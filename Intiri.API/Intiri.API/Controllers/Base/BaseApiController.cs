@@ -7,6 +7,11 @@ namespace Intiri.API.Controllers.Base
     [Route("[controller]")]
     public class BaseApiController : ControllerBase
     {
-       
-    }
+		protected IUnitOfWork _unitOfWork;
+
+		public BaseApiController(IUnitOfWork unitOfWork)
+		{
+			_unitOfWork = unitOfWork;
+		}
+	}
 }
