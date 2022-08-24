@@ -10,6 +10,7 @@ namespace Intiri.API.DataAccess
 
 		private readonly DataContext _dataContext;
 		private readonly IRoleRepository _roleRepository;
+		private readonly IUserRepository _userRepository;
 
 		#endregion Fields
 
@@ -18,6 +19,7 @@ namespace Intiri.API.DataAccess
 		public UnitOfWork(DataContext dataContext, IMapper mapper)
 		{
 			_roleRepository = new RoleRepository(dataContext, mapper);
+			_userRepository = new UserRepository(dataContext, mapper);
 			_dataContext = dataContext;
 		}
 
@@ -26,6 +28,7 @@ namespace Intiri.API.DataAccess
 		#region Properties
 
 		public IRoleRepository RoleRepository => _roleRepository;
+		public IUserRepository UserRepository => _userRepository;
 
 		#endregion Properties
 

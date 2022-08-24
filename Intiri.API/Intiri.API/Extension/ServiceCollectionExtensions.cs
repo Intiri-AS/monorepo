@@ -1,7 +1,12 @@
 ﻿using Intiri.API.DataAccess;
-using Intiri.API.DataAccess.Repository;
-using Intiri.API.DataAccess.Repository.Interface;
+using Intiri.API.Models;
+using Intiri.API.Services;
+using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Intiri.API.Extension
 {
@@ -17,7 +22,38 @@ namespace Intiri.API.Extension
 			});
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
-			services.AddScoped<IRoleRepository, RoleRepository>();
+			services.AddScoped<ITokenService, TokenService>();
+			services.AddScoped<IAccountService, AccountService>();
+
+			return services;
+		}
+
+		public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
+		{
+			services.AddIdentityCore<User>(opt =>
+			{
+				//opt.User.RequireUniqueEmail = true;
+				//opt.SignIn.RequireConfirmedEmail = true;
+				opt.Password.RequireNonAlphanumeric = false;
+			})
+				.AddRoles<Role>()
+				.AddRoleManager<RoleManager<Role>>()
+				.AddSignInManager<SignInManager<User>>()
+				.AddRoleValidator<RoleValidator<Role>>()
+				.AddEntityFrameworkStores<DataContext>()
+				.AddDefaultTokenProviders();
+
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuerSigningKey = true,
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
+						ValidateIssuer = false,
+						ValidateAudience = false,
+					};
+				});
 
 			return services;
 		}

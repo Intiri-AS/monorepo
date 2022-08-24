@@ -16,5 +16,22 @@ namespace Intiri.API.DataAccess
 		}
 
 		#endregion ctors
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			base.OnModelCreating(builder);
+
+			builder.Entity<User>()
+				.HasMany(ur => ur.Roles)
+				.WithOne(u => u.User)
+				.HasForeignKey(ur => ur.UserId)
+				.IsRequired();
+
+			builder.Entity<Role>()
+				.HasMany(ur => ur.Users)
+				.WithOne(u => u.Role)
+				.HasForeignKey(ur => ur.RoleId)
+				.IsRequired();
+		}
 	}
 }

@@ -1,6 +1,11 @@
 
+using Intiri.API.DataAccess;
+using Intiri.API.DataAccess.SeedData;
 using Intiri.API.Extension;
 using Intiri.API.Middleware;
+using Intiri.API.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
@@ -19,6 +24,7 @@ try
 
 	// Add services to the container
 	builder.Services.AddApplicationServices(configuration);
+	builder.Services.AddIdentityServices(configuration);
 	builder.Services.AddControllers();
 	// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 	builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +32,25 @@ try
 
 	var app = builder.Build();
 
-	// Configure the HTTP request pipeline.
+	#region Seed data
+
+using IServiceScope _scope = app.Services.CreateScope();
+IServiceProvider _serviceProvider = _scope.ServiceProvider;
+DataContext dataContext = _serviceProvider.GetRequiredService<DataContext>();
+
+UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
+RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
+
+//add migrations
+await dataContext.Database.MigrateAsync();
+// seed data
+await SeedData.SeedUsers(userManager, roleManager);
+
+
+
+#endregion Seed data
+
+// Configure the HTTP request pipeline.
 	if (app.Environment.IsDevelopment())
 	{
 		app.UseSwagger();
@@ -47,7 +71,7 @@ try
 
 	app.MapControllers();
 
-	app.Run();
+	await app.RunAsync();
 }
 catch (Exception exception)
 {

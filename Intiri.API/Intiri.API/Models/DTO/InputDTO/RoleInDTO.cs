@@ -2,7 +2,7 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class RoleInputDTO
+	public class RoleInDTO
 	{
 		[Required]
 		public string Name { get; set; }

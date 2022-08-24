@@ -11,7 +11,7 @@ namespace Intiri.API.Automapper
 		{
 			CreateMap<Role, RoleDTO>();
 			CreateMap<Role, RoleWithPermissonsDTO>();
-			CreateMap<RoleInputDTO, Role>()
+			CreateMap<RoleInDTO, Role>()
 				.ForMember(dest => dest.Name,
 						   opt => opt.MapFrom(src => src.Name.Trim()))
 				.ForMember(dest => dest.NormalizedName,

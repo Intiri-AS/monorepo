@@ -6,6 +6,8 @@ namespace Intiri.API.Models
 	{
 		#region Properties
 
+		public DateTime Created { get; set; } = DateTime.UtcNow;
+		public string Address { get; set; }
 		public ICollection<UserRole> Roles { get; set; }
 
 		#endregion Properties
