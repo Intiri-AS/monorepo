@@ -5,6 +5,7 @@ using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +17,18 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly ILogger<UsersController> _logger;
+		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
 
 		#endregion Fields
 
 		#region ctors
 
-		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UsersController> logger) : base(unitOfWork) 
+		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ILogger<UsersController> logger) : base(unitOfWork) 
 		{ 
 			_mapper = mapper;
 			_logger = logger;
+			_accountService = accountService;
 		}
 
 		#endregion ctors
@@ -57,18 +60,17 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<UserOutDTO>(user);
 		}
 
-		[HttpPut]
+		[HttpPut("update")]
 		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
 		{
-			// TODO: use ClaimsPrincipal to get user
-			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(userUpdateDto.Username);
+			User user = await _accountService.GetUserByPhoneNumberAsync(User.GetUsername());
 
 			_mapper.Map(userUpdateDto, user);
 			_unitOfWork.UserRepository.UpdateUser(user);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return _mapper.Map<UserOutDTO>(user); //or - NoContent();
+				return _mapper.Map<UserOutDTO>(user);
 			}
 
 			return BadRequest("Failed to update user");

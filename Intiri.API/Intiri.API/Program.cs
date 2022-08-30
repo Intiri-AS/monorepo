@@ -60,13 +60,14 @@ await SeedData.SeedUsers(userManager, roleManager);
 						policy.AllowAnyHeader()
 							   .AllowAnyMethod()
 							   .AllowCredentials()
-							   .WithOrigins("https://localhost:4200"));
+							   .WithOrigins("http://localhost:8100"));
 	}
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 	app.UseHttpsRedirection();
 
+	app.UseAuthentication();
 	app.UseAuthorization();
 
 	app.MapControllers();

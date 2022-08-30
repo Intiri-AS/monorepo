@@ -11,13 +11,19 @@ namespace Intiri.API.Services.Interfaces
 
 		Task<IdentityResult> AddUserToRolesAsync(User user, string desiredRole);
 
-		Task DeleteUserAsync(User user);
+		Task<IdentityResult> DeleteUserAsync(User user);
 
 		Action<User> DeleteUserAsync();
+
+		Task<User> FindUserByIdAsync(string id);
 
 		Task<User> GetUserByPhoneNumberAsync(string userPhoneNumber);
 
 		Task<SignInResult> CheckUserSignInPaswordAsync(User user, string password, bool lockoutOnFailure);
+
+		Task<string> GeneratePasswordResetTokenAsync(User user);
+
+		Task<IdentityResult> UserResetPaswordAsync(User user, string token, string password);
 
 		Task<bool> IsUserWithPhoneNumberExists(string phoneNumber);
 	}
