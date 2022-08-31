@@ -42,6 +42,7 @@ import { StylePage } from './pages/shared-guarded-pages/style/style.page';
 import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
 
 //app components
+import { HeaderLandingComponent } from './components/header-landing/header-landing.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -59,7 +60,7 @@ import { CodeInputModule } from 'angular-code-input';
     DashboardPage, DesignerPage, VendorPage,
     MyMoodboardPage,
     StylePage, MoodboardPage,
-    HeaderComponent, FooterComponent,
+    HeaderLandingComponent, HeaderComponent, FooterComponent,
     LoginModalComponent,
   ],
   entryComponents: [

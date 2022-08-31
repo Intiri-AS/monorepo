@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonContent, ModalController } from '@ionic/angular';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 
 @Component({
@@ -10,9 +10,13 @@ import { LoginModalComponent } from 'src/app/components/modals/login/login-modal
 
 export class NewProjectPage {
 
+  isScrolledDown: boolean;
+
   constructor(
     private modalController: ModalController
   ) {}
+
+  @ViewChild(IonContent) content: IonContent;
 
   async openModal() {
     const modal = await this.modalController.create({
@@ -22,4 +26,5 @@ export class NewProjectPage {
 
     await modal.present();
   }
+
 }
