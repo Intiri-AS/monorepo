@@ -1,0 +1,38 @@
+.black-2 {
+  color: #555555
+}
+
+.login-btn {
+  @apply font-['Fira-Sans'] text-lg font-semibold text-black mt-14;
+  --padding-start: 4px;
+  text-transform: none;
+}
+
+.register-btn {
+  @apply flex justify-center items-center w-32 h-14 text-white rounded-2xl mt-8 font-['Fira-Sans'] text-lg font-semibold;
+  background: #9B7E60;
+  text-transform: none;
+}
+
+.password-input {
+  border: none;
+}
+
+ion-item {
+  border: 1px solid #555555;
+  color: #555555;
+  --padding-start: 0px;
+}
+
+ion-input {
+  color: #555555;
+  caret-color: #555555;
+}
+
+.border-black-2 {
+  border-color: #555555;
+}
+
+ion-icon {
+  pointer-events: none;
+}

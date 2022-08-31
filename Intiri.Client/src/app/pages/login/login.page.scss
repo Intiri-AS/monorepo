@@ -1,0 +1,41 @@
+.black-2 {
+  color: #555555
+}
+
+.login-btn {
+  @apply flex justify-center items-center w-28 h-14 text-white rounded-2xl mt-8 font-['Fira-Sans'] text-lg font-semibold;
+  background: #9B7E60;
+  text-transform: none;
+}
+
+.forgot-btn {
+  @apply border-0 text-lg font-['Fira-Sans'] font-semibold mt-7;
+  color: #AA4C33;
+  text-transform: none;
+}
+
+.create-btn {
+  @apply flex justify-center items-center border w-52 h-14 rounded-2xl font-['Fira-Sans'] text-lg font-semibold;
+  color: #9B7E60;
+  text-transform: none;
+  border-color: #9B7E60;
+}
+
+.password-input {
+  border: none;
+}
+
+ion-item {
+  border: 1px solid #555555;
+  color: #555555;
+  --padding-start: 0px;
+}
+
+ion-input {
+  color: #555555;
+  caret-color: #555555;
+}
+
+.border-black-2 {
+  border-color: #555555;
+}

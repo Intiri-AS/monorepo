@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.intiri.app",
+	"appName": "Intiri",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
