@@ -6,6 +6,7 @@ using Intiri.API.Middleware;
 using Intiri.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using NLog;
 using NLog.Web;
 
@@ -66,6 +67,13 @@ await SeedData.SeedUsers(userManager, roleManager);
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 	app.UseHttpsRedirection();
+
+	app.UseStaticFiles();
+	app.UseStaticFiles(new StaticFileOptions()
+	{
+		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+		RequestPath = new PathString("/Resources")
+	});
 
 	app.UseAuthentication();
 	app.UseAuthorization();

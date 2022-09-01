@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Intiri.API.Models.Style;
 
 namespace Intiri.API.DataAccess
 {
@@ -16,6 +17,9 @@ namespace Intiri.API.DataAccess
 		}
 
 		#endregion ctors
+
+		public DbSet<Style> Styles { get; set; }
+		public DbSet<StyleImage> StyleImages { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
