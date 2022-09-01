@@ -1,29 +1,25 @@
-.white-header {
-  @apply bg-white border-b border-slate-100
-}
-
 .btn {
-  @apply normal-case text-black-1 font-bold hover:text-black-2 mx-1
+  @apply normal-case text-black-1 font-bold hover:text-black-2 mx-1;
 }
 
-.btn-active {
-  @apply bg-indigo-400 text-white
-}
-
-.login-btn {
-  @apply hover:opacity-80 bg-primary text-white font-bold normal-case rounded-xl px-4 mx-2 h-10
-}
-
-.register-btn {
-  @apply hover:opacity-80 bg-transparent text-primary font-bold normal-case rounded-xl border-primary border px-4 mx-2 h-10
+.new-project-btn {
+  @apply hover:opacity-80 bg-primary text-white font-medium normal-case rounded-xl px-4 mx-2 h-10;
 }
 
 .header-wrapper {
-  @apply container flex items-center py-4 mt-4 sm:mt-12
+  @apply container flex items-center py-4;
 }
 
 .header-buttons {
-  @apply hidden md:flex flex-1 justify-end items-center gap-2
+  @apply hidden xl:flex flex-1 items-center gap-2 ml-8;
+}
+
+.header-icon {
+    @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-2 mr-2
+}
+
+.header-profile-img {
+    @apply object-cover rounded-xl h-[40px] w-[40px] mr-4
 }
 
 ion-header::after {

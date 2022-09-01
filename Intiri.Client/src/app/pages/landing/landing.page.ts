@@ -22,7 +22,7 @@ export class LandingPage {
   async openLogin() {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
-      cssClass: 'login-modal-css'
+      cssClass: 'modal-css'
     });
 
     await modal.present();

@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: 'app-header-landing',
+  templateUrl: './header-landing.component.html',
+  styleUrls: ['./header-landing.component.scss'],
 })
 
-export class HeaderComponent {
+export class HeaderLandingComponent {
 
   @Input() isScrolledDown: boolean;
 
@@ -28,9 +28,6 @@ export class HeaderComponent {
   menuClosed() {
     const x = document.querySelector('#home');
     x['style'].height = 'auto'
-  }
-  removeProjectDraft(){
-    sessionStorage.removeItem('draftProjectName');
   }
 
 }

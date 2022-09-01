@@ -26,9 +26,10 @@
 // @import "~@ionic/angular/css/flex-utils.css";
 
 @media (min-width: 576px) {
-  .login-modal-css::part(content) {
+  .modal-css::part(content) {
     --width: 400px;
-    border-radius: 5px;
+    border-radius: 16px;
+    --height: 400px;
   }
 }
 
