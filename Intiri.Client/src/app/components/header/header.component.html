@@ -21,30 +21,38 @@
         <ion-icon class="header-icon" name="settings-sharp"></ion-icon>
         <ion-button fill="clear" class="new-project-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
       </ion-buttons>
-      <div class="flex md:hidden flex-1 justify-end" id="menu-content">
+      <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>
-      </div>
+      </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
-  <ion-header>
-    <ion-toolbar translucent>
-      <ion-title><a routerLink="/landing" routerDirection="root" class="py-1">
-        <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
-      </a></ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-label class="cursor-pointer" routerLink="/login" >Login</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label class="cursor-pointer" routerLink="/register" >Register</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
 
-
+  <ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-title><a routerLink="/my-intiri" routerDirection="root" class="py-1">
+          <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
+        </a></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-label class="cursor-pointer" routerLink="/my-intiri" >My Intiri</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="cursor-pointer" routerLink="#" >Book a designer</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="cursor-pointer" routerLink="#" >My Profile</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="cursor-pointer" routerLink="#" >Settings</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="cursor-pointer" routerLink="#" >Create new project</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
