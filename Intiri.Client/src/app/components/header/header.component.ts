@@ -18,5 +18,8 @@ export class HeaderComponent {
     const x = document.querySelector('#home');
     x['style'].height = 'auto'
   }
+  removeProjectDraft(){
+    sessionStorage.removeItem('draftProjectName');
+  }
 
 }

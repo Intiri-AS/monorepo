@@ -1,0 +1,50 @@
+.step-title {
+    @apply text-black-1 text-4xl mt-1
+}
+
+.step-subtitle {
+    @apply text-black-3 text-base
+}
+
+.step-item-wrapper {
+    @apply rounded-2xl border hover:border-4 hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mr-2 md:mr-3 mt-4
+}
+
+.selected-item {
+    @apply border-4 border-primary
+}
+
+.bigger-margin {
+    @apply mt-12
+}
+
+
+.step-image {
+    @apply object-cover h-full w-full rounded-sm p-2
+}
+
+.step-icon-wrapper {
+    @apply h-[90%] rounded-sm m-2 bg-light pt-[30px] lg:pt-[50px]
+}
+
+.step-color-wrapper {
+    @apply h-[90%] rounded-sm m-2 pt-[30px] lg:pt-[50px]
+}
+
+.step-icon {
+    @apply h-[50px] w-[50px] mx-auto
+}
+
+.step-items {
+    @apply min-h-[490px] max-h-[700px] overflow-auto mb-3
+}
+
+.step-items::-webkit-scrollbar {
+    @apply opacity-0 w-[4px] bg-transparent
+    }
+.step-items:hover::-webkit-scrollbar-thumb {
+   @apply bg-[#cfcfcf]
+}
+.step-items::-webkit-scrollbar-thumb {
+    @apply bg-white duration-1000
+}

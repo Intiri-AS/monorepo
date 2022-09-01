@@ -45,10 +45,11 @@ import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.
 import { HeaderLandingComponent } from './components/header-landing/header-landing.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { StepPickerComponent } from './components/step-picker/step-picker.component';
+import { NewProjectStepComponent } from './components/new-project-step/new-project-step.component';
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
-
+import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 
@@ -61,7 +62,8 @@ import { CodeInputModule } from 'angular-code-input';
     MyMoodboardPage,
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderComponent, FooterComponent,
-    LoginModalComponent,
+    NewProjectStepComponent, StepPickerComponent,
+    LoginModalComponent, CreateProjectModalComponent
   ],
   entryComponents: [
     LoginModalComponent

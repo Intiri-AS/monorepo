@@ -19,13 +19,14 @@
         </a>
         <ion-icon class="header-icon" name="chatbox-ellipses-sharp"></ion-icon>
         <ion-icon class="header-icon" name="settings-sharp"></ion-icon>
-        <ion-button fill="clear" class="new-project-btn" routerLink="/login" routerDirection="root">Create new project</ion-button>
+        <ion-button fill="clear" class="new-project-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
+
 
   <ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
     <ion-header>
