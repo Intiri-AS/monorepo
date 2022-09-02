@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
-using Intiri.API.Models.DTO.InputDTO;
-using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Style;
 using Microsoft.EntityFrameworkCore;
 

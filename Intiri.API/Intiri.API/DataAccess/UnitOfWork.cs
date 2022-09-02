@@ -12,6 +12,7 @@ namespace Intiri.API.DataAccess
 		private readonly IRoleRepository _roleRepository;
 		private readonly IUserRepository _userRepository;
 		private readonly IStyleRepository _stylRepository;
+		private readonly IStyleImageRepository _stylImageRepository;
 
 		#endregion Fields
 
@@ -22,6 +23,7 @@ namespace Intiri.API.DataAccess
 			_roleRepository = new RoleRepository(dataContext, mapper);
 			_userRepository = new UserRepository(dataContext, mapper);
 			_stylRepository = new StyleRepository(dataContext, mapper);
+			_stylImageRepository = new StyleImageRepository(dataContext, mapper);
 			_dataContext = dataContext;
 		}
 
@@ -32,6 +34,7 @@ namespace Intiri.API.DataAccess
 		public IRoleRepository RoleRepository => _roleRepository;
 		public IUserRepository UserRepository => _userRepository;
 		public IStyleRepository StyleRepository => _stylRepository;
+		public IStyleImageRepository StyleImageRepository => _stylImageRepository;
 
 		#endregion Properties
 

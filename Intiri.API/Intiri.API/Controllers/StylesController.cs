@@ -81,7 +81,7 @@ namespace Intiri.API.Controllers
 
 			if (file.Length > 0)
 			{
-				string dbPath = await _imageService.AddImageAsync(file, "StyleCoverImage", styleInDTO.Name);
+				string dbPath = await _imageService.AddImageAsync(file, "StyleCoverImages", styleInDTO.Name);
 				Style style = _mapper.Map<Style>(styleInDTO);
 
 				style.ImagePath = dbPath;
@@ -113,7 +113,6 @@ namespace Intiri.API.Controllers
 
 				await _unitOfWork.StyleRepository.Delete(styleId);
 				await _unitOfWork.SaveChanges();
-
 			}
 			catch (Exception ex)
 			{

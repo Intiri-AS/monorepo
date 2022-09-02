@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\StyleCoverImage\" />
+    <Folder Include="Resources\StyleCoverImages\" />
     <Folder Include="Resources\StyleImages\" />
   </ItemGroup>
 

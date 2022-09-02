@@ -10,11 +10,10 @@ namespace Intiri.API.Automapper
 		public StyleMapperProfile()
 		{
 			CreateMap<StyleInDTO, Style>();
-			CreateMap<Style, StyleInDTO>();
-
-			CreateMap<StyleOutDTO, Style>();
 			CreateMap<Style, StyleOutDTO>();
-		}
 
+			CreateMap<StyleImage, StyleImageOutDTO>();
+			CreateMap<StyleImageInDTO, StyleImage>();
+		}
 	}
 }

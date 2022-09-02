@@ -36,6 +36,12 @@ namespace Intiri.API.DataAccess
 				.WithOne(u => u.Role)
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();
+
+			builder.Entity<StyleImage>()
+				.HasOne(si => si.Style)
+				.WithMany(s => s.StyleImages)
+				.HasForeignKey(si => si.StyleId)
+				.IsRequired();
 		}
 	}
 }
