@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.Style;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -20,5 +21,15 @@ namespace Intiri.API.DataAccess.Repository
 		}
 
 		#endregion Constructors
+
+		public async Task<IEnumerable<StyleImage>> GetStyleImagesAsync()
+		{
+			return await _context.StyleImages.ToListAsync();
+		}
+
+		public async Task<StyleImage> GetStyleImageByIdAsync(int imageId)
+		{
+			return await GetByID(imageId);
+		}
 	}
 }

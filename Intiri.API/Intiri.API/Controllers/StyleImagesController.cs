@@ -30,6 +30,28 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetStyleImages()
+		{
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesAsync();
+			IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+
+			return Ok(styleImagesToReturn);
+		}
+
+		[HttpGet("id/{imageId}")]
+		public async Task<ActionResult<StyleImageOutDTO>> GetStyleImageById(int imageId)
+		{
+			StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetStyleImageByIdAsync(imageId);
+
+			if (styleImage == null)
+			{
+				return BadRequest("Style image doesn't exist");
+			}
+
+			return _mapper.Map<StyleImageOutDTO>(styleImage);
+		}
+
 		[HttpPost("add")]
 		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleImageInDTO styleImageInDTO)
 		{
