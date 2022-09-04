@@ -42,7 +42,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{roomTypeId}")]
 		public async Task<ActionResult<RoomTypeOutDTO>> GetRoomTypeById(int roomTypeId)
 		{
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeWithRoomsByIdAsync(roomTypeId);
+			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeByIdAsync(roomTypeId);
 			RoomTypeOutDTO roomTypeOutDTO = _mapper.Map<RoomTypeOutDTO>(roomType);
 
 			return Ok(roomTypeOutDTO);
@@ -51,14 +51,14 @@ namespace Intiri.API.Controllers
 		[HttpGet("rooms/{roomTypeId}")]
 		public async Task<ActionResult<RoomTypeRoomsOutDTO>> GetRoomTypeWithRoomsById(int roomTypeId)
 		{
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeWithRoomsByIdAsync(roomTypeId);
+			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomTypeId);
 			RoomTypeRoomsOutDTO roomTypeRoomsOutDTO = _mapper.Map<RoomTypeRoomsOutDTO>(roomType);
 
 			return Ok(roomTypeRoomsOutDTO);
 		}
 
 		[HttpPost("add")]
-		public async Task<ActionResult<RoomTypeOutDTO>> AddRoomType(RoomTypeInDTO roomTypeInDTO)
+		public async Task<ActionResult> AddRoomType(RoomTypeInDTO roomTypeInDTO)
 		{
 			if (await _unitOfWork.RoomTypeRepository.IsRoomTypeNameExists(roomTypeInDTO.Name))
 			{
@@ -79,7 +79,7 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{roomTypeId}")]
 		public async Task<ActionResult> DeleteRoomType(int roomTypeId)
 		{
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeWithRoomsByIdAsync(roomTypeId);
+			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomTypeId);
 
 			if (roomType == null)
 			{

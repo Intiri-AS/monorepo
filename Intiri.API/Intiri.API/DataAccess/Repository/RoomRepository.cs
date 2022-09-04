@@ -25,7 +25,8 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Room>> GetAllRoomsAsync()
 		{
-			return await _context.Rooms.ToListAsync();
+			//return await _context.Rooms.ToListAsync();
+			return await _context.Rooms.Include(rt => rt.RoomType).ToListAsync();
 		}
 	}
 }

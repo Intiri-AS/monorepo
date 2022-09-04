@@ -73,16 +73,19 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<StyleOutDTO>> AddStyle([FromForm]StyleInDTO styleInDTO)
 		{
-			bool isStyleExist = await _unitOfWork.StyleRepository.IsStyleByNameExistAsync(styleInDTO.Name);
-			if (isStyleExist) return BadRequest("Style name is taken.");
+			if (await _unitOfWork.StyleRepository.IsStyleByNameExistAsync(styleInDTO.Name))
+			{
+				return BadRequest("Style name is taken.");
+			}
 
 			IFormFile file = styleInDTO.ImageFile;
 
 			if (file.Length > 0)
 			{
-				string dbPath = await _imageService.AddImageAsync(file, "StyleCoverImages", styleInDTO.Name);
+				string imgPrefixName = styleInDTO.Name + "_";
+				string dbPath = await _imageService.AddImageAsync(file, "StyleCoverImages", imgPrefixName);
+				
 				Style style = _mapper.Map<Style>(styleInDTO);
-
 				style.ImagePath = dbPath;
 				_unitOfWork.StyleRepository.Insert(style);
 				

@@ -10,7 +10,8 @@ namespace Intiri.API.Automapper
 		public RoomMapperProfile()
 		{
 			CreateMap<RoomInDTO, Room>();
-			CreateMap<Room, RoomOutDTO>();
+			CreateMap<Room, RoomOutDTO>()
+				.ForMember(rt => rt.RoomTypeName, opt => opt.MapFrom(src => src.RoomType.Name));
 
 			CreateMap<RoomTypeInDTO, RoomType>();
 			CreateMap<RoomType, RoomTypeOutDTO>();

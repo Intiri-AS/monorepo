@@ -55,20 +55,23 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<RoomOutDTO>> AddRoom([FromForm] RoomInDTO roomInDTO)
 		{
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetByID(roomInDTO.RoomTypeId);
+			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomInDTO.RoomTypeId);
+			
+			if (roomType == null) return BadRequest("Room type doesn't exist");
 
-			if (roomType == null)
+			if (roomType.Rooms.Any(r => r.Name == roomInDTO.Name))
 			{
-				return BadRequest("Room type doesn't exist");
+				return BadRequest("Room name with room type already exist");
 			}
 
 			IFormFile file = roomInDTO.ImageFile;
 
 			if (file.Length > 0)
 			{
-				string dbPath = await _imageService.AddImageAsync(file, "RoomImages");
+				string imgPrefixName = roomInDTO.Name + roomInDTO.RoomTypeId + "_";
+				string dbPath = await _imageService.AddImageAsync(file, "RoomImages", imgPrefixName);
+				
 				Room room = _mapper.Map<Room>(roomInDTO);
-
 				room.ImagePath = dbPath;
 				_unitOfWork.RoomRepository.Insert(room);
 

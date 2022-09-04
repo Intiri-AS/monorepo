@@ -67,8 +67,8 @@ namespace Intiri.API.Controllers
 			if (file.Length > 0)
 			{
 				string dbPath = await _imageService.AddImageAsync(file, "StyleImages");
+				
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
-
 				styleImage.Path = dbPath;
 				_unitOfWork.StyleImageRepository.Insert(styleImage);
 

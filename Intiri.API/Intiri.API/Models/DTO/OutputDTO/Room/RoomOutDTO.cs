@@ -13,5 +13,6 @@ namespace Intiri.API.Models.DTO.OutputDTO.Room
         public string Description { get; set; }
 
         public int RoomTypeId { get; set; }
+        public string RoomTypeName { get; set; }
     }
 }

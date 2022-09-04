@@ -7,7 +7,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	{
 		Task<IEnumerable<RoomType>> GetAllRoomTypesAsync();
 		Task<RoomType> GetRoomTypeByIdAsync(int roomTypeId);
-		Task<RoomType> GetRoomTypeWithRoomsByIdAsync(int roomTypeId);
+		Task<RoomType> GetRoomTypeRoomsByIdAsync(int roomTypeId);
 		Task<bool> IsRoomTypeNameExists(string roomTypeName);
 	}
 }

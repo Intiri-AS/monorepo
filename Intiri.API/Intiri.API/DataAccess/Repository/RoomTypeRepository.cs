@@ -36,7 +36,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		}
 
-		public async Task<RoomType> GetRoomTypeWithRoomsByIdAsync(int roomTypeId)
+		public async Task<RoomType> GetRoomTypeRoomsByIdAsync(int roomTypeId)
 		{
 			return (await Get(roomType => roomType.Id == roomTypeId, includeProperties: "Rooms")).SingleOrDefault();
 			
@@ -44,7 +44,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<bool> IsRoomTypeNameExists(string roomTypeName)
 		{
-			return await DoesAnyExist(x => x.Name == roomTypeName.ToLower());
+			return await DoesAnyExist(rt => rt.Name == roomTypeName.ToLower());
 		}
 	}
 }
