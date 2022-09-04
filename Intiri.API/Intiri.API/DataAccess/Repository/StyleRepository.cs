@@ -27,14 +27,14 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Styles.ToListAsync();
 		}
 
+		public async Task<Style> GetStyleWithStyleImagesByIdAsync(int styleId)
+		{
+			return (await Get(style => style.Id == styleId, includeProperties: "StyleImages" )).SingleOrDefault();
+		}
+
 		public async Task<Style> GetStyleByIdAsync(int styleId)
 		{
 			return await GetByID(styleId);
-		}
-
-		public async Task<Style> GetStyleByNameAsync(string styleName)
-		{
-			return await SingleOrDefaultAsync(x => x.Name == styleName);
 		}
 
 		public async Task<bool> IsStyleByNameExistAsync(string styleName)

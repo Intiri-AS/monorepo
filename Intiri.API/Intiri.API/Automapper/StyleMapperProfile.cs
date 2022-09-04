@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Intiri.API.Models.DTO.InputDTO;
-using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 
 namespace Intiri.API.Automapper
@@ -11,9 +13,10 @@ namespace Intiri.API.Automapper
 		{
 			CreateMap<StyleInDTO, Style>();
 			CreateMap<Style, StyleOutDTO>();
+			CreateMap<Style, StyleWithImagesOutDTO>();
 
-			CreateMap<StyleImage, StyleImageOutDTO>();
 			CreateMap<StyleImageInDTO, StyleImage>();
+			CreateMap<StyleImage, StyleImageOutDTO>();
 		}
 	}
 }

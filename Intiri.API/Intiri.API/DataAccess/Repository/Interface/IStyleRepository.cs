@@ -8,7 +8,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	{
 		Task<IEnumerable<Style>> GetStylesAsync();
 		Task<Style> GetStyleByIdAsync(int styleId);
-		Task<Style> GetStyleByNameAsync(string styleName);
+		Task<Style> GetStyleWithStyleImagesByIdAsync(int styleId);
 		Task<bool> IsStyleByNameExistAsync(string styleName);
 	}
 }

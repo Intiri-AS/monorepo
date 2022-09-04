@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Intiri.API.Models.Style;
+using Intiri.API.Models.Room;
 
 namespace Intiri.API.DataAccess
 {
@@ -20,6 +21,8 @@ namespace Intiri.API.DataAccess
 
 		public DbSet<Style> Styles { get; set; }
 		public DbSet<StyleImage> StyleImages { get; set; }
+		public DbSet<Room> Rooms { get; set; }
+		public DbSet<RoomType> RoomTypes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -37,11 +40,11 @@ namespace Intiri.API.DataAccess
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();
 
-			builder.Entity<StyleImage>()
-				.HasOne(si => si.Style)
-				.WithMany(s => s.StyleImages)
-				.HasForeignKey(si => si.StyleId)
-				.IsRequired();
+			//builder.Entity<StyleImage>()
+			//	.HasOne(si => si.Style)
+			//	.WithMany(s => s.StyleImages)
+			//	.HasForeignKey(si => si.StyleId)
+			//	.IsRequired();
 		}
 	}
 }

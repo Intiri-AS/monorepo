@@ -3,7 +3,7 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.DTO.InputDTO;
-using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +31,7 @@ namespace Intiri.API.Controllers
 		#endregion Constructors
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetStyleImages()
+		public async Task<ActionResult<IEnumerable<StyleImageOutDTO>>> GetStyleImages()
 		{
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesAsync();
 			IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
@@ -69,7 +69,6 @@ namespace Intiri.API.Controllers
 				string dbPath = await _imageService.AddImageAsync(file, "StyleImages");
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
-				styleImage.Style = style;
 				styleImage.Path = dbPath;
 				_unitOfWork.StyleImageRepository.Insert(styleImage);
 
@@ -106,7 +105,7 @@ namespace Intiri.API.Controllers
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(500, $"Internal server error: {ex}");
+				return BadRequest($"Internal error: {ex}");
 			}
 
 			return Ok();
