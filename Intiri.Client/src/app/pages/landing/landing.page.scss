@@ -1,0 +1,61 @@
+.btn {
+  @apply hover:opacity-80 bg-primary text-white font-bold normal-case rounded-xl px-4 mx-2 h-10 mt-8
+}
+
+.hero-pencraft {
+  @apply text-black-2 font-Allison text-5xl md:text-6xl mb-8 leading-[90px]
+}
+
+.hero-text {
+  @apply text-black-1 text-4xl md:text-5xl lg:text-6xl lg:text-left mb-6 leading-[60px] md:leading-[80px] lg:leading-[90px] font-bold
+}
+
+.hero-wrapper {
+  @apply bg-landing-img rounded-2xl bg-cover h-[800px] md:h-[1030px] mb-16 mt-[-72px] mx-4 md:mx-12
+}
+
+.hero-text-wrapper {
+  @apply lg:w-[610px] top-[150px] absolute flex flex-1 flex-col items-start
+}
+
+.pencraft {
+  @apply pt-16 text-black-2 font-Allison text-6xl leading-[70px]
+}
+
+.pencraft-white {
+  @extend .pencraft;
+  @apply text-white pt-0;
+}
+
+.landing-headline {
+  @apply text-black-1 text-4xl lg:text-5xl text-left mb-6 leading-[55px] font-bold
+}
+
+.landing-headline-white {
+  @extend .landing-headline;
+  @apply text-white text-center;
+}
+
+.landing-text {
+  @apply font-normal text-black-2 text-[18px] leading-[30px]
+}
+
+.landing-bold {
+  @apply font-bold text-black-1 text-[18px] leading-[30px]
+}
+
+.landing-img {
+  @apply m-16 ml-0 rounded-2xl
+}
+
+.quote-icon {
+  @apply inline-block w-[27px] h-[40px] bg-quote
+}
+
+.arrow-icon {
+  @apply inline-block cursor-pointer w-[40px] h-[20px] hover:opacity-50
+}
+
+.contact-btn {
+  @apply hover:opacity-70 bg-transparent text-white normal-case rounded-xl border-white border px-4 mx-auto my-0 h-10
+}

@@ -1,0 +1,57 @@
+.black-2 {
+  color: #555555
+}
+
+.register-btn {
+  @apply font-['Fira-Sans'] text-lg font-semibold text-black mt-14;
+  --padding-start: 4px;
+  text-transform: none;
+}
+
+.btn {
+  @apply flex justify-center items-center w-48 h-14 text-white rounded-2xl mt-8 font-['Fira-Sans'] text-lg font-semibold;
+  background: #9B7E60;
+  text-transform: none;
+}
+
+.send-btn {
+  @apply flex justify-center items-center text-lg mt-6 font-['Fira-Sans'] font-semibold;
+  color: #AA4C33;
+  text-transform: none;
+}
+
+.password-input {
+  border: none;
+}
+
+ion-item {
+  border: 1px solid #555555;
+  color: #555555;
+  --padding-start: 0px;
+}
+
+ion-input {
+  color: #555555;
+  caret-color: #555555;
+}
+
+.border-black-2 {
+  border-color: #555555;
+}
+
+ion-icon {
+  pointer-events: none;
+}
+
+code-input {
+  --color: #555555;
+  --item-spacing: 20px;
+  --item-border: 1px solid #555555;
+  --item-border-radius: 15px;
+  --item-border-bottom: 1px solid #555555;
+  --item-border-has-value: 1px solid #555555;
+  --item-border-bottom-has-value: 1px solid #555555;
+  --item-border-focused: 1px solid #555555;
+  --item-border-bottom-focused: 1px solid #555555;
+  --item-shadow-focused: 0px;
+}

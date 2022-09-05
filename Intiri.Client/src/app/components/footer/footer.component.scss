@@ -1,0 +1,21 @@
+p {
+  @apply text-white
+}
+ion-button {
+  @apply text-white font-medium normal-case ml-[-15px] hover:opacity-80 my-0
+}
+ion-row {
+  @apply h-full
+}
+
+ion-col {
+  @apply flex justify-start lg:justify-center
+}
+
+.social-logo {
+  @apply text-white text-2xl lg:text-4xl mr-4 mb-8 cursor-pointer hover:opacity-80
+}
+
+.footer-text {
+  @apply font-normal text-[16px] lg:text-[18px] leading-[26px]
+}
