@@ -6,6 +6,7 @@ using Intiri.API.Middleware;
 using Intiri.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using NLog;
 using NLog.Web;
 
@@ -34,17 +35,18 @@ try
 
 	#region Seed data
 
-using IServiceScope _scope = app.Services.CreateScope();
-IServiceProvider _serviceProvider = _scope.ServiceProvider;
-DataContext dataContext = _serviceProvider.GetRequiredService<DataContext>();
+	using IServiceScope _scope = app.Services.CreateScope();
+	IServiceProvider _serviceProvider = _scope.ServiceProvider;
+	DataContext dataContext = _serviceProvider.GetRequiredService<DataContext>();
 
-UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
-RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
+	IUnitOfWork unitOfWork = _serviceProvider.GetRequiredService<IUnitOfWork>();
+	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
+	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
 
-//add migrations
-await dataContext.Database.MigrateAsync();
-// seed data
-await SeedData.SeedUsers(userManager, roleManager);
+	//add migrations
+	await dataContext.Database.MigrateAsync();
+	// seed data
+	//await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 
 
@@ -66,6 +68,15 @@ await SeedData.SeedUsers(userManager, roleManager);
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 	app.UseHttpsRedirection();
+
+	app.UseStaticFiles();
+	app.UseStaticFiles(new StaticFileOptions()
+	{
+		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+		RequestPath = new PathString("/Resources")
+	});
+	// seed data
+	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
 	app.UseAuthorization();

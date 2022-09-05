@@ -6,6 +6,13 @@ namespace Intiri.API.DataAccess
 	{
 		IRoleRepository RoleRepository { get; }
 		IUserRepository UserRepository { get; }
+		IStyleRepository StyleRepository { get; }
+		IStyleImageRepository StyleImageRepository { get; }
+		IRoomRepository RoomRepository { get; }
+		IRoomTypeRepository RoomTypeRepository { get; }
+		IMaterialRepository MaterialRepository { get; }
+		IMaterialTypeRepository MaterialTypeRepository { get; }
+		IColorRepository ColorRepository { get; }
 
 		Task<bool> SaveChanges();
 	}

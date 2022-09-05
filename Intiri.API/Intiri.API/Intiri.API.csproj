@@ -24,4 +24,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\MaterialImages\" />
+    <Folder Include="Resources\RoomImages\" />
+    <Folder Include="Resources\StyleCoverImages\" />
+    <Folder Include="Resources\StyleImages\" />
+  </ItemGroup>
+
 </Project>

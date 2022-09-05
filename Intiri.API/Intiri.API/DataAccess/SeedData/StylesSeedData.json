@@ -1,0 +1,27 @@
+﻿[
+	{
+		"Name": "Scandinavian",
+		"ImagePath": "path",
+		"Description": "Description Scandinavian"
+	},
+	{
+		"Name": "Classic",
+		"ImagePath": "path",
+		"Description": "Description Classic"
+	},
+	{
+		"Name": "Traditional",
+		"ImagePath": "path",
+		"Description": "Description Traditional"
+	},
+	{
+		"Name": "Glam",
+		"ImagePath": "path",
+		"Description": "Description Glam"
+	},
+	{
+		"Name": "Preppy",
+		"ImagePath": "path",
+		"Description": "Description Glam"
+	}
+]
