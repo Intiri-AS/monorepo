@@ -25,7 +25,7 @@ import { SmsVerificationPage } from './pages/sms-verification/sms-verification.p
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'new-project',
+    redirectTo: 'my-intiri',
     pathMatch: 'full'
   },
   {
