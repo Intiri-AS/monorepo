@@ -17,6 +17,7 @@ namespace Intiri.API.DataAccess
 		private readonly IRoomTypeRepository _roomTypeRepository;
 		private readonly IMaterialRepository _materialRepository;
 		private readonly IMaterialTypeRepository _materialTypeRepository;
+		private readonly IColorRepository _colorRepository;
 
 		#endregion Fields
 
@@ -32,6 +33,7 @@ namespace Intiri.API.DataAccess
 			_roomTypeRepository = new RoomTypeRepository(dataContext, mapper);
 			_materialRepository = new MaterialRepository(dataContext);
 			_materialTypeRepository = new MaterialTypeRepository(dataContext);
+			_colorRepository = new ColorRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -48,6 +50,7 @@ namespace Intiri.API.DataAccess
 		public IRoomTypeRepository RoomTypeRepository => _roomTypeRepository;
 		public IMaterialRepository MaterialRepository => _materialRepository;
 		public IMaterialTypeRepository MaterialTypeRepository => _materialTypeRepository;
+		public IColorRepository ColorRepository => _colorRepository;
 
 		#endregion Properties
 

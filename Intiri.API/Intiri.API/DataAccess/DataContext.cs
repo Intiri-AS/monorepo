@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Intiri.API.Models.Style;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.IntiriColor;
 
 namespace Intiri.API.DataAccess
 {
@@ -26,6 +27,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<RoomType> RoomTypes { get; set; }
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<MaterialType> MaterialTypes { get; set; }
+		public DbSet<Color> Colors { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{

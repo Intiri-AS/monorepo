@@ -12,6 +12,7 @@ namespace Intiri.API.DataAccess
 		IRoomTypeRepository RoomTypeRepository { get; }
 		IMaterialRepository MaterialRepository { get; }
 		IMaterialTypeRepository MaterialTypeRepository { get; }
+		IColorRepository ColorRepository { get; }
 
 		Task<bool> SaveChanges();
 	}
