@@ -1,0 +1,30 @@
+﻿[
+	{
+		"Name": "Red",
+		"HexValue": "#ff0000"
+	},
+	{
+		"Name": "Blue",
+		"HexValue": "#3366ff"
+	},
+	{
+		"Name": "Yellow",
+		"HexValue": "#ffff66"
+	},
+	{
+		"Name": "Green",
+		"HexValue": "#66ff33"
+	},
+	{
+		"Name": "PINK ",
+		"HexValue": "#c0397b"
+	},
+	{
+		"Name": "Gold",
+		"HexValue": "#c09c39"
+	},
+	{
+		"Name": "Purple",
+		"HexValue": "#7639c0 "
+	}
+]

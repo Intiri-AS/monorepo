@@ -1,0 +1,38 @@
+﻿[
+	{
+		"Name": "Living Room",
+		"ImagePath": "Resources\\RoomImages\\Living.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	},
+	{
+		"Name": "Dinning Room",
+		"ImagePath": "Resources\\RoomImages\\Living.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	},
+	{
+		"Name": "Bedroom",
+		"ImagePath": "Resources\\RoomImages\\Bedroom.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	},
+	{
+		"Name": "Kitchen",
+		"ImagePath": "Resources\\RoomImages\\Kitchen.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	},
+	{
+		"Name": "Bathroom",
+		"ImagePath": "Resources\\RoomImages\\Bathroom.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	},
+	{
+		"Name": "Entry ways",
+		"ImagePath": "Resources\\RoomImages\\Entry.svg",
+		"Description": "Description Room",
+		"RoomTypeId": 2
+	}
+]

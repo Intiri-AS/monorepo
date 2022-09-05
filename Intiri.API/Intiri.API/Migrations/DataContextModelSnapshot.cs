@@ -38,7 +38,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.Material", b =>
@@ -65,7 +65,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("MaterialTypeId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.MaterialType", b =>
@@ -81,7 +81,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MaterialTypes");
+                    b.ToTable("MaterialTypes", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Role", b =>
@@ -138,7 +138,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("RoomTypeId");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Room.RoomType", b =>
@@ -154,7 +154,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoomTypes");
+                    b.ToTable("RoomTypes", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.Style", b =>
@@ -176,7 +176,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Styles");
+                    b.ToTable("Styles", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.StyleImage", b =>
@@ -200,7 +200,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("StyleImages");
+                    b.ToTable("StyleImages", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.User", b =>

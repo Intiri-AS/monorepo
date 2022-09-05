@@ -1,0 +1,37 @@
+﻿[
+	{
+		"Name": "StyleImage1",
+		"Path": "Resources\\StyleImages\\StyleImage1.png",
+		"StyleId": 1
+	},
+	{
+		"Name": "StyleImage2",
+		"Path": "Resources\\StyleImages\\StyleImage2.png",
+		"StyleId": 2
+	},
+	{
+		"Name": "StyleImage3",
+		"Path": "Resources\\StyleImages\\StyleImage3.png",
+		"StyleId": 3
+	},
+	{
+		"Name": "StyleImage4",
+		"Path": "Resources\\StyleImages\\StyleImage4.png",
+		"StyleId": 4
+	},
+	{
+		"Name": "StyleImage5",
+		"Path": "Resources\\StyleImages\\StyleImage5.png",
+		"StyleId": 5
+	},
+	{
+		"Name": "StyleImage6",
+		"Path": "Resources\\StyleImages\\StyleImage6.png",
+		"StyleId": 1
+	},
+	{
+		"Name": "StyleImage7",
+		"Path": "Resources\\StyleImages\\StyleImage7.png",
+		"StyleId": 2
+	}
+]
