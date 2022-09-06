@@ -47,6 +47,8 @@ import { HeaderLandingComponent } from './components/header-landing/header-landi
 import { FooterComponent } from './components/footer/footer.component';
 import { StepPickerComponent } from './components/step-picker/step-picker.component';
 import { NewProjectStepComponent } from './components/new-project-step/new-project-step.component';
+import { ProfileImgSectionComponent } from './components/profile-img-section/profile-img-section.component';
+import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
@@ -63,6 +65,7 @@ import { CodeInputModule } from 'angular-code-input';
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderComponent, FooterComponent,
     NewProjectStepComponent, StepPickerComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent,
     LoginModalComponent, CreateProjectModalComponent
   ],
   entryComponents: [
