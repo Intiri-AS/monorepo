@@ -23,6 +23,7 @@ try
 	builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 	builder.Host.UseNLog();
 
+	logger.Info("Init Services..");
 	// Add services to the container
 	builder.Services.AddApplicationServices(configuration);
 	builder.Services.AddIdentityServices(configuration);
@@ -31,6 +32,7 @@ try
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen();
 
+	logger.Info("Build app..");
 	var app = builder.Build();
 
 	#region Seed data
@@ -43,6 +45,7 @@ try
 	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
 	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
 
+	logger.Info("Migrate db..");
 	//add migrations
 	await dataContext.Database.MigrateAsync();
 	// seed data
