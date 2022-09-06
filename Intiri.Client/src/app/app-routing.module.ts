@@ -21,6 +21,7 @@ import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './pages/reset-password/reset.password.page';
 import { SmsVerificationPage } from './pages/sms-verification/sms-verification.page';
+import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
   {
     path: 'my-intiri', //TODO Set up page guard (end-user guard)
     component: MyIntiriPage
+  },
+  {
+    path: 'project-details', //TODO Set up page guard (end-user guard)
+    component: ProjectDetailsPage
   },
   {
     path: 'new-project', //TODO Set up page guard (end-user guard)
