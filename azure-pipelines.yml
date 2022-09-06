@@ -1,0 +1,124 @@
+trigger:
+
+- development
+
+variables:
+  solutionDir: 'Intiri.API'
+  buildConfiguration: 'Release'
+
+pool:
+  name: 'Intiri_pipeline'
+  vmImage: windows-latest
+  # vmImage: windows-latest
+
+stages:
+- stage: build_and_publish_artifact
+  jobs:
+    - job: build
+      steps:
+      - script: dotnet build --configuration $(buildConfiguration)
+        displayName: 'dotnet build'
+        workingDirectory: $(solutionDir)
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: publish
+          publishWebProjects: True
+          arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+          zipAfterPublish: True
+      
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+          artifact: 'drop'
+          publishLocation: 'pipeline'
+        
+- stage: create_sqlscript_and_publish_artifact
+  jobs:
+    - job: create_sqlscript_from_migrations
+      steps:  
+      - task: DotNetCoreCLI@2
+        displayName: New Manifest for tool
+        inputs:
+          command: custom
+          custom: 'new '
+          arguments: tool-manifest
+        
+      - task: DotNetCoreCLI@2
+        displayName: Install EF Tool
+        inputs:
+          command: custom
+          custom: 'tool '
+          arguments: install dotnet-ef
+      - task: DotNetCoreCLI@2
+        displayName: Create SQL Scripts
+        inputs:
+          command: custom
+          custom: 'ef '
+          arguments: migrations script --output $(Build.SourcesDirectory)/intiriscript.sql --idempotent --project $(solutionDir)/Intiri.API/Intiri.API.csproj --context DataContext
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: $(Build.SourcesDirectory)
+          artifact: 'SQLScripts'
+          publishLocation: 'pipeline'
+      
+- stage: deploy_to_production
+  jobs:
+    - job: deploy_database
+      steps:
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'SQLScripts'
+            targetPath: '$(Pipeline.Workspace)/SQLScripts'
+
+        - task: SqlAzureDacpacDeployment@1
+          inputs:
+            azureSubscription: 'intiri_service_connection'
+            AuthenticationType: 'server'
+            ServerName: 'intiri-test.database.windows.net'
+            DatabaseName: 'intiri-test'
+            SqlUsername: 'milos'
+            SqlPassword: $(SqlPassword)
+            deployType: 'SqlTask'
+            SqlFile: '$(Pipeline.Workspace)/SQLScripts/intiriscript.sql'
+            IpDetectionMethod: 'AutoDetect'
+
+    - job: set_environment_variables
+      steps:
+        - task: AzureAppServiceSettings@1
+          inputs:
+            azureSubscription: 'intiri_service_connection'
+            appName: 'intiri-test'
+            resourceGroupName: 'intiri-test'
+            appSettings: |
+              [
+               {
+                  "name":"TokenKey",
+                  "value":"$(TokenSecret)"
+               }
+              ]
+            connectionStrings: |
+              [
+                {
+                  "name": "DefaultConnection",
+                  "value": "$(ConnectionString)"
+                }
+              ]
+
+    - job: deploy_application
+      steps:
+        - task: DownloadPipelineArtifact@2
+          inputs:
+            buildType: 'current'
+            artifactName: 'drop'
+            targetPath: '$(Pipeline.Workspace)/drop'
+
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: 'intiri_service_connection'
+            appType: 'webApp'
+            appName: 'intiri-test'
+            package: '$(Pipeline.Workspace)/drop/**/*.zip'
+            deploymentMethod: 'auto'
