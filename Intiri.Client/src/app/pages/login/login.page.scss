@@ -3,22 +3,28 @@
 }
 
 .login-btn {
-  @apply flex justify-center items-center w-28 h-14 text-white rounded-2xl mt-8 font-['Fira-Sans'] text-lg font-semibold;
+  @apply flex justify-center items-center w-28 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
   background: #9B7E60;
   text-transform: none;
 }
 
 .forgot-btn {
-  @apply border-0 text-lg font-['Fira-Sans'] font-semibold mt-7;
+  @apply border-0 text-lg font-semibold mt-7;
   color: #AA4C33;
   text-transform: none;
 }
 
 .create-btn {
-  @apply flex justify-center items-center border w-52 h-14 rounded-2xl font-['Fira-Sans'] text-lg font-semibold;
+  @apply flex justify-center items-center border w-52 h-14 rounded-2xl text-lg font-semibold;
   color: #9B7E60;
   text-transform: none;
   border-color: #9B7E60;
+}
+
+.scan-btn {
+  @apply flex justify-center items-center text-black w-52 h-14 rounded-2xl text-lg font-medium;
+  background: #F8F5F1;
+  text-transform: none;
 }
 
 .password-input {

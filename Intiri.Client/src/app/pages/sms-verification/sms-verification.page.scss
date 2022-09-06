@@ -3,19 +3,19 @@
 }
 
 .register-btn {
-  @apply font-['Fira-Sans'] text-lg font-semibold text-black mt-14;
+  @apply text-lg font-semibold text-black mt-14;
   --padding-start: 4px;
   text-transform: none;
 }
 
 .btn {
-  @apply flex justify-center items-center w-48 h-14 text-white rounded-2xl mt-8 font-['Fira-Sans'] text-lg font-semibold;
+  @apply flex justify-center items-center w-48 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
   background: #9B7E60;
   text-transform: none;
 }
 
 .send-btn {
-  @apply flex justify-center items-center text-lg mt-6 font-['Fira-Sans'] font-semibold;
+  @apply flex justify-center items-center text-lg mt-6 font-semibold;
   color: #AA4C33;
   text-transform: none;
 }

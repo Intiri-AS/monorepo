@@ -3,32 +3,45 @@
     <ion-row>
       <ion-col offset="2" size="4" class="p-12 h-full">
         <div class="w-[470px]">
-          <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg">
+          <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
           <ion-button fill="clear" class="login-btn" routerLink="/login" routerDirection="root">
             <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
             <p>Login</p>
           </ion-button>
           <h1 class="font-['Allison'] text-7xl mt-0 black-2">Start your journey</h1>
-          <h1 class="text-5xl font-semibold font-['Fira-Sans']">Create an account</h1>
-          <p class="text-lg font-['Fira-Sans'] black-2">
+          <h1 class="text-5xl font-semibold">Create an account</h1>
+          <p class="text-lg black-2">
             Manage your account, create and edit projects, collaborate on design and more.
           </p>
-          <div class="font-['Fira-Sans'] mt-8">
-            <span class="text-sm black-2">First and last name</span>
-            <ion-input type="name" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          <div class="mt-8 flex justify-between">
+            <div>
+              <span class="text-sm black-2">First name</span>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2 w-56"></ion-input>
+            </div>
+            <div>
+              <span class="text-sm black-2">Last name</span>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2 w-56"></ion-input>
+            </div>
           </div>
-          <div class="font-['Fira-Sans'] mt-7">
-            <span class="text-sm black-2">Email</span>
-            <ion-input type="email" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          <div class="mt-7">
+            <span class="text-sm black-2">Phone number</span>
+            <div class="flex justify-between">
+              <div>
+                <ion-input class="border rounded-2xl border-black-2 h-14 w-32"></ion-input>
+              </div>
+              <div>
+                <ion-input type="tel" class="border rounded-2xl h-14 border-black-2 w-80"></ion-input>
+              </div>
+            </div>
           </div>
-          <div class="font-['Fira-Sans'] mt-7">
+          <div class="mt-7">
             <span class="text-sm black-2">Password</span>
             <ion-item class="rounded-2xl border-black-2" lines="none">
               <ion-input type="password" class="h-14 password-input"></ion-input>
               <ion-icon slot="end" name="eye"></ion-icon>
             </ion-item>
           </div>
-          <div class="font-['Fira-Sans'] mt-7">
+          <div class="mt-7">
             <span class="text-sm black-2">Repeat password</span>
             <ion-item class="rounded-2xl border-black-2" lines="none">
               <ion-input type="password" class="h-14 password-input"></ion-input>
