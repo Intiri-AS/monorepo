@@ -76,6 +76,7 @@ try
 		RequestPath = new PathString("/Resources")
 	});
 	// seed data
+	logger.Debug("Seeding data...");
 	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
@@ -83,10 +84,12 @@ try
 
 	app.MapControllers();
 
+	logger.Debug("Running app...");
 	await app.RunAsync();
 }
 catch (Exception exception)
 {
+	logger.Error(exception.Message);
 	logger.Error("Stopped program: ", exception);
 }
 
