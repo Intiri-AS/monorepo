@@ -86,7 +86,14 @@ try
 	app.UseAuthentication();
 	app.UseAuthorization();
 
-	app.MapControllers();
+	app.UseDefaultFiles();
+	app.UseStaticFiles();
+
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+		endpoints.MapFallbackToController("Index", "Fallback");
+	});
 
 	logger.Debug("Running app...");
 	await app.RunAsync();
