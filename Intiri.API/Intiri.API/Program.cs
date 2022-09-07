@@ -23,6 +23,7 @@ try
 	builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 	builder.Host.UseNLog();
 
+	logger.Info("Init Services..");
 	// Add services to the container
 	builder.Services.AddApplicationServices(configuration);
 	builder.Services.AddIdentityServices(configuration);
@@ -31,6 +32,7 @@ try
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen();
 
+	logger.Info("Build app..");
 	var app = builder.Build();
 
 	#region Seed data
@@ -43,6 +45,7 @@ try
 	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
 	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
 
+	logger.Info("Migrate db..");
 	//add migrations
 	await dataContext.Database.MigrateAsync();
 	// seed data
@@ -68,25 +71,37 @@ try
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 	app.UseHttpsRedirection();
+	app.UseRouting();
 
-	app.UseStaticFiles();
-	app.UseStaticFiles(new StaticFileOptions()
-	{
-		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-		RequestPath = new PathString("/Resources")
-	});
+	//app.UseStaticFiles();
+	//app.UseStaticFiles(new StaticFileOptions()
+	//{
+	//	FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+	//	RequestPath = new PathString("/Resources")
+	//});
+
 	// seed data
+	logger.Debug("Seeding data...");
 	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
 	app.UseAuthorization();
 
-	app.MapControllers();
+	app.UseDefaultFiles();
+	app.UseStaticFiles();
 
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+		endpoints.MapFallbackToController("Index", "Fallback");
+	});
+
+	logger.Debug("Running app...");
 	await app.RunAsync();
 }
 catch (Exception exception)
 {
+	logger.Error(exception.Message);
 	logger.Error("Stopped program: ", exception);
 }
 

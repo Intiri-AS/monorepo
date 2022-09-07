@@ -22,6 +22,11 @@
     @apply object-cover rounded-xl h-[40px] w-[40px] mr-4
 }
 
+ion-popover {
+  --backdrop-opacity: 0;
+  --offset-y: 10px;
+}
+
 ion-header::after {
   border-bottom: none;
   border: 0px;

@@ -3,17 +3,24 @@
     <ion-row>
       <ion-col offset="2" size="4" class="p-12 h-full">
         <div class="w-[470px]">
-          <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg">
+          <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
           <h1 class="font-['Allison'] text-7xl mt-16 black-2">Welcome back</h1>
-          <h1 class="text-5xl font-semibold font-['Fira-Sans']">Login</h1>
-          <p class="text-lg font-['Fira-Sans'] black-2">
+          <h1 class="text-5xl font-semibold">Login</h1>
+          <p class="text-lg black-2">
             Manage your account, create and edit projects, collaborate on design and more.
           </p>
-          <div class="font-['Fira-Sans'] mt-8">
-            <span class="text-sm black-2">Email</span>
-            <ion-input type="email" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          <div class="mt-8">
+            <span class="text-sm black-2">Phone number</span>
+            <div class="flex justify-between">
+              <div>
+                <ion-input class="border rounded-2xl border-black-2 h-14 w-32"></ion-input>
+              </div>
+              <div>
+                <ion-input type="tel" class="border rounded-2xl h-14 border-black-2 w-80"></ion-input>
+              </div>
+            </div>
           </div>
-          <div class="font-['Fira-Sans'] mt-7">
+          <div class="mt-7">
             <span class="text-sm black-2">Password</span>
             <ion-item class="rounded-2xl border-black-2" lines="none">
               <ion-input type="password" class="h-14 password-input"></ion-input>
@@ -23,7 +30,9 @@
           <div class="flex flex-col justify-center items-center">
             <ion-button fill="clear" class="login-btn">Login</ion-button>
             <ion-button fill="clear" class="forgot-btn" routerLink="/forgot-password" routerDirection="root">Forgot password?</ion-button>
-            <p class="font-['Fira-Sans'] text-lg black-2 mt-24">Don't have an account?</p>
+            <p class="text-lg black-2 mt-7">Or</p>
+            <ion-button fill="clear" class="scan-btn">Scan QR code</ion-button>
+            <p class="text-lg black-2 mt-20">Don't have an account?</p>
             <ion-button fill="clear" class="create-btn" routerLink="/register" routerDirection="root">Create an account</ion-button>
           </div>
         </div>

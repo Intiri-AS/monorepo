@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
+import { IonSlides } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 
 @Component({
@@ -11,21 +10,43 @@ import { IonContent } from '@ionic/angular';
 
 export class LandingPage {
 
+  @ViewChild('slides') slides: IonSlides;
+
+  public comments = [
+    {
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris.',
+      author: 'John Doe'
+    },
+    {
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
+      author: 'John Boe'
+    },
+    {
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
+      author: 'John Bro'
+    },
+    {
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
+      author: 'Ide Ide'
+    },
+  ];
+
   isScrolledDown: boolean;
 
-  constructor(
-    private modalController: ModalController
-  ) {}
+  constructor() {}
 
   @ViewChild(IonContent) content: IonContent;
 
-  async openLogin() {
-    const modal = await this.modalController.create({
-      component: LoginModalComponent,
-      cssClass: 'modal-css'
-    });
+  next() {
+    this.slides.slideNext();
+  }
 
-    await modal.present();
+  prev() {
+    this.slides.slidePrev();
+  }
+
+  getOptions(){
+    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1}
   }
 
   async logScrollEnd() {
