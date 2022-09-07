@@ -3,3 +3,13 @@
   --padding-start: 4px;
   text-transform: none;
 }
+
+.clear-btn {
+  @apply text-lg font-medium text-primary border border-primary rounded-2xl h-[52px] px-3;
+  text-transform: none;
+}
+
+.full-btn {
+  @apply text-lg font-medium text-white border border-primary rounded-2xl h-[52px] bg-primary mx-4 px-3;
+  text-transform: none;
+}
