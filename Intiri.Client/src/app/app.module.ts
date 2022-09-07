@@ -52,6 +52,7 @@ import { ProfileImgSectionComponent } from './components/profile-img-section/pro
 import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
+import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -68,10 +69,10 @@ import { CodeInputModule } from 'angular-code-input';
     HeaderLandingComponent, HeaderComponent, FooterComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, CreateProjectModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent
   ],
   entryComponents: [
-    LoginModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent
   ],
   imports: [
     BrowserModule,

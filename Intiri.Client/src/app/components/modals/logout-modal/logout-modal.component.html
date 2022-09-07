@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="logout-icon-wrapper"><ion-icon class="h-[34px] w-[34px] mx-auto mt-[5px] block" name="log-out-outline"></ion-icon></div>
+          <h2 class="mt-6 text-center text-2xl font-bold text-black1">Logout!</h2>
+          <p class="text-center text-base text-black2">Are you sure you want to logout from the app?</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button  class="cancel-btn" (click)="dismiss()">Cancel</ion-button>
+          <ion-button class="logout-btn" (click)="logout()">Logout</ion-button>
+        </ion-buttons>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

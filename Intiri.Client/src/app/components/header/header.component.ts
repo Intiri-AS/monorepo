@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  constructor() {}
+  constructor(private modalController: ModalController) {}
 
   menuOpened() {
     const x = document.querySelector('#home');
@@ -20,6 +22,15 @@ export class HeaderComponent {
   }
   removeProjectDraft(){
     sessionStorage.removeItem('draftProjectName');
+  }
+
+  async openLogoutModal() {
+    const modal = await this.modalController.create({
+      component: LogoutModalComponent,
+      cssClass: 'modal-css'
+    });
+
+    await modal.present();
   }
 
 }
