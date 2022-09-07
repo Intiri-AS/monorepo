@@ -21,6 +21,7 @@ import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './pages/reset-password/reset.password.page';
 import { SmsVerificationPage } from './pages/sms-verification/sms-verification.page';
+import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'craftsman-portal', //TODO Set up page guard (end-user guard)
     component: CraftsmanPortalPage
+  },
+  {
+    path: 'pricing-plans', //TODO Set up page guard (end-user guard)
+    component: PricingPlansPage
   },
   {
     path: 'customize-moodboard', //TODO Set up page guard (end-user guard)

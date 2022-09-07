@@ -28,7 +28,9 @@ module.exports = {
         'color-pallete': "url('/assets/icon/color-pallete.svg')",
         'moodboard': "url('/assets/icon/moodboard.svg')",
         'final-result': "url('/assets/icon/final-result.svg')",
-        'plus': "url('/assets/icon/plus.svg')",
+        'plus': "url('/assets/icon/premium.svg')",
+        'premium-plan': "url('/assets/icon/premium-plan.svg')",
+        'free-plan': "url('/assets/icon/free-plan.svg')",
       },
       colors: {
         primary: {

@@ -28,6 +28,7 @@ import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboa
 import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
+import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 
@@ -63,7 +64,7 @@ import { CodeInputModule } from 'angular-code-input';
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
-    ProjectDetailsPage, MoodboardDetailsPage,
+    ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage,
     DashboardPage, DesignerPage, VendorPage,
     MyMoodboardPage,
     StylePage, MoodboardPage,

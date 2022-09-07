@@ -7,6 +7,25 @@
         <p>Project details</p>
       </ion-button>
       <p class="text-[45px] font-medium">Moodboard 1</p>
+      <ion-card class="border border-black shadow-none rounded-2xl w-[866px] h-[411px] m-0 mt-7 p-4">
+        <img src="../../../../assets/images/landing-img.png" class="h-full w-full">
+      </ion-card>
+      <div class="mt-16">
+        <p class="text-black-2 text-2xl font-medium">What's included in moodboard</p>
+        <div class="mt-6 flex justify-between flex-wrap">
+          <div *ngFor="let p of parts" class="flex flex-col">
+            <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 p-4">
+              <img src={{p.image}} class="h-full w-full">
+            </ion-card>
+            <p class="text-black-2 text-2xl mt-2 font-medium">{{p.name}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-40 mb-40">
+        <ion-button fill="clear" class="clear-btn">Edit moodboard</ion-button>
+        <ion-button fill="clear" class="full-btn">Contact designer</ion-button>
+        <ion-button fill="clear" class="clear-btn">Contact craftsman</ion-button>
+      </div>
     </div>
   </div>
 </ion-content>
