@@ -23,6 +23,7 @@ import { ResetPasswordPage } from './pages/reset-password/reset.password.page';
 import { SmsVerificationPage } from './pages/sms-verification/sms-verification.page';
 import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
+import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 
 const routes: Routes = [
   {
@@ -89,6 +90,10 @@ const routes: Routes = [
   {
     path: 'project-details', //TODO Set up page guard (end-user guard)
     component: ProjectDetailsPage
+  },
+  {
+    path: 'moodboard-details', //TODO Set up page guard (end-user guard)
+    component: MoodboardDetailsPage
   },
   {
     path: 'new-project', //TODO Set up page guard (end-user guard)

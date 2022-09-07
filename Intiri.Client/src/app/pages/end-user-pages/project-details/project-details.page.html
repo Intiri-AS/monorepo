@@ -1,6 +1,32 @@
 <ion-content>
   <div id="home">
     <app-header></app-header>
-    <p>TESTING DETAILS</p>
+    <div class="2xl:container">
+      <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
+        <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
+        <p>My Intiri</p>
+      </ion-button>
+      <p class="text-[45px] font-medium">Skandinavian bright</p>
+      <div class="mt-7 flex flex-wrap justify-between">
+        <div *ngFor="let mb of moodboards">
+          <ion-card class="h-[350px] w-[370px] border border-black rounded-2xl m-0 mt-5 shadow-none p-4">
+            <img src={{mb.image}} class="w-full h-full">
+          </ion-card>
+          <div class="flex items-center justify-start">
+            <p class="text-black-2 text-2xl font-medium">{{mb.name}}</p>
+            <ion-button fill="clear" class="text-black" routerLink="/moodboard-details" routerDirection="root">
+              <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <p class="text-black-3 text-lg">{{mb.pieces}} pieces / {{mb.updated}} ago</p>
+          </div>
+        </div>
+        <ion-card class="h-[350px] w-[370px] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-5 p-4 flex justify-center items-center flex-col">
+          <ion-icon name="add" class="w-20 h-20"></ion-icon>
+          <p class="text-lg font-medium">Add new moodboard</p>
+        </ion-card>
+      </div>
+    </div>
   </div>
 </ion-content>

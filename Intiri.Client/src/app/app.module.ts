@@ -30,6 +30,7 @@ import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/con
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
+import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 
 //pages for admins
 import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
@@ -63,7 +64,7 @@ import { CodeInputModule } from 'angular-code-input';
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
-    ProjectDetailsPage, PricingPlansPage,
+    ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage,
     DashboardPage, DesignerPage, VendorPage,
     MyMoodboardPage,
     StylePage, MoodboardPage,
