@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-intiri-page',
@@ -73,12 +72,6 @@ export class MyIntiriPage {
     },
   ]
 
-  constructor(
-    private nav: NavController
-  ) {}
-
-  details() {
-    this.nav.navigateRoot('/project-details');
-  }
+  constructor() {}
 
 }
