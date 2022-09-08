@@ -8,11 +8,17 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class StepPickerComponent implements OnInit {
 
+
+  @Input() page: string = 'create-project';
   @Input() currentStepNo: number;
-  @Input() project: object;
   @Input() steps: Array<object>;
   @Input() canChangeToStep: (value: any) => boolean;
   @Output() changeStep = new EventEmitter<number>();
+
+  // inputs used only for canChangeStep() function, since it needs to pass context to "this".
+  @Input() project: object; // used only for create-project-page
+  @Input() moodboard: object; // used only for customize-moodboard-page
+
   constructor() { }
 
   ngOnInit() {}

@@ -31,6 +31,9 @@ module.exports = {
         'plus': "url('/assets/icon/premium.svg')",
         'premium-plan': "url('/assets/icon/premium-plan.svg')",
         'free-plan': "url('/assets/icon/free-plan.svg')",
+        'room-details': "url('/assets/icon/room-details.svg')",
+        'sofa': "url('/assets/icon/sofa.svg')",
+        'materials': "url('/assets/icon/materials.svg')",
       },
       colors: {
         primary: {

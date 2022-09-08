@@ -1,0 +1,11 @@
+.next-btn {
+  @apply hover:opacity-80 bg-primary text-white font-medium normal-case rounded-xl px-4 mx-2 h-10;
+}
+
+.back-btn {
+  @apply hover:opacity-80 bg-transparent text-primary font-medium normal-case rounded-xl border-primary border px-4 mx-2 h-10;
+}
+
+.disabled {
+  @apply pointer-events-none opacity-60;
+}
