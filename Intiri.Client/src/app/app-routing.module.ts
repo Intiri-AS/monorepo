@@ -24,6 +24,7 @@ import { SmsVerificationPage } from './pages/sms-verification/sms-verification.p
 import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
+import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
 
 const routes: Routes = [
   {
@@ -78,6 +79,10 @@ const routes: Routes = [
   {
     path: 'pricing-plans', //TODO Set up page guard (end-user guard)
     component: PricingPlansPage
+  },
+  {
+    path: 'messenger', //TODO Set up page guard (end-user guard)
+    component: MessengerPage
   },
   {
     path: 'customize-moodboard', //TODO Set up page guard (end-user guard)

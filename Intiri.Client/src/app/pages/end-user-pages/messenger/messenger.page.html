@@ -1,0 +1,62 @@
+<ion-content>
+  <div id="home">
+    <app-header></app-header>
+    <ion-grid class="px-[2%] xs:px-[5%] xll:container mt-[30px]">
+      <ion-row>
+        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="4">
+          <h1 class="font-medium text-black-1 text-5xl mt-0">Messages</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="5">
+            <div class="xl-ion:w-[370px] xl-ion:h-[720px] pb-8">
+              <div class="profile-input">
+                <span class="text-sm text-black-2">Search</span>
+                <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px]"></ion-input>
+              </div>
+              <ul>
+                <li *ngFor="let number of [0,1,2,3,4,5,6]">
+                  <div class="my-6 flex justify-between">
+                    <div class="flex" >
+                      <img src="../../../assets/images/profile-img.png" class="w-[57px] h-[57px] rounded-lg object-cover" alt="Profile Img"/>
+                      <div class="ml-3.5 w-[170px]">
+                        <p class="text-black-1 leading-5 font-semibold">Sina Marlsberg</p>
+                        <p class="text-black-3 size-[15px] leading-5" style="overflow: hidden;
+                          display: -webkit-box;
+                          -webkit-box-orient: vertical;
+                          -webkit-line-clamp: 2;
+                          ">Hello, I wanted to go to the dates of...
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="text-black-3 size-[15px] leading-[14px]">22 Jun</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </ion-col>
+        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="5">
+            <div class="bg-light xl-ion:w-[794px] xl-ion:h-[682px] rounded-lg text-center pb-8">
+              <div class="flex py-[22px] pl-[18px] border-b border-secondary">
+                <img src="../../../assets/images/profile-img.png" class="w-[45px] h-[45px] rounded-lg object-cover" alt="Profile Img"/>
+                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">Sina Marlsberg</p>
+              </div>
+              <div class="chat">
+                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. </div>
+                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. </div>
+                <div class="chat-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. Vivamus eget vehicula nulla. </div>
+                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. Vivamus eget vehicula nulla. </div>
+              </div>
+              <div class="chat-input">
+                <ion-input type="text" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                <ion-icon class="img-btn disabled" name="image"></ion-icon>
+                <div class="send-btn-wrapper"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
+              </div>
+            </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
