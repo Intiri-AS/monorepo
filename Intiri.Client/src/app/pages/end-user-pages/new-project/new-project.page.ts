@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-new-project-page',
@@ -89,12 +90,17 @@ export class NewProjectPage {
 
   currentStepNo: number = 0;
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, public projectService: ProjectService) {}
 
   ngOnInit() {
     if(!sessionStorage.getItem('draftProjectName')) {
       this.openModal();
     }
+    this.projectService.getStyleImages().subscribe(images => {
+      console.log(images)
+    },error =>{
+      console.log(error);
+    })
   }
 
   backStep() {
