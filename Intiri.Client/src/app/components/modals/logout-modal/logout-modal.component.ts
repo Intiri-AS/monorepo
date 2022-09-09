@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-logout-modal',
@@ -8,7 +9,7 @@ import { ModalController, NavController } from '@ionic/angular';
 })
 export class LogoutModalComponent implements OnInit {
 
-  constructor(private modalController: ModalController,  private nav: NavController) { }
+  constructor(public accountService: AccountService, private modalController: ModalController,  private nav: NavController) { }
 
   ngOnInit() {}
 
@@ -18,6 +19,7 @@ export class LogoutModalComponent implements OnInit {
 
   logout() {
     this.dismiss();
+    this.accountService.logout();
     this.nav.navigateRoot('/login');
   }
 

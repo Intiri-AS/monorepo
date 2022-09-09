@@ -13,7 +13,7 @@
             An sms with 6-digit verification code was sent to your phone.
           </p>
           <div class="mt-8">
-            <code-input [codeLength]="6" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)">
+            <code-input  #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)">
 
             </code-input>
           </div>
