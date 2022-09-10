@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-project-step',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NewProjectStepComponent implements OnInit {
 
+  apiUrl = environment.apiUrl;
   @Input() currentStep: object;
   @Input() project: object;
   @Input() currentStepNo: number;

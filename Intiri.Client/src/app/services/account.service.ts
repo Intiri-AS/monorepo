@@ -11,14 +11,14 @@ import { User } from '../models/user.model';
 
 export class AccountService {
 
-  baseUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'account/login', model).pipe(
+    return this.http.post(this.apiUrl + 'account/login', model).pipe(
       map((response: User) =>{
         const user = response;
         if (user) {
@@ -30,7 +30,7 @@ export class AccountService {
   }
 
   register(model: any) {
-    return this.http.post(this.baseUrl + 'account/register', model);
+    return this.http.post(this.apiUrl + 'account/register', model);
   }
 
   setCurrentUser(user: User) {
@@ -43,7 +43,7 @@ export class AccountService {
   }
 
  forgotPassword(model: any) {
-    return this.http.patch(this.baseUrl + 'account/forgot-password', model).pipe(
+    return this.http.patch(this.apiUrl + 'account/forgot-password', model).pipe(
       map((response: User) =>{
         const user = response;
         if (user) {
@@ -57,6 +57,6 @@ export class AccountService {
   }
 
   resetPassword(model: any){
-    return this.http.post(this.baseUrl + 'account/reset-password', model);
+    return this.http.post(this.apiUrl + 'account/reset-password', model);
   }
 }

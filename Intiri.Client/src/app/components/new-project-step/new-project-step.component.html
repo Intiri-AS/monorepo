@@ -3,13 +3,13 @@
   <p class="step-subtitle">{{currentStep.subtitle}}</p>
   <ion-grid class="step-items">
     <ion-row>
-      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.5" size-sm="3.75" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.title">
-        <img *ngIf="item.img" src="../../../assets/{{item.img}}" class="step-image" alt="style-img"/>
-        <div *ngIf="item.icon" class="step-icon-wrapper" >
-          <img src="../../../assets/{{item.icon}}" class="step-icon" alt="room-icon"/>
+      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.5" size-sm="3.75" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <img *ngIf="item.path" src="{{apiUrl}}{{item.path}}" class="step-image" alt="style-img"/>
+        <div *ngIf="item.imagePath" class="step-icon-wrapper" >
+          <img src="{{apiUrl}}{{item.imagePath}}" class="step-icon" alt="room-icon"/>
         </div>
-        <div *ngIf="item.color" class="step-color-wrapper" [ngStyle]="{background: item.color}"></div>
-        <p *ngIf="item.title" class="font-bold mt-6">{{item.title}}</p>
+        <div *ngIf="item.hexValue" class="step-color-wrapper" [ngStyle]="{background: item.hexValue}"></div>
+        <p *ngIf="item.name" class="font-bold mt-6">{{item.name}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
