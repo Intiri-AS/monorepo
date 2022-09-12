@@ -6,6 +6,7 @@ using Intiri.API.Models.Style;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Product;
 
 namespace Intiri.API.DataAccess
 {
@@ -28,6 +29,8 @@ namespace Intiri.API.DataAccess
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<MaterialType> MaterialTypes { get; set; }
 		public DbSet<Color> Colors { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<ProductType> ProductTypes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
