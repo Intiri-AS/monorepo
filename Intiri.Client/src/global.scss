@@ -31,6 +31,12 @@
     border-radius: 16px;
     --height: 400px;
   }
+
+  .book-designer-modal-css::part(content) {
+    --width: 884px;
+    border-radius: 16px;
+    --height: 1090px;
+  }
 }
 
 ion-button {

@@ -1,0 +1,31 @@
+<ion-content>
+  <div id="hero">
+    <app-header></app-header>
+    <div class="2xl:container mb-40">
+      <p class="text-[45px] font-medium mt-16">Select a designer</p>
+      <div class="flex flex-wrap justify-between">
+        <div *ngFor="let d of designers">
+          <ion-card class="border border-black rounded-2xl shadow-none w-[370px] h-[350px] m-0 mt-5 mb-[8px] p-4">
+            <img src={{d.image}} class="w-full h-full">
+          </ion-card>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center justify-start">
+              <img src={{d.logo}} class="h-[30px] w-[30px] rounded-md">
+              <p class="text-black-2 text-2xl font-medium ml-2">{{d.name}}</p>
+              <ion-button fill="clear" class="text-black" (click)="paymentModal()">
+                <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+              </ion-button>
+            </div>
+            <div class="h-[30px] w-[55px] bg-secondary flex items-center justify-evenly rounded-md">
+              <ion-icon name="star" class="text-light text-sm"></ion-icon>
+              <p class="text-light text-sm">{{d.rating}}</p>
+            </div>
+          </div>
+          <div>
+            <p class="text-lg text-black-3">{{d.designs}} completed designs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

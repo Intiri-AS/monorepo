@@ -25,6 +25,8 @@ import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-p
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
+import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/designer-profile.page';
+import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
 
 const routes: Routes = [
   {
@@ -71,6 +73,14 @@ const routes: Routes = [
   {
     path: 'contact-designer', //TODO Set up page guard (end-user guard)
     component: ContactDesignerPage
+  },
+  {
+    path: 'designer-profile',
+    component: DesignerProfilePage
+  },
+  {
+    path: 'payment-details',
+    component: PaymentDetailsPage
   },
   {
     path: 'craftsman-portal', //TODO Set up page guard (end-user guard)

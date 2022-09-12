@@ -1,0 +1,53 @@
+<ion-content>
+  <div id="hero">
+    <app-header></app-header>
+    <div class="2xl:container">
+      <p class="text-[45px] font-medium mt-16">Designer profile</p>
+      <div class="mt-[30px]">
+        <ion-row>
+          <ion-col size="4">
+            <div class="bg-light rounded-2xl flex flex-col items-center">
+              <img src="../../../../assets/images/profile-img.png" class="w-[240px] h-[240px] rounded-full mt-[65px]">
+              <p class="text-2xl text-black-2 font-medium mt-[30px]">Diana Haliwell</p>
+              <p class="text-lg text-black-3">16 projects</p>
+              <p class="text-lg text-black-2 px-[60px] mt-[30px]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui. Maecenas congue vel leo ac feugiat.
+                <br>
+                <br>
+                Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis sed dolor mauris.
+              </p>
+              <ion-button fill="clear" class="contact-btn">Contact designer</ion-button>
+            </div>
+          </ion-col>
+          <ion-col size="8" class="pl-5">
+            <p class="text-2xl text-black-2 font-medium">Available slots</p>
+            <div class="mt-[30px] flex flex-wrap justify-between">
+              <div class="border border-black rounded-2xl h-[477px] w-[470px] p-4 flex justify-center items-center">
+                <ion-datetime presentation="calendar" class="h-full w-full" [multiple]="true"></ion-datetime>
+              </div>
+              <div class="border border-black rounded-2xl h-[477px] w-[260px] p-4 flex flex-col items-center">
+                <ion-button fill="clear" class="time-btn">10 AM - 11 AM</ion-button>
+                <ion-button fill="clear" class="time-btn">11 AM - 12 AM</ion-button>
+                <ion-button fill="clear" class="time-btn">13 AM - 14 AM</ion-button>
+                <ion-button fill="clear" class="time-btn">14 AM - 15 AM</ion-button>
+                <ion-button fill="clear" class="time-btn">15 AM - 16 AM</ion-button>
+                <ion-button fill="clear" class="time-btn">16 AM - 17 AM</ion-button>
+              </div>
+            </div>
+            <p class="text-2xl text-black-2 font-medium mt-[80px]">Moodboard</p>
+            <div class="mt-[30px] mb-[200px]">
+              <div class="border border-black rounded-2xl w-[746px] h-[410px] p-4">
+                <img src="../../../../assets/images/landing-img.png" class="w-full h-full">
+              </div>
+            </div>
+            <div class="flex justify-center items-center h-[152px] w-[746px] fixed bottom-0 bg-white">
+              <ion-button fill="clear" class="cancel-btn">Cancel</ion-button>
+              <ion-button fill="clear" class="book-btn" routerLink="/payment-details" routerDirection="root">Book consultation</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

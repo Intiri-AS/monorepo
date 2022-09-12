@@ -1,0 +1,9 @@
+.credit-btn {
+  @apply border border-secondary rounded-2xl h-[62px] p-0 px-4 m-0 mt-[30px] text-lg text-black font-medium;
+  text-transform: none;
+}
+
+.continue-btn {
+  @apply border border-primary bg-primary rounded-2xl h-[52px] p-0 px-4 text-lg text-white font-medium;
+  text-transform: none;
+}

@@ -32,6 +32,8 @@ import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-p
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
+import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/designer-profile.page';
+import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
 
 //pages for admins
 import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
@@ -57,6 +59,7 @@ import { ProfileInfoSectionComponent } from './components/profile-info-section/p
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
 import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
+import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 
@@ -65,17 +68,17 @@ import { CodeInputModule } from 'angular-code-input';
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
-    ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage,
+    ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage,
     MyMoodboardPage,
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderComponent, FooterComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent
   ],
   entryComponents: [
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent
   ],
   imports: [
     BrowserModule,
