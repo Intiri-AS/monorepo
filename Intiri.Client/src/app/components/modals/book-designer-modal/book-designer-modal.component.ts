@@ -36,7 +36,7 @@ export class BookDesignerModalComponent {
     {
       id: 8, name: 'Other questions'
     }
-  ]
+  ];
 
   constructor(
     private modalController: ModalController,
@@ -44,9 +44,13 @@ export class BookDesignerModalComponent {
   ) {}
 
   totalPriceSum(event) {
-    console.log(event);
     const numberOfConsultations = event.detail.value;
-    this.totalPrice = this.price * numberOfConsultations;
+    const reg = new RegExp(/^[1-9]\d*$/g);
+    if(reg.test(numberOfConsultations)) {
+      this.totalPrice = this.price * numberOfConsultations;
+    } else {
+      this.totalPrice = 0;
+    }
   }
 
   dismissModal() {
