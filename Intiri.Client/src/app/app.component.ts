@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Project } from './models/project.model';
 import { User } from './models/user.model';
 
 import { AccountService } from './services/account.service';
+import { ProjectService } from './services/project.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +12,22 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent implements OnInit {
 
-  users: any;
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private projectService: ProjectService) {}
 
   ngOnInit() {
     this.setCurrentUser();
+    this.setCurrentProject();
   }
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
+  }
+
+  setCurrentProject() {
+    const project: Project = JSON.parse(sessionStorage.getItem('project'));
+    console.log(project)
+    this.projectService.setCurrentProject(project);
   }
 
 }

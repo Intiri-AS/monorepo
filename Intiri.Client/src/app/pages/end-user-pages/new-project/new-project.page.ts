@@ -22,10 +22,7 @@ export class NewProjectPage {
     {
       title: 'Select the room you want to improve',
       subtitle: 'Don’t worry, you can improve more rooms later.',
-      data: [
-        { id: 1, icon: 'icon/style.svg', title: 'Brush' },
-        { id: 2, icon: 'icon/room.svg', title: 'Bed' },
-      ],
+      data: [],
     },
     {
       title: 'Select color pallet',
@@ -46,12 +43,12 @@ export class NewProjectPage {
   ];
 
 
-  project: Project = new Project();
+  project: Project = null;
 
   stepsOrder: object = {
-    0: 'style',
+    0: 'styleImages',
     1: 'room',
-    2: 'color-pallete',
+    2: 'color',
     3: 'moodboard',
     4: 'final-result'
   }
@@ -61,24 +58,20 @@ export class NewProjectPage {
   constructor(private modalController: ModalController, public projectService: ProjectService) {}
 
   ngOnInit() {
-    // if(!sessionStorage.getItem('draftProjectName')) {
-    //   this.openModal();
-    // }
-   
-    //this.projectService.setCurrentProject(new Project())
+
     this.projectService.currentProject$.subscribe(project => {
-      console.log(project)
-      if(!project) {
+      this.project = project;
+      if(!project.name) {
         this.openModal();
       }
     });
     this.projectService.getStyleImages().subscribe(res => {
       this.steps[0]['data'] = res;
     })
-    this.projectService.getColors().subscribe(res => {
+    this.projectService.getRooms().subscribe(res => {
       this.steps[1]['data'] = res;
     })
-    this.projectService.getRooms().subscribe(res => {
+    this.projectService.getColors().subscribe(res => {
       this.steps[2]['data'] = res;
     })
   }
@@ -86,18 +79,21 @@ export class NewProjectPage {
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
       this.currentStepNo--;
+      this.projectService.setCurrentProject(this.project);
     }
   }
 
   nextStep() {
     if (this.canChangeToStep(this.currentStepNo + 1)) {
       this.currentStepNo++;
+      this.projectService.setCurrentProject(this.project);
     }
   }
 
   goToStep(stepNo) {
     if (this.canChangeToStep(stepNo)) {
       this.currentStepNo = stepNo;
+      this.projectService.setCurrentProject(this.project);
     }
   }
 
@@ -108,25 +104,29 @@ export class NewProjectPage {
     switch(step) {
       case 0: { return true; }
       case 1: { return this.project.styleImages.length > 0; }
-      case 2: { return this.project.styleImages.length > 0 && !!this.project.room}
-      case 3: { return this.project.styleImages.length > 0 && this.project.room && !!this.project.color;}
-      case 4: { return this.project.styleImages.length > 0 && this.project.room && this.project.color && !!this.project.moodboard;}
+      case 2: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room)}
+      case 3: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room) && !this.isEmpty(this.project.color);}
+      case 4: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room) && !this.isEmpty(this.project.color) && !this.isEmpty(this.project.moodboard);}
     }
     return false;
+  }
+
+  isEmpty(object): boolean {
+    return object && Object.keys(object).length === 0 && Object.getPrototypeOf(object) === Object.prototype;
   }
 
   toggleItem(item) {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.project[stepName])) {
-      if(this.project[stepName].includes(item)) {
+      if(this.project[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
         this.project[stepName] = this.project[stepName].filter(e => e.id !== item.id);
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
     } else {
       // else it's a single select
-      this.project[stepName] = this.project[stepName] === item ? null : item;
+      this.project[stepName] = JSON.stringify(this.project[stepName]) === JSON.stringify(item) ? null : item;
     }
   }
 

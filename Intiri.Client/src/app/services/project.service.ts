@@ -18,6 +18,10 @@ export class ProjectService {
 
 
   setCurrentProject(project: Project) {
+    if(!project) {
+      project = new Project();
+    }
+    sessionStorage.setItem('project', JSON.stringify(project));
     this.currentProjectSource.next(project);
   }
 

@@ -23,7 +23,6 @@ export class HeaderComponent {
     x['style'].height = 'auto'
   }
   removeProjectDraft(){
-    //sessionStorage.removeItem('draftProjectName');
     this.projectService.setCurrentProject(new Project());
   }
 
