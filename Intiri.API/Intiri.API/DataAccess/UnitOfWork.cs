@@ -20,6 +20,7 @@ namespace Intiri.API.DataAccess
 		private readonly IColorRepository _colorRepository;
 		private readonly IProductRepository _productRepository;
 		private readonly IProductTypeRepository _productTypeRepository;
+		private readonly IColorPalleteRepository _colorPalleteRepository;
 
 		#endregion Fields
 
@@ -38,6 +39,7 @@ namespace Intiri.API.DataAccess
 			_colorRepository = new ColorRepository(dataContext);
 			_productRepository = new ProductRepository(dataContext, mapper);
 			_productTypeRepository = new ProductTypeRepository(dataContext, mapper);
+			_colorPalleteRepository = new ColorPalleteRepository(dataContext, mapper);
 
 			_dataContext = dataContext;
 		}
@@ -57,6 +59,7 @@ namespace Intiri.API.DataAccess
 		public IColorRepository ColorRepository => _colorRepository;
 		public IProductRepository ProductRepository => _productRepository;
 		public IProductTypeRepository ProductTypeRepository => _productTypeRepository;
+		public IColorPalleteRepository ColorPalleteRepository => _colorPalleteRepository;
 
 		#endregion Properties
 

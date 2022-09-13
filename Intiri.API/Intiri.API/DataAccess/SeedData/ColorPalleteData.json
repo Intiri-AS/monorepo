@@ -1,0 +1,26 @@
+[
+	{
+		"Name": "Space Gray",
+		"Number": 3043,
+		"MainColor": "#696868",
+		"ShadeColorLight": "#B4B3B3",
+		"ShadeColorMedium": "#808080",
+		"ShadeColorDark": "#3A3A3A"
+	},
+	{
+		"Name": "Fancy Yellow",
+		"Number": 2038,
+		"MainColor": "#F8F549",
+		"ShadeColorLight": "#FBF981",
+		"ShadeColorMedium": "#FBF84E",
+		"ShadeColorDark": "#FBF715"
+	},
+	{
+		"Name": "Meadow Green",
+		"Number": 3043,
+		"MainColor": "#4CAD40",
+		"ShadeColorLight": "#6AAE61",
+		"ShadeColorMedium": "#57B24C",
+		"ShadeColorDark": "#25B514"
+	}
+]
