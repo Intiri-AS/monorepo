@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220913113219_AddColorPallete")]
+    partial class AddColorPallete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ColorPalletes", (string)null);
+                    b.ToTable("ColorPalletes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.Color", b =>
@@ -69,7 +71,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors", (string)null);
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.Material", b =>
@@ -96,7 +98,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("MaterialTypeId");
 
-                    b.ToTable("Materials", (string)null);
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.MaterialType", b =>
@@ -112,7 +114,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MaterialTypes", (string)null);
+                    b.ToTable("MaterialTypes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
@@ -150,7 +152,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("ProductTypeId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Product.ProductType", b =>
@@ -166,7 +168,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes", (string)null);
+                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Role", b =>
@@ -223,7 +225,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("RoomTypeId");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Room.RoomType", b =>
@@ -239,7 +241,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoomTypes", (string)null);
+                    b.ToTable("RoomTypes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.Style", b =>
@@ -261,7 +263,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Styles", (string)null);
+                    b.ToTable("Styles");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.StyleImage", b =>
@@ -285,7 +287,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("StyleImages", (string)null);
+                    b.ToTable("StyleImages");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.User", b =>

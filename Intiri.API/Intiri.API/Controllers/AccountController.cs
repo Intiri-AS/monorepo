@@ -76,11 +76,12 @@ namespace Intiri.API.Controllers
 				return Unauthorized("Invalid user phone number");
 			}
 
-			SignInResult result = await _accountService.CheckUserSignInPaswordAsync(user, loginDto.Password, false);
-			if (!result.Succeeded)
-			{
-				return Unauthorized("Invalid user password");
-			}
+			// Commented out since we no longer use password
+			//SignInResult result = await _accountService.CheckUserSignInPaswordAsync(user, loginDto.Password, false);
+			//if (!result.Succeeded)
+			//{
+			//	return Unauthorized("Invalid user password");
+			//}
 
 			return new LoginOutDTO
 			{

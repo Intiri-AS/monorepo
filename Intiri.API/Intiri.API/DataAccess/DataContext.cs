@@ -31,6 +31,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<Color> Colors { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
+		public DbSet<ColorPallete> ColorPalletes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
