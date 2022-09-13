@@ -22,11 +22,26 @@ namespace Intiri.API.DataAccess.Repository
 
 		#endregion Constructors
 
-		public async Task<IEnumerable<Product>> GetAllProductsAsync()
+		#region Public methods
+
+		public async Task<IEnumerable<Product>> GetProductsAsync()
 		{
-			return await _context.Products.ToListAsync();
+			return await _context.Products
+				.Include(pt => pt.ProductType)
+				.Include(pt => pt.MaterialType)
+				.ToListAsync();
 		}
 
-		
+		public async Task<Product> GetProductByIdAsync(int productId)
+		{
+			return await GetByID(productId);
+		}
+
+		public async Task<Product> GetProductByName(string productName)
+		{
+			return await SingleOrDefaultAsync<Product>(product => product.Name == productName, _mapper);
+		}
+
+		#endregion Public methods
 	}
 }

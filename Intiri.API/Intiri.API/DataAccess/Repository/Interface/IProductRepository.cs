@@ -4,6 +4,8 @@ namespace Intiri.API.DataAccess.Repository.Interface
 {
 	public interface IProductRepository : IRepositoryBase<Product>
 	{
-		Task<IEnumerable<Product>> GetAllProductsAsync();
+		Task<IEnumerable<Product>> GetProductsAsync();
+		Task<Product> GetProductByIdAsync(int productId);
+		Task<Product> GetProductByName(string productName);
 	}
 }
