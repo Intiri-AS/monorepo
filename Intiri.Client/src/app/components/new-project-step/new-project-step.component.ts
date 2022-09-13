@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-project-step',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NewProjectStepComponent implements OnInit {
 
+  apiUrl = environment.apiUrl;
   @Input() currentStep: object;
   @Input() project: object;
   @Input() currentStepNo: number;
@@ -24,12 +26,12 @@ export class NewProjectStepComponent implements OnInit {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.project[stepName])) {
-      if(this.project[stepName].includes(item)) {
+      if(this.project[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
         return true;
       }
     } else {
       // else it's a single select
-      return this.project[stepName] === item
+      return JSON.stringify(this.project[stepName]) === JSON.stringify(item)
     }
     return false;
   }
