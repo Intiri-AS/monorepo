@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
 import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
 
 @Component({
@@ -9,7 +11,7 @@ import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.compon
 })
 export class HeaderComponent {
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, private projectService: ProjectService) {}
 
   menuOpened() {
     const x = document.querySelector('#home');
@@ -21,7 +23,7 @@ export class HeaderComponent {
     x['style'].height = 'auto'
   }
   removeProjectDraft(){
-    sessionStorage.removeItem('draftProjectName');
+    this.projectService.setCurrentProject(new Project());
   }
 
   async openLogoutModal() {

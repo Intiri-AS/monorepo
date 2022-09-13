@@ -27,6 +27,10 @@ export class StepPickerComponent implements OnInit {
     this.changeStep.emit(step);
   }
 
+  isEmpty(object): boolean {
+    return object && Object.keys(object).length === 0 && Object.getPrototypeOf(object) === Object.prototype;
+  }
+
   canChangeStep(step) {
     return this.canChangeToStep(step);
   }

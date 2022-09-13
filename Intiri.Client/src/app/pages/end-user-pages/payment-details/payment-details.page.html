@@ -1,0 +1,85 @@
+<ion-content>
+  <div id="hero">
+    <app-header></app-header>
+    <div class="2xl:container">
+      <p class="text-[45px] font-medium mt-16">Payment details</p>
+      <ion-row>
+        <ion-col size="5">
+          <ion-button fill="clear" class="credit-btn">
+            <ion-icon name="card-outline"></ion-icon>
+            <p class="ml-2">Credit card</p>
+          </ion-button>
+          <p class="text-2xl text-black-2 font-medium mt-[30px]">Billing address</p>
+          <div class="mt-[30px]">
+            <span class="text-sm black-2">Full name</span>
+            <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[470px]"></ion-input>
+          </div>
+          <div class="mt-[30px]">
+            <span class="text-sm black-2">Street</span>
+            <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[470px]"></ion-input>
+          </div>
+          <div class="mt-[30px] flex">
+            <div>
+              <span class="text-sm black-2">Postal code</span>
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[225px]"></ion-input>
+            </div>
+            <div class="ml-[20px]">
+              <span class="text-sm black-2">City</span>
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[225px]"></ion-input>
+            </div>
+          </div>
+          <div class="mt-[30px]">
+            <span class="text-sm black-2">City</span>
+            <ion-select class="border rounded-2xl border-black-2 h-[52px] w-[470px]" interface="popover">
+              <ion-select-option>Serbia</ion-select-option>
+              <ion-select-option>Norway</ion-select-option>
+            </ion-select>
+          </div>
+          <p class="text-2xl text-black-2 font-medium mt-[30px]">Billing address</p>
+          <div class="mt-[30px]">
+            <span class="text-sm black-2">Name on card</span>
+            <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[470px]"></ion-input>
+          </div>
+          <div class="mt-[30px]">
+            <span class="text-sm black-2">Card number</span>
+            <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[470px]"></ion-input>
+          </div>
+          <div class="mt-[30px] flex">
+            <div>
+              <span class="text-sm black-2">CVV</span>
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[225px]"></ion-input>
+            </div>
+            <div class="ml-[20px]">
+              <span class="text-sm black-2">Expiration date</span>
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px] w-[225px]"></ion-input>
+            </div>
+          </div>
+          <div class="flex justify-center mt-[30px] mb-[50px]">
+            <ion-button fill="clear" class="continue-btn" routerLink="/designer-profile" routerDirection="root">Continue</ion-button>
+          </div>
+        </ion-col>
+        <ion-col offset="2" size="5">
+          <div class="min-h-[580px] bg-light border border-light rounded-2xl px-[50px] pt-[50px]">
+          <p class="text-2xl text-black-2 font-medium">Order summary</p>
+          <p class="text-lg text-black-2 font-medium mt-[30px]">Consultation with designer</p>
+          <p class="text-lg text-black-2 mt-[10px]" *ngFor="let item of items">{{item.name}}</p>
+          <ion-item-divider class="border-b border-secondary bg-transparent"></ion-item-divider>
+          <div class="mt-[30px] flex justify-between">
+            <p class="text-lg text-black-2 font-medium">Consultation price</p>
+            <p class="text-lg text-black-2">{{consultationPrice}} {{currency}}</p>
+          </div>
+          <div class="mt-[14px] flex justify-between">
+            <p class="text-lg text-black-2 font-medium">Number of consultations</p>
+            <p class="text-lg text-black-2">{{consultationNumber}}</p>
+          </div>
+          <ion-item-divider class="border-b border-secondary bg-transparent"></ion-item-divider>
+          <div class="mt-[30px] flex justify-between items-center mb-[50px]">
+            <p class="text-lg text-black-2 font-medium">TOTAL</p>
+            <p class="text-2xl text-black-2 font-medium">{{totalPrice}} {{currency}}</p>
+          </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

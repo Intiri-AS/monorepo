@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-create-project-modal',
@@ -10,7 +12,7 @@ export class CreateProjectModalComponent implements OnInit {
 
   projectName: string = '';
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private projectService: ProjectService) { }
 
   ngOnInit() {}
 
@@ -19,7 +21,9 @@ export class CreateProjectModalComponent implements OnInit {
   }
 
   startProjectCreation() {
-    sessionStorage.setItem('draftProjectName', this.projectName);
+    let project = new Project();
+    project.name = this.projectName;
+    this.projectService.setCurrentProject(project);
     this.dismiss();
   }
 
