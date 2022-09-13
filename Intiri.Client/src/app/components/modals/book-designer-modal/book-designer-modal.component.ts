@@ -11,6 +11,8 @@ export class BookDesignerModalComponent {
 
   price = 950;
   totalPrice = 0;
+  extraPayment = false;
+  extraPaymentAmount = 3500;
   items = [
     {
       id: 1, name: 'Room sketch'
@@ -22,19 +24,16 @@ export class BookDesignerModalComponent {
       id: 3, name: 'Moodboard adjustments'
     },
     {
-      id: 4, name: '2D & 3D drawings'
+      id: 4, name: 'Select products'
     },
     {
-      id: 5, name: 'Select products'
+      id: 5, name: 'Lining plan'
     },
     {
-      id: 6, name: 'Lining plan'
+      id: 6, name: 'Decoration'
     },
     {
-      id: 7, name: 'Decoration'
-    },
-    {
-      id: 8, name: 'Other questions'
+      id: 7, name: 'Other questions'
     }
   ];
 
@@ -47,7 +46,11 @@ export class BookDesignerModalComponent {
     const numberOfConsultations = event.detail.value;
     const reg = new RegExp(/^[1-9]\d*$/g);
     if(reg.test(numberOfConsultations)) {
-      this.totalPrice = this.price * numberOfConsultations;
+      if (this.extraPayment) {
+        this.totalPrice = this.price * numberOfConsultations + this.extraPaymentAmount;
+      } else {
+        this.totalPrice = this.price * numberOfConsultations
+      }
     } else {
       this.totalPrice = 0;
     }
@@ -57,8 +60,18 @@ export class BookDesignerModalComponent {
     this.modalController.dismiss();
   }
 
-  redirectToDesigner() {
+  redirectToPayment() {
     this.modalController.dismiss();
-    this.nav.navigateRoot('/designer-profile');
+    this.nav.navigateRoot('/payment-details');
+  }
+
+  isChecked(event) {
+    if (event.detail.checked) {
+      this.extraPayment = true;
+      this.totalPrice = this.totalPrice + this.extraPaymentAmount;
+    } else {
+      this.extraPayment = false
+      this.totalPrice = this.totalPrice - this.extraPaymentAmount;
+    }
   }
 }

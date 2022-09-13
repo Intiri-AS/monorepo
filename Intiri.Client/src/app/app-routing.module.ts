@@ -27,6 +27,7 @@ import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/m
 import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
 import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/designer-profile.page';
 import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
+import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-profile/book-designer-profile.page';
 
 const routes: Routes = [
   {
@@ -75,12 +76,16 @@ const routes: Routes = [
     component: ContactDesignerPage
   },
   {
-    path: 'designer-profile',
+    path: 'designer-profile', //TODO Set up page guard (end-user guard)
     component: DesignerProfilePage
   },
   {
-    path: 'payment-details',
+    path: 'payment-details', //TODO Set up page guard (end-user guard)
     component: PaymentDetailsPage
+  },
+  {
+    path: 'book-designer-profile', //TODO Set up page guard (end-user guard)
+    component: BookDesignerProfilePage
   },
   {
     path: 'craftsman-portal', //TODO Set up page guard (end-user guard)

@@ -19,10 +19,19 @@
           <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{item.name}}</p>
         </div>
       </ion-item>
+      <ion-item class="w-1/2" lines="none">
+        <div class="flex items-center">
+          <ion-checkbox (ionChange)="isChecked($event)"></ion-checkbox>
+          <div>
+            <p class="text-[18px] text-black-2 ml-2 leading-[26px]">2D & 3D drawings</p>
+            <p class="text-[18px] text-primary ml-2 leading-[26px]">(+3500 Nok)</p>
+          </div>
+        </div>
+      </ion-item>
     </div>
     <div class="mt-[50px]">
       <ion-button fill="clear" class="cancel-btn" (click)="dismissModal()">Cancel</ion-button>
-      <ion-button fill="clear" class="proceed-btn" (click)="redirectToDesigner()">Proceed</ion-button>
+      <ion-button fill="clear" class="proceed-btn" (click)="redirectToPayment()">Proceed</ion-button>
     </div>
   </div>
 </ion-content>
