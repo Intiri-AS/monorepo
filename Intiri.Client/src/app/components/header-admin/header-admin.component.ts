@@ -1,23 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { Project } from 'src/app/models/project.model';
-import { ProjectService } from 'src/app/services/project.service';
 import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: 'app-header-admin',
+  templateUrl: './header-admin.component.html',
+  styleUrls: ['./header-admin.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderAdminComponent {
+
 
   menuItems = [
-    {title: 'My Intiri', url: '/my-intiri'},
-    {title: 'Book a designer', url: '/book-designer'},
+    {title: 'Dashboard', url: '#'},
+    {title: 'Consultations', url: '#'},
+    {title: 'Vendors', url: '#'},
+    {title: 'Designers', url: '#'},
+    {title: 'Clients', url: '#'},
+    {title: 'Moodboards', url: '#'},
+    {title: 'Style', url: '#'},
   ]
 
-  constructor(private modalController: ModalController, private projectService: ProjectService,  private router: Router) {}
+  constructor(private modalController: ModalController, private router: Router) {}
 
   isActiveRoute(route): boolean {
     return this.router.url === route;
@@ -31,9 +35,6 @@ export class HeaderComponent {
   menuClosed() {
     const x = document.querySelector('#home');
     x['style'].height = 'auto'
-  }
-  removeProjectDraft(){
-    this.projectService.setCurrentProject(new Project());
   }
 
   async openLogoutModal() {
