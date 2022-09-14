@@ -10,29 +10,42 @@
             <div class="flex justify-between items-center">
               <p class="text-2xl font-medium">Latest projects</p>
               <div>
-                <ion-button fill="clear" class="text-black">
+                <ion-button fill="clear" class="text-black" (click)="prev()">
                   <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                 </ion-button>
-                <ion-button fill="clear" class="text-black">
+                <ion-button fill="clear" class="text-black" (click)="next()">
                   <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
                 </ion-button>
               </div>
             </div>
-            <div class="flex justify-center">
-              <ion-card class="w-[370px] h-[350px] border rounded-2xl border-black ml-0 shadow-none p-4">
+            <div class="flex justify-between m-0 mt-4 mb-2">
+              <ion-card class="w-[370px] h-[350px] border rounded-2xl border-black m-0 shadow-none p-4">
                 <img src="../../../../assets/images/landing-img.png" class="w-full h-full">
               </ion-card>
-              <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 shadow-none p-4">
-                <p class="mt-2 text-lg text-black-1 text-center">Colors</p>
-                <img src="../../../../assets/images/landing-img.png" class="w-full h-[52px] mt-1">
-                <img src="../../../../assets/images/landing-img.png" class="w-full h-[52px] mt-1">
-                <img src="../../../../assets/images/landing-img.png" class="w-full h-[52px] mt-1">
-                <img src="../../../../assets/images/landing-img.png" class="w-full h-[52px] mt-1">
-                <img src="../../../../assets/images/landing-img.png" class="w-full h-[52px] mt-1">
-              </ion-card>
-              <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 shadow-none p-4">
-                <p class="mt-2 text-lg text-black-1 text-center">Material</p>
-              </ion-card>
+              <div class="w-[370px] h-[350px]">
+                <ion-slides #slides [options]="options" class="p-0 m-0">
+                  <ion-slide>
+                    <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4">
+                      <p class="mt-2 text-lg text-black-1 text-center">Colors</p>
+                      <img src="../../../../assets/images/landing-img.png" class="img-settings">
+                      <img src="../../../../assets/images/landing-img.png" class="img-settings">
+                      <img src="../../../../assets/images/landing-img.png" class="img-settings">
+                      <img src="../../../../assets/images/landing-img.png" class="img-settings">
+                      <img src="../../../../assets/images/landing-img.png" class="img-settings">
+                    </ion-card>
+                  </ion-slide>
+                  <ion-slide>
+                    <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4">
+                      <p class="mt-2 text-lg text-black-1 text-center">Material</p>
+                    </ion-card>
+                  </ion-slide>
+                  <ion-slide>
+                    <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4">
+                      <p class="mt-2 text-lg text-black-1 text-center">Furniture</p>
+                    </ion-card>
+                  </ion-slide>
+                </ion-slides>
+              </div>
             </div>
             <div class="flex items-center justify-start">
               <p class="text-black-2 text-2xl font-medium">Skandinavian Bright</p>
@@ -48,7 +61,7 @@
             <p class="text-2xl font-medium text-black-2">All projects</p>
             <div class="flex flex-wrap justify-between">
               <div *ngFor="let project of projects">
-                <ion-card class="w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 shadow-none p-4">
+                <ion-card class="w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 mb-2 shadow-none p-4">
                   <img src={{project.image}} class="w-full h-full">
                 </ion-card>
                 <div class="flex items-center justify-start">

@@ -22,8 +22,6 @@ export class RegisterPage implements OnInit {
     this.registerForm = this.fb.group({
       username: [''],
       phoneNumber: [''],
-      password: [''],
-      confirmPassword: ['']
     })
   }
 

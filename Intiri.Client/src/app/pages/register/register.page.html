@@ -28,26 +28,21 @@
               <span class="text-sm black-2">Phone number</span>
               <div class="flex justify-between">
                 <div>
-                  <ion-input class="border rounded-2xl border-black-2 h-14 w-32"></ion-input>
+                  <ion-select class="border rounded-2xl border-black-2 h-14 w-32" interface="popover">
+                    <ion-select-option>
+                      <div>
+                        <p class="text-lg text-black">+47</p>
+                      </div>
+                    </ion-select-option>
+                    <ion-select-option>
+                      <p class="text-lg text-black">+381</p>
+                    </ion-select-option>
+                  </ion-select>
                 </div>
                 <div>
                   <ion-input formControlName="phoneNumber" type="tel" class="border rounded-2xl h-14 border-black-2 w-80"></ion-input>
                 </div>
               </div>
-            </div>
-            <div class="mt-7">
-              <span class="text-sm black-2">Password</span>
-              <ion-item class="rounded-2xl border-black-2" lines="none">
-                <ion-input formControlName="password" type="password" class="h-14 password-input"></ion-input>
-                <ion-icon slot="end" name="eye"></ion-icon>
-              </ion-item>
-            </div>
-            <div class="mt-7">
-              <span class="text-sm black-2">Repeat password</span>
-              <ion-item class="rounded-2xl border-black-2" lines="none">
-                <ion-input formControlName="confirmPassword" type="password" class="h-14 password-input"></ion-input>
-                <ion-icon slot="end" name="eye"></ion-icon>
-              </ion-item>
             </div>
             <div class="flex flex-col justify-center items-center">
               <ion-button type="submit" fill="clear" class="register-btn">Register</ion-button>
