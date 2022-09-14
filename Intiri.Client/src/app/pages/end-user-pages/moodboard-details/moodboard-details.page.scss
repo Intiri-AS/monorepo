@@ -1,5 +1,5 @@
 .back-btn {
-  @apply text-lg font-medium text-black mt-14 mb-0;
+  @apply text-lg font-medium text-black mt-14 mb-0 pl-2 xl:pl-0;
   --padding-start: 4px;
   text-transform: none;
 }
@@ -10,6 +10,6 @@
 }
 
 .full-btn {
-  @apply text-lg font-medium text-white border border-primary rounded-2xl h-[52px] bg-primary mx-4 px-3;
+  @apply text-lg font-medium text-white border border-primary rounded-2xl h-[52px] bg-primary xl:mx-4 px-3;
   text-transform: none;
 }

@@ -38,7 +38,7 @@
         <hr class="border-light border-t mx-[16px] my-[16px]" />
         <ion-item class="text-black-1" [button]="true" [detail]="true">Language</ion-item>
         <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
-        <ion-item class="text-black-1" [button]="true" [detail]="true">Pricing plans</ion-item>
+        <ion-item class="text-black-1" [button]="true" [detail]="true" routerLink="/pricing-plans" routerDirection="root">Pricing plans</ion-item>
         <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
       </ion-list>
   </ng-template>
@@ -56,19 +56,19 @@
   <ion-content>
     <ion-list>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="/my-intiri" >My Intiri</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/my-intiri" routerDirection="root">My Intiri</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="#" >Book a designer</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/book-designer" routerDirection="root">Book a designer</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="#" >My Profile</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/profile" routerDirection="root">My Profile</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="#" >Settings</ion-label>
+        <ion-label class="cursor-pointer">Settings</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="#" >Create new project</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/new-project" routerDirection="root">Create new project</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>

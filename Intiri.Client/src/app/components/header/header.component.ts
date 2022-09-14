@@ -14,13 +14,13 @@ export class HeaderComponent {
   constructor(private modalController: ModalController, private projectService: ProjectService) {}
 
   menuOpened() {
-    const x = document.querySelector('#home');
-    x['style'].overflow = 'hidden'
-    x['style'].height = '100vh'
+    // const x = document.querySelector('#home');
+    // x['style'].overflow = 'hidden'
+    // x['style'].height = '100vh'
   }
   menuClosed() {
-    const x = document.querySelector('#home');
-    x['style'].height = 'auto'
+    // const x = document.querySelector('#home');
+    // x['style'].height = 'auto'
   }
   removeProjectDraft(){
     this.projectService.setCurrentProject(new Project());

@@ -1,58 +1,56 @@
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col offset="2" size="4" class="p-12 h-full">
-        <div class="w-[470px]">
-          <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
-          <ion-button fill="clear" class="login-btn" routerLink="/login" routerDirection="root">
-            <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
-            <p>Login</p>
-          </ion-button>
-          <h1 class="font-['Allison'] text-7xl mt-0 black-2">Start your journey</h1>
-          <h1 class="text-5xl font-semibold">Create an account</h1>
-          <p class="text-lg black-2">
-            Manage your account, create and edit projects, collaborate on design and more.
-          </p>
-          <form [formGroup]="registerForm" (ngSubmit)="register()">
-            <div class="mt-8 flex justify-between">
+  <ion-row>
+    <ion-col size="12" offset-xl="2" size-xl="4" class="p-2 xl:p-12 h-full">
+      <div class="w-full xl:w-[470px]">
+        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
+        <ion-button fill="clear" class="login-btn" routerLink="/login" routerDirection="root">
+          <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
+          <p>Login</p>
+        </ion-button>
+        <h1 class="font-['Allison'] text-7xl mt-0 black-2">Start your journey</h1>
+        <h1 class="text-5xl font-semibold">Create an account</h1>
+        <p class="text-lg black-2">
+          Manage your account, create and edit projects, collaborate on design and more.
+        </p>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="mt-8 flex flex-col xl:flex-row justify-between">
+            <div>
+              <span class="text-sm black-2">First name</span>
+              <ion-input type="text" formControlName="username" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+            </div>
+            <div class="mt-[30px] xl:mt-0">
+              <span class="text-sm black-2">Last name</span>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+            </div>
+          </div>
+          <div class="mt-7">
+            <span class="text-sm black-2">Phone number</span>
+            <div class="flex justify-between">
               <div>
-                <span class="text-sm black-2">First name</span>
-                <ion-input type="text" formControlName="username" class="border rounded-2xl h-14 border-black-2 w-56"></ion-input>
+                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
+                  <ion-select-option>
+                    <div>
+                      <p class="text-lg text-black">+47</p>
+                    </div>
+                  </ion-select-option>
+                  <ion-select-option>
+                    <p class="text-lg text-black">+381</p>
+                  </ion-select-option>
+                </ion-select>
               </div>
               <div>
-                <span class="text-sm black-2">Last name</span>
-                <ion-input type="text" class="border rounded-2xl h-14 border-black-2 w-56"></ion-input>
+                <ion-input formControlName="phoneNumber" type="tel" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
               </div>
             </div>
-            <div class="mt-7">
-              <span class="text-sm black-2">Phone number</span>
-              <div class="flex justify-between">
-                <div>
-                  <ion-select class="border rounded-2xl border-black-2 h-14 w-32" interface="popover">
-                    <ion-select-option>
-                      <div>
-                        <p class="text-lg text-black">+47</p>
-                      </div>
-                    </ion-select-option>
-                    <ion-select-option>
-                      <p class="text-lg text-black">+381</p>
-                    </ion-select-option>
-                  </ion-select>
-                </div>
-                <div>
-                  <ion-input formControlName="phoneNumber" type="tel" class="border rounded-2xl h-14 border-black-2 w-80"></ion-input>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col justify-center items-center">
-              <ion-button type="submit" fill="clear" class="register-btn">Register</ion-button>
-            </div>
-          </form>
-        </div>
-      </ion-col>
-      <ion-col size="6" class="p-12 h-full flex justify-end">
-        <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          </div>
+          <div class="flex flex-col justify-center items-center">
+            <ion-button type="submit" fill="clear" class="register-btn">Register</ion-button>
+          </div>
+        </form>
+      </div>
+    </ion-col>
+    <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full flex justify-end">
+      <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
+    </ion-col>
+  </ion-row>
 </ion-content>

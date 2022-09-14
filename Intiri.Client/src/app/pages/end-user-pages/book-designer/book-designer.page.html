@@ -2,24 +2,24 @@
   <div id="hero">
     <app-header></app-header>
     <div class="2xl:container">
-      <p class="text-[45px] font-medium mt-16">Book a designer</p>
-      <div class="mt-[30px]">
+      <p class="text-[45px] font-medium mt-16 p-2 xl:p-0">Book a designer</p>
+      <div class="mt-[30px] p-2 xl:p-0">
         <span class="text-sm black-2">Sort by</span>
           <ion-select class="border rounded-2xl border-black-2 h-[52px] w-[270px]" interface="popover">
             <ion-select-option>Rating</ion-select-option>
             <ion-select-option>Moodboards</ion-select-option>
           </ion-select>
       </div>
-      <div class="flex flex-wrap justify-between mt-[30px]">
+      <div class="flex flex-wrap justify-between mt-[30px] p-2 xl:p-0">
         <div *ngFor="let d of designers">
-          <ion-card class="border border-black rounded-2xl shadow-none w-[370px] h-[350px] m-0 mt-5 mb-2 p-4">
+          <ion-card class="border border-black rounded-2xl shadow-none w-full xl:w-[370px] h-[350px] m-0 mt-5 mb-2 p-4">
             <img src={{d.image}} class="w-full h-full">
           </ion-card>
           <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
               <img src={{d.logo}} class="h-[30px] w-[30px] rounded-md">
               <p class="text-black-2 text-2xl font-medium ml-2">{{d.name}}</p>
-              <ion-button fill="clear" class="text-black" routerLink="/book-designer-profile" routerDirection="root">
+              <ion-button fill="clear" class="text-black" routerLink="/designer-profile" routerDirection="root">
                 <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
               </ion-button>
             </div>
