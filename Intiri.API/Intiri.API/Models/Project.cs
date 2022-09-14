@@ -2,6 +2,7 @@
 {
 	public class Project
 	{
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public ICollection<Style.StyleImage> StyleImages { get; set; }
 		public ColorPallete ColorPallete { get; set; }

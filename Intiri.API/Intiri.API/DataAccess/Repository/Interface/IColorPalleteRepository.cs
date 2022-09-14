@@ -5,5 +5,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	public interface IColorPalleteRepository : IRepositoryBase<ColorPallete>
 	{
 		Task<IEnumerable<ColorPallete>> GetColorPalletesAsync();
+		Task<ColorPallete> GetColorPalleteById(int id);
 	}
 }

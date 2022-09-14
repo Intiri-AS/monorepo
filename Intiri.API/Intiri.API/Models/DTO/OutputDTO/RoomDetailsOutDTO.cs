@@ -2,6 +2,7 @@
 {
 	public class RoomDetailsOutDTO
 	{
+		public int Id { get; set; }
 		public string Shape { get; set; }
 		public double Size { get; set; }
 	}

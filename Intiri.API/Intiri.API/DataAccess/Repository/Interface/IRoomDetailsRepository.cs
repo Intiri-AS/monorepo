@@ -4,5 +4,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 {
 	public interface IRoomDetailsRepository: IRepositoryBase<RoomDetails>
 	{
+		Task<RoomDetails> GetRoomDetailsById(int id);
 	}
 }

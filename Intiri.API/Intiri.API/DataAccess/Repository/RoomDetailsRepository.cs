@@ -9,5 +9,10 @@ namespace Intiri.API.DataAccess.Repository
 		public RoomDetailsRepository(DataContext context): base(context)
 		{
 		}
+
+		public async Task<RoomDetails> GetRoomDetailsById(int id)
+		{
+			return await GetByID(id);
+		}
 	}
 }

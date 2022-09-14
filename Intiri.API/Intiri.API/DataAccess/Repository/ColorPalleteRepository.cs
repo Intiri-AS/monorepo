@@ -29,6 +29,11 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.ColorPalletes.ToListAsync();
 		}
 
+		public async Task<ColorPallete> GetColorPalleteById(int id)
+		{
+			return await GetByID(id);
+		}
+
 		#endregion Public methods
 	}
 }
