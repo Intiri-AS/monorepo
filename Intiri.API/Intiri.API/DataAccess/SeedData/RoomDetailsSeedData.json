@@ -1,0 +1,22 @@
+[
+	{
+		"Shape": "rectangular",
+		"Size": 17.2
+	},
+	{
+		"Shape": "circular",
+		"Size": 14.1
+	},
+	{
+		"Shape": "custom",
+		"Size": 27.5
+	},
+	{
+		"Shape": "rectangular",
+		"Size": 11.6
+	},
+	{
+		"Shape": "custom",
+		"Size": 22.8
+	}
+]

@@ -22,6 +22,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedStylesImages(unitOfWork);
 			await SeedRooms(unitOfWork);
 			await SeedColorPalletes(unitOfWork);
+			await SeedRoomDetails(unitOfWork);
 		}
 
 		public static async Task SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
@@ -140,6 +141,19 @@ namespace Intiri.API.DataAccess.SeedData
 			foreach (ColorPallete colorPallete in colorPalletes)
 			{
 				unitOfWork.ColorPalleteRepository.Insert(colorPallete);
+			}
+
+			await unitOfWork.SaveChanges();
+		}
+
+		public static async Task SeedRoomDetails(IUnitOfWork unitOfWork)
+		{
+			string roomDetailsData = await File.ReadAllTextAsync("DataAccess/SeedData/RoomDetailsSeedData.json");
+			List<RoomDetails> roomDetails = JsonSerializer.Deserialize<List<RoomDetails>>(roomDetailsData);
+
+			foreach (RoomDetails roomDetail in roomDetails)
+			{
+				unitOfWork.RoomDetailsRepository.Insert(roomDetail);
 			}
 
 			await unitOfWork.SaveChanges();
