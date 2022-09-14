@@ -1,0 +1,19 @@
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4
+}
+
+.total {
+    @apply border rounded-2xl h-12 border-black-2 h-[200px] mb-[30px]
+}
+
+.sales {
+    @apply border rounded-2xl h-12 border-black-2 h-[426px] mb-[30px]
+}
+
+.designers {
+    @apply border rounded-2xl h-12 border-black-2 h-[882px] mb-[30px]
+}
+
+.trending {
+    @apply border rounded-2xl h-12 border-black-2 h-[426px] mb-[30px]
+}
