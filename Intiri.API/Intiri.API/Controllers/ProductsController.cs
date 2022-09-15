@@ -37,16 +37,26 @@ namespace Intiri.API.Controllers
 			return Ok(productsOut);
 		}
 
+		[HttpGet("id/{productId}")]
+		public async Task<ActionResult<ProductOutDTO>> GetProductByProductId(int productId)
+		{
+			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
+
+			if (product == null)
+			{
+				return BadRequest($"Product with Id={productId} doesn't exist");
+			}
+			return Ok(_mapper.Map<ProductOutDTO>(product));
+		}
+
 		[HttpPost("add")]
 		public async Task<ActionResult<ProductOutDTO>> AddProduct([FromForm] ProductInDTO productInDTO)
 		{
-			Models.Product.ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeByIdAsync(productInDTO.ProductTypeId);
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productInDTO.ProductTypeId);
 
 			if (productType == null) return BadRequest("Product type doesn't exist");
 
-			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsAsync();
-
-			if (products.Any(product => (product.Name == productInDTO.Name && productType.Id == productInDTO.ProductTypeId)))
+			if (productType.Products.Any(p => p.Name == productInDTO.Name))
 			{
 				return BadRequest($"Product name: '{productInDTO.Name}' already exists for product type: {productInDTO.ProductTypeId}");
 			}
@@ -62,19 +72,44 @@ namespace Intiri.API.Controllers
 				product.ImagePath = dbPath;
 			}
 
-			product.ProductType = productType;
-
 			product.Style = await _unitOfWork.StyleRepository.GetByID(productInDTO.StyleId);
 
 			_unitOfWork.ProductRepository.Insert(product);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return _mapper.Map<ProductOutDTO>(product);
+				productType.Products.Add(product);
+				return Ok(_mapper.Map<ProductOutDTO>(product));
 			}
 
 			return BadRequest("Probem occured while adding product");
 		}
 
+		[HttpDelete("delete/{productId}")]
+		public async Task<IActionResult> DeleteProduct(int productId)
+		{
+			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(product.ProductType.Id);
+
+			if (product == null)
+			{
+				return BadRequest($"Product with Id={productId} not found");
+			}
+
+			try
+			{
+				await _imageService.DeleteImageFromFileSystemAsync(product.ImagePath);
+
+				await _unitOfWork.ProductRepository.Delete(productId);
+				productType.Products.Remove(product);
+
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal server error: {ex}");
+			}
+			return Ok($"Successfully deleted product with Id={productId}");
+		}
 	}
 }

@@ -173,7 +173,7 @@ namespace Intiri.API.DataAccess.SeedData
 
 			foreach (Product product in products)
 			{
-				ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductTypeId);
+				ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductType.Id);
 				product.ProductType = productType;
 
 				Style style = await unitOfWork.StyleRepository.SingleOrDefaultAsync(s => s.Id == product.StyleId);

@@ -9,6 +9,5 @@ namespace Intiri.API.Models.Room
 		public string Description { get; set; }
 		public RoomType RoomType { get; set; }
 		public int RoomTypeId { get; set; }
-
 	}
 }

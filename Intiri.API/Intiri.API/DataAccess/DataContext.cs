@@ -52,6 +52,11 @@ namespace Intiri.API.DataAccess
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();
 
+			builder.Entity<Product>()
+				.HasOne(p => p.ProductType)
+				.WithMany(pt => pt.Products)
+				.OnDelete(DeleteBehavior.SetNull);
+
 			builder.Entity<Moodboard>()
 				.HasMany<ColorPallete>(m => m.ColorPalletes)
 				.WithMany(cp => cp.Moodboards)
