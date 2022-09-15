@@ -51,6 +51,21 @@ namespace Intiri.API.DataAccess
 				.WithOne(u => u.Role)
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();
+
+			builder.Entity<Moodboard>()
+				.HasMany<ColorPallete>(m => m.ColorPalletes)
+				.WithMany(cp => cp.Moodboards)
+				.UsingEntity(cm => cm.ToTable("MoodboardColorPallete"));
+
+			builder.Entity<Moodboard>()
+				.HasMany<Material>(mood => mood.Materials)
+				.WithMany(mat => mat.Moodboards)
+				.UsingEntity(mm => mm.ToTable("MoodboardMaterial"));
+
+			builder.Entity<Moodboard>()
+				.HasMany<Product>(mood => mood.Products)
+				.WithMany(prod => prod.Moodboards)
+				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public StyleOutDTO Style { get; set; }
 		public RoomOutDTO Room { get; set; }
 		public ICollection<MaterialOutDTO> Materials { get; set; }
-		public ColorPallete ColorPallete { get; set; }
+		public ICollection<ColorPalleteOutDTO> ColorPalletes { get; set; }
 		public ICollection<ProductOutDTO> Products { get; set; }
 	}
 }

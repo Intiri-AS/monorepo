@@ -1,8 +1,5 @@
 ﻿using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
 using Intiri.API.Models.Material;
-using Intiri.API.Models.Room;
-using Intiri.API.Models.Style;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository

@@ -6,7 +6,7 @@
 		"StyleId": 1,
 		"RoomId": 1,
 		"MaterialIds": [ 1 ],
-		"ColorPalleteId": 1,
+		"ColorPalleteIds": [ 1 ],
 		"ProductIds": [ 1 ]
 	},
 	{
@@ -16,7 +16,7 @@
 		"StyleId": 2,
 		"RoomId": 2,
 		"MaterialIds": [ 2 ],
-		"ColorPalleteId": 2,
+		"ColorPalleteIds": [ 2 ],
 		"ProductIds": [ 2 ]
 	},
 	{
@@ -26,7 +26,7 @@
 		"StyleId": 3,
 		"RoomId": 3,
 		"MaterialIds": [ 3 ],
-		"ColorPalleteId": 3,
+		"ColorPalleteIds": [ 3, 4 ],
 		"ProductIds": [ 3 ]
 	}
 ]

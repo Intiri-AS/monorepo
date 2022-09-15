@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\MaterialImages\" />
+	<Folder Include="Resources\MaterialImages\" />
     <Folder Include="Resources\ProductImages\" />
     <Folder Include="Resources\RoomImages\" />
     <Folder Include="Resources\StyleCoverImages\" />

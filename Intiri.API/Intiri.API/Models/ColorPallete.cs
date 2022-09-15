@@ -9,5 +9,7 @@
 		public string ShadeColorLight { get; set; }
 		public string ShadeColorMedium { get; set; }
 		public string ShadeColorDark { get; set; }
+
+		public ICollection<Moodboard> Moodboards { get; set; }
 	}
 }

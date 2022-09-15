@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using NLog;
 using NLog.Web;
+using System.Text.Json.Serialization;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Info("Init Main");
@@ -27,7 +28,8 @@ try
 	// Add services to the container
 	builder.Services.AddApplicationServices(configuration);
 	builder.Services.AddIdentityServices(configuration);
-	builder.Services.AddControllers();
+	builder.Services.AddControllers().AddJsonOptions(x =>
+		x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
 	// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen();

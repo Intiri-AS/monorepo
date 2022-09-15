@@ -3,11 +3,8 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
-using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.Material;
-using Intiri.API.Models.Room;
 using Intiri.API.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
