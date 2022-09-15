@@ -1,7 +1,7 @@
 
 
-  <ion-header class="" id="main-content">
-    <ion-toolbar class="header-wrapper">
+  <ion-header id="main-content">
+    <ion-toolbar class="header-wrapper header-container">
       <ion-buttons slot="start" class="">
         <ion-button slot="start">
           <a routerLink="/my-intiri" routerDirection="root" class="py-1">
@@ -18,7 +18,8 @@
         </a>
         <ion-icon class="header-icon" name="chatbox-ellipses-sharp"></ion-icon>
         <ion-icon class="header-icon" id="settings-btn" name="settings-sharp"></ion-icon>
-        <ion-button fill="clear" class="new-project-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
+
+        <ion-button fill="clear" class="primary-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>
@@ -26,7 +27,7 @@
     </ion-toolbar>
 </ion-header>
 
-<!-- Settings Dropdown Menu -->
+        <!-- Settings Dropdown Menu -->
 <ion-popover trigger="settings-btn" [dismissOnSelect]="true">
   <ng-template>
       <ion-list lines="none" >
@@ -42,6 +43,7 @@
       </ion-list>
   </ng-template>
 </ion-popover>
+
 
 <!-- Mobile Menu -->
 <ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">

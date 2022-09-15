@@ -40,6 +40,7 @@ import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-pr
 import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
 import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
+import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
 
 //pages for designers
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
@@ -71,7 +72,7 @@ import { CodeInputModule } from 'angular-code-input';
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
-    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage,
+    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage,
     MyMoodboardPage,
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent,

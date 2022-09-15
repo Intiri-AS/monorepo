@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
 import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
+import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
 import { StylePage } from './pages/shared-guarded-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
@@ -126,6 +127,10 @@ const routes: Routes = [
   {
     path: 'dashboard', //TODO Set up page guard (admin guard)
     component: DashboardPage
+  },
+  {
+    path: 'consultations', //TODO Set up page guard (admin guard)
+    component: ConsultationsPage
   },
   {
     path: 'designer', //TODO Set up page guard (admin guard)

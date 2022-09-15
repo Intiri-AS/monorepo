@@ -16,8 +16,8 @@
             </div>
           </div>
           <ion-buttons class="justify-center">
-            <ion-button  class="cancel-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Cancel</ion-button>
-            <ion-button class="create-btn" [class.disabled]="!isValidProjectName()" (click)="startProjectCreation()">Create</ion-button>
+            <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Cancel</ion-button>
+            <ion-button class="primary-btn" [class.disabled]="!isValidProjectName()" (click)="startProjectCreation()">Create</ion-button>
           </ion-buttons>
         </form>
       </div>
