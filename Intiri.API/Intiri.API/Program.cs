@@ -82,7 +82,16 @@ try
 
 	// seed data
 	logger.Debug("Seeding data...");
-	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+	try
+	{
+		await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+
+	}
+	catch (Exception)
+	{
+
+		logger.Debug("Whatever...");
+	}
 
 	app.UseAuthentication();
 	app.UseAuthorization();

@@ -21,6 +21,9 @@ namespace Intiri.API.DataAccess
 		private readonly IProductRepository _productRepository;
 		private readonly IProductTypeRepository _productTypeRepository;
 		private readonly IColorPalleteRepository _colorPalleteRepository;
+		private readonly IRoomDetailsRepository _roomDetailsRepository;
+		private readonly IProjectRepository _projectRepository;
+		private readonly IMoodboardRepository _moodboardRepository;
 
 		#endregion Fields
 
@@ -40,6 +43,9 @@ namespace Intiri.API.DataAccess
 			_productRepository = new ProductRepository(dataContext, mapper);
 			_productTypeRepository = new ProductTypeRepository(dataContext, mapper);
 			_colorPalleteRepository = new ColorPalleteRepository(dataContext, mapper);
+			_roomDetailsRepository = new RoomDetailsRepository(dataContext);
+			_projectRepository = new ProjectRepository(dataContext, mapper);
+			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
 
 			_dataContext = dataContext;
 		}
@@ -60,6 +66,9 @@ namespace Intiri.API.DataAccess
 		public IProductRepository ProductRepository => _productRepository;
 		public IProductTypeRepository ProductTypeRepository => _productTypeRepository;
 		public IColorPalleteRepository ColorPalleteRepository => _colorPalleteRepository;
+		public IRoomDetailsRepository RoomDetailsRepository => _roomDetailsRepository;
+		public IProjectRepository ProjectRepository => _projectRepository;
+		public IMoodboardRepository MoodboardRepository => _moodboardRepository;
 
 		#endregion Properties
 

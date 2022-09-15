@@ -1,0 +1,32 @@
+[
+	{
+		"Name": "Harmony",
+		"Description": "This moodboard will give you harmony",
+		"Designer": "Will Smith",
+		"StyleId": 1,
+		"RoomId": 1,
+		"MaterialIds": [ 1 ],
+		"ColorPalleteId": 1,
+		"ProductIds": [ 1 ]
+	},
+	{
+		"Name": "Synergy",
+		"Description": "This moodboard will give you synergy",
+		"Designer": "Willow Smith",
+		"StyleId": 2,
+		"RoomId": 2,
+		"MaterialIds": [ 2 ],
+		"ColorPalleteId": 2,
+		"ProductIds": [ 2 ]
+	},
+	{
+		"Name": "Zen",
+		"Description": "This moodboard will give you zen",
+		"Designer": "Jaden Smith",
+		"StyleId": 3,
+		"RoomId": 3,
+		"MaterialIds": [ 3 ],
+		"ColorPalleteId": 3,
+		"ProductIds": [ 3 ]
+	}
+]
