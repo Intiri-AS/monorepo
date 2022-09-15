@@ -7,24 +7,24 @@
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
           <p>Login</p>
         </ion-button>
-        <h1 class="font-['Allison'] text-7xl mt-0 black-2">Start your journey</h1>
+        <h1 class="font-['Allison'] text-7xl mt-0 text-black-2">Start your journey</h1>
         <h1 class="text-5xl font-semibold">Create an account</h1>
-        <p class="text-lg black-2">
+        <p class="text-lg text-black-2">
           Manage your account, create and edit projects, collaborate on design and more.
         </p>
         <form [formGroup]="registerForm" (ngSubmit)="register()">
           <div class="mt-8 flex flex-col xl:flex-row justify-between">
             <div>
-              <span class="text-sm black-2">First name</span>
+              <span class="text-sm text-black-2">First name</span>
               <ion-input type="text" formControlName="username" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
             </div>
             <div class="mt-[30px] xl:mt-0">
-              <span class="text-sm black-2">Last name</span>
+              <span class="text-sm text-black-2">Last name</span>
               <ion-input type="text" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
             </div>
           </div>
           <div class="mt-7">
-            <span class="text-sm black-2">Phone number</span>
+            <span class="text-sm text-black-2">Phone number</span>
             <div class="flex justify-between">
               <div>
                 <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="flex flex-col justify-center items-center">
-            <ion-button type="submit" fill="clear" class="register-btn">Register</ion-button>
+            <ion-button type="submit" fill="clear" class="primary-btn mt-[30px]">Register</ion-button>
           </div>
         </form>
       </div>

@@ -39,6 +39,11 @@
   }
 }
 
+ion-popover {
+  --backdrop-opacity: 0;
+  --offset-y: 10px;
+}
+
 ion-button {
   --background-hover-opacity: 0;
   --background-focused-opacity: 0;
@@ -54,7 +59,7 @@ ion-button {
 }
 
 .primary-btn {
-  @apply hover:opacity-80 bg-primary text-white normal-case rounded-xl text-lg px-4;
+  @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
   height: 46px !important;
@@ -63,7 +68,7 @@ ion-button {
 }
 
 .secondary-btn {
-  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-xl border-primary border px-4;
+  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
   height: 46px !important;
@@ -79,6 +84,10 @@ ion-button {
 .main-container {
   @extend .header-container;
   @apply my-[50px] pt-0;
+}
+
+.ion-card-container {
+  @apply border border-black rounded-[15px] p-4
 }
 
 .native-input.sc-ion-input-md {

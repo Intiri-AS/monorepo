@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
-import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
+import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +17,21 @@ export class HeaderComponent {
     {title: 'Book a designer', url: '/book-designer'},
   ]
 
-  constructor(private modalController: ModalController, private projectService: ProjectService,  private router: Router) {}
+  constructor(private projectService: ProjectService,  private router: Router, public popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
     return this.router.url === route;
+  }
+
+  async showSettings(e: Event) {
+    const popover = await this.popoverController.create({
+      component: SettingsPopoverComponent,
+      componentProps: { headerType: 'user'},
+      event: e,
+      dismissOnSelect: true
+    });
+
+    await popover.present();
   }
 
   menuOpened() {
@@ -36,13 +47,5 @@ export class HeaderComponent {
     this.projectService.setCurrentProject(new Project());
   }
 
-  async openLogoutModal() {
-    const modal = await this.modalController.create({
-      component: LogoutModalComponent,
-      cssClass: 'modal-css'
-    });
-
-    await modal.present();
-  }
 
 }

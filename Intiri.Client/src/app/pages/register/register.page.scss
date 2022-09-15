@@ -1,16 +1,6 @@
-.black-2 {
-  color: #555555
-}
-
 .login-btn {
   @apply text-lg font-semibold text-black mt-14;
   --padding-start: 4px;
-  text-transform: none;
-}
-
-.register-btn {
-  @apply flex justify-center items-center w-32 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
-  background: #9B7E60;
   text-transform: none;
 }
 
@@ -27,10 +17,6 @@ ion-item {
 ion-input {
   color: #555555;
   caret-color: #555555;
-}
-
-.border-black-2 {
-  border-color: #555555;
 }
 
 ion-icon {

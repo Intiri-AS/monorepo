@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
+import { PopoverController } from '@ionic/angular';
+import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
 
 @Component({
   selector: 'app-header-admin',
@@ -21,7 +21,7 @@ export class HeaderAdminComponent {
     {title: 'Style', url: '#'},
   ]
 
-  constructor(private modalController: ModalController, private router: Router) {}
+  constructor(private router: Router, private popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
     return this.router.url === route;
@@ -37,13 +37,15 @@ export class HeaderAdminComponent {
     x['style'].height = 'auto'
   }
 
-  async openLogoutModal() {
-    const modal = await this.modalController.create({
-      component: LogoutModalComponent,
-      cssClass: 'modal-css'
+  async showSettings(e: Event) {
+    const popover = await this.popoverController.create({
+      component: SettingsPopoverComponent,
+      componentProps: { headerType: 'admin'},
+      event: e,
+      dismissOnSelect: true
     });
 
-    await modal.present();
+    await popover.present();
   }
 
 }
