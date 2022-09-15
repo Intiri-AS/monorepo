@@ -32,7 +32,7 @@ namespace Intiri.API.Controllers
 		#endregion Constructors
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<MaterialOutDTO>>> GetRooms()
+		public async Task<ActionResult<IEnumerable<MaterialOutDTO>>> GetMaterials()
 		{
 			IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetAllMaterialsAsync();
 			IEnumerable<MaterialOutDTO> materialsToReturn = _mapper.Map<IEnumerable<MaterialOutDTO>>(materials);
@@ -53,38 +53,38 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<MaterialOutDTO>(material);
 		}
 
-		[HttpPost("add")]
-		public async Task<ActionResult<MaterialOutDTO>> AddMaterial([FromForm] MaterialInDTO materialInDTO)
-		{
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(materialInDTO.MaterialTypeId);
+		//[HttpPost("add")]
+		//public async Task<ActionResult<MaterialOutDTO>> AddMaterial([FromForm] MaterialInDTO materialInDTO)
+		//{
+		//	MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(materialInDTO.MaterialTypeId);
 			
-			if (materialType == null) return BadRequest("Material type doesn't exist");
+		//	if (materialType == null) return BadRequest("Material type doesn't exist");
 
-			if (materialType.Materials.Any(r => r.Name == materialInDTO.Name))
-			{
-				return BadRequest("Material name with material type already exist");
-			}
+		//	if (materialType.Materials.Any(r => r.Name == materialInDTO.Name))
+		//	{
+		//		return BadRequest("Material name with material type already exist");
+		//	}
 
-			IFormFile file = materialInDTO.ImageFile;
+		//	IFormFile file = materialInDTO.ImageFile;
 
-			if (file.Length > 0)
-			{
-				string imgPrefixName = materialInDTO.Name + materialInDTO.MaterialTypeId + "_";
-				string dbPath = await _imageService.AddImageAsync(file, "MaterialImages", imgPrefixName);
+		//	if (file.Length > 0)
+		//	{
+		//		string imgPrefixName = materialInDTO.Name + materialInDTO.MaterialTypeId + "_";
+		//		string dbPath = await _imageService.AddImageAsync(file, "MaterialImages", imgPrefixName);
 				
-				Material material = _mapper.Map<Material>(materialInDTO);
-				material.ImagePath = dbPath;
-				_unitOfWork.MaterialRepository.Insert(material);
+		//		Material material = _mapper.Map<Material>(materialInDTO);
+		//		material.ImagePath = dbPath;
+		//		_unitOfWork.MaterialRepository.Insert(material);
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					materialType.Materials.Add(material);
-					return _mapper.Map<MaterialOutDTO>(material);
-				}
-			}
+		//		if (await _unitOfWork.SaveChanges())
+		//		{
+		//			materialType.Materials.Add(material);
+		//			return _mapper.Map<MaterialOutDTO>(material);
+		//		}
+		//	}
 
-			return BadRequest("Problem adding material.");
-		}
+		//	return BadRequest("Problem adding material.");
+		//}
 
 		[HttpDelete("delete/{materialId}")]
 		public async Task<IActionResult> DeleteMaterial(int materialId)

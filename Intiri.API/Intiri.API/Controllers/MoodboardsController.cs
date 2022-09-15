@@ -35,6 +35,8 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboards()
 		{
 			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboards();
+
+
 			IEnumerable<MoodboardOutDTO> moodboardsOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards); ;
 
 			return Ok(moodboardsOut);
@@ -43,7 +45,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{moodboardId}")]
 		public async Task<ActionResult<MoodboardOutDTO>> GetMoodboardById(int moodboardId)
 		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetMoodboardById(moodboardId);
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
 
 			if (moodboard == null)
 			{
@@ -53,7 +55,7 @@ namespace Intiri.API.Controllers
 			return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
 		}
 
-		[HttpPost("new")]
+		[HttpPost("add")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboard(MoodboardInDTO moodboardIn)
 		{
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
@@ -67,8 +69,8 @@ namespace Intiri.API.Controllers
 			IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardIn.MaterialIds);
 			moodboard.Materials = materials.ToArray();
 
-			ColorPallete colorPallete = await _unitOfWork.ColorPalleteRepository.GetColorPalleteById(moodboardIn.ColorPalleteId);
-			moodboard.ColorPallete = colorPallete;
+			IEnumerable<ColorPallete> colorPalletes = await _unitOfWork.ColorPalleteRepository.GetColorPalletesByIdsListAsync(moodboardIn.ColorPalleteIds);
+			moodboard.ColorPalletes = colorPalletes.ToArray();
 
 			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 			moodboard.Products = products.ToArray();

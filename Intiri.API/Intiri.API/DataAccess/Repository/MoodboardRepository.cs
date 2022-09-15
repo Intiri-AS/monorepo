@@ -26,12 +26,13 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboards()
 		{
-			return await _context.Moodboards.ToListAsync();
-		}
-
-		public Task<Moodboard> GetMoodboardById(int id)
-		{
-			throw new NotImplementedException();
+			return await _context.Moodboards
+				.Include(p => p.Style)
+				.Include(p => p.Room)
+				.Include(p => p.Materials)
+				.Include(p => p.Products)
+				.Include(p => p.ColorPalletes)
+				.ToListAsync();
 		}
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids)

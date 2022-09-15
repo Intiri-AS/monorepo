@@ -7,8 +7,9 @@
 		public string Designer { get; set; }
 		public int StyleId { get; set; }
 		public int RoomId { get; set; }
+
 		public ICollection<int> MaterialIds { get; set; }
-		public int ColorPalleteId { get; set; }
+		public ICollection<int> ColorPalleteIds { get; set; }
 		public ICollection<int> ProductIds { get; set; }
 	}
 }

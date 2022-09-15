@@ -5,6 +5,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,7 +40,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<ProductOutDTO>> AddProduct([FromForm] ProductInDTO productInDTO)
 		{
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeByIdAsync(productInDTO.ProductTypeId);
+			Models.Product.ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeByIdAsync(productInDTO.ProductTypeId);
 
 			if (productType == null) return BadRequest("Product type doesn't exist");
 
@@ -61,11 +62,9 @@ namespace Intiri.API.Controllers
 				product.ImagePath = dbPath;
 			}
 
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeByIdAsync(productInDTO.MaterialTypeId);
-			if (materialType == null) return BadRequest("Material type doesn't exist");
-			product.MaterialType = materialType;
-
 			product.ProductType = productType;
+
+			product.Style = await _unitOfWork.StyleRepository.GetByID(productInDTO.StyleId);
 
 			_unitOfWork.ProductRepository.Insert(product);
 

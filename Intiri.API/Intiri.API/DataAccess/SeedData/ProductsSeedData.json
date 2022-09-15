@@ -1,0 +1,50 @@
+[
+	{
+		"Name": "Comfy Sofa",
+		"ProductTypeId": 1,
+		"Description": "Very nice sofa",
+		"StyleId": 2,
+		"Price": 450,
+		"ImagePath": "path"
+	},
+	{
+		"Name": "Sofa Royale",
+		"ProductTypeId": 1,
+		"Description": "Premium",
+		"StyleId": 3,
+		"Price": 360,
+		"ImagePath": "path"
+	},
+	{
+		"Name": "Standing Desk",
+		"ProductTypeId": 2,
+		"Description": "Description",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "path"
+	},
+	{
+		"Name": "Ornament Lamp",
+		"ProductTypeId": 3,
+		"Description": "Very nice sofa",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "path"
+	},
+	{
+		"Name": "Sia",
+		"ProductTypeId": 4,
+		"Description": "Provides illumination",
+		"StyleId": 4,
+		"Price": 450,
+		"ImagePath": "path"
+	},
+	{
+		"Name": "Work Chair",
+		"ProductTypeId": 5,
+		"Description": "Chair for work",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "path"
+	}
+]

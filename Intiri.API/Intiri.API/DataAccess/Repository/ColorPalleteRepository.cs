@@ -34,6 +34,11 @@ namespace Intiri.API.DataAccess.Repository
 			return await GetByID(id);
 		}
 
+		public async Task<IEnumerable<ColorPallete>> GetColorPalletesByIdsListAsync(ICollection<int> cpIds)
+		{
+			return await _context.ColorPalletes.Where(cp => cpIds.Contains(cp.Id)).ToListAsync();
+		}
+
 		#endregion Public methods
 	}
 }

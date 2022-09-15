@@ -29,7 +29,8 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Products
 				.Include(pt => pt.ProductType)
-				.Include(pt => pt.MaterialType)
+				.Include(pt => pt.Style)
+				.Include(pt => pt.Moodboards)
 				.ToListAsync();
 		}
 
