@@ -12,7 +12,7 @@ export class HeaderAdminComponent {
 
 
   menuItems = [
-    {title: 'Dashboard', url: '#'},
+    {title: 'Dashboard', url: '/dashboard'},
     {title: 'Consultations', url: '#'},
     {title: 'Vendors', url: '#'},
     {title: 'Designers', url: '#'},
