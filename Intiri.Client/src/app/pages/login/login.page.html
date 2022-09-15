@@ -3,14 +3,14 @@
     <ion-col offset-xl="2" size-xl="4" class="p-2 xl:p-12 h-full">
       <div class="w-full xl:w-[470px]">
         <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
-        <h1 class="font-['Allison'] text-7xl mt-16 black-2">Welcome back</h1>
+        <h1 class="font-['Allison'] text-7xl mt-16 text-black-2">Welcome back</h1>
         <h1 class="text-5xl font-semibold">Login</h1>
-        <p class="text-lg black-2">
+        <p class="text-lg text-black-2">
           Manage your account, create and edit projects, collaborate on design and more.
         </p>
         <form #loginForm="ngForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
         <div class="mt-8">
-          <span class="text-sm black-2">Phone number</span>
+          <span class="text-sm text-black-2">Phone number</span>
           <div class="flex justify-between">
             <div>
               <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
@@ -30,13 +30,13 @@
           </div>
         </div>
         <div class="flex flex-col justify-center items-center">
-          <ion-button fill="clear" class="login-btn" type="submit">Login</ion-button>
-          <p class="text-lg black-2 mt-7">Or</p>
+          <ion-button fill="clear" class="primary-btn mt-[30px]" type="submit">Login</ion-button>
+          <p class="text-lg text-black-2 mt-7">Or</p>
           <ion-button fill="clear" class="vipps-btn">
             <img src="../../../assets/icon/vipps-white.svg">
           </ion-button>
-          <p class="text-lg black-2 mt-20">Don't have an account?</p>
-          <ion-button fill="clear" class="create-btn" routerLink="/register" routerDirection="root">Create an account</ion-button>
+          <p class="text-lg text-black-2 mt-20">Don't have an account?</p>
+          <ion-button fill="clear" class="secondary-btn" routerLink="/register" routerDirection="root">Create an account</ion-button>
         </div>
         </form>
       </div>

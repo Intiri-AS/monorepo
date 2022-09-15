@@ -1,19 +1,4 @@
-.contact-btn {
-  @apply border border-primary rounded-2xl bg-primary text-white text-lg h-[52px] p-0 px-4 mt-[30px] mb-[60px];
-  text-transform: none;
-}
-
 .time-btn {
   @apply border border-light rounded-2xl bg-light text-black text-lg h-[46px] p-0 px-2 font-normal;
-  text-transform: none;
-}
-
-.book-btn {
-  @apply border border-primary rounded-2xl bg-primary text-white text-lg h-[52px] p-0 px-4 ml-0 xl:ml-5;
-  text-transform: none;
-}
-
-.cancel-btn {
-  @apply border border-primary rounded-2xl text-primary text-lg h-[52px] p-0 px-4;
   text-transform: none;
 }

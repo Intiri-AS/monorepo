@@ -1,28 +1,5 @@
-.black-2 {
-  color: #555555
-}
-
-.login-btn {
-  @apply flex justify-center items-center w-28 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
-  background: #9B7E60;
-  text-transform: none;
-}
-
-.forgot-btn {
-  @apply border-0 text-lg font-semibold mt-7;
-  color: #AA4C33;
-  text-transform: none;
-}
-
-.create-btn {
-  @apply flex justify-center items-center border w-52 h-14 rounded-2xl text-lg font-semibold;
-  color: #9B7E60;
-  text-transform: none;
-  border-color: #9B7E60;
-}
-
 .vipps-btn {
-  @apply flex justify-center items-center text-white w-[151px] h-14 rounded-2xl text-lg font-medium pt-1;
+  @apply flex justify-center items-center text-white w-[151px] h-[46px] rounded-2xl text-lg font-medium pt-1;
   background: #FF5B24;
   text-transform: none;
 }
@@ -40,10 +17,6 @@ ion-item {
 ion-input {
   color: #555555;
   caret-color: #555555;
-}
-
-.border-black-2 {
-  border-color: #555555;
 }
 
 .img-bg {
