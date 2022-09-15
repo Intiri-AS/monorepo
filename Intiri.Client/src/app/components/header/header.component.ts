@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
@@ -11,7 +12,16 @@ import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.compon
 })
 export class HeaderComponent {
 
-  constructor(private modalController: ModalController, private projectService: ProjectService) {}
+  menuItems = [
+    {title: 'My Intiri', url: '/my-intiri'},
+    {title: 'Book a designer', url: '/book-designer'},
+  ]
+
+  constructor(private modalController: ModalController, private projectService: ProjectService,  private router: Router) {}
+
+  isActiveRoute(route): boolean {
+    return this.router.url === route;
+  }
 
   menuOpened() {
     const x = document.querySelector('#home');

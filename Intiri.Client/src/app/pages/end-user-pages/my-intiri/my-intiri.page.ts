@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-intiri-page',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 
 export class MyIntiriPage {
+  @ViewChild('slides') slides: IonSlides;
 
   projects = [
     {
@@ -72,6 +74,19 @@ export class MyIntiriPage {
     },
   ]
 
+  options = {
+    slidesPerView: 2,
+    spaceBetween: 20,
+  }
+
   constructor() {}
+
+  next() {
+    this.slides.slideNext();
+  }
+
+  prev() {
+    this.slides.slidePrev();
+  }
 
 }

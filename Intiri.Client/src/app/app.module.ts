@@ -50,6 +50,7 @@ import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.
 
 //app components
 import { HeaderComponent } from './components/header/header.component';
+import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { HeaderLandingComponent } from './components/header-landing/header-landing.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { StepPickerComponent } from './components/step-picker/step-picker.component';
@@ -73,7 +74,7 @@ import { CodeInputModule } from 'angular-code-input';
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage,
     MyMoodboardPage,
     StylePage, MoodboardPage,
-    HeaderLandingComponent, HeaderComponent, FooterComponent,
+    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent

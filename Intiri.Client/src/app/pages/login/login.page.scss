@@ -21,9 +21,9 @@
   border-color: #9B7E60;
 }
 
-.scan-btn {
-  @apply flex justify-center items-center text-black w-52 h-14 rounded-2xl text-lg font-medium;
-  background: #F8F5F1;
+.vipps-btn {
+  @apply flex justify-center items-center text-white w-[151px] h-14 rounded-2xl text-lg font-medium pt-1;
+  background: #FF5B24;
   text-transform: none;
 }
 
@@ -45,3 +45,14 @@ ion-input {
 .border-black-2 {
   border-color: #555555;
 }
+
+.img-bg {
+  border-radius: 0 !important;
+  border: none !important;
+  height: 15px !important;
+  width: 22px !important;
+  background-size: 15px 22px !important;
+  background-repeat: no-repeat !important;
+  background-image: url("../../../assets/icon/flags/no.svg") !important;
+}
+

@@ -1,6 +1,6 @@
 trigger:
 
-- development
+- deployment
 
 variables:
   solutionDir: 'Intiri.API'

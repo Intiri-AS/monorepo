@@ -13,6 +13,7 @@ export class BookDesignerModalComponent {
   totalPrice = 0;
   extraPayment = false;
   extraPaymentAmount = 3500;
+  numberOfConsultations = 0;
   items = [
     {
       id: 1, name: 'Room sketch'
@@ -44,6 +45,7 @@ export class BookDesignerModalComponent {
 
   totalPriceSum(event) {
     const numberOfConsultations = event.detail.value;
+    this.numberOfConsultations = numberOfConsultations;
     const reg = new RegExp(/^[1-9]\d*$/g);
     if(reg.test(numberOfConsultations)) {
       if (this.extraPayment) {
@@ -66,6 +68,15 @@ export class BookDesignerModalComponent {
   }
 
   isChecked(event) {
+    if (this.numberOfConsultations == 0) {
+      if (event.detail.checked) {
+        this.extraPayment = true;
+      } else {
+        this.extraPayment = false;
+      }
+      this.totalPrice = 0;
+      return;
+    }
     if (event.detail.checked) {
       this.extraPayment = true;
       this.totalPrice = this.totalPrice + this.extraPaymentAmount;

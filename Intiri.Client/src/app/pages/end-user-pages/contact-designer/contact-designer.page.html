@@ -1,11 +1,11 @@
 <ion-content>
-  <div id="hero">
+  <div id="home">
     <app-header></app-header>
     <div class="2xl:container mb-40">
-      <p class="text-[45px] font-medium mt-16">Select a designer</p>
-      <div class="flex flex-wrap justify-between">
+      <p class="text-[45px] font-medium mt-16 p-2 xl:p-0">Select a designer</p>
+      <div class="flex flex-wrap justify-between p-2 xl:p-0">
         <div *ngFor="let d of designers">
-          <ion-card class="border border-black rounded-2xl shadow-none w-[370px] h-[350px] m-0 mt-5 mb-[8px] p-4">
+          <ion-card class="border border-black rounded-2xl shadow-none w-full xl:w-[370px] h-[350px] m-0 mt-5 mb-2 p-4">
             <img src={{d.image}} class="w-full h-full">
           </ion-card>
           <div class="flex items-center justify-between">
