@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
-import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-project-page',

@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
 
   setCurrentProject() {
     const project: Project = JSON.parse(sessionStorage.getItem('project'));
-    console.log(project)
     this.projectService.setCurrentProject(project);
   }
 

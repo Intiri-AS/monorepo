@@ -1,12 +1,12 @@
 <ion-content>
   <div id="home">
     <app-header></app-header>
-    <div class="2xl:container">
+    <div class="main-container">
       <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>My Intiri</p>
       </ion-button>
-      <p class="text-[45px] font-medium pl-2 xl:pl-0">Skandinavian bright</p>
+      <p class="main-title">Skandinavian bright</p>
       <div class="mt-7 flex flex-wrap justify-between p-2 xl:p-0">
         <div *ngFor="let mb of moodboards">
           <ion-card class="h-[350px] w-full xl:w-[370px] border border-black rounded-2xl m-0 mt-5 mb-2 shadow-none p-4">
