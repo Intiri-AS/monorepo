@@ -39,6 +39,11 @@
   }
 }
 
+ion-popover {
+  --backdrop-opacity: 0;
+  --offset-y: 10px;
+}
+
 ion-button {
   --background-hover-opacity: 0;
   --background-focused-opacity: 0;

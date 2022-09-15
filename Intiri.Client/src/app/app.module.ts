@@ -63,6 +63,7 @@ import { LoginModalComponent } from './components/modals/login/login-modal.compo
 import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
+import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 
@@ -78,7 +79,7 @@ import { CodeInputModule } from 'angular-code-input';
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent, SettingsPopoverComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent

@@ -16,24 +16,13 @@
         <a routerLink="/profile" routerDirection="root" class="py-1">
           <img src="../../../assets/images/landing-img.png" class="header-profile-img" alt="Profile Img"/>
         </a>
-        <ion-icon class="header-icon" id="settings-btn" name="settings-sharp"></ion-icon>
+        <ion-icon class="header-icon" (click)="showSettings($event)" name="settings-sharp"></ion-icon>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<!-- Settings Dropdown Menu -->
-<ion-popover trigger="settings-btn" [dismissOnSelect]="true">
-  <ng-template>
-      <ion-list lines="none" >
-        <ion-item class="text-black-1" [button]="true" [detail]="true">Language</ion-item>
-        <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
-        <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
-      </ion-list>
-  </ng-template>
-</ion-popover>
 
 <!-- Mobile Menu -->
 <ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
