@@ -36,15 +36,45 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+
+			IEnumerable<RoomDetails> roomDetails = await _unitOfWork.RoomDetailsRepository.GetRoomDetails();
+
+			foreach (Project project in projects)
+			{
+				project.RoomDetails = roomDetails.SingleOrDefault(rd => rd.ProjectId == project.Id);
+			}
+
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
 		}
 
-		[HttpPost("add")]
-		public async Task<ActionResult<int>> AddProject([FromBody] ProjectInDTO projectIn)
+		[HttpGet("id/{projectId}")]
+		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
+			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+
+			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.SingleOrDefaultAsync(rd => rd.ProjectId == project.Id);
+
+			project.RoomDetails = roomDetails;
+
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+			
+			return Ok(projectOut);
+		}
+
+		[HttpPost("add")]
+		public async Task<ActionResult<int>> Add([FromBody] ProjectInDTO projectIn)
+		{
+			if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.Name))
+			{
+				return BadRequest($"Project with name '{projectIn.Name}' already exists");
+			}
+
 			Project project = _mapper.Map<Project>(projectIn);
+
+			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.SingleOrDefaultAsync(rd => rd.ProjectId == project.Id);
+			project.RoomDetails = roomDetails;
 
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
@@ -55,18 +85,34 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetRoomDetailsById(projectIn.RoomDetailsId);
-			project.RoomDetails = roomDetails;
-
 			_unitOfWork.ProjectRepository.Insert(project);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok(_mapper.Map<ProjectOutDTO>(project));
+				return Ok(_mapper.Map<ProjectOutDTO>(project).Id);
+			}
+			return BadRequest("Problem occured while adding project");
+		}
+
+		[HttpDelete("delete/{projectId}")]
+		public async Task<ActionResult> DeleteProject(int projectId)
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+
+			if (project == null)
+			{
+				return BadRequest($"Project with Id={projectId} not found");
 			}
 
-			return BadRequest("Probem occured while adding project");
+			await _unitOfWork.ProjectRepository.Delete(projectId);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok($"Succesfully deleted project with Id={projectId}");
+			}
+			return BadRequest("Problem occured while deleting the project)");
 		}
+
 
 		[HttpPost("moodboard-match")]
 		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] ProjectInDTO projectIn)
@@ -97,23 +143,6 @@ namespace Intiri.API.Controllers
 
 			return Ok(suggestions);
 		}
-
-		[HttpPost("add-room-details")]
-		public async Task<ActionResult<int>> AddRoomDetails([FromBody] RoomDetailsInDTO roomDetailsIn)
-		{
-			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
-
-			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
-
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<RoomDetailsOutDTO>(roomDetails));
-			}
-
-			return BadRequest("Probem occured while adding project");
-
-		}
-
 		#endregion Public methods
 	}
 }

@@ -36,10 +36,10 @@ namespace Intiri.API.Controllers
 			return Ok(roomDetailsOut);
 		}
 
-		[HttpGet("id")]
-		public async Task<ActionResult<RoomDetailsOutDTO>> GetRoomDetailsById(int id)
+		[HttpGet("id/{roomDetailsId}")]
+		public async Task<ActionResult<RoomDetailsOutDTO>> GetRoomDetailsById(int roomDetailsId)
 		{
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetRoomDetailsById(id);
+			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(roomDetailsId);
 			RoomDetailsOutDTO roomDetailsOut = _mapper.Map<RoomDetailsOutDTO>(roomDetails);
 
 			return Ok(roomDetailsOut);
@@ -50,6 +50,11 @@ namespace Intiri.API.Controllers
 		{
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
 
+			if (await _unitOfWork.RoomDetailsRepository.DoesAnyExist(rd => rd.ProjectId == roomDetailsIn.ProjectId))
+			{
+				return BadRequest($"Room details already exist for project with id={roomDetailsIn.ProjectId}");
+			}
+
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 			
 			if (await _unitOfWork.SaveChanges())
@@ -58,6 +63,26 @@ namespace Intiri.API.Controllers
 			}
 
 			return BadRequest("Problem occured while adding room details");
+		}
+
+		[HttpDelete("delete/{roomDetailsId}")]
+		public async Task<IActionResult> DeleteRoomDetails(int roomDetailsId)
+		{
+			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(roomDetailsId);
+
+			if (roomDetails == null)
+			{
+				return BadRequest($"Room details with Id={roomDetailsId} not found");
+			}
+
+			await _unitOfWork.RoomDetailsRepository.Delete(roomDetailsId);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok($"Succesfully deleted room details with Id={roomDetailsId}");
+			}
+
+			return BadRequest("Problem occured while deleting room details");
 		}
 
 		#endregion Public methods

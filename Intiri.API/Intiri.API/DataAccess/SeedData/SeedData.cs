@@ -1,6 +1,8 @@
 ﻿using Intiri.API.Models;
+using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +24,9 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedStylesImages(unitOfWork);
 			await SeedRooms(unitOfWork);
 			await SeedColorPalletes(unitOfWork);
+			await SeedProjects(unitOfWork);
 			await SeedRoomDetails(unitOfWork);
+			await SeedMoodboards(unitOfWork);
 		}
 
 		public static async Task SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
@@ -154,6 +158,44 @@ namespace Intiri.API.DataAccess.SeedData
 			foreach (RoomDetails roomDetail in roomDetails)
 			{
 				unitOfWork.RoomDetailsRepository.Insert(roomDetail);
+			}
+
+			await unitOfWork.SaveChanges();
+		}
+
+		public static async Task SeedProjects(IUnitOfWork unitOfWork)
+		{
+			string projectsData = await File.ReadAllTextAsync("DataAccess/SeedData/ProjectsSeedData.json");
+			List<Project> projects = JsonSerializer.Deserialize<List<Project>>(projectsData);
+
+			foreach (Project project in projects)
+			{
+				unitOfWork.ProjectRepository.Insert(project);
+			}
+
+			await unitOfWork.SaveChanges();
+		}
+
+		public static async Task SeedMoodboards(IUnitOfWork unitOfWork)
+		{
+			string moodboardsData = await File.ReadAllTextAsync("DataAccess/SeedData/MoodboardsSeedData.json");
+			List<MoodboardInDTO> moodboardIns = JsonSerializer.Deserialize<List<MoodboardInDTO>>(moodboardsData);
+
+			foreach (MoodboardInDTO moodboardIn in moodboardIns)
+			{
+				Moodboard moodboard = new Moodboard();
+				// TODO: Inject automapper
+				moodboard.Name = moodboardIn.Name;
+				moodboard.Description = moodboardIn.Description;
+				moodboard.Designer = moodboardIn.Designer;
+
+				moodboard.Style = await unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
+				moodboard.Room = await unitOfWork.RoomRepository.GetByID(moodboardIn.RoomId);
+				moodboard.Materials = (await unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardIn.MaterialIds)).ToArray();
+				moodboard.ColorPallete = await unitOfWork.ColorPalleteRepository.GetByID(moodboardIn.ColorPalleteId);
+				moodboard.Products = (await unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds)).ToArray();
+
+				unitOfWork.MoodboardRepository.Insert(moodboard);
 			}
 
 			await unitOfWork.SaveChanges();

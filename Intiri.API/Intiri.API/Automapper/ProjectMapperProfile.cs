@@ -9,6 +9,7 @@ namespace Intiri.API.Automapper
 	{
 		public ProjectMapperProfile()
 		{
+			CreateMap<ProjectNameInDTO, Project>();
 			CreateMap<ProjectInDTO, Project>();
 			CreateMap<Project, ProjectOutDTO>();
 		}

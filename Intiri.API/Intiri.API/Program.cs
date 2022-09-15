@@ -79,10 +79,19 @@ try
 		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
 		RequestPath = new PathString("/Resources")
 	});
-	
+
 	// seed data
 	logger.Debug("Seeding data...");
-	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+	try
+	{
+		await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+
+	}
+	catch (Exception)
+	{
+
+		logger.Debug("Whatever...");
+	}
 
 	app.UseAuthentication();
 	app.UseAuthorization();
