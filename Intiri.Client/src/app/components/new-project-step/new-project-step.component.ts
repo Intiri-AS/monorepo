@@ -14,6 +14,7 @@ export class NewProjectStepComponent implements OnInit {
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
+
   constructor() { }
 
   ngOnInit() {}
@@ -22,6 +23,15 @@ export class NewProjectStepComponent implements OnInit {
     this.toggleSelection.emit(item);
   }
 
+  isArray(item) {
+    return Array.isArray(item);
+  }
+
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
+
+
   isItemSelected(item): boolean {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
@@ -29,9 +39,14 @@ export class NewProjectStepComponent implements OnInit {
       if(this.project[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
         return true;
       }
-    } else {
-      // else it's a single select
-      return JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+    } else { // else it's a single select
+       // if it's updating sub-object
+       if(stepName.includes('.')) {
+        return JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
+       }
+       else {
+        return JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+       }
     }
     return false;
   }

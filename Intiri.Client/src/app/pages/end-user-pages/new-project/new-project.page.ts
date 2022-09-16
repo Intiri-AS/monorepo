@@ -24,61 +24,72 @@ export class NewProjectPage {
       data: [],
     },
     {
+      title: 'Enter more detail about selected room',
+      subtitle: 'Don’t worry, you can improve more rooms later.',
+      data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
+    },
+    {
       title: 'Select color pallet',
       subtitle: 'Don’t worry, you can chage color later.',
       data: [],
     },
     {
       title: 'Select the moodboard you like the most',
-      subtitle: 'We have found you style match. Choose moodboard you like the most. ',
+      subtitle:
+        'We have found you style match. Choose moodboard you like the most. ',
       data: [],
     },
     {
       title: 'This is your style',
       subtitle:
         'This style captures the balance between comfort and minimalism characteristic of Scandinavial bright design. This include clean lines, minimal decoration and the importance of artwork. Try to create an environment that encourages feelings of strenght, contentmentt and clean lines. Typicalcoloors are calming and neutral with palettes sticking to whites, grays, greens, black and blue accents. The syle allso reflects the wooden landscape and trees of the Nordic countries.',
-      data: [],
+      data: 'final',
     },
   ];
-
 
   project: Project = null;
 
   stepsOrder: object = {
     0: 'styleImages',
     1: 'room',
-    2: 'color',
-    3: 'moodboard',
-    4: 'final-result'
-  }
+    2: 'roomDetails.shape',
+    3: 'colorPallete',
+    4: 'moodboard',
+    5: 'final',
+  };
 
   currentStepNo: number = 0;
 
-  constructor(private modalController: ModalController, public projectService: ProjectService) {}
+  constructor(
+    private modalController: ModalController,
+    public projectService: ProjectService
+  ) {}
 
   ngOnInit() {
-
-    this.projectService.currentProject$.subscribe(project => {
+    this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if(!project.name) {
-        this.openModal();
+      if (!project.name) {
+        this.openStartModal();
       }
     });
-    this.projectService.getStyleImages().subscribe(res => {
+    this.projectService.getStyleImages().subscribe((res) => {
       this.steps[0]['data'] = res;
-    })
-    this.projectService.getRooms().subscribe(res => {
+    });
+    this.projectService.getRooms().subscribe((res) => {
       this.steps[1]['data'] = res;
-    })
-    this.projectService.getColors().subscribe(res => {
-      this.steps[2]['data'] = res;
-    })
+    });
+    this.projectService.getColorPalletes().subscribe((res) => {
+      this.steps[3]['data'] = res;
+    });
   }
 
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
       this.currentStepNo--;
       this.projectService.setCurrentProject(this.project);
+    }
+    if (this.currentStepNo === 4) {
+      this.getMoodboardMatches();
     }
   }
 
@@ -87,6 +98,9 @@ export class NewProjectPage {
       this.currentStepNo++;
       this.projectService.setCurrentProject(this.project);
     }
+    if (this.currentStepNo === 4) {
+      this.getMoodboardMatches();
+    }
   }
 
   goToStep(stepNo) {
@@ -94,50 +108,135 @@ export class NewProjectPage {
       this.currentStepNo = stepNo;
       this.projectService.setCurrentProject(this.project);
     }
+    if (stepNo === 4) {
+      this.getMoodboardMatches();
+    }
+  }
+
+  getMoodboardMatches() {
+    this.projectService.getMoodboardMatches(this.project).subscribe(
+      (res) => {
+        this.steps[4]['data'] = {moodboardFamily: res['moodboardFamily'], moodboards: res['moodboards'].map(e => { return {...e.moodboard, percentageMatch: e.percentageMatch}})};
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   canChangeToStep(step): boolean {
     if (step >= this.steps.length || step < 0) {
       return false;
     }
-    switch(step) {
-      case 0: { return true; }
-      case 1: { return this.project.styleImages.length > 0; }
-      case 2: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room)}
-      case 3: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room) && !this.isEmpty(this.project.color);}
-      case 4: { return this.project.styleImages.length > 0 && !this.isEmpty(this.project.room) && !this.isEmpty(this.project.color) && !this.isEmpty(this.project.moodboard);}
+    switch (step) {
+      case 0: {
+        return true;
+      }
+      case 1: {
+        return this.project.styleImages.length > 0;
+      }
+      case 2: {
+        return (
+          this.project.styleImages.length > 0 &&
+          !this.isEmpty(this.project.room)
+        );
+      }
+      case 3: {
+        return (
+          this.project.styleImages.length > 0 &&
+          !this.isEmpty(this.project.room) &&
+          this.areProjectDetailsValid()
+        );
+      }
+      case 4: {
+        return (
+          this.project.styleImages.length > 0 &&
+          !this.isEmpty(this.project.room) &&
+          this.areProjectDetailsValid() &&
+          !this.isEmpty(this.project.colorPallete)
+        );
+      }
+      case 5: {
+        return (
+          this.project.styleImages.length > 0 &&
+          !this.isEmpty(this.project.room) &&
+          this.areProjectDetailsValid() &&
+          !this.isEmpty(this.project.colorPallete) &&
+          !this.isEmpty(this.project.moodboard)
+        );
+      }
     }
     return false;
   }
 
   isEmpty(object): boolean {
-    return object && Object.keys(object).length === 0 && Object.getPrototypeOf(object) === Object.prototype;
+    return (
+      !object ||
+      (Object.keys(object).length === 0 &&
+      Object.getPrototypeOf(object) === Object.prototype)
+    );
+  }
+
+  areProjectDetailsValid(): boolean {
+    return this.project.roomDetails['shape'] && this.project.roomDetails['size'] && !!this.project.budget;
   }
 
   toggleItem(item) {
+
+    // if you change any selection, selected moodboard will reset
+    if(this.currentStepNo < 4) {
+      this.project.moodboard = {};
+    }
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
-    if(Array.isArray(this.project[stepName])) {
-      if(this.project[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
-        this.project[stepName] = this.project[stepName].filter(e => e.id !== item.id);
+    if (Array.isArray(this.project[stepName])) {
+      if (
+        this.project[stepName].some(
+          (e) => JSON.stringify(e) === JSON.stringify(item)
+        )
+      ) {
+        this.project[stepName] = this.project[stepName].filter(
+          (e) => e.id !== item.id
+        );
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
-    } else {
-      // else it's a single select
-      this.project[stepName] = JSON.stringify(this.project[stepName]) === JSON.stringify(item) ? null : item;
+    } else {  // else it's a single select
+
+      // if it's updating sub-object
+      if(stepName.includes('.')) {
+        this.project[stepName.split('.')[0]][stepName.split('.')[1]] =
+        JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
+          ? null
+          : item;
+      } else {
+        this.project[stepName] =
+        JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+          ? null
+          : item;
+      }
     }
   }
 
-  async openModal() {
+  async openStartModal() {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      cssClass: 'modal-css',
+      componentProps: {start: true},
+      cssClass: 'small-modal-css',
       backdropDismiss: false,
-      swipeToClose: false
+      swipeToClose: false,
     });
 
     await modal.present();
   }
 
+  async openFinalModal() {
+    const modal = await this.modalController.create({
+      component: CreateProjectModalComponent,
+      componentProps: {final: true, projectName: this.project.name},
+      cssClass: 'final-project-step-modal-css'
+    });
+
+    await modal.present();
+  }
 }

@@ -2,7 +2,9 @@ export class Project {
   name: string;
   styleImages: Array<object>;
   room: object;
-  color: object;
+  colorPallete: object;
+  budget: string;
+  roomDetails: object;
   moodboard: object;
 
   //TODO This is example for User model
@@ -11,7 +13,9 @@ export class Project {
     this.name = '';
     this.styleImages = [];
     this.room = {};
-    this.color = {};
+    this.budget = '';
+    this.roomDetails = {};
+    this.colorPallete = {};
     this.moodboard = {};
   }
 }

@@ -29,11 +29,20 @@ export class ProjectService {
     return this.http.get(this.apiUrl + 'styleImages');
   }
 
-  getColors(){
-    return this.http.get(this.apiUrl + 'colors');
+  getColorPalletes(){
+    return this.http.get(this.apiUrl + 'colorPalletes');
   }
 
   getRooms(){
     return this.http.get(this.apiUrl + 'rooms');
+  }
+
+  getMoodboardMatches(project) {
+    const req_data = {
+      styleImageIds: project.styleImages.map(e=> e.id),
+      colorPaletteId: project.colorPallete.id,
+      roomId: project.room.id,
+      name: project.name}
+    return this.http.post(this.apiUrl + 'projects/moodboard-match', req_data);
   }
 }

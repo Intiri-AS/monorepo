@@ -26,16 +26,32 @@
         <ion-col offset-xl="3">
           <ion-buttons class="justify-center">
             <ion-button
+              *ngIf="steps[currentStepNo].data !== 'final'"
               class="secondary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo-1)"
               (click)="backStep()"
               >Back</ion-button
             >
             <ion-button
+              *ngIf="steps[currentStepNo].data !== 'final'"
               class="primary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
               (click)="nextStep()"
               >Next</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo].data === 'final'"
+              class="secondary-btn"
+              [class.disabled]="!canChangeToStep(currentStepNo-1)"
+              routerLink="/customize-moodboard"
+              routerDirection="root"
+              >Customize moodboard</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo].data === 'final'"
+              class="primary-btn"
+              (click)="openFinalModal()"
+              >Finish</ion-button
             >
           </ion-buttons>
         </ion-col>
