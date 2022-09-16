@@ -136,10 +136,10 @@ namespace Intiri.API.Controllers
 			}
 			suggestions.Moodboards = moodboardMatches;
 			
-			IEnumerable<Room> roomMatches = await _unitOfWork.RoomRepository.GetRoomsByIdsListAsync(matchesIds);
-			IEnumerable<RoomOutDTO> roomOuts = _mapper.Map<IEnumerable<RoomOutDTO>>(roomMatches).ToList();
+			IEnumerable<Moodboard> moodboardFamily = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(new int[] {4,5,6});
+			IEnumerable<MoodboardOutDTO> moodboardFamilyOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboardFamily).ToList();
 
-			suggestions.Rooms = roomOuts;
+			suggestions.MoodboardFamily = moodboardFamilyOut;
 
 			return Ok(suggestions);
 		}

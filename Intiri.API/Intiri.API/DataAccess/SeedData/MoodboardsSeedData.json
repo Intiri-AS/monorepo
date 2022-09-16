@@ -1,8 +1,8 @@
 [
 	{
-		"Name": "Harmony",
-		"Description": "This moodboard will give you harmony",
-		"Designer": "Will Smith",
+		"Name": "Harmony ",
+		"Description": "Harmony beyond measure",
+		"Designer": "Lisa Smith",
 		"StyleId": 1,
 		"RoomId": 1,
 		"MaterialIds": [ 1 ],
@@ -11,8 +11,8 @@
 	},
 	{
 		"Name": "Synergy",
-		"Description": "This moodboard will give you synergy",
-		"Designer": "Willow Smith",
+		"Description": "Synergy Redefined",
+		"Designer": "Stacey Stone",
 		"StyleId": 2,
 		"RoomId": 2,
 		"MaterialIds": [ 2 ],
@@ -21,10 +21,40 @@
 	},
 	{
 		"Name": "Zen",
-		"Description": "This moodboard will give you zen",
-		"Designer": "Jaden Smith",
+		"Description": "Zen in your home",
+		"Designer": "Brian Adams",
 		"StyleId": 3,
 		"RoomId": 3,
+		"MaterialIds": [ 3 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 3 ]
+	},
+	{
+		"Name": "Harmony Redefined",
+		"Description": "Simplicity at its finest",
+		"Designer": "Mickey Briggs",
+		"StyleId": 1,
+		"RoomId": 2,
+		"MaterialIds": [ 3 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 2 ]
+	},
+	{
+		"Name": "Harmony Recreated",
+		"Description": "Harmony for your home",
+		"Designer": "John Ricardo",
+		"StyleId": 1,
+		"RoomId": 3,
+		"MaterialIds": [ 3 ],
+		"ColorPalleteIds": [ 3, 2 ],
+		"ProductIds": [ 3 ]
+	},
+	{
+		"Name": "Harmony Captured",
+		"Description": "Harmony Captured description",
+		"Designer": "Sasha Holland",
+		"StyleId": 1,
+		"RoomId": 4,
 		"MaterialIds": [ 3 ],
 		"ColorPalleteIds": [ 3, 4 ],
 		"ProductIds": [ 3 ]

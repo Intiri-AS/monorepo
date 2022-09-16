@@ -38,7 +38,15 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids)
 		{
-			return await _context.Moodboards.Where(m => ids.Contains(m.Id)).ToListAsync();
+			return await _context.Moodboards
+				.Where(m => ids.Contains(m.Id))
+				.Include(p => p.Room)
+				.Include(p => p.Materials)
+				.Include(p => p.Products)
+				.Include(p => p.ColorPalletes)
+				.Include(p => p.Style)
+				.ThenInclude(s => s.StyleImages)
+				.ToListAsync();
 		}
 
 		#endregion Public methods

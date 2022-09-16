@@ -10,6 +10,7 @@
 
 		public int StyleId { get; set; }
 		public Style.Style Style { get; set; }
+		public int ProductTypeId { get; set; }
 		public ProductType ProductType { get; set; }
 		public ICollection<Moodboard> Moodboards { get; set; }
 	}
