@@ -13,5 +13,14 @@
 	},
 	{
 		"Name": "Plastic"
+	},
+	{
+		"Name": "Textile"
+	},
+	{
+		"Name": "Wool"
+	},
+	{
+		"Name": "Stone"
 	}
 ]

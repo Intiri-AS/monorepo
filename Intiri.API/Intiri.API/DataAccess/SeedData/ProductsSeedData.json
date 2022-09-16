@@ -5,7 +5,7 @@
 		"Description": "Very nice sofa",
 		"StyleId": 2,
 		"Price": 450,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\comfy_sofa.jpg"
 	},
 	{
 		"Name": "Sofa Royale",
@@ -13,7 +13,7 @@
 		"Description": "Premium",
 		"StyleId": 3,
 		"Price": 360,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\sofa_royale.jpg"
 	},
 	{
 		"Name": "Standing Desk",
@@ -21,30 +21,46 @@
 		"Description": "Description",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\standing_desk.jpg"
 	},
 	{
-		"Name": "Ornament Lamp",
+		"Name": "Standing Lamp",
 		"ProductTypeId": 3,
 		"Description": "Very nice sofa",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\standing_lamp.jpg"
 	},
 	{
-		"Name": "Sia",
+		"Name": "Ceramic Lamp",
 		"ProductTypeId": 4,
 		"Description": "Provides illumination",
 		"StyleId": 4,
 		"Price": 450,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\ceramic_lamp.jpg"
 	},
 	{
-		"Name": "Work Chair",
+		"Name": "Office Chair",
 		"ProductTypeId": 5,
 		"Description": "Chair for work",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "path"
+		"ImagePath": "Resources\\ProductImages\\office_chair.jpg"
+	},
+	{
+		"Name": "Dinning Table",
+		"ProductTypeId": 6,
+		"Description": "Table for dinner",
+		"StyleId": 2,
+		"Price": 450,
+		"ImagePath": "Resources\\ProductImages\\dinning_table.jpg"
+	},
+	{
+		"Name": "Office Desk",
+		"ProductTypeId": 2,
+		"Description": "Ideal for companies",
+		"StyleId": 3,
+		"Price": 450,
+		"ImagePath": "Resources\\ProductImages\\office_table.jpg"
 	}
 ]

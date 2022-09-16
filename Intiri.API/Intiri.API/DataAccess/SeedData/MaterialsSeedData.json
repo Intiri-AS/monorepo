@@ -3,30 +3,48 @@
 		"Name": "Dark Wood",
 		"Description": "Brief description",
 		"MaterialTypeId": 1,
-		"ImagePath": "Resources\\MaterialImages\\light_wood.svg"
+		"ImagePath": "Resources\\MaterialImages\\light_wood.jpg"
 	},
 	{
 		"Name": "Fancy Steel",
 		"Description": "Brief description",
 		"MaterialTypeId": 2,
-		"ImagePath": "Resources\\MaterialImages\\fancy_steel.svg"
+		"ImagePath": "Resources\\MaterialImages\\fancy_steel.jpg"
 	},
 	{
 		"Name": "Blue Glass",
 		"Description": "Brief description",
 		"MaterialTypeId": 2,
-		"ImagePath": "Resources\\MaterialImages\\blue_glass.svg"
+		"ImagePath": "Resources\\MaterialImages\\blue_glass.jpg"
 	},
 	{
 		"Name": "Bone Ceramic",
 		"Description": "Brief description",
 		"MaterialTypeId": 2,
-		"ImagePath": "Resources\\MaterialImages\\bone_ceramic.svg"
+		"ImagePath": "Resources\\MaterialImages\\bone_ceramic.jpg"
 	},
 	{
 		"Name": "Line Plastic",
 		"Description": "Brief description",
 		"MaterialTypeId": 2,
-		"ImagePath": "Resources\\MaterialImages\\line_plastic.svg"
+		"ImagePath": "Resources\\MaterialImages\\line_plastic.jpg"
+	},
+	{
+		"Name": "Gray Wool",
+		"Description": "Brief description",
+		"MaterialTypeId": 7,
+		"ImagePath": "Resources\\MaterialImages\\gray_wool.jpg"
+	},
+	{
+		"Name": "Rustic Textile",
+		"Description": "Brief description",
+		"MaterialTypeId": 6,
+		"ImagePath": "Resources\\MaterialImages\\industrial_textiles.jpg"
+	},
+	{
+		"Name": "Sahara Stone",
+		"Description": "Brief description",
+		"MaterialTypeId": 8,
+		"ImagePath": "Resources\\MaterialImages\\sand_stone.jpg"
 	}
 ]
