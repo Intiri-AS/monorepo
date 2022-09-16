@@ -15,6 +15,11 @@ namespace Intiri.API.DataAccess.SeedData
 	{
 		public static async Task SeedTestData(IUnitOfWork unitOfWork, UserManager<User> userManager, RoleManager<Role> roleManager)
 		{
+			if (await userManager.Users.AnyAsync())
+			{
+				return;
+			}
+
 			await SeedUsers(userManager, roleManager);
 			await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
@@ -33,11 +38,6 @@ namespace Intiri.API.DataAccess.SeedData
 
 		public static async Task SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
 		{
-			if (await userManager.Users.AnyAsync())
-			{
-				return;
-			}
-
 			//create users
 			string usersData = await File.ReadAllTextAsync("DataAccess/SeedData/UserSeedData.json");
 			List<User> users = JsonSerializer.Deserialize<List<User>>(usersData);
