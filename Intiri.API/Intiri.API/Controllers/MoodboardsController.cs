@@ -36,7 +36,6 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboards();
 
-
 			IEnumerable<MoodboardOutDTO> moodboardsOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards); ;
 
 			return Ok(moodboardsOut);
@@ -52,7 +51,9 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
 			}
 
-			return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+			MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
+
+			return Ok(moodboardOut);
 		}
 
 		[HttpPost("add")]
