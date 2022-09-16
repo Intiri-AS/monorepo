@@ -361,6 +361,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Ignore resources folder
-Intiri.API/Intiri.API/Resources/*
-!Intiri.API/Intiri.API/Resources/Seed/
