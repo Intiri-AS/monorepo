@@ -44,6 +44,7 @@ import { ConsultationsPage } from './pages/admin-pages/consultations/consultatio
 
 //pages for designers
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
+import { ClientListPage } from './pages/designer-pages/internal-designer/clients/client-list/client-list.page';
 
 //shared admin/designer pages
 import { StylePage } from './pages/shared-guarded-pages/style/style.page';
@@ -58,6 +59,8 @@ import { StepPickerComponent } from './components/step-picker/step-picker.compon
 import { NewProjectStepComponent } from './components/new-project-step/new-project-step.component';
 import { ProfileImgSectionComponent } from './components/profile-img-section/profile-img-section.component';
 import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
+import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
+
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
 import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
@@ -74,9 +77,9 @@ import { CodeInputModule } from 'angular-code-input';
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage,
-    MyMoodboardPage,
+    MyMoodboardPage, ClientListPage,
     StylePage, MoodboardPage,
-    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent,
+    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent, SettingsPopoverComponent
