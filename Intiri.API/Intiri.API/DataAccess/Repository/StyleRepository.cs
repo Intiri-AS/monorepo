@@ -24,7 +24,8 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Style>> GetStylesAsync()
 		{
-			return await _context.Styles.ToListAsync();
+			return await _context.Styles
+				.Include(s => s.StyleImages).ToListAsync();
 		}
 
 		public async Task<Style> GetStyleWithStyleImagesByIdAsync(int styleId)

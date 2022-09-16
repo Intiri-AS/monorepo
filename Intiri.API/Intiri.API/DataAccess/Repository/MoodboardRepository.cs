@@ -27,11 +27,12 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<IEnumerable<Moodboard>> GetMoodboards()
 		{
 			return await _context.Moodboards
-				.Include(p => p.Style)
 				.Include(p => p.Room)
 				.Include(p => p.Materials)
 				.Include(p => p.Products)
 				.Include(p => p.ColorPalletes)
+				.Include(p => p.Style)
+				.ThenInclude(s => s.StyleImages)
 				.ToListAsync();
 		}
 
