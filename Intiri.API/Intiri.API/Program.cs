@@ -91,9 +91,8 @@ try
 	}
 	catch (Exception)
 	{
-
-	//	logger.Debug("Whatever...");
-	//}
+		logger.Debug("Whatever...");
+	}
 
 	app.UseAuthentication();
 	app.UseAuthorization();
