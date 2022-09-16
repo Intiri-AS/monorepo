@@ -1,0 +1,19 @@
+.btn {
+  @apply text-black normal-case text-lg px-0
+}
+
+.active-btn {
+  @apply text-primary;
+}
+
+.avatar-img {
+  height: 70px !important;
+  width: 70px !important;
+  border-radius: 15px;
+}
+
+.moodboard-img {
+  height: 100% !important;
+  width: 100% !important;
+}
+
