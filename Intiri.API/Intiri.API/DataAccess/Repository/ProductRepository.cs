@@ -34,11 +34,6 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
-		public async Task<Product> GetProductByIdAsync(int productId)
-		{
-			return await GetByID(productId);
-		}
-
 		public async Task<Product> GetProductByName(string productName)
 		{
 			return await SingleOrDefaultAsync<Product>(product => product.Name == productName, _mapper);

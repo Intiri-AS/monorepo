@@ -83,17 +83,17 @@ try
 	});
 
 	// seed data
-	logger.Debug("Seeding data...");
-	try
-	{
-		await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+	//logger.Debug("Seeding data...");
+	//try
+	//{
+	//	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
-	}
-	catch (Exception)
-	{
+	//}
+	//catch (Exception)
+	//{
 
-		logger.Debug("Whatever...");
-	}
+	//	logger.Debug("Whatever...");
+	//}
 
 	app.UseAuthentication();
 	app.UseAuthorization();
