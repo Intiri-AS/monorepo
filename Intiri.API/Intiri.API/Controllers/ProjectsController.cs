@@ -37,13 +37,6 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
 
-			IEnumerable<RoomDetails> roomDetails = await _unitOfWork.RoomDetailsRepository.GetRoomDetails();
-
-			foreach (Project project in projects)
-			{
-				project.RoomDetails = roomDetails.SingleOrDefault(rd => rd.ProjectId == project.Id);
-			}
-
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
@@ -54,12 +47,8 @@ namespace Intiri.API.Controllers
 		{
 			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
 
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.SingleOrDefaultAsync(rd => rd.ProjectId == project.Id);
-
-			project.RoomDetails = roomDetails;
-
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
-			
+
 			return Ok(projectOut);
 		}
 
@@ -73,9 +62,6 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.SingleOrDefaultAsync(rd => rd.ProjectId == project.Id);
-			project.RoomDetails = roomDetails;
-
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
@@ -85,11 +71,14 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardId);
+			project.Moodboard = moodboard;
+
 			_unitOfWork.ProjectRepository.Insert(project);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok(_mapper.Map<ProjectOutDTO>(project).Id);
+				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 			return BadRequest("Problem occured while adding project");
 		}
@@ -113,33 +102,63 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while deleting the project)");
 		}
 
-
 		[HttpPost("moodboard-match")]
 		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] ProjectInDTO projectIn)
 		{
-			// Add logic for calculating matches to separate class
-			// Dummy logic
-			MoodboardSuggestionDTO suggestions = new MoodboardSuggestionDTO();
+			IEnumerable<Moodboard> roomMoodboards = 
+				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(projectIn.RoomId);
 
-			int[] matchesIds = new int[] {1,2,3};
-			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(matchesIds);
-			IEnumerable<MoodboardOutDTO> moodboardOuts = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards);
-			List<MoodboardMatchDTO> moodboardMatches = new List<MoodboardMatchDTO>();
-
-			Random rand = new Random();
-			foreach (MoodboardOutDTO moodboard in moodboardOuts)
+			Dictionary<Moodboard, double> moodboardToMatchPercentage = new();
+			foreach (Moodboard moodboard in roomMoodboards)
 			{
-				MoodboardMatchDTO moodboardMatch = new MoodboardMatchDTO();
-				moodboardMatch.Moodboard = moodboard;
-				moodboardMatch.PercentageMatch = rand.Next(50, 100);
-				moodboardMatches.Add(moodboardMatch);
-			}
-			suggestions.Moodboards = moodboardMatches;
-			
-			IEnumerable<Moodboard> moodboardFamily = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(new int[] {4,5,6});
-			IEnumerable<MoodboardOutDTO> moodboardFamilyOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboardFamily).ToList();
+				int styleImageMatches = moodboard.Style.StyleImages
+					.Select(si => si.Id)
+					.ToList()
+					.Intersect(projectIn.StyleImageIds)
+					.Count();
 
-			suggestions.MoodboardFamily = moodboardFamilyOut;
+				int styleImagesCount = moodboard.Style.StyleImages.Count();
+
+				double matchPercentage = (int)(100 *(double)styleImageMatches / styleImagesCount);
+
+				moodboardToMatchPercentage.Add(moodboard, matchPercentage);
+			}
+
+			IEnumerable<KeyValuePair<Moodboard, double>> topMatches = moodboardToMatchPercentage
+				.OrderByDescending(key => key.Value)
+				.Take(3);
+
+			bool isFirst = true;
+			Moodboard topMatch = null;
+			MoodboardSuggestionDTO suggestions = new()
+			{
+				Moodboards = new List<MoodboardMatchDTO>(),
+				MoodboardFamily = new List<MoodboardOutDTO>()
+			};
+			foreach (KeyValuePair<Moodboard, double> match in topMatches)
+			{
+				Moodboard moodboard = 
+					await _unitOfWork.MoodboardRepository.GetFullMoodboardById(match.Key.Id);
+
+				if (isFirst)
+				{
+					topMatch = moodboard;
+					isFirst = false;
+				}
+
+				MoodboardMatchDTO moodboardMatch = new()
+				{
+					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+					PercentageMatch = (int)match.Value
+				};
+
+				suggestions.Moodboards.Add(moodboardMatch);
+			}
+
+			IEnumerable<Moodboard> moodboardFamily =
+				(await _unitOfWork.MoodboardRepository.GetMoodboardFamily(topMatch)).Take(3);
+
+			suggestions.MoodboardFamily = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
 
 			return Ok(suggestions);
 		}

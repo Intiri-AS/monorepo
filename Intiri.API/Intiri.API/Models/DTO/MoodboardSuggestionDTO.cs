@@ -5,7 +5,7 @@ namespace Intiri.API.Models.DTO
 {
 	public class MoodboardSuggestionDTO
 	{
-		public IEnumerable<MoodboardMatchDTO> Moodboards { get; set; }
-		public IEnumerable<MoodboardOutDTO> MoodboardFamily { get; set; }
+		public ICollection<MoodboardMatchDTO> Moodboards { get; set; }
+		public ICollection<MoodboardOutDTO> MoodboardFamily { get; set; }
 	}
 }

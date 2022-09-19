@@ -1,7 +1,9 @@
 [
 	{
 		"Name": "Comfy Sofa",
-		"ProductTypeId": 1,
+		"ProductType": {
+			"Id":  1
+		},
 		"Description": "Very nice sofa",
 		"StyleId": 2,
 		"Price": 450,
@@ -9,7 +11,9 @@
 	},
 	{
 		"Name": "Sofa Royale",
-		"ProductTypeId": 1,
+		"ProductType": {
+			"Id": 1
+		},
 		"Description": "Premium",
 		"StyleId": 3,
 		"Price": 360,
@@ -17,7 +21,9 @@
 	},
 	{
 		"Name": "Standing Desk",
-		"ProductTypeId": 2,
+		"ProductType": {
+			"Id": 2
+		},
 		"Description": "Description",
 		"StyleId": 1,
 		"Price": 450,
@@ -25,7 +31,9 @@
 	},
 	{
 		"Name": "Standing Lamp",
-		"ProductTypeId": 3,
+		"ProductType": {
+			"Id": 3
+		},
 		"Description": "Very nice sofa",
 		"StyleId": 1,
 		"Price": 450,
@@ -33,7 +41,9 @@
 	},
 	{
 		"Name": "Ceramic Lamp",
-		"ProductTypeId": 4,
+		"ProductType": {
+			"Id": 4
+		},
 		"Description": "Provides illumination",
 		"StyleId": 4,
 		"Price": 450,
@@ -41,7 +51,9 @@
 	},
 	{
 		"Name": "Office Chair",
-		"ProductTypeId": 5,
+		"ProductType": {
+			"Id": 5
+		},
 		"Description": "Chair for work",
 		"StyleId": 1,
 		"Price": 450,
@@ -49,7 +61,9 @@
 	},
 	{
 		"Name": "Dinning Table",
-		"ProductTypeId": 6,
+		"ProductType": {
+			"Id": 6
+		},
 		"Description": "Table for dinner",
 		"StyleId": 2,
 		"Price": 450,
@@ -57,7 +71,9 @@
 	},
 	{
 		"Name": "Office Desk",
-		"ProductTypeId": 2,
+		"ProductType": {
+			"Id": 2
+		},
 		"Description": "Ideal for companies",
 		"StyleId": 3,
 		"Price": 450,
