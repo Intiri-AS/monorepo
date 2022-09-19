@@ -2,7 +2,7 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class ColorPalleteInDTO
+	public class ColorPaletteInDTO
 	{
 		[Required]
 		public string Name { get; set; }

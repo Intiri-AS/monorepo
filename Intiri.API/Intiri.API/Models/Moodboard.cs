@@ -11,7 +11,7 @@ namespace Intiri.API.Models
 		public Style.Style Style { get; set; }
 		public Room.Room Room { get; set; }
 		public ICollection<Material.Material> Materials { get; set; }
-		public ICollection<ColorPallete> ColorPalletes { get; set; }
+		public ICollection<ColorPalette> ColorPalettes { get; set; }
 		public ICollection<Product.Product> Products { get; set; }
 	}
 }

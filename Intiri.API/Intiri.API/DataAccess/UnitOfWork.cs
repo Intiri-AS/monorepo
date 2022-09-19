@@ -20,7 +20,7 @@ namespace Intiri.API.DataAccess
 		private readonly IColorRepository _colorRepository;
 		private readonly IProductRepository _productRepository;
 		private readonly IProductTypeRepository _productTypeRepository;
-		private readonly IColorPalleteRepository _colorPalleteRepository;
+		private readonly IColorPaletteRepository _colorPaletteRepository;
 		private readonly IRoomDetailsRepository _roomDetailsRepository;
 		private readonly IProjectRepository _projectRepository;
 		private readonly IMoodboardRepository _moodboardRepository;
@@ -42,7 +42,7 @@ namespace Intiri.API.DataAccess
 			_colorRepository = new ColorRepository(dataContext);
 			_productRepository = new ProductRepository(dataContext, mapper);
 			_productTypeRepository = new ProductTypeRepository(dataContext, mapper);
-			_colorPalleteRepository = new ColorPalleteRepository(dataContext, mapper);
+			_colorPaletteRepository = new ColorPaletteRepository(dataContext, mapper);
 			_roomDetailsRepository = new RoomDetailsRepository(dataContext);
 			_projectRepository = new ProjectRepository(dataContext, mapper);
 			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
@@ -65,7 +65,7 @@ namespace Intiri.API.DataAccess
 		public IColorRepository ColorRepository => _colorRepository;
 		public IProductRepository ProductRepository => _productRepository;
 		public IProductTypeRepository ProductTypeRepository => _productTypeRepository;
-		public IColorPalleteRepository ColorPalleteRepository => _colorPalleteRepository;
+		public IColorPaletteRepository ColorPaletteRepository => _colorPaletteRepository;
 		public IRoomDetailsRepository RoomDetailsRepository => _roomDetailsRepository;
 		public IProjectRepository ProjectRepository => _projectRepository;
 		public IMoodboardRepository MoodboardRepository => _moodboardRepository;

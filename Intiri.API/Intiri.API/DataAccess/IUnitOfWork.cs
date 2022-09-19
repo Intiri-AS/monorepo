@@ -15,7 +15,7 @@ namespace Intiri.API.DataAccess
 		IColorRepository ColorRepository { get; }
 		IProductRepository ProductRepository { get; }
 		IProductTypeRepository ProductTypeRepository { get; }
-		IColorPalleteRepository ColorPalleteRepository { get; }
+		IColorPaletteRepository ColorPaletteRepository { get; }
 		IRoomDetailsRepository RoomDetailsRepository { get; }
 		IProjectRepository ProjectRepository { get; }
 		IMoodboardRepository MoodboardRepository { get; }

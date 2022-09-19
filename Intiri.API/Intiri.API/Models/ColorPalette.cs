@@ -1,6 +1,6 @@
-﻿namespace Intiri.API.Models.DTO.OutputDTO
+﻿namespace Intiri.API.Models
 {
-	public class ColorPalleteOutDTO
+	public class ColorPalette
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
@@ -9,5 +9,7 @@
 		public string ShadeColorLight { get; set; }
 		public string ShadeColorMedium { get; set; }
 		public string ShadeColorDark { get; set; }
+
+		public ICollection<Moodboard> Moodboards { get; set; }
 	}
 }

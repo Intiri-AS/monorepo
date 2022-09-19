@@ -37,6 +37,13 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
 
+			foreach (Project project in projects)
+			{
+				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
+
+				project.Moodboard = moodboard;
+			}
+
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
@@ -46,6 +53,10 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
 			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
+
+			project.Moodboard = moodboard;
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -65,8 +76,8 @@ namespace Intiri.API.Controllers
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
-			ColorPallete colorPallete = await _unitOfWork.ColorPalleteRepository.GetColorPalleteById(projectIn.ColorPalleteId);
-			project.ColorPallete = colorPallete;
+			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(projectIn.ColorPaletteId);
+			project.ColorPalette = colorPalette;
 
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
