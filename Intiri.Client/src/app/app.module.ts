@@ -65,8 +65,10 @@ import { HeaderInternalDesignerComponents } from './components/header-internal-d
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
 import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
+import { AddDesignerModalComponent } from './components/modals/add-designer-modal/add-designer-modal.component';
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
+import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 
@@ -82,10 +84,10 @@ import { CodeInputModule } from 'angular-code-input';
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent, SettingsPopoverComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent, SettingsPopoverComponent, MenuPopoverComponent
   ],
   entryComponents: [
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, BookDesignerModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent
   ],
   imports: [
     BrowserModule,

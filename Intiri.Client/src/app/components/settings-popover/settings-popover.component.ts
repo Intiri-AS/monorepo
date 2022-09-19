@@ -16,7 +16,7 @@ export class SettingsPopoverComponent implements OnInit {
   async openLogoutModal() {
     const modal = await this.modalController.create({
       component: LogoutModalComponent,
-      cssClass: 'modal-css'
+      cssClass: 'small-modal-css'
     });
 
     await modal.present();

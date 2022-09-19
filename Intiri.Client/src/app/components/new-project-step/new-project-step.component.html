@@ -1,16 +1,156 @@
 <div>
   <h2 class="step-title">{{currentStep.title}}</h2>
   <p class="step-subtitle">{{currentStep.subtitle}}</p>
-  <ion-grid class="step-items">
-    <ion-row>
-      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.5" size-sm="3.75" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+  <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
+    <ion-row >
+      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <!-- if image (style|material|product) -->
         <img *ngIf="item.path" src="{{apiUrl}}{{item.path}}" class="step-image" alt="style-img"/>
+         <!-- if icon (room) -->
         <div *ngIf="item.imagePath" class="step-icon-wrapper" >
           <img src="{{apiUrl}}{{item.imagePath}}" class="step-icon" alt="room-icon"/>
         </div>
-        <div *ngIf="item.hexValue" class="step-color-wrapper" [ngStyle]="{background: item.hexValue}"></div>
-        <p *ngIf="item.name" class="font-bold mt-6">{{item.name}}</p>
+        <!-- if color pallete -->
+        <div *ngIf="item.mainColor" class="step-color-wrapper" >
+          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-[47.5%] h-full inline-block float-right">
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
+            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+          </div>
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
+        <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+   <!-- if room details -->
+  <div *ngIf="currentStep.data.roomShapes">
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">Room details</p>
+    <p class="text-black-2">Select room shape</p>
+    <ion-grid class="step-items" style="min-height: 300px;">
+      <ion-row>
+        <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+          <div class="step-icon-wrapper" >
+            <img src="../../../assets/{{item.imagePath}}" class="step-icon" alt="room-icon"/>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="input">
+      <span class="text-black-2">Room area (m2)</span>
+      <ion-input [(ngModel)]="project.roomDetails.size" type="number" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
+    </div>
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">Budget for products</p>
+    <div class="input">
+      <span class="text-black-2">Select your budget for products</span>
+      <ion-select  [(ngModel)]="project.budget" interface="popover">
+        <ion-select-option value="low">Low</ion-select-option>
+        <ion-select-option value="medium">Medium</ion-select-option>
+        <ion-select-option value="high">High</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+
+  <!-- if moodboards -->
+  <div *ngIf="currentStep.data.moodboards">
+    <ion-grid class="step-items" style="min-height: 400px;">
+      <ion-row>
+        <ion-col *ngFor="let item of currentStep.data.moodboards" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <img src="{{apiUrl}}{{item.style.styleImages[0].path}}" class="h-[95px] lg:h-[135px] mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{apiUrl}}{{item.style.styleImages[0].path}}" class="h-[95px] lg:h-[135px] object-cover" alt="moodboard-img"/>
+                </ion-col>
+                <ion-col size="6">
+                  <img src="{{apiUrl}}{{item.style.styleImages[0].path}}" class="h-full object-cover" alt="moodboard-img"/>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">See rooms in this style</p>
+    <ion-grid class="step-items" style="min-height: 785px;">
+      <ion-row>
+        <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="3.75" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <img src="{{apiUrl}}{{item.style.styleImages[1].path}}" class="h-[95px] lg:h-[135px] mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{apiUrl}}{{item.style.styleImages[0].path}}" class="h-[95px] lg:h-[135px] object-cover" alt="moodboard-img"/>
+                </ion-col>
+                <ion-col size="6">
+                  <img src="{{apiUrl}}{{item.style.styleImages[0].path}}" class="h-full object-cover" alt="moodboard-img"/>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="h-full w-full relative">
+          <div class="mt-8 w-full h-[360px] bg-landing-img bg-cover blur rounded-lg "></div>
+          <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2" style="transform: translate(-50%, -50%)">
+            <p class="text-black-1 text-xl font-bold mb-2">Upgrade!</p>
+            <p class="text-black-2 font-bold mb-4">To see more rooms from this style upgrade to Premium plan.</p>
+            <ion-buttons class="justify-center">
+              <ion-button class="primary-btn" routerLink="/pricing-plans" routerDirection="root">Pricing plans</ion-button>
+            </ion-buttons>
+          </div>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+    <!-- if final step -->
+    <div *ngIf="currentStep.data === 'final'">
+      <div class="rounded-2xl border-black-3 border-2 w-full h-[320px] lg:h-[410px] mr-2 md:mr-3 mt-4 p-3">
+        <div class="result-grid">
+          <div class="item-sm" [ngStyle]="{background: project.moodboard.colorPalletes[0].shadeColorLight}"></div>
+          <div class="item-lg" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.products[0].imagePath) + ')'}"></div>
+          <div class="item-lg" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.products[0].imagePath) + ')'}"></div>
+          <div class="item-lg-tall" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.style.styleImages[0].path) + ')'}"></div>
+          <div class="item-sm" [ngStyle]="{background: project.moodboard.colorPalletes[0].shadeColorMedium}"></div>
+          <div class="item-sm" [ngStyle]="{background: project.moodboard.colorPalletes[0].shadeColorDark}"></div>
+          <div class="item-sm-tall" [ngStyle]="{background: project.moodboard.colorPalletes[0].mainColor}"></div>
+          <div class="item-lg" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.style.styleImages[1].path) + ')'}"></div>
+          <div class="item-md" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.materials[0].imagePath) + ')'}"></div>
+          <div class="item-md" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.materials[0].imagePath) + ')'}"></div>
+          <div class="item-md" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.materials[0].imagePath) + ')'}"></div>
+          <div class="item-md" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(project.moodboard.materials[0].imagePath) + ')'}"></div>
+        </div>
+      </div>
+      <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">What's included in moodboard</p>
+      <ion-grid class="step-items" style="min-height: 460px;">
+        <ion-row>
+          <ion-col *ngFor="let item of project.moodboard.colorPalletes" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
+            <div *ngIf="item.mainColor" class="step-color-wrapper" >
+              <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+              <div class="w-[47.5%] h-full inline-block float-right">
+                <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
+                <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
+                <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+              </div>
+            </div>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+          </ion-col>
+          <ion-col *ngFor="let item of project.moodboard.materials" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
+            <img *ngIf="item.imagePath" src="{{apiUrl}}{{item.imagePath}}" class="step-image" alt="style-img"/>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+          </ion-col>
+          <ion-col *ngFor="let item of project.moodboard.products" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
+            <img *ngIf="item.imagePath" src="{{apiUrl}}{{item.imagePath}}" class="step-image" alt="style-img"/>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
 </div>

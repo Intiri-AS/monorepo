@@ -26,10 +26,28 @@
 // @import "~@ionic/angular/css/flex-utils.css";
 
 @media (min-width: 576px) {
-  .modal-css::part(content) {
+  .small-modal-css::part(content) {
     --width: 400px;
     border-radius: 16px;
     --height: 400px;
+  }
+
+  .final-project-step-modal-css::part(content) {
+    --width: 460px;
+    border-radius: 16px;
+    --height: 460px;
+  }
+
+  .add-designer-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 802px;
+  }
+
+  .added-designer-modal-css::part(content) {
+    --width: 600px;
+    border-radius: 15px;
+    --height: 445px;
   }
 
   .book-designer-modal-css::part(content) {
@@ -59,21 +77,21 @@ ion-button {
 }
 
 .primary-btn {
-  @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4;
+  @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
   height: 46px !important;
   font-weight: 500 !important;
-  font-size: 1.125rem;
+  font-size: 1.125rem !important;
 }
 
 .secondary-btn {
-  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4;
+  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
   height: 46px !important;
   font-weight: 500 !important;
-  font-size: 1.125rem;
+  font-size: 1.125rem !important;
 }
 
 .header-container {
