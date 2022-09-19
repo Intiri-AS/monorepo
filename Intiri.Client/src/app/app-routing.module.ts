@@ -138,7 +138,7 @@ const routes: Routes = [
     component: DesignerPage
   },
   {
-    path: 'vendor', //TODO Set up page guard (admin guard)
+    path: 'vendors', //TODO Set up page guard (admin guard)
     component: VendorPage
   },
   {
