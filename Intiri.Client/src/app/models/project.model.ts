@@ -2,7 +2,7 @@ export class Project {
   name: string;
   styleImages: Array<object>;
   room: object;
-  colorPallete: object;
+  colorPalette: object;
   budget: string;
   roomDetails: object;
   moodboard: object;
@@ -15,7 +15,7 @@ export class Project {
     this.room = {};
     this.budget = '';
     this.roomDetails = {};
-    this.colorPallete = {};
+    this.colorPalette = {};
     this.moodboard = {};
   }
 }

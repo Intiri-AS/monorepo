@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-customize-moodboard-page',
@@ -12,50 +13,15 @@ export class CustomizeMoodboardPage {
   steps: Array<object> = [
     {
       title: 'Select colors',
-      data: [
-        { id: 1, color: '#243c5a', title: 'Midnight' },
-        { id: 2, color: '#3f3cbb', title: 'Purple' },
-        { id: 3, color: '#565584', title: 'Metal' },
-        { id: 4, color: '#3ab7bf', title: 'Tahiti' },
-        { id: 5, color: '#243c5a', title: 'Midnight' },
-        { id: 6, color: '#3f3cbb', title: 'Purple' },
-        { id: 7, color: '#565584', title: 'Metal' },
-        { id: 8, color: '#3ab7bf', title: 'Tahiti' },
-        { id: 9, color: '#243c5a', title: 'Midnight' },
-        { id: 10, color: '#3f3cbb', title: 'Purple' },
-        { id: 11, color: '#565584', title: 'Metal' },
-        { id: 12, color: '#3ab7bf', title: 'Tahiti' },
-      ],
+      data: [],
     },
     {
       title: 'Select materials',
-      data: [
-        { id: 1, img: 'images/landing-img.png', title: 'Wood' },
-        { id: 2, img: 'images/img-01.png', title: 'Ceramic'  },
-        { id: 3, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 4, img: 'images/intiri-logo.svg', title: 'Wool'  },
-        { id: 5, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 6, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 7, img: 'images/landing-img.png', title: 'Wood'  }
-      ],
+      data: [],
     },
     {
       title: 'Select products',
-      data: [
-        { id: 1, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 2, img: 'images/img-01.png', title: 'Table'  },
-        { id: 3, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 4, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-        { id: 5, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 6, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 7, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 8, img: 'images/img-01.png', title: 'Table'  },
-        { id: 9, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 10, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-        { id: 11, img: 'images/img-01.png', title: 'Table'  },
-        { id: 12, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 13, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-      ],
+      data: [],
     }
   ];
 
@@ -73,7 +39,19 @@ export class CustomizeMoodboardPage {
 
   currentStepNo: number = 0;
 
-  constructor() {}
+  constructor(public projectService: ProjectService) {}
+
+  ngOnInit() {
+    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
+      this.steps[0]['data'] = res;
+    });
+    this.projectService.getMaterials().subscribe((res: Array<any>) => {
+      this.steps[1]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+    });
+    this.projectService.getProducts().subscribe((res: Array<any>) => {
+      this.steps[2]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+    });
+  }
 
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {

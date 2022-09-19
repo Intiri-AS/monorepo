@@ -29,20 +29,46 @@ export class ProjectService {
     return this.http.get(this.apiUrl + 'styleImages');
   }
 
-  getColorPalletes(){
-    return this.http.get(this.apiUrl + 'colorPalletes');
+  getColorPalettes(){
+    return this.http.get(this.apiUrl + 'colorPalettes');
   }
 
   getRooms(){
     return this.http.get(this.apiUrl + 'rooms');
   }
 
-  getMoodboardMatches(project) {
-    const req_data = {
-      styleImageIds: project.styleImages.map(e=> e.id),
-      colorPaletteId: project.colorPallete.id,
-      roomId: project.room.id,
+  getProducts(){
+    return this.http.get(this.apiUrl + 'products');
+  }
+
+  getMaterials(){
+    return this.http.get(this.apiUrl + 'materials');
+  }
+
+  getAllProjects(){
+    return this.http.get(this.apiUrl + 'projects');
+  }
+
+  parseProject(project: Project) {
+    let parsedProj = {
+      styleImageIds: project.styleImages.map(e=> e['id']),
+      colorPaletteId: project.colorPalette['id'],
+      roomId: project.room['id'],
+      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
+
+    if(project.moodboard?.['id']) {
+      parsedProj['moodboardId'] = project.moodboard['id']
+    }
+    return parsedProj;
+  };
+
+  getMoodboardMatches(project) {
+    const req_data = this.parseProject(project);
     return this.http.post(this.apiUrl + 'projects/moodboard-match', req_data);
+  }
+  saveProject(project) {
+    const req_data = this.parseProject(project);
+    return this.http.post(this.apiUrl + 'projects/add', req_data);
   }
 }

@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-intiri-page',
@@ -9,37 +12,9 @@ import { IonSlides } from '@ionic/angular';
 
 export class MyIntiriPage {
   @ViewChild('slides') slides: IonSlides;
+  apiUrl = environment.apiUrl;
 
-  projects = [
-    {
-      projectName: 'Vintage',
-      moodboard: '2',
-      pieces: '20',
-      updated: '1 week',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Industrial',
-      moodboard: '3',
-      pieces: '25',
-      updated: '1 day',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Minimal',
-      moodboard: '1',
-      pieces: '5',
-      updated: '3 week',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Funky',
-      moodboard: '0',
-      pieces: '20',
-      updated: '1 day',
-      image: '../../../../assets/images/landing-img.png'
-    },
-  ];
+  projects = [];
 
   news = [
     {
@@ -79,7 +54,21 @@ export class MyIntiriPage {
     spaceBetween: 20,
   }
 
-  constructor() {}
+  constructor(public projectService: ProjectService) {}
+
+  ngOnInit() {
+    this.projectService.getAllProjects().subscribe((res: Array<Project>) => {
+      this.projects = res;
+    });
+  }
+
+  // TODO: needs to be updated after project is allowed to have multiple moodboards!
+  getPiecesNo(project){
+    return project.moodboard.colorPalettes.length + project.moodboard.materials.length + project.moodboard.products.length;
+  }
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
 
   next() {
     this.slides.slideNext();

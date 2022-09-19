@@ -35,9 +35,9 @@
         </div>
           <ion-buttons class="justify-center">
             <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Go to project</ion-button>
-            <ion-button class="primary-btn" (click)="dismiss()">Add new moodboard</ion-button>
+            <ion-button class="primary-btn" (click)="dismiss()" [class.disabled]="true">Add new moodboard</ion-button>
           </ion-buttons>
-          <p class="text-primary text-center cursor-pointer hover:opacity-80"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p>
+          <p class="text-primary text-center cursor-pointer hover:opacity-80" [class.disabled]="true"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p>
       </div>
     </div>
   </div>

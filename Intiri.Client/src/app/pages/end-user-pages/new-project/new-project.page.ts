@@ -53,7 +53,7 @@ export class NewProjectPage {
     0: 'styleImages',
     1: 'room',
     2: 'roomDetails.shape',
-    3: 'colorPallete',
+    3: 'colorPalette',
     4: 'moodboard',
     5: 'final',
   };
@@ -78,7 +78,7 @@ export class NewProjectPage {
     this.projectService.getRooms().subscribe((res) => {
       this.steps[1]['data'] = res;
     });
-    this.projectService.getColorPalletes().subscribe((res) => {
+    this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
   }
@@ -124,6 +124,17 @@ export class NewProjectPage {
     );
   }
 
+  saveProject() {
+    this.projectService.saveProject(this.project).subscribe(
+      (res) => {
+        console.log(res)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   canChangeToStep(step): boolean {
     if (step >= this.steps.length || step < 0) {
       return false;
@@ -153,7 +164,7 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPallete)
+          !this.isEmpty(this.project.colorPalette)
         );
       }
       case 5: {
@@ -161,7 +172,7 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPallete) &&
+          !this.isEmpty(this.project.colorPalette) &&
           !this.isEmpty(this.project.moodboard)
         );
       }
@@ -234,7 +245,9 @@ export class NewProjectPage {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
       componentProps: {final: true, projectName: this.project.name},
-      cssClass: 'final-project-step-modal-css'
+      cssClass: 'final-project-step-modal-css',
+      backdropDismiss: false,
+      swipeToClose: false,
     });
 
     await modal.present();

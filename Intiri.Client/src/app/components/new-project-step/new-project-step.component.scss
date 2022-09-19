@@ -96,8 +96,8 @@
   }
 }
 
-ion-row {
-  @apply justify-between;
+.step-items-row {
+  @apply gap-x-[2%];
 }
 ion-input {
   @apply h-12;
