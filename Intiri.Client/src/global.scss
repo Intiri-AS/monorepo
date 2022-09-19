@@ -38,6 +38,18 @@
     --height: 460px;
   }
 
+  .add-designer-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 802px;
+  }
+
+  .added-designer-modal-css::part(content) {
+    --width: 600px;
+    border-radius: 15px;
+    --height: 445px;
+  }
+
   .book-designer-modal-css::part(content) {
     --width: 884px;
     border-radius: 16px;
