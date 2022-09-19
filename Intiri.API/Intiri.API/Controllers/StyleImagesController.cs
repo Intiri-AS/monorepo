@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
@@ -16,15 +17,21 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly IFileUploadService _fileUploadService;
 		private readonly IImageService _imageService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public StyleImagesController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public StyleImagesController(
+			IUnitOfWork unitOfWork, 
+			IImageService imageService, 
+			IMapper mapper, 
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
+			_fileUploadService = fileUploadService;
 			_imageService = imageService;
 		}
 
@@ -66,14 +73,33 @@ namespace Intiri.API.Controllers
 
 			if (file.Length > 0)
 			{
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(file);
+				}
+				catch (Exception ex)
+				{
+					return BadRequest("Unable to upload file. Please try again later.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest("Unable to upload file. Please try again later.");
+				}
+
 				string dbPath = await _imageService.AddImageAsync(file, "StyleImages");
 				
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
-				styleImage.Path = dbPath;
+
+				styleImage.Path = uploadResult.SecureUrl.AbsoluteUri;
+				styleImage.PublicId = uploadResult.PublicId;
+
 				_unitOfWork.StyleImageRepository.Insert(styleImage);
 
 				if (await _unitOfWork.SaveChanges())
 				{
+					// TODO: WTF?
 					style.StyleImages.Add(styleImage);
 					return _mapper.Map<StyleImageOutDTO>(styleImage);
 				}
