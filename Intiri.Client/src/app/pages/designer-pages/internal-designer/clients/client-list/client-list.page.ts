@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 
 @Component({
@@ -15,7 +16,7 @@ export class ClientListPage {
     initialSlide: 0
   }
 
-  activeBtn = 'clients';
+  currentSlide = 0;
 
   clients = [
     {
@@ -35,7 +36,19 @@ export class ClientListPage {
       name: 'Grace Dweler',
       email: 'test@test.com',
       style: 'Skandinavian Bright'
-    }
+    },
+    {
+      avatar: '../../../../../assets/images/profile-img.png',
+      name: 'Grace Dweler',
+      email: 'test@test.com',
+      style: 'Skandinavian Bright'
+    },
+    {
+      avatar: '../../../../../assets/images/profile-img.png',
+      name: 'Grace Dweler',
+      email: 'test@test.com',
+      style: 'Skandinavian Bright'
+    },
   ]
 
   moodboards = [
@@ -61,10 +74,34 @@ export class ClientListPage {
     }
   ]
 
-  constructor() {}
+  constructor(private _route: ActivatedRoute, private _router: Router) {}
 
-  changeSlide(id, name) {
+  ngOnInit() {
+    this._route.queryParams.subscribe(params => {
+      if(params.section) {
+        this.options.initialSlide = params.section;
+      }
+    });
+  }
+
+  changeSlide(id) {
     this.slides.slideTo(id);
-    this.activeBtn = name;
+    this.currentSlide = id;
+    this.changeQueryParam(id);
+  }
+
+  onSlideChange(){
+    const currentSlideId = this.slides['el']['swiper']['activeIndex']
+    this.currentSlide = currentSlideId;
+    this.changeQueryParam(currentSlideId);
+  }
+
+  changeQueryParam(section){
+    this._router.navigate([], {
+     relativeTo: this._route,
+     queryParams: {
+       section
+     },
+   });
   }
 }

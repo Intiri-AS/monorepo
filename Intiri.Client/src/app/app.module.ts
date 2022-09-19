@@ -59,6 +59,7 @@ import { StepPickerComponent } from './components/step-picker/step-picker.compon
 import { NewProjectStepComponent } from './components/new-project-step/new-project-step.component';
 import { ProfileImgSectionComponent } from './components/profile-img-section/profile-img-section.component';
 import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
+import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
 
 //app modals
@@ -81,7 +82,7 @@ import { CodeInputModule } from 'angular-code-input';
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage,
     MyMoodboardPage, ClientListPage,
     StylePage, MoodboardPage,
-    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents,
+    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent, SettingsPopoverComponent, MenuPopoverComponent

@@ -2,19 +2,9 @@
   <div id="home">
     <app-header-internal-designer></app-header-internal-designer>
     <div class="main-container">
-      <p class="main-title">Client</p>
-      <div class="w-full bg-light h-[62px] rounded-2xl mt-[30px] flex items-center">
-        <ion-button fill="clear" class="ml-[40px] btn" (click)="changeSlide(0, 'clients')" [ngClass]="{ 'active-btn ' : activeBtn === 'clients'}">
-          Clients
-        </ion-button>
-        <ion-button fill="clear" class="btn" (click)="changeSlide(1, 'moodboards')" [ngClass]="{ 'active-btn ' : activeBtn === 'moodboards'}">
-          Moodboards
-        </ion-button>
-        <ion-button fill="clear" class="btn" (click)="changeSlide(2, 'statistics')" [ngClass]="{ 'active-btn ' : activeBtn === 'statistics'}">
-          Statistics
-        </ion-button>
-      </div>
-      <ion-slides #slides [options]="options">
+      <p class="main-title mb-[30px]">Client</p>
+      <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
         <ion-slide>
           <div class="w-full h-full mt-5 flex flex-wrap">
             <div *ngFor="let client of clients">

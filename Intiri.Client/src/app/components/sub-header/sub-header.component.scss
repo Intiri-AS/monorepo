@@ -1,0 +1,6 @@
+.header-buttons {
+    @apply flex flex-1 items-center gap-2 ml-8 h-[100%];
+  }
+.btn {
+    @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 tracking-normal text-[18px];
+  }
