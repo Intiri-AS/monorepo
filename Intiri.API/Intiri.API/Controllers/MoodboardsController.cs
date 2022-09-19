@@ -2,6 +2,7 @@
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Material;
@@ -36,7 +37,6 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboards();
 
-
 			IEnumerable<MoodboardOutDTO> moodboardsOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards); ;
 
 			return Ok(moodboardsOut);
@@ -52,7 +52,9 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
 			}
 
-			return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+			MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
+
+			return Ok(moodboardOut);
 		}
 
 		[HttpPost("add")]
@@ -83,6 +85,48 @@ namespace Intiri.API.Controllers
 			}
 
 			return BadRequest("Problem occured while adding moodboard");
+		}
+
+		[HttpPost("modify/{moodboardId}")]
+		public async Task<ActionResult<ProjectOutDTO>> ModifyMoodboard(int moodboardId, [FromBody] MoodboardModifyDTO modifyDTO)
+		{
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+
+			if (moodboard == null)
+			{
+				return BadRequest($"Moodboard with Id={moodboardId} not found");
+			}
+
+			if (modifyDTO.ColorPalleteIds != null)
+			{
+				IEnumerable<ColorPallete> colorPalletes =
+					await _unitOfWork.ColorPalleteRepository.GetColorPalletesByIdsListAsync(modifyDTO.ColorPalleteIds);
+
+				moodboard.ColorPalletes = colorPalletes.ToList();
+			}
+
+			if (modifyDTO.MaterialIds != null)
+			{
+				IEnumerable<Material> materials =
+					await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(modifyDTO.MaterialIds);
+
+				moodboard.Materials = materials.ToList();
+			}
+
+			if (modifyDTO.ProductIds != null)
+			{
+				IEnumerable<Product> products =
+					await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(modifyDTO.ProductIds);
+
+				moodboard.Products = products.ToList();
+			}
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+			}
+
+			return BadRequest("Something went wrong while modifying moodboard");
 		}
 
 		#endregion Public methods

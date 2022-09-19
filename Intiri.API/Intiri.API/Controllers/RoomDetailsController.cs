@@ -50,11 +50,6 @@ namespace Intiri.API.Controllers
 		{
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
 
-			if (await _unitOfWork.RoomDetailsRepository.DoesAnyExist(rd => rd.ProjectId == roomDetailsIn.ProjectId))
-			{
-				return BadRequest($"Room details already exist for project with id={roomDetailsIn.ProjectId}");
-			}
-
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 			
 			if (await _unitOfWork.SaveChanges())

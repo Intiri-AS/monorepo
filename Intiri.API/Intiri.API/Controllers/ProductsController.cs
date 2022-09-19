@@ -89,7 +89,7 @@ namespace Intiri.API.Controllers
 		public async Task<IActionResult> DeleteProduct(int productId)
 		{
 			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(product.ProductTypeId);
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(product.ProductType.Id);
 
 			if (product == null)
 			{

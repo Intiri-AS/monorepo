@@ -1,62 +1,122 @@
 [
 	{
 		"Name": "Harmony ",
-		"Description": "Harmony beyond measure",
+		"Description": "Harmony for first room",
 		"Designer": "Lisa Smith",
 		"StyleId": 1,
 		"RoomId": 1,
-		"MaterialIds": [ 1 ],
-		"ColorPalleteIds": [ 1 ],
-		"ProductIds": [ 1 ]
-	},
-	{
-		"Name": "Synergy",
-		"Description": "Synergy Redefined",
-		"Designer": "Stacey Stone",
-		"StyleId": 2,
-		"RoomId": 2,
-		"MaterialIds": [ 2 ],
-		"ColorPalleteIds": [ 2 ],
-		"ProductIds": [ 2 ]
-	},
-	{
-		"Name": "Zen",
-		"Description": "Zen in your home",
-		"Designer": "Brian Adams",
-		"StyleId": 3,
-		"RoomId": 3,
-		"MaterialIds": [ 3 ],
-		"ColorPalleteIds": [ 3, 4 ],
-		"ProductIds": [ 3 ]
+		"MaterialIds": [ 1, 2, 3, 4 ],
+		"ColorPalleteIds": [ 1, 3 ],
+		"ProductIds": [ 1, 2, 3, 4 ]
 	},
 	{
 		"Name": "Harmony Redefined",
-		"Description": "Simplicity at its finest",
+		"Description": "Harmony for second room",
 		"Designer": "Mickey Briggs",
 		"StyleId": 1,
 		"RoomId": 2,
-		"MaterialIds": [ 3 ],
+		"MaterialIds": [ 2, 4, 6, 8 ],
 		"ColorPalleteIds": [ 3, 4 ],
-		"ProductIds": [ 2 ]
+		"ProductIds": [ 2, 4, 6, 8 ]
 	},
 	{
 		"Name": "Harmony Recreated",
-		"Description": "Harmony for your home",
+		"Description": "Harmony for third room",
 		"Designer": "John Ricardo",
 		"StyleId": 1,
 		"RoomId": 3,
-		"MaterialIds": [ 3 ],
+		"MaterialIds": [ 3, 1, 5, 7 ],
 		"ColorPalleteIds": [ 3, 2 ],
-		"ProductIds": [ 3 ]
+		"ProductIds": [ 3, 1, 5, 7 ]
 	},
 	{
 		"Name": "Harmony Captured",
-		"Description": "Harmony Captured description",
+		"Description": "Harmony for fourth room",
 		"Designer": "Sasha Holland",
 		"StyleId": 1,
 		"RoomId": 4,
-		"MaterialIds": [ 3 ],
+		"MaterialIds": [ 4, 1, 2, 6 ],
 		"ColorPalleteIds": [ 3, 4 ],
-		"ProductIds": [ 3 ]
+		"ProductIds": [ 4, 1, 2, 6 ]
+	},
+	{
+		"Name": "Synergy",
+		"Description": "Synergy for first room",
+		"Designer": "Stacey Stone",
+		"StyleId": 2,
+		"RoomId": 1,
+		"MaterialIds": [ 1, 2, 3, 4 ],
+		"ColorPalleteIds": [ 2, 1 ],
+		"ProductIds": [ 1, 2, 3, 4 ]
+	},
+	{
+		"Name": "Synergy Redefined",
+		"Description": "Synergy for second room",
+		"Designer": "Mickey Briggs",
+		"StyleId": 2,
+		"RoomId": 2,
+		"MaterialIds": [ 2, 4, 6, 8 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 2, 4, 6, 8 ]
+	},
+	{
+		"Name": "Synergy Recreated",
+		"Description": "Synergy for third room",
+		"Designer": "John Ricardo",
+		"StyleId": 2,
+		"RoomId": 3,
+		"MaterialIds": [ 3, 1, 5, 7 ],
+		"ColorPalleteIds": [ 3, 2 ],
+		"ProductIds": [ 3, 1, 5, 7 ]
+	},
+	{
+		"Name": "Synergy Captured",
+		"Description": "Synergy for fourth room",
+		"Designer": "Sasha Holland",
+		"StyleId": 2,
+		"RoomId": 4,
+		"MaterialIds": [ 4, 1, 2, 6 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 4, 1, 2, 6 ]
+	},
+	{
+		"Name": "Zen",
+		"Description": "Zen for first room",
+		"Designer": "Brian Adams",
+		"StyleId": 3,
+		"RoomId": 1,
+		"MaterialIds": [ 1, 2, 3, 4 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 1, 2, 3, 4 ]
+	},
+	{
+		"Name": "Zen Redefined",
+		"Description": "Zen for second room",
+		"Designer": "Mickey Briggs",
+		"StyleId": 3,
+		"RoomId": 2,
+		"MaterialIds": [ 2, 4, 6, 8 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 2, 4, 6, 8 ]
+	},
+	{
+		"Name": "Zen Recreated",
+		"Description": "Zen for third room",
+		"Designer": "John Ricardo",
+		"StyleId": 3,
+		"RoomId": 3,
+		"MaterialIds": [ 3, 1, 5, 7 ],
+		"ColorPalleteIds": [ 3, 2 ],
+		"ProductIds": [ 3, 1, 5, 7 ]
+	},
+	{
+		"Name": "Zen Captured",
+		"Description": "Zen for fourth room",
+		"Designer": "Sasha Holland",
+		"StyleId": 3,
+		"RoomId": 4,
+		"MaterialIds": [ 4, 1, 2, 6 ],
+		"ColorPalleteIds": [ 3, 4 ],
+		"ProductIds": [ 4, 1, 2, 6 ]
 	}
 ]

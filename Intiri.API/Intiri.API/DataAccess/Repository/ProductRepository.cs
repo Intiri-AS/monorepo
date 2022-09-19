@@ -29,12 +29,19 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Products
 				.Include(pt => pt.ProductType)
-				.Include(pt => pt.Style)
-				.Include(pt => pt.Moodboards)
 				.ToListAsync();
 		}
 
-		public async Task<Product> GetProductByName(string productName)
+
+		public async Task<Product> GetProductByIdAsync(int id)
+		{
+			return await _context.Products
+				.Where(p => p.Id == id)
+				.Include(p => p.ProductType)
+				.FirstOrDefaultAsync();
+		}
+
+		public async Task<Product> GetProductByNameAsync(string productName)
 		{
 			return await SingleOrDefaultAsync<Product>(product => product.Name == productName, _mapper);
 		}

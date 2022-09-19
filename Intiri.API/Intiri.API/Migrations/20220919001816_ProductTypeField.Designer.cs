@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220919001816_ProductTypeField")]
+    partial class ProductTypeField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,14 +229,11 @@ namespace Intiri.API.Migrations
                     b.Property<int?>("ColorPalleteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MoodboardId")
+                    b.Property<int>("MoodboardId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RoomDetailsId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -242,10 +241,6 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ColorPalleteId");
-
-                    b.HasIndex("MoodboardId");
-
-                    b.HasIndex("RoomDetailsId");
 
                     b.HasIndex("RoomId");
 
@@ -333,6 +328,9 @@ namespace Intiri.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");
 
@@ -340,6 +338,9 @@ namespace Intiri.API.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId")
+                        .IsUnique();
 
                     b.ToTable("RoomDetails");
                 });
@@ -677,25 +678,13 @@ namespace Intiri.API.Migrations
                         .WithMany()
                         .HasForeignKey("ColorPalleteId");
 
-                    b.HasOne("Intiri.API.Models.Moodboard", "Moodboard")
-                        .WithMany()
-                        .HasForeignKey("MoodboardId");
-
-                    b.HasOne("Intiri.API.Models.RoomDetails", "RoomDetails")
-                        .WithMany()
-                        .HasForeignKey("RoomDetailsId");
-
                     b.HasOne("Intiri.API.Models.Room.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
 
                     b.Navigation("ColorPallete");
 
-                    b.Navigation("Moodboard");
-
                     b.Navigation("Room");
-
-                    b.Navigation("RoomDetails");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Room.Room", b =>
@@ -707,6 +696,17 @@ namespace Intiri.API.Migrations
                         .IsRequired();
 
                     b.Navigation("RoomType");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.RoomDetails", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Project", "Project")
+                        .WithOne("RoomDetails")
+                        .HasForeignKey("Intiri.API.Models.RoomDetails", "ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.StyleImage", b =>
@@ -828,6 +828,11 @@ namespace Intiri.API.Migrations
             modelBuilder.Entity("Intiri.API.Models.Product.ProductType", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Project", b =>
+                {
+                    b.Navigation("RoomDetails");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Role", b =>
