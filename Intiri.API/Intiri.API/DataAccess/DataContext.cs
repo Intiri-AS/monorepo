@@ -31,7 +31,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<Color> Colors { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
-		public DbSet<ColorPallete> ColorPalletes { get; set; }
+		public DbSet<ColorPalette> ColorPalettes { get; set; }
 		public DbSet<RoomDetails> RoomDetails { get; set; }
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Moodboard> Moodboards { get; set; }
@@ -58,9 +58,9 @@ namespace Intiri.API.DataAccess
 				.OnDelete(DeleteBehavior.SetNull);
 
 			builder.Entity<Moodboard>()
-				.HasMany<ColorPallete>(m => m.ColorPalletes)
+				.HasMany<ColorPalette>(m => m.ColorPalettes)
 				.WithMany(cp => cp.Moodboards)
-				.UsingEntity(cm => cm.ToTable("MoodboardColorPallete"));
+				.UsingEntity(cm => cm.ToTable("MoodboardColorPalette"));
 
 			builder.Entity<Moodboard>()
 				.HasMany<Material>(mood => mood.Materials)

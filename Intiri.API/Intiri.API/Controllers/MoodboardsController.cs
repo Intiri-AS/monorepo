@@ -71,8 +71,8 @@ namespace Intiri.API.Controllers
 			IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardIn.MaterialIds);
 			moodboard.Materials = materials.ToArray();
 
-			IEnumerable<ColorPallete> colorPalletes = await _unitOfWork.ColorPalleteRepository.GetColorPalletesByIdsListAsync(moodboardIn.ColorPalleteIds);
-			moodboard.ColorPalletes = colorPalletes.ToArray();
+			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardIn.ColorPaletteIds);
+			moodboard.ColorPalettes = colorPalettes.ToArray();
 
 			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 			moodboard.Products = products.ToArray();
@@ -97,12 +97,12 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Moodboard with Id={moodboardId} not found");
 			}
 
-			if (modifyDTO.ColorPalleteIds != null)
+			if (modifyDTO.ColorPaletteIds != null)
 			{
-				IEnumerable<ColorPallete> colorPalletes =
-					await _unitOfWork.ColorPalleteRepository.GetColorPalletesByIdsListAsync(modifyDTO.ColorPalleteIds);
+				IEnumerable<ColorPalette> colorPalettes =
+					await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(modifyDTO.ColorPaletteIds);
 
-				moodboard.ColorPalletes = colorPalletes.ToList();
+				moodboard.ColorPalettes = colorPalettes.ToList();
 			}
 
 			if (modifyDTO.MaterialIds != null)
