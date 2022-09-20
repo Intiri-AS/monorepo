@@ -11,7 +11,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public ICollection<int> StyleImageIds { get; set; }
 
 		[Required]
-		public int ColorPalleteId { get; set; }
+		public int ColorPaletteId { get; set; }
 
 		[Required]
 		public int RoomId { get; set; }

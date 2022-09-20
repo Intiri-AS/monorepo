@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220919134230_AddProjectCreation")]
+    partial class AddProjectCreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace Intiri.API.Migrations
 
                     b.HasIndex("MoodboardsId");
 
-                    b.ToTable("MoodboardColorPalette", (string)null);
+                    b.ToTable("MoodboardColorPallete", (string)null);
                 });
 
             modelBuilder.Entity("Intiri.API.Models.ColorPalette", b =>
@@ -65,7 +67,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ColorPalettes");
+                    b.ToTable("ColorPalletes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.Color", b =>
@@ -224,7 +226,7 @@ namespace Intiri.API.Migrations
                     b.Property<int>("BudgetId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ColorPaletteId")
+                    b.Property<int?>("ColorPalleteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
@@ -244,7 +246,7 @@ namespace Intiri.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorPaletteId");
+                    b.HasIndex("ColorPalleteId");
 
                     b.HasIndex("MoodboardId");
 
@@ -381,9 +383,6 @@ namespace Intiri.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StyleId")
@@ -679,9 +678,9 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Project", b =>
                 {
-                    b.HasOne("Intiri.API.Models.ColorPalette", "ColorPalette")
+                    b.HasOne("Intiri.API.Models.ColorPalette", "ColorPallete")
                         .WithMany()
-                        .HasForeignKey("ColorPaletteId");
+                        .HasForeignKey("ColorPalleteId");
 
                     b.HasOne("Intiri.API.Models.Moodboard", "Moodboard")
                         .WithMany()
@@ -695,7 +694,7 @@ namespace Intiri.API.Migrations
                         .WithMany()
                         .HasForeignKey("RoomId");
 
-                    b.Navigation("ColorPalette");
+                    b.Navigation("ColorPallete");
 
                     b.Navigation("Moodboard");
 

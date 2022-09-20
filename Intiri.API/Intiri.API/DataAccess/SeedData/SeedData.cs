@@ -30,7 +30,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedRooms(unitOfWork);
 			await SeedMaterials(unitOfWork);
 			await SeedProducts(unitOfWork);
-			await SeedColorPalletes(unitOfWork);
+			await SeedColorPalettes(unitOfWork);
 			await SeedMoodboards(unitOfWork);
 			await SeedProjects(unitOfWork);
 			await SeedRoomDetails(unitOfWork);
@@ -198,14 +198,14 @@ namespace Intiri.API.DataAccess.SeedData
 			await unitOfWork.SaveChanges();
 		}
 
-		public static async Task SeedColorPalletes(IUnitOfWork unitOfWork)
+		public static async Task SeedColorPalettes(IUnitOfWork unitOfWork)
 		{
-			string colorPalleteData = await File.ReadAllTextAsync("DataAccess/SeedData/ColorPalleteData.json");
-			List<ColorPallete> colorPalletes = JsonSerializer.Deserialize<List<ColorPallete>>(colorPalleteData);
+			string colorPaletteData = await File.ReadAllTextAsync("DataAccess/SeedData/ColorPaletteData.json");
+			List<ColorPalette> colorPalettes = JsonSerializer.Deserialize<List<ColorPalette>>(colorPaletteData);
 
-			foreach (ColorPallete colorPallete in colorPalletes)
+			foreach (ColorPalette colorPalette in colorPalettes)
 			{
-				unitOfWork.ColorPalleteRepository.Insert(colorPallete);
+				unitOfWork.ColorPaletteRepository.Insert(colorPalette);
 			}
 
 			await unitOfWork.SaveChanges();
@@ -253,7 +253,7 @@ namespace Intiri.API.DataAccess.SeedData
 				moodboard.Style = await unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
 				moodboard.Room = await unitOfWork.RoomRepository.GetByID(moodboardIn.RoomId);
 				moodboard.Materials = (await unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardIn.MaterialIds)).ToArray();
-				moodboard.ColorPalletes = (await unitOfWork.ColorPalleteRepository.GetColorPalletesByIdsListAsync(moodboardIn.ColorPalleteIds)).ToArray();
+				moodboard.ColorPalettes = (await unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardIn.ColorPaletteIds)).ToArray();
 				moodboard.Products = (await unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds)).ToArray();
 
 				unitOfWork.MoodboardRepository.Insert(moodboard);

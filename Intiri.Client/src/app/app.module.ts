@@ -72,6 +72,7 @@ import { SettingsPopoverComponent } from './components/settings-popover/settings
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
 //plugins
 import { CodeInputModule } from 'angular-code-input';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { CodeInputModule } from 'angular-code-input';
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent, SettingsPopoverComponent, MenuPopoverComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent, SettingsPopoverComponent, MenuPopoverComponent,
+    TimeAgoPipe
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent
@@ -96,7 +98,7 @@ import { CodeInputModule } from 'angular-code-input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
-    CodeInputModule
+    CodeInputModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
