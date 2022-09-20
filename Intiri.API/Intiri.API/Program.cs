@@ -74,29 +74,22 @@ try
 	app.UseHttpsRedirection();
 	app.UseRouting();
 
-	app.UseStaticFiles();
-	app.UseStaticFiles(new StaticFileOptions()
-	{
-		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-		RequestPath = new PathString("/Resources")
-	});
-
+	//app.UseStaticFiles();
+	//app.UseStaticFiles(new StaticFileOptions()
+	//{
+	//	FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+	//	RequestPath = new PathString("/Resources")
+	//});
+	
 	// seed data
-	try
-	{
-		await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
-
-	}
-	catch (Exception)
-	{
-		logger.Debug("Whatever...");
-	}
+	logger.Debug("Seeding data...");
+	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
 	app.UseAuthorization();
 
 	app.UseDefaultFiles();
-	//app.UseStaticFiles();
+	app.UseStaticFiles();
 
 	app.UseEndpoints(endpoints =>
 	{
