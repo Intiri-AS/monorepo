@@ -2,12 +2,12 @@
 	{
 		"Name": "Comfy Sofa",
 		"ProductType": {
-			"Id":  1
+			"Id": 1
 		},
 		"Description": "Very nice sofa",
 		"StyleId": 2,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\comfy_sofa.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/comfy_sofa_z6efhg.jpg"
 	},
 	{
 		"Name": "Sofa Royale",
@@ -17,7 +17,7 @@
 		"Description": "Premium",
 		"StyleId": 3,
 		"Price": 360,
-		"ImagePath": "Resources\\ProductImages\\sofa_royale.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"
 	},
 	{
 		"Name": "Standing Desk",
@@ -27,7 +27,7 @@
 		"Description": "Description",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\standing_desk.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/standing_desk_b2xjr4.jpg"
 	},
 	{
 		"Name": "Standing Lamp",
@@ -37,7 +37,7 @@
 		"Description": "Very nice sofa",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\standing_lamp.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/standing_lamp_hscqi1.jpg"
 	},
 	{
 		"Name": "Ceramic Lamp",
@@ -47,7 +47,7 @@
 		"Description": "Provides illumination",
 		"StyleId": 4,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\ceramic_lamp.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/ceramic_lamp_fn0eur.jpg"
 	},
 	{
 		"Name": "Office Chair",
@@ -57,7 +57,7 @@
 		"Description": "Chair for work",
 		"StyleId": 1,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\office_chair.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_chair_q2mtyc.jpg"
 	},
 	{
 		"Name": "Dinning Table",
@@ -67,7 +67,7 @@
 		"Description": "Table for dinner",
 		"StyleId": 2,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\dinning_table.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/dinning_table_egcwht.jpg"
 	},
 	{
 		"Name": "Office Desk",
@@ -77,6 +77,6 @@
 		"Description": "Ideal for companies",
 		"StyleId": 3,
 		"Price": 450,
-		"ImagePath": "Resources\\ProductImages\\office_table.jpg"
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_table_vnzk4k.jpg"
 	}
 ]

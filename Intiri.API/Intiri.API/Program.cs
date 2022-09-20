@@ -82,7 +82,6 @@ try
 	});
 
 	// seed data
-	logger.Debug("Seeding data...");
 	try
 	{
 		await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
@@ -97,7 +96,7 @@ try
 	app.UseAuthorization();
 
 	app.UseDefaultFiles();
-	app.UseStaticFiles();
+	//app.UseStaticFiles();
 
 	app.UseEndpoints(endpoints =>
 	{

@@ -76,7 +76,7 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file);
+					uploadResult = await _fileUploadService.UploadFileAsync(file, "StyleImages");
 				}
 				catch (Exception ex)
 				{
@@ -88,8 +88,6 @@ namespace Intiri.API.Controllers
 					return BadRequest("Unable to upload file. Please try again later.");
 				}
 
-				string dbPath = await _imageService.AddImageAsync(file, "StyleImages");
-				
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
 				styleImage.Path = uploadResult.SecureUrl.AbsoluteUri;
@@ -99,12 +97,9 @@ namespace Intiri.API.Controllers
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					// TODO: WTF?
-					style.StyleImages.Add(styleImage);
-					return _mapper.Map<StyleImageOutDTO>(styleImage);
+					return Ok(_mapper.Map<StyleImageOutDTO>(styleImage));
 				}
 			}
-
 			return BadRequest("Problem adding style image");
 		}
 
