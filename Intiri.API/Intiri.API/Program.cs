@@ -67,11 +67,13 @@ try
 		//					   .AllowAnyMethod()
 		//					   .AllowCredentials()
 		//					   .WithOrigins("http://localhost:8100"));
-		app.UseCors(policy =>
+		
+	}
+
+	app.UseCors(policy =>
 						policy.AllowAnyOrigin()
 							  .AllowAnyHeader()
 							  .AllowAnyMethod());
-	}
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
