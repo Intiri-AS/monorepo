@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 export class NewProjectStepComponent implements OnInit {
 
   apiUrl = environment.apiUrl;
-  @Input() currentStep: object;
-  @Input() project: object;
+  @Input() currentStep: any;
+  @Input() project: any;
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();

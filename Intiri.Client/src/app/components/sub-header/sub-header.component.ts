@@ -7,12 +7,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SubHeaderComponent implements OnInit {
 
-  @Input() menu: 'partners' | 'clients' | 'moodboards | clientList';
-  @Input() activeTitle: string;
+  @Input() menu: 'partners' | 'clients' | 'moodboards' | 'clientList' | 'designerMoodboards';
+  @Input() activeTitle: number;
   @Input() slider: boolean = false;
   @Output() changeSlide = new EventEmitter<object>();
 
-  menuItems = {
+  menuItems: any = {
     partners: ['partners', 'products'],
     clients: ['clients', 'inspiration'],
     moodboards: ['styles','materials','rooms', 'colors', 'pictures'],

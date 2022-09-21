@@ -8,6 +8,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddPartnerModalComponent implements OnInit {
 
+  added;
+  nextPage;
+
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
