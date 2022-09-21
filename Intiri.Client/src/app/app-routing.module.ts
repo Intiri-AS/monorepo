@@ -136,11 +136,11 @@ const routes: Routes = [
     component: ConsultationsPage
   },
   {
-    path: 'designer', //TODO Set up page guard (admin guard)
+    path: 'designers', //TODO Set up page guard (admin guard)
     component: DesignerPage
   },
   {
-    path: 'vendors', //TODO Set up page guard (admin guard)
+    path: 'partners', //TODO Set up page guard (admin guard)
     component: VendorPage
   },
   {

@@ -14,8 +14,8 @@ export class HeaderAdminComponent {
   menuItems = [
     {title: 'Dashboard', url: '/dashboard'},
     {title: 'Consultations', url: '/consultations'},
-    {title: 'Vendors', url: '/vendors'},
-    {title: 'Designers', url: '#'},
+    {title: 'Partners', url: '/partners'},
+    {title: 'Designers', url: '/designers'},
     {title: 'Clients', url: '#'},
     {title: 'Moodboards', url: '#'},
     {title: 'Style', url: '#'},
@@ -24,7 +24,7 @@ export class HeaderAdminComponent {
   constructor(private router: Router, private popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
-    return this.router.url === route;
+    return this.router.url.split('?')[0] === route;
   }
 
   menuOpened() {

@@ -63,12 +63,14 @@ import { ProfileImgSectionComponent } from './components/profile-img-section/pro
 import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
+import { AdminPartnersComponent } from './components/admin-partners/admin-partners.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
 import { LogoutModalComponent } from './components/modals/logout-modal/logout-modal.component';
 import { CreateProjectModalComponent } from './components/modals/create-project-modal/create-project-modal.component';
 import { AddDesignerModalComponent } from './components/modals/add-designer-modal/add-designer-modal.component';
+import { AddPartnerModalComponent } from './components/modals/add-partner-modal/add-partner-modal.component';
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
@@ -88,13 +90,13 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent, SettingsPopoverComponent, MenuPopoverComponent,
-    StylePopoverComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent,
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
     TimeAgoPipe
   ],
   entryComponents: [
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, BookDesignerModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent
   ],
   imports: [
     BrowserModule,
