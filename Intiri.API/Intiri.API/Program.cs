@@ -70,8 +70,7 @@ try
 		app.UseCors(policy =>
 						policy.AllowAnyOrigin()
 							  .AllowAnyHeader()
-							  .AllowAnyMethod()
-							  .AllowCredentials());
+							  .AllowAnyMethod());
 	}
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
