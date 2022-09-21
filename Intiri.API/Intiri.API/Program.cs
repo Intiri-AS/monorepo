@@ -62,11 +62,11 @@ try
 		app.UseSwagger();
 		app.UseSwaggerUI();
 
-		app.UseCors(policy =>
-						policy.AllowAnyHeader()
-							   .AllowAnyMethod()
-							   .AllowCredentials()
-							   .WithOrigins("http://localhost:8100"));
+		//app.UseCors(policy =>
+		//				policy.AllowAnyHeader()
+		//					   .AllowAnyMethod()
+		//					   .AllowCredentials()
+		//					   .WithOrigins("http://localhost:8100"));
 	}
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
@@ -74,14 +74,6 @@ try
 	app.UseHttpsRedirection();
 	app.UseRouting();
 
-	//app.UseStaticFiles();
-	//app.UseStaticFiles(new StaticFileOptions()
-	//{
-	//	FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-	//	RequestPath = new PathString("/Resources")
-	//});
-	
-	// seed data
 	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
