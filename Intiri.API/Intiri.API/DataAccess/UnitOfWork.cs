@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository;
 using Intiri.API.DataAccess.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess
 {
@@ -83,7 +84,6 @@ namespace Intiri.API.DataAccess
 
 			return await _dataContext.SaveChangesAsync() > 0;
 		}
-
 		#endregion Public methods
 	}
 }

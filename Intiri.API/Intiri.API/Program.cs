@@ -82,7 +82,6 @@ try
 	//});
 	
 	// seed data
-	logger.Debug("Seeding data...");
 	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
