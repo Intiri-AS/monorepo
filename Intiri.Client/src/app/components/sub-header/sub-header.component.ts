@@ -16,7 +16,8 @@ export class SubHeaderComponent implements OnInit {
     vendors: [{title: 'Vendors', url: '/vendors'}, {title: 'Products', url: '/products'}],
     clients: ['clients', 'inspiration'],
     moodboards: ['styles','materials','rooms', 'colors', 'pictures'],
-    clientList: ['clients', 'moodboard','statistic']
+    clientList: ['clients', 'moodboard','statistic'],
+    designerMoodboards: ['my moodboards', 'all moodboards']
   }
 
   constructor() {}

@@ -30,6 +30,8 @@ import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/des
 import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
 import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-profile/book-designer-profile.page';
 import { ClientListPage } from './pages/designer-pages/internal-designer/clients/client-list/client-list.page';
+import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
+import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 
 const routes: Routes = [
   {
@@ -148,6 +150,14 @@ const routes: Routes = [
   {
     path: 'client-list', //TODO Set up page guard (internal designer guard)
     component: ClientListPage
+  },
+  {
+    path: 'client-request', //TODO Set up page guard (designer guard)
+    component: ClientRequestPage
+  },
+  {
+    path: 'style-list', //TODO Set up page guard (internal designer guard)
+    component: StyleListPage
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)

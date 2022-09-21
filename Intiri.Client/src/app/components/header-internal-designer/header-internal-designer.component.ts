@@ -13,8 +13,8 @@ export class HeaderInternalDesignerComponents {
 
   menuItems = [
     {title: 'Client', url: '/client-list'},
-    {title: 'Style', url: '#'},
-    {title: 'Moodboard', url: '#'},
+    {title: 'Style', url: '/style-list'},
+    {title: 'Moodboard', url: '/my-moodboard'},
   ]
 
   constructor(
