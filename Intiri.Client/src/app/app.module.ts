@@ -64,6 +64,7 @@ import { ProfileInfoSectionComponent } from './components/profile-info-section/p
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
 import { AdminPartnersComponent } from './components/admin-partners/admin-partners.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -90,7 +91,7 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
     TimeAgoPipe
