@@ -1,0 +1,17 @@
+<ion-content>
+  <div id="home">
+    <app-header-admin></app-header-admin>
+    <div class="main-container">
+      <p class="main-title mb-[30px]">Clients</p>
+      <app-sub-header [menu]="'clients'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
+        <ion-slide>
+          <app-admin-clients></app-admin-clients>
+        </ion-slide>
+        <ion-slide>
+          <app-admin-inspiration></app-admin-inspiration>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>

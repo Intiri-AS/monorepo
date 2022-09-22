@@ -41,6 +41,7 @@ import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
 import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
 import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
+import { ClientPage } from './pages/admin-pages/client/client.page';
 
 //pages for designers
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
@@ -65,6 +66,8 @@ import { SubHeaderComponent } from './components/sub-header/sub-header.component
 import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
 import { AdminPartnersComponent } from './components/admin-partners/admin-partners.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { AdminClientsComponent } from './components/admin-clients/admin-clients.component';
+import { AdminInspirationComponent } from './components/admin-inspiration/admin-inspiration.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -75,6 +78,7 @@ import { AddPartnerModalComponent } from './components/modals/add-partner-modal/
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
+
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
@@ -86,12 +90,12 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
-    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage,
+    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
     TimeAgoPipe

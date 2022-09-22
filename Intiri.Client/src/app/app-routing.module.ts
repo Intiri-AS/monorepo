@@ -32,6 +32,7 @@ import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-pr
 import { ClientListPage } from './pages/designer-pages/internal-designer/clients/client-list/client-list.page';
 import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
+import { ClientPage } from './pages/admin-pages/client/client.page';
 
 const routes: Routes = [
   {
@@ -142,6 +143,10 @@ const routes: Routes = [
   {
     path: 'partners', //TODO Set up page guard (admin guard)
     component: VendorPage
+  },
+  {
+    path: 'clients', //TODO Set up page guard (admin guard)
+    component: ClientPage
   },
   {
     path: 'my-moodboard', //TODO Set up page guard (designer guard)
