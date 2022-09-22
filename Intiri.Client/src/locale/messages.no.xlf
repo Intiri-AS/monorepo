@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="4200317694838753109" datatype="html">
+        <source>Welcome back</source>
+        <target>Velkommen tilbake</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <target>Logg Inn</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2130551631824281045" datatype="html">
+        <source> Manage your account, create and edit projects, collaborate on design and more. </source>
+        <target> Administrer kontoen din, opprett og rediger prosjekter, samarbeid om design og mer. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8121141462865337916" datatype="html">
+        <source>Phone number</source>
+        <target>Telefonnummer</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5504129468136884250" datatype="html">
+        <source>Or</source>
+        <target>Eller</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8164791295086777340" datatype="html">
+        <source>Don&apos;t have an account?</source>
+        <target>Har du ikke en konto?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2308975396733519902" datatype="html">
+        <source>Create an account</source>
+        <target>Opprett en konto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.page.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

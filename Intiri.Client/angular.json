@@ -4,6 +4,15 @@
   "newProjectRoot": "projects",
   "projects": {
     "app": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "no": {
+            "translation": "src/locale/messages.no.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,6 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["no"],
             "outputPath": "../Intiri.API/Intiri.API/wwwroot",
             "index": "src/index.html",
             "main": "src/main.ts",

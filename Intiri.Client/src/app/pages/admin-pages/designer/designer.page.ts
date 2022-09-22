@@ -17,6 +17,7 @@ export class DesignerPage {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
+      componentProps: {designer: true},
       dismissOnSelect: true
     });
 

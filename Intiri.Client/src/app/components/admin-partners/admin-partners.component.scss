@@ -1,0 +1,16 @@
+.profile-input {
+    @apply mt-4 mx-2 flex-1 text-left;
+}
+
+ion-input {
+    @apply h-12;
+}
+
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4;
+}
+
+.logo {
+    @apply border rounded-2xl border-black-2 min-h-[320px] mb-[30px] overflow-hidden;
+    //-webkit-box-shadow: 7px 8px 32px 17px rgb(0 0 0 / 8%);
+}

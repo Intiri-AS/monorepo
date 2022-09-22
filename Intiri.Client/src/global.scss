@@ -44,10 +44,22 @@
     --height: 802px;
   }
 
+  .add-partner-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 90vh;
+  }
+
   .added-designer-modal-css::part(content) {
     --width: 600px;
     border-radius: 15px;
     --height: 445px;
+  }
+
+  .add-partner-contact-modal-css::part(content) {
+    --width: 820px;
+    border-radius: 15px;
+    --height: 645px;
   }
 
   .book-designer-modal-css::part(content) {
@@ -74,6 +86,11 @@ ion-button {
 
 .main-title {
   @apply font-medium text-black-1 text-5xl mt-0
+}
+
+// without this change ion-grid does not work well, since slide is reducing container width based on given content (eg. size=12 will not take full width if content is not wide enough)
+.swiper-slide {
+  display: block;
 }
 
 .primary-btn {

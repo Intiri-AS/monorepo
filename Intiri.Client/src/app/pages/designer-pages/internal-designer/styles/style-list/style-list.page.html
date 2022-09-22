@@ -1,0 +1,23 @@
+<ion-content>
+  <div id="home">
+    <app-header-internal-designer></app-header-internal-designer>
+    <div class="main-container">
+      <p class="main-title mb-[30px]">Style</p>
+      <div>
+        <ion-row>
+          <ion-col size="3" *ngFor="let style of styles">
+            <ion-card class="ion-card-container h-[200px]">
+              <img src={{style.image}} class="h-full w-full">
+            </ion-card>
+            <div class="flex justify-between items-center ml-3 mt-2">
+              <p class="text-2xl text-medium">{{style.name}}</p>
+              <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>

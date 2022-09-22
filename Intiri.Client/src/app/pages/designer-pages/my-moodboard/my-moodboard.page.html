@@ -1,0 +1,66 @@
+<ion-content>
+  <div id="home">
+    <app-header-internal-designer></app-header-internal-designer>
+    <div class="main-container">
+      <p class="main-title mb-[30px]">Moodboard</p>
+      <app-sub-header [menu]="'designerMoodboards'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
+        <ion-slide>
+          <div class="w-full h-full mt-5">
+            <ion-row>
+              <ion-col size="4" *ngFor="let moodboard of myMoodboards">
+                <ion-card class="ion-card-container h-[350px]">
+                  <img src={{moodboard.image}} class="moodboard-img">
+                </ion-card>
+                <div class="flex justify-between items-center ml-3 mt-2">
+                  <div class="flex items-center justify-start">
+                    <p class="text-2xl text-medium">{{moodboard.style}}</p>
+                    <ion-button fill="clear" class="text-black" routerLink="#" routerDirection="root">
+                      <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                    </ion-button>
+                  </div>
+                  <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+                  </button>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="w-full h-full mt-5">
+            <ion-row>
+              <ion-col size="4" class="px-3">
+                <ion-select class="border rounded-2xl border-black-2 h-[52px] w-full text-left" interface="popover" placeholder="Select style">
+                  <ion-select-option>Vintage</ion-select-option>
+                  <ion-select-option>Traditional</ion-select-option>
+                  <ion-select-option>Minimal</ion-select-option>
+                  <ion-select-option>Industrial</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4" *ngFor="let moodboard of allMoodboards">
+                <ion-card class="ion-card-container h-[350px]">
+                  <img src={{moodboard.image}} class="moodboard-img">
+                </ion-card>
+                <div class="flex flex-col ml-3 mt-2">
+                  <div class="flex items-center justify-start">
+                    <p class="text-2xl text-medium">{{moodboard.style}}</p>
+                    <ion-button fill="clear" class="text-black" routerLink="#" routerDirection="root">
+                      <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                    </ion-button>
+                  </div>
+                  <div class="flex items-center justify-start">
+                    <img src="../../../../assets/images/profile-img.png" class="avatar-img rounded-md">
+                    <p class="text-lg ml-2 text-black-2">Monica Bing</p>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>

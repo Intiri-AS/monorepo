@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Messenger\Messenger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<Folder Include="Resources\MaterialImages\" />
     <Folder Include="Resources\ProductImages\" />
     <Folder Include="Resources\RoomImages\" />

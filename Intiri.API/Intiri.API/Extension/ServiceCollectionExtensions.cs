@@ -3,6 +3,7 @@ using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
+using Messenger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace Intiri.API.Extension
 
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
+			services.AddSingleton<IMessenger, Messenger.Messenger>();
 
 			return services;
 		}

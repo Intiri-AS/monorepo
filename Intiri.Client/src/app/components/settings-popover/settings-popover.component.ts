@@ -9,6 +9,8 @@ import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.compon
 })
 export class SettingsPopoverComponent implements OnInit {
 
+  headerType;
+
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {}

@@ -11,6 +11,8 @@ import { ProjectService } from 'src/app/services/project.service';
 export class CreateProjectModalComponent implements OnInit {
 
   projectName: string = '';
+  start;
+  final;
 
   constructor(private modalController: ModalController, private projectService: ProjectService) { }
 

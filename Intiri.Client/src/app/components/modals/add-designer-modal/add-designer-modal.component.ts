@@ -8,7 +8,11 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddDesignerModalComponent implements OnInit {
 
+  add;
+  added;
+
   constructor(private modalController: ModalController) { }
+
 
   ngOnInit() {}
 
