@@ -28,7 +28,6 @@ namespace Intiri.API.Extension
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IAccountService, AccountService>();
-			services.AddScoped<IImageService, ImageService>();
 
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
