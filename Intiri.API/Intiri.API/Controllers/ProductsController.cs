@@ -16,7 +16,6 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
 		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
@@ -24,18 +23,17 @@ namespace Intiri.API.Controllers
 		#region Constructors
 		public ProductsController(
 			IUnitOfWork unitOfWork,
-			IImageService imageService,
 			IMapper mapper,
 			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
 			_fileUploadService = fileUploadService;
 		}
 		#endregion Constructors
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetProducts()
+		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> 
+			GetProducts()
 		{
 			IEnumerable<Product> products = await _unitOfWork
 				.ProductRepository.GetProductsAsync();
@@ -66,7 +64,7 @@ namespace Intiri.API.Controllers
 		{
 			ProductType productType = await _unitOfWork
 				.ProductTypeRepository
-				.GetByID(productInDTO.ProductTypeId);
+				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
 
 			if (productType == null)
 			{
@@ -80,8 +78,6 @@ namespace Intiri.API.Controllers
 					$" for product type: {productInDTO.ProductTypeId}");
 			}
 
-			Product product = _mapper.Map<Product>(productInDTO);
-
 			IFormFile file = productInDTO.ImageFile;
 
 			if (file.Length > 0)
@@ -89,34 +85,35 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService
-						.UploadFileAsync(file, FileUploadDestinations.ProductImages);
+					uploadResult = await _fileUploadService.UploadFileAsync(
+							file, FileUploadDestinations.ProductImages);
 				}
 				catch (Exception)
 				{
-					return BadRequest(
-						"Unable to upload file. Please try again later.");
+					return BadRequest("Failed to upload product image.");
 				}
 
 				if (uploadResult.Error != null)
 				{
-					return BadRequest(
-						"Unable to upload file. Please try again later.");
+					return BadRequest("Failed to upload product image.");
 				}
-				
+				Product product = _mapper.Map<Product>(productInDTO);
+
 				product.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
 				product.ImagePublicId = uploadResult.PublicId;
-			}
 
-			product.Style = await _unitOfWork
-				.StyleRepository.GetByID(productInDTO.StyleId);
+				product.ProductType = productType;
 
-			_unitOfWork.ProductRepository.Insert(product);
+				product.Style = await _unitOfWork
+					.StyleRepository.GetByID(productInDTO.StyleId);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				productType.Products.Add(product);
-				return Ok(_mapper.Map<ProductOutDTO>(product));
+				_unitOfWork.ProductRepository.Insert(product);
+
+				if (await _unitOfWork.SaveChanges())
+				{
+					productType.Products.Add(product);
+					return Ok(_mapper.Map<ProductOutDTO>(product));
+				}
 			}
 			return BadRequest("Probem occured while adding product");
 		}
@@ -125,14 +122,11 @@ namespace Intiri.API.Controllers
 		public async Task<IActionResult> DeleteProduct(int productId)
 		{
 			Product product = await _unitOfWork
-				.ProductRepository.GetByID(productId);
-
-			ProductType productType = await _unitOfWork
-				.ProductTypeRepository.GetByID(product.ProductType.Id);
+				.ProductRepository.GetProductByIdAsync(productId);
 
 			if (product == null)
 			{
-				return BadRequest($"Product with Id={productId} not found");
+				return BadRequest($"Product '{product.Name}' not found");
 			}
 
 			try
@@ -142,11 +136,10 @@ namespace Intiri.API.Controllers
 
 				if (deletionResult.Error != null)
 				{
-					return BadRequest("Unable to delete product image.");
+					return BadRequest("Failed to delete product image.");
 				}
 
 				await _unitOfWork.ProductRepository.Delete(productId);
-				productType.Products.Remove(product);
 
 				await _unitOfWork.SaveChanges();
 			}
@@ -154,7 +147,7 @@ namespace Intiri.API.Controllers
 			{
 				return BadRequest($"Internal server error: {ex}");
 			}
-			return Ok($"Successfully deleted product with Id={productId}");
+			return Ok($"Product '{product.Name}' deleted.");
 		}
 	}
 }

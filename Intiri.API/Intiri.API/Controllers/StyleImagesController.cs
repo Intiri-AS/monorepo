@@ -79,12 +79,12 @@ namespace Intiri.API.Controllers
 				}
 				catch (Exception)
 				{
-					return BadRequest("Unable to upload file. Please try again later.");
+					return BadRequest("Failed to upload style image.");
 				}
 
 				if (uploadResult.Error != null)
 				{
-					return BadRequest("Unable to upload file. Please try again later.");
+					return BadRequest("Failed to upload style image.");
 				}
 
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
@@ -120,7 +120,7 @@ namespace Intiri.API.Controllers
 
 				if (deletionResult.Error != null)
 				{
-					return BadRequest("Unable to delete style image.");
+					return BadRequest("Failed to delete style image.");
 				}
 
 				await _unitOfWork.StyleImageRepository.Delete(imageId);
@@ -133,7 +133,7 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Internal error: {ex}");
 			}
 
-			return Ok();
+			return Ok($"Style image '{styleImage.Name}' deleted.");
 		}
 	}
 }

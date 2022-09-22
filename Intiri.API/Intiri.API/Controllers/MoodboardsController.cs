@@ -62,7 +62,7 @@ namespace Intiri.API.Controllers
 		{
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
 
-			Style style = await _unitOfWork.StyleRepository.GetStyleByIdAsync(moodboardIn.StyleId);
+			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
 			moodboard.Style = style;
 
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardIn.RoomId);

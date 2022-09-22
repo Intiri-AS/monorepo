@@ -18,7 +18,6 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
 		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
@@ -27,12 +26,10 @@ namespace Intiri.API.Controllers
 
 		public RoomsController(
 			IUnitOfWork unitOfWork,
-			IImageService imageService,
 			IMapper mapper,
 			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
 			_fileUploadService = fileUploadService;
 		}
 
@@ -85,7 +82,7 @@ namespace Intiri.API.Controllers
 				}
 				catch (Exception)
 				{
-					return BadRequest("Unable to upload room image.");
+					return BadRequest("Failed to upload room image.");
 				}
 
 				if (uploadResult.Error != null)
