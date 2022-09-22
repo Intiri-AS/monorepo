@@ -7,6 +7,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,6 @@ namespace Intiri.API.Controllers
 
 		private readonly IMapper _mapper;
 		private readonly IFileUploadService _fileUploadService;
-		private readonly IImageService _imageService;
 
 		#endregion Fields
 
@@ -32,7 +32,6 @@ namespace Intiri.API.Controllers
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
-			_imageService = imageService;
 		}
 
 		#endregion Constructors
@@ -76,9 +75,9 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file, "StyleImages");
+					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.StyleImages);
 				}
-				catch (Exception ex)
+				catch (Exception)
 				{
 					return BadRequest("Unable to upload file. Please try again later.");
 				}
@@ -116,8 +115,13 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				string imagePath = styleImage.Path;
-				await _imageService.DeleteImageFromFileSystemAsync(imagePath);
+				DeletionResult deletionResult = await _fileUploadService
+					.DeleteFileAsync(styleImage.PublicId);
+
+				if (deletionResult.Error != null)
+				{
+					return BadRequest("Unable to delete style image.");
+				}
 
 				await _unitOfWork.StyleImageRepository.Delete(imageId);
 				style.StyleImages.Remove(styleImage);

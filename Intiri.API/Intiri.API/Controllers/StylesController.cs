@@ -13,6 +13,7 @@ using System.IO;
 using Intiri.API.Services;
 using System.Xml.Linq;
 using Intiri.API.Models.DTO.OutputDTO.Style;
+using CloudinaryDotNet.Actions;
 
 namespace Intiri.API.Controllers
 {
@@ -20,17 +21,23 @@ namespace Intiri.API.Controllers
 	{
 		#region Fields
 
-		IImageService _imageService;
-		IMapper _mapper;
+		private readonly IMapper _mapper;
+		private readonly IFileUploadService _fileUploadService;
+		private readonly IImageService _imageService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public StylesController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public StylesController(
+			IUnitOfWork unitOfWork,
+			IImageService imageService,
+			IMapper mapper,
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_imageService = imageService;
 			_mapper = mapper;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors

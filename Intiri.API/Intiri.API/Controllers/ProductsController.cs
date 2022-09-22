@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
-using Intiri.API.Models.Material;
 using Intiri.API.Models.Product;
-using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
@@ -17,30 +17,41 @@ namespace Intiri.API.Controllers
 
 		private readonly IMapper _mapper;
 		private readonly IImageService _imageService;
+		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
-		public ProductsController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public ProductsController(
+			IUnitOfWork unitOfWork,
+			IImageService imageService,
+			IMapper mapper,
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_imageService = imageService;
+			_fileUploadService = fileUploadService;
 		}
 		#endregion Constructors
 
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetProducts()
 		{
-			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsAsync();
-			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(products);
+			IEnumerable<Product> products = await _unitOfWork
+				.ProductRepository.GetProductsAsync();
+
+			IEnumerable<ProductOutDTO> productsOut = 
+				_mapper.Map<IEnumerable<ProductOutDTO>>(products);
 
 			return Ok(productsOut);
 		}
 
 		[HttpGet("id/{productId}")]
-		public async Task<ActionResult<ProductOutDTO>> GetProductByProductId(int productId)
+		public async Task<ActionResult<ProductOutDTO>> 
+			GetProductByProductId(int productId)
 		{
-			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
+			Product product = await _unitOfWork
+				.ProductRepository.GetByID(productId);
 
 			if (product == null)
 			{
@@ -50,29 +61,55 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("add")]
-		public async Task<ActionResult<ProductOutDTO>> AddProduct([FromForm] ProductInDTO productInDTO)
+		public async Task<ActionResult<ProductOutDTO>> 
+			AddProduct([FromForm] ProductInDTO productInDTO)
 		{
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productInDTO.ProductTypeId);
+			ProductType productType = await _unitOfWork
+				.ProductTypeRepository
+				.GetByID(productInDTO.ProductTypeId);
 
-			if (productType == null) return BadRequest("Product type doesn't exist");
+			if (productType == null)
+			{
+				return BadRequest("Product type doesn't exist");
+			}
 
 			if (productType.Products.Any(p => p.Name == productInDTO.Name))
 			{
-				return BadRequest($"Product name: '{productInDTO.Name}' already exists for product type: {productInDTO.ProductTypeId}");
+				return BadRequest(
+					$"Product name: '{productInDTO.Name}' already exists" +
+					$" for product type: {productInDTO.ProductTypeId}");
 			}
 
 			Product product = _mapper.Map<Product>(productInDTO);
 
 			IFormFile file = productInDTO.ImageFile;
+
 			if (file.Length > 0)
 			{
-				string imgPrefixName = productInDTO.Name + productInDTO.ProductTypeId + "_";
-				string dbPath = await _imageService.AddImageAsync(file, "ProductImages", imgPrefixName);
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService
+						.UploadFileAsync(file, FileUploadDestinations.ProductImages);
+				}
+				catch (Exception)
+				{
+					return BadRequest(
+						"Unable to upload file. Please try again later.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest(
+						"Unable to upload file. Please try again later.");
+				}
 				
-				product.ImagePath = dbPath;
+				product.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
+				product.ImagePublicId = uploadResult.PublicId;
 			}
 
-			product.Style = await _unitOfWork.StyleRepository.GetByID(productInDTO.StyleId);
+			product.Style = await _unitOfWork
+				.StyleRepository.GetByID(productInDTO.StyleId);
 
 			_unitOfWork.ProductRepository.Insert(product);
 
@@ -81,15 +118,17 @@ namespace Intiri.API.Controllers
 				productType.Products.Add(product);
 				return Ok(_mapper.Map<ProductOutDTO>(product));
 			}
-
 			return BadRequest("Probem occured while adding product");
 		}
 
 		[HttpDelete("delete/{productId}")]
 		public async Task<IActionResult> DeleteProduct(int productId)
 		{
-			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(product.ProductType.Id);
+			Product product = await _unitOfWork
+				.ProductRepository.GetByID(productId);
+
+			ProductType productType = await _unitOfWork
+				.ProductTypeRepository.GetByID(product.ProductType.Id);
 
 			if (product == null)
 			{
@@ -98,7 +137,13 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				await _imageService.DeleteImageFromFileSystemAsync(product.ImagePath);
+				DeletionResult deletionResult = await _fileUploadService
+					.DeleteFileAsync(product.ImagePublicId);
+
+				if (deletionResult.Error != null)
+				{
+					return BadRequest("Unable to delete product image.");
+				}
 
 				await _unitOfWork.ProductRepository.Delete(productId);
 				productType.Products.Remove(product);
