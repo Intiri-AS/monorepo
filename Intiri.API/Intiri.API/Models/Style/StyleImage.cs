@@ -5,8 +5,9 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
+		public string PublicId { get; set; }
         public Style Style { get; set; }
         public int StyleId { get; set; }
-        public ICollection<Project> Projects { get; set; }
+		public ICollection<Project> Projects { get; set; }
     }
 }

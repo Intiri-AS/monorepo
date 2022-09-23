@@ -19,7 +19,7 @@
             </div>
             <div class="flex flex-col xl:flex-row xl:justify-between m-0 mt-4 mb-2">
               <ion-card class="w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 shadow-none p-4">
-                <img src="{{apiUrl}}{{projects[projects.length-1].moodboard.style.styleImages[1].path}}" class="w-full h-full object-cover">
+                <img src="{{projects[projects.length-1].moodboard.style.styleImages[1].path}}" class="w-full h-full object-cover">
               </ion-card>
               <div class="w-full xl:w-[370px] h-[350px] mt-5 xl:mt-0">
                 <ion-slides #slides [options]="options" class="p-0 m-0">
@@ -35,7 +35,7 @@
                     <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4">
                       <p class="mt-2 text-lg text-black-1 text-center">Material</p>
                       <section  class="max-h-[280px] overflow-auto">
-                        <div *ngFor="let item of projects[projects.length-1].moodboard.materials" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(item.imagePath) + ')'}" class="img-settings"></div>
+                        <div *ngFor="let item of projects[projects.length-1].moodboard.materials" [ngStyle]="{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}" class="img-settings"></div>
                       </section>
                     </ion-card>
                   </ion-slide>
@@ -43,7 +43,7 @@
                     <ion-card class="w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4">
                       <p class="mt-2 text-lg text-black-1 text-center">Furniture</p>
                       <section  class="max-h-[280px] overflow-auto">
-                        <div *ngFor="let item of projects[projects.length-1].moodboard.products" [ngStyle]="{background: 'url(' + apiUrl + normalizeSlashes(item.imagePath) + ')'}" class="img-settings"></div>
+                        <div *ngFor="let item of projects[projects.length-1].moodboard.products" [ngStyle]="{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}" class="img-settings"></div>
                       </section>
                     </ion-card>
                   </ion-slide>
@@ -65,7 +65,7 @@
             <div class="flex flex-wrap justify-between">
               <div *ngFor="let project of projects">
                 <ion-card class="w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 mb-2 shadow-none p-4">
-                  <img src="{{apiUrl}}{{project.moodboard.style.styleImages[0].path}}" class="w-full h-full">
+                  <img src="{{project.moodboard.style.styleImages[0].path}}" class="w-full h-full">
                 </ion-card>
                 <div class="flex items-center justify-start">
                   <p class="text-black-2 text-2xl font-medium">{{project.name}}</p>
