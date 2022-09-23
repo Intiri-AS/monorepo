@@ -63,11 +63,6 @@ public class CloudinaryService : IFileUploadService
         {
             parameters.Folder = folderName;
         }
-        //if (_contentTypesService.IsImage(file.ContentType))
-        //{
-        //    parameters.Transformation = new CloudinaryDotNet.Transformation()
-        //                                        .Crop("fill");
-        //}
         return await _cloudinary.UploadAsync(parameters);
     }
 
