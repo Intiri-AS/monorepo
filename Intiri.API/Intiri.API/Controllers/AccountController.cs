@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IdentityModel.Client;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
@@ -79,6 +80,30 @@ namespace Intiri.API.Controllers
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			};
+		}
+
+		[HttpPost("vipps-login")]
+		public async Task<ActionResult<bool>> VippsLogin()
+		{
+			var client = new HttpClient();
+			string identityUrl = "https://apitest.vipps.no" +
+				"/access-management-1.0/access/.well-known/openid-configuration";
+
+			var discovery = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+			{
+				Address = identityUrl,
+				Policy =
+				{
+					ValidateEndpoints = false
+				}
+			});
+
+			if (discovery.IsError)
+			{
+				return BadRequest($"{discovery.Error}");
+			}
+
+			return true;
 		}
 
 		[HttpDelete("delete-user/{phone}")]

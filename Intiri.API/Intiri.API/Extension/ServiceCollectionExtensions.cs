@@ -24,6 +24,7 @@ namespace Intiri.API.Extension
 			});
 
 			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
+			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
