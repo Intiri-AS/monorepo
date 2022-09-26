@@ -16,16 +16,14 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public RoomTypesController(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService) : base(unitOfWork)
+		public RoomTypesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
 		}
 
 		#endregion Constructors
@@ -90,7 +88,7 @@ namespace Intiri.API.Controllers
 			{
 				foreach (Room room in roomType.Rooms)
 				{
-					await _imageService.DeleteImageFromFileSystemAsync(room.ImagePath);
+					//await _imageService.DeleteImageFromFileSystemAsync(room.ImagePath);
 				}
 
 				await _unitOfWork.RoomTypeRepository.Delete(roomType.Id);

@@ -1,34 +1,38 @@
 [
 	{
-		"FirstName": "Dina",
-		"LastName": "Dina",
+		"UserName": "1231231",
 		"Email": "dina@exoswitch.com",
 		"PhoneNumber": "1231231",
-		//"Address": "543 Bowne Street, Singer, North Dakota, 5501",
+		"FirstName": "Dina",
+		"LastName": "Dina",
+		"Gender": "Female",
 		"Created": "2019-04-03"
 	},
 	{
-		"FirstName": "Cora",
-		"LastName": "Cora",
+		"UserName": "1231232",
 		"Email": "cora@exoswitch.com",
 		"PhoneNumber": "1231232",
-		//"Address": "335 Cozine Avenue, Ribera, South Dakota, 4032",
+		"FirstName": "Cora",
+		"LastName": "Cora",
+		"Gender": "Female",
 		"Created": "2020-02-13"
 	},
 	{
-		"FirstName": "Moss",
-		"LastName": "Moss",
+		"UserName": "1231233",
 		"Email": "moss@exoswitch.com",
 		"PhoneNumber": "1231233",
-		"Address": "924 Tapscott Avenue, Rosedale, South Carolina, 512",
+		"FirstName": "Moss",
+		"LastName": "Moss",
+		"Gender": "Male",
 		"Created": "2015-07-13"
 	},
 	{
-		"FirstName": "Day",
-		"LastName": "Day",
+		"UserName": "1231234",
 		"Email": "day@exoswitch.com",
 		"PhoneNumber": "1231234",
-		//"Address": "631 Dank Court, Gratton, Federated States Of Micronesia, 2378",
+		"FirstName": "Day",
+		"LastName": "Day",
+		"Gender": "Other",
 		"Created": "2018-08-16"
 	}
 ]

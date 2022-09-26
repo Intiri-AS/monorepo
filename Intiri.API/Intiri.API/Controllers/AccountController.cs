@@ -51,7 +51,7 @@ namespace Intiri.API.Controllers
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "EndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
 			if (!roleResult.Succeeded)
 			{
 				return BadRequest(roleResult.Errors);
