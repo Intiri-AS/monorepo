@@ -45,9 +45,7 @@ namespace Intiri.API.Controllers
 
 			User user = _mapper.Map<User>(registerDto);
 
-			user.UserName = registerDto.Username.ToLower();
-
-			IdentityResult result = await _accountService.CreateUserAsync(user, registerDto.Password);
+			IdentityResult result = await _accountService.CreateUserAsync(user);
 			if (!result.Succeeded)
 			{
 				return BadRequest(result.Errors);
@@ -56,7 +54,7 @@ namespace Intiri.API.Controllers
 			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "EndUser");
 			if (!roleResult.Succeeded)
 			{
-				return BadRequest(result.Errors);
+				return BadRequest(roleResult.Errors);
 			}
 
 			return new LoginOutDTO
@@ -75,13 +73,6 @@ namespace Intiri.API.Controllers
 			{
 				return Unauthorized("Invalid user phone number");
 			}
-
-			// Commented out since we no longer use password
-			//SignInResult result = await _accountService.CheckUserSignInPaswordAsync(user, loginDto.Password, false);
-			//if (!result.Succeeded)
-			//{
-			//	return Unauthorized("Invalid user password");
-			//}
 
 			return new LoginOutDTO
 			{
