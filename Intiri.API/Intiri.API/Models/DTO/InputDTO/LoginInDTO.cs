@@ -6,7 +6,5 @@ namespace Intiri.API.Models.DTO.InputDTO
 	{
 		[Required]
 		public string PhoneNumber { get; set; }
-
-		public string Password { get; set; }
 	}
 }

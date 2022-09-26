@@ -14,16 +14,14 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService) : base(unitOfWork)
+		public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
 		}
 
 		#endregion Constructors
@@ -88,7 +86,7 @@ namespace Intiri.API.Controllers
 			{
 				foreach (Material material in materialType.Materials)
 				{
-					await _imageService.DeleteImageFromFileSystemAsync(material.ImagePath);
+					//await _imageService.DeleteImageFromFileSystemAsync(material.ImagePath);
 				}
 
 				await _unitOfWork.MaterialTypeRepository.Delete(materialType.Id);

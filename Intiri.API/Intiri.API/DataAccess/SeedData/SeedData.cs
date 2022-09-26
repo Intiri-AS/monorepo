@@ -47,13 +47,14 @@ namespace Intiri.API.DataAccess.SeedData
 			List<User> users = JsonSerializer.Deserialize<List<User>>(usersData);
 			if (users == null) return;
 
-			string commonPassword = "Pa$$w0rd";
-
 			var roles = new List<Role>
 			{
-				new Role{Name = "EndUser"},
 				new Role{Name = "Admin"},
-				new Role{Name = "Designer"},
+				new Role{Name = "FreeEndUser"},
+				new Role{Name = "PremiumEndUser"},
+				new Role{Name = "InternalDesigner"},
+				new Role{Name = "ExternalDesigner"},
+				new Role{Name = "Partner"},
 			};
 
 			foreach (var role in roles)
@@ -63,11 +64,13 @@ namespace Intiri.API.DataAccess.SeedData
 
 			foreach (User user in users)
 			{
-				user.UserName = user.UserName.ToLower();
-
-				await userManager.CreateAsync(user, commonPassword);
-				await userManager.AddToRoleAsync(user, "EndUser");
+				await userManager.CreateAsync(user);
 			}
+
+			await userManager.AddToRoleAsync(users[0], "Admin");
+			await userManager.AddToRoleAsync(users[1], "InternalDesigner");
+			await userManager.AddToRoleAsync(users[2], "FreeEndUser");
+			await userManager.AddToRoleAsync(users[3], "Partner");
 		}
 
 		public static async Task SeedStyles(IUnitOfWork unitOfWork)

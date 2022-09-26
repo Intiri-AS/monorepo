@@ -26,7 +26,6 @@ namespace Intiri.API.Controllers
 
 		public StyleImagesController(
 			IUnitOfWork unitOfWork, 
-			IImageService imageService, 
 			IMapper mapper, 
 			IFileUploadService fileUploadService) : base(unitOfWork)
 		{

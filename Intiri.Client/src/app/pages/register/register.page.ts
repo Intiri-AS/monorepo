@@ -20,7 +20,8 @@ export class RegisterPage implements OnInit {
 
   intitializeForm() {
     this.registerForm = this.fb.group({
-      username: [''],
+      firstName: [''],
+      lastName: [''],
       phoneNumber: [''],
     })
   }
