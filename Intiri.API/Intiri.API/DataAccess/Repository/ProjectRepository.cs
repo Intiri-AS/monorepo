@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
+using Intiri.API.Models.Project;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ProjectRepository: RepositoryBase<Project>, IProjectRepository
+    public class ProjectRepository: RepositoryBase<Project>, IProjectRepository
 	{
 		#region Fields
 

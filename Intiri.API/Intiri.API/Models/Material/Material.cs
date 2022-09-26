@@ -3,7 +3,7 @@ using Intiri.API.Models.Style;
 
 namespace Intiri.API.Models.Material
 {
-	public class Material
+    public class Material
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
@@ -13,6 +13,6 @@ namespace Intiri.API.Models.Material
 
 		public int MaterialTypeId { get; set; }
 		public MaterialType	MaterialType { get; set; }
-		public ICollection<Moodboard> Moodboards { get; set; }
+		public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
 	}
 }

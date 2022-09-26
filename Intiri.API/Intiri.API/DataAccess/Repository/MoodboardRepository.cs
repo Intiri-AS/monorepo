@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
+using Intiri.API.Models.Moodboard;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class MoodboardRepository: RepositoryBase<Moodboard>, IMoodboardRepository
+    public class MoodboardRepository: RepositoryBase<Moodboard>, IMoodboardRepository
 	{
 		#region Fields
 

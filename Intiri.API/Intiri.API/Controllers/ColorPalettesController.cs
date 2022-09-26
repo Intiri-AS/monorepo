@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
-using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.IntiriColor;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
-	public class ColorPalettesController : BaseApiController
+    public class ColorPalettesController : BaseApiController
 	{
 		#region Fields
 
