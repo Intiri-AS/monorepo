@@ -33,11 +33,6 @@ namespace Intiri.API.DataAccess.Repository
 			return (await Get(style => style.Id == styleId, includeProperties: "StyleImages" )).SingleOrDefault();
 		}
 
-		public async Task<Style> GetStyleByIdAsync(int styleId)
-		{
-			return await GetByID(styleId);
-		}
-
 		public async Task<bool> IsStyleByNameExistAsync(string styleName)
 		{
 			return await DoesAnyExist(style => style.Name == styleName);

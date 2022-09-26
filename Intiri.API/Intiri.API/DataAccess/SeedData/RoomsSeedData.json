@@ -1,37 +1,37 @@
 ﻿[
 	{
 		"Name": "Living Room",
-		"ImagePath": "Resources\\RoomImages\\Living.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Living_fujlaw.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Dinning Room",
-		"ImagePath": "Resources\\RoomImages\\Living.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Dining_cerzcs.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Bedroom",
-		"ImagePath": "Resources\\RoomImages\\Bedroom.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bedroom_evvbz6.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Kitchen",
-		"ImagePath": "Resources\\RoomImages\\Kitchen.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Kitchen_njsgt3.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Bathroom",
-		"ImagePath": "Resources\\RoomImages\\Bathroom.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bathroom_axq8eu.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Entry ways",
-		"ImagePath": "Resources\\RoomImages\\Entry.svg",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Entry_l2f3ya.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	}

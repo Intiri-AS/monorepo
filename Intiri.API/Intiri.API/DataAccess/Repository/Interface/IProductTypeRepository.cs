@@ -6,5 +6,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	{
 		Task<IEnumerable<ProductType>> GetAllProductTypesAsync();
 		Task<bool> IsProductTypeNameExists(string productTypeName);
+		Task<ProductType> GetProductTypeProductsByIdAsync(int productTypeId);
 	}
 }

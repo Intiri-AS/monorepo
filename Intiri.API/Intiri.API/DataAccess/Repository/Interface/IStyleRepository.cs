@@ -7,7 +7,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	public interface IStyleRepository : IRepositoryBase<Style>
 	{
 		Task<IEnumerable<Style>> GetStylesAsync();
-		Task<Style> GetStyleByIdAsync(int styleId);
 		Task<Style> GetStyleWithStyleImagesByIdAsync(int styleId);
 		Task<bool> IsStyleByNameExistAsync(string styleName);
 	}

@@ -17,10 +17,18 @@
 	},
 	{
 		"Name": "Meadow Green",
-		"Number": 3043,
+		"Number": 3025,
 		"MainColor": "#4CAD40",
 		"ShadeColorLight": "#6AAE61",
 		"ShadeColorMedium": "#57B24C",
 		"ShadeColorDark": "#25B514"
+	},
+	{
+		"Name": "Purple Dream",
+		"Number": 2638,
+		"MainColor": "#DDAFE2",
+		"ShadeColorLight": "#E1CFE3",
+		"ShadeColorMedium": "#E1C6E5",
+		"ShadeColorDark": "#DE9EE6"
 	}
 ]

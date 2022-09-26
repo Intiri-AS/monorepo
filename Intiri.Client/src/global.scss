@@ -88,6 +88,11 @@ ion-button {
   @apply font-medium text-black-1 text-5xl mt-0
 }
 
+// without this change ion-grid does not work well, since slide is reducing container width based on given content (eg. size=12 will not take full width if content is not wide enough)
+.swiper-slide {
+  display: block;
+}
+
 .primary-btn {
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
   margin-right: 0.5rem !important;

@@ -101,6 +101,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePublicId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MaterialTypeId")
                         .HasColumnType("int");
 
@@ -179,6 +182,9 @@ namespace Intiri.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -309,6 +315,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePublicId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -371,6 +380,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePublicId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -391,6 +403,9 @@ namespace Intiri.API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StyleId")

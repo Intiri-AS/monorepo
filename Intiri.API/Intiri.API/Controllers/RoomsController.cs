@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
@@ -6,6 +7,7 @@ using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +18,19 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
+		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public RoomsController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public RoomsController(
+			IUnitOfWork unitOfWork,
+			IMapper mapper,
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors
@@ -55,7 +60,8 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<RoomOutDTO>> AddRoom([FromForm] RoomInDTO roomInDTO)
 		{
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomInDTO.RoomTypeId);
+			RoomType roomType = await _unitOfWork
+				.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomInDTO.RoomTypeId);
 			
 			if (roomType == null) return BadRequest("Room type doesn't exist");
 
@@ -68,11 +74,27 @@ namespace Intiri.API.Controllers
 
 			if (file.Length > 0)
 			{
-				string imgPrefixName = roomInDTO.Name + roomInDTO.RoomTypeId + "_";
-				string dbPath = await _imageService.AddImageAsync(file, "RoomImages", imgPrefixName);
-				
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService
+						.UploadFileAsync(file, FileUploadDestinations.RoomImages);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to upload room image.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest("Failed to upload room image.");
+				}
+
 				Room room = _mapper.Map<Room>(roomInDTO);
-				room.ImagePath = dbPath;
+
+				room.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
+				room.ImagePublicId = uploadResult.PublicId;
+
 				_unitOfWork.RoomRepository.Insert(room);
 
 				if (await _unitOfWork.SaveChanges())
@@ -99,7 +121,14 @@ namespace Intiri.API.Controllers
 			try
 			{
 				string imagePath = room.ImagePath;
-				await _imageService.DeleteImageFromFileSystemAsync(imagePath);
+
+				DeletionResult deletionResult = await _fileUploadService
+					.DeleteFileAsync(room.ImagePublicId);
+
+				if (deletionResult.Error != null)
+				{
+					return BadRequest("Unable to delete room image.");
+				}
 
 				await _unitOfWork.RoomRepository.Delete(roomId);
 				roomType.Rooms.Remove(room);

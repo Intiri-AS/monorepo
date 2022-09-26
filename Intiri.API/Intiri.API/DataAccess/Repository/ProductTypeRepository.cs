@@ -27,6 +27,15 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.ProductTypes.ToListAsync();
 		}
 
+		public async Task<ProductType> 
+			GetProductTypeProductsByIdAsync(int productTypeId)
+		{
+			return (await Get(
+				pt => pt.Id == productTypeId,
+				includeProperties: "Products"))
+				.SingleOrDefault();
+		}
+
 		public async Task<bool> IsProductTypeNameExists(string productTypeName)
 		{
 			return await DoesAnyExist(productType => productType.Name == productTypeName.ToLower());

@@ -1,29 +1,14 @@
 [
 	{
 		"Name": "my project 1",
-		"StyleImages": [
-			{
-				"Id": 1
-			},
-			{
-				"Id": 2
-			},
-			{
-				"Id": 3
-			}
-		],
-		"ColorPalette": {
-			"Id": 3
-		},
-		"Room": {
-			"Id": 2
-		},
+		"StyleImageIds": [1, 2, 3],
+		"ColorPaletteId": 3,
+		"RoomId": 1,
 		"BudgetId": 1,
 		"RoomDetails": {
-			"Id": 1
+			"Shape": "rectangular",
+			"Size": 14.3
 		},
-		"Moodboard": {
-			"Id": 2
-		}
+		"MoodboardId": 2
 	}
 ]

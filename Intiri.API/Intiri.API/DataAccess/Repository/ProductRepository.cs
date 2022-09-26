@@ -43,7 +43,8 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<Product> GetProductByNameAsync(string productName)
 		{
-			return await SingleOrDefaultAsync<Product>(product => product.Name == productName, _mapper);
+			return await SingleOrDefaultAsync<Product>(
+				product => product.Name == productName, _mapper);
 		}
 
 		public async Task<IEnumerable<Product>> GetProductsByIdsListAsync(ICollection<int> productIds)

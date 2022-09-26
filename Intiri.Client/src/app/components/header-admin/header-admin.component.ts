@@ -16,7 +16,7 @@ export class HeaderAdminComponent {
     {title: 'Consultations', url: '/consultations'},
     {title: 'Partners', url: '/partners'},
     {title: 'Designers', url: '/designers'},
-    {title: 'Clients', url: '#'},
+    {title: 'Clients', url: '/clients'},
     {title: 'Moodboards', url: '#'},
     {title: 'Style', url: '#'},
   ]
