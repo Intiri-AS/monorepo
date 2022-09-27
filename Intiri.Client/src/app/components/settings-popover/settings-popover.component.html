@@ -11,13 +11,13 @@
 </ion-list>
 
 <ion-list *ngIf="headerType === 'admin'" lines="none" >
-  <ion-item class="text-black-1" [button]="true" [detail]="true">Language</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
   <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
   <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
 </ion-list>
 
 <ion-list *ngIf="headerType === 'designer'" lines="none" >
-  <ion-item class="text-black-1" [button]="true" [detail]="true">Language</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
   <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
   <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
 </ion-list>
