@@ -5,7 +5,7 @@ import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
 import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
-import { StylePage } from './pages/shared-guarded-pages/style/style.page';
+import { StylePage } from './pages/admin-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
@@ -154,6 +154,10 @@ const routes: Routes = [
     component: ClientPage
   },
   {
+    path: 'style', //TODO Set up page guard (shared guard)
+    component: StylePage
+  },
+  {
     path: 'my-moodboard', //TODO Set up page guard (designer guard)
     component: MyMoodboardPage
   },
@@ -168,10 +172,6 @@ const routes: Routes = [
   {
     path: 'style-list', //TODO Set up page guard (internal designer guard)
     component: StyleListPage
-  },
-  {
-    path: 'style', //TODO Set up page guard (shared guard)
-    component: StylePage
   },
   {
     path: 'moodboard', //TODO Set up page guard (shared guard)

@@ -17,7 +17,8 @@ export class SubHeaderComponent implements OnInit {
     clients: ['clients', 'inspiration'],
     moodboards: ['styles','materials','rooms', 'colors', 'pictures'],
     clientList: ['clients', 'moodboard','statistic'],
-    designerMoodboards: ['my moodboards', 'all moodboards']
+    designerMoodboards: ['my moodboards', 'all moodboards'],
+    style: ['styles','materials','rooms', 'colors', 'pictures']
   }
 
   constructor() {}

@@ -43,6 +43,7 @@ import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
 import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
 import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
+import { StylePage } from './pages/admin-pages/style/style.page';
 
 //pages for designers
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
@@ -51,7 +52,6 @@ import { StyleListPage } from './pages/designer-pages/internal-designer/styles/s
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 
 //shared admin/designer pages
-import { StylePage } from './pages/shared-guarded-pages/style/style.page';
 import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
 
 //app components
@@ -69,6 +69,7 @@ import { AdminPartnersComponent } from './components/admin-partners/admin-partne
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminClientsComponent } from './components/admin-clients/admin-clients.component';
 import { AdminInspirationComponent } from './components/admin-inspiration/admin-inspiration.component';
+import { AdminStylesComponent } from './components/admin-styles/admin-styles.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -79,6 +80,7 @@ import { AddPartnerModalComponent } from './components/modals/add-partner-modal/
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
+import { AddStyleModalComponent } from './components/modals/add-style-modal/add-style-modal.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -96,9 +98,9 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent,
     TimeAgoPipe
   ],
   entryComponents: [
