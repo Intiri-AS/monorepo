@@ -28,7 +28,7 @@ export class HeaderComponent {
       component: SettingsPopoverComponent,
       componentProps: { headerType: 'user'},
       event: e,
-      dismissOnSelect: true
+      dismissOnSelect: false
     });
 
     await popover.present();

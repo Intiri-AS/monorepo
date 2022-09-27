@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 import { Project } from './models/project.model';
 import { User } from './models/user.model';
 
 import { AccountService } from './services/account.service';
+import { LanguageService } from './services/language.service';
 import { ProjectService } from './services/project.service';
 
 @Component({
@@ -12,11 +14,23 @@ import { ProjectService } from './services/project.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private projectService: ProjectService) {}
+  constructor(
+    private accountService: AccountService,
+    private projectService: ProjectService,
+    private languageService: LanguageService,
+    private storage: Storage
+  ) {
+    this.initStorage();
+  }
+
+  async initStorage() {
+    await this.storage.create();
+  }
 
   ngOnInit() {
     this.setCurrentUser();
     this.setCurrentProject();
+    this.languageService.setInitialAppLanguage();
   }
 
   setCurrentUser() {
