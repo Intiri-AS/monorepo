@@ -27,9 +27,9 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Projects
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
-				.Include(p => p.ColorPalette)
-				.Include(p => p.RoomDetails)
-				.Include(p => p.Moodboard)
+				.Include(p => p.ColorPalettes)
+				//.Include(p => p.RoomDetails)
+				//.Include(p => p.Moodboard)
 				.ToListAsync();
 		}
 
@@ -39,9 +39,9 @@ namespace Intiri.API.DataAccess.Repository
 				.Where(p => p.Id == id)
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
-				.Include(p => p.ColorPalette)
-				.Include(p => p.RoomDetails)
-				.Include(p => p.Moodboard)
+				.Include(p => p.ColorPalettes)
+				//.Include(p => p.RoomDetails)
+				//.Include(p => p.Moodboard)
 				.FirstOrDefaultAsync();
 		}
 	}

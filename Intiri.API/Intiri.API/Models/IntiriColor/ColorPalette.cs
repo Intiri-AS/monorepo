@@ -10,6 +10,6 @@
         public string ShadeColorMedium { get; set; }
         public string ShadeColorDark { get; set; }
 
-        public ICollection<Moodboard> Moodboards { get; set; }
+        public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
     }
 }

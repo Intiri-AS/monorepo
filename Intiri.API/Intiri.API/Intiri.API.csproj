@@ -37,4 +37,6 @@
     <Folder Include="Resources\StyleImages\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties dataaccess_4seeddata_4userseeddata_1json__JsonSchema="https://carafe.fm/schema/draft-02/bundle.schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿using Intiri.API.Models.Moodboard;
+﻿using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {

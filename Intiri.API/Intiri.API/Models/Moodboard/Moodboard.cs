@@ -7,8 +7,8 @@ namespace Intiri.API.Models.Moodboard
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public User Desinger { get; set; }
-        public int DesingerId { get; set; }
+        public User Designer { get; set; }
+        public int DesignerId { get; set; }
         public Style.Style Style { get; set; }
         public Room.Room Room { get; set; }
         public Moodboard SourceMoodboard { get; set; }

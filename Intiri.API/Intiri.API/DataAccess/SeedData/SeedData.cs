@@ -71,8 +71,9 @@ namespace Intiri.API.DataAccess.SeedData
 
 			await userManager.AddToRoleAsync(users[0], "Admin");
 			await userManager.AddToRoleAsync(users[1], "InternalDesigner");
-			await userManager.AddToRoleAsync(users[2], "FreeEndUser");
-			await userManager.AddToRoleAsync(users[3], "Partner");
+			await userManager.AddToRoleAsync(users[2], "ExternalDesigner");
+			await userManager.AddToRoleAsync(users[3], "FreeEndUser");
+			await userManager.AddToRoleAsync(users[4], "Partner");
 		}
 
 		public static async Task SeedStyles(IUnitOfWork unitOfWork)
@@ -234,10 +235,10 @@ namespace Intiri.API.DataAccess.SeedData
 
 		public static async Task SeedProjects(IUnitOfWork unitOfWork)
 		{
-			string projectsData = 
+			string projectsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/ProjectsSeedData.json");
 
-			List<ProjectInDTO> projectInDTOs = 
+			List<ProjectInDTO> projectInDTOs =
 				JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
 
 			foreach (ProjectInDTO inDTO in projectInDTOs)
@@ -245,15 +246,16 @@ namespace Intiri.API.DataAccess.SeedData
 				Project project = new()
 				{
 					Name = inDTO.Name,
-					BudgetId = inDTO.BudgetId,
+					BudgetRate = inDTO.BudgetId,
+					EndUser = await unitOfWork.UserRepository.GetByID(inDTO.EndUserId),
 					StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
 						.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
-					ColorPalette = await unitOfWork.ColorPaletteRepository
-						.SingleOrDefaultAsync(cp => cp.Id == inDTO.ColorPaletteId),
+					ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
+						.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
 					Room = await unitOfWork.RoomRepository
 						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
-					Moodboard = await unitOfWork.MoodboardRepository
-						.SingleOrDefaultAsync(m => m.Id == inDTO.MoodboardId)
+					ProjectMoodboards = (ICollection<Moodboard>)await unitOfWork.MoodboardRepository
+						.GetMoodboardsByIdsList(inDTO.MoodboardsIds)
 				};
 				unitOfWork.ProjectRepository.Insert(project);
 			}
@@ -262,10 +264,10 @@ namespace Intiri.API.DataAccess.SeedData
 
 		public static async Task SeedMoodboards(IUnitOfWork unitOfWork)
 		{
-			string moodboardsData = 
+			string moodboardsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/MoodboardsSeedData.json");
 
-			List<MoodboardInDTO> moodboardInDTOs = 
+			List<MoodboardInDTO> moodboardInDTOs =
 				JsonSerializer.Deserialize<List<MoodboardInDTO>>(moodboardsData);
 
 			foreach (MoodboardInDTO inDTO in moodboardInDTOs)
@@ -274,14 +276,15 @@ namespace Intiri.API.DataAccess.SeedData
 				{
 					Name = inDTO.Name,
 					Description = inDTO.Description,
-					Designer = inDTO.Designer,
+					Designer = await unitOfWork.UserRepository.SingleOrDefaultAsync(u => u.Id == inDTO.DesignerId),
+					IsTemplate = inDTO.IsTemplate,
 					Style = await unitOfWork.StyleRepository
 						.SingleOrDefaultAsync(s => s.Id == inDTO.StyleId),
 					Room = await unitOfWork.RoomRepository
 						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
 					Materials = (ICollection<Material>)await unitOfWork.MaterialRepository
 						.GetMaterialsByIdsListAsync(inDTO.MaterialIds),
-					ColorPalettes = (ICollection<ColorPalette>) await unitOfWork.ColorPaletteRepository
+					ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
 						.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
 					Products = (ICollection<Product>)await unitOfWork.ProductRepository
 						.GetProductsByIdsListAsync(inDTO.ProductIds)
