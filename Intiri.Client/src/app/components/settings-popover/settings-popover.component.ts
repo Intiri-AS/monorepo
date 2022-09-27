@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
+import { LanguagePopoverComponent } from '../popovers/language-popover/language-popover.component';
 
 @Component({
   selector: 'app-settings-popover',
@@ -11,7 +12,10 @@ export class SettingsPopoverComponent implements OnInit {
 
   headerType;
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private popoverController: PopoverController
+  ) { }
 
   ngOnInit() {}
 
@@ -22,6 +26,15 @@ export class SettingsPopoverComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  async openLanguagePopover(ev) {
+    const popover = await this.popoverController.create({
+      component: LanguagePopoverComponent,
+      event: ev
+    })
+
+    await popover.present();
   }
 
 }

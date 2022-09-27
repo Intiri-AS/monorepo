@@ -81,6 +81,7 @@ import { BookDesignerModalComponent } from './components/modals/book-designer-mo
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
 import { AddStyleModalComponent } from './components/modals/add-style-modal/add-style-modal.component';
+import { LanguagePopoverComponent } from './components/popovers/language-popover/language-popover.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -108,7 +109,7 @@ export function createTranslateLoader(http: HttpClient) {
     NewProjectStepComponent, StepPickerComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent,
     TimeAgoPipe
   ],
   entryComponents: [

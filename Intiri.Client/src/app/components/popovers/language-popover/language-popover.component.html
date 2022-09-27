@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-list button *ngFor="let lng of languages" (click)="selectLanguage(lng.value)">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <img [src]="lng.img" slot="start" class="w-8 h-8 ml-2">
+        <p class="text-lg ml-2">
+          {{lng.text}}
+        </p>
+      </div>
+      <ion-icon slot="end" name="checkmark" class="w-6 h-6 mr-2" *ngIf="lng.value === selected"></ion-icon>
+    </div>
+  </ion-list>
+</ion-content>
