@@ -38,7 +38,7 @@
 		"DesignerId": 1,
 		"StyleId": 1,
 		"RoomId": 4,
-		"IsTemplate":  true,
+		"IsTemplate": true,
 		"MaterialIds": [ 4, 1, 2, 6 ],
 		"ColorPaletteIds": [ 3, 4 ],
 		"ProductIds": [ 4, 1, 2, 6 ]

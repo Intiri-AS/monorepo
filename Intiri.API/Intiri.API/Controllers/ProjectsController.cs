@@ -34,67 +34,66 @@ namespace Intiri.API.Controllers
 
 		#region Public methods
 
-		//[HttpGet]
-		//public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
-		//{
-		//	IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
+		{
+			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
-		//	foreach (Project project in projects)
-		//	{
-		//		Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
+			return Ok(projectsOut);
+		}
 
-		//		project.Moodboard = moodboard;
-		//	}
+		[HttpGet("id/{projectId}")]
+		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
 
-		//	IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
+			//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
 
-		//	return Ok(projectsOut);
-		//}
+			//project.Moodboard = moodboard;
 
-		//[HttpGet("id/{projectId}")]
-		//public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
-		//{
-		//	Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
-		//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
+			return Ok(projectOut);
+		}
 
-		//	project.Moodboard = moodboard;
+		[HttpPost("add")]
+		public async Task<ActionResult<int>> Add([FromBody] ProjectInDTO projectIn)
+		{
+			if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.Name))
+			{
+				return BadRequest($"Project with name '{projectIn.Name}' already exists");
+			}
 
-		//	ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+			Project project = _mapper.Map<Project>(projectIn);
 
-		//	return Ok(projectOut);
-		//}
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
+			project.StyleImages = styleImages.ToArray();
 
-		//[HttpPost("add")]
-		//public async Task<ActionResult<int>> Add([FromBody] ProjectInDTO projectIn)
-		//{
-		//	if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.Name))
-		//	{
-		//		return BadRequest($"Project with name '{projectIn.Name}' already exists");
-		//	}
 
-		//	Project project = _mapper.Map<Project>(projectIn);
+			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ColorPaletteIds);
+			project.ColorPalettes = colorPalettes.ToArray();
 
-		//	IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
-		//	project.StyleImages = styleImages.ToArray();
+			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
+			project.Room = room;
 
-		//	ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(projectIn.ColorPaletteId);
-		//	project.ColorPalette = colorPalette;
+			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(projectIn.MoodboardsIds);
+			project.ColorPalettes = colorPalettes.ToArray();
 
-		//	Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
-		//	project.Room = room;
+			//foreach (int moodboardId in projectIn.MoodboardsIds)
+			//{
+			//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+			//	project.ProjectMoodboards.Add(moodboard);
+			//}
 
-		//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardId);
-		//	project.Moodboard = moodboard;
+			_unitOfWork.ProjectRepository.Insert(project);
 
-		//	_unitOfWork.ProjectRepository.Insert(project);
-
-		//	if (await _unitOfWork.SaveChanges())
-		//	{
-		//		return Ok(_mapper.Map<ProjectOutDTO>(project));
-		//	}
-		//	return BadRequest("Problem occured while adding project");
-		//}
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<ProjectOutDTO>(project));
+			}
+			return BadRequest("Problem occured while adding project");
+		}
 
 		[HttpDelete("delete/{projectId}")]
 		public async Task<ActionResult> DeleteProject(int projectId)

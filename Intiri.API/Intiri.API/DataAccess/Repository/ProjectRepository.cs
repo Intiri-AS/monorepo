@@ -28,8 +28,8 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
 				.Include(p => p.ColorPalettes)
-				//.Include(p => p.RoomDetails)
-				//.Include(p => p.Moodboard)
+				.Include(p => p.RoomDetails)
+				.Include(p => p.ProjectMoodboards)
 				.ToListAsync();
 		}
 
@@ -40,8 +40,8 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
 				.Include(p => p.ColorPalettes)
-				//.Include(p => p.RoomDetails)
-				//.Include(p => p.Moodboard)
+				.Include(p => p.RoomDetails)
+				.Include(p => p.ProjectMoodboards)
 				.FirstOrDefaultAsync();
 		}
 	}

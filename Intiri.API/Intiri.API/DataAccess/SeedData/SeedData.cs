@@ -10,6 +10,7 @@ using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
+using System.ComponentModel.Design;
 using System.Text.Json;
 
 namespace Intiri.API.DataAccess.SeedData
@@ -238,28 +239,48 @@ namespace Intiri.API.DataAccess.SeedData
 			string projectsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/ProjectsSeedData.json");
 
-			List<ProjectInDTO> projectInDTOs =
-				JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
-
-			foreach (ProjectInDTO inDTO in projectInDTOs)
+			List<Project> projects =
+				JsonSerializer.Deserialize<List<Project>>(projectsData);
+			foreach (Project project in projects)
 			{
-				Project project = new()
-				{
-					Name = inDTO.Name,
-					BudgetRate = inDTO.BudgetId,
-					EndUser = await unitOfWork.UserRepository.GetByID(inDTO.EndUserId),
-					StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
-						.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
-					ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
-						.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
-					Room = await unitOfWork.RoomRepository
-						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
-					ProjectMoodboards = (ICollection<Moodboard>)await unitOfWork.MoodboardRepository
-						.GetMoodboardsByIdsList(inDTO.MoodboardsIds)
-				};
+				project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
+				project.Room = await unitOfWork.RoomRepository.GetByID(1);
+				project.StyleImages = new List<StyleImage>();
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(1));
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(2));
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(3));
+				project.ColorPalettes = new List<ColorPalette>();
+				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(1));
+				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(3));
+				project.ProjectMoodboards = new List<Moodboard>();
+				project.ProjectMoodboards.Add(await unitOfWork.MoodboardRepository.GetByID(2));
+				
 				unitOfWork.ProjectRepository.Insert(project);
 			}
 			await unitOfWork.SaveChanges();
+
+			//List<ProjectInDTO> projectInDTOs =
+			//	JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
+
+			//foreach (ProjectInDTO inDTO in projectInDTOs)
+			//{
+			//	Project project = new()
+			//	{
+			//		Name = inDTO.Name,
+			//		BudgetRate = inDTO.BudgetId,
+			//		EndUser = await unitOfWork.UserRepository.GetByID(inDTO.EndUserId),
+			//		StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
+			//			.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
+			//		ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
+			//			.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
+			//		Room = await unitOfWork.RoomRepository
+			//			.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
+			//		ProjectMoodboards = (ICollection<Moodboard>)await unitOfWork.MoodboardRepository
+			//			.GetMoodboardsByIdsList(inDTO.MoodboardsIds)
+			//	};
+			//	unitOfWork.ProjectRepository.Insert(project);
+			//}
+			//await unitOfWork.SaveChanges();
 		}
 
 		public static async Task SeedMoodboards(IUnitOfWork unitOfWork)

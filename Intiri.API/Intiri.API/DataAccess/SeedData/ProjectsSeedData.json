@@ -1,15 +1,13 @@
 [
 	{
 		"Name": "my project 1",
-		"StyleImageIds": [ 1, 2, 3 ],
+		
 		"EndUserId": 2,
 		"RoomId": 1,
 		"BudgetRate": 1,
 		"RoomDetails": {
 			"Shape": "rectangular",
 			"Size": 14.3
-		},
-		"ColorPaletteIds": [ 1, 3 ],
-		"MoodboardsIds": [ 2 ]
+		}
 	}
 ]
