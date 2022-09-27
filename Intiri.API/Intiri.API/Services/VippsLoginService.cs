@@ -9,38 +9,58 @@ namespace Intiri.API.Services
 {
 	public class VippsLoginService: IVippsLoginService
 	{
-		private readonly string _discoveryUrl;
-		private readonly Logger _logger;
+		private readonly IOptions<VippsLoginConfiguration> _options;
+		private readonly ILogger<VippsLoginService> _logger;
+		private readonly HttpClient _httpClient;
+		private DiscoveryDocumentResponse _discoveryDocument;
 
-		public VippsLoginService(Logger logger, IOptions<VippsConfiguration> options)
+		public VippsLoginService(
+			ILogger<VippsLoginService> logger,
+			IOptions<VippsLoginConfiguration> options)
 		{
 			_logger = logger;
-			_discoveryUrl = options.Value.DiscoveryUrl;
+			_options = options;
+			_httpClient = new HttpClient();
 		}
 
-		private async Task<DiscoveryDocumentResponse> Get()
+		public async Task GetDiscoveryDocument()
 		{
-			HttpClient client = new HttpClient();
-
 			DiscoveryDocumentRequest discoRequest = new DiscoveryDocumentRequest
 			{
-				Address = _discoveryUrl
+				Address = _options.Value.DiscoveryUrl,
+				Policy =
+				{
+					ValidateEndpoints = false
+				}
 			};
 
 			DiscoveryDocumentResponse discoResponse =
-				await client.GetDiscoveryDocumentAsync();
+				await _httpClient.GetDiscoveryDocumentAsync(discoRequest);
 
 			if (discoResponse.IsError)
 			{
-				_logger.Error($"{discoResponse.Error}");
+				_logger.LogError($"{discoResponse.Error}");
+				return;
 			}
 
-			//var ru = new RequestUrl(discovery.AuthorizeEndpoint);
+			_discoveryDocument = discoResponse;
 
-			//var ulr = ru.CreateAuthorizeUrl(
-			//	clientId: )
-			//return true;
+		}
 
+		public async Task<string> GetRedirectUrl()
+		{
+			RequestUrl requestUrl = new RequestUrl(_discoveryDocument.AuthorizeEndpoint);
+
+			string authorizationUrl = requestUrl.CreateAuthorizeUrl(
+				clientId: _options.Value.ClientId,
+				responseType: "code",
+				redirectUri: "http://localhost:8100/my-intiri",
+				scope: "name email phoneNumber",
+				state: "TODO: Session cookie");
+
+			//var ola = await _httpClient.GetAsync(authorizationUrl);
+
+			return authorizationUrl;
 		}
 	}
 }

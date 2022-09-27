@@ -20,17 +20,25 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly ITokenService _tokenService;
 		private readonly IAccountService _accountService;
+		private readonly IVippsLoginService _vippsLoginService;
 		private readonly ILogger<AccountController> _logger;
 
 		#endregion  Fields
 
 		#region Constructors
 
-		public AccountController(IUnitOfWork unitOfWork, ITokenService tokenService, IMapper mapper, IAccountService accountService, ILogger<AccountController> logger) : base(unitOfWork)
+		public AccountController(
+			IUnitOfWork unitOfWork,
+			ITokenService tokenService,
+			IMapper mapper,
+			IAccountService accountService,
+			IVippsLoginService vippsLoginService,
+			ILogger<AccountController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
 			_accountService = accountService;
+			_vippsLoginService = vippsLoginService;
 			_logger = logger;
 		}
 
@@ -85,25 +93,9 @@ namespace Intiri.API.Controllers
 		[HttpPost("vipps-login")]
 		public async Task<ActionResult<bool>> VippsLogin()
 		{
-			var client = new HttpClient();
-			string identityUrl = "https://apitest.vipps.no" +
-				"/access-management-1.0/access/.well-known/openid-configuration";
+			await _vippsLoginService.GetDiscoveryDocument();
 
-			var discovery = await client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
-			{
-				Address = identityUrl,
-				Policy =
-				{
-					ValidateEndpoints = false
-				}
-			});
-
-			if (discovery.IsError)
-			{
-				return BadRequest($"{discovery.Error}");
-			}
-
-			return true;
+			return Redirect(await _vippsLoginService.GetRedirectUrl());
 		}
 
 		[HttpDelete("delete-user/{phone}")]

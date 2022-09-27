@@ -24,12 +24,13 @@ namespace Intiri.API.Extension
 			});
 
 			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
-			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
+			AddConfigurationService<VippsLoginConfiguration>(services, config, "VippsLoginConfiguration");
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IAccountService, AccountService>();
 
+			services.AddScoped<IVippsLoginService, VippsLoginService>();
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
