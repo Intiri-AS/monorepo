@@ -4,7 +4,7 @@
 		"Email": "dina@exoswitch.com",
 		"PhoneNumber": "1231231",
 		"FirstName": "Dina",
-		"LastName": "Dina",
+		"LastName": "Admin",
 		"Gender": "Female",
 		"Created": "2019-04-03"
 	},
@@ -13,25 +13,34 @@
 		"Email": "cora@exoswitch.com",
 		"PhoneNumber": "1231232",
 		"FirstName": "Cora",
-		"LastName": "Cora",
+		"LastName": "InternalDesigner",
 		"Gender": "Female",
 		"Created": "2020-02-13"
 	},
 	{
 		"UserName": "1231233",
+		"Email": "cora@exoswitch.com",
+		"PhoneNumber": "1231232",
+		"FirstName": "Tod",
+		"LastName": "FreeEndUser",
+		"Gender": "Male",
+		"Created": "2020-02-13"
+	},
+	{
+		"UserName": "1231234",
 		"Email": "moss@exoswitch.com",
 		"PhoneNumber": "1231233",
 		"FirstName": "Moss",
-		"LastName": "Moss",
+		"LastName": "FreeEndUser",
 		"Gender": "Male",
 		"Created": "2015-07-13"
 	},
 	{
-		"UserName": "1231234",
+		"UserName": "1231235",
 		"Email": "day@exoswitch.com",
 		"PhoneNumber": "1231234",
 		"FirstName": "Day",
-		"LastName": "Day",
+		"LastName": "Partner",
 		"Gender": "Other",
 		"Created": "2018-08-16"
 	}

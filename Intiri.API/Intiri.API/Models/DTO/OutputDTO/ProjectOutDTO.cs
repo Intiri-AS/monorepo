@@ -1,5 +1,7 @@
 ﻿using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Room;
 
 namespace Intiri.API.Models.DTO.OutputDTO
 {
@@ -8,11 +10,11 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Created { get; set; }
-		public int BudgetId { get; set; }
-		public ICollection<StyleImageOutDTO> StyleImages { get; set; }
-		public ColorPaletteOutDTO ColorPalette { get; set; }
 		public RoomOutDTO Room { get; set; }
-		public RoomDetailsOutDTO RoomDetails { get; set; }
-		public MoodboardOutDTO Moodboard { get; set; }
+		public int BudgetRate { get; set; }
+		public RoomDetails RoomDetails { get; set; }
+		public ICollection<ColorPaletteOutDTO> ColorPalettes { get; set; }
+		public ICollection<StyleImageOutDTO> StyleImages { get; set; }
+		public ICollection<MoodboardOutDTO> ProjectMoodboards { get; set; }
 	}
 }

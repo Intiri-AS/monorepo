@@ -7,10 +7,12 @@ using Intiri.API.Models.Room;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Project;
+using Intiri.API.Models.Moodboard;
 
 namespace Intiri.API.DataAccess
 {
-	public class DataContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole,
+    public class DataContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole,
 								IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 	{
 		#region ctors

@@ -1,8 +1,10 @@
-﻿using Intiri.API.Models;
+﻿using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IMoodboardRepository: IRepositoryBase<Moodboard>
+    public interface IMoodboardRepository: IRepositoryBase<Moodboard>
 	{
 		Task<IEnumerable<Moodboard>> GetMoodboards();
 		Task<Moodboard> GetFullMoodboardById(int id);

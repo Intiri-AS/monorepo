@@ -9,7 +9,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string Designer { get; set; }
+		public int DesignerId { get; set; }
 		public StyleOutDTO Style { get; set; }
 		public RoomOutDTO Room { get; set; }
 		public ICollection<MaterialOutDTO> Materials { get; set; }

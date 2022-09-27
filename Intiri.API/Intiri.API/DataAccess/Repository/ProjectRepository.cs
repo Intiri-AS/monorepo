@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
+using Intiri.API.Models.Project;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ProjectRepository: RepositoryBase<Project>, IProjectRepository
+    public class ProjectRepository: RepositoryBase<Project>, IProjectRepository
 	{
 		#region Fields
 
@@ -27,9 +27,9 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Projects
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
-				.Include(p => p.ColorPalette)
+				.Include(p => p.ColorPalettes)
 				.Include(p => p.RoomDetails)
-				.Include(p => p.Moodboard)
+				.Include(p => p.ProjectMoodboards)
 				.ToListAsync();
 		}
 
@@ -39,9 +39,9 @@ namespace Intiri.API.DataAccess.Repository
 				.Where(p => p.Id == id)
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
-				.Include(p => p.ColorPalette)
+				.Include(p => p.ColorPalettes)
 				.Include(p => p.RoomDetails)
-				.Include(p => p.Moodboard)
+				.Include(p => p.ProjectMoodboards)
 				.FirstOrDefaultAsync();
 		}
 	}

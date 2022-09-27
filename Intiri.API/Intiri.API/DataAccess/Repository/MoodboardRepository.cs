@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
+using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class MoodboardRepository: RepositoryBase<Moodboard>, IMoodboardRepository
+    public class MoodboardRepository: RepositoryBase<Moodboard>, IMoodboardRepository
 	{
 		#region Fields
 
@@ -43,6 +44,7 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Moodboards
 				.Where(m => ids.Contains(m.Id))
 				.Include(m => m.Room)
+				.Include(m => m.Designer)
 				.Include(m => m.Materials)
 					.ThenInclude(mat => mat.MaterialType)
 				.Include(m => m.Products)

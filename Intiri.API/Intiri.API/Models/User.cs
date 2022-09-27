@@ -15,8 +15,8 @@ namespace Intiri.API.Models
 		public string City { get; set; }
 		public string Country { get; set; }
 		public ICollection<UserRole> Roles { get; set; }
-		public ICollection<Project> CreatedProjects { get; set; }
-		public ICollection<Moodboard> CreatedMoodboards { get; set; }
+		public ICollection<Project.Project> CreatedProjects { get; set; }
+		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
 
 		#endregion Properties
 	}

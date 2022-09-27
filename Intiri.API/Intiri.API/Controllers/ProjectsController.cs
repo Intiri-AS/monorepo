@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
-using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Mvc;
@@ -36,14 +38,6 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
-
-			foreach (Project project in projects)
-			{
-				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
-
-				project.Moodboard = moodboard;
-			}
-
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
@@ -54,9 +48,9 @@ namespace Intiri.API.Controllers
 		{
 			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
+			//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
 
-			project.Moodboard = moodboard;
+			//project.Moodboard = moodboard;
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -76,14 +70,21 @@ namespace Intiri.API.Controllers
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
-			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(projectIn.ColorPaletteId);
-			project.ColorPalette = colorPalette;
+
+			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ColorPaletteIds);
+			project.ColorPalettes = colorPalettes.ToArray();
 
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardId);
-			project.Moodboard = moodboard;
+			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(projectIn.MoodboardsIds);
+			project.ColorPalettes = colorPalettes.ToArray();
+
+			//foreach (int moodboardId in projectIn.MoodboardsIds)
+			//{
+			//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+			//	project.ProjectMoodboards.Add(moodboard);
+			//}
 
 			_unitOfWork.ProjectRepository.Insert(project);
 

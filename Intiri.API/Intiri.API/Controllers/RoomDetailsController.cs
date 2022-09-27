@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
-using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Room;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
-	public class RoomDetailsController : BaseApiController
+    public class RoomDetailsController : BaseApiController
 	{
 		#region Fields
 

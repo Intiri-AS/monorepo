@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
+using Intiri.API.Models.IntiriColor;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ColorPaletteRepository: RepositoryBase<ColorPalette>, IColorPaletteRepository
+    public class ColorPaletteRepository: RepositoryBase<ColorPalette>, IColorPaletteRepository
 	{
 		#region Fields
 
