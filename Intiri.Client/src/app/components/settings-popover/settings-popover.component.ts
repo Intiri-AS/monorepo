@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, NavController, PopoverController } from '@ionic/angular';
 import { LogoutModalComponent } from '../modals/logout-modal/logout-modal.component';
 import { LanguagePopoverComponent } from '../popovers/language-popover/language-popover.component';
 
@@ -14,12 +14,14 @@ export class SettingsPopoverComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private nav: NavController
   ) { }
 
   ngOnInit() {}
 
   async openLogoutModal() {
+    this.popoverController.dismiss();
     const modal = await this.modalController.create({
       component: LogoutModalComponent,
       cssClass: 'small-modal-css'
@@ -28,13 +30,18 @@ export class SettingsPopoverComponent implements OnInit {
     await modal.present();
   }
 
-  async openLanguagePopover(ev) {
+  async openLanguagePopover(event) {
     const popover = await this.popoverController.create({
       component: LanguagePopoverComponent,
-      event: ev
+      event
     })
 
     await popover.present();
+  }
+
+  openPricingPlans() {
+    this.popoverController.dismiss();
+    this.nav.navigateRoot('/pricing-plans')
   }
 
 }

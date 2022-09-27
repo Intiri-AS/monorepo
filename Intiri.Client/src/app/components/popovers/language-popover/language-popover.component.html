@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-list button *ngFor="let lng of languages" (click)="selectLanguage(lng.value)">
+  <ion-list button *ngFor="let lng of languages" (click)="selectLanguage(lng.value)" class="cursor-pointer hover:opacity-80">
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <img [src]="lng.img" slot="start" class="w-8 h-8 ml-2">
