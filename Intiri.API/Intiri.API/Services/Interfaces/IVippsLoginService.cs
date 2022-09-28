@@ -2,7 +2,7 @@
 {
 	public interface IVippsLoginService
 	{
-		public Task GetDiscoveryDocument();
-		public Task<string> GetRedirectUrl();
+		public Task<string> GetAuthorizationUrl();
+		public string GetTokenAuthorizationHeader();
 	}
 }

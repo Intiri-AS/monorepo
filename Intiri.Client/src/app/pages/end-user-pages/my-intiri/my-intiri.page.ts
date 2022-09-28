@@ -77,5 +77,4 @@ export class MyIntiriPage {
   prev() {
     this.slides.slidePrev();
   }
-
 }

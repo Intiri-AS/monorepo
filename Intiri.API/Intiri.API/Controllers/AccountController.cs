@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using IdentityModel.Client;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
@@ -20,7 +19,6 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly ITokenService _tokenService;
 		private readonly IAccountService _accountService;
-		private readonly IVippsLoginService _vippsLoginService;
 		private readonly ILogger<AccountController> _logger;
 
 		#endregion  Fields
@@ -32,13 +30,11 @@ namespace Intiri.API.Controllers
 			ITokenService tokenService,
 			IMapper mapper,
 			IAccountService accountService,
-			IVippsLoginService vippsLoginService,
 			ILogger<AccountController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
 			_accountService = accountService;
-			_vippsLoginService = vippsLoginService;
 			_logger = logger;
 		}
 
@@ -88,14 +84,6 @@ namespace Intiri.API.Controllers
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			};
-		}
-
-		[HttpPost("vipps-login")]
-		public async Task<ActionResult<bool>> VippsLogin()
-		{
-			await _vippsLoginService.GetDiscoveryDocument();
-
-			return Redirect(await _vippsLoginService.GetRedirectUrl());
 		}
 
 		[HttpDelete("delete-user/{phone}")]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.page.html',
@@ -25,6 +26,10 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/sms-verification');
     },error =>{
       console.log(error);
-    })
+    });
+  }
+
+  loginWithVipps() {
+    this.accountService.loginWithVipps();
   }
 }

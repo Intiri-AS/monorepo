@@ -23,7 +23,7 @@ namespace Intiri.API.Services
 			_httpClient = new HttpClient();
 		}
 
-		public async Task GetDiscoveryDocument()
+		private async Task GetDiscoveryDocument()
 		{
 			DiscoveryDocumentRequest discoRequest = new DiscoveryDocumentRequest
 			{
@@ -44,23 +44,27 @@ namespace Intiri.API.Services
 			}
 
 			_discoveryDocument = discoResponse;
-
 		}
 
-		public async Task<string> GetRedirectUrl()
+		public async Task<string> GetAuthorizationUrl()
 		{
-			RequestUrl requestUrl = new RequestUrl(_discoveryDocument.AuthorizeEndpoint);
+			await GetDiscoveryDocument();
+
+			RequestUrl requestUrl = new(_discoveryDocument.AuthorizeEndpoint);
 
 			string authorizationUrl = requestUrl.CreateAuthorizeUrl(
 				clientId: _options.Value.ClientId,
 				responseType: "code",
-				redirectUri: "http://localhost:8100/my-intiri",
+				redirectUri: "http://localhost:8100/processing",
 				scope: "name email phoneNumber",
 				state: "TODO: Session cookie");
 
-			//var ola = await _httpClient.GetAsync(authorizationUrl);
-
 			return authorizationUrl;
+		}
+
+		public string GetTokenAuthorizationHeader()
+		{
+			return $"{_options.Value.ClientId}:{_options.Value.ClientSecret}";
 		}
 	}
 }

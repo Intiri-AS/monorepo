@@ -58,4 +58,16 @@ export class AccountService {
   resetPassword(model: any){
     return this.http.post(this.apiUrl + 'account/reset-password', model);
   }
+
+  loginWithVipps() {
+    return this.http.get<any>(this.apiUrl + 'account/vipps-auth-url')
+      .subscribe(resp => {
+        console.log(resp.authorizationUrl);
+
+        if (resp?.authorizationUrl)
+        {
+          window.location.href = resp.authorizationUrl;
+        }
+      });
+  }
 }

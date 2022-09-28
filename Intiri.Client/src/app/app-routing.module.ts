@@ -33,6 +33,7 @@ import { ClientListPage } from './pages/designer-pages/internal-designer/clients
 import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
+import { ProcessingPage } from './pages/processing/processing.page';
 
 const routes: Routes = [
   {
@@ -67,6 +68,10 @@ const routes: Routes = [
   {
     path: 'how-it-works',
     component: HowItWorksPage
+  },
+  {
+    path: 'processing',
+    component: ProcessingPage
   },
   {
     path: 'profile', //TODO Set up page guard (all users guard)

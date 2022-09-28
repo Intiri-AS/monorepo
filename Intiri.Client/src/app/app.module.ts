@@ -83,6 +83,7 @@ import { MenuPopoverComponent } from './components/menu-popover/menu-popover.com
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
+import { ProcessingPage } from './pages/processing/processing.page';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
-    TimeAgoPipe
+    TimeAgoPipe,ProcessingPage
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent
