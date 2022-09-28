@@ -1,15 +1,13 @@
 export class User {
-  email: string;
+  phoneNumber: string;
   role: string;
   token: string;
-  phoneNumber: string;
 
   //TODO This is example for User model
 
-  constructor(email: string, role: string, token: string, phoneNumber: string) {
-    this.email = email;
+  constructor(phoneNumber: string, role: string, token: string) {
+    this.phoneNumber = phoneNumber;
     this.role = role;
     this.token = token;
-    this.phoneNumber = phoneNumber;
   }
 }
