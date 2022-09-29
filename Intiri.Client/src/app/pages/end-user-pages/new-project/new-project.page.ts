@@ -14,13 +14,13 @@ export class NewProjectPage {
 
   steps: Array<object> = [
     {
-      title: 'Select pictures that you like',
-      subtitle: 'Decisions are hard, pick as many as you want.',
+      title: 'Select the room you want to improve',
+      subtitle: 'Don’t worry, you can improve more rooms later.',
       data: [],
     },
     {
-      title: 'Select the room you want to improve',
-      subtitle: 'Don’t worry, you can improve more rooms later.',
+      title: 'Select pictures that you like',
+      subtitle: 'Decisions are hard, pick as many as you want.',
       data: [],
     },
     {
@@ -50,8 +50,8 @@ export class NewProjectPage {
   project: Project = null;
 
   stepsOrder: object = {
-    0: 'styleImages',
-    1: 'room',
+    0: 'room',
+    1: 'styleImages',
     2: 'roomDetails.shape',
     3: 'colorPalette',
     4: 'moodboard',
@@ -72,10 +72,10 @@ export class NewProjectPage {
         this.openStartModal();
       }
     });
-    this.projectService.getStyleImages().subscribe((res) => {
+    this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
-    this.projectService.getRooms().subscribe((res) => {
+    this.projectService.getStyleImages().subscribe((res) => {
       this.steps[1]['data'] = res;
     });
     this.projectService.getColorPalettes().subscribe((res) => {
@@ -144,7 +144,7 @@ export class NewProjectPage {
         return true;
       }
       case 1: {
-        return this.project.styleImages.length > 0;
+        return !this.isEmpty(this.project.room);
       }
       case 2: {
         return (
