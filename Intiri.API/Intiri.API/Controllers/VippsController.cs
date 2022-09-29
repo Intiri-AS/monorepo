@@ -1,5 +1,8 @@
-﻿using Intiri.API.Controllers.Base;
+﻿using IdentityModel.Client;
+using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Models.DTO;
+using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +34,32 @@ namespace Intiri.API.Controllers
 			return Ok(authOut);
 		}
 
-		[HttpPost("access-token")]
-		public async Task<ActionResult> V
+		[HttpPost("get-access-token")]
+		public async void GetAccessToken(AccessTokenRequestDTO dto)
+		{
+			HttpClient client = new();
+
+			TokenResponse accessToken = await _vippsLoginService
+				.GetAccessToken(dto.AuthorizationCode, dto.RedirectUri);
+
+			if (accessToken.IsError)
+			{
+				_logger.LogError($"{accessToken.Error}");
+				return;
+			}
+
+			AuthEndpointResponseInDTO authEndpointResponseContent = await 
+				authEndpointResponse.Content
+				.ReadFromJsonAsync<AuthEndpointResponseInDTO>();
+
+			HttpRequestMessage userInfoEndpointRequest =
+				_vippsLoginService
+				.CreateUserInfoRequest(authEndpointResponseContent.AccessToken);
+
+			HttpResponseMessage userInfoEndpointResponse =
+				await client.SendAsync(userInfoEndpointRequest);
+
+
+		}
 	}
 }

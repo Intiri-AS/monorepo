@@ -3,7 +3,8 @@ using Intiri.API.Configuration;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using NLog;
+using System.Text;
+using Headers = System.Net.Http.Headers;
 
 namespace Intiri.API.Services
 {
@@ -62,9 +63,52 @@ namespace Intiri.API.Services
 			return authorizationUrl;
 		}
 
-		public string GetTokenAuthorizationHeader()
+		public async Task<TokenResponse> 
+			GetAccessToken(string authorizationCode, string redirectUri)
 		{
-			return $"{_options.Value.ClientId}:{_options.Value.ClientSecret}";
+			AuthorizationCodeTokenRequest accessTokenRequest =
+				CreateAccessTokenRequest(authorizationCode, redirectUri);
+
+			return await _httpClient
+				.RequestAuthorizationCodeTokenAsync(accessTokenRequest);
+		}
+
+		public async Task<UserInfoResponse> GetUserInfo(string accessToken)
+		{
+			UserInfoRequest userInfoRequest = CreateUserInfoRequest(accessToken);
+
+			return await _httpClient.GetUserInfoAsync(userInfoRequest);
+		}
+
+		private AuthorizationCodeTokenRequest CreateAccessTokenRequest(string authorizationCode, string redirectUri)
+		{
+			AuthorizationCodeTokenRequest accessTokenRequest = new()
+			{
+				Address = _discoveryDocument.TokenEndpoint,
+
+				ClientId = _options.Value.ClientId,
+				ClientSecret = _options.Value.ClientSecret,
+
+				Code = authorizationCode,
+				RedirectUri = redirectUri
+			};
+			return accessTokenRequest;
+		}
+
+		public UserInfoRequest CreateUserInfoRequest(string access_token)
+		{
+			UserInfoRequest userInfoRequest = new()
+			{
+				Address = _discoveryDocument.UserInfoEndpoint,
+				Token = access_token
+			};
+			return userInfoRequest;
+		}
+
+		private string CreateTokenAuthorizationHeader()
+		{
+			string authorizationHeader = $"{_options.Value.ClientId}:{_options.Value.ClientSecret}";
+			return Convert.ToBase64String(Encoding.UTF8.GetBytes(authorizationHeader));
 		}
 	}
 }

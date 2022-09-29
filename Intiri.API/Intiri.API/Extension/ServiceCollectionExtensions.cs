@@ -30,7 +30,7 @@ namespace Intiri.API.Extension
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IAccountService, AccountService>();
 
-			services.AddScoped<IVippsLoginService, VippsLoginService>();
+			services.AddSingleton<IVippsLoginService, VippsLoginService>();
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
