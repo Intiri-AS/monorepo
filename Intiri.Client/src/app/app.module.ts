@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -83,6 +83,7 @@ import { MenuPopoverComponent } from './components/menu-popover/menu-popover.com
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { StylePopoverComponent } from './components/popovers/style-popover/style
     CodeInputModule,
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
