@@ -2,7 +2,7 @@
 	{
 		"Name": "my project 1",
 		
-		"EndUserId": 2,
+		"EndUserId": 3,
 		"RoomId": 1,
 		"BudgetRate": 1,
 		"RoomDetails": {

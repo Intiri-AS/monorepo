@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Extension;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
@@ -35,9 +37,9 @@ namespace Intiri.API.Controllers
 		#region Public methods
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetUserProjects()
 		{
-			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(User.GetUserId());
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
@@ -57,6 +59,8 @@ namespace Intiri.API.Controllers
 			return Ok(projectOut);
 		}
 
+
+
 		[HttpPost("add")]
 		public async Task<ActionResult<int>> Add([FromBody] ProjectInDTO projectIn)
 		{
@@ -67,9 +71,14 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
+			User user = await _unitOfWork.UserRepository.GetByID(projectIn.EndUserId);
+			project.EndUser = user;
+
+			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
+
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
-
 
 			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ColorPaletteIds);
 			project.ColorPalettes = colorPalettes.ToArray();
@@ -77,16 +86,11 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(projectIn.MoodboardsIds);
-			project.ColorPalettes = colorPalettes.ToArray();
-
-			//foreach (int moodboardId in projectIn.MoodboardsIds)
-			//{
-			//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
-			//	project.ProjectMoodboards.Add(moodboard);
-			//}
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardId);
+			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			_unitOfWork.ProjectRepository.Insert(project);
+			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{

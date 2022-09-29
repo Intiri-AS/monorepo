@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
+using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Project;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +46,19 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
 				.FirstOrDefaultAsync();
+		}
+
+		public async Task<IEnumerable<Project>> GetProjectsBasicInfoForUser(int userId)
+		{
+			return (await Get(project => project.EndUserId == userId, includeProperties: "ColorPalettes,StyleImages"));
+
+			//return await _context.Projects
+			//	.Where(p => p.EndUserId == userId)
+			//	.Include(p => p.Room)
+			//	.Include(p => p.StyleImages)
+			//	.Include(p => p.ColorPalettes)
+			//	.Include(p => p.ProjectMoodboards)
+			//	.ToListAsync();
 		}
 	}
 }

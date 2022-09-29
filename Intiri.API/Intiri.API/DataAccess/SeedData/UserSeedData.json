@@ -19,8 +19,8 @@
 	},
 	{
 		"UserName": "1231233",
-		"Email": "cora@exoswitch.com",
-		"PhoneNumber": "1231232",
+		"Email": "tod@exoswitch.com",
+		"PhoneNumber": "1231233",
 		"FirstName": "Tod",
 		"LastName": "FreeEndUser",
 		"Gender": "Male",
@@ -29,7 +29,7 @@
 	{
 		"UserName": "1231234",
 		"Email": "moss@exoswitch.com",
-		"PhoneNumber": "1231233",
+		"PhoneNumber": "1231234",
 		"FirstName": "Moss",
 		"LastName": "FreeEndUser",
 		"Gender": "Male",
@@ -38,7 +38,7 @@
 	{
 		"UserName": "1231235",
 		"Email": "day@exoswitch.com",
-		"PhoneNumber": "1231234",
+		"PhoneNumber": "1231235",
 		"FirstName": "Day",
 		"LastName": "Partner",
 		"Gender": "Other",

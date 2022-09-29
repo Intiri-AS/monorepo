@@ -52,14 +52,15 @@ export class ProjectService {
   parseProject(project: Project) {
     let parsedProj = {
       styleImageIds: project.styleImages.map(e=> e['id']),
-      colorPaletteId: project.colorPalette['id'],
+      colorPaletteIds: [project.colorPalette['id']],
       roomId: project.room['id'],
+      moodboardId: project.moodboard['id'],
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 
-    if(project.moodboard?.['id']) {
-      parsedProj['moodboardId'] = project.moodboard['id']
-    }
+    // if(project.moodboard?.['id']) {
+    //   parsedProj['moodboardId'] = project.moodboard['id']
+    // }
     return parsedProj;
   };
 

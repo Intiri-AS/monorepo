@@ -2,7 +2,9 @@
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Project;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -64,19 +66,22 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
-		public async Task<Moodboard> GetFullMoodboardById(int id)
+		public async Task<Moodboard> GetFullMoodboardById(int moodboardId)
 		{
-			return await _context.Moodboards
-				.Include(m => m.Room)
-				.Include(m => m.Materials)
-					.ThenInclude(mat => mat.MaterialType)
-				.Include(m => m.Products)
-					.ThenInclude(p => p.ProductType)
-				.Include(m => m.ColorPalettes)
-				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.Where(m => id == m.Id)
-				.FirstOrDefaultAsync();
+			return (await Get(moodboard => moodboard.Id == moodboardId, includeProperties: "Room,Materials,Products,ColorPalettes,Style"))
+			.FirstOrDefault();
+
+			//return await _context.Moodboards
+			//	.Include(m => m.Room)
+			//	.Include(m => m.Materials)
+			//		.ThenInclude(mat => mat.MaterialType)
+			//	.Include(m => m.Products)
+			//		.ThenInclude(p => p.ProductType)
+			//	.Include(m => m.ColorPalettes)
+			//	.Include(m => m.Style)
+			//		.ThenInclude(s => s.StyleImages)
+			//	.Where(m => moodboardId == m.Id)
+			//	.FirstOrDefaultAsync();
 		}
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard)
@@ -92,6 +97,29 @@ namespace Intiri.API.DataAccess.Repository
 				.Where(m => m.Id != moodboard.Id)
 				.Where(m => m.Style.Id == moodboard.Style.Id)
 				.ToListAsync();
+		}
+
+		public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard)
+		{
+			PropertyValues moodboardValues = _context.Entry(moodboard).CurrentValues.Clone();
+			Moodboard clonedMoodboard = new();
+			moodboardValues[nameof(clonedMoodboard.Id)] = 0;
+			moodboardValues[nameof(clonedMoodboard.IsTemplate)] = false;
+
+			_context.Entry(clonedMoodboard).CurrentValues.SetValues(moodboardValues);
+			await _context.Moodboards.AddAsync(clonedMoodboard);
+
+			clonedMoodboard.SourceMoodboard = moodboard;
+			clonedMoodboard.Materials = moodboard.Materials.ToArray();
+			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
+			clonedMoodboard.Products = moodboard.Products.ToArray();
+
+			return clonedMoodboard;
+
+			//var entity = context.Entities
+			//		.AsNoTracking()
+			//		.Include(x => x.ChildEntities)
+			//		.FirstOrDefault(x => x.EntityId == entityId);
 		}
 
 		#endregion Public methods
