@@ -25,6 +25,7 @@
 // @import "~@ionic/angular/css/text-transformation.css";
 // @import "~@ionic/angular/css/flex-utils.css";
 
+
 @media (min-width: 576px) {
   .small-modal-css::part(content) {
     --width: 400px;
@@ -56,6 +57,12 @@
     --height: 445px;
   }
 
+  .add-color-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 850px;
+  }
+
   .add-partner-contact-modal-css::part(content) {
     --width: 820px;
     border-radius: 15px;
@@ -85,7 +92,7 @@ ion-button {
 
 
 .main-title {
-  @apply font-medium text-black-1 text-4xl sm:text-5xl mt-0 
+  @apply font-medium text-black-1 text-4xl sm:text-5xl mt-0
 }
 
 // without this change ion-grid does not work well, since slide is reducing container width based on given content (eg. size=12 will not take full width if content is not wide enough)
@@ -128,6 +135,14 @@ ion-button {
 .native-input.sc-ion-input-md {
   @apply focus:ring-0;
   padding-left: 15px;
+}
+
+// override for color picker from ngx-color-picker library (cannot be overriden inside a component)
+.color-picker {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 85px !important;
+  left: 30% !important;
 }
 
 code-input {

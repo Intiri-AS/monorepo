@@ -18,7 +18,7 @@ export class HeaderAdminComponent {
     {title: 'Designers', url: '/designers'},
     {title: 'Clients', url: '/clients'},
     {title: 'Moodboards', url: '/moodboards'},
-    {title: 'Style', url: '#'},
+    {title: 'Style', url: '/style'},
   ]
 
   constructor(private router: Router, private popoverController: PopoverController) {}
