@@ -53,8 +53,8 @@ export class NewProjectPage {
     0: 'styleImages',
     1: 'room',
     2: 'roomDetails.shape',
-    3: 'colorPalette',
-    4: 'moodboard',
+    3: 'colorPalettes',
+    4: 'projectMoodboards',
     5: 'final',
   };
 
@@ -164,7 +164,7 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPalette)
+          this.project.colorPalettes.length > 0
         );
       }
       case 5: {
@@ -172,8 +172,8 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPalette) &&
-          !this.isEmpty(this.project.moodboard)
+          this.project.colorPalettes.length > 0 &&
+          this.project.projectMoodboards.length > 0
         );
       }
     }
@@ -196,7 +196,7 @@ export class NewProjectPage {
 
     // if you change any selection, selected moodboard will reset
     if(this.currentStepNo < 4) {
-      this.project.moodboard = {};
+      this.project.projectMoodboards = [];
     }
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select

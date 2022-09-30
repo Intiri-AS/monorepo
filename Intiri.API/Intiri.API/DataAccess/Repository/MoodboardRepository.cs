@@ -68,20 +68,20 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<Moodboard> GetFullMoodboardById(int moodboardId)
 		{
-			return (await Get(moodboard => moodboard.Id == moodboardId, includeProperties: "Room,Materials,Products,ColorPalettes,Style"))
-			.FirstOrDefault();
+			//return (await Get(moodboard => moodboard.Id == moodboardId, includeProperties: "Room,Materials,Products,ColorPalettes,Style"))
+			//.FirstOrDefault();
 
-			//return await _context.Moodboards
-			//	.Include(m => m.Room)
-			//	.Include(m => m.Materials)
-			//		.ThenInclude(mat => mat.MaterialType)
-			//	.Include(m => m.Products)
-			//		.ThenInclude(p => p.ProductType)
-			//	.Include(m => m.ColorPalettes)
-			//	.Include(m => m.Style)
-			//		.ThenInclude(s => s.StyleImages)
-			//	.Where(m => moodboardId == m.Id)
-			//	.FirstOrDefaultAsync();
+			return await _context.Moodboards
+				.Include(m => m.Room)
+				.Include(m => m.Materials)
+					.ThenInclude(mat => mat.MaterialType)
+				.Include(m => m.Products)
+					.ThenInclude(p => p.ProductType)
+				.Include(m => m.ColorPalettes)
+				.Include(m => m.Style)
+					.ThenInclude(s => s.StyleImages)
+				.Where(m => moodboardId == m.Id)
+				.FirstOrDefaultAsync();
 		}
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard)
@@ -107,6 +107,8 @@ namespace Intiri.API.DataAccess.Repository
 			moodboardValues[nameof(clonedMoodboard.IsTemplate)] = false;
 
 			_context.Entry(clonedMoodboard).CurrentValues.SetValues(moodboardValues);
+			_context.Entry(clonedMoodboard).State = EntityState.Added;
+
 			await _context.Moodboards.AddAsync(clonedMoodboard);
 
 			clonedMoodboard.SourceMoodboard = moodboard;
@@ -115,11 +117,6 @@ namespace Intiri.API.DataAccess.Repository
 			clonedMoodboard.Products = moodboard.Products.ToArray();
 
 			return clonedMoodboard;
-
-			//var entity = context.Entities
-			//		.AsNoTracking()
-			//		.Include(x => x.ChildEntities)
-			//		.FirstOrDefault(x => x.EntityId == entityId);
 		}
 
 		#endregion Public methods

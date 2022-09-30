@@ -8,12 +8,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public string Name { get; set; }
 
 		[Required]
-		public ICollection<int> StyleImageIds { get; set; }
-
-		[Required]
-		public int EndUserId { get; set; }
-
-		[Required]
 		public int RoomId { get; set; }
 
 		[Required]
@@ -23,8 +17,11 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public RoomDetailsInDTO RoomDetails { get; set; }
 
 		[Required]
+		public ICollection<int> StyleImageIds { get; set; }
+
+		[Required]
 		public ICollection<int> ColorPaletteIds { get; set; }
 
-		public int MoodboardId { get; set; }
+		public ICollection<int> MoodboardIds { get; set; }
 	}
 }

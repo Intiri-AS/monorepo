@@ -52,9 +52,9 @@ export class ProjectService {
   parseProject(project: Project) {
     let parsedProj = {
       styleImageIds: project.styleImages.map(e=> e['id']),
-      colorPaletteIds: [project.colorPalette['id']],
+      colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
-      moodboardId: project.moodboard['id'],
+      moodboardIds: project.projectMoodboards.map(e=> e['id']),
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 

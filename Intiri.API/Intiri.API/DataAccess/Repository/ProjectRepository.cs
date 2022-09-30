@@ -50,7 +50,22 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Project>> GetProjectsBasicInfoForUser(int userId)
 		{
-			return (await Get(project => project.EndUserId == userId, includeProperties: "ColorPalettes,StyleImages"));
+			//return (await Get(project => project.EndUserId == userId, includeProperties: "ProjectMoodboards"));
+
+			return await _context.Projects
+				.Where(p => p.EndUserId == userId)
+				.Include(p => p.Room)
+				.Include(p => p.StyleImages)
+				.Include(p => p.ColorPalettes)
+				.Include(p => p.ProjectMoodboards)
+				.ToListAsync();
+		}
+
+		public async Task<Project> GetLastProjectForUser(int userId)
+		{
+			IEnumerable<int> result = (await Get(project => project.EndUserId == userId)).Select(x => x.Id);
+
+			return (await Get(project => project.Id == result.Max(), includeProperties: "ColorPalettes,StyleImages,ProjectMoodboards")).FirstOrDefault();
 
 			//return await _context.Projects
 			//	.Where(p => p.EndUserId == userId)
