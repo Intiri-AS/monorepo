@@ -14,14 +14,14 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]" size="12" size-sm="5.75" size-xl="2.85">
+    <ion-col *ngFor="let room of rooms" size="12" size-sm="5.75" size-xl="2.85">
       <div class="card">
         <div class="step-icon-wrapper" >
-          <img src="../../../assets/icon/room.svg" class="step-icon" alt="room-icon"/>
+          <img src="{{room.imagePath}}" class="step-icon" alt="room-icon"/>
         </div>
       </div>
       <div class="flex justify-between">
-        <p class="py-2 text-black-2 font-semibold">Chair</p>
+        <p class="py-2 text-black-2 font-semibold">{{room.name}}</p>
         <div class="float-right">
           <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
               <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>

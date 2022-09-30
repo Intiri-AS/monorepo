@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { StyleService } from 'src/app/services/style.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-modal.component';
 
@@ -10,9 +11,15 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 })
 export class AdminStylesComponent implements OnInit {
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController) { }
+  styles: [];
 
-  ngOnInit() {}
+  constructor(public popoverController: PopoverController, private modalController: ModalController, private styleService: StyleService) { }
+
+  ngOnInit() {
+    this.styleService.getStyles().subscribe((res: []) => {
+      this.styles = res;
+    })
+  }
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({
