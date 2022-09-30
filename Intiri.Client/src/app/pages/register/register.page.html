@@ -16,30 +16,34 @@
           <div class="mt-8 flex flex-col xl:flex-row justify-between">
             <div>
               <span class="text-sm text-black-2">First name</span>
-              <ion-input type="text" formControlName="firstName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+              <ion-input type="text" #firstName formControlName="firstName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+              <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">First name is Required!</span>
             </div>
             <div class="mt-[30px] xl:mt-0">
               <span class="text-sm text-black-2">Last name</span>
-              <ion-input type="text" formControlName="lastName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+              <ion-input type="text" #lastName formControlName="lastName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
+              <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">Last name is Required!</span>
             </div>
           </div>
           <div class="mt-7">
             <span class="text-sm text-black-2">Phone number</span>
             <div class="flex justify-between">
               <div>
-                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
-                  <ion-select-option>
+                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover" (ionChange)="setActiveCode($event)" [value]="activeCode">
+                  <ion-select-option value="47">
                     <div>
                       <p class="text-lg text-black">+47</p>
                     </div>
                   </ion-select-option>
-                  <ion-select-option>
+                  <ion-select-option value="381">
                     <p class="text-lg text-black">+381</p>
                   </ion-select-option>
                 </ion-select>
               </div>
               <div>
-                <ion-input formControlName="phoneNumber" type="tel" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
+                <ion-input #phoneNumber formControlName="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
               </div>
             </div>
           </div>

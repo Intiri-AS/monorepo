@@ -17,7 +17,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: any) {
+  login(model) {
     return this.http.post(this.apiUrl + 'account/login', model).pipe(
       map((user: User) =>{
         if (user) {
@@ -27,7 +27,7 @@ export class AccountService {
     )
   }
 
-  register(model: any) {
+  register(model) {
     return this.http.post(this.apiUrl + 'account/register', model);
   }
 

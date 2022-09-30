@@ -8,24 +8,26 @@
         <p class="text-lg text-black-2">
           {{'LOGIN.login-msg' | translate}}
         </p>
-        <form #loginForm="ngForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+        <form [formGroup]="loginForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
         <div class="mt-8">
           <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
           <div class="flex justify-between">
             <div>
-              <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
-                <ion-select-option>
+              <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover" (ionChange)="setActiveCode($event)" [value]="activeCode">
+                <ion-select-option value="47">
                   <div>
                     <p class="text-lg text-black">+47</p>
                   </div>
                 </ion-select-option>
-                <ion-select-option>
+                <ion-select-option value="381">
                   <p class="text-lg text-black">+381</p>
                 </ion-select-option>
               </ion-select>
             </div>
             <div>
-              <ion-input [(ngModel)]="model.phoneNumber" name="phoneNumber" type="tel" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
+              <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
             </div>
           </div>
         </div>
