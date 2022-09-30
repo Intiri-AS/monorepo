@@ -160,6 +160,7 @@ export class NewProjectPage {
         );
       }
       case 4: {
+        console.log()
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
@@ -199,8 +200,8 @@ export class NewProjectPage {
       this.project.projectMoodboards = [];
     }
     const stepName = this.stepsOrder[this.currentStepNo];
-    // check if it's multi-select
-    if (Array.isArray(this.project[stepName])) {
+    // check if it's multi-select **and that it's not a moodboard step (this is addded additionaly, may change)**
+    if (Array.isArray(this.project[stepName]) && this.currentStepNo !== 4) {
       if (
         this.project[stepName].some(
           (e) => JSON.stringify(e) === JSON.stringify(item)
@@ -212,7 +213,13 @@ export class NewProjectPage {
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
-    } else {  // else it's a single select
+    } else if(this.currentStepNo === 4) {
+      this.project[stepName] =
+        JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+          ? null
+          : [item];
+    }
+     else {  // else it's a single select
 
       // if it's updating sub-object
       if(stepName.includes('.')) {
