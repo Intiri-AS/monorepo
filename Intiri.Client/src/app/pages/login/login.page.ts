@@ -30,6 +30,6 @@ export class LoginPage implements OnInit {
   }
 
   loginWithVipps() {
-    this.accountService.loginWithVipps();
+    this.accountService.startVippsLogin();
   }
 }

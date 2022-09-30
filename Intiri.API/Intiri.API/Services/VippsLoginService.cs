@@ -1,10 +1,7 @@
 ﻿using IdentityModel.Client;
 using Intiri.API.Configuration;
 using Intiri.API.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Text;
-using Headers = System.Net.Http.Headers;
 
 namespace Intiri.API.Services
 {
@@ -13,7 +10,6 @@ namespace Intiri.API.Services
 		private readonly IOptions<VippsLoginConfiguration> _options;
 		private readonly ILogger<VippsLoginService> _logger;
 		private readonly HttpClient _httpClient;
-		private DiscoveryDocumentResponse _discoveryDocument;
 
 		public VippsLoginService(
 			ILogger<VippsLoginService> logger,
@@ -24,34 +20,17 @@ namespace Intiri.API.Services
 			_httpClient = new HttpClient();
 		}
 
-		private async Task GetDiscoveryDocument()
+		public async Task<string> GetAuthorizationUrlAsync()
 		{
-			DiscoveryDocumentRequest discoRequest = new DiscoveryDocumentRequest
-			{
-				Address = _options.Value.DiscoveryUrl,
-				Policy =
-				{
-					ValidateEndpoints = false
-				}
-			};
+			DiscoveryDocumentResponse discoResponse = 
+				await GetDiscoveryDocumentAsync();
 
-			DiscoveryDocumentResponse discoResponse =
-				await _httpClient.GetDiscoveryDocumentAsync(discoRequest);
-
-			if (discoResponse.IsError)
+			if (discoResponse == null)
 			{
-				_logger.LogError($"{discoResponse.Error}");
-				return;
+				return null;
 			}
 
-			_discoveryDocument = discoResponse;
-		}
-
-		public async Task<string> GetAuthorizationUrl()
-		{
-			await GetDiscoveryDocument();
-
-			RequestUrl requestUrl = new(_discoveryDocument.AuthorizeEndpoint);
+			RequestUrl requestUrl = new(discoResponse.AuthorizeEndpoint);
 
 			string authorizationUrl = requestUrl.CreateAuthorizeUrl(
 				clientId: _options.Value.ClientId,
@@ -64,27 +43,82 @@ namespace Intiri.API.Services
 		}
 
 		public async Task<TokenResponse> 
-			GetAccessToken(string authorizationCode, string redirectUri)
+			GetAccessTokenAsync(string authorizationCode, string redirectUri)
 		{
+			DiscoveryDocumentResponse discoResponse =
+				await GetDiscoveryDocumentAsync();
+
+			if (discoResponse == null)
+			{
+				return null;
+			}
+
 			AuthorizationCodeTokenRequest accessTokenRequest =
-				CreateAccessTokenRequest(authorizationCode, redirectUri);
+				CreateAccessTokenRequest(
+					discoResponse.AuthorizeEndpoint,
+					authorizationCode,
+					redirectUri);
 
 			return await _httpClient
 				.RequestAuthorizationCodeTokenAsync(accessTokenRequest);
 		}
 
-		public async Task<UserInfoResponse> GetUserInfo(string accessToken)
+		public async Task<UserInfoResponse> GetUserInfoAsync(string accessToken)
 		{
-			UserInfoRequest userInfoRequest = CreateUserInfoRequest(accessToken);
+			DiscoveryDocumentResponse discoResponse =
+				await GetDiscoveryDocumentAsync();
+
+			if (discoResponse == null)
+			{
+				return null;
+			}
+
+			UserInfoRequest userInfoRequest = 
+				CreateUserInfoRequest(discoResponse.UserInfoEndpoint, accessToken);
 
 			return await _httpClient.GetUserInfoAsync(userInfoRequest);
 		}
 
-		private AuthorizationCodeTokenRequest CreateAccessTokenRequest(string authorizationCode, string redirectUri)
+		private async Task<DiscoveryDocumentResponse> GetDiscoveryDocumentAsync()
+		{
+			DiscoveryDocumentRequest discoRequest =
+				CreateDiscoveryDocumentRequest();
+
+			DiscoveryDocumentResponse discoResponse =
+				await _httpClient.GetDiscoveryDocumentAsync(discoRequest);
+
+			if (discoResponse.IsError)
+			{
+				_logger.LogError($"{discoResponse.Error}");
+				return null;
+			}
+			return discoResponse;
+		}
+
+		private DiscoveryDocumentRequest CreateDiscoveryDocumentRequest()
+		{
+			string discoveryEndpoingAddress =
+				$"{_options.Value.Authority}/.well-known/openid-configuration";
+
+			DiscoveryDocumentRequest discoRequest = new()
+			{
+				Address = discoveryEndpoingAddress,
+				Policy =
+				{
+					ValidateEndpoints = false
+				}
+			};
+			return discoRequest;
+		}
+
+		private AuthorizationCodeTokenRequest CreateAccessTokenRequest(
+			string tokenEndpointAddress,
+			string authorizationCode,
+			string redirectUri)
 		{
 			AuthorizationCodeTokenRequest accessTokenRequest = new()
 			{
-				Address = _discoveryDocument.TokenEndpoint,
+				Address = tokenEndpointAddress,
 
 				ClientId = _options.Value.ClientId,
 				ClientSecret = _options.Value.ClientSecret,
@@ -95,20 +129,16 @@ namespace Intiri.API.Services
 			return accessTokenRequest;
 		}
 
-		public UserInfoRequest CreateUserInfoRequest(string access_token)
+		public UserInfoRequest CreateUserInfoRequest(
+			string userInfoEndpointAddress,
+			string access_token)
 		{
 			UserInfoRequest userInfoRequest = new()
 			{
-				Address = _discoveryDocument.UserInfoEndpoint,
+				Address = userInfoEndpointAddress,
 				Token = access_token
 			};
 			return userInfoRequest;
-		}
-
-		private string CreateTokenAuthorizationHeader()
-		{
-			string authorizationHeader = $"{_options.Value.ClientId}:{_options.Value.ClientSecret}";
-			return Convert.ToBase64String(Encoding.UTF8.GetBytes(authorizationHeader));
 		}
 	}
 }

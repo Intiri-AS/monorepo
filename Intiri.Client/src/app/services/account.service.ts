@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { AccessTokenRequestDTO } from '../DTO/vipps-types';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,7 @@ export class AccountService {
     return this.http.post(this.apiUrl + 'account/reset-password', model);
   }
 
-  loginWithVipps() {
+  startVippsLogin() {
     return this.http.get<any>(this.apiUrl + 'account/vipps-auth-url')
       .subscribe(resp => {
         console.log(resp.authorizationUrl);
@@ -68,6 +69,13 @@ export class AccountService {
         {
           window.location.href = resp.authorizationUrl;
         }
+      });
+  }
+
+  finalizeVippsLogin(auth: AccessTokenRequestDTO) {
+    return this.http.post<any>(this.apiUrl + 'account/vipps-login', auth)
+      .subscribe(resp => {
+        console.log(resp);
       });
   }
 }

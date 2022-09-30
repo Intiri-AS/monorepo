@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using IdentityModel.Client;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Services.Interfaces;
@@ -19,6 +21,7 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly ITokenService _tokenService;
 		private readonly IAccountService _accountService;
+		private readonly IVippsLoginService _vippsLoginService;
 		private readonly ILogger<AccountController> _logger;
 
 		#endregion  Fields
@@ -30,11 +33,13 @@ namespace Intiri.API.Controllers
 			ITokenService tokenService,
 			IMapper mapper,
 			IAccountService accountService,
+			IVippsLoginService vippsLoginService,
 			ILogger<AccountController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
 			_accountService = accountService;
+			_vippsLoginService = vippsLoginService;
 			_logger = logger;
 		}
 
@@ -143,6 +148,52 @@ namespace Intiri.API.Controllers
 				return BadRequest("Unable to reset password.");
 			}
 
+			return Ok();
+		}
+
+		[HttpGet("vipps-auth-url")]
+		public async Task<ActionResult<string>> GetVippsAuthorizationUrl()
+		{
+			var authUrl = await _vippsLoginService.GetAuthorizationUrlAsync();
+
+			if (authUrl == null)
+			{
+				_logger.LogError($"Authorization URL isn't initialized");
+			}
+
+			var authOut = new AuthorizationUrlOutDTO
+			{
+				AuthorizationUrl = authUrl
+			};
+			return Ok(authOut);
+		}
+
+		[HttpPost("vipps-login")]
+		public async Task<IActionResult> VippsLogin(AccessTokenRequestDTO dto)
+		{
+			TokenResponse accessToken = await _vippsLoginService
+				.GetAccessTokenAsync(dto.AuthorizationCode, dto.RedirectUri);
+
+			if (accessToken == null)
+			{
+				_logger.LogError($"Access token isn't initialized");
+				return BadRequest();
+			}
+
+			if (accessToken.IsError)
+			{
+				_logger.LogError($"{accessToken.Error}");
+				return BadRequest();
+			}
+
+			UserInfoResponse userInfoResponse = await _vippsLoginService
+				.GetUserInfoAsync(accessToken.AccessToken);
+
+			if (userInfoResponse.IsError)
+			{
+				_logger.LogError($"{userInfoResponse.Error}");
+				return BadRequest();
+			}
 			return Ok();
 		}
 
