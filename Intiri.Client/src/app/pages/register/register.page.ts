@@ -54,8 +54,8 @@ export class RegisterPage {
     const registerModel = {
       firstName: this.registerForm.value.firstName,
       lastName: this.registerForm.value.lastName,
-      code: this.activeCode,
-      phone: this.registerForm.value.phoneNumber
+      countryCode: this.activeCode,
+      phoneNumber: this.registerForm.value.phoneNumber
     }
     this.accountService.register(registerModel).subscribe(response => {
       this.router.navigateByUrl('/sms-verification');
