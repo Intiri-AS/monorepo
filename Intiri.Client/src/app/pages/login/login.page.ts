@@ -49,8 +49,8 @@ export class LoginPage implements OnInit {
       return;
     }
     const loginModel = {
-      code: this.activeCode,
-      phone: this.loginForm.value.phoneNumber
+      countryCode: this.activeCode,
+      phoneNumber: this.loginForm.value.phoneNumber
     }
     this.accountService.login(loginModel).subscribe(response => {
       console.log(response);
