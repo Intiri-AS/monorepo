@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Extension;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
@@ -35,22 +38,34 @@ namespace Intiri.API.Controllers
 		#region Public methods
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetUserProjects()
 		{
-			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(User.GetUserId());
+
+			foreach (Project project in projects)
+			{
+				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.ProjectMoodboards.First().Id);
+				project.ProjectMoodboards.Add(moodboard);
+			}
+
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
+		}
+
+		[HttpGet("lastProject")]
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetUserLastProject()
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetLastProjectForUser(User.GetUserId());
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+
+			return Ok(projectOut);
 		}
 
 		[HttpGet("id/{projectId}")]
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
 			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
-
-			//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
-
-			//project.Moodboard = moodboard;
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -67,9 +82,14 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
+			User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+			project.EndUser = user;
+
+			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
+
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
-
 
 			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ColorPaletteIds);
 			project.ColorPalettes = colorPalettes.ToArray();
@@ -77,21 +97,17 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(projectIn.MoodboardsIds);
-			project.ColorPalettes = colorPalettes.ToArray();
-
-			//foreach (int moodboardId in projectIn.MoodboardsIds)
-			//{
-			//	Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
-			//	project.ProjectMoodboards.Add(moodboard);
-			//}
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardIds.FirstOrDefault());
+			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			_unitOfWork.ProjectRepository.Insert(project);
+			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
+
 			return BadRequest("Problem occured while adding project");
 		}
 

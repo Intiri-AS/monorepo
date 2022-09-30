@@ -2,6 +2,11 @@
 {
     public class StyleImage
     {
+        public StyleImage()
+        {
+            Projects = new HashSet<Project.Project>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }

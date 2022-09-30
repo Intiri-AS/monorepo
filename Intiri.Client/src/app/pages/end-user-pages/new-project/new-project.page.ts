@@ -14,13 +14,13 @@ export class NewProjectPage {
 
   steps: Array<object> = [
     {
-      title: 'Select pictures that you like',
-      subtitle: 'Decisions are hard, pick as many as you want.',
+      title: 'Select the room you want to improve',
+      subtitle: 'Don’t worry, you can improve more rooms later.',
       data: [],
     },
     {
-      title: 'Select the room you want to improve',
-      subtitle: 'Don’t worry, you can improve more rooms later.',
+      title: 'Select pictures that you like',
+      subtitle: 'Decisions are hard, pick as many as you want.',
       data: [],
     },
     {
@@ -50,11 +50,11 @@ export class NewProjectPage {
   project: Project = null;
 
   stepsOrder: object = {
-    0: 'styleImages',
-    1: 'room',
+    0: 'room',
+    1: 'styleImages',
     2: 'roomDetails.shape',
-    3: 'colorPalette',
-    4: 'moodboard',
+    3: 'colorPalettes',
+    4: 'projectMoodboards',
     5: 'final',
   };
 
@@ -72,10 +72,10 @@ export class NewProjectPage {
         this.openStartModal();
       }
     });
-    this.projectService.getStyleImages().subscribe((res) => {
+    this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
-    this.projectService.getRooms().subscribe((res) => {
+    this.projectService.getStyleImages().subscribe((res) => {
       this.steps[1]['data'] = res;
     });
     this.projectService.getColorPalettes().subscribe((res) => {
@@ -144,7 +144,7 @@ export class NewProjectPage {
         return true;
       }
       case 1: {
-        return this.project.styleImages.length > 0;
+        return !this.isEmpty(this.project.room);
       }
       case 2: {
         return (
@@ -164,7 +164,7 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPalette)
+          this.project.colorPalettes.length > 0
         );
       }
       case 5: {
@@ -172,8 +172,8 @@ export class NewProjectPage {
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
-          !this.isEmpty(this.project.colorPalette) &&
-          !this.isEmpty(this.project.moodboard)
+          this.project.colorPalettes.length > 0 &&
+          this.project.projectMoodboards.length > 0
         );
       }
     }
@@ -196,7 +196,7 @@ export class NewProjectPage {
 
     // if you change any selection, selected moodboard will reset
     if(this.currentStepNo < 4) {
-      this.project.moodboard = {};
+      this.project.projectMoodboards = [];
     }
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select

@@ -64,7 +64,11 @@ export class MyIntiriPage {
 
   // TODO: needs to be updated after project is allowed to have multiple moodboards!
   getPiecesNo(project){
-    return project.moodboard.colorPalettes.length + project.moodboard.materials.length + project.moodboard.products.length;
+    let result = 0;
+    project.projectMoodboards.forEach(moodboard => {
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    });
+    return result;
   }
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")

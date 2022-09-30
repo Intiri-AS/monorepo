@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -70,6 +70,10 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
 import { AdminClientsComponent } from './components/admin-clients/admin-clients.component';
 import { AdminInspirationComponent } from './components/admin-inspiration/admin-inspiration.component';
 import { AdminStylesComponent } from './components/admin-styles/admin-styles.component';
+import { AdminMaterialsComponent } from './components/admin-materials/admin-materials.component';
+import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.component';
+import { AdminColorsComponent } from './components/admin-colors/admin-colors.component';
+import { AdminPicturesComponent } from './components/admin-pictures/admin-pictures.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -82,14 +86,19 @@ import { SettingsPopoverComponent } from './components/settings-popover/settings
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
 import { AddStyleModalComponent } from './components/modals/add-style-modal/add-style-modal.component';
 import { LanguagePopoverComponent } from './components/popovers/language-popover/language-popover.component';
+import { AddMaterialsModalComponent } from './components/modals/add-materials-modal/add-materials-modal.component';
+import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
+import { AddColorModalComponent } from './components/modals/add-color-modal/add-color-modal.component';
+import { AddPictureModalComponent } from './components/modals/add-picture-modal/add-picture-modal.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -107,9 +116,9 @@ export function createTranslateLoader(http: HttpClient) {
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
     TimeAgoPipe
   ],
   entryComponents: [
@@ -117,6 +126,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    ColorPickerModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
@@ -132,7 +142,8 @@ export function createTranslateLoader(http: HttpClient) {
     }),
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

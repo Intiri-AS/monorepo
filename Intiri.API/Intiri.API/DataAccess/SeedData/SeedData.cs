@@ -72,7 +72,7 @@ namespace Intiri.API.DataAccess.SeedData
 
 			await userManager.AddToRoleAsync(users[0], "Admin");
 			await userManager.AddToRoleAsync(users[1], "InternalDesigner");
-			await userManager.AddToRoleAsync(users[2], "ExternalDesigner");
+			await userManager.AddToRoleAsync(users[2], "FreeEndUser");
 			await userManager.AddToRoleAsync(users[3], "FreeEndUser");
 			await userManager.AddToRoleAsync(users[4], "Partner");
 		}
@@ -243,19 +243,15 @@ namespace Intiri.API.DataAccess.SeedData
 				JsonSerializer.Deserialize<List<Project>>(projectsData);
 			foreach (Project project in projects)
 			{
+				unitOfWork.ProjectRepository.Insert(project);
 				project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
 				project.Room = await unitOfWork.RoomRepository.GetByID(1);
-				project.StyleImages = new List<StyleImage>();
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(1));
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(2));
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(3));
-				project.ColorPalettes = new List<ColorPalette>();
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(1));
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(3));
-				project.ProjectMoodboards = new List<Moodboard>();
 				project.ProjectMoodboards.Add(await unitOfWork.MoodboardRepository.GetByID(2));
-				
-				unitOfWork.ProjectRepository.Insert(project);
 			}
 			await unitOfWork.SaveChanges();
 
