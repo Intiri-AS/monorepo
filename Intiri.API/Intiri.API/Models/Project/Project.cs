@@ -5,6 +5,13 @@ namespace Intiri.API.Models.Project
 {
     public class Project
     {
+        public Project()
+        {
+            ColorPalettes = new HashSet<ColorPalette>();
+			StyleImages = new HashSet<Style.StyleImage>();
+            ProjectMoodboards = new HashSet<Moodboard.Moodboard>();
+		}
+
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;

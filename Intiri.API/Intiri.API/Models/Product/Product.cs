@@ -2,6 +2,11 @@
 {
     public class Product
 	{
+		public Product()
+		{
+			Moodboards = new HashSet<Moodboard.Moodboard>();
+		}
+
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public double Price { get; set; }

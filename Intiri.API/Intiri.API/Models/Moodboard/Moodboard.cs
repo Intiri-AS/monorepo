@@ -1,9 +1,17 @@
 ﻿using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Product;
 
 namespace Intiri.API.Models.Moodboard
 {
     public class Moodboard
     {
+        public Moodboard()
+        {
+            Materials = new HashSet<Material.Material>();
+			ColorPalettes = new HashSet<ColorPalette>();
+			Products = new HashSet<Product.Product>();
+		}
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

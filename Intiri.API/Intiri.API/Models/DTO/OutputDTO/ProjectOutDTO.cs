@@ -13,8 +13,8 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public RoomOutDTO Room { get; set; }
 		public int BudgetRate { get; set; }
 		public RoomDetails RoomDetails { get; set; }
-		public ICollection<ColorPaletteOutDTO> ColorPalettes { get; set; }
-		public ICollection<StyleImageOutDTO> StyleImages { get; set; }
+		public IEnumerable<ColorPaletteOutDTO> ColorPalettes { get; set; }
+		public IEnumerable<StyleImageOutDTO> StyleImages { get; set; }
 		public ICollection<MoodboardOutDTO> ProjectMoodboards { get; set; }
 	}
 }

@@ -11,6 +11,9 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public string LastName { get; set; }
 
 		[Required]
+		public string CountryCode { get; set; }
+
+		[Required]
 		public string PhoneNumber { get; set; }
 	}
 }
