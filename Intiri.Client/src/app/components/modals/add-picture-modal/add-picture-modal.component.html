@@ -1,0 +1,60 @@
+<ion-content>
+  <!-- Add picture modal -->
+  <div *ngIf="add" class="justify-center items-center h-full">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add pictures</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col>
+          <div class="profile-input">
+            <span class="text-sm text-black-2">Select style</span>
+            <ion-select interface="popover">
+              <ion-select-option value="1">style 1</ion-select-option>
+              <ion-select-option value="2">style 2</ion-select-option>
+              <ion-select-option value="3">style 3</ion-select-option>
+              <ion-select-option value="4">style 4</ion-select-option>
+            </ion-select>
+          </div>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <div class="profile-input">
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Image</p>
+            <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
+              <div class="text-center mt-[65px]">
+                <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+                <p class="leading-[22px] font-semibold text-black-3 text-lg">Upload</p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="text-center mt-8">
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addedPicture()">Add</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+   <!-- Material picture modal -->
+   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Picture added!</h2>
+          <p class="text-center text-base text-[18px] text-black-2">You successfully added new picture.</p>
+        </div>
+          <ion-buttons class="justify-center">
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Pictures</ion-button>
+          </ion-buttons>
+        </div>
+    </div>
+  </div>
+</ion-content>

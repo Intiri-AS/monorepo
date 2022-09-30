@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -41,7 +41,9 @@ import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
 import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
 import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
+import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
+import { StylePage } from './pages/admin-pages/style/style.page';
 
 //pages for designers
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
@@ -50,7 +52,6 @@ import { StyleListPage } from './pages/designer-pages/internal-designer/styles/s
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 
 //shared admin/designer pages
-import { StylePage } from './pages/shared-guarded-pages/style/style.page';
 import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
 
 //app components
@@ -68,6 +69,11 @@ import { AdminPartnersComponent } from './components/admin-partners/admin-partne
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminClientsComponent } from './components/admin-clients/admin-clients.component';
 import { AdminInspirationComponent } from './components/admin-inspiration/admin-inspiration.component';
+import { AdminStylesComponent } from './components/admin-styles/admin-styles.component';
+import { AdminMaterialsComponent } from './components/admin-materials/admin-materials.component';
+import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.component';
+import { AdminColorsComponent } from './components/admin-colors/admin-colors.component';
+import { AdminPicturesComponent } from './components/admin-pictures/admin-pictures.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -78,12 +84,26 @@ import { AddPartnerModalComponent } from './components/modals/add-partner-modal/
 import { BookDesignerModalComponent } from './components/modals/book-designer-modal/book-designer-modal.component';
 import { SettingsPopoverComponent } from './components/settings-popover/settings-popover.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
+import { AddStyleModalComponent } from './components/modals/add-style-modal/add-style-modal.component';
+import { LanguagePopoverComponent } from './components/popovers/language-popover/language-popover.component';
+import { AddMaterialsModalComponent } from './components/modals/add-materials-modal/add-materials-modal.component';
+import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
+import { AddColorModalComponent } from './components/modals/add-color-modal/add-color-modal.component';
+import { AddPictureModalComponent } from './components/modals/add-picture-modal/add-picture-modal.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -91,14 +111,14 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
-    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage,
+    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
     StylePage, MoodboardPage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
     NewProjectStepComponent, StepPickerComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent,
+    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
     TimeAgoPipe
   ],
   entryComponents: [
@@ -106,11 +126,20 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
   ],
   imports: [
     BrowserModule,
+    ColorPickerModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     CodeInputModule,
+    IonicStorageModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+    }
+    }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -5,7 +5,7 @@ import { DesignerPage } from './pages/admin-pages/designer/designer.page';
 import { VendorPage } from './pages/admin-pages/vendor/vendor.page';
 import { ConsultationsPage } from './pages/admin-pages/consultations/consultations.page';
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
-import { StylePage } from './pages/shared-guarded-pages/style/style.page';
+import { StylePage } from './pages/admin-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
@@ -32,6 +32,7 @@ import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-pr
 import { ClientListPage } from './pages/designer-pages/internal-designer/clients/client-list/client-list.page';
 import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
+import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
 
 const routes: Routes = [
@@ -145,8 +146,16 @@ const routes: Routes = [
     component: VendorPage
   },
   {
+    path: 'moodboards', //TODO Set up page guard (admin guard)
+    component: MoodboardsPage
+  },
+  {
     path: 'clients', //TODO Set up page guard (admin guard)
     component: ClientPage
+  },
+  {
+    path: 'style', //TODO Set up page guard (shared guard)
+    component: StylePage
   },
   {
     path: 'my-moodboard', //TODO Set up page guard (designer guard)
@@ -165,13 +174,10 @@ const routes: Routes = [
     component: StyleListPage
   },
   {
-    path: 'style', //TODO Set up page guard (shared guard)
-    component: StylePage
-  },
-  {
     path: 'moodboard', //TODO Set up page guard (shared guard)
     component: MoodboardPage
   }
+
   //TODO Add routes for client pages, after discussion
 ];
 
