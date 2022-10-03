@@ -148,14 +148,14 @@ export class NewProjectPage {
     else
     {
       this.saveProject();
-      this.openFinalModal();
     }
   }
 
   saveProject() {
     this.projectService.saveProject(this.project).subscribe(
       (res) => {
-        console.log(res)
+        this.openFinalModal();
+        console.log(res);
       },
       (error) => {
         console.log(error);
