@@ -34,6 +34,7 @@ import { StyleListPage } from './pages/designer-pages/internal-designer/styles/s
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
+import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
 
 const routes: Routes = [
   {
@@ -154,6 +155,10 @@ const routes: Routes = [
     component: ClientPage
   },
   {
+    path: 'add-moodboard',
+    component: AddMoodboardPage
+  },
+  {
     path: 'style', //TODO Set up page guard (shared guard)
     component: StylePage
   },
@@ -177,6 +182,7 @@ const routes: Routes = [
     path: 'moodboard', //TODO Set up page guard (shared guard)
     component: MoodboardPage
   }
+
 
   //TODO Add routes for client pages, after discussion
 ];

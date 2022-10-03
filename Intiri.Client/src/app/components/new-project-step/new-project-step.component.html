@@ -19,7 +19,7 @@
             <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
           </div>
         </div>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
+        <p *ngIf="!item.number && item.name" class="font-bold pt-5 text-black-2">{{item.name}} </p>
         <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
       </ion-col>
     </ion-row>

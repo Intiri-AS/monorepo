@@ -160,7 +160,6 @@ export class NewProjectPage {
         );
       }
       case 4: {
-        console.log()
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
