@@ -1,4 +1,5 @@
 export class Project {
+  id: number;
   name: string;
   styleImages: Array<any>;
   room: any;
@@ -10,6 +11,7 @@ export class Project {
   //TODO This is example for User model
 
   constructor() {
+    this.id = 0;
     this.name = '';
     this.styleImages = [];
     this.room = {};

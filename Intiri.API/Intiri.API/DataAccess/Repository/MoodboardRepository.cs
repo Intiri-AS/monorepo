@@ -64,9 +64,6 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<Moodboard> GetFullMoodboardById(int moodboardId)
 		{
-			//return (await Get(moodboard => moodboard.Id == moodboardId, includeProperties: "Room,Materials,Products,ColorPalettes,Style"))
-			//.FirstOrDefault();
-
 			return await _context.Moodboards
 				.Include(m => m.Room)
 				.Include(m => m.Materials)

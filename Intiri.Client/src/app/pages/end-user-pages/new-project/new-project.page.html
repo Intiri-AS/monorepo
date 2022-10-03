@@ -50,9 +50,11 @@
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
               class="primary-btn"
-              (click)="saveProject(); openFinalModal()"
+              (click)="saveCurrentProject()"
               >Finish</ion-button
             >
+            
+
           </ion-buttons>
         </ion-col>
       </ion-row>
