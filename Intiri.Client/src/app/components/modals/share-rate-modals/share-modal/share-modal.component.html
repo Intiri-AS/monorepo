@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="flex flex-col items-center px-[65px]">
+    <div class="h-[80px] w-[80px] rounded-full bg-light mt-[75px] flex items-center justify-center">
+      <ion-icon name="share-social" class="h-[30px] w-[30px] text-primary"></ion-icon>
+    </div>
+    <p class="text-2xl font-medium mt-[40px]">Share</p>
+    <p class="text-lg mt-[10px] text-black-2">Enter your friends phone number</p>
+    <div class="mt-[40px]">
+      <span class="text-sm text-black-2">Phone number</span>
+      <div class="flex justify-between">
+        <div>
+          <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
+            <ion-select-option>
+              <div>
+                <p class="text-lg text-black">+47</p>
+              </div>
+            </ion-select-option>
+            <ion-select-option>
+              <p class="text-lg text-black">+381</p>
+            </ion-select-option>
+          </ion-select>
+        </div>
+        <div>
+          <ion-input name="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80 ml-[10px]"></ion-input>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-start w-full">
+      <ion-button fill="clear" class="normal-case mt-[30px]">
+        <ion-icon name="add" slot="start"></ion-icon>
+        <p class="text-lg text-primary font-medium">Add more users</p>
+      </ion-button>
+    </div>
+    <div class="flex justify-center mt-[40px]">
+      <ion-button fill="clear" class="secondary-btn" (click)="dismiss()">Cancel</ion-button>
+      <ion-button fill="clear" class="primary-btn" (click)="share()">Share</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { RoomService } from 'src/app/services/room.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.component';
 
@@ -10,9 +11,15 @@ import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.c
 })
 export class AdminRoomsComponent implements OnInit {
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController) { }
+  rooms: [];
 
-  ngOnInit() {}
+  constructor(public popoverController: PopoverController, private modalController: ModalController, private roomService: RoomService) { }
+
+  ngOnInit() {
+    this.roomService.getRooms().subscribe((res: []) => {
+      this.rooms = res;
+    })
+  }
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({

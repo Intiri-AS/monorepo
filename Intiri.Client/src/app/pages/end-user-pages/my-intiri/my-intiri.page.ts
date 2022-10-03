@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
+import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
@@ -56,7 +57,11 @@ export class MyIntiriPage {
     spaceBetween: 20,
   }
 
-  constructor(public projectService: ProjectService, private router: Router) {}
+  constructor(
+    public projectService: ProjectService,
+    private modalController: ModalController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.projectService.getAllProjects().subscribe((res: Array<Project>) => {
@@ -91,6 +96,14 @@ export class MyIntiriPage {
         data: project
       }
     });
+  }
+  
+  async openShare() {
+    const modal = await this.modalController.create({
+      component: ShareModalComponent,
+    });
+
+    await modal.present();
   }
 
 }

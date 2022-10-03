@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { ColorService } from 'src/app/services/color.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddColorModalComponent } from '../modals/add-color-modal/add-color-modal.component';
 
@@ -10,9 +11,14 @@ import { AddColorModalComponent } from '../modals/add-color-modal/add-color-moda
 })
 export class AdminColorsComponent implements OnInit {
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController) { }
+  colorPalettes: [];
+  constructor(public popoverController: PopoverController, private modalController: ModalController, private colorService: ColorService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.colorService.getColorPalettes().subscribe((res: []) => {
+      this.colorPalettes = res;
+    })
+  }
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
+import { MoodboardService } from 'src/app/services/moodboard.service';
+import { StyleService } from 'src/app/services/style.service';
 
 @Component({
   selector: 'app-moodboards',
@@ -9,9 +11,16 @@ import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popov
 })
 export class MoodboardsPage implements OnInit {
 
-  constructor(public popoverController: PopoverController) { }
+  moodboards: [];
+  styles$ = this.styleService.styles$;
+
+  constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
 
   ngOnInit() {
+    this.moodboardService.getMoodboards().subscribe((res: []) => {
+      this.moodboards = res;
+    })
+    this.styleService.getStyles();
   }
 
   async showSettings(e: Event) {

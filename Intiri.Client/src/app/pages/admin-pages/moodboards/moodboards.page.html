@@ -21,30 +21,25 @@
             <span class="text-sm text-black-2">Style</span>
             <div class="h-[52px]">
               <ion-select interface="popover" [multiple]="true">
-                <ion-select-option value="style1">View all</ion-select-option>
-                <ion-select-option value="style2">Scandinavian</ion-select-option>
-                <ion-select-option value="style3">Vintage</ion-select-option>
-                <ion-select-option value="style4">Traditional</ion-select-option>
-                <ion-select-option value="style5">Funky</ion-select-option>
-                <ion-select-option value="style6">Industrial</ion-select-option>
+                <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
               </ion-select>
             </div>
           </div>
-          <ion-button (click)="addMoodboard()" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2">Add moodboard</ion-button>
+          <ion-button routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2">Add moodboard</ion-button>
         </ion-col>
       </ion-row>
 
       <ion-row class="mt-8 gap-x-[1.65%]">
-        <ion-col *ngFor="let i of [1,2,3]" size="12" size-sm="5.75" size-xl="3.86" >
+        <ion-col *ngFor="let moodboard of moodboards" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
           <div class="designer ">
             <ion-grid>
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img src="../../../assets/images/img-01.png" class="h-[113px] lg:h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="../../../assets/images/img-01.png" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[0].path}}" class="h-[113px] lg:h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[1].path}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <img src="../../../assets/images/img-01.png" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[2].path}}" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -60,7 +55,7 @@
             </div>
             <ion-icon name="arrow-forward-outline" class="my-[7px] text-xl cursor-pointer"></ion-icon>
           </div>
-          <p class="text-black-3 mt-1">Vintage / Living room</p>
+          <p class="text-black-3 mt-1">{{moodboard.style.name}} / {{moodboard.room.name}}</p>
 
         </ion-col>
       </ion-row>

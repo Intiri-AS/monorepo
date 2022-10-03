@@ -27,6 +27,11 @@
 
 
 @media (min-width: 576px) {
+  .auto-size-modal-css::part(content) {
+    --width: 600px;
+    --height: 430px;
+    border-radius: 16px;
+  }
   .small-modal-css::part(content) {
     --width: 400px;
     border-radius: 16px;

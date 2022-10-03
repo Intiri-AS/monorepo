@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { PartnerService } from 'src/app/services/partner.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 
 @Component({
@@ -9,9 +10,20 @@ import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 })
 export class AdminProductsComponent implements OnInit {
 
-  constructor(public popoverController: PopoverController) { }
+  products: [];
+  productTypes: [];
 
-  ngOnInit() {}
+  constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
+
+  ngOnInit() {
+    this.partnerService.getProducts().subscribe((res: []) => {
+      this.products = res;
+    })
+
+    this.partnerService.getProductsType().subscribe((res: []) => {
+      this.productTypes = res;
+    })
+  }
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({
