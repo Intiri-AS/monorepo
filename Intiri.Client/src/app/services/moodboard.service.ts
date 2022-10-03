@@ -19,7 +19,7 @@ export class MoodboardService {
 
   addMoodboard(moodboard){
     const req_data = this.parseMoodboard(moodboard);
-    return this.http.get(this.apiUrl + 'moodboards/add');
+    return this.http.post(this.apiUrl + 'moodboards/add', req_data);
   }
 
   parseMoodboard(moodboard: Moodboard) {

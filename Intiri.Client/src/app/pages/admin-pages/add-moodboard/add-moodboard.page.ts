@@ -57,8 +57,9 @@ export class AddMoodboardPage implements OnInit {
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
-    this.styleSrv.getStyles().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res.map(e => {e.path = e.styleImages[0].path; delete e.imagePath; return e;});
+    this.styleSrv.getStyles();
+    this.styleSrv.styles$.subscribe((res: Array<any>) => {
+      this.steps[1]['data'] = res.map(e => {e.path = e.imagePath !== 'path' ? e.imagePath : e.styleImages[0].path; delete e.imagePath; return e;});
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
       this.steps[2]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
@@ -74,21 +75,18 @@ export class AddMoodboardPage implements OnInit {
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
       this.currentStepNo--;
-      //this.projectService.setCurrentProject(this.project);
     }
   }
 
   nextStep() {
     if (this.canChangeToStep(this.currentStepNo + 1)) {
       this.currentStepNo++;
-      //this.projectService.setCurrentProject(this.project);
     }
   }
 
   goToStep(stepNo) {
     if (this.canChangeToStep(stepNo)) {
       this.currentStepNo = stepNo;
-      //this.projectService.setCurrentProject(this.project);
     }
   }
 

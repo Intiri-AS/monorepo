@@ -3,7 +3,6 @@ import { PopoverController } from '@ionic/angular';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { StyleService } from 'src/app/services/style.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-moodboards',
@@ -13,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MoodboardsPage implements OnInit {
 
   moodboards: [];
-  styles: [];
+  styles$ = this.styleService.styles$;
 
   constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
 
@@ -21,9 +20,7 @@ export class MoodboardsPage implements OnInit {
     this.moodboardService.getMoodboards().subscribe((res: []) => {
       this.moodboards = res;
     })
-    this.styleService.getStyles().subscribe((res: []) => {
-      this.styles = res;
-    })
+    this.styleService.getStyles();
   }
 
   async showSettings(e: Event) {

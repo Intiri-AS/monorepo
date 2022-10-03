@@ -21,7 +21,7 @@
             <span class="text-sm text-black-2">Style</span>
             <div class="h-[52px]">
               <ion-select interface="popover" [multiple]="true">
-                <ion-select-option *ngFor="let style of styles" value="{{style.name}}">{{style.name}}</ion-select-option>
+                <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
               </ion-select>
             </div>
           </div>

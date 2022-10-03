@@ -48,19 +48,35 @@
       </ion-row>
     </ion-grid>
   </div>
-   <!-- Style added modal -->
-   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+  <!-- Style added modal -->
+  <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mt-[7px]" src="../../../../assets/icon/success.svg" alt="success"></div>
           <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Style added!</h2>
           <p class="text-center text-base text-[18px] text-black-2">You successfully added new style.</p>
         </div>
-          <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Styles</ion-button>
-          </ion-buttons>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Styles</ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+  <!-- Style delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove style</h2>
+          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this style? This action cannot be undone.</p>
         </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyle()">Remove style</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+        </ion-buttons>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -11,6 +11,8 @@ export class AddStyleModalComponent implements OnInit {
 
   constructor(private modalController: ModalController, private styleService: StyleService, private sanitizer: DomSanitizer) { }
 
+  item: {}
+
   style = {
     name: '',
     description: '',
@@ -33,8 +35,16 @@ export class AddStyleModalComponent implements OnInit {
   addStyle() {
     this.styleService.addStyle(this.style).subscribe(res => {
       if (typeof (res) === 'object') {
+        this.styleService.getStyles();
         this.openSuccessModal();
       }
+    });
+  }
+
+  deleteStyle() {
+    this.styleService.deleteStyle(this.item['id']).subscribe(res => {
+        this.styleService.getStyles();
+        this.modalController.dismiss();
     });
   }
 
