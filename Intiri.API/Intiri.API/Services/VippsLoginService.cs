@@ -1,6 +1,7 @@
 ﻿using IdentityModel.Client;
 using Intiri.API.Configuration;
 using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace Intiri.API.Services
@@ -10,6 +11,7 @@ namespace Intiri.API.Services
 		private readonly IOptions<VippsLoginConfiguration> _options;
 		private readonly ILogger<VippsLoginService> _logger;
 		private readonly HttpClient _httpClient;
+		private readonly string _redirectUri = "http://localhost:8100/processing";
 
 		public VippsLoginService(
 			ILogger<VippsLoginService> logger,
@@ -35,7 +37,7 @@ namespace Intiri.API.Services
 			string authorizationUrl = requestUrl.CreateAuthorizeUrl(
 				clientId: _options.Value.ClientId,
 				responseType: "code",
-				redirectUri: "http://localhost:8100/processing",
+				redirectUri: _redirectUri,
 				scope: "name email phoneNumber",
 				state: "TODO: Session cookie");
 
@@ -55,7 +57,7 @@ namespace Intiri.API.Services
 
 			AuthorizationCodeTokenRequest accessTokenRequest =
 				CreateAccessTokenRequest(
-					discoResponse.AuthorizeEndpoint,
+					discoResponse.TokenEndpoint,
 					authorizationCode,
 					redirectUri);
 

@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { AccessTokenRequestDTO } from 'src/app/DTO/vipps-types';
+import { AccessTokenRequestDTO } from 'src/app/DTOs/access-token.dto';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -24,20 +23,26 @@ export class ProcessingPage implements OnInit {
     const code = this.queryParams.get('code');
     const state = this.queryParams.get('state');
     const scope = this.queryParams.get('scope');
-    const redirectUri = this.queryParams.get('redirectUri');
-    console.log('redirectUri', redirectUri);
+    const redirectUri = 'http://localhost:8100/processing';
 
-    let a = new AccessTokenRequestDTO();
-    a.authorizationCode = code;
-    a.state = state;
-    a.scope = scope;
-    a.redirectUri = 'http://localhost:8100/my-intiry';
-    console.log(code);
+    const accessTokenRequest = new AccessTokenRequestDTO(
+      code,
+      state,
+      scope,
+      redirectUri
+    );
 
     const hasUserGivenConsent = this.hasUserGivenConsent(this.queryParams);
     if (hasUserGivenConsent) {
-      console.log(a);
-      this.account.finalizeVippsLogin(a);
+      console.log(accessTokenRequest);
+      this.account.finalizeVippsLogin(accessTokenRequest).subscribe(
+        () => {
+          this.router.navigateByUrl('/my-intiri');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     } else {
       this.errorMsg = this.queryParams.get('error_description');
       this.router.navigateByUrl('/login');

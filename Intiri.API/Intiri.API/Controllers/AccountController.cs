@@ -61,7 +61,7 @@ namespace Intiri.API.Controllers
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "EndUser");
 			if (!roleResult.Succeeded)
 			{
 				return BadRequest(roleResult.Errors);
@@ -147,55 +147,149 @@ namespace Intiri.API.Controllers
 					.ForEach(error => _logger.LogError($"Error code:{error.Code}. Error description:{error.Description}"));
 				return BadRequest("Unable to reset password.");
 			}
-
 			return Ok();
 		}
 
 		[HttpGet("vipps-auth-url")]
-		public async Task<ActionResult<string>> GetVippsAuthorizationUrl()
+		public async Task<ActionResult> GetVippsAuthorizationUrl()
 		{
-			var authUrl = await _vippsLoginService.GetAuthorizationUrlAsync();
+			string authUrl = await _vippsLoginService.GetAuthorizationUrlAsync();
 
 			if (authUrl == null)
 			{
-				_logger.LogError($"Authorization URL isn't initialized");
+				_logger.LogError(
+					$"Fetching Vipps authorization URL failed. " +
+					$"Authorization_URL={authUrl}");
+
+				return NotFound(
+					"Something went wrong " +
+					"while fetching authorization URL from Vipps.");
 			}
 
-			var authOut = new AuthorizationUrlOutDTO
-			{
-				AuthorizationUrl = authUrl
-			};
-			return Ok(authOut);
+			return Content(authUrl);
 		}
 
 		[HttpPost("vipps-login")]
-		public async Task<IActionResult> VippsLogin(AccessTokenRequestDTO dto)
+		public async Task<ActionResult<LoginOutDTO>> VippsLogin(
+			AccessTokenRequestDTO dto)
 		{
 			TokenResponse accessToken = await _vippsLoginService
 				.GetAccessTokenAsync(dto.AuthorizationCode, dto.RedirectUri);
 
 			if (accessToken == null)
 			{
-				_logger.LogError($"Access token isn't initialized");
-				return BadRequest();
-			}
+				_logger.LogError(
+					$"Fetching access token from Vipps failed. " +
+					$"Access_token={accessToken}");
 
+				return NotFound(
+					"Something went wrong " +
+					"while fetching access token from Vipps.");
+			}
+			
 			if (accessToken.IsError)
 			{
-				_logger.LogError($"{accessToken.Error}");
-				return BadRequest();
+				_logger.LogError(
+					$"Fetching access token from Vipps failed. " +
+					$"Error={accessToken.Error}");
+
+				return BadRequest(
+					"Something went wrong " +
+					"while fetching access token from Vipps.");
 			}
 
-			UserInfoResponse userInfoResponse = await _vippsLoginService
-				.GetUserInfoAsync(accessToken.AccessToken);
+			UserInfoResponse userInfoResponse = await 
+				_vippsLoginService.GetUserInfoAsync(accessToken.AccessToken);
+
+			if (userInfoResponse == null)
+			{
+				_logger.LogError(
+					$"Fetching user info from Vipps failed. " +
+					$"Access_token={userInfoResponse}");
+
+				return NotFound(
+					"Something went wrong " +
+					"while fetching user info from Vipps.");
+			}
 
 			if (userInfoResponse.IsError)
 			{
-				_logger.LogError($"{userInfoResponse.Error}");
-				return BadRequest();
-			}
-			return Ok();
-		}
+				_logger.LogError(
+					$"Fetching user info from Vipps failed. " +
+					$"Error={userInfoResponse.Error}");
 
+				return BadRequest(
+					"Something went wrong " +
+					"while fetching user info from Vipps.");
+			}
+
+			string phoneNumber = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "phone_number").Value;
+
+			if (phoneNumber == null)
+			{
+				_logger.LogError(
+					$"Fetching user's phone number from Vipps failed. " +
+					$"phone_number={phoneNumber}");
+
+				BadRequest("Something went wrong " +
+					"while fetching user's phone number from Vipps.");
+			}
+
+			// Login user if already in DB
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumber))
+			{
+				User existingUser = await _accountService
+					.GetUserByPhoneNumberAsync(phoneNumber);
+
+				return Ok(new LoginOutDTO
+				{
+					PhoneNumber = existingUser.PhoneNumber,
+					Token = await _tokenService.CreateToken(existingUser)
+				});
+			}
+
+			// Register user if not in DB
+			string email = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "email").Value;
+
+			string firstName = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "given_name").Value;
+
+			string lastName = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "family_name").Value;
+
+			User newUser = new()
+			{
+				UserName = phoneNumber,
+				FirstName = firstName,
+				LastName = lastName,
+				PhoneNumber = phoneNumber
+			};
+
+			IdentityResult result = await
+				_accountService.CreateUserAsync(newUser);
+
+			if (!result.Succeeded)
+			{
+				_logger.LogError($"{result.Errors}");
+				return BadRequest(result.Errors);
+			}
+
+			IdentityResult roleResult = await 
+				_accountService.AddUserToRolesAsync(newUser, "EndUser");
+
+			if (!roleResult.Succeeded)
+			{
+				_logger.LogError($"{roleResult.Errors}");
+				return BadRequest(roleResult.Errors);
+			}
+
+			return Ok(new LoginOutDTO
+			{
+				PhoneNumber = newUser.PhoneNumber,
+				Token = await _tokenService.CreateToken(newUser)
+			});
+		}
 	}
 }

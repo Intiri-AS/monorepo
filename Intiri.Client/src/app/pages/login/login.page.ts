@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-  loginWithVipps() {
-    this.accountService.startVippsLogin();
+  initiateVippsLogin() {
+    this.accountService.initiateVippsLogin();
   }
 }
