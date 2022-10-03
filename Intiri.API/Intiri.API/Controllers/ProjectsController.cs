@@ -125,7 +125,7 @@ namespace Intiri.API.Controllers
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok($"Succesfully deleted project with Id={projectId}");
+				return Ok();
 			}
 			return BadRequest("Problem occured while deleting the project)");
 		}

@@ -74,7 +74,7 @@ namespace Intiri.API.Controllers
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok($"Succesfully deleted room details with Id={roomDetailsId}");
+				return Ok();
 			}
 
 			return BadRequest("Problem occured while deleting room details");

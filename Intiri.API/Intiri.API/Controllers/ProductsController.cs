@@ -147,7 +147,7 @@ namespace Intiri.API.Controllers
 			{
 				return BadRequest($"Internal server error: {ex}");
 			}
-			return Ok($"Product '{product.Name}' deleted.");
+			return Ok();
 		}
 	}
 }
