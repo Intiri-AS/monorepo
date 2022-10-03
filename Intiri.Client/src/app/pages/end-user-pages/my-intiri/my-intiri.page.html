@@ -2,7 +2,12 @@
   <div id="home">
     <app-header></app-header>
     <div class="main-container">
-      <p class="main-title">My intiri</p>
+      <div class="flex justify-between">
+        <p class="main-title">My intiri</p>
+        <ion-button fill="clear" (click)="openShare()">
+          <ion-icon name="share-social" class="w-10 h-10"></ion-icon>
+        </ion-button>
+      </div>
       <ion-row class="mt-3">
         <ion-col size="12" size-xl="8" class="p-2 xl:p-0 xl:pt-6">
           <div *ngIf="projects.length > 0">

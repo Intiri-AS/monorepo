@@ -89,6 +89,10 @@ import { SettingsPopoverComponent } from './components/settings-popover/settings
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';
 import { AddStyleModalComponent } from './components/modals/add-style-modal/add-style-modal.component';
 import { LanguagePopoverComponent } from './components/popovers/language-popover/language-popover.component';
+import { RateModalComponent } from './components/modals/share-rate-modals/rate-modal/rate-modal.component';
+import { RateSuccessfulModalComponent } from './components/modals/share-rate-modals/rate-successful-modal/rate-successful-modal.component';
+import { ShareModalComponent } from './components/modals/share-rate-modals/share-modal/share-modal.component';
+import { ShareSuccessfulModalComponent } from './components/modals/share-rate-modals/share-successful-modal/share-successful-modal.component';
 import { AddMaterialsModalComponent } from './components/modals/add-materials-modal/add-materials-modal.component';
 import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
 import { AddColorModalComponent } from './components/modals/add-color-modal/add-color-modal.component';
@@ -121,11 +125,14 @@ export function createTranslateLoader(http: HttpClient) {
     NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
+    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
+    ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
     TimeAgoPipe
   ],
   entryComponents: [
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent
+    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
+    RateModalComponent, RateSuccessfulModalComponent, ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent,
+    AddColorModalComponent, AddPictureModalComponent,
   ],
   imports: [
     BrowserModule,
