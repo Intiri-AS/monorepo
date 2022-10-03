@@ -45,12 +45,8 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Moodboards
 				.Where(m => ids.Contains(m.Id))
-				.Include(m => m.Room)
-				.Include(m => m.Designer)
 				.Include(m => m.Materials)
-					.ThenInclude(mat => mat.MaterialType)
 				.Include(m => m.Products)
-					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)

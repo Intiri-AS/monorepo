@@ -44,8 +44,8 @@ namespace Intiri.API.Controllers
 
 			foreach (Project project in projects)
 			{
-				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.ProjectMoodboards.First().Id);
-				project.ProjectMoodboards.Add(moodboard);
+				IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
+				project.ProjectMoodboards = moodboards.ToArray();
 			}
 
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
@@ -101,7 +101,9 @@ namespace Intiri.API.Controllers
 			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			_unitOfWork.ProjectRepository.Insert(project);
+
 			project.ProjectMoodboards.Add(newMoodboard);
+			user.CreatedProjects.Add(project);
 
 			if (await _unitOfWork.SaveChanges())
 			{

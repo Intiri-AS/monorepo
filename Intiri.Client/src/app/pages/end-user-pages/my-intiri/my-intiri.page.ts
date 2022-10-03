@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
@@ -15,6 +16,7 @@ export class MyIntiriPage {
   apiUrl = environment.apiUrl;
 
   projects = [];
+  projectId = 0;
 
   news = [
     {
@@ -54,7 +56,7 @@ export class MyIntiriPage {
     spaceBetween: 20,
   }
 
-  constructor(public projectService: ProjectService) {}
+  constructor(public projectService: ProjectService, private router: Router) {}
 
   ngOnInit() {
     this.projectService.getAllProjects().subscribe((res: Array<Project>) => {
@@ -70,6 +72,7 @@ export class MyIntiriPage {
     });
     return result;
   }
+  
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
   }
@@ -80,6 +83,14 @@ export class MyIntiriPage {
 
   prev() {
     this.slides.slidePrev();
+  }
+
+  goToProjectDetails(project: Project){
+    this.router.navigate(['/project-details'], {
+      state:{
+        data: project
+      }
+    });
   }
 
 }

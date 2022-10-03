@@ -52,7 +52,10 @@
             </div>
             <div class="flex items-center justify-start">
               <p class="text-black-2 text-2xl font-medium">{{projects[projects.length-1].name}}</p>
-              <ion-button fill="clear" class="text-black" routerLink="/project-details" routerDirection="root">
+              <!-- <ion-button fill="clear" class="text-black" routerLink="/project-details" routerDirection="root">
+                <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+              </ion-button> -->
+              <ion-button fill="clear" class="text-black" (click)="goToProjectDetails(projects[projects.length-1])">
                 <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
               </ion-button>
             </div>
@@ -69,7 +72,10 @@
                 </ion-card>
                 <div class="flex items-center justify-start">
                   <p class="text-black-2 text-2xl font-medium">{{project.name}}</p>
-                  <ion-button fill="clear" class="text-black" routerLink="/project-details" routerDirection="root">
+                  <!-- <ion-button fill="clear" class="text-black" routerLink="['/project-details', {{project}}]" routerDirection="root">
+                    <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                  </ion-button> -->
+                  <ion-button fill="clear" class="text-black" (click)="goToProjectDetails(project)">
                     <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                   </ion-button>
                 </div>
