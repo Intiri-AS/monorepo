@@ -76,7 +76,7 @@ namespace Intiri.API.Controllers
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok($"Successfully deleted material type with Id={productTypeId}");
+				return Ok();
 			}
 			return BadRequest("Problem occured while deleting material type");
 		}
