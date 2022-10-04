@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Moodboard } from 'src/app/models/moodboard.model';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-details-page',
@@ -6,23 +10,36 @@ import { Component } from '@angular/core';
   styleUrls: ['./project-details.page.scss'],
 })
 
-export class ProjectDetailsPage {
+export class ProjectDetailsPage implements OnInit {
+  
+  currentProject: Project;
+  
+  constructor(public projectService: ProjectService, private router: Router) { }
 
-  moodboards = [
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'moodboard 1',
-      pieces: 20,
-      updated: '1 week'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'moodboard 2',
-      pieces: 10,
-      updated: '1 day'
-    }
-  ]
+  ngOnInit(): void {
+    this.currentProject =  this.router.getCurrentNavigation().extras.state.data;
+  }
 
-  constructor() {}
+  goToMoodboardDetails(moodboard: Moodboard){
+    this.router.navigate(['/moodboard-details'], {
+      state:{
+        data: moodboard
+      }
+    });
+  }
+
+  addMoodboardToProject()
+  {
+    //sessionStorage.clear();
+    this.currentProject.room = {};
+    this.currentProject.budget = '';
+    this.currentProject.roomDetails = {};
+    this.currentProject.colorPalettes = [];
+    this.currentProject.styleImages = [];
+    this.currentProject.projectMoodboards = [];
+    this.projectService.setCurrentProject(this.currentProject);
+    this.router.navigateByUrl('/new-project');
+
+  }
 
 }

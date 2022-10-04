@@ -1,9 +1,9 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["common"],{
 
-/***/ 3696:
+/***/ 5652:
 /*!*********************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/button-active-8937ead0.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/button-active-9f97b694.js ***!
   \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "c": () => (/* binding */ createButtonActiveGesture)
 /* harmony export */ });
-/* harmony import */ var _index_88bdeaae_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-88bdeaae.js */ 9479);
+/* harmony import */ var _index_8e692445_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-8e692445.js */ 1559);
 /* harmony import */ var _haptic_683b3b3c_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./haptic-683b3b3c.js */ 3750);
 /* harmony import */ var _index_3f1a7d95_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-3f1a7d95.js */ 2172);
 /*!
@@ -51,7 +51,7 @@ const createButtonActiveGesture = (el, isButton) => {
     }
 
     const buttonToModify = currentTouchedButton;
-    (0,_index_88bdeaae_js__WEBPACK_IMPORTED_MODULE_0__.c)(() => buttonToModify.classList.add('ion-activated'));
+    (0,_index_8e692445_js__WEBPACK_IMPORTED_MODULE_0__.c)(() => buttonToModify.classList.add('ion-activated'));
     hapticFeedbackFn();
   };
 
@@ -61,7 +61,7 @@ const createButtonActiveGesture = (el, isButton) => {
     }
 
     const buttonToModify = currentTouchedButton;
-    (0,_index_88bdeaae_js__WEBPACK_IMPORTED_MODULE_0__.c)(() => buttonToModify.classList.remove('ion-activated'));
+    (0,_index_8e692445_js__WEBPACK_IMPORTED_MODULE_0__.c)(() => buttonToModify.classList.remove('ion-activated'));
     /**
      * Clicking on one button, but releasing on another button
      * does not dispatch a click event in browsers, so we
@@ -214,9 +214,9 @@ const startFocusVisible = rootEl => {
 
 /***/ }),
 
-/***/ 2668:
+/***/ 9553:
 /*!**************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-ce4f806c.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-82cc7646.js ***!
   \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -226,8 +226,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "a": () => (/* binding */ attachComponent),
 /* harmony export */   "d": () => (/* binding */ detachComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-2914b3be.js */ 4244);
 
 
 /*!
@@ -236,7 +236,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const attachComponent = /*#__PURE__*/function () {
-  var _ref = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
+  var _ref = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
     var _a;
 
     if (delegate) {
@@ -258,7 +258,7 @@ const attachComponent = /*#__PURE__*/function () {
     }
 
     container.appendChild(el);
-    yield new Promise(resolve => (0,_helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
+    yield new Promise(resolve => (0,_helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
     return el;
   });
 
@@ -285,7 +285,7 @@ const CoreDelegate = () => {
   let Reference;
 
   const attachViewToDom = /*#__PURE__*/function () {
-    var _ref2 = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
+    var _ref2 = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
       var _a, _b;
 
       BaseComponent = parentElement;
@@ -319,7 +319,7 @@ const CoreDelegate = () => {
          */
 
         BaseComponent.appendChild(el);
-        yield new Promise(resolve => (0,_helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
+        yield new Promise(resolve => (0,_helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
       } else if (BaseComponent.children.length > 0) {
         // If there is no component, then we need to create a new parent
         // element to apply the css classes to.
@@ -536,9 +536,71 @@ const hapticImpact = options => {
 
 /***/ }),
 
-/***/ 7288:
+/***/ 2002:
 /*!*************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/index-3413f7be.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/index-40bb69ee.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "a": () => (/* binding */ arrowBackSharp),
+/* harmony export */   "b": () => (/* binding */ closeCircle),
+/* harmony export */   "c": () => (/* binding */ chevronBack),
+/* harmony export */   "d": () => (/* binding */ closeSharp),
+/* harmony export */   "e": () => (/* binding */ searchSharp),
+/* harmony export */   "f": () => (/* binding */ checkmarkOutline),
+/* harmony export */   "g": () => (/* binding */ ellipseOutline),
+/* harmony export */   "h": () => (/* binding */ caretBackSharp),
+/* harmony export */   "i": () => (/* binding */ arrowDown),
+/* harmony export */   "j": () => (/* binding */ reorderThreeOutline),
+/* harmony export */   "k": () => (/* binding */ reorderTwoSharp),
+/* harmony export */   "l": () => (/* binding */ chevronDown),
+/* harmony export */   "m": () => (/* binding */ chevronForwardOutline),
+/* harmony export */   "n": () => (/* binding */ ellipsisHorizontal),
+/* harmony export */   "o": () => (/* binding */ chevronForward),
+/* harmony export */   "p": () => (/* binding */ caretUpSharp),
+/* harmony export */   "q": () => (/* binding */ caretDownSharp),
+/* harmony export */   "r": () => (/* binding */ removeOutline),
+/* harmony export */   "s": () => (/* binding */ searchOutline),
+/* harmony export */   "t": () => (/* binding */ close),
+/* harmony export */   "u": () => (/* binding */ menuOutline),
+/* harmony export */   "v": () => (/* binding */ menuSharp)
+/* harmony export */ });
+/*!
+ * (C) Ionic http://ionicframework.com - MIT License
+ */
+
+/* Ionicons v6.0.3, ES Modules */
+const arrowBackSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Arrow Back</title><path stroke-linecap='square' stroke-miterlimit='10' stroke-width='48' d='M244 400L100 256l144-144M120 256h292' class='ionicon-fill-none'/></svg>";
+const arrowDown = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Arrow Down</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 268l144 144 144-144M256 392V100' class='ionicon-fill-none'/></svg>";
+const caretBackSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Back</title><path d='M368 64L144 256l224 192V64z'/></svg>";
+const caretDownSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Down</title><path d='M64 144l192 224 192-224H64z'/></svg>";
+const caretUpSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Up</title><path d='M448 368L256 144 64 368h384z'/></svg>";
+const checkmarkOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark</title><path stroke-linecap='round' stroke-linejoin='round' d='M416 128L192 384l-96-96' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const chevronBack = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Back</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M328 112L184 256l144 144' class='ionicon-fill-none'/></svg>";
+const chevronDown = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Down</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' class='ionicon-fill-none'/></svg>";
+const chevronForward = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Forward</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M184 112l144 144-144 144' class='ionicon-fill-none'/></svg>";
+const chevronForwardOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Forward</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M184 112l144 144-144 144' class='ionicon-fill-none'/></svg>";
+const close = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z'/></svg>";
+const closeCircle = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm75.31 260.69a16 16 0 11-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 01-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0122.62-22.62L256 233.37l52.69-52.68a16 16 0 0122.62 22.62L278.63 256z'/></svg>";
+const closeSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z'/></svg>";
+const ellipseOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' stroke-linecap='round' stroke-linejoin='round' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const ellipsisHorizontal = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipsis Horizontal</title><circle cx='256' cy='256' r='48'/><circle cx='416' cy='256' r='48'/><circle cx='96' cy='256' r='48'/></svg>";
+const menuOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Menu</title><path stroke-linecap='round' stroke-miterlimit='10' d='M80 160h352M80 256h352M80 352h352' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const menuSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Menu</title><path d='M64 384h384v-42.67H64zm0-106.67h384v-42.66H64zM64 128v42.67h384V128z'/></svg>";
+const removeOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Remove</title><path stroke-linecap='round' stroke-linejoin='round' d='M400 256H112' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const reorderThreeOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Reorder Three</title><path stroke-linecap='round' stroke-linejoin='round' d='M96 256h320M96 176h320M96 336h320' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const reorderTwoSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Reorder Two</title><path stroke-linecap='square' stroke-linejoin='round' stroke-width='44' d='M118 304h276M118 208h276' class='ionicon-fill-none'/></svg>";
+const searchOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Search</title><path d='M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z' stroke-miterlimit='10' class='ionicon-fill-none ionicon-stroke-width'/><path stroke-linecap='round' stroke-miterlimit='10' d='M338.29 338.29L448 448' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
+const searchSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Search</title><path d='M464 428L339.92 303.9a160.48 160.48 0 0030.72-94.58C370.64 120.37 298.27 48 209.32 48S48 120.37 48 209.32s72.37 161.32 161.32 161.32a160.48 160.48 0 0094.58-30.72L428 464zM209.32 319.69a110.38 110.38 0 11110.37-110.37 110.5 110.5 0 01-110.37 110.37z'/></svg>";
+
+
+/***/ }),
+
+/***/ 7584:
+/*!*************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm/index-50cd649f.js ***!
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -556,8 +618,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "r": () => (/* binding */ resetContentScrollY),
 /* harmony export */   "s": () => (/* binding */ scrollToTop)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var _helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-2914b3be.js */ 4244);
 /* harmony import */ var _index_c4b11676_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-c4b11676.js */ 9273);
 
 
@@ -593,9 +655,9 @@ const isIonContent = el => el && el.tagName === ION_CONTENT_TAG_NAME;
 
 
 const getScrollElement = /*#__PURE__*/function () {
-  var _ref = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
+  var _ref = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
     if (isIonContent(el)) {
-      yield new Promise(resolve => (0,_helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
+      yield new Promise(resolve => (0,_helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
       return el.getScrollElement();
     }
 
@@ -714,68 +776,6 @@ const resetContentScrollY = (contentEl, initialScrollY) => {
   }
 };
 
-
-
-/***/ }),
-
-/***/ 2312:
-/*!*************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/index-45ecc7ca.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a": () => (/* binding */ arrowBackSharp),
-/* harmony export */   "b": () => (/* binding */ closeCircle),
-/* harmony export */   "c": () => (/* binding */ chevronBack),
-/* harmony export */   "d": () => (/* binding */ closeSharp),
-/* harmony export */   "e": () => (/* binding */ searchSharp),
-/* harmony export */   "f": () => (/* binding */ checkmarkOutline),
-/* harmony export */   "g": () => (/* binding */ ellipseOutline),
-/* harmony export */   "h": () => (/* binding */ caretBackSharp),
-/* harmony export */   "i": () => (/* binding */ arrowDown),
-/* harmony export */   "j": () => (/* binding */ reorderThreeOutline),
-/* harmony export */   "k": () => (/* binding */ reorderTwoSharp),
-/* harmony export */   "l": () => (/* binding */ chevronDown),
-/* harmony export */   "m": () => (/* binding */ chevronForwardOutline),
-/* harmony export */   "n": () => (/* binding */ ellipsisHorizontal),
-/* harmony export */   "o": () => (/* binding */ chevronForward),
-/* harmony export */   "p": () => (/* binding */ caretUpSharp),
-/* harmony export */   "q": () => (/* binding */ caretDownSharp),
-/* harmony export */   "r": () => (/* binding */ removeOutline),
-/* harmony export */   "s": () => (/* binding */ searchOutline),
-/* harmony export */   "t": () => (/* binding */ close),
-/* harmony export */   "u": () => (/* binding */ menuOutline),
-/* harmony export */   "v": () => (/* binding */ menuSharp)
-/* harmony export */ });
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- */
-
-/* Ionicons v6.0.2, ES Modules */
-const arrowBackSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Arrow Back</title><path stroke-linecap='square' stroke-miterlimit='10' stroke-width='48' d='M244 400L100 256l144-144M120 256h292' class='ionicon-fill-none'/></svg>";
-const arrowDown = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Arrow Down</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 268l144 144 144-144M256 392V100' class='ionicon-fill-none'/></svg>";
-const caretBackSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Back</title><path d='M368 64L144 256l224 192V64z'/></svg>";
-const caretDownSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Down</title><path d='M64 144l192 224 192-224H64z'/></svg>";
-const caretUpSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Caret Up</title><path d='M448 368L256 144 64 368h384z'/></svg>";
-const checkmarkOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark</title><path stroke-linecap='round' stroke-linejoin='round' d='M416 128L192 384l-96-96' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const chevronBack = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Back</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M328 112L184 256l144 144' class='ionicon-fill-none'/></svg>";
-const chevronDown = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Down</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' class='ionicon-fill-none'/></svg>";
-const chevronForward = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Forward</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M184 112l144 144-144 144' class='ionicon-fill-none'/></svg>";
-const chevronForwardOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Chevron Forward</title><path stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M184 112l144 144-144 144' class='ionicon-fill-none'/></svg>";
-const close = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z'/></svg>";
-const closeCircle = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close Circle</title><path d='M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm75.31 260.69a16 16 0 11-22.62 22.62L256 278.63l-52.69 52.68a16 16 0 01-22.62-22.62L233.37 256l-52.68-52.69a16 16 0 0122.62-22.62L256 233.37l52.69-52.68a16 16 0 0122.62 22.62L278.63 256z'/></svg>";
-const closeSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Close</title><path d='M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z'/></svg>";
-const ellipseOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' stroke-linecap='round' stroke-linejoin='round' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const ellipsisHorizontal = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipsis Horizontal</title><circle cx='256' cy='256' r='48'/><circle cx='416' cy='256' r='48'/><circle cx='96' cy='256' r='48'/></svg>";
-const menuOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Menu</title><path stroke-linecap='round' stroke-miterlimit='10' d='M80 160h352M80 256h352M80 352h352' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const menuSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Menu</title><path d='M64 384h384v-42.67H64zm0-106.67h384v-42.66H64zM64 128v42.67h384V128z'/></svg>";
-const removeOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Remove</title><path stroke-linecap='round' stroke-linejoin='round' d='M400 256H112' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const reorderThreeOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Reorder Three</title><path stroke-linecap='round' stroke-linejoin='round' d='M96 256h320M96 176h320M96 336h320' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const reorderTwoSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Reorder Two</title><path stroke-linecap='square' stroke-linejoin='round' stroke-width='44' d='M118 304h276M118 208h276' class='ionicon-fill-none'/></svg>";
-const searchOutline = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Search</title><path d='M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z' stroke-miterlimit='10' class='ionicon-fill-none ionicon-stroke-width'/><path stroke-linecap='round' stroke-miterlimit='10' d='M338.29 338.29L448 448' class='ionicon-fill-none ionicon-stroke-width'/></svg>";
-const searchSharp = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Search</title><path d='M464 428L339.92 303.9a160.48 160.48 0 0030.72-94.58C370.64 120.37 298.27 48 209.32 48S48 120.37 48 209.32s72.37 161.32 161.32 161.32a160.48 160.48 0 0094.58-30.72L428 464zM209.32 319.69a110.38 110.38 0 11110.37-110.37 110.5 110.5 0 01-110.37 110.37z'/></svg>";
 
 
 /***/ }),
@@ -954,6 +954,68 @@ const copyVisualViewport = visualViewport => {
 
 /***/ }),
 
+/***/ 3963:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm/keyboard-controller-73af62b2.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "c": () => (/* binding */ createKeyboardController)
+/* harmony export */ });
+/* harmony import */ var _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-33ffec25.js */ 2286);
+/*!
+ * (C) Ionic http://ionicframework.com - MIT License
+ */
+
+/**
+ * Creates a controller that tracks and reacts to opening or closing the keyboard.
+ *
+ * @internal
+ * @param keyboardChangeCallback A function to call when the keyboard opens or closes.
+ */
+
+const createKeyboardController = keyboardChangeCallback => {
+  let keyboardWillShowHandler;
+  let keyboardWillHideHandler;
+  let keyboardVisible;
+
+  const init = () => {
+    keyboardWillShowHandler = () => {
+      keyboardVisible = true;
+      if (keyboardChangeCallback) keyboardChangeCallback(true);
+    };
+
+    keyboardWillHideHandler = () => {
+      keyboardVisible = false;
+      if (keyboardChangeCallback) keyboardChangeCallback(false);
+    };
+
+    _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === null || _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === void 0 ? void 0 : _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w.addEventListener('keyboardWillShow', keyboardWillShowHandler);
+    _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === null || _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === void 0 ? void 0 : _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w.addEventListener('keyboardWillHide', keyboardWillHideHandler);
+  };
+
+  const destroy = () => {
+    _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === null || _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === void 0 ? void 0 : _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w.removeEventListener('keyboardWillShow', keyboardWillShowHandler);
+    _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === null || _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w === void 0 ? void 0 : _index_33ffec25_js__WEBPACK_IMPORTED_MODULE_0__.w.removeEventListener('keyboardWillHide', keyboardWillHideHandler);
+    keyboardWillShowHandler = keyboardWillHideHandler = undefined;
+  };
+
+  const isKeyboardVisible = () => keyboardVisible;
+
+  init();
+  return {
+    init,
+    destroy,
+    isKeyboardVisible
+  };
+};
+
+
+
+/***/ }),
+
 /***/ 3844:
 /*!***********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/spinner-configs-5d6b6fe7.js ***!
@@ -1111,9 +1173,9 @@ const SPINNERS = spinners;
 
 /***/ }),
 
-/***/ 1812:
+/***/ 6014:
 /*!******************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/swipe-back-fa30a130.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/swipe-back-867b0442.js ***!
   \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1121,7 +1183,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createSwipeBackGesture": () => (/* binding */ createSwipeBackGesture)
 /* harmony export */ });
-/* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
+/* harmony import */ var _helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers-2914b3be.js */ 4244);
 /* harmony import */ var _dir_e8b767a8_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dir-e8b767a8.js */ 7481);
 /* harmony import */ var _index_3f1a7d95_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-3f1a7d95.js */ 2172);
 /* harmony import */ var _gesture_controller_17e82006_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gesture-controller-17e82006.js */ 607);
@@ -1197,7 +1259,7 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
      */
 
 
-    onEndHandler(shouldComplete, stepValue <= 0 ? 0.01 : (0,_helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_0__.l)(0, stepValue, 0.9999), realDur);
+    onEndHandler(shouldComplete, stepValue <= 0 ? 0.01 : (0,_helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_0__.l)(0, stepValue, 0.9999), realDur);
   };
 
   return (0,_index_3f1a7d95_js__WEBPACK_IMPORTED_MODULE_2__.createGesture)({

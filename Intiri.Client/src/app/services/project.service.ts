@@ -68,8 +68,20 @@ export class ProjectService {
     const req_data = this.parseProject(project);
     return this.http.post(this.apiUrl + 'projects/moodboard-match', req_data);
   }
+
   saveProject(project) {
     const req_data = this.parseProject(project);
     return this.http.post(this.apiUrl + 'projects/add', req_data);
+  }
+
+  addMoodboardToProject(project)
+  {
+    const reqData = {
+      projectId: project['id'],
+      moodboardId: project.projectMoodboards[0].id
+    }
+
+    return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
+
   }
 }

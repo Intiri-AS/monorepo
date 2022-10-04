@@ -4398,7 +4398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "visitAll": () => (/* binding */ visitAll)
 /* harmony export */ });
 /**
- * @license Angular v14.1.0
+ * @license Angular v14.2.4
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -17118,11 +17118,19 @@ class _ParseAST {
         while (this.consumeOptionalCharacter($SEMICOLON)) {} // read all semicolons
 
       } else if (this.index < this.tokens.length) {
-        this.error(`Unexpected token '${this.next}'`);
+        const errorIndex = this.index;
+        this.error(`Unexpected token '${this.next}'`); // The `error` call above will skip ahead to the next recovery point in an attempt to
+        // recover part of the expression, but that might be the token we started from which will
+        // lead to an infinite loop. If that's the case, break the loop assuming that we can't
+        // parse further.
+
+        if (this.index === errorIndex) {
+          break;
+        }
       }
     }
 
-    if (exprs.length == 0) {
+    if (exprs.length === 0) {
       // We have no expressions so create an empty expression that spans the entire input length
       const artificialStart = this.offset;
       const artificialEnd = this.offset + this.input.length;
@@ -22374,7 +22382,7 @@ function SECURITY_SCHEMA() {
     registerContext(SecurityContext.HTML, ['iframe|srcdoc', '*|innerHTML', '*|outerHTML']);
     registerContext(SecurityContext.STYLE, ['*|style']); // NB: no SCRIPT contexts here, they are never allowed due to the parser stripping them.
 
-    registerContext(SecurityContext.URL, ['*|formAction', 'area|href', 'area|ping', 'audio|src', 'a|href', 'a|ping', 'blockquote|cite', 'body|background', 'del|cite', 'form|action', 'img|src', 'img|srcset', 'input|src', 'ins|cite', 'q|cite', 'source|src', 'source|srcset', 'track|src', 'video|poster', 'video|src']);
+    registerContext(SecurityContext.URL, ['*|formAction', 'area|href', 'area|ping', 'audio|src', 'a|href', 'a|ping', 'blockquote|cite', 'body|background', 'del|cite', 'form|action', 'img|src', 'input|src', 'ins|cite', 'q|cite', 'source|src', 'track|src', 'video|poster', 'video|src']);
     registerContext(SecurityContext.RESOURCE_URL, ['applet|code', 'applet|codebase', 'base|href', 'embed|src', 'frame|src', 'head|profile', 'html|manifest', 'iframe|src', 'link|href', 'media|src', 'object|codebase', 'object|data', 'script|src']);
   }
 
@@ -22466,46 +22474,49 @@ const OBJECT = 'object';
 const SCHEMA = ['[Element]|textContent,%classList,className,id,innerHTML,*beforecopy,*beforecut,*beforepaste,*copy,*cut,*paste,*search,*selectstart,*webkitfullscreenchange,*webkitfullscreenerror,*wheel,outerHTML,#scrollLeft,#scrollTop,slot' +
 /* added manually to avoid breaking changes */
 ',*message,*mozfullscreenchange,*mozfullscreenerror,*mozpointerlockchange,*mozpointerlockerror,*webglcontextcreationerror,*webglcontextlost,*webglcontextrestored', '[HTMLElement]^[Element]|accessKey,contentEditable,dir,!draggable,!hidden,innerText,lang,*abort,*auxclick,*blur,*cancel,*canplay,*canplaythrough,*change,*click,*close,*contextmenu,*cuechange,*dblclick,*drag,*dragend,*dragenter,*dragleave,*dragover,*dragstart,*drop,*durationchange,*emptied,*ended,*error,*focus,*gotpointercapture,*input,*invalid,*keydown,*keypress,*keyup,*load,*loadeddata,*loadedmetadata,*loadstart,*lostpointercapture,*mousedown,*mouseenter,*mouseleave,*mousemove,*mouseout,*mouseover,*mouseup,*mousewheel,*pause,*play,*playing,*pointercancel,*pointerdown,*pointerenter,*pointerleave,*pointermove,*pointerout,*pointerover,*pointerup,*progress,*ratechange,*reset,*resize,*scroll,*seeked,*seeking,*select,*show,*stalled,*submit,*suspend,*timeupdate,*toggle,*volumechange,*waiting,outerText,!spellcheck,%style,#tabIndex,title,!translate', 'abbr,address,article,aside,b,bdi,bdo,cite,code,dd,dfn,dt,em,figcaption,figure,footer,header,i,kbd,main,mark,nav,noscript,rb,rp,rt,rtc,ruby,s,samp,section,small,strong,sub,sup,u,var,wbr^[HTMLElement]|accessKey,contentEditable,dir,!draggable,!hidden,innerText,lang,*abort,*auxclick,*blur,*cancel,*canplay,*canplaythrough,*change,*click,*close,*contextmenu,*cuechange,*dblclick,*drag,*dragend,*dragenter,*dragleave,*dragover,*dragstart,*drop,*durationchange,*emptied,*ended,*error,*focus,*gotpointercapture,*input,*invalid,*keydown,*keypress,*keyup,*load,*loadeddata,*loadedmetadata,*loadstart,*lostpointercapture,*mousedown,*mouseenter,*mouseleave,*mousemove,*mouseout,*mouseover,*mouseup,*mousewheel,*pause,*play,*playing,*pointercancel,*pointerdown,*pointerenter,*pointerleave,*pointermove,*pointerout,*pointerover,*pointerup,*progress,*ratechange,*reset,*resize,*scroll,*seeked,*seeking,*select,*show,*stalled,*submit,*suspend,*timeupdate,*toggle,*volumechange,*waiting,outerText,!spellcheck,%style,#tabIndex,title,!translate', 'media^[HTMLElement]|!autoplay,!controls,%controlsList,%crossOrigin,#currentTime,!defaultMuted,#defaultPlaybackRate,!disableRemotePlayback,!loop,!muted,*encrypted,*waitingforkey,#playbackRate,preload,src,%srcObject,#volume', ':svg:^[HTMLElement]|*abort,*auxclick,*blur,*cancel,*canplay,*canplaythrough,*change,*click,*close,*contextmenu,*cuechange,*dblclick,*drag,*dragend,*dragenter,*dragleave,*dragover,*dragstart,*drop,*durationchange,*emptied,*ended,*error,*focus,*gotpointercapture,*input,*invalid,*keydown,*keypress,*keyup,*load,*loadeddata,*loadedmetadata,*loadstart,*lostpointercapture,*mousedown,*mouseenter,*mouseleave,*mousemove,*mouseout,*mouseover,*mouseup,*mousewheel,*pause,*play,*playing,*pointercancel,*pointerdown,*pointerenter,*pointerleave,*pointermove,*pointerout,*pointerover,*pointerup,*progress,*ratechange,*reset,*resize,*scroll,*seeked,*seeking,*select,*show,*stalled,*submit,*suspend,*timeupdate,*toggle,*volumechange,*waiting,%style,#tabIndex', ':svg:graphics^:svg:|', ':svg:animation^:svg:|*begin,*end,*repeat', ':svg:geometry^:svg:|', ':svg:componentTransferFunction^:svg:|', ':svg:gradient^:svg:|', ':svg:textContent^:svg:graphics|', ':svg:textPositioning^:svg:textContent|', 'a^[HTMLElement]|charset,coords,download,hash,host,hostname,href,hreflang,name,password,pathname,ping,port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,username', 'area^[HTMLElement]|alt,coords,download,hash,host,hostname,href,!noHref,password,pathname,ping,port,protocol,referrerPolicy,rel,search,shape,target,username', 'audio^media|', 'br^[HTMLElement]|clear', 'base^[HTMLElement]|href,target', 'body^[HTMLElement]|aLink,background,bgColor,link,*beforeunload,*blur,*error,*focus,*hashchange,*languagechange,*load,*message,*offline,*online,*pagehide,*pageshow,*popstate,*rejectionhandled,*resize,*scroll,*storage,*unhandledrejection,*unload,text,vLink', 'button^[HTMLElement]|!autofocus,!disabled,formAction,formEnctype,formMethod,!formNoValidate,formTarget,name,type,value', 'canvas^[HTMLElement]|#height,#width', 'content^[HTMLElement]|select', 'dl^[HTMLElement]|!compact', 'datalist^[HTMLElement]|', 'details^[HTMLElement]|!open', 'dialog^[HTMLElement]|!open,returnValue', 'dir^[HTMLElement]|!compact', 'div^[HTMLElement]|align', 'embed^[HTMLElement]|align,height,name,src,type,width', 'fieldset^[HTMLElement]|!disabled,name', 'font^[HTMLElement]|color,face,size', 'form^[HTMLElement]|acceptCharset,action,autocomplete,encoding,enctype,method,name,!noValidate,target', 'frame^[HTMLElement]|frameBorder,longDesc,marginHeight,marginWidth,name,!noResize,scrolling,src', 'frameset^[HTMLElement]|cols,*beforeunload,*blur,*error,*focus,*hashchange,*languagechange,*load,*message,*offline,*online,*pagehide,*pageshow,*popstate,*rejectionhandled,*resize,*scroll,*storage,*unhandledrejection,*unload,rows', 'hr^[HTMLElement]|align,color,!noShade,size,width', 'head^[HTMLElement]|', 'h1,h2,h3,h4,h5,h6^[HTMLElement]|align', 'html^[HTMLElement]|version', 'iframe^[HTMLElement]|align,!allowFullscreen,frameBorder,height,longDesc,marginHeight,marginWidth,name,referrerPolicy,%sandbox,scrolling,src,srcdoc,width', 'img^[HTMLElement]|align,alt,border,%crossOrigin,#height,#hspace,!isMap,longDesc,lowsrc,name,referrerPolicy,sizes,src,srcset,useMap,#vspace,#width', 'input^[HTMLElement]|accept,align,alt,autocapitalize,autocomplete,!autofocus,!checked,!defaultChecked,defaultValue,dirName,!disabled,%files,formAction,formEnctype,formMethod,!formNoValidate,formTarget,#height,!incremental,!indeterminate,max,#maxLength,min,#minLength,!multiple,name,pattern,placeholder,!readOnly,!required,selectionDirection,#selectionEnd,#selectionStart,#size,src,step,type,useMap,value,%valueAsDate,#valueAsNumber,#width', 'li^[HTMLElement]|type,#value', 'label^[HTMLElement]|htmlFor', 'legend^[HTMLElement]|align', 'link^[HTMLElement]|as,charset,%crossOrigin,!disabled,href,hreflang,integrity,media,referrerPolicy,rel,%relList,rev,%sizes,target,type', 'map^[HTMLElement]|name', 'marquee^[HTMLElement]|behavior,bgColor,direction,height,#hspace,#loop,#scrollAmount,#scrollDelay,!trueSpeed,#vspace,width', 'menu^[HTMLElement]|!compact', 'meta^[HTMLElement]|content,httpEquiv,name,scheme', 'meter^[HTMLElement]|#high,#low,#max,#min,#optimum,#value', 'ins,del^[HTMLElement]|cite,dateTime', 'ol^[HTMLElement]|!compact,!reversed,#start,type', 'object^[HTMLElement]|align,archive,border,code,codeBase,codeType,data,!declare,height,#hspace,name,standby,type,useMap,#vspace,width', 'optgroup^[HTMLElement]|!disabled,label', 'option^[HTMLElement]|!defaultSelected,!disabled,label,!selected,text,value', 'output^[HTMLElement]|defaultValue,%htmlFor,name,value', 'p^[HTMLElement]|align', 'param^[HTMLElement]|name,type,value,valueType', 'picture^[HTMLElement]|', 'pre^[HTMLElement]|#width', 'progress^[HTMLElement]|#max,#value', 'q,blockquote,cite^[HTMLElement]|', 'script^[HTMLElement]|!async,charset,%crossOrigin,!defer,event,htmlFor,integrity,src,text,type', 'select^[HTMLElement]|autocomplete,!autofocus,!disabled,#length,!multiple,name,!required,#selectedIndex,#size,value', 'shadow^[HTMLElement]|', 'slot^[HTMLElement]|name', 'source^[HTMLElement]|media,sizes,src,srcset,type', 'span^[HTMLElement]|', 'style^[HTMLElement]|!disabled,media,type', 'caption^[HTMLElement]|align', 'th,td^[HTMLElement]|abbr,align,axis,bgColor,ch,chOff,#colSpan,headers,height,!noWrap,#rowSpan,scope,vAlign,width', 'col,colgroup^[HTMLElement]|align,ch,chOff,#span,vAlign,width', 'table^[HTMLElement]|align,bgColor,border,%caption,cellPadding,cellSpacing,frame,rules,summary,%tFoot,%tHead,width', 'tr^[HTMLElement]|align,bgColor,ch,chOff,vAlign', 'tfoot,thead,tbody^[HTMLElement]|align,ch,chOff,vAlign', 'template^[HTMLElement]|', 'textarea^[HTMLElement]|autocapitalize,autocomplete,!autofocus,#cols,defaultValue,dirName,!disabled,#maxLength,#minLength,name,placeholder,!readOnly,!required,#rows,selectionDirection,#selectionEnd,#selectionStart,value,wrap', 'title^[HTMLElement]|text', 'track^[HTMLElement]|!default,kind,label,src,srclang', 'ul^[HTMLElement]|!compact,type', 'unknown^[HTMLElement]|', 'video^media|#height,poster,#width', ':svg:a^:svg:graphics|', ':svg:animate^:svg:animation|', ':svg:animateMotion^:svg:animation|', ':svg:animateTransform^:svg:animation|', ':svg:circle^:svg:geometry|', ':svg:clipPath^:svg:graphics|', ':svg:defs^:svg:graphics|', ':svg:desc^:svg:|', ':svg:discard^:svg:|', ':svg:ellipse^:svg:geometry|', ':svg:feBlend^:svg:|', ':svg:feColorMatrix^:svg:|', ':svg:feComponentTransfer^:svg:|', ':svg:feComposite^:svg:|', ':svg:feConvolveMatrix^:svg:|', ':svg:feDiffuseLighting^:svg:|', ':svg:feDisplacementMap^:svg:|', ':svg:feDistantLight^:svg:|', ':svg:feDropShadow^:svg:|', ':svg:feFlood^:svg:|', ':svg:feFuncA^:svg:componentTransferFunction|', ':svg:feFuncB^:svg:componentTransferFunction|', ':svg:feFuncG^:svg:componentTransferFunction|', ':svg:feFuncR^:svg:componentTransferFunction|', ':svg:feGaussianBlur^:svg:|', ':svg:feImage^:svg:|', ':svg:feMerge^:svg:|', ':svg:feMergeNode^:svg:|', ':svg:feMorphology^:svg:|', ':svg:feOffset^:svg:|', ':svg:fePointLight^:svg:|', ':svg:feSpecularLighting^:svg:|', ':svg:feSpotLight^:svg:|', ':svg:feTile^:svg:|', ':svg:feTurbulence^:svg:|', ':svg:filter^:svg:|', ':svg:foreignObject^:svg:graphics|', ':svg:g^:svg:graphics|', ':svg:image^:svg:graphics|', ':svg:line^:svg:geometry|', ':svg:linearGradient^:svg:gradient|', ':svg:mpath^:svg:|', ':svg:marker^:svg:|', ':svg:mask^:svg:|', ':svg:metadata^:svg:|', ':svg:path^:svg:geometry|', ':svg:pattern^:svg:|', ':svg:polygon^:svg:geometry|', ':svg:polyline^:svg:geometry|', ':svg:radialGradient^:svg:gradient|', ':svg:rect^:svg:geometry|', ':svg:svg^:svg:graphics|#currentScale,#zoomAndPan', ':svg:script^:svg:|type', ':svg:set^:svg:animation|', ':svg:stop^:svg:|', ':svg:style^:svg:|!disabled,media,title,type', ':svg:switch^:svg:graphics|', ':svg:symbol^:svg:|', ':svg:tspan^:svg:textPositioning|', ':svg:text^:svg:textPositioning|', ':svg:textPath^:svg:textContent|', ':svg:title^:svg:|', ':svg:use^:svg:graphics|', ':svg:view^:svg:|#zoomAndPan', 'data^[HTMLElement]|value', 'keygen^[HTMLElement]|!autofocus,challenge,!disabled,form,keytype,name', 'menuitem^[HTMLElement]|type,label,icon,!disabled,!checked,radiogroup,!default', 'summary^[HTMLElement]|', 'time^[HTMLElement]|dateTime', ':svg:cursor^:svg:|'];
-const _ATTR_TO_PROP = {
+
+const _ATTR_TO_PROP = new Map(Object.entries({
   'class': 'className',
   'for': 'htmlFor',
   'formaction': 'formAction',
   'innerHtml': 'innerHTML',
   'readonly': 'readOnly',
   'tabindex': 'tabIndex'
-}; // Invert _ATTR_TO_PROP.
+})); // Invert _ATTR_TO_PROP.
 
-const _PROP_TO_ATTR = Object.keys(_ATTR_TO_PROP).reduce((inverted, attr) => {
-  inverted[_ATTR_TO_PROP[attr]] = attr;
+
+const _PROP_TO_ATTR = Array.from(_ATTR_TO_PROP).reduce((inverted, [propertyName, attributeName]) => {
+  inverted.set(propertyName, attributeName);
   return inverted;
-}, {});
+}, new Map());
 
 class DomElementSchemaRegistry extends ElementSchemaRegistry {
   constructor() {
     super();
-    this._schema = {}; // We don't allow binding to events for security reasons. Allowing event bindings would almost
+    this._schema = new Map(); // We don't allow binding to events for security reasons. Allowing event bindings would almost
     // certainly introduce bad XSS vulnerabilities. Instead, we store events in a separate schema.
 
-    this._eventSchema = {};
+    this._eventSchema = new Map();
     SCHEMA.forEach(encodedType => {
-      const type = {};
+      const type = new Map();
       const events = new Set();
       const [strType, strProperties] = encodedType.split('|');
       const properties = strProperties.split(',');
       const [typeNames, superName] = strType.split('^');
       typeNames.split(',').forEach(tag => {
-        this._schema[tag.toLowerCase()] = type;
-        this._eventSchema[tag.toLowerCase()] = events;
+        this._schema.set(tag.toLowerCase(), type);
+
+        this._eventSchema.set(tag.toLowerCase(), events);
       });
 
-      const superType = superName && this._schema[superName.toLowerCase()];
+      const superType = superName && this._schema.get(superName.toLowerCase());
 
       if (superType) {
-        Object.keys(superType).forEach(prop => {
-          type[prop] = superType[prop];
-        });
+        for (const [prop, value] of superType) {
+          type.set(prop, value);
+        }
 
-        for (const superEvent of this._eventSchema[superName.toLowerCase()]) {
+        for (const superEvent of this._eventSchema.get(superName.toLowerCase())) {
           events.add(superEvent);
         }
       }
@@ -22518,19 +22529,19 @@ class DomElementSchemaRegistry extends ElementSchemaRegistry {
               break;
 
             case '!':
-              type[property.substring(1)] = BOOLEAN;
+              type.set(property.substring(1), BOOLEAN);
               break;
 
             case '#':
-              type[property.substring(1)] = NUMBER;
+              type.set(property.substring(1), NUMBER);
               break;
 
             case '%':
-              type[property.substring(1)] = OBJECT;
+              type.set(property.substring(1), OBJECT);
               break;
 
             default:
-              type[property] = STRING;
+              type.set(property, STRING);
           }
         }
       });
@@ -22554,9 +22565,9 @@ class DomElementSchemaRegistry extends ElementSchemaRegistry {
       }
     }
 
-    const elementProperties = this._schema[tagName.toLowerCase()] || this._schema['unknown'];
+    const elementProperties = this._schema.get(tagName.toLowerCase()) || this._schema.get('unknown');
 
-    return !!elementProperties[propName];
+    return elementProperties.has(propName);
   }
 
   hasElement(tagName, schemaMetas) {
@@ -22575,7 +22586,7 @@ class DomElementSchemaRegistry extends ElementSchemaRegistry {
       }
     }
 
-    return !!this._schema[tagName.toLowerCase()];
+    return this._schema.has(tagName.toLowerCase());
   }
   /**
    * securityContext returns the security context for the given property on the given DOM tag.
@@ -22610,7 +22621,7 @@ class DomElementSchemaRegistry extends ElementSchemaRegistry {
   }
 
   getMappedPropName(propName) {
-    return _ATTR_TO_PROP[propName] || propName;
+    return _ATTR_TO_PROP.get(propName) ?? propName;
   }
 
   getDefaultComponentElementName() {
@@ -22646,18 +22657,18 @@ class DomElementSchemaRegistry extends ElementSchemaRegistry {
   }
 
   allKnownElementNames() {
-    return Object.keys(this._schema);
+    return Array.from(this._schema.keys());
   }
 
   allKnownAttributesOfElement(tagName) {
-    const elementProperties = this._schema[tagName.toLowerCase()] || this._schema['unknown']; // Convert properties to attributes.
+    const elementProperties = this._schema.get(tagName.toLowerCase()) || this._schema.get('unknown'); // Convert properties to attributes.
 
 
-    return Object.keys(elementProperties).map(prop => _PROP_TO_ATTR[prop] ?? prop);
+    return Array.from(elementProperties.keys()).map(prop => _PROP_TO_ATTR.get(prop) ?? prop);
   }
 
   allKnownEventsOfElement(tagName) {
-    return Array.from(this._eventSchema[tagName.toLowerCase()] ?? []);
+    return Array.from(this._eventSchema.get(tagName.toLowerCase()) ?? []);
   }
 
   normalizeAnimationStyleProperty(propName) {
@@ -28646,7 +28657,7 @@ function publishFacade(global) {
  */
 
 
-const VERSION = new Version('14.1.1');
+const VERSION = new Version('14.2.4');
 /**
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -31248,7 +31259,7 @@ const MINIMUM_PARTIAL_LINKER_VERSION$6 = '12.0.0';
 function compileDeclareClassMetadata(metadata) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$6));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core));
   definitionMap.set('type', metadata.type);
   definitionMap.set('decorators', metadata.decorators);
@@ -31389,7 +31400,7 @@ function compileDeclareDirectiveFromMetadata(meta) {
 function createDirectiveDefinitionMap(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$5));
-  definitionMap.set('version', literal('14.1.1')); // e.g. `type: MyDirective`
+  definitionMap.set('version', literal('14.2.4')); // e.g. `type: MyDirective`
 
   definitionMap.set('type', meta.internalType);
 
@@ -31649,7 +31660,7 @@ const MINIMUM_PARTIAL_LINKER_VERSION$4 = '12.0.0';
 function compileDeclareFactoryFunction(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$4));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core));
   definitionMap.set('type', meta.internalType);
   definitionMap.set('deps', compileDependencies(meta.deps));
@@ -31700,7 +31711,7 @@ function compileDeclareInjectableFromMetadata(meta) {
 function createInjectableDefinitionMap(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$3));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core));
   definitionMap.set('type', meta.internalType); // Only generate providedIn property if it has a non-null value
 
@@ -31774,7 +31785,7 @@ function compileDeclareInjectorFromMetadata(meta) {
 function createInjectorDefinitionMap(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$2));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core));
   definitionMap.set('type', meta.internalType);
   definitionMap.set('providers', meta.providers);
@@ -31822,7 +31833,7 @@ function compileDeclareNgModuleFromMetadata(meta) {
 function createNgModuleDefinitionMap(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION$1));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core));
   definitionMap.set('type', meta.internalType); // We only generate the keys in the metadata if the arrays contain values.
   // We must wrap the arrays inside a function if any of the values are a forward reference to a
@@ -31895,7 +31906,7 @@ function compileDeclarePipeFromMetadata(meta) {
 function createPipeDefinitionMap(meta) {
   const definitionMap = new DefinitionMap();
   definitionMap.set('minVersion', literal(MINIMUM_PARTIAL_LINKER_VERSION));
-  definitionMap.set('version', literal('14.1.1'));
+  definitionMap.set('version', literal('14.2.4'));
   definitionMap.set('ngImport', importExpr(Identifiers.core)); // e.g. `type: MyPipe`
 
   definitionMap.set('type', meta.internalType);
@@ -31969,7 +31980,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_localize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/localize */ 9321);
 /**
- * @license Angular v14.1.0
+ * @license Angular v14.2.4
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -32015,7 +32026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_compiler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/compiler */ 8781);
 /**
- * @license Angular v14.1.0
+ * @license Angular v14.2.4
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */

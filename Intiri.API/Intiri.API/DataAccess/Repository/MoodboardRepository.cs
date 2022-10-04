@@ -45,12 +45,8 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Moodboards
 				.Where(m => ids.Contains(m.Id))
-				.Include(m => m.Room)
-				.Include(m => m.Designer)
 				.Include(m => m.Materials)
-					.ThenInclude(mat => mat.MaterialType)
 				.Include(m => m.Products)
-					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)
@@ -68,9 +64,6 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<Moodboard> GetFullMoodboardById(int moodboardId)
 		{
-			//return (await Get(moodboard => moodboard.Id == moodboardId, includeProperties: "Room,Materials,Products,ColorPalettes,Style"))
-			//.FirstOrDefault();
-
 			return await _context.Moodboards
 				.Include(m => m.Room)
 				.Include(m => m.Materials)
