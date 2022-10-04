@@ -1,4 +1,4 @@
-export class AccessTokenRequestDTO {
+export class VippsAccessTokenRequestDTO {
   authorizationCode: string;
   state: string;
   scope: string;

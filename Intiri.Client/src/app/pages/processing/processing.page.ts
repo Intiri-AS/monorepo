@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { AccessTokenRequestDTO } from 'src/app/DTOs/access-token.dto';
+import { VippsAccessTokenRequestDTO } from 'src/app/DTOs/vipps-access-token.dto';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -23,9 +23,9 @@ export class ProcessingPage implements OnInit {
     const code = this.queryParams.get('code');
     const state = this.queryParams.get('state');
     const scope = this.queryParams.get('scope');
-    const redirectUri = 'http://localhost:8100/processing';
+    const redirectUri = location.origin + location.pathname;
 
-    const accessTokenRequest = new AccessTokenRequestDTO(
+    const accessTokenRequest = new VippsAccessTokenRequestDTO(
       code,
       state,
       scope,
@@ -34,10 +34,10 @@ export class ProcessingPage implements OnInit {
 
     const hasUserGivenConsent = this.hasUserGivenConsent(this.queryParams);
     if (hasUserGivenConsent) {
-      console.log(accessTokenRequest);
+      const stateObj = JSON.parse(state);
       this.account.finalizeVippsLogin(accessTokenRequest).subscribe(
         () => {
-          this.router.navigateByUrl('/my-intiri');
+          this.router.navigateByUrl(stateObj.returnUri);
         },
         (error) => {
           console.log(error);

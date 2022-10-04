@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -62,6 +63,9 @@ export class LoginPage implements OnInit {
   }
 
   initiateVippsLogin() {
-    this.accountService.initiateVippsLogin();
+    const redirectUri = '/processing';
+    const state = JSON.stringify(new VippsState('/my-intiri'));
+
+    this.accountService.initiateVippsLogin(redirectUri, state);
   }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
+import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Project } from 'src/app/models/project.model';
+import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -62,7 +64,8 @@ export class NewProjectPage {
 
   constructor(
     private modalController: ModalController,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -94,12 +97,17 @@ export class NewProjectPage {
   }
 
   nextStep() {
-    if (this.canChangeToStep(this.currentStepNo + 1)) {
-      this.currentStepNo++;
-      this.projectService.setCurrentProject(this.project);
-    }
-    if (this.currentStepNo === 4) {
-      this.getMoodboardMatches();
+    let isUserLoggedIn = false;
+    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+      this.openLoginModal();
+    } else {
+      if (this.canChangeToStep(this.currentStepNo + 1)) {
+        this.currentStepNo++;
+        this.projectService.setCurrentProject(this.project);
+      }
+      if (this.currentStepNo === 4) {
+        this.getMoodboardMatches();
+      }
     }
   }
 
@@ -254,6 +262,17 @@ export class NewProjectPage {
       cssClass: 'final-project-step-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
+    });
+
+    await modal.present();
+  }
+
+  async openLoginModal() {
+    const modal = await this.modalController.create({
+      component: LoginModalComponent,
+      cssClass: 'small-modal-css',
+      backdropDismiss: false,
+      swipeToClose: false
     });
 
     await modal.present();

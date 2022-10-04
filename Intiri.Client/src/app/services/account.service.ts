@@ -4,7 +4,8 @@ import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
-import { AccessTokenRequestDTO } from '../DTOs/access-token.dto';
+import { VippsAccessTokenRequestDTO } from '../DTOs/vipps-access-token.dto';
+import { VippsAuthUrlRequestDTO } from '../DTOs/vipps-auth-url.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -64,13 +65,15 @@ export class AccountService {
     return this.http.post(this.apiUrl + 'account/reset-password', model);
   }
 
-  initiateVippsLogin() {
+  initiateVippsLogin(redirectionPath: string, state: string) {
+    const redirectionUri = location.origin + redirectionPath;
+    const authUrlRequest = new VippsAuthUrlRequestDTO(redirectionUri, state);
     return this.http
-      .get(this.apiUrl + 'account/vipps-auth-url', { responseType: 'text' })
+      .post<any>(this.apiUrl + 'account/vipps-auth-url', authUrlRequest)
       .subscribe(
-        (authorizationUrl) => {
-          if (authorizationUrl) {
-            window.location.href = String(authorizationUrl);
+        (response) => {
+          if (response) {
+            window.location.href = String(response.authorizationUrl);
           }
         },
         (error) => {
@@ -79,7 +82,7 @@ export class AccountService {
       );
   }
 
-  finalizeVippsLogin(auth: AccessTokenRequestDTO) {
+  finalizeVippsLogin(auth: VippsAccessTokenRequestDTO) {
     return this.http.post<any>(this.apiUrl + 'account/vipps-login', auth).pipe(
       map((user: User) => {
         if (user) {

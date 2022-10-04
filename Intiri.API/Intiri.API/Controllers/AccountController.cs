@@ -6,6 +6,7 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.Vipps;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -154,10 +155,12 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		[HttpGet("vipps-auth-url")]
-		public async Task<ActionResult> GetVippsAuthorizationUrl()
+		[HttpPost("vipps-auth-url")]
+		public async Task<ActionResult> GetVippsAuthorizationUrl(
+			VippsRedirectionUriDTO dto)
 		{
-			string authUrl = await _vippsLoginService.GetAuthorizationUrlAsync();
+			string authUrl = await _vippsLoginService
+				.GetAuthorizationUrlAsync(dto.RedirectUri, dto.State);
 
 			if (authUrl == null)
 			{
@@ -170,12 +173,12 @@ namespace Intiri.API.Controllers
 					"while fetching authorization URL from Vipps.");
 			}
 
-			return Content(authUrl);
+			return Ok(new VippsAuthorizationUrlDTO() { AuthorizationUrl = authUrl});
 		}
 
 		[HttpPost("vipps-login")]
 		public async Task<ActionResult<LoginOutDTO>> VippsLogin(
-			AccessTokenRequestDTO dto)
+			VippsAccessTokenRequestDTO dto)
 		{
 			TokenResponse accessToken = await _vippsLoginService
 				.GetAccessTokenAsync(dto.AuthorizationCode, dto.RedirectUri);
@@ -269,6 +272,7 @@ namespace Intiri.API.Controllers
 				FirstName = firstName,
 				LastName = lastName,
 				PhoneNumber = phoneNumber
+				
 			};
 
 			IdentityResult result = await
@@ -281,7 +285,7 @@ namespace Intiri.API.Controllers
 			}
 
 			IdentityResult roleResult = await 
-				_accountService.AddUserToRolesAsync(newUser, "EndUser");
+				_accountService.AddUserToRolesAsync(newUser, "FreeEndUser");
 
 			if (!roleResult.Succeeded)
 			{

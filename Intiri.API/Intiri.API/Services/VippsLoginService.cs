@@ -11,7 +11,6 @@ namespace Intiri.API.Services
 		private readonly IOptions<VippsLoginConfiguration> _options;
 		private readonly ILogger<VippsLoginService> _logger;
 		private readonly HttpClient _httpClient;
-		private readonly string _redirectUri = "http://localhost:8100/processing";
 
 		public VippsLoginService(
 			ILogger<VippsLoginService> logger,
@@ -22,7 +21,9 @@ namespace Intiri.API.Services
 			_httpClient = new HttpClient();
 		}
 
-		public async Task<string> GetAuthorizationUrlAsync()
+		public async Task<string> GetAuthorizationUrlAsync(
+			string redirectUri,
+			string state)
 		{
 			DiscoveryDocumentResponse discoResponse = 
 				await GetDiscoveryDocumentAsync();
@@ -37,9 +38,9 @@ namespace Intiri.API.Services
 			string authorizationUrl = requestUrl.CreateAuthorizeUrl(
 				clientId: _options.Value.ClientId,
 				responseType: "code",
-				redirectUri: _redirectUri,
+				redirectUri: redirectUri,
 				scope: "name email phoneNumber",
-				state: "TODO: Session cookie");
+				state: state);
 
 			return authorizationUrl;
 		}
