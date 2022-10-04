@@ -9,7 +9,7 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 })
 export class MenuPopoverComponent implements OnInit {
 
-  item: object
+  item: any
 
   constructor(private modalController: ModalController) { }
 

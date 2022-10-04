@@ -11,12 +11,12 @@ import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.c
 })
 export class AdminRoomsComponent implements OnInit {
 
-  rooms: [];
+  rooms: any[];
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private roomService: RoomService) { }
 
   ngOnInit() {
-    this.roomService.getRooms().subscribe((res: []) => {
+    this.roomService.getRooms().subscribe((res: any[]) => {
       this.rooms = res;
     })
   }

@@ -75,7 +75,7 @@ namespace Intiri.API.Controllers
 			
 			if (user == null)
 			{
-				return Unauthorized("Invalid user phone number");
+				return BadRequest("Invalid user phone number");
 			}
 
 			return new LoginOutDTO

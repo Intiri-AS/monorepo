@@ -11,6 +11,7 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class NewProjectPage {
   isScrolledDown: boolean;
+  isExistProject: boolean;
 
   steps: Array<object> = [
     {
@@ -66,18 +67,23 @@ export class NewProjectPage {
   ) {}
 
   ngOnInit() {
+    this.isExistProject = true;
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (!project.name) {
+      if (project.name === "") {
+        this.isExistProject = false;
         this.openStartModal();
       }
     });
+
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
+
     this.projectService.getStyleImages().subscribe((res) => {
       this.steps[1]['data'] = res;
     });
+
     this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
@@ -124,10 +130,32 @@ export class NewProjectPage {
     );
   }
 
+  saveCurrentProject()
+  {
+    if(this.isExistProject)
+    {
+      this.isExistProject = false;
+      this.projectService.addMoodboardToProject(this.project).subscribe(
+        (res) => {
+          console.log(res)
+          this.openFinalModal();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else
+    {
+      this.saveProject();
+    }
+  }
+
   saveProject() {
     this.projectService.saveProject(this.project).subscribe(
       (res) => {
-        console.log(res)
+        this.openFinalModal();
+        console.log(res);
       },
       (error) => {
         console.log(error);

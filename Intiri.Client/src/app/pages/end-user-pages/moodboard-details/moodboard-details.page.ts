@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Moodboard } from 'src/app/models/moodboard.model';
 
 @Component({
   selector: 'app-moodboard-details-page',
@@ -6,43 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./moodboard-details.page.scss'],
 })
 
-export class MoodboardDetailsPage {
+export class MoodboardDetailsPage implements OnInit {
 
-  parts = [
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Parkett'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Couch'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Boot'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Carpet'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Floor'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: '6634 / Soft Touch'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Walls'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Desk'
-    }
-  ]
+  currentMoodboard: any;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    this.currentMoodboard =  this.router.getCurrentNavigation().extras.state.data;
+  }
 
 }

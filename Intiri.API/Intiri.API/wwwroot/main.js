@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        redirectTo: 'my-intiri',
+        redirectTo: 'landing',
         pathMatch: 'full'
     },
     {
@@ -261,7 +261,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.html?ngResource */ 3383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 9259);
@@ -291,7 +291,7 @@ let AppComponent = class AppComponent {
   initStorage() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _this.storage.create();
     })();
   }
@@ -348,13 +348,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppModule": () => (/* binding */ AppModule),
 /* harmony export */   "createTranslateLoader": () => (/* binding */ createTranslateLoader)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! @angular/common/http */ 8987);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
 /* harmony import */ var _pages_landing_landing_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/landing/landing.page */ 4808);
@@ -422,18 +422,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/menu-popover/menu-popover.component */ 5506);
 /* harmony import */ var _components_modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/modals/add-style-modal/add-style-modal.component */ 6444);
 /* harmony import */ var _components_popovers_language_popover_language_popover_component__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/popovers/language-popover/language-popover.component */ 8649);
-/* harmony import */ var _components_modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/modals/add-materials-modal/add-materials-modal.component */ 1332);
-/* harmony import */ var _components_modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/modals/add-room-modal/add-room-modal.component */ 8563);
-/* harmony import */ var _components_modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/modals/add-color-modal/add-color-modal.component */ 4531);
-/* harmony import */ var _components_modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/modals/add-picture-modal/add-picture-modal.component */ 818);
-/* harmony import */ var angular_code_input__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! angular-code-input */ 3891);
-/* harmony import */ var _pipes_time_ago_pipe__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./pipes/time-ago.pipe */ 2541);
-/* harmony import */ var _components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/popovers/style-popover/style-popover.component */ 4058);
-/* harmony import */ var _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./interceptors/jwt.interceptor */ 3543);
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! @ngx-translate/core */ 8699);
-/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! @ngx-translate/http-loader */ 8319);
-/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ngx-color-picker */ 743);
-/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! @ionic/storage-angular */ 7566);
+/* harmony import */ var _components_modals_share_rate_modals_rate_modal_rate_modal_component__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/modals/share-rate-modals/rate-modal/rate-modal.component */ 2384);
+/* harmony import */ var _components_modals_share_rate_modals_rate_successful_modal_rate_successful_modal_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/modals/share-rate-modals/rate-successful-modal/rate-successful-modal.component */ 8509);
+/* harmony import */ var _components_modals_share_rate_modals_share_modal_share_modal_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/modals/share-rate-modals/share-modal/share-modal.component */ 5402);
+/* harmony import */ var _components_modals_share_rate_modals_share_successful_modal_share_successful_modal_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/modals/share-rate-modals/share-successful-modal/share-successful-modal.component */ 9904);
+/* harmony import */ var _components_modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/modals/add-materials-modal/add-materials-modal.component */ 1332);
+/* harmony import */ var _components_modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/modals/add-room-modal/add-room-modal.component */ 8563);
+/* harmony import */ var _components_modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/modals/add-color-modal/add-color-modal.component */ 4531);
+/* harmony import */ var _components_modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/modals/add-picture-modal/add-picture-modal.component */ 818);
+/* harmony import */ var angular_code_input__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! angular-code-input */ 3891);
+/* harmony import */ var _pipes_time_ago_pipe__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./pipes/time-ago.pipe */ 2541);
+/* harmony import */ var _components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/popovers/style-popover/style-popover.component */ 4058);
+/* harmony import */ var _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./interceptors/jwt.interceptor */ 3543);
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! @ngx-translate/core */ 8699);
+/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! @ngx-translate/http-loader */ 8319);
+/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ngx-color-picker */ 743);
+/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! @ionic/storage-angular */ 7566);
 
 
 
@@ -519,6 +523,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 //plugins
 
 
@@ -529,12 +537,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function createTranslateLoader(http) {
-    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_74__.TranslateHttpLoader(http, 'assets/i18n/', '.json');
+    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_78__.TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_75__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_76__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_79__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_80__.NgModule)({
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent, _pages_landing_landing_page__WEBPACK_IMPORTED_MODULE_2__.LandingPage, _pages_login_login_page__WEBPACK_IMPORTED_MODULE_3__.LoginPage, _pages_register_register_page__WEBPACK_IMPORTED_MODULE_4__.RegisterPage, _pages_how_it_works_how_it_works_page__WEBPACK_IMPORTED_MODULE_5__.HowItWorksPage, _pages_profile_profile_page__WEBPACK_IMPORTED_MODULE_6__.ProfilePage, _pages_forgot_password_forgot_password_page__WEBPACK_IMPORTED_MODULE_7__.ForgotPasswordPage, _pages_reset_password_reset_password_page__WEBPACK_IMPORTED_MODULE_8__.ResetPasswordPage,
             _pages_sms_verification_sms_verification_page__WEBPACK_IMPORTED_MODULE_9__.SmsVerificationPage,
@@ -547,32 +555,35 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_75__.__decorate)([
             _components_new_project_step_new_project_step_component__WEBPACK_IMPORTED_MODULE_42__.NewProjectStepComponent, _components_step_picker_step_picker_component__WEBPACK_IMPORTED_MODULE_41__.StepPickerComponent, _components_add_moodboard_step_add_moodboard_step_component__WEBPACK_IMPORTED_MODULE_56__.AddMoodboardStepComponent,
             _components_profile_img_section_profile_img_section_component__WEBPACK_IMPORTED_MODULE_43__.ProfileImgSectionComponent, _components_profile_info_section_profile_info_section_component__WEBPACK_IMPORTED_MODULE_44__.ProfileInfoSectionComponent, _components_admin_partners_admin_partners_component__WEBPACK_IMPORTED_MODULE_47__.AdminPartnersComponent, _components_admin_products_admin_products_component__WEBPACK_IMPORTED_MODULE_48__.AdminProductsComponent, _components_admin_clients_admin_clients_component__WEBPACK_IMPORTED_MODULE_49__.AdminClientsComponent, _components_admin_inspiration_admin_inspiration_component__WEBPACK_IMPORTED_MODULE_50__.AdminInspirationComponent, _components_admin_styles_admin_styles_component__WEBPACK_IMPORTED_MODULE_51__.AdminStylesComponent, _components_admin_materials_admin_materials_component__WEBPACK_IMPORTED_MODULE_52__.AdminMaterialsComponent, _components_admin_rooms_admin_rooms_component__WEBPACK_IMPORTED_MODULE_53__.AdminRoomsComponent, _components_admin_colors_admin_colors_component__WEBPACK_IMPORTED_MODULE_54__.AdminColorsComponent, _components_admin_pictures_admin_pictures_component__WEBPACK_IMPORTED_MODULE_55__.AdminPicturesComponent,
             _components_modals_login_login_modal_component__WEBPACK_IMPORTED_MODULE_57__.LoginModalComponent, _components_modals_logout_modal_logout_modal_component__WEBPACK_IMPORTED_MODULE_58__.LogoutModalComponent, _components_modals_create_project_modal_create_project_modal_component__WEBPACK_IMPORTED_MODULE_59__.CreateProjectModalComponent, _components_modals_add_designer_modal_add_designer_modal_component__WEBPACK_IMPORTED_MODULE_60__.AddDesignerModalComponent, _components_modals_add_partner_modal_add_partner_modal_component__WEBPACK_IMPORTED_MODULE_61__.AddPartnerModalComponent, _components_modals_book_designer_modal_book_designer_modal_component__WEBPACK_IMPORTED_MODULE_62__.BookDesignerModalComponent,
-            _components_settings_popover_settings_popover_component__WEBPACK_IMPORTED_MODULE_63__.SettingsPopoverComponent, _components_menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_64__.MenuPopoverComponent, _components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_72__.StylePopoverComponent, _components_modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_65__.AddStyleModalComponent, _components_popovers_language_popover_language_popover_component__WEBPACK_IMPORTED_MODULE_66__.LanguagePopoverComponent, _components_modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_67__.AddMaterialsModalComponent, _components_modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_68__.AddRoomModalComponent, _components_modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_69__.AddColorModalComponent, _components_modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_70__.AddPictureModalComponent,
-            _pipes_time_ago_pipe__WEBPACK_IMPORTED_MODULE_71__.TimeAgoPipe
+            _components_settings_popover_settings_popover_component__WEBPACK_IMPORTED_MODULE_63__.SettingsPopoverComponent, _components_menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_64__.MenuPopoverComponent, _components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_76__.StylePopoverComponent, _components_modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_65__.AddStyleModalComponent, _components_popovers_language_popover_language_popover_component__WEBPACK_IMPORTED_MODULE_66__.LanguagePopoverComponent, _components_modals_share_rate_modals_rate_modal_rate_modal_component__WEBPACK_IMPORTED_MODULE_67__.RateModalComponent, _components_modals_share_rate_modals_rate_successful_modal_rate_successful_modal_component__WEBPACK_IMPORTED_MODULE_68__.RateSuccessfulModalComponent,
+            _components_modals_share_rate_modals_share_modal_share_modal_component__WEBPACK_IMPORTED_MODULE_69__.ShareModalComponent, _components_modals_share_rate_modals_share_successful_modal_share_successful_modal_component__WEBPACK_IMPORTED_MODULE_70__.ShareSuccessfulModalComponent, _components_modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_71__.AddMaterialsModalComponent, _components_modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_72__.AddRoomModalComponent, _components_modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_73__.AddColorModalComponent, _components_modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_74__.AddPictureModalComponent,
+            _pipes_time_ago_pipe__WEBPACK_IMPORTED_MODULE_75__.TimeAgoPipe
         ],
         entryComponents: [
-            _components_modals_login_login_modal_component__WEBPACK_IMPORTED_MODULE_57__.LoginModalComponent, _components_modals_logout_modal_logout_modal_component__WEBPACK_IMPORTED_MODULE_58__.LogoutModalComponent, _components_modals_create_project_modal_create_project_modal_component__WEBPACK_IMPORTED_MODULE_59__.CreateProjectModalComponent, _components_modals_add_designer_modal_add_designer_modal_component__WEBPACK_IMPORTED_MODULE_60__.AddDesignerModalComponent, _components_modals_add_partner_modal_add_partner_modal_component__WEBPACK_IMPORTED_MODULE_61__.AddPartnerModalComponent, _components_modals_book_designer_modal_book_designer_modal_component__WEBPACK_IMPORTED_MODULE_62__.BookDesignerModalComponent
+            _components_modals_login_login_modal_component__WEBPACK_IMPORTED_MODULE_57__.LoginModalComponent, _components_modals_logout_modal_logout_modal_component__WEBPACK_IMPORTED_MODULE_58__.LogoutModalComponent, _components_modals_create_project_modal_create_project_modal_component__WEBPACK_IMPORTED_MODULE_59__.CreateProjectModalComponent, _components_modals_add_designer_modal_add_designer_modal_component__WEBPACK_IMPORTED_MODULE_60__.AddDesignerModalComponent, _components_modals_add_partner_modal_add_partner_modal_component__WEBPACK_IMPORTED_MODULE_61__.AddPartnerModalComponent, _components_modals_book_designer_modal_book_designer_modal_component__WEBPACK_IMPORTED_MODULE_62__.BookDesignerModalComponent,
+            _components_modals_share_rate_modals_rate_modal_rate_modal_component__WEBPACK_IMPORTED_MODULE_67__.RateModalComponent, _components_modals_share_rate_modals_rate_successful_modal_rate_successful_modal_component__WEBPACK_IMPORTED_MODULE_68__.RateSuccessfulModalComponent, _components_modals_share_rate_modals_share_modal_share_modal_component__WEBPACK_IMPORTED_MODULE_69__.ShareModalComponent, _components_modals_share_rate_modals_share_successful_modal_share_successful_modal_component__WEBPACK_IMPORTED_MODULE_70__.ShareSuccessfulModalComponent, _components_modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_71__.AddMaterialsModalComponent, _components_modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_72__.AddRoomModalComponent,
+            _components_modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_73__.AddColorModalComponent, _components_modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_74__.AddPictureModalComponent,
         ],
         imports: [
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_77__.BrowserModule,
-            ngx_color_picker__WEBPACK_IMPORTED_MODULE_78__.ColorPickerModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_79__.IonicModule.forRoot(),
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_81__.BrowserModule,
+            ngx_color_picker__WEBPACK_IMPORTED_MODULE_82__.ColorPickerModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_83__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_80__.HttpClientModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_81__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_81__.ReactiveFormsModule,
-            angular_code_input__WEBPACK_IMPORTED_MODULE_82__.CodeInputModule,
-            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_83__.IonicStorageModule.forRoot(),
-            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_84__.TranslateModule.forRoot({
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_84__.HttpClientModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_85__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_85__.ReactiveFormsModule,
+            angular_code_input__WEBPACK_IMPORTED_MODULE_86__.CodeInputModule,
+            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_87__.IonicStorageModule.forRoot(),
+            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_88__.TranslateModule.forRoot({
                 loader: {
-                    provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_84__.TranslateLoader,
+                    provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_88__.TranslateLoader,
                     useFactory: (createTranslateLoader),
-                    deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_80__.HttpClient]
+                    deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_84__.HttpClient]
                 }
             }),
         ],
         providers: [
-            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_85__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_79__.IonicRouteStrategy },
-            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_80__.HTTP_INTERCEPTORS, useClass: _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_73__.JwtInterceptor, multi: true }
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_89__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_83__.IonicRouteStrategy },
+            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_84__.HTTP_INTERCEPTORS, useClass: _interceptors_jwt_interceptor__WEBPACK_IMPORTED_MODULE_77__.JwtInterceptor, multi: true }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
     })
@@ -669,7 +680,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminClientsComponent": () => (/* binding */ AdminClientsComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_clients_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-clients.component.html?ngResource */ 7417);
 /* harmony import */ var _admin_clients_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-clients.component.scss?ngResource */ 1054);
@@ -693,7 +704,7 @@ let AdminClientsComponent = class AdminClientsComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_3__.MenuPopoverComponent,
         event: e,
@@ -732,7 +743,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminColorsComponent": () => (/* binding */ AdminColorsComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_colors_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-colors.component.html?ngResource */ 5659);
 /* harmony import */ var _admin_colors_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-colors.component.scss?ngResource */ 8800);
@@ -766,7 +777,7 @@ let AdminColorsComponent = class AdminColorsComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_4__.MenuPopoverComponent,
         event: e,
@@ -782,7 +793,7 @@ let AdminColorsComponent = class AdminColorsComponent {
   addColor() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _modals_add_color_modal_add_color_modal_component__WEBPACK_IMPORTED_MODULE_5__.AddColorModalComponent,
         componentProps: {
@@ -860,7 +871,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminMaterialsComponent": () => (/* binding */ AdminMaterialsComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_materials_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-materials.component.html?ngResource */ 7839);
 /* harmony import */ var _admin_materials_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-materials.component.scss?ngResource */ 8840);
@@ -897,7 +908,7 @@ let AdminMaterialsComponent = class AdminMaterialsComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_4__.MenuPopoverComponent,
         event: e,
@@ -913,7 +924,7 @@ let AdminMaterialsComponent = class AdminMaterialsComponent {
   addMaterials() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _modals_add_materials_modal_add_materials_modal_component__WEBPACK_IMPORTED_MODULE_5__.AddMaterialsModalComponent,
         componentProps: {
@@ -955,7 +966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminPartnersComponent": () => (/* binding */ AdminPartnersComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_partners_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-partners.component.html?ngResource */ 6687);
 /* harmony import */ var _admin_partners_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-partners.component.scss?ngResource */ 3698);
@@ -979,7 +990,7 @@ let AdminPartnersComponent = class AdminPartnersComponent {
   addPartner() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalController.create({
         component: _modals_add_partner_modal_add_partner_modal_component__WEBPACK_IMPORTED_MODULE_3__.AddPartnerModalComponent,
         componentProps: {
@@ -1017,7 +1028,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminPicturesComponent": () => (/* binding */ AdminPicturesComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_pictures_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-pictures.component.html?ngResource */ 6996);
 /* harmony import */ var _admin_pictures_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-pictures.component.scss?ngResource */ 2731);
@@ -1044,7 +1055,7 @@ let AdminPicturesComponent = class AdminPicturesComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_3__.MenuPopoverComponent,
         event: e,
@@ -1060,7 +1071,7 @@ let AdminPicturesComponent = class AdminPicturesComponent {
   addPicture() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _modals_add_picture_modal_add_picture_modal_component__WEBPACK_IMPORTED_MODULE_4__.AddPictureModalComponent,
         componentProps: {
@@ -1100,7 +1111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminProductsComponent": () => (/* binding */ AdminProductsComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_products_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-products.component.html?ngResource */ 3887);
 /* harmony import */ var _admin_products_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-products.component.scss?ngResource */ 5505);
@@ -1134,7 +1145,7 @@ let AdminProductsComponent = class AdminProductsComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_4__.MenuPopoverComponent,
         event: e,
@@ -1175,7 +1186,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminRoomsComponent": () => (/* binding */ AdminRoomsComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_rooms_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-rooms.component.html?ngResource */ 779);
 /* harmony import */ var _admin_rooms_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-rooms.component.scss?ngResource */ 5490);
@@ -1209,7 +1220,7 @@ let AdminRoomsComponent = class AdminRoomsComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_4__.MenuPopoverComponent,
         event: e,
@@ -1225,7 +1236,7 @@ let AdminRoomsComponent = class AdminRoomsComponent {
   addMaterials() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _modals_add_room_modal_add_room_modal_component__WEBPACK_IMPORTED_MODULE_5__.AddRoomModalComponent,
         componentProps: {
@@ -1267,7 +1278,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AdminStylesComponent": () => (/* binding */ AdminStylesComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _admin_styles_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-styles.component.html?ngResource */ 8708);
 /* harmony import */ var _admin_styles_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-styles.component.scss?ngResource */ 6525);
@@ -1290,23 +1301,23 @@ let AdminStylesComponent = class AdminStylesComponent {
     this.popoverController = popoverController;
     this.modalController = modalController;
     this.styleService = styleService;
+    this.styles$ = this.styleService.styles$;
   }
 
   ngOnInit() {
-    this.styleService.getStyles().subscribe(res => {
-      this.styles = res;
-    });
+    this.styleService.getStyles();
   }
 
-  showSettings(e) {
+  showSettings(e, style) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_4__.MenuPopoverComponent,
         event: e,
         componentProps: {
-          style: true
+          style: true,
+          item: style
         },
         dismissOnSelect: true
       });
@@ -1317,7 +1328,7 @@ let AdminStylesComponent = class AdminStylesComponent {
   addStyle() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: _modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_5__.AddStyleModalComponent,
         componentProps: {
@@ -1401,7 +1412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HeaderAdminComponent": () => (/* binding */ HeaderAdminComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _header_admin_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header-admin.component.html?ngResource */ 1152);
 /* harmony import */ var _header_admin_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header-admin.component.scss?ngResource */ 3548);
@@ -1463,7 +1474,7 @@ let HeaderAdminComponent = class HeaderAdminComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _settings_popover_settings_popover_component__WEBPACK_IMPORTED_MODULE_3__.SettingsPopoverComponent,
         componentProps: {
@@ -1504,7 +1515,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HeaderInternalDesignerComponents": () => (/* binding */ HeaderInternalDesignerComponents)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _header_internal_designer_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header-internal-designer.component.html?ngResource */ 9366);
 /* harmony import */ var _header_internal_designer_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header-internal-designer.component.scss?ngResource */ 3235);
@@ -1543,7 +1554,7 @@ let HeaderInternalDesignerComponents = class HeaderInternalDesignerComponents {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _settings_popover_settings_popover_component__WEBPACK_IMPORTED_MODULE_3__.SettingsPopoverComponent,
         componentProps: {
@@ -1649,7 +1660,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HeaderComponent": () => (/* binding */ HeaderComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _header_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./header.component.html?ngResource */ 2011);
 /* harmony import */ var _header_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header.component.scss?ngResource */ 5413);
@@ -1690,7 +1701,7 @@ let HeaderComponent = class HeaderComponent {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: _settings_popover_settings_popover_component__WEBPACK_IMPORTED_MODULE_5__.SettingsPopoverComponent,
         componentProps: {
@@ -1748,27 +1759,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MenuPopoverComponent": () => (/* binding */ MenuPopoverComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _menu_popover_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./menu-popover.component.html?ngResource */ 3879);
-/* harmony import */ var _menu_popover_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu-popover.component.scss?ngResource */ 2082);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _menu_popover_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu-popover.component.html?ngResource */ 3879);
+/* harmony import */ var _menu_popover_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu-popover.component.scss?ngResource */ 2082);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/add-style-modal/add-style-modal.component */ 6444);
+
+
+
 
 
 
 
 let MenuPopoverComponent = class MenuPopoverComponent {
-    constructor() { }
-    ngOnInit() { }
-};
-MenuPopoverComponent.ctorParameters = () => [];
-MenuPopoverComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
-        selector: 'app-menu-popover',
-        template: _menu_popover_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_menu_popover_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], MenuPopoverComponent);
+  constructor(modalController) {
+    this.modalController = modalController;
+  }
 
+  ngOnInit() {}
+
+  openDeleteStyleModal() {
+    var _this = this;
+
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const modal = yield _this.modalController.create({
+        component: _modals_add_style_modal_add_style_modal_component__WEBPACK_IMPORTED_MODULE_3__.AddStyleModalComponent,
+        componentProps: {
+          delete: true,
+          item: _this.item
+        },
+        cssClass: 'added-designer-modal-css'
+      });
+      yield modal.present();
+    })();
+  }
+
+};
+
+MenuPopoverComponent.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController
+}];
+
+MenuPopoverComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-menu-popover',
+  template: _menu_popover_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_menu_popover_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], MenuPopoverComponent);
 
 
 /***/ }),
@@ -1784,20 +1822,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddColorModalComponent": () => (/* binding */ AddColorModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_color_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-color-modal.component.html?ngResource */ 9381);
 /* harmony import */ var _add_color_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-color-modal.component.scss?ngResource */ 5510);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddColorModalComponent_1;
 
 
 
 
 
-let AddColorModalComponent = AddColorModalComponent_1 = class AddColorModalComponent {
+let AddColorModalComponent = class AddColorModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
     this.colorPallete = {
@@ -1819,11 +1856,11 @@ let AddColorModalComponent = AddColorModalComponent_1 = class AddColorModalCompo
   addedColor() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddColorModalComponent_1,
+        component: AddColorModalComponent,
         componentProps: {
           added: true
         },
@@ -1839,7 +1876,7 @@ AddColorModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddColorModalComponent = AddColorModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddColorModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-color-modal',
   template: _add_color_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_color_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -1859,20 +1896,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddDesignerModalComponent": () => (/* binding */ AddDesignerModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_designer_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-designer-modal.component.html?ngResource */ 7999);
 /* harmony import */ var _add_designer_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-designer-modal.component.scss?ngResource */ 6898);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddDesignerModalComponent_1;
 
 
 
 
 
-let AddDesignerModalComponent = AddDesignerModalComponent_1 = class AddDesignerModalComponent {
+let AddDesignerModalComponent = class AddDesignerModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
   }
@@ -1886,11 +1922,11 @@ let AddDesignerModalComponent = AddDesignerModalComponent_1 = class AddDesignerM
   addedDesigner() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddDesignerModalComponent_1,
+        component: AddDesignerModalComponent,
         componentProps: {
           added: true
         },
@@ -1906,7 +1942,7 @@ AddDesignerModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddDesignerModalComponent = AddDesignerModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddDesignerModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-designer-modal',
   template: _add_designer_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_designer_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -1926,20 +1962,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddMaterialsModalComponent": () => (/* binding */ AddMaterialsModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_materials_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-materials-modal.component.html?ngResource */ 8499);
 /* harmony import */ var _add_materials_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-materials-modal.component.scss?ngResource */ 9949);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddMaterialsModalComponent_1;
 
 
 
 
 
-let AddMaterialsModalComponent = AddMaterialsModalComponent_1 = class AddMaterialsModalComponent {
+let AddMaterialsModalComponent = class AddMaterialsModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
   }
@@ -1953,11 +1988,11 @@ let AddMaterialsModalComponent = AddMaterialsModalComponent_1 = class AddMateria
   addedMaterial() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddMaterialsModalComponent_1,
+        component: AddMaterialsModalComponent,
         componentProps: {
           added: true
         },
@@ -1973,7 +2008,7 @@ AddMaterialsModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddMaterialsModalComponent = AddMaterialsModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddMaterialsModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-materials-modal',
   template: _add_materials_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_materials_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -1993,20 +2028,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddPartnerModalComponent": () => (/* binding */ AddPartnerModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_partner_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-partner-modal.component.html?ngResource */ 3570);
 /* harmony import */ var _add_partner_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-partner-modal.component.scss?ngResource */ 5906);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddPartnerModalComponent_1;
 
 
 
 
 
-let AddPartnerModalComponent = AddPartnerModalComponent_1 = class AddPartnerModalComponent {
+let AddPartnerModalComponent = class AddPartnerModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
   }
@@ -2020,11 +2054,11 @@ let AddPartnerModalComponent = AddPartnerModalComponent_1 = class AddPartnerModa
   goToNextPage() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddPartnerModalComponent_1,
+        component: AddPartnerModalComponent,
         componentProps: {
           nextPage: true
         },
@@ -2037,11 +2071,11 @@ let AddPartnerModalComponent = AddPartnerModalComponent_1 = class AddPartnerModa
   addedPartner() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this2.modalController.dismiss();
 
       const modal = yield _this2.modalController.create({
-        component: AddPartnerModalComponent_1,
+        component: AddPartnerModalComponent,
         componentProps: {
           added: true
         },
@@ -2057,7 +2091,7 @@ AddPartnerModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddPartnerModalComponent = AddPartnerModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddPartnerModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-partner-modal',
   template: _add_partner_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_partner_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -2077,20 +2111,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddPictureModalComponent": () => (/* binding */ AddPictureModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_picture_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-picture-modal.component.html?ngResource */ 8466);
 /* harmony import */ var _add_picture_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-picture-modal.component.scss?ngResource */ 3410);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddPictureModalComponent_1;
 
 
 
 
 
-let AddPictureModalComponent = AddPictureModalComponent_1 = class AddPictureModalComponent {
+let AddPictureModalComponent = class AddPictureModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
   }
@@ -2104,11 +2137,11 @@ let AddPictureModalComponent = AddPictureModalComponent_1 = class AddPictureModa
   addedPicture() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddPictureModalComponent_1,
+        component: AddPictureModalComponent,
         componentProps: {
           added: true
         },
@@ -2124,7 +2157,7 @@ AddPictureModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddPictureModalComponent = AddPictureModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddPictureModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-picture-modal',
   template: _add_picture_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_picture_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -2144,20 +2177,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddRoomModalComponent": () => (/* binding */ AddRoomModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_room_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-room-modal.component.html?ngResource */ 2814);
 /* harmony import */ var _add_room_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-room-modal.component.scss?ngResource */ 1185);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
 
-var AddRoomModalComponent_1;
 
 
 
 
 
-let AddRoomModalComponent = AddRoomModalComponent_1 = class AddRoomModalComponent {
+let AddRoomModalComponent = class AddRoomModalComponent {
   constructor(modalController) {
     this.modalController = modalController;
   }
@@ -2171,11 +2203,11 @@ let AddRoomModalComponent = AddRoomModalComponent_1 = class AddRoomModalComponen
   addedRoom() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddRoomModalComponent_1,
+        component: AddRoomModalComponent,
         componentProps: {
           added: true
         },
@@ -2191,7 +2223,7 @@ AddRoomModalComponent.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController
 }];
 
-AddRoomModalComponent = AddRoomModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+AddRoomModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
   selector: 'app-add-room-modal',
   template: _add_room_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_room_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -2211,7 +2243,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddStyleModalComponent": () => (/* binding */ AddStyleModalComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _add_style_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-style-modal.component.html?ngResource */ 9403);
 /* harmony import */ var _add_style_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-style-modal.component.scss?ngResource */ 837);
@@ -2220,7 +2252,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var src_app_services_style_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/style.service */ 3112);
 
-var AddStyleModalComponent_1;
 
 
 
@@ -2228,7 +2259,7 @@ var AddStyleModalComponent_1;
 
 
 
-let AddStyleModalComponent = AddStyleModalComponent_1 = class AddStyleModalComponent {
+let AddStyleModalComponent = class AddStyleModalComponent {
   constructor(modalController, styleService, sanitizer) {
     this.modalController = modalController;
     this.styleService = styleService;
@@ -2255,19 +2286,27 @@ let AddStyleModalComponent = AddStyleModalComponent_1 = class AddStyleModalCompo
   addStyle() {
     this.styleService.addStyle(this.style).subscribe(res => {
       if (typeof res === 'object') {
+        this.styleService.getStyles();
         this.openSuccessModal();
       }
+    });
+  }
+
+  deleteStyle() {
+    this.styleService.deleteStyle(this.item['id']).subscribe(res => {
+      this.styleService.getStyles();
+      this.modalController.dismiss();
     });
   }
 
   openSuccessModal() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.modalController.dismiss();
 
       const modal = yield _this.modalController.create({
-        component: AddStyleModalComponent_1,
+        component: AddStyleModalComponent,
         componentProps: {
           added: true
         },
@@ -2287,7 +2326,7 @@ AddStyleModalComponent.ctorParameters = () => [{
   type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.DomSanitizer
 }];
 
-AddStyleModalComponent = AddStyleModalComponent_1 = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+AddStyleModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
   selector: 'app-add-style-modal',
   template: _add_style_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_add_style_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -2562,6 +2601,241 @@ LogoutModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
+/***/ 2384:
+/*!****************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-modal/rate-modal.component.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RateModalComponent": () => (/* binding */ RateModalComponent)
+/* harmony export */ });
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _rate_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./rate-modal.component.html?ngResource */ 1522);
+/* harmony import */ var _rate_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./rate-modal.component.scss?ngResource */ 188);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _rate_successful_modal_rate_successful_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rate-successful-modal/rate-successful-modal.component */ 8509);
+
+
+
+
+
+
+
+let RateModalComponent = class RateModalComponent {
+  constructor(modalController) {
+    this.modalController = modalController;
+    this.star = 0;
+    this.rateDisabled = true;
+  }
+
+  rate() {
+    var _this = this;
+
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      _this.modalController.dismiss();
+
+      const modal = yield _this.modalController.create({
+        component: _rate_successful_modal_rate_successful_modal_component__WEBPACK_IMPORTED_MODULE_3__.RateSuccessfulModalComponent,
+        cssClass: 'auto-size-modal-css'
+      });
+      yield modal.present();
+    })();
+  }
+
+  dismiss() {
+    this.modalController.dismiss();
+  }
+
+  addRate(num) {
+    this.star = num;
+    this.rateDisabled = false;
+  }
+
+};
+
+RateModalComponent.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController
+}];
+
+RateModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-rate-modal',
+  template: _rate_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_rate_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], RateModalComponent);
+
+
+/***/ }),
+
+/***/ 8509:
+/*!**************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-successful-modal/rate-successful-modal.component.ts ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RateSuccessfulModalComponent": () => (/* binding */ RateSuccessfulModalComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _rate_successful_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./rate-successful-modal.component.html?ngResource */ 5322);
+/* harmony import */ var _rate_successful_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./rate-successful-modal.component.scss?ngResource */ 6137);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
+
+
+
+
+let RateSuccessfulModalComponent = class RateSuccessfulModalComponent {
+    constructor(modalController) {
+        this.modalController = modalController;
+    }
+    dismiss() {
+        this.modalController.dismiss();
+    }
+};
+RateSuccessfulModalComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController }
+];
+RateSuccessfulModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+        selector: 'app-rate-successful-modal',
+        template: _rate_successful_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+        styles: [_rate_successful_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], RateSuccessfulModalComponent);
+
+
+
+/***/ }),
+
+/***/ 5402:
+/*!******************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-modal/share-modal.component.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ShareModalComponent": () => (/* binding */ ShareModalComponent)
+/* harmony export */ });
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _share_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./share-modal.component.html?ngResource */ 3860);
+/* harmony import */ var _share_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./share-modal.component.scss?ngResource */ 6153);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _share_successful_modal_share_successful_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../share-successful-modal/share-successful-modal.component */ 9904);
+
+
+
+
+
+
+
+let ShareModalComponent = class ShareModalComponent {
+  constructor(modalController) {
+    this.modalController = modalController;
+  }
+
+  share() {
+    var _this = this;
+
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      _this.modalController.dismiss();
+
+      const modal = yield _this.modalController.create({
+        component: _share_successful_modal_share_successful_modal_component__WEBPACK_IMPORTED_MODULE_3__.ShareSuccessfulModalComponent,
+        cssClass: 'auto-size-modal-css'
+      });
+      yield modal.present();
+    })();
+  }
+
+  dismiss() {
+    this.modalController.dismiss();
+  }
+
+};
+
+ShareModalComponent.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController
+}];
+
+ShareModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-share-modal',
+  template: _share_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_share_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], ShareModalComponent);
+
+
+/***/ }),
+
+/***/ 9904:
+/*!****************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-successful-modal/share-successful-modal.component.ts ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ShareSuccessfulModalComponent": () => (/* binding */ ShareSuccessfulModalComponent)
+/* harmony export */ });
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _share_successful_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./share-successful-modal.component.html?ngResource */ 968);
+/* harmony import */ var _share_successful_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./share-successful-modal.component.scss?ngResource */ 6239);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _rate_modal_rate_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rate-modal/rate-modal.component */ 2384);
+
+
+
+
+
+
+
+let ShareSuccessfulModalComponent = class ShareSuccessfulModalComponent {
+  constructor(modalController) {
+    this.modalController = modalController;
+  }
+
+  dismiss() {
+    var _this = this;
+
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      _this.modalController.dismiss();
+
+      const modal = yield _this.modalController.create({
+        component: _rate_modal_rate_modal_component__WEBPACK_IMPORTED_MODULE_3__.RateModalComponent
+      });
+      yield modal.present();
+    })();
+  }
+
+};
+
+ShareSuccessfulModalComponent.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController
+}];
+
+ShareSuccessfulModalComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+  selector: 'app-share-successful-modal',
+  template: _share_successful_modal_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_share_successful_modal_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], ShareSuccessfulModalComponent);
+
+
+/***/ }),
+
 /***/ 8735:
 /*!***************************************************************************!*\
   !*** ./src/app/components/new-project-step/new-project-step.component.ts ***!
@@ -2812,7 +3086,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SettingsPopoverComponent": () => (/* binding */ SettingsPopoverComponent)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _settings_popover_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./settings-popover.component.html?ngResource */ 4953);
 /* harmony import */ var _settings_popover_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settings-popover.component.scss?ngResource */ 5391);
@@ -2840,7 +3114,7 @@ let SettingsPopoverComponent = class SettingsPopoverComponent {
   openLogoutModal() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this.popoverController.dismiss();
 
       const modal = yield _this.modalController.create({
@@ -2854,7 +3128,7 @@ let SettingsPopoverComponent = class SettingsPopoverComponent {
   openLanguagePopover(event) {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this2.popoverController.create({
         component: _popovers_language_popover_language_popover_component__WEBPACK_IMPORTED_MODULE_4__.LanguagePopoverComponent,
         event
@@ -3062,16 +3336,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Moodboard": () => (/* binding */ Moodboard)
 /* harmony export */ });
 class Moodboard {
-    //TODO This is example for User model
-    constructor() {
-        this.name = '';
-        this.description = null;
-        this.designer = null;
-        this.room = null;
-        this.style = null;
-        this.materials = [];
-        this.colorPalettes = [];
-        this.products = [];
+    constructor(name, description, designer, style, room, colorPalettes, materials, products) {
+        this.name = name;
+        this.description = description;
+        this.designer = designer;
+        this.style = style;
+        this.room = room;
+        this.colorPalettes = colorPalettes;
+        this.materials = materials;
+        this.products = products;
     }
 }
 
@@ -3090,15 +3363,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Project": () => (/* binding */ Project)
 /* harmony export */ });
 class Project {
-    //TODO This is example for User model
-    constructor() {
-        this.name = '';
-        this.styleImages = [];
-        this.room = {};
-        this.budget = '';
-        this.roomDetails = {};
-        this.colorPalettes = [];
-        this.projectMoodboards = [];
+    constructor(id, name, budget, room, roomDetails, styleImages, colorPalettes, projectMoodboards) {
+        this.id = id;
+        this.name = name;
+        this.budget = budget;
+        this.room = room;
+        this.roomDetails = roomDetails;
+        this.styleImages = styleImages;
+        this.colorPalettes = colorPalettes;
+        this.projectMoodboards = projectMoodboards;
     }
 }
 
@@ -3178,8 +3451,9 @@ let AddMoodboardPage = class AddMoodboardPage {
         this.projectService.getRooms().subscribe((res) => {
             this.steps[0]['data'] = res;
         });
-        this.styleSrv.getStyles().subscribe((res) => {
-            this.steps[1]['data'] = res.map(e => { e.path = e.styleImages[0].path; delete e.imagePath; return e; });
+        this.styleSrv.getStyles();
+        this.styleSrv.styles$.subscribe((res) => {
+            this.steps[1]['data'] = res.map(e => { e.path = e.imagePath !== 'path' ? e.imagePath : e.styleImages[0].path; delete e.imagePath; return e; });
         });
         this.projectService.getMaterials().subscribe((res) => {
             this.steps[2]['data'] = res.map(e => { const parsed = { ...e, path: e.imagePath }; delete parsed.imagePath; return parsed; });
@@ -3194,19 +3468,16 @@ let AddMoodboardPage = class AddMoodboardPage {
     backStep() {
         if (this.canChangeToStep(this.currentStepNo - 1)) {
             this.currentStepNo--;
-            //this.projectService.setCurrentProject(this.project);
         }
     }
     nextStep() {
         if (this.canChangeToStep(this.currentStepNo + 1)) {
             this.currentStepNo++;
-            //this.projectService.setCurrentProject(this.project);
         }
     }
     goToStep(stepNo) {
         if (this.canChangeToStep(stepNo)) {
             this.currentStepNo = stepNo;
-            //this.projectService.setCurrentProject(this.project);
         }
     }
     canChangeToStep(step) {
@@ -3450,7 +3721,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DesignerPage": () => (/* binding */ DesignerPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _designer_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./designer.page.html?ngResource */ 4652);
 /* harmony import */ var _designer_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./designer.page.scss?ngResource */ 6736);
@@ -3475,7 +3746,7 @@ let DesignerPage = class DesignerPage {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: src_app_components_menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_3__.MenuPopoverComponent,
         event: e,
@@ -3491,7 +3762,7 @@ let DesignerPage = class DesignerPage {
   addDesigner() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: src_app_components_modals_add_designer_modal_add_designer_modal_component__WEBPACK_IMPORTED_MODULE_4__.AddDesignerModalComponent,
         componentProps: {
@@ -3531,7 +3802,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MoodboardsPage": () => (/* binding */ MoodboardsPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _moodboards_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moodboards.page.html?ngResource */ 1773);
 /* harmony import */ var _moodboards_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./moodboards.page.scss?ngResource */ 1714);
@@ -3554,21 +3825,20 @@ let MoodboardsPage = class MoodboardsPage {
     this.popoverController = popoverController;
     this.moodboardService = moodboardService;
     this.styleService = styleService;
+    this.styles$ = this.styleService.styles$;
   }
 
   ngOnInit() {
     this.moodboardService.getMoodboards().subscribe(res => {
       this.moodboards = res;
     });
-    this.styleService.getStyles().subscribe(res => {
-      this.styles = res;
-    });
+    this.styleService.getStyles();
   }
 
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: src_app_components_menu_popover_menu_popover_component__WEBPACK_IMPORTED_MODULE_3__.MenuPopoverComponent,
         event: e,
@@ -3928,7 +4198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "StyleListPage": () => (/* binding */ StyleListPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _style_list_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style-list.page.html?ngResource */ 4613);
 /* harmony import */ var _style_list_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style-list.page.scss?ngResource */ 8330);
@@ -3981,7 +4251,7 @@ let StyleListPage = class StyleListPage {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: src_app_components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_3__.StylePopoverComponent,
         event: e,
@@ -4017,7 +4287,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MyMoodboardPage": () => (/* binding */ MyMoodboardPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _my_moodboard_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-moodboard.page.html?ngResource */ 7182);
 /* harmony import */ var _my_moodboard_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./my-moodboard.page.scss?ngResource */ 5919);
@@ -4100,7 +4370,7 @@ let MyMoodboardPage = class MyMoodboardPage {
   showSettings(e) {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const popover = yield _this.popoverController.create({
         component: src_app_components_popovers_style_popover_style_popover_component__WEBPACK_IMPORTED_MODULE_3__.StylePopoverComponent,
         event: e,
@@ -4261,7 +4531,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ContactDesignerPage": () => (/* binding */ ContactDesignerPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _contact_designer_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contact-designer.page.html?ngResource */ 4530);
 /* harmony import */ var _contact_designer_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./contact-designer.page.scss?ngResource */ 3043);
@@ -4320,7 +4590,7 @@ let ContactDesignerPage = class ContactDesignerPage {
   paymentModal() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalController.create({
         component: src_app_components_modals_book_designer_modal_book_designer_modal_component__WEBPACK_IMPORTED_MODULE_3__.BookDesignerModalComponent,
         cssClass: 'book-designer-modal-css'
@@ -4518,7 +4788,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DesignerProfilePage": () => (/* binding */ DesignerProfilePage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _designer_profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./designer-profile.page.html?ngResource */ 5662);
 /* harmony import */ var _designer_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./designer-profile.page.scss?ngResource */ 7927);
@@ -4554,7 +4824,7 @@ let DesignerProfilePage = class DesignerProfilePage {
   bookConsultationModal() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalController.create({
         component: src_app_components_modals_book_designer_modal_book_designer_modal_component__WEBPACK_IMPORTED_MODULE_3__.BookDesignerModalComponent,
         cssClass: 'book-designer-modal-css'
@@ -4628,55 +4898,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MoodboardDetailsPage": () => (/* binding */ MoodboardDetailsPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _moodboard_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moodboard-details.page.html?ngResource */ 4326);
 /* harmony import */ var _moodboard_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moodboard-details.page.scss?ngResource */ 7017);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 124);
+
 
 
 
 
 let MoodboardDetailsPage = class MoodboardDetailsPage {
-    constructor() {
-        this.parts = [
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Parkett'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Couch'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Boot'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Carpet'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Floor'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: '6634 / Soft Touch'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Walls'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Desk'
-            }
-        ];
+    constructor(route, router) {
+        this.route = route;
+        this.router = router;
+    }
+    ngOnInit() {
+        this.currentMoodboard = this.router.getCurrentNavigation().extras.state.data;
     }
 };
-MoodboardDetailsPage.ctorParameters = () => [];
-MoodboardDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+MoodboardDetailsPage.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.ActivatedRoute },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__.Router }
+];
+MoodboardDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-moodboard-details-page',
         template: _moodboard_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_moodboard_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -4698,12 +4944,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MyIntiriPage": () => (/* binding */ MyIntiriPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _my_intiri_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./my-intiri.page.html?ngResource */ 7165);
-/* harmony import */ var _my_intiri_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-intiri.page.scss?ngResource */ 4723);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var src_app_services_project_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/project.service */ 354);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ 2340);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _my_intiri_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my-intiri.page.html?ngResource */ 7165);
+/* harmony import */ var _my_intiri_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./my-intiri.page.scss?ngResource */ 4723);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var src_app_components_modals_share_rate_modals_share_modal_share_modal_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/components/modals/share-rate-modals/share-modal/share-modal.component */ 5402);
+/* harmony import */ var src_app_services_project_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/project.service */ 354);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ 2340);
+
+
+
+
 
 
 
@@ -4711,84 +4965,111 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MyIntiriPage = class MyIntiriPage {
-    constructor(projectService) {
-        this.projectService = projectService;
-        this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.apiUrl;
-        this.projects = [];
-        this.news = [
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'Andy Miller',
-                news: 'New moodboard'
-            },
-        ];
-        this.options = {
-            slidesPerView: 2,
-            spaceBetween: 20,
-        };
-    }
-    ngOnInit() {
-        this.projectService.getAllProjects().subscribe((res) => {
-            this.projects = res;
-        });
-    }
-    // TODO: needs to be updated after project is allowed to have multiple moodboards!
-    getPiecesNo(project) {
-        let result = 0;
-        project.projectMoodboards.forEach(moodboard => {
-            result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
-        });
-        return result;
-    }
-    normalizeSlashes(string) {
-        return string.replaceAll("\\", "/");
-    }
-    next() {
-        this.slides.slideNext();
-    }
-    prev() {
-        this.slides.slidePrev();
-    }
-};
-MyIntiriPage.ctorParameters = () => [
-    { type: src_app_services_project_service__WEBPACK_IMPORTED_MODULE_2__.ProjectService }
-];
-MyIntiriPage.propDecorators = {
-    slides: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.ViewChild, args: ['slides',] }]
-};
-MyIntiriPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
-        selector: 'app-my-intiri-page',
-        template: _my_intiri_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_my_intiri_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], MyIntiriPage);
+  constructor(projectService, modalController, router) {
+    this.projectService = projectService;
+    this.modalController = modalController;
+    this.router = router;
+    this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__.environment.apiUrl;
+    this.projects = [];
+    this.projectId = 0;
+    this.news = [{
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }, {
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }, {
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }, {
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }, {
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }, {
+      image: '../../../../assets/images/landing-img.png',
+      name: 'Andy Miller',
+      news: 'New moodboard'
+    }];
+    this.options = {
+      slidesPerView: 2,
+      spaceBetween: 20
+    };
+  }
 
+  ngOnInit() {
+    this.projectService.getAllProjects().subscribe(res => {
+      this.projects = res;
+    });
+  } // TODO: needs to be updated after project is allowed to have multiple moodboards!
+
+
+  getPiecesNo(project) {
+    let result = 0;
+    project.projectMoodboards.forEach(moodboard => {
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    });
+    return result;
+  }
+
+  normalizeSlashes(string) {
+    return string.replaceAll("\\", "/");
+  }
+
+  next() {
+    this.slides.slideNext();
+  }
+
+  prev() {
+    this.slides.slidePrev();
+  }
+
+  goToProjectDetails(project) {
+    this.router.navigate(['/project-details'], {
+      state: {
+        data: project
+      }
+    });
+  }
+
+  openShare() {
+    var _this = this;
+
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const modal = yield _this.modalController.create({
+        component: src_app_components_modals_share_rate_modals_share_modal_share_modal_component__WEBPACK_IMPORTED_MODULE_3__.ShareModalComponent
+      });
+      yield modal.present();
+    })();
+  }
+
+};
+
+MyIntiriPage.ctorParameters = () => [{
+  type: src_app_services_project_service__WEBPACK_IMPORTED_MODULE_4__.ProjectService
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+}, {
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
+}];
+
+MyIntiriPage.propDecorators = {
+  slides: [{
+    type: _angular_core__WEBPACK_IMPORTED_MODULE_8__.ViewChild,
+    args: ['slides']
+  }]
+};
+MyIntiriPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+  selector: 'app-my-intiri-page',
+  template: _my_intiri_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_my_intiri_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], MyIntiriPage);
 
 
 /***/ }),
@@ -4804,7 +5085,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NewProjectPage": () => (/* binding */ NewProjectPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _new_project_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./new-project.page.html?ngResource */ 5631);
 /* harmony import */ var _new_project_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./new-project.page.scss?ngResource */ 2569);
@@ -4873,10 +5154,12 @@ let NewProjectPage = class NewProjectPage {
   }
 
   ngOnInit() {
+    this.isExistProject = true;
     this.projectService.currentProject$.subscribe(project => {
       this.project = project;
 
-      if (!project.name) {
+      if (project.name === "") {
+        this.isExistProject = false;
         this.openStartModal();
       }
     });
@@ -4939,8 +5222,23 @@ let NewProjectPage = class NewProjectPage {
     });
   }
 
+  saveCurrentProject() {
+    if (this.isExistProject) {
+      this.isExistProject = false;
+      this.projectService.addMoodboardToProject(this.project).subscribe(res => {
+        console.log(res);
+        this.openFinalModal();
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.saveProject();
+    }
+  }
+
   saveProject() {
     this.projectService.saveProject(this.project).subscribe(res => {
+      this.openFinalModal();
       console.log(res);
     }, error => {
       console.log(error);
@@ -5025,7 +5323,7 @@ let NewProjectPage = class NewProjectPage {
   openStartModal() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalController.create({
         component: src_app_components_modals_create_project_modal_create_project_modal_component__WEBPACK_IMPORTED_MODULE_3__.CreateProjectModalComponent,
         componentProps: {
@@ -5042,7 +5340,7 @@ let NewProjectPage = class NewProjectPage {
   openFinalModal() {
     var _this2 = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this2.modalController.create({
         component: src_app_components_modals_create_project_modal_create_project_modal_component__WEBPACK_IMPORTED_MODULE_3__.CreateProjectModalComponent,
         componentProps: {
@@ -5204,35 +5502,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ProjectDetailsPage": () => (/* binding */ ProjectDetailsPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _project_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project-details.page.html?ngResource */ 5461);
 /* harmony import */ var _project_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project-details.page.scss?ngResource */ 3908);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var src_app_services_project_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/project.service */ 354);
+
+
 
 
 
 
 let ProjectDetailsPage = class ProjectDetailsPage {
-    constructor() {
-        this.moodboards = [
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'moodboard 1',
-                pieces: 20,
-                updated: '1 week'
-            },
-            {
-                image: '../../../../assets/images/landing-img.png',
-                name: 'moodboard 2',
-                pieces: 10,
-                updated: '1 day'
+    constructor(projectService, router) {
+        this.projectService = projectService;
+        this.router = router;
+    }
+    ngOnInit() {
+        this.currentProject = this.router.getCurrentNavigation().extras.state.data;
+    }
+    goToMoodboardDetails(moodboard) {
+        this.router.navigate(['/moodboard-details'], {
+            state: {
+                data: moodboard
             }
-        ];
+        });
+    }
+    addMoodboardToProject() {
+        //sessionStorage.clear();
+        this.currentProject.room = {};
+        this.currentProject.budget = '';
+        this.currentProject.roomDetails = {};
+        this.currentProject.colorPalettes = [];
+        this.currentProject.styleImages = [];
+        this.currentProject.projectMoodboards = [];
+        this.projectService.setCurrentProject(this.currentProject);
+        this.router.navigateByUrl('/new-project');
     }
 };
-ProjectDetailsPage.ctorParameters = () => [];
-ProjectDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+ProjectDetailsPage.ctorParameters = () => [
+    { type: src_app_services_project_service__WEBPACK_IMPORTED_MODULE_2__.ProjectService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router }
+];
+ProjectDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-project-details-page',
         template: _project_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_project_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -5353,7 +5667,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LandingPage": () => (/* binding */ LandingPage)
 /* harmony export */ });
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _landing_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./landing.page.html?ngResource */ 6663);
 /* harmony import */ var _landing_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./landing.page.scss?ngResource */ 8467);
@@ -5401,7 +5715,7 @@ let LandingPage = class LandingPage {
   logScrollEnd() {
     var _this = this;
 
-    return (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    return (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const scrollElement = yield _this.content.getScrollElement(); // get scroll element
 
       _this.isScrolledDown = scrollElement.scrollTop > 50;
@@ -6135,7 +6449,7 @@ let MoodboardService = class MoodboardService {
     }
     addMoodboard(moodboard) {
         const req_data = this.parseMoodboard(moodboard);
-        return this.http.get(this.apiUrl + 'moodboards/add');
+        return this.http.post(this.apiUrl + 'moodboards/add', req_data);
     }
     parseMoodboard(moodboard) {
         let parsedProj = {
@@ -6284,6 +6598,13 @@ let ProjectService = class ProjectService {
         const req_data = this.parseProject(project);
         return this.http.post(this.apiUrl + 'projects/add', req_data);
     }
+    addMoodboardToProject(project) {
+        const reqData = {
+            projectId: project['id'],
+            moodboardId: project.projectMoodboards[0].id
+        };
+        return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
+    }
 };
 ProjectService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }
@@ -6350,10 +6671,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "StyleService": () => (/* binding */ StyleService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 1555);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 6942);
 /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
+
+
 
 
 
@@ -6362,23 +6687,32 @@ let StyleService = class StyleService {
     constructor(http) {
         this.http = http;
         this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl;
+        this.stylesSource = new rxjs__WEBPACK_IMPORTED_MODULE_1__.ReplaySubject(1);
+        this.styles$ = this.stylesSource.asObservable();
     }
     getStyles() {
-        return this.http.get(this.apiUrl + 'styles');
+        return this.http.get(this.apiUrl + 'styles').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)((styles) => {
+            if (styles) {
+                this.stylesSource.next(styles);
+            }
+        })).toPromise();
     }
     addStyle(styleObj) {
         const formData = new FormData();
         Object.keys(styleObj).forEach(key => formData.append(key, styleObj[key]));
         formData.delete('imageFile'); // removing it first so we can manually add a file name
         formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.name.replace(/\s/g, '')}.png`);
-        return this.http.post(this.apiUrl, formData);
+        return this.http.post(`${this.apiUrl}styles/add`, formData);
+    }
+    deleteStyle(styleId) {
+        return this.http.delete(this.apiUrl + 'styles/delete/' + styleId);
     }
 };
 StyleService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient }
 ];
-StyleService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Injectable)({
+StyleService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
         providedIn: 'root'
     })
 ], StyleService);
@@ -6402,7 +6736,7 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const environment = {
-    production: false,
+    production: true,
     apiUrl: 'https://localhost:7004/'
 };
 /*
@@ -6509,12 +6843,12 @@ var map = {
 	],
 	"./ion-datetime-button.entry.js": [
 		7950,
-		"default-node_modules_ionic_core_dist_esm_parse-46e842f3_js-node_modules_ionic_core_dist_esm_t-5e0416",
+		"default-node_modules_ionic_core_dist_esm_parse-250f021a_js-node_modules_ionic_core_dist_esm_t-7df007",
 		"node_modules_ionic_core_dist_esm_ion-datetime-button_entry_js"
 	],
 	"./ion-datetime_3.entry.js": [
 		9689,
-		"default-node_modules_ionic_core_dist_esm_parse-46e842f3_js-node_modules_ionic_core_dist_esm_t-5e0416",
+		"default-node_modules_ionic_core_dist_esm_parse-250f021a_js-node_modules_ionic_core_dist_esm_t-7df007",
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-datetime_3_entry_js"
 	],
@@ -6639,6 +6973,7 @@ var map = {
 	],
 	"./ion-tab-bar_2.entry.js": [
 		8902,
+		"common",
 		"node_modules_ionic_core_dist_esm_ion-tab-bar_2_entry_js"
 	],
 	"./ion-tab_2.entry.js": [
@@ -6948,7 +7283,7 @@ module.exports = ".profile-input {\n    margin-left: 0.5rem;\n    margin-right: 
 /***/ ((module) => {
 
 "use strict";
-module.exports = ".profile-input {\n    margin-left: 0.5rem;\n    margin-right: 0.5rem;\n    margin-top: 1rem;\n    flex: 1 1 0%;\n    padding-left: 0px;\n    padding-right: 0px\n}\n@media (min-width: 640px) {\n    .profile-input {\n        padding-left: 100px;\n        padding-right: 100px\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC1zdHlsZS1tb2RhbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDSTtJQUFBLG1CQUFBO0lBQUEsb0JBQUE7SUFBQSxnQkFBQTtJQUFBLFlBQUE7SUFBQSxpQkFBQTtJQUFBO0FBQUE7QUFBQTtJQUFBO1FBQUEsbUJBQUE7UUFBQTtJQUFBO0FBQUEiLCJmaWxlIjoiYWRkLXN0eWxlLW1vZGFsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2ZpbGUtaW5wdXQge1xyXG4gICAgQGFwcGx5IG10LTQgbXgtMiBmbGV4LTEgcHgtMCBzbTpweC1bMTAwcHhdXHJcbn1cclxuIl19 */";
+module.exports = ".profile-input {\n\n    margin-left: 0.5rem;\n\n    margin-right: 0.5rem;\n\n    margin-top: 1rem;\n\n    flex: 1 1 0%;\n\n    padding-left: 0px;\n\n    padding-right: 0px\n}\n\n@media (min-width: 640px) {\n\n    .profile-input {\n\n        padding-left: 100px;\n\n        padding-right: 100px\n    }\n}\n\n.plus-icon-wrapper {\n\n    margin-left: auto;\n\n    margin-right: auto;\n\n    height: 60px;\n\n    width: 60px;\n\n    border-radius: 9999px;\n\n    background-color: var(--ion-color-light);\n\n    padding: 0.5rem;\n\n    font-size: 1.5rem;\n\n    line-height: 2rem;\n\n    color: var(--ion-color-primary)\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC1zdHlsZS1tb2RhbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDSTs7SUFBQSxtQkFBQTs7SUFBQSxvQkFBQTs7SUFBQSxnQkFBQTs7SUFBQSxZQUFBOztJQUFBLGlCQUFBOztJQUFBO0FBQUE7O0FBQUE7O0lBQUE7O1FBQUEsbUJBQUE7O1FBQUE7SUFBQTtBQUFBOztBQUdBOztJQUFBLGlCQUFBOztJQUFBLGtCQUFBOztJQUFBLFlBQUE7O0lBQUEsV0FBQTs7SUFBQSxxQkFBQTs7SUFBQSx3Q0FBQTs7SUFBQSxlQUFBOztJQUFBLGlCQUFBOztJQUFBLGlCQUFBOztJQUFBO0FBQUEiLCJmaWxlIjoiYWRkLXN0eWxlLW1vZGFsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2ZpbGUtaW5wdXQge1xyXG4gICAgQGFwcGx5IG10LTQgbXgtMiBmbGV4LTEgcHgtMCBzbTpweC1bMTAwcHhdXHJcbn1cclxuLnBsdXMtaWNvbi13cmFwcGVyIHtcclxuICAgIEBhcHBseSBteC1hdXRvIHRleHQtcHJpbWFyeSB0ZXh0LTJ4bCByb3VuZGVkLWZ1bGwgYmctbGlnaHQgcC0yIGgtWzYwcHhdIHctWzYwcHhdXHJcbn0iXX0= */";
 
 /***/ }),
 
@@ -6993,6 +7328,50 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 "use strict";
 module.exports = ".logout-icon-wrapper {\n    margin-left: auto;\n    margin-right: auto;\n    height: 60px;\n    width: 60px;\n    border-radius: 9999px;\n    background-color: var(--ion-color-light);\n    padding: 0.5rem;\n    font-size: 1.5rem;\n    line-height: 2rem;\n    color: var(--ion-color-primary)\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ291dC1tb2RhbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFRTtJQUFBLGlCQUFBO0lBQUEsa0JBQUE7SUFBQSxZQUFBO0lBQUEsV0FBQTtJQUFBLHFCQUFBO0lBQUEsd0NBQUE7SUFBQSxlQUFBO0lBQUEsaUJBQUE7SUFBQSxpQkFBQTtJQUFBO0FBQUEiLCJmaWxlIjoibG9nb3V0LW1vZGFsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5sb2dvdXQtaWNvbi13cmFwcGVyIHtcclxuICBAYXBwbHkgbXgtYXV0byB0ZXh0LXByaW1hcnkgdGV4dC0yeGwgcm91bmRlZC1mdWxsIGJnLWxpZ2h0IHAtMiBoLVs2MHB4XSB3LVs2MHB4XVxyXG59Il19 */";
+
+/***/ }),
+
+/***/ 188:
+/*!*****************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-modal/rate-modal.component.scss?ngResource ***!
+  \*****************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "ion-textarea {\n  height: 150px;\n  width: 470px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJhdGUtbW9kYWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFBO0VBQ0EsWUFBQTtBQUNGIiwiZmlsZSI6InJhdGUtbW9kYWwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdGV4dGFyZWEge1xyXG4gIGhlaWdodDogMTUwcHg7XHJcbiAgd2lkdGg6IDQ3MHB4O1xyXG59XHJcbiJdfQ== */";
+
+/***/ }),
+
+/***/ 6137:
+/*!***************************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-successful-modal/rate-successful-modal.component.scss?ngResource ***!
+  \***************************************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyYXRlLXN1Y2Nlc3NmdWwtbW9kYWwuY29tcG9uZW50LnNjc3MifQ== */";
+
+/***/ }),
+
+/***/ 6153:
+/*!*******************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-modal/share-modal.component.scss?ngResource ***!
+  \*******************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzaGFyZS1tb2RhbC5jb21wb25lbnQuc2NzcyJ9 */";
+
+/***/ }),
+
+/***/ 6239:
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-successful-modal/share-successful-modal.component.scss?ngResource ***!
+  \*****************************************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzaGFyZS1zdWNjZXNzZnVsLW1vZGFsLmNvbXBvbmVudC5zY3NzIn0= */";
 
 /***/ }),
 
@@ -7586,7 +7965,7 @@ module.exports = "<ion-grid class=\"px-0 m\">\r\n  <ion-row class=\"mt-2\">\r\n 
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-grid class=\"px-0 m\">\r\n  <ion-row class=\"mt-2\">\r\n    <ion-col size=\"12\" size-md=\"4\" size-lg=\"3\">\r\n      <div class=\"profile-input\">\r\n        <ion-select interface=\"popover\" placeholder=\"Search\">\r\n          <ion-select-option value=\"1\">Option 1</ion-select-option>\r\n          <ion-select-option value=\"2\">Option 2</ion-select-option>\r\n        </ion-select>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col offset-md=\"4\" size=\"12\" size-md=\"3\" size-lg=\"3\" class=\"relative bottom-[29px] w-full\">\r\n      <div class=\"profile-input justify-end\">\r\n        <div class=\"w-full\">\r\n          <span class=\"text-sm text-black-2\">Style</span>\r\n          <ion-select interface=\"popover\" [multiple]=\"true\">\r\n            <ion-select-option *ngFor=\"let style of styles\" value=\"{{style.name}}\">{{style.name}}</ion-select-option>\r\n          </ion-select>\r\n        </div>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col size=\"12\" size-sm=\"3\" size-xl=\"2\">\r\n      <ion-button (click)=\"addStyle()\" fill=\"clear\" class=\"primary-btn mt-4\">Add style</ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  <ion-row class=\"gap-x-[1.65%]\">\r\n    <ion-col *ngFor=\"let style of styles\" size=\"12\" size-sm=\"5.75\" size-xl=\"2.85\">\r\n      <div class=\"card\">\r\n        <div class=\"p-[20px] h-full w-full\">\r\n          <img src=\"{{style.imagePath == 'path' ? style.styleImages[0].path : style.imagePath}}\" class=\"object-cover !h-full !w-full\" alt=\"Profile Img\" />\r\n        </div>\r\n      </div>\r\n      <div class=\"flex justify-between\">\r\n        <p class=\"py-2 text-black-2 font-semibold\">{{style.name}}</p>\r\n        <div class=\"float-right\">\r\n          <button (click)=\"showSettings($event)\" id=\"dropdownMenuIconButton\" data-dropdown-toggle=\"dropdownDots\" class=\"inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg\" type=\"button\">\r\n              <svg class=\"w-6 h-6\" aria-hidden=\"true\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z\"></path></svg>\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-grid>";
+module.exports = "<ion-grid class=\"px-0 m\">\r\n  <ion-row class=\"mt-2\">\r\n    <ion-col size=\"12\" size-md=\"4\" size-lg=\"3\">\r\n      <div class=\"profile-input\">\r\n        <ion-select interface=\"popover\" placeholder=\"Search\">\r\n          <ion-select-option value=\"1\">Option 1</ion-select-option>\r\n          <ion-select-option value=\"2\">Option 2</ion-select-option>\r\n        </ion-select>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col offset-md=\"4\" size=\"12\" size-md=\"3\" size-lg=\"3\" class=\"relative bottom-[29px] w-full\">\r\n      <div class=\"profile-input justify-end\">\r\n        <div class=\"w-full\">\r\n          <span class=\"text-sm text-black-2\">Style</span>\r\n          <ion-select interface=\"popover\" [multiple]=\"true\">\r\n            <ion-select-option *ngFor=\"let style of (styles$ | async)\" value=\"{{style.name}}\">{{style.name}}</ion-select-option>\r\n          </ion-select>\r\n        </div>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col size=\"12\" size-sm=\"3\" size-xl=\"2\">\r\n      <ion-button (click)=\"addStyle()\" fill=\"clear\" class=\"primary-btn mt-4\">Add style</ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n  <ion-row class=\"gap-x-[1.65%]\">\r\n    <ion-col *ngFor=\"let style of (styles$ | async)\" size=\"12\" size-sm=\"5.75\" size-xl=\"2.85\">\r\n      <div class=\"card\">\r\n        <div class=\"p-[20px] h-full w-full\">\r\n          <img src=\"{{style.imagePath == 'path' ? style.styleImages[0].path : style.imagePath}}\" class=\"object-cover !h-full !w-full\" alt=\"Profile Img\" />\r\n        </div>\r\n      </div>\r\n      <div class=\"flex justify-between\">\r\n        <p class=\"py-2 text-black-2 font-semibold\">{{style.name}}</p>\r\n        <div class=\"float-right\">\r\n          <button (click)=\"showSettings($event, style)\" id=\"dropdownMenuIconButton\" data-dropdown-toggle=\"dropdownDots\" class=\"inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg\" type=\"button\">\r\n              <svg class=\"w-6 h-6\" aria-hidden=\"true\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z\"></path></svg>\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-grid>";
 
 /***/ }),
 
@@ -7652,7 +8031,7 @@ module.exports = "  <ion-header id=\"main-content\">\r\n    <ion-toolbar class=\
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-list *ngIf=\"designer\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit designer</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"product\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit product</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"moodboard \" lines=\"none\" >\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"client\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"style\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit style</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"material\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Connect to moodboard</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>";
+module.exports = "<ion-list *ngIf=\"'designer'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit designer</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"'product'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit product</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"'moodboard'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"'client'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"'style'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Edit style</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" (click)=\"openDeleteStyleModal()\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>\r\n\r\n<ion-list *ngIf=\"'material'\" lines=\"none\" >\r\n  <ion-item class=\"text-black-1\" [button]=\"true\">Connect to moodboard</ion-item>\r\n  <ion-item class=\"text-black-1 font-medium\" [button]=\"true\">Delete</ion-item>\r\n</ion-list>";
 
 /***/ }),
 
@@ -7663,7 +8042,7 @@ module.exports = "<ion-list *ngIf=\"designer\" lines=\"none\" >\r\n  <ion-item c
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <!-- Add color modal -->\r\n  <div *ngIf=\"add\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add color</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Color pallet preview</p>\r\n            <div class=\"border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"flex justify-center mt-[18px]\">\r\n                <div class=\"card\">\r\n                  <div class=\"w-[47.5%] h-full inline-block\" [ngStyle]=\"{background: colorPallete.mainColor}\"></div>\r\n                  <div class=\"w-[47.5%] h-full inline-block float-right\">\r\n                    <div class=\"h-[30%] mb-[6%]\" [ngStyle]=\"{background: colorPallete.shadeColorLight}\"></div>\r\n                    <div class=\"h-[30%] mb-[6%]\" [ngStyle]=\"{background: colorPallete.shadeColorMedium}\"></div>\r\n                    <div class=\"h-[30%]\" [ngStyle]=\"{background: colorPallete.shadeColorDark}\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Color name</span>\r\n            <ion-input  type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Color number</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Select main color</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.mainColor\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.mainColor\" type=\"text\"\r\n            class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 1</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorLight\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorLight\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 2</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorMedium\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorMedium\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 3</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorDark\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorDark\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedColor()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Color added modal -->\r\n   <div *ngIf=\"added\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Color added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new color.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Colors</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <!-- Add color modal -->\r\n  <div *ngIf=\"'add'\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add color</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Color pallet preview</p>\r\n            <div class=\"border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"flex justify-center mt-[18px]\">\r\n                <div class=\"card\">\r\n                  <div class=\"w-[47.5%] h-full inline-block\" [ngStyle]=\"{background: colorPallete.mainColor}\"></div>\r\n                  <div class=\"w-[47.5%] h-full inline-block float-right\">\r\n                    <div class=\"h-[30%] mb-[6%]\" [ngStyle]=\"{background: colorPallete.shadeColorLight}\"></div>\r\n                    <div class=\"h-[30%] mb-[6%]\" [ngStyle]=\"{background: colorPallete.shadeColorMedium}\"></div>\r\n                    <div class=\"h-[30%]\" [ngStyle]=\"{background: colorPallete.shadeColorDark}\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Color name</span>\r\n            <ion-input  type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Color number</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Select main color</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.mainColor\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.mainColor\" type=\"text\"\r\n            class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 1</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorLight\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorLight\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 2</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorMedium\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorMedium\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Shade 3</span>\r\n            <ion-input disabled [style.background]=\"colorPallete.shadeColorDark\"\r\n            [cpPosition]=\"'top'\"\r\n            [(colorPicker)]=\"colorPallete.shadeColorDark\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedColor()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Color added modal -->\r\n   <div *ngIf=\"'added'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Color added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new color.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Colors</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7685,7 +8064,7 @@ module.exports = "<ion-content>\r\n  <!-- Add designer modal -->\r\n  <div *ngIf
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <!-- Add material modal -->\r\n  <div *ngIf=\"add\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add material</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Material name</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Material type</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" class=\"border border-black-2 rounded-2xl focus:outline-0\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedMaterial()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Material added modal -->\r\n   <div *ngIf=\"added\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Material added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new material.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Materials</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <!-- Add material modal -->\r\n  <div *ngIf=\"'add'\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add material</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Material name</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Material type</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" class=\"border border-black-2 rounded-2xl focus:outline-0\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedMaterial()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Material added modal -->\r\n   <div *ngIf=\"'added'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Material added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new material.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Materials</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7707,7 +8086,7 @@ module.exports = "<ion-content>\r\n  <!-- Add partner modal -->\r\n  <div *ngIf=
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <!-- Add picture modal -->\r\n  <div *ngIf=\"add\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add pictures</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row >\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Select style</span>\r\n            <ion-select interface=\"popover\">\r\n              <ion-select-option value=\"1\">style 1</ion-select-option>\r\n              <ion-select-option value=\"2\">style 2</ion-select-option>\r\n              <ion-select-option value=\"3\">style 3</ion-select-option>\r\n              <ion-select-option value=\"4\">style 4</ion-select-option>\r\n            </ion-select>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      \r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedPicture()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Material picture modal -->\r\n   <div *ngIf=\"added\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Picture added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new picture.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Pictures</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <!-- Add picture modal -->\r\n  <div *ngIf=\"'add'\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add pictures</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row >\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Select style</span>\r\n            <ion-select interface=\"popover\">\r\n              <ion-select-option value=\"1\">style 1</ion-select-option>\r\n              <ion-select-option value=\"2\">style 2</ion-select-option>\r\n              <ion-select-option value=\"3\">style 3</ion-select-option>\r\n              <ion-select-option value=\"4\">style 4</ion-select-option>\r\n            </ion-select>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      \r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedPicture()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Material picture modal -->\r\n   <div *ngIf=\"'added'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Picture added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new picture.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Pictures</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7718,7 +8097,7 @@ module.exports = "<ion-content>\r\n  <!-- Add picture modal -->\r\n  <div *ngIf=
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <!-- Add room modal -->\r\n  <div *ngIf=\"add\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add room</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Room name</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Room type</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" class=\"border border-black-2 rounded-2xl\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedRoom()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Room added modal -->\r\n   <div *ngIf=\"added\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Room added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new room.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Rooms</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <!-- Add room modal -->\r\n  <div *ngIf=\"'add'\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add room</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"mt-4 mx-2 flex-1 px-0 sm:px-[100px]\">\r\n        <ion-col>\r\n          <div class=\"pr-2\">\r\n            <span class=\"text-sm text-black-2\">Room name</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <div class=\"pl-2\">\r\n            <span class=\"text-sm text-black-2\">Room type</span>\r\n            <ion-input type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" class=\"border border-black-2 rounded-2xl\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n              <div class=\"text-center mt-[65px]\">\r\n                <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addedRoom()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Room added modal -->\r\n   <div *ngIf=\"'added'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Room added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new room.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Rooms</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7729,7 +8108,7 @@ module.exports = "<ion-content>\r\n  <!-- Add room modal -->\r\n  <div *ngIf=\"a
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <!-- Add style modal -->\r\n  <div *ngIf=\"add\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add style</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Style name</span>\r\n            <ion-input [(ngModel)]=\"style.name\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" [(ngModel)]=\"style.description\" class=\"border border-black-2 rounded-2xl\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input w-fit\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <label for=\"dropzone-file\">\r\n              <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n                <div *ngIf=\"!imagePath\" class=\"text-center mt-[65px]\">\r\n                  <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                  <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n                </div>\r\n                <img *ngIf=\"imagePath\" [src]=\"imagePath\" class=\"object-cover rounded-2xl p-2 h-full w-full\" alt=\"styleImg\" />\r\n              </div>\r\n              <input (change)=\"onFileChange($event)\" id=\"dropzone-file\" type=\"file\" class=\"hidden\" />\r\n            </label>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addStyle()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n   <!-- Style added modal -->\r\n   <div *ngIf=\"added\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mx-auto mt-[18px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Style added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new style.</p>\r\n        </div>\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Styles</ion-button>\r\n          </ion-buttons>\r\n        </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <!-- Add style modal -->\r\n  <div *ngIf=\"'add'\" class=\"justify-center items-center h-full\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1 class=\"font-medium text-black-1 text-5xl mt-9 text-center\">Add style</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Style name</span>\r\n            <ion-input [(ngModel)]=\"style.name\" type=\"text\" class=\"border rounded-2xl h-14 border-black-2\"></ion-input>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input\">\r\n            <span class=\"text-sm text-black-2\">Description</span>\r\n            <ion-textarea rows=\"5\" [(ngModel)]=\"style.description\" class=\"border border-black-2 rounded-2xl\"></ion-textarea>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div class=\"profile-input w-fit\">\r\n            <p class=\"leading-[22px] mb-2 font-semibold text-black-1 text-lg\">Image</p>\r\n            <label for=\"dropzone-file\">\r\n              <div class=\"w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer\">\r\n                <div *ngIf=\"!imagePath\" class=\"text-center mt-[65px]\">\r\n                  <ion-icon class=\"text-[27px] text-black-3\" name=\"add-outline\"></ion-icon>\r\n                  <p class=\"leading-[22px] font-semibold text-black-3 text-lg\">Upload</p>\r\n                </div>\r\n                <img *ngIf=\"imagePath\" [src]=\"imagePath\" class=\"object-cover rounded-2xl p-2 h-full w-full\" alt=\"styleImg\" />\r\n              </div>\r\n              <input (change)=\"onFileChange($event)\" id=\"dropzone-file\" type=\"file\" class=\"hidden\" />\r\n            </label>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"text-center mt-8\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn h-[52px]\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn h-[52px]\" (click)=\"addStyle()\">Add</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n  <!-- Style added modal -->\r\n  <div *ngIf=\"'added'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><img class=\"h-[32px] w-[32px] mt-[7px]\" src=\"../../../../assets/icon/success.svg\" alt=\"success\"></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Style added!</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">You successfully added new style.</p>\r\n        </div>\r\n        <ion-buttons class=\"justify-center\">\r\n          <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Go to Styles</ion-button>\r\n        </ion-buttons>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- Style delete modal -->\r\n  <div *ngIf=\"'delete'\" class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"plus-icon-wrapper !pt-[8px] !pl-[12px]\"><ion-icon class=\"h-[32px] w-[32px] ml-[3px] mt-[7px]\" name=\"trash-outline\"></ion-icon></div>\r\n          <h2 class=\"mt-10 text-center text-2xl font-bold text-black-1\">Remove style</h2>\r\n          <p class=\"text-center text-base text-[18px] text-black-2\">Are you sure that you want to remove this style? This action cannot be undone.</p>\r\n        </div>\r\n        <ion-buttons class=\"justify-center\">\r\n          <ion-button class=\"primary-btn h-[52px] mt-10\" (click)=\"deleteStyle()\">Remove style</ion-button>\r\n          <ion-button class=\"secondary-btn h-[52px] mt-10\" (click)=\"dismissModal()\">Cancel</ion-button>\r\n        </ion-buttons>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7774,6 +8153,50 @@ module.exports = "<ion-content>\r\n  <div class=\"bg-gray-500 justify-center ite
 
 "use strict";
 module.exports = "<ion-content>\r\n  <div class=\"bg-gray-500 justify-center items-center flex flex-col h-full\">\r\n    <div class=\"min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white\">\r\n      <div class=\"max-w-md w-full space-y-8\">\r\n        <div>\r\n          <div class=\"logout-icon-wrapper\"><ion-icon class=\"h-[34px] w-[34px] mx-auto mt-[5px] block\" name=\"log-out-outline\"></ion-icon></div>\r\n          <h2 class=\"mt-6 text-center text-2xl font-bold text-black1\">Logout!</h2>\r\n          <p class=\"text-center text-base text-black2\">Are you sure you want to logout from the app?</p>\r\n        </div>\r\n        <ion-buttons class=\"justify-center\">\r\n          <ion-button  class=\"secondary-btn\" (click)=\"dismiss()\">Cancel</ion-button>\r\n          <ion-button class=\"primary-btn\" (click)=\"logout()\">Logout</ion-button>\r\n        </ion-buttons>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+
+/***/ }),
+
+/***/ 1522:
+/*!*****************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-modal/rate-modal.component.html?ngResource ***!
+  \*****************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<ion-content>\r\n  <div class=\"flex flex-col items-center px-[65px]\">\r\n    <p class=\"text-2xl font-medium mt-[80px]\">Rate designer</p>\r\n    <p class=\"text-lg mt-[10px]\">Please rate designer <b>Joana Martinez</b></p>\r\n    <div class=\"flex justify-evenly items-center mt-[40px] w-full\">\r\n      <ion-icon name=\"star\" class=\"h-14 w-14 text-light cursor-pointer\" (click)=\"addRate(1)\" [class.!text-secondary]=\"star>=1\"></ion-icon>\r\n      <ion-icon name=\"star\" class=\"h-14 w-14 text-light cursor-pointer\" (click)=\"addRate(2)\" [class.!text-secondary]=\"star>=2\"></ion-icon>\r\n      <ion-icon name=\"star\" class=\"h-14 w-14 text-light cursor-pointer\" (click)=\"addRate(3)\" [class.!text-secondary]=\"star>=3\"></ion-icon>\r\n      <ion-icon name=\"star\" class=\"h-14 w-14 text-light cursor-pointer\" (click)=\"addRate(4)\" [class.!text-secondary]=\"star>=4\"></ion-icon>\r\n      <ion-icon name=\"star\" class=\"h-14 w-14 text-light cursor-pointer\" (click)=\"addRate(5)\" [class.!text-secondary]=\"star>=5\"></ion-icon>\r\n    </div>\r\n    <div class=\"mt-[40px]\" *ngIf=\"star > 0\">\r\n      <p class=\"text-black-2 text-[13px]\">Please leave a comment</p>\r\n      <ion-textarea rows=\"5\" class=\"border border-black-2 rounded-2xl mt-0\"></ion-textarea>\r\n    </div>\r\n    <div class=\"flex justify-center mt-[40px]\">\r\n      <ion-button fill=\"clear\" class=\"secondary-btn\" (click)=\"dismiss()\">Cancel</ion-button>\r\n      <ion-button fill=\"clear\" class=\"primary-btn\" (click)=\"rate()\" [disabled]=\"rateDisabled\" [class.!opacity-50]=\"rateDisabled\">Rate</ion-button>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+
+/***/ }),
+
+/***/ 5322:
+/*!***************************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/rate-successful-modal/rate-successful-modal.component.html?ngResource ***!
+  \***************************************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<ion-content>\r\n  <div class=\"flex flex-col items-center\">\r\n    <div class=\"w-[80px] h-[80px] bg-light rounded-full mt-[75px] flex items-center justify-center\">\r\n      <ion-icon name=\"star\" class=\"h-10 w-10 text-secondary\"></ion-icon>\r\n    </div>\r\n    <p class=\"text-2xl font-medium mt-[40px]\">Thank you for rating</p>\r\n    <p class=\"text-lg mt-[10px]\">You successfully rated <b>Joana Martinez</b></p>\r\n    <ion-button fill=\"clear\" class=\"primary-btn mt-[40px]\" (click)=\"dismiss()\">Go to My Intiri</ion-button>\r\n  </div>\r\n</ion-content>\r\n";
+
+/***/ }),
+
+/***/ 3860:
+/*!*******************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-modal/share-modal.component.html?ngResource ***!
+  \*******************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<ion-content>\r\n  <div class=\"flex flex-col items-center px-[65px]\">\r\n    <div class=\"h-[80px] w-[80px] rounded-full bg-light mt-[75px] flex items-center justify-center\">\r\n      <ion-icon name=\"share-social\" class=\"h-[30px] w-[30px] text-primary\"></ion-icon>\r\n    </div>\r\n    <p class=\"text-2xl font-medium mt-[40px]\">Share</p>\r\n    <p class=\"text-lg mt-[10px] text-black-2\">Enter your friends phone number</p>\r\n    <div class=\"mt-[40px]\">\r\n      <span class=\"text-sm text-black-2\">Phone number</span>\r\n      <div class=\"flex justify-between\">\r\n        <div>\r\n          <ion-select class=\"border rounded-2xl border-black-2 h-14 w-24 xl:w-32\" interface=\"popover\">\r\n            <ion-select-option>\r\n              <div>\r\n                <p class=\"text-lg text-black\">+47</p>\r\n              </div>\r\n            </ion-select-option>\r\n            <ion-select-option>\r\n              <p class=\"text-lg text-black\">+381</p>\r\n            </ion-select-option>\r\n          </ion-select>\r\n        </div>\r\n        <div>\r\n          <ion-input name=\"phoneNumber\" class=\"border rounded-2xl h-14 border-black-2 w-60 xl:w-80 ml-[10px]\"></ion-input>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"flex justify-start w-full\">\r\n      <ion-button fill=\"clear\" class=\"normal-case mt-[30px]\">\r\n        <ion-icon name=\"add\" slot=\"start\"></ion-icon>\r\n        <p class=\"text-lg text-primary font-medium\">Add more users</p>\r\n      </ion-button>\r\n    </div>\r\n    <div class=\"flex justify-center mt-[40px]\">\r\n      <ion-button fill=\"clear\" class=\"secondary-btn\" (click)=\"dismiss()\">Cancel</ion-button>\r\n      <ion-button fill=\"clear\" class=\"primary-btn\" (click)=\"share()\">Share</ion-button>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+
+/***/ }),
+
+/***/ 968:
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/app/components/modals/share-rate-modals/share-successful-modal/share-successful-modal.component.html?ngResource ***!
+  \*****************************************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = "<ion-content>\r\n  <div class=\"flex flex-col items-center\">\r\n    <div class=\"w-[80px] h-[80px] bg-light rounded-full mt-[75px] flex items-center justify-center\">\r\n      <ion-icon name=\"checkmark-circle-outline\" class=\"h-10 w-10 text-primary\"></ion-icon>\r\n    </div>\r\n    <p class=\"text-2xl font-medium mt-[40px]\">Moodboard shared!</p>\r\n    <p class=\"text-lg mt-[10px] text-black-2\">You successfully shared your moodboard.</p>\r\n    <ion-button fill=\"clear\" class=\"primary-btn mt-[40px]\" (click)=\"dismiss()\">Go to My Intiri</ion-button>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -7927,7 +8350,7 @@ module.exports = "<ion-content>\r\n    <div id=\"home\">\r\n      <app-header-ad
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header-admin></app-header-admin>\r\n    <ion-grid class=\"main-container\">\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-xl=\"4\">\r\n          <h1 class=\"main-title\">Moodboards</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-md=\"3.9\" size-xl=\"2.75\">\r\n          <div class=\"h-[52px] mt-6\">\r\n            <ion-select interface=\"popover\" placeholder=\"Search\">\r\n              <ion-select-option value=\"1\">Option 1</ion-select-option>\r\n              <ion-select-option value=\"2\">Option 2</ion-select-option>\r\n            </ion-select>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col class=\"grid sm-ion:flex gap-x-2\" size=\"12\" size-md=\"7.9\" offset-md=\"0.2\" offset-xl=\"3.95\" size-xl=\"5.3\">\r\n          <div class=\"sm-ion:w-1/2 w-[90vw]\">\r\n            <span class=\"text-sm text-black-2\">Style</span>\r\n            <div class=\"h-[52px]\">\r\n              <ion-select interface=\"popover\" [multiple]=\"true\">\r\n                <ion-select-option *ngFor=\"let style of styles\" value=\"{{style.name}}\">{{style.name}}</ion-select-option>\r\n              </ion-select>\r\n            </div>\r\n          </div>\r\n          <ion-button routerLink=\"/add-moodboard\" routerDirection=\"root\" fill=\"clear\" class=\"primary-btn mt-6 sm-ion:w-1/2\">Add moodboard</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row class=\"mt-8 gap-x-[1.65%]\">\r\n        <ion-col *ngFor=\"let moodboard of moodboards\" class=\"!pb-8\" size=\"12\" size-sm=\"5.75\" size-xl=\"3.86\" >\r\n          <div class=\"designer \">\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"4.5\" class=\"!p-3 !pr-2\">\r\n                  <img src=\"{{moodboard.style.styleImages[0].path}}\" class=\"h-[113px] lg:h-[155px] w-full mb-2 object-cover\" alt=\"moodboard-img\"/>\r\n                  <img src=\"{{moodboard.style.styleImages[1].path}}\" class=\"h-[113px] lg:h-[155px] w-full object-cover\" alt=\"moodboard-img\"/>\r\n                </ion-col>\r\n                <ion-col size=\"7.5\" class=\"!p-3 !pl-0\">\r\n                  <img src=\"{{moodboard.style.styleImages[2].path}}\" class=\"h-[235px] lg:h-[318px] w-full object-cover\" alt=\"moodboard-img\"/>\r\n                </ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </div>\r\n          <div class=\"flex\">\r\n            <img src=\"../../../assets/images/profile-img.png\" class=\"w-[30ppx] h-[30px] rounded object-cover \"\r\n              alt=\"Profile Img\" />\r\n            <p class=\"text-black-2 font-semibold my-[3px] mx-2 text-xl\">Teresa Gonzales</p>\r\n            <div class=\"absolute right-[-5px]\">\r\n              <button (click)=\"showSettings($event)\" id=\"dropdownMenuIconButton\" data-dropdown-toggle=\"dropdownDots\" class=\"inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50\" type=\"button\">\r\n                  <svg class=\"w-6 h-6\" aria-hidden=\"true\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z\"></path></svg>\r\n              </button>\r\n            </div>\r\n            <ion-icon name=\"arrow-forward-outline\" class=\"my-[7px] text-xl cursor-pointer\"></ion-icon>\r\n          </div>\r\n          <p class=\"text-black-3 mt-1\">{{moodboard.style.name}} / {{moodboard.room.name}}</p>\r\n\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n</ion-content>";
+module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header-admin></app-header-admin>\r\n    <ion-grid class=\"main-container\">\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-xl=\"4\">\r\n          <h1 class=\"main-title\">Moodboards</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-md=\"3.9\" size-xl=\"2.75\">\r\n          <div class=\"h-[52px] mt-6\">\r\n            <ion-select interface=\"popover\" placeholder=\"Search\">\r\n              <ion-select-option value=\"1\">Option 1</ion-select-option>\r\n              <ion-select-option value=\"2\">Option 2</ion-select-option>\r\n            </ion-select>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col class=\"grid sm-ion:flex gap-x-2\" size=\"12\" size-md=\"7.9\" offset-md=\"0.2\" offset-xl=\"3.95\" size-xl=\"5.3\">\r\n          <div class=\"sm-ion:w-1/2 w-[90vw]\">\r\n            <span class=\"text-sm text-black-2\">Style</span>\r\n            <div class=\"h-[52px]\">\r\n              <ion-select interface=\"popover\" [multiple]=\"true\">\r\n                <ion-select-option *ngFor=\"let style of (styles$ | async)\" value=\"{{style.name}}\">{{style.name}}</ion-select-option>\r\n              </ion-select>\r\n            </div>\r\n          </div>\r\n          <ion-button routerLink=\"/add-moodboard\" routerDirection=\"root\" fill=\"clear\" class=\"primary-btn mt-6 sm-ion:w-1/2\">Add moodboard</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row class=\"mt-8 gap-x-[1.65%]\">\r\n        <ion-col *ngFor=\"let moodboard of moodboards\" class=\"!pb-8\" size=\"12\" size-sm=\"5.75\" size-xl=\"3.86\" >\r\n          <div class=\"designer \">\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"4.5\" class=\"!p-3 !pr-2\">\r\n                  <img src=\"{{moodboard.style.styleImages[0].path}}\" class=\"h-[113px] lg:h-[155px] w-full mb-2 object-cover\" alt=\"moodboard-img\"/>\r\n                  <img src=\"{{moodboard.style.styleImages[1].path}}\" class=\"h-[113px] lg:h-[155px] w-full object-cover\" alt=\"moodboard-img\"/>\r\n                </ion-col>\r\n                <ion-col size=\"7.5\" class=\"!p-3 !pl-0\">\r\n                  <img src=\"{{moodboard.style.styleImages[2].path}}\" class=\"h-[235px] lg:h-[318px] w-full object-cover\" alt=\"moodboard-img\"/>\r\n                </ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </div>\r\n          <div class=\"flex\">\r\n            <img src=\"../../../assets/images/profile-img.png\" class=\"w-[30ppx] h-[30px] rounded object-cover \"\r\n              alt=\"Profile Img\" />\r\n            <p class=\"text-black-2 font-semibold my-[3px] mx-2 text-xl\">Teresa Gonzales</p>\r\n            <div class=\"absolute right-[-5px]\">\r\n              <button (click)=\"showSettings($event)\" id=\"dropdownMenuIconButton\" data-dropdown-toggle=\"dropdownDots\" class=\"inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50\" type=\"button\">\r\n                  <svg class=\"w-6 h-6\" aria-hidden=\"true\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z\"></path></svg>\r\n              </button>\r\n            </div>\r\n            <ion-icon name=\"arrow-forward-outline\" class=\"my-[7px] text-xl cursor-pointer\"></ion-icon>\r\n          </div>\r\n          <p class=\"text-black-3 mt-1\">{{moodboard.style.name}} / {{moodboard.room.name}}</p>\r\n\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n</ion-content>";
 
 /***/ }),
 
@@ -7938,7 +8361,7 @@ module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header-admin>
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header-admin></app-header-admin>\r\n    <div class=\"main-container\">\r\n      <p class=\"main-title mb-[30px]\">Style</p>\r\n      <app-sub-header [menu]=\"'style'\" [activeTitle]=\"currentSlide\" [slider]=\"true\" (changeSlide)=\"changeSlide($event)\"></app-sub-header>\r\n      <ion-slides #slides [options]=\"options\" (ionSlideDidChange)=\"onSlideChange()\">\r\n        <ion-slide>\r\n          <app-admin-styles></app-admin-styles>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-materials></app-admin-materials>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-rooms></app-admin-rooms>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-colors></app-admin-colors>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-pictures></app-admin-pictures>\r\n        </ion-slide>\r\n      </ion-slides>\r\n    </div>\r\n  </div>\r\n</ion-content>";
+module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header-admin></app-header-admin>\r\n    <div class=\"main-container\">\r\n      <p class=\"main-title mb-[30px]\">Style</p>\r\n      <app-sub-header [menu]=\"\" [activeTitle]=\"currentSlide\" [slider]=\"true\" (changeSlide)=\"changeSlide($event)\"></app-sub-header>\r\n      <ion-slides #slides [options]=\"options\" (ionSlideDidChange)=\"onSlideChange()\">\r\n        <ion-slide>\r\n          <app-admin-styles></app-admin-styles>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-materials></app-admin-materials>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-rooms></app-admin-rooms>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-colors></app-admin-colors>\r\n        </ion-slide>\r\n        <ion-slide>\r\n          <app-admin-pictures></app-admin-pictures>\r\n        </ion-slide>\r\n      </ion-slides>\r\n    </div>\r\n  </div>\r\n</ion-content>";
 
 /***/ }),
 
@@ -8081,7 +8504,7 @@ module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>Project details</p>\r\n      </ion-button>\r\n      <p class=\"main-title\">Moodboard 1</p>\r\n      <div class=\"p-2 xl:p-0\">\r\n        <ion-card class=\"border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4\">\r\n          <img src=\"../../../../assets/images/landing-img.png\" class=\"h-full w-full\">\r\n        </ion-card>\r\n        <div class=\"mt-16 text-center xl:text-left\">\r\n          <p class=\"text-black-2 text-2xl font-medium\">What's included in moodboard</p>\r\n          <div class=\"mt-6 flex justify-center xl:justify-between flex-wrap\">\r\n            <div *ngFor=\"let p of parts\" class=\"flex flex-col\">\r\n              <ion-card class=\"border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4\">\r\n                <img src={{p.image}} class=\"h-full w-full\">\r\n              </ion-card>\r\n              <p class=\"text-black-2 text-2xl mt-2 font-medium\">{{p.name}}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Edit moodboard</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn\" routerLink=\"/contact-designer\" routerDirection=\"root\">Contact designer</ion-button>\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Contact craftsman</ion-button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<!-- <ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>Project details</p>\r\n      </ion-button>\r\n      <p class=\"main-title\">{{currentMoodboard.name}</p>\r\n      <div class=\"p-2 xl:p-0\">\r\n        <ion-card class=\"border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4\">\r\n          <img src={{currentMoodboard.style.styleImages[0].path}} class=\"h-full w-full\">\r\n        </ion-card>\r\n        <div class=\"mt-16 text-center xl:text-left\">\r\n          <p class=\"text-black-2 text-2xl font-medium\">What's included in moodboard</p>\r\n          <div class=\"mt-6 flex justify-center xl:justify-between flex-wrap\">\r\n            <div *ngFor=\"let mbPart of currentMoodboard\" class=\"flex flex-col\">\r\n              <ion-card class=\"border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4\">\r\n                <img src={{mbPart.styleImages[0].path}} class=\"h-full w-full\">\r\n              </ion-card>\r\n              <p class=\"text-black-2 text-2xl mt-2 font-medium\">{{mbPart.name}}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Edit moodboard</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn\" routerLink=\"/contact-designer\" routerDirection=\"root\">Contact designer</ion-button>\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Contact craftsman</ion-button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content> -->\r\n\r\n\r\n<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>Project details</p>\r\n      </ion-button>\r\n      <p class=\"main-title\">{{currentMoodboard.name}}</p>\r\n      <div class=\"p-2 xl:p-0\">\r\n        <ion-card class=\"border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4\">\r\n          <img src=\"{{currentMoodboard.style.styleImages[1].path}}\" class=\"h-full w-full\">\r\n        </ion-card>\r\n        \r\n        <div class=\"mt-16 text-center xl:text-left\">\r\n          <p class=\"text-black-2 text-2xl font-medium\">What's included in moodboard</p>\r\n          <div class=\"mt-6 flex justify-center xl:justify-between flex-wrap\">\r\n            <div *ngFor=\"let material of currentMoodboard.materials\" class=\"flex flex-col\">\r\n              <ion-card class=\"border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4\">\r\n                <img src=\"{{material.imagePath}}\" class=\"h-full w-full\">\r\n              </ion-card>\r\n              <p class=\"text-black-2 text-2xl mt-2 font-medium\">{{material.name}}</p>\r\n            </div>\r\n            <div *ngFor=\"let product of currentMoodboard.products\" class=\"flex flex-col\">\r\n              <ion-card class=\"border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4\">\r\n                <img src=\"{{product.imagePath}}\" class=\"h-full w-full\">\r\n              </ion-card>\r\n              <p class=\"text-black-2 text-2xl mt-2 font-medium\">{{product.name}}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40\">\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Edit moodboard</ion-button>\r\n          <ion-button fill=\"clear\" class=\"primary-btn\" routerLink=\"/contact-designer\" routerDirection=\"root\">Contact designer</ion-button>\r\n          <ion-button fill=\"clear\" class=\"secondary-btn\">Contact craftsman</ion-button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -8092,7 +8515,7 @@ module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <p class=\"main-title\">My intiri</p>\r\n      <ion-row class=\"mt-3\">\r\n        <ion-col size=\"12\" size-xl=\"8\" class=\"p-2 xl:p-0 xl:pt-6\">\r\n          <div *ngIf=\"projects.length > 0\">\r\n            <div class=\"flex justify-between items-center \">\r\n              <p class=\"text-2xl font-medium\">Latest project</p>\r\n              <div>\r\n                <ion-button fill=\"clear\" class=\"text-black\" (click)=\"prev()\">\r\n                  <ion-icon name=\"arrow-back\" class=\"h-6 w-6\"></ion-icon>\r\n                </ion-button>\r\n                <ion-button fill=\"clear\" class=\"text-black\" (click)=\"next()\">\r\n                  <ion-icon name=\"arrow-forward\" class=\"h-6 w-6\"></ion-icon>\r\n                </ion-button>\r\n              </div>\r\n            </div>\r\n            <div class=\"flex flex-col xl:flex-row xl:justify-between m-0 mt-4 mb-2\">\r\n              <ion-card class=\"w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 shadow-none p-4\">\r\n                <img src=\"{{projects[projects.length-1].projectMoodboards[0].style.styleImages[1].path}}\" class=\"w-full h-full object-cover\">\r\n              </ion-card>\r\n              <div class=\"w-full xl:w-[370px] h-[350px] mt-5 xl:mt-0\">\r\n                <ion-slides #slides [options]=\"options\" class=\"p-0 m-0\">\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Colors</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let palette of projects[projects.length-1].projectMoodboards[0].colorPalettes\" [ngStyle]=\"{background: palette.mainColor}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Material</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let item of projects[projects.length-1].projectMoodboards[0].materials\" [ngStyle]=\"{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Furniture</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let item of projects[projects.length-1].projectMoodboards[0].products\" [ngStyle]=\"{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                </ion-slides>\r\n              </div>\r\n            </div>\r\n            <div class=\"flex items-center justify-start\">\r\n              <p class=\"text-black-2 text-2xl font-medium\">{{projects[projects.length-1].name}}</p>\r\n              <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n                <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n              </ion-button>\r\n            </div>\r\n            <div>\r\n              <p class=\"text-black-3 text-lg\">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>\r\n            </div>\r\n          </div>\r\n          <div class=\"mt-16\">\r\n            <p class=\"text-2xl font-medium text-black-2\">All projects</p>\r\n            <div class=\"flex flex-wrap justify-between\">\r\n              <div *ngFor=\"let project of projects\">\r\n                <ion-card class=\"w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 mb-2 shadow-none p-4\">\r\n                  <img src=\"{{project.projectMoodboards[0].style.styleImages[0].path}}\" class=\"w-full h-full\">\r\n                </ion-card>\r\n                <div class=\"flex items-center justify-start\">\r\n                  <p class=\"text-black-2 text-2xl font-medium\">{{project.name}}</p>\r\n                  <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n                    <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n                  </ion-button>\r\n                </div>\r\n                <div>\r\n                  <p class=\"text-black-3 text-lg\">1 moodboard / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col size=\"12\" size-xl=\"4\" class=\"xl:pl-4\">\r\n          <div class=\"h-full bg-light rounded-2xl pl-7 pt-6\">\r\n            <p class=\"text-2xl font-medium\">Intiri news</p>\r\n            <div *ngFor=\"let n of news\" class=\"flex justify-start mt-5\">\r\n              <img src={{n.image}} class=\"w-14 h-14 rounded-2xl\">\r\n              <div class=\"ml-5\">\r\n                <p class=\"text-lg font-medium\">{{n.name}}</p>\r\n                <p class=\"text-lg text-black-2\">{{n.news}}</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <div class=\"flex justify-between\">\r\n        <p class=\"main-title\">My intiri</p>\r\n        <ion-button fill=\"clear\" (click)=\"openShare()\">\r\n          <ion-icon name=\"share-social\" class=\"w-10 h-10\"></ion-icon>\r\n        </ion-button>\r\n      </div>\r\n      <ion-row class=\"mt-3\">\r\n        <ion-col size=\"12\" size-xl=\"8\" class=\"p-2 xl:p-0 xl:pt-6\">\r\n          <div *ngIf=\"projects.length > 0\">\r\n            <div class=\"flex justify-between items-center \">\r\n              <p class=\"text-2xl font-medium\">Latest project</p>\r\n              <div>\r\n                <ion-button fill=\"clear\" class=\"text-black\" (click)=\"prev()\">\r\n                  <ion-icon name=\"arrow-back\" class=\"h-6 w-6\"></ion-icon>\r\n                </ion-button>\r\n                <ion-button fill=\"clear\" class=\"text-black\" (click)=\"next()\">\r\n                  <ion-icon name=\"arrow-forward\" class=\"h-6 w-6\"></ion-icon>\r\n                </ion-button>\r\n              </div>\r\n            </div>\r\n            <div class=\"flex flex-col xl:flex-row xl:justify-between m-0 mt-4 mb-2\">\r\n              <ion-card class=\"w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 shadow-none p-4\">\r\n                <img src=\"{{projects[projects.length-1].projectMoodboards[0].style.styleImages[1].path}}\" class=\"w-full h-full object-cover\">\r\n              </ion-card>\r\n              <div class=\"w-full xl:w-[370px] h-[350px] mt-5 xl:mt-0\">\r\n                <ion-slides #slides [options]=\"options\" class=\"p-0 m-0\">\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Colors</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let palette of projects[projects.length-1].projectMoodboards[0].colorPalettes\" [ngStyle]=\"{background: palette.mainColor}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Material</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let item of projects[projects.length-1].projectMoodboards[0].materials\" [ngStyle]=\"{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                  <ion-slide>\r\n                    <ion-card class=\"w-[170px] h-[350px] border rounded-2xl border-gray-400 m-0 shadow-none p-4\">\r\n                      <p class=\"mt-2 text-lg text-black-1 text-center\">Furniture</p>\r\n                      <section  class=\"max-h-[280px] overflow-auto\">\r\n                        <div *ngFor=\"let item of projects[projects.length-1].projectMoodboards[0].products\" [ngStyle]=\"{background: 'url(' + normalizeSlashes(item.imagePath) + ')'}\" class=\"img-settings\"></div>\r\n                      </section>\r\n                    </ion-card>\r\n                  </ion-slide>\r\n                </ion-slides>\r\n              </div>\r\n            </div>\r\n            <div class=\"flex items-center justify-start\">\r\n              <p class=\"text-black-2 text-2xl font-medium\">{{projects[projects.length-1].name}}</p>\r\n              <!-- <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"/project-details\" routerDirection=\"root\">\r\n                <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n              </ion-button> -->\r\n              <ion-button fill=\"clear\" class=\"text-black\" (click)=\"goToProjectDetails(projects[projects.length-1])\">\r\n                <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n              </ion-button>\r\n            </div>\r\n            <div>\r\n              <p class=\"text-black-3 text-lg\">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>\r\n            </div>\r\n          </div>\r\n          <div class=\"mt-16\">\r\n            <p class=\"text-2xl font-medium text-black-2\">All projects</p>\r\n            <div class=\"flex flex-wrap justify-between\">\r\n              <div *ngFor=\"let project of projects\">\r\n                <ion-card class=\"w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 mb-2 shadow-none p-4\">\r\n                  <img src=\"{{project.projectMoodboards[0].style.styleImages[0].path}}\" class=\"w-full h-full\">\r\n                </ion-card>\r\n                <div class=\"flex items-center justify-start\">\r\n                  <p class=\"text-black-2 text-2xl font-medium\">{{project.name}}</p>\r\n                  <!-- <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"['/project-details', {{project}}]\" routerDirection=\"root\">\r\n                    <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n                  </ion-button> -->\r\n                  <ion-button fill=\"clear\" class=\"text-black\" (click)=\"goToProjectDetails(project)\">\r\n                    <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n                  </ion-button>\r\n                </div>\r\n                <div>\r\n                  <p class=\"text-black-3 text-lg\">1 moodboard / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n        <ion-col size=\"12\" size-xl=\"4\" class=\"xl:pl-4\">\r\n          <div class=\"h-full bg-light rounded-2xl pl-7 pt-6\">\r\n            <p class=\"text-2xl font-medium\">Intiri news</p>\r\n            <div *ngFor=\"let n of news\" class=\"flex justify-start mt-5\">\r\n              <img src={{n.image}} class=\"w-14 h-14 rounded-2xl\">\r\n              <div class=\"ml-5\">\r\n                <p class=\"text-lg font-medium\">{{n.name}}</p>\r\n                <p class=\"text-lg text-black-2\">{{n.news}}</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -8103,7 +8526,7 @@ module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <ion-grid class=\"main-container\">\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-xl=\"3\">\r\n          <app-step-picker\r\n            (changeStep)=\"goToStep($event)\"\r\n            [canChangeToStep]=\"canChangeToStep\"\r\n            [currentStepNo]=\"currentStepNo\"\r\n            [project]=\"project\"\r\n            [steps]=\"steps\"\r\n          ></app-step-picker>\r\n        </ion-col>\r\n        <ion-col size=\"12\" size-xl=\"9\">\r\n          <app-new-project-step\r\n            (toggleSelection)=\"toggleItem($event)\"\r\n            [project]=\"project\"\r\n            [stepsOrder]=\"stepsOrder\"\r\n            [currentStepNo]=\"currentStepNo\"\r\n            [currentStep]=\"steps[currentStepNo]\"\r\n          ></app-new-project-step>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col offset-xl=\"3\">\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] !== 'final'\"\r\n              class=\"secondary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo-1)\"\r\n              (click)=\"backStep()\"\r\n              >Back</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] !== 'final'\"\r\n              class=\"primary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo+1)\"\r\n              (click)=\"nextStep()\"\r\n              >Next</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] === 'final'\"\r\n              class=\"secondary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo-1)\"\r\n              routerLink=\"/customize-moodboard\"\r\n              routerDirection=\"root\"\r\n              >Customize moodboard</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] === 'final'\"\r\n              class=\"primary-btn\"\r\n              (click)=\"saveProject(); openFinalModal()\"\r\n              >Finish</ion-button\r\n            >\r\n          </ion-buttons>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <ion-grid class=\"main-container\">\r\n      <ion-row>\r\n        <ion-col size=\"12\" size-xl=\"3\">\r\n          <app-step-picker\r\n            (changeStep)=\"goToStep($event)\"\r\n            [canChangeToStep]=\"canChangeToStep\"\r\n            [currentStepNo]=\"currentStepNo\"\r\n            [project]=\"project\"\r\n            [steps]=\"steps\"\r\n          ></app-step-picker>\r\n        </ion-col>\r\n        <ion-col size=\"12\" size-xl=\"9\">\r\n          <app-new-project-step\r\n            (toggleSelection)=\"toggleItem($event)\"\r\n            [project]=\"project\"\r\n            [stepsOrder]=\"stepsOrder\"\r\n            [currentStepNo]=\"currentStepNo\"\r\n            [currentStep]=\"steps[currentStepNo]\"\r\n          ></app-new-project-step>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col offset-xl=\"3\">\r\n          <ion-buttons class=\"justify-center\">\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] !== 'final'\"\r\n              class=\"secondary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo-1)\"\r\n              (click)=\"backStep()\"\r\n              >Back</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] !== 'final'\"\r\n              class=\"primary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo+1)\"\r\n              (click)=\"nextStep()\"\r\n              >Next</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] === 'final'\"\r\n              class=\"secondary-btn\"\r\n              [class.disabled]=\"!canChangeToStep(currentStepNo-1)\"\r\n              routerLink=\"/customize-moodboard\"\r\n              routerDirection=\"root\"\r\n              >Customize moodboard</ion-button\r\n            >\r\n            <ion-button\r\n              *ngIf=\"steps[currentStepNo]['data'] === 'final'\"\r\n              class=\"primary-btn\"\r\n              (click)=\"saveCurrentProject()\"\r\n              >Finish</ion-button\r\n            >\r\n            \r\n\r\n          </ion-buttons>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 
@@ -8147,7 +8570,7 @@ module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/my-intiri\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>My Intiri</p>\r\n      </ion-button>\r\n      <p class=\"main-title\">Skandinavian bright</p>\r\n      <div class=\"mt-7 flex flex-wrap justify-between p-2 xl:p-0\">\r\n        <div *ngFor=\"let mb of moodboards\">\r\n          <ion-card class=\"h-[350px] w-full xl:w-[370px] border border-black rounded-2xl m-0 mt-5 mb-2 shadow-none p-4\">\r\n            <img src={{mb.image}} class=\"w-full h-full\">\r\n          </ion-card>\r\n          <div class=\"flex items-center justify-start\">\r\n            <p class=\"text-black-2 text-2xl font-medium\">{{mb.name}}</p>\r\n            <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"/moodboard-details\" routerDirection=\"root\">\r\n              <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n            </ion-button>\r\n          </div>\r\n          <div>\r\n            <p class=\"text-black-3 text-lg\">{{mb.pieces}} pieces / {{mb.updated}} ago</p>\r\n          </div>\r\n        </div>\r\n        <ion-card class=\"h-[350px] w-[370px] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-5 p-4 flex justify-center items-center flex-col\">\r\n          <ion-icon name=\"add\" class=\"w-20 h-20\"></ion-icon>\r\n          <p class=\"text-lg font-medium\">Add new moodboard</p>\r\n        </ion-card>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<!-- <ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/my-intiri\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>My Intiri</p>\r\n      </ion-button>\r\n      <p class=\"main-title\">Skandinavian bright</p>\r\n      <div class=\"mt-7 flex flex-wrap justify-between p-2 xl:p-0\">\r\n        <div *ngFor=\"let mb of moodboards\">\r\n          <ion-card class=\"h-[350px] w-full xl:w-[370px] border border-black rounded-2xl m-0 mt-5 mb-2 shadow-none p-4\">\r\n            <img src={{mb.image}} class=\"w-full h-full\">\r\n          </ion-card>\r\n          <div class=\"flex items-center justify-start\">\r\n            <p class=\"text-black-2 text-2xl font-medium\">{{mb.name}}</p>\r\n            <ion-button fill=\"clear\" class=\"text-black\" routerLink=\"/moodboard-details\" routerDirection=\"root\">\r\n              <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n            </ion-button>\r\n          </div>\r\n          <div>\r\n            <p class=\"text-black-3 text-lg\">{{mb.pieces}} pieces / {{mb.updated}} ago</p>\r\n          </div>\r\n        </div>\r\n        <ion-card class=\"h-[350px] w-[370px] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-5 p-4 flex justify-center items-center flex-col\">\r\n          <ion-icon name=\"add\" class=\"w-20 h-20\" routerLink=\"/new-project\"></ion-icon>\r\n          <p class=\"text-lg font-medium\">Add new moodboard</p>\r\n        </ion-card>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content> -->\r\n\r\n<ion-content>\r\n  <div id=\"home\">\r\n    <app-header></app-header>\r\n    <div class=\"main-container\">\r\n      <ion-button fill=\"clear\" class=\"back-btn\" routerLink=\"/my-intiri\" routerDirection=\"root\">\r\n        <ion-icon name=\"arrow-back\" class=\"w-6 h-6\" slot=\"start\"></ion-icon>\r\n        <p>My Intiri</p>\r\n      </ion-button>\r\n      <!-- <p class=\"main-title\">Skandinavian bright</p> -->\r\n      <p class=\"main-title\">{{currentProject.name}}</p>\r\n      <div class=\"mt-7 flex flex-wrap justify-between p-2 xl:p-0\">\r\n        <div *ngFor=\"let mb of currentProject.projectMoodboards\">\r\n          <ion-card class=\"h-[350px] w-full xl:w-[370px] border border-black rounded-2xl m-0 mt-5 mb-2 shadow-none p-4\">\r\n            <img src=\"{{mb.style.styleImages[0].path}}\" class=\"w-full h-full\">\r\n          </ion-card>\r\n          <div class=\"flex items-center justify-start\">\r\n            <p class=\"text-black-2 text-2xl font-medium\">{{mb.name}}</p>\r\n            <ion-button fill=\"clear\" class=\"text-black\" (click)=\"goToMoodboardDetails(mb)\">\r\n              <ion-icon name=\"arrow-forward\" class=\"h-6 w-6 text-black-2\"></ion-icon>\r\n            </ion-button>\r\n          </div>\r\n          <div>\r\n            <!-- <p class=\"text-black-3 text-lg\">{{mb.pieces}} pieces / {{mb.updated}} ago</p> -->\r\n          </div>\r\n        </div>\r\n\r\n        <ion-card class=\"h-[350px] w-[370px] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-5 p-4 flex justify-center items-center flex-col\">\r\n          <ion-icon name=\"add\" class=\"w-20 h-20\" (click)=\"addMoodboardToProject()\"></ion-icon>\r\n          <p class=\"text-lg font-medium\">Add new moodboard</p>\r\n        </ion-card>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ }),
 

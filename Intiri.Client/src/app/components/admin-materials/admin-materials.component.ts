@@ -11,16 +11,16 @@ import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-ma
 })
 export class AdminMaterialsComponent implements OnInit {
 
-  materials: [];
-  materialTypes: [];
+  materials: any[];
+  materialTypes: any[];
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private materialService: MaterialService) { }
 
   ngOnInit() {
-    this.materialService.getMaterials().subscribe((res: []) => {
+    this.materialService.getMaterials().subscribe((res: any[]) => {
       this.materials = res;
     })
-    this.materialService.getMaterialTypes().subscribe((res: []) => {
+    this.materialService.getMaterialTypes().subscribe((res: any[]) => {
       this.materialTypes = res;
     })
   }

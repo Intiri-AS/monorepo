@@ -6,11 +6,8 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
-using Intiri.API.Models.DTO.OutputDTO.Room;
-using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
-using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
@@ -44,8 +41,8 @@ namespace Intiri.API.Controllers
 
 			foreach (Project project in projects)
 			{
-				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.ProjectMoodboards.First().Id);
-				project.ProjectMoodboards.Add(moodboard);
+				IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
+				project.ProjectMoodboards = moodboards.ToArray();
 			}
 
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
@@ -70,6 +67,29 @@ namespace Intiri.API.Controllers
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
 			return Ok(projectOut);
+		}
+
+		[HttpPost("addMoodboard")]
+		public async Task<ActionResult<int>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetByID(moodboardProjectIn.ProjectId);
+
+			if (project == null)
+			{
+				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
+			}
+
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.MoodboardId);
+			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+
+			project.ProjectMoodboards.Add(newMoodboard);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<ProjectOutDTO>(project));
+			}
+
+			return BadRequest("Problem occured while adding moodboard to project");
 		}
 
 		[HttpPost("add")]
@@ -101,7 +121,9 @@ namespace Intiri.API.Controllers
 			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			_unitOfWork.ProjectRepository.Insert(project);
+
 			project.ProjectMoodboards.Add(newMoodboard);
+			user.CreatedProjects.Add(project);
 
 			if (await _unitOfWork.SaveChanges())
 			{
@@ -133,7 +155,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("moodboard-match")]
 		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] ProjectInDTO projectIn)
 		{
-			IEnumerable<Moodboard> roomMoodboards = 
+			IEnumerable<Moodboard> roomMoodboards =
 				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(projectIn.RoomId);
 
 			Dictionary<Moodboard, double> moodboardToMatchPercentage = new();
@@ -147,7 +169,7 @@ namespace Intiri.API.Controllers
 
 				int styleImagesCount = moodboard.Style.StyleImages.Count();
 
-				double matchPercentage = (int)(100 *(double)styleImageMatches / styleImagesCount);
+				double matchPercentage = (int)(100 * (double)styleImageMatches / styleImagesCount);
 
 				moodboardToMatchPercentage.Add(moodboard, matchPercentage);
 			}
@@ -165,7 +187,7 @@ namespace Intiri.API.Controllers
 			};
 			foreach (KeyValuePair<Moodboard, double> match in topMatches)
 			{
-				Moodboard moodboard = 
+				Moodboard moodboard =
 					await _unitOfWork.MoodboardRepository.GetFullMoodboardById(match.Key.Id);
 
 				if (isFirst)

@@ -39,7 +39,7 @@ import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboar
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'my-intiri',
+    redirectTo: 'landing',
     pathMatch: 'full'
   },
   {

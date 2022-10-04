@@ -50,8 +50,6 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Project>> GetProjectsBasicInfoForUser(int userId)
 		{
-			//return (await Get(project => project.EndUserId == userId, includeProperties: "ProjectMoodboards"));
-
 			return await _context.Projects
 				.Where(p => p.EndUserId == userId)
 				.Include(p => p.Room)

@@ -11,11 +11,11 @@ import { AddColorModalComponent } from '../modals/add-color-modal/add-color-moda
 })
 export class AdminColorsComponent implements OnInit {
 
-  colorPalettes: [];
+  colorPalettes: any[];
   constructor(public popoverController: PopoverController, private modalController: ModalController, private colorService: ColorService) { }
 
   ngOnInit() {
-    this.colorService.getColorPalettes().subscribe((res: []) => {
+    this.colorService.getColorPalettes().subscribe((res: any[]) => {
       this.colorPalettes = res;
     })
   }
