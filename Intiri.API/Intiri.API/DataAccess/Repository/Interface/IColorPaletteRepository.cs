@@ -1,8 +1,8 @@
-﻿using Intiri.API.Models;
+﻿using Intiri.API.Models.IntiriColor;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IColorPaletteRepository : IRepositoryBase<ColorPalette>
+    public interface IColorPaletteRepository : IRepositoryBase<ColorPalette>
 	{
 		Task<IEnumerable<ColorPalette>> GetColorPalettesAsync();
 		Task<ColorPalette> GetColorPaletteById(int id);

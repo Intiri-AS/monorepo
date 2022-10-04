@@ -1,0 +1,11 @@
+{
+  "LOGIN": {
+    "welcome": "Welcome back",
+    "login": "Login",
+    "login-msg": "Manage your account, create and edit projects, collaborate on design and more.",
+    "phone": "Phone number",
+    "or": "Or",
+    "no-account": "Don't have an account?",
+    "create": "Create an account"
+  }
+}

@@ -1,0 +1,61 @@
+<ion-content>
+  <div id="home">
+    <app-header-admin></app-header-admin>
+    <ion-grid class="main-container">
+      <p class="main-title mb-[34px] pl-2">Add moodboard</p>
+      <ion-row>
+        <ion-col size="12" size-xl="3">
+          <div class="bg-light xl-ion:w-[240px] xl-ion:h-[440px] rounded-lg text-center">
+            <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item pt-[45px]">Room</p>
+            <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">Style</p>
+            <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">Materials</p>
+            <p [class.!text-primary]="currentStepNo == 3" (click)="goToStep(3)" [class.disabled]="!canChangeToStep(3)" class="side-menu-item">Colors</p>
+            <p [class.!text-primary]="currentStepNo == 4" (click)="goToStep(4)" [class.disabled]="!canChangeToStep(4)" class="side-menu-item">Products</p>
+            <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">Moodboard preview</p>
+          </div>
+        </ion-col>
+        <ion-col size="12" size-xl="9">
+          <app-add-moodboard-step
+          (toggleSelection)="toggleItem($event)"
+          [stepsOrder]="stepsOrder"
+          [moodboard]="moodboard"
+          [currentStepNo]="currentStepNo"
+          [currentStep]="steps[currentStepNo]"></app-add-moodboard-step>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-xl="3">
+          <ion-buttons class="justify-center">
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] !== 'final'"
+              class="secondary-btn"
+              (click)="backStep()"
+              [class.disabled]="!canChangeToStep(currentStepNo-1)"
+              >Back</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] !== 'final'"
+              class="primary-btn"
+              (click)="nextStep()"
+              [class.disabled]="!canChangeToStep(currentStepNo+1)"
+              >Next</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] === 'final'"
+              class="secondary-btn"
+              routerLink="/moodboards"
+              routerDirection="root"
+              >Cancel</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] === 'final'"
+              class="primary-btn"
+              (click)="saveMoodboard();"
+              >Save moodboard</ion-button
+            >
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

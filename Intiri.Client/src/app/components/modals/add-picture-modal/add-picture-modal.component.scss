@@ -1,0 +1,10 @@
+.profile-input {
+    @apply mt-4 mx-2 flex-1 px-0 sm:px-[100px]
+}
+ion-input {
+    @apply h-12
+}
+
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4
+}

@@ -2,12 +2,15 @@
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
+using System.ComponentModel.Design;
 using System.Text.Json;
 
 namespace Intiri.API.DataAccess.SeedData
@@ -70,7 +73,8 @@ namespace Intiri.API.DataAccess.SeedData
 			await userManager.AddToRoleAsync(users[0], "Admin");
 			await userManager.AddToRoleAsync(users[1], "InternalDesigner");
 			await userManager.AddToRoleAsync(users[2], "FreeEndUser");
-			await userManager.AddToRoleAsync(users[3], "Partner");
+			await userManager.AddToRoleAsync(users[3], "FreeEndUser");
+			await userManager.AddToRoleAsync(users[4], "Partner");
 		}
 
 		public static async Task SeedStyles(IUnitOfWork unitOfWork)
@@ -232,38 +236,55 @@ namespace Intiri.API.DataAccess.SeedData
 
 		public static async Task SeedProjects(IUnitOfWork unitOfWork)
 		{
-			string projectsData = 
+			string projectsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/ProjectsSeedData.json");
 
-			List<ProjectInDTO> projectInDTOs = 
-				JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
-
-			foreach (ProjectInDTO inDTO in projectInDTOs)
+			List<Project> projects =
+				JsonSerializer.Deserialize<List<Project>>(projectsData);
+			foreach (Project project in projects)
 			{
-				Project project = new()
-				{
-					Name = inDTO.Name,
-					BudgetId = inDTO.BudgetId,
-					StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
-						.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
-					ColorPalette = await unitOfWork.ColorPaletteRepository
-						.SingleOrDefaultAsync(cp => cp.Id == inDTO.ColorPaletteId),
-					Room = await unitOfWork.RoomRepository
-						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
-					Moodboard = await unitOfWork.MoodboardRepository
-						.SingleOrDefaultAsync(m => m.Id == inDTO.MoodboardId)
-				};
 				unitOfWork.ProjectRepository.Insert(project);
+				project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
+				project.Room = await unitOfWork.RoomRepository.GetByID(1);
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(1));
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(2));
+				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(3));
+				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(1));
+				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(3));
+				project.ProjectMoodboards.Add(await unitOfWork.MoodboardRepository.GetByID(2));
 			}
 			await unitOfWork.SaveChanges();
+
+			//List<ProjectInDTO> projectInDTOs =
+			//	JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
+
+			//foreach (ProjectInDTO inDTO in projectInDTOs)
+			//{
+			//	Project project = new()
+			//	{
+			//		Name = inDTO.Name,
+			//		BudgetRate = inDTO.BudgetId,
+			//		EndUser = await unitOfWork.UserRepository.GetByID(inDTO.EndUserId),
+			//		StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
+			//			.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
+			//		ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
+			//			.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
+			//		Room = await unitOfWork.RoomRepository
+			//			.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
+			//		ProjectMoodboards = (ICollection<Moodboard>)await unitOfWork.MoodboardRepository
+			//			.GetMoodboardsByIdsList(inDTO.MoodboardsIds)
+			//	};
+			//	unitOfWork.ProjectRepository.Insert(project);
+			//}
+			//await unitOfWork.SaveChanges();
 		}
 
 		public static async Task SeedMoodboards(IUnitOfWork unitOfWork)
 		{
-			string moodboardsData = 
+			string moodboardsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/MoodboardsSeedData.json");
 
-			List<MoodboardInDTO> moodboardInDTOs = 
+			List<MoodboardInDTO> moodboardInDTOs =
 				JsonSerializer.Deserialize<List<MoodboardInDTO>>(moodboardsData);
 
 			foreach (MoodboardInDTO inDTO in moodboardInDTOs)
@@ -272,14 +293,15 @@ namespace Intiri.API.DataAccess.SeedData
 				{
 					Name = inDTO.Name,
 					Description = inDTO.Description,
-					Designer = inDTO.Designer,
+					Designer = await unitOfWork.UserRepository.SingleOrDefaultAsync(u => u.Id == inDTO.DesignerId),
+					IsTemplate = inDTO.IsTemplate,
 					Style = await unitOfWork.StyleRepository
 						.SingleOrDefaultAsync(s => s.Id == inDTO.StyleId),
 					Room = await unitOfWork.RoomRepository
 						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
 					Materials = (ICollection<Material>)await unitOfWork.MaterialRepository
 						.GetMaterialsByIdsListAsync(inDTO.MaterialIds),
-					ColorPalettes = (ICollection<ColorPalette>) await unitOfWork.ColorPaletteRepository
+					ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
 						.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
 					Products = (ICollection<Product>)await unitOfWork.ProductRepository
 						.GetProductsByIdsListAsync(inDTO.ProductIds)

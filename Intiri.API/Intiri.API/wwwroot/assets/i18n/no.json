@@ -1,0 +1,11 @@
+{
+  "LOGIN": {
+    "welcome": "Velkommen tilbake",
+    "login": "Logg Inn",
+    "login-msg": "Administrer kontoen din, opprett og rediger prosjekter, samarbeid om design og mer.",
+    "phone": "Telefonnummer",
+    "or": "Eller",
+    "no-account": "Har du ikke en konto?",
+    "create": "Opprett en konto"
+  }
+}

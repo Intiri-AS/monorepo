@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
-using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;

@@ -1,0 +1,42 @@
+<ion-grid class="px-0 m">
+  <ion-row class="mt-2">
+    <ion-col size="12" size-md="4" size-lg="3">
+      <div class="profile-input">
+        <ion-select interface="popover" placeholder="Search">
+          <ion-select-option value="1">Option 1</ion-select-option>
+          <ion-select-option value="2">Option 2</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    <ion-col offset-md="4" size="12" size-md="3" size-lg="3" class="relative bottom-[29px] w-full">
+      <div class="profile-input justify-end">
+        <div class="w-full">
+          <span class="text-sm text-black-2">Style</span>
+          <ion-select interface="popover" [multiple]="true">
+            <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="12" size-sm="3" size-xl="2">
+      <ion-button (click)="addStyle()" fill="clear" class="primary-btn mt-4">Add style</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="gap-x-[1.65%]">
+    <ion-col *ngFor="let style of (styles$ | async)" size="12" size-sm="5.75" size-xl="2.85">
+      <div class="card">
+        <div class="p-[20px] h-full w-full">
+          <img src="{{style.imagePath == 'path' ? style.styleImages[0].path : style.imagePath}}" class="object-cover !h-full !w-full" alt="Profile Img" />
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <p class="py-2 text-black-2 font-semibold">{{style.name}}</p>
+        <div class="float-right">
+          <button (click)="showSettings($event, style)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

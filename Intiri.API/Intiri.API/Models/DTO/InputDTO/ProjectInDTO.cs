@@ -8,20 +8,20 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public string Name { get; set; }
 
 		[Required]
-		public ICollection<int> StyleImageIds { get; set; }
-
-		[Required]
-		public int ColorPaletteId { get; set; }
-
-		[Required]
 		public int RoomId { get; set; }
 
 		[Required]
-		public int BudgetId { get; set; }
+		public int BudgetRate { get; set; }
 
 		[Required]
 		public RoomDetailsInDTO RoomDetails { get; set; }
 
-		public int MoodboardId { get; set; }
+		[Required]
+		public ICollection<int> StyleImageIds { get; set; }
+
+		[Required]
+		public ICollection<int> ColorPaletteIds { get; set; }
+
+		public ICollection<int> MoodboardIds { get; set; }
 	}
 }

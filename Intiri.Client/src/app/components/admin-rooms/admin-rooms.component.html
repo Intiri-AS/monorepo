@@ -1,0 +1,33 @@
+<ion-grid class="px-0 m">
+  <ion-row class="mt-2">
+    <ion-col size="6" size-xl="3">
+      <div class="profile-input">
+        <ion-select interface="popover" placeholder="Search">
+          <ion-select-option value="1">Option 1</ion-select-option>
+          <ion-select-option value="2">Option 2</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    
+    <ion-col size="6" offset-xl="6.5" size-xl="2.5" class="flex justify-end">
+      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4">Add room</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="gap-x-[1.65%]">
+    <ion-col *ngFor="let room of rooms" size="12" size-sm="5.75" size-xl="2.85">
+      <div class="card">
+        <div class="step-icon-wrapper" >
+          <img src="{{room.imagePath}}" class="step-icon" alt="room-icon"/>
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <p class="py-2 text-black-2 font-semibold">{{room.name}}</p>
+        <div class="float-right">
+          <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -37,5 +37,7 @@
     <Folder Include="Resources\StyleCoverImages\" />
     <Folder Include="Resources\StyleImages\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties dataaccess_4seeddata_4userseeddata_1json__JsonSchema="https://carafe.fm/schema/draft-02/bundle.schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

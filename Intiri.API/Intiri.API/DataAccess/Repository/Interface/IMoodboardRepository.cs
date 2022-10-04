@@ -1,13 +1,17 @@
-﻿using Intiri.API.Models;
+﻿using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IMoodboardRepository: IRepositoryBase<Moodboard>
+    public interface IMoodboardRepository: IRepositoryBase<Moodboard>
 	{
 		Task<IEnumerable<Moodboard>> GetMoodboards();
-		Task<Moodboard> GetFullMoodboardById(int id);
+		Task<Moodboard> GetFullMoodboardById(int moodboardId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids);
 		Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard);
+
+		Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard);
 	}
 }

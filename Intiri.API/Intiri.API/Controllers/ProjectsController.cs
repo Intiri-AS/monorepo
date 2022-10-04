@@ -1,12 +1,17 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Mvc;
@@ -33,15 +38,14 @@ namespace Intiri.API.Controllers
 		#region Public methods
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjects()
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetUserProjects()
 		{
-			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjects();
+			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(User.GetUserId());
 
 			foreach (Project project in projects)
 			{
-				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
-
-				project.Moodboard = moodboard;
+				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.ProjectMoodboards.First().Id);
+				project.ProjectMoodboards.Add(moodboard);
 			}
 
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
@@ -49,14 +53,19 @@ namespace Intiri.API.Controllers
 			return Ok(projectsOut);
 		}
 
+		[HttpGet("lastProject")]
+		public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetUserLastProject()
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetLastProjectForUser(User.GetUserId());
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+
+			return Ok(projectOut);
+		}
+
 		[HttpGet("id/{projectId}")]
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
 			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
-
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(project.Moodboard.Id);
-
-			project.Moodboard = moodboard;
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -73,24 +82,32 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
+			User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+			project.EndUser = user;
+
+			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
+
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
-			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(projectIn.ColorPaletteId);
-			project.ColorPalette = colorPalette;
+			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ColorPaletteIds);
+			project.ColorPalettes = colorPalettes.ToArray();
 
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardId);
-			project.Moodboard = moodboard;
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardIds.FirstOrDefault());
+			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			_unitOfWork.ProjectRepository.Insert(project);
+			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
+
 			return BadRequest("Problem occured while adding project");
 		}
 
@@ -108,7 +125,7 @@ namespace Intiri.API.Controllers
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok($"Succesfully deleted project with Id={projectId}");
+				return Ok();
 			}
 			return BadRequest("Problem occured while deleting the project)");
 		}

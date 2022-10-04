@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 
@@ -9,25 +9,55 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./register.page.scss'],
 })
 
-export class RegisterPage implements OnInit {
+export class RegisterPage {
 
-  registerForm: FormGroup;
-  constructor(private accountService: AccountService, private fb: FormBuilder, private router: Router) {}
+  public registerForm: FormGroup;
+  public isFormSubmited = false;
+  public activeCode = '47';
 
-  ngOnInit(): void {
-    this.intitializeForm();
+  get firstNameErrors() {
+    return this.registerForm.controls.firstName.errors;
   }
 
-  intitializeForm() {
-    this.registerForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      phoneNumber: [''],
+  get lastNameErrors() {
+    return this.registerForm.controls.lastName.errors;
+  }
+
+  get phoneNumberErrors() {
+    return this.registerForm.controls.phoneNumber.errors;
+  }
+
+  constructor(
+    private accountService: AccountService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
+      ])],
     })
   }
 
+  setActiveCode(event) {
+    this.activeCode = event.detail.value;
+  }
+
   register() {
-    this.accountService.register(this.registerForm.value).subscribe(response => {
+    this.isFormSubmited = true;
+    if (!this.registerForm.valid) {
+      return;
+    }
+    const registerModel = {
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      countryCode: this.activeCode,
+      phoneNumber: this.registerForm.value.phoneNumber
+    }
+    this.accountService.register(registerModel).subscribe(response => {
       this.router.navigateByUrl('/sms-verification');
     }, error => {
       console.log(error);

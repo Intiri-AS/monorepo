@@ -48,12 +48,15 @@ namespace Intiri.API.Controllers
 		[HttpPost("register")]
 		public async Task<ActionResult<LoginOutDTO>> Register(RegisterDTO registerDto)
 		{
-			if (await _accountService.IsUserWithPhoneNumberExists(registerDto.PhoneNumber))
+			string fullPhoneNumber = registerDto.CountryCode + registerDto.PhoneNumber;
+
+			if (await _accountService.IsUserWithPhoneNumberExists(fullPhoneNumber))
 			{
 				return BadRequest("Phone number is taken");
 			}
 
 			User user = _mapper.Map<User>(registerDto);
+			user.PhoneNumber = fullPhoneNumber;
 
 			IdentityResult result = await _accountService.CreateUserAsync(user);
 			if (!result.Succeeded)
@@ -77,7 +80,8 @@ namespace Intiri.API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult<LoginOutDTO>> Login(LoginInDTO loginDto)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(loginDto.PhoneNumber);
+			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
+			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
 			
 			if (user == null)
 			{

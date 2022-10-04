@@ -160,7 +160,7 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Internal error: {ex}");
 			}
 
-			return Ok($"Style '{style.Name}' deleted.");
+			return Ok();
 		}
 	}
 }

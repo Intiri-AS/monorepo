@@ -37,37 +37,6 @@ namespace Intiri.API.Migrations
                     b.ToTable("MoodboardColorPalette", (string)null);
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.ColorPalette", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("MainColor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShadeColorDark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShadeColorLight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShadeColorMedium")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ColorPalettes");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.Color", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +54,42 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.IntiriColor.ColorPalette", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("MainColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShadeColorDark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShadeColorLight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShadeColorMedium")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ColorPalettes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.Material", b =>
@@ -133,7 +138,7 @@ namespace Intiri.API.Migrations
                     b.ToTable("MaterialTypes");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Moodboard", b =>
+            modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,28 +149,38 @@ namespace Intiri.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Designer")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DesignerId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsTemplate")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SourceMoodboardId")
                         .HasColumnType("int");
 
                     b.Property<int?>("StyleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("DesignerId");
+
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("RoomId");
 
-                    b.HasIndex("StyleId");
+                    b.HasIndex("SourceMoodboardId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("StyleId");
 
                     b.ToTable("Moodboards");
                 });
@@ -224,7 +239,7 @@ namespace Intiri.API.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Project", b =>
+            modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,16 +247,13 @@ namespace Intiri.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BudgetId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ColorPaletteId")
+                    b.Property<int>("BudgetRate")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MoodboardId")
+                    b.Property<int>("EndUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -253,20 +265,16 @@ namespace Intiri.API.Migrations
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorPaletteId");
-
-                    b.HasIndex("MoodboardId");
+                    b.HasIndex("EndUserId");
 
                     b.HasIndex("RoomDetailsId");
 
                     b.HasIndex("RoomId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Projects");
                 });
@@ -331,23 +339,7 @@ namespace Intiri.API.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Room.RoomType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RoomTypes");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.RoomDetails", b =>
+            modelBuilder.Entity("Intiri.API.Models.Room.RoomDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -364,6 +356,22 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RoomDetails");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Room.RoomType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomTypes");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Style.Style", b =>
@@ -660,17 +668,24 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("ColorPaletteMoodboard", b =>
                 {
-                    b.HasOne("Intiri.API.Models.ColorPalette", null)
+                    b.HasOne("Intiri.API.Models.IntiriColor.ColorPalette", null)
                         .WithMany()
                         .HasForeignKey("ColorPalettesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Intiri.API.Models.Moodboard", null)
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", null)
                         .WithMany()
                         .HasForeignKey("MoodboardsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.IntiriColor.ColorPalette", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Project.Project", null)
+                        .WithMany("ColorPalettes")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.Material", b =>
@@ -684,21 +699,35 @@ namespace Intiri.API.Migrations
                     b.Navigation("MaterialType");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Moodboard", b =>
+            modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
                 {
+                    b.HasOne("Intiri.API.Models.User", "Designer")
+                        .WithMany("CreatedMoodboards")
+                        .HasForeignKey("DesignerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Intiri.API.Models.Project.Project", null)
+                        .WithMany("ProjectMoodboards")
+                        .HasForeignKey("ProjectId");
+
                     b.HasOne("Intiri.API.Models.Room.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
+
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "SourceMoodboard")
+                        .WithMany()
+                        .HasForeignKey("SourceMoodboardId");
 
                     b.HasOne("Intiri.API.Models.Style.Style", "Style")
                         .WithMany()
                         .HasForeignKey("StyleId");
 
-                    b.HasOne("Intiri.API.Models.User", null)
-                        .WithMany("CreatedMoodboards")
-                        .HasForeignKey("UserId");
+                    b.Navigation("Designer");
 
                     b.Navigation("Room");
+
+                    b.Navigation("SourceMoodboard");
 
                     b.Navigation("Style");
                 });
@@ -721,17 +750,15 @@ namespace Intiri.API.Migrations
                     b.Navigation("Style");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Project", b =>
+            modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
                 {
-                    b.HasOne("Intiri.API.Models.ColorPalette", "ColorPalette")
-                        .WithMany()
-                        .HasForeignKey("ColorPaletteId");
+                    b.HasOne("Intiri.API.Models.User", "EndUser")
+                        .WithMany("CreatedProjects")
+                        .HasForeignKey("EndUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Intiri.API.Models.Moodboard", "Moodboard")
-                        .WithMany()
-                        .HasForeignKey("MoodboardId");
-
-                    b.HasOne("Intiri.API.Models.RoomDetails", "RoomDetails")
+                    b.HasOne("Intiri.API.Models.Room.RoomDetails", "RoomDetails")
                         .WithMany()
                         .HasForeignKey("RoomDetailsId");
 
@@ -739,13 +766,7 @@ namespace Intiri.API.Migrations
                         .WithMany()
                         .HasForeignKey("RoomId");
 
-                    b.HasOne("Intiri.API.Models.User", null)
-                        .WithMany("CreatedProjects")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("ColorPalette");
-
-                    b.Navigation("Moodboard");
+                    b.Navigation("EndUser");
 
                     b.Navigation("Room");
 
@@ -801,7 +822,7 @@ namespace Intiri.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Intiri.API.Models.Moodboard", null)
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", null)
                         .WithMany()
                         .HasForeignKey("MoodboardsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -846,7 +867,7 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("MoodboardProduct", b =>
                 {
-                    b.HasOne("Intiri.API.Models.Moodboard", null)
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", null)
                         .WithMany()
                         .HasForeignKey("MoodboardsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -861,7 +882,7 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("ProjectStyleImage", b =>
                 {
-                    b.HasOne("Intiri.API.Models.Project", null)
+                    b.HasOne("Intiri.API.Models.Project.Project", null)
                         .WithMany()
                         .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -882,6 +903,13 @@ namespace Intiri.API.Migrations
             modelBuilder.Entity("Intiri.API.Models.Product.ProductType", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
+                {
+                    b.Navigation("ColorPalettes");
+
+                    b.Navigation("ProjectMoodboards");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Role", b =>
