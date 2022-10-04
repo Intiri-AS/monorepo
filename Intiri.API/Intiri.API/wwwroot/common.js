@@ -226,13 +226,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "a": () => (/* binding */ attachComponent),
 /* harmony export */   "d": () => (/* binding */ detachComponent)
 /* harmony export */ });
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/common.js
 /* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var _helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-2914b3be.js */ 4244);
-=======
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/en-US/common.js
 
 
 /*!
@@ -241,11 +236,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const attachComponent = /*#__PURE__*/function () {
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/common.js
   var _ref = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
-=======
-  var _ref = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/en-US/common.js
     var _a;
 
     if (delegate) {
@@ -294,11 +285,7 @@ const CoreDelegate = () => {
   let Reference;
 
   const attachViewToDom = /*#__PURE__*/function () {
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/common.js
     var _ref2 = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
-=======
-    var _ref2 = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/en-US/common.js
       var _a, _b;
 
       BaseComponent = parentElement;
@@ -631,13 +618,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "r": () => (/* binding */ resetContentScrollY),
 /* harmony export */   "s": () => (/* binding */ scrollToTop)
 /* harmony export */ });
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/common.js
 /* harmony import */ var C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
 /* harmony import */ var _helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-2914b3be.js */ 4244);
-=======
-/* harmony import */ var C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var _helpers_4d272360_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-4d272360.js */ 9158);
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/en-US/common.js
 /* harmony import */ var _index_c4b11676_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-c4b11676.js */ 9273);
 
 
@@ -673,11 +655,7 @@ const isIonContent = el => el && el.tagName === ION_CONTENT_TAG_NAME;
 
 
 const getScrollElement = /*#__PURE__*/function () {
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/common.js
   var _ref = (0,C_WORK_Intiri_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
-=======
-  var _ref = (0,C_Users_vladi_Desktop_Intiri_backend_Intiri_Client_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (el) {
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/en-US/common.js
     if (isIonContent(el)) {
       yield new Promise(resolve => (0,_helpers_2914b3be_js__WEBPACK_IMPORTED_MODULE_1__.c)(el, resolve));
       return el.getScrollElement();

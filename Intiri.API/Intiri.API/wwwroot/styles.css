@@ -743,9 +743,6 @@ select {
 .invisible {
   visibility: hidden;
 }
-.static {
-  position: static;
-}
 .fixed {
   position: fixed;
 }
@@ -876,20 +873,6 @@ select {
   margin-left: 20px;
   margin-right: 20px;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.mt-3 {
-  margin-top: 0.75rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
-.mt-4 {
-  margin-top: 1rem;
-=======
-.mb-\[6\%\] {
-  margin-bottom: 6%;
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
-}
 .mb-\[6\%\] {
   margin-bottom: 6%;
 }
@@ -929,15 +912,6 @@ select {
 .ml-4 {
   margin-left: 1rem;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.mt-\[30px\] {
-  margin-top: 30px;
-}
-.mb-\[10px\] {
-  margin-bottom: 10px;
-}
-=======
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -995,6 +969,12 @@ select {
 .mt-\[65px\] {
   margin-top: 65px;
 }
+.mt-\[7px\] {
+  margin-top: 7px;
+}
+.ml-\[3px\] {
+  margin-left: 3px;
+}
 .mt-\[90px\] {
   margin-top: 90px;
 }
@@ -1007,12 +987,9 @@ select {
 .mt-6 {
   margin-top: 1.5rem;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
 .mb-\[34px\] {
   margin-bottom: 34px;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .mb-\[30px\] {
   margin-bottom: 30px;
 }
@@ -1070,6 +1047,12 @@ select {
 .mt-\[14px\] {
   margin-top: 14px;
 }
+.mt-\[40px\] {
+  margin-top: 40px;
+}
+.mt-\[75px\] {
+  margin-top: 75px;
+}
 .mb-\[15px\] {
   margin-bottom: 15px;
 }
@@ -1094,23 +1077,12 @@ select {
 .hidden {
   display: none;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.h-\[70px\] {
-  height: 70px;
-}
-.h-6 {
-  height: 1.5rem;
-}
-=======
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .h-full {
   height: 100%;
 }
 .h-\[30\%\] {
   height: 30%;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
 .h-\[320px\] {
   height: 320px;
 }
@@ -1123,7 +1095,6 @@ select {
 .h-6 {
   height: 1.5rem;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .\!h-full {
   height: 100% !important;
 }
@@ -1223,6 +1194,9 @@ select {
 .h-\[45px\] {
   height: 45px;
 }
+.h-10 {
+  height: 2.5rem;
+}
 .h-\[77px\] {
   height: 77px;
 }
@@ -1231,6 +1205,9 @@ select {
 }
 .h-20 {
   height: 5rem;
+}
+.h-\[80px\] {
+  height: 80px;
 }
 .h-\[270px\] {
   height: 270px;
@@ -1250,20 +1227,11 @@ select {
 .min-h-\[580px\] {
   min-height: 580px;
 }
-.w-full {
-  width: 100%;
-}
-.w-\[70px\] {
-  width: 70px;
-}
-.w-6 {
-  width: 1.5rem;
-}
 .w-\[47\.5\%\] {
   width: 47.5%;
 }
-.\!w-full {
-  width: 100% !important;
+.w-full {
+  width: 100%;
 }
 .w-\[70px\] {
   width: 70px;
@@ -1368,6 +1336,9 @@ select {
 .w-\[45px\] {
   width: 45px;
 }
+.w-10 {
+  width: 2.5rem;
+}
 .w-14 {
   width: 3.5rem;
 }
@@ -1379,6 +1350,9 @@ select {
 }
 .w-20 {
   width: 5rem;
+}
+.w-\[80px\] {
+  width: 80px;
 }
 .min-w-full {
   min-width: 100%;
@@ -1611,18 +1585,6 @@ select {
 .object-scale-down {
   object-fit: scale-down;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.p-2 {
-  padding: 0.5rem;
-}
-.p-\[20px\] {
-  padding: 20px;
-}
-.p-4 {
-  padding: 1rem;
-}
-=======
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .p-3 {
   padding: 0.75rem;
 }
@@ -1695,12 +1657,13 @@ select {
   padding-top: 22px;
   padding-bottom: 22px;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
+.px-\[65px\] {
+  padding-left: 65px;
+  padding-right: 65px;
+}
 .pt-5 {
   padding-top: 1.25rem;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -1743,12 +1706,9 @@ select {
 .\!pr-\[48px\] {
   padding-right: 48px !important;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
 .\!pb-8 {
   padding-bottom: 2rem !important;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .\!pr-2 {
   padding-right: 0.5rem !important;
 }
@@ -1782,27 +1742,10 @@ select {
 .font-\[\'Allison\'\] {
   font-family: 'Allison';
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-=======
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1815,7 +1758,6 @@ select {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -1847,30 +1789,20 @@ select {
 .text-\[60px\] {
   font-size: 60px;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.font-medium {
-  font-weight: 500;
+.text-\[13px\] {
+  font-size: 13px;
 }
-.font-semibold {
-  font-weight: 600;
-=======
 .font-bold {
   font-weight: 700;
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 }
 .font-normal {
   font-weight: 400;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.font-bold {
-  font-weight: 700;
-=======
 .font-medium {
   font-weight: 500;
 }
 .font-semibold {
   font-weight: 600;
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 }
 .font-extrabold {
   font-weight: 800;
@@ -1878,17 +1810,9 @@ select {
 .uppercase {
   text-transform: uppercase;
 }
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-.leading-5 {
-  line-height: 1.25rem;
+.normal-case {
+  text-transform: none;
 }
-.leading-\[26px\] {
-  line-height: 26px;
-}
-.leading-\[29px\] {
-  line-height: 29px;
-}
-=======
 .leading-\[29px\] {
   line-height: 29px;
 }
@@ -1898,7 +1822,6 @@ select {
 .leading-\[26px\] {
   line-height: 26px;
 }
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
 .leading-\[22px\] {
   line-height: 22px;
 }
@@ -1956,12 +1879,18 @@ select {
 .text-secondary {
   color: var(--ion-color-secondary);
 }
+.\!text-secondary {
+  color: var(--ion-color-secondary) !important;
+}
 .placeholder-gray-500::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(107 114 128 / var(--tw-placeholder-opacity));
 }
 .opacity-50 {
   opacity: 0.5;
+}
+.\!opacity-50 {
+  opacity: 0.5 !important;
 }
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -2197,29 +2126,9 @@ select {
   }
 }
 @media (min-width: 576px) {
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
 
   .sm-ion\:flex {
     display: flex;
-  }
-
-  .sm-ion\:w-1\/2 {
-    width: 50%;
-  }
-}
-@media (min-width: 768px) {
-
-  .md\:\!mt-4 {
-    margin-top: 1rem !important;
-  }
-
-  .md\:mt-0 {
-    margin-top: 0px;
-=======
-
-  .sm-ion\:flex {
-    display: flex;
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
   }
 
   .sm-ion\:w-1\/2 {
@@ -2258,13 +2167,10 @@ select {
     height: 180px;
   }
 
-<<<<<<< HEAD:Intiri.API/Intiri.API/wwwroot/styles.css
-=======
   .lg\:h-\[135px\] {
     height: 135px;
   }
 
->>>>>>> dcd2bc9a60b3876c451d0833f814b9d1f3d54aab:Intiri.API/Intiri.API/wwwroot/no/styles.css
   .lg\:h-\[155px\] {
     height: 155px;
   }
@@ -3093,6 +2999,11 @@ sub {
 }
 /* Optional CSS utils that can be commented out */
 @media (min-width: 576px) {
+  .auto-size-modal-css::part(content) {
+    --width: 600px;
+    --height: 430px;
+    border-radius: 16px;
+  }
   .small-modal-css::part(content) {
     --width: 400px;
     border-radius: 16px;
