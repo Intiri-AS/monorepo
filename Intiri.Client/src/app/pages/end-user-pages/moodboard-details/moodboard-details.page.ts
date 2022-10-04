@@ -10,7 +10,7 @@ import { Moodboard } from 'src/app/models/moodboard.model';
 
 export class MoodboardDetailsPage implements OnInit {
 
-  currentMoodboard: Moodboard;
+  currentMoodboard: any;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 

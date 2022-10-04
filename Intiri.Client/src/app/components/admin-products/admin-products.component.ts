@@ -10,17 +10,17 @@ import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 })
 export class AdminProductsComponent implements OnInit {
 
-  products: [];
-  productTypes: [];
+  products: any[];
+  productTypes: any[];
 
   constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
 
   ngOnInit() {
-    this.partnerService.getProducts().subscribe((res: []) => {
+    this.partnerService.getProducts().subscribe((res: any[]) => {
       this.products = res;
     })
 
-    this.partnerService.getProductsType().subscribe((res: []) => {
+    this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
     })
   }
