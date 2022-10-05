@@ -59,9 +59,6 @@ export class ProjectService {
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 
-    // if(project.moodboard?.['id']) {
-    //   parsedProj['moodboardId'] = project.moodboard['id']
-    // }
     return parsedProj;
   };
 
