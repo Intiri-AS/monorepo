@@ -11,6 +11,10 @@ export class AddStyleModalComponent implements OnInit {
 
   constructor(private modalController: ModalController, private styleService: StyleService, private sanitizer: DomSanitizer) { }
 
+  add: boolean;
+  added: boolean;
+  delete: boolean;
+
   item: {}
 
   style = {
@@ -28,8 +32,12 @@ export class AddStyleModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    this.style.imageFile = event.target.files[0];
-    this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.style.imageFile));
+    if(event.target.files[0]) {
+      this.style.imageFile = event.target.files[0];
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.style.imageFile));
+    } else {
+      this.imagePath = null;
+    }
   }
 
   addStyle() {

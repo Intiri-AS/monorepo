@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { StyleService } from 'src/app/services/style.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddPictureModalComponent } from '../modals/add-picture-modal/add-picture-modal.component';
 
@@ -10,15 +12,19 @@ import { AddPictureModalComponent } from '../modals/add-picture-modal/add-pictur
 })
 export class AdminPicturesComponent implements OnInit {
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController) { }
+  styleImages$: Observable<any> = this.styleService.styleImages$;
 
-  ngOnInit() {}
+  constructor(public popoverController: PopoverController, private styleService: StyleService, private modalController: ModalController) { }
 
-  async showSettings(e: Event) {
+  ngOnInit() {
+    this.styleService.getStyleImages();
+  }
+
+  async showSettings(e: Event, styleImage) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {material: true},
+      componentProps: {picture: true, item: styleImage},
       dismissOnSelect: true
     });
 

@@ -12,7 +12,6 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 })
 export class AdminStylesComponent implements OnInit {
 
-
   styles$: Observable<any> = this.styleService.styles$;
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private styleService: StyleService) { }
