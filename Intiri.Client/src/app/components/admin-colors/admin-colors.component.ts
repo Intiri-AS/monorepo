@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { ColorService } from 'src/app/services/color.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddColorModalComponent } from '../modals/add-color-modal/add-color-modal.component';
@@ -11,20 +12,19 @@ import { AddColorModalComponent } from '../modals/add-color-modal/add-color-moda
 })
 export class AdminColorsComponent implements OnInit {
 
-  colorPalettes: any[];
+  colorPalettes$: Observable<any> = this.colorService.colorPalettes$;
+
   constructor(public popoverController: PopoverController, private modalController: ModalController, private colorService: ColorService) { }
 
   ngOnInit() {
-    this.colorService.getColorPalettes().subscribe((res: any[]) => {
-      this.colorPalettes = res;
-    })
+    this.colorService.getColorPalettes();
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, color) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {material: true},
+      componentProps: {color: true, item: color},
       dismissOnSelect: true
     });
 

@@ -1,6 +1,6 @@
 <ion-content>
   <!-- Add style modal -->
-  <div *ngIf="'add'" class="justify-center items-center h-full">
+  <div *ngIf="add" class="justify-center items-center h-full">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -49,7 +49,7 @@
     </ion-grid>
   </div>
   <!-- Style added modal -->
-  <div *ngIf="'added'" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+  <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <div class="max-w-md w-full space-y-8">
         <div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <!-- Style delete modal -->
-  <div *ngIf="'delete'" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <div class="max-w-md w-full space-y-8">
         <div>

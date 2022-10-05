@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { MaterialService } from 'src/app/services/material.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-materials-modal.component';
@@ -11,25 +12,23 @@ import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-ma
 })
 export class AdminMaterialsComponent implements OnInit {
 
-  materials: any[];
+  materials$: Observable<any> = this.materialService.materials$;
   materialTypes: any[];
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private materialService: MaterialService) { }
 
   ngOnInit() {
-    this.materialService.getMaterials().subscribe((res: any[]) => {
-      this.materials = res;
-    })
-    this.materialService.getMaterialTypes().subscribe((res: any[]) => {
+    this.materialService.getMaterials();
+    this.materialService.getMaterialTypes().subscribe((res: []) => {
       this.materialTypes = res;
     })
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, material) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {material: true},
+      componentProps: {material: true, item: material},
       dismissOnSelect: true
     });
 
