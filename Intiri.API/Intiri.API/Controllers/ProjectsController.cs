@@ -83,10 +83,11 @@ namespace Intiri.API.Controllers
 			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
 
 			project.ProjectMoodboards.Add(newMoodboard);
+			Project updatedProject = await _unitOfWork.ProjectRepository.GetProjectById(project.Id);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok(_mapper.Map<ProjectOutDTO>(project));
+				return Ok(_mapper.Map<ProjectOutDTO>(updatedProject));
 			}
 
 			return BadRequest("Problem occured while adding moodboard to project");

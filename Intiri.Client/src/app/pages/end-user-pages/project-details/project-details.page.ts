@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -14,18 +16,15 @@ export class ProjectDetailsPage implements OnInit {
   
   currentProject: Project;
   
-  constructor(public projectService: ProjectService, private router: Router) { }
+  constructor(public projectService: ProjectService, public moodboardService: MoodboardService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.currentProject =  this.router.getCurrentNavigation().extras.state.data;
+  ngOnInit() {
+    this.projectService.currentProject$.pipe(take(1)).subscribe(project => this.currentProject = project);
   }
 
   goToMoodboardDetails(moodboard: Moodboard){
-    this.router.navigate(['/moodboard-details'], {
-      state:{
-        data: moodboard
-      }
-    });
+    this.moodboardService.setCurrentMoodboard(moodboard);
+    this.router.navigateByUrl('/moodboard-details');
   }
 
   addMoodboardToProject()

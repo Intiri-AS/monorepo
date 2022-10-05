@@ -1,6 +1,9 @@
+import { JsonpInterceptor } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -63,14 +66,15 @@ export class NewProjectPage {
 
   constructor(
     private modalController: ModalController,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.isExistProject = true;
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (project.name === "") {
+      if (project.name === "" || !project.name) {
         this.isExistProject = false;
         this.openStartModal();
       }
@@ -136,9 +140,9 @@ export class NewProjectPage {
     {
       this.isExistProject = false;
       this.projectService.addMoodboardToProject(this.project).subscribe(
-        (res) => {
-          console.log(res)
-          this.openFinalModal();
+        (project: Project) => {
+          this.projectService.setCurrentProject(project);
+          this.router.navigateByUrl('/project-details');
         },
         (error) => {
           console.log(error);

@@ -45,6 +45,8 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.ColorPalettes)
 				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
+				.ThenInclude(p => p.Style)
+				.ThenInclude(p => p.StyleImages)
 				.FirstOrDefaultAsync();
 		}
 

@@ -91,11 +91,8 @@ export class MyIntiriPage {
   }
 
   goToProjectDetails(project: Project){
-    this.router.navigate(['/project-details'], {
-      state:{
-        data: project
-      }
-    });
+    this.projectService.setCurrentProject(project);
+    this.router.navigateByUrl('/project-details');
   }
   
   async openShare() {
