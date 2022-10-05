@@ -103,10 +103,11 @@ export class NewProjectPage {
   }
 
   nextStep() {
-    let isUserLoggedIn = false;
-    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
-      this.openLoginModal();
-    } else {
+    this.openLoginModal();
+    // let isUserLoggedIn = false;
+    // if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+      
+    // } else {
       if (this.canChangeToStep(this.currentStepNo + 1)) {
         this.currentStepNo++;
         this.projectService.setCurrentProject(this.project);
@@ -114,7 +115,7 @@ export class NewProjectPage {
       if (this.currentStepNo === 4) {
         this.getMoodboardMatches();
       }
-    }
+    // }
   }
 
   goToStep(stepNo) {

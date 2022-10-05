@@ -271,8 +271,8 @@ namespace Intiri.API.Controllers
 				UserName = phoneNumber,
 				FirstName = firstName,
 				LastName = lastName,
-				PhoneNumber = phoneNumber
-				
+				PhoneNumber = phoneNumber,
+				Email = email
 			};
 
 			IdentityResult result = await
