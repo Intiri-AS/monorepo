@@ -54,6 +54,7 @@ export class ProjectService {
       styleImageIds: project.styleImages.map(e=> e['id']),
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
+      burgetRate: 0,
       moodboardIds: project.projectMoodboards.map(e=> e['id']),
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}

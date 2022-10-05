@@ -14,7 +14,7 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let colorPalette of colorPalettes" size="12" size-sm="5.75" size-xl="2.85">
+    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async)" size="12" size-sm="5.75" size-xl="2.85">
       <div class="card">
         <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: colorPalette.mainColor}"></div>
         <div class="w-[47.5%] h-full inline-block float-right">
@@ -26,7 +26,7 @@
       <div class="flex justify-between">
         <p class="py-2 text-black-2 font-semibold">{{colorPalette.number}} <span class="font-normal">/ {{colorPalette.name}}</span></p>
         <div class="float-right">
-          <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
+          <button (click)="showSettings($event, colorPalette)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
               <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
           </button>
         </div>
