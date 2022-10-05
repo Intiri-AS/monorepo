@@ -8,13 +8,13 @@ namespace Intiri.API.Services
 {
 	public class VippsLoginService: IVippsLoginService
 	{
-		private readonly IOptions<VippsLoginConfiguration> _options;
+		private readonly IOptions<VippsConfiguration> _options;
 		private readonly ILogger<VippsLoginService> _logger;
 		private readonly HttpClient _httpClient;
 
 		public VippsLoginService(
 			ILogger<VippsLoginService> logger,
-			IOptions<VippsLoginConfiguration> options)
+			IOptions<VippsConfiguration> options)
 		{
 			_logger = logger;
 			_options = options;

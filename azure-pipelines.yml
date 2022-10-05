@@ -109,6 +109,18 @@ stages:
                {
                   "name":"CloudinaryConfiguration:ApiSecret",
                   "value": "$(CloudinaryApiSecret)"
+               },
+               {
+                  "name": "VippsConfiguration:ClientId",
+                  "value": "$(VippsClientId)"
+               },
+               {
+                  "name": "VippsConfiguration:ClientSecret",
+                  "value": "$(VippsClientSecret)"
+               },
+               {
+                  "name": "VippsConfiguration:Authority",
+                  "value": "$(VippsAuthority)"
                }
               ]
             connectionStrings: |

@@ -1,6 +1,6 @@
 ﻿namespace Intiri.API.Configuration
 {
-	public class VippsLoginConfiguration
+	public class VippsConfiguration
 	{
 		public string ClientId { get; set; }
 		public string ClientSecret { get; set; }
