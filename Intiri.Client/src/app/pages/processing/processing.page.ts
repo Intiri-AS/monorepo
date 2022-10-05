@@ -25,7 +25,7 @@ export class ProcessingPage implements OnInit {
     const scope = this.queryParams.get('scope');
     const redirectUri = location.origin + location.pathname;
 
-    const accessTokenRequest = new VippsAccessTokenRequestDTO(
+    const accessTokenRequestData = new VippsAccessTokenRequestDTO(
       code,
       state,
       scope,
@@ -35,7 +35,7 @@ export class ProcessingPage implements OnInit {
     const hasUserGivenConsent = this.hasUserGivenConsent(this.queryParams);
     if (hasUserGivenConsent) {
       const stateObj = JSON.parse(state);
-      this.account.finalizeVippsLogin(accessTokenRequest).subscribe(
+      this.account.finalizeVippsLogin(accessTokenRequestData).subscribe(
         () => {
           this.router.navigateByUrl(stateObj.returnUri);
         },
@@ -54,11 +54,10 @@ export class ProcessingPage implements OnInit {
   }
 
   hasUserGivenConsent(queryParams: ParamMap): boolean {
-    let isConsentGiven = false;
-
+    let consent = false;
     if (!queryParams.has('error')) {
-      isConsentGiven = true;
+      consent = true;
     }
-    return isConsentGiven;
+    return consent;
   }
 }

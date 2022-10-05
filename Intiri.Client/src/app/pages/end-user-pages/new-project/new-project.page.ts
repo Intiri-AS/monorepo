@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
@@ -11,7 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './new-project.page.html',
   styleUrls: ['./new-project.page.scss'],
 })
-export class NewProjectPage {
+export class NewProjectPage implements OnInit {
   isScrolledDown: boolean;
   isExistProject: boolean;
 
@@ -29,7 +30,13 @@ export class NewProjectPage {
     {
       title: 'Enter more detail about selected room',
       subtitle: 'Don’t worry, you can improve more rooms later.',
-      data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
+      data: {
+        roomShapes: [
+          { shape: 'rectangular', imagePath: 'icon/rectangle.png' },
+          { shape: 'square', imagePath: 'icon/square.png' },
+          { shape: 'l-shaped', imagePath: 'icon/l-shape.png' },
+        ],
+      },
     },
     {
       title: 'Select color pallet',
@@ -66,14 +73,28 @@ export class NewProjectPage {
   constructor(
     private modalController: ModalController,
     public projectService: ProjectService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    // Jump to step where login modal occurred
+    const isRedirectedFromLogin = this.checkIfRedirectedFromLogin();
+    if (isRedirectedFromLogin) {
+      const stepParam = this.route.snapshot.queryParamMap.get('step');
+      const step = parseInt(stepParam, 10);
+      if (!isNaN(step))
+      {
+        this.currentStepNo = step;
+      } else {
+        console.log(`Invalid value received for step param: ${stepParam}`);
+      }
+    }
+
     this.isExistProject = true;
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (project.name === "") {
+      if (project.name === '') {
         this.isExistProject = false;
         this.openStartModal();
       }
@@ -103,11 +124,10 @@ export class NewProjectPage {
   }
 
   nextStep() {
-    this.openLoginModal();
-    // let isUserLoggedIn = false;
-    // if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
-      
-    // } else {
+    const isUserLoggedIn = this.checkIfUserLoggedIn();
+    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+      this.openLoginModal();
+    } else {
       if (this.canChangeToStep(this.currentStepNo + 1)) {
         this.currentStepNo++;
         this.projectService.setCurrentProject(this.project);
@@ -115,7 +135,7 @@ export class NewProjectPage {
       if (this.currentStepNo === 4) {
         this.getMoodboardMatches();
       }
-    // }
+    }
   }
 
   goToStep(stepNo) {
@@ -131,7 +151,12 @@ export class NewProjectPage {
   getMoodboardMatches() {
     this.projectService.getMoodboardMatches(this.project).subscribe(
       (res) => {
-        this.steps[4]['data'] = {moodboardFamily: res['moodboardFamily'], moodboards: res['moodboards'].map(e => { return {...e.moodboard, percentageMatch: e.percentageMatch}})};
+        this.steps[4]['data'] = {
+          moodboardFamily: res['moodboardFamily'],
+          moodboards: res['moodboards'].map((e) => {
+            return { ...e.moodboard, percentageMatch: e.percentageMatch };
+          }),
+        };
       },
       (error) => {
         console.log(error);
@@ -139,23 +164,19 @@ export class NewProjectPage {
     );
   }
 
-  saveCurrentProject()
-  {
-    if(this.isExistProject)
-    {
+  saveCurrentProject() {
+    if (this.isExistProject) {
       this.isExistProject = false;
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
-          console.log(res)
+          console.log(res);
           this.openFinalModal();
         },
         (error) => {
           console.log(error);
         }
       );
-    }
-    else
-    {
+    } else {
       this.saveProject();
     }
   }
@@ -221,18 +242,21 @@ export class NewProjectPage {
     return (
       !object ||
       (Object.keys(object).length === 0 &&
-      Object.getPrototypeOf(object) === Object.prototype)
+        Object.getPrototypeOf(object) === Object.prototype)
     );
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['shape'] && this.project.roomDetails['size'] && !!this.project.budget;
+    return (
+      this.project.roomDetails['shape'] &&
+      this.project.roomDetails['size'] &&
+      !!this.project.budget
+    );
   }
 
   toggleItem(item) {
-
     // if you change any selection, selected moodboard will reset
-    if(this.currentStepNo < 4) {
+    if (this.currentStepNo < 4) {
       this.project.projectMoodboards = [];
     }
     const stepName = this.stepsOrder[this.currentStepNo];
@@ -249,25 +273,27 @@ export class NewProjectPage {
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
-    } else if(this.currentStepNo === 4) {
+    } else if (this.currentStepNo === 4) {
       this.project[stepName] =
         JSON.stringify(this.project[stepName]) === JSON.stringify(item)
           ? null
           : [item];
-    }
-     else {  // else it's a single select
+    } else {
+      // else it's a single select
 
       // if it's updating sub-object
-      if(stepName.includes('.')) {
+      if (stepName.includes('.')) {
         this.project[stepName.split('.')[0]][stepName.split('.')[1]] =
-        JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
-          ? null
-          : item;
+          JSON.stringify(
+            this.project[stepName.split('.')[0]][stepName.split('.')[1]]
+          ) === JSON.stringify(item)
+            ? null
+            : item;
       } else {
         this.project[stepName] =
-        JSON.stringify(this.project[stepName]) === JSON.stringify(item)
-          ? null
-          : item;
+          JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+            ? null
+            : item;
       }
     }
   }
@@ -275,7 +301,7 @@ export class NewProjectPage {
   async openStartModal() {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      componentProps: {start: true},
+      componentProps: { start: true },
       cssClass: 'small-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
@@ -287,7 +313,7 @@ export class NewProjectPage {
   async openFinalModal() {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      componentProps: {final: true, projectName: this.project.name},
+      componentProps: { final: true, projectName: this.project.name },
       cssClass: 'final-project-step-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
@@ -296,14 +322,28 @@ export class NewProjectPage {
     await modal.present();
   }
 
-  async openLoginModal() {
+  async openLoginModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
       cssClass: 'small-modal-css',
       backdropDismiss: false,
-      swipeToClose: false
+      swipeToClose: false,
     });
 
     await modal.present();
+  }
+
+  private checkIfRedirectedFromLogin(): boolean {
+    return this.route.snapshot.queryParamMap.get('step') != null;
+  }
+
+  private checkIfUserLoggedIn(): boolean {
+    let isUserLoggedIn = false;
+    this.accountService.currentUser$.subscribe((user) => {
+      if (user) {
+        isUserLoggedIn = true;
+      }
+    });
+    return isUserLoggedIn;
   }
 }

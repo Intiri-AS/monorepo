@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
@@ -65,7 +65,7 @@ export class AccountService {
     return this.http.post(this.apiUrl + 'account/reset-password', model);
   }
 
-  initiateVippsLogin(redirectionPath: string, state: string) {
+  initiateVippsLogin(redirectionPath: string, state: string): Subscription {
     const redirectionUri = location.origin + redirectionPath;
     const authUrlRequest = new VippsAuthUrlRequestDTO(redirectionUri, state);
     return this.http
@@ -82,7 +82,7 @@ export class AccountService {
       );
   }
 
-  finalizeVippsLogin(auth: VippsAccessTokenRequestDTO) {
+  finalizeVippsLogin(auth: VippsAccessTokenRequestDTO): Observable<void> {
     return this.http.post<any>(this.apiUrl + 'account/vipps-login', auth).pipe(
       map((user: User) => {
         if (user) {
