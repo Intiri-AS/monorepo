@@ -1,3 +1,4 @@
+import { JsonpInterceptor } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -76,13 +77,13 @@ export class NewProjectPage {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'))
-
+    
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (project.name === "") {
+      if (project.name === "" || !project.name) {
+        this.isExistingProject = false;
         this.openStartModal();
-      }
-      if (project.projectMoodboards.length > 0) {
+      } if (project.projectMoodboards.length > 0) {
         this.isExistingProject = true;
       }
     });
@@ -165,6 +166,7 @@ export class NewProjectPage {
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
+          this.projectService.addToObservableColl(res);
           this.project.projectMoodboards.push(this.project.currentMoodboard);
           this.projectService.setCurrentProject(this.project);
           this.openFinalModal(true);

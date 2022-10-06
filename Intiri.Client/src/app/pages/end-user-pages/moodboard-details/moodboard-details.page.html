@@ -1,37 +1,3 @@
-<!-- <ion-content>
-  <div id="home">
-    <app-header></app-header>
-    <div class="main-container">
-      <ion-button fill="clear" class="back-btn" routerLink="/project-details" routerDirection="root">
-        <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
-        <p>Project details</p>
-      </ion-button>
-      <p class="main-title">{{currentMoodboard.name}</p>
-      <div class="p-2 xl:p-0">
-        <ion-card class="border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
-          <img src={{currentMoodboard.style.styleImages[0].path}} class="h-full w-full">
-        </ion-card>
-        <div class="mt-16 text-center xl:text-left">
-          <p class="text-black-2 text-2xl font-medium">What's included in moodboard</p>
-          <div class="mt-6 flex justify-center xl:justify-between flex-wrap">
-            <div *ngFor="let mbPart of currentMoodboard" class="flex flex-col">
-              <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
-                <img src={{mbPart.styleImages[0].path}} class="h-full w-full">
-              </ion-card>
-              <p class="text-black-2 text-2xl mt-2 font-medium">{{mbPart.name}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40">
-          <ion-button fill="clear" class="secondary-btn">Edit moodboard</ion-button>
-          <ion-button fill="clear" class="primary-btn" routerLink="/contact-designer" routerDirection="root">Contact designer</ion-button>
-          <ion-button fill="clear" class="secondary-btn">Contact craftsman</ion-button>
-        </div>
-      </div>
-    </div>
-  </div>
-</ion-content> -->
-
 
 <ion-content>
   <div id="home">
@@ -41,22 +7,22 @@
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>Project details</p>
       </ion-button>
-      <p class="main-title">{{currentMoodboard.name}}</p>
+      <p class="main-title">{{moodboard.name}}</p>
       <div class="p-2 xl:p-0">
         <ion-card class="border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
-          <img src="{{currentMoodboard.style.styleImages[1].path}}" class="h-full w-full">
+          <img src="{{moodboard.style.styleImages[1].path}}" class="h-full w-full">
         </ion-card>
         
         <div class="mt-16 text-center xl:text-left">
           <p class="text-black-2 text-2xl font-medium">What's included in moodboard</p>
           <div class="mt-6 flex justify-center xl:justify-between flex-wrap">
-            <div *ngFor="let material of currentMoodboard.materials" class="flex flex-col">
+            <div *ngFor="let material of moodboard.materials" class="flex flex-col">
               <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
                 <img src="{{material.imagePath}}" class="h-full w-full">
               </ion-card>
               <p class="text-black-2 text-2xl mt-2 font-medium">{{material.name}}</p>
             </div>
-            <div *ngFor="let product of currentMoodboard.products" class="flex flex-col">
+            <div *ngFor="let product of moodboard.products" class="flex flex-col">
               <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
                 <img src="{{product.imagePath}}" class="h-full w-full">
               </ion-card>

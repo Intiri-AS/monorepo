@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -12,31 +14,44 @@ import { ProjectService } from 'src/app/services/project.service';
 
 export class ProjectDetailsPage implements OnInit {
   
+  project: Project;
   currentProject: Project;
+  moodboards$: Observable<any[]>;
   
-  constructor(public projectService: ProjectService, private router: Router) { }
+  constructor(public projectService: ProjectService, private route: ActivatedRoute, public moodboardService: MoodboardService, private router: Router) 
+  { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
-  ngOnInit(): void {
-    this.currentProject =  this.router.getCurrentNavigation().extras.state.data;
+  ngOnInit() { 
+    this.route.data.subscribe(data => {
+      this.project = data.project;
+    })
+
+    if(this.project !== undefined){
+      this.projectService.setCurrentProject(this.project);
+      this.moodboards$ = this.moodboardService.storeMoodboardsFromProject(this.project);
+    }else{
+      this.loadProject();
+    }
+    
+  }
+
+  loadProject() {
+    this.project = JSON.parse(sessionStorage.getItem("project"))
+    this.moodboards$ = this.moodboardService.storeMoodboardsFromProject(this.project);
   }
 
   goToMoodboardDetails(moodboard: Moodboard){
-    this.router.navigate(['/moodboard-details'], {
-      state:{
-        data: moodboard
-      }
-    });
+    this.moodboardService.setCurrentMoodboard(moodboard);
+    this.router.navigateByUrl('/moodboard-details');
   }
 
   addMoodboardToProject()
   {
-    //sessionStorage.clear();
-    this.currentProject.room = {};
-    this.currentProject.budget = '';
-    this.currentProject.roomDetails = {};
-    this.currentProject.colorPalettes = [];
-    this.currentProject.styleImages = [];
-    this.currentProject.projectMoodboards = [];
+    //this.projectService.currentProject$.pipe(take(1)).subscribe(project => this._currentProject = project);
+    this.currentProject = new Project();
+    this.currentProject.name = this.project.name;
     this.projectService.setCurrentProject(this.currentProject);
     this.router.navigateByUrl('/new-project');
 

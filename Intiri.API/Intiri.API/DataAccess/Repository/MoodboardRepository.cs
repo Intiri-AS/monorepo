@@ -77,6 +77,21 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
+		public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
+		{
+			return await _context.Moodboards
+				.Include(m => m.Room)
+				.Include(m => m.Materials)
+					.ThenInclude(mat => mat.MaterialType)
+				.Include(m => m.Products)
+					.ThenInclude(p => p.ProductType)
+				.Include(m => m.ColorPalettes)
+				.Include(m => m.Style)
+					.ThenInclude(s => s.StyleImages)
+				.Where(m => moodboardName == m.Name)
+				.FirstOrDefaultAsync();
+		}
+
 		public async Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard)
 		{
 			return await _context.Moodboards

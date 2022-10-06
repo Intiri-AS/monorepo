@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable, of, ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Project } from '../models/project.model';
 
@@ -8,14 +10,15 @@ import { Project } from '../models/project.model';
   providedIn: 'root'
 })
 
-export class ProjectService {
+export class ProjectService implements Resolve<Project> {
 
   apiUrl = environment.apiUrl;
   private currentProjectSource = new ReplaySubject<Project>(1);
   currentProject$ = this.currentProjectSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  projects: Project[] = [];
 
+  constructor(private http: HttpClient) { }
 
   setCurrentProject(project: Project) {
     if(!project) {
@@ -46,7 +49,19 @@ export class ProjectService {
   }
 
   getAllProjects(){
-    return this.http.get(this.apiUrl + 'projects');
+    if(this.projects.length > 0) return of(this.projects);
+    return this.http.get<Project[]>(this.apiUrl + 'projects').pipe(
+      map(projects =>{
+        this.projects = projects;
+        return projects;
+      })
+    )
+  }
+
+  getProject(projectName: string){
+    const project = this.projects.find(pr => pr.name === projectName);
+    if(project !== undefined) return of (project);
+    return this.http.get<Project>(this.apiUrl + 'projects/name/' + projectName);
   }
 
   parseProject(project: Project) {
@@ -75,11 +90,22 @@ export class ProjectService {
   addMoodboardToProject(project: Project)
   {
     const reqData = {
-      projectId: project.id,
+      projectName: project.name,
+      //moodboardId: project.projectMoodboards[0].id
+      //projectId: project.id,
       moodboard: project.currentMoodboard
     }
-
     return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
-
   }
+
+  addToObservableColl(project: any){
+    this.setCurrentProject(project);
+    const index = this.projects.indexOf(project);
+    this.projects[index] = project;
+  }
+
+  resolve(route: ActivatedRouteSnapshot): Observable<Project> {
+    return this.getProject(route.paramMap.get('name'));
+  }
+  
 }
