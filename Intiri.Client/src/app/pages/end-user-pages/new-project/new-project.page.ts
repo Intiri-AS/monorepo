@@ -141,7 +141,7 @@ export class NewProjectPage {
       this.isExistProject = false;
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (project: Project) => {
-          this.projectService.setCurrentProject(project);
+          this.projectService.addToObservableColl(project);
           this.router.navigateByUrl('/project-details');
         },
         (error) => {

@@ -8,6 +8,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	{
 		Task<IEnumerable<Moodboard>> GetMoodboards();
 		Task<Moodboard> GetFullMoodboardById(int moodboardId);
+		Task<Moodboard> GetFullMoodboardByName(string moodboardName);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids);
 		Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard);

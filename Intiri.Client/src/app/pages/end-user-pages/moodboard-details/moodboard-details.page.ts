@@ -12,12 +12,17 @@ import { MoodboardService } from 'src/app/services/moodboard.service';
 
 export class MoodboardDetailsPage implements OnInit {
 
-  currentMoodboard: any;
+  moodboard: Moodboard;
 
-  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router) {}
+  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router) 
+  {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
-    this.moodboardService.currentMoodboard$.pipe(take(1)).subscribe(moodboard => this.currentMoodboard = moodboard);
+    this.route.data.subscribe(data => {
+      this.moodboard = data.moodboard;
+    })
   }
 
 }

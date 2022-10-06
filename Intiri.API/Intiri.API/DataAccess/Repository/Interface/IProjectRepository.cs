@@ -8,5 +8,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<IEnumerable<Project>> GetProjectsBasicInfoForUser(int userId);
 		Task<Project> GetProjectById(int id);
 		Task<Project> GetLastProjectForUser(int userId);
+		Task<Project> GetProjectByName(string projectName);
 	}
 }

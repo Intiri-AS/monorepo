@@ -62,7 +62,18 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{projectId}")]
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+			Project project = await _unitOfWork.ProjectRepository.GetProjectById(projectId);
+
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+
+			return Ok(projectOut);
+		}
+
+		//[HttpGet("{name}", Name = "GetProject")]
+		[HttpGet("name/{projectName}")]
+		public async Task<ActionResult<ProjectOutDTO>> GetProjectByName(string projectName)
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetProjectByName(projectName);
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -72,11 +83,11 @@ namespace Intiri.API.Controllers
 		[HttpPost("addMoodboard")]
 		public async Task<ActionResult<int>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetByID(moodboardProjectIn.ProjectId);
+			Project project = await _unitOfWork.ProjectRepository.GetProjectByName(moodboardProjectIn.ProjectName);
 
 			if (project == null)
 			{
-				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
+				return BadRequest($"Project with id '{moodboardProjectIn.ProjectName}' doesn't exists");
 			}
 
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.MoodboardId);

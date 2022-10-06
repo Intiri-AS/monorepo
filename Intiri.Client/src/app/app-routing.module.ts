@@ -35,12 +35,22 @@ import { ClientRequestPage } from './pages/designer-pages/client-request/client-
 import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
+import { ProjectService } from './services/project.service';
+import { MoodboardService } from './services/moodboard.service';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'
+  },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    children: [
+      {path: 'project-details/:name', component: ProjectDetailsPage, resolve: {project: ProjectService}},
+      {path: 'moodboard-details/:name', component: MoodboardDetailsPage, resolve: {moodboard: MoodboardService}},
+    ]
   },
   {
     path: 'landing',
