@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
 
 
@@ -30,6 +31,12 @@ export class StepPickerComponent implements OnInit {
 
   isEmpty(object): boolean {
     return !object || (Object.keys(object).length === 0 && Object.getPrototypeOf(object) === Object.prototype);
+  }
+
+  isMoodboardEmpty(moodboard: Moodboard): boolean {
+    if(!moodboard.id && !moodboard.name && moodboard.materials.length === 0 && moodboard.products.length === 0 && moodboard.colorPalettes.length === 0) {
+      return true;
+    } return false;
   }
 
   areProjectDetailsValid(): boolean {

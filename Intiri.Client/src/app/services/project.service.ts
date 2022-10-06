@@ -54,8 +54,8 @@ export class ProjectService {
       styleImageIds: project.styleImages.map(e=> e['id']),
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
-      burgetRate: 0,
-      moodboardIds: project.projectMoodboards.map(e=> e['id']),
+      budgetRate: 0, // ?
+      moodboard: project.currentMoodboard,
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 
@@ -72,11 +72,11 @@ export class ProjectService {
     return this.http.post(this.apiUrl + 'projects/add', req_data);
   }
 
-  addMoodboardToProject(project)
+  addMoodboardToProject(project: Project)
   {
     const reqData = {
-      projectId: project['id'],
-      moodboardId: project.projectMoodboards[0].id
+      projectId: project.id,
+      moodboard: project.currentMoodboard
     }
 
     return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);

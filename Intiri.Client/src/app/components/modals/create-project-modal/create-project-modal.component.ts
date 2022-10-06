@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
@@ -11,10 +12,12 @@ import { ProjectService } from 'src/app/services/project.service';
 export class CreateProjectModalComponent implements OnInit {
 
   projectName: string = '';
-  start;
-  final;
+  project: Project;
+  start: boolean;
+  final: boolean;
+  existing: boolean;
 
-  constructor(private modalController: ModalController, private projectService: ProjectService) { }
+  constructor(private modalController: ModalController, private projectService: ProjectService, private router: Router) { }
 
   ngOnInit() {}
 
@@ -27,6 +30,16 @@ export class CreateProjectModalComponent implements OnInit {
     project.name = this.projectName;
     this.projectService.setCurrentProject(project);
     this.dismiss();
+  }
+
+  addNewMoodboard() {
+    const blankProject = new Project();
+    blankProject.projectMoodboards = [...this.project.projectMoodboards];
+    blankProject.name = this.project.name;
+    blankProject.id = this.project.id;
+    this.projectService.setCurrentProject(blankProject);
+    this.dismiss();
+    location.replace('/new-project'); // in future figure out how to do this with router.navigate (navigate to '/new-project?step=0')
   }
 
   dismiss() {

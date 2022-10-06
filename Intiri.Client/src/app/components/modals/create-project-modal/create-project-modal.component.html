@@ -31,11 +31,12 @@
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="text-primary h-[34px] w-[34px] mx-auto mt-[5px]" name="bookmark"></ion-icon></div>
           <h2 class="mt-6 text-center text-2xl font-bold text-black-1">Saved!</h2>
-          <p class="text-center text-base text-black-2">Your project <span class="font-medium">{{projectName}}</span> and first moodboard are saved. You can add new moodboard to the same project or review it.</p>
+          <p *ngIf="!existing" class="text-center text-base text-black-2">Your project <span class="font-medium">{{project.name}}</span> and first moodboard are saved. You can add new moodboard to the same project or review it.</p>
+          <p *ngIf="existing" class="text-center text-base text-black-2">You have successfully added new moodboard to project <span class="font-medium">{{project.name}}</span>. You can now add new moodboard to the same project or review it.</p>
         </div>
           <ion-buttons class="justify-center">
             <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Go to project</ion-button>
-            <ion-button class="primary-btn" (click)="dismiss()" [class.disabled]="true">Add new moodboard</ion-button>
+            <ion-button class="primary-btn" (click)="addNewMoodboard()">Add new moodboard</ion-button>
           </ion-buttons>
           <p class="text-primary text-center cursor-pointer hover:opacity-80" [class.disabled]="true"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p>
       </div>

@@ -1,4 +1,6 @@
 export class Moodboard {
+  id: number;
+  sourceMoodboardId: number;
   name: string;
   description: string;
   designer: any;
@@ -10,6 +12,8 @@ export class Moodboard {
 
   constructor()
   {
+    this.id = null;
+    this.sourceMoodboardId = null;
     this.name = ''
     this.description = '';
     this.designer = null;
