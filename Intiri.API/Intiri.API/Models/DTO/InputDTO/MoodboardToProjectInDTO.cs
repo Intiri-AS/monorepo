@@ -2,7 +2,7 @@
 {
 	public class MoodboardToProjectInDTO
 	{
-		public string ProjectName { get; set; }
-		public int MoodboardId { get; set; }
+		public int ProjectId { get; set; }
+		public MoodboardInDTO Moodboard { get; set; }
 	}
 }
