@@ -3,3 +3,7 @@
   --padding-start: 4px;
   text-transform: none;
 }
+
+img {
+  @apply h-full w-full object-cover
+}

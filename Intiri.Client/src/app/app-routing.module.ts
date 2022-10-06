@@ -48,8 +48,8 @@ const routes: Routes = [
     path: '',
     runGuardsAndResolvers: 'always',
     children: [
-      {path: 'project-details/:name', component: ProjectDetailsPage, resolve: {project: ProjectService}},
-      {path: 'moodboard-details/:name', component: MoodboardDetailsPage, resolve: {moodboard: MoodboardService}},
+      {path: 'project-details/:id', component: ProjectDetailsPage, resolve: {project: ProjectService}},
+      {path: 'project-details/:projectId/moodboard-details/:id', component: MoodboardDetailsPage, resolve: {moodboard: MoodboardService}},
     ]
   },
   {

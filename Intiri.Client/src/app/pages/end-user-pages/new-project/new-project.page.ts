@@ -64,7 +64,6 @@ export class NewProjectPage {
   };
 
   currentStepNo: number = 0;
-  initPathCheck: boolean = true;
 
   constructor(
     private modalController: ModalController,
@@ -77,11 +76,10 @@ export class NewProjectPage {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'))
-    
+
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (project.name === "" || !project.name) {
-        this.isExistingProject = false;
+      if (project.name === "") {
         this.openStartModal();
       } if (project.projectMoodboards.length > 0) {
         this.isExistingProject = true;
@@ -90,7 +88,7 @@ export class NewProjectPage {
 
     this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
       // initial path parameter check (and redirect to that step if possible)
-      if(this.initPathCheck && stepParam && this.canChangeToStep(stepParam)) {
+      if(stepParam && this.canChangeToStep(stepParam)) {
         this.currentStepNo = stepParam;
       } else this.currentStepNo = 0;
     });
@@ -166,7 +164,6 @@ export class NewProjectPage {
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
-          this.projectService.addToObservableColl(res);
           this.project.projectMoodboards.push(this.project.currentMoodboard);
           this.projectService.setCurrentProject(this.project);
           this.openFinalModal(true);
