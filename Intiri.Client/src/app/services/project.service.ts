@@ -91,17 +91,19 @@ export class ProjectService implements Resolve<Project> {
   }
 
   parseMoodboard(moodboard: Moodboard) {
-    let parsedMdb = {
-      styleId: moodboard.style['id'],
-      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
-      roomId: moodboard.room['id'],
-      materialIds: moodboard.materials.map(e=> e['id']),
-      productIds: moodboard.products.map(e=> e['id']),
-      id: moodboard.id,
-      name: moodboard.name, // remove later
-      sourceMoodboardId: moodboard.sourceMoodboardId
-    }
-    return parsedMdb;
+    if(moodboard.room && moodboard.style) {
+      let parsedMdb = {
+        styleId: moodboard.style ? moodboard.style['id'] : null,
+        colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+        roomId: moodboard.room['id'],
+        materialIds: moodboard?.materials.map(e=> e['id']),
+        productIds: moodboard?.products.map(e=> e['id']),
+        id: moodboard.id,
+        name: moodboard.name, // remove later
+        sourceMoodboardId: moodboard.sourceMoodboardId
+      }
+      return parsedMdb;
+    } return moodboard;
   };
 
 }

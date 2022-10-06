@@ -81,7 +81,7 @@ export class NewProjectPage {
       this.project = project;
       if (project.name === "") {
         this.openStartModal();
-      } if (project.projectMoodboards.length > 0) {
+      } if (project.id) {
         this.isExistingProject = true;
       }
     });
