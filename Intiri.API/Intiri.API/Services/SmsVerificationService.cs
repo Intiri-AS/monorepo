@@ -47,10 +47,10 @@ namespace Intiri.API.Services
 			{
 				PhoneNumber = phoneNumber,
 				VerificationCode = verificationCode,
-				DateSent = messageResource.DateSent
+				DateCreated = messageResource.DateCreated
 			};
 
-			if (!pendingSmsVerification.DateSent.HasValue)
+			if (!pendingSmsVerification.DateCreated.HasValue)
 			{
 				return false;
 			}
@@ -114,9 +114,9 @@ namespace Intiri.API.Services
 		{
 			bool isExpired = false;
 
-			if (verification.DateSent != null)
+			if (verification.DateCreated != null)
 			{
-				TimeSpan? timeDiff = DateTime.Now - verification.DateSent;
+				TimeSpan? timeDiff = DateTime.Now - verification.DateCreated;
 
 				if (!timeDiff.HasValue)
 				{

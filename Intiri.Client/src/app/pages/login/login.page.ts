@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
-import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.page.html',
@@ -11,14 +10,10 @@ import { environment } from 'src/environments/environment';
 })
 
 export class LoginPage implements OnInit {
-  model: any = {}
+  model: any = {};
   public loginForm: FormGroup;
   public isFormSubmited = false;
-  public activeCode = '47';
-
-  get phoneNumberErrors() {
-    return this.loginForm.controls.phoneNumber.errors;
-  }
+  public activeCode = '+47';
 
   constructor(
     public accountService: AccountService,
@@ -30,7 +25,11 @@ export class LoginPage implements OnInit {
         Validators.required,
         Validators.pattern('^[0-9]+$')
       ])],
-    })
+    });
+  }
+
+  get phoneNumberErrors() {
+    return this.loginForm.controls.phoneNumber.errors;
   }
 
   ngOnInit() {
@@ -53,10 +52,10 @@ export class LoginPage implements OnInit {
     const loginModel = {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber
-    }
-    const phoneNumber = `+${loginModel.countryCode}${loginModel.phoneNumber}`;
+    };
+    const phoneNumber = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(response => {
-      this.router.navigate(['/sms-verification'], {queryParams: {phoneNumber: phoneNumber}});
+      this.router.navigate(['/sms-verification'], {queryParams: {phoneNumber}});
     },error =>{
       console.log(error);
     });

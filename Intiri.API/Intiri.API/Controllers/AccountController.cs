@@ -84,7 +84,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult> Login(LoginInDTO loginDto)
 		{
-			string fullPhoneNumber = "+" + loginDto.CountryCode + loginDto.PhoneNumber;
+			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
 			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
 			
 			if (user == null)
@@ -94,11 +94,7 @@ namespace Intiri.API.Controllers
 
 			var result = await _smsVerificationService.SendSmsVerificationCode(fullPhoneNumber);
 
-			if (result.Value)
-			{
-				return Ok();
-			}
-			return BadRequest();
+			return Ok();
 		}
 
 		[HttpPost("sms-verification")]

@@ -25,7 +25,7 @@ export class SmsVerificationPage implements OnInit {
     private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.phoneNumber = this.route.snapshot.paramMap.get('phoneNumber');
+    this.phoneNumber = this.route.snapshot.queryParamMap.get('phoneNumber');
   }
 
   // this called every time when user changed the code
@@ -35,15 +35,20 @@ export class SmsVerificationPage implements OnInit {
 
   // this called only if user entered full code
   public onCodeCompleted(verificationCode) {
-    this.accountService.smsVerification(this.phoneNumber, verificationCode);
+    this.accountService.smsVerification(this.phoneNumber, verificationCode).subscribe(response => {
+      this.router.navigate(['/my-intiri']);
+    }, error => {
+      console.log(error);
+    });
+
     // This is only for testing and presenatation purpose
-    if(this.loginCode === verificationCode) {
-      this.router.navigateByUrl('/my-intiri');
-    } else if (this.resetPassCode === verificationCode) {
-      this.router.navigateByUrl('/reset-password');
-    } else if (this.registerCode === verificationCode) {
-      this.router.navigateByUrl('/login');
-    }
+    // if(this.loginCode === verificationCode) {
+    //   this.router.navigateByUrl('/my-intiri');
+    // } else if (this.resetPassCode === verificationCode) {
+    //   this.router.navigateByUrl('/reset-password');
+    // } else if (this.registerCode === verificationCode) {
+    //   this.router.navigateByUrl('/login');
+    // }
 
     // Reset code input fields
     this.codeInput.reset();

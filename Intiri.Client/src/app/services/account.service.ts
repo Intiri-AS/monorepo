@@ -19,13 +19,7 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   login(model) {
-    return this.http.post(this.apiUrl + 'account/login', model).subscribe(
-      () => {
-
-      }, error => {
-        console.log();
-      }
-    )
+    return this.http.post(this.apiUrl + 'account/login', model);
   }
 
   smsVerification(phoneNumber: string, verificationCode: string) {
