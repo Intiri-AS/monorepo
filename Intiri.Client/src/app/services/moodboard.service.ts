@@ -14,45 +14,19 @@ import { Project } from '../models/project.model';
 export class MoodboardService {
 
   apiUrl = environment.apiUrl;
-  private currentMoodboardSource = new ReplaySubject<Moodboard>(1);
-  currentMoodboard$ = this.currentMoodboardSource.asObservable();
-
   project: Project;
-  moodboards: Moodboard[] = [];
-
   constructor(private http: HttpClient) { }
 
-  setCurrentMoodboard(moodboard: Moodboard) {
-    if(!moodboard) {
-      moodboard = new Moodboard();
-    }
-    sessionStorage.setItem('moodboard', JSON.stringify(moodboard));
-    this.currentMoodboardSource.next(moodboard);
-  }
-
   getMoodboards(){
-    if(this.moodboards.length > 0) return of(this.moodboards);
-    return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards').pipe(
-      map(moodboards =>{
-        this.moodboards = moodboards;
-        return moodboards;
-      })
-    )
+    return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards');
   }
 
-  getMoodboard(moodboardName: string){
-    const moodboard = this.moodboards.find(mb => mb.name === moodboardName);
-    if(moodboard !== undefined) return of (moodboard);
-    return this.http.get<Moodboard>(this.apiUrl + 'moodboards/name/' + moodboardName);
+  getMoodboard(id: number){
+    return this.http.get<Moodboard>(this.apiUrl + 'moodboards/id/' + id);
   }
 
   updateMoodboard(moodboard: Moodboard){
-    return this.http.post<Moodboard>(this.apiUrl + 'moodboards/addMoodboard', moodboard).pipe(
-      map(projectIn =>{
-        const index = this.moodboards.indexOf(moodboard);
-        this.moodboards[index] = moodboard;
-      })
-    )
+    return this.http.post<Moodboard>(this.apiUrl + 'moodboards/addMoodboard', moodboard);
   }
 
   addMoodboard(moodboard){
@@ -71,14 +45,8 @@ export class MoodboardService {
   };
 
   resolve(route: ActivatedRouteSnapshot): Observable<Moodboard> {
-    let id = route.params['id'];
-    return this.getMoodboard(route.paramMap.get('name'));
+    return this.getMoodboard(parseInt(route.paramMap.get('id')));
   }
 
-  storeMoodboardsFromProject(project: Project){
-    this.project = project;
-    this.moodboards = project.projectMoodboards;
-    return of (this.moodboards)
-  }
 
 }

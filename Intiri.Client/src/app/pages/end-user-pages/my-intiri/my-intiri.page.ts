@@ -76,7 +76,7 @@ export class MyIntiriPage {
     });
     return result;
   }
-  
+
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
   }
@@ -89,11 +89,11 @@ export class MyIntiriPage {
     this.slides.slidePrev();
   }
 
-  goToProjectDetails(project: Project){
-    this.projectService.setCurrentProject(project);
-    this.router.navigateByUrl('/project-details');
-  }
-  
+  // goToProjectDetails(project: Project){
+  //   this.projectService.setCurrentProject(project);
+  //   this.router.navigateByUrl('/project-details');
+  // }
+
   async openShare() {
     const modal = await this.modalController.create({
       component: ShareModalComponent,

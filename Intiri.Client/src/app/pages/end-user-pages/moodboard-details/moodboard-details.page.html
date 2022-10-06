@@ -3,7 +3,7 @@
   <div id="home">
     <app-header></app-header>
     <div class="main-container">
-      <ion-button fill="clear" class="back-btn" routerLink="/project-details" routerDirection="root">
+      <ion-button fill="clear" class="back-btn" (click)="backToProjectDetails()">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>Project details</p>
       </ion-button>
@@ -12,19 +12,18 @@
         <ion-card class="border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
           <img src="{{moodboard.style.styleImages[1].path}}" class="h-full w-full">
         </ion-card>
-        
         <div class="mt-16 text-center xl:text-left">
           <p class="text-black-2 text-2xl font-medium">What's included in moodboard</p>
           <div class="mt-6 flex justify-center xl:justify-between flex-wrap">
             <div *ngFor="let material of moodboard.materials" class="flex flex-col">
               <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
-                <img src="{{material.imagePath}}" class="h-full w-full">
+                <img src="{{material.imagePath}}">
               </ion-card>
               <p class="text-black-2 text-2xl mt-2 font-medium">{{material.name}}</p>
             </div>
             <div *ngFor="let product of moodboard.products" class="flex flex-col">
               <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
-                <img src="{{product.imagePath}}" class="h-full w-full">
+                <img src="{{product.imagePath}}">
               </ion-card>
               <p class="text-black-2 text-2xl mt-2 font-medium">{{product.name}}</p>
             </div>

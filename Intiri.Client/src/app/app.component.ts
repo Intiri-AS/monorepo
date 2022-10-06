@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.setCurrentUser();
     this.setCurrentProject();
-    this.setCurrentMoodboard();
     this.languageService.setInitialAppLanguage();
   }
 
@@ -50,9 +49,5 @@ export class AppComponent implements OnInit {
     this.projectService.setCurrentProject(project);
   }
 
-  setCurrentMoodboard() {
-    const moodboard: Moodboard = JSON.parse(sessionStorage.getItem('moodboard'));
-    this.moodboardService.setCurrentMoodboard(moodboard);
-  }
 
 }

@@ -14,7 +14,7 @@ export class MoodboardDetailsPage implements OnInit {
 
   moodboard: Moodboard;
 
-  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router) 
+  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router)
   {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -23,6 +23,9 @@ export class MoodboardDetailsPage implements OnInit {
     this.route.data.subscribe(data => {
       this.moodboard = data.moodboard;
     })
+  }
+  backToProjectDetails() {
+    this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
   }
 
 }
