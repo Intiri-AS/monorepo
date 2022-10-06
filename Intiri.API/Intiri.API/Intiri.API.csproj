@@ -24,6 +24,7 @@
     </PackageReference>
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Twilio" Version="5.80.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,6 +23,7 @@ namespace Intiri.API.Controllers
 		private readonly ITokenService _tokenService;
 		private readonly IAccountService _accountService;
 		private readonly IVippsLoginService _vippsLoginService;
+		private readonly ISmsVerificationService _smsVerificationService;
 		private readonly ILogger<AccountController> _logger;
 
 		#endregion  Fields
@@ -35,12 +36,14 @@ namespace Intiri.API.Controllers
 			IMapper mapper,
 			IAccountService accountService,
 			IVippsLoginService vippsLoginService,
+			ISmsVerificationService smsVerificationService,
 			ILogger<AccountController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
 			_accountService = accountService;
 			_vippsLoginService = vippsLoginService;
+			_smsVerificationService = smsVerificationService;
 			_logger = logger;
 		}
 
@@ -79,9 +82,9 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("login")]
-		public async Task<ActionResult<LoginOutDTO>> Login(LoginInDTO loginDto)
+		public async Task<ActionResult> Login(LoginInDTO loginDto)
 		{
-			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
+			string fullPhoneNumber = "+" + loginDto.CountryCode + loginDto.PhoneNumber;
 			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
 			
 			if (user == null)
@@ -89,11 +92,39 @@ namespace Intiri.API.Controllers
 				return BadRequest("Invalid user phone number");
 			}
 
-			return new LoginOutDTO
+			var result = await _smsVerificationService.SendSmsVerificationCode(fullPhoneNumber);
+
+			if (result.Value)
+			{
+				return Ok();
+			}
+			return BadRequest();
+		}
+
+		[HttpPost("sms-verification")]
+		public async Task<ActionResult<LoginOutDTO>> SmsVerification(SmsVerificationInDTO verificationDto)
+		{
+			User user = await _accountService
+				.GetUserByPhoneNumberAsync(verificationDto.PhoneNumber);
+
+			if (user == null)
+			{
+				return BadRequest("Invalid user phone number");
+			}
+
+			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+				verificationDto.PhoneNumber, verificationDto.VerificationCode);
+
+			if (!isSuccess)
+			{
+				return BadRequest("SMS verification failed");
+			}
+
+			return Ok(new LoginOutDTO
 			{
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
-			};
+			});
 		}
 
 		[HttpDelete("delete-user/{phone}")]

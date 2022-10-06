@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import {CodeInputComponent} from 'angular-code-input';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CodeInputComponent } from 'angular-code-input';
+import { SmsVerificationDTO } from 'src/app/DTOs/sms-verification.dto';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-sms-verification-page',
@@ -8,8 +10,8 @@ import {CodeInputComponent} from 'angular-code-input';
   styleUrls: ['./sms-verification.page.scss'],
 })
 
-export class SmsVerificationPage implements OnInit{
-
+export class SmsVerificationPage implements OnInit {
+  private phoneNumber: string;
   @ViewChild('codeInput') codeInput !: CodeInputComponent;
 
   // This is only for testing and presenatation purpose
@@ -17,9 +19,13 @@ export class SmsVerificationPage implements OnInit{
   registerCode = '222222'
   resetPassCode = '333333'
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.phoneNumber = this.route.snapshot.paramMap.get('phoneNumber');
   }
 
   // this called every time when user changed the code
@@ -28,14 +34,14 @@ export class SmsVerificationPage implements OnInit{
   }
 
   // this called only if user entered full code
-  public onCodeCompleted(code) {
-
+  public onCodeCompleted(verificationCode) {
+    this.accountService.smsVerification(this.phoneNumber, verificationCode);
     // This is only for testing and presenatation purpose
-    if (this.loginCode === code) {
+    if(this.loginCode === verificationCode) {
       this.router.navigateByUrl('/my-intiri');
-    }else if (this.resetPassCode === code) {
+    } else if (this.resetPassCode === verificationCode) {
       this.router.navigateByUrl('/reset-password');
-    }else if(this.registerCode === code){
+    } else if (this.registerCode === verificationCode) {
       this.router.navigateByUrl('/login');
     }
 

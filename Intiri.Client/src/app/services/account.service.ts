@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { VippsAccessTokenRequestDTO } from '../DTOs/vipps-access-token.dto';
 import { VippsAuthUrlRequestDTO } from '../DTOs/vipps-auth-url.dto';
+import { SmsVerificationDTO } from '../DTOs/sms-verification.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,18 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   login(model) {
-    return this.http.post(this.apiUrl + 'account/login', model).pipe(
+    return this.http.post(this.apiUrl + 'account/login', model).subscribe(
+      () => {
+
+      }, error => {
+        console.log();
+      }
+    )
+  }
+
+  smsVerification(phoneNumber: string, verificationCode: string) {
+    const verificationDTO = new SmsVerificationDTO(phoneNumber, verificationCode);
+    return this.http.post(this.apiUrl + 'account/sms-verification', verificationDTO).pipe(
       map((user: User) => {
         if (user) {
           this.setCurrentUser(user);

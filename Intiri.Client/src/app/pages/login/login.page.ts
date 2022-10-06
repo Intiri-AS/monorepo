@@ -54,9 +54,9 @@ export class LoginPage implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber
     }
+    const phoneNumber = `+${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(response => {
-      console.log(response);
-      this.router.navigateByUrl('/sms-verification');
+      this.router.navigate(['/sms-verification'], {queryParams: {phoneNumber: phoneNumber}});
     },error =>{
       console.log(error);
     });
