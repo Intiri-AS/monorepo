@@ -2,16 +2,16 @@
 <section class="sm:flex">
   <div class="profile-input">
     <span class="text-sm text-black-2">First name</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.firstName"></ion-input>
   </div>
   <div class="profile-input">
     <span class="text-sm text-black-2">Last name</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.lastName"></ion-input>
   </div>
 </section>
 <div class="profile-input">
   <span class="text-sm text-black-2">Gender</span>
-  <ion-select interface="popover">
+  <ion-select interface="popover" [value]="userInfo.gender" (ionChange)="genderChange($event)">
     <ion-select-option value="male">Male</ion-select-option>
     <ion-select-option value="female">Female</ion-select-option>
     <ion-select-option value="non-binary">Non-binary</ion-select-option>
@@ -23,45 +23,45 @@
 <section class="flex">
   <div class="phone-input">
     <span class="text-sm text-black-2">Phone number</span>
-    <ion-select class="" interface="popover">
-      <ion-select-option value="denmark">+45</ion-select-option>
-      <ion-select-option value="sweden">+46</ion-select-option>
-      <ion-select-option value="norway">+47</ion-select-option>
-      <ion-select-option value="serbia">+381</ion-select-option>
-      <ion-select-option value="montenegro">+382</ion-select-option>
+    <ion-select class="" interface="popover" [value]="userInfo.countryCode" (ionChange)="countryCodeChange($event)">
+      <ion-select-option value="45">+45</ion-select-option>
+      <ion-select-option value="46">+46</ion-select-option>
+      <ion-select-option value="47">+47</ion-select-option>
+      <ion-select-option value="381">+381</ion-select-option>
+      <ion-select-option value="382">+382</ion-select-option>
     </ion-select>
   </div>
   <div class="profile-input">
     <span class="text-sm invisible">Phone number</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.phoneNumber"></ion-input>
   </div>
 </section>
 
 <div class="profile-input">
   <span class="text-sm text-black-2">Email</span>
-  <ion-input type="email" class="border rounded-2xl h-14 border-black-2"></ion-input>
+  <ion-input type="email" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.email"></ion-input>
   <span class="text-sm text-[#eb445a] hidden">Wrong format</span>
 </div>
 <div class="profile-input">
   <span class="text-sm text-black-2">Street</span>
-  <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+  <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.street"></ion-input>
 </div>
 <section class="sm:flex">
   <div class="profile-input">
     <span class="text-sm text-black-2">Postal code</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.postalCode"></ion-input>
   </div>
   <div class="profile-input">
     <span class="text-sm text-black-2">City</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.city"></ion-input>
   </div>
 </section>
 <div class="profile-input">
   <span class="text-sm text-black-2">Country</span>
-  <ion-select interface="popover">
-    <ion-select-option value="apples">Apples</ion-select-option>
-    <ion-select-option value="oranges">Oranges</ion-select-option>
-    <ion-select-option value="bananas">Bananas</ion-select-option>
+  <ion-select interface="popover" [value]="userInfo.country" (ionChange)="countryChange($event)">
+    <ion-select-option value="norway">Norway</ion-select-option>
+    <ion-select-option value="serbia">Serbia</ion-select-option>
+    <ion-select-option value="england">England</ion-select-option>
   </ion-select>
 </div>
 
