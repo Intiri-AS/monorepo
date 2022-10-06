@@ -22,6 +22,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public ICollection<int> ColorPaletteIds { get; set; }
 
-		public ICollection<int> MoodboardIds { get; set; }
+		[Required]
+		public MoodboardInDTO Moodboard { get; set; }
 	}
 }
