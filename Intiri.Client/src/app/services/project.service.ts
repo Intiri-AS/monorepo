@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Moodboard } from '../models/moodboard.model';
 import { Project } from '../models/project.model';
 
 @Injectable({
@@ -59,7 +60,7 @@ export class ProjectService implements Resolve<Project> {
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
       budgetRate: 0, // ?
-      moodboard: project.currentMoodboard,
+      moodboard: this.parseMoodboard(project.currentMoodboard),
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 
@@ -73,14 +74,14 @@ export class ProjectService implements Resolve<Project> {
 
   saveProject(project) {
     const req_data = this.parseProject(project);
-    return this.http.post(this.apiUrl + 'projects/add', req_data);
+    return this.http.post(this.apiUrl + 'projects/create', req_data);
   }
 
   addMoodboardToProject(project: Project)
   {
     const reqData = {
       projectId: project.id,
-      moodboard: project.currentMoodboard
+      moodboard: this.parseMoodboard(project.currentMoodboard)
     }
     return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
   }
@@ -88,5 +89,19 @@ export class ProjectService implements Resolve<Project> {
   resolve(route: ActivatedRouteSnapshot): Observable<Project> {
     return this.getProject(parseInt(route.paramMap.get('id')));
   }
+
+  parseMoodboard(moodboard: Moodboard) {
+    let parsedMdb = {
+      styleId: moodboard.style['id'],
+      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+      roomId: moodboard.room['id'],
+      materialIds: moodboard.materials.map(e=> e['id']),
+      productIds: moodboard.products.map(e=> e['id']),
+      id: moodboard.id,
+      name: moodboard.name, // remove later
+      sourceMoodboardId: moodboard.sourceMoodboardId
+    }
+    return parsedMdb;
+  };
 
 }

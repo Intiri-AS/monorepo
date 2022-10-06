@@ -95,7 +95,7 @@ export class CustomizeMoodboardPage {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.moodboard[stepName])) {
-      if(this.moodboard[stepName].some(e => e.name === item.name)) { // TODO: change to id
+      if(this.moodboard[stepName].some(e => e.id === item.id)) {
         this.moodboard[stepName] = this.moodboard[stepName].filter(e => e.id !== item.id);
       } else {
         this.moodboard[stepName] = [...this.moodboard[stepName], item];

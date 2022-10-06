@@ -224,7 +224,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("moodboard-match")]
-		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] ProjectInDTO projectIn)
+		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
 		{
 			IEnumerable<Moodboard> roomMoodboards =
 				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(projectIn.RoomId);
