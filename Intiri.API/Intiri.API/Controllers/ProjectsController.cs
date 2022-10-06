@@ -7,7 +7,9 @@ using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
@@ -81,24 +83,53 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("addMoodboard")]
-		public async Task<ActionResult<int>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
+		public async Task<ActionResult<ProjectOutDTO>> AddMoodboardToProject(MoodboardToProjectInDTO moodboardProjectIn)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetProjectByName(moodboardProjectIn.ProjectName);
+			Project project = await _unitOfWork.ProjectRepository.GetProjectById(moodboardProjectIn.ProjectId);
 
 			if (project == null)
 			{
-				return BadRequest($"Project with id '{moodboardProjectIn.ProjectName}' doesn't exists");
+				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
 			}
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.MoodboardId);
-			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			Moodboard moodboard = null;
+			Moodboard newMoodboard = null;
+
+			if (moodboardProjectIn.Moodboard.Id > 0)
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.Moodboard.Id);
+				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			}
+			else
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardProjectIn.Moodboard.SourceMoodboardId);
+				newMoodboard = _mapper.Map<Moodboard>(moodboardProjectIn.Moodboard);
+				newMoodboard.SourceMoodboard = moodboard; 
+				newMoodboard.IsTemplate = false;
+				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
+
+				User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+				newMoodboard.Designer = user;
+
+				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
+				newMoodboard.Room = room;
+
+				IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardProjectIn.Moodboard.ColorPaletteIds);
+				newMoodboard.ColorPalettes = colorPalettes.ToArray();
+
+				IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardProjectIn.Moodboard.MaterialIds);
+				newMoodboard.Materials = materials.ToArray();
+
+				IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardProjectIn.Moodboard.ProductIds);
+				newMoodboard.Materials = materials.ToArray();
+			}
 
 			project.ProjectMoodboards.Add(newMoodboard);
-			Project updatedProject = await _unitOfWork.ProjectRepository.GetProjectById(project.Id);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok(_mapper.Map<ProjectOutDTO>(updatedProject));
+				project.ProjectMoodboards.Add(newMoodboard);
+				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
 			return BadRequest("Problem occured while adding moodboard to project");
@@ -139,6 +170,7 @@ namespace Intiri.API.Controllers
 
 			if (await _unitOfWork.SaveChanges())
 			{
+
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
