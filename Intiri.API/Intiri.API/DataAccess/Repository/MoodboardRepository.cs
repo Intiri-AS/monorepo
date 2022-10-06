@@ -117,12 +117,14 @@ namespace Intiri.API.DataAccess.Repository
 			_context.Entry(clonedMoodboard).CurrentValues.SetValues(moodboardValues);
 			_context.Entry(clonedMoodboard).State = EntityState.Added;
 
-			await _context.Moodboards.AddAsync(clonedMoodboard);
+			_context.Moodboards.Add(clonedMoodboard);
+			await _context.SaveChangesAsync();
 
 			clonedMoodboard.SourceMoodboard = moodboard;
 			clonedMoodboard.Materials = moodboard.Materials.ToArray();
 			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
 			clonedMoodboard.Products = moodboard.Products.ToArray();
+			clonedMoodboard.IsTemplate = false;
 
 			return clonedMoodboard;
 		}
