@@ -8,7 +8,7 @@ namespace Intiri.API.Models.DTO.OutputDTO.Room
 
         public string Name { get; set; }
 
-        public string ImagePath { get; set; }
+        public string IconPath { get; set; }
 
         public string Description { get; set; }
 
