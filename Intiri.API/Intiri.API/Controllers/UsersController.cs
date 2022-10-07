@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +20,7 @@ namespace Intiri.API.Controllers
 
 		#region Fields
 
+		private readonly IFileUploadService _fileUploadService;
 		private readonly ILogger<UsersController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -83,8 +88,49 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<UserOutDTO>(user);
 		}
 
+		[HttpPost("addPhoto")]
+		public async Task<ActionResult<string>> AddPhoto(IFormFile file)
+		{
+			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user.");
+			}
+
+			if (file.Length > 0)
+			{
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.UserProfilePhotos);
+				}
+				catch (Exception ex)
+				{
+					return BadRequest($"Failed to upload user photo: {ex.Message}");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest($"Failed to upload user photo: {uploadResult.Error.Message}");
+				}
+
+				user.PhotoPath = uploadResult.SecureUrl.AbsoluteUri;
+				user.PublicId = uploadResult.PublicId;
+
+				_unitOfWork.UserRepository.UpdateUser(user);
+
+				if (await _unitOfWork.SaveChanges())
+				{
+					return Ok(new UserPhotoPathOutDTO() { PhotoPath = user.PhotoPath });
+				}
+			}
+
+			return BadRequest("Problem adding user photo.");
+		}
+
 		[HttpPut("update")]
-		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
+		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserOutDTO userUpdateDto)
 		{
 			User user = await _accountService.GetUserByPhoneNumberAsync(User.GetUsername());
 
@@ -96,7 +142,7 @@ namespace Intiri.API.Controllers
 				return _mapper.Map<UserOutDTO>(user);
 			}
 
-			return BadRequest("Failed to update user");
+			return BadRequest("Failed to update user.");
 		}
 
 		#endregion Public methods
