@@ -92,8 +92,8 @@ namespace Intiri.API.Controllers
 
 				Room room = _mapper.Map<Room>(roomInDTO);
 
-				room.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
-				room.ImagePublicId = uploadResult.PublicId;
+				room.IconPath = uploadResult.SecureUrl.AbsoluteUri;
+				room.IconPublicId = uploadResult.PublicId;
 
 				_unitOfWork.RoomRepository.Insert(room);
 
@@ -120,10 +120,10 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				string imagePath = room.ImagePath;
+				string iconPath = room.IconPath;
 
 				DeletionResult deletionResult = await _fileUploadService
-					.DeleteFileAsync(room.ImagePublicId);
+					.DeleteFileAsync(room.IconPublicId);
 
 				if (deletionResult.Error != null)
 				{

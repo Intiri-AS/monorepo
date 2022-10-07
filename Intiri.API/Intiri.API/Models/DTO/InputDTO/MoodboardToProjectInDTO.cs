@@ -3,6 +3,6 @@
 	public class MoodboardToProjectInDTO
 	{
 		public int ProjectId { get; set; }
-		public int MoodboardId { get; set; }
+		public MoodboardInDTO Moodboard { get; set; }
 	}
 }

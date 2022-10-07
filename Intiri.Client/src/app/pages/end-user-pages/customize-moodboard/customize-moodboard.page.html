@@ -51,8 +51,7 @@
                 *ngIf="currentStepNo === 2"
                 class="primary-btn"
                 [class.disabled]="!validateData()"
-                routerLink="/new-project"
-                routerDirection="root"
+                (click)="finishCustomizing()"
                 >Finish</ion-button
               >
             </ion-buttons>

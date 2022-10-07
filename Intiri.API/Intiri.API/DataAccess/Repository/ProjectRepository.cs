@@ -45,6 +45,22 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.ColorPalettes)
 				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
+					.ThenInclude(p => p.Style)
+					.ThenInclude(p => p.StyleImages)
+				.FirstOrDefaultAsync();
+		}
+
+		public async Task<Project> GetProjectByName(string projectName)
+		{
+			return await _context.Projects
+				.Where(p => p.Name == projectName)
+				.Include(p => p.Room)
+				.Include(p => p.StyleImages)
+				.Include(p => p.ColorPalettes)
+				.Include(p => p.RoomDetails)
+				.Include(p => p.ProjectMoodboards)
+				.ThenInclude(p => p.Style)
+				.ThenInclude(p => p.StyleImages)
 				.FirstOrDefaultAsync();
 		}
 

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class ProjectInDTO
+	public class MoodboardMatchInDTO
 	{
 		[Required]
 		public string Name { get; set; }
@@ -22,7 +22,5 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public ICollection<int> ColorPaletteIds { get; set; }
 
-		[Required]
-		public MoodboardInDTO Moodboard { get; set; }
 	}
 }

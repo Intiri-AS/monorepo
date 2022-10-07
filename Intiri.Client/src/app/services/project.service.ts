@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Moodboard } from '../models/moodboard.model';
 import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ProjectService {
+export class ProjectService implements Resolve<Project> {
 
   apiUrl = environment.apiUrl;
   private currentProjectSource = new ReplaySubject<Project>(1);
   currentProject$ = this.currentProjectSource.asObservable();
 
   constructor(private http: HttpClient) { }
-
 
   setCurrentProject(project: Project) {
     if(!project) {
@@ -46,7 +47,11 @@ export class ProjectService {
   }
 
   getAllProjects(){
-    return this.http.get(this.apiUrl + 'projects');
+    return this.http.get<Project[]>(this.apiUrl + 'projects');
+  }
+
+  getProject(id: number){
+    return this.http.get<Project>(this.apiUrl + 'projects/id/' + id);
   }
 
   parseProject(project: Project) {
@@ -54,8 +59,8 @@ export class ProjectService {
       styleImageIds: project.styleImages.map(e=> e['id']),
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
-      burgetRate: 0,
-      moodboardIds: project.projectMoodboards.map(e=> e['id']),
+      budgetRate: 0, // ?
+      moodboard: this.parseMoodboard(project.currentMoodboard),
       roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
       name: project.name}
 
@@ -69,17 +74,36 @@ export class ProjectService {
 
   saveProject(project) {
     const req_data = this.parseProject(project);
-    return this.http.post(this.apiUrl + 'projects/add', req_data);
+    return this.http.post(this.apiUrl + 'projects/create', req_data);
   }
 
-  addMoodboardToProject(project)
+  addMoodboardToProject(project: Project)
   {
     const reqData = {
-      projectId: project['id'],
-      moodboardId: project.projectMoodboards[0].id
+      projectId: project.id,
+      moodboard: this.parseMoodboard(project.currentMoodboard)
     }
-
     return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
-
   }
+
+  resolve(route: ActivatedRouteSnapshot): Observable<Project> {
+    return this.getProject(parseInt(route.paramMap.get('id')));
+  }
+
+  parseMoodboard(moodboard: Moodboard) {
+    if(moodboard.room && moodboard.style) {
+      let parsedMdb = {
+        styleId: moodboard.style ? moodboard.style['id'] : null,
+        colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+        roomId: moodboard.room['id'],
+        materialIds: moodboard?.materials.map(e=> e['id']),
+        productIds: moodboard?.products.map(e=> e['id']),
+        id: moodboard.id,
+        name: moodboard.name, // remove later
+        sourceMoodboardId: moodboard.sourceMoodboardId
+      }
+      return parsedMdb;
+    } return moodboard;
+  };
+
 }

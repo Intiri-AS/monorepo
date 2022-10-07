@@ -36,7 +36,7 @@ export class NewProjectStepComponent implements OnInit {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.project[stepName])) {
-      if(this.project[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
+      if(this.project[stepName].some(e => e.id === item.id)) {
         return true;
       }
     } else { // else it's a single select
@@ -45,7 +45,7 @@ export class NewProjectStepComponent implements OnInit {
         return JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
        }
        else {
-        return JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+        return this.project[stepName].id === item.id
        }
     }
     return false;

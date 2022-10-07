@@ -77,6 +77,21 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
+		public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
+		{
+			return await _context.Moodboards
+				.Include(m => m.Room)
+				.Include(m => m.Materials)
+					.ThenInclude(mat => mat.MaterialType)
+				.Include(m => m.Products)
+					.ThenInclude(p => p.ProductType)
+				.Include(m => m.ColorPalettes)
+				.Include(m => m.Style)
+					.ThenInclude(s => s.StyleImages)
+				.Where(m => moodboardName == m.Name)
+				.FirstOrDefaultAsync();
+		}
+
 		public async Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard)
 		{
 			return await _context.Moodboards
@@ -102,12 +117,14 @@ namespace Intiri.API.DataAccess.Repository
 			_context.Entry(clonedMoodboard).CurrentValues.SetValues(moodboardValues);
 			_context.Entry(clonedMoodboard).State = EntityState.Added;
 
-			await _context.Moodboards.AddAsync(clonedMoodboard);
+			_context.Moodboards.Add(clonedMoodboard);
+			await _context.SaveChangesAsync();
 
 			clonedMoodboard.SourceMoodboard = moodboard;
 			clonedMoodboard.Materials = moodboard.Materials.ToArray();
 			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
 			clonedMoodboard.Products = moodboard.Products.ToArray();
+			clonedMoodboard.IsTemplate = false;
 
 			return clonedMoodboard;
 		}

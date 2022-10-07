@@ -7,7 +7,9 @@ using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
@@ -62,7 +64,18 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{projectId}")]
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectById(int projectId)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+			Project project = await _unitOfWork.ProjectRepository.GetProjectById(projectId);
+
+			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
+
+			return Ok(projectOut);
+		}
+
+		//[HttpGet("{name}", Name = "GetProject")]
+		[HttpGet("name/{projectName}")]
+		public async Task<ActionResult<ProjectOutDTO>> GetProjectByName(string projectName)
+		{
+			Project project = await _unitOfWork.ProjectRepository.GetProjectByName(projectName);
 
 			ProjectOutDTO projectOut = _mapper.Map<ProjectOutDTO>(project);
 
@@ -70,30 +83,63 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("addMoodboard")]
-		public async Task<ActionResult<int>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
+		public async Task<ActionResult<ProjectOutDTO>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetByID(moodboardProjectIn.ProjectId);
+			Project project = await _unitOfWork.ProjectRepository.GetProjectById(moodboardProjectIn.ProjectId);
 
 			if (project == null)
 			{
 				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
 			}
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.MoodboardId);
-			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			Moodboard moodboard = null;
+			Moodboard newMoodboard = null;
+
+			if (moodboardProjectIn.Moodboard.Id > 0)
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.Moodboard.Id);
+				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			}
+			else
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardProjectIn.Moodboard.SourceMoodboardId);
+				newMoodboard = _mapper.Map<Moodboard>(moodboardProjectIn.Moodboard);
+				newMoodboard.SourceMoodboard = moodboard; 
+				newMoodboard.IsTemplate = false;
+				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
+
+				User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+				newMoodboard.Designer = user;
+
+				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
+				newMoodboard.Room = room;
+
+                Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(moodboardProjectIn.Moodboard.StyleId);
+                newMoodboard.Style = style;
+
+                IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardProjectIn.Moodboard.ColorPaletteIds);
+				newMoodboard.ColorPalettes = colorPalettes.ToArray();
+
+				IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardProjectIn.Moodboard.MaterialIds);
+				newMoodboard.Materials = materials.ToArray();
+
+				IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardProjectIn.Moodboard.ProductIds);
+				newMoodboard.Products = products.ToArray();
+			}
 
 			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
+				project.ProjectMoodboards.Add(newMoodboard);
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
 			return BadRequest("Problem occured while adding moodboard to project");
 		}
 
-		[HttpPost("add")]
-		public async Task<ActionResult<int>> Add([FromBody] ProjectInDTO projectIn)
+		[HttpPost("create")]
+		public async Task<ActionResult<ProjectOutDTO>> Add([FromBody] ProjectInDTO projectIn)
 		{
 			if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.Name))
 			{
@@ -117,8 +163,39 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.RoomId);
 			project.Room = room;
 
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.MoodboardIds.FirstOrDefault());
-			Moodboard newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			Moodboard moodboard = null;
+			Moodboard newMoodboard = null;
+
+			if (projectIn.Moodboard.Id > 0)
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.Moodboard.Id);
+				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+			}
+			else
+			{
+				moodboard = await _unitOfWork.MoodboardRepository.GetByID(projectIn.Moodboard.SourceMoodboardId);
+				newMoodboard = _mapper.Map<Moodboard>(projectIn.Moodboard);
+				newMoodboard.SourceMoodboard = moodboard;
+				newMoodboard.IsTemplate = false;
+				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
+
+				newMoodboard.Designer = user;
+
+				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.Moodboard.RoomId);
+				newMoodboard.Room = mRoom;
+
+                Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(projectIn.Moodboard.StyleId);
+                newMoodboard.Style = style;
+
+                IEnumerable<ColorPalette> mColorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.Moodboard.ColorPaletteIds);
+				newMoodboard.ColorPalettes = mColorPalettes.ToArray();
+
+				IEnumerable<Material> mMaterials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(projectIn.Moodboard.MaterialIds);
+				newMoodboard.Materials = mMaterials.ToArray();
+
+				IEnumerable<Product> mProducts = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(projectIn.Moodboard.ProductIds);
+				newMoodboard.Products = mProducts.ToArray();
+			}
 
 			_unitOfWork.ProjectRepository.Insert(project);
 
@@ -153,7 +230,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("moodboard-match")]
-		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] ProjectInDTO projectIn)
+		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
 		{
 			IEnumerable<Moodboard> roomMoodboards =
 				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(projectIn.RoomId);

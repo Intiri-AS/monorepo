@@ -1,27 +1,27 @@
 ﻿[
 	{
 		"Name": "Scandinavian",
-		"ImagePath": "path",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage2_1_jxaje9.png",
 		"Description": "Description Scandinavian"
 	},
 	{
 		"Name": "Classic",
-		"ImagePath": "path",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage3_1_cwtvti.png",
 		"Description": "Description Classic"
 	},
 	{
 		"Name": "Traditional",
-		"ImagePath": "path",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage4_1_pbaanw.png",
 		"Description": "Description Traditional"
 	},
 	{
 		"Name": "Glam",
-		"ImagePath": "path",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage5_1_qtqvst.png",
 		"Description": "Description Glam"
 	},
 	{
 		"Name": "Preppy",
-		"ImagePath": "path",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage3_2_kmhuzg.png",
 		"Description": "Description Glam"
 	}
 ]

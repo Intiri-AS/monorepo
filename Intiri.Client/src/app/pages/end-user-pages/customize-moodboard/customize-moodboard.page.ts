@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -25,14 +27,11 @@ export class CustomizeMoodboardPage {
     }
   ];
 
-  moodboard: object = {
-    'color-pallete': [],
-    'materials': [],
-    'products': []
-  }
+  initialMoodboard: Moodboard;
+  moodboard: Moodboard;
 
   stepsOrder: object = {
-    0: 'color-pallete',
+    0: 'colorPalettes',
     1: 'materials',
     2: 'products',
   }
@@ -42,14 +41,19 @@ export class CustomizeMoodboardPage {
   constructor(public projectService: ProjectService) {}
 
   ngOnInit() {
-    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
+
+    this.projectService.currentProject$.subscribe((project) => {
+      this.moodboard = project.currentMoodboard;
+      this.initialMoodboard = {...project.currentMoodboard};
+    });
+    this.projectService.getColorPalettes().subscribe((res: Array<any>) => {
       this.steps[0]['data'] = res;
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[1]['data'] = res;
     });
     this.projectService.getProducts().subscribe((res: Array<any>) => {
-      this.steps[2]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[2]['data'] = res;
     });
   }
 
@@ -77,21 +81,21 @@ export class CustomizeMoodboardPage {
     }
     switch(step) {
       case 0: { return true; }
-      case 1: { return this.moodboard['color-pallete'].length > 0; }
-      case 2: { return this.moodboard['color-pallete'].length > 0 && this.moodboard['materials'].length > 0}
+      case 1: { return this.moodboard.colorPalettes.length > 0; }
+      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0}
     }
     return true;
   }
 
   validateData(): boolean {
-    return this.moodboard['color-pallete'].length > 0 && this.moodboard['materials'].length > 0 && this.moodboard['products'].length > 0
+    return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0 && this.moodboard.products.length > 0
   }
 
   toggleItem(item) {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.moodboard[stepName])) {
-      if(this.moodboard[stepName].includes(item)) {
+      if(this.moodboard[stepName].some(e => e.id === item.id)) {
         this.moodboard[stepName] = this.moodboard[stepName].filter(e => e.id !== item.id);
       } else {
         this.moodboard[stepName] = [...this.moodboard[stepName], item];
@@ -100,6 +104,19 @@ export class CustomizeMoodboardPage {
       // else it's a single select
       this.moodboard[stepName] = this.moodboard[stepName] === item ? null : item;
     }
+  }
+
+  finishCustomizing() {
+    if(JSON.stringify(this.moodboard) !== JSON.stringify(this.initialMoodboard)) {
+      this.moodboard.sourceMoodboardId = this.moodboard.id;
+      this.moodboard.id = 0;
+    }
+    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
+      const customizedProject = project;
+      customizedProject.currentMoodboard = this.moodboard;
+      this.projectService.setCurrentProject(customizedProject);
+      location.replace('/new-project?step=5'); // in future figure out how to do this with router.navigate
+    });
   }
 
 }

@@ -8,7 +8,6 @@
         </ion-select>
       </div>
     </ion-col>
-    
     <ion-col size="6" offset-xl="6.5" size-xl="2.5" class="flex justify-end">
       <ion-button (click)="addPicture()" fill="clear" class="primary-btn mt-4">Add pictures</ion-button>
     </ion-col>
@@ -17,7 +16,7 @@
     <ion-col *ngFor="let styleImage of (styleImages$ | async)" size="12" size-sm="5.75" size-xl="2.85">
       <div class="card">
         <div class="p-[20px] h-full w-full">
-          <img src="{{styleImage.path}}" class="object-cover !h-full !w-full" alt="Picture Img" />
+          <img src="{{styleImage.imagePath}}" class="object-cover !h-full !w-full" alt="Picture Img" />
         </div>
       </div>
       <div class="flex justify-between">

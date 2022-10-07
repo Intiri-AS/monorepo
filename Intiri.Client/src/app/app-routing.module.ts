@@ -36,12 +36,22 @@ import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
 import { ProcessingPage } from './pages/processing/processing.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
+import { ProjectService } from './services/project.service';
+import { MoodboardService } from './services/moodboard.service';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'
+  },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    children: [
+      {path: 'project-details/:id', component: ProjectDetailsPage, resolve: {project: ProjectService}},
+      {path: 'project-details/:projectId/moodboard-details/:id', component: MoodboardDetailsPage, resolve: {moodboard: MoodboardService}},
+    ]
   },
   {
     path: 'landing',

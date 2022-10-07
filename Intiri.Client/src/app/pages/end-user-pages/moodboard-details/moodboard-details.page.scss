@@ -3,3 +3,60 @@
   --padding-start: 4px;
   text-transform: none;
 }
+
+img {
+  @apply h-full w-full object-cover
+}
+
+.result-grid {
+  @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
+}
+
+.step-color-wrapper {
+  @apply h-[87%] rounded-sm m-2;
+}
+
+.step-items-row {
+  @apply gap-x-[2%];
+}
+
+.step-items {
+  @apply max-h-[750px] overflow-auto mb-3;
+}
+
+.step-image {
+  @apply object-cover h-full w-full rounded-sm p-2;
+}
+
+.item {
+  &-sm {
+    @apply bg-light;
+    height: 53px;
+  }
+  &-sm-tall {
+    @apply bg-secondary;
+    grid-row: auto / span 3;
+    height: 184px;
+  }
+  &-md {
+    @apply bg-primary;
+    background-size: cover !important;
+    grid-column: auto / span 2;
+    grid-row: auto / span 1.5;
+    height: 86px;
+  }
+  &-lg {
+    @apply bg-landing-img;
+    background-size: cover !important;
+    grid-column: auto / span 4;
+    grid-row: auto / span 3;
+    height: 184px;
+  }
+  &-lg-tall {
+    @apply bg-img-01;
+    background-size: cover !important;
+    grid-column: auto / span 4;
+    grid-row: auto / span 6;
+    height: 381px;
+  }
+}

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -11,33 +14,34 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 
 export class ProjectDetailsPage implements OnInit {
-  
-  currentProject: Project;
-  
-  constructor(public projectService: ProjectService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.currentProject =  this.router.getCurrentNavigation().extras.state.data;
+  project: Project;
+  moodboards: Moodboard[];
+
+  constructor(public projectService: ProjectService, private route: ActivatedRoute, public moodboardService: MoodboardService, private router: Router)
+  {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  goToMoodboardDetails(moodboard: Moodboard){
-    this.router.navigate(['/moodboard-details'], {
-      state:{
-        data: moodboard
-      }
-    });
+  ngOnInit() {
+    this.route.data.pipe(take(1)).subscribe(data => {
+      this.project = data.project;
+      this.moodboards = this.project.projectMoodboards;
+    })
   }
+
+
+  // goToMoodboardDetails(moodboard: Moodboard){
+  //   this.moodboardService.setCurrentMoodboard(moodboard);
+  //   this.router.navigateByUrl('/moodboard-details');
+  // }
 
   addMoodboardToProject()
   {
-    //sessionStorage.clear();
-    this.currentProject.room = {};
-    this.currentProject.budget = '';
-    this.currentProject.roomDetails = {};
-    this.currentProject.colorPalettes = [];
-    this.currentProject.styleImages = [];
-    this.currentProject.projectMoodboards = [];
-    this.projectService.setCurrentProject(this.currentProject);
+    const currentProject = new Project();
+    currentProject.id = this.project.id;
+    currentProject.name = this.project.name;
+    this.projectService.setCurrentProject(currentProject);
     this.router.navigateByUrl('/new-project');
 
   }

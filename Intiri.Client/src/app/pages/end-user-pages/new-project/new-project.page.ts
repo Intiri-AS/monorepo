@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { take } from 'rxjs/operators';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
-import { SmsVerificationModalComponent } from 'src/app/components/modals/sms-verification-modal/sms-verification-modal.component';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
 import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -15,7 +16,7 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class NewProjectPage implements OnInit {
   isScrolledDown: boolean;
-  isExistProject: boolean;
+  isExistingProject: boolean = false;
 
   steps: Array<object> = [
     {
@@ -65,7 +66,7 @@ export class NewProjectPage implements OnInit {
     1: 'styleImages',
     2: 'roomDetails.shape',
     3: 'colorPalettes',
-    4: 'projectMoodboards',
+    4: 'currentMoodboard',
     5: 'final',
   };
 
@@ -75,30 +76,41 @@ export class NewProjectPage implements OnInit {
     private modalController: ModalController,
     public projectService: ProjectService,
     private accountService: AccountService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    // Jump to step where login modal occurred
     const isRedirectedFromLogin = this.checkIfRedirectedFromLogin();
     if (isRedirectedFromLogin) {
-      const stepParam = this.route.snapshot.queryParamMap.get('step');
-      const step = parseInt(stepParam, 10);
+      const stepNum = this.route.snapshot.queryParamMap.get('step');
+      const step = parseInt(stepNum, 10);
       if (!isNaN(step))
       {
         this.currentStepNo = step;
       } else {
-        console.log(`Invalid value received for step param: ${stepParam}`);
+        console.log(`Invalid value received for step param: ${stepNum}`);
       }
     }
 
-    this.isExistProject = true;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const stepParam = parseInt(urlParams.get('step'), 10);
+
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
-      if (project.name === '') {
-        this.isExistProject = false;
+      if (project.name === "") {
         this.openStartModal();
+      } if (project.id) {
+        this.isExistingProject = true;
       }
+    });
+
+    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
+      // initial path parameter check (and redirect to that step if possible)
+      if(stepParam && this.canChangeToStep(stepParam)) {
+        this.currentStepNo = stepParam;
+      } else this.currentStepNo = 0;
     });
 
     this.projectService.getRooms().subscribe((res) => {
@@ -114,9 +126,19 @@ export class NewProjectPage implements OnInit {
     });
   }
 
+  changeQueryParam(step){
+    this.router.navigate([], {
+     relativeTo: this.route,
+     queryParams: {
+       step
+     },
+   });
+  }
+
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
       this.currentStepNo--;
+      this.changeQueryParam(this.currentStepNo);
       this.projectService.setCurrentProject(this.project);
     }
     if (this.currentStepNo === 4) {
@@ -131,6 +153,7 @@ export class NewProjectPage implements OnInit {
     } else {
       if (this.canChangeToStep(this.currentStepNo + 1)) {
         this.currentStepNo++;
+        this.changeQueryParam(this.currentStepNo);
         this.projectService.setCurrentProject(this.project);
       }
       if (this.currentStepNo === 4) {
@@ -142,6 +165,7 @@ export class NewProjectPage implements OnInit {
   goToStep(stepNo) {
     if (this.canChangeToStep(stepNo)) {
       this.currentStepNo = stepNo;
+      this.changeQueryParam(stepNo);
       this.projectService.setCurrentProject(this.project);
     }
     if (stepNo === 4) {
@@ -165,28 +189,32 @@ export class NewProjectPage implements OnInit {
     );
   }
 
-  saveCurrentProject() {
-    if (this.isExistProject) {
-      this.isExistProject = false;
+  saveCurrentProject()
+  {
+    if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
-          console.log(res);
-          this.openFinalModal();
+          this.project.projectMoodboards.push(this.project.currentMoodboard);
+          this.projectService.setCurrentProject(this.project);
+          this.openFinalModal(true);
         },
         (error) => {
           console.log(error);
         }
       );
-    } else {
+    }
+    else {
       this.saveProject();
     }
   }
 
   saveProject() {
     this.projectService.saveProject(this.project).subscribe(
-      (res) => {
+      (res: Project) => {
+        this.project.projectMoodboards.push(this.project.currentMoodboard);
+        this.project.id = res.id;
+        this.projectService.setCurrentProject(this.project);
         this.openFinalModal();
-        console.log(res);
       },
       (error) => {
         console.log(error);
@@ -232,7 +260,7 @@ export class NewProjectPage implements OnInit {
           !this.isEmpty(this.project.room) &&
           this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0 &&
-          this.project.projectMoodboards.length > 0
+          !this.isMoodboardEmpty(this.project.currentMoodboard)
         );
       }
     }
@@ -247,6 +275,12 @@ export class NewProjectPage implements OnInit {
     );
   }
 
+  isMoodboardEmpty(moodboard: Moodboard): boolean {
+    if(!moodboard.id && !moodboard.name && moodboard.materials.length === 0 && moodboard.products.length === 0 && moodboard.colorPalettes.length === 0) {
+      return true;
+    } return false;
+  }
+
   areProjectDetailsValid(): boolean {
     return (
       this.project.roomDetails['shape'] &&
@@ -257,12 +291,12 @@ export class NewProjectPage implements OnInit {
 
   toggleItem(item) {
     // if you change any selection, selected moodboard will reset
-    if (this.currentStepNo < 4) {
-      this.project.projectMoodboards = [];
+    if(this.currentStepNo < 4) {
+      this.project.currentMoodboard = new Moodboard();
     }
     const stepName = this.stepsOrder[this.currentStepNo];
-    // check if it's multi-select **and that it's not a moodboard step (this is addded additionaly, may change)**
-    if (Array.isArray(this.project[stepName]) && this.currentStepNo !== 4) {
+    // check if it's multi-select
+    if (Array.isArray(this.project[stepName])) {
       if (
         this.project[stepName].some(
           (e) => JSON.stringify(e) === JSON.stringify(item)
@@ -274,13 +308,8 @@ export class NewProjectPage implements OnInit {
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
-    } else if (this.currentStepNo === 4) {
-      this.project[stepName] =
-        JSON.stringify(this.project[stepName]) === JSON.stringify(item)
-          ? null
-          : [item];
-    } else {
-      // else it's a single select
+    }
+     else {  // else it's a single select
 
       // if it's updating sub-object
       if (stepName.includes('.')) {
@@ -311,10 +340,10 @@ export class NewProjectPage implements OnInit {
     await modal.present();
   }
 
-  async openFinalModal() {
+  async openFinalModal(existing: boolean = false) {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      componentProps: { final: true, projectName: this.project.name },
+      componentProps: {final: true, existing, project: this.project},
       cssClass: 'final-project-step-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
