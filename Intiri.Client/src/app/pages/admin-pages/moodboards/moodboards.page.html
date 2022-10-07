@@ -30,7 +30,7 @@
       </ion-row>
 
       <ion-row class="mt-8 gap-x-[1.65%]">
-        <ion-col *ngFor="let moodboard of moodboards" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
+        <ion-col *ngFor="let moodboard of (moodboards$ | async)" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
           <div class="designer ">
             <ion-grid>
               <ion-row>

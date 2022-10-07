@@ -44,10 +44,12 @@
                 <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center" (click)="unsubscribeFromChannel()">Sina Marlsberg</p>
               </div>
               <div class="chat" id="chatbox">
-                <div *ngFor="let msg of messages" class="chat-left">{{msg.message}}</div>
+                <div class="chat-left">Hello there, try and type something to me! Also try it with two browsers, or with your colleague ;)</div>
+                <div class="chat-left">(even if you're on your local environment)</div>
+                <div *ngFor="let msg of messages" class="chat-right">{{msg.message}}</div>
               </div>
               <div class="chat-input">
-                <ion-input type="text" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                 <ion-icon class="img-btn disabled" name="image"></ion-icon>
                 <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
               </div>

@@ -14,11 +14,17 @@ import { Project } from '../models/project.model';
 export class MoodboardService {
 
   apiUrl = environment.apiUrl;
-  project: Project;
+  private mbSource = new ReplaySubject<any>(1);
+  moodboards$ = this.mbSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getMoodboards(){
-    return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards');
+    return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards').pipe(map((mbs) => {
+      if(mbs) {
+        this.mbSource.next(mbs);
+      }
+    })).toPromise();;
   }
 
   getMoodboard(id: number){

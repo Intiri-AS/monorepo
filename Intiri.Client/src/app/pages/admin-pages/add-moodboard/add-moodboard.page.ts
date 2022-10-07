@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -51,7 +52,7 @@ export class AddMoodboardPage implements OnInit {
 
   currentStepNo: number = 0;
 
-  constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService) { }
+  constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService, private router: Router) { }
 
   ngOnInit() {
     this.projectService.getRooms().subscribe((res) => {
@@ -163,7 +164,8 @@ export class AddMoodboardPage implements OnInit {
   saveMoodboard() {
     this.moodboardSrv.addMoodboard(this.moodboard).subscribe(
       (res) => {
-        console.log(res)
+        this.moodboardSrv.getMoodboards();
+        this.router.navigateByUrl('/moodboards');
       },
       (error) => {
         console.log(error);

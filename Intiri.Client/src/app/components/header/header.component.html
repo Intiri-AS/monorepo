@@ -14,8 +14,8 @@
         <a routerLink="/profile" routerDirection="root" class="py-1">
           <img src="../../../assets/images/landing-img.png" class="header-profile-img" alt="Profile Img"/>
         </a>
-        <ion-icon class="header-icon" name="chatbox-ellipses-sharp"></ion-icon>
-        <ion-icon class="header-icon" (click)="showSettings($event)" name="settings-sharp"></ion-icon>
+        <div title="Messenger" routerLink="/messenger" routerDirection="root" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon pointer-events-none" name="chatbox-ellipses-sharp"></ion-icon></div>
+        <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon"  name="settings-sharp"></ion-icon></div>
         <ion-button fill="clear" class="primary-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">

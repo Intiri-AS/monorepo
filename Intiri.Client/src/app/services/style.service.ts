@@ -13,7 +13,6 @@ export class StyleService {
   apiUrl = environment.apiUrl;
   private stylesSource = new ReplaySubject<any>(1);
   styles$ = this.stylesSource.asObservable();
-  
   private styleImagesSource = new ReplaySubject<any>(1);
   styleImages$ = this.styleImagesSource.asObservable();
 

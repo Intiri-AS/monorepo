@@ -11,15 +11,13 @@ import { StyleService } from 'src/app/services/style.service';
 })
 export class MoodboardsPage implements OnInit {
 
-  moodboards: any[];
+  moodboards$ = this.moodboardService.moodboards$;
   styles$ = this.styleService.styles$;
 
   constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
 
   ngOnInit() {
-    this.moodboardService.getMoodboards().subscribe((res: any[]) => {
-      this.moodboards = res;
-    })
+    this.moodboardService.getMoodboards();
     this.styleService.getStyles();
   }
 
