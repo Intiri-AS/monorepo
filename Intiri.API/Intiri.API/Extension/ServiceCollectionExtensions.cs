@@ -24,13 +24,18 @@ namespace Intiri.API.Extension
 			});
 
 			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
+			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
+			AddConfigurationService<TwilioConfiguration>(services, config, "TwilioConfiguaration");
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IAccountService, AccountService>();
 
+			services.AddScoped<IVippsLoginService, VippsLoginService>();
+			services.AddSingleton<ISmsSender, AuthMessageSenderService>();
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
+			services.AddSingleton<ISmsVerificationService, SmsVerificationService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
 
 			return services;

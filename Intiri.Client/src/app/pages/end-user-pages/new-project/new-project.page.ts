@@ -1,11 +1,12 @@
-import { JsonpInterceptor } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
+import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './new-project.page.html',
   styleUrls: ['./new-project.page.scss'],
 })
-export class NewProjectPage {
+export class NewProjectPage implements OnInit {
   isScrolledDown: boolean;
   isExistingProject: boolean = false;
 
@@ -31,7 +32,13 @@ export class NewProjectPage {
     {
       title: 'Enter more detail about selected room',
       subtitle: 'Don’t worry, you can improve more rooms later.',
-      data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
+      data: {
+        roomShapes: [
+          { shape: 'rectangular', imagePath: 'icon/rectangle.png' },
+          { shape: 'square', imagePath: 'icon/square.png' },
+          { shape: 'l-shaped', imagePath: 'icon/l-shape.png' },
+        ],
+      },
     },
     {
       title: 'Select color pallet',
@@ -68,14 +75,27 @@ export class NewProjectPage {
   constructor(
     private modalController: ModalController,
     public projectService: ProjectService,
-    private _route: ActivatedRoute,
-    private _router: Router
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    const isRedirectedFromLogin = this.checkIfRedirectedFromLogin();
+    if (isRedirectedFromLogin) {
+      const stepNum = this.route.snapshot.queryParamMap.get('step');
+      const step = parseInt(stepNum, 10);
+      if (!isNaN(step))
+      {
+        this.currentStepNo = step;
+      } else {
+        console.log(`Invalid value received for step param: ${stepNum}`);
+      }
+    }
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const stepParam = parseInt(urlParams.get('step'))
+    const stepParam = parseInt(urlParams.get('step'), 10);
 
     this.projectService.currentProject$.subscribe((project) => {
       this.project = project;
@@ -107,8 +127,8 @@ export class NewProjectPage {
   }
 
   changeQueryParam(step){
-    this._router.navigate([], {
-     relativeTo: this._route,
+    this.router.navigate([], {
+     relativeTo: this.route,
      queryParams: {
        step
      },
@@ -127,13 +147,18 @@ export class NewProjectPage {
   }
 
   nextStep() {
-    if (this.canChangeToStep(this.currentStepNo + 1)) {
-      this.currentStepNo++;
-      this.changeQueryParam(this.currentStepNo);
-      this.projectService.setCurrentProject(this.project);
-    }
-    if (this.currentStepNo === 4) {
-      this.getMoodboardMatches();
+    const isUserLoggedIn = this.checkIfUserLoggedIn();
+    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+      this.openLoginModal();
+    } else {
+      if (this.canChangeToStep(this.currentStepNo + 1)) {
+        this.currentStepNo++;
+        this.changeQueryParam(this.currentStepNo);
+        this.projectService.setCurrentProject(this.project);
+      }
+      if (this.currentStepNo === 4) {
+        this.getMoodboardMatches();
+      }
     }
   }
 
@@ -151,7 +176,12 @@ export class NewProjectPage {
   getMoodboardMatches() {
     this.projectService.getMoodboardMatches(this.project).subscribe(
       (res) => {
-        this.steps[4]['data'] = {moodboardFamily: res['moodboardFamily'], moodboards: res['moodboards'].map(e => { return {...e.moodboard, percentageMatch: e.percentageMatch}})};
+        this.steps[4]['data'] = {
+          moodboardFamily: res['moodboardFamily'],
+          moodboards: res['moodboards'].map((e) => {
+            return { ...e.moodboard, percentageMatch: e.percentageMatch };
+          }),
+        };
       },
       (error) => {
         console.log(error);
@@ -241,7 +271,7 @@ export class NewProjectPage {
     return (
       !object ||
       (Object.keys(object).length === 0 &&
-      Object.getPrototypeOf(object) === Object.prototype)
+        Object.getPrototypeOf(object) === Object.prototype)
     );
   }
 
@@ -252,11 +282,14 @@ export class NewProjectPage {
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['shape'] && this.project.roomDetails['size'] && !!this.project.budget;
+    return (
+      this.project.roomDetails['shape'] &&
+      this.project.roomDetails['size'] &&
+      !!this.project.budget
+    );
   }
 
   toggleItem(item) {
-
     // if you change any selection, selected moodboard will reset
     if(this.currentStepNo < 4) {
       this.project.currentMoodboard = new Moodboard();
@@ -279,16 +312,18 @@ export class NewProjectPage {
      else {  // else it's a single select
 
       // if it's updating sub-object
-      if(stepName.includes('.')) {
+      if (stepName.includes('.')) {
         this.project[stepName.split('.')[0]][stepName.split('.')[1]] =
-        JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
-          ? null
-          : item;
+          JSON.stringify(
+            this.project[stepName.split('.')[0]][stepName.split('.')[1]]
+          ) === JSON.stringify(item)
+            ? null
+            : item;
       } else {
         this.project[stepName] =
-        JSON.stringify(this.project[stepName]) === JSON.stringify(item)
-          ? null
-          : item;
+          JSON.stringify(this.project[stepName]) === JSON.stringify(item)
+            ? null
+            : item;
       }
     }
   }
@@ -296,7 +331,7 @@ export class NewProjectPage {
   async openStartModal() {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      componentProps: {start: true},
+      componentProps: { start: true },
       cssClass: 'small-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
@@ -315,5 +350,30 @@ export class NewProjectPage {
     });
 
     await modal.present();
+  }
+
+  async openLoginModal(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: LoginModalComponent,
+      cssClass: 'medium-modal-css',
+      backdropDismiss: false,
+      swipeToClose: false,
+    });
+
+    await modal.present();
+  }
+
+  private checkIfRedirectedFromLogin(): boolean {
+    return this.route.snapshot.queryParamMap.get('step') != null;
+  }
+
+  private checkIfUserLoggedIn(): boolean {
+    let isUserLoggedIn = false;
+    this.accountService.currentUser$.subscribe((user) => {
+      if (user) {
+        isUserLoggedIn = true;
+      }
+    });
+    return isUserLoggedIn;
   }
 }

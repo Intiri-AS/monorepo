@@ -102,11 +102,13 @@ import { AddPictureModalComponent } from './components/modals/add-picture-modal/
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
+import { ProcessingPage } from './pages/processing/processing.page';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -127,7 +129,7 @@ export function createTranslateLoader(http: HttpClient) {
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
-    TimeAgoPipe
+    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,

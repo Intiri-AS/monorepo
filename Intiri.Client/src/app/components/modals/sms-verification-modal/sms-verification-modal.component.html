@@ -1,0 +1,30 @@
+<ion-content>
+    <div class="bg-gray-500 justify-center items-center flex flex-col h-full">
+        <div class="min-h-full min-w-full flex items-center justify-center py-2 px-2 sm:px-2 lg:px-2 bg-white">
+            <div class="max-w-md w-full p-6">
+                <div class="w-full xl:w-50">
+                    <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
+                    <ion-button fill="clear" class="register-btn" routerLink="/register" routerDirection="root">
+                        <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
+                        <p>Create an account</p>
+                    </ion-button>
+                    <h1 class="text-xl font-semibold">6-digit code</h1>
+                    <p class="text-lg text-black-2">
+                        An sms with 6-digit verification code was sent to your phone.
+                    </p>
+                    <div class="mt-8">
+                        <code-input #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)"
+                            (codeCompleted)="onCodeCompleted($event)">
+
+                        </code-input>
+                        <span class="ion-warning mt-2" *ngIf="error">{{ error }}</span>
+                    </div>
+                    <div class="flex flex-col justify-center items-center">
+                        <ion-button fill="clear" class="primary-btn mt-[30px]">Proceed to app</ion-button>
+                        <ion-button fill="clear" class="send-btn">Send again</ion-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

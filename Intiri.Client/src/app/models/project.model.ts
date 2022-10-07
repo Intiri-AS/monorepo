@@ -7,6 +7,7 @@ export class Project {
   room: object;
   colorPalettes: Array<any>;
   budget: string;
+  created: any;
   roomDetails: object;
   projectMoodboards: Array<any>;
   currentMoodboard: Moodboard;
