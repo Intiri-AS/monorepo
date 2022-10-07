@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterInDTO } from 'src/app/DTOs/In/register-in.dto';
@@ -17,7 +18,7 @@ export class RegisterPage {
   public registerForm: FormGroup;
   public isFormSubmited = false;
   public activeCode = '47';
-  error: any;
+  error: HttpErrorResponse;
 
   get firstNameErrors() {
     return this.registerForm.controls.firstName.errors;
@@ -68,7 +69,7 @@ export class RegisterPage {
           { queryParams: { target: VerificationTarget.REGISTER , ...response } }
         );
       }, error => {
-        error = error;
+        this.error = error;
         console.log(error);
       });
   }

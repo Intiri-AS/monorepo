@@ -1,5 +1,6 @@
 ﻿using Intiri.API.Models;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Timers;
 using Twilio.Rest.Api.V2010.Account;
@@ -31,7 +32,7 @@ namespace Intiri.API.Services
 			_logger = logger;
 		}
 
-		public async Task<bool> SendSmsVerificationCode(string phoneNumber)
+		public async Task<OperationResult<bool>> SendSmsVerificationCode(string phoneNumber)
 		{
 			Random generator = new();
 
@@ -50,12 +51,18 @@ namespace Intiri.API.Services
 				DateCreated = messageResource.DateCreated
 			};
 
-			if (!pendingSmsVerification.DateCreated.HasValue)
+			OperationResult<bool> sendOperation = new()
 			{
-				return false;
+				Result = true,
+				IsSuccess = messageResource.ErrorMessage == null,
+				ErrorMessage = messageResource.ErrorMessage
+			};
+
+			if (sendOperation.IsSuccess)
+			{
+				_pendingSmsVerifications.Add(pendingSmsVerification);
 			}
-			_pendingSmsVerifications.Add(pendingSmsVerification);
-			return true;
+			return sendOperation;
 		}
 
 		public bool ValidateSmsVerificationCode(
