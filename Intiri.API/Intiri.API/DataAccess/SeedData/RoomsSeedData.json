@@ -1,37 +1,37 @@
 ﻿[
 	{
 		"Name": "Living Room",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Living_fujlaw.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Living_fujlaw.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Dinning Room",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Dining_cerzcs.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Dining_cerzcs.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Bedroom",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bedroom_evvbz6.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bedroom_evvbz6.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Kitchen",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Kitchen_njsgt3.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Kitchen_njsgt3.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Bathroom",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bathroom_axq8eu.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bathroom_axq8eu.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	},
 	{
 		"Name": "Entry ways",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Entry_l2f3ya.svg",
+		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Entry_l2f3ya.svg",
 		"Description": "Description Room",
 		"RoomTypeId": 2
 	}
