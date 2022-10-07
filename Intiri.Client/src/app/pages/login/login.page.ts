@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.accountService.currentUser$.subscribe(loggedUser => {
-      if(loggedUser) {
+      if (loggedUser) {
         this.router.navigateByUrl('/my-intiri');
       }
     });
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
     this.activeCode = event.detail.value;
   }
 
-  login(){
+  login() {
     this.isFormSubmited = true;
     if (!this.loginForm.valid) {
       return;
@@ -54,11 +54,13 @@ export class LoginPage implements OnInit {
       phoneNumber: this.loginForm.value.phoneNumber
     };
     const phoneNumber = `${loginModel.countryCode}${loginModel.phoneNumber}`;
-    this.accountService.login(loginModel).subscribe(response => {
-      this.router.navigate(['/sms-verification'], {queryParams: {phoneNumber}});
-    },error =>{
-      console.log(error);
-    });
+    this.accountService.login(loginModel).subscribe(
+      (response) => {
+        this.router.navigate(['/sms-verification'], { queryParams: { phoneNumber } });
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 
   initiateVippsLogin() {

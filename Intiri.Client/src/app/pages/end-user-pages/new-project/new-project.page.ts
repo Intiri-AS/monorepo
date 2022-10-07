@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
+import { SmsVerificationModalComponent } from 'src/app/components/modals/sms-verification-modal/sms-verification-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -325,7 +326,7 @@ export class NewProjectPage implements OnInit {
   async openLoginModal(): Promise<void> {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
-      cssClass: 'small-modal-css',
+      cssClass: 'medium-modal-css',
       backdropDismiss: false,
       swipeToClose: false,
     });

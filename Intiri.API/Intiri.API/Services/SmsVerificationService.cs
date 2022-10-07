@@ -31,7 +31,7 @@ namespace Intiri.API.Services
 			_logger = logger;
 		}
 
-		public async Task<ActionResult<bool>> SendSmsVerificationCode(string phoneNumber)
+		public async Task<bool> SendSmsVerificationCode(string phoneNumber)
 		{
 			Random generator = new();
 

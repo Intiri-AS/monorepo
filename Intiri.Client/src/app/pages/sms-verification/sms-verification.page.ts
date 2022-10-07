@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodeInputComponent } from 'angular-code-input';
-import { SmsVerificationDTO } from 'src/app/DTOs/sms-verification.dto';
 import { AccountService } from 'src/app/services/account.service';
+import { VerificationTarget } from 'src/app/types/types';
 
 @Component({
   selector: 'app-sms-verification-page',
@@ -11,13 +11,9 @@ import { AccountService } from 'src/app/services/account.service';
 })
 
 export class SmsVerificationPage implements OnInit {
-  private phoneNumber: string;
+  error: string;
+  verificationTarget: VerificationTarget;
   @ViewChild('codeInput') codeInput !: CodeInputComponent;
-
-  // This is only for testing and presenatation purpose
-  loginCode = '111111';
-  registerCode = '222222'
-  resetPassCode = '333333'
 
   constructor(
     private router: Router,
@@ -25,7 +21,7 @@ export class SmsVerificationPage implements OnInit {
     private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.phoneNumber = this.route.snapshot.queryParamMap.get('phoneNumber');
+    this.getVerificationTarget();
   }
 
   // this called every time when user changed the code
@@ -35,22 +31,65 @@ export class SmsVerificationPage implements OnInit {
 
   // this called only if user entered full code
   public onCodeCompleted(verificationCode) {
-    this.accountService.smsVerification(this.phoneNumber, verificationCode).subscribe(response => {
-      this.router.navigate(['/my-intiri']);
-    }, error => {
-      console.log(error);
-    });
+    switch (this.verificationTarget) {
+      case VerificationTarget.LOGIN:
+        {
+          const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
+          this.accountService.smsVerificationLogin(phoneNumberFull, verificationCode)
+            .subscribe(response => {
+              this.router.navigate(['/my-intiri']);
+            }, error => {
+              this.error = error;
+              console.log(error);
+            });
+          break;
+        }
+      case VerificationTarget.REGISTER:
+        {
+          const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
+          const firstName = this.getQueryParamFromSnapshot('firstName');
+          const lastName = this.getQueryParamFromSnapshot('lastName');
 
-    // This is only for testing and presenatation purpose
-    // if(this.loginCode === verificationCode) {
-    //   this.router.navigateByUrl('/my-intiri');
-    // } else if (this.resetPassCode === verificationCode) {
-    //   this.router.navigateByUrl('/reset-password');
-    // } else if (this.registerCode === verificationCode) {
-    //   this.router.navigateByUrl('/login');
-    // }
-
-    // Reset code input fields
+          this.accountService.smsVerificationRegister(
+            phoneNumberFull,
+            verificationCode,
+            firstName,
+            lastName
+          ).subscribe(response => {
+            this.router.navigate(['/my-intiri']);
+          }, error => {
+            this.error = error;
+            console.log(error);
+          });
+          break;
+        }
+      default:
+        console.log('Invalid value for verification target');
+        break;
+    }
     this.codeInput.reset();
+  }
+
+  resendVerificationCode() {
+    const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
+    this.accountService.resendVerificationCode(phoneNumberFull).subscribe(
+      response => {
+        // nothing to do here
+      }, error => {
+        this.error = error.error;
+        console.log(error);
+      }
+    )
+  }
+
+  private getVerificationTarget() {
+    const target = this.route.snapshot.queryParamMap.get('target');
+    if (target) {
+      this.verificationTarget = target as VerificationTarget;
+    }
+  }
+
+  private getQueryParamFromSnapshot(param: string): string {
+    return this.route.snapshot.queryParamMap.get(param);
   }
 }

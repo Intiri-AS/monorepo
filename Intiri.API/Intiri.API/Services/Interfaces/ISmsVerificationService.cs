@@ -4,7 +4,7 @@ namespace Intiri.API.Services.Interfaces
 {
 	public interface ISmsVerificationService
 	{
-		Task<ActionResult<bool>> SendSmsVerificationCode(string phoneNumber);
+		Task<bool> SendSmsVerificationCode(string phoneNumber);
 		bool ValidateSmsVerificationCode(string phoneNumber, string verificationCode);
 	}
 }

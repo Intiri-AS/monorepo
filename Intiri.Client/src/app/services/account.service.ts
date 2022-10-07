@@ -16,25 +16,52 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(model) {
     return this.http.post(this.apiUrl + 'account/login', model);
   }
 
-  smsVerification(phoneNumber: string, verificationCode: string) {
-    const verificationDTO = new SmsVerificationDTO(phoneNumber, verificationCode);
-    return this.http.post(this.apiUrl + 'account/sms-verification', verificationDTO).pipe(
-      map((user: User) => {
-        if (user) {
-          this.setCurrentUser(user);
-        }
-      })
-    );
-  }
-
   register(model) {
     return this.http.post(this.apiUrl + 'account/register', model);
+  }
+
+  smsVerificationLogin(phoneNumberFull: string, verificationCode: string) {
+    const verificationDTO = new SmsVerificationDTO(phoneNumberFull, verificationCode);
+    return this.http.post(this.apiUrl + 'account/sms-verification-login', verificationDTO)
+      .pipe(
+        map((user: User) => {
+          if (user) {
+            this.setCurrentUser(user);
+          }
+        })
+      );
+  }
+
+  smsVerificationRegister(
+    phoneNumberFull: string,
+    verificationCode: string,
+    firstName: string,
+    lastName: string) {
+
+    const verificationDTO = <SmsVerificationDTO>({
+      phoneNumberFull: phoneNumberFull,
+      verificationCode: verificationCode,
+      firstName: firstName,
+      lastName: lastName
+    });
+    return this.http.post(this.apiUrl + 'account/sms-verification-register', verificationDTO)
+      .pipe(
+        map((user: User) => {
+          if (user) {
+            this.setCurrentUser(user);
+          }
+        })
+      );
+  }
+
+  resendVerificationCode(phoneNumberFull: string) {
+    return this.http.post(this.apiUrl + 'account/resend-sms-verification', {phoneNumberFull});
   }
 
   setCurrentUser(user: User) {

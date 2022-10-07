@@ -3,15 +3,12 @@ using IdentityModel.Client;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
-using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.Vipps;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Intiri.API.Controllers
 {
@@ -50,17 +47,73 @@ namespace Intiri.API.Controllers
 		#endregion Constructors
 
 		[HttpPost("register")]
-		public async Task<ActionResult<LoginOutDTO>> Register(RegisterDTO registerDto)
+		public async Task<ActionResult<RegisterOutDTO>> Register(RegisterInDTO registerIn)
 		{
-			string fullPhoneNumber = registerDto.CountryCode + registerDto.PhoneNumber;
+			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
 
-			if (await _accountService.IsUserWithPhoneNumberExists(fullPhoneNumber))
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
 			{
 				return BadRequest("Phone number is taken");
 			}
 
-			User user = _mapper.Map<User>(registerDto);
-			user.PhoneNumber = fullPhoneNumber;
+			bool isSent = await _smsVerificationService
+				.SendSmsVerificationCode(phoneNumberFull);
+
+			if (!isSent)
+			{
+				return BadRequest(
+					"Failed to send SMS verification code " +
+					"during registration process");
+			}
+
+			RegisterOutDTO registerOut = new()
+			{
+				FirstName = registerIn.FirstName,
+				LastName = registerIn.LastName,
+				PhoneNumberFull = phoneNumberFull
+			};
+			return Ok(registerOut);
+		}
+
+		[HttpPost("login")]
+		public async Task<ActionResult> Login(LoginInDTO loginDto)
+		{
+			string phoneNumberFull = "+" + loginDto.CountryCode + loginDto.PhoneNumber;
+
+			User user = await _accountService
+				.GetUserByPhoneNumberAsync(phoneNumberFull);
+			
+			if (user == null)
+			{
+				return BadRequest("Invalid user phone number");
+			}
+
+			bool isSent = await _smsVerificationService
+				.SendSmsVerificationCode(phoneNumberFull);
+
+			if (!isSent)
+			{
+				return BadRequest(
+					"Failed to send SMS verification code " +
+					"during login process");
+			}
+			return Ok();
+		}
+
+		[HttpPost("sms-verification-register")]
+		public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
+			SmsVerificationInDTO verificationDto)
+		{
+			User user = _mapper.Map<User>(verificationDto);
+			user.PhoneNumber = verificationDto.PhoneNumberFull;
+
+			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+				verificationDto.PhoneNumberFull, verificationDto.VerificationCode);
+
+			if (!isSuccess)
+			{
+				return BadRequest("Invalid SMS verification code.");
+			}
 
 			IdentityResult result = await _accountService.CreateUserAsync(user);
 			if (!result.Succeeded)
@@ -68,7 +121,7 @@ namespace Intiri.API.Controllers
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "EndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
 			if (!roleResult.Succeeded)
 			{
 				return BadRequest(roleResult.Errors);
@@ -81,27 +134,12 @@ namespace Intiri.API.Controllers
 			};
 		}
 
-		[HttpPost("login")]
-		public async Task<ActionResult> Login(LoginInDTO loginDto)
-		{
-			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
-			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
-			
-			if (user == null)
-			{
-				return BadRequest("Invalid user phone number");
-			}
-
-			var result = await _smsVerificationService.SendSmsVerificationCode(fullPhoneNumber);
-
-			return Ok();
-		}
-
-		[HttpPost("sms-verification")]
-		public async Task<ActionResult<LoginOutDTO>> SmsVerification(SmsVerificationInDTO verificationDto)
+		[HttpPost("sms-verification-login")]
+		public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
+			SmsVerificationInDTO verificationDto)
 		{
 			User user = await _accountService
-				.GetUserByPhoneNumberAsync(verificationDto.PhoneNumber);
+				.GetUserByPhoneNumberAsync(verificationDto.PhoneNumberFull);
 
 			if (user == null)
 			{
@@ -109,11 +147,11 @@ namespace Intiri.API.Controllers
 			}
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-				verificationDto.PhoneNumber, verificationDto.VerificationCode);
+				verificationDto.PhoneNumberFull, verificationDto.VerificationCode);
 
 			if (!isSuccess)
 			{
-				return BadRequest("SMS verification failed");
+				return BadRequest("Invalid SMS verification code.");
 			}
 
 			return Ok(new LoginOutDTO
@@ -121,6 +159,22 @@ namespace Intiri.API.Controllers
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			});
+		}
+
+		[HttpPost("resend-sms-verification")]
+		public async Task<IActionResult> ResendSmsVerificationCode(
+			SmsVerificationResendInDTO verificationResendInDTO)
+		{
+			string phoneNumberFull = verificationResendInDTO.PhoneNumberFull;
+
+			bool isSent = await _smsVerificationService
+				.SendSmsVerificationCode(phoneNumberFull);
+
+			if (isSent)
+			{
+				return BadRequest("Failed to send SMS verification code.");
+			}
+			return Ok("SMS verification code sent.");
 		}
 
 		[HttpDelete("delete-user/{phone}")]
