@@ -28,5 +28,15 @@ namespace Intiri.API.DataAccess.Repository
 			//return await _context.Rooms.ToListAsync();
 			return await _context.Rooms.Include(rt => rt.RoomType).ToListAsync();
 		}
+
+		public async Task<Room> GetRoomByIdAsync(int roomId)
+		{
+			return await GetByID(roomId);
+		}
+
+		public async Task<IEnumerable<Room>> GetRoomsByIdsListAsync(ICollection<int> roomIds)
+		{
+			return await _context.Rooms.Where(r => roomIds.Contains(r.Id)).ToListAsync();
+		}
 	}
 }

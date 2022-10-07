@@ -8,5 +8,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 
 		Task<IEnumerable<StyleImage>> GetStyleImagesAsync();
 		Task<StyleImage> GetStyleImageByIdAsync(int ImageId);
+		Task<IEnumerable<StyleImage>> GetStyleImagesByIdsListAsync(ICollection<int> ImageIds);
 	}
 }

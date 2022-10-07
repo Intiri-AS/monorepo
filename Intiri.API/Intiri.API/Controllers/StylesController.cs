@@ -13,6 +13,8 @@ using System.IO;
 using Intiri.API.Services;
 using System.Xml.Linq;
 using Intiri.API.Models.DTO.OutputDTO.Style;
+using CloudinaryDotNet.Actions;
+using Intiri.API.Shared;
 
 namespace Intiri.API.Controllers
 {
@@ -20,17 +22,20 @@ namespace Intiri.API.Controllers
 	{
 		#region Fields
 
-		IImageService _imageService;
-		IMapper _mapper;
+		private readonly IMapper _mapper;
+		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public StylesController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public StylesController(
+			IUnitOfWork unitOfWork,
+			IMapper mapper,
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
-			_imageService = imageService;
 			_mapper = mapper;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors
@@ -47,7 +52,8 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{styleId}")]
 		public async Task<ActionResult<StyleOutDTO>> GetStyleById(int styleId)
 		{
-			Style style = await _unitOfWork.StyleRepository.GetStyleByIdAsync(styleId);
+			Style style = await _unitOfWork.StyleRepository
+				.GetStyleWithStyleImagesByIdAsync(styleId);
 
 			if (style == null)
 			{
@@ -82,11 +88,27 @@ namespace Intiri.API.Controllers
 
 			if (file.Length > 0)
 			{
-				string imgPrefixName = styleInDTO.Name + "_";
-				string dbPath = await _imageService.AddImageAsync(file, "StyleCoverImages", imgPrefixName);
-				
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(
+						file, FileUploadDestinations.StyleCoverImages);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to upload style cover image.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest("Failed to upload style cover image.");
+				}
+
 				Style style = _mapper.Map<Style>(styleInDTO);
-				style.ImagePath = dbPath;
+
+				style.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
+				style.ImagePublicId = uploadResult.PublicId;
+
 				_unitOfWork.StyleRepository.Insert(style);
 				
 				if (await _unitOfWork.SaveChanges())
@@ -101,7 +123,8 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{styleId}")]
 		public async Task<IActionResult>DeleteStyle(int styleId)
 		{
-			Style style = await _unitOfWork.StyleRepository.GetStyleByIdAsync(styleId);
+			Style style = await _unitOfWork.StyleRepository
+				.GetStyleWithStyleImagesByIdAsync(styleId);
 
 			if (style == null)
 			{
@@ -110,12 +133,23 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				string imagePath = style.ImagePath;
-				await _imageService.DeleteImageFromFileSystemAsync(imagePath);
+				DeletionResult deletionResult = await _fileUploadService
+					.DeleteFileAsync(style.ImagePublicId);
+
+				if (deletionResult.Error != null)
+				{
+					return BadRequest("Failed to delete style cover image.");
+				}
 
 				foreach (StyleImage	si in style.StyleImages)
 				{
-					await _imageService.DeleteImageFromFileSystemAsync(si.Path);
+					deletionResult = await _fileUploadService
+						.DeleteFileAsync(si.PublicId);
+
+					if (deletionResult.Error != null)
+					{
+						return BadRequest("Failed to delete style cover image.");
+					}
 				}
 
 				await _unitOfWork.StyleRepository.Delete(styleId);

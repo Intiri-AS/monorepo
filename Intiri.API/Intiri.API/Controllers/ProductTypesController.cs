@@ -37,7 +37,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{productTypeId}")]
 		public async Task<ActionResult<ProductTypeOutDTO>> GetProductTypeById(int productTypeId)
 		{
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeByIdAsync(productTypeId);
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productTypeId);
 			ProductTypeOutDTO productTypeOutDTO = _mapper.Map<ProductTypeOutDTO>(productType);
 
 			return Ok(productTypeOutDTO);
@@ -54,12 +54,31 @@ namespace Intiri.API.Controllers
 			ProductType productType = _mapper.Map<ProductType>(productTypeInDTO);
 			_unitOfWork.ProductTypeRepository.Insert(productType);
 
-			if(!await _unitOfWork.SaveChanges())
+			if(await _unitOfWork.SaveChanges())
 			{
-				return BadRequest();
+				return Ok(_mapper.Map<ProductTypeOutDTO>(productType));
 			}
 
-			return Ok();
+			return BadRequest("Something went wrong while adding product type");
+		}
+
+		[HttpDelete("delete/{productTypeId}")]
+		public async Task<IActionResult> DeleteProductType(int productTypeId)
+		{
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productTypeId);
+
+			if (productType == null)
+			{
+				return BadRequest($"Material type for Id={productTypeId} not found");
+			}
+
+			_unitOfWork.ProductTypeRepository.Delete(productType);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok();
+			}
+			return BadRequest("Problem occured while deleting material type");
 		}
 	}
 }

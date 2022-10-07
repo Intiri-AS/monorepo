@@ -1,0 +1,32 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-sub-header',
+  templateUrl: './sub-header.component.html',
+  styleUrls: ['./sub-header.component.scss'],
+})
+export class SubHeaderComponent implements OnInit {
+
+  @Input() menu: 'partners' | 'clients' | 'moodboards' | 'clientList' | 'designerMoodboards';
+  @Input() activeTitle: number;
+  @Input() slider: boolean = false;
+  @Output() changeSlide = new EventEmitter<object>();
+
+  menuItems: any = {
+    partners: ['partners', 'products'],
+    clients: ['clients', 'inspiration'],
+    moodboards: ['styles','materials','rooms', 'colors', 'pictures'],
+    clientList: ['clients', 'moodboard','statistic'],
+    designerMoodboards: ['my moodboards', 'all moodboards'],
+    style: ['styles','materials','rooms', 'colors', 'pictures']
+  }
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  goToSlide(id) {
+    this.changeSlide.emit(id);
+  }
+
+}

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { Moodboard } from 'src/app/models/moodboard.model';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-customize-moodboard-page',
@@ -12,68 +15,47 @@ export class CustomizeMoodboardPage {
   steps: Array<object> = [
     {
       title: 'Select colors',
-      data: [
-        { id: 1, color: '#243c5a', title: 'Midnight' },
-        { id: 2, color: '#3f3cbb', title: 'Purple' },
-        { id: 3, color: '#565584', title: 'Metal' },
-        { id: 4, color: '#3ab7bf', title: 'Tahiti' },
-        { id: 5, color: '#243c5a', title: 'Midnight' },
-        { id: 6, color: '#3f3cbb', title: 'Purple' },
-        { id: 7, color: '#565584', title: 'Metal' },
-        { id: 8, color: '#3ab7bf', title: 'Tahiti' },
-        { id: 9, color: '#243c5a', title: 'Midnight' },
-        { id: 10, color: '#3f3cbb', title: 'Purple' },
-        { id: 11, color: '#565584', title: 'Metal' },
-        { id: 12, color: '#3ab7bf', title: 'Tahiti' },
-      ],
+      data: [],
     },
     {
       title: 'Select materials',
-      data: [
-        { id: 1, img: 'images/landing-img.png', title: 'Wood' },
-        { id: 2, img: 'images/img-01.png', title: 'Ceramic'  },
-        { id: 3, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 4, img: 'images/intiri-logo.svg', title: 'Wool'  },
-        { id: 5, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 6, img: 'images/landing-img.png', title: 'Wood'  },
-        { id: 7, img: 'images/landing-img.png', title: 'Wood'  }
-      ],
+      data: [],
     },
     {
       title: 'Select products',
-      data: [
-        { id: 1, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 2, img: 'images/img-01.png', title: 'Table'  },
-        { id: 3, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 4, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-        { id: 5, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 6, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 7, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 8, img: 'images/img-01.png', title: 'Table'  },
-        { id: 9, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 10, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-        { id: 11, img: 'images/img-01.png', title: 'Table'  },
-        { id: 12, img: 'images/landing-img.png', title: 'Chair'  },
-        { id: 13, img: 'images/intiri-logo.svg', title: 'Sofa'  },
-      ],
+      data: [],
     }
   ];
 
-  moodboard: object = {
-    'color-pallete': [],
-    'materials': [],
-    'products': []
-  }
+  initialMoodboard: Moodboard;
+  moodboard: Moodboard;
 
   stepsOrder: object = {
-    0: 'color-pallete',
+    0: 'colorPalettes',
     1: 'materials',
     2: 'products',
   }
 
   currentStepNo: number = 0;
 
-  constructor() {}
+  constructor(public projectService: ProjectService) {}
+
+  ngOnInit() {
+
+    this.projectService.currentProject$.subscribe((project) => {
+      this.moodboard = project.currentMoodboard;
+      this.initialMoodboard = {...project.currentMoodboard};
+    });
+    this.projectService.getColorPalettes().subscribe((res: Array<any>) => {
+      this.steps[0]['data'] = res;
+    });
+    this.projectService.getMaterials().subscribe((res: Array<any>) => {
+      this.steps[1]['data'] = res;
+    });
+    this.projectService.getProducts().subscribe((res: Array<any>) => {
+      this.steps[2]['data'] = res;
+    });
+  }
 
   backStep() {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
@@ -99,21 +81,21 @@ export class CustomizeMoodboardPage {
     }
     switch(step) {
       case 0: { return true; }
-      case 1: { return this.moodboard['color-pallete'].length > 0; }
-      case 2: { return this.moodboard['color-pallete'].length > 0 && this.moodboard['materials'].length > 0}
+      case 1: { return this.moodboard.colorPalettes.length > 0; }
+      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0}
     }
     return true;
   }
 
   validateData(): boolean {
-    return this.moodboard['color-pallete'].length > 0 && this.moodboard['materials'].length > 0 && this.moodboard['products'].length > 0
+    return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0 && this.moodboard.products.length > 0
   }
 
   toggleItem(item) {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.moodboard[stepName])) {
-      if(this.moodboard[stepName].includes(item)) {
+      if(this.moodboard[stepName].some(e => e.id === item.id)) {
         this.moodboard[stepName] = this.moodboard[stepName].filter(e => e.id !== item.id);
       } else {
         this.moodboard[stepName] = [...this.moodboard[stepName], item];
@@ -122,6 +104,19 @@ export class CustomizeMoodboardPage {
       // else it's a single select
       this.moodboard[stepName] = this.moodboard[stepName] === item ? null : item;
     }
+  }
+
+  finishCustomizing() {
+    if(JSON.stringify(this.moodboard) !== JSON.stringify(this.initialMoodboard)) {
+      this.moodboard.sourceMoodboardId = this.moodboard.id;
+      this.moodboard.id = 0;
+    }
+    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
+      const customizedProject = project;
+      customizedProject.currentMoodboard = this.moodboard;
+      this.projectService.setCurrentProject(customizedProject);
+      location.replace('/new-project?step=5'); // in future figure out how to do this with router.navigate
+    });
   }
 
 }

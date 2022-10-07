@@ -7,10 +7,12 @@ using Intiri.API.Models.Room;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Project;
+using Intiri.API.Models.Moodboard;
 
 namespace Intiri.API.DataAccess
 {
-	public class DataContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole,
+    public class DataContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole,
 								IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 	{
 		#region ctors
@@ -31,7 +33,10 @@ namespace Intiri.API.DataAccess
 		public DbSet<Color> Colors { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
-		public DbSet<ColorPallete> ColorPalletes { get; set; }
+		public DbSet<ColorPalette> ColorPalettes { get; set; }
+		public DbSet<RoomDetails> RoomDetails { get; set; }
+		public DbSet<Project> Projects { get; set; }
+		public DbSet<Moodboard> Moodboards { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -48,6 +53,26 @@ namespace Intiri.API.DataAccess
 				.WithOne(u => u.Role)
 				.HasForeignKey(ur => ur.RoleId)
 				.IsRequired();
+
+			builder.Entity<Product>()
+				.HasOne(p => p.ProductType)
+				.WithMany(pt => pt.Products)
+				.OnDelete(DeleteBehavior.SetNull);
+
+			builder.Entity<Moodboard>()
+				.HasMany<ColorPalette>(m => m.ColorPalettes)
+				.WithMany(cp => cp.Moodboards)
+				.UsingEntity(cm => cm.ToTable("MoodboardColorPalette"));
+
+			builder.Entity<Moodboard>()
+				.HasMany<Material>(mood => mood.Materials)
+				.WithMany(mat => mat.Moodboards)
+				.UsingEntity(mm => mm.ToTable("MoodboardMaterial"));
+
+			builder.Entity<Moodboard>()
+				.HasMany<Product>(mood => mood.Products)
+				.WithMany(prod => prod.Moodboards)
+				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
 		}
 	}
 }

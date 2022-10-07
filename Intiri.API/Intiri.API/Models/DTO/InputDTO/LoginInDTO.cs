@@ -5,8 +5,9 @@ namespace Intiri.API.Models.DTO.InputDTO
 	public class LoginInDTO
 	{
 		[Required]
-		public string PhoneNumber { get; set; }
+		public string CountryCode { get; set; }
 
-		public string Password { get; set; }
+		[Required]
+		public string PhoneNumber { get; set; }
 	}
 }

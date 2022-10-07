@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { Moodboard } from 'src/app/models/moodboard.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 
 @Component({
   selector: 'app-moodboard-details-page',
@@ -6,43 +10,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./moodboard-details.page.scss'],
 })
 
-export class MoodboardDetailsPage {
+export class MoodboardDetailsPage implements OnInit {
 
-  parts = [
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Parkett'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Couch'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Boot'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Carpet'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Floor'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: '6634 / Soft Touch'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Walls'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Desk'
-    }
-  ]
+  moodboard: Moodboard;
 
-  constructor() {}
+  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router)
+  {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.moodboard = data.moodboard;
+    })
+  }
+  backToProjectDetails() {
+    this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
+  }
+
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
 
 }

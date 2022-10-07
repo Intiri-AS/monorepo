@@ -1,0 +1,23 @@
+<ion-list *ngIf="headerType === 'user'" lines="none" >
+  <ion-item class="mt-[16px]">
+    <ion-icon class="header-icon" name="settings-sharp"></ion-icon>
+    <span class="text-primary font-medium ml-2">Free plan</span><br/><br/>
+  </ion-item>
+  <hr class="border-light border-t mx-[16px] my-[16px]" />
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openPricingPlans()">Pricing plans</ion-item>
+  <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
+</ion-list>
+
+<ion-list *ngIf="headerType === 'admin'" lines="none" >
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
+  <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
+</ion-list>
+
+<ion-list *ngIf="headerType === 'designer'" lines="none" >
+  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+  <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
+  <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
+</ion-list>

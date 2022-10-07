@@ -1,16 +1,12 @@
-.black-2 {
-  color: #555555
-}
-
 .login-btn {
   @apply text-lg font-semibold text-black mt-14;
   --padding-start: 4px;
   text-transform: none;
 }
 
-.register-btn {
-  @apply flex justify-center items-center w-32 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
-  background: #9B7E60;
+.vipps-btn {
+  @apply flex justify-center items-center text-white w-[151px] h-[46px] rounded-2xl text-lg font-medium pt-1;
+  background: #FF5B24;
   text-transform: none;
 }
 
@@ -29,10 +25,16 @@ ion-input {
   caret-color: #555555;
 }
 
-.border-black-2 {
-  border-color: #555555;
-}
-
 ion-icon {
   pointer-events: none;
+}
+
+.ion-warning {
+  display: flex;
+  font-size: 10px;
+  color: red;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  padding-top: 1px;
 }

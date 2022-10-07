@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Style;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
@@ -28,18 +29,27 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Products
 				.Include(pt => pt.ProductType)
-				.Include(pt => pt.MaterialType)
 				.ToListAsync();
 		}
 
-		public async Task<Product> GetProductByIdAsync(int productId)
+
+		public async Task<Product> GetProductByIdAsync(int id)
 		{
-			return await GetByID(productId);
+			return await _context.Products
+				.Where(p => p.Id == id)
+				.Include(p => p.ProductType)
+				.FirstOrDefaultAsync();
 		}
 
-		public async Task<Product> GetProductByName(string productName)
+		public async Task<Product> GetProductByNameAsync(string productName)
 		{
-			return await SingleOrDefaultAsync<Product>(product => product.Name == productName, _mapper);
+			return await SingleOrDefaultAsync<Product>(
+				product => product.Name == productName, _mapper);
+		}
+
+		public async Task<IEnumerable<Product>> GetProductsByIdsListAsync(ICollection<int> productIds)
+		{
+			return await _context.Products.Where(p => productIds.Contains(p.Id)).ToListAsync();
 		}
 
 		#endregion Public methods

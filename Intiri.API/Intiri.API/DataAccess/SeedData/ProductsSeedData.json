@@ -1,0 +1,82 @@
+[
+	{
+		"Name": "Comfy Sofa",
+		"ProductType": {
+			"Id": 1
+		},
+		"Description": "Very nice sofa",
+		"StyleId": 2,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/comfy_sofa_z6efhg.jpg"
+	},
+	{
+		"Name": "Sofa Royale",
+		"ProductType": {
+			"Id": 1
+		},
+		"Description": "Premium",
+		"StyleId": 3,
+		"Price": 360,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"
+	},
+	{
+		"Name": "Standing Desk",
+		"ProductType": {
+			"Id": 2
+		},
+		"Description": "Description",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/standing_desk_b2xjr4.jpg"
+	},
+	{
+		"Name": "Standing Lamp",
+		"ProductType": {
+			"Id": 3
+		},
+		"Description": "Very nice sofa",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/standing_lamp_hscqi1.jpg"
+	},
+	{
+		"Name": "Ceramic Lamp",
+		"ProductType": {
+			"Id": 4
+		},
+		"Description": "Provides illumination",
+		"StyleId": 4,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/ceramic_lamp_fn0eur.jpg"
+	},
+	{
+		"Name": "Office Chair",
+		"ProductType": {
+			"Id": 5
+		},
+		"Description": "Chair for work",
+		"StyleId": 1,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_chair_q2mtyc.jpg"
+	},
+	{
+		"Name": "Dinning Table",
+		"ProductType": {
+			"Id": 6
+		},
+		"Description": "Table for dinner",
+		"StyleId": 2,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/dinning_table_egcwht.jpg"
+	},
+	{
+		"Name": "Office Desk",
+		"ProductType": {
+			"Id": 2
+		},
+		"Description": "Ideal for companies",
+		"StyleId": 3,
+		"Price": 450,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_table_vnzk4k.jpg"
+	}
+]

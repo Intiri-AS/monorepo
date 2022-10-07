@@ -1,5 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { IonSlides, ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-intiri-page',
@@ -9,37 +15,10 @@ import { IonSlides } from '@ionic/angular';
 
 export class MyIntiriPage {
   @ViewChild('slides') slides: IonSlides;
+  apiUrl = environment.apiUrl;
 
-  projects = [
-    {
-      projectName: 'Vintage',
-      moodboard: '2',
-      pieces: '20',
-      updated: '1 week',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Industrial',
-      moodboard: '3',
-      pieces: '25',
-      updated: '1 day',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Minimal',
-      moodboard: '1',
-      pieces: '5',
-      updated: '3 week',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Funky',
-      moodboard: '0',
-      pieces: '20',
-      updated: '1 day',
-      image: '../../../../assets/images/landing-img.png'
-    },
-  ];
+  projects$: Observable<Project[]>;
+  projectId = 0;
 
   news = [
     {
@@ -79,7 +58,28 @@ export class MyIntiriPage {
     spaceBetween: 20,
   }
 
-  constructor() {}
+  constructor(
+    public projectService: ProjectService,
+    private modalController: ModalController,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.projects$ = this.projectService.getAllProjects();
+  }
+
+  // TODO: needs to be updated after project is allowed to have multiple moodboards!
+  getPiecesNo(project){
+    let result = 0;
+    project.projectMoodboards.forEach(moodboard => {
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    });
+    return result;
+  }
+
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
 
   next() {
     this.slides.slideNext();
@@ -87,6 +87,19 @@ export class MyIntiriPage {
 
   prev() {
     this.slides.slidePrev();
+  }
+
+  // goToProjectDetails(project: Project){
+  //   this.projectService.setCurrentProject(project);
+  //   this.router.navigateByUrl('/project-details');
+  // }
+
+  async openShare() {
+    const modal = await this.modalController.create({
+      component: ShareModalComponent,
+    });
+
+    await modal.present();
   }
 
 }

@@ -3,11 +3,8 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
-using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.Material;
-using Intiri.API.Models.Room;
 using Intiri.API.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
@@ -17,16 +14,14 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService) : base(unitOfWork)
+		public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
 		}
 
 		#endregion Constructors
@@ -91,7 +86,7 @@ namespace Intiri.API.Controllers
 			{
 				foreach (Material material in materialType.Materials)
 				{
-					await _imageService.DeleteImageFromFileSystemAsync(material.ImagePath);
+					//await _imageService.DeleteImageFromFileSystemAsync(material.ImagePath);
 				}
 
 				await _unitOfWork.MaterialTypeRepository.Delete(materialType.Id);

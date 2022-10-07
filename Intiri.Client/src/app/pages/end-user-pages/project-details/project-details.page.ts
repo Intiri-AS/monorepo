@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { Moodboard } from 'src/app/models/moodboard.model';
+import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-details-page',
@@ -6,23 +13,37 @@ import { Component } from '@angular/core';
   styleUrls: ['./project-details.page.scss'],
 })
 
-export class ProjectDetailsPage {
+export class ProjectDetailsPage implements OnInit {
 
-  moodboards = [
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'moodboard 1',
-      pieces: 20,
-      updated: '1 week'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'moodboard 2',
-      pieces: 10,
-      updated: '1 day'
-    }
-  ]
+  project: Project;
+  moodboards: Moodboard[];
 
-  constructor() {}
+  constructor(public projectService: ProjectService, private route: ActivatedRoute, public moodboardService: MoodboardService, private router: Router)
+  {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  ngOnInit() {
+    this.route.data.pipe(take(1)).subscribe(data => {
+      this.project = data.project;
+      this.moodboards = this.project.projectMoodboards;
+    })
+  }
+
+
+  // goToMoodboardDetails(moodboard: Moodboard){
+  //   this.moodboardService.setCurrentMoodboard(moodboard);
+  //   this.router.navigateByUrl('/moodboard-details');
+  // }
+
+  addMoodboardToProject()
+  {
+    const currentProject = new Project();
+    currentProject.id = this.project.id;
+    currentProject.name = this.project.name;
+    this.projectService.setCurrentProject(currentProject);
+    this.router.navigateByUrl('/new-project');
+
+  }
 
 }

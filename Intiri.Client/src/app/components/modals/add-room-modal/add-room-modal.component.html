@@ -1,0 +1,92 @@
+<ion-content>
+  <!-- Add room modal -->
+  <div *ngIf="add" class="justify-center items-center h-full">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add room</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+        <ion-col>
+          <div class="pr-2">
+            <span class="text-sm text-black-2">Room name</span>
+            <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="pl-2">
+            <div class="pl-2">
+              <span class="text-sm text-black-2">Type</span>
+            <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class=" h-[56px]">
+              <ion-select-option  *ngFor="let roomType of roomTypes" value="{{roomType.id}}">{{roomType.name}}</ion-select-option>
+            </ion-select>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="profile-input">
+            <span class="text-sm text-black-2">Description</span>
+            <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl"></ion-textarea>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="profile-input w-fit">
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Image</p>
+            <label for="dropzone-file">
+              <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
+                <div *ngIf="!imagePath" class="text-center mt-[65px]">
+                  <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Upload</p>
+                </div>
+                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="roomImg" />
+              </div>
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="text-center mt-8">
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addRoom()">Add</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+   <!-- Room added modal -->
+   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Room added!</h2>
+          <p class="text-center text-base text-[18px] text-black-2">You successfully added new room.</p>
+        </div>
+          <ion-buttons class="justify-center">
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Rooms</ion-button>
+          </ion-buttons>
+        </div>
+    </div>
+  </div>
+  <!-- Room delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove room</h2>
+          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this room? This action cannot be undone.</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteRoom()">Remove room</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
+</ion-content>

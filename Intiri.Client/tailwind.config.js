@@ -35,6 +35,9 @@ module.exports = {
         'sofa': "url('/assets/icon/sofa.svg')",
         'materials': "url('/assets/icon/materials.svg')",
       },
+      gridTemplateColumns: {
+        '13': 'repeat(13, minmax(0, 1fr))'
+      },
       colors: {
         primary: {
           DEFAULT: 'var(--ion-color-primary)',
@@ -79,7 +82,7 @@ module.exports = {
         DEFAULT: '1rem',
         sm: '2rem',
         md: '4rem',
-        lg: '12rem',
+        lg: '10rem',
       }
     },
     fontFamily: {

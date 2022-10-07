@@ -1,5 +1,5 @@
 .container {
-  @apply px-[152px] py-0 flex flex-col items-center;
+  @apply px-4 xl:px-[152px] py-0 flex flex-col items-center;
 }
 
 ion-checkbox {
@@ -8,14 +8,4 @@ ion-checkbox {
   height: 25px;
   width: 25px;
   margin: 0;
-}
-
-.cancel-btn {
-  @apply text-primary border border-primary rounded-2xl text-lg font-medium h-[52px] p-0 px-4;
-  text-transform: none;
-}
-
-.proceed-btn {
-  @apply text-white border border-primary bg-primary rounded-2xl text-lg font-medium h-[52px] p-0 px-4 ml-5;
-  text-transform: none;
 }

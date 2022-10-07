@@ -1,7 +1,5 @@
 ﻿using Intiri.API.DataAccess.Repository.Interface;
-using Intiri.API.Models;
 using Intiri.API.Models.Material;
-using Intiri.API.Models.Room;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
@@ -23,6 +21,11 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<IEnumerable<Material>> GetAllMaterialsAsync()
 		{
 			return await _context.Materials.Include(mt => mt.MaterialType).ToListAsync();
+		}
+
+		public async Task<IEnumerable<Material>> GetMaterialsByIdsListAsync(ICollection<int> materialIds)
+		{
+			return await _context.Materials.Where(m => materialIds.Contains(m.Id)).ToListAsync();
 		}
 	}
 }

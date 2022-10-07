@@ -97,6 +97,18 @@ stages:
                {
                   "name":"TokenKey",
                   "value":"$(TokenSecret)"
+               },
+               {
+                  "name":"CloudinaryConfiguration:CloudName",
+                  "value": "$(CloudinaryCloudName)"
+               },
+               {
+                  "name":"CloudinaryConfiguration:ApiKey",
+                  "value": "$(CloudinaryApiKey)"
+               },
+               {
+                  "name":"CloudinaryConfiguration:ApiSecret",
+                  "value": "$(CloudinaryApiSecret)"
                }
               ]
             connectionStrings: |

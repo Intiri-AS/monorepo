@@ -1,0 +1,11 @@
+.consultations-input-wrapper {
+    @apply mt-4 flex-1 relative;
+}
+
+.consultations-input {
+    @apply border rounded-2xl h-14 border-black-2;
+}
+
+.currency-label {
+    @apply absolute bottom-[16px] right-[13px] z-50 text-black-3;
+}

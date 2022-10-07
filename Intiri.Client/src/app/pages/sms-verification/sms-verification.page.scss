@@ -1,21 +1,11 @@
-.black-2 {
-  color: #555555
-}
-
 .register-btn {
   @apply text-lg font-semibold text-black mt-14;
   --padding-start: 4px;
   text-transform: none;
 }
 
-.btn {
-  @apply flex justify-center items-center w-48 h-14 text-white rounded-2xl mt-8 text-lg font-semibold;
-  background: #9B7E60;
-  text-transform: none;
-}
-
 .send-btn {
-  @apply flex justify-center items-center text-lg mt-6 font-semibold;
+  @apply flex justify-center items-center text-lg mt-4 font-semibold;
   color: #AA4C33;
   text-transform: none;
 }
@@ -33,10 +23,6 @@ ion-item {
 ion-input {
   color: #555555;
   caret-color: #555555;
-}
-
-.border-black-2 {
-  border-color: #555555;
 }
 
 ion-icon {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
@@ -6,6 +7,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +18,19 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IImageService _imageService;
+		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public StyleImagesController(IUnitOfWork unitOfWork, IImageService imageService, IMapper mapper) : base(unitOfWork)
+		public StyleImagesController(
+			IUnitOfWork unitOfWork, 
+			IMapper mapper, 
+			IFileUploadService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_imageService = imageService;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors
@@ -66,19 +71,33 @@ namespace Intiri.API.Controllers
 
 			if (file.Length > 0)
 			{
-				string dbPath = await _imageService.AddImageAsync(file, "StyleImages");
-				
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.StyleImages);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to upload style image.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest("Failed to upload style image.");
+				}
+
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
-				styleImage.Path = dbPath;
+
+				styleImage.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
+				styleImage.PublicId = uploadResult.PublicId;
+
 				_unitOfWork.StyleImageRepository.Insert(styleImage);
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					style.StyleImages.Add(styleImage);
-					return _mapper.Map<StyleImageOutDTO>(styleImage);
+					return Ok(_mapper.Map<StyleImageOutDTO>(styleImage));
 				}
 			}
-
 			return BadRequest("Problem adding style image");
 		}
 
@@ -95,8 +114,13 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				string imagePath = styleImage.Path;
-				await _imageService.DeleteImageFromFileSystemAsync(imagePath);
+				DeletionResult deletionResult = await _fileUploadService
+					.DeleteFileAsync(styleImage.PublicId);
+
+				if (deletionResult.Error != null)
+				{
+					return BadRequest("Failed to delete style image.");
+				}
 
 				await _unitOfWork.StyleImageRepository.Delete(imageId);
 				style.StyleImages.Remove(styleImage);

@@ -38,25 +38,26 @@ namespace Intiri.API.Controllers
 		[HttpPost("register")]
 		public async Task<ActionResult<LoginOutDTO>> Register(RegisterDTO registerDto)
 		{
-			if (await _accountService.IsUserWithPhoneNumberExists(registerDto.PhoneNumber))
+			string fullPhoneNumber = registerDto.CountryCode + registerDto.PhoneNumber;
+
+			if (await _accountService.IsUserWithPhoneNumberExists(fullPhoneNumber))
 			{
 				return BadRequest("Phone number is taken");
 			}
 
 			User user = _mapper.Map<User>(registerDto);
+			user.PhoneNumber = fullPhoneNumber;
 
-			user.UserName = registerDto.Username.ToLower();
-
-			IdentityResult result = await _accountService.CreateUserAsync(user, registerDto.Password);
+			IdentityResult result = await _accountService.CreateUserAsync(user);
 			if (!result.Succeeded)
 			{
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "EndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
 			if (!roleResult.Succeeded)
 			{
-				return BadRequest(result.Errors);
+				return BadRequest(roleResult.Errors);
 			}
 
 			return new LoginOutDTO
@@ -69,19 +70,13 @@ namespace Intiri.API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult<LoginOutDTO>> Login(LoginInDTO loginDto)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(loginDto.PhoneNumber);
+			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
+			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
 			
 			if (user == null)
 			{
-				return Unauthorized("Invalid user phone number");
+				return BadRequest("Invalid user phone number");
 			}
-
-			// Commented out since we no longer use password
-			//SignInResult result = await _accountService.CheckUserSignInPaswordAsync(user, loginDto.Password, false);
-			//if (!result.Succeeded)
-			//{
-			//	return Unauthorized("Invalid user password");
-			//}
 
 			return new LoginOutDTO
 			{

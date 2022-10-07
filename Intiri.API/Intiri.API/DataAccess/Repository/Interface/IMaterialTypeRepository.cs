@@ -1,5 +1,4 @@
 ﻿using Intiri.API.Models.Material;
-using Intiri.API.Models.Room;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {

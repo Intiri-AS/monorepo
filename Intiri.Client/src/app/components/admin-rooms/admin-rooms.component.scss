@@ -1,0 +1,23 @@
+.profile-input {
+    @apply mt-4 flex-1 text-left text-black-2;
+}
+
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4;
+}
+
+ion-col {
+    @apply mb-4
+}
+
+.card {
+    @apply border-2 rounded-2xl border-black-2 h-[200px] p-2
+}
+
+.step-icon-wrapper {
+    @apply h-[93%] rounded-sm m-2 bg-light pt-[50px] 
+}
+
+.step-icon {
+@apply h-[70px] w-[55px] mx-auto;
+}

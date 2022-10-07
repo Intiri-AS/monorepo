@@ -1,0 +1,62 @@
+<ion-content>
+  <div id="home">
+    <app-header-internal-designer></app-header-internal-designer>
+    <div class="main-container">
+      <p class="main-title mb-[30px]">Client</p>
+      <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
+        <ion-slide>
+          <div class="w-full h-full mt-5">
+            <ion-row>
+              <ion-col size="3" *ngFor="let client of clients">
+                <ion-card class="ion-card-container h-[270px]" routerLink="/client-request" routerDirection="root">
+                  <div class="flex flex-col items-center">
+                    <img src={{client.avatar}} class="avatar-img">
+                    <p class="text-2xl text-black-2 font-medium mt-[15px]">{{client.name}}</p>
+                    <p class="text-lg text-black-2">{{client.email}}</p>
+                    <div class="w-full bg-light flex flex-col items-center mt-[15px]">
+                      <p class="text-sm text-primary mt-[15px]">Selected style</p>
+                      <p class="text-lg text-black-2 font-medium mb-[15px]">{{client.style}}</p>
+                    </div>
+                  </div>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="w-full h-full mt-5">
+            <ion-row>
+              <ion-col size="4" *ngFor="let moodboard of moodboards">
+                <ion-card class="ion-card-container h-[350px] mt-[30px]">
+                  <img src={{moodboard.image}} class="moodboard-img">
+                </ion-card>
+                <div class="flex items-center justify-start ml-2">
+                  <p class="text-black-2 text-2xl font-medium">{{moodboard.style}}</p>
+                  <ion-button fill="clear" class="text-black" routerLink="#" routerDirection="root">
+                    <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                  </ion-button>
+                </div>
+                <div class="text-left ml-2">
+                  <p class="text-black-3 text-lg">2 moodboard / 20 pieces / 2d ago</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="w-full h-full mt-5 flex">
+            <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">
+              <p class="text-lg text-primary ml-[20px]">NUMBER OF CLIENTS</p>
+              <p class="text-[60px] text-black font-medium ml-[20px]">25</p>
+            </ion-card>
+            <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">
+              <p class="text-lg text-primary ml-[20px]">TOTAL INCOME</p>
+              <p class="text-[60px] text-black font-medium ml-[20px]">$25.456</p>
+            </ion-card>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>

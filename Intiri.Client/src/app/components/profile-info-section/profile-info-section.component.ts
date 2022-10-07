@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-info-section',
@@ -7,8 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileInfoSectionComponent implements OnInit {
 
-  constructor() { }
+  @Input() userInfo = {
+    firstName: '',
+    lastName: '',
+    gender: '',
+    countryCode: '',
+    phoneNumber: '',
+    email: '',
+    street: '',
+    postalCode: '',
+    city: '',
+    country: ''
+  }
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {}
 
+
+  genderChange(event) {
+    this.userInfo.gender = event.detail.value;
+  }
+
+  countryCodeChange(event) {
+    this.userInfo.countryCode = event.detail.value;
+  }
+
+  countryChange(event) {
+    this.userInfo.country = event.detail.value;
+  }
 }

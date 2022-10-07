@@ -1,0 +1,12 @@
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4
+}
+
+ion-col {
+    @apply p-0
+}
+
+.designer {
+    @apply  border rounded-2xl border-black-2 h-[270px] lg:h-[350px] mb-[10px] overflow-hidden;
+    //-webkit-box-shadow: 7px 8px 32px 17px rgb(0 0 0 / 8%);
+}

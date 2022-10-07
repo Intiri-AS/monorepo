@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using NLog;
 using NLog.Web;
+using System.Text.Json.Serialization;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Info("Init Main");
@@ -60,28 +61,19 @@ try
 	{
 		app.UseSwagger();
 		app.UseSwaggerUI();
-
-		app.UseCors(policy =>
-						policy.AllowAnyHeader()
-							   .AllowAnyMethod()
-							   .AllowCredentials()
-							   .WithOrigins("http://localhost:8100"));
 	}
+
+	app.UseCors(policy =>
+				policy.AllowAnyHeader()
+					   .AllowAnyMethod()
+					   .AllowCredentials()
+					   .WithOrigins("http://localhost:8100"));
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 	app.UseHttpsRedirection();
 	app.UseRouting();
 
-	//app.UseStaticFiles();
-	//app.UseStaticFiles(new StaticFileOptions()
-	//{
-	//	FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-	//	RequestPath = new PathString("/Resources")
-	//});
-	
-	// seed data
-	logger.Debug("Seeding data...");
 	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();

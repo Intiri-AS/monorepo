@@ -31,5 +31,10 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await GetByID(imageId);
 		}
+
+		public async Task<IEnumerable<StyleImage>> GetStyleImagesByIdsListAsync(ICollection<int> ImageIds)
+		{
+			return await _context.StyleImages.Where(si => ImageIds.Contains(si.Id)).ToListAsync();
+		}
 	}
 }

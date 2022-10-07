@@ -1,17 +1,25 @@
-export class Project {
-  name: string;
-  styleImages: Array<object>;
-  room: object;
-  color: object;
-  moodboard: object;
+import { Moodboard } from './moodboard.model';
 
-  //TODO This is example for User model
+export class Project {
+  id: number;
+  name: string;
+  styleImages: Array<any>;
+  room: object;
+  colorPalettes: Array<any>;
+  budget: string;
+  roomDetails: object;
+  projectMoodboards: Array<any>;
+  currentMoodboard: Moodboard;
 
   constructor() {
+    this.id = null;
     this.name = '';
     this.styleImages = [];
     this.room = {};
-    this.color = {};
-    this.moodboard = {};
+    this.budget = '';
+    this.roomDetails = {};
+    this.colorPalettes = [];
+    this.projectMoodboards = [];
+    this.currentMoodboard = new Moodboard();
   }
 }

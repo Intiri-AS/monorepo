@@ -8,5 +8,23 @@ import { Component } from '@angular/core';
 
 export class ProfilePage {
 
+  userInfo = {
+    firstName: '',
+    lastName: '',
+    gender: '',
+    countryCode: '',
+    phoneNumber: '',
+    email: '',
+    street: '',
+    postalCode: '',
+    city: '',
+    country: '',
+    image: '../../../assets/images/landing-img.png'
+  }
+
   constructor() {}
+
+  saveChanges() {
+    console.log(this.userInfo);
+  }
 }

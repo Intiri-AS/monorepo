@@ -1,0 +1,35 @@
+<ion-content>
+  <div id="home">
+    <app-header-admin></app-header-admin>
+    <ion-grid class="main-container">
+      <ion-row>
+        <ion-col size="12" size-xl="4">
+          <h1 class="main-title">Consultations</h1>
+          <p class="text-2xl font-bold text-black-2 mt-8">Details</p>
+
+          <div class="consultations-input-wrapper">
+            <span class="text-sm text-black-2">Duration</span>
+            <span class="currency-label">min</span>
+            <ion-input
+              type="number"
+              class="consultations-input !pr-[48px]"
+            ></ion-input>
+          </div>
+
+          <div class="consultations-input-wrapper">
+            <span class="text-sm text-black-2">Price</span>
+            <span class="currency-label">Nok</span>
+            <ion-input
+              type="number"
+              class="consultations-input !pr-[48px]"
+            ></ion-input>
+          </div>
+
+          <ion-buttons class="justify-center mt-8">
+            <ion-button class="primary-btn">Save changes</ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

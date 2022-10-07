@@ -1,7 +1,9 @@
-﻿using Intiri.API.DataAccess;
+﻿using Intiri.API.Configuration;
+using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
+using Messenger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +23,15 @@ namespace Intiri.API.Extension
 				options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 			});
 
+			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
+
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IAccountService, AccountService>();
-			services.AddScoped<IImageService, ImageService>();
+
+			services.AddScoped<IFileUploadService, CloudinaryService>();
+			services.AddScoped<IContentTypesService, ContentTypesService>();
+			services.AddSingleton<IMessenger, Messenger.Messenger>();
 
 			return services;
 		}
@@ -58,5 +65,17 @@ namespace Intiri.API.Extension
 
 			return services;
 		}
+
+		#region Private methods
+
+		private static IConfiguration AddConfigurationService<T>(IServiceCollection services, IConfiguration config, string configSection)
+		where T : class
+		{
+			IConfiguration _config = config.GetSection(configSection);
+			services.Configure<T>(_config);
+			return _config;
+		}
+
+		#endregion Private methods
 	}
 }

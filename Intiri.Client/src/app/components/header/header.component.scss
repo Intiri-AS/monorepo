@@ -1,13 +1,9 @@
 .btn {
-  @apply normal-case text-black-1 font-bold hover:text-black-2 mx-1;
-}
-
-.new-project-btn {
-  @apply hover:opacity-80 bg-primary text-white font-medium normal-case rounded-xl px-4 mx-2 h-10;
+  @apply tracking-normal normal-case text-black-1 text-[18px] font-medium hover:text-black-2 mx-1;
 }
 
 .header-wrapper {
-  @apply container flex items-center py-4;
+  @apply flex items-center py-4;
 }
 
 .header-buttons {
@@ -15,17 +11,13 @@
 }
 
 .header-icon {
-    @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-2 mr-2
+    @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
 }
 
 .header-profile-img {
-    @apply object-cover rounded-xl h-[40px] w-[40px] mr-4
+    @apply object-cover rounded-xl h-[45px] w-[45px] mr-4
 }
 
-ion-popover {
-  --backdrop-opacity: 0;
-  --offset-y: 10px;
-}
 
 ion-header::after {
   border-bottom: none;

@@ -1,0 +1,50 @@
+[
+	{
+		"Name": "Dark Wood",
+		"Description": "Brief description",
+		"MaterialTypeId": 1,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668225/MaterialImages/light_wood_ydr4fj.jpg"
+	},
+	{
+		"Name": "Fancy Steel",
+		"Description": "Brief description",
+		"MaterialTypeId": 2,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668225/MaterialImages/fancy_steel_ggdxm7.jpg"
+	},
+	{
+		"Name": "Blue Glass",
+		"Description": "Brief description",
+		"MaterialTypeId": 2,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668226/MaterialImages/blue_glass_lgzd4f.jpg"
+	},
+	{
+		"Name": "Bone Ceramic",
+		"Description": "Brief description",
+		"MaterialTypeId": 2,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668227/MaterialImages/bone_ceramic_qgojaz.jpg"
+	},
+	{
+		"Name": "Line Plastic",
+		"Description": "Brief description",
+		"MaterialTypeId": 2,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668225/MaterialImages/line_plastic_rh7zmj.jpg"
+	},
+	{
+		"Name": "Gray Wool",
+		"Description": "Brief description",
+		"MaterialTypeId": 7,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668227/MaterialImages/gray_wool_ayceii.jpg"
+	},
+	{
+		"Name": "Rustic Textile",
+		"Description": "Brief description",
+		"MaterialTypeId": 6,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668227/MaterialImages/industrial_textiles_w09jxh.jpg"
+	},
+	{
+		"Name": "Sahara Stone",
+		"Description": "Brief description",
+		"MaterialTypeId": 8,
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663668227/MaterialImages/sand_stone_cdavcb.jpg"
+	}
+]
