@@ -12,7 +12,7 @@ import { MoodboardService } from 'src/app/services/moodboard.service';
 
 export class MoodboardDetailsPage implements OnInit {
 
-  moodboard: Moodboard;
+  moodboard: any;
 
   constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router)
   {
