@@ -13,7 +13,7 @@ namespace Intiri.API.Controllers
 {
 	public class UsersController : BaseApiController
 	{
-		
+
 		#region Fields
 
 		private readonly ILogger<UsersController> _logger;
@@ -24,8 +24,8 @@ namespace Intiri.API.Controllers
 
 		#region ctors
 
-		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ILogger<UsersController> logger) : base(unitOfWork) 
-		{ 
+		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ILogger<UsersController> logger) : base(unitOfWork)
+		{
 			_mapper = mapper;
 			_logger = logger;
 			_accountService = accountService;
@@ -44,10 +44,28 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
+		[HttpGet("profile")]
+		public async Task<ActionResult<UserOutDTO>> GetUserProfile()
+		{
+			User user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user.");
+			}
+
+			return _mapper.Map<UserOutDTO>(user);
+		}
+
 		[HttpGet("{username}")]
 		public async Task<ActionResult<UserOutDTO>> GetUserByUsername(string username)
 		{
 			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user name.");
+			}
 
 			return _mapper.Map<UserOutDTO>(user);
 		}
@@ -56,6 +74,11 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<UserOutDTO>> GetUserById(int id)
 		{
 			User user = await _unitOfWork.UserRepository.GetUserByIdAsync(id);
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user id.");
+			}
 
 			return _mapper.Map<UserOutDTO>(user);
 		}
