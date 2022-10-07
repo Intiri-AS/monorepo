@@ -89,7 +89,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("addPhoto")]
-		public async Task<ActionResult<string>> AddPhoto(IFormFile file)
+		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto(IFormFile file)
 		{
 			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
 
@@ -130,7 +130,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPut("update")]
-		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserOutDTO userUpdateDto)
+		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
 		{
 			User user = await _accountService.GetUserByPhoneNumberAsync(User.GetUsername());
 
