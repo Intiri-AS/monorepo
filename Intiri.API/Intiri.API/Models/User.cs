@@ -11,6 +11,7 @@ namespace Intiri.API.Models
 		public DateTime Created { get; set; } = DateTime.UtcNow;
 		public string Gender { get; set; }
 		public string PhotoPath { get; set; }
+		public string PublicId { get; set; }
 		public string Street { get; set; }
 		public string PostalCode { get; set; }
 		public string City { get; set; }
