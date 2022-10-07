@@ -4,16 +4,16 @@ namespace Intiri.API.Models.DTO.InputDTO
 {
 	public class UserUpdateInDTO
 	{
-		[Required]
-		public string Username { get; set; }
-
-		[Required]
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string Gender { get; set; }
 		public string Email { get; set; }
-
-		[Required]
 		public string PhoneNumber { get; set; }
+		public string Street { get; set; }
+		public string PostalCode { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+		public string CountryCode { get; set; }
 
-		[Required]
-		public string Address { get; set; }
 	}
 }
