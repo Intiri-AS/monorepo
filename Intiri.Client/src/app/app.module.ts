@@ -110,6 +110,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
 
+// search module
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -138,6 +141,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    Ng2SearchPipeModule,
     ColorPickerModule,
     IonicModule.forRoot(),
     AppRoutingModule,

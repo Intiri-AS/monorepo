@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { StyleService } from 'src/app/services/style.service';
@@ -12,6 +13,7 @@ import { StyleService } from 'src/app/services/style.service';
 export class MoodboardsPage implements OnInit {
 
   moodboards$ = this.moodboardService.moodboards$;
+  moodboards: any[];
   styles$ = this.styleService.styles$;
 
   constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
@@ -19,6 +21,9 @@ export class MoodboardsPage implements OnInit {
   ngOnInit() {
     this.moodboardService.getMoodboards();
     this.styleService.getStyles();
+    this.moodboards$.pipe(take(1)).subscribe(moodboards => { 
+      this.moodboards = moodboards;
+    });
   }
 
   async showSettings(e: Event) {
@@ -31,5 +36,16 @@ export class MoodboardsPage implements OnInit {
 
     await popover.present();
   }
+
+  onFilterChange(event){
+    const selectedStyleNames = event.detail.value;
+    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
+      if(selectedStyleNames.length > 0) {
+        this.moodboards = moodboards.filter(moodboard => selectedStyleNames.includes(moodboard.style.name));  
+      } else {
+        this.moodboards = moodboards;
+      }
+    })
+}
 
 }

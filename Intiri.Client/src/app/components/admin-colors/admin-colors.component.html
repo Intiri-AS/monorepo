@@ -2,10 +2,9 @@
   <ion-row class="mt-2">
     <ion-col size="6" size-xl="3">
       <div class="profile-input">
-        <ion-select interface="popover" placeholder="Search">
-          <ion-select-option value="1">Option 1</ion-select-option>
-          <ion-select-option value="2">Option 2</ion-select-option>
-        </ion-select>
+        <div class="mt-6">
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+        </div>
       </div>
     </ion-col>
 
@@ -14,7 +13,7 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async)" size="12" size-sm="5.75" size-xl="2.85">
+    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
       <div class="card">
         <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: colorPalette.mainColor}"></div>
         <div class="w-[47.5%] h-full inline-block float-right">
