@@ -17,6 +17,7 @@ export class RegisterPage {
   public registerForm: FormGroup;
   public isFormSubmited = false;
   public activeCode = '47';
+  error: any;
 
   get firstNameErrors() {
     return this.registerForm.controls.firstName.errors;
@@ -67,7 +68,8 @@ export class RegisterPage {
           { queryParams: { target: VerificationTarget.REGISTER , ...response } }
         );
       }, error => {
+        error = error;
         console.log(error);
-      })
+      });
   }
 }
