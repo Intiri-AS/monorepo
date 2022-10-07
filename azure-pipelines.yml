@@ -121,6 +121,18 @@ stages:
                {
                   "name": "VippsConfiguration:Authority",
                   "value": "$(VippsAuthority)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountIdentification",
+                  "value": "$(TwilioAccountId)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountPassword",
+                  "value": "$(TwilioAccountPassword)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountFrom",
+                  "value": "$(TwilioAccountFrom)"
                }
               ]
             connectionStrings: |
