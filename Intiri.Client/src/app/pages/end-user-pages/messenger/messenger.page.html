@@ -41,18 +41,15 @@
             <div class="bg-light xl-ion:w-[794px] xl-ion:h-[682px] rounded-lg text-center pb-8">
               <div class="flex py-[22px] pl-[18px] border-b border-secondary">
                 <img src="../../../assets/images/profile-img.png" class="w-[45px] h-[45px] rounded-lg object-cover" alt="Profile Img"/>
-                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">Sina Marlsberg</p>
+                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center" (click)="unsubscribeFromChannel()">Sina Marlsberg</p>
               </div>
-              <div class="chat">
-                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. </div>
-                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. </div>
-                <div class="chat-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. Vivamus eget vehicula nulla. </div>
-                <div class="chat-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed tempor turpis. Fusce laoreet commodo eros vitae condimentum. Fusce at sem tellus. Vivamus eget vehicula nulla. </div>
+              <div class="chat" id="chatbox">
+                <div *ngFor="let msg of messages" class="chat-left">{{msg.message}}</div>
               </div>
               <div class="chat-input">
-                <ion-input type="text" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                <ion-input type="text" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                 <ion-icon class="img-btn disabled" name="image"></ion-icon>
-                <div class="send-btn-wrapper"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
+                <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
               </div>
             </div>
         </ion-col>
