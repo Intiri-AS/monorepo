@@ -78,7 +78,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult> Login(LoginInDTO loginDto)
 		{
-			string phoneNumberFull = "+" + loginDto.CountryCode + loginDto.PhoneNumber;
+			string phoneNumberFull = loginDto.CountryCode + loginDto.PhoneNumber;
 
 			User user = await _accountService
 				.GetUserByPhoneNumberAsync(phoneNumberFull);

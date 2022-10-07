@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
+import { VerificationTarget } from 'src/app/types/types';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.page.html',
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
   model: any = {};
   public loginForm: FormGroup;
   public isFormSubmited = false;
-  public activeCode = '+47';
+  public activeCode = '47';
 
   constructor(
     public accountService: AccountService,
@@ -53,10 +54,10 @@ export class LoginPage implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber
     };
-    const phoneNumber = `${loginModel.countryCode}${loginModel.phoneNumber}`;
+    const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(
       (response) => {
-        this.router.navigate(['/sms-verification'], { queryParams: { phoneNumber } });
+        this.router.navigate(['/sms-verification'], { queryParams: { target: VerificationTarget.LOGIN, phoneNumberFull } });
       },
       (error) => {
         console.log(error);

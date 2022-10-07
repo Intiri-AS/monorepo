@@ -55,7 +55,7 @@ export class LoginModalComponent implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber,
     };
-    const phoneNumberFull = `+${loginModel.countryCode}${loginModel.phoneNumber}`;
+    const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(
       () => {
         this.openSmsVerificationModal(phoneNumberFull);
@@ -77,6 +77,10 @@ export class LoginModalComponent implements OnInit {
     this.accountService.initiateVippsLogin(redirectUri, state);
   }
 
+  dismiss() {
+    this.modalController.dismiss({dismissed: true});
+  }
+
   private async openSmsVerificationModal(phoneNumberFull: string): Promise<void> {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
@@ -85,11 +89,7 @@ export class LoginModalComponent implements OnInit {
       backdropDismiss: false,
       swipeToClose: false,
     });
-    
+
     await modal.present();
   }
-
-  dismiss() {
-    this.modalController.dismiss({'dismissed': true})
-}
 }

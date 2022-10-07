@@ -1,53 +1,53 @@
 [
 	{
-		"UserName": "+471231231",
+		"UserName": "471231231",
 		"Email": "dina@exoswitch.com",
-		"PhoneNumber": "+471231231",
+		"PhoneNumber": "471231231",
 		"FirstName": "Dina",
 		"LastName": "Admin",
 		"Gender": "Female",
 		"Created": "2019-04-03"
 	},
 	{
-		"UserName": "+471231232",
+		"UserName": "471231232",
 		"Email": "cora@exoswitch.com",
-		"PhoneNumber": "+471231232",
+		"PhoneNumber": "471231232",
 		"FirstName": "Cora",
 		"LastName": "InternalDesigner",
 		"Gender": "Female",
 		"Created": "2020-02-13"
 	},
 	{
-		"UserName": "+471231233",
+		"UserName": "471231233",
 		"Email": "tod@exoswitch.com",
-		"PhoneNumber": "+471231233",
+		"PhoneNumber": "471231233",
 		"FirstName": "Tod",
 		"LastName": "FreeEndUser",
 		"Gender": "Male",
 		"Created": "2020-02-13"
 	},
 	{
-		"UserName": "+471231234",
+		"UserName": "471231234",
 		"Email": "moss@exoswitch.com",
-		"PhoneNumber": "+471231234",
+		"PhoneNumber": "471231234",
 		"FirstName": "Moss",
 		"LastName": "FreeEndUser",
 		"Gender": "Male",
 		"Created": "2015-07-13"
 	},
 	{
-		"UserName": "+471231235",
+		"UserName": "471231235",
 		"Email": "day@exoswitch.com",
-		"PhoneNumber": "+471231235",
+		"PhoneNumber": "471231235",
 		"FirstName": "Day",
 		"LastName": "Partner",
 		"Gender": "Other",
 		"Created": "2018-08-16"
 	},
 	{
-		"UserName": "+381695227677",
+		"UserName": "381695227677",
 		"Email": "bro@exoswitch.com",
-		"PhoneNumber": "+381695227677",
+		"PhoneNumber": "381695227677",
 		"FirstName": "Day",
 		"LastName": "Partner",
 		"Gender": "Other",

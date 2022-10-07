@@ -16,7 +16,7 @@ export class RegisterPage {
 
   public registerForm: FormGroup;
   public isFormSubmited = false;
-  public activeCode = '+47';
+  public activeCode = '47';
 
   get firstNameErrors() {
     return this.registerForm.controls.firstName.errors;

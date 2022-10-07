@@ -10,11 +10,11 @@ selector: 'app-sms-verification-modal',
 templateUrl: './sms-verification-modal.component.html',
 })
 export class SmsVerificationModalComponent implements OnInit {
+    @ViewChild('codeInput') codeInput !: CodeInputComponent;
     error: string;
     step: string;
     phoneNumberFull: string;
     verificationTarget: VerificationTarget;
-    @ViewChild('codeInput') codeInput !: CodeInputComponent;
 
     constructor(
         private accountService: AccountService,
@@ -37,7 +37,7 @@ export class SmsVerificationModalComponent implements OnInit {
             }, error => {
                 this.error = error.error;
                 console.log(error);
-            })
+            });
     }
 
     resendVerificationCode() {
@@ -52,6 +52,6 @@ export class SmsVerificationModalComponent implements OnInit {
     }
 
     dismiss() {
-        this.modalController.dismiss({'dismissed': true})
+        this.modalController.dismiss({dismissed: true});
     }
 }

@@ -64,7 +64,7 @@ export class SmsVerificationPage implements OnInit {
           break;
         }
       default:
-        console.log('Invalid value for verification target');
+        console.log('Invalid value for verification target', this.verificationTarget);
         break;
     }
     this.codeInput.reset();
@@ -79,7 +79,7 @@ export class SmsVerificationPage implements OnInit {
         this.error = error.error;
         console.log(error);
       }
-    )
+    );
   }
 
   private getVerificationTarget() {

@@ -41,7 +41,7 @@ namespace Intiri.API.Services
 			string message = GenerateVerificationMessage(verificationCode);
 
 			MessageResource messageResource = 
-				await _smsSender.SendSmsAsync(phoneNumber, message);
+				await _smsSender.SendSmsAsync($"+{phoneNumber}", message);
 
 			PendingSmsVerification pendingSmsVerification = new()
 			{

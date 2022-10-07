@@ -44,12 +44,14 @@ export class AccountService {
     firstName: string,
     lastName: string) {
 
-    const verificationDTO = <SmsVerificationDTO>({
-      phoneNumberFull: phoneNumberFull,
-      verificationCode: verificationCode,
-      firstName: firstName,
-      lastName: lastName
-    });
+    const verificationDTO =
+    {
+      phoneNumberFull,
+      verificationCode,
+      firstName,
+      lastName
+    } as SmsVerificationDTO;
+
     return this.http.post(this.apiUrl + 'account/sms-verification-register', verificationDTO)
       .pipe(
         map((user: User) => {
