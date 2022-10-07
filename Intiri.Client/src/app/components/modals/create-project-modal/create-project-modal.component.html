@@ -35,7 +35,7 @@
           <p *ngIf="existing" class="text-center text-base text-black-2">You have successfully added new moodboard to project <span class="font-medium">{{project.name}}</span>. You can now add new moodboard to the same project or review it.</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Go to project</ion-button>
+            <ion-button  class="secondary-btn" (click)="dismiss()" href="/project-details/{{project.id}}">Go to project</ion-button>
             <ion-button class="primary-btn" (click)="addNewMoodboard()">Add new moodboard</ion-button>
           </ion-buttons>
           <p class="text-primary text-center cursor-pointer hover:opacity-80" [class.disabled]="true"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p>

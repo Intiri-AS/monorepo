@@ -5,10 +5,10 @@
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
         <!-- if image (style|material|product) -->
-        <img *ngIf="item.path" src="{{item.path}}" class="step-image" alt="style-img"/>
+        <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
          <!-- if icon (room) -->
-        <div *ngIf="item.imagePath" class="step-icon-wrapper" >
-          <img src="{{item.imagePath}}" class="step-icon" alt="room-icon"/>
+        <div *ngIf="item.iconPath" class="step-icon-wrapper" >
+          <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
         </div>
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" >
@@ -61,11 +61,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[0].path}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{item.style.styleImages[2].path}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[2].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[1].path}}" class="h-full object-cover w-full" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-full object-cover w-full" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -84,7 +84,7 @@
                   <img src="{{item.products[1].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[1].path}}" class="h-full w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-full w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -113,11 +113,11 @@
           <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorLight}"></div>
           <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.products[0].imagePath) + ')'}"></div>
           <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.products[1].imagePath) + ')'}"></div>
-          <div class="item-lg-tall" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[0].path) + ')'}"></div>
+          <div class="item-lg-tall" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[0].imagePath) + ')'}"></div>
           <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorMedium}"></div>
           <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorDark}"></div>
           <div class="item-sm-tall" [ngStyle]="{background: project.currentMoodboard.colorPalettes[project.currentMoodboard.colorPalettes.length-1].mainColor}"></div>
-          <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[1].path) + ')'}"></div>
+          <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[1].imagePath) + ')'}"></div>
           <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[0].imagePath) + ')'}"></div>
           <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[1].imagePath) + ')'}"></div>
           <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[2].imagePath) + ')'}"></div>

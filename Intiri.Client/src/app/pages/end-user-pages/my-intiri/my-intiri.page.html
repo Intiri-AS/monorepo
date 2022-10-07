@@ -25,7 +25,7 @@
               </div>
               <div class="flex flex-col xl:flex-row xl:justify-between m-0 mt-4 mb-2">
                 <ion-card class="w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 shadow-none p-4">
-                  <img src="{{projects[projects.length-1].projectMoodboards[0].style.styleImages[1].path}}" class="w-full h-full object-cover">
+                  <img src="{{projects[projects.length-1].projectMoodboards[0].style.imagePath}}" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root"  class="w-full h-full object-cover cursor-pointer hover:opacity-90">
                 </ion-card>
                 <div class="w-full xl:w-[370px] h-[350px] mt-5 xl:mt-0">
                   <ion-slides #slides [options]="options" class="p-0 m-0">
@@ -56,9 +56,9 @@
                   </ion-slides>
                 </div>
               </div>
-              <div class="flex items-center justify-start">
+              <div class="flex items-center justify-start cursor-pointer hover:opacity-80" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">
                 <p class="text-black-2 text-2xl font-medium">{{projects[projects.length-1].name}}</p>
-                <ion-button fill="clear" class="text-black" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">
+                <ion-button fill="clear" class="text-black" >
                   <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                 </ion-button>
               </div>
@@ -71,11 +71,11 @@
               <div class="flex flex-wrap justify-between">
                 <div *ngFor="let project of projects">
                   <ion-card class="w-full xl:w-[370px] h-[350px] border rounded-2xl border-black m-0 mt-5 mb-2 shadow-none p-4">
-                    <img src="{{project.projectMoodboards[0].style.styleImages[0].path}}" class="w-full h-full">
+                    <img src="{{project.projectMoodboards[0].style.imagePath}}" routerLink="/project-details/{{project.id}}" routerDirection="root"  class="w-full h-full object-cover cursor-pointer hover:opacity-90">
                   </ion-card>
-                  <div class="flex items-center justify-start">
+                  <div class="flex items-center justify-start cursor-pointer hover:opacity-80" routerLink="/project-details/{{project.id}}" routerDirection="root">
                     <p class="text-black-2 text-2xl font-medium">{{project.name}}</p>
-                    <ion-button fill="clear" class="text-black" routerLink="/project-details/{{project.id}}" routerDirection="root">
+                    <ion-button fill="clear" class="text-black" >
                       <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                     </ion-button>
                   </div>
@@ -198,7 +198,6 @@
                 </ion-card>
                 <div class="flex items-center justify-start">
                   <p class="text-black-2 text-2xl font-medium">{{project.name}}</p>
-                 
                   <ion-button fill="clear" class="text-black" routerLink="/project-details"  >
                     <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                   </ion-button>

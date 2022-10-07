@@ -50,10 +50,10 @@ export class CustomizeMoodboardPage {
       this.steps[0]['data'] = res;
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[1]['data'] = res;
     });
     this.projectService.getProducts().subscribe((res: Array<any>) => {
-      this.steps[2]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[2]['data'] = res;
     });
   }
 

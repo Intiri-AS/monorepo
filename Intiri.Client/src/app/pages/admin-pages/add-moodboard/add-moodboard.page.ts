@@ -59,16 +59,16 @@ export class AddMoodboardPage implements OnInit {
     });
     this.styleSrv.getStyles();
     this.styleSrv.styles$.subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res.map(e => {e.path = e.imagePath !== 'path' ? e.imagePath : e.styleImages[0].path; delete e.imagePath; return e;});
+      this.steps[1]['data'] = res.map(e => {e.imagePath = (!e.imagePath || e.imagePath === 'path') ?  e.styleImages[0].imagePath : e.imagePath; return e;});
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
-      this.steps[2]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[2]['data'] = res;
     });
     this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
     this.projectService.getProducts().subscribe((res: Array<any>) => {
-      this.steps[4]['data'] = res.map(e => { const parsed = {...e, path: e.imagePath}; delete parsed.imagePath; return parsed; });
+      this.steps[4]['data'] = res;
     });
   }
 

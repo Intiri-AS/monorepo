@@ -28,4 +28,8 @@ export class MoodboardDetailsPage implements OnInit {
     this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
   }
 
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
+
 }

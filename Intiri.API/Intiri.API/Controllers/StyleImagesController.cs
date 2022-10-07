@@ -88,7 +88,7 @@ namespace Intiri.API.Controllers
 
 				StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
-				styleImage.Path = uploadResult.SecureUrl.AbsoluteUri;
+				styleImage.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
 				styleImage.PublicId = uploadResult.PublicId;
 
 				_unitOfWork.StyleImageRepository.Insert(styleImage);
