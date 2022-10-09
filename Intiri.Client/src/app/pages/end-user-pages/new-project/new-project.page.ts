@@ -356,7 +356,7 @@ export class NewProjectPage implements OnInit {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
       cssClass: 'medium-modal-css',
-      backdropDismiss: false,
+      backdropDismiss: true,
       swipeToClose: false,
     });
 

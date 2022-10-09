@@ -93,7 +93,7 @@ export class LoginModalComponent implements OnInit {
       component: SmsVerificationModalComponent,
       componentProps: { phoneNumberFull, step : '3', verificationTarget: VerificationTarget.LOGIN},
       cssClass: 'medium-modal-css',
-      backdropDismiss: false,
+      backdropDismiss: true,
       swipeToClose: false,
     });
 
