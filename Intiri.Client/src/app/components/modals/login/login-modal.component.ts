@@ -77,8 +77,15 @@ export class LoginModalComponent implements OnInit {
     this.accountService.initiateVippsLogin(redirectUri, state);
   }
 
-  dismiss() {
+  dismiss(): void {
     this.modalController.dismiss({dismissed: true});
+  }
+
+  goToRegisterPage(): void {
+    this.dismiss();
+    this.router.navigate(['/register'], {state: {
+      step: "4"
+    }});
   }
 
   private async openSmsVerificationModal(phoneNumberFull: string): Promise<void> {

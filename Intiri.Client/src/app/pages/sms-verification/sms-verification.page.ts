@@ -49,6 +49,7 @@ export class SmsVerificationPage implements OnInit {
           const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
           const firstName = this.getQueryParamFromSnapshot('firstName');
           const lastName = this.getQueryParamFromSnapshot('lastName');
+          const step = this.getQueryParamFromSnapshot('step');
 
           this.accountService.smsVerificationRegister(
             phoneNumberFull,
@@ -56,7 +57,11 @@ export class SmsVerificationPage implements OnInit {
             firstName,
             lastName
           ).subscribe(response => {
-            this.router.navigate(['/my-intiri']);
+            if (step) {
+              this.router.navigate(['/new-project'], {queryParams: {step}});
+            } else {
+              this.router.navigate(['/my-intiri']);
+            }
           }, error => {
             this.error = error;
             console.log(error);
