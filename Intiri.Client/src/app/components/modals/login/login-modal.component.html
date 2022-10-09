@@ -1,15 +1,16 @@
 <ion-content>
   <div class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
-      <div class="max-w-md w-full p-6">
+      <div class="h-full w-full">
         <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
         <h1 class="text-2xl font-semibold my-2 text-center">{{'LOGIN.login' | translate}}</h1>
         <form [formGroup]="loginForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
           <div class="mt-2">
             <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
-            <div class="flex justify-between space-x-1">
+            <div class="flex justify-center space-x-1">
               <div>
-                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover" (ionChange)="setActiveCode($event)" [value]="activeCode">
+                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover"
+                  (ionChange)="setActiveCode($event)" [value]="activeCode">
                   <ion-select-option value="47">
                     <div>
                       <p class="text-lg text-black">+47</p>
@@ -21,14 +22,17 @@
                 </ion-select>
               </div>
               <div>
-                <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
+                <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber"
+                  class="border rounded-2xl h-14 border-black-2 w-50 xl:w-80"></ion-input>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is
+                  Required!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone
+                  Number!</span>
               </div>
             </div>
           </div>
-          <div class="flex flex-row justify-center items-center">
-            <ion-button fill="clear" class="primary-btn mt-2" type="submit">{{'LOGIN.login' | translate}}</ion-button>
+          <div class="flex flex-col justify-center items-center">
+            <ion-button fill="clear" class="primary-btn mt-4" type="submit">{{'LOGIN.login' | translate}}</ion-button>
             <p class="text-lg text-black-2 mt-2">{{'LOGIN.or' | translate}}</p>
             <ion-button fill="clear" class="vipps-btn mt-2 mx-2" (click)="initiateVippsLogin()">
               <img src="../../../../assets/icon/vipps-white.svg">
@@ -36,9 +40,10 @@
           </div>
           <div class="flex flex-col justify-center items-center">
             <p class="text-lg text-black-2 mt-2">{{'LOGIN.no-account' | translate}}</p>
-            <ion-button fill="clear" class="secondary-btn" (click)="goToRegisterPage()">{{'LOGIN.create' | translate}}</ion-button>
+            <ion-button fill="clear" class="secondary-btn" (click)="goToRegisterPage()">{{'LOGIN.create' | translate}}
+            </ion-button>
           </div>
-          </form>
+        </form>
       </div>
     </div>
 
