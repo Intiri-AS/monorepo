@@ -34,6 +34,7 @@ import { StyleListPage } from './pages/designer-pages/internal-designer/styles/s
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
+import { ProcessingPage } from './pages/processing/processing.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
 import { ProjectService } from './services/project.service';
 import { MoodboardService } from './services/moodboard.service';
@@ -79,6 +80,10 @@ const routes: Routes = [
   {
     path: 'how-it-works',
     component: HowItWorksPage
+  },
+  {
+    path: 'processing',
+    component: ProcessingPage
   },
   {
     path: 'profile', //TODO Set up page guard (all users guard)

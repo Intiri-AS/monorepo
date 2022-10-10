@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { MaterialService } from 'src/app/services/material.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-materials-modal.component';
@@ -13,6 +14,7 @@ import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-ma
 export class AdminMaterialsComponent implements OnInit {
 
   materials$: Observable<any> = this.materialService.materials$;
+  materials: any[];
   materialTypes: any[];
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private materialService: MaterialService) { }
@@ -22,6 +24,9 @@ export class AdminMaterialsComponent implements OnInit {
     this.materialService.getMaterialTypes().subscribe((res: []) => {
       this.materialTypes = res;
     })
+    this.materials$.pipe(take(1)).subscribe(materials => { 
+      this.materials = materials;
+    });
   }
 
   async showSettings(e: Event, material) {
@@ -44,5 +49,17 @@ export class AdminMaterialsComponent implements OnInit {
 
     await modal.present();
   }
+
+  onFilterChange(event){
+    console.log(event)
+    const selectedTypeNames = event.detail.value;
+    this.materials$.pipe(take(1)).subscribe(materials => {
+      if(selectedTypeNames.length > 0) {
+        this.materials = materials.filter(material => selectedTypeNames.includes(material.materialTypeName));  
+      } else {
+        this.materials = materials;
+      }
+    })
+}
 
 }

@@ -34,7 +34,7 @@
         <div class="flex flex-col justify-center items-center">
           <ion-button fill="clear" class="primary-btn mt-[30px]" type="submit">{{'LOGIN.login' | translate}}</ion-button>
           <p class="text-lg text-black-2 mt-7">{{'LOGIN.or' | translate}}</p>
-          <ion-button fill="clear" class="vipps-btn">
+          <ion-button fill="clear" class="vipps-btn" (click)="initiateVippsLogin()">
             <img src="../../../assets/icon/vipps-white.svg">
           </ion-button>
           <p class="text-lg text-black-2 mt-20">{{'LOGIN.no-account' | translate}}</p>

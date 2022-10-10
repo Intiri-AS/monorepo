@@ -38,6 +38,14 @@
     --height: 400px;
   }
 
+  .medium-modal-css::part(content) {
+    width: 30%;
+    max-width: 600px;
+    --width: 400px;
+    border-radius: 16px;
+    --height: 50%;
+  }
+
   .final-project-step-modal-css::part(content) {
     --width: 460px;
     border-radius: 16px;

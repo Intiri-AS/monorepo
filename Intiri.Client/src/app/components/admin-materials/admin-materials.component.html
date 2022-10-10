@@ -2,17 +2,16 @@
   <ion-row class="mt-2">
     <ion-col size="6" size-md="4" size-xl="3">
       <div class="profile-input">
-        <ion-select interface="popover" placeholder="Search">
-          <ion-select-option value="1">Option 1</ion-select-option>
-          <ion-select-option value="2">Option 2</ion-select-option>
-        </ion-select>
+        <div class="mt-6">
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+        </div>
       </div>
     </ion-col>
     <ion-col size="6" size-md="4" offset-xl="3.5" size-xl="3" class="relative bottom-[27px] ">
       <div class="profile-input justify-end">
         <div class="w-full">
           <span class="text-sm text-black-2">Type</span>
-          <ion-select interface="popover" [multiple]="true">
+          <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
             <ion-select-option *ngFor="let materialType of materialTypes" value="{{materialType.name}}">{{materialType.name}}</ion-select-option>
           </ion-select>
         </div>
@@ -23,7 +22,7 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let material of (materials$ | async)" size="12" size-sm="5.75" size-xl="2.85">
+    <ion-col *ngFor="let material of materials | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
       <div class="card">
         <div class="p-[20px] h-full w-full">
           <img src="{{material.imagePath}}" class="object-cover !h-full !w-full" alt="Profile Img" />

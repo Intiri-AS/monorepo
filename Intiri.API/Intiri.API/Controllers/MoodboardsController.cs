@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Extension;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
@@ -62,7 +64,12 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboard(MoodboardInDTO moodboardIn)
 		{
-			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
+
+            User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+
+            Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
+
+			moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
 			moodboard.Style = style;

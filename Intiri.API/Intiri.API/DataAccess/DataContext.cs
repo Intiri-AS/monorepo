@@ -37,6 +37,8 @@ namespace Intiri.API.DataAccess
 		public DbSet<RoomDetails> RoomDetails { get; set; }
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Moodboard> Moodboards { get; set; }
+		public DbSet<Partner> Partners { get; set; }
+		public DbSet<ShareMoodboard> ShareMoodboards { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -47,6 +49,19 @@ namespace Intiri.API.DataAccess
 				.WithOne(u => u.User)
 				.HasForeignKey(ur => ur.UserId)
 				.IsRequired();
+
+			builder.Entity<EndUser>()
+				.HasMany(p => p.CreatedProjects)
+				.WithOne(eu => eu.EndUser);
+
+			builder.Entity<Designer>()
+				.HasMany(m => m.CreatedMoodboards)
+				.WithOne(d => d.Designer);
+
+			builder.Entity<PartnerContact>()
+				.HasOne(p => p.Partner)
+				.WithMany(pc => pc.PartnerContacts);
+
 
 			builder.Entity<Role>()
 				.HasMany(ur => ur.Users)
@@ -73,6 +88,21 @@ namespace Intiri.API.DataAccess
 				.HasMany<Product>(mood => mood.Products)
 				.WithMany(prod => prod.Moodboards)
 				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
+
+			builder.Entity<ShareMoodboard>()
+				.HasKey(k => new { k.SenderUserId, k.RecipientUserId });
+
+			builder.Entity<ShareMoodboard>()
+				.HasOne(s => s.SenderUser)
+				.WithMany(l => l.SendMoodboards)
+				.HasForeignKey(s => s.SenderUserId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			builder.Entity<ShareMoodboard>()
+				.HasOne(s => s.RecipientUser)
+				.WithMany(l => l.ReceivedMoodboards)
+				.HasForeignKey(s => s.RecipientUserId)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

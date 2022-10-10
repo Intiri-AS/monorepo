@@ -19,6 +19,7 @@ namespace Intiri.API.DataAccess
 		IRoomDetailsRepository RoomDetailsRepository { get; }
 		IProjectRepository ProjectRepository { get; }
 		IMoodboardRepository MoodboardRepository { get; }
+		IPartnerRepository PartnerRepository { get; }
 
 		Task<bool> SaveChanges();
 	}

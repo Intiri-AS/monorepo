@@ -2,34 +2,65 @@
   <ion-row>
     <ion-col size="12" offset-xl="2" size-xl="4" class="p-2 xl:p-12 h-full">
       <div class="w-full xl:w-[470px]">
-        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
-        <ion-button fill="clear" class="login-btn" routerLink="/login" routerDirection="root">
+        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" />
+        <ion-button
+          fill="clear"
+          class="login-btn"
+          routerLink="/login"
+          routerDirection="root"
+        >
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
           <p>Login</p>
         </ion-button>
-        <h1 class="font-['Allison'] text-7xl mt-0 text-black-2">Start your journey</h1>
+        <h1 class="font-['Allison'] text-7xl mt-0 text-black-2">
+          Start your journey
+        </h1>
         <h1 class="text-5xl font-semibold">Create an account</h1>
         <p class="text-lg text-black-2">
-          Manage your account, create and edit projects, collaborate on design and more.
+          Manage your account, create and edit projects, collaborate on design
+          and more.
         </p>
         <form [formGroup]="registerForm" (ngSubmit)="register()">
           <div class="mt-8 flex flex-col xl:flex-row justify-between">
             <div>
               <span class="text-sm text-black-2">First name</span>
-              <ion-input type="text" #firstName formControlName="firstName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">First name is Required!</span>
+              <ion-input
+                type="text"
+                #firstName
+                formControlName="firstName"
+                class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && firstNameErrors?.required"
+                >First name is Required!</span
+              >
             </div>
             <div class="mt-[30px] xl:mt-0">
               <span class="text-sm text-black-2">Last name</span>
-              <ion-input type="text" #lastName formControlName="lastName" class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">Last name is Required!</span>
+              <ion-input
+                type="text"
+                #lastName
+                formControlName="lastName"
+                class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && lastNameErrors?.required"
+                >Last name is Required!</span
+              >
             </div>
           </div>
           <div class="mt-7">
             <span class="text-sm text-black-2">Phone number</span>
             <div class="flex justify-between">
               <div>
-                <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover" (ionChange)="setActiveCode($event)" [value]="activeCode">
+                <ion-select
+                  class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32"
+                  interface="popover"
+                  (ionChange)="setActiveCode($event)"
+                  [value]="activeCode"
+                >
                   <ion-select-option value="47">
                     <div>
                       <p class="text-lg text-black">+47</p>
@@ -41,18 +72,33 @@
                 </ion-select>
               </div>
               <div>
-                <ion-input #phoneNumber formControlName="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
+                <ion-input
+                  #phoneNumber
+                  formControlName="phoneNumber"
+                  class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"
+                ></ion-input>
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && phoneNumberErrors?.required"
+                  >Phone is Required!</span
+                >
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && phoneNumberErrors?.pattern"
+                  >Invalid Phone Number!</span
+                >
               </div>
             </div>
           </div>
           <div class="flex flex-col justify-center items-center">
-            <ion-button type="submit" fill="clear" class="primary-btn mt-[30px]">Register</ion-button>
-            <p class="text-lg text-black-2 mt-7">Or</p>
+            <ion-button type="submit" fill="clear" class="primary-btn mt-[30px]"
+              >Register</ion-button
+            >
+            <p class="text-lg text-black-2 mt-1">Or</p>
             <ion-button fill="clear" class="vipps-btn">
-              <img src="../../../assets/icon/vipps-white.svg">
+              <img src="../../../assets/icon/vipps-white.svg" />
             </ion-button>
+            <span class="inline-block w-1/2 mt-2 text-center text-red-500" *ngIf="error">{{error.error}}</span>
           </div>
         </form>
       </div>

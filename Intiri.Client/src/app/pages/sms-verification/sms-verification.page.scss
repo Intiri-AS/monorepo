@@ -14,6 +14,15 @@
   border: none;
 }
 
+.ion-warning {
+  display: flex;
+  color: red;
+  padding: 0;
+  margin-top: 0.5rem;
+  justify-content: center;
+  padding-top: 1px;
+}
+
 ion-item {
   border: 1px solid #555555;
   color: #555555;

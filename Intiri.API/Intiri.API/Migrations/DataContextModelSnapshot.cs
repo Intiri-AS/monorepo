@@ -185,6 +185,75 @@ namespace Intiri.API.Migrations
                     b.ToTable("Moodboards");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Moodboard.ShareMoodboard", b =>
+                {
+                    b.Property<int>("SenderUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipientUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MoodboardSharedId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SharedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SenderUserId", "RecipientUserId");
+
+                    b.HasIndex("MoodboardSharedId");
+
+                    b.HasIndex("RecipientUserId");
+
+                    b.ToTable("ShareMoodboards");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Partner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoPublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Partners");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -192,6 +261,9 @@ namespace Intiri.API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -205,6 +277,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PartnerId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -215,6 +290,8 @@ namespace Intiri.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PartnerId");
 
                     b.HasIndex("ProductTypeId");
 
@@ -447,8 +524,15 @@ namespace Intiri.API.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -489,13 +573,19 @@ namespace Intiri.API.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StreetAddress")
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -516,6 +606,8 @@ namespace Intiri.API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.UserRole", b =>
@@ -666,6 +758,40 @@ namespace Intiri.API.Migrations
                     b.ToTable("ProjectStyleImage");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Designer", b =>
+                {
+                    b.HasBaseType("Intiri.API.Models.User");
+
+                    b.Property<float>("HourlyRate")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("StyleId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("StyleId");
+
+                    b.HasDiscriminator().HasValue("Designer");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.EndUser", b =>
+                {
+                    b.HasBaseType("Intiri.API.Models.User");
+
+                    b.HasDiscriminator().HasValue("EndUser");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.PartnerContact", b =>
+                {
+                    b.HasBaseType("Intiri.API.Models.User");
+
+                    b.Property<int>("PartnerId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasDiscriminator().HasValue("PartnerContact");
+                });
+
             modelBuilder.Entity("ColorPaletteMoodboard", b =>
                 {
                     b.HasOne("Intiri.API.Models.IntiriColor.ColorPalette", null)
@@ -701,13 +827,13 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
                 {
-                    b.HasOne("Intiri.API.Models.User", "Designer")
+                    b.HasOne("Intiri.API.Models.Designer", "Designer")
                         .WithMany("CreatedMoodboards")
                         .HasForeignKey("DesignerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Intiri.API.Models.Project.Project", null)
+                    b.HasOne("Intiri.API.Models.Project.Project", "Project")
                         .WithMany("ProjectMoodboards")
                         .HasForeignKey("ProjectId");
 
@@ -725,6 +851,8 @@ namespace Intiri.API.Migrations
 
                     b.Navigation("Designer");
 
+                    b.Navigation("Project");
+
                     b.Navigation("Room");
 
                     b.Navigation("SourceMoodboard");
@@ -732,8 +860,37 @@ namespace Intiri.API.Migrations
                     b.Navigation("Style");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Moodboard.ShareMoodboard", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "MoodboardShared")
+                        .WithMany()
+                        .HasForeignKey("MoodboardSharedId");
+
+                    b.HasOne("Intiri.API.Models.EndUser", "RecipientUser")
+                        .WithMany("ReceivedMoodboards")
+                        .HasForeignKey("RecipientUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Intiri.API.Models.EndUser", "SenderUser")
+                        .WithMany("SendMoodboards")
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("MoodboardShared");
+
+                    b.Navigation("RecipientUser");
+
+                    b.Navigation("SenderUser");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
+                    b.HasOne("Intiri.API.Models.Partner", "Partner")
+                        .WithMany("Products")
+                        .HasForeignKey("PartnerId");
+
                     b.HasOne("Intiri.API.Models.Product.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
@@ -745,6 +902,8 @@ namespace Intiri.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Partner");
+
                     b.Navigation("ProductType");
 
                     b.Navigation("Style");
@@ -752,7 +911,7 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
                 {
-                    b.HasOne("Intiri.API.Models.User", "EndUser")
+                    b.HasOne("Intiri.API.Models.EndUser", "EndUser")
                         .WithMany("CreatedProjects")
                         .HasForeignKey("EndUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -895,9 +1054,36 @@ namespace Intiri.API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Designer", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Style.Style", "Style")
+                        .WithMany()
+                        .HasForeignKey("StyleId");
+
+                    b.Navigation("Style");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.PartnerContact", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Partner", "Partner")
+                        .WithMany("PartnerContacts")
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Partner");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Material.MaterialType", b =>
                 {
                     b.Navigation("Materials");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Partner", b =>
+                {
+                    b.Navigation("PartnerContacts");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Product.ProductType", b =>
@@ -929,11 +1115,21 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.User", b =>
                 {
-                    b.Navigation("CreatedMoodboards");
+                    b.Navigation("Roles");
+                });
 
+            modelBuilder.Entity("Intiri.API.Models.Designer", b =>
+                {
+                    b.Navigation("CreatedMoodboards");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.EndUser", b =>
+                {
                     b.Navigation("CreatedProjects");
 
-                    b.Navigation("Roles");
+                    b.Navigation("ReceivedMoodboards");
+
+                    b.Navigation("SendMoodboards");
                 });
 #pragma warning restore 612, 618
         }

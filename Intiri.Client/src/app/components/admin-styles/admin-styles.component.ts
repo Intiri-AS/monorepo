@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { StyleService } from 'src/app/services/style.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-modal.component';
@@ -13,11 +14,16 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 export class AdminStylesComponent implements OnInit {
 
   styles$: Observable<any> = this.styleService.styles$;
+  styles: any[];
 
   constructor(public popoverController: PopoverController, private modalController: ModalController, private styleService: StyleService) { }
 
   ngOnInit() {
     this.styleService.getStyles();
+
+    this.styles$.pipe(take(1)).subscribe(styles => { 
+      this.styles = styles;
+    });
   }
 
   async showSettings(e: Event, style) {
@@ -41,6 +47,15 @@ export class AdminStylesComponent implements OnInit {
     await modal.present();
   }
 
-
+  onFilterChange(event){
+      const selectedStyleNames = event.detail.value;
+      this.styles$.pipe(take(1)).subscribe(styles => {
+        if(selectedStyleNames.length > 0) {
+          this.styles = styles.filter(style => selectedStyleNames.includes(style.name));  
+        } else {
+          this.styles = styles;
+        }
+      })
+  }
 
 }

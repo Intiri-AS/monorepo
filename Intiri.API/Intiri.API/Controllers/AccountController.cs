@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
+using IdentityModel.Client;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.Vipps;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Intiri.API.Controllers
 {
@@ -19,34 +20,101 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly ITokenService _tokenService;
 		private readonly IAccountService _accountService;
+		private readonly IVippsLoginService _vippsLoginService;
+		private readonly ISmsVerificationService _smsVerificationService;
 		private readonly ILogger<AccountController> _logger;
 
 		#endregion  Fields
 
 		#region Constructors
 
-		public AccountController(IUnitOfWork unitOfWork, ITokenService tokenService, IMapper mapper, IAccountService accountService, ILogger<AccountController> logger) : base(unitOfWork)
+		public AccountController(
+			IUnitOfWork unitOfWork,
+			ITokenService tokenService,
+			IMapper mapper,
+			IAccountService accountService,
+			IVippsLoginService vippsLoginService,
+			ISmsVerificationService smsVerificationService,
+			ILogger<AccountController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
 			_accountService = accountService;
+			_vippsLoginService = vippsLoginService;
+			_smsVerificationService = smsVerificationService;
 			_logger = logger;
 		}
 
 		#endregion Constructors
 
 		[HttpPost("register")]
-		public async Task<ActionResult<LoginOutDTO>> Register(RegisterDTO registerDto)
+		public async Task<ActionResult<RegisterOutDTO>> Register(RegisterInDTO registerIn)
 		{
-			string fullPhoneNumber = registerDto.CountryCode + registerDto.PhoneNumber;
+			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
 
-			if (await _accountService.IsUserWithPhoneNumberExists(fullPhoneNumber))
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
 			{
 				return BadRequest("Phone number is taken");
 			}
 
-			User user = _mapper.Map<User>(registerDto);
-			user.PhoneNumber = fullPhoneNumber;
+			OperationResult<bool> sendOperation = await _smsVerificationService
+				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber);
+
+			if (!sendOperation.Result)
+			{
+				return BadRequest(sendOperation.ErrorMessage);
+			}
+
+			RegisterOutDTO registerOut = new()
+			{
+				FirstName = registerIn.FirstName,
+				LastName = registerIn.LastName,
+				CountryCode = registerIn.CountryCode,
+				PhoneNumber = registerIn.PhoneNumber,
+			};
+			return Ok(registerOut);
+		}
+
+		[HttpPost("login")]
+		public async Task<ActionResult> Login(LoginInDTO loginDto)
+		{
+			string phoneNumberFull = loginDto.CountryCode + loginDto.PhoneNumber;
+
+			User user = await _accountService
+				.GetUserByPhoneNumberAsync(phoneNumberFull);
+			
+			if (user == null)
+			{
+				return BadRequest("Invalid user phone number");
+			}
+
+			OperationResult<bool> sendOperation = await _smsVerificationService
+				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber);
+
+			if (!sendOperation.IsSuccess)
+			{
+				return BadRequest(sendOperation.ErrorMessage);
+			}
+			return Ok();
+		}
+
+		[HttpPost("sms-verification-register")]
+		public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
+			SmsVerificationInDTO verificationDto)
+		{
+			User user = _mapper.Map<User>(verificationDto);
+
+			user.CountryCode = verificationDto.CountryCode;
+			user.PhoneNumber = verificationDto.PhoneNumber;
+			user.UserName = user.CountryCode + user.PhoneNumber;
+
+			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
+
+			if (!isSuccess)
+			{
+				return BadRequest("Invalid SMS verification code.");
+			}
 
 			IdentityResult result = await _accountService.CreateUserAsync(user);
 			if (!result.Succeeded)
@@ -62,27 +130,53 @@ namespace Intiri.API.Controllers
 
 			return new LoginOutDTO
 			{
+				CountryCode = verificationDto.CountryCode,
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			};
 		}
 
-		[HttpPost("login")]
-		public async Task<ActionResult<LoginOutDTO>> Login(LoginInDTO loginDto)
+		[HttpPost("sms-verification-login")]
+		public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
+			SmsVerificationInDTO verificationDto)
 		{
-			string fullPhoneNumber = loginDto.CountryCode + loginDto.PhoneNumber;
-			User user = await _accountService.GetUserByPhoneNumberAsync(fullPhoneNumber);
-			
+			string phoneNumberFull = verificationDto.CountryCode + verificationDto.PhoneNumber;
+			User user = await _accountService
+				.GetUserByPhoneNumberAsync(phoneNumberFull);
+
 			if (user == null)
 			{
 				return BadRequest("Invalid user phone number");
 			}
 
-			return new LoginOutDTO
+			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
+
+			if (!isSuccess)
 			{
+				return BadRequest("Invalid SMS verification code.");
+			}
+
+			return Ok(new LoginOutDTO
+			{
+				CountryCode = user.CountryCode,
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
-			};
+			});
+		}
+
+		[HttpPost("resend-sms-verification")]
+		public async Task<IActionResult> ResendSmsVerificationCode(
+			SmsVerificationResendInDTO inDTO)
+		{
+			OperationResult<bool> sendOperation = await _smsVerificationService
+				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber);
+
+			if (!sendOperation.IsSuccess)
+			{
+				return BadRequest(sendOperation.ErrorMessage);
+			}
+			return Ok("SMS verification code sent.");
 		}
 
 		[HttpDelete("delete-user/{phone}")]
@@ -141,9 +235,152 @@ namespace Intiri.API.Controllers
 					.ForEach(error => _logger.LogError($"Error code:{error.Code}. Error description:{error.Description}"));
 				return BadRequest("Unable to reset password.");
 			}
-
 			return Ok();
 		}
 
+		[HttpPost("vipps-auth-url")]
+		public async Task<ActionResult> GetVippsAuthorizationUrl(
+			VippsRedirectionUriDTO dto)
+		{
+			string authUrl = await _vippsLoginService
+				.GetAuthorizationUrlAsync(dto.RedirectUri, dto.State);
+
+			if (authUrl == null)
+			{
+				_logger.LogError(
+					$"Fetching Vipps authorization URL failed. " +
+					$"Authorization_URL={authUrl}");
+
+				return NotFound(
+					"Something went wrong " +
+					"while fetching authorization URL from Vipps.");
+			}
+
+			return Ok(new VippsAuthorizationUrlDTO() { AuthorizationUrl = authUrl});
+		}
+
+		[HttpPost("vipps-login")]
+		public async Task<ActionResult<LoginOutDTO>> VippsLogin(
+			VippsAccessTokenRequestDTO dto)
+		{
+			TokenResponse accessToken = await _vippsLoginService
+				.GetAccessTokenAsync(dto.AuthorizationCode, dto.RedirectUri);
+
+			if (accessToken == null)
+			{
+				_logger.LogError(
+					$"Fetching access token from Vipps failed. " +
+					$"Access_token={accessToken}");
+
+				return NotFound(
+					"Something went wrong " +
+					"while fetching access token from Vipps.");
+			}
+			
+			if (accessToken.IsError)
+			{
+				_logger.LogError(
+					$"Fetching access token from Vipps failed. " +
+					$"Error={accessToken.Error}");
+
+				return BadRequest(
+					"Something went wrong " +
+					"while fetching access token from Vipps.");
+			}
+
+			UserInfoResponse userInfoResponse = await 
+				_vippsLoginService.GetUserInfoAsync(accessToken.AccessToken);
+
+			if (userInfoResponse == null)
+			{
+				_logger.LogError(
+					$"Fetching user info from Vipps failed. " +
+					$"Access_token={userInfoResponse}");
+
+				return NotFound(
+					"Something went wrong " +
+					"while fetching user info from Vipps.");
+			}
+
+			if (userInfoResponse.IsError)
+			{
+				_logger.LogError(
+					$"Fetching user info from Vipps failed. " +
+					$"Error={userInfoResponse.Error}");
+
+				return BadRequest(
+					"Something went wrong " +
+					"while fetching user info from Vipps.");
+			}
+
+			string phoneNumber = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "phone_number").Value;
+
+			if (phoneNumber == null)
+			{
+				_logger.LogError(
+					$"Fetching user's phone number from Vipps failed. " +
+					$"phone_number={phoneNumber}");
+
+				BadRequest("Something went wrong " +
+					"while fetching user's phone number from Vipps.");
+			}
+
+			// Login user if already in DB
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumber))
+			{
+				User existingUser = await _accountService
+					.GetUserByPhoneNumberAsync(phoneNumber);
+
+				return Ok(new LoginOutDTO
+				{
+					PhoneNumber = existingUser.PhoneNumber,
+					Token = await _tokenService.CreateToken(existingUser)
+				});
+			}
+
+			// Register user if not in DB
+			string email = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "email").Value;
+
+			string firstName = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "given_name").Value;
+
+			string lastName = userInfoResponse.Claims
+				.FirstOrDefault(c => c.Type == "family_name").Value;
+
+			User newUser = new()
+			{
+				UserName = phoneNumber,
+				FirstName = firstName,
+				LastName = lastName,
+				PhoneNumber = phoneNumber,
+				Email = email
+			};
+
+			IdentityResult result = await
+				_accountService.CreateUserAsync(newUser);
+
+			if (!result.Succeeded)
+			{
+				_logger.LogError($"{result.Errors}");
+				return BadRequest(result.Errors);
+			}
+
+			IdentityResult roleResult = await 
+				_accountService.AddUserToRolesAsync(newUser, "FreeEndUser");
+
+			if (!roleResult.Succeeded)
+			{
+				_logger.LogError($"{roleResult.Errors}");
+				return BadRequest(roleResult.Errors);
+			}
+
+			return Ok(new LoginOutDTO
+			{
+				PhoneNumber = newUser.PhoneNumber,
+				Token = await _tokenService.CreateToken(newUser)
+			});
+		}
 	}
 }

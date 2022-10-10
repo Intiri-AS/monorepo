@@ -1,0 +1,41 @@
+.vipps-btn {
+    @apply flex justify-center items-center text-white w-[130px] h-[46px] rounded-2xl text-lg font-medium pt-1;
+    background: #FF5B24;
+    text-transform: none;
+    }
+    
+    .password-input {
+    border: none;
+    }
+    
+    ion-item {
+    border: 1px solid #555555;
+    color: #555555;
+    --padding-start: 0px;
+    }
+    
+    ion-input {
+    color: #555555;
+    caret-color: #555555;
+    }
+    
+    .img-bg {
+    border-radius: 0 !important;
+    border: none !important;
+    height: 15px !important;
+    width: 22px !important;
+    background-size: 15px 22px !important;
+    background-repeat: no-repeat !important;
+    background-image: url("../../../../assets/icon/flags/no.svg") !important;
+    }
+    
+    .ion-warning {
+    display: flex;
+    font-size: 10px;
+    color: red;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    padding-top: 1px;
+    }
+    

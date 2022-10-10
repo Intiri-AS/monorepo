@@ -109,6 +109,30 @@ stages:
                {
                   "name":"CloudinaryConfiguration:ApiSecret",
                   "value": "$(CloudinaryApiSecret)"
+               },
+               {
+                  "name": "VippsConfiguration:ClientId",
+                  "value": "$(VippsClientId)"
+               },
+               {
+                  "name": "VippsConfiguration:ClientSecret",
+                  "value": "$(VippsClientSecret)"
+               },
+               {
+                  "name": "VippsConfiguration:Authority",
+                  "value": "$(VippsAuthority)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountIdentification",
+                  "value": "$(TwilioAccountId)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountPassword",
+                  "value": "$(TwilioAccountPassword)"
+               },
+               {
+                  "name": "TwilioConfiguaration:SMSAccountFrom",
+                  "value": "$(TwilioAccountFrom)"
                }
               ]
             connectionStrings: |

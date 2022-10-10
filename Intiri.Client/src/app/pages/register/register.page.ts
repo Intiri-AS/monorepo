@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegisterInDTO } from 'src/app/DTOs/In/register-in.dto';
+import { RegisterOutDTO } from 'src/app/DTOs/Out/register-out.dto';
 import { AccountService } from 'src/app/services/account.service';
+import { VerificationTarget } from 'src/app/types/types';
 
 @Component({
   selector: 'app-register-page',
@@ -14,6 +18,8 @@ export class RegisterPage {
   public registerForm: FormGroup;
   public isFormSubmited = false;
   public activeCode = '47';
+  error: HttpErrorResponse;
+  newProjectPageStep: number;
 
   get firstNameErrors() {
     return this.registerForm.controls.firstName.errors;
@@ -40,6 +46,13 @@ export class RegisterPage {
         Validators.pattern('^[0-9]+$')
       ])],
     })
+
+    const state = router.getCurrentNavigation().extras.state;
+    if (state) {
+      this.newProjectPageStep = state['step'];
+    }
+    console.log(this.newProjectPageStep);
+    
   }
 
   setActiveCode(event) {
@@ -51,16 +64,31 @@ export class RegisterPage {
     if (!this.registerForm.valid) {
       return;
     }
-    const registerModel = {
-      firstName: this.registerForm.value.firstName,
-      lastName: this.registerForm.value.lastName,
-      countryCode: this.activeCode,
-      phoneNumber: this.registerForm.value.phoneNumber
-    }
-    this.accountService.register(registerModel).subscribe(response => {
-      this.router.navigateByUrl('/sms-verification');
-    }, error => {
-      console.log(error);
-    })
+    const registerModel = new RegisterOutDTO(
+      this.registerForm.value.firstName,
+      this.registerForm.value.lastName,
+      this.activeCode,
+      this.registerForm.value.phoneNumber
+    );
+    this.accountService.register(registerModel).subscribe(
+      (response: RegisterInDTO) => {
+        const queryParams = {
+          target: VerificationTarget.REGISTER,
+          ...response,
+          step: this.newProjectPageStep
+        };
+
+        Object.keys(queryParams)
+          .filter(key => queryParams[key] === null || queryParams[key] === undefined)
+          .forEach(key => delete queryParams[key])
+
+        this.router.navigate(
+          ['/sms-verification'],
+          { queryParams: queryParams }
+        );
+      }, error => {
+        this.error = error;
+        console.log(error);
+      });
   }
 }
