@@ -40,7 +40,7 @@ export class LoginModalComponent implements OnInit {
     return this.loginForm.controls.phoneNumber.errors;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   setActiveCode(event) {
     this.activeCode = event.detail.value;
@@ -59,7 +59,7 @@ export class LoginModalComponent implements OnInit {
     this.accountService.login(loginModel).subscribe(
       () => {
         this.openSmsVerificationModal(phoneNumberFull);
-        this.dismiss();
+        this.modalController.dismiss({ dismissed: true });
       },
       (error) => {
         console.log(error);
@@ -77,16 +77,21 @@ export class LoginModalComponent implements OnInit {
     this.accountService.initiateVippsLogin(redirectUri, state);
   }
 
-  dismiss() {
-    this.modalController.dismiss({dismissed: true});
+  goToRegisterPage(): void {
+    this.modalController.dismiss({ dismissed: true });
+    this.router.navigate(['/register'], {
+      state: {
+        step: "4"
+      }
+    });
   }
 
   private async openSmsVerificationModal(phoneNumberFull: string): Promise<void> {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
-      componentProps: { phoneNumberFull, step : '3', verificationTarget: VerificationTarget.LOGIN},
+      componentProps: { phoneNumberFull, step: '3', verificationTarget: VerificationTarget.LOGIN },
       cssClass: 'medium-modal-css',
-      backdropDismiss: false,
+      backdropDismiss: true,
       swipeToClose: false,
     });
 

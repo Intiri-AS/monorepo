@@ -7,6 +7,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.Vipps;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,14 +57,12 @@ namespace Intiri.API.Controllers
 				return BadRequest("Phone number is taken");
 			}
 
-			bool isSent = await _smsVerificationService
+			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(phoneNumberFull);
 
-			if (!isSent)
+			if (!sendOperation.Result)
 			{
-				return BadRequest(
-					"Failed to send SMS verification code " +
-					"during registration process");
+				return BadRequest(sendOperation.ErrorMessage);
 			}
 
 			RegisterOutDTO registerOut = new()
@@ -88,14 +87,12 @@ namespace Intiri.API.Controllers
 				return BadRequest("Invalid user phone number");
 			}
 
-			bool isSent = await _smsVerificationService
+			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(phoneNumberFull);
 
-			if (!isSent)
+			if (!sendOperation.IsSuccess)
 			{
-				return BadRequest(
-					"Failed to send SMS verification code " +
-					"during login process");
+				return BadRequest(sendOperation.ErrorMessage);
 			}
 			return Ok();
 		}
@@ -167,12 +164,12 @@ namespace Intiri.API.Controllers
 		{
 			string phoneNumberFull = verificationResendInDTO.PhoneNumberFull;
 
-			bool isSent = await _smsVerificationService
+			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(phoneNumberFull);
 
-			if (isSent)
+			if (!sendOperation.IsSuccess)
 			{
-				return BadRequest("Failed to send SMS verification code.");
+				return BadRequest(sendOperation.ErrorMessage);
 			}
 			return Ok("SMS verification code sent.");
 		}
