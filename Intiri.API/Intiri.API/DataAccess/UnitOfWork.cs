@@ -25,6 +25,7 @@ namespace Intiri.API.DataAccess
 		private readonly IRoomDetailsRepository _roomDetailsRepository;
 		private readonly IProjectRepository _projectRepository;
 		private readonly IMoodboardRepository _moodboardRepository;
+		private readonly IPartnerRepository _partnerRepository;
 
 		#endregion Fields
 
@@ -47,6 +48,7 @@ namespace Intiri.API.DataAccess
 			_roomDetailsRepository = new RoomDetailsRepository(dataContext);
 			_projectRepository = new ProjectRepository(dataContext, mapper);
 			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
+			_partnerRepository = new PartnerRepository(dataContext, mapper);
 
 			_dataContext = dataContext;
 		}
@@ -70,6 +72,7 @@ namespace Intiri.API.DataAccess
 		public IRoomDetailsRepository RoomDetailsRepository => _roomDetailsRepository;
 		public IProjectRepository ProjectRepository => _projectRepository;
 		public IMoodboardRepository MoodboardRepository => _moodboardRepository;
+		public IPartnerRepository PartnerRepository => _partnerRepository;
 
 		#endregion Properties
 
