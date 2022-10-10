@@ -202,6 +202,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -251,7 +254,7 @@ namespace Intiri.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PartnerId")
+                    b.Property<int?>("PartnerId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
@@ -838,9 +841,7 @@ namespace Intiri.API.Migrations
                 {
                     b.HasOne("Intiri.API.Models.Partner", "Partner")
                         .WithMany("Products")
-                        .HasForeignKey("PartnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PartnerId");
 
                     b.HasOne("Intiri.API.Models.Product.ProductType", "ProductType")
                         .WithMany("Products")

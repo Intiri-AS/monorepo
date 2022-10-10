@@ -7,6 +7,8 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
+using Intiri.API.Services;
+using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -18,6 +20,7 @@ namespace Intiri.API.DataAccess.SeedData
 	public class SeedData
 	{
 		public static async Task SeedTestData(
+			IAccountService accountService,
 			IUnitOfWork unitOfWork,
 			UserManager<User> userManager,
 			RoleManager<Role> roleManager)
@@ -27,7 +30,7 @@ namespace Intiri.API.DataAccess.SeedData
 				return;
 			}
 
-			await SeedUsers(userManager, roleManager);
+			await SeedUsers(accountService, userManager, roleManager);
 			await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
 			await SeedMaterialTypes(unitOfWork);
@@ -43,7 +46,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedRoomDetails(unitOfWork);
 		}
 
-		public static async Task SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager)
 		{
 			//create users
 			string usersData = await File.ReadAllTextAsync("DataAccess/SeedData/UserSeedData.json");
@@ -65,17 +68,36 @@ namespace Intiri.API.DataAccess.SeedData
 				await roleManager.CreateAsync(role);
 			}
 
-			foreach (User user in users)
-			{
-				await userManager.CreateAsync(user);
-			}
+			User u1 = new User() { FirstName = "Dina", LastName = "Admin", PhoneNumber = "471231231", UserName = "471231231" };
+			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", PhoneNumber = "471231232", UserName = "471231232" };
+			EndUser u3 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", PhoneNumber = "471231233", UserName = "471231233" };
+			EndUser u4 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", PhoneNumber = "471231234", UserName = "471231234" };
+			//PartnerContact u5 = new PartnerContact() { FirstName = "Day", LastName = "Partner", PhoneNumber = "471231235", UserName = "471231235" };
 
-			await userManager.AddToRoleAsync(users[0], "Admin");
-			await userManager.AddToRoleAsync(users[1], "InternalDesigner");
-			await userManager.AddToRoleAsync(users[2], "FreeEndUser");
-			await userManager.AddToRoleAsync(users[3], "FreeEndUser");
-			await userManager.AddToRoleAsync(users[4], "Partner");
+			await accountService.CreateUserAsync(u1);
+			await accountService.CreateUserAsync(u2);
+			await accountService.CreateUserAsync(u3);
+			await accountService.CreateUserAsync(u4);
+			//await accountService.CreateUserAsync(u5);
+
+			await userManager.AddToRoleAsync(u1, "Admin");
+			await userManager.AddToRoleAsync(u2, "InternalDesigner");
+			await userManager.AddToRoleAsync(u3, "FreeEndUser");
+			await userManager.AddToRoleAsync(u4, "FreeEndUser");
 		}
+
+		//public static async Task SeedPartner(IUnitOfWork unitOfWork)
+		//{
+		//	string partnersData = await File.ReadAllTextAsync("DataAccess/SeedData/PartnerSeedData.json");
+		//	List<Partner> partners = JsonSerializer.Deserialize<List<Partner>>(partnersData);
+
+		//	foreach (Partner partner in partners)
+		//	{
+		//		unitOfWork.StyleRepository.Insert(style);
+		//	}
+
+		//	await unitOfWork.SaveChanges();
+		//}
 
 		public static async Task SeedStyles(IUnitOfWork unitOfWork)
 		{
@@ -244,39 +266,18 @@ namespace Intiri.API.DataAccess.SeedData
 			foreach (Project project in projects)
 			{
 				unitOfWork.ProjectRepository.Insert(project);
-				//project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
+				project.EndUser = await unitOfWork.UserRepository.GetEndUserByIdAsync(project.EndUserId);
 				project.Room = await unitOfWork.RoomRepository.GetByID(1);
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(1));
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(2));
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(3));
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(1));
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(3));
-				project.ProjectMoodboards.Add(await unitOfWork.MoodboardRepository.GetByID(2));
+				Moodboard moodboard = await unitOfWork.MoodboardRepository.GetByID(2);
+				project.ProjectMoodboards.Add(moodboard);
+				moodboard.Project = project;
 			}
 			await unitOfWork.SaveChanges();
-
-			//List<ProjectInDTO> projectInDTOs =
-			//	JsonSerializer.Deserialize<List<ProjectInDTO>>(projectsData);
-
-			//foreach (ProjectInDTO inDTO in projectInDTOs)
-			//{
-			//	Project project = new()
-			//	{
-			//		Name = inDTO.Name,
-			//		BudgetRate = inDTO.BudgetId,
-			//		EndUser = await unitOfWork.UserRepository.GetByID(inDTO.EndUserId),
-			//		StyleImages = (ICollection<StyleImage>)await unitOfWork.StyleImageRepository
-			//			.GetStyleImagesByIdsListAsync(inDTO.StyleImageIds),
-			//		ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
-			//			.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
-			//		Room = await unitOfWork.RoomRepository
-			//			.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
-			//		ProjectMoodboards = (ICollection<Moodboard>)await unitOfWork.MoodboardRepository
-			//			.GetMoodboardsByIdsList(inDTO.MoodboardsIds)
-			//	};
-			//	unitOfWork.ProjectRepository.Insert(project);
-			//}
-			//await unitOfWork.SaveChanges();
 		}
 
 		public static async Task SeedMoodboards(IUnitOfWork unitOfWork)
@@ -284,33 +285,24 @@ namespace Intiri.API.DataAccess.SeedData
 			string moodboardsData =
 				await File.ReadAllTextAsync("DataAccess/SeedData/MoodboardsSeedData.json");
 
-			List<MoodboardInDTO> moodboardInDTOs =
+			List<MoodboardInDTO> inDTO =
 				JsonSerializer.Deserialize<List<MoodboardInDTO>>(moodboardsData);
 
-			foreach (MoodboardInDTO inDTO in moodboardInDTOs)
+			List<Moodboard> moodboards =
+				JsonSerializer.Deserialize<List<Moodboard>>(moodboardsData);
+
+			for (int i = 0; i < moodboards.Count; i++)
 			{
-				Moodboard moodboard = new()
-				{
-					Name = inDTO.Name,
-					Description = inDTO.Description,
-					//Designer = await unitOfWork.UserRepository.SingleOrDefaultAsync(u => u.Id == inDTO.DesignerId),
-					IsTemplate = inDTO.IsTemplate,
-					Style = await unitOfWork.StyleRepository
-						.SingleOrDefaultAsync(s => s.Id == inDTO.StyleId),
-					Room = await unitOfWork.RoomRepository
-						.SingleOrDefaultAsync(r => r.Id == inDTO.RoomId),
-					Materials = (ICollection<Material>)await unitOfWork.MaterialRepository
-						.GetMaterialsByIdsListAsync(inDTO.MaterialIds),
-					ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository
-						.GetColorPalettesByIdsListAsync(inDTO.ColorPaletteIds),
-					Products = (ICollection<Product>)await unitOfWork.ProductRepository
-						.GetProductsByIdsListAsync(inDTO.ProductIds)
-				};
-
-				unitOfWork.MoodboardRepository.Insert(moodboard);
-
-				await unitOfWork.SaveChanges();
+				unitOfWork.MoodboardRepository.Insert(moodboards[i]);
+				moodboards[i].Designer = await unitOfWork.UserRepository.GetDesignerUserByIdAsync(inDTO[i].DesignerId);
+				moodboards[i].Style = await unitOfWork.StyleRepository.SingleOrDefaultAsync(s => s.Id == inDTO[i].StyleId);
+				moodboards[i].Room = await unitOfWork.RoomRepository.SingleOrDefaultAsync(r => r.Id == inDTO[i].RoomId);
+				moodboards[i].Materials = (ICollection<Material>)await unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(inDTO[i].MaterialIds);
+				moodboards[i].ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(inDTO[i].ColorPaletteIds);
+				moodboards[i].Products = (ICollection<Product>)await unitOfWork.ProductRepository.GetProductsByIdsListAsync(inDTO[i].ProductIds);
 			}
+
+			await unitOfWork.SaveChanges();
 		}
 	}
 }

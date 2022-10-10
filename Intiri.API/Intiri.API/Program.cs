@@ -4,6 +4,7 @@ using Intiri.API.DataAccess.SeedData;
 using Intiri.API.Extension;
 using Intiri.API.Middleware;
 using Intiri.API.Models;
+using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -45,6 +46,7 @@ try
 	IUnitOfWork unitOfWork = _serviceProvider.GetRequiredService<IUnitOfWork>();
 	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
 	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
+	IAccountService accountService = _serviceProvider.GetRequiredService<IAccountService>();
 
 	logger.Info("Migrate db..");
 	//add migrations
@@ -74,7 +76,7 @@ try
 	app.UseHttpsRedirection();
 	app.UseRouting();
 
-	await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
+	await SeedData.SeedTestData(accountService, unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
 	app.UseAuthorization();

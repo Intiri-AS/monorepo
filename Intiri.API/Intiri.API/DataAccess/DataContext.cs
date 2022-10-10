@@ -87,6 +87,11 @@ namespace Intiri.API.DataAccess
 				.HasMany<Product>(mood => mood.Products)
 				.WithMany(prod => prod.Moodboards)
 				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
+
+			builder.Entity<Moodboard>()
+				.HasMany<Product>(mood => mood.Products)
+				.WithMany(prod => prod.Moodboards)
+				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
 		}
 	}
 }
