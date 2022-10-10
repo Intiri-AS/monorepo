@@ -34,43 +34,5 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
-		[HttpPost("createPartner")]
-		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromBody] PartnerInDTO partnerInDTO)
-		{
-			Partner partner = _mapper.Map<Partner>(partnerInDTO);
-
-			IFormFile file = partnerInDTO.LogoFile;
-
-			if (file.Length > 0)
-			{
-				ImageUploadResult uploadResult = null;
-				try
-				{
-					uploadResult = await _fileUploadService
-						.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to upload partner logo.");
-				}
-
-				if (uploadResult.Error != null)
-				{
-					return BadRequest("Failed to upload material image.");
-				}
-
-				partner.LogoPath = uploadResult.SecureUri.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.PublicId;
-			}
-
-			_unitOfWork.PartnerRepository.Insert(partner);
-
-			if (await _unitOfWork.SaveChanges())
-			{
-				return _mapper.Map<PartnerOutDTO>(partner);
-			}
-
-			return BadRequest("Problem occured while adding partner");
-		}
 	}
 }

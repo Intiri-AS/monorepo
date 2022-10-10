@@ -6,6 +6,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 	{
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
-		public string PhoneNumberFull { get; set; }
+		public string CountryCode { get; set; }
+		public string PhoneNumber { get; set; }
 	}
 }

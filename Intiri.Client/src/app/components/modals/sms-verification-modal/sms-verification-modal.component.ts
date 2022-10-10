@@ -34,7 +34,7 @@ export class SmsVerificationModalComponent implements OnInit {
     }
 
     public onCodeCompleted(verificationCode) {
-        this.accountService.smsVerificationLogin(this.phoneNumberFull, verificationCode)
+        this.accountService.smsVerificationLogin("countryCode", "phoneNumber", verificationCode)
             .subscribe(response => {
                 this.router.navigate(['/new-project'], { queryParams: { step: this.step } });
                 this.modalController.dismiss({ dismissed: true });

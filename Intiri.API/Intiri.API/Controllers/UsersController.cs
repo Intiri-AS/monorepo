@@ -29,11 +29,12 @@ namespace Intiri.API.Controllers
 
 		#region ctors
 
-		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ILogger<UsersController> logger) : base(unitOfWork)
+		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploadService fileUploadService, ILogger<UsersController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_logger = logger;
 			_accountService = accountService;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion ctors
@@ -113,6 +114,25 @@ namespace Intiri.API.Controllers
 				if (uploadResult.Error != null)
 				{
 					return BadRequest($"Failed to upload user photo: {uploadResult.Error.Message}");
+				}
+				
+				if(user.PhotoPath != null)
+				{
+					DeletionResult deletionResult = null;
+					try
+					{
+						deletionResult = await _fileUploadService
+							.DeleteFileAsync(user.PublicId);
+					}
+					catch (Exception)
+					{
+						return BadRequest("Failed to delete partner logo.");
+					}
+
+					if (deletionResult.Error != null)
+					{
+						_logger.LogWarning("Faild delete all photo from cloudinary services");
+					}
 				}
 
 				user.PhotoPath = uploadResult.SecureUrl.AbsoluteUri;

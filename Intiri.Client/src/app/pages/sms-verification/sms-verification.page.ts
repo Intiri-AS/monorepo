@@ -34,8 +34,9 @@ export class SmsVerificationPage implements OnInit {
     switch (this.verificationTarget) {
       case VerificationTarget.LOGIN:
         {
-          const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
-          this.accountService.smsVerificationLogin(phoneNumberFull, verificationCode)
+          const countryCode = this.getQueryParamFromSnapshot('countryCode');
+          const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
+          this.accountService.smsVerificationLogin(countryCode, phoneNumber, verificationCode)
             .subscribe(response => {
               this.router.navigate(['/my-intiri']);
             }, error => {
@@ -46,13 +47,15 @@ export class SmsVerificationPage implements OnInit {
         }
       case VerificationTarget.REGISTER:
         {
-          const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
+          const countryCode = this.getQueryParamFromSnapshot('countryCode');
+          const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
           const firstName = this.getQueryParamFromSnapshot('firstName');
           const lastName = this.getQueryParamFromSnapshot('lastName');
           const step = this.getQueryParamFromSnapshot('step');
 
           this.accountService.smsVerificationRegister(
-            phoneNumberFull,
+            countryCode,
+            phoneNumber,
             verificationCode,
             firstName,
             lastName
