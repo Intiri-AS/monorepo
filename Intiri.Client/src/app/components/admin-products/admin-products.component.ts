@@ -12,6 +12,7 @@ export class AdminProductsComponent implements OnInit {
 
   products: any[];
   productTypes: any[];
+  searchText: any;
 
   constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
 

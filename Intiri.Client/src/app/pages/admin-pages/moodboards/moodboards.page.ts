@@ -15,6 +15,7 @@ export class MoodboardsPage implements OnInit {
   moodboards$ = this.moodboardService.moodboards$;
   moodboards: any[];
   styles$ = this.styleService.styles$;
+  searchText: any;
 
   constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
 

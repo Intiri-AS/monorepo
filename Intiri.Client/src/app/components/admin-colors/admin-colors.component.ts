@@ -14,6 +14,8 @@ export class AdminColorsComponent implements OnInit {
 
   colorPalettes$: Observable<any> = this.colorService.colorPalettes$;
 
+  searchText: any;
+
   constructor(public popoverController: PopoverController, private modalController: ModalController, private colorService: ColorService) { }
 
   ngOnInit() {

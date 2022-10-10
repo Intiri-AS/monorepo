@@ -17,7 +17,10 @@ export class AdminMaterialsComponent implements OnInit {
   materials: any[];
   materialTypes: any[];
 
+  searchText: any;
+
   constructor(public popoverController: PopoverController, private modalController: ModalController, private materialService: MaterialService) { }
+
 
   ngOnInit() {
     this.materialService.getMaterials();

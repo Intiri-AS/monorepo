@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminInspirationComponent implements OnInit {
 
+  searchText: any;
+  
   constructor() { }
 
   ngOnInit() {}

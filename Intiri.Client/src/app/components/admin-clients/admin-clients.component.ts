@@ -9,6 +9,8 @@ import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 })
 export class AdminClientsComponent implements OnInit {
 
+  searchText: any;
+  
   constructor(public popoverController: PopoverController) { }
 
   ngOnInit() {}
