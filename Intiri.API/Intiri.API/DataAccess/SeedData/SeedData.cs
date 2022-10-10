@@ -244,7 +244,7 @@ namespace Intiri.API.DataAccess.SeedData
 			foreach (Project project in projects)
 			{
 				unitOfWork.ProjectRepository.Insert(project);
-				project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
+				//project.EndUser = await unitOfWork.UserRepository.GetByID(project.EndUserId);
 				project.Room = await unitOfWork.RoomRepository.GetByID(1);
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(1));
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(2));
@@ -293,7 +293,7 @@ namespace Intiri.API.DataAccess.SeedData
 				{
 					Name = inDTO.Name,
 					Description = inDTO.Description,
-					Designer = await unitOfWork.UserRepository.SingleOrDefaultAsync(u => u.Id == inDTO.DesignerId),
+					//Designer = await unitOfWork.UserRepository.SingleOrDefaultAsync(u => u.Id == inDTO.DesignerId),
 					IsTemplate = inDTO.IsTemplate,
 					Style = await unitOfWork.StyleRepository
 						.SingleOrDefaultAsync(s => s.Id == inDTO.StyleId),

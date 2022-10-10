@@ -15,7 +15,7 @@
 		public string ImagePath { get; set; }
 		public string ImagePublicId { get; set; }
 		public Partner Partner { get; set; }
-		public int? PartnerId { get; set; }
+		public int PartnerId { get; set; }
 
 		public int StyleId { get; set; }
 		public Style.Style Style { get; set; }

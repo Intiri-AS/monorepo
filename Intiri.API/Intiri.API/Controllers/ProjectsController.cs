@@ -108,7 +108,7 @@ namespace Intiri.API.Controllers
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+				Designer user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 				newMoodboard.Designer = user;
 
 				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
@@ -139,7 +139,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("create")]
-		public async Task<ActionResult<ProjectOutDTO>> Add([FromBody] ProjectInDTO projectIn)
+		public async Task<ActionResult<ProjectOutDTO>> Create([FromBody] ProjectInDTO projectIn)
 		{
 			if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.Name))
 			{
@@ -148,7 +148,7 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
-			User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
+			EndUser user = await _unitOfWork.UserRepository.GetEndUserByIdAsync(User.GetUserId());
 			project.EndUser = user;
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
@@ -179,7 +179,7 @@ namespace Intiri.API.Controllers
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				newMoodboard.Designer = user;
+				newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 
 				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.Moodboard.RoomId);
 				newMoodboard.Room = mRoom;

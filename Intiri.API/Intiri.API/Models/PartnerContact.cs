@@ -1,6 +1,6 @@
 ﻿namespace Intiri.API.Models
 {
-	public class PartnerContact
+	public class PartnerContact : User
 	{
 		#region Properties
 
