@@ -16,7 +16,7 @@ namespace Intiri.API.Models.Project
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime Updated { get; set; } = DateTime.UtcNow;
-        public User EndUser { get; set; }
+        public EndUser EndUser { get; set; }
         public int EndUserId { get; set; }
         public int BudgetRate { get; set; }
         public Room.Room Room { get; set; }

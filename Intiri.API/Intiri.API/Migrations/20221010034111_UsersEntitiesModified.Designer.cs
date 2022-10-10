@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221010034111_UsersEntitiesModified")]
+    partial class UsersEntitiesModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,29 +185,6 @@ namespace Intiri.API.Migrations
                     b.HasIndex("StyleId");
 
                     b.ToTable("Moodboards");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.Moodboard.ShareMoodboard", b =>
-                {
-                    b.Property<int>("SenderUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecipientUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MoodboardSharedId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SharedTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SenderUserId", "RecipientUserId");
-
-                    b.HasIndex("MoodboardSharedId");
-
-                    b.HasIndex("RecipientUserId");
-
-                    b.ToTable("ShareMoodboards");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Partner", b =>
@@ -860,31 +839,6 @@ namespace Intiri.API.Migrations
                     b.Navigation("Style");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Moodboard.ShareMoodboard", b =>
-                {
-                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "MoodboardShared")
-                        .WithMany()
-                        .HasForeignKey("MoodboardSharedId");
-
-                    b.HasOne("Intiri.API.Models.EndUser", "RecipientUser")
-                        .WithMany("ReceivedMoodboards")
-                        .HasForeignKey("RecipientUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Intiri.API.Models.EndUser", "SenderUser")
-                        .WithMany("SendMoodboards")
-                        .HasForeignKey("SenderUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("MoodboardShared");
-
-                    b.Navigation("RecipientUser");
-
-                    b.Navigation("SenderUser");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
                     b.HasOne("Intiri.API.Models.Partner", "Partner")
@@ -1126,10 +1080,6 @@ namespace Intiri.API.Migrations
             modelBuilder.Entity("Intiri.API.Models.EndUser", b =>
                 {
                     b.Navigation("CreatedProjects");
-
-                    b.Navigation("ReceivedMoodboards");
-
-                    b.Navigation("SendMoodboards");
                 });
 #pragma warning restore 612, 618
         }
