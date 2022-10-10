@@ -15,7 +15,6 @@
                     <div class="mt-8">
                         <code-input #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)"
                             (codeCompleted)="onCodeCompleted($event)">
-
                         </code-input>
                         <span class="ion-warning mt-2" *ngIf="error">{{ error }}</span>
                     </div>

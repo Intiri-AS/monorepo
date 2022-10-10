@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { ModalController } from "@ionic/angular";
 import { CodeInputComponent } from "angular-code-input";
 import { AccountService } from "src/app/services/account.service";
 import { VerificationTarget } from "src/app/types/types";
 
 @Component({
-selector: 'app-sms-verification-modal',
-templateUrl: './sms-verification-modal.component.html',
+    selector: 'app-sms-verification-modal',
+    templateUrl: './sms-verification-modal.component.html',
 })
 export class SmsVerificationModalComponent implements OnInit {
     @ViewChild('codeInput') codeInput !: CodeInputComponent;
@@ -19,10 +19,14 @@ export class SmsVerificationModalComponent implements OnInit {
     constructor(
         private accountService: AccountService,
         private router: Router,
-        private modalController: ModalController)
-    {}
+        private modalController: ModalController) { }
 
     ngOnInit(): void {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.modalController.dismiss();
+            }
+        })
     }
 
     onCodeChanged(verificationCode) {
@@ -32,8 +36,8 @@ export class SmsVerificationModalComponent implements OnInit {
     public onCodeCompleted(verificationCode) {
         this.accountService.smsVerificationLogin(this.phoneNumberFull, verificationCode)
             .subscribe(response => {
-                this.router.navigate(['/new-project'], {queryParams: {step: this.step}});
-                this.dismiss();
+                this.router.navigate(['/new-project'], { queryParams: { step: this.step } });
+                this.modalController.dismiss({ dismissed: true });
             }, error => {
                 this.error = error.error;
                 console.log(error);
@@ -43,15 +47,11 @@ export class SmsVerificationModalComponent implements OnInit {
     resendVerificationCode() {
         this.accountService.resendVerificationCode(this.phoneNumberFull).subscribe(
             response => {
-            // nothing to do here
+                // nothing to do here
             }, error => {
-            this.error = error.error;
-            console.log(error);
+                this.error = error.error;
+                console.log(error);
             }
         )
-    }
-
-    dismiss() {
-        this.modalController.dismiss({dismissed: true});
     }
 }
