@@ -32,7 +32,7 @@ namespace Intiri.API.Services
 			_logger = logger;
 		}
 
-		public async Task<OperationResult<bool>> SendSmsVerificationCode(string phoneNumber)
+		public async Task<OperationResult<bool>> SendSmsVerificationCode(string countryCode, string phoneNumber)
 		{
 			Random generator = new();
 
@@ -42,11 +42,11 @@ namespace Intiri.API.Services
 			string message = GenerateVerificationMessage(verificationCode);
 
 			MessageResource messageResource = 
-				await _smsSender.SendSmsAsync($"+{phoneNumber}", message);
+				await _smsSender.SendSmsAsync($"+{countryCode}{phoneNumber}", message);
 
 			PendingSmsVerification pendingSmsVerification = new()
 			{
-				PhoneNumber = phoneNumber,
+				PhoneNumber = countryCode + phoneNumber,
 				VerificationCode = verificationCode,
 				DateCreated = messageResource.DateCreated
 			};
@@ -66,31 +66,33 @@ namespace Intiri.API.Services
 		}
 
 		public bool ValidateSmsVerificationCode(
+			string countryCode,
 			string phoneNumber,
 			string verificationCode)
 		{
+			string _phoneNumber = countryCode + phoneNumber; 
 			bool isVerificationSuccessful = _pendingSmsVerifications.Where(
-				v => v.PhoneNumber == phoneNumber && 
+				v => v.PhoneNumber == _phoneNumber && 
 				v.VerificationCode == verificationCode)
 				.Any();
 
 			if (isVerificationSuccessful)
 			{
 				_logger.LogInformation(
-					$"SMS verification SUCCESS for phoneNumber='${phoneNumber}' " +
+					$"SMS verification SUCCESS for phoneNumber='${_phoneNumber}' " +
 					$"and verificationCode='${verificationCode}'");
 
 				_pendingSmsVerifications.RemoveAll(
-					v => v.PhoneNumber == phoneNumber);
+					v => v.PhoneNumber == _phoneNumber);
 			}
 			else
 			{
 				_logger.LogInformation(
-					$"SMS verification FAIL for phoneNumber='${phoneNumber}' " +
+					$"SMS verification FAIL for phoneNumber='${_phoneNumber}' " +
 					$"and verificationCode='${verificationCode}'");
 
 				_pendingSmsVerifications.RemoveAll(
-					v => v.PhoneNumber == phoneNumber &&
+					v => v.PhoneNumber == _phoneNumber &&
 					v.VerificationCode == verificationCode);
 			}
 

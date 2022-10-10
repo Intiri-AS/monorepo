@@ -4,8 +4,9 @@ namespace Intiri.API.Models.DTO.InputDTO
 {
 	public class SmsVerificationInDTO
 	{
+		public string CountryCode { get; set; }
 		[Required]
-		public string PhoneNumberFull { get; set; }
+		public string PhoneNumber { get; set; }
 
 		[Required]
 		public string VerificationCode { get; set; }

@@ -1,11 +1,13 @@
 export class SmsVerificationDTO {
-    phoneNumberFull: string;
+    countryCode: string;
+    phoneNumber: string;
     verificationCode: string;
     firstName?: string;
     lastName?: string;
 
-    constructor(phoneNumberFull: string, verificationCode: string) {
-        this.phoneNumberFull = phoneNumberFull;
+    constructor(countryCode: string, phoneNumber: string, verificationCode: string) {
+        this.countryCode = countryCode;
+        this.phoneNumber = phoneNumber;
         this.verificationCode = verificationCode;
     }
 }

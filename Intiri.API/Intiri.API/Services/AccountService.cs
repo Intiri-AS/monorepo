@@ -60,7 +60,7 @@ namespace Intiri.API.Services
 
 		public async Task<User> GetUserByPhoneNumberAsync(string userPhoneNumber)
 		{
-			return await _userManager.Users.SingleOrDefaultAsync(x => x.PhoneNumber == userPhoneNumber.ToLower());
+			return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == userPhoneNumber.ToLower());
 		}
 
 		public async Task<SignInResult> CheckUserSignInPaswordAsync(User user, string password, bool lockoutOnFailure)
@@ -79,7 +79,7 @@ namespace Intiri.API.Services
 
 		public async Task<bool> IsUserWithPhoneNumberExists(string phoneNumber)
 		{
-			return await _userManager.Users.AnyAsync(x => x.PhoneNumber == phoneNumber.ToLower());
+			return await _userManager.Users.AnyAsync(x => x.UserName == phoneNumber.ToLower());
 		}
 
 		#endregion IAccountService members

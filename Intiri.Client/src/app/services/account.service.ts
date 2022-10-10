@@ -26,8 +26,8 @@ export class AccountService {
     return this.http.post(this.apiUrl + 'account/register', model);
   }
 
-  smsVerificationLogin(phoneNumberFull: string, verificationCode: string) {
-    const verificationDTO = new SmsVerificationDTO(phoneNumberFull, verificationCode);
+  smsVerificationLogin(countryCode: string, phoneNumber: string, verificationCode: string) {
+    const verificationDTO = new SmsVerificationDTO(countryCode, phoneNumber, verificationCode);
     return this.http.post(this.apiUrl + 'account/sms-verification-login', verificationDTO)
       .pipe(
         map((user: User) => {
@@ -39,14 +39,16 @@ export class AccountService {
   }
 
   smsVerificationRegister(
-    phoneNumberFull: string,
+    countryCode: string,
+    phoneNumber: string,
     verificationCode: string,
     firstName: string,
     lastName: string) {
 
     const verificationDTO =
     {
-      phoneNumberFull,
+      countryCode,
+      phoneNumber,
       verificationCode,
       firstName,
       lastName

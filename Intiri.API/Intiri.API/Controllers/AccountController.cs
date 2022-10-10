@@ -58,7 +58,7 @@ namespace Intiri.API.Controllers
 			}
 
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(phoneNumberFull);
+				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber);
 
 			if (!sendOperation.Result)
 			{
@@ -69,7 +69,8 @@ namespace Intiri.API.Controllers
 			{
 				FirstName = registerIn.FirstName,
 				LastName = registerIn.LastName,
-				PhoneNumberFull = phoneNumberFull
+				CountryCode = registerIn.CountryCode,
+				PhoneNumber = registerIn.PhoneNumber,
 			};
 			return Ok(registerOut);
 		}
@@ -88,7 +89,7 @@ namespace Intiri.API.Controllers
 			}
 
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(phoneNumberFull);
+				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber);
 
 			if (!sendOperation.IsSuccess)
 			{
@@ -102,10 +103,13 @@ namespace Intiri.API.Controllers
 			SmsVerificationInDTO verificationDto)
 		{
 			User user = _mapper.Map<User>(verificationDto);
-			user.PhoneNumber = verificationDto.PhoneNumberFull;
+
+			user.CountryCode = verificationDto.CountryCode;
+			user.PhoneNumber = verificationDto.PhoneNumber;
+			user.UserName = user.CountryCode + user.PhoneNumber;
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-				verificationDto.PhoneNumberFull, verificationDto.VerificationCode);
+				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
 
 			if (!isSuccess)
 			{
@@ -126,6 +130,7 @@ namespace Intiri.API.Controllers
 
 			return new LoginOutDTO
 			{
+				CountryCode = verificationDto.CountryCode,
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			};
@@ -135,8 +140,9 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
 			SmsVerificationInDTO verificationDto)
 		{
+			string phoneNumberFull = verificationDto.CountryCode + verificationDto.PhoneNumber;
 			User user = await _accountService
-				.GetUserByPhoneNumberAsync(verificationDto.PhoneNumberFull);
+				.GetUserByPhoneNumberAsync(phoneNumberFull);
 
 			if (user == null)
 			{
@@ -144,7 +150,7 @@ namespace Intiri.API.Controllers
 			}
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-				verificationDto.PhoneNumberFull, verificationDto.VerificationCode);
+				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
 
 			if (!isSuccess)
 			{
@@ -153,6 +159,7 @@ namespace Intiri.API.Controllers
 
 			return Ok(new LoginOutDTO
 			{
+				CountryCode = user.CountryCode,
 				PhoneNumber = user.PhoneNumber,
 				Token = await _tokenService.CreateToken(user)
 			});
@@ -160,12 +167,10 @@ namespace Intiri.API.Controllers
 
 		[HttpPost("resend-sms-verification")]
 		public async Task<IActionResult> ResendSmsVerificationCode(
-			SmsVerificationResendInDTO verificationResendInDTO)
+			SmsVerificationResendInDTO inDTO)
 		{
-			string phoneNumberFull = verificationResendInDTO.PhoneNumberFull;
-
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(phoneNumberFull);
+				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber);
 
 			if (!sendOperation.IsSuccess)
 			{

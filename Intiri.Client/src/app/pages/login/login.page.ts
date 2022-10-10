@@ -54,10 +54,13 @@ export class LoginPage implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber
     };
-    const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
+    //const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(
       (response) => {
-        this.router.navigate(['/sms-verification'], { queryParams: { target: VerificationTarget.LOGIN, phoneNumberFull } });
+        this.router.navigate(['/sms-verification'], { queryParams: { 
+          target: VerificationTarget.LOGIN, 
+          countryCode: loginModel.countryCode, 
+          phoneNumber: loginModel.phoneNumber } });
       },
       (error) => {
         console.log(error);
