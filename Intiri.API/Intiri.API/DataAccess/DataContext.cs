@@ -38,6 +38,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<Moodboard> Moodboards { get; set; }
 		public DbSet<Partner> Partners { get; set; }
+		public DbSet<ShareMoodboard> ShareMoodboards { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -88,10 +89,20 @@ namespace Intiri.API.DataAccess
 				.WithMany(prod => prod.Moodboards)
 				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
 
-			builder.Entity<Moodboard>()
-				.HasMany<Product>(mood => mood.Products)
-				.WithMany(prod => prod.Moodboards)
-				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
+			builder.Entity<ShareMoodboard>()
+				.HasKey(k => new { k.SenderUserId, k.RecipientUserId });
+
+			builder.Entity<ShareMoodboard>()
+				.HasOne(s => s.SenderUser)
+				.WithMany(l => l.SendMoodboards)
+				.HasForeignKey(s => s.SenderUserId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			builder.Entity<ShareMoodboard>()
+				.HasOne(s => s.RecipientUser)
+				.WithMany(l => l.ReceivedMoodboards)
+				.HasForeignKey(s => s.RecipientUserId)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }
