@@ -1,4 +1,6 @@
-﻿namespace Intiri.API.Models.DTO.InputDTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Intiri.API.Models.DTO.InputDTO
 {
 	public class PartnerInDTO
 	{
