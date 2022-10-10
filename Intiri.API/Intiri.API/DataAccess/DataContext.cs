@@ -48,6 +48,19 @@ namespace Intiri.API.DataAccess
 				.HasForeignKey(ur => ur.UserId)
 				.IsRequired();
 
+			builder.Entity<EndUser>()
+				.HasMany(p => p.CreatedProjects)
+				.WithOne(eu => eu.EndUser);
+
+			builder.Entity<Designer>()
+				.HasMany(m => m.CreatedMoodboards)
+				.WithOne(d => d.Designer);
+
+			builder.Entity<PartnerContact>()
+				.HasOne(p => p.Partner)
+				.WithMany(pc => pc.PartnerContacts);
+
+
 			builder.Entity<Role>()
 				.HasMany(ur => ur.Users)
 				.WithOne(u => u.Role)
