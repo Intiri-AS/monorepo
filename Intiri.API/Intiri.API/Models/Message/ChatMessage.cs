@@ -1,5 +1,8 @@
-﻿namespace Intiri.API.Models.ChatMessage
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Intiri.API.Models.ChatMessage
 {
+    [Index(nameof(SenderId), nameof(RecipientId))]
     public class ChatMessage
     {
         public int Id { get; set; }
