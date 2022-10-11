@@ -3,6 +3,7 @@ using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Extension;
 using Intiri.API.Models.DTO;
+using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,17 @@ namespace Intiri.API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet("chat-persons")]
+        public async Task<ActionResult<IEnumerable<ChatPersonOutDTO>>> GetChatPersons()
+        {
+            List<ChatPersonOutDTO> chatPersonOutDTOs = new List<ChatPersonOutDTO>();
+            chatPersonOutDTOs.Add(new ChatPersonOutDTO());
+
+            await Task.CompletedTask;
+
+            return Ok(chatPersonOutDTOs);
         }
     }
 }

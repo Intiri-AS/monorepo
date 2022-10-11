@@ -13,4 +13,6 @@ public class ChatPersonOutDTO
     public DateTime LastMessageDate { get; set; }
 
     public string LastMessageContent { get; set; }
+
+    public bool ChatPeriodExpired { get; set; }
 }
