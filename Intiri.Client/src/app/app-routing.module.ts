@@ -38,6 +38,9 @@ import { ProcessingPage } from './pages/processing/processing.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
 import { ProjectService } from './services/project.service';
 import { MoodboardService } from './services/moodboard.service';
+import { EnduserGuard } from './guards/enduser.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { DesignerGuard } from './guards/designer.guard';
 
 const routes: Routes = [
   {
@@ -127,7 +130,8 @@ const routes: Routes = [
   },
   {
     path: 'my-intiri', //TODO Set up page guard (end-user guard)
-    component: MyIntiriPage
+    component: MyIntiriPage,
+    canActivate: [EnduserGuard]
   },
   {
     path: 'project-details', //TODO Set up page guard (end-user guard)
@@ -147,7 +151,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', //TODO Set up page guard (admin guard)
-    component: DashboardPage
+    component: DashboardPage,
+    canActivate: [AdminGuard]
   },
   {
     path: 'consultations', //TODO Set up page guard (admin guard)
@@ -183,7 +188,8 @@ const routes: Routes = [
   },
   {
     path: 'client-list', //TODO Set up page guard (internal designer guard)
-    component: ClientListPage
+    component: ClientListPage,
+    canActivate: [DesignerGuard]
   },
   {
     path: 'client-request', //TODO Set up page guard (designer guard)
