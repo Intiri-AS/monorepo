@@ -38,7 +38,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.accountService.currentUser$.subscribe(loggedUser => {
       if (loggedUser) {
-        console.log(loggedUser);
         if (loggedUser.roles[0] === 'FreeEndUser') {
           this.nav.navigateRoot('/my-intiri');
         } else if (loggedUser.roles[0] === 'Admin') {
