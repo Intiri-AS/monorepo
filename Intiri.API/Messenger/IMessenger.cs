@@ -26,6 +26,6 @@ namespace Messenger
 		/// </summary>
 		/// <param name="message">Message</param>
 		/// <returns>True if successful, otherwise false</returns>
-		bool SendMessage(Message message);
+		Task<bool> SendMessage(Message message);
 	}
 }

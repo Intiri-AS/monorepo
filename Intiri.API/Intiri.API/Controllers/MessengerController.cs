@@ -1,44 +1,58 @@
 ﻿using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.DataAccess.Repository.Interface;
+using Intiri.API.Extension;
 using Intiri.API.Models.DTO;
+using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PusherServer;
 
 namespace Intiri.API.Controllers
 {
+    [Authorize]
     public class MessengerController : BaseApiController
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IMessengerService _messengerService;
 
-        public MessengerController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public MessengerController(IUnitOfWork unitOfWork,
+                                   IMessengerService messengerService) : base(unitOfWork)
         {
-            
+            _userRepository = unitOfWork.UserRepository;
+            _messengerService = messengerService;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult> Message(MessageDTO messageDTO)
+        public async Task<ActionResult> SendMessage(ChatMessageInDTO messageDTO)
         {
-            var options = new PusherOptions
+            bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
+
+            if (!recipientExists)
             {
-                Cluster = "eu",
-                Encrypted = true
-            };
+                return BadRequest("Unknown recipient of message.");
+            }
 
-            var pusher = new Pusher(
-              "1488805",
-              "0233be6c2ef5fb26cc7d", // TODO: keep this keys, secrets in env file
-              "bab67a1d5e732b7ccfec",
-              options);
+            int senderId = User.GetUserId();
+            DateTime sentDate = DateTime.UtcNow;
 
-            await pusher.TriggerAsync(
-              "chat",
-              "message",
-              new { 
-                  username = messageDTO.Username, 
-                  message = messageDTO.Message 
-              });
+            if (!await _messengerService.SendMessage(messageDTO, senderId, sentDate))
+            {
+                return BadRequest("Unable to send message to listeners.");
+            }
 
-            return Ok(new string[] { });
+            return Ok();
+        }
+
+        [HttpGet("chat-persons")]
+        public async Task<ActionResult<IEnumerable<ChatPersonOutDTO>>> GetChatPersons()
+        {
+            List<ChatPersonOutDTO> chatPersonOutDTOs = new List<ChatPersonOutDTO>();
+            chatPersonOutDTOs.Add(new ChatPersonOutDTO());
+
+            await Task.CompletedTask;
+
+            return Ok(chatPersonOutDTOs);
         }
     }
 }

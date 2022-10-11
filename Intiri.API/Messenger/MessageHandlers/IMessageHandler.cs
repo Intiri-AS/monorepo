@@ -19,6 +19,6 @@ namespace Messenger.MessageHandlers
 		/// </summary>
 		/// <param name="message">Message</param>
 		/// <returns>True if successful, otherwise false</returns>
-		bool SendMesssage(Message message);
+		Task<bool> SendMesssage(Message message);
 	}
 }

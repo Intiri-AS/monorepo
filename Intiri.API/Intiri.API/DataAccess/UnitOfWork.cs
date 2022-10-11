@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository;
 using Intiri.API.DataAccess.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess
 {
-	public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
 	{
 		#region Fields
 
@@ -26,6 +25,7 @@ namespace Intiri.API.DataAccess
 		private readonly IProjectRepository _projectRepository;
 		private readonly IMoodboardRepository _moodboardRepository;
 		private readonly IPartnerRepository _partnerRepository;
+		private readonly IChatMessageRepository _chatMessageRepository;
 
 		#endregion Fields
 
@@ -49,6 +49,7 @@ namespace Intiri.API.DataAccess
 			_projectRepository = new ProjectRepository(dataContext, mapper);
 			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
 			_partnerRepository = new PartnerRepository(dataContext, mapper);
+			_chatMessageRepository = new ChatMessageRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -73,6 +74,7 @@ namespace Intiri.API.DataAccess
 		public IProjectRepository ProjectRepository => _projectRepository;
 		public IMoodboardRepository MoodboardRepository => _moodboardRepository;
 		public IPartnerRepository PartnerRepository => _partnerRepository;
+		public IChatMessageRepository ChatMessageRepository => _chatMessageRepository;
 
 		#endregion Properties
 

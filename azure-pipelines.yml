@@ -133,6 +133,18 @@ stages:
                {
                   "name": "TwilioConfiguaration:SMSAccountFrom",
                   "value": "$(TwilioAccountFrom)"
+               },
+               {
+                 "name": "PusherConfiguration:AppId",
+                  "value": "$(PusherAppId)"
+               },
+               {
+                 "name": "PusherConfiguration:AppKey",
+                  "value": "$(PusherAppKey)"
+               },
+               {
+                 "name": "PusherConfiguration:AppSecret",
+                  "value": "$(PusherAppSecret)"
                }
               ]
             connectionStrings: |

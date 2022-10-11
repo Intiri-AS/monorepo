@@ -9,6 +9,7 @@ using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.ChatMessage;
 
 namespace Intiri.API.DataAccess
 {
@@ -103,6 +104,16 @@ namespace Intiri.API.DataAccess
 				.WithMany(l => l.ReceivedMoodboards)
 				.HasForeignKey(s => s.RecipientUserId)
 				.OnDelete(DeleteBehavior.Cascade);
+
+			builder.Entity<ChatMessage>()
+				   .HasOne(m => m.Sender)
+				   .WithMany(u => u.MessagesSent)
+				   .OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<ChatMessage>()
+				   .HasOne(m => m.Recipient)
+				   .WithMany(u => u.MessagesReceived)
+				   .OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }

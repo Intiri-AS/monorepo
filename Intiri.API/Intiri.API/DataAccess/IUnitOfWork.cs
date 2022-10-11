@@ -20,6 +20,7 @@ namespace Intiri.API.DataAccess
 		IProjectRepository ProjectRepository { get; }
 		IMoodboardRepository MoodboardRepository { get; }
 		IPartnerRepository PartnerRepository { get; }
+		IChatMessageRepository ChatMessageRepository { get; }
 
 		Task<bool> SaveChanges();
 	}
