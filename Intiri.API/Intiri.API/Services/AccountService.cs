@@ -57,10 +57,9 @@ namespace Intiri.API.Services
 			return await _userManager.FindByIdAsync(id);
 		}
 
-
-		public async Task<User> GetUserByPhoneNumberAsync(string userPhoneNumber)
+		public async Task<User> GetUserByUsernameAsync(string username)
 		{
-			return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == userPhoneNumber.ToLower());
+			return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == username.ToLower());
 		}
 
 		public async Task<SignInResult> CheckUserSignInPaswordAsync(User user, string password, bool lockoutOnFailure)

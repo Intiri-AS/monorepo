@@ -78,10 +78,9 @@ namespace Intiri.API.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult> Login(LoginInDTO loginDto)
 		{
-			string phoneNumberFull = loginDto.CountryCode + loginDto.PhoneNumber;
+			string usernameFullPhone = loginDto.CountryCode + loginDto.PhoneNumber;
 
-			User user = await _accountService
-				.GetUserByPhoneNumberAsync(phoneNumberFull);
+			User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
 			
 			if (user == null)
 			{
@@ -95,7 +94,13 @@ namespace Intiri.API.Controllers
 			{
 				return BadRequest(sendOperation.ErrorMessage);
 			}
-			return Ok();
+			return Ok(new LoginOutDTO
+			{
+				CountryCode = user.CountryCode,
+				PhoneNumber = user.PhoneNumber,
+				Token = await _tokenService.CreateToken(user)
+			});
+			//return Ok();
 		}
 
 		[HttpPost("sms-verification-register")]
@@ -140,9 +145,9 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
 			SmsVerificationInDTO verificationDto)
 		{
-			string phoneNumberFull = verificationDto.CountryCode + verificationDto.PhoneNumber;
+			string usernameFullPhone = verificationDto.CountryCode + verificationDto.PhoneNumber;
 			User user = await _accountService
-				.GetUserByPhoneNumberAsync(phoneNumberFull);
+				.GetUserByUsernameAsync(usernameFullPhone);
 
 			if (user == null)
 			{
@@ -182,7 +187,7 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete-user/{phone}")]
 		public async Task<ActionResult> DeleteUser(string phone)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(phone);
+			User user = await _accountService.GetUserByUsernameAsync(phone);
 
 			if (user == null)
 			{
@@ -202,7 +207,7 @@ namespace Intiri.API.Controllers
 		[HttpPatch("forgot-password")]
 		public async Task<ActionResult<LoginOutDTO>> ForgotPassword([FromBody] ForgotPasswordInDTO forgotPasswordInDTO)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(forgotPasswordInDTO.PhoneNumber);
+			User user = await _accountService.GetUserByUsernameAsync(forgotPasswordInDTO.PhoneNumber);
 
 			if (user == null)
 			{
@@ -219,7 +224,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("reset-password")]
 		public async Task<ActionResult> ResetPassword(ResetPasswordInDTO resetPasswordInDTO)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(resetPasswordInDTO.PhoneNumber);
+			User user = await _accountService.GetUserByUsernameAsync(resetPasswordInDTO.PhoneNumber);
 			if (user == null)
 			{
 				//don't get much information because of security reasons
@@ -330,10 +335,11 @@ namespace Intiri.API.Controllers
 			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumber))
 			{
 				User existingUser = await _accountService
-					.GetUserByPhoneNumberAsync(phoneNumber);
+					.GetUserByUsernameAsync(phoneNumber);
 
 				return Ok(new LoginOutDTO
 				{
+					CountryCode = existingUser.CountryCode,
 					PhoneNumber = existingUser.PhoneNumber,
 					Token = await _tokenService.CreateToken(existingUser)
 				});
@@ -349,12 +355,15 @@ namespace Intiri.API.Controllers
 			string lastName = userInfoResponse.Claims
 				.FirstOrDefault(c => c.Type == "family_name").Value;
 
+			//TODO: Find the proper way to separate country code
+			string countryCode = "47";
 			User newUser = new()
 			{
 				UserName = phoneNumber,
 				FirstName = firstName,
 				LastName = lastName,
-				PhoneNumber = phoneNumber,
+				CountryCode = countryCode,
+				PhoneNumber = phoneNumber.Replace(countryCode, ""),
 				Email = email
 			};
 
@@ -378,6 +387,7 @@ namespace Intiri.API.Controllers
 
 			return Ok(new LoginOutDTO
 			{
+				CountryCode = newUser.CountryCode,
 				PhoneNumber = newUser.PhoneNumber,
 				Token = await _tokenService.CreateToken(newUser)
 			});

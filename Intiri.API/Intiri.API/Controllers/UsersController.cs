@@ -53,7 +53,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("profile")]
 		public async Task<ActionResult<UserOutDTO>> GetUserProfile()
 		{
-			User user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
 
 			if (user == null)
 			{
@@ -66,7 +66,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("{username}")]
 		public async Task<ActionResult<UserOutDTO>> GetUserByUsername(string username)
 		{
-			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
 
 			if (user == null)
 			{
@@ -92,7 +92,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("addPhoto")]
 		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto(IFormFile file)
 		{
-			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername()); ;
 
 			if (user == null)
 			{
@@ -152,7 +152,12 @@ namespace Intiri.API.Controllers
 		[HttpPut("update")]
 		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(User.GetUsername());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user.");
+			}
 
 			_mapper.Map(userUpdateDto, user);
 			_unitOfWork.UserRepository.UpdateUser(user);
