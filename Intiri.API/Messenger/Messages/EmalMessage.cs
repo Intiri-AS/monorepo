@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Messenger.Messages
+﻿namespace Messenger.Messages
 {
-	public class EmalMessage : Message
+    public class EmalMessage : Message
 	{
 		public string Recipient { get; set; }
 		public string Message { get; set; }

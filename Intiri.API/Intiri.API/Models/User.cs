@@ -23,6 +23,8 @@ namespace Intiri.API.Models
 		public string Country { get; set; }
 		public string CountryCode { get; set; }
 		public virtual ICollection<UserRole> Roles { get; set; }
+		public ICollection<ChatMessage.ChatMessage> MessagesSent { get; set; }
+		public ICollection<ChatMessage.ChatMessage> MessagesReceived { get; set; }
 
 		#endregion Properties
 	}

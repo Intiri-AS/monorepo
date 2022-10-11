@@ -69,7 +69,7 @@ try
 				policy.AllowAnyHeader()
 					   .AllowAnyMethod()
 					   .AllowCredentials()
-					   .WithOrigins("http://localhost:8100"));
+					   .WithOrigins("http://localhost:8100", "http://localhost:4200"));
 
 	app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 

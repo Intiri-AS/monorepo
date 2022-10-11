@@ -10,7 +10,16 @@ namespace Messenger
 		private bool _initialized;
 		private readonly Dictionary<Type, IMessageHandler> _handlers = new Dictionary<Type, IMessageHandler>();
 
-		#endregion Fields
+        #endregion Fields
+
+        #region Constructor
+
+		public Messenger()
+        {
+			DefaultInitialize();
+        }
+
+		#endregion Constructor
 
 		#region Public methods
 
@@ -25,6 +34,7 @@ namespace Messenger
 			}
 
 			AddHandler(new EmailMessageHandler());
+			AddHandler(new PusherMessageHandler());
 			_initialized = true;
 		}
 
@@ -49,7 +59,7 @@ namespace Messenger
 		/// </summary>
 		/// <param name="message">Message</param>
 		/// <returns>True if successful, otherwise false</returns>
-		public bool SendMessage(Message message)
+		public async Task<bool> SendMessage(Message message)
 		{
 			// TODO: create queue and handle messages asynchronously
 
@@ -70,15 +80,13 @@ namespace Messenger
 
 			try
 			{
-				handler.SendMesssage(message);
-	}
+				return await handler.SendMesssage(message);
+			}
 			catch (Exception)
 			{
 				// log error
 				return false;
 			}
-
-			return true;
 		}
 
 		#endregion Public methods

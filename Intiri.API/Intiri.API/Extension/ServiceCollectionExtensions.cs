@@ -26,6 +26,7 @@ namespace Intiri.API.Extension
 			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
 			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
 			AddConfigurationService<TwilioConfiguration>(services, config, "TwilioConfiguaration");
+			AddConfigurationService<PusherConfiguration>(services, config, "PusherConfiguration");
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
@@ -35,8 +36,9 @@ namespace Intiri.API.Extension
 			services.AddSingleton<ISmsSender, AuthMessageSenderService>();
 			services.AddScoped<IFileUploadService, CloudinaryService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
-			services.AddSingleton<ISmsVerificationService, SmsVerificationService>();
+			services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
+			services.AddScoped<IMessengerService, MessengerService>();
 
 			return services;
 		}

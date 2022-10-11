@@ -40,11 +40,11 @@ namespace Messenger.MessageHandlers
 		/// </summary>
 		/// <param name="message">Message</param>
 		/// <returns>True if successful, otherwise false</returns>
-		public bool SendMesssage(Message message)
+		public async Task<bool> SendMesssage(Message message)
 		{
 			ArgumentNullException.ThrowIfNull(message, nameof(message));
 
-			return true;
+			return await Task.FromResult(true);
 		}
 
 		#endregion Public methods
