@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { CodeInputComponent } from 'angular-code-input';
 import { AccountService } from 'src/app/services/account.service';
 import { VerificationTarget } from 'src/app/types/types';
@@ -18,7 +19,9 @@ export class SmsVerificationPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private nav: NavController
+  ) { }
 
   ngOnInit(): void {
     this.getVerificationTarget();
@@ -38,7 +41,18 @@ export class SmsVerificationPage implements OnInit {
           const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
           this.accountService.smsVerificationLogin(countryCode, phoneNumber, verificationCode)
             .subscribe(response => {
-              this.router.navigate(['/my-intiri']);
+              this.accountService.currentUser$.subscribe(loggedUser => {
+                if (loggedUser) {
+                  if (loggedUser.roles[0] === 'FreeEndUser') {
+                    this.nav.navigateRoot('/my-intiri');
+                  } else if (loggedUser.roles[0] === 'Admin') {
+                    this.nav.navigateRoot('/dashboard');
+                  } else if (loggedUser.roles[0] === 'InternalDesigner') {
+                    this.nav.navigateRoot('/client-list')
+                  }
+                }
+              })
+              // this.router.navigate(['/my-intiri']);
             }, error => {
               this.error = error;
               console.log(error);

@@ -9,7 +9,7 @@ import { AccountService } from '../services/account.service';
   providedIn: 'root'
 })
 
-export class AdminGuard implements CanActivate {
+export class EnduserGuard implements CanActivate {
 
   constructor(
     private nav: NavController,
@@ -23,7 +23,7 @@ export class AdminGuard implements CanActivate {
     //TODO Guard code here
     this.accountService.currentUser$.subscribe(user => {
       if (user) {
-        if (user.roles[0] !== 'Admin') {
+        if (user.roles[0] !== 'FreeEndUser') {
           this.nav.navigateRoot('/login');
           return false;
         }
