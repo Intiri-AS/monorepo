@@ -1,4 +1,6 @@
+
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-payment-details-page',
@@ -22,6 +24,15 @@ export class PaymentDetailsPage {
   totalPrice = 2850;
 
 
+
   constructor() {}
+
+
+
+  ngOnInit() {}
+
+
+
+
 
 }
