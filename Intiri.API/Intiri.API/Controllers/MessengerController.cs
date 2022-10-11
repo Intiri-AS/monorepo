@@ -2,6 +2,7 @@
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Extension;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Services.Interfaces;
@@ -47,10 +48,9 @@ namespace Intiri.API.Controllers
         [HttpGet("chat-persons")]
         public async Task<ActionResult<IEnumerable<ChatPersonOutDTO>>> GetChatPersons()
         {
-            List<ChatPersonOutDTO> chatPersonOutDTOs = new List<ChatPersonOutDTO>();
-            chatPersonOutDTOs.Add(new ChatPersonOutDTO());
+            User user = await _userRepository.GetByID(User.GetUserId());
 
-            await Task.CompletedTask;
+            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _messengerService.GetChatPersons(user);
 
             return Ok(chatPersonOutDTOs);
         }

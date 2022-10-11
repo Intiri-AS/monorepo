@@ -5,6 +5,7 @@ using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
+using Intiri.API.Models.RoleNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services;
@@ -55,12 +56,12 @@ namespace Intiri.API.DataAccess.SeedData
 
 			var roles = new List<Role>
 			{
-				new Role{Name = "Admin"},
-				new Role{Name = "FreeEndUser"},
-				new Role{Name = "PremiumEndUser"},
-				new Role{Name = "InternalDesigner"},
-				new Role{Name = "ExternalDesigner"},
-				new Role{Name = "Partner"},
+				new Role{Name = RoleNames.Admin},
+				new Role{Name = RoleNames.FreeEndUser},
+				new Role{Name = RoleNames.PremiumEndUser},
+				new Role{Name = RoleNames.InternalDesigner},
+				new Role{Name = RoleNames.ExternalDesigner},
+				new Role{Name = RoleNames.Partner},
 			};
 
 			foreach (var role in roles)
