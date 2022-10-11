@@ -90,7 +90,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("addPhoto")]
-		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto(IFormFile file)
+		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto([FromForm] UploadFileInDTO inFile)
 		{
 			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername()); ;
 
@@ -98,6 +98,8 @@ namespace Intiri.API.Controllers
 			{
 				return Unauthorized("Invalid user.");
 			}
+
+			IFormFile file = inFile.PhotoPath;
 
 			if (file.Length > 0)
 			{
@@ -149,7 +151,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding user photo.");
 		}
 
-		[HttpPut("update")]
+		[HttpPut("profile")]
 		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
 		{
 			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
