@@ -4,10 +4,12 @@ using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Extension;
 using Intiri.API.Models.DTO;
 using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
+    [Authorize]
     public class MessengerController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
@@ -21,7 +23,7 @@ namespace Intiri.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Message(ChatMessageInDTO messageDTO)
+        public async Task<ActionResult> SendMessage(ChatMessageInDTO messageDTO)
         {
             bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
 
@@ -31,13 +33,12 @@ namespace Intiri.API.Controllers
             }
 
             int senderId = User.GetUserId();
+            DateTime sentDate = DateTime.UtcNow;
 
-            if (!await _messengerService.SendMessageToListeners(messageDTO, senderId))
+            if (!await _messengerService.SendMessage(messageDTO, senderId, sentDate))
             {
                 return BadRequest("Unable to send message to listeners.");
             }
-
-            //TODO: Save message to DB
 
             return Ok();
         }

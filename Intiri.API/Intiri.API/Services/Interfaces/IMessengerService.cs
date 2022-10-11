@@ -4,5 +4,5 @@ namespace Intiri.API.Services.Interfaces;
 
 public interface IMessengerService
 {
-    Task<bool> SendMessageToListeners(ChatMessageInDTO chatMessageInDTO, int senderId);
+    Task<bool> SendMessage(ChatMessageInDTO chatMessageInDTO, int senderId, DateTime sentDate);
 }
