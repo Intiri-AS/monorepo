@@ -7,7 +7,7 @@
 }
 
 .step-item-wrapper {
-  @apply rounded-2xl border-black-3 border hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-4;
+  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-4 p-0;
 }
 
 .moodboard-item-wrapper {
@@ -24,15 +24,15 @@
 }
 
 .step-image {
-  @apply object-cover h-full w-full rounded-sm p-2;
+  @apply object-cover h-full w-full rounded-[13px];
 }
 
 .step-icon-wrapper {
-  @apply h-[87%] rounded-sm m-2 bg-light pt-[30px] lg:pt-[50px];
+  @apply h-[87%] rounded-2xl bg-light pt-[30px] lg:pt-[50px];
 }
 
 .step-color-wrapper {
-  @apply h-[87%] rounded-sm m-2;
+  @apply h-[87%] rounded-2xl m-2 p-3 shadow-1;
 }
 
 .step-icon {

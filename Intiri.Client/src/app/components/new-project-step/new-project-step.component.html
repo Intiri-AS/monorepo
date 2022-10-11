@@ -3,15 +3,15 @@
   <p class="step-subtitle">{{currentStep.subtitle}}</p>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
-      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
         <!-- if image (style|material|product) -->
         <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
          <!-- if icon (room) -->
-        <div *ngIf="item.iconPath" class="step-icon-wrapper" >
+        <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
           <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
         </div>
         <!-- if color pallete -->
-        <div *ngIf="item.mainColor" class="step-color-wrapper" >
+        <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
           <div class="w-[47.5%] h-full inline-block float-right">
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
@@ -31,7 +31,7 @@
     <p class="text-black-2">Select room shape</p>
     <ion-grid class="step-items" style="min-height: 300px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleItem(item)" size="5.8" size-sm="2.2" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
           <div class="step-icon-wrapper" >
             <img src="../../../assets/{{item.imagePath}}" class="step-icon" alt="room-icon"/>
           </div>
@@ -57,7 +57,7 @@
   <div *ngIf="currentStep.data.moodboards">
     <ion-grid class="step-items" style="min-height: 400px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.moodboards" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.moodboards" (click)="toggleItem(item)" size="5.8" size-sm="2.2" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
@@ -76,7 +76,7 @@
     <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">See rooms in this style</p>
     <ion-grid class="step-items" style="min-height: 785px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="3.75" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="2.2" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
@@ -108,7 +108,7 @@
 
     <!-- if final step -->
     <div *ngIf="currentStep.data === 'final'">
-      <div class="rounded-2xl border-black-3 border-2 w-full h-[320px] lg:h-[410px] mr-2 md:mr-3 mt-4 p-3">
+      <div class="rounded-2xl border shadow-1 w-full mac:w-[75%] h-[410px] mr-2 md:mr-3 mt-4 p-3">
         <div class="result-grid">
           <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorLight}"></div>
           <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.products[0].imagePath) + ')'}"></div>
@@ -127,30 +127,24 @@
       <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">What's included in moodboard</p>
       <ion-grid class="step-items" style="min-height: 460px; max-height: 720px;">
         <ion-row class="step-items-row">
-          <ion-col *ngFor="let item of project.currentMoodboard.colorPalettes" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
-            <div *ngIf="item.mainColor" class="step-color-wrapper" >
-              <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
-              <div class="w-[47.5%] h-full inline-block float-right">
-                <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-                <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-                <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
-              </div>
+          <ion-col *ngFor="let item of project.currentMoodboard.colorPalettes" size="5.8" size-sm="2.2" class="rounded-2x w-full h-[130px] lg:h-[180px] mt-4 !mb-0" [class.bigger-margin]="item.name">
+            <div *ngIf="item.mainColor" class="h-[100%] rounded-2xl" >
+              <div class="w-full h-full inline-block rounded-2xl" [ngStyle]="{background: item.mainColor}"></div>
             </div>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
           </ion-col>
-          <ion-col *ngFor="let item of project.currentMoodboard.materials" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
+          <ion-col *ngFor="let item of project.currentMoodboard.materials" size="5.8" size-sm="2.2" class="rounded-2xl w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
             <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
           </ion-col>
-          <ion-col *ngFor="let item of project.currentMoodboard.products" size="5.8" size-sm="3.8" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
+          <ion-col *ngFor="let item of project.currentMoodboard.products" size="5.8" size-sm="2.2" class="rounded-2xl w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
             <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
+            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
-
 </div>

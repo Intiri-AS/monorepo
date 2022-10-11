@@ -8,7 +8,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col size="12" size-sm="5" size-xl="2.75">
+            <ion-col size="12" size-sm="5" size-xl="1.9">
                 <div class="h-[52px] mt-6">
                     <ion-select interface="popover" placeholder="Search">
                     <ion-select-option value=""></ion-select-option>
@@ -16,7 +16,7 @@
                     </ion-select>
                 </div>
             </ion-col>
-            <ion-col size="12" size-sm="5" offset-xl="4.30" size-xl="2.75">
+            <ion-col size="12" size-sm="5" offset-xl="5.8" size-xl="2.8">
                 <span class="text-sm text-black-2">Duration</span>
                 <div class=" h-[52px]">
                     <ion-select interface="popover" [multiple]="true">
@@ -25,13 +25,13 @@
                     </ion-select>
                 </div>
             </ion-col>
-            <ion-col size="12" size-sm="5" size-xl="2">
+            <ion-col size="12" size-sm="5" size-xl="1.5">
                 <ion-button (click)="addDesigner()" fill="clear" class="primary-btn mt-6">Add designer</ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row class="mt-8 gap-x-[1.65%]">
-            <ion-col *ngFor="let i of [1,2,3,4,6,7]" size="12" size-sm="5.75" size-xl="2.85">
+        <ion-row class="mt-8 gap-x-[1.45%]">
+            <ion-col *ngFor="let i of [1,2,3,4,6,7,8,9]" size="12" size-sm="5.75" size-xl="2.25">
                 <div class="designer">
                     <div class="my-6 flex flex-1 justify-center">
                         <img src="../../../assets/images/profile-img.png" class="w-[70px] h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
@@ -45,7 +45,7 @@
                         <p class="text-black-2 leading-5 font-semibold text-2xl">Grace  Delawer</p>
                         <p class="text-black-2 size-[22px] leading-5 mt-1">Scandinavian style</p>
                         <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">INHOUSE DESIGNER</p>
-                        <div class="p-4 m-4 bg-light">
+                        <div class="py-4 px-1 m-4 bg-light">
                             <ul>
                                 <li *ngFor="let number of [0,1,2,3,4]" class="inline-block">
                                     <ion-icon name="star" class="text-primary mr-1"></ion-icon>

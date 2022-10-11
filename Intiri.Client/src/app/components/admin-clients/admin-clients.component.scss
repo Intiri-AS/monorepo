@@ -11,8 +11,7 @@ ion-select {
 }
 
 .client {
-    @apply border rounded-2xl border-black-2 min-h-[300px] mb-[30px] overflow-hidden;
-    //-webkit-box-shadow: 7px 8px 32px 17px rgb(0 0 0 / 8%);
+    @apply border rounded-2xl min-h-[300px] mb-[30px] overflow-hidden shadow-1;
 }
 
 ion-col {
