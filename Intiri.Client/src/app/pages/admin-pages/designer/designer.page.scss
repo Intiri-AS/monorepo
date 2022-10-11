@@ -3,6 +3,5 @@ ion-select {
 }
 
 .designer {
-    @apply  border rounded-2xl h-12 border-black-2 h-[320px] mb-[30px] overflow-hidden;
-    //-webkit-box-shadow: 7px 8px 32px 17px rgb(0 0 0 / 8%);
+    @apply  border rounded-2xl h-12  h-[320px] mb-[30px] overflow-hidden shadow-1;
 }

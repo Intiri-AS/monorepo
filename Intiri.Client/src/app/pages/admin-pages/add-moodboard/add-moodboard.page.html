@@ -4,7 +4,7 @@
     <ion-grid class="main-container">
       <p class="main-title mb-[34px] pl-2">Add moodboard</p>
       <ion-row>
-        <ion-col size="12" size-xl="3">
+        <ion-col size="12" size-xl="2.5">
           <div class="bg-light xl-ion:w-[240px] xl-ion:h-[440px] rounded-lg text-center">
             <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item pt-[45px]">Room</p>
             <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">Style</p>
@@ -14,7 +14,7 @@
             <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">Moodboard preview</p>
           </div>
         </ion-col>
-        <ion-col size="12" size-xl="9">
+        <ion-col size="12" offset="0.1" size-xl="9.4">
           <app-add-moodboard-step
           (toggleSelection)="toggleItem($event)"
           [stepsOrder]="stepsOrder"

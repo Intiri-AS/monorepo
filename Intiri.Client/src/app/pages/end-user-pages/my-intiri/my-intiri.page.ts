@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 
 export class MyIntiriPage {
   @ViewChild('slides') slides: IonSlides;
+  @ViewChild('projectSlides') projectSlides: IonSlides;
   apiUrl = environment.apiUrl;
 
   projects$: Observable<Project[]>;
@@ -54,7 +55,7 @@ export class MyIntiriPage {
   ]
 
   options = {
-    slidesPerView: 2,
+    slidesPerView: 3,
     spaceBetween: 20,
   }
 
@@ -87,6 +88,14 @@ export class MyIntiriPage {
 
   prev() {
     this.slides.slidePrev();
+  }
+
+  nextProject() {
+    this.projectSlides.slideNext();
+  }
+
+  prevProject() {
+    this.projectSlides.slidePrev();
   }
 
   // goToProjectDetails(project: Project){

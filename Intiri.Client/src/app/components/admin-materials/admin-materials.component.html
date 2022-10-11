@@ -21,11 +21,11 @@
       <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4">Add material</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let material of materials | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
+  <ion-row class="gap-x-[1.45%]">
+    <ion-col *ngFor="let material of materials | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
       <div class="card">
-        <div class="p-[20px] h-full w-full">
-          <img src="{{material.imagePath}}" class="object-cover !h-full !w-full" alt="Profile Img" />
+        <div class="h-full w-full">
+          <img src="{{material.imagePath}}" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
         </div>
       </div>
       <div class="flex justify-between">
