@@ -17,7 +17,7 @@ namespace Intiri.API.Services.Interfaces
 
 		Task<User> FindUserByIdAsync(string id);
 
-		Task<User> GetUserByPhoneNumberAsync(string userPhoneNumber);
+		Task<User> GetUserByUsernameAsync(string username);
 
 		Task<SignInResult> CheckUserSignInPaswordAsync(User user, string password, bool lockoutOnFailure);
 

@@ -24,7 +24,7 @@ namespace Intiri.API.Services
 			var claims = new List<Claim>
 			{
 				new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-				new Claim(JwtRegisteredClaimNames.UniqueName, user.PhoneNumber),
+				new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
 			};
 
 			var roles = await _userManager.GetRolesAsync(user);
