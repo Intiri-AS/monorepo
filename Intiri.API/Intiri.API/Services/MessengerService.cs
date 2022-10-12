@@ -1,4 +1,5 @@
-﻿using Intiri.API.DataAccess;
+﻿using AutoMapper;
+using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
 using Intiri.API.Models.ChatMessage;
@@ -20,16 +21,19 @@ public class MessengerService : IMessengerService
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<User> _userManager;
+    private readonly IMapper _mapper;
 
     public MessengerService(IMessenger messenger,
                             IUnitOfWork unitOfWork,
-                            UserManager<User> userManager)
+                            UserManager<User> userManager,
+                            IMapper mapper)
     {
         _messenger = messenger;
         _chatMessageRepository = unitOfWork.ChatMessageRepository;
         _userRepository = unitOfWork.UserRepository;
         _unitOfWork = unitOfWork;
         _userManager = userManager;
+        _mapper = mapper;
     }
 
     public async Task<bool> SendMessage(ChatMessageInDTO chatMessageInDTO, int senderId, DateTime sentDate)
@@ -104,8 +108,18 @@ public class MessengerService : IMessengerService
                                                                   user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault()
+                                                                  .FirstOrDefault(),
+            ChatPeriodExpired = false
         };
+    }
+
+    public async Task<IEnumerable<ChatMessageOutDTO>> GetChatHistory(int firstUserId, int secondUserId)
+    {
+        //TODO: Process what if one of users is deleted
+        return await _chatMessageRepository.Get<ChatMessageOutDTO>(_mapper,
+                                                            message => (message.SenderId == firstUserId && message.RecipientId == secondUserId) ||
+                                                                        (message.SenderId == secondUserId && message.RecipientId == firstUserId),
+                                                            messages => messages.OrderBy(message => message.MessageSentDate));
     }
 
     #region Private methods
