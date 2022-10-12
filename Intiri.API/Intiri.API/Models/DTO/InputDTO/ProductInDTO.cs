@@ -7,11 +7,14 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public string Name { get; set; }
 
-		[Required]
+		[Required] 
 		public int ProductTypeId { get; set; }
 
 		[Required]
-		public int StyleId { get; set; }
+		public int MaterialId { get; set; }
+		
+		[Required]
+		public string Color { get; set; }
 
 		[Required]
 		public double Price { get; set; }

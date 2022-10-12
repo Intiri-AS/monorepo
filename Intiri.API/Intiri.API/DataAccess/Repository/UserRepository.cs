@@ -14,6 +14,20 @@ namespace Intiri.API.DataAccess.Repository
 			_mapper = mapper;
 		}
 
+		public async Task<IEnumerable<TEntity>> GetUsersAsync<TEntity>() where TEntity : class
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<TEntity>().ToListAsync();
+		}
+
+		public async Task<T> GetUserByIdAsync<T>(int id) where T : User
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<T>().SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
+
+
 		public async Task<IEnumerable<EndUser>> GetEndUsersAsync()
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
@@ -48,22 +62,6 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			//return _context.Set<PartnerContact>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<PartnerContact>().SingleOrDefaultAsync(/*eu => eu.Id == id*/);
-		}
-
-
-		public async Task<User> GetUserByIdAsync(int id)
-		{
-			return await GetByID(id);
-		}
-
-		public async Task<User> GetUserByUserNameAsync(string username)
-		{
-			return await SingleOrDefaultAsync(x => x.UserName == username);
-		}
-
-		public async Task<IEnumerable<User>> GetUsersAsync()
-		{
-			return await _context.Users.ToListAsync();
 		}
 
 		public void UpdateUser(User user)

@@ -208,8 +208,8 @@ namespace Intiri.API.DataAccess.SeedData
 				ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductType.Id);
 				product.ProductType = productType;
 
-				Style style = await unitOfWork.StyleRepository.SingleOrDefaultAsync(s => s.Id == product.StyleId);
-				product.Style = style;
+				//Material material  = await unitOfWork.MaterialRepository.SingleOrDefaultAsync(m => m.Id == product.StyleId);
+				//product.Style = style;
 
 				unitOfWork.ProductRepository.Insert(product);
 			}

@@ -37,56 +37,105 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
-		public async Task<ActionResult<RegisterOutDTO>> AddPartnerContact(RegisterInDTO registerIn)
+		[HttpPost("createPartner")]
+		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
 		{
-			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+			Partner partner = _mapper.Map<Partner>(partnerInDTO);
 
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+			IFormFile file = partnerInDTO.LogoFile;
+
+			if (file != null && file.Length > 0)
 			{
-				return BadRequest("Phone number is taken");
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService
+						.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to upload partner logo.");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest("Failed to upload material image.");
+				}
+
+				partner.LogoPath = uploadResult.SecureUri.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.PublicId;
 			}
 
-			PartnerContact pUser = _mapper.Map<PartnerContact>(registerIn);
+			_unitOfWork.PartnerRepository.Insert(partner);
 
-			IdentityResult result = await _accountService.CreateUserAsync(pUser);
-			if (!result.Succeeded)
+			if (await _unitOfWork.SaveChanges())
 			{
-				return BadRequest(result.Errors);
+				return _mapper.Map<PartnerOutDTO>(partner);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(pUser, registerIn.Role);
-			if (!roleResult.Succeeded)
-			{
-				return BadRequest(roleResult.Errors);
-			}
-
-			return Ok(_mapper.Map<RegisterOutDTO>(pUser));
+			return BadRequest("Problem occured while adding partner");
 		}
 
-		public async Task<ActionResult<RegisterOutDTO>> AddDesigner(RegisterInDTO registerIn)
+		[HttpDelete("delete/{partnerId}")]
+		public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
 		{
-			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+			Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
 
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+			if (partner == null)
 			{
-				return BadRequest("Phone number is taken");
+				return BadRequest("Partner doesn' exist.");
 			}
 
-			Designer pUser = _mapper.Map<Designer>(registerIn);
+			DeletionResult deletionResult = null;
 
-			IdentityResult result = await _accountService.CreateUserAsync(pUser);
-			if (!result.Succeeded)
+			try
 			{
-				return BadRequest(result.Errors);
+				deletionResult = await _fileUploadService
+					.DeleteFileAsync(partner.LogoPublicId);
+			}
+			catch (Exception)
+			{
+				return BadRequest("Failed to delete partner logo.");
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(pUser, registerIn.Role);
-			if (!roleResult.Succeeded)
+			try
 			{
-				return BadRequest(roleResult.Errors);
+				await _unitOfWork.PartnerRepository.Delete(partner.Id);
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal error: {ex}");
 			}
 
-			return Ok(_mapper.Map<RegisterOutDTO>(pUser));
+			return Ok();
+		}
+
+		[HttpGet("endUsers")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllEndUsers()
+		{
+			IEnumerable<EndUser> users = await _unitOfWork.UserRepository.GetUsersAsync<EndUser>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+
+			return Ok(usersToReturn);
+		}
+
+		[HttpGet("designers")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllDesigner()
+		{
+			IEnumerable<Designer> users = await _unitOfWork.UserRepository.GetUsersAsync<Designer>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+
+			return Ok(usersToReturn);
+		}
+
+		[HttpGet("partnerContacts")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
+		{
+			IEnumerable<PartnerContact> users = await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+
+			return Ok(usersToReturn);
 		}
 
 	}

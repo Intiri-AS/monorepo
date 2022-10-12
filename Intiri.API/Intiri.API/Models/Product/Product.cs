@@ -17,8 +17,7 @@
 		public Partner Partner { get; set; }
 		public int? PartnerId { get; set; }
 
-		public int StyleId { get; set; }
-		public Style.Style Style { get; set; }
+		public Material.Material Material { get; set; }
 		public ProductType ProductType { get; set; }
 		public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
 	}
