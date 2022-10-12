@@ -13,6 +13,7 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 })
 export class AdminStylesComponent implements OnInit {
 
+  searchText: any;
   styles$: Observable<any> = this.styleService.styles$;
   styles: any[];
 
