@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -112,6 +112,8 @@ import { SmsVerificationModalComponent } from './components/modals/sms-verificat
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -148,6 +150,8 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     CodeInputModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -157,6 +161,7 @@ export function createTranslateLoader(http: HttpClient) {
     }
     }),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
