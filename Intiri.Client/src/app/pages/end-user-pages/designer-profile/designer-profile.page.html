@@ -32,13 +32,13 @@
             <p class="text-2xl text-black-2 font-medium">Latest project</p>
             <ion-card class="border shadow-1 rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
               <div class="result-grid">
-                <div class="item-sm" [ngStyle]="{background: black}"></div>
+                <div class="item-sm" [ngStyle]="{background: '#333'}"></div>
                 <div class="item-lg" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
                 <div class="item-lg" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
                 <div class="item-lg-tall" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
-                <div class="item-sm" [ngStyle]="{background: red}"></div>
-                <div class="item-sm" [ngStyle]="{background: red}"></div>
-                <div class="item-sm-tall" [ngStyle]="{background: red}"></div>
+                <div class="item-sm" [ngStyle]="{background: '#333'}"></div>
+                <div class="item-sm" [ngStyle]="{background: '#333'}"></div>
+                <div class="item-sm-tall" [ngStyle]="{background: '#333'}"></div>
                 <div class="item-lg" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
                 <div class="item-md" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
                 <div class="item-md" [ngStyle]="{background: '../../../../assets/images/profile-img.png'}"></div>
@@ -57,7 +57,6 @@
             </div>
             <div class="mt-16">
               <p class="text-2xl font-medium text-black-2">Other projects</p>
-              
               <ion-row class="mt-8 gap-x-[1.65%]">
                 <ion-col *ngFor="let project of projects" class="!pb-8" size="12" size-sm="5.75" size-xl="5.8" >
                   <div class="designer">
@@ -76,7 +75,7 @@
                   <div class="flex items-center justify-between">
                     <div class="flex items-center justify-start">
                       <p class="text-black-2 text-2xl font-medium">{{project.projectName}}</p>
-                      <ion-button fill="clear" class="text-black" (click)="paymentModal()">
+                      <ion-button fill="clear" class="text-black">
                         <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                       </ion-button>
                     </div>

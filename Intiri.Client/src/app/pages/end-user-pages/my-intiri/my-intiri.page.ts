@@ -58,6 +58,7 @@ export class MyIntiriPage {
     slidesPerView: 3,
     spaceBetween: 20,
   }
+  searchText: any;
 
   constructor(
     public projectService: ProjectService,

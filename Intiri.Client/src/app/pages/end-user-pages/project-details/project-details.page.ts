@@ -30,6 +30,15 @@ export class ProjectDetailsPage implements OnInit {
     })
   }
 
+  getPiecesNo(project){
+    console.log(project)
+    let result = 0;
+    project.projectMoodboards.forEach(moodboard => {
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    });
+    return result;
+  }
+
 
   // goToMoodboardDetails(moodboard: Moodboard){
   //   this.moodboardService.setCurrentMoodboard(moodboard);
