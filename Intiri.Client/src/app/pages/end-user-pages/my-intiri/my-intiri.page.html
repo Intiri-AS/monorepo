@@ -11,7 +11,7 @@
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
                 <p class="text-2xl font-medium">Latest project</p>
-                <div>
+                <div *ngIf="projects[projects.length-1].projectMoodboards.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>
@@ -30,8 +30,8 @@
                 <p class="text-black-3 text-lg">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
               <div class="flex flex-wrap gap-x-[2%]">
-                <ion-slides #slides [options]="options" class="py-4 pr-4">
-                  <ion-slide *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[350px]">
+                <ion-slides #slides [options]="options" class="py-4 pr-4 w-full">
+                  <ion-slide *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
@@ -50,7 +50,7 @@
             <div class="mt-8">
               <div class="flex justify-between items-center">
                 <p class="text-2xl font-medium text-black-2">All projects</p>
-                <div>
+                <div *ngIf="projects.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevProject()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>
@@ -60,8 +60,8 @@
                 </div>
               </div>
               <div class="flex flex-wrap gap-x-[2%]">
-                <ion-slides #projectSlides [options]="options" class="pb-20 pr-4  pt-4">
-                  <ion-slide *ngFor="let project of projects" class="rounded-2xl border shadow-1 h-[350px]">
+                <ion-slides #projectSlides [options]="options" class="pb-20 pr-4 pt-4 w-full">
+                  <ion-slide *ngFor="let project of projects" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
@@ -79,7 +79,7 @@
                             <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
                           </ion-button>
                         </div>
-                        <div>
+                        <div class="w-full text-left">
                           <p class="text-black-3 text-lg">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
                         </div>
                       </ion-row>
