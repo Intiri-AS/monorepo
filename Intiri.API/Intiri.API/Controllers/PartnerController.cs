@@ -9,6 +9,7 @@ using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Intiri.API.Services;
 
 namespace Intiri.API.Controllers
 {

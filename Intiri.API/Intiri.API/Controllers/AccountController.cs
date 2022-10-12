@@ -72,6 +72,7 @@ namespace Intiri.API.Controllers
 				CountryCode = registerIn.CountryCode,
 				PhoneNumber = registerIn.PhoneNumber,
 			};
+
 			return Ok(registerOut);
 		}
 
@@ -107,11 +108,11 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
 			SmsVerificationInDTO verificationDto)
 		{
-			User user = _mapper.Map<User>(verificationDto);
+			EndUser eUser = _mapper.Map<EndUser>(verificationDto);
 
-			user.CountryCode = verificationDto.CountryCode;
-			user.PhoneNumber = verificationDto.PhoneNumber;
-			user.UserName = user.CountryCode + user.PhoneNumber;
+			//eUser.CountryCode = verificationDto.CountryCode;
+			//eUser.PhoneNumber = verificationDto.PhoneNumber;
+			eUser.UserName = eUser.CountryCode + eUser.PhoneNumber;
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
 				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
@@ -121,13 +122,13 @@ namespace Intiri.API.Controllers
 				return BadRequest("Invalid SMS verification code.");
 			}
 
-			IdentityResult result = await _accountService.CreateUserAsync(user);
+			IdentityResult result = await _accountService.CreateUserAsync(eUser);
 			if (!result.Succeeded)
 			{
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(eUser, "FreeEndUser");
 			if (!roleResult.Succeeded)
 			{
 				return BadRequest(roleResult.Errors);
@@ -136,8 +137,8 @@ namespace Intiri.API.Controllers
 			return new LoginOutDTO
 			{
 				CountryCode = verificationDto.CountryCode,
-				PhoneNumber = user.PhoneNumber,
-				Token = await _tokenService.CreateToken(user)
+				PhoneNumber = eUser.PhoneNumber,
+				Token = await _tokenService.CreateToken(eUser)
 			};
 		}
 

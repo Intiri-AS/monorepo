@@ -10,7 +10,7 @@ namespace Intiri.API.Automapper
 		public UserMapperProfiles()
 		{
 			CreateMap<User, UserOutDTO>();
-			CreateMap<SmsVerificationInDTO, User>();
+			CreateMap<SmsVerificationInDTO, EndUser>();
 			CreateMap<UserOutDTO, User>();
 			CreateMap<UserUpdateInDTO, User>();
 		}
