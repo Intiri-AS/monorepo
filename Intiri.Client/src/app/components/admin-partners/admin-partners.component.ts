@@ -9,6 +9,8 @@ import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partne
 })
 export class AdminPartnersComponent implements OnInit {
 
+  searchText: any;
+
   constructor(private modalController: ModalController) {}
 
   ngOnInit(): void {

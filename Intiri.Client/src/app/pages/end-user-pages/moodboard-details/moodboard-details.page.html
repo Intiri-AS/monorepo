@@ -9,7 +9,7 @@
       </ion-button>
       <p class="main-title">{{moodboard.name}}</p>
       <div class="p-2 xl:p-0">
-        <ion-card class="border border-black shadow-none rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
+        <ion-card class="border shadow-1 rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
             <div class="result-grid">
               <div class="item-sm" [ngStyle]="{background: moodboard.colorPalettes[0].shadeColorLight}"></div>
               <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(moodboard.products[0].imagePath) + ')'}"></div>
@@ -29,27 +29,20 @@
           <p class="text-black-2 text-2xl font-medium mb-12">What's included in moodboard</p>
           <ion-grid class="step-items">
             <ion-row class="step-items-row">
-              <ion-col *ngFor="let item of moodboard.colorPalettes" size="5.8" size-sm="2.7" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mb-16" [class.bigger-margin]="item.name">
-                <div *ngIf="item.mainColor" class="step-color-wrapper" >
-                  <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
-                  <div class="w-[47.5%] h-full inline-block float-right">
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-                    <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
-                  </div>
+              <ion-col *ngFor="let item of moodboard.colorPalettes" size="5.8" size-md="2.7" size-xl="1.8" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+                <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
+                  <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
                 </div>
-                <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
-                <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2 text-[18px]">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+                <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
+                <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
               </ion-col>
-              <ion-col *ngFor="let item of moodboard.materials" size="5.8" size-sm="2.7" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mb-16" [class.bigger-margin]="item.name">
+              <ion-col *ngFor="let item of moodboard.materials" size="5.8" size-md="2.7" size-xl="1.8" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
                 <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-                <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2 text-[18px]">{{item.name}} </p>
-                <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+                <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.name}} </p>
               </ion-col>
-              <ion-col *ngFor="let item of moodboard.products" size="5.8" size-sm="2.7" class="rounded-2xl border-2 border-black-3 w-full h-[130px] lg:h-[180px] mb-16" [class.bigger-margin]="item.name">
+              <ion-col *ngFor="let item of moodboard.products" size="5.8" size-md="2.7" size-xl="1.8" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
                 <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-                <p *ngIf="!item.number && item.name" class="font-bold mt-5 text-black-2 text-[18px]">{{item.name}} </p>
-                <p *ngIf="item.number && item.name" class="font-bold mt-5 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+                <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.name}} </p>
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -64,7 +64,7 @@ export class AccountService {
       );
   }
 
-  resendVerificationCode(phoneNumberFull: string) {
+  resendVerificationCode(phoneNumberFull) {
     return this.http.post(this.apiUrl + 'account/resend-sms-verification', {phoneNumberFull});
   }
 

@@ -11,11 +11,11 @@
       <ion-button (click)="addPicture()" fill="clear" class="primary-btn mt-4">Add pictures</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let styleImage of (styleImages$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
+  <ion-row class="gap-x-[1.45%]">
+    <ion-col *ngFor="let styleImage of (styleImages$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
       <div class="card">
-        <div class="p-[20px] h-full w-full">
-          <img src="{{styleImage.imagePath}}" class="object-cover !h-full !w-full" alt="Picture Img" />
+        <div class="h-full w-full">
+          <img src="{{styleImage.imagePath}}" class="object-cover !h-full !w-full rounded-2xl" alt="Picture Img" />
         </div>
       </div>
       <div class="flex justify-between">

@@ -21,17 +21,17 @@
       <ion-button (click)="addStyle()" fill="clear" class="primary-btn mt-4">Add style</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let style of styles | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
+  <ion-row class="gap-x-[1.45%]">
+    <ion-col *ngFor="let style of styles | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
       <div class="card">
-        <div class="p-[20px] h-full w-full">
-          <img src="{{style.imagePath == 'path' ? style.styleImages[0].imagePath : style.imagePath}}" class="object-cover !h-full !w-full" alt="Profile Img" />
+        <div class="h-full w-full">
+          <img src="{{style.imagePath == 'path' ? style.styleImages[0].imagePath : style.imagePath}}" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
         </div>
       </div>
       <div class="flex justify-between">
         <p class="py-2 text-black-2 font-semibold">{{style.name}}</p>
         <div class="float-right">
-          <button (click)="showSettings($event, style)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-white rounded-lg" type="button">
+          <button (click)="showSettings($event, style)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center" type="button">
               <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
           </button>
         </div>

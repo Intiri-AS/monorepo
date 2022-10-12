@@ -16,6 +16,7 @@ export class StylePage implements OnInit {
     initialSlide: 0
   }
 
+  style: any;
   currentSlide = 0;
   constructor(private _route: ActivatedRoute, private _router: Router) {}
 

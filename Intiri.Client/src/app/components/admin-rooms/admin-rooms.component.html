@@ -12,8 +12,8 @@
       <ion-button (click)="addRoom()" fill="clear" class="primary-btn mt-4">Add room</ion-button>
     </ion-col>
   </ion-row>
-  <ion-row class="gap-x-[1.65%]">
-    <ion-col *ngFor="let room of (rooms$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.85">
+  <ion-row class="gap-x-[1.45%]">
+    <ion-col *ngFor="let room of (rooms$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
       <div class="card">
         <div class="step-icon-wrapper" >
           <img src="{{room.iconPath}}" class="step-icon" alt="room-icon"/>

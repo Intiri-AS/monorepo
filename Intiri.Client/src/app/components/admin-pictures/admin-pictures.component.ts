@@ -13,6 +13,7 @@ import { AddPictureModalComponent } from '../modals/add-picture-modal/add-pictur
 export class AdminPicturesComponent implements OnInit {
 
   styleImages$: Observable<any> = this.styleService.styleImages$;
+  searchText: any;
 
   constructor(public popoverController: PopoverController, private styleService: StyleService, private modalController: ModalController) { }
 

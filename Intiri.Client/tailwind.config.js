@@ -13,6 +13,7 @@ module.exports = {
       'xl-ion': '1200px',
       'xl': '1280px',
       'xll': '1340px',
+      'mac': '1480px',
       '2xl': '1536px',
     },
     extend: {
@@ -34,6 +35,9 @@ module.exports = {
         'room-details': "url('/assets/icon/room-details.svg')",
         'sofa': "url('/assets/icon/sofa.svg')",
         'materials': "url('/assets/icon/materials.svg')",
+      },
+      boxShadow: {
+        '1': ' 4px 4px 15px rgb(0, 0, 0, 0.25)'
       },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))'
