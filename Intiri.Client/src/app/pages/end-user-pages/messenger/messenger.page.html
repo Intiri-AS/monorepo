@@ -36,7 +36,7 @@
             <div class="bg-light xl-ion:h-[682px] rounded-lg text-center pb-8">
               <div class="flex py-[22px] pl-[18px] border-b border-secondary">
                 <img [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'" class="w-[45px] h-[45px] rounded-lg object-cover" alt="Profile Img"/>
-                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center" (click)="unsubscribeFromChannel()">{{activeChatUser.firstName}} {{activeChatUser.lastName}}</p>
+                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">{{activeChatUser.firstName}} {{activeChatUser.lastName}}</p>
               </div>
               <div class="chat" id="chatbox">
                 <div *ngFor="let msg of messages" [class]="getChatClassName(msg)">{{msg.content ? msg.content : msg.Content}}</div>

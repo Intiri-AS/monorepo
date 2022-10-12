@@ -20,7 +20,7 @@ export class MessengerPage implements OnInit {
 
   loggedUser;
   contacts: any[];
-  activeChatUser = {photoPath: '', id: null};
+  activeChatUser = {photoPath: '', id: null, firstName: '', lastName: ''};
   currentChannel: string;
 
   constructor(private msgService: MessengerService, private accountService: AccountService, public datepipe: DatePipe, private route: ActivatedRoute,
