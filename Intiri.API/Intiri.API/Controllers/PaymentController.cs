@@ -2,6 +2,8 @@
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using NLog.Fluent;
+using Stripe;
 using Stripe.Checkout;
 
 namespace Intiri.API.Controllers
@@ -44,9 +46,48 @@ namespace Intiri.API.Controllers
             var service = new SessionService();
             //Response.Headers.Add("Location", session.Url);
             //return new StatusCodeResult(303);
+            Console.WriteLine("HELOU THERE");
 
             Session session = service.Create(options);
             return Ok(session);
+        }
+
+        [HttpPost("/stripe-webhook")]
+        public async Task<ActionResult> StripeWebhookHandler()
+        {
+            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+            var webhook_endpoint_secret = "whsec_738dfde9f640c33fbbcb7028dfca567a6809d1754bc73769a3f990efcdc52f4d";
+            try
+            {
+                var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], webhook_endpoint_secret);
+
+                if(stripeEvent.Type == Events.PaymentIntentSucceeded)
+                {
+                    var session = stripeEvent.Data.Object as Session;
+                    // TODO: implement method/logic for saving payment info
+                    //await savePayment();
+                }
+                else if(stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
+                {
+                    var session = stripeEvent.Data.Object as Session;
+                    // TODO: implement method/logic for saving payment info
+                    //await savePayment();
+                }
+                else if(stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed)
+                {
+                    var session = stripeEvent.Data.Object as Session;
+                    // handle failure
+                } else
+                {
+                    Console.WriteLine("Unhandled event type: {0}", stripeEvent.Type);
+                }
+
+                return Ok();
+            }
+            catch (StripeException e)
+            {
+                return BadRequest();
+            }
         }
     }
 }
