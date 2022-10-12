@@ -132,7 +132,7 @@ ion-button {
 }
 
 .header-container {
-  @apply px-[75px] 
+  @apply px-[75px];
 }
 
 .box-shadow {
@@ -142,7 +142,7 @@ ion-button {
 // should be wrapped around every main content of the page (main section below header)
 .main-container {
   @extend .header-container;
-  @apply my-[50px] px-[75px] pt-0;
+  @apply my-[50px] px-[30px] lg:px-[75px] pt-0;
 }
 
 .ion-card-container {

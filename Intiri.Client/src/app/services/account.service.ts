@@ -64,14 +64,18 @@ export class AccountService {
       );
   }
 
-  resendVerificationCode(phoneNumberFull: string) {
+  resendVerificationCode(phoneNumberFull) {
     return this.http.post(this.apiUrl + 'account/resend-sms-verification', {phoneNumberFull});
   }
 
   setCurrentUser(user: User) {
     user.roles = [];
-    const roles = this.getDecodedToken(user.token).role;
+    const tokenData = this.getDecodedToken(user.token);
+    const roles = tokenData.role;
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+    user.id = parseInt(tokenData.nameid);
+    user.fullName = tokenData.name;
+    user.photoPath = tokenData.prn;
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }

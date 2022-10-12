@@ -8,12 +8,13 @@ import { VerificationTarget } from "src/app/types/types";
 @Component({
     selector: 'app-sms-verification-modal',
     templateUrl: './sms-verification-modal.component.html',
+    styleUrls: ['./sms-verification-modal.component.scss'],
 })
 export class SmsVerificationModalComponent implements OnInit {
     @ViewChild('codeInput') codeInput !: CodeInputComponent;
     error: string;
     step: string;
-    phoneNumberFull: string;
+    phoneModel: any;
     verificationTarget: VerificationTarget;
 
     constructor(
@@ -34,7 +35,7 @@ export class SmsVerificationModalComponent implements OnInit {
     }
 
     public onCodeCompleted(verificationCode) {
-        this.accountService.smsVerificationLogin("countryCode", "phoneNumber", verificationCode)
+        this.accountService.smsVerificationLogin(this.phoneModel.countryCode, this.phoneModel.phoneNumber, verificationCode)
             .subscribe(response => {
                 this.router.navigate(['/new-project'], { queryParams: { step: this.step } });
                 this.modalController.dismiss({ dismissed: true });
@@ -45,7 +46,7 @@ export class SmsVerificationModalComponent implements OnInit {
     }
 
     resendVerificationCode() {
-        this.accountService.resendVerificationCode(this.phoneNumberFull).subscribe(
+        this.accountService.resendVerificationCode(this.phoneModel).subscribe(
             response => {
                 // nothing to do here
             }, error => {
