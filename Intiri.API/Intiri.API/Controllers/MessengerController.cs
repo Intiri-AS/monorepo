@@ -2,57 +2,64 @@
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Extension;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Intiri.API.Controllers
+namespace Intiri.API.Controllers;
+
+[Authorize]
+public class MessengerController : BaseApiController
 {
-    [Authorize]
-    public class MessengerController : BaseApiController
+    private readonly IUserRepository _userRepository;
+    private readonly IMessengerService _messengerService;
+
+    public MessengerController(IUnitOfWork unitOfWork,
+                               IMessengerService messengerService) : base(unitOfWork)
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMessengerService _messengerService;
+        _userRepository = unitOfWork.UserRepository;
+        _messengerService = messengerService;
+    }
 
-        public MessengerController(IUnitOfWork unitOfWork,
-                                   IMessengerService messengerService) : base(unitOfWork)
+    [HttpPost]
+    public async Task<ActionResult> SendMessage(ChatMessageInDTO messageDTO)
+    {
+        bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
+
+        if (!recipientExists)
         {
-            _userRepository = unitOfWork.UserRepository;
-            _messengerService = messengerService;
+            return BadRequest("Unknown recipient of message.");
         }
 
-        [HttpPost]
-        public async Task<ActionResult> SendMessage(ChatMessageInDTO messageDTO)
+        int senderId = User.GetUserId();
+        DateTime sentDate = DateTime.UtcNow;
+
+        if (!await _messengerService.SendMessage(messageDTO, senderId, sentDate))
         {
-            bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
-
-            if (!recipientExists)
-            {
-                return BadRequest("Unknown recipient of message.");
-            }
-
-            int senderId = User.GetUserId();
-            DateTime sentDate = DateTime.UtcNow;
-
-            if (!await _messengerService.SendMessage(messageDTO, senderId, sentDate))
-            {
-                return BadRequest("Unable to send message to listeners.");
-            }
-
-            return Ok();
+            return BadRequest("Unable to send message to listeners.");
         }
 
-        [HttpGet("chat-persons")]
-        public async Task<ActionResult<IEnumerable<ChatPersonOutDTO>>> GetChatPersons()
-        {
-            List<ChatPersonOutDTO> chatPersonOutDTOs = new List<ChatPersonOutDTO>();
-            chatPersonOutDTOs.Add(new ChatPersonOutDTO());
+        return Ok();
+    }
 
-            await Task.CompletedTask;
+    [HttpGet("chat-persons")]
+    public async Task<ActionResult<IEnumerable<ChatPersonOutDTO>>> GetChatPersons()
+    {
+        User user = await _userRepository.GetByID(User.GetUserId());
 
-            return Ok(chatPersonOutDTOs);
-        }
+        IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _messengerService.GetChatPersons(user);
+
+        return Ok(chatPersonOutDTOs);
+    }
+
+    [HttpGet("chat-history/{chatUserId}")]
+    public async Task<ActionResult<IEnumerable<ChatMessageOutDTO>>> GetChatHistory(int chatUserId)
+    {
+        IEnumerable<ChatMessageOutDTO> messages = await _messengerService.GetChatHistory(User.GetUserId(), chatUserId);
+
+        return Ok(messages);
     }
 }

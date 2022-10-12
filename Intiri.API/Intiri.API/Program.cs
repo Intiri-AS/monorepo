@@ -11,6 +11,7 @@ using Microsoft.Extensions.FileProviders;
 using NLog;
 using NLog.Web;
 using System.Text.Json.Serialization;
+using Stripe;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Info("Init Main");
@@ -84,7 +85,9 @@ try
 	app.UseDefaultFiles();
 	app.UseStaticFiles();
 
-	app.UseEndpoints(endpoints =>
+    StripeConfiguration.ApiKey = "sk_test_51LrTfeKX8zAv4zjwEPlN604oFYBaKnJOBeZhoR2kdPyIhTnpaRjsGqTyg1VLx6Ao1TNUSh1VmsBY6SKFTF5YT3Hp00w2JYZGG8";
+
+    app.UseEndpoints(endpoints =>
 	{
 		endpoints.MapControllers();
 		endpoints.MapFallbackToController("Index", "Fallback");

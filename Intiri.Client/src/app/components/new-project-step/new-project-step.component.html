@@ -57,7 +57,7 @@
   <div *ngIf="currentStep.data.moodboards">
     <ion-grid class="step-items" style="min-height: 400px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.moodboards" (click)="toggleItem(item)" size="5.8" size-sm="2.2" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.moodboards" (click)="toggleItem(item)" size="5.8" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
@@ -76,7 +76,7 @@
     <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">See rooms in this style</p>
     <ion-grid class="step-items" style="min-height: 785px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="2.2" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
               <ion-row>
                 <ion-col size="6">

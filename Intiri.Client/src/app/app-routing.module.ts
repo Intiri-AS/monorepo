@@ -104,10 +104,10 @@ const routes: Routes = [
     path: 'designer-profile', //TODO Set up page guard (end-user guard)
     component: DesignerProfilePage
   },
-  {
-    path: 'payment-details', //TODO Set up page guard (end-user guard)
-    component: PaymentDetailsPage
-  },
+  // {
+  //   path: 'payment-details', //TODO Set up page guard (end-user guard)
+  //   component: PaymentDetailsPage
+  // },
   {
     path: 'book-designer-profile', //TODO Set up page guard (end-user guard)
     component: BookDesignerProfilePage
