@@ -71,7 +71,6 @@ namespace Intiri.API.Controllers
 			return Ok(projectOut);
 		}
 
-		//[HttpGet("{name}", Name = "GetProject")]
 		[HttpGet("name/{projectName}")]
 		public async Task<ActionResult<ProjectOutDTO>> GetProjectByName(string projectName)
 		{

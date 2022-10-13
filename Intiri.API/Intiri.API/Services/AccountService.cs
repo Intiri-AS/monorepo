@@ -81,6 +81,27 @@ namespace Intiri.API.Services
 			return await _userManager.Users.AnyAsync(x => x.UserName == phoneNumber.ToLower());
 		}
 
+
+
+		#region Generic methods
+
+		public async Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User
+		{
+			return await _userManager.Users.OfType<TEntity>().SingleOrDefaultAsync(x => x.Id == id);
+		}
+
+		public async Task<TEntity> GetUserByUsernameAsync<TEntity>(string username) where TEntity : User
+		{
+			return await _userManager.Users.OfType<TEntity>().SingleOrDefaultAsync(x => x.UserName == username);
+		}
+
+		public async Task<IEnumerable<TEntity>> GetAllUsersAsync<TEntity>() where TEntity : class
+		{
+			return await _userManager.Users.OfType<TEntity>().ToListAsync();
+		}
+
+		#endregion Generic methods
+
 		#endregion IAccountService members
 	}
 }

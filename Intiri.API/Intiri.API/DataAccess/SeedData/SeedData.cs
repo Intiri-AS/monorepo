@@ -1,5 +1,6 @@
 ﻿using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
@@ -31,7 +32,8 @@ namespace Intiri.API.DataAccess.SeedData
 				return;
 			}
 
-			await SeedUsers(accountService, userManager, roleManager);
+			await SeedPartners(unitOfWork);
+			await SeedUsers(accountService, userManager, roleManager, unitOfWork);
 			await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
 			await SeedMaterialTypes(unitOfWork);
@@ -47,7 +49,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedRoomDetails(unitOfWork);
 		}
 
-		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager)
+		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork)
 		{
 			//create users
 			string usersData = await File.ReadAllTextAsync("DataAccess/SeedData/UserSeedData.json");
@@ -70,35 +72,39 @@ namespace Intiri.API.DataAccess.SeedData
 			}
 
 			User u1 = new User() { FirstName = "Dina", LastName = "Admin", PhoneNumber = "471231231", UserName = "471231231" };
-			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", PhoneNumber = "471231232", UserName = "471231232" };
+			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", PhoneNumber = "471231232", UserName = "471231232", HourlyRate = 700f };
 			EndUser u3 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", PhoneNumber = "471231233", UserName = "471231233" };
 			EndUser u4 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", PhoneNumber = "471231234", UserName = "471231234" };
-			//PartnerContact u5 = new PartnerContact() { FirstName = "Day", LastName = "Partner", PhoneNumber = "471231235", UserName = "471231235" };
+			PartnerContact u5 = new PartnerContact() { FirstName = "Day", LastName = "Partner", PhoneNumber = "471231235", UserName = "471231235" };
+			u5.Partner = await unitOfWork.PartnerRepository.GetByID(1);
 
 			await accountService.CreateUserAsync(u1);
 			await accountService.CreateUserAsync(u2);
 			await accountService.CreateUserAsync(u3);
 			await accountService.CreateUserAsync(u4);
-			//await accountService.CreateUserAsync(u5);
+			await accountService.CreateUserAsync(u5);
 
-			await userManager.AddToRoleAsync(u1, "Admin");
-			await userManager.AddToRoleAsync(u2, "InternalDesigner");
-			await userManager.AddToRoleAsync(u3, "FreeEndUser");
-			await userManager.AddToRoleAsync(u4, "FreeEndUser");
+			await userManager.AddToRoleAsync(u1, RoleNames.Admin);
+			await userManager.AddToRoleAsync(u2, RoleNames.InternalDesigner);
+			await userManager.AddToRoleAsync(u3, RoleNames.FreeEndUser);
+			await userManager.AddToRoleAsync(u4, RoleNames.FreeEndUser);
+			await userManager.AddToRoleAsync(u5, RoleNames.Partner);
+
+			u5.Partner.PartnerContacts.Add(u5);
 		}
 
-		//public static async Task SeedPartner(IUnitOfWork unitOfWork)
-		//{
-		//	string partnersData = await File.ReadAllTextAsync("DataAccess/SeedData/PartnerSeedData.json");
-		//	List<Partner> partners = JsonSerializer.Deserialize<List<Partner>>(partnersData);
+		public static async Task SeedPartners(IUnitOfWork unitOfWork)
+		{
+			string partnersData = await File.ReadAllTextAsync("DataAccess/SeedData/PartnerSeedData.json");
+			List<Partner> partners = JsonSerializer.Deserialize<List<Partner>>(partnersData);
 
-		//	foreach (Partner partner in partners)
-		//	{
-		//		unitOfWork.StyleRepository.Insert(style);
-		//	}
+			foreach (Partner partner in partners)
+			{
+				unitOfWork.PartnerRepository.Insert(partner);
+			}
 
-		//	await unitOfWork.SaveChanges();
-		//}
+			await unitOfWork.SaveChanges();
+		}
 
 		public static async Task SeedStyles(IUnitOfWork unitOfWork)
 		{
@@ -201,18 +207,22 @@ namespace Intiri.API.DataAccess.SeedData
 
 		public static async Task SeedProducts(IUnitOfWork unitOfWork)
 		{
+
 			string productData = await File.ReadAllTextAsync("DataAccess/SeedData/ProductsSeedData.json");
+			List<ProductInDTO> inDTO = JsonSerializer.Deserialize<List<ProductInDTO>>(productData);
 			List<Product> products = JsonSerializer.Deserialize<List<Product>>(productData);
 
-			foreach (Product product in products)
-			{
-				ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductType.Id);
-				product.ProductType = productType;
+			Partner partner = await unitOfWork.PartnerRepository.GetByID(1);
 
-				Style style = await unitOfWork.StyleRepository.SingleOrDefaultAsync(s => s.Id == product.StyleId);
-				product.Style = style;
+			for (int i = 0; i < products.Count; i++)
+			{
+				Product product = products[i];
+				products[i].ProductType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductType.Id);
+				product.Material = await unitOfWork.MaterialRepository.GetByID(inDTO[i].MaterialId);
+				product.Partner = partner;
 
 				unitOfWork.ProductRepository.Insert(product);
+				partner.Products.Add(product);
 			}
 
 			await unitOfWork.SaveChanges();

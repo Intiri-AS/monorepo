@@ -6,6 +6,7 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.Vipps;
+using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Microsoft.AspNetCore.Identity;
@@ -60,10 +61,7 @@ namespace Intiri.API.Controllers
 			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber);
 
-			if (!sendOperation.Result)
-			{
-				return BadRequest(sendOperation.ErrorMessage);
-			}
+			if (!sendOperation.Result) return BadRequest(sendOperation.ErrorMessage);
 
 			RegisterOutDTO registerOut = new()
 			{
@@ -72,6 +70,7 @@ namespace Intiri.API.Controllers
 				CountryCode = registerIn.CountryCode,
 				PhoneNumber = registerIn.PhoneNumber,
 			};
+
 			return Ok(registerOut);
 		}
 
@@ -82,62 +81,40 @@ namespace Intiri.API.Controllers
 
 			User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
 			
-			if (user == null)
-			{
-				return BadRequest("Invalid user phone number");
-			}
+			if (user == null) return BadRequest("Invalid user phone number");
 
 			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber);
 
-			if (!sendOperation.IsSuccess)
-			{
-				return BadRequest(sendOperation.ErrorMessage);
-			}
-			return Ok(new LoginOutDTO
-			{
-				CountryCode = user.CountryCode,
-				PhoneNumber = user.PhoneNumber,
-				Token = await _tokenService.CreateToken(user)
-			});
-			//return Ok();
+			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
+
+			return Ok();
 		}
 
 		[HttpPost("sms-verification-register")]
 		public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
 			SmsVerificationInDTO verificationDto)
 		{
-			User user = _mapper.Map<User>(verificationDto);
+			EndUser eUser = _mapper.Map<EndUser>(verificationDto);
 
-			user.CountryCode = verificationDto.CountryCode;
-			user.PhoneNumber = verificationDto.PhoneNumber;
-			user.UserName = user.CountryCode + user.PhoneNumber;
+			eUser.UserName = eUser.CountryCode + eUser.PhoneNumber;
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
 				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
 
-			if (!isSuccess)
-			{
-				return BadRequest("Invalid SMS verification code.");
-			}
+			if (!isSuccess) return BadRequest("Invalid SMS verification code.");
 
-			IdentityResult result = await _accountService.CreateUserAsync(user);
-			if (!result.Succeeded)
-			{
-				return BadRequest(result.Errors);
-			}
+			IdentityResult result = await _accountService.CreateUserAsync(eUser);
+			if (!result.Succeeded) return BadRequest(result.Errors);
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(user, "FreeEndUser");
-			if (!roleResult.Succeeded)
-			{
-				return BadRequest(roleResult.Errors);
-			}
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(eUser, RoleNames.FreeEndUser);
+			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
 			return new LoginOutDTO
 			{
 				CountryCode = verificationDto.CountryCode,
-				PhoneNumber = user.PhoneNumber,
-				Token = await _tokenService.CreateToken(user)
+				PhoneNumber = eUser.PhoneNumber,
+				Token = await _tokenService.CreateToken(eUser)
 			};
 		}
 
@@ -146,21 +123,14 @@ namespace Intiri.API.Controllers
 			SmsVerificationInDTO verificationDto)
 		{
 			string usernameFullPhone = verificationDto.CountryCode + verificationDto.PhoneNumber;
-			User user = await _accountService
-				.GetUserByUsernameAsync(usernameFullPhone);
+			User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
 
-			if (user == null)
-			{
-				return BadRequest("Invalid user phone number");
-			}
+			if (user == null) return BadRequest("Invalid user phone number");
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
 				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
 
-			if (!isSuccess)
-			{
-				return BadRequest("Invalid SMS verification code.");
-			}
+			if (!isSuccess) return BadRequest("Invalid SMS verification code.");
 
 			return Ok(new LoginOutDTO
 			{
@@ -177,69 +147,20 @@ namespace Intiri.API.Controllers
 			OperationResult<bool> sendOperation = await _smsVerificationService
 				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber);
 
-			if (!sendOperation.IsSuccess)
-			{
-				return BadRequest(sendOperation.ErrorMessage);
-			}
+			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
+
 			return Ok("SMS verification code sent.");
 		}
 
-		[HttpDelete("delete-user/{phone}")]
-		public async Task<ActionResult> DeleteUser(string phone)
+		[HttpDelete("delete-user/{id}")]
+		public async Task<ActionResult> DeleteUser(int id)
 		{
-			User user = await _accountService.GetUserByUsernameAsync(phone);
-
-			if (user == null)
-			{
-				return BadRequest("User does not exist in dB");
-			}
+			User user = await _accountService.GetUserByIdAsync<User>(id);
+			if (user == null) return BadRequest("User does not exist in dB");
 
 			IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
+			if (!identityResult.Succeeded) return BadRequest("Faild to delete user");
 
-			if (!identityResult.Succeeded)
-			{
-				return BadRequest("Faild to delete user");
-			}
-
-			return Ok();
-		}
-
-		[HttpPatch("forgot-password")]
-		public async Task<ActionResult<LoginOutDTO>> ForgotPassword([FromBody] ForgotPasswordInDTO forgotPasswordInDTO)
-		{
-			User user = await _accountService.GetUserByUsernameAsync(forgotPasswordInDTO.PhoneNumber);
-
-			if (user == null)
-			{
-				return Unauthorized("Invalid user phone number");
-			}
-
-			return new LoginOutDTO
-			{
-				PhoneNumber = user.PhoneNumber,
-				Token = await _accountService.GeneratePasswordResetTokenAsync(user)
-			};
-		}
-
-		[HttpPost("reset-password")]
-		public async Task<ActionResult> ResetPassword(ResetPasswordInDTO resetPasswordInDTO)
-		{
-			User user = await _accountService.GetUserByUsernameAsync(resetPasswordInDTO.PhoneNumber);
-			if (user == null)
-			{
-				//don't get much information because of security reasons
-				return BadRequest("Unable to reset password.");
-			}
-
-			var resetPassResult = await _accountService.UserResetPaswordAsync(user, resetPasswordInDTO.Token, resetPasswordInDTO.Password);
-
-			if (!resetPassResult.Succeeded)
-			{
-				resetPassResult.Errors
-					.ToList()
-					.ForEach(error => _logger.LogError($"Error code:{error.Code}. Error description:{error.Description}"));
-				return BadRequest("Unable to reset password.");
-			}
 			return Ok();
 		}
 
@@ -247,8 +168,7 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult> GetVippsAuthorizationUrl(
 			VippsRedirectionUriDTO dto)
 		{
-			string authUrl = await _vippsLoginService
-				.GetAuthorizationUrlAsync(dto.RedirectUri, dto.State);
+			string authUrl = await _vippsLoginService.GetAuthorizationUrlAsync(dto.RedirectUri, dto.State);
 
 			if (authUrl == null)
 			{
@@ -346,14 +266,9 @@ namespace Intiri.API.Controllers
 			}
 
 			// Register user if not in DB
-			string email = userInfoResponse.Claims
-				.FirstOrDefault(c => c.Type == "email").Value;
-
-			string firstName = userInfoResponse.Claims
-				.FirstOrDefault(c => c.Type == "given_name").Value;
-
-			string lastName = userInfoResponse.Claims
-				.FirstOrDefault(c => c.Type == "family_name").Value;
+			string email = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "email").Value;
+			string firstName = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "given_name").Value;
+			string lastName = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "family_name").Value;
 
 			//TODO: Find the proper way to separate country code
 			string countryCode = "47";
@@ -376,8 +291,7 @@ namespace Intiri.API.Controllers
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await 
-				_accountService.AddUserToRolesAsync(newUser, "FreeEndUser");
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(newUser, RoleNames.FreeEndUser);
 
 			if (!roleResult.Succeeded)
 			{
@@ -391,6 +305,56 @@ namespace Intiri.API.Controllers
 				PhoneNumber = newUser.PhoneNumber,
 				Token = await _tokenService.CreateToken(newUser)
 			});
+		}
+
+		[HttpPost("register/partnerContact")]
+		public async Task<ActionResult<RegisterOutDTO>> AddPartnerContact(PartnerContactInDTO registerIn)
+		{
+			Partner partner = await _unitOfWork.PartnerRepository.GetByID(registerIn.PartnerId);
+
+			if (partner == null) return NotFound("Partner for partner contact not found");
+
+			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+			{
+				return BadRequest("Phone number is taken");
+			}
+
+			PartnerContact pUser = _mapper.Map<PartnerContact>(registerIn);
+			pUser.Partner = partner;
+			pUser.UserName = phoneNumberFull;
+
+			IdentityResult result = await _accountService.CreateUserAsync(pUser);
+			if (!result.Succeeded) return BadRequest(result.Errors);
+
+			partner.PartnerContacts.Add(pUser);
+
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(pUser, RoleNames.Partner);
+			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+
+			return Ok(_mapper.Map<PartnerContactOutDTO>(pUser));
+		}
+
+		[HttpPost("register/designer")]
+		public async Task<ActionResult<RegisterOutDTO>> AddDesigner(DesignerInDTO registerIn)
+		{
+			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+
+			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+			{
+				return BadRequest("Phone number is taken");
+			}
+
+			Designer dUser = _mapper.Map<Designer>(registerIn);
+
+			IdentityResult result = await _accountService.CreateUserAsync(dUser);
+			if (!result.Succeeded) return BadRequest(result.Errors);
+
+			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(dUser, registerIn.Role);
+			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+
+			return Ok(_mapper.Map<RegisterOutDTO>(dUser));
 		}
 	}
 }
