@@ -5,6 +5,7 @@ using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.DTO.Vipps;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
-	public class AccountController : BaseApiController
+    public class AccountController : BaseApiController
 	{
 		#region Fields
 

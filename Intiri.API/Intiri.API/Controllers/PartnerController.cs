@@ -12,7 +12,7 @@ using AutoMapper;
 using Intiri.API.Services;
 using Intiri.API.Extension;
 using Intiri.API.Models.Product;
-
+using Intiri.API.Models.DTO.OutputDTO.Partner;
 
 namespace Intiri.API.Controllers
 {
