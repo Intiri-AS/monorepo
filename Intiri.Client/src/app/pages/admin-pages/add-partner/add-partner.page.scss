@@ -1,0 +1,14 @@
+.text-clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;          
+}
+
+.card {
+    @apply rounded-2xl h-[250px];
+}
+
+.profile-input {
+    @apply mt-4 flex-1
+}

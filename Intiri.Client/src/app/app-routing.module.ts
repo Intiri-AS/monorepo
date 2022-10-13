@@ -36,6 +36,7 @@ import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
 import { ProcessingPage } from './pages/processing/processing.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
+import { AddPartnerPage } from './pages/admin-pages/add-partner/add-partner.page';
 import { ProjectService } from './services/project.service';
 import { MoodboardService } from './services/moodboard.service';
 import { EnduserGuard } from './guards/enduser.guard';
@@ -200,6 +201,10 @@ const routes: Routes = [
     path: 'add-moodboard',
     component: AddMoodboardPage,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'add-partner',
+    component: AddPartnerPage
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)
