@@ -36,12 +36,16 @@ import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
 import { ProcessingPage } from './pages/processing/processing.page';
 import { AddMoodboardPage } from './pages/admin-pages/add-moodboard/add-moodboard.page';
+import { PartnerProductsPage } from './pages/partner-pages/partner-products/partner-products.page';
+import { PartnerProfilePage } from './pages/partner-pages/partner-profile/partner-profile.page';
 import { ProjectService } from './services/project.service';
 import { MoodboardService } from './services/moodboard.service';
 import { EnduserGuard } from './guards/enduser.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { DesignerGuard } from './guards/designer.guard';
 import { SharedGuard } from './guards/shared.guard';
+import { PartnerGuard } from './guards/partner.guard';
+
 
 const routes: Routes = [
   {
@@ -227,6 +231,16 @@ const routes: Routes = [
   {
     path: 'moodboard', //TODO Set up page guard (shared guard)
     component: MoodboardPage
+  },
+  {
+    path: 'partner', //TODO Set up page guard (shared guard)
+    component: PartnerProductsPage,
+    //canActivate: [PartnerGuard]
+  },
+  {
+    path: 'partner/profile', //TODO Set up page guard (shared guard)
+    component: PartnerProfilePage,
+    //canActivate: [PartnerGuard]
   }
 
 

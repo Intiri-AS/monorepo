@@ -52,6 +52,10 @@ import { ClientListPage } from './pages/designer-pages/internal-designer/clients
 import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 
+//pages for partners
+import { PartnerProductsPage } from './pages/partner-pages/partner-products/partner-products.page';
+import { PartnerProfilePage } from './pages/partner-pages/partner-profile/partner-profile.page';
+
 //shared admin/designer pages
 import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
 
@@ -65,6 +69,7 @@ import { NewProjectStepComponent } from './components/new-project-step/new-proje
 import { ProfileImgSectionComponent } from './components/profile-img-section/profile-img-section.component';
 import { ProfileInfoSectionComponent } from './components/profile-info-section/profile-info-section.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { HeaderPartnerComponent } from './components/header-partner/header-partner.component';
 import { HeaderInternalDesignerComponents } from './components/header-internal-designer/header-internal-designer.component';
 import { AdminPartnersComponent } from './components/admin-partners/admin-partners.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
@@ -128,8 +133,8 @@ export function createTranslateLoader(http: HttpClient) {
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
-    StylePage, MoodboardPage, AddMoodboardPage,
-    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent,
+    StylePage, MoodboardPage, AddMoodboardPage, PartnerProductsPage, PartnerProfilePage,
+    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent, HeaderPartnerComponent,
     NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
