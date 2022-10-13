@@ -1,4 +1,6 @@
 ﻿namespace Intiri.API.Models.Payment;
+using Intiri.API.Models.Moodboard;
+using System.ComponentModel.DataAnnotations;
 
 public class ConsultationPayment : PaymentBase
 {
@@ -9,4 +11,11 @@ public class ConsultationPayment : PaymentBase
     public Designer Receiver { get; set; }
 
     public int ReceiverId { get; set; }
+
+    public Moodboard Moodboard { get; set; }
+
+    public int? MoodboardId { get; set; }
+
+    [Required]
+    public int NumberOfConsultations { get; set; }
 }

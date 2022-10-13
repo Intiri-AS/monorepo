@@ -10,7 +10,7 @@ public class StripePaymentDTO
     [Required]
     public long Amount { get; set; }
 
-    public DateTime ExpirationDate { get; set; } = DateTime.UtcNow + TimeSpan.FromDays(3);
+    public DateTime ExpirationDate { get; set; } = DateTime.UtcNow + TimeSpan.FromMinutes(5);
 
     public string Locale { get; set; }
 
@@ -18,6 +18,11 @@ public class StripePaymentDTO
 
     [Required]
     public int ReceiverId { get; set; }
+
+    public int? MoodboardId { get; set; }
+
+    [Required]
+    public int NumberOfConsultations { get; set; }
 
     [Required]
     public string SuccessUrlPath { get; set; }

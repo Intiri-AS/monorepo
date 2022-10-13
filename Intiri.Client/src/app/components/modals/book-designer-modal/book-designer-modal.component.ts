@@ -73,12 +73,14 @@ export class BookDesignerModalComponent {
   checkout(): void {
     this.paymentService.sendPayment(
       {
-        name: 'Consulatations', 
-        amount: this.totalPrice * 100,
-        receiverId: 2,
-        locale: 'en',
-        successUrlPath: 'messegner?contact=2',
-        cancelUrlPath: ''
+        name: 'Consulatations', //required
+        amount: this.totalPrice * 100,//required
+        receiverId: 2, //required
+        locale: 'en', //optional, if not specified 'en' default
+        successUrlPath: 'messegner?contact=2',//required
+        cancelUrlPath: '',//optional, if not specified path is ''
+        moodboardId: 2, //optional
+        numberOfConsultations: 5 //required
       }).subscribe(async (res: any) => {
       let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
       console.log(res)
