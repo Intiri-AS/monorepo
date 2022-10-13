@@ -1,6 +1,8 @@
 <ion-content>
   <div id="home">
-    <app-header></app-header>
+    <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
+    <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
+    <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'"></app-header-internal-designer>
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <ion-grid class="main-container">
       <ion-row>

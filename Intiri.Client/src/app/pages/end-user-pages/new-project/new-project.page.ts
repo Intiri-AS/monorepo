@@ -163,13 +163,18 @@ export class NewProjectPage implements OnInit {
   }
 
   goToStep(stepNo) {
-    if (this.canChangeToStep(stepNo)) {
-      this.currentStepNo = stepNo;
-      this.changeQueryParam(stepNo);
-      this.projectService.setCurrentProject(this.project);
-    }
-    if (stepNo === 4) {
-      this.getMoodboardMatches();
+    const isUserLoggedIn = this.checkIfUserLoggedIn();
+    if (stepNo === 4 && !isUserLoggedIn) {
+      this.openLoginModal();
+    } else {
+      if (this.canChangeToStep(stepNo)) {
+        this.currentStepNo = stepNo;
+        this.changeQueryParam(stepNo);
+        this.projectService.setCurrentProject(this.project);
+      }
+      if (stepNo === 4) {
+        this.getMoodboardMatches();
+      }
     }
   }
 

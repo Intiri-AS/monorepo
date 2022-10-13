@@ -5,11 +5,9 @@ namespace Intiri.API.DataAccess.Repository.Interface
 {
 	public interface IUserRepository : IRepositoryBase<User>
 	{
-		void UpdateUser(User user);
-		Task<User> GetUserByIdAsync(int id);
-		Task<User> GetUserByUserNameAsync(string username);
-		Task<IEnumerable<User>> GetUsersAsync();
-
+		Task<IEnumerable<TEntity>> GetUsersAsync<TEntity>() where TEntity : class;
+		Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User;
+		Task<TEntity> GetUserUsernameIdAsync<TEntity>(string username) where TEntity : User;
 
 		Task<IEnumerable<EndUser>> GetEndUsersAsync();
 		Task<EndUser> GetEndUserByIdAsync(int id);
@@ -17,5 +15,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Designer> GetDesignerUserByIdAsync(int id);
 		Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync();
 		Task<PartnerContact> GetPartnerUserByIdAsync(int id);
+
+		void UpdateUser(User user);
 	}
 }

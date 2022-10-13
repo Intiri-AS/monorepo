@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Payment;
 using Intiri.API.Models.Product;
 
 namespace Intiri.API.Models.Moodboard
@@ -25,5 +26,6 @@ namespace Intiri.API.Models.Moodboard
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }
+        public ICollection<ConsultationPayment> ConsultationPayments { get; set; }
     }
 }

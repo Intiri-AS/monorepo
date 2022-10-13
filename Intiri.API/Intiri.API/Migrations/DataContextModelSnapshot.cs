@@ -292,6 +292,47 @@ namespace Intiri.API.Migrations
                     b.ToTable("Partners");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Payment.ConsultationPayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MoodboardId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfConsultations")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MoodboardId");
+
+                    b.HasIndex("PayerId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("ConsultationPayment");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -312,6 +353,9 @@ namespace Intiri.API.Migrations
                     b.Property<string>("ImagePublicId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MaterialId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -324,16 +368,13 @@ namespace Intiri.API.Migrations
                     b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StyleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
 
                     b.HasIndex("PartnerId");
 
                     b.HasIndex("ProductTypeId");
-
-                    b.HasIndex("StyleId");
 
                     b.ToTable("Products");
                 });
@@ -942,8 +983,37 @@ namespace Intiri.API.Migrations
                     b.Navigation("SenderUser");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Payment.ConsultationPayment", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "Moodboard")
+                        .WithMany("ConsultationPayments")
+                        .HasForeignKey("MoodboardId");
+
+                    b.HasOne("Intiri.API.Models.EndUser", "Payer")
+                        .WithMany("ConsultationPayments")
+                        .HasForeignKey("PayerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Intiri.API.Models.Designer", "Receiver")
+                        .WithMany("ConsultationPaymentsReceived")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Moodboard");
+
+                    b.Navigation("Payer");
+
+                    b.Navigation("Receiver");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
+                    b.HasOne("Intiri.API.Models.Material.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId");
+
                     b.HasOne("Intiri.API.Models.Partner", "Partner")
                         .WithMany("Products")
                         .HasForeignKey("PartnerId");
@@ -953,17 +1023,11 @@ namespace Intiri.API.Migrations
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Intiri.API.Models.Style.Style", "Style")
-                        .WithMany()
-                        .HasForeignKey("StyleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Material");
 
                     b.Navigation("Partner");
 
                     b.Navigation("ProductType");
-
-                    b.Navigation("Style");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
@@ -1136,6 +1200,11 @@ namespace Intiri.API.Migrations
                     b.Navigation("Materials");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
+                {
+                    b.Navigation("ConsultationPayments");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Partner", b =>
                 {
                     b.Navigation("PartnerContacts");
@@ -1181,11 +1250,15 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Designer", b =>
                 {
+                    b.Navigation("ConsultationPaymentsReceived");
+
                     b.Navigation("CreatedMoodboards");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.EndUser", b =>
                 {
+                    b.Navigation("ConsultationPayments");
+
                     b.Navigation("CreatedProjects");
 
                     b.Navigation("ReceivedMoodboards");

@@ -26,5 +26,12 @@ namespace Intiri.API.Services.Interfaces
 		Task<IdentityResult> UserResetPaswordAsync(User user, string token, string password);
 
 		Task<bool> IsUserWithPhoneNumberExists(string phoneNumber);
+
+
+		Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User;
+
+		Task<TEntity> GetUserByUsernameAsync<TEntity>(string username) where TEntity : User;
+
+		Task<IEnumerable<TEntity>> GetAllUsersAsync<TEntity>() where TEntity : class;
 	}
 }

@@ -22,6 +22,8 @@ namespace Intiri.API.DataAccess
 		IPartnerRepository PartnerRepository { get; }
 		IChatMessageRepository ChatMessageRepository { get; }
 
+		IConsultationPaymentRepository ConsultationPaymentRepository { get; }
+
 		Task<bool> SaveChanges();
 	}
 }

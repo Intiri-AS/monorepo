@@ -2,6 +2,7 @@
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
 using Intiri.API.Models.Product;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -18,6 +19,21 @@ namespace Intiri.API.DataAccess.Repository
 		public PartnerRepository(DataContext dataContext, IMapper mapper) : base(dataContext)
 		{
 			_mapper = mapper;
+		}
+
+		public async Task<Partner> GetPartnerWithProductsAsync(int partnerId)
+		{
+			return (await Get(partner => partner.Id == partnerId, includeProperties: "Products")).FirstOrDefault();
+		}
+
+		public async Task<Partner> GetPartnerAllContactsAsync(int partnerId)
+		{
+			return (await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts")).FirstOrDefault();
+		}
+
+		public async Task<IEnumerable<Partner>> GetPartnersAsync()
+		{
+			return await _context.Partners.ToListAsync();
 		}
 
 		#endregion Constructors

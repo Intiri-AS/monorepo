@@ -46,37 +46,11 @@
               </ion-col>
             </ion-row>
           </ion-grid>
-          <!-- <div class="mt-6 flex justify-center xl:justify-between flex-wrap">
-            <div *ngFor="let item of moodboard.colorPalettes" class="flex flex-col">
-              <div *ngIf="item.mainColor" class="step-color-wrapper" >
-                <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
-                <div class="w-[47.5%] h-full inline-block float-right">
-                  <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-                  <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-                  <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
-                </div>
-              </div>
-              <p *ngIf="!item.number && item.name" class="font-bold mt-8 text-black-2">{{item.name}} </p>
-              <p *ngIf="item.number && item.name" class="font-bold mt-8 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-            </div>
-            <div *ngFor="let material of moodboard.materials" class="flex flex-col">
-              <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
-                <img src="{{material.imagePath}}">
-              </ion-card>
-              <p class="text-black-2 text-2xl mt-2 font-medium">{{material.name}}</p>
-            </div>
-            <div *ngFor="let product of moodboard.products" class="flex flex-col">
-              <ion-card class="border border-black shadow-none rounded-2xl w-[270px] h-[200px] m-0 mt-5 mb-2 p-4">
-                <img src="{{product.imagePath}}">
-              </ion-card>
-              <p class="text-black-2 text-2xl mt-2 font-medium">{{product.name}}</p>
-            </div>
-          </div> -->
         </div>
 
         <div class="flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40">
           <ion-button fill="clear" class="secondary-btn">Edit moodboard</ion-button>
-          <ion-button fill="clear" class="primary-btn" routerLink="/contact-designer" routerDirection="root">Contact designer</ion-button>
+          <ion-button fill="clear" class="primary-btn" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">Contact designer</ion-button>
           <ion-button fill="clear" class="secondary-btn">Contact craftsman</ion-button>
         </div>
       </div>

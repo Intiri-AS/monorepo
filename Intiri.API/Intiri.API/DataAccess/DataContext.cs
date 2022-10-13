@@ -10,6 +10,7 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.ChatMessage;
+using Intiri.API.Models.Payment;
 
 namespace Intiri.API.DataAccess
 {
@@ -106,14 +107,24 @@ namespace Intiri.API.DataAccess
 				.OnDelete(DeleteBehavior.Cascade);
 
 			builder.Entity<ChatMessage>()
-				   .HasOne(m => m.Sender)
-				   .WithMany(u => u.MessagesSent)
-				   .OnDelete(DeleteBehavior.Restrict);
+				.HasOne(m => m.Sender)
+				.WithMany(u => u.MessagesSent)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.Entity<ChatMessage>()
-				   .HasOne(m => m.Recipient)
-				   .WithMany(u => u.MessagesReceived)
-				   .OnDelete(DeleteBehavior.Restrict);
+				.HasOne(m => m.Recipient)
+				.WithMany(u => u.MessagesReceived)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<ConsultationPayment>()
+				.HasOne(p => p.Payer)
+				.WithMany(eu => eu.ConsultationPayments)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<ConsultationPayment>()
+				.HasOne(p => p.Receiver)
+				.WithMany(d => d.ConsultationPaymentsReceived)
+				.OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }
