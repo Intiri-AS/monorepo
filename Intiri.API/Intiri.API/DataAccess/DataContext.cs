@@ -125,6 +125,11 @@ namespace Intiri.API.DataAccess
 				.HasOne(p => p.Receiver)
 				.WithMany(d => d.ConsultationPaymentsReceived)
 				.OnDelete(DeleteBehavior.Restrict);
+
+				builder.Entity<Designer>()
+				   .HasMany(m => m.CreatedMoodboards)
+				   .WithOne(d => d.Designer)
+				   .OnDelete(DeleteBehavior.Restrict);
 		}
 	}
 }

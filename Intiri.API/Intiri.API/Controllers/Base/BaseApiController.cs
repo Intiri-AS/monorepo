@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Intiri.API.Controllers.Base
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BaseApiController : ControllerBase
     {
 		protected IUnitOfWork _unitOfWork;

@@ -7,6 +7,8 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Project;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
@@ -119,16 +121,23 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpGet("designers")]
-		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllDesigner()
+		public async Task<ActionResult<IEnumerable<DesignerOutDTO>>> GetAllDesigner()
 		{
-			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetUsersAsync<Designer>();
-			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(dUsers);
+			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignerUsersAsync();
+
+			foreach (Designer designer in dUsers)
+			{
+				IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(designer.CreatedMoodboards.Select(m => m.Id).ToArray());
+				designer.CreatedMoodboards = moodboards.ToArray();
+			}
+
+			IEnumerable<DesignerOutDTO> usersToReturn = _mapper.Map<IEnumerable<DesignerOutDTO>>(dUsers);
 
 			return Ok(usersToReturn);
 		}
 
 		[HttpGet("partners")]
-		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartners()
+		public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
 		{
 			IEnumerable<Partner> partners = await _unitOfWork.PartnerRepository.GetPartnersAsync();
 			IEnumerable<PartnerOutDTO> usersToReturn = _mapper.Map<IEnumerable<PartnerOutDTO>>(partners);
