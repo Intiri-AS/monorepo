@@ -11,6 +11,11 @@ namespace Intiri.API.Automapper
 		{
 			CreateMap<PartnerInDTO, Partner>();
 			CreateMap<Partner, PartnerOutDTO>();
+
+			CreateMap<PartnerContactInDTO, PartnerContact>();
+			CreateMap<PartnerContact, RegisterOutDTO>();
+			
+			CreateMap<PartnerContact, PartnerContactOutDTO>();
 		}
 	}
 }

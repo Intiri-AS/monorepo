@@ -22,8 +22,7 @@ namespace Intiri.API.Controllers
 
 		private readonly IMapper _mapper;
 		private readonly IFileUploadService _fileUploadService;
-		private readonly IAccountService _accountService;
-
+		
 		#endregion Fields
 
 		#region Constructors
@@ -32,7 +31,6 @@ namespace Intiri.API.Controllers
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
-			_accountService = accountService;
 		}
 
 		#endregion Constructors
@@ -49,8 +47,7 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService
-						.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
+					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
 				}
 				catch (Exception)
 				{
@@ -87,15 +84,16 @@ namespace Intiri.API.Controllers
 			}
 
 			DeletionResult deletionResult = null;
-
-			try
+			if (partner.LogoPath != null)
 			{
-				deletionResult = await _fileUploadService
-					.DeleteFileAsync(partner.LogoPublicId);
-			}
-			catch (Exception)
-			{
-				return BadRequest("Failed to delete partner logo.");
+				try
+				{
+					deletionResult = await _fileUploadService.DeleteFileAsync(partner.LogoPublicId);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to delete partner logo.");
+				}
 			}
 
 			try
@@ -123,17 +121,37 @@ namespace Intiri.API.Controllers
 		[HttpGet("designers")]
 		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllDesigner()
 		{
-			IEnumerable<Designer> users = await _unitOfWork.UserRepository.GetUsersAsync<Designer>();
-			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetUsersAsync<Designer>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(dUsers);
 
 			return Ok(usersToReturn);
 		}
 
-		[HttpGet("partnerContacts")]
+		[HttpGet("partners")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartners()
+		{
+			IEnumerable<Partner> partners = await _unitOfWork.PartnerRepository.GetPartnersAsync();
+			IEnumerable<PartnerOutDTO> usersToReturn = _mapper.Map<IEnumerable<PartnerOutDTO>>(partners);
+
+			return Ok(usersToReturn);
+		}
+
+		[HttpGet("partnerContacts/{partnerId}")]
+		public async Task<ActionResult<IEnumerable<PartnerContactOutDTO>>> GetAllPartnerContactsByParent(int partnerId)
+		{
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllContactsAsync(partnerId);
+			if (partner == null) return BadRequest("Invalid partner.");
+
+			IEnumerable<PartnerContactOutDTO> pContactsToReturn = _mapper.Map<IEnumerable<PartnerContactOutDTO>>(partner.PartnerContacts.ToList());
+
+			return Ok(pContactsToReturn);
+		}
+
+		[HttpGet("allPartnerContacts")]
 		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
 		{
-			IEnumerable<PartnerContact> users = await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
-			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+			IEnumerable<PartnerContact> pUsers = await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(pUsers);
 
 			return Ok(usersToReturn);
 		}

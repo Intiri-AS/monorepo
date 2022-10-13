@@ -26,6 +26,16 @@ namespace Intiri.API.DataAccess.Repository
 			return (await Get(partner => partner.Id == partnerId, includeProperties: "Products")).FirstOrDefault();
 		}
 
+		public async Task<Partner> GetPartnerAllContactsAsync(int partnerId)
+		{
+			return (await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts")).FirstOrDefault();
+		}
+
+		public async Task<IEnumerable<Partner>> GetPartnersAsync()
+		{
+			return await _context.Partners.ToListAsync();
+		}
+
 		#endregion Constructors
 	}
 }

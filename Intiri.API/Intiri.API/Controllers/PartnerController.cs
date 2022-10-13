@@ -117,7 +117,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpDelete("delete/{productId}")]
-		public async Task<IActionResult> DeleteParnerProduct(int productId)
+		public async Task<IActionResult> DeletePartnerProduct(int productId)
 		{
 			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
 			if (pUser == null) return Unauthorized("Invalid partner contact user.");

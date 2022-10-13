@@ -83,6 +83,7 @@ namespace Intiri.API.Services
 
 
 
+		#region Generic methods
 
 		public async Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User
 		{
@@ -98,6 +99,8 @@ namespace Intiri.API.Services
 		{
 			return await _userManager.Users.OfType<TEntity>().ToListAsync();
 		}
+
+		#endregion Generic methods
 
 		#endregion IAccountService members
 	}
