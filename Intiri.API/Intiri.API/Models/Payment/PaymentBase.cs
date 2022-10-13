@@ -10,8 +10,10 @@ public class PaymentBase
     [Required]
     public long Amount { get; set; }
 
+    [Required]
     public string Name { get; set; }
 
+    [Required]
     public DateTime ExpirationDate { get; set; } = DateTime.MaxValue;
 
     [NotMapped]

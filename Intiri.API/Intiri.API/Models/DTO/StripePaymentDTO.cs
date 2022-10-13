@@ -4,6 +4,7 @@ namespace Intiri.API.Models.DTO;
 
 public class StripePaymentDTO
 {
+    [Required]
     public string Name { get; set; }
 
     [Required]

@@ -120,7 +120,7 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
             },
             Mode = PaymentMode,
             Metadata = metadata,
-            Locale = paymentDTO.Locale,
+            Locale = paymentDTO.Locale != null ? paymentDTO.Locale : "en",
             SuccessUrl = domain + paymentDTO.SuccessUrlPath,
             CancelUrl = domain + (paymentDTO.CancelUrlPath != null ? paymentDTO.CancelUrlPath : "")
         };
