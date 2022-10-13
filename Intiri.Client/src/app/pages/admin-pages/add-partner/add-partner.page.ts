@@ -27,4 +27,8 @@ export class AddPartnerPage implements OnInit {
     this.slides.slidePrev();
   }
 
+  showSettings() {
+    //TODO
+  }
+
 }

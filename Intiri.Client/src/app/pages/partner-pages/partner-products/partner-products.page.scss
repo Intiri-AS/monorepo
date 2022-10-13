@@ -1,0 +1,19 @@
+.profile-input {
+    @apply mt-4 flex-1 text-left;
+}
+
+ion-input {
+    @apply h-12;
+}
+
+ion-select {
+    @apply border rounded-2xl h-12 border-black-2 pr-4;
+}
+
+ion-col {
+    @apply px-0 pb-3
+}
+
+.card {
+    @apply rounded-2xl h-[300px];
+}
