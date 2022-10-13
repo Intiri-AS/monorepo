@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221012191804_AddMaterialToProductEntity")]
+    partial class AddMaterialToProductEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,47 +292,6 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Partners");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.Payment.ConsultationPayment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MoodboardId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfConsultations")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PayerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MoodboardId");
-
-                    b.HasIndex("PayerId");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.ToTable("ConsultationPayment");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
@@ -983,31 +944,6 @@ namespace Intiri.API.Migrations
                     b.Navigation("SenderUser");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Payment.ConsultationPayment", b =>
-                {
-                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "Moodboard")
-                        .WithMany("ConsultationPayments")
-                        .HasForeignKey("MoodboardId");
-
-                    b.HasOne("Intiri.API.Models.EndUser", "Payer")
-                        .WithMany("ConsultationPayments")
-                        .HasForeignKey("PayerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Intiri.API.Models.Designer", "Receiver")
-                        .WithMany("ConsultationPaymentsReceived")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Moodboard");
-
-                    b.Navigation("Payer");
-
-                    b.Navigation("Receiver");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
                     b.HasOne("Intiri.API.Models.Material.Material", "Material")
@@ -1200,11 +1136,6 @@ namespace Intiri.API.Migrations
                     b.Navigation("Materials");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
-                {
-                    b.Navigation("ConsultationPayments");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.Partner", b =>
                 {
                     b.Navigation("PartnerContacts");
@@ -1250,15 +1181,11 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Designer", b =>
                 {
-                    b.Navigation("ConsultationPaymentsReceived");
-
                     b.Navigation("CreatedMoodboards");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.EndUser", b =>
                 {
-                    b.Navigation("ConsultationPayments");
-
                     b.Navigation("CreatedProjects");
 
                     b.Navigation("ReceivedMoodboards");

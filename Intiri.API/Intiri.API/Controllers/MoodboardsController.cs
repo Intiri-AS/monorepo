@@ -48,7 +48,6 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{moodboardId}")]
 		public async Task<ActionResult<MoodboardOutDTO>> GetMoodboardById(int moodboardId)
 		{
-			//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 
 			if (moodboard == null)

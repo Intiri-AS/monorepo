@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { AccountService } from 'src/app/services/account.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
 
 @Component({
@@ -21,7 +22,9 @@ export class HeaderAdminComponent {
     {title: 'Style', url: '/style'},
   ]
 
-  constructor(private router: Router, private popoverController: PopoverController) {}
+  loggedUser$ = this.accountService.currentUser$;
+
+  constructor(private router: Router, private accountService: AccountService, private popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
     return this.router.url.split('?')[0] === route;

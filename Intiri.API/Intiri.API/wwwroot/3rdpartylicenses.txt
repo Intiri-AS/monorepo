@@ -1,3 +1,6 @@
+@angular/animations
+MIT
+
 @angular/common
 MIT
 
@@ -366,6 +369,9 @@ SOFTWARE.
 
 
 ngx-color-picker
+MIT
+
+ngx-spinner
 MIT
 
 pusher-js

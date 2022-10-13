@@ -20,15 +20,13 @@ export class EnduserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    //TODO Guard code here
-    this.accountService.currentUser$.subscribe(user => {
-      if (user) {
-        if (user.roles[0] !== 'FreeEndUser') {
+    return this.accountService.currentUser$.pipe(map(user => {
+        if (user && user.roles[0] === 'FreeEndUser') {
+          return true;
+        } else {
           this.nav.navigateRoot('/login');
           return false;
         }
-      }
-    })
-    return true;
+    }));
   }
 }

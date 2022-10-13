@@ -13,6 +13,9 @@ namespace Intiri.API.Automapper
 			CreateMap<SmsVerificationInDTO, User>();
 			CreateMap<UserOutDTO, User>();
 			CreateMap<UserUpdateInDTO, User>();
+
+			CreateMap<SmsVerificationInDTO, EndUser>();
+
 		}
 	}
 }
