@@ -35,8 +35,13 @@ public class MessengerController : BaseApiController
         }
 
         int senderId = User.GetUserId();
-        DateTime sentDate = DateTime.UtcNow;
 
+        if (senderId == messageDTO.RecipientId)
+        {
+            return BadRequest("You cannot send message to yourself");
+        }
+
+        DateTime sentDate = DateTime.UtcNow;
         if (!await _messengerService.SendMessage(messageDTO, senderId, sentDate))
         {
             return BadRequest("Unable to send message to listeners.");

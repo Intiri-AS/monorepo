@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { PaymentService } from 'src/app/services/payment.service';
 import { loadStripe } from '@stripe/stripe-js';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -11,11 +12,13 @@ import { loadStripe } from '@stripe/stripe-js';
 
 export class BookDesignerModalComponent {
 
+  designer; //as modal prop
+  moodboard;//as modal prop
   price = 950;
-  totalPrice = 0;
   extraPayment = false;
   extraPaymentAmount = 3500;
-  numberOfConsultations = 0;
+  numberOfConsultations = 1;
+  totalPrice = this.price * this.numberOfConsultations;
   items = [
     {
       id: 1, name: 'Room sketch'
@@ -42,8 +45,11 @@ export class BookDesignerModalComponent {
 
   constructor(
     private modalController: ModalController,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private languageService: LanguageService
   ) {}
+
+  ngOnInit() {}
 
   totalPriceSum(event) {
     const numberOfConsultations = event.detail.value;
@@ -71,9 +77,18 @@ export class BookDesignerModalComponent {
   }
 
   checkout(): void {
-    this.paymentService.sendPayment({name: 'Consulatations', amount: this.totalPrice * 100}).subscribe(async (res: any) => {
+    this.paymentService.sendPayment(
+      {
+        name: 'Consulatations', //required
+        amount: this.totalPrice * 100,//required
+        receiverId: this.designer.id, //required
+        locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
+        successUrlPath: 'messenger?contact=2',//required
+        cancelUrlPath: '',//optional, if not specified path is ''
+        moodboardId: this.moodboard?.id, //optional
+        numberOfConsultations: this.numberOfConsultations //required
+      }).subscribe(async (res: any) => {
       let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
-      console.log(res)
       stripe?.redirectToCheckout({
         sessionId: res.id
       })

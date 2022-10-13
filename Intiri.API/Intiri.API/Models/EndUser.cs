@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Payment;
 
 namespace Intiri.API.Models
 {
@@ -19,6 +20,7 @@ namespace Intiri.API.Models
 		public ICollection<Project.Project> CreatedProjects { get; set; }
 		public ICollection<ShareMoodboard> SendMoodboards { get; set; }
 		public ICollection<ShareMoodboard> ReceivedMoodboards { get; set; }
+		public ICollection<ConsultationPayment> ConsultationPayments { get; set; }
 
 		#endregion Properties
 	}

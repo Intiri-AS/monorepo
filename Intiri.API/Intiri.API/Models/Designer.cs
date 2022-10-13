@@ -1,4 +1,6 @@
-﻿namespace Intiri.API.Models
+﻿using Intiri.API.Models.Payment;
+
+namespace Intiri.API.Models
 {
 	public class Designer : User
 	{
@@ -16,6 +18,7 @@
 		public float HourlyRate { get; set; }
 		public Style.Style Style { get; set; }
 		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
+		public ICollection<ConsultationPayment> ConsultationPaymentsReceived { get; set; }
 
 		#endregion Properties
 	}

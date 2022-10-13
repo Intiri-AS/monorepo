@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221013093037_ConsultationPaymentExtension")]
+    partial class ConsultationPaymentExtension
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,9 +355,6 @@ namespace Intiri.API.Migrations
                     b.Property<string>("ImagePublicId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MaterialId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -368,13 +367,16 @@ namespace Intiri.API.Migrations
                     b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("StyleId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("MaterialId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PartnerId");
 
                     b.HasIndex("ProductTypeId");
+
+                    b.HasIndex("StyleId");
 
                     b.ToTable("Products");
                 });
@@ -1010,10 +1012,6 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.Product.Product", b =>
                 {
-                    b.HasOne("Intiri.API.Models.Material.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId");
-
                     b.HasOne("Intiri.API.Models.Partner", "Partner")
                         .WithMany("Products")
                         .HasForeignKey("PartnerId");
@@ -1023,11 +1021,17 @@ namespace Intiri.API.Migrations
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Material");
+                    b.HasOne("Intiri.API.Models.Style.Style", "Style")
+                        .WithMany()
+                        .HasForeignKey("StyleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Partner");
 
                     b.Navigation("ProductType");
+
+                    b.Navigation("Style");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Project.Project", b =>
