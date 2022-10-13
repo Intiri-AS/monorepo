@@ -4,79 +4,103 @@
 		"ProductType": {
 			"Id": 1
 		},
+		"PartnerId": 1,
 		"Description": "Very nice sofa",
-		"StyleId": 2,
+		"MaterialId": 2,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/comfy_sofa_z6efhg.jpg"
+		"Color": "2596be",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/comfy_sofa_z6efhg.jpg",
+		"ImagePublicId": "ProductImages/comfy_sofa_z6efhg.jpg"
 	},
 	{
 		"Name": "Sofa Royale",
 		"ProductType": {
 			"Id": 1
 		},
+		"PartnerId": 1,
 		"Description": "Premium",
-		"StyleId": 3,
+		"MaterialId": 6,
 		"Price": 360,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"
+		"Color": "9925be",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg",
+		"ImagePublicId": "ProductImages/sofa_royale_ohrxtb.jpg"
 	},
 	{
 		"Name": "Standing Desk",
 		"ProductType": {
 			"Id": 2
 		},
+		"PartnerId": 1,
 		"Description": "Description",
-		"StyleId": 1,
+		"MaterialId": 2,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/standing_desk_b2xjr4.jpg"
+		"Color": "49be25",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/standing_desk_b2xjr4.jpg",
+		"ImagePublicId": "ProductImages/standing_desk_b2xjr4.jpg"
 	},
 	{
 		"Name": "Standing Lamp",
 		"ProductType": {
 			"Id": 3
 		},
+		"PartnerId": 1,
 		"Description": "Very nice sofa",
-		"StyleId": 1,
+		"MaterialId": 5,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/standing_lamp_hscqi1.jpg"
+		"Color": "be4d25",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/standing_lamp_hscqi1.jpg",
+		"ImagePublicId": "ProductImages/standing_lamp_hscqi1.jpg"
 	},
 	{
 		"Name": "Ceramic Lamp",
 		"ProductType": {
 			"Id": 4
 		},
+		"PartnerId": 1,
 		"Description": "Provides illumination",
-		"StyleId": 4,
+		"MaterialId": 4,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/ceramic_lamp_fn0eur.jpg"
+		"Color": "145369",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/ceramic_lamp_fn0eur.jpg",
+		"ImagePublicId": "ProductImages/ceramic_lamp_fn0eur.jpg"
 	},
 	{
 		"Name": "Office Chair",
 		"ProductType": {
 			"Id": 5
 		},
+		"PartnerId": 1,
 		"Description": "Chair for work",
-		"StyleId": 1,
+		"MaterialId": 1,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_chair_q2mtyc.jpg"
+		"Color": "041014",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_chair_q2mtyc.jpg",
+		"ImagePublicId": "ProductImages/office_chair_q2mtyc.jpg"
 	},
 	{
 		"Name": "Dinning Table",
 		"ProductType": {
 			"Id": 6
 		},
+		"PartnerId": 1,
 		"Description": "Table for dinner",
-		"StyleId": 2,
+		"MaterialId": 3,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/dinning_table_egcwht.jpg"
+		"Color": "",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667341/ProductImages/dinning_table_egcwht.jpg",
+		"ImagePublicId": "ProductImages/dinning_table_egcwht.jpg"
 	},
 	{
 		"Name": "Office Desk",
 		"ProductType": {
 			"Id": 2
 		},
+		"PartnerId": 1,
 		"Description": "Ideal for companies",
-		"StyleId": 3,
+		"MaterialId": 2,
 		"Price": 450,
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_table_vnzk4k.jpg"
+		"Color": "bee0ec",
+		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/office_table_vnzk4k.jpg",
+		"ImagePublicId": "ProductImages/office_table_vnzk4k.jpg"
 	}
 ]

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
+import { PaymentService } from 'src/app/services/payment.service';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -40,7 +42,7 @@ export class BookDesignerModalComponent {
 
   constructor(
     private modalController: ModalController,
-    private nav: NavController
+    private paymentService: PaymentService
   ) {}
 
   totalPriceSum(event) {
@@ -63,8 +65,29 @@ export class BookDesignerModalComponent {
   }
 
   redirectToPayment() {
-    this.modalController.dismiss();
-    this.nav.navigateRoot('/payment-details');
+    if(this.totalPrice > 0) {
+      this.checkout();
+    }
+  }
+
+  checkout(): void {
+    this.paymentService.sendPayment(
+      {
+        name: 'Consulatations', //required
+        amount: this.totalPrice * 100,//required
+        receiverId: 2, //required
+        locale: 'en', //optional, if not specified 'en' default
+        successUrlPath: 'messegner?contact=2',//required
+        cancelUrlPath: '',//optional, if not specified path is ''
+        moodboardId: 2, //optional
+        numberOfConsultations: 5 //required
+      }).subscribe(async (res: any) => {
+      let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
+      console.log(res)
+      stripe?.redirectToCheckout({
+        sessionId: res.id
+      })
+    })
   }
 
   isChecked(event) {

@@ -55,10 +55,10 @@ export class LoginModalComponent implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber,
     };
-    const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
+    // const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(
       () => {
-        this.openSmsVerificationModal(phoneNumberFull);
+        this.openSmsVerificationModal(loginModel);
         this.modalController.dismiss({ dismissed: true });
       },
       (error) => {
@@ -86,10 +86,10 @@ export class LoginModalComponent implements OnInit {
     });
   }
 
-  private async openSmsVerificationModal(phoneNumberFull: string): Promise<void> {
+  private async openSmsVerificationModal(phoneModel): Promise<void> {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
-      componentProps: { phoneNumberFull, step: '3', verificationTarget: VerificationTarget.LOGIN },
+      componentProps: { phoneModel, step: '3', verificationTarget: VerificationTarget.LOGIN },
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,

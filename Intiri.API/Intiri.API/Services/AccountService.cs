@@ -57,10 +57,9 @@ namespace Intiri.API.Services
 			return await _userManager.FindByIdAsync(id);
 		}
 
-
-		public async Task<User> GetUserByPhoneNumberAsync(string userPhoneNumber)
+		public async Task<User> GetUserByUsernameAsync(string username)
 		{
-			return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == userPhoneNumber.ToLower());
+			return await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == username.ToLower());
 		}
 
 		public async Task<SignInResult> CheckUserSignInPaswordAsync(User user, string password, bool lockoutOnFailure)
@@ -81,6 +80,27 @@ namespace Intiri.API.Services
 		{
 			return await _userManager.Users.AnyAsync(x => x.UserName == phoneNumber.ToLower());
 		}
+
+
+
+		#region Generic methods
+
+		public async Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User
+		{
+			return await _userManager.Users.OfType<TEntity>().SingleOrDefaultAsync(x => x.Id == id);
+		}
+
+		public async Task<TEntity> GetUserByUsernameAsync<TEntity>(string username) where TEntity : User
+		{
+			return await _userManager.Users.OfType<TEntity>().SingleOrDefaultAsync(x => x.UserName == username);
+		}
+
+		public async Task<IEnumerable<TEntity>> GetAllUsersAsync<TEntity>() where TEntity : class
+		{
+			return await _userManager.Users.OfType<TEntity>().ToListAsync();
+		}
+
+		#endregion Generic methods
 
 		#endregion IAccountService members
 	}

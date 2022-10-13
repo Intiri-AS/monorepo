@@ -43,7 +43,7 @@
     max-width: 600px;
     --width: 400px;
     border-radius: 16px;
-    --height: 50%;
+    --height: 550px;
   }
 
   .final-project-step-modal-css::part(content) {
@@ -85,7 +85,7 @@
   .book-designer-modal-css::part(content) {
     --width: 884px;
     border-radius: 16px;
-    --height: 1090px;
+    --height: 95%;
   }
 }
 
@@ -132,13 +132,17 @@ ion-button {
 }
 
 .header-container {
-  @apply 2xl:container px-[3%] xs:px-[5%] sm:px-[10%]
+  @apply px-[75px];
+}
+
+.box-shadow {
+  -webkit-box-shadow: 4px 4px 15px rgb(0, 0, 0, 0.25);
 }
 
 // should be wrapped around every main content of the page (main section below header)
 .main-container {
   @extend .header-container;
-  @apply my-[50px] pt-0;
+  @apply my-[50px] px-[30px] lg:px-[75px] pt-0;
 }
 
 .ion-card-container {

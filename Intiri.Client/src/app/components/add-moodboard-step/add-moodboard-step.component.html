@@ -2,15 +2,15 @@
   <h2 class="step-title">{{currentStep.title}}</h2>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
-      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-sm="3.8" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
         <!-- if image (style|material|product) -->
         <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
          <!-- if icon (room) -->
-        <div *ngIf="item.iconPath" class="step-icon-wrapper" >
+        <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
           <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
         </div>
         <!-- if color pallete -->
-        <div *ngIf="item.mainColor" class="step-color-wrapper" >
+        <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
           <div class="w-[47.5%] h-full inline-block float-right">
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
@@ -26,7 +26,7 @@
 
   <!-- if final step -->
   <div *ngIf="currentStep.data === 'final'">
-    <div class="rounded-2xl border-black-3 border-2 w-full h-[320px] lg:h-[410px] mr-2 md:mr-3 mt-4 p-3">
+    <div class="rounded-2xl border-black-3 border-2 w-full mac:w-[75%] h-[410px] mr-2 md:mr-3 mt-4 p-3">
       <div class="result-grid">
         <div class="item-sm" [ngStyle]="{background: moodboard.colorPalettes[0].shadeColorLight}"></div>
         <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(moodboard.products[0].imagePath) + ')'}"></div>

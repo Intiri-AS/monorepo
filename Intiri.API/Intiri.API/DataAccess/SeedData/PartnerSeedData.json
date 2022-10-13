@@ -5,6 +5,8 @@
 		"PhoneNumber": "473333222",
 		"Street": "Skeidar Street",
 		"Country": "Norway",
+		"LogoPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1665615134/PartnerLogos/skeidar-200x200_hxskab.png",
+		"LogoPublicId": "PartnerLogos/skeidar-200x200_hxskab",
 		"Created": "2019-04-03"
 	}
 ]

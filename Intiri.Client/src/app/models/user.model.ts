@@ -1,15 +1,19 @@
 export class User {
-  email: string;
+  id: number;
+  fullName: string;
   roles: string[];
   token: string;
   phoneNumber: string;
+  photoPath: string;
 
   //TODO This is example for User model
 
   constructor() {
-    this.email = '';
+    this.id = null;
+    this.fullName = '';
     this.roles = [];
     this.token = '';
     this.phoneNumber = '';
+    this.photoPath = '';
   }
 }

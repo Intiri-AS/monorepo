@@ -9,10 +9,33 @@ namespace Intiri.API.DataAccess.Repository
 	{
 		private readonly IMapper _mapper;
 
-		public UserRepository(DataContext context, IMapper mapper): base(context)
+		public UserRepository(DataContext context, IMapper mapper) : base(context)
 		{
 			_mapper = mapper;
 		}
+
+		#region Generic methods
+
+		public async Task<IEnumerable<TEntity>> GetUsersAsync<TEntity>() where TEntity : class
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<TEntity>().ToListAsync();
+		}
+
+		public async Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<TEntity>().SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
+		public async Task<TEntity> GetUserUsernameIdAsync<TEntity>(string username) where TEntity : User
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<TEntity>().SingleOrDefaultAsync(eu => eu.UserName == username);
+		}
+
+		#endregion  Generic methods
+
 
 		public async Task<IEnumerable<EndUser>> GetEndUsersAsync()
 		{
@@ -47,23 +70,7 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<PartnerContact> GetPartnerUserByIdAsync(int id)
 		{
 			//return _context.Set<PartnerContact>().SingleOrDefault(x => x.Id == id);
-			return await _context.Users.OfType<PartnerContact>().SingleOrDefaultAsync(/*eu => eu.Id == id*/);
-		}
-
-
-		public async Task<User> GetUserByIdAsync(int id)
-		{
-			return await GetByID(id);
-		}
-
-		public async Task<User> GetUserByUserNameAsync(string username)
-		{
-			return await SingleOrDefaultAsync(x => x.UserName == username);
-		}
-
-		public async Task<IEnumerable<User>> GetUsersAsync()
-		{
-			return await _context.Users.ToListAsync();
+			return await _context.Users.OfType<PartnerContact>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
 		public void UpdateUser(User user)

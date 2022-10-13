@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Moodboard } from './models/moodboard.model';
 import { Project } from './models/project.model';
 import { User } from './models/user.model';
 
 import { AccountService } from './services/account.service';
 import { LanguageService } from './services/language.service';
-import { MoodboardService } from './services/moodboard.service';
 import { ProjectService } from './services/project.service';
 
 @Component({
@@ -19,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private projectService: ProjectService,
-    private moodboardService: MoodboardService,
     private languageService: LanguageService,
     private storage: Storage
   ) {
@@ -41,6 +38,8 @@ export class AppComponent implements OnInit {
     if (user)
     {
       this.accountService.setCurrentUser(user);
+    } else {
+      this.accountService.setCurrentUser(null);
     }
   }
 

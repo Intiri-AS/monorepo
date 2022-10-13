@@ -3,7 +3,7 @@
     <app-header-admin></app-header-admin>
     <div class="main-container">
       <p class="main-title mb-[30px]">Style</p>
-      <app-sub-header [menu]="'style'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
+      <app-sub-header [menu]="style" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
         <ion-slide>
           <app-admin-styles></app-admin-styles>

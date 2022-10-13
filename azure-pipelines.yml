@@ -145,6 +145,10 @@ stages:
                {
                  "name": "PusherConfiguration:AppSecret",
                   "value": "$(PusherAppSecret)"
+               },
+               {
+                 "name": "StripeConfiguration:WebhookEndpointSecret",
+                  "value": "$(WebhookEndpointSecret)"
                }
               ]
             connectionStrings: |

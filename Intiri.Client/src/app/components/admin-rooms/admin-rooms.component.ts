@@ -14,7 +14,8 @@ export class AdminRoomsComponent implements OnInit {
 
   rooms$: Observable<any> = this.roomService.rooms$;
   roomTypes: [];
-
+  searchText: any;
+  
   constructor(public popoverController: PopoverController, private modalController: ModalController, private roomService: RoomService) { }
 
   ngOnInit() {

@@ -41,63 +41,30 @@ namespace Intiri.API.Controllers
 
 		#region Public methods
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetUsers()
-		{
-			IEnumerable<User> users = await _unitOfWork.UserRepository.GetUsersAsync();
-			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
-
-			return Ok(usersToReturn);
-		}
-
 		[HttpGet("profile")]
 		public async Task<ActionResult<UserOutDTO>> GetUserProfile()
 		{
-			User user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
 
 			if (user == null)
 			{
 				return Unauthorized("Invalid user.");
-			}
-
-			return _mapper.Map<UserOutDTO>(user);
-		}
-
-		[HttpGet("{username}")]
-		public async Task<ActionResult<UserOutDTO>> GetUserByUsername(string username)
-		{
-			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
-
-			if (user == null)
-			{
-				return Unauthorized("Invalid user name.");
-			}
-
-			return _mapper.Map<UserOutDTO>(user);
-		}
-
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<UserOutDTO>> GetUserById(int id)
-		{
-			User user = await _unitOfWork.UserRepository.GetUserByIdAsync(id);
-
-			if (user == null)
-			{
-				return Unauthorized("Invalid user id.");
 			}
 
 			return _mapper.Map<UserOutDTO>(user);
 		}
 
 		[HttpPost("addPhoto")]
-		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto(IFormFile file)
+		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto([FromForm] UserPhotoFileInDTO inFile)
 		{
-			User user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
 
 			if (user == null)
 			{
 				return Unauthorized("Invalid user.");
 			}
+
+			IFormFile file = inFile.PhotoPath;
 
 			if (file.Length > 0)
 			{
@@ -149,10 +116,15 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding user photo.");
 		}
 
-		[HttpPut("update")]
+		[HttpPut("profile")]  
 		public async Task<ActionResult<UserOutDTO>> UpdateUser(UserUpdateInDTO userUpdateDto)
 		{
-			User user = await _accountService.GetUserByPhoneNumberAsync(User.GetUsername());
+			User user = await _accountService.GetUserByUsernameAsync(User.GetUsername());
+
+			if (user == null)
+			{
+				return Unauthorized("Invalid user.");
+			}
 
 			_mapper.Map(userUpdateDto, user);
 			_unitOfWork.UserRepository.UpdateUser(user);
