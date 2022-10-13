@@ -63,16 +63,18 @@ public class MessengerService : IMessengerService
         if (roleNames.Contains(RoleNames.InternalDesigner) || roleNames.Contains(RoleNames.ExternalDesigner))
         {
             IEnumerable<PaymentInfo> paymentInfos = await GetPayerInfosForUser(currentUser);
+            IEnumerable<int> paymentIds = paymentInfos.Select(pi => pi.PayerId);
 
             return await _userRepository.Get(GetChatEndUserData(currentUser, paymentInfos),
-                                             user => paymentInfos.Any(payerInfo => payerInfo.PayerId == user.Id));
+                                             user => paymentIds.Contains(user.Id));
         }
         else if ((roleNames.Contains(RoleNames.FreeEndUser) || roleNames.Contains(RoleNames.PremiumEndUser)))
         {
             IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos = await GetReceiverInfosForUser(currentUser);
+            IEnumerable<int> paymentReceiverIds = receivedPaymentInfos.Select(pi => pi.ReceiverId);
 
             return await _userRepository.Get(GetChatDesignerData(currentUser, receivedPaymentInfos),
-                                             user => receivedPaymentInfos.Any(receiver => receiver.ReceiverId == user.Id));
+                                             user => paymentReceiverIds.Contains(user.Id));
         }
 
         return new List<ChatPersonOutDTO>();
