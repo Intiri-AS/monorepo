@@ -35,7 +35,7 @@ export class MessengerPage implements OnInit {
     this.msgService.getContacts().subscribe((res: any[]) => {
       this.contacts = res;
       this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-        this.loggedUser = {id: user.id, fullName: user.fullName, photoPath: user.photoPath};
+        this.loggedUser = user;
       });
 
       const queryString = window.location.search;

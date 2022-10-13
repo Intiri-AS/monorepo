@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
@@ -18,7 +17,7 @@ export class MyIntiriPage {
   @ViewChild('projectSlides') projectSlides: IonSlides;
   apiUrl = environment.apiUrl;
 
-  projects$: Observable<Project[]>;
+  projects: Project[] = [];
   projectId = 0;
 
   news = [
@@ -59,15 +58,21 @@ export class MyIntiriPage {
     spaceBetween: 20,
   }
   searchText: any;
+  isLoading = true;
 
   constructor(
     public projectService: ProjectService,
     private modalController: ModalController,
-    private router: Router
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
-    this.projects$ = this.projectService.getAllProjects();
+    this.spinner.show();
+    this.projectService.getAllProjects().subscribe(res => {
+      this.projects = res;
+      this.isLoading = false;
+      this.spinner.hide();
+    });
   }
 
   // TODO: needs to be updated after project is allowed to have multiple moodboards!

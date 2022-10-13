@@ -14,7 +14,7 @@
       </ion-buttons>
       <ion-buttons class="header-buttons justify-end">
         <a routerLink="/profile" routerDirection="root" class="py-1">
-          <img src="../../../assets/images/landing-img.png" class="header-profile-img" alt="Profile Img"/>
+          <img [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/landing-img.png'" class="header-profile-img" alt="Profile Img"/>
         </a>
         <ion-icon class="header-icon" (click)="showSettings($event)" name="settings-sharp"></ion-icon>
       </ion-buttons>

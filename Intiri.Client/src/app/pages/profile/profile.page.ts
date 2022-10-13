@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
+import { AccountService } from 'src/app/services/account.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -28,8 +29,11 @@ export class ProfilePage implements OnInit {
     photoPath: ''
   }
 
+  loggedUser$ = this.accountService.currentUser$;
+
   constructor(
     private http: HttpClient,
+    private accountService: AccountService,
     private spinner: NgxSpinnerService
   ) {}
 
