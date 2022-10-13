@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map, take } from 'rxjs/operators';
+import { AccountService } from 'src/app/services/account.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,7 +20,8 @@ export class ProfileImgSectionComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {}
@@ -34,8 +37,12 @@ export class ProfileImgSectionComponent implements OnInit {
       formData.append('photoPath', event.target.files[0]);
       this.http.post(this.apiUrl + 'users/addPhoto', formData).subscribe((res: any) => {
         this.spinner.hide();
+        console.log(res)
         if (res.photoPath) {
           this.image = res.photoPath
+          this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+            this.accountService.setCurrentUser({...user, photoPath: res.photoPath});
+          });
         }
       })
     } else {

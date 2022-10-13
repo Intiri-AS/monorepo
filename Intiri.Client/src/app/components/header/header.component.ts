@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
+import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
 
@@ -17,7 +18,9 @@ export class HeaderComponent {
     {title: 'Book a designer', url: '/book-designer'},
   ]
 
-  constructor(private projectService: ProjectService,  private router: Router, public popoverController: PopoverController) {}
+  loggedUser$ = this.accountService.currentUser$;
+
+  constructor(private projectService: ProjectService, private accountService: AccountService,  private router: Router, public popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
     return this.router.url === route;

@@ -38,6 +38,8 @@ export class AppComponent implements OnInit {
     if (user)
     {
       this.accountService.setCurrentUser(user);
+    } else {
+      this.accountService.setCurrentUser(null);
     }
   }
 

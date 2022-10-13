@@ -69,10 +69,16 @@ export class AccountService {
   }
 
   setCurrentUser(user: User) {
-    user.roles = [];
-    const roles = this.getDecodedToken(user.token).role;
-    Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-    localStorage.setItem('user', JSON.stringify(user));
+    if(user){
+      user.roles = [];
+      const tokenData = this.getDecodedToken(user.token);
+      const roles = tokenData.role;
+      Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+      user.id = parseInt(tokenData.nameid);
+      user.fullName = tokenData.name;
+      user.photoPath = user.photoPath ? user.photoPath : tokenData.prn;
+      localStorage.setItem('user', JSON.stringify(user));
+    }
     this.currentUserSource.next(user);
   }
 
