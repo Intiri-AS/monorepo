@@ -65,19 +65,45 @@ public class MessengerService : IMessengerService
             IEnumerable<PaymentInfo> paymentInfos = await GetPayerInfosForUser(currentUser);
             IEnumerable<int> paymentIds = paymentInfos.Select(pi => pi.PayerId);
 
-            return await _userRepository.Get(GetChatEndUserData(currentUser, paymentInfos),
+            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatEndUserData(currentUser, paymentInfos),
                                              user => paymentIds.Contains(user.Id));
+
+            return SetLastMessage(chatPersonOutDTOs);
         }
         else if ((roleNames.Contains(RoleNames.FreeEndUser) || roleNames.Contains(RoleNames.PremiumEndUser)))
         {
             IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos = await GetReceiverInfosForUser(currentUser);
             IEnumerable<int> paymentReceiverIds = receivedPaymentInfos.Select(pi => pi.ReceiverId);
 
-            return await _userRepository.Get(GetChatDesignerData(currentUser, receivedPaymentInfos),
+            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatDesignerData(currentUser, receivedPaymentInfos),
                                              user => paymentReceiverIds.Contains(user.Id));
+
+            return SetLastMessage(chatPersonOutDTOs);
         }
 
         return new List<ChatPersonOutDTO>();
+    }
+
+    private IEnumerable<ChatPersonOutDTO> SetLastMessage(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs)
+    {
+        foreach (var chatPersonOut in chatPersonOutDTOs)
+        {
+            DateTime lastSentDate = chatPersonOut.LastSentMessageDate;
+            DateTime lastRecievedDate = chatPersonOut.LastReceivedMessageDate;
+
+            if (lastSentDate > lastRecievedDate)
+            {
+                chatPersonOut.LastMessageDate = lastSentDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastSentMessageContent;
+            }
+            else
+            {
+                chatPersonOut.LastMessageDate = lastRecievedDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastReceivedMessageContent;
+            }
+        }
+
+        return chatPersonOutDTOs;
     }
 
     private static Expression<Func<User, ChatPersonOutDTO>> GetChatEndUserData(User currentUser, IEnumerable<PaymentInfo> paymentInfos)
@@ -88,23 +114,21 @@ public class MessengerService : IMessengerService
             FirstName = user.FirstName,
             LastName = user.LastName,
             PhotoPath = user.PhotoPath,
-            LastMessageContent = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.Content)
                                                                   .FirstOrDefault(),
-            LastMessageDate = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
                                                                   .FirstOrDefault(),
             ChatPeriodExpired = false
         };
@@ -118,23 +142,21 @@ public class MessengerService : IMessengerService
             FirstName = user.FirstName,
             LastName = user.LastName,
             PhotoPath = user.PhotoPath,
-            LastMessageContent = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.Content)
                                                                   .FirstOrDefault(),
-            LastMessageDate = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
                                                                   .FirstOrDefault(),
             ChatPeriodExpired = false
         };
