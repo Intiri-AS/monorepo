@@ -71,26 +71,29 @@ namespace Intiri.API.DataAccess.SeedData
 				await roleManager.CreateAsync(role);
 			}
 
-			User u1 = new User() { FirstName = "Dina", LastName = "Admin", PhoneNumber = "471231231", UserName = "471231231" };
-			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", PhoneNumber = "471231232", UserName = "471231232", HourlyRate = 700f };
-			EndUser u3 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", PhoneNumber = "471231233", UserName = "471231233" };
-			EndUser u4 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", PhoneNumber = "471231234", UserName = "471231234" };
-			PartnerContact u5 = new PartnerContact() { FirstName = "Day", LastName = "Partner", PhoneNumber = "471231235", UserName = "471231235" };
-			u5.Partner = await unitOfWork.PartnerRepository.GetByID(1);
+			User u1 = new User() { FirstName = "Dina", LastName = "Admin", CountryCode = "47", PhoneNumber = "1231231", UserName = "471231231" };
+			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231232", UserName = "471231232", HourlyRate = 700f };
+			Designer u3 = new Designer() { FirstName = "Drina", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231233", UserName = "471231233", HourlyRate = 650f };
+			EndUser u4 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231234", UserName = "471231234" };
+			EndUser u5 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231235", UserName = "471231235" };
+			PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };
+			u6.Partner = await unitOfWork.PartnerRepository.GetByID(1);
 
 			await accountService.CreateUserAsync(u1);
 			await accountService.CreateUserAsync(u2);
 			await accountService.CreateUserAsync(u3);
 			await accountService.CreateUserAsync(u4);
 			await accountService.CreateUserAsync(u5);
+			await accountService.CreateUserAsync(u6);
 
 			await userManager.AddToRoleAsync(u1, RoleNames.Admin);
 			await userManager.AddToRoleAsync(u2, RoleNames.InternalDesigner);
-			await userManager.AddToRoleAsync(u3, RoleNames.FreeEndUser);
+			await userManager.AddToRoleAsync(u3, RoleNames.InternalDesigner);
 			await userManager.AddToRoleAsync(u4, RoleNames.FreeEndUser);
-			await userManager.AddToRoleAsync(u5, RoleNames.Partner);
+			await userManager.AddToRoleAsync(u5, RoleNames.FreeEndUser);
+			await userManager.AddToRoleAsync(u6, RoleNames.Partner);
 
-			u5.Partner.PartnerContacts.Add(u5);
+			u6.Partner.PartnerContacts.Add(u6);
 		}
 
 		public static async Task SeedPartners(IUnitOfWork unitOfWork)
@@ -305,7 +308,10 @@ namespace Intiri.API.DataAccess.SeedData
 			for (int i = 0; i < moodboards.Count; i++)
 			{
 				unitOfWork.MoodboardRepository.Insert(moodboards[i]);
+
 				moodboards[i].Designer = await unitOfWork.UserRepository.GetDesignerUserByIdAsync(inDTO[i].DesignerId);
+				moodboards[i].Designer.CreatedMoodboards.Add(moodboards[i]);
+
 				moodboards[i].Style = await unitOfWork.StyleRepository.SingleOrDefaultAsync(s => s.Id == inDTO[i].StyleId);
 				moodboards[i].Room = await unitOfWork.RoomRepository.SingleOrDefaultAsync(r => r.Id == inDTO[i].RoomId);
 				moodboards[i].Materials = (ICollection<Material>)await unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(inDTO[i].MaterialIds);

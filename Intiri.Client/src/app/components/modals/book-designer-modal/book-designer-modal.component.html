@@ -1,18 +1,18 @@
 <ion-content>
   <div class="container">
-    <p class="mt-[90px] text-2xl text-black font-medium">Book your design consultation</p>
+    <p class="mt-[40px] text-2xl text-black font-medium">Book your design consultation</p>
     <p class="mt-[30px] text-2xl text-primary font-medium">{{price}} Nok / consultation</p>
     <p class="text-lg text-black-2">*Consultation duration is 45min</p>
     <div class="mt-[30px]">
       <span class="text-sm text-black-2">Number of consultations</span>
-      <ion-input type="number" class="border rounded-2xl border-black-2 w-[310px] h-14 focus:ring-transparent" (ionChange)="totalPriceSum($event)"></ion-input>
+      <ion-input type="number" min="1" class="border rounded-2xl border-black-2 w-[310px] h-14 focus:ring-transparent" [(ngModel)]="numberOfConsultations" (ionChange)="totalPriceSum($event)"></ion-input>
     </div>
     <p class="mt-[30px] text-lg text-black-2 font-medium">TOTAL TO PAY</p>
     <p class="text-[45px] text-primary font-medium">{{totalPrice}} Nok</p>
     <ion-item-divider class="border-b-[3px] border-primary w-[60px] h-0 bg-white"></ion-item-divider>
-    <p class="mt-[50px] text-2xl text-black font-medium">Tell us what you need</p>
+    <p class="mt-[25px] text-2xl text-black font-medium">Tell us what you need</p>
     <p class="text-lg text-black-2 text-center">You are soon ready to meet your designer, just tell us what you need help with.</p>
-    <div class="flex flex-wrap mt-[50px]">
+    <div class="flex flex-wrap mt-[30px]">
       <ion-item *ngFor="let item of items" class="w-full xl:w-1/2" lines="none">
         <div class="flex items-center">
           <ion-checkbox></ion-checkbox>
@@ -29,7 +29,7 @@
         </div>
       </ion-item>
     </div>
-    <div class="mt-[50px]">
+    <div class="mt-[30px] pb-6">
       <ion-button fill="clear" class="secondary-btn" (click)="dismissModal()">Cancel</ion-button>
       <ion-button fill="clear" class="primary-btn" [disabled]="totalPrice <= 0" (click)="redirectToPayment()">Proceed</ion-button>
     </div>

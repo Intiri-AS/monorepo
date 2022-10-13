@@ -51,8 +51,9 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<IEnumerable<Designer>> GetDesignerUsersAsync()
 		{
-			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
-			return await _context.Users.OfType<Designer>().ToListAsync();
+			return await _context.Users.OfType<Designer>()
+				.Include(m => m.CreatedMoodboards)
+				.ToListAsync();
 		}
 
 		public async Task<Designer> GetDesignerUserByIdAsync(int id)

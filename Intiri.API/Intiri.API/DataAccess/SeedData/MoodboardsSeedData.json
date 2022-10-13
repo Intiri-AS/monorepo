@@ -2,7 +2,7 @@
 	{
 		"Name": "Harmony ",
 		"Description": "Harmony for first room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 1,
 		"RoomId": 1,
 		"ProjectId": null,
@@ -14,7 +14,7 @@
 	{
 		"Name": "Harmony Redefined",
 		"Description": "Harmony for second room",
-		"DesignerId": 1,
+		"DesignerId": 3,
 		"StyleId": 1,
 		"RoomId": 2,
 		"ProjectId": 1,
@@ -26,7 +26,7 @@
 	{
 		"Name": "Harmony Recreated",
 		"Description": "Harmony for third room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 1,
 		"RoomId": 3,
 		"ProjectId": null,
@@ -38,7 +38,7 @@
 	{
 		"Name": "Harmony Captured",
 		"Description": "Harmony for fourth room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 1,
 		"RoomId": 4,
 		"ProjectId": null,
@@ -50,7 +50,7 @@
 	{
 		"Name": "Synergy",
 		"Description": "Synergy for first room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 2,
 		"RoomId": 1,
 		"ProjectId": null,
@@ -62,7 +62,7 @@
 	{
 		"Name": "Synergy Redefined",
 		"Description": "Synergy for second room",
-		"DesignerId": 1,
+		"DesignerId": 3,
 		"StyleId": 2,
 		"RoomId": 2,
 		"ProjectId": null,
@@ -74,7 +74,7 @@
 	{
 		"Name": "Synergy Recreated",
 		"Description": "Synergy for third room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 2,
 		"RoomId": 3,
 		"ProjectId": null,
@@ -86,7 +86,7 @@
 	{
 		"Name": "Synergy Captured",
 		"Description": "Synergy for fourth room",
-		"DesignerId": 1,
+		"DesignerId": 3,
 		"StyleId": 2,
 		"RoomId": 4,
 		"ProjectId": null,
@@ -98,7 +98,7 @@
 	{
 		"Name": "Zen",
 		"Description": "Zen for first room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 3,
 		"RoomId": 1,
 		"ProjectId": null,
@@ -110,7 +110,7 @@
 	{
 		"Name": "Zen Redefined",
 		"Description": "Zen for second room",
-		"DesignerId": 1,
+		"DesignerId": 3,
 		"StyleId": 3,
 		"RoomId": 2,
 		"ProjectId": null,
@@ -122,7 +122,7 @@
 	{
 		"Name": "Zen Recreated",
 		"Description": "Zen for third room",
-		"DesignerId": 1,
+		"DesignerId": 2,
 		"StyleId": 3,
 		"RoomId": 3,
 		"ProjectId": null,
@@ -134,7 +134,7 @@
 	{
 		"Name": "Zen Captured",
 		"Description": "Zen for fourth room",
-		"DesignerId": 1,
+		"DesignerId": 3,
 		"StyleId": 3,
 		"RoomId": 4,
 		"ProjectId": null,

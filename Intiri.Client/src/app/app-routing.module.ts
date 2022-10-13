@@ -92,11 +92,6 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'contact-designer', //TODO Set up page guard (end-user guard)
-    component: ContactDesignerPage,
-    canActivate: [EnduserGuard]
-  },
-  {
     path: 'designer-profile', //TODO Set up page guard (end-user guard)
     component: DesignerProfilePage,
     canActivate: [EnduserGuard]
@@ -143,6 +138,12 @@ const routes: Routes = [
   {
     path: 'moodboard-details', //TODO Set up page guard (end-user guard)
     component: MoodboardDetailsPage,
+    canActivate: [EnduserGuard]
+  },
+  {
+    path: 'contact-designer/:id', //TODO Set up page guard (end-user guard)
+    component: ContactDesignerPage,
+    resolve: {moodboard: MoodboardService},
     canActivate: [EnduserGuard]
   },
   {
