@@ -1,6 +1,7 @@
 ﻿using Intiri.API.Configuration;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Messenger;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Stripe.Checkout;
 using System.Text;
 
 namespace Intiri.API.Extension
@@ -27,6 +29,8 @@ namespace Intiri.API.Extension
 			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
 			AddConfigurationService<TwilioConfiguration>(services, config, "TwilioConfiguaration");
 			AddConfigurationService<PusherConfiguration>(services, config, "PusherConfiguration");
+			AddConfigurationService<StripeConfiguration>(services, config, "StripeConfiguration");
+			AddConfigurationService<HostingConfiguration>(services, config, "HostingConfiguration");
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<ITokenService, TokenService>();
@@ -39,6 +43,7 @@ namespace Intiri.API.Extension
 			services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
 			services.AddScoped<IMessengerService, MessengerService>();
+			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
 
 			return services;
 		}

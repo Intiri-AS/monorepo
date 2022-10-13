@@ -26,6 +26,7 @@ namespace Intiri.API.DataAccess
 		private readonly IMoodboardRepository _moodboardRepository;
 		private readonly IPartnerRepository _partnerRepository;
 		private readonly IChatMessageRepository _chatMessageRepository;
+		private readonly IConsultationPaymentRepository _consultationPaymentRepository;
 
 		#endregion Fields
 
@@ -50,6 +51,7 @@ namespace Intiri.API.DataAccess
 			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
 			_partnerRepository = new PartnerRepository(dataContext, mapper);
 			_chatMessageRepository = new ChatMessageRepository(dataContext);
+			_consultationPaymentRepository = new ConsultationPaymentRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -75,6 +77,8 @@ namespace Intiri.API.DataAccess
 		public IMoodboardRepository MoodboardRepository => _moodboardRepository;
 		public IPartnerRepository PartnerRepository => _partnerRepository;
 		public IChatMessageRepository ChatMessageRepository => _chatMessageRepository;
+
+		public IConsultationPaymentRepository ConsultationPaymentRepository => _consultationPaymentRepository;
 
 		#endregion Properties
 

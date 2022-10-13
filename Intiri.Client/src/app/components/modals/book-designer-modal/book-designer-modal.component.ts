@@ -71,7 +71,15 @@ export class BookDesignerModalComponent {
   }
 
   checkout(): void {
-    this.paymentService.sendPayment({name: 'Consulatations', amount: this.totalPrice * 100}).subscribe(async (res: any) => {
+    this.paymentService.sendPayment(
+      {
+        name: 'Consulatations', 
+        amount: this.totalPrice * 100,
+        receiverId: 2,
+        locale: 'en',
+        successUrlPath: 'messegner?contact=2',
+        cancelUrlPath: ''
+      }).subscribe(async (res: any) => {
       let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
       console.log(res)
       stripe?.redirectToCheckout({
