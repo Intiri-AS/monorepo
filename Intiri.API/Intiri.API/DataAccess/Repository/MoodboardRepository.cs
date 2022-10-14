@@ -29,7 +29,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<int> GetMoodboardsCountAsync()
 		{
-			return await _context.Moodboards.Where(m => m.Project == null).CountAsync();
+			return await _context.Moodboards.Where(m => m.EndUser == null).CountAsync();
 		}
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboards()
