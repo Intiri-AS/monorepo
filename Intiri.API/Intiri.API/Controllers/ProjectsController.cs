@@ -13,6 +13,7 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
+using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
@@ -22,14 +23,16 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly IAccountService _accountService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService) : base(unitOfWork)
 		{
 			_mapper = mapper;
+			_accountService = accountService;
 		}
 
 		#endregion Constructors
@@ -147,7 +150,9 @@ namespace Intiri.API.Controllers
 
 			Project project = _mapper.Map<Project>(projectIn);
 
-			EndUser user = await _unitOfWork.UserRepository.GetEndUserByIdAsync(User.GetUserId());
+			EndUser user = await _accountService.GetUserByIdAsync<EndUser>(User.GetUserId());
+			if (user == null) return Unauthorized();
+
 			project.EndUser = user;
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);

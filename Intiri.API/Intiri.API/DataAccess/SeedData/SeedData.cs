@@ -79,12 +79,15 @@ namespace Intiri.API.DataAccess.SeedData
 			PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };
 			u6.Partner = await unitOfWork.PartnerRepository.GetByID(1);
 
+			EndUser uChanette = new EndUser() { FirstName = "Chanette", LastName = "Suopanki Blindheim", CountryCode = "47", PhoneNumber = "95970309", UserName = "4795970309" };
+
 			await accountService.CreateUserAsync(u1);
 			await accountService.CreateUserAsync(u2);
 			await accountService.CreateUserAsync(u3);
 			await accountService.CreateUserAsync(u4);
 			await accountService.CreateUserAsync(u5);
 			await accountService.CreateUserAsync(u6);
+			await accountService.CreateUserAsync(uChanette);
 
 			await userManager.AddToRoleAsync(u1, RoleNames.Admin);
 			await userManager.AddToRoleAsync(u2, RoleNames.InternalDesigner);
@@ -92,6 +95,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await userManager.AddToRoleAsync(u4, RoleNames.FreeEndUser);
 			await userManager.AddToRoleAsync(u5, RoleNames.FreeEndUser);
 			await userManager.AddToRoleAsync(u6, RoleNames.Partner);
+			await userManager.AddToRoleAsync(uChanette, RoleNames.FreeEndUser);
 
 			u6.Partner.PartnerContacts.Add(u6);
 		}
