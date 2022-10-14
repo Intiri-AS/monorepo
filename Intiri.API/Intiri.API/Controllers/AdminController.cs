@@ -6,6 +6,7 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
+using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Project;
@@ -111,6 +112,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+
 		[HttpGet("endUsers")]
 		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllEndUsers()
 		{
@@ -145,15 +147,15 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
-		[HttpGet("partnerContacts/{partnerId}")]
-		public async Task<ActionResult<IEnumerable<PartnerContactOutDTO>>> GetAllPartnerContactsByParent(int partnerId)
+		[HttpGet("partner/{partnerId}")]
+		public async Task<ActionResult<IEnumerable<PartnerContactOutDTO>>> GetPartnerWithContactsAndProducts(int partnerId)
 		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllContactsAsync(partnerId);
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllAsync(partnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
-			IEnumerable<PartnerContactOutDTO> pContactsToReturn = _mapper.Map<IEnumerable<PartnerContactOutDTO>>(partner.PartnerContacts.ToList());
+			PartnerAllOutDTO partnerOut = _mapper.Map<PartnerAllOutDTO>(partner);
 
-			return Ok(pContactsToReturn);
+			return Ok(partnerOut);
 		}
 
 		[HttpGet("allPartnerContacts")]

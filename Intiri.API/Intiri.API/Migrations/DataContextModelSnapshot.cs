@@ -190,6 +190,9 @@ namespace Intiri.API.Migrations
                     b.Property<int>("DesignerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EndUserId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsTemplate")
                         .HasColumnType("bit");
 
@@ -211,6 +214,8 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DesignerId");
+
+                    b.HasIndex("EndUserId");
 
                     b.HasIndex("ProjectId");
 
@@ -928,8 +933,12 @@ namespace Intiri.API.Migrations
                     b.HasOne("Intiri.API.Models.Designer", "Designer")
                         .WithMany("CreatedMoodboards")
                         .HasForeignKey("DesignerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Intiri.API.Models.EndUser", "EndUser")
+                        .WithMany()
+                        .HasForeignKey("EndUserId");
 
                     b.HasOne("Intiri.API.Models.Project.Project", "Project")
                         .WithMany("ProjectMoodboards")
@@ -948,6 +957,8 @@ namespace Intiri.API.Migrations
                         .HasForeignKey("StyleId");
 
                     b.Navigation("Designer");
+
+                    b.Navigation("EndUser");
 
                     b.Navigation("Project");
 
