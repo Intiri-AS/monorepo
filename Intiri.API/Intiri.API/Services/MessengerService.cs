@@ -15,6 +15,8 @@ using System.Linq.Expressions;
 
 namespace Intiri.API.Services;
 
+public readonly record struct PaymentData(int ParticipantId, DateTime ExpirationDate);
+
 public class MessengerService : IMessengerService
 {
     private readonly IMessenger _messenger;
@@ -53,109 +55,28 @@ public class MessengerService : IMessengerService
     public async Task<IEnumerable<ChatPersonOutDTO>> GetChatPersons(User currentUser)
     {
         ArgumentNullException.ThrowIfNull(currentUser, nameof(currentUser));
-        IEnumerable<ChatPersonOutDTO> result = new List<ChatPersonOutDTO>();
 
         IEnumerable<string> roleNames = await _userManager.GetRolesAsync(currentUser);
-        IEnumerable<PaymentData> paymentDataInfos;
-        IEnumerable<int> paymentParticipantsIds;
+        IEnumerable<PaymentData> paymentDataInfos = new List<PaymentData>();
 
         //TODO not sure about roles. Also it should be optimized and commonized
         if (roleNames.Contains(RoleNames.InternalDesigner) || roleNames.Contains(RoleNames.ExternalDesigner))
         {
             paymentDataInfos = await GetPaymentDataForUser(ProjectToPayerPaymentData(), FilterByReceiverId(currentUser.Id));
-            paymentParticipantsIds = paymentDataInfos.Select(pi => pi.ParticipantId);
-
-            result = await _userRepository.Get(GetChatEndUserData(currentUser, paymentDataInfos),
-                                             user => paymentParticipantsIds.Contains(user.Id));
         }
         else if ((roleNames.Contains(RoleNames.FreeEndUser) || roleNames.Contains(RoleNames.PremiumEndUser)))
         {
             paymentDataInfos = await GetPaymentDataForUser(ProjectToReceiverPaymentData(), FilterByPayerId(currentUser.Id));
-            paymentParticipantsIds = paymentDataInfos.Select(pi => pi.ParticipantId);
-
-            result = await _userRepository.Get(GetChatDesignerData(currentUser, paymentDataInfos),
-                                             user => paymentParticipantsIds.Contains(user.Id));
         }
 
-        return SetLastMessage(result);
-    }
+        IEnumerable<int> paymentParticipantsIds = paymentDataInfos.Select(pi => pi.ParticipantId);
+        IEnumerable<ChatPersonOutDTO> result = await _userRepository.Get(ProjectToChatPerson(currentUser),
+                                         user => paymentParticipantsIds.Contains(user.Id));
 
-    private IEnumerable<ChatPersonOutDTO> SetLastMessage(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs)
-    {
-        foreach (var chatPersonOut in chatPersonOutDTOs)
-        {
-            DateTime lastSentDate = chatPersonOut.LastSentMessageDate;
-            DateTime lastRecievedDate = chatPersonOut.LastReceivedMessageDate;
+        SetIsChatExpired(result, paymentDataInfos);
+        SetLastMessage(result);
 
-            if (lastSentDate > lastRecievedDate)
-            {
-                chatPersonOut.LastMessageDate = lastSentDate;
-                chatPersonOut.LastMessageContent = chatPersonOut.LastSentMessageContent;
-            }
-            else
-            {
-                chatPersonOut.LastMessageDate = lastRecievedDate;
-                chatPersonOut.LastMessageContent = chatPersonOut.LastReceivedMessageContent;
-            }
-        }
-
-        return chatPersonOutDTOs;
-    }
-
-    private static Expression<Func<User, ChatPersonOutDTO>> GetChatEndUserData(User currentUser, IEnumerable<PaymentData> paymentInfos)
-    {
-        return user => new ChatPersonOutDTO()
-        {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PhotoPath = user.PhotoPath,
-            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault(),
-            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault(),
-            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault(),
-            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault(),
-            ChatPeriodExpired = false
-        };
-    }
-
-    private static Expression<Func<User, ChatPersonOutDTO>> GetChatDesignerData(User currentUser, IEnumerable<PaymentData> receivedPaymentInfos)
-    {
-        return user => new ChatPersonOutDTO()
-        {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PhotoPath = user.PhotoPath,
-            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault(),
-            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault(),
-            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault(),
-            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
-                                                                  .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault(),
-            ChatPeriodExpired = false
-        };
+        return result;
     }
 
     public async Task<IEnumerable<ChatMessageOutDTO>> GetChatHistory(int firstUserId, int secondUserId)
@@ -203,6 +124,62 @@ public class MessengerService : IMessengerService
         return payment => payment.ReceiverId == idToFind;
     }
 
+    private void SetIsChatExpired(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs, IEnumerable<PaymentData> paymentDataInfos)
+    {
+        foreach (var chatPersonOut in chatPersonOutDTOs)
+        {
+            PaymentData paymentForCurrentPerson = paymentDataInfos.SingleOrDefault(pd => chatPersonOut.Id == pd.ParticipantId);
+            chatPersonOut.ChatPeriodExpired = paymentForCurrentPerson != default ? paymentForCurrentPerson.ExpirationDate < DateTime.UtcNow : true;
+        }
+    }
+
+    private void SetLastMessage(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs)
+    {
+        foreach (var chatPersonOut in chatPersonOutDTOs)
+        {
+            DateTime lastSentDate = chatPersonOut.LastSentMessageDate;
+            DateTime lastRecievedDate = chatPersonOut.LastReceivedMessageDate;
+
+            if (lastSentDate > lastRecievedDate)
+            {
+                chatPersonOut.LastMessageDate = lastSentDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastSentMessageContent;
+            }
+            else
+            {
+                chatPersonOut.LastMessageDate = lastRecievedDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastReceivedMessageContent;
+            }
+        }
+    }
+
+    private static Expression<Func<User, ChatPersonOutDTO>> ProjectToChatPerson(User currentUser)
+    {
+        return user => new ChatPersonOutDTO()
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PhotoPath = user.PhotoPath,
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
+                                                                  .FirstOrDefault()
+        };
+    }
+
     private PusherMessage CreatePusherMessage(ChatMessage chatMessage)
     {
         return new PusherMessage()
@@ -228,11 +205,4 @@ public class MessengerService : IMessengerService
     }
 
     #endregion Private methods
-}
-
-public class PaymentData
-{
-    public int ParticipantId { get; set; }
-
-    public DateTime ExpirationDate { get; set; }
 }
