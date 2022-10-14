@@ -42,46 +42,42 @@ public class MessengerService : IMessengerService
     public async Task<bool> SendMessage(ChatMessageInDTO chatMessageInDTO, int senderId, DateTime sentDate)
     {
         ChatMessage chatMessage = CreateChatMessage(chatMessageInDTO, senderId, sentDate);
-        _chatMessageRepository.Insert(chatMessage);
-
-        if (!await _unitOfWork.SaveChanges())
-        {
-            return await Task.FromResult(false);
-        }
 
         PusherMessage pusherMessage = CreatePusherMessage(chatMessage);
-        return await _messenger.SendMessage(pusherMessage);
+        await _messenger.SendMessage(pusherMessage);
+
+        _chatMessageRepository.Insert(chatMessage);
+        return await _unitOfWork.SaveChanges();
     }
 
     public async Task<IEnumerable<ChatPersonOutDTO>> GetChatPersons(User currentUser)
     {
         ArgumentNullException.ThrowIfNull(currentUser, nameof(currentUser));
+        IEnumerable<ChatPersonOutDTO> result = new List<ChatPersonOutDTO>();
 
         IEnumerable<string> roleNames = await _userManager.GetRolesAsync(currentUser);
+        IEnumerable<PaymentData> paymentDataInfos;
+        IEnumerable<int> paymentParticipantsIds;
 
         //TODO not sure about roles. Also it should be optimized and commonized
         if (roleNames.Contains(RoleNames.InternalDesigner) || roleNames.Contains(RoleNames.ExternalDesigner))
         {
-            IEnumerable<PaymentInfo> paymentInfos = await GetPayerInfosForUser(currentUser);
-            IEnumerable<int> paymentIds = paymentInfos.Select(pi => pi.PayerId);
+            paymentDataInfos = await GetPaymentDataForUser(ProjectToPayerPaymentData(), FilterByReceiverId(currentUser.Id));
+            paymentParticipantsIds = paymentDataInfos.Select(pi => pi.ParticipantId);
 
-            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatEndUserData(currentUser, paymentInfos),
-                                             user => paymentIds.Contains(user.Id));
-
-            return SetLastMessage(chatPersonOutDTOs);
+            result = await _userRepository.Get(GetChatEndUserData(currentUser, paymentDataInfos),
+                                             user => paymentParticipantsIds.Contains(user.Id));
         }
         else if ((roleNames.Contains(RoleNames.FreeEndUser) || roleNames.Contains(RoleNames.PremiumEndUser)))
         {
-            IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos = await GetReceiverInfosForUser(currentUser);
-            IEnumerable<int> paymentReceiverIds = receivedPaymentInfos.Select(pi => pi.ReceiverId);
+            paymentDataInfos = await GetPaymentDataForUser(ProjectToReceiverPaymentData(), FilterByPayerId(currentUser.Id));
+            paymentParticipantsIds = paymentDataInfos.Select(pi => pi.ParticipantId);
 
-            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatDesignerData(currentUser, receivedPaymentInfos),
-                                             user => paymentReceiverIds.Contains(user.Id));
-
-            return SetLastMessage(chatPersonOutDTOs);
+            result = await _userRepository.Get(GetChatDesignerData(currentUser, paymentDataInfos),
+                                             user => paymentParticipantsIds.Contains(user.Id));
         }
 
-        return new List<ChatPersonOutDTO>();
+        return SetLastMessage(result);
     }
 
     private IEnumerable<ChatPersonOutDTO> SetLastMessage(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs)
@@ -106,7 +102,7 @@ public class MessengerService : IMessengerService
         return chatPersonOutDTOs;
     }
 
-    private static Expression<Func<User, ChatPersonOutDTO>> GetChatEndUserData(User currentUser, IEnumerable<PaymentInfo> paymentInfos)
+    private static Expression<Func<User, ChatPersonOutDTO>> GetChatEndUserData(User currentUser, IEnumerable<PaymentData> paymentInfos)
     {
         return user => new ChatPersonOutDTO()
         {
@@ -134,7 +130,7 @@ public class MessengerService : IMessengerService
         };
     }
 
-    private static Expression<Func<User, ChatPersonOutDTO>> GetChatDesignerData(User currentUser, IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos)
+    private static Expression<Func<User, ChatPersonOutDTO>> GetChatDesignerData(User currentUser, IEnumerable<PaymentData> receivedPaymentInfos)
     {
         return user => new ChatPersonOutDTO()
         {
@@ -173,34 +169,38 @@ public class MessengerService : IMessengerService
 
     #region Private methods
 
-    private async Task<IEnumerable<PaymentInfo>> GetPayerInfosForUser(User currentUser)
+    private async Task<IEnumerable<PaymentData>> GetPaymentDataForUser(Expression<Func<ConsultationPayment, PaymentData>> projection, Expression<Func<ConsultationPayment, bool>> filter)
     {
-        IEnumerable<PaymentInfo> consultationPayments = await _consultationPaymentRepository.Get(payment => new PaymentInfo { PayerId = payment.PayerId, ExpirationDate = payment.ExpirationDate }, 
-                                                                            payment => payment.ReceiverId == currentUser.Id);
+        IEnumerable<PaymentData> consultationPayments = await _consultationPaymentRepository.Get(projection, filter);
 
-        return consultationPayments.GroupBy(group => group.PayerId).Select(group => new PaymentInfo
+        return consultationPayments.GroupBy(group => group.ParticipantId).Select(group => new PaymentData
         {
-            PayerId = group.Key,
-            ExpirationDate = group.OrderByDescending(payment => payment.ExpirationDate)
-                                 .Select(payment => payment.ExpirationDate)
-                                 .FirstOrDefault() 
-        }
-        );
-    }
-
-    private async Task<IEnumerable<ReceivedPaymentInfo>> GetReceiverInfosForUser(User currentUser)
-    {
-        IEnumerable<ReceivedPaymentInfo> consultationPayments = await _consultationPaymentRepository.Get(payment => new ReceivedPaymentInfo { ReceiverId = payment.ReceiverId, ExpirationDate = payment.ExpirationDate },
-                                                                                                 filter: payment => payment.PayerId == currentUser.Id);
-
-        return consultationPayments.GroupBy(group => group.ReceiverId).Select(group => new ReceivedPaymentInfo
-        {
-            ReceiverId = group.Key,
+            ParticipantId = group.Key,
             ExpirationDate = group.OrderByDescending(payment => payment.ExpirationDate)
                                  .Select(payment => payment.ExpirationDate)
                                  .FirstOrDefault()
         }
         );
+    }
+
+    private Expression<Func<ConsultationPayment, PaymentData>> ProjectToPayerPaymentData()
+    {
+        return payment => new PaymentData { ParticipantId = payment.PayerId, ExpirationDate = payment.ExpirationDate };
+    }
+
+    private Expression<Func<ConsultationPayment, PaymentData>> ProjectToReceiverPaymentData()
+    {
+        return payment => new PaymentData { ParticipantId = payment.ReceiverId, ExpirationDate = payment.ExpirationDate };
+    }
+
+    private Expression<Func<ConsultationPayment, bool>> FilterByPayerId(int idToFind)
+    {
+        return payment => payment.PayerId == idToFind;
+    }
+
+    private Expression<Func<ConsultationPayment, bool>> FilterByReceiverId(int idToFind)
+    {
+        return payment => payment.ReceiverId == idToFind;
     }
 
     private PusherMessage CreatePusherMessage(ChatMessage chatMessage)
@@ -230,16 +230,9 @@ public class MessengerService : IMessengerService
     #endregion Private methods
 }
 
-public class PaymentInfo
+public class PaymentData
 {
-    public int PayerId { get; set; }
-
-    public DateTime ExpirationDate { get; set; }
-}
-
-public class ReceivedPaymentInfo
-{
-    public int ReceiverId { get; set; }
+    public int ParticipantId { get; set; }
 
     public DateTime ExpirationDate { get; set; }
 }
