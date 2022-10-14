@@ -5,6 +5,7 @@ using Intiri.API.Models;
 using Intiri.API.Models.ChatMessage;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Payment;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
 using Messenger;
@@ -20,6 +21,7 @@ public class MessengerService : IMessengerService
     private readonly IChatMessageRepository _chatMessageRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IConsultationPaymentRepository _consultationPaymentRepository;
     private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
 
@@ -30,6 +32,7 @@ public class MessengerService : IMessengerService
     {
         _messenger = messenger;
         _chatMessageRepository = unitOfWork.ChatMessageRepository;
+        _consultationPaymentRepository = unitOfWork.ConsultationPaymentRepository;
         _userRepository = unitOfWork.UserRepository;
         _unitOfWork = unitOfWork;
         _userManager = userManager;
@@ -59,31 +62,51 @@ public class MessengerService : IMessengerService
         //TODO not sure about roles. Also it should be optimized and commonized
         if (roleNames.Contains(RoleNames.InternalDesigner) || roleNames.Contains(RoleNames.ExternalDesigner))
         {
-            return await _userRepository.Get(GetChatPersonData(currentUser),
-            //user => (user.Roles.Any(role => role.Role.Name == RoleNames.FreeEndUser) ||
-            //        user.Roles.Any(role => role.Role.Name == RoleNames.PremiumEndUser)) &&
-            //        (user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ||
-            //        user.MessagesSent.Any(message => message.RecipientId == currentUser.Id))
-            user => (user.Roles.Any(role => role.Role.Name == RoleNames.FreeEndUser) ||
-                    user.Roles.Any(role => role.Role.Name == RoleNames.PremiumEndUser))
-            );
+            IEnumerable<PaymentInfo> paymentInfos = await GetPayerInfosForUser(currentUser);
+            IEnumerable<int> paymentIds = paymentInfos.Select(pi => pi.PayerId);
+
+            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatEndUserData(currentUser, paymentInfos),
+                                             user => paymentIds.Contains(user.Id));
+
+            return SetLastMessage(chatPersonOutDTOs);
         }
         else if ((roleNames.Contains(RoleNames.FreeEndUser) || roleNames.Contains(RoleNames.PremiumEndUser)))
         {
-            return await _userRepository.Get(GetChatPersonData(currentUser),
-            //user => (user.Roles.Any(role => role.Role.Name == RoleNames.InternalDesigner) ||
-            //        user.Roles.Any(role => role.Role.Name == RoleNames.ExternalDesigner)) &&
-            //        (user.MessagesReceived.Any(message => message.SenderId == currentUser.Id ||
-            //        user.MessagesSent.Any(message => message.RecipientId == currentUser.Id)))
-            user => (user.Roles.Any(role => role.Role.Name == RoleNames.InternalDesigner) ||
-                    user.Roles.Any(role => role.Role.Name == RoleNames.ExternalDesigner))
-            );
+            IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos = await GetReceiverInfosForUser(currentUser);
+            IEnumerable<int> paymentReceiverIds = receivedPaymentInfos.Select(pi => pi.ReceiverId);
+
+            IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _userRepository.Get(GetChatDesignerData(currentUser, receivedPaymentInfos),
+                                             user => paymentReceiverIds.Contains(user.Id));
+
+            return SetLastMessage(chatPersonOutDTOs);
         }
 
         return new List<ChatPersonOutDTO>();
     }
 
-    private static Expression<Func<User, ChatPersonOutDTO>> GetChatPersonData(User currentUser)
+    private IEnumerable<ChatPersonOutDTO> SetLastMessage(IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs)
+    {
+        foreach (var chatPersonOut in chatPersonOutDTOs)
+        {
+            DateTime lastSentDate = chatPersonOut.LastSentMessageDate;
+            DateTime lastRecievedDate = chatPersonOut.LastReceivedMessageDate;
+
+            if (lastSentDate > lastRecievedDate)
+            {
+                chatPersonOut.LastMessageDate = lastSentDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastSentMessageContent;
+            }
+            else
+            {
+                chatPersonOut.LastMessageDate = lastRecievedDate;
+                chatPersonOut.LastMessageContent = chatPersonOut.LastReceivedMessageContent;
+            }
+        }
+
+        return chatPersonOutDTOs;
+    }
+
+    private static Expression<Func<User, ChatPersonOutDTO>> GetChatEndUserData(User currentUser, IEnumerable<PaymentInfo> paymentInfos)
     {
         return user => new ChatPersonOutDTO()
         {
@@ -91,23 +114,49 @@ public class MessengerService : IMessengerService
             FirstName = user.FirstName,
             LastName = user.LastName,
             PhotoPath = user.PhotoPath,
-            LastMessageContent = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
-                                                                  .Select(message => message.Content)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.Content)
                                                                   .FirstOrDefault(),
-            LastMessageDate = user.MessagesReceived.Any(message => message.SenderId == currentUser.Id) ?
-                                                                  user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
-                                                                  .FirstOrDefault() :
-                                                                  user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
+                                                                  .FirstOrDefault(),
+            ChatPeriodExpired = false
+        };
+    }
+
+    private static Expression<Func<User, ChatPersonOutDTO>> GetChatDesignerData(User currentUser, IEnumerable<ReceivedPaymentInfo> receivedPaymentInfos)
+    {
+        return user => new ChatPersonOutDTO()
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PhotoPath = user.PhotoPath,
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.MessageSentDate)
+                                                                  .FirstOrDefault(),
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+                                                                  .OrderByDescending(message => message.MessageSentDate)
+                                                                  .Select(message => message.Content)
                                                                   .FirstOrDefault(),
             ChatPeriodExpired = false
         };
@@ -123,6 +172,36 @@ public class MessengerService : IMessengerService
     }
 
     #region Private methods
+
+    private async Task<IEnumerable<PaymentInfo>> GetPayerInfosForUser(User currentUser)
+    {
+        IEnumerable<PaymentInfo> consultationPayments = await _consultationPaymentRepository.Get(payment => new PaymentInfo { PayerId = payment.PayerId, ExpirationDate = payment.ExpirationDate }, 
+                                                                            payment => payment.ReceiverId == currentUser.Id);
+
+        return consultationPayments.GroupBy(group => group.PayerId).Select(group => new PaymentInfo
+        {
+            PayerId = group.Key,
+            ExpirationDate = group.OrderByDescending(payment => payment.ExpirationDate)
+                                 .Select(payment => payment.ExpirationDate)
+                                 .FirstOrDefault() 
+        }
+        );
+    }
+
+    private async Task<IEnumerable<ReceivedPaymentInfo>> GetReceiverInfosForUser(User currentUser)
+    {
+        IEnumerable<ReceivedPaymentInfo> consultationPayments = await _consultationPaymentRepository.Get(payment => new ReceivedPaymentInfo { ReceiverId = payment.ReceiverId, ExpirationDate = payment.ExpirationDate },
+                                                                                                 filter: payment => payment.PayerId == currentUser.Id);
+
+        return consultationPayments.GroupBy(group => group.ReceiverId).Select(group => new ReceivedPaymentInfo
+        {
+            ReceiverId = group.Key,
+            ExpirationDate = group.OrderByDescending(payment => payment.ExpirationDate)
+                                 .Select(payment => payment.ExpirationDate)
+                                 .FirstOrDefault()
+        }
+        );
+    }
 
     private PusherMessage CreatePusherMessage(ChatMessage chatMessage)
     {
@@ -149,4 +228,18 @@ public class MessengerService : IMessengerService
     }
 
     #endregion Private methods
+}
+
+public class PaymentInfo
+{
+    public int PayerId { get; set; }
+
+    public DateTime ExpirationDate { get; set; }
+}
+
+public class ReceivedPaymentInfo
+{
+    public int ReceiverId { get; set; }
+
+    public DateTime ExpirationDate { get; set; }
 }
