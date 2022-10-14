@@ -41,6 +41,11 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Partners.ToListAsync();
 		}
 
+		public async Task<int> GetPartnersCountAsync()
+		{
+			return await _context.Partners.CountAsync();
+		}
+
 		#endregion Constructors
 	}
 }
