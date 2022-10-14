@@ -44,9 +44,9 @@
                 <div *ngFor="let msg of messages" [class]="getChatClassName(msg)">{{msg.content ? msg.content : msg.Content}}</div>
               </div>
               <div class="chat-input">
-                <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                <ion-input type="text" (keyup.enter)="!activeChatUser.chatPeriodExpired && sendMsg()" [disabled]="activeChatUser.chatPeriodExpired" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                 <ion-icon class="img-btn disabled" name="image"></ion-icon>
-                <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
+                <div class="send-btn-wrapper" [ngClass]="{'disabled': activeChatUser.chatPeriodExpired}" (click)="!activeChatUser.chatPeriodExpired && sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
               </div>
             </div>
         </ion-col>
