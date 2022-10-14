@@ -16,6 +16,12 @@ namespace Intiri.API.DataAccess.Repository
 
 		#region Generic methods
 
+		public async Task<int> GetUsersCountAsync<TEntity>() where TEntity : class
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<TEntity>().CountAsync();
+		}
+
 		public async Task<IEnumerable<TEntity>> GetUsersAsync<TEntity>() where TEntity : class
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
