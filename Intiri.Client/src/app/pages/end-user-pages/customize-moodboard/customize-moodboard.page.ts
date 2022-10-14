@@ -88,7 +88,7 @@ export class CustomizeMoodboardPage {
   }
 
   validateData(): boolean {
-    return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0 && this.moodboard.products.length > 0
+    return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 3 && this.moodboard.products.length > 1;
   }
 
   toggleItem(item) {
