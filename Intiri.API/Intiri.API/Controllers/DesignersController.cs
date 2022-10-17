@@ -62,7 +62,7 @@ namespace Intiri.API.Controllers
 				return BadRequest("Designer user not found.");
 			}
 
-			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsWithImagesByIds(dUser.CreatedMoodboards.Select(m => m.Id).ToArray());
+			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(dUser.CreatedMoodboards.Select(m => m.Id).ToArray());
 			dUser.CreatedMoodboards = moodboards.ToArray();
 
 			DesignerOutDTO userToReturn = _mapper.Map<DesignerOutDTO>(dUser);

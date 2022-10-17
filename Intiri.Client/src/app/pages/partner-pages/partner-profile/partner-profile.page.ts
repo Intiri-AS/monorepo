@@ -42,7 +42,7 @@ export class PartnerProfilePage implements OnInit {
       this.spinner.hide();
       this.userInfo = res;
       if (!res.photoPath) {
-        this.userInfo.photoPath = '../../../assets/images/landing-img.png'
+        this.userInfo.photoPath = '../../../assets/images/profile-img.png'
       }
     })
   }

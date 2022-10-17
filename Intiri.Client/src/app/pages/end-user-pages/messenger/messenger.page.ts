@@ -43,17 +43,18 @@ export class MessengerPage implements OnInit {
       this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
         this.loggedUser = user;
       });
-
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      let contactId = parseInt(urlParams.get('contact'), 10);
-      if(!contactId) {
-        contactId = this.contacts[0].id;
-        this.activeChatUser = this.contacts[0];
-      } else {
-        this.activeChatUser = this.contacts.find(u => u.id === contactId);
+      if(this.contacts.length > 0) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        let contactId = parseInt(urlParams.get('contact'), 10);
+        if(!contactId) {
+          contactId = this.contacts[0].id;
+          this.activeChatUser = this.contacts[0];
+        } else {
+          this.activeChatUser = this.contacts.find(u => u.id === contactId);
+        }
+        this.connectToChannel(contactId);
       }
-      this.connectToChannel(contactId);
     });
   }
 

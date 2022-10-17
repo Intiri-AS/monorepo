@@ -57,9 +57,6 @@ import { ClientRequestPage } from './pages/designer-pages/client-request/client-
 import { PartnerProductsPage } from './pages/partner-pages/partner-products/partner-products.page';
 import { PartnerProfilePage } from './pages/partner-pages/partner-profile/partner-profile.page';
 
-//shared admin/designer pages
-import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
-
 //app components
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
@@ -134,7 +131,7 @@ export function createTranslateLoader(http: HttpClient) {
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
-    StylePage, MoodboardPage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
+    StylePage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent, HeaderPartnerComponent,
     NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,

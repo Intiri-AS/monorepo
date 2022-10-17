@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,6 +9,13 @@ import { Component } from '@angular/core';
 
 export class DashboardPage {
 
-  constructor() {}
+  totalCountData = {totalMoodboards: null, totalPartners: null, totalClients: null, totalDesigners: null};
 
+  constructor(private commonService: CommonService) {}
+
+  ngOnInit(){
+    this.commonService.getDashboardData().subscribe((res:any) => {
+      this.totalCountData = res;
+    })
+  }
 }

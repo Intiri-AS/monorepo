@@ -27,11 +27,11 @@ export class MoodboardsPage implements OnInit {
     });
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, mb) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {moodboard: true},
+      componentProps: {moodboard: true, item: mb},
       dismissOnSelect: true
     });
 
