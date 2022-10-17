@@ -2,7 +2,6 @@
 
 namespace Intiri.API.Models.ChatMessage;
 
-//TODO: Are content and SentDate mandatory in db level? Maybe message later can contain only some attachments without content?
 [Index(nameof(SenderId), nameof(RecipientId))]
 public class ChatMessage
 {
@@ -25,4 +24,6 @@ public class ChatMessage
     public bool SenderDeleted { get; set; }
 
     public bool RecipientDeleted { get; set; }
+
+    public ICollection<ChatMessageAttachment> Attachments { get; set; }
 }
