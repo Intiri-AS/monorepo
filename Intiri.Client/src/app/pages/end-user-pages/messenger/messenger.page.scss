@@ -3,21 +3,50 @@
 }
 
 .chat-input {
-    @apply flex h-[102px] items-center;
+    @apply flex min-h-[102px] items-center;
 }
 
 .chat-bubble {
-  @apply clear-both  p-[15px] text-left my-[5px] max-w-[400px];
+  @apply clear-both p-[15px] text-left my-[5px] max-w-[400px];
 }
 
+.l-side {
+  @apply ml-[55px] bg-white;
+}
+
+.r-side {
+  @apply float-right mr-[27px] bg-secondary;
+}
 .chat-left {
   @extend .chat-bubble;
-  @apply bg-white ml-[55px] rounded-b-lg rounded-tr-lg;
+  @extend .l-side;
+  @apply rounded-b-lg rounded-tr-lg;
 }
 
 .chat-right {
   @extend .chat-bubble;
-  @apply float-right bg-secondary mr-[27px] rounded-b-lg rounded-tl-lg;
+  @extend .r-side;
+  @apply rounded-b-lg rounded-tl-lg;
+}
+
+.download-img {
+  display: none;
+}
+
+.chat-image {
+  @extend .chat-bubble;
+  @apply w-[150px] h-[110px] lg:w-[250px] lg:h-[180px] rounded-lg bg-cover p-0 relative;
+}
+
+.chat-image:hover {
+  .download-img {
+    display: block;
+  }
+}
+
+.chat-file {
+  @extend .chat-bubble;
+  @apply w-[170px] h-[50px] rounded-lg p-0 cursor-pointer hover:opacity-70 relative;
 }
 
 .chat::-webkit-scrollbar {

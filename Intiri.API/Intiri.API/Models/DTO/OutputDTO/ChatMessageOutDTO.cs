@@ -13,4 +13,6 @@ public class ChatMessageOutDTO
     public DateTime? DateRead { get; set; }
 
     public DateTime MessageSentDate { get; set; }
+
+    public IEnumerable<ChatMessageAttachmentOutDTO> Attachments { get; set; }
 }

@@ -5,6 +5,8 @@ import { AccountService } from 'src/app/services/account.service';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-messenger',
@@ -16,15 +18,19 @@ export class MessengerPage implements OnInit {
   username = 'vladk2';
   messages = [];
   message = '';
+  attachments;
+  attachmentPaths;
+  searchText: any;
   pusher: Pusher;
-
+  isLoading: boolean = false;
+  err: string = '';
   loggedUser;
   contacts: any[];
   activeChatUser = {photoPath: '', id: null, firstName: '', lastName: '', chatPeriodExpired: true};
   currentChannel: string;
 
   constructor(private msgService: MessengerService, private accountService: AccountService, public datepipe: DatePipe, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     //Pusher.logToConsole = true; // remove after testing
@@ -49,7 +55,16 @@ export class MessengerPage implements OnInit {
       }
       this.connectToChannel(contactId);
     });
+  }
 
+  onFileChange(event) {
+    if(event.target.files[0]) {
+      this.attachments = event.target.files;
+      this.attachmentPaths = (Array.from(this.attachments)).map((e:any) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e)));
+    } else {
+      this.attachments = null;
+      this.attachmentPaths = null;
+    }
   }
 
   connectToChannel(contactId) {
@@ -80,12 +95,29 @@ export class MessengerPage implements OnInit {
   }
 
   sendMsg(): void {
-    if(this.message) {
-      const req = { recipientId: this.activeChatUser.id, content: this.message}
+    if(this.message || this.attachments && !this.isLoading) {
+      this.attachments && this.spinner.show();
+      this.isLoading = true;
+      const req = { recipientId: this.activeChatUser.id, content: this.message, attachments: this.attachments}
       this.msgService.sendMessage(req).subscribe(res => {
+        this.spinner.hide();
+        this.isLoading = false;
+        this.attachments = null;
         this.message = '';
-      });
+      }, err => { this.spinner.hide(); this.attachments = null; this.err = 'Error: Cannot upload file(s).' });
     }
+  }
+
+  downloadFile(file){
+    const sourceSplit = file.url.split('/upload/');
+    const source = sourceSplit[0] + '/upload/fl_attachment/' + sourceSplit[1];
+    const fileName = source.split('/').pop();
+    const el = document.createElement("a");
+    el.setAttribute("href", source);
+    el.setAttribute("download", fileName);
+    document.body.appendChild(el);
+    el.click();
+    el.remove();
   }
 
   parseDate(dateString) {
@@ -93,11 +125,10 @@ export class MessengerPage implements OnInit {
     return this.datepipe.transform(date, 'MMM d');
   }
 
-  getChatClassName(msg) {
+  getChatClassName(msg, rightClass, leftClass) {
     const senderId = msg.senderId ? msg.senderId : msg.SenderId;
-    return senderId === this.loggedUser.id ? 'chat-right' : 'chat-left';
+    return senderId === this.loggedUser.id ? rightClass : leftClass;
   }
-
 
   unsubscribeFromChannel(channelName) {
     this.pusher.unsubscribe(channelName);

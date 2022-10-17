@@ -12,6 +12,7 @@ using NLog;
 using NLog.Web;
 using System.Text.Json.Serialization;
 using Stripe;
+using Intiri.API.Models.CommonNames;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Info("Init Main");
@@ -48,6 +49,7 @@ try
 	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
 	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
 	IAccountService accountService = _serviceProvider.GetRequiredService<IAccountService>();
+	IFileUploadService fileUploadService = _serviceProvider.GetRequiredService<IFileUploadService>();
 
 	logger.Info("Migrate db..");
 	//add migrations
@@ -77,6 +79,19 @@ try
 	app.UseHttpsRedirection();
 	app.UseRouting();
 
+	//create folder where chat message attachments will be stored (at the moment of implementation it is cloudinary) - catch exception immediatelly to avoid killing process because of this
+	try
+    {
+		if (!await fileUploadService.DoesFolderExist(ChatMessageNames.AttachmentsFolderName))
+		{
+			await fileUploadService.TryCreateFolder(ChatMessageNames.AttachmentsFolderName);
+		}
+	}
+	catch (Exception)
+    {
+		//TODO: log problem
+    }
+
 	await SeedData.SeedTestData(accountService, unitOfWork, userManager, roleManager);
 
 	app.UseAuthentication();
@@ -85,6 +100,7 @@ try
 	app.UseDefaultFiles();
 	app.UseStaticFiles();
 
+	//TODO-SECURITY: Move this to configuration
     StripeConfiguration.ApiKey = "sk_test_51LrTfeKX8zAv4zjwEPlN604oFYBaKnJOBeZhoR2kdPyIhTnpaRjsGqTyg1VLx6Ao1TNUSh1VmsBY6SKFTF5YT3Hp00w2JYZGG8";
 
     app.UseEndpoints(endpoints =>

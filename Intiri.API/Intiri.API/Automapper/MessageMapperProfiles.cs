@@ -9,5 +9,6 @@ public class MessageMapperProfiles : Profile
 	public MessageMapperProfiles()
 	{
 		CreateMap<ChatMessage, ChatMessageOutDTO>();
+		CreateMap<ChatMessageAttachment, ChatMessageAttachmentOutDTO>();
 	}
 }
