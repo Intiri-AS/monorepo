@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models.Payment;
+using Intiri.API.Models.UserLanguage;
 
 namespace Intiri.API.Models
 {
@@ -15,8 +16,7 @@ namespace Intiri.API.Models
 
 		#region Properties
 
-		public float HourlyRate { get; set; }
-		public Style.Style Style { get; set; }
+		public string Language { get; set; }
 		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
 		public ICollection<ConsultationPayment> ConsultationPaymentsReceived { get; set; }
 

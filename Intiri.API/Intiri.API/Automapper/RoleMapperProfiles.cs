@@ -9,7 +9,12 @@ namespace Intiri.API.Automapper
 	{
 		public RoleMapperProfiles()
 		{
-			CreateMap<Role, RoleDTO>();
+			CreateMap<UserRole, RoleDTO>()
+				.ForMember(dest => dest.Name,
+						   opt => opt.MapFrom(src => src.Role.Name))
+				.ForMember(dest => dest.Id,
+						   opt => opt.MapFrom(src => src.RoleId));
+
 			CreateMap<Role, RoleWithPermissonsDTO>();
 			CreateMap<RoleInDTO, Role>()
 				.ForMember(dest => dest.Name,
