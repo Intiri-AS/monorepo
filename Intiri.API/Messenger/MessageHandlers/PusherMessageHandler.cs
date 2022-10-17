@@ -25,7 +25,7 @@ public class PusherMessageHandler : IMessageHandler
 
         var pusher = new Pusher(
           "1488805",
-          "0233be6c2ef5fb26cc7d", // TODO: keep this keys, secrets in env file
+          "0233be6c2ef5fb26cc7d", // //TODO-SECURITY: Move this to configuration
           "bab67a1d5e732b7ccfec",
           options);
 
