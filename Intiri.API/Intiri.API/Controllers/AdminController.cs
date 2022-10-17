@@ -5,6 +5,7 @@ using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.Material;
@@ -37,6 +38,19 @@ namespace Intiri.API.Controllers
 		}
 
 		#endregion Constructors
+
+		[HttpGet("totalCount")]
+		public async Task<ActionResult<DashboardTotalOutDTO>> GetDashboardTotalCount()
+		{
+			DashboardTotalOutDTO dashboardTotalDTO = new DashboardTotalOutDTO();
+
+			dashboardTotalDTO.TotalClients = await _unitOfWork.UserRepository.GetUsersCountAsync<EndUser>();
+			dashboardTotalDTO.TotalDesigners = await _unitOfWork.UserRepository.GetUsersCountAsync<Designer>();
+			dashboardTotalDTO.TotalPartners = await _unitOfWork.PartnerRepository.GetPartnersCountAsync();
+			dashboardTotalDTO.TotalMoodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsCountAsync();
+
+			return Ok(dashboardTotalDTO);
+		}
 
 		[HttpPost("createPartner")]
 		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
@@ -166,6 +180,5 @@ namespace Intiri.API.Controllers
 
 			return Ok(usersToReturn);
 		}
-
 	}
 }
