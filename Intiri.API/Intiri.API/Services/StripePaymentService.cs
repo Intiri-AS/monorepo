@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess;
+using Intiri.API.DataAccess.Repository.Interface;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.Payment;
 using Intiri.API.Services.Interfaces;
@@ -13,6 +15,8 @@ namespace Intiri.API.Services;
 public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, HttpRequest>
 {
     private readonly IOptions<Configuration.StripeConfiguration> _options;
+    private readonly IMessengerService _messengerService;
+    private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
@@ -21,10 +25,13 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
     const string PaymentStatus = "paid";
 
     public StripePaymentService(IOptions<Configuration.StripeConfiguration> options,
+                                IMessengerService messengerService,
                                 IUnitOfWork unitOfWork,
                                 IMapper mapper)
     {
         _options = options;
+        _messengerService = messengerService;
+        _userRepository = unitOfWork.UserRepository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
@@ -69,10 +76,12 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
             if (stripeEvent.Type == Events.CheckoutSessionCompleted && session.PaymentStatus == PaymentStatus)
             {
                 await SavePayment(paymentDTO);
+                await SendMessageAsPaymentConfirmation(paymentDTO);
             }
             else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
             {
                 await SavePayment(paymentDTO);
+                await SendMessageAsPaymentConfirmation(paymentDTO);
             }
             else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed)
             {
@@ -96,6 +105,28 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
 
         _unitOfWork.ConsultationPaymentRepository.Insert(payment);
         await _unitOfWork.SaveChanges();
+    }
+
+    private async Task SendMessageAsPaymentConfirmation(StripePaymentDTO paymentDTO)
+    {
+        User payer = await _userRepository.GetByID(paymentDTO.PayerId);
+        User receiver = await _userRepository.GetByID(paymentDTO.ReceiverId);
+
+        if (payer == null || receiver == null)
+        {
+            throw new ArgumentNullException("Payer or payment receiver are null.");
+        }
+
+        string consultation = paymentDTO.NumberOfConsultations == 1 ? "consultation" : "consultations";
+
+        ChatMessageInDTO message = new ChatMessageInDTO()
+        {
+            RecipientId = payer.Id,
+            Content = $"Hi {payer.FirstName}. I received your payment ({paymentDTO.Amount / 100} NOK) for {paymentDTO.NumberOfConsultations} {consultation}. " +
+            $"We can use this chat to communicate, but also we can use phone numbers (your phone number +{payer.CountryCode}  {payer.PhoneNumber} and my phone number +{receiver.CountryCode}  {receiver.PhoneNumber})"
+        };
+
+        await _messengerService.SendMessage(message, receiver.Id, DateTime.UtcNow);
     }
 
     private static SessionCreateOptions CreateSessionOptions(StripePaymentDTO paymentDTO, string domain, Dictionary<string, string> metadata)
