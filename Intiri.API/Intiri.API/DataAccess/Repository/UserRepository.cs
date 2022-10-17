@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO.OutputDTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
@@ -59,13 +61,17 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Users.OfType<Designer>()
 				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
 				.ToListAsync();
 		}
 
 		public async Task<Designer> GetDesignerUserByIdAsync(int id)
 		{
 			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
-			return await _context.Users.OfType<Designer>().SingleOrDefaultAsync(eu => eu.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 
 		public async Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync()
