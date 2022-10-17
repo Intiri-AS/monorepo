@@ -83,7 +83,7 @@ export class BookDesignerModalComponent {
         amount: this.totalPrice * 100,//required
         receiverId: this.designer.id, //required
         locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
-        successUrlPath: 'messenger?contact=2',//required
+        successUrlPath: `messenger?contact=${this.designer.id}`,//required
         cancelUrlPath: '',//optional, if not specified path is ''
         moodboardId: this.moodboard?.id, //optional
         numberOfConsultations: this.numberOfConsultations //required
