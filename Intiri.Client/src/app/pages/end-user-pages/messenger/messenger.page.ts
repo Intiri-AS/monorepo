@@ -5,6 +5,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { take } from 'rxjs/operators';
 import { DatePipe } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-messenger',
@@ -16,6 +17,8 @@ export class MessengerPage implements OnInit {
   username = 'vladk2';
   messages = [];
   message = '';
+  attachments;
+  attachmentPaths;
   pusher: Pusher;
 
   loggedUser;
@@ -24,7 +27,7 @@ export class MessengerPage implements OnInit {
   currentChannel: string;
 
   constructor(private msgService: MessengerService, private accountService: AccountService, public datepipe: DatePipe, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     //Pusher.logToConsole = true; // remove after testing
@@ -49,7 +52,17 @@ export class MessengerPage implements OnInit {
       }
       this.connectToChannel(contactId);
     });
+  }
 
+  onFileChange(event) {
+    if(event.target.files[0]) {
+      console.log(event.target.files)
+      this.attachments = event.target.files;
+      this.attachmentPaths = (Array.from(this.attachments)).map((e:any) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e)));
+    } else {
+      this.attachments = null;
+      this.attachmentPaths = null;
+    }
   }
 
   connectToChannel(contactId) {
