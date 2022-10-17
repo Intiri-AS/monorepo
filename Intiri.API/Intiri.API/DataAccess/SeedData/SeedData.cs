@@ -9,6 +9,7 @@ using Intiri.API.Models.Project;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
+using Intiri.API.Models.UserLanguage;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -72,8 +73,8 @@ namespace Intiri.API.DataAccess.SeedData
 			}
 
 			User u1 = new User() { FirstName = "Dina", LastName = "Admin", CountryCode = "47", PhoneNumber = "1231231", UserName = "471231231" };
-			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231232", UserName = "471231232", HourlyRate = 700f };
-			Designer u3 = new Designer() { FirstName = "Drina", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231233", UserName = "471231233", HourlyRate = 650f };
+			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231232", UserName = "471231232", Language = Language.Norway };
+			Designer u3 = new Designer() { FirstName = "Drina", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231233", UserName = "471231233", Language = Language.NorwayEnglish };
 			EndUser u4 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231234", UserName = "471231234" };
 			EndUser u5 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231235", UserName = "471231235" };
 			PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };
