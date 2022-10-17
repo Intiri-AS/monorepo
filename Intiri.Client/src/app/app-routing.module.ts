@@ -18,7 +18,6 @@ import { LandingPage } from './pages/landing/landing.page';
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { RegisterPage } from './pages/register/register.page';
-import { MoodboardPage } from './pages/shared-guarded-pages/moodboard/moodboard.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './pages/reset-password/reset.password.page';
 import { SmsVerificationPage } from './pages/sms-verification/sms-verification.page';
@@ -46,6 +45,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { DesignerGuard } from './guards/designer.guard';
 import { SharedGuard } from './guards/shared.guard';
 import { PartnerGuard } from './guards/partner.guard';
+import { DesignerService } from './services/designer.service';
 
 
 const routes: Routes = [
@@ -97,7 +97,8 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'designer-profile', //TODO Set up page guard (end-user guard)
+    path: 'designer-profile/:id', //TODO Set up page guard (end-user guard)
+    resolve: {designer: DesignerService},
     component: DesignerProfilePage,
     canActivate: [EnduserGuard]
   },
@@ -232,10 +233,6 @@ const routes: Routes = [
   {
     path: 'style-list', //TODO Set up page guard (internal designer guard)
     component: StyleListPage
-  },
-  {
-    path: 'moodboard', //TODO Set up page guard (shared guard)
-    component: MoodboardPage
   },
   {
     path: 'partner', //TODO Set up page guard (shared guard)

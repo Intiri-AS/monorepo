@@ -11,14 +11,34 @@ import { DesignerService } from 'src/app/services/designer.service';
 
 export class BookDesignerPage {
 
+  languages = this.designerService.languages;
+
   designers = [];
 
   constructor(private designerService: DesignerService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.designerService.getDesigners().subscribe((res: any[]) => {
+    this.designerService.getContactDesigners().subscribe((res: any[]) => {
       this.designers = res;
     });
+  }
+
+  getDesignerType(d) {
+    const role = d.roles[0].name;
+    if(role === 'InternalDesigner') {
+      return 'Intiri Designer'
+    } else if(role === 'ExternalDesigner') {
+      return 'External Designer'
+    }
+    return role;
+  }
+
+  getMoodboardImage(d, index = null) {
+    const style = d.createdMoodboards[0].style;
+    if(index >= 0) {
+      return style?.styleImages[index]?.imagePath;
+    }
+    return style?.imagePath;
   }
 
   async paymentModal(designer) {
