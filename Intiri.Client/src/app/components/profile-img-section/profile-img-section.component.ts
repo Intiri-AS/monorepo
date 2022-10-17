@@ -37,7 +37,6 @@ export class ProfileImgSectionComponent implements OnInit {
       formData.append('photoPath', event.target.files[0]);
       this.http.post(this.apiUrl + 'users/addPhoto', formData).subscribe((res: any) => {
         this.spinner.hide();
-        console.log(res)
         if (res.photoPath) {
           this.image = res.photoPath
           this.accountService.currentUser$.pipe(take(1)).subscribe(user => {

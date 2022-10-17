@@ -14,10 +14,10 @@
             <div class=" xl-ion:h-[720px] pb-8">
               <div class="mb-2">
                 <span class="text-sm text-black-2">Search</span>
-                <ion-input type="text" class="border rounded-2xl border-black-2 h-[52px]"></ion-input>
+                <ion-input [(ngModel)]="searchText" type="text" class="border rounded-2xl border-black-2 h-[52px]"></ion-input>
               </div>
               <ul>
-                <li *ngFor="let user of contacts">
+                <li *ngFor="let user of contacts | filter:searchText">
                   <div [class.bg-light]="activeChatUser.id === user.id" class="py-3 mb-1 px-2 rounded-md hover:bg-light flex justify-between cursor-pointer" (click)="changeChat(user)">
                     <div class="flex" >
                       <img [src]="user.photoPath ? user.photoPath : '../../../assets/images/profile-img.png'" class="w-[57px] h-[57px] rounded-lg object-cover" alt="Profile Img"/>
@@ -41,32 +41,47 @@
                 <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">{{activeChatUser.firstName}} {{activeChatUser.lastName}}</p>
               </div>
               <div class="chat" id="chatbox">
-                <!-- <div class="chat-right">Some text message</div>
+                <ng-container *ngFor="let msg of messages">
+                  <div *ngIf="msg.content || msg.Content" [class]="getChatClassName(msg, 'chat-right', 'chat-left')">{{msg.content ? msg.content : msg.Content}}</div>
+                  <ng-container *ngFor="let file of msg.attachments">
+                    <div *ngIf="!file.fileFormat.startsWith('image')" class="chat-file" [class]="getChatClassName(msg, 'r-side', 'l-side')"  (click)="downloadFile(file)">
+                      <ion-icon class="text-4xl mt-2 pl-2 text-primary" name="document"></ion-icon>
+                      <span class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]" [title]="'Download '+file.url.split('/').pop()">{{file.url.split('/').pop()}}</span>
+                    </div>
+                    <div *ngIf="file.fileFormat.startsWith('image')" [ngStyle]="{background: 'url(' + file.url + ')'}"  [class]="getChatClassName(msg, 'r-side', 'l-side')" class="chat-image !bg-cover">
+                      <div [ngStyle]="{background: 'url(' + file.url + ')'}" class="w-full h-full !bg-cover blur-sm rounded-lg download-img"></div>
+                      <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img" style="transform: translate(-50%, -50%)">
+                        <div (click)="downloadFile(file)" class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"> <ion-icon name="download" class="text-4xl text-primary"></ion-icon> </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngFor="let file of msg.MessageAttachments">
+                    <div *ngIf="!file.FileFormat.startsWith('image')" class="chat-file" [class]="getChatClassName(msg, 'r-side', 'l-side')"   (click)="downloadFile(file)">
+                      <ion-icon class="text-4xl mt-2 pl-2 text-primary" name="document"></ion-icon>
+                      <span class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]" [title]="'Download '+file.Url.split('/').pop()">{{file.Url.split('/').pop()}}</span>
+                    </div>
+                    <div *ngIf="file.FileFormat.startsWith('image')" [ngStyle]="{background: 'url(' + file.Url + ')'}"  [class]="getChatClassName(msg, 'r-side', 'l-side')" class="chat-image !bg-cover">
+                      <div [ngStyle]="{background: 'url(' + file.Url + ')'}" class="w-full h-full !bg-cover blur-sm rounded-lg download-img"></div>
+                      <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img" style="transform: translate(-50%, -50%)">
+                        <div (click)="downloadFile(file)" class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"> <ion-icon name="download" class="text-4xl text-primary"></ion-icon> </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
 
-                <div class="chat-file r-side">
-                  <ion-icon class="text-4xl mt-2 pl-2 text-primary" name="document"></ion-icon>
-                  <span class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]" title="Filename.pdf">Filename.pdf</span>
-                </div>
-
-                <div [ngStyle]="{background: 'url(' + (activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png') + ')'}" class="chat-image r-side !bg-cover">
-                  <div [ngStyle]="{background: 'url(' + (activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png') + ')'}" class="w-full h-full !bg-cover blur-sm rounded-lg download-img"></div>
-                  <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img" style="transform: translate(-50%, -50%)">
-                    <div class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"> <ion-icon name="download" class="text-4xl text-primary"></ion-icon> </div>
-                  </div>
-                </div> -->
-
-                <div *ngFor="let msg of messages" [class]="getChatClassName(msg)">{{msg.content ? msg.content : msg.Content}}</div>
               </div>
-              <div class="chat-input">
-                <div *ngIf="!activeChatUser.chatPeriodExpired">
+              <div class="chat-input relative">
+                <ngx-spinner [fullScreen]="false" size="medium" bdColor="rgba(51,51,51,0.1)" color="#9B7E60" type="ball-spin-clockwise"></ngx-spinner>
+                <ng-container *ngIf="!activeChatUser.chatPeriodExpired">
                   <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                   <label for="dropzone-file">
                     <div *ngIf="attachments" class="text-primary cursor-pointer relative bottom-[10px] inline-block">{{attachments.length}} file(s) selected</div>
+                    <div *ngIf="err" class="text-[#a30505] cursor-pointer relative bottom-[10px] inline-block">Error: Cannot upload file(s).</div>
                     <ion-icon class="img-btn" name="attach-outline"></ion-icon>
                     <input (change)="onFileChange($event)" id="dropzone-file" multiple type="file" class="hidden" />
                   </label>
                   <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
-                </div>
+                </ng-container>
                 <div *ngIf="activeChatUser.chatPeriodExpired" class="text-primary mx-auto cursor-default">
                   Your chat session with {{activeChatUser.firstName}} has expired.
                 </div>
