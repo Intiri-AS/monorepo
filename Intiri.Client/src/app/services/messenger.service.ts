@@ -14,7 +14,10 @@ export class MessengerService {
 
 
   sendMessage(messageData) {
-    return this.http.post(`${this.apiUrl}messenger`, messageData);
+    let formData = new FormData();
+    formData.append('RecipientId', messageData.recipientId);
+    formData.append('Content', messageData.content);
+    return this.http.post(`${this.apiUrl}messenger`, formData);
   }
 
   getContacts() {

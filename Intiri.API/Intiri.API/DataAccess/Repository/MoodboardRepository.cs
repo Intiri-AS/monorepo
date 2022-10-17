@@ -27,6 +27,11 @@ namespace Intiri.API.DataAccess.Repository
 
 		#region Public methods
 
+		public async Task<int> GetMoodboardsCountAsync()
+		{
+			return await _context.Moodboards.Where(m => m.EndUser == null).CountAsync();
+		}
+
 		public async Task<IEnumerable<Moodboard>> GetMoodboards()
 		{
 			return await _context.Moodboards
@@ -36,6 +41,15 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(m => m.Products)
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
+				.Include(m => m.Style)
+					.ThenInclude(s => s.StyleImages)
+				.ToListAsync();
+		}
+
+		public async Task<IEnumerable<Moodboard>> GetMoodboardsWithImagesByIds(ICollection<int> ids)
+		{
+			return await _context.Moodboards
+				.Where(m => ids.Contains(m.Id))
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)
 				.ToListAsync();

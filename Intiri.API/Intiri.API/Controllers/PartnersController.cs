@@ -41,112 +41,111 @@ namespace Intiri.API.Controllers
 		#endregion Constructors
 
 
-		[HttpGet("products")]
-		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetAllPartnerProducts()
-		{ 
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
+		{
+			IEnumerable<Partner> partners = await _unitOfWork.PartnerRepository.GetPartnersAsync();
+			IEnumerable<PartnerOutDTO> usersToReturn = _mapper.Map<IEnumerable<PartnerOutDTO>>(partners);
 
-			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(partner.Products);
-
-			return Ok(productsOut);
+			return Ok(usersToReturn);
 		}
 
-		[HttpPost("add")]
-		public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct([FromForm] ProductInDTO productInDTO)
+		[HttpGet("partner/{partnerId}")]
+		public async Task<ActionResult<IEnumerable<PartnerContactOutDTO>>> GetPartnerWithContactsAndProducts(int partnerId)
 		{
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
-
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllAsync(partnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
-			ProductType productType = await _unitOfWork.ProductTypeRepository
-				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
+			PartnerAllOutDTO partnerOut = _mapper.Map<PartnerAllOutDTO>(partner);
 
-			if (productType == null) return BadRequest("Product type doesn't exist");
+			return Ok(partnerOut);
+		}
 
-			if (productType.Products.Any(p => p.Name == productInDTO.Name))
-			{
-				return BadRequest(
-					$"Product name: '{productInDTO.Name}' already exists" +
-					$" for product type: {productInDTO.ProductTypeId}");
-			}
+		[HttpGet("allPartnersContacts")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
+		{
+			IEnumerable<PartnerContact> pUsers = await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(pUsers);
 
-			IFormFile file = productInDTO.ImageFile;
+			return Ok(usersToReturn);
+		}
 
-			if (file.Length > 0)
+		[HttpPost("createPartner")]
+		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
+		{
+			Partner partner = _mapper.Map<Partner>(partnerInDTO);
+
+			IFormFile file = partnerInDTO.LogoFile;
+
+			if (file != null && file.Length > 0)
 			{
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(
-							file, FileUploadDestinations.ProductImages);
+					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
 				}
 				catch (Exception)
 				{
-					return BadRequest("Failed to upload product image.");
+					return BadRequest("Failed to upload partner logo.");
 				}
 
-				if (uploadResult.Error != null) return BadRequest("Failed to upload product image.");
-
-				Product product = _mapper.Map<Product>(productInDTO);
-
-				product.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
-				product.ImagePublicId = uploadResult.PublicId;
-				product.ProductType = productType;
-
-				product.Material = await _unitOfWork.MaterialRepository.GetByID(productInDTO.MaterialId);
-				product.Partner = partner;
-
-				_unitOfWork.ProductRepository.Insert(product);
-
-				if (await _unitOfWork.SaveChanges())
+				if (uploadResult.Error != null)
 				{
-					productType.Products.Add(product);
-					partner.Products.Add(product);
+					return BadRequest("Failed to upload material image.");
+				}
 
-					return Ok(_mapper.Map<ProductOutDTO>(product));
+				partner.LogoPath = uploadResult.SecureUri.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.PublicId;
+			}
+
+			_unitOfWork.PartnerRepository.Insert(partner);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return _mapper.Map<PartnerOutDTO>(partner);
+			}
+
+			return BadRequest("Problem occured while adding partner");
+		}
+
+		[HttpDelete("delete/{partnerId}")]
+		public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
+		{
+			Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
+
+			if (partner == null)
+			{
+				return BadRequest("Partner doesn' exist.");
+			}
+
+			DeletionResult deletionResult = null;
+			if (partner.LogoPath != null)
+			{
+				try
+				{
+					deletionResult = await _fileUploadService.DeleteFileAsync(partner.LogoPublicId);
+				}
+				catch (Exception)
+				{
+					return BadRequest("Failed to delete partner logo.");
 				}
 			}
 
-			return BadRequest("Probem occured while adding product");
-		}
-
-		[HttpDelete("delete/{productId}")]
-		public async Task<IActionResult> DeletePartnerProduct(int productId)
-		{
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
-
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
-
-			Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
-			if (product == null) return BadRequest($"Product '{product.Name}' not found");
-
 			try
 			{
-				DeletionResult deletionResult = await _fileUploadService.DeleteFileAsync(product.ImagePublicId);
-				if (deletionResult.Error != null) return BadRequest("Failed to delete product image.");
-
-				partner.Products.Remove(product);
-
-				await _unitOfWork.ProductRepository.Delete(productId);
+				await _unitOfWork.PartnerRepository.Delete(partner.Id);
 				await _unitOfWork.SaveChanges();
 			}
 			catch (Exception ex)
 			{
-				return BadRequest($"Internal server error: {ex}");
+				return BadRequest($"Internal error: {ex}");
 			}
 
 			return Ok();
 		}
 
-		[HttpPut("parner")]
+		[HttpPut("profile")]
 		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile(PartnerInDTO partnerInDTO)
 		{
 			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());

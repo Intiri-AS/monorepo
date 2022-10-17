@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
 using Intiri.API.Models.ChatMessage;
+using Intiri.API.Models.CommonNames;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Payment;
@@ -25,11 +27,13 @@ public class MessengerService : IMessengerService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IConsultationPaymentRepository _consultationPaymentRepository;
     private readonly UserManager<User> _userManager;
+    private readonly IFileUploadService _fileUploadService;
     private readonly IMapper _mapper;
 
     public MessengerService(IMessenger messenger,
                             IUnitOfWork unitOfWork,
                             UserManager<User> userManager,
+                            IFileUploadService fileUploadService,
                             IMapper mapper)
     {
         _messenger = messenger;
@@ -38,12 +42,22 @@ public class MessengerService : IMessengerService
         _userRepository = unitOfWork.UserRepository;
         _unitOfWork = unitOfWork;
         _userManager = userManager;
+        _fileUploadService = fileUploadService;
         _mapper = mapper;
     }
 
     public async Task<bool> SendMessage(ChatMessageInDTO chatMessageInDTO, int senderId, DateTime sentDate)
     {
+        if (chatMessageInDTO.Content is null && chatMessageInDTO.Attachments is null)
+        {
+            throw new ArgumentException($"Both {nameof(chatMessageInDTO.Content)} and {nameof(chatMessageInDTO.Attachments)} are null.");
+        }
+
+        //TODO: Validations - message can be sent between designer and end user and only if there is payment that is not expired.
+
         ChatMessage chatMessage = CreateChatMessage(chatMessageInDTO, senderId, sentDate);
+        //upload attachments (if error happen exception will be thrown and caught in upper layer - message won't be stored and pushed to listeners)
+        chatMessage.Attachments = await UploadMessageAttachments(chatMessageInDTO.Attachments);
 
         PusherMessage pusherMessage = CreatePusherMessage(chatMessage);
         await _messenger.SendMessage(pusherMessage);
@@ -161,19 +175,19 @@ public class MessengerService : IMessengerService
             FirstName = user.FirstName,
             LastName = user.LastName,
             PhotoPath = user.PhotoPath,
-            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+            LastSentMessageDate = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id && message.Content != null)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
                                                                   .FirstOrDefault(),
-            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id)
+            LastSentMessageContent = user.MessagesSent.Where(message => message.RecipientId == currentUser.Id && message.Content != null)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.Content)
                                                                   .FirstOrDefault(),
-            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastReceivedMessageDate = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id && message.Content != null)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.MessageSentDate)
                                                                   .FirstOrDefault(),
-            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id)
+            LastReceivedMessageContent = user.MessagesReceived.Where(message => message.SenderId == currentUser.Id && message.Content != null)
                                                                   .OrderByDescending(message => message.MessageSentDate)
                                                                   .Select(message => message.Content)
                                                                   .FirstOrDefault()
@@ -187,7 +201,8 @@ public class MessengerService : IMessengerService
             Content = chatMessage.Content,
             RecipientId = chatMessage.RecipientId,
             SenderId = chatMessage.SenderId,
-            MessageSentDate = chatMessage.MessageSentDate
+            MessageSentDate = chatMessage.MessageSentDate,
+            MessageAttachments = chatMessage.Attachments.Select(a => new PusherMessageAttachment() { FileFormat = a.FileFormat, PublicId = a.PublicId, Url = a.Url})
         };
     }
 
@@ -202,6 +217,46 @@ public class MessengerService : IMessengerService
             SenderDeleted = false,
             RecipientDeleted = false
         };
+    }
+
+    private async Task<ICollection<ChatMessageAttachment>> UploadMessageAttachments(IEnumerable<IFormFile> attachments)
+    {
+        ICollection<ChatMessageAttachment> chatMessageAttachments = new List<ChatMessageAttachment>();
+
+        if (attachments is null || attachments.Count() == 0)
+        {
+            return chatMessageAttachments;
+        }
+
+        foreach (IFormFile fileAttachment in attachments)
+        {
+            try
+            {
+                ImageUploadResult uploadResult = await _fileUploadService.UploadFileAsync(fileAttachment, ChatMessageNames.AttachmentsFolderName);
+
+                if (uploadResult.Error is not null)
+                {
+                    throw new Exception($"Problem uploading file {fileAttachment.FileName}.");
+                }
+
+                ChatMessageAttachment chatMessageAttachment = new ChatMessageAttachment()
+                {
+                    Url = uploadResult.SecureUrl.AbsoluteUri,
+                    PublicId = uploadResult.PublicId,
+                    FileFormat = fileAttachment.ContentType
+                };
+
+                chatMessageAttachments.Add(chatMessageAttachment);
+            }
+            catch (Exception)
+            {
+                //TODO: log error
+                //TODO: delete all already uploaded before error happened
+                throw;
+            }
+        }
+
+        return chatMessageAttachments;
     }
 
     #endregion Private methods

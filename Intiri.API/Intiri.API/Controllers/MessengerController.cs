@@ -25,7 +25,7 @@ public class MessengerController : BaseApiController
     }
 
     [HttpPost]
-    public async Task<ActionResult> SendMessage(ChatMessageInDTO messageDTO)
+    public async Task<ActionResult> SendMessage([FromForm] ChatMessageInDTO messageDTO)
     {
         bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
 

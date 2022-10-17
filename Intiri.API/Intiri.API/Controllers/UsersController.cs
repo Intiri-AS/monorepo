@@ -41,6 +41,15 @@ namespace Intiri.API.Controllers
 
 		#region Public methods
 
+		[HttpGet("endUsers")]
+		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllEndUsers()
+		{
+			IEnumerable<EndUser> users = await _unitOfWork.UserRepository.GetUsersAsync<EndUser>();
+			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(users);
+
+			return Ok(usersToReturn);
+		}
+
 		[HttpGet("profile")]
 		public async Task<ActionResult<UserOutDTO>> GetUserProfile()
 		{

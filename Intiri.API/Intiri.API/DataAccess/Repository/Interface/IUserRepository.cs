@@ -5,6 +5,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 {
 	public interface IUserRepository : IRepositoryBase<User>
 	{
+		Task<int> GetUsersCountAsync<TEntity>() where TEntity : class;
 		Task<IEnumerable<TEntity>> GetUsersAsync<TEntity>() where TEntity : class;
 		Task<TEntity> GetUserByIdAsync<TEntity>(int id) where TEntity : User;
 		Task<TEntity> GetUserUsernameIdAsync<TEntity>(string username) where TEntity : User;

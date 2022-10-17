@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221017141256_ChatMessageAttachments")]
+    partial class ChatMessageAttachments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -876,8 +878,13 @@ namespace Intiri.API.Migrations
                 {
                     b.HasBaseType("Intiri.API.Models.User");
 
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("HourlyRate")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("StyleId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("StyleId");
 
                     b.HasDiscriminator().HasValue("Designer");
                 });
@@ -1220,6 +1227,15 @@ namespace Intiri.API.Migrations
                         .HasForeignKey("StyleImagesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Designer", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Style.Style", "Style")
+                        .WithMany()
+                        .HasForeignKey("StyleId");
+
+                    b.Navigation("Style");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.PartnerContact", b =>

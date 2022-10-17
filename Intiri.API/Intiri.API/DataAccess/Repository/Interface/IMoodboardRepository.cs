@@ -12,7 +12,9 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids);
 		Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard);
+		Task<IEnumerable<Moodboard>> GetMoodboardsWithImagesByIds(ICollection<int> ids);
 
 		Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard);
+		Task<int> GetMoodboardsCountAsync();
 	}
 }
