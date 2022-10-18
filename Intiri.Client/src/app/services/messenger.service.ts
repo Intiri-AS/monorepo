@@ -14,7 +14,14 @@ export class MessengerService {
 
 
   sendMessage(messageData) {
-    return this.http.post(`${this.apiUrl}messenger`, messageData);
+    let formData = new FormData();
+    formData.append('RecipientId', messageData.recipientId);
+    formData.append('Content', messageData.content);
+    if(messageData.attachments) {
+      const fileArray = Array.from(messageData.attachments)
+      fileArray.forEach((file: any) => { formData.append('Attachments', file); });
+    }
+    return this.http.post(`${this.apiUrl}messenger`, formData);
   }
 
   getContacts() {

@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221017212607_MoodboardDateCreateUpdate")]
+    partial class MoodboardDateCreateUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,36 +75,6 @@ namespace Intiri.API.Migrations
                     b.HasIndex("SenderId", "RecipientId");
 
                     b.ToTable("ChatMessage");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.ChatMessage.ChatMessageAttachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ChatMessageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileFormat")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatMessageId");
-
-                    b.ToTable("ChatMessageAttachment");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.Color", b =>
@@ -941,17 +913,6 @@ namespace Intiri.API.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.ChatMessage.ChatMessageAttachment", b =>
-                {
-                    b.HasOne("Intiri.API.Models.ChatMessage.ChatMessage", "ChatMessage")
-                        .WithMany("Attachments")
-                        .HasForeignKey("ChatMessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChatMessage");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.ColorPalette", b =>
                 {
                     b.HasOne("Intiri.API.Models.Project.Project", null)
@@ -1237,11 +1198,6 @@ namespace Intiri.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Partner");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.ChatMessage.ChatMessage", b =>
-                {
-                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Material.MaterialType", b =>

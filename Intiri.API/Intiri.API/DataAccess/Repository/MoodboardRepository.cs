@@ -41,6 +41,7 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(m => m.Products)
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
+				.Include(m => m.Designer)
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)
 				.ToListAsync();

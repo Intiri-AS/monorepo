@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { BookDesignerModalComponent } from 'src/app/components/modals/book-designer-modal/book-designer-modal.component';
+import { DesignerService } from 'src/app/services/designer.service';
 
 @Component({
   selector: 'app-designer-profile-page',
@@ -10,31 +12,58 @@ import { BookDesignerModalComponent } from 'src/app/components/modals/book-desig
 
 export class DesignerProfilePage {
 
-  projects = [
-    {
-      projectName: 'Minimal',
-      moodboard: '2',
-      pieces: '20',
-      updated: '1 week',
-      image: '../../../../assets/images/landing-img.png'
-    },
-    {
-      projectName: 'Funky',
-      moodboard: '3',
-      pieces: '25',
-      updated: '1 day',
-      image: '../../../../assets/images/landing-img.png'
-    },
-  ];
+  languages = this.designerService.languages;
+
+  designer;
 
   constructor(
     private modalController: ModalController,
-    private nav: NavController
-  ) {}
+    private route: ActivatedRoute,
+    private designerService: DesignerService,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.designer = data.designer;
+    })
+  }
+
+  getDesignerType() {
+    const role = this.designer.roles[0].name;
+    if(role === 'InternalDesigner') {
+      return 'Intiri Designer'
+    } else if(role === 'ExternalDesigner') {
+      return 'External Designer'
+    }
+    return role;
+  }
+
+  normalizeSlashes(string): string {
+    return string.replaceAll("\\", "/")
+  }
+
+  getMoodboardImage(mb, index = null) {
+    const style = mb.style;
+    if(index >= 0) {
+      return style?.styleImages[index]?.imagePath;
+    }
+    return style?.imagePath;
+  }
+
+  // TODO: needs to be updated after project is allowed to have multiple moodboards!
+  getPiecesNo(moodboard){
+    let result = 0;
+    result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    return result;
+  }
 
   async bookConsultationModal() {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
+      componentProps: {designer: this.designer},
       cssClass: 'book-designer-modal-css',
     });
 

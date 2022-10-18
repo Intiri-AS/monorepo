@@ -36,6 +36,9 @@
                   <img src="{{moodboard.style.styleImages[1].imagePath}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
+                  <div *ngIf="moodboard.isTemplate" class="h-[30px] w-[70px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[22px] top-[20px] shadow-sm">
+                    <p class="text-black-1 text-sm">Template</p>
+                  </div>
                   <img src="{{moodboard.style.styleImages[2].imagePath}}" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
@@ -44,13 +47,12 @@
           <div class="flex">
             <img src="../../../assets/images/profile-img.png" class="w-[30ppx] h-[30px] rounded object-cover "
               alt="Profile Img" />
-            <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl">Teresa Gonzales</p>
+            <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
             <div class="absolute right-[-5px]">
-              <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+              <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
                   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
               </button>
             </div>
-            <ion-icon name="arrow-forward-outline" class="my-[7px] text-xl cursor-pointer"></ion-icon>
           </div>
           <p class="text-black-3 mt-1">{{moodboard.style.name}} / {{moodboard.room.name}}</p>
 

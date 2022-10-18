@@ -9,8 +9,10 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public int DesignerId { get; set; }
 		public bool IsTemplate { get; set; }
+		public UserOutDTO Designer { get; set; }
+		public DateTime Created { get; set; }
+		public DateTime Updated { get; set; }
 		public StyleOutDTO Style { get; set; }
 		public RoomOutDTO Room { get; set; }
 		public ICollection<MaterialOutDTO> Materials { get; set; }

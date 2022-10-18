@@ -16,7 +16,9 @@ namespace Intiri.API.Models.Moodboard
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Designer Designer { get; set; }
+		public DateTime Created { get; set; } = DateTime.UtcNow;
+		public DateTime Updated { get; set; } = DateTime.UtcNow;
+		public Designer Designer { get; set; }
         public int DesignerId { get; set; }
         public Style.Style Style { get; set; }
         public Room.Room Room { get; set; }

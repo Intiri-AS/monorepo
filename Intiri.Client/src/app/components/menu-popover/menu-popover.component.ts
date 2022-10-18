@@ -29,6 +29,14 @@ export class MenuPopoverComponent implements OnInit {
 
   ngOnInit() {}
 
+  toggleTemplateMoodboard() {
+    //TODO
+  }
+
+  openDeleteMoodboardModal() {
+    //TODO
+  }
+
   async openDeleteStyleModal() {
     const modal = await this.modalController.create({
       component: AddStyleModalComponent,

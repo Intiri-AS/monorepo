@@ -12,6 +12,7 @@ import { DesignerService } from 'src/app/services/designer.service';
 
 export class ContactDesignerPage {
 
+  languages = this.designerService.languages;
   designers = []
   moodboard: any;
 
@@ -25,7 +26,7 @@ export class ContactDesignerPage {
   }
 
   ngOnInit() {
-    this.designerService.getDesigners().subscribe((res: any[]) => {
+    this.designerService.getContactDesigners().subscribe((res: any[]) => {
       this.designers = res;
     });
     this.route.data.subscribe(data => {
@@ -33,6 +34,23 @@ export class ContactDesignerPage {
     })
   }
 
+  getDesignerType(d) {
+    const role = d.roles[0].name;
+    if(role === 'InternalDesigner') {
+      return 'Intiri Designer'
+    } else if(role === 'ExternalDesigner') {
+      return 'External Designer'
+    }
+    return role;
+  }
+
+  getMoodboardImage(d, index = null) {
+    const style = d.createdMoodboards[0].style;
+    if(index >= 0) {
+      return style?.styleImages[index]?.imagePath;
+    }
+    return style?.imagePath;
+  }
 
   async paymentModal(designer) {
     const modal = await this.modalController.create({
