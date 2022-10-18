@@ -95,46 +95,26 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
-		[HttpPost("modify/{moodboardId}")]
-		public async Task<ActionResult<ProjectOutDTO>> ModifyMoodboard(int moodboardId, [FromBody] MoodboardModifyDTO modifyDTO)
+		[HttpPatch("template/{moodboardId}/{setTemplate}")]
+		public async Task<ActionResult> EditMoodboard(int moodboardId, bool setTemplate)
 		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
 
 			if (moodboard == null)
 			{
 				return BadRequest($"Moodboard with Id={moodboardId} not found");
 			}
 
-			if (modifyDTO.ColorPaletteIds != null)
-			{
-				IEnumerable<ColorPalette> colorPalettes =
-					await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(modifyDTO.ColorPaletteIds);
+			moodboard.IsTemplate = setTemplate;
 
-				moodboard.ColorPalettes = colorPalettes.ToList();
-			}
-
-			if (modifyDTO.MaterialIds != null)
-			{
-				IEnumerable<Material> materials =
-					await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(modifyDTO.MaterialIds);
-
-				moodboard.Materials = materials.ToList();
-			}
-
-			if (modifyDTO.ProductIds != null)
-			{
-				IEnumerable<Product> products =
-					await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(modifyDTO.ProductIds);
-
-				moodboard.Products = products.ToList();
-			}
+			_unitOfWork.MoodboardRepository.Update(moodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+				return Ok();
 			}
 
-			return BadRequest("Something went wrong while modifying moodboard");
+			return BadRequest("Something went wrong while set template moodboard");
 		}
 
 		#endregion Public methods
