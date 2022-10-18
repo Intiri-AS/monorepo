@@ -3,8 +3,7 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
 using Intiri.API.Models;
-using Intiri.API.Models.DTO;
-using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Models.DTO.InputDTO.Moodboard;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
@@ -95,14 +94,14 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
-		[HttpPost("modify/{moodboardId}")]
-		public async Task<ActionResult<ProjectOutDTO>> ModifyMoodboard(int moodboardId, [FromBody] MoodboardModifyDTO modifyDTO)
+		[HttpPut("edit")]
+		public async Task<ActionResult<ProjectOutDTO>> EditMoodboard([FromBody] MoodboardEditInDTO modifyDTO)
 		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(modifyDTO.MoodboardId);
 
 			if (moodboard == null)
 			{
-				return BadRequest($"Moodboard with Id={moodboardId} not found");
+				return BadRequest($"Moodboard with Id={modifyDTO.MoodboardId} not found");
 			}
 
 			if (modifyDTO.ColorPaletteIds != null)
@@ -129,12 +128,38 @@ namespace Intiri.API.Controllers
 				moodboard.Products = products.ToList();
 			}
 
+			moodboard.Updated = DateTime.UtcNow;
+
+			_unitOfWork.MoodboardRepository.Update(moodboard);
+
 			if (await _unitOfWork.SaveChanges())
 			{
 				return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
 			}
 
 			return BadRequest("Something went wrong while modifying moodboard");
+		}
+
+		[HttpPatch("templateSet")]
+		public async Task<ActionResult> EditMoodboard(MoodboardAsTemplateInDTO moodboardInDTO)
+		{
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardInDTO.MoodboardId);
+
+			if (moodboard == null)
+			{
+				return BadRequest($"Moodboard with Id={moodboardInDTO.MoodboardId} not found");
+			}
+
+			moodboard.IsTemplate = moodboardInDTO.IsTemplate;
+
+			_unitOfWork.MoodboardRepository.Update(moodboard);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok();
+			}
+
+			return BadRequest("Something went wrong while set template moodboard");
 		}
 
 		#endregion Public methods
