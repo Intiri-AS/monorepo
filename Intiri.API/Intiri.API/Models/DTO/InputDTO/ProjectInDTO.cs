@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Intiri.API.Models.DTO.InputDTO.Moodboard;
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class ProjectInDTO
+    public class ProjectInDTO
 	{
 		[Required]
 		public string Name { get; set; }

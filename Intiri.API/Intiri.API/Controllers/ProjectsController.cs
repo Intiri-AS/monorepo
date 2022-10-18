@@ -5,6 +5,7 @@ using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Models.DTO.InputDTO.Moodboard;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
