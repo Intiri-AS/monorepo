@@ -11,6 +11,8 @@ using Intiri.API.Models.Project;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.ChatMessage;
 using Intiri.API.Models.Payment;
+using Intiri.API.Models.Rating;
+using System.Reflection.Emit;
 
 namespace Intiri.API.DataAccess
 {
@@ -41,6 +43,8 @@ namespace Intiri.API.DataAccess
 		public DbSet<Moodboard> Moodboards { get; set; }
 		public DbSet<Partner> Partners { get; set; }
 		public DbSet<ShareMoodboard> ShareMoodboards { get; set; }
+		public DbSet<DesignerRating> DesignerRatings { get; set; }
+		public DbSet<DesignerReview> DesignerReviews { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -126,10 +130,16 @@ namespace Intiri.API.DataAccess
 				.WithMany(d => d.ConsultationPaymentsReceived)
 				.OnDelete(DeleteBehavior.Restrict);
 
-				builder.Entity<Designer>()
-				   .HasMany(m => m.CreatedMoodboards)
-				   .WithOne(d => d.Designer)
-				   .OnDelete(DeleteBehavior.Restrict);
+			builder.Entity<Designer>()
+				.HasMany(m => m.CreatedMoodboards)
+				.WithOne(d => d.Designer)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			//builder.Entity<Designer>()
+			//	.HasOne(dr => dr.DesignerRating)
+			//	.WithOne(d => d.Designer)
+			//	.HasForeignKey<DesignerRating>(r => r.DesignerId);
+
 		}
 	}
 }

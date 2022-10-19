@@ -6,6 +6,10 @@ using Intiri.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Services.Interfaces;
+using Intiri.API.Extension;
+using Intiri.API.Models.Rating;
 
 namespace Intiri.API.Controllers
 {
@@ -14,14 +18,16 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly IRatingService _ratingService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public DesignersController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+		public DesignersController(IUnitOfWork unitOfWork, IMapper mapper, IRatingService ratingService) : base(unitOfWork)
 		{
 			_mapper = mapper;
+			_ratingService = ratingService;
 		}
 
 		#endregion Constructors
@@ -29,7 +35,7 @@ namespace Intiri.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<DesignerOutDTO>>> GetAllDesignerBasicInfo()
 		{ 
-			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignerUsersAsync();
+			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignersWithRatingsAsync(); 
 
 			IEnumerable<DesignerOutDTO> usersToReturn = _mapper.Map<IEnumerable<DesignerOutDTO>>(dUsers);
 
@@ -52,8 +58,10 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
+
+		// EndUser panel
 		[HttpGet("id/{designerId}")]
-		public async Task<ActionResult<DesignerOutDTO>> GetAllDesigneWithMoodboardImages(int designerId)
+		public async Task<ActionResult<DesignerOutDTO>> GetAllDesignerWithMoodboardImages(int designerId)
 		{
 			Designer dUser = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(designerId);
 
@@ -69,5 +77,25 @@ namespace Intiri.API.Controllers
 
 			return Ok(userToReturn);
 		}
+
+		// Admin panel
+		[HttpGet("withReviews/id/{designerId}")]
+		public async Task<ActionResult<DesignerOutDTO>> GetAllDesignerWithMoodboardsAndReviews(int designerId)
+		{
+			Designer dUser = await _unitOfWork.UserRepository.GetDesignerByIdWithReviewsAsync(designerId);
+
+			if (dUser == null)
+			{
+				return BadRequest("Designer user not found.");
+			}
+
+			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(dUser.CreatedMoodboards.Select(m => m.Id).ToArray());
+			dUser.CreatedMoodboards = moodboards.ToArray();
+
+			DesignerWithReviewsOutDTO userToReturn = _mapper.Map<DesignerWithReviewsOutDTO>(dUser);
+
+			return Ok(userToReturn);
+		}
+
 	}
 }
