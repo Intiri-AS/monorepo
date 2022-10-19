@@ -22,7 +22,7 @@ export class MoodboardsPage implements OnInit {
   ngOnInit() {
     this.moodboardService.getMoodboards();
     this.styleService.getStyles();
-    this.moodboards$.pipe(take(1)).subscribe(moodboards => { 
+    this.moodboards$.subscribe(moodboards => {
       this.moodboards = moodboards;
     });
   }
