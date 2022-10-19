@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
@@ -34,7 +35,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private http: HttpClient,
     private accountService: AccountService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,10 @@ export class ProfilePage implements OnInit {
     this.spinner.show();
     this.http.put(this.apiUrl + 'users/profile', userInfoModel).subscribe(res => {
       this.spinner.hide();
+      this.notifier.show({
+        message: 'Profile updated successfully',
+        type: 'success',
+      });
     })
   }
 }

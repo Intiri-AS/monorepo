@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map, take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
@@ -21,7 +22,8 @@ export class ProfileImgSectionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private notifier: NotifierService
   ) { }
 
   ngOnInit() {}
@@ -41,6 +43,10 @@ export class ProfileImgSectionComponent implements OnInit {
           this.image = res.photoPath
           this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
             this.accountService.setCurrentUser({...user, photoPath: res.photoPath});
+          });
+          this.notifier.show({
+            message: 'Profile image updated successfully',
+            type: 'success',
           });
         }
       })

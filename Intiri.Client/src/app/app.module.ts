@@ -9,6 +9,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NotifierModule } from 'angular-notifier';
 
 //pages for all users
 import { LandingPage } from './pages/landing/landing.page';
@@ -163,6 +164,16 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
     }
+    }),
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          distance: 30
+        },
+        vertical: {
+          distance: 30
+        }
+      }
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

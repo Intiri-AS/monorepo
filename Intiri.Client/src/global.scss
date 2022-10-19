@@ -18,6 +18,9 @@
 @import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
 
+//angular-notifier
+@import "~angular-notifier/styles.css";
+
 /* Optional CSS utils that can be commented out */
 // @import "~@ionic/angular/css/padding.css";
 // @import "~@ionic/angular/css/float-elements.css";
@@ -25,6 +28,10 @@
 // @import "~@ionic/angular/css/text-transformation.css";
 // @import "~@ionic/angular/css/flex-utils.css";
 
+// angular-notifier override
+.notifier__notification--success {
+  background-color: var(--ion-color-primary);
+}
 
 @media (min-width: 576px) {
   .auto-size-modal-css::part(content) {
