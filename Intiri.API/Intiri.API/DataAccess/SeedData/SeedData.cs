@@ -7,6 +7,7 @@ using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
+using Intiri.API.Models.Rating;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
@@ -100,6 +101,18 @@ namespace Intiri.API.DataAccess.SeedData
 			await userManager.AddToRoleAsync(uChanette, RoleNames.FreeEndUser);
 
 			u6.Partner.PartnerContacts.Add(u6);
+
+
+			DesignerRating u2DesignerRating = new DesignerRating();
+			u2DesignerRating.Designer = u2;
+			DesignerRating u3DesignerRating = new DesignerRating();
+			u2DesignerRating.Designer = u3;
+			unitOfWork.DesignerRatingRepository.Insert(u2DesignerRating);
+			unitOfWork.DesignerRatingRepository.Insert(u3DesignerRating);
+			u2.DesignerRating = u2DesignerRating;
+			u3.DesignerRating = u3DesignerRating;
+
+			await unitOfWork.SaveChanges();
 		}
 
 		public static async Task SeedPartners(IUnitOfWork unitOfWork)

@@ -65,10 +65,40 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
+		public async Task<IEnumerable<Designer>> GetDesignersWithRatingsAsync()
+		{
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.ToListAsync();
+		}
+
 		public async Task<Designer> GetDesignerUserByIdAsync(int id)
 		{
 			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<Designer>()
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
+		public async Task<Designer> GetDesignerByIdWithRatingsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
+		public async Task<Designer> GetDesignerByIdWithReviewsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
+				.Include(c => c.DesignerReviews).ThenInclude(eu => eu.EndUser)
 				.Include(m => m.CreatedMoodboards)
 				.Include(u => u.Roles).ThenInclude(r => r.Role)
 				.SingleOrDefaultAsync(d => d.Id == id);
