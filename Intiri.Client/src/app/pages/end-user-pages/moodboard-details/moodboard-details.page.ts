@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { Moodboard } from 'src/app/models/moodboard.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 
 @Component({
@@ -13,16 +11,16 @@ import { MoodboardService } from 'src/app/services/moodboard.service';
 export class MoodboardDetailsPage implements OnInit {
 
   moodboard: any;
+  projectId: string;
 
   constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router)
-  {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+  {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.moodboard = data.moodboard;
     })
+    this.projectId = this.route.snapshot.paramMap.get('projectId');
   }
   backToProjectDetails() {
     this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);

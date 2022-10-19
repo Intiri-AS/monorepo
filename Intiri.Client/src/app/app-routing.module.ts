@@ -159,6 +159,12 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
+    path: 'edit-moodboard/:id/project/:projectId',
+    component: CustomizeMoodboardPage,
+    resolve: {moodboard: MoodboardService},
+    canActivate: [EnduserGuard]
+  },
+  {
     path: 'project-details/:id',
     component: ProjectDetailsPage,
     resolve: {project: ProjectService},
