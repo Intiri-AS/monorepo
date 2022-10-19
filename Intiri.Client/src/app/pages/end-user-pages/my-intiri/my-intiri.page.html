@@ -11,7 +11,7 @@
           <div>
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
-                <p class="text-2xl font-medium">Latest project</p>
+                <p class="text-2xl font-medium mb-4">Latest project</p>
                 <div *ngIf="projects[projects.length-1].projectMoodboards.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>

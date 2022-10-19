@@ -39,6 +39,14 @@ export class MoodboardService {
     const req_data = this.parseMoodboard(moodboard);
     return this.http.post(this.apiUrl + 'moodboards/add', req_data);
   }
+  editMoodboard(moodboard) {
+    const editMb = {
+      moodboardId: moodboard.id,
+      materialIds:  moodboard.materials.map(e=> e['id']),
+      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+      productIds: moodboard.products.map(e=> e['id']) };
+    return this.http.put(this.apiUrl + 'moodboards/edit', editMb);
+  }
 
   parseMoodboard(moodboard: Moodboard) {
     let parsedProj = {
