@@ -27,6 +27,8 @@ namespace Intiri.API.DataAccess
 		private readonly IPartnerRepository _partnerRepository;
 		private readonly IChatMessageRepository _chatMessageRepository;
 		private readonly IConsultationPaymentRepository _consultationPaymentRepository;
+		private readonly IDesignerRatingRepository _designerRatingRepository;
+		private readonly IDesignerReviewRepository _designerReviewRepository;
 
 		#endregion Fields
 
@@ -52,6 +54,8 @@ namespace Intiri.API.DataAccess
 			_partnerRepository = new PartnerRepository(dataContext, mapper);
 			_chatMessageRepository = new ChatMessageRepository(dataContext);
 			_consultationPaymentRepository = new ConsultationPaymentRepository(dataContext);
+			_designerRatingRepository = new DesignerRatingRepository(dataContext);
+			_designerReviewRepository = new DesignerReviewRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -79,6 +83,9 @@ namespace Intiri.API.DataAccess
 		public IChatMessageRepository ChatMessageRepository => _chatMessageRepository;
 
 		public IConsultationPaymentRepository ConsultationPaymentRepository => _consultationPaymentRepository;
+
+		public IDesignerRatingRepository DesignerRatingRepository => _designerRatingRepository;
+		public IDesignerReviewRepository DesignerReviewRepository => _designerReviewRepository;
 
 		#endregion Properties
 

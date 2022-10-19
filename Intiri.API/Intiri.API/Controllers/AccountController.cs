@@ -7,6 +7,8 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.DTO.Vipps;
+using Intiri.API.Models.Product;
+using Intiri.API.Models.Rating;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
@@ -354,6 +356,21 @@ namespace Intiri.API.Controllers
 
 			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(dUser, registerIn.Role);
 			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+
+			//test
+
+			DesignerRating designerRating = new DesignerRating();
+			designerRating.Designer = dUser;
+			_unitOfWork.DesignerRatingRepository.Insert(designerRating);
+			dUser.DesignerRating = designerRating;
+			//_unitOfWork.UserRepository.UpdateUser(dUser);
+
+			if (!await _unitOfWork.SaveChanges())
+			{
+				return BadRequest();
+			}
+
+			//endTest
 
 			return Ok(_mapper.Map<RegisterOutDTO>(dUser));
 		}
