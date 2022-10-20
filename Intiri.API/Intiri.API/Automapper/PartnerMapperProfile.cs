@@ -14,10 +14,9 @@ namespace Intiri.API.Automapper
 			CreateMap<Partner, PartnerOutDTO>();
 
 			CreateMap<Partner, PartnerAllOutDTO>();
-				//.ForMember(dest => dest.PartnerContacts, pc => pc.MapFrom(p => p.PartnerContacts))
-				//.ForMember(dest => dest.Products, pr => pr.MapFrom(p => p.Products));
 
-			CreateMap<PartnerContactInDTO, PartnerContact>();
+			CreateMap<PartnerContactInDTO, PartnerContact>()
+				.ForMember(d => d.UserName, opt => opt.MapFrom(src => (src.CountryCode + src.PhoneNumber)));
 			CreateMap<PartnerContact, RegisterOutDTO>();
 			
 			CreateMap<PartnerContact, PartnerContactOutDTO>();
