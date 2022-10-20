@@ -3,7 +3,7 @@
     <ion-col size="6" size-md="4" size-xl="3">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
@@ -18,7 +18,7 @@
       </div>
     </ion-col>
     <ion-col size="12" size-md="4" size-xl="2.5" class="flex justify-end">
-      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4">Add material</ion-button>
+      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4">{{'STYLE.add-material' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

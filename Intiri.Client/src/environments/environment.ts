@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7004/api/'
+  apiUrl: 'https://intiri-test.azurewebsites.net/api/'
+  // apiUrl: 'https://localhost:7004/api/'
 };
 
 /*

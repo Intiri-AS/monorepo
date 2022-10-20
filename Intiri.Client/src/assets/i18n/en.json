@@ -151,7 +151,8 @@
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
-    "save-text": "Your project and first moodboard are saved. You can add new moodboard to the same project or review it.",
+    "save-text1": "Your project",
+    "save-text2" : " and first moodboard are saved. You can add new moodboard to the same project or review it.",
     "go-to": "Go to project",
     "add-new": "Add new moodboard",
     "share": "Share via email"
@@ -200,6 +201,7 @@
     "create": "Create",
     "continue": "Continue",
     "moodboard": "Moodboard",
+    "client": "Client",
     "sort": "Sort by",
     "back": "Back",
     "next": "Next",
@@ -211,15 +213,23 @@
     "duration": "Duration",
     "email": "Email",
     "upload": "Upload",
-    "add": "Add"
+    "add": "Add",
+    "my-profile":"My Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "delete": "Delete"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
     "consultations": "Consultations",
     "partners": "Partners",
+    "partner": "Partner",
     "designers": "Designers",
     "clients": "Clients",
+    "statistic":"Statistic",
     "moodboards": "Moodbaoards",
+    "my-moodboards":"My moodboards",
+    "all-moodboards":"All moodboards",
     "style": "Style",
     "total-vendors": "Total vendors",
     "total-designers": "Total designers",

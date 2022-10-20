@@ -1,29 +1,49 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sub-header',
   templateUrl: './sub-header.component.html',
   styleUrls: ['./sub-header.component.scss'],
 })
-export class SubHeaderComponent implements OnInit {
+export class SubHeaderComponent {
 
   @Input() menu: 'partners' | 'clients' | 'moodboards' | 'clientList' | 'designerMoodboards' | 'style';
   @Input() activeTitle: number;
   @Input() slider: boolean = false;
   @Output() changeSlide = new EventEmitter<object>();
 
+  currentLang: string = ''
+
+
+  constructor(private translate: TranslateService) {}
+
   menuItems: any = {
-    partners: ['partners', 'products'],
-    clients: ['clients', 'inspiration'],
-    moodboards: ['styles','materials','rooms', 'colors', 'pictures'],
-    clientList: ['clients', 'moodboard','statistic'],
-    designerMoodboards: ['my moodboards', 'all moodboards'],
-    style: ['styles','materials','rooms', 'colors', 'pictures']
+    partners: [this.translate.instant("DASHBOARD.partners"), this.translate.instant("PARTNERS.products")],
+    clients: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("CLIENTS.inspiration")],
+    moodboards: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")],
+    clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.moodboards"), this.translate.instant("DASHBOARD.statistic")],
+    designerMoodboards: [this.translate.instant("DASHBOARD.my-moodboards"), this.translate.instant("DASHBOARD.all-moodboards")],
+    style: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")]
   }
 
-  constructor() {}
+   ngOnInit() {
+    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+      this.translate.setDefaultLang(event.lang);
+      this.revokeTranslations();
+    });
+  }
 
-  ngOnInit() {}
+  revokeTranslations() {
+  this.menuItems = {
+    partners: [this.translate.instant("DASHBOARD.partners"), this.translate.instant("PARTNERS.products")],
+    clients: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("CLIENTS.inspiration")],
+    moodboards: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")],
+    clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.moodboards"), this.translate.instant("DASHBOARD.statistic")],
+    designerMoodboards: [this.translate.instant("DASHBOARD.my-moodboards"), this.translate.instant("DASHBOARD.all-moodboards")],
+    style: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")]
+  }
+  }
 
   goToSlide(id) {
     this.changeSlide.emit(id);

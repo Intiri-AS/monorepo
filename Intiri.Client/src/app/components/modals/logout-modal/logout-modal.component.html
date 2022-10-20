@@ -4,12 +4,12 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="logout-icon-wrapper"><ion-icon class="h-[34px] w-[34px] mx-auto mt-[5px] block" name="log-out-outline"></ion-icon></div>
-          <h2 class="mt-6 text-center text-2xl font-bold text-black1">Logout!</h2>
-          <p class="text-center text-base text-black2">Are you sure you want to logout from the app?</p>
+          <h2 class="mt-6 text-center text-2xl font-bold text-black1">{{'COMMON.logout' | translate}}</h2>
+          <p class="text-center text-base text-black2">{{'MY-INTIRI.logout-text' | translate}}</p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button  class="secondary-btn" (click)="dismiss()">Cancel</ion-button>
-          <ion-button class="primary-btn" (click)="logout()">Logout</ion-button>
+          <ion-button  class="secondary-btn" (click)="dismiss()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button class="primary-btn" (click)="logout()">{{'COMMON.logout' | translate}}</ion-button>
         </ion-buttons>
 
       </div>

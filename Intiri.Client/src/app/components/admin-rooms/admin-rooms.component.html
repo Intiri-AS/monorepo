@@ -3,13 +3,13 @@
     <ion-col size="6" size-xl="3">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
     
     <ion-col size="6" offset-xl="6.5" size-xl="2.5" class="flex justify-end">
-      <ion-button (click)="addRoom()" fill="clear" class="primary-btn mt-4">Add room</ion-button>
+      <ion-button (click)="addRoom()" fill="clear" class="primary-btn mt-4">{{'STYLE.add-room' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

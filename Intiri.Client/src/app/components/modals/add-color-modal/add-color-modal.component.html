@@ -4,13 +4,13 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add color</h1>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-color' | translate}}</h1>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Color pallet preview</p>
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.color-preview' | translate}}</p>
             <div class="border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer">
               <div class="flex justify-center mt-[18px]">
                 <div class="card">
@@ -29,13 +29,13 @@
       <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
         <ion-col>
           <div class="pr-2">
-            <span class="text-sm text-black-2">Color name</span>
+            <span class="text-sm text-black-2">{{'STYLE.color-name' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.name" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
         </ion-col>
         <ion-col>
           <div class="pl-2">
-            <span class="text-sm text-black-2">Color number</span>
+            <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.number" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
         </ion-col>
@@ -43,7 +43,7 @@
       <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative">
         <ion-col>
           <div class="pr-2">
-            <span class="text-sm text-black-2">Select main color</span>
+            <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.mainColor" disabled [style.background]="colorPallete.mainColor"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.mainColor" type="text"
@@ -52,7 +52,7 @@
         </ion-col>
         <ion-col>
           <div class="pl-2">
-            <span class="text-sm text-black-2">Shade 1</span>
+            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
             <ion-input [(ngModel)]="colorPallete.shadeColorLight" disabled [style.background]="colorPallete.shadeColorLight"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorLight" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -62,7 +62,7 @@
       <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
         <ion-col>
           <div class="pr-2">
-            <span class="text-sm text-black-2">Shade 2</span>
+            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
             <ion-input [(ngModel)]="colorPallete.shadeColorMedium" disabled [style.background]="colorPallete.shadeColorMedium"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorMedium" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -70,7 +70,7 @@
         </ion-col>
         <ion-col>
           <div class="pl-2">
-            <span class="text-sm text-black-2">Shade 3</span>
+            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
             <ion-input [(ngModel)]="colorPallete.shadeColorDark" disabled [style.background]="colorPallete.shadeColorDark"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorDark" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -79,8 +79,8 @@
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addColor()">Add</ion-button>
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addColor()">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -91,11 +91,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Color added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new color.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'STYLE.color-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'STYLE.color-added-text' | translate}}</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Colors</ion-button>
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'STYLE.go-to-colors' | translate}}</ion-button>
           </ion-buttons>
         </div>
     </div>
@@ -111,7 +111,7 @@
         </div>
         <ion-buttons class="justify-center">
           <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteColor()">Remove color</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>

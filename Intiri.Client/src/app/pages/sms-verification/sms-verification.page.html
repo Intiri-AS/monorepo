@@ -6,11 +6,11 @@
         <div class="w-full xl:w-[470px] text-center">
           <ion-button fill="clear" class="register-btn" routerLink="/register" routerDirection="root">
             <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
-            <p>Create an account</p>
+            <p>{{'SMS.create' | translate}}</p>
           </ion-button>
-          <h1 class="text-5xl font-semibold">6-digit code</h1>
+          <h1 class="text-5xl font-semibold">{{'SMS.code' | translate}}</h1>
           <p class="text-lg text-black-2">
-            An sms with 6-digit verification code was sent to your phone.
+            {{'SMS.sms-msg' | translate}}
           </p>
           <div class="mt-8 max-w-[500px] mx-auto">
             <code-input  #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)">
@@ -19,8 +19,8 @@
             <span class="ion-warning mt-2" *ngIf="error">{{ error }}</span>
           </div>
           <div class="flex flex-col justify-center items-center">
-            <ion-button fill="clear" class="primary-btn mt-[30px]">Proceed to app</ion-button>
-            <ion-button fill="clear" class="send-btn">Send again</ion-button>
+            <ion-button fill="clear" class="primary-btn mt-[30px]">{{'SMS.proceed' | translate}}</ion-button>
+            <ion-button fill="clear" class="send-btn">{{'SMS.again' | translate}}</ion-button>
           </div>
         </div>
       </ion-col>

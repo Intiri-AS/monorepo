@@ -4,7 +4,7 @@
   <!-- <p class="text-black-3 mb-8">16 projects</p> -->
   <ion-buttons class="justify-center">
     <label for="dropzone-file">
-      <ion-button class="change-img-btn" (click)="openFile()">Change profile picture
+      <ion-button class="change-img-btn" (click)="openFile()">{{'PROFILE.change-profile-pic' | translate}}
         <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
       </ion-button>
     </label>
