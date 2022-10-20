@@ -44,6 +44,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		#endregion  Generic methods
 
+		#region EndUser
 
 		public async Task<IEnumerable<EndUser>> GetEndUsersAsync()
 		{
@@ -56,6 +57,10 @@ namespace Intiri.API.DataAccess.Repository
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<EndUser>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
+
+		#endregion EndUser
+
+		#region Designer
 
 		public async Task<IEnumerable<Designer>> GetDesignerUsersAsync()
 		{
@@ -104,6 +109,15 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 
+		public async Task<bool> IsDesignerExistByAsync(int id)
+		{
+			return await _context.Users.OfType<Designer>().AnyAsync(d => d.Id == id);
+		}
+
+		#endregion Designer
+
+		#region Partner
+
 		public async Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync()
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
@@ -115,6 +129,8 @@ namespace Intiri.API.DataAccess.Repository
 			//return _context.Set<PartnerContact>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<PartnerContact>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
+
+		#endregion Partner
 
 		public void UpdateUser(User user)
 		{
