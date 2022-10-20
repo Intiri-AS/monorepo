@@ -48,6 +48,10 @@ export class MoodboardService {
     return this.http.put(this.apiUrl + 'moodboards/edit', editMb);
   }
 
+  setIsTemplate(req) {
+    return this.http.patch(this.apiUrl + 'moodboards/templateSet', req);
+  }
+
   parseMoodboard(moodboard: Moodboard) {
     let parsedProj = {
       styleId: moodboard.style['id'],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { AddColorModalComponent } from '../modals/add-color-modal/add-color-modal.component';
 import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-materials-modal.component';
 import { AddPictureModalComponent } from '../modals/add-picture-modal/add-picture-modal.component';
@@ -25,12 +27,18 @@ export class MenuPopoverComponent implements OnInit {
 
   item: any
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private moodboardService: MoodboardService, private notifier: NotifierService) { }
 
   ngOnInit() {}
 
   toggleTemplateMoodboard() {
-    //TODO
+    this.moodboardService.setIsTemplate({moodboardId: this.item.id, isTemplate: !this.item.isTemplate}).subscribe(() => {
+      this.moodboardService.getMoodboards();
+      this.notifier.show({
+        message: `Moodboard ${this.item.isTemplate ? 'removed from' : 'added to'} templates successfully`,
+        type: 'success',
+      });
+    })
   }
 
   openDeleteMoodboardModal() {
