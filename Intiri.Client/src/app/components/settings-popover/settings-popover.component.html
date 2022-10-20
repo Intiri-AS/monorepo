@@ -5,15 +5,9 @@
   </ion-item>
   <hr class="border-light border-t mx-[16px] my-[16px]" />
   <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
-<<<<<<< HEAD
   <ion-item class="text-black-1" [button]="true" [detail]="true">{{'LANDING.terms' | translate}}</ion-item>
-  <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openPricingPlans()">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-item>
+  <!-- <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openPricingPlans()">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-item> -->
   <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">{{'COMMON.logout' | translate}}</ion-item>
-=======
-  <ion-item class="text-black-1" [button]="true" [detail]="true">Terms & Conditions</ion-item>
-  <!-- <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openPricingPlans()">Pricing plans</ion-item> -->
-  <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">Logout</ion-item>
->>>>>>> development
 </ion-list>
 
 <ion-list *ngIf="headerType === 'admin'" lines="none" >
