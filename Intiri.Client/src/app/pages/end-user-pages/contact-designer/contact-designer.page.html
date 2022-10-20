@@ -15,7 +15,7 @@
                 <ion-col size="7.5" class="!p-3 !pl-0">
                   <div class="h-[30px] w-[55px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[20px] top-[20px] shadow-sm">
                     <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
-                    <p class="text-black-1 text-sm">0</p>
+                    <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
                   </div>
                   <img [src]="getMoodboardImage(d) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>

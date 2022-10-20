@@ -26,7 +26,7 @@ export class ContactDesignerPage {
   }
 
   ngOnInit() {
-    this.designerService.getContactDesigners().subscribe((res: any[]) => {
+    this.designerService.getDesigners().subscribe((res: any[]) => {
       this.designers = res;
     });
     this.route.data.subscribe(data => {

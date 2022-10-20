@@ -1,18 +1,18 @@
 <ion-content>
   <div class="flex flex-col items-center px-[65px]">
     <p class="text-2xl font-medium mt-[80px]">{{'SHARE-RATE.rate-designer' | translate}}</p>
-    <p class="text-lg mt-[10px]">{{'SHARE-RATE.please-rate' | translate}} <b>Joana Martinez</b></p>
+    <p class="text-lg mt-[10px]">{{'SHARE-RATE.please-rate' | translate}} <b>{{designer.firstName}} {{designer.lastName}}</b></p>
     <div class="flex justify-evenly items-center mt-[40px] w-full">
-      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (click)="addRate(1)" [class.!text-secondary]="star>=1"></ion-icon>
-      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (click)="addRate(2)" [class.!text-secondary]="star>=2"></ion-icon>
-      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (click)="addRate(3)" [class.!text-secondary]="star>=3"></ion-icon>
-      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (click)="addRate(4)" [class.!text-secondary]="star>=4"></ion-icon>
-      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (click)="addRate(5)" [class.!text-secondary]="star>=5"></ion-icon>
+      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (mouseenter)="hoverStar=1" (mouseleave)="hoverStar=0" (click)="addRate(1)" [class.!text-secondary]="star>=1 || hoverStar>=1"></ion-icon>
+      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (mouseenter)="hoverStar=2" (mouseleave)="hoverStar=0" (click)="addRate(2)" [class.!text-secondary]="star>=2 || hoverStar>=2"></ion-icon>
+      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (mouseenter)="hoverStar=3" (mouseleave)="hoverStar=0" (click)="addRate(3)" [class.!text-secondary]="star>=3 || hoverStar>=3"></ion-icon>
+      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (mouseenter)="hoverStar=4" (mouseleave)="hoverStar=0" (click)="addRate(4)" [class.!text-secondary]="star>=4 || hoverStar>=4"></ion-icon>
+      <ion-icon name="star" class="h-14 w-14 text-light cursor-pointer" (mouseenter)="hoverStar=5" (mouseleave)="hoverStar=0" (click)="addRate(5)" [class.!text-secondary]="star>=5 || hoverStar>=5"></ion-icon>
     </div>
-    <div class="mt-[40px]" *ngIf="star > 0">
+    <!-- <div class="mt-[40px]" *ngIf="star > 0">
       <p class="text-black-2 text-[13px]">{{'SHARE-RATE.comment' | translate}}</p>
       <ion-textarea rows="5" class="border border-black-2 rounded-2xl mt-0"></ion-textarea>
-    </div>
+    </div> -->
     <div class="flex justify-center mt-[40px]">
       <ion-button fill="clear" class="secondary-btn" (click)="dismiss()">{{'COMMON.cancel' | translate}}</ion-button>
       <ion-button fill="clear" class="primary-btn" (click)="rate()" [disabled]="rateDisabled" [class.!opacity-50]="rateDisabled">{{'SHARE-RATE.rate' | translate}}</ion-button>

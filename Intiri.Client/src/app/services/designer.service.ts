@@ -36,5 +36,17 @@ export class DesignerService {
     return this.getDesigner(parseInt(route.paramMap.get('id')));
   }
 
+  rateDesigner(payload) {
+    return this.http.put(this.apiUrl + 'ratings/addRating', payload);
+  }
+
+  isDesignerRated(designerId) {
+    return this.http.get(this.apiUrl + 'ratings/isRated/id/' + designerId);
+  }
+
+  getDesignerRating(){
+    return this.http.get(this.apiUrl + 'ratings/designerRating');
+  }
+
 
 }
