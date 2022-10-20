@@ -17,6 +17,7 @@ namespace Intiri.API.Models
 
 		#region Properties
 
+		public ICollection<Inspiration> Inspirations { get; set; }
 		public ICollection<Project.Project> CreatedProjects { get; set; }
 		public ICollection<ShareMoodboard> SendMoodboards { get; set; }
 		public ICollection<ShareMoodboard> ReceivedMoodboards { get; set; }

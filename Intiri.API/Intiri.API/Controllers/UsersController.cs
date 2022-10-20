@@ -70,7 +70,7 @@ namespace Intiri.API.Controllers
 
 			if (user == null)
 			{
-				return Unauthorized("Invalid user.");
+				return Unauthorized("Invalid clent.");
 			}
 
 			IFormFile file = inFile.PhotoPath;
