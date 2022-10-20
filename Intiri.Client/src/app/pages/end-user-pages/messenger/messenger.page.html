@@ -6,14 +6,14 @@
     <ion-grid class="main-container">
       <ion-row>
         <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="4">
-          <h1 class="main-title">Messages</h1>
+          <h1 class="main-title">{{'MESSENGER.messages' | translate}}</h1>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="3.2">
             <div class=" xl-ion:h-[720px] pb-8">
               <div class="mb-2">
-                <span class="text-sm text-black-2">Search</span>
+                <span class="text-sm text-black-2">{{'MESSENGER.search' | translate}}</span>
                 <ion-input [(ngModel)]="searchText" type="text" class="border rounded-2xl border-black-2 h-[52px]"></ion-input>
               </div>
               <ul>
@@ -34,7 +34,12 @@
               </ul>
             </div>
         </ion-col>
-        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0.3" size-xl="8.5">
+        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0.3" size-xl="8.5" class="relative">
+          <div *ngIf="ratePrompt" class="w-[333px] h-[100px] absolute z-10 m-auto inset-0">
+            <ion-button fill="clear" class="primary-btn w-[170px]" (click)="openRatingModal()">Rate Designer</ion-button>
+            <ion-button fill="clear" class="secondary-btn w-[130px]" (click)="ratePrompt=false;">Skip</ion-button>
+          </div>
+            <div [class]="ratePrompt ? 'blur pointer-events-none' : ''">
             <div class="bg-light xl-ion:h-[682px] rounded-lg text-center pb-8">
               <div class="flex py-[22px] pl-[18px] border-b border-secondary">
                 <img [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'" class="w-[45px] h-[45px] rounded-lg object-cover" alt="Profile Img"/>
@@ -76,7 +81,6 @@
                   <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                   <label for="dropzone-file">
                     <div *ngIf="attachments" class="text-primary cursor-pointer relative bottom-[10px] inline-block">{{attachments.length}} file(s) selected</div>
-                    <div *ngIf="err" class="text-[#a30505] cursor-pointer relative bottom-[10px] inline-block">Error: Cannot upload file(s).</div>
                     <ion-icon class="img-btn" name="attach-outline"></ion-icon>
                     <input (change)="onFileChange($event)" id="dropzone-file" multiple type="file" class="hidden" />
                   </label>
@@ -87,6 +91,7 @@
                 </div>
               </div>
             </div>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -3,13 +3,13 @@
     <ion-col size="6" size-md="4" size-lg="3">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
     <ion-col>
       <ion-buttons class="justify-end mt-4">
-        <ion-button class="primary-btn" (click)="addPartner()">Add partner</ion-button>
+        <ion-button class="primary-btn" (click)="addPartner()">{{'PARTNERS.add' | translate}}</ion-button>
       </ion-buttons>
     </ion-col>
   </ion-row>

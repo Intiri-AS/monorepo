@@ -1,16 +1,16 @@
 <h3 class="text-black-2 text-[24px] my-0 mx-2">Personal Info</h3>
 <section class="sm:flex">
   <div class="profile-input">
-    <span class="text-sm text-black-2">First name</span>
+    <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.firstName"></ion-input>
   </div>
   <div class="profile-input">
-    <span class="text-sm text-black-2">Last name</span>
+    <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.lastName"></ion-input>
   </div>
 </section>
 <div class="profile-input">
-  <span class="text-sm text-black-2">Gender</span>
+  <span class="text-sm text-black-2">{{'PROFILE.gender' | translate}}</span>
   <ion-select interface="popover" [value]="userInfo.gender" (ionChange)="genderChange($event)">
     <ion-select-option value="male">Male</ion-select-option>
     <ion-select-option value="female">Female</ion-select-option>
@@ -22,7 +22,7 @@
 
 <section class="flex">
   <div class="phone-input">
-    <span class="text-sm text-black-2">Phone number</span>
+    <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
     <ion-select disabled class="" interface="popover" [value]="userInfo.countryCode" (ionChange)="countryCodeChange($event)">
       <ion-select-option value="45">+45</ion-select-option>
       <ion-select-option value="46">+46</ion-select-option>
@@ -32,32 +32,32 @@
     </ion-select>
   </div>
   <div class="profile-input">
-    <span class="text-sm invisible">Phone number</span>
+    <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
     <ion-input disabled type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.phoneNumber"></ion-input>
   </div>
 </section>
 
 <div class="profile-input">
-  <span class="text-sm text-black-2">Email</span>
+  <span class="text-sm text-black-2">{{'COMMON.email' | translate}}</span>
   <ion-input type="email" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.email"></ion-input>
   <span class="text-sm text-[#eb445a] hidden">Wrong format</span>
 </div>
 <div class="profile-input">
-  <span class="text-sm text-black-2">Street</span>
+  <span class="text-sm text-black-2">{{'PARTNERS.street' | translate}}</span>
   <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.street"></ion-input>
 </div>
 <section class="sm:flex">
   <div class="profile-input">
-    <span class="text-sm text-black-2">Postal code</span>
+    <span class="text-sm text-black-2">{{'PARTNERS.postal-code' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.postalCode"></ion-input>
   </div>
   <div class="profile-input">
-    <span class="text-sm text-black-2">City</span>
+    <span class="text-sm text-black-2">{{'PARTNERS.city' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.city"></ion-input>
   </div>
 </section>
 <div class="profile-input">
-  <span class="text-sm text-black-2">Country</span>
+  <span class="text-sm text-black-2">{{'PARTNERS.country' | translate}}</span>
   <ion-select interface="popover" [value]="userInfo.country" (ionChange)="countryChange($event)">
     <ion-select-option value="norway">Norway</ion-select-option>
     <ion-select-option value="serbia">Serbia</ion-select-option>

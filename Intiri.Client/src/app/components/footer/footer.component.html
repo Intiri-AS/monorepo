@@ -10,23 +10,23 @@
       <hr/>
       <ion-col size="10" offset="2" size-lg="2" offset-lg="1" class="mt-[60px] md:mt-0">
         <ion-text>
-          <p class="uppercase">Navigation</p><br/>
-            <ion-button (click)="scrollTo('home')" fill="clear">Home</ion-button><br/>
+          <p class="uppercase">{{'LANDING.navigation' | translate}}</p><br/>
+            <ion-button (click)="scrollTo('home')" fill="clear">{{'LANDING.home' | translate}}</ion-button><br/>
             <ion-button (click)="scrollTo('how-it-works')" fill="clear">How it works</ion-button><br/>
-            <ion-button (click)="scrollTo('stories')" fill="clear">Stories</ion-button><br/>
-            <ion-button (click)="scrollTo('contact')" fill="clear">Contact</ion-button>
+            <ion-button (click)="scrollTo('stories')" fill="clear">{{'LANDING.stories' | translate}}</ion-button><br/>
+            <ion-button (click)="scrollTo('contact')" fill="clear">{{'LANDING.contact' | translate}}</ion-button>
         </ion-text>
       </ion-col>
       <ion-col size="10" offset="2" size-lg="4" offset-lg="1" class="mt-[60px] md:mt-0">
         <ion-text>
-          <p class="uppercase">Social Media</p><br/>
+          <p class="uppercase">{{'LANDING.social' | translate}}</p><br/>
           <ion-icon class="social-logo" name="logo-facebook"></ion-icon>
           <ion-icon class="social-logo" name="logo-instagram"></ion-icon>
           <ion-icon class="social-logo" name="logo-linkedin"></ion-icon>
           <ion-icon class="social-logo" name="logo-twitter"></ion-icon><br/>
 
-          <ion-button fill="clear">Terms & Conditions</ion-button><br/>
-          <ion-button fill="clear">Privacy Policy</ion-button>
+          <ion-button fill="clear">{{'LANDING.terms' | translate}}</ion-button><br/>
+          <ion-button fill="clear">{{'LANDING.privacy' | translate}}</ion-button>
         </ion-text>
       </ion-col>
     </ion-row>

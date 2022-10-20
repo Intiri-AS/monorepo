@@ -31,28 +31,28 @@
                 class="secondary-btn"
                 routerLink="/new-project"
                 routerDirection="root"
-                >Cancel</ion-button
+                >{{'COMMON.cancel' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="currentStepNo !== 0"
                 class="secondary-btn"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
                 (click)="backStep()"
-                >Back</ion-button
+                >{{'COMMON.back' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="currentStepNo !== 2"
                 class="primary-btn"
                 [class.disabled]="!canChangeToStep(currentStepNo+1)"
                 (click)="nextStep()"
-                >Next</ion-button
+                >{{'COMMON.next' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="currentStepNo === 2"
                 class="primary-btn"
                 [class.disabled]="!validateData()"
                 (click)="finish()"
-                >Finish</ion-button
+                >{{'NEW-PROJECT.finish' | translate}}</ion-button
               >
             </ion-buttons>
           </ion-col>

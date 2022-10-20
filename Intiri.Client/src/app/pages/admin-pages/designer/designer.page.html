@@ -4,20 +4,20 @@
       <ion-grid class="main-container">
         <ion-row>
           <ion-col  size="12" size-xl="4">
-            <h1 class="main-title">Designers</h1>
+            <h1 class="main-title">{{'DASHBOARD.designers' | translate}}</h1>
           </ion-col>
         </ion-row>
         <ion-row>
             <ion-col size="12" size-sm="5" size-xl="1.9">
                 <div class="h-[52px] mt-6">
-                    <ion-select interface="popover" placeholder="Search">
+                    <ion-select interface="popover" placeholder="{{'MESSENGER.search' | translate}}">
                     <ion-select-option value=""></ion-select-option>
                     <ion-select-option value=""></ion-select-option>
                     </ion-select>
                 </div>
             </ion-col>
             <ion-col size="12" size-sm="5" offset-xl="5.8" size-xl="2.8">
-                <span class="text-sm text-black-2">Duration</span>
+                <span class="text-sm text-black-2">{{'COMMON.duration' | translate}}</span>
                 <div class=" h-[52px]">
                     <ion-select interface="popover" [multiple]="true">
                     <ion-select-option value="status1">Status1</ion-select-option>
@@ -26,7 +26,7 @@
                 </div>
             </ion-col>
             <ion-col size="12" size-sm="5" size-xl="1.5">
-                <ion-button (click)="addDesigner()" fill="clear" class="primary-btn mt-6">Add designer</ion-button>
+                <ion-button (click)="addDesigner()" fill="clear" class="primary-btn mt-6">{{'DESIGNERS.add' | translate}}</ion-button>
             </ion-col>
         </ion-row>
 
@@ -44,14 +44,14 @@
                     <div class="my-4 text-center">
                         <p class="text-black-2 leading-5 font-semibold text-2xl">Grace  Delawer</p>
                         <p class="text-black-2 size-[22px] leading-5 mt-1">Scandinavian style</p>
-                        <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">INHOUSE DESIGNER</p>
+                        <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">{{'DESIGNERS.inhouse' | translate}}</p>
                         <div class="py-4 px-1 m-4 bg-light">
                             <ul>
                                 <li *ngFor="let number of [0,1,2,3,4]" class="inline-block">
                                     <ion-icon name="star" class="text-primary mr-1"></ion-icon>
                                 </li>
                             </ul>
-                            <p class="text-primary size-[20px] leading-5">128 Completed Designs</p>
+                            <p class="text-primary size-[20px] leading-5">128 {{'CONTACT-DESIGNER.completed' | translate}}</p>
                         </div>
                     </div>
                 </div>

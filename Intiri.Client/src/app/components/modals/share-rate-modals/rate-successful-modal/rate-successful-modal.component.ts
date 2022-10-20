@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 
 export class RateSuccessfulModalComponent {
 
+  designerFullname: string;
+
   constructor(
     private modalController: ModalController
   ) {}

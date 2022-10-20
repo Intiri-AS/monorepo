@@ -4,13 +4,13 @@
     <ion-grid class="main-container">
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add designer</h1>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'DESIGNERS.add' | translate}}</h1>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Designer name</span>
+            <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
             <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
         </ion-col>
@@ -19,7 +19,7 @@
         <ion-col>
           <section class="flex">
             <div class="phone-input">
-              <span class="text-sm text-black-2">Phone number</span>
+              <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
               <ion-select class="" value="serbia" interface="popover">
                 <ion-select-option value="denmark">+45</ion-select-option>
                 <ion-select-option value="sweden">+46</ion-select-option>
@@ -29,7 +29,7 @@
               </ion-select>
             </div>
             <div class="profile-input">
-              <span class="text-sm invisible">Phone number</span>
+              <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
               <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
             </div>
           </section>
@@ -38,35 +38,35 @@
       <ion-row>
         <ion-col class="flex">
           <div class="profile-input">
-            <span class="text-sm text-black-2">Hourly rate</span>
+            <span class="text-sm text-black-2">{{'DESIGNERS.hourly-rate' | translate}}</span>
             <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Style</span>
+            <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
             <ion-select class="" interface="popover">
-              <ion-select-option value="style1">style1</ion-select-option>
-              <ion-select-option value="style2">style2</ion-select-option>
+              <ion-select-option value="style1">{{'DESIGNERS.style' | translate}}1</ion-select-option>
+              <ion-select-option value="style2">{{'DESIGNERS.style' | translate}}2</ion-select-option>
             </ion-select>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">Designer status</p>
+          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
           <div class="flex items-center mb-3">
             <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 rounded text-black-1 cursor-pointer">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">In-house designer</label>
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'DESIGNERS.inhouse' | translate}}</label>
           </div>
           <div class="flex items-center">
             <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 rounded text-black-1">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">External designer</label>
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'DESIGNERS.external' | translate}}</label>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-12">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addedDesigner()">Add</ion-button>
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addedDesigner()">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -77,11 +77,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Designer added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new designer.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'DESIGNERS.designer-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'DESIGNERS.designer-added-text' | translate}}</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Designers</ion-button>
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'DESIGNERS.go-to' | translate}}</ion-button>
           </ion-buttons>
         </div>
     </div>
