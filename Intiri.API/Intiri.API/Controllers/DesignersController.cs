@@ -32,6 +32,7 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
+		// Admin Panel
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<DesignerOutDTO>>> GetAllDesignerBasicInfo()
 		{ 
@@ -42,10 +43,11 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
+		//EndUser
 		[HttpGet("contactDesigners")]
 		public async Task<ActionResult<IEnumerable<DesignerOutDTO>>> GetAllDesignerWithStyleImages()
 		{
-			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignerUsersAsync();
+			IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignersWithRatingsAsync();
 
 			foreach (Designer designer in dUsers)
 			{
