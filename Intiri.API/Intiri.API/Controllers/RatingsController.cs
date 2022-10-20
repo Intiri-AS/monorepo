@@ -33,10 +33,10 @@ namespace Intiri.API.Controllers
 		#endregion Constructors
 
 		[HttpGet("designerRating")]
-		public async Task<ActionResult<RatingBasicOutDTO>> GetDesignerFullRating(DesignerRatingInDTO ratingInDTO)
+		public async Task<ActionResult<RatingFullOutDTO>> GetDesignerFullRating()
 		{
-			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(ratingInDTO.DesignerId);
-			if (designer == null) return BadRequest();
+			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(User.GetUserId());
+			if (designer == null) return Unauthorized("Invalid designer.");
 
 			DesignerRating dRating = designer.DesignerRating;
 
@@ -52,7 +52,7 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<bool>> GetIsDesignerAlreadyRated(int designerId)
 		{
 			EndUser endUser = await _unitOfWork.UserRepository.GetUserByIdAsync<EndUser>(User.GetUserId());
-			if (endUser == null) return Unauthorized("Invalid client.");
+			if (endUser == null) return true;
 
 			if (!await _unitOfWork.UserRepository.IsDesignerExistByAsync(designerId))
 			{
