@@ -12,6 +12,27 @@ export class AddPartnerPage implements OnInit {
   options = {
     slidesPerView: 5,
     spaceBetween: 20,
+    breakpoints: {
+      100: {
+        slidesPerView: 1,
+      },
+      480: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      800: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 20
+      },
+      1400: {
+        slidesPerView: 5,
+        spaceBetween: 20
+      }
+    }
   }
 
   constructor() { }

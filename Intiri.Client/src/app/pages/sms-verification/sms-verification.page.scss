@@ -50,3 +50,9 @@ code-input {
   --item-border-bottom-focused: 1px solid #555555;
   --item-shadow-focused: 0px;
 }
+
+@media (max-width: 520px) {
+  code-input {
+    --item-spacing: 3px;
+  }
+}

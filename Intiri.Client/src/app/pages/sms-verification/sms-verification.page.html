@@ -1,9 +1,9 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" offset-xl="2" size-xl="4" class="p-2 xl:p-12 h-full">
-        <div class="w-full xl:w-[470px]">
-          <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
+      <ion-col size="12" offset-xl="1" size-xl="5" class="p-2 xl:p-12 h-full">
+        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg">
+        <div class="w-full xl:w-[470px] text-center">
           <ion-button fill="clear" class="register-btn" routerLink="/register" routerDirection="root">
             <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
             <p>Create an account</p>
@@ -12,7 +12,7 @@
           <p class="text-lg text-black-2">
             An sms with 6-digit verification code was sent to your phone.
           </p>
-          <div class="mt-8">
+          <div class="mt-8 max-w-[500px] mx-auto">
             <code-input  #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)" (codeCompleted)="onCodeCompleted($event)">
 
             </code-input>
@@ -24,7 +24,7 @@
           </div>
         </div>
       </ion-col>
-      <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full flex justify-end">
+      <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full hidden xl:flex justify-end">
         <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
       </ion-col>
     </ion-row>

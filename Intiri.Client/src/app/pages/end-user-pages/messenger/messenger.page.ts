@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-messenger',
@@ -30,7 +31,7 @@ export class MessengerPage implements OnInit {
   currentChannel: string;
 
   constructor(private msgService: MessengerService, private accountService: AccountService, public datepipe: DatePipe, private route: ActivatedRoute,
-    private router: Router, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService) { }
+    private router: Router, private sanitizer: DomSanitizer, private spinner: NgxSpinnerService, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     //Pusher.logToConsole = true; // remove after testing
@@ -105,7 +106,14 @@ export class MessengerPage implements OnInit {
         this.isLoading = false;
         this.attachments = null;
         this.message = '';
-      }, err => { this.spinner.hide(); this.attachments = null; this.err = 'Error: Cannot upload file(s).' });
+      }, err => {
+        this.spinner.hide();
+        this.attachments = null;
+        this.err = 'Error: Cannot upload file(s).'
+        this.notifier.show({
+          message: this.err,
+          type: 'error',
+        }); });
     }
   }
 
