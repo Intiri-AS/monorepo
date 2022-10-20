@@ -31,6 +31,16 @@ namespace Intiri.API.Services
 
 		#endregion Constructor
 
+		public async Task<bool> InitRatingAndSaveDesignerAsync(Designer designer)
+		{
+			DesignerRating designerRating = new DesignerRating();
+			designerRating.Designer = designer;
+			_unitOfWork.DesignerRatingRepository.Insert(designerRating);
+			designer.DesignerRating = designerRating;
+
+			return await _unitOfWork.SaveChanges();
+		}
+
 		public async Task<RatingBasicOutDTO> AddDesignerRatingAsync(DesignerRatingInDTO ratingInDTO, Designer designer, EndUser endUser)
 		{
 			DesignerRating dRating = designer.DesignerRating;
@@ -70,6 +80,5 @@ namespace Intiri.API.Services
 
 			return await _unitOfWork.SaveChanges() ? _mapper.Map<RatingBasicOutDTO>(dRating) : null;
 		}
-
 	}
 }
