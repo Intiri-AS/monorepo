@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AddPartnerPage } from 'src/app/pages/admin-pages/add-partner/add-partner.page';
+import { AdminClientsComponent } from '../admin-clients/admin-clients.component';
 import { NotifierService } from 'angular-notifier';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { AddColorModalComponent } from '../modals/add-color-modal/add-color-modal.component';
@@ -24,6 +26,7 @@ export class MenuPopoverComponent implements OnInit {
   room: boolean;
   color: boolean;
   picture: boolean;
+  contact: boolean;
 
   item: any
 
@@ -84,6 +87,26 @@ export class MenuPopoverComponent implements OnInit {
   async openDeletePictureModal() {
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  async openDeleteContactModal() {
+    const modal = await this.modalController.create({
+      component: AddPartnerPage,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  async openDeleteClientModal() {
+    const modal = await this.modalController.create({
+      component: AdminClientsComponent,
       componentProps: {delete: true, item: this.item},
       cssClass: 'added-designer-modal-css'
     });

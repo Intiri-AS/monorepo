@@ -161,11 +161,19 @@ ion-button {
   padding-left: 15px;
 }
 
-.text-clamp-1 {
+.clamp {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+}
+.text-clamp-1 {
+  @extend .clamp;
   -webkit-line-clamp: 1;
+}
+
+.text-clamp-2 {
+  @extend .clamp;
+  -webkit-line-clamp: 2;
 }
 
 // override for color picker from ngx-color-picker library (cannot be overriden inside a component)

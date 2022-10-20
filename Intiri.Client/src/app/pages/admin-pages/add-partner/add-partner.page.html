@@ -1,47 +1,47 @@
 <ion-content>
-  <div id="home">
+  <div *ngIf="!delete" id="home">
     <app-header-admin></app-header-admin>
     <ion-grid class="main-container">
       <ion-row>
         <ion-col size="12" size-md="3" size-lg="2.5">
           <div class="bg-light xl:h-[820px] h-[630px] rounded-lg text-center">
             <img src="../../../assets/images/img-01.png" class="rounded-[50%] w-[165px] h-[165px] xll:w-[250px] xll:h-[250px] object-cover p-8 relative top-12 mx-auto" alt="Profile Img"/>
-            <h3 class="mt-12 mx-10 mb-8 font-medium text-black-2">SKEIDAR</h3>
-            <p class="text-black-2 ">+47 585 56 565</p>
-            <p class="text-black-2">gracedel@gmail.com</p>
-            <p class="text-black-2">Oslo Volvat Sokedalsvelen 33</p>
+            <h3 class="mt-12 mx-10 mb-8 font-medium text-black-2">{{partner.name}}</h3>
+            <p class="text-black-2 ">+{{partner.countryCode}}{{partner.phoneNumber}}</p>
+            <p class="text-black-2">{{partner.email}}</p>
+            <p class="text-black-2">{{partner.street}}</p>
           </div>
         </ion-col>
         <ion-col size="12" size-md="7.7" offset="0.2" size-lg="9.3">
           <ion-grid>
             <ion-row>
-              <ion-button fill="clear" class="text-black hover:opacity-50">
+              <ion-button fill="clear" class="text-black hover:opacity-50 relative right-[18px]" routerLink="/partners" routerDirection="root">
                 <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                 <p class="capitalize ml-2 text-lg">{{'DASHBOARD.partners' | translate}}</p>
               </ion-button>
             </ion-row>
             <ion-row>
-              <p class="text-black-2 text-2xl font-medium">Partners contacts</p>
+              <p class="text-black-2 text-2xl font-medium cursor-default">Partners contacts</p>
             </ion-row>
             <ion-row class="w-[85%]">
-              <ion-col *ngFor="let l of [1,2,3,4,5,6]" size="12" size-md="5" size-lg="3">
+              <ion-col *ngFor="let contact of partner.partnerContacts" size="12" size-md="5" size-lg="3">
                 <div class="mt-4 border rounded-2xl shadow-1 h-[130px]">
                   <div class="flex justify-between pt-[35px] px-4">
-                    <p [title]="'Mary Jane Smith SmithSmithSmithSmith'" class="text-black-2 font-semibold text-lg h-full cursor-default text-clamp">
-                      Mary Jane Smith
+                    <p class="text-black-2 font-semibold text-lg h-full cursor-default text-clamp">
+                      {{contact.firstName}} {{contact.lastName}}
                     </p>
                     <div class="float-right">
-                      <button (click)="showSettings()" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="pt-1 inline-flex text-black-2 text-sm font-medium text-center" type="button">
+                      <button (click)="showSettings($event, contact)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="pt-1 inline-flex text-black-2 text-sm font-medium text-center" type="button">
                           <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                       </button>
                     </div>
                   </div>
-                  <p class="text-black-2 px-4">+47 585 56 565</p>
+                  <p class="text-black-2 px-4">{{contact.phoneNumber}}</p>
                 </div>
               </ion-col>
               <ion-col size="12" size-md="5" size-lg="3">
                 <div class="profile-input">
-                  <div class="border-2 border-dashed rounded-2xl h-[128px] border-black-3 hover:opacity-70 cursor-pointer">
+                  <div (click)="openAddContactModal(partner.id)" class="border-2 border-dashed rounded-2xl h-[128px] border-black-3 hover:opacity-70 cursor-pointer">
                     <div class="text-center mt-[35px]">
                       <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                       <p class="font-semibold text-black-3 text-lg">Add contact person</p>
@@ -52,7 +52,7 @@
             </ion-row>
             <ion-row class="pt-20 flex justify-between items-center">
                 <p class="text-2xl text-black-2 font-medium">{{'PARTNERS.products' | translate}}</p>
-                <div>
+                <div *ngIf="partner.products.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black-2 hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>
@@ -63,15 +63,15 @@
             </ion-row>
             <ion-row class="gap-x-[1.65%]">
               <ion-slides #slides [options]="options" class="w-full">
-                <ion-slide *ngFor="let product of [1,2,3,4,5,6,7,8]" >
+                <ion-slide *ngFor="let product of partner.products" >
                   <ion-col size="12" size-sm="5.75" size-xl="1.83">
                     <div class="card">
                       <div class="h-full w-full">
-                        <img src="../../../assets/images/img-01.png" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
+                        <img src="{{product.imagePath}}" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
                       </div>
                     </div>
                     <div class="flex justify-between">
-                      <p class="py-2 text-black-2 font-semibold">Chair</p>
+                      <p class="py-2 text-black-2 font-semibold">{{product.name}}</p>
                     </div>
                   </ion-col>
                 </ion-slide>
@@ -81,5 +81,21 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </div>
+  <!-- Picture delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove partner contact</h2>
+          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this partner contact? This action cannot be undone.</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteContact()">Remove</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+        </ion-buttons>
+      </div>
+    </div>
   </div>
 </ion-content>

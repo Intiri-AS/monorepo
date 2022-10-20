@@ -101,6 +101,8 @@ import { AddMaterialsModalComponent } from './components/modals/add-materials-mo
 import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
 import { AddColorModalComponent } from './components/modals/add-color-modal/add-color-modal.component';
 import { AddPictureModalComponent } from './components/modals/add-picture-modal/add-picture-modal.component';
+import { AddProductModalComponent } from './components/modals/add-product-modal/add-product-modal.component';
+import { DeleteMoodboardModalComponent } from './components/modals/delete-moodboard-modal/delete-moodboard-modal.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -140,12 +142,12 @@ export function createTranslateLoader(http: HttpClient) {
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
-    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent
+    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     RateModalComponent, RateSuccessfulModalComponent, ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent,
-    AddColorModalComponent, AddPictureModalComponent,
+    AddColorModalComponent, AddPictureModalComponent, AddProductModalComponent, DeleteMoodboardModalComponent
   ],
   imports: [
     BrowserModule,

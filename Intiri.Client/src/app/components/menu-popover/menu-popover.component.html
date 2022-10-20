@@ -14,7 +14,7 @@
 </ion-list>
 
 <ion-list *ngIf="client" lines="none" >
-  <ion-item class="text-black-1 font-medium" (click)="openDeleteStyleModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
+  <ion-item class="text-black-1 font-medium" (click)="openDeleteClientModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="style" lines="none" >
@@ -40,4 +40,9 @@
 <ion-list *ngIf="picture" lines="none" >
   <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
   <ion-item class="text-black-1 font-medium" (click)="openDeletePictureModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
+</ion-list>
+
+<ion-list *ngIf="contact" lines="none" >
+  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1 font-medium" (click)="openDeleteContactModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>

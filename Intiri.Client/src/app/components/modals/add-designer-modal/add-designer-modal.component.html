@@ -11,7 +11,13 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
-            <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+            <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="profile-input">
+            <span class="text-sm text-black-2">Last name</span>
+            <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
         </ion-col>
       </ion-row>
@@ -20,53 +26,49 @@
           <section class="flex">
             <div class="phone-input">
               <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
-              <ion-select class="" value="serbia" interface="popover">
-                <ion-select-option value="denmark">+45</ion-select-option>
-                <ion-select-option value="sweden">+46</ion-select-option>
-                <ion-select-option value="norway">+47</ion-select-option>
-                <ion-select-option value="serbia">+381</ion-select-option>
-                <ion-select-option value="montenegro">+382</ion-select-option>
+              <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode">
+                <ion-select-option value="45">+45</ion-select-option>
+                <ion-select-option value="46">+46</ion-select-option>
+                <ion-select-option value="47">+47</ion-select-option>
+                <ion-select-option value="381">+381</ion-select-option>
+                <ion-select-option value="382">+382</ion-select-option>
               </ion-select>
             </div>
             <div class="profile-input">
               <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-              <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber"></ion-input>
             </div>
           </section>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col class="flex">
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'DESIGNERS.hourly-rate' | translate}}</span>
-            <ion-input type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
-          </div>
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
-            <ion-select class="" interface="popover">
-              <ion-select-option value="style1">{{'DESIGNERS.style' | translate}}1</ion-select-option>
-              <ion-select-option value="style2">{{'DESIGNERS.style' | translate}}2</ion-select-option>
-            </ion-select>
-          </div>
+        <ion-col class="ml-2.5">
+          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
+          <ion-radio-group [(ngModel)]="designer.role">
+            <ion-radio value="InternalDesigner"></ion-radio>
+            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.inhouse' | translate}}</span>
+            <ion-radio value="ExternalDesigner"></ion-radio>
+            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
+          </ion-radio-group>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
+          <p class="font-medium text-black-1 text-lg mt-7 mb-2">Language</p>
           <div class="flex items-center mb-3">
-            <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 rounded text-black-1 cursor-pointer">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'DESIGNERS.inhouse' | translate}}</label>
+            <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer">
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">English</label>
           </div>
           <div class="flex items-center">
-            <input id="default-checkbox" type="checkbox" value="" class="w-5 h-5 rounded text-black-1">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'DESIGNERS.external' | translate}}</label>
+            <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary">
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">Norwegian</label>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-12">
           <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addedDesigner()">{{'COMMON.add' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addDesigner()">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
