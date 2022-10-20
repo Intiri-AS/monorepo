@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { PartnerService } from 'src/app/services/partner.service';
 import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partner-modal.component';
 
 @Component({
@@ -9,12 +12,17 @@ import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partne
 })
 export class AdminPartnersComponent implements OnInit {
 
+  partners: any[];
+  partners$: Observable<any> = this.partnerService.partners$;
   searchText: any;
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, private partnerService: PartnerService) {}
 
   ngOnInit(): void {
-      
+    this.partnerService.getPartners();
+    this.partners$.pipe(take(1)).subscribe(partners => { 
+      this.partners = partners;
+    });
   }
 
   async addPartner() {

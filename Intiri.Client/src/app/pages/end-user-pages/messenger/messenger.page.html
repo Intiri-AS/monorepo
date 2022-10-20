@@ -86,8 +86,12 @@
                   </label>
                   <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
                 </ng-container>
-                <div *ngIf="activeChatUser.chatPeriodExpired" class="text-primary mx-auto cursor-default">
+                <div *ngIf="activeChatUser.id && activeChatUser.chatPeriodExpired" class="text-primary mx-auto cursor-default">
                   Your chat session with {{activeChatUser.firstName}} has expired.
+                </div>
+                <div *ngIf="!activeChatUser.id" class="text-primary mx-auto cursor-default">
+                  Your inbox is empty. 
+                  <span routerLink="/book-designer" routerDirection="root" class="font-bold cursor-pointer hover:opacity-80">Book designer</span> in order to start conversation.
                 </div>
               </div>
             </div>

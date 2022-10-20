@@ -47,6 +47,6 @@ export class MoodboardsPage implements OnInit {
         this.moodboards = moodboards;
       }
     })
-}
+  }
 
 }
