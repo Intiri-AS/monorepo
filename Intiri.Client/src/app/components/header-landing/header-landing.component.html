@@ -10,9 +10,9 @@
         <ion-button fill="clear" class="btn" (click)="scrollTo('contact')">{{'LANDING.contact' | translate}}</ion-button>
         <ion-button fill="clear" class="primary-btn" routerLink="/login" routerDirection="root">{{'COMMON.login' | translate}}</ion-button>
         <ion-button fill="clear" class="secondary-btn" routerLink="/register" routerDirection="root">{{'COMMON.register' | translate}}</ion-button>
-        <ion-button class="btn" (click)="showLanguage($event)">
+        <ion-button class="btn hover:opacity-80" (click)="showLanguage($event)">
           <ion-img [src]="languageImg"></ion-img>
-        </ion-button> 
+        </ion-button>
       </ion-buttons>
       <div class="flex md:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>

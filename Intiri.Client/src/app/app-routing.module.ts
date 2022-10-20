@@ -236,10 +236,10 @@ const routes: Routes = [
     path: 'client-request', //TODO Set up page guard (designer guard)
     component: ClientRequestPage
   },
-  {
-    path: 'style-list', //TODO Set up page guard (internal designer guard)
-    component: StyleListPage
-  },
+  // {
+  //   path: 'style-list', //TODO Set up page guard (internal designer guard)
+  //   component: StyleListPage
+  // },
   {
     path: 'partner', //TODO Set up page guard (shared guard)
     component: PartnerProductsPage,

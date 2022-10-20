@@ -18,7 +18,7 @@ export class BookDesignerPage {
   constructor(private designerService: DesignerService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.designerService.getDesigners().subscribe((res: any[]) => {
+    this.designerService.getContactDesigners().subscribe((res: any[]) => {
       this.designers = res;
     });
   }

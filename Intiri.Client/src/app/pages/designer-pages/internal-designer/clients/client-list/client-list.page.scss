@@ -17,3 +17,6 @@
   width: 100% !important;
 }
 
+.client {
+  @apply border rounded-2xl min-h-[300px] mb-[30px] overflow-hidden shadow-1;
+}
