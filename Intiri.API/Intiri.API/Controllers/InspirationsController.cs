@@ -9,6 +9,9 @@ using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Intiri.API.Models.DTO.OutputDTO.Material;
+using Intiri.API.Models.Moodboard;
+using AutoMapper;
 
 namespace Intiri.API.Controllers
 {
@@ -19,24 +22,39 @@ namespace Intiri.API.Controllers
 		private readonly IFileUploadService _fileUploadService;
 		private readonly ILogger<InspirationsController> _logger;
 		private readonly IAccountService _accountService;
+		private readonly IMapper _mapper;
+
 
 		#endregion Fields
 
 		#region Constructors
 
-		public InspirationsController(IUnitOfWork unitOfWork, IFileUploadService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger) : base(unitOfWork)
+		public InspirationsController(IUnitOfWork unitOfWork, IFileUploadService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
 		{
 			_fileUploadService = fileUploadService;
 			_accountService = accountService;
 			_logger = logger;
+			_mapper = mapper;
 		}
 
 		#endregion Constructors
 
-		[HttpPost("add")]
-		public async Task<ActionResult> AddPhoto(IFormFile inFile)
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
 		{
-			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
+			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
+			if (clientUser == null) return Unauthorized("Invalid clent.");
+
+			IEnumerable<InspirationOutDTO> inspirationsOut = _mapper.Map<IEnumerable<InspirationOutDTO>>(clientUser.Inspirations);
+
+			return Ok(inspirationsOut);
+		}
+
+		[HttpPost("add")]
+		public async Task<ActionResult<InspirationOutDTO>> AddPhoto(IFormFile inFile)
+		{
+			//EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
+			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(5);
 			if (clientUser == null) return Unauthorized("Invalid clent.");
 
 			if (inFile.Length > 0)
@@ -66,7 +84,7 @@ namespace Intiri.API.Controllers
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					return Ok();
+					return Ok(_mapper.Map<InspirationOutDTO>(inspiration));
 				}
 			}
 
@@ -87,7 +105,7 @@ namespace Intiri.API.Controllers
 				var result = await _fileUploadService.DeleteFileAsync(inspiration.PublicId);
 				if (result.Error != null) return BadRequest(result.Error.Message);
 			}
-
+			 
 			clientUser.Inspirations.Remove(inspiration);
 
 			if (await _unitOfWork.SaveChanges())

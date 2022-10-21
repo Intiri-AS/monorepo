@@ -23,6 +23,9 @@ namespace Intiri.API.Automapper
 			CreateMap<Designer, DesignerOutDTO>();
 			CreateMap<Designer, DesignerWithReviewsOutDTO>();
 
+			// Inspiration map
+			CreateMap<Inspiration, InspirationOutDTO>();
+
 		}
 	}
 }
