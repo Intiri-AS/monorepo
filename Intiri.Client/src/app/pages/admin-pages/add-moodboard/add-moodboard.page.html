@@ -5,7 +5,7 @@
       <p class="main-title mb-[34px] pl-2">Add moodboard</p>
       <ion-row>
         <ion-col size="12" size-xl="2.5">
-          <div class="bg-light xl-ion:w-[240px] xl-ion:h-[440px] rounded-lg text-center">
+          <div class="bg-light xl-ion:w-[240px] xl-ion:h-[440px] rounded-lg text-center pb-1">
             <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item pt-[45px]">{{'NEW-PROJECT.room' | translate}}</p>
             <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">{{'NEW-PROJECT.style' | translate}}</p>
             <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">{{'NEW-PROJECT.materials' | translate}}</p>
@@ -45,7 +45,7 @@
               class="secondary-btn"
               routerLink="/moodboards"
               routerDirection="root"
-              >{{'CLIENTS.cancel' | translate}}</ion-button
+              >{{'COMMON.cancel' | translate}}</ion-button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
