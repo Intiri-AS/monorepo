@@ -15,7 +15,7 @@
   "SMS": {
     "create": "Create an account",
     "code": "6-digit code",
-    "sms-msg": "An sms with 6-digit verification code was sent to you phone.",
+    "sms-msg": "An sms with 6-digit verification code was sent to your phone.",
     "proceed": "Proceed to app",
     "again": "Send again"
   },
@@ -107,7 +107,10 @@
   "DESIGNER-PROFILE": {
     "other": "Other projects",
     "languages": "Languages",
-    "book": "Book consultation"
+    "book": "Book consultation",
+    "latest-moodboard": "Latest moodboard",
+    "other-moodboards": "Other moodboards"
+
   },
   "MESSENGER": {
     "messages": "Messages",
@@ -227,7 +230,7 @@
     "designers": "Designers",
     "clients": "Clients",
     "statistic":"Statistic",
-    "moodboards": "Moodbaoards",
+    "moodboards": "Moodboards",
     "my-moodboards":"My moodboards",
     "all-moodboards":"All moodboards",
     "style": "Style",

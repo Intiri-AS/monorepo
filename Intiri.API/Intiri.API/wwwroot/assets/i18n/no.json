@@ -107,7 +107,9 @@
   "DESIGNER-PROFILE": {
     "other": "Annet",
     "languages": "Språk",
-    "book": "Book konsultasjon"
+    "book": "Book konsultasjon",
+    "latest-moodboard": "Siste moodboard",
+    "other-moodboards": "Alle moodboards"
   },
   "MESSENGER": {
     "messages": "Meldinger",
