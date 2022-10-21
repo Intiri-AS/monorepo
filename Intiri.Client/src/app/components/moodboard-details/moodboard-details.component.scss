@@ -1,0 +1,22 @@
+.result-grid {
+  @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
+}
+.step-items-row {
+  @apply gap-x-[2%];
+}
+
+.step-items {
+  @apply max-h-[750px] overflow-auto mb-3;
+}
+
+.step-image {
+  @apply object-cover h-full w-full rounded-2xl;
+}
+
+img {
+  @apply h-full w-full object-cover;
+}
+
+p {
+  @apply text-left;
+}
