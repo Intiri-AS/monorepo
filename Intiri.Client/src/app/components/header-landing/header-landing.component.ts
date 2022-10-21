@@ -15,7 +15,6 @@ export class HeaderLandingComponent {
   @Input() isScrolledDown: boolean;
 
   languageImg: string = ''
-  language: any = ''
 
   constructor(private popoverController: PopoverController, 
               private translate: TranslateService,
