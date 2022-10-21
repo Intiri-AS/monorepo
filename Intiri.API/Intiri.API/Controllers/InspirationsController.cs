@@ -33,24 +33,18 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
-		[HttpPost("addInspiration")]
-		public async Task<ActionResult<UserPhotoPathOutDTO>> AddPhoto([FromForm] UserPhotoFileInDTO inFile)
+		[HttpPost("add")]
+		public async Task<ActionResult> AddPhoto(IFormFile inFile)
 		{
 			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
+			if (clientUser == null) return Unauthorized("Invalid clent.");
 
-			if (clientUser == null)
-			{
-				return Unauthorized("Invalid clent.");
-			}
-
-			IFormFile file = inFile.PhotoPath;
-
-			if (file.Length > 0)
+			if (inFile.Length > 0)
 			{
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.ClientInspirations);
+					uploadResult = await _fileUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
 				}
 				catch (Exception ex)
 				{
@@ -72,21 +66,21 @@ namespace Intiri.API.Controllers
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					return Ok(new UserPhotoPathOutDTO() { PhotoPath = inspiration.Url });
+					return Ok();
 				}
 			}
 
-			return BadRequest("Problem adding user photo.");
+			return BadRequest("Problem adding user inspiration.");
 		}
 
-		[HttpDelete("deleteInspiration/{inspirationId}")]
+		[HttpDelete("delete/{inspirationId}")]
 		public async Task<IActionResult> DeleteInspiration(int inspirationId)
 		{
-			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
+			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
+			if (clientUser == null) return Unauthorized("Invalid clent.");
 
 			Inspiration inspiration = clientUser.Inspirations.FirstOrDefault(x => x.Id == inspirationId);
-
-			if (inspiration == null) return NotFound();
+			if (inspiration == null) return NotFound("Inspiration file not found.");
 
 			if (inspiration.PublicId != null)
 			{
