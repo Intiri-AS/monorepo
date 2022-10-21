@@ -12,6 +12,7 @@ import { RateSuccessfulModalComponent } from '../rate-successful-modal/rate-succ
 export class RateModalComponent {
 
   star = 0;
+  hoverStar = 0;
   rateDisabled = true;
   designer: any;
 

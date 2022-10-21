@@ -12,6 +12,7 @@ import { PartnerService } from 'src/app/services/partner.service';
 export class AddPartnerModalComponent implements OnInit {
 
   added;
+  addedContact;
   nextPage;
   delete;
   partnerId;
