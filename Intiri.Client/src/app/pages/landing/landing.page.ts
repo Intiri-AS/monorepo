@@ -36,9 +36,6 @@ export class LandingPage {
 
   constructor(private translate: TranslateService) {}
 
-  ngOnInit() {
-    console.log(this.translate.getBrowserCultureLang())
-  }
 
   @ViewChild(IonContent) content: IonContent;
 
