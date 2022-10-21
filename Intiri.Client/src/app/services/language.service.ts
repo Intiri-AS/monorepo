@@ -17,7 +17,7 @@ export class LanguageService {
   ) {}
 
   setInitialAppLanguage() {
-    let language = this.translate.getBrowserLang();
+    let language = 'no';
     this.translate.setDefaultLang(language);
 
     this.storage.get(LNG_KEY).then(val => {

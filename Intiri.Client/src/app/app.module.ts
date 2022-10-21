@@ -204,7 +204,7 @@ export function ApplicationInitializerFactory(
   return async () => {
     await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
-    const deaultLang = 'en';
+    const deaultLang = 'no';
     translate.addLangs(['en', 'no']);
     translate.setDefaultLang(deaultLang);
     try {

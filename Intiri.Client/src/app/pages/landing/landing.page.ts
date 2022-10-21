@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -33,7 +34,11 @@ export class LandingPage {
 
   isScrolledDown: boolean;
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
+
+  ngOnInit() {
+    console.log(this.translate.getBrowserCultureLang())
+  }
 
   @ViewChild(IonContent) content: IonContent;
 

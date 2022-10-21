@@ -18,7 +18,7 @@ export class HeaderLandingComponent {
   constructor(private popoverController: PopoverController, private translate: TranslateService) {}
 
   ngOnInit() {
-    this.language = this.translate.getBrowserLang();
+    this.language = 'no';
     this.chosenLanguage(this.language);
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
       this.chosenLanguage(event.lang);
@@ -26,9 +26,9 @@ export class HeaderLandingComponent {
   }
 
   chosenLanguage(lng:string) {
-    if (lng === 'en-US' || lng === 'en') {
+    if (lng === 'en') {
       this.languageImg = 'assets/icon/flags/us.svg'
-    } else if (lng === 'no' || lng === 'nb') {
+    } else if (lng === 'no') {
       this.languageImg = 'assets/icon/flags/no.svg'
     }
   }
