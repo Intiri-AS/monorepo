@@ -28,7 +28,7 @@ export class HeaderLandingComponent {
   chosenLanguage(lng:string) {
     if (lng === 'en-US' || lng === 'en') {
       this.languageImg = 'assets/icon/flags/us.svg'
-    } else if (lng === 'no' || lng === 'nb') {
+    } else if (lng === 'no') {
       this.languageImg = 'assets/icon/flags/no.svg'
     }
   }
