@@ -4,9 +4,9 @@
             <div class="max-w-md w-full p-6">
                 <div class="w-full">
                     <img class="h-7 w-full text-center" src="../../../assets/images/intiri-logo.svg">
-                    <h1 class="text-2xl font-semibold text-center mt-10">6-digit code</h1>
+                    <h1 class="text-2xl font-semibold text-center mt-10">{{'SMS.code' | translate}}</h1>
                     <p class="text-base text-black-2 text-center">
-                        An sms with 6-digit verification code was sent to your phone.
+                        {{'SMS.sms-msg' | translate}}
                     </p>
                     <div class="mt-8">
                         <code-input #codeInput [codeLength]="6" (codeChanged)="onCodeChanged($event)"
@@ -15,8 +15,8 @@
                         <span class="ion-warning mt-2" *ngIf="error">{{ error }}</span>
                     </div>
                     <div class="flex flex-col justify-center items-center">
-                        <ion-button fill="clear" class="primary-btn mt-[30px]">Proceed to app</ion-button>
-                        <ion-button fill="clear" class="send-btn">Send again</ion-button>
+                        <ion-button fill="clear" class="primary-btn mt-[30px]"> {{'SMS.proceed' | translate}}</ion-button>
+                        <ion-button fill="clear" class="send-btn">{{'SMS.again' | translate}}</ion-button>
                     </div>
                 </div>
             </div>

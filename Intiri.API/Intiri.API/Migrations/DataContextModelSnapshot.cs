@@ -476,6 +476,75 @@ namespace Intiri.API.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Rating.DesignerRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("DesignerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FiveStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FourStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OneStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThreeStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TwoStar")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DesignerId")
+                        .IsUnique();
+
+                    b.ToTable("DesignerRatings");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Rating.DesignerReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DesignerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EndUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RatingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DesignerId");
+
+                    b.HasIndex("EndUserId");
+
+                    b.ToTable("DesignerReviews");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -1106,6 +1175,34 @@ namespace Intiri.API.Migrations
                     b.Navigation("RoomDetails");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Rating.DesignerRating", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Designer", "Designer")
+                        .WithOne("DesignerRating")
+                        .HasForeignKey("Intiri.API.Models.Rating.DesignerRating", "DesignerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Designer");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Rating.DesignerReview", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Designer", "Designer")
+                        .WithMany("DesignerReviews")
+                        .HasForeignKey("DesignerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Intiri.API.Models.EndUser", "EndUser")
+                        .WithMany()
+                        .HasForeignKey("EndUserId");
+
+                    b.Navigation("Designer");
+
+                    b.Navigation("EndUser");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Room.Room", b =>
                 {
                     b.HasOne("Intiri.API.Models.Room.RoomType", "RoomType")
@@ -1302,6 +1399,10 @@ namespace Intiri.API.Migrations
                     b.Navigation("ConsultationPaymentsReceived");
 
                     b.Navigation("CreatedMoodboards");
+
+                    b.Navigation("DesignerRating");
+
+                    b.Navigation("DesignerReviews");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.EndUser", b =>

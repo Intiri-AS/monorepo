@@ -44,6 +44,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		#endregion  Generic methods
 
+		#region EndUser
 
 		public async Task<IEnumerable<EndUser>> GetEndUsersAsync()
 		{
@@ -57,9 +58,22 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Users.OfType<EndUser>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
+		#endregion EndUser
+
+		#region Designer
+
 		public async Task<IEnumerable<Designer>> GetDesignerUsersAsync()
 		{
 			return await _context.Users.OfType<Designer>()
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.ToListAsync();
+		}
+
+		public async Task<IEnumerable<Designer>> GetDesignersWithRatingsAsync()
+		{
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
 				.Include(m => m.CreatedMoodboards)
 				.Include(u => u.Roles).ThenInclude(r => r.Role)
 				.ToListAsync();
@@ -74,6 +88,36 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 
+		public async Task<Designer> GetDesignerByIdWithRatingsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
+		public async Task<Designer> GetDesignerByIdWithReviewsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(dr => dr.DesignerRating)
+				.Include(c => c.DesignerReviews).ThenInclude(eu => eu.EndUser)
+				.Include(m => m.CreatedMoodboards)
+				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
+		public async Task<bool> IsDesignerExistByAsync(int id)
+		{
+			return await _context.Users.OfType<Designer>().AnyAsync(d => d.Id == id);
+		}
+
+		#endregion Designer
+
+		#region Partner
+
 		public async Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync()
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
@@ -85,6 +129,8 @@ namespace Intiri.API.DataAccess.Repository
 			//return _context.Set<PartnerContact>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<PartnerContact>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
+
+		#endregion Partner
 
 		public void UpdateUser(User user)
 		{

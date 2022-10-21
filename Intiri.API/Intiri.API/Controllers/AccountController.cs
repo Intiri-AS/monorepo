@@ -7,6 +7,8 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.DTO.Vipps;
+using Intiri.API.Models.Product;
+using Intiri.API.Models.Rating;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
@@ -25,6 +27,7 @@ namespace Intiri.API.Controllers
 		private readonly IVippsLoginService _vippsLoginService;
 		private readonly ISmsVerificationService _smsVerificationService;
 		private readonly ILogger<AccountController> _logger;
+		private readonly IRatingService _ratingService;
 
 		#endregion  Fields
 
@@ -37,7 +40,8 @@ namespace Intiri.API.Controllers
 			IAccountService accountService,
 			IVippsLoginService vippsLoginService,
 			ISmsVerificationService smsVerificationService,
-			ILogger<AccountController> logger) : base(unitOfWork)
+			ILogger<AccountController> logger,
+			IRatingService ratingService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
@@ -45,6 +49,7 @@ namespace Intiri.API.Controllers
 			_vippsLoginService = vippsLoginService;
 			_smsVerificationService = smsVerificationService;
 			_logger = logger;
+			_ratingService = ratingService;
 		}
 
 		#endregion Constructors
@@ -97,8 +102,6 @@ namespace Intiri.API.Controllers
 			SmsVerificationInDTO verificationDto)
 		{
 			EndUser eUser = _mapper.Map<EndUser>(verificationDto);
-
-			eUser.UserName = eUser.CountryCode + eUser.PhoneNumber;
 
 			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
 				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
@@ -324,7 +327,6 @@ namespace Intiri.API.Controllers
 
 			PartnerContact pUser = _mapper.Map<PartnerContact>(registerIn);
 			pUser.Partner = partner;
-			pUser.UserName = phoneNumberFull;
 
 			IdentityResult result = await _accountService.CreateUserAsync(pUser);
 			if (!result.Succeeded) return BadRequest(result.Errors);
@@ -354,6 +356,11 @@ namespace Intiri.API.Controllers
 
 			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(dUser, registerIn.Role);
 			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+
+			if (!await _ratingService.InitRatingAndSaveDesignerAsync(dUser))
+			{
+				return BadRequest("Failed to register designer.");
+			}
 
 			return Ok(_mapper.Map<RegisterOutDTO>(dUser));
 		}

@@ -17,7 +17,5 @@ namespace Intiri.API.DataAccess.Repository
 		}
 
 		#endregion Constructors
-
-
 	}
 }

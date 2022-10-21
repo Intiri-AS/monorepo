@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models.Payment;
+using Intiri.API.Models.Rating;
 using Intiri.API.Models.UserLanguage;
 
 namespace Intiri.API.Models
@@ -10,6 +11,7 @@ namespace Intiri.API.Models
 		public Designer()
 		{
 			CreatedMoodboards = new HashSet<Moodboard.Moodboard>();
+			DesignerReviews = new HashSet<DesignerReview>();
 		}
 
 		#endregion Constructors
@@ -17,6 +19,8 @@ namespace Intiri.API.Models
 		#region Properties
 
 		public string Language { get; set; }
+		public DesignerRating DesignerRating { get; set; }
+		public ICollection<DesignerReview> DesignerReviews { get; set; }
 		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
 		public ICollection<ConsultationPayment> ConsultationPaymentsReceived { get; set; }
 

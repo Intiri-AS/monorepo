@@ -5,20 +5,20 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper"><div class="bg-plus h-[34px] w-[34px] mx-auto mt-[5px]"></div></div>
-          <h2 class="mt-6 text-center text-2xl font-bold text-black-1">Let's create new project</h2>
-          <p class="text-center text-base text-black-2">Name the project first.</p>
+          <h2 class="mt-6 text-center text-2xl font-bold text-black-1">{{'NEW-PROJECT.create' | translate}}</h2>
+          <p class="text-center text-base text-black-2">{{'NEW-PROJECT.project' | translate}}</p>
         </div>
         <form class="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" value="true">
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
-              <label for="project-name" class="sr-only">Project name</label>
+              <label for="project-name" class="sr-only">{{'NEW-PROJECT.project-name' | translate}}</label>
               <input id="project-name" name="email" type="email" autocomplete="email" [(ngModel)]="projectName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-[8px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" placeholder="Project name">
             </div>
           </div>
           <ion-buttons class="justify-center">
-            <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">Cancel</ion-button>
-            <ion-button class="primary-btn" [class.disabled]="!isValidProjectName()" (click)="startProjectCreation()">Create</ion-button>
+            <ion-button  class="secondary-btn" (click)="dismiss()" routerLink="/my-intiri" routerDirection="root">{{'COMMON.cancel' | translate}}</ion-button>
+            <ion-button class="primary-btn" [class.disabled]="!isValidProjectName()" (click)="startProjectCreation()">{{'COMMON.create' | translate}}</ion-button>
           </ion-buttons>
         </form>
       </div>
@@ -30,13 +30,13 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="text-primary h-[34px] w-[34px] mx-auto mt-[5px]" name="bookmark"></ion-icon></div>
-          <h2 class="mt-6 text-center text-2xl font-bold text-black-1">Saved!</h2>
-          <p *ngIf="!existing" class="text-center text-base text-black-2">Your project <span class="font-medium">{{project.name}}</span> and first moodboard are saved. You can add new moodboard to the same project or review it.</p>
+          <h2 class="mt-6 text-center text-2xl font-bold text-black-1">{{'PROJECT-SAVED-MODAL.save' | translate}}</h2>
+          <p *ngIf="!existing" class="text-center text-base text-black-2">{{'PROJECT-SAVED-MODAL.save-text1' | translate}} <span class="font-medium">{{project.name}}</span> {{'PROJECT-SAVED-MODAL.save-text2' | translate}}</p>
           <p *ngIf="existing" class="text-center text-base text-black-2">You have successfully added new moodboard to project <span class="font-medium">{{project.name}}</span>. You can now add new moodboard to the same project or review it.</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button  class="secondary-btn" (click)="dismiss()" href="/project-details/{{project.id}}">Go to project</ion-button>
-            <ion-button class="primary-btn" (click)="addNewMoodboard()">Add new moodboard</ion-button>
+            <ion-button  class="secondary-btn" (click)="dismiss()" href="/project-details/{{project.id}}">{{'PROJECT-SAVED-MODAL.go-to' | translate}}</ion-button>
+            <ion-button class="primary-btn" (click)="addNewMoodboard()">{{'PROJECT-SAVED-MODAL.add-new' | translate}}</ion-button>
           </ion-buttons>
           <!-- <p class="text-primary text-center cursor-pointer hover:opacity-80" [class.disabled]="true"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p> -->
       </div>

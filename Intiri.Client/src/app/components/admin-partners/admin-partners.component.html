@@ -3,27 +3,27 @@
     <ion-col size="6" size-md="4" size-lg="3">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
     <ion-col>
       <ion-buttons class="justify-end mt-4">
-        <ion-button class="primary-btn" (click)="addPartner()">Add partner</ion-button>
+        <ion-button class="primary-btn" (click)="addPartner()">{{'PARTNERS.add' | translate}}</ion-button>
       </ion-buttons>
     </ion-col>
   </ion-row>
   <ion-row class="mt-8 gap-x-[1.45%]">
-    <ion-col *ngFor="let i of [1,2,3,4,5,6]" size="12" size-sm="5.75" size-xl="2.25">
-      <div class="logo">
+    <ion-col *ngFor="let partner of (partners$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+      <div class="logo cursor-pointer hover:opacity-70" routerLink="/partner-profile/{{partner.id}}" routerDirection="root">
         <div class="my-6 mx-5 h-[60px] flex flex-1 justify-center">
-          <img src="../../../assets/images/skeidar.png" class="object-scale-down" alt="Profile Img" />
+          <img src="{{partner.logoPath}}" class="object-scale-down" alt="Profile Img" />
         </div>
         <div class="my-4 text-center">
           <div class="px-1">
-            <p class="leading-[26px] text-black-2 text-lg">+47 585 56 565</p>
-            <p class="leading-[26px] text-black-2 text-lg">gracedel@gmail.com</p>
-            <p class="leading-[26px] text-black-2 text-lg">Oslo Volvat Sokedalsvelen 33</p>
+            <p class="leading-[26px] text-black-2 text-lg text-clamp-1" title="{{partner.name}}">{{partner.name}}</p>
+            <p class="leading-[26px] text-black-2 text-lg text-clamp-1" title="{{partner.email}}">{{partner.email}}</p>
+            <p class="leading-[26px] text-black-2 text-lg text-clamp-1" title="{{partner.street}}">{{partner.street}}</p>
           </div>
           <div class="p-4 mt-6 mx-5 bg-light">
             <ul>

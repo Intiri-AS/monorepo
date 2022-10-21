@@ -4,14 +4,14 @@
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <div *ngIf="!isLoading" class="main-container">
       <div class="flex justify-between">
-        <p class="main-title">My intiri</p>
+        <p class="main-title">{{'MY-INTIRI.intiri' | translate}}</p>
       </div>
       <ion-row class="mt-3">
         <ion-col size="12" class="p-2 xl:p-0 xl:pt-6">
           <div>
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
-                <p class="text-2xl font-medium">Latest project</p>
+                <p class="text-2xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
                 <div *ngIf="projects[projects.length-1].projectMoodboards.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
@@ -50,7 +50,7 @@
             </div>
             <div class="mt-8">
               <div class="flex justify-between items-center">
-                <p class="text-2xl font-medium text-black-2">All projects</p>
+                <p class="text-2xl font-medium text-black-2">{{'MY-INTIRI.all-projects' | translate}}</p>
                 <div *ngIf="projects.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevProject()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
@@ -93,7 +93,7 @@
         </ion-col>
       </ion-row>
       <div class="flex justify-between items-center">
-        <p class="text-2xl font-medium text-black-2 mt-8 mb-4">My inspiration</p>
+        <p class="text-2xl font-medium text-black-2 mt-8 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
         <ion-button fill="clear" class="text-primary">
           <p class="capitalize">See all</p>
           <ion-icon name="arrow-forward" class="h-4 w-4"></ion-icon>

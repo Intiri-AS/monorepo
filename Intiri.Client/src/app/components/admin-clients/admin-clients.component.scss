@@ -11,9 +11,13 @@ ion-select {
 }
 
 .client {
-    @apply border rounded-2xl min-h-[300px] mb-[30px] overflow-hidden shadow-1;
+    @apply border rounded-2xl px-2 h-[320px] mb-[30px] overflow-hidden shadow-1;
 }
 
 ion-col {
     @apply px-0
+}
+
+.plus-icon-wrapper {
+    @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[60px] w-[60px]
 }

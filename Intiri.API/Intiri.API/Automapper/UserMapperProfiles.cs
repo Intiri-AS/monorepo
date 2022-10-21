@@ -14,9 +14,14 @@ namespace Intiri.API.Automapper
 			CreateMap<UserOutDTO, User>();
 			CreateMap<UserUpdateInDTO, User>();
 
-			CreateMap<SmsVerificationInDTO, EndUser>();
+			CreateMap<SmsVerificationInDTO, EndUser>()
+				.ForMember(d => d.UserName, opt => opt.MapFrom(src => (src.CountryCode + src.PhoneNumber)));
 
+			CreateMap<DesignerInDTO, Designer>()
+				.ForMember(d => d.UserName, opt => opt.MapFrom(src => (src.CountryCode + src.PhoneNumber)));
+			CreateMap<Designer, RegisterOutDTO>();
 			CreateMap<Designer, DesignerOutDTO>();
+			CreateMap<Designer, DesignerWithReviewsOutDTO>();
 
 		}
 	}

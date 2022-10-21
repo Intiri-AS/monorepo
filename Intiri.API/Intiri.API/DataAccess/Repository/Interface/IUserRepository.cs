@@ -12,8 +12,15 @@ namespace Intiri.API.DataAccess.Repository.Interface
 
 		Task<IEnumerable<EndUser>> GetEndUsersAsync();
 		Task<EndUser> GetEndUserByIdAsync(int id);
+
+
 		Task<IEnumerable<Designer>> GetDesignerUsersAsync();
+		Task<IEnumerable<Designer>> GetDesignersWithRatingsAsync();
 		Task<Designer> GetDesignerUserByIdAsync(int id);
+		Task<Designer> GetDesignerByIdWithRatingsAsync(int id);
+		Task<Designer> GetDesignerByIdWithReviewsAsync(int id);
+		Task<bool> IsDesignerExistByAsync(int id);
+
 		Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync();
 		Task<PartnerContact> GetPartnerUserByIdAsync(int id);
 

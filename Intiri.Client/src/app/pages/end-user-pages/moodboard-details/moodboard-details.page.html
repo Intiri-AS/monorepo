@@ -26,7 +26,7 @@
             </div>
         </ion-card>
         <div class="mt-16 text-center xl:text-left">
-          <p class="text-black-2 text-2xl font-medium mb-12">What's included in moodboard</p>
+          <p class="text-black-2 text-2xl font-medium mb-12">{{'MOODBOARD-DETAILS.included' | translate}}</p>
           <ion-grid class="step-items">
             <ion-row class="step-items-row">
               <ion-col *ngFor="let item of moodboard.colorPalettes" size="5.8" size-md="2.7" size-xl="1.8" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
@@ -49,9 +49,9 @@
         </div>
 
         <div class="flex flex-col xl:flex-row justify-center mt-10 xl:mt-40 mb-40">
-          <ion-button fill="clear" class="secondary-btn">Edit moodboard</ion-button>
-          <ion-button fill="clear" class="primary-btn" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">Contact designer</ion-button>
-          <ion-button fill="clear" class="secondary-btn">Contact craftsman</ion-button>
+          <ion-button fill="clear" class="secondary-btn" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
+          <ion-button fill="clear" class="secondary-btn opacity-60" disabled>{{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
         </div>
       </div>
     </div>

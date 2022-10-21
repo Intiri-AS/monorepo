@@ -18,8 +18,8 @@
           <div title="Messenger" routerLink="/messenger" routerDirection="root" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon pointer-events-none" name="chatbox-ellipses-sharp"></ion-icon></div>
           <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon"  name="settings-sharp"></ion-icon></div>
         </ng-container>
-        <ion-button *ngIf="!(loggedUser$ | async)" fill="clear" class="secondary-btn" routerLink="/login" routerDirection="root">Login</ion-button>
-        <ion-button fill="clear" class="primary-btn" (click)="removeProjectDraft()" href="/new-project">Create new project</ion-button>
+        <ion-button *ngIf="!(loggedUser$ | async)" fill="clear" class="secondary-btn" routerLink="/login" routerDirection="root">{{'NEW-COMMON.login' | translate}}</ion-button>
+        <ion-button fill="clear" class="primary-btn" (click)="removeProjectDraft()" href="/new-project">{{'MY-INTIRI.create' | translate}}</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>
@@ -42,10 +42,13 @@
         <ion-label class="cursor-pointer" routerLink="{{item.url}}" routerDirection="root">{{item.title}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="/profile" routerDirection="root">My Profile</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/profile" routerDirection="root">{{'COMMON.my-profile' | translate}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label class="cursor-pointer" routerLink="/new-project" routerDirection="root">Create new project</ion-label>
+        <ion-label class="cursor-pointer">{{'COMMON.settings' | translate}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label class="cursor-pointer" routerLink="/new-project" routerDirection="root">{{'MY-INTIRI.create' | translate}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>

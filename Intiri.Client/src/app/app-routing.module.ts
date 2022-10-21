@@ -45,6 +45,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { DesignerGuard } from './guards/designer.guard';
 import { SharedGuard } from './guards/shared.guard';
 import { PartnerGuard } from './guards/partner.guard';
+import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 
 
@@ -159,10 +160,22 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
+    path: 'edit-moodboard/:id/project/:projectId',
+    component: CustomizeMoodboardPage,
+    resolve: {moodboard: MoodboardService},
+    canActivate: [EnduserGuard]
+  },
+  {
     path: 'project-details/:id',
     component: ProjectDetailsPage,
     resolve: {project: ProjectService},
     canActivate: [EnduserGuard]
+  },
+  {
+    path: 'partner-profile/:id',
+    component: AddPartnerPage,
+    resolve: {partner: PartnerService},
+    canActivate: [AdminGuard]
   },
   {
     path: 'new-project',
@@ -207,10 +220,6 @@ const routes: Routes = [
     path: 'add-moodboard',
     component: AddMoodboardPage,
     canActivate: [AdminGuard]
-  },
-  {
-    path: 'add-partner',
-    component: AddPartnerPage
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)

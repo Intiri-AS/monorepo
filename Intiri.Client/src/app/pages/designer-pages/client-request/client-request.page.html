@@ -12,12 +12,12 @@
               <p class="text-lg text-black-2 mt-[5px]">m.j.smith@gmail.com</p>
               <p class="text-lg text-primary mt-[30px]">SELECTED STYLE</p>
               <p class="text-lg text-black-2 mt-[5px]">Skandinavian Bright</p>
-              <ion-button fill="clear" class="primary-btn mt-[30px]" routerLink="/messenger" routerDirection="root">Open chat</ion-button>
+              <ion-button fill="clear" class="primary-btn mt-[30px]" routerLink="/messenger" routerDirection="root">Open chat{{'DASHBOARD.client-number' | translate}}</ion-button>
             </div>
           </div>
         </ion-col>
         <ion-col size="12" size-xl="8" class="p-2 xl:p-0 xl:pl-5">
-          <p class="text-2xl text-black-2 font-medium">Moodboard</p>
+          <p class="text-2xl text-black-2 font-medium">{{'COMMON.moodboard' | translate}}</p>
           <div class="mt-[10px]">
             <div class="border border-black rounded-2xl w-full xl:w-[765px] h-[410px] p-4 mb-2">
               <img src="../../../../assets/images/landing-img.png" class="w-full h-full">
@@ -33,13 +33,13 @@
             <p class="text-black-3 text-lg">20 pieces / 1w ago</p>
           </div>
           <div class="mt-[50px]">
-            <p class="text-2xl text-black-2 font-medium">What's included in moodboard</p>
+            <p class="text-2xl text-black-2 font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
             <ion-row class="w-[900px]">
               <ion-col size="4" *ngFor="let img of [0,1,2,3,4,5]">
                 <ion-card class="ion-card-container h-[200px]">
                   <img src="../../../../assets/images/landing-img.png" class="h-full w-full">
                 </ion-card>
-                <p class="text-2xl text-black-2 font-medium ml-2">Material</p>
+                <p class="text-2xl text-black-2 font-medium ml-2">{{'NEW-PROJECT.materials' | translate}}</p>
               </ion-col>
             </ion-row>
           </div>

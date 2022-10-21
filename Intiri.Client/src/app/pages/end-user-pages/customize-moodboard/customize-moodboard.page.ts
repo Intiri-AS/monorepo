@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -29,6 +32,7 @@ export class CustomizeMoodboardPage {
 
   initialMoodboard: Moodboard;
   moodboard: Moodboard;
+  isEdit: boolean;
 
   stepsOrder: object = {
     0: 'colorPalettes',
@@ -38,14 +42,23 @@ export class CustomizeMoodboardPage {
 
   currentStepNo: number = 0;
 
-  constructor(public projectService: ProjectService) {}
+  constructor(public projectService: ProjectService, private route: ActivatedRoute, private router: Router, private moodboardService: MoodboardService, private notifier: NotifierService) {}
 
   ngOnInit() {
 
-    this.projectService.currentProject$.subscribe((project) => {
-      this.moodboard = project.currentMoodboard;
-      this.initialMoodboard = {...project.currentMoodboard};
-    });
+    this.route.data.subscribe(data => {
+      // if edit
+      if(data.moodboard) {
+        this.moodboard = data.moodboard;
+        this.isEdit = true;
+      } else {  // if customize
+        this.projectService.currentProject$.subscribe((project) => {
+          this.moodboard = project.currentMoodboard;
+          this.initialMoodboard = {...project.currentMoodboard};
+          this.isEdit = false;
+        });
+      }
+    })
     this.projectService.getColorPalettes().subscribe((res: Array<any>) => {
       this.steps[0]['data'] = res;
     });
@@ -104,6 +117,25 @@ export class CustomizeMoodboardPage {
       // else it's a single select
       this.moodboard[stepName] = this.moodboard[stepName] === item ? null : item;
     }
+  }
+
+  finish() {
+    if(this.isEdit){
+      this.finishEditing();
+    } else {
+      this.finishCustomizing()
+    }
+  }
+
+  finishEditing() {
+    this.moodboardService.editMoodboard(this.moodboard).subscribe(res => {
+      this.notifier.show({
+        message: 'Moodboard updated successfully',
+        type: 'success',
+      });
+      const projectId = this.route.snapshot.paramMap.get('projectId')
+      this.router.navigateByUrl(`/project-details/${projectId}/moodboard-details/${this.moodboard.id}`)
+    })
   }
 
   finishCustomizing() {

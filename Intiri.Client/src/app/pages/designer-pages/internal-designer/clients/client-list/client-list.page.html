@@ -2,7 +2,7 @@
   <div id="home">
     <app-header-internal-designer></app-header-internal-designer>
     <div class="main-container">
-      <p class="main-title mb-[30px]">Client</p>
+      <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
         <ion-slide>
@@ -47,7 +47,7 @@
         <ion-slide>
           <div class="w-full h-full mt-5 flex">
             <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">
-              <p class="text-lg text-primary ml-[20px]">NUMBER OF CLIENTS</p>
+              <p class="text-lg text-primary ml-[20px]">{{'DASHBOARD.client-number' | translate}}</p>
               <p class="text-[60px] text-black font-medium ml-[20px]">25</p>
             </ion-card>
             <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">

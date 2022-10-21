@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -17,11 +19,21 @@ export class DesignerService {
   }
 
   apiUrl = environment.apiUrl;
+  private designersSource = new ReplaySubject<any>(1);
+  designers$ = this.designersSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
   getDesigners(){
-    return this.http.get(this.apiUrl + 'designers');
+    return this.http.get(this.apiUrl + 'designers').pipe(map((designer) => {
+      if(designer) {
+        this.designersSource.next(designer);
+      }
+    })).toPromise();
+  }
+
+  addDesigner(designerObj) {
+    return this.http.post(`${this.apiUrl}account/register/designer`, designerObj);
   }
 
   getContactDesigners() {
@@ -34,6 +46,18 @@ export class DesignerService {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.getDesigner(parseInt(route.paramMap.get('id')));
+  }
+
+  rateDesigner(payload) {
+    return this.http.put(this.apiUrl + 'ratings/addRating', payload);
+  }
+
+  isDesignerRated(designerId) {
+    return this.http.get(this.apiUrl + 'ratings/isRated/id/' + designerId);
+  }
+
+  getDesignerRating(){
+    return this.http.get(this.apiUrl + 'ratings/designerRating');
   }
 
 
