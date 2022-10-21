@@ -42,8 +42,7 @@ namespace Intiri.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
 		{
-			//EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
-			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(4);
+			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
 			if (clientUser == null) return Unauthorized("Invalid clent.");
 
 			IEnumerable<InspirationOutDTO> inspirationsOut = _mapper.Map<IEnumerable<InspirationOutDTO>>(clientUser.Inspirations);
@@ -54,8 +53,7 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<InspirationOutDTO>> AddPhoto(IFormFile inFile)
 		{
-			//EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
-			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(5);
+			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
 			if (clientUser == null) return Unauthorized("Invalid clent.");
 
 			if (inFile.Length > 0)

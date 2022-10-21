@@ -364,15 +364,6 @@ namespace Intiri.API.DataAccess.SeedData
 				u5.Inspirations.Add(inspirations[i]);
 			}
 
-			//inspirations[0].EndUser = u4;	u4.Inspirations.Add(inspirations[0]);
-			//inspirations[0].EndUser = u4;	u4.Inspirations.Add(inspirations[1]);
-			//inspirations[0].EndUser = u4;	u4.Inspirations.Add(inspirations[2]);
-			//inspirations[0].EndUser = u4;	u4.Inspirations.Add(inspirations[3]);
-			//inspirations[0].EndUser = u5;	u5.Inspirations.Add(inspirations[4]);
-			//inspirations[0].EndUser = u5;	u5.Inspirations.Add(inspirations[5]);
-			//inspirations[0].EndUser = u5;	u5.Inspirations.Add(inspirations[6]);
-			//inspirations[0].EndUser = u5;	u5.Inspirations.Add(inspirations[7]);
-
 			await unitOfWork.SaveChanges();
 		}
 	}
