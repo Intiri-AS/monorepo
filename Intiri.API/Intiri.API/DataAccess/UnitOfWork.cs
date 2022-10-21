@@ -29,6 +29,7 @@ namespace Intiri.API.DataAccess
 		private readonly IConsultationPaymentRepository _consultationPaymentRepository;
 		private readonly IDesignerRatingRepository _designerRatingRepository;
 		private readonly IDesignerReviewRepository _designerReviewRepository;
+		private readonly IInspirationRepository _inspirationRepository;
 
 		#endregion Fields
 
@@ -56,6 +57,7 @@ namespace Intiri.API.DataAccess
 			_consultationPaymentRepository = new ConsultationPaymentRepository(dataContext);
 			_designerRatingRepository = new DesignerRatingRepository(dataContext);
 			_designerReviewRepository = new DesignerReviewRepository(dataContext);
+			_inspirationRepository = new InspirationRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -86,6 +88,8 @@ namespace Intiri.API.DataAccess
 
 		public IDesignerRatingRepository DesignerRatingRepository => _designerRatingRepository;
 		public IDesignerReviewRepository DesignerReviewRepository => _designerReviewRepository;
+
+		public IInspirationRepository InspirationRepository => _inspirationRepository;
 
 		#endregion Properties
 
