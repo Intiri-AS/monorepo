@@ -13,8 +13,6 @@ import { SettingsPopoverComponent } from '../settings-popover/settings-popover.c
 
 export class HeaderInternalDesignerComponents {
 
- 
-
   loggedUser$ = this.accountService.currentUser$;
 
   constructor(
@@ -26,7 +24,7 @@ export class HeaderInternalDesignerComponents {
 
   menuItems = [
     {title: this.translate.instant("COMMON.client"), url: '/client-list'},
-    {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
+    // {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
     {title: this.translate.instant("COMMON.moodboard"), url: '/my-moodboard'},
   ]
 
@@ -40,7 +38,7 @@ export class HeaderInternalDesignerComponents {
   revokeTranslations() {
     this.menuItems = [
       {title: this.translate.instant("COMMON.client"), url: '/client-list'},
-      {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
+      // {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
       {title: this.translate.instant("COMMON.moodboard"), url: '/my-moodboard'},
     ]
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DesignerService } from 'src/app/services/designer.service';
 
 @Component({
   selector: 'app-client-request-page',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
 
 export class ClientRequestPage {
 
-  constructor() {}
+  client = {createdMoodboards: []};
+
+  constructor(private designerService: DesignerService) {}
+
+  ngOnInit() {
+    this.designerService.getDesigner(2).subscribe((res: any) => {
+      this.client = res;
+    })
+  }
 }

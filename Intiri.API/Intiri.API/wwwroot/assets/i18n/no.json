@@ -107,7 +107,9 @@
   "DESIGNER-PROFILE": {
     "other": "Annet",
     "languages": "Språk",
-    "book": "Book konsultasjon"
+    "book": "Book konsultasjon",
+    "latest-moodboard": "Siste moodboard",
+    "other-moodboards": "Alle moodboards"
   },
   "MESSENGER": {
     "messages": "Meldinger",
@@ -151,7 +153,8 @@
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
-    "save-text": "Ditt prosjekt og første stilforslag er lagret. Nå kan du legge til nye stilforslag til prosjektet, eller se gjennom på nytt.",
+    "save-text1": "Ditt prosjekt ",
+    "save-text2" : "og første stilforslag er lagret. Nå kan du legge til nye stilforslag til prosjektet, eller se gjennom på nytt.",
     "go-to": "Gå til prosjekt",
     "add-new": "Legg til nytt stilforslag",
     "share": "Del via e-post"
@@ -200,6 +203,7 @@
     "create": "Lag",
     "continue": "Fortsett",
     "moodboard": "Stilforslag",
+    "client": "Klient",
     "sort": "Sorter etter",
     "back": "Tilbake",
     "next": "Neste",
@@ -211,15 +215,23 @@
     "duration": "Varighet",
     "email": "E-post",
     "upload": "Last opp",
-    "add": "Legg til"
+    "add": "Legg til",
+    "my-profile": "Min profil",
+    "settings": "Innstillinger",
+    "notifications": "Varsler",
+    "delete": "Slett"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
     "consultations": "Konsultasjoner",
     "partners": "Partnere",
+    "partner": "Partner",
     "designers": "Designere",
     "clients": "Kunder",
+    "statistic":"Statistikk",
     "moodboards": "Stilforslag",
+    "my-moodboards":"Mine moodboards",
+    "all-moodboards":"Alle moodboards",
     "style": "Stil",
     "total-vendors": "Totale samarbeidspartnere",
     "total-designers": "Totale designere",
