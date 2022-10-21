@@ -17,3 +17,6 @@
   width: 100% !important;
 }
 
+.client {
+  @apply border rounded-2xl h-[320px] mb-[30px] overflow-hidden shadow-1 hover:opacity-80 cursor-pointer;
+}

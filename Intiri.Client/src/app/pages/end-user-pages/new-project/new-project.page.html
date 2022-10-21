@@ -37,7 +37,7 @@
               class="primary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
               (click)="nextStep()"
-              >{{'COMMON.next' | translate}</ion-button
+              >{{'COMMON.next' | translate}}</ion-button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
