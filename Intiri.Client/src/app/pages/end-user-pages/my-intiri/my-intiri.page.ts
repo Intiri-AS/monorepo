@@ -20,42 +20,26 @@ export class MyIntiriPage {
   projects: Project[] = [];
   projectId = 0;
 
-  news = [
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-    {
-      image: '../../../../assets/images/landing-img.png',
-      name: 'Andy Miller',
-      news: 'New moodboard'
-    },
-  ]
-
   options = {
     slidesPerView: 3,
     spaceBetween: 20,
+    breakpoints: {
+      100: {
+        slidesPerView: 1,
+      },
+      480: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      800: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 20
+      }
+    }
   }
   searchText: any;
   isLoading = true;

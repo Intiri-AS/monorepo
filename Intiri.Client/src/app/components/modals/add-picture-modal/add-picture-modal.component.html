@@ -4,13 +4,13 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add picture</h1>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-pictures' | translate}}</h1>
         </ion-col>
       </ion-row>
       <ion-row >
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Select style</span>
+            <span class="text-sm text-black-2">{{'STYLE.select-style' | translate}}</span>
             <ion-select [(ngModel)]="styleImage.styleId" interface="popover">
               <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.id}}">{{style.name}}</ion-select-option>
             </ion-select>
@@ -21,12 +21,12 @@
       <ion-row>
         <ion-col>
           <div class="profile-input w-fit">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Image</p>
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.image' | translate}}</p>
             <label for="dropzone-file">
               <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
                 <div *ngIf="!imagePath" class="text-center mt-[65px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Upload</p>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'STYLE.upload' | translate}}</p>
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="pictureImg" />
               </div>
@@ -37,8 +37,8 @@
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyleImage()">Add</ion-button>
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyleImage()">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -49,11 +49,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Picture added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new picture.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'STYLE.picture-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'STYLE.picture-added-text' | translate}}</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Pictures</ion-button>
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'STYLE.go-to-pictures' | translate}}</ion-button>
           </ion-buttons>
         </div>
     </div>
@@ -69,7 +69,7 @@
         </div>
         <ion-buttons class="justify-center">
           <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyleImage()">Remove picture</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account.service';
+import { LanguageService } from 'src/app/services/language.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
 
 @Component({
@@ -9,25 +11,47 @@ import { SettingsPopoverComponent } from '../settings-popover/settings-popover.c
   templateUrl: './header-admin.component.html',
   styleUrls: ['./header-admin.component.scss'],
 })
-export class HeaderAdminComponent {
-
-
-  menuItems = [
-    {title: 'Dashboard', url: '/dashboard'},
-    {title: 'Consultations', url: '/consultations'},
-    {title: 'Partners', url: '/partners'},
-    {title: 'Designers', url: '/designers'},
-    {title: 'Clients', url: '/clients'},
-    {title: 'Moodboards', url: '/moodboards'},
-    {title: 'Style', url: '/style'},
-  ]
+export class HeaderAdminComponent implements OnInit {
 
   loggedUser$ = this.accountService.currentUser$;
 
-  constructor(private router: Router, private accountService: AccountService, private popoverController: PopoverController) {}
+  constructor(private router: Router, 
+    private accountService: AccountService, 
+    private popoverController: PopoverController,
+    private languageService: LanguageService,
+    private translate: TranslateService) {}
+
+    menuItems = [
+      {title: this.translate.instant("DASHBOARD.dashboard"), url: '/dashboard'},
+      {title: this.translate.instant("DASHBOARD.consultations"), url: '/consultations'},
+      {title: this.translate.instant("DASHBOARD.partners"), url: '/partners'},
+      {title: this.translate.instant("DASHBOARD.designers"), url: '/designers'},
+      {title: this.translate.instant("DASHBOARD.clients"), url: '/clients'},
+      {title: this.translate.instant("DASHBOARD.moodboards"), url: '/moodboards'},
+      {title: this.translate.instant("DASHBOARD.style"), url: '/style'},
+    ]
+
+    ngOnInit() {
+      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+        this.translate.setDefaultLang(event.lang);
+        this.revokeTranslations();
+      });
+    }
 
   isActiveRoute(route): boolean {
     return this.router.url.split('?')[0] === route;
+  }
+
+  revokeTranslations() {
+    this.menuItems = [
+      {title: this.translate.instant("DASHBOARD.dashboard"), url: '/dashboard'},
+      {title: this.translate.instant("DASHBOARD.consultations"), url: '/consultations'},
+      {title: this.translate.instant("DASHBOARD.partners"), url: '/partners'},
+      {title: this.translate.instant("DASHBOARD.designers"), url: '/designers'},
+      {title: this.translate.instant("DASHBOARD.clients"), url: '/clients'},
+      {title: this.translate.instant("DASHBOARD.moodboards"), url: '/moodboards'},
+      {title: this.translate.instant("DASHBOARD.style"), url: '/style'},
+    ]
   }
 
   menuOpened() {

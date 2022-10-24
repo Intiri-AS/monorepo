@@ -4,13 +4,13 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Add style</h1>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-style' | translate}}</h1>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Style name</span>
+            <span class="text-sm text-black-2">{{'STYLE.style-name' | translate}}</span>
             <ion-input [(ngModel)]="style.name" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
         </ion-col>
@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Description</span>
+            <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="style.description" class="border border-black-2 rounded-2xl"></ion-textarea>
           </div>
         </ion-col>
@@ -26,12 +26,12 @@
       <ion-row>
         <ion-col>
           <div class="profile-input w-fit">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Image</p>
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.image' | translate}}</p>
             <label for="dropzone-file">
               <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
                 <div *ngIf="!imagePath" class="text-center mt-[65px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Upload</p>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
@@ -42,8 +42,8 @@
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">Cancel</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyle()">Add</ion-button>
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyle()">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -54,11 +54,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mt-[7px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Style added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new style.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'STYLE.style-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'STYLE.style-added-text' | translate}}</p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">Go to Styles</ion-button>
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'STYLE.go-to-styles' | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>
@@ -74,7 +74,7 @@
         </div>
         <ion-buttons class="justify-center">
           <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyle()">Remove style</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>

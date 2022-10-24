@@ -11,6 +11,8 @@ import { IonSlides } from '@ionic/angular';
 export class ClientListPage {
   @ViewChild('slides') slides: IonSlides;
 
+  user = null;
+
   options = {
     slidesPerView: 1,
     initialSlide: 0

@@ -2,7 +2,7 @@
   <div id="home">
     <app-header></app-header>
     <div class="main-container mb-40">
-      <h1 class="main-title">Select a designer</h1>
+      <h1 class="main-title">{{'CONTACT-DESIGNER.select' | translate}}</h1>
       <ion-row class="mt-8 gap-x-[1.65%]">
         <ion-col *ngFor="let d of designers" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
           <div class="designer">
@@ -15,7 +15,7 @@
                 <ion-col size="7.5" class="!p-3 !pl-0">
                   <div class="h-[30px] w-[55px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[20px] top-[20px] shadow-sm">
                     <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
-                    <p class="text-black-1 text-sm">0</p>
+                    <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
                   </div>
                   <img [src]="getMoodboardImage(d) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
@@ -24,7 +24,7 @@
           </div>
           <div class="flex items-center justify-between mt-4">
             <div class="flex items-center justify-start">
-              <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/landing-img.png'" class="h-[30px] w-[30px] rounded-md object-cover">
+              <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/profile-img.png'" class="h-[30px] w-[30px] rounded-md object-cover">
               <p class="text-black-2 text-2xl font-medium ml-2">{{d.firstName}} {{d.lastName}}</p>
             </div>
             <ion-buttons (click)="paymentModal(d)"><ion-button class="primary-btn !bg-none">Choose</ion-button></ion-buttons>

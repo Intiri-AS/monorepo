@@ -3,14 +3,14 @@
     <ion-col size="12" size-md="4" size-lg="3">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
     <ion-col offset-md="4" size="12" size-md="3" size-lg="3" class="relative bottom-[29px] w-full">
       <div class="profile-input justify-end">
         <div class="w-full">
-          <span class="text-sm text-black-2">Style</span>
+          <span class="text-sm text-black-2">{{'NEW-PROJECT.style' | translate}}</span>
           <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
             <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
           </ion-select>
@@ -18,7 +18,7 @@
       </div>
     </ion-col>
     <ion-col size="12" size-sm="3" size-xl="2">
-      <ion-button (click)="addStyle()" fill="clear" class="primary-btn mt-4">Add style</ion-button>
+      <ion-button (click)="addStyle()" fill="clear" class="primary-btn mt-4">{{'STYLE.add-style' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

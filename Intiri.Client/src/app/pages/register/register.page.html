@@ -1,8 +1,9 @@
 <ion-content>
   <ion-row>
-    <ion-col size="12" offset-xl="2" size-xl="4" class="p-2 xl:p-12 h-full">
+    <ion-col size="12" offset-xl="1" size-xl="5" class="p-2 xl:p-12 h-full">
       <div class="w-full xl:w-[470px]">
         <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" />
+        <div class="text-center">
         <ion-button
           fill="clear"
           class="login-btn"
@@ -10,20 +11,20 @@
           routerDirection="root"
         >
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
-          <p>Login</p>
+          <p>{{'COMMON.login' | translate}}</p>
         </ion-button>
         <h1 class="font-['Allison'] text-7xl mt-0 text-black-2">
-          Start your journey
+          {{'REGISTER.start' | translate}}
         </h1>
-        <h1 class="text-5xl font-semibold">Create an account</h1>
+        <h1 class="text-5xl font-semibold">{{'LOGIN.create' | translate}}</h1>
         <p class="text-lg text-black-2">
           Manage your account, create and edit projects, collaborate on design
           and more.
         </p>
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="w-max mx-auto text-left">
           <div class="mt-8 flex flex-col xl:flex-row justify-between">
             <div>
-              <span class="text-sm text-black-2">First name</span>
+              <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
               <ion-input
                 type="text"
                 #firstName
@@ -37,7 +38,7 @@
               >
             </div>
             <div class="mt-[30px] xl:mt-0">
-              <span class="text-sm text-black-2">Last name</span>
+              <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
               <ion-input
                 type="text"
                 #lastName
@@ -52,8 +53,8 @@
             </div>
           </div>
           <div class="mt-7">
-            <span class="text-sm text-black-2">Phone number</span>
-            <div class="flex justify-between">
+            <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
+            <div class="flex gap-x-2">
               <div>
                 <ion-select
                   class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32"
@@ -92,7 +93,7 @@
           </div>
           <div class="flex flex-col justify-center items-center">
             <ion-button type="submit" fill="clear" class="primary-btn mt-[30px]"
-              >Register</ion-button
+              >{{'COMMON.register' | translate}}</ion-button
             >
             <p class="text-lg text-black-2 mt-1">Or</p>
             <ion-button fill="clear" class="vipps-btn">
@@ -102,8 +103,9 @@
           </div>
         </form>
       </div>
+      </div>
     </ion-col>
-    <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full flex justify-end">
+    <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full hidden xl:flex justify-center xl:justify-end">
       <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
     </ion-col>
   </ion-row>

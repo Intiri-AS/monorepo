@@ -1,42 +1,42 @@
 <div *ngIf="page === 'create-project'" class="bg-light xl-ion:w-[240px] xl-ion:h-[820px] rounded-lg text-center">
   <section [class.opacity-50]="currentStepNo !== 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="project-step">
     <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room"></div>
-    <p class="project-step-text">Room</p>
+    <p class="project-step-text">{{'NEW-PROJECT.room' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 1" [class.disabled]="!canChangeStep(1)" (click)="goToStep(1)" class="project-step">
     <div class="project-step-icon bg-style"></div>
-    <p class="project-step-text">Style</p>
+    <p class="project-step-text">{{'NEW-PROJECT.style' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 2" [class.disabled]="!canChangeStep(2)" (click)="goToStep(2)" class="project-step">
     <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room-details"></div>
-    <p class="project-step-text">Room Details</p>
+    <p class="project-step-text">{{'NEW-PROJECT.room-details' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="project-step">
     <div class="project-step-icon bg-color-pallete"></div>
-    <p class="project-step-text">Color Pallete</p>
+    <p class="project-step-text">{{'NEW-PROJECT.color-pallete' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 4" [class.disabled]="!canChangeStep(4)" (click)="goToStep(4)" class="project-step">
     <div class="project-step-icon bg-moodboard"></div>
-    <p class="project-step-text">Moodboard</p>
+    <p class="project-step-text">{{'COMMON.moodboard' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 5" [class.disabled]="!canChangeStep(5)" (click)="goToStep(5)" class="project-step no-border">
     <div class="project-step-icon bg-final-result"></div>
-    <p class="project-step-text">Final Result</p>
+    <p class="project-step-text">{{'NEW-PROJECT.final' | translate}}</p>
   </section>
 </div>
 
 <div *ngIf="page === 'customize-moodboard'" class="bg-light xl-ion:w-[240px] xl-ion:h-[680px] rounded-lg text-center">
   <section [class.opacity-50]="currentStepNo !== 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="project-step">
     <div class="project-step-icon bg-color-pallete"></div>
-    <p class="project-step-text">Color Pallete</p>
+    <p class="project-step-text">{{'NEW-PROJECT.color-pallete' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 1" [class.disabled]="!canChangeStep(1)" (click)="goToStep(1)" class="project-step">
     <div class="project-step-icon mx-auto bg-cover bg-materials"></div>
-    <p class="project-step-text">Materials</p>
+    <p class="project-step-text">{{'NEW-PROJECT.materials' | translate}}</p>
   </section>
   <section [class.opacity-50]="currentStepNo !== 2" [class.disabled]="!canChangeStep(2)" (click)="goToStep(2)" class="project-step no-border">
     <div class="project-step-icon bg-sofa"></div>
-    <p class="project-step-text">Products</p>
+    <p class="project-step-text">{{'NEW-PROJECT.products' | translate}}</p>
   </section>
 </div>
 

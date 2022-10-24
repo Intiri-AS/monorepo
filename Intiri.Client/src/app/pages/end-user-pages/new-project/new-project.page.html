@@ -30,14 +30,14 @@
               class="secondary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo-1)"
               (click)="backStep()"
-              >Back</ion-button
+              >{{'COMMON.back' | translate}}</ion-button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] !== 'final'"
               class="primary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
               (click)="nextStep()"
-              >Next</ion-button
+              >{{'COMMON.next' | translate}}</ion-button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
@@ -45,13 +45,13 @@
               [class.disabled]="!canChangeToStep(currentStepNo-1)"
               routerLink="/customize-moodboard"
               routerDirection="root"
-              >Customize moodboard</ion-button
+              >{{'NEW-PROJECT.customize' | translate}}</ion-button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
               class="primary-btn"
               (click)="saveCurrentProject()"
-              >Finish</ion-button
+              >{{'NEW-PROJECT.finish' | translate}}</ion-button
             >
           </ion-buttons>
         </ion-col>

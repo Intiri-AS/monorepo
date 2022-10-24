@@ -2,7 +2,7 @@
   <div id="home">
     <app-header-admin></app-header-admin>
     <div class="main-container">
-      <p class="main-title mb-[30px]">Partners</p>
+      <p class="main-title mb-[30px]">{{'DASHBOARD.partners' | translate}}</p>
       <app-sub-header [menu]="'partners'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
         <ion-slide>

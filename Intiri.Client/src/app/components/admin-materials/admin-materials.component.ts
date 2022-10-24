@@ -54,7 +54,6 @@ export class AdminMaterialsComponent implements OnInit {
   }
 
   onFilterChange(event){
-    console.log(event)
     const selectedTypeNames = event.detail.value;
     this.materials$.pipe(take(1)).subscribe(materials => {
       if(selectedTypeNames.length > 0) {

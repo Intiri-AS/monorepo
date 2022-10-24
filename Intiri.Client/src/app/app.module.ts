@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -101,6 +101,9 @@ import { AddMaterialsModalComponent } from './components/modals/add-materials-mo
 import { AddRoomModalComponent } from './components/modals/add-room-modal/add-room-modal.component';
 import { AddColorModalComponent } from './components/modals/add-color-modal/add-color-modal.component';
 import { AddPictureModalComponent } from './components/modals/add-picture-modal/add-picture-modal.component';
+import { AddProductModalComponent } from './components/modals/add-product-modal/add-product-modal.component';
+import { DeleteMoodboardModalComponent } from './components/modals/delete-moodboard-modal/delete-moodboard-modal.component';
+import { MoodboardDetailsComponent } from './components/moodboard-details/moodboard-details.component';
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -108,7 +111,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
 import { ProcessingPage } from './pages/processing/processing.page';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
@@ -118,7 +121,8 @@ import { SmsVerificationModalComponent } from './components/modals/sms-verificat
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, LOCATION_INITIALIZED } from '@angular/common';
+import { take } from 'rxjs/operators';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -134,17 +138,17 @@ export function createTranslateLoader(http: HttpClient) {
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
     StylePage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent, HeaderPartnerComponent,
-    NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent,
+    NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent, MoodboardDetailsComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
-    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent
+    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     RateModalComponent, RateSuccessfulModalComponent, ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent,
-    AddColorModalComponent, AddPictureModalComponent,
+    AddColorModalComponent, AddPictureModalComponent, AddProductModalComponent, DeleteMoodboardModalComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +159,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     CodeInputModule,
+    CommonModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
@@ -180,8 +185,39 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: ApplicationInitializerFactory,
+      deps: [ TranslateService, Injector ],
+      multi: true
+    },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
+
+export function ApplicationInitializerFactory(
+  translate: TranslateService, injector: Injector) {
+  return async () => {
+    await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+
+    const deaultLang = 'en';
+    translate.addLangs(['en', 'no']);
+    translate.setDefaultLang(deaultLang);
+    try {
+      await translate.use(deaultLang).toPromise();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+
+
+

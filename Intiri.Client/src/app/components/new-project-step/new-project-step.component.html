@@ -27,8 +27,8 @@
 
    <!-- if room details -->
   <div *ngIf="currentStep.data.roomShapes">
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">Room details</p>
-    <p class="text-black-2">Select room shape</p>
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.room-details' | translate}}</p>
+    <p class="text-black-2">{{'NEW-PROJECT.room-shape' | translate}}</p>
     <ion-grid class="step-items" style="min-height: 300px;">
       <ion-row class="step-items-row">
         <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleItem(item)" size="5.8" size-sm="2.2" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
@@ -39,16 +39,16 @@
       </ion-row>
     </ion-grid>
     <div class="input">
-      <span class="text-black-2">Room area (m2)</span>
+      <span class="text-black-2">{{'NEW-PROJECT.room-area' | translate}}</span>
       <ion-input [(ngModel)]="project.roomDetails.size" type="number" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
     </div>
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">Budget for products</p>
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.budget' | translate}}</p>
     <div class="input">
-      <span class="text-black-2">Select your budget for products</span>
+      <span class="text-black-2">{{'NEW-PROJECT.select-budget' | translate}}</span>
       <ion-select  [(ngModel)]="project.budget" interface="popover">
-        <ion-select-option value="low">Low</ion-select-option>
-        <ion-select-option value="medium">Medium</ion-select-option>
-        <ion-select-option value="high">High</ion-select-option>
+        <ion-select-option value="low">{{'COMMON.low' | translate}}</ion-select-option>
+        <ion-select-option value="medium">{{'COMMON.medium' | translate}}</ion-select-option>
+        <ion-select-option value="high">{{'COMMON.high' | translate}}</ion-select-option>
       </ion-select>
     </div>
   </div>
@@ -73,7 +73,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">See rooms in this style</p>
+    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.see-rooms-style' | translate}}</p>
     <ion-grid class="step-items" style="min-height: 785px;">
       <ion-row class="step-items-row">
         <ion-col *ngFor="let item of currentStep.data.moodboardFamily" (click)="toggleItem(item)" size="5.5" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
@@ -95,10 +95,10 @@
         <div class="h-full w-full relative">
           <div class="mt-8 w-full h-[360px] bg-landing-img bg-cover blur rounded-lg "></div>
           <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2" style="transform: translate(-50%, -50%)">
-            <p class="text-black-1 text-xl font-bold mb-2">Upgrade!</p>
-            <p class="text-black-2 font-bold mb-4">To see more rooms from this style upgrade to Premium plan.</p>
+            <p class="text-black-1 text-xl font-bold mb-2">{{'NEW-PROJECT.upgrade' | translate}}</p>
+            <p class="text-black-2 font-bold mb-4">{{'NEW-PROJECT.upgrade-text' | translate}}</p>
             <ion-buttons class="justify-center">
-              <ion-button class="primary-btn" routerLink="/pricing-plans" routerDirection="root">Pricing plans</ion-button>
+              <ion-button class="primary-btn" routerLink="/pricing-plans" routerDirection="root">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-button>
             </ion-buttons>
           </div>
         </div>
@@ -108,43 +108,6 @@
 
     <!-- if final step -->
     <div *ngIf="currentStep.data === 'final'">
-      <div class="rounded-2xl border shadow-1 w-full mac:w-[75%] h-[410px] mr-2 md:mr-3 mt-4 p-3">
-        <div class="result-grid">
-          <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorLight}"></div>
-          <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.products[0].imagePath) + ')'}"></div>
-          <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.products[1].imagePath) + ')'}"></div>
-          <div class="item-lg-tall" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[0].imagePath) + ')'}"></div>
-          <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorMedium}"></div>
-          <div class="item-sm" [ngStyle]="{background: project.currentMoodboard.colorPalettes[0].shadeColorDark}"></div>
-          <div class="item-sm-tall" [ngStyle]="{background: project.currentMoodboard.colorPalettes[project.currentMoodboard.colorPalettes.length-1].mainColor}"></div>
-          <div class="item-lg" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.style.styleImages[1].imagePath) + ')'}"></div>
-          <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[0].imagePath) + ')'}"></div>
-          <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[1].imagePath) + ')'}"></div>
-          <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[2].imagePath) + ')'}"></div>
-          <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(project.currentMoodboard.materials[3].imagePath) + ')'}"></div>
-        </div>
-      </div>
-      <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">What's included in moodboard</p>
-      <ion-grid class="step-items" style="min-height: 460px; max-height: 720px;">
-        <ion-row class="step-items-row">
-          <ion-col *ngFor="let item of project.currentMoodboard.colorPalettes" size="5.8" size-sm="2.2" class="rounded-2x w-full h-[130px] lg:h-[180px] mt-4 !mb-0" [class.bigger-margin]="item.name">
-            <div *ngIf="item.mainColor" class="h-[100%] rounded-2xl" >
-              <div class="w-full h-full inline-block rounded-2xl" [ngStyle]="{background: item.mainColor}"></div>
-            </div>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-          </ion-col>
-          <ion-col *ngFor="let item of project.currentMoodboard.materials" size="5.8" size-sm="2.2" class="rounded-2xl w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
-            <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-          </ion-col>
-          <ion-col *ngFor="let item of project.currentMoodboard.products" size="5.8" size-sm="2.2" class="rounded-2xl w-full h-[130px] lg:h-[180px] mt-4" [class.bigger-margin]="item.name">
-            <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
-            <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
-            <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <app-moodboard-details [moodboard]="project.currentMoodboard"></app-moodboard-details>
     </div>
 </div>

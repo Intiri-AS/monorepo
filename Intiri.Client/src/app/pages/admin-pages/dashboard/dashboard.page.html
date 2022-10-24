@@ -4,7 +4,7 @@
       <ion-grid class="main-container">
         <ion-row>
           <ion-col size="12" size-xl="4">
-            <h1 class="main-title">Dashboard</h1>
+            <h1 class="main-title">{{'DASHBOARD.dashboard' | translate}}</h1>
           </ion-col>
         </ion-row>
         <!-- <ion-row>
@@ -18,25 +18,25 @@
         <ion-row class="mt-8">
             <ion-col size="12" size-sm="5.75" size-xl="2.25">
                 <div class="total">
-                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">TOTAL PARTNERS</p>
+                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">{{'DASHBOARD.total-vendors' | translate}}</p>
                     <p class="text-black-1 text-[60px] font-bold ml-[30px]">{{totalCountData.totalPartners}}</p>
                 </div>
             </ion-col>
             <ion-col size="12" offset="0" size-sm="5.75" offset-sm="0.33" offset-xl="0" size-xl="2.25">
                 <div class="total">
-                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">TOTAL DESIGNERS</p>
+                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">{{'DASHBOARD.total-designers' | translate}}</p>
                     <p class="text-black-1 text-[60px] font-bold ml-[30px]">{{totalCountData.totalDesigners}}</p>
                 </div>
             </ion-col>
             <ion-col size="12" offset="0" size-sm="5.75" offset-sm="0"  offset-xl="0" size-xl="2.25">
                 <div class="total">
-                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">TOTAL CLIENTS</p>
+                    <p class="text-primary text-[18px] mt-[44px] ml-[30px] tracking-[3px]">{{'DASHBOARD.total-clients' | translate}}</p>
                     <p class="text-black-1 text-[60px] font-bold ml-[30px]">{{totalCountData.totalClients}}</p>
                 </div>
             </ion-col>
             <ion-col size="12" offset="0" size-sm="5.75" offset-sm="0.33" offset-xl="0" size-xl="2.25">
                 <div class="total">
-                    <p class="text-primary text-[18px] mt-[44px] mx-[25px] tracking-[2px]">TOTAL MOODBOARDS</p>
+                    <p class="text-primary text-[18px] mt-[44px] mx-[25px] tracking-[2px]">{{'DASHBOARD.total-moodboards' | translate}}</p>
                     <p class="text-black-1 text-[60px] font-bold ml-[30px]">{{totalCountData.totalMoodboards}}</p>
                 </div>
             </ion-col>
@@ -44,15 +44,15 @@
         <!-- <ion-row>
             <ion-col size="12" size-sm="5.75" size-xl="9.5">
                 <div class="sales">
-                    <h3 class="text-black-2 mt-[30px] ml-[30px]">Sales Overview</h3>
+                    <h3 class="text-black-2 mt-[30px] ml-[30px]">{{'DASHBOARD.sales-overview' | translate}}</h3>
                 </div>
                 <div class="sales">
-                    <h3 class="text-black-2 mt-[30px] ml-[30px]">Number of Clients</h3>
+                    <h3 class="text-black-2 mt-[30px] ml-[30px]">{{'DASHBOARD.client-number' | translate}}</h3>
                 </div>
             </ion-col>
             <ion-col size="12" offset="0" size-sm="5.75" offset-sm="0.33" offset-xl="0" size-xl="2.5">
                 <div class="designers">
-                    <h3 class="text-black-2 mt-[30px] ml-[30px]">Top Designers</h3>
+                    <h3 class="text-black-2 mt-[30px] ml-[30px]">{{'DASHBOARD.top-designers' | translate}}</h3>
                     <ul>
                         <li *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">
                             <div class="my-6 flex justify-between mt-[30px]">
@@ -72,12 +72,12 @@
         <ion-row>
             <ion-col size="12" size-sm="5.75" size-xl="5.875">
                 <div class="trending">
-                    <h3 class="text-black-2 mt-[30px] ml-[30px]">Trending Styles</h3>
+                    <h3 class="text-black-2 mt-[30px] ml-[30px]">{{'DASHBOARD.trending-styles' | translate}}</h3>
                 </div>
             </ion-col>
             <ion-col size="12" offset="0" size-sm="5.75" offset-sm="0.33" offset-xl="0.25" size-xl="5.875">
                 <div class="trending">
-                    <h3 class="text-black-2 mt-[30px] ml-[30px]">Recent Activity</h3>
+                    <h3 class="text-black-2 mt-[30px] ml-[30px]">{{'DASHBOARD.recent-activity' | translate}}</h3>
                     <ul>
                         <li *ngFor="let number of [0,1,2,3,4]">
                             <div class="my-6 flex justify-between mt-[30px]">
