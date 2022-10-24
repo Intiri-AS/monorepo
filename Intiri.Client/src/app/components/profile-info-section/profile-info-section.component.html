@@ -9,7 +9,7 @@
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="userInfo.lastName"></ion-input>
   </div>
 </section>
-<div class="profile-input">
+<div class="profile-input" *ngIf="userInfo.gender">
   <span class="text-sm text-black-2">{{'PROFILE.gender' | translate}}</span>
   <ion-select interface="popover" [value]="userInfo.gender" (ionChange)="genderChange($event)">
     <ion-select-option value="male">Male</ion-select-option>

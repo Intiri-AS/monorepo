@@ -252,6 +252,7 @@
   "PARTNERS": {
     "products": "Produkter",
     "add": "Legg til samarbeidspartner",
+    "addProduct": "Legg til produkt",
     "type": "Produkttype",
     "partner-name": "Navn samarbeidspartner",
     "street": "Gate",

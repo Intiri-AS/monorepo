@@ -8,10 +8,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProfileInfoSectionComponent implements OnInit {
 
-  @Input() userInfo = {
+  @Input() userInfo? = {
     firstName: '',
     lastName: '',
     gender: '',
+    countryCode: '',
+    phoneNumber: '',
+    email: '',
+    street: '',
+    postalCode: '',
+    city: '',
+    country: ''
+  }
+
+  @Input() partnerInfo? = {
+    firstName: '',
+    lastName: '',
     countryCode: '',
     phoneNumber: '',
     email: '',
@@ -34,9 +46,29 @@ export class ProfileInfoSectionComponent implements OnInit {
 
   countryCodeChange(event) {
     this.userInfo.countryCode = event.detail.value;
+    this.partnerInfo.countryCode = event.detail.value;
   }
 
   countryChange(event) {
     this.userInfo.country = event.detail.value;
+    this.partnerInfo.countryCode = event.detail.value;
+  }
+
+  //Depending od form properties while creating reusable component, we will decide which method we will take in action
+
+  submitForm() {
+    if (!this.userInfo.gender) {
+      this.sendPartnerProfile();
+    } else if (this.userInfo.gender) {
+      this.sendUserInfo()
+    }
+  }
+
+  sendPartnerProfile() {
+    console.log()
+  }
+
+  sendUserInfo() {
+
   }
 }

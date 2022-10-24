@@ -14,10 +14,9 @@ export class PartnerProfilePage implements OnInit {
 
   apiUrl = environment.apiUrl;
 
-  userInfo = {
+  partnerProfile = {
     firstName: '',
     lastName: '',
-    gender: '',
     countryCode: '',
     phoneNumber: '',
     email: '',
@@ -40,25 +39,24 @@ export class PartnerProfilePage implements OnInit {
     this.spinner.show();
     this.http.get(this.apiUrl + 'users/profile').toPromise().then((res: any) => {
       this.spinner.hide();
-      this.userInfo = res;
+      this.partnerProfile = res;
       if (!res.photoPath) {
-        this.userInfo.photoPath = '../../../assets/images/profile-img.png'
+        this.partnerProfile.photoPath = '../../../assets/images/profile-img.png'
       }
     })
   }
 
   saveChanges() {
     const userInfoModel = {
-      firstName: this.userInfo.firstName || "",
-      lastName: this.userInfo.lastName || "",
-      gender: this.userInfo.gender || "",
-      email: this.userInfo.email || "",
-      phoneNumber: this.userInfo.phoneNumber || "",
-      street: this.userInfo.street || "",
-      postalCode: this.userInfo.postalCode || "",
-      city: this.userInfo.city || "",
-      country: this.userInfo.country || "",
-      countryCode: this.userInfo.countryCode || ""
+      firstName: this.partnerProfile.firstName || "",
+      lastName: this.partnerProfile.lastName || "",
+      email: this.partnerProfile.email || "",
+      phoneNumber: this.partnerProfile.phoneNumber || "",
+      street: this.partnerProfile.street || "",
+      postalCode: this.partnerProfile.postalCode || "",
+      city: this.partnerProfile.city || "",
+      country: this.partnerProfile.country || "",
+      countryCode: this.partnerProfile.countryCode || ""
     }
     this.spinner.show();
     this.http.put(this.apiUrl + 'users/profile', userInfoModel).subscribe(res => {
