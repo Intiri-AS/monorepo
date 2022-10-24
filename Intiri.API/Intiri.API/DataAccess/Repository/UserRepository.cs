@@ -58,6 +58,12 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Users.OfType<EndUser>().SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
+		public async Task<EndUser> GetEndUserByIdWithInspirationsAsync(int id)
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
 		#endregion EndUser
 
 		#region Designer
@@ -106,6 +112,15 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(c => c.DesignerReviews).ThenInclude(eu => eu.EndUser)
 				.Include(m => m.CreatedMoodboards)
 				.Include(u => u.Roles).ThenInclude(r => r.Role)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
+		public async Task<Designer> GetDesignerByIdWithClientsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.Payer)
+				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.Moodboard).ThenInclude(s => s.Style)
 				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 

@@ -10,6 +10,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Extension;
 using Intiri.API.Models.Rating;
+using Intiri.API.Models.Payment;
 
 namespace Intiri.API.Controllers
 {
@@ -99,5 +100,28 @@ namespace Intiri.API.Controllers
 			return Ok(userToReturn);
 		}
 
+		[HttpGet("designerClients")]
+		public async Task<ActionResult<IEnumerable<DesignerClientOutDTO>>> GetAllDesignerClients()
+		{
+			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithClientsAsync(User.GetUserId());
+			if (designer == null) return Unauthorized("Invalid designer.");
+
+			IEnumerable<DesignerClientOutDTO> clientsToReturn = _mapper.Map<IEnumerable<DesignerClientOutDTO>>(designer.ConsultationPaymentsReceived);
+
+			return Ok(clientsToReturn);
+		}
+
+		[HttpGet("clientConsultation/{consultationId}")]
+		public async Task<ActionResult<DesignerClientFullOutDTO>> GetDesignerClient(int consultationId)
+		{
+			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithClientsAsync(User.GetUserId());
+			if (designer == null) return Unauthorized("Invalid designer.");
+
+			ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetFullConsultationByIdAsync(consultationId);
+
+			DesignerClientFullOutDTO clientFullOutDTO = _mapper.Map<DesignerClientFullOutDTO>(consultationPayment);
+
+			return Ok(clientFullOutDTO);
+		}
 	}
 }
