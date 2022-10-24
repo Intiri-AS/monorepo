@@ -51,7 +51,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPost("add")]
-		public async Task<ActionResult<InspirationOutDTO>> AddPhoto(IFormFile inFile)
+		public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
 		{
 			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
 			if (clientUser == null) return Unauthorized("Invalid clent.");
