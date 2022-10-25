@@ -109,12 +109,7 @@ export class ClientListPage {
 
     this.dataService.getDesignerRate().subscribe((res: any) => {
       this.spinner.hide();
-      this.ratingArray.push(res.fiveStar);
-      this.ratingArray.push(res.fourStar);
-      this.ratingArray.push(res.threeStar);
-      this.ratingArray.push(res.twoStar);
-      this.ratingArray.push(res.oneStar);
-      // this.ratingArray = [200, 232, 1000, 600, 20];
+      this.ratingArray = [res.fiveStar, res.fourStar, res.threeStar, res.twoStar, res.oneStar];
       this.rating = res.averageRating;
       this.star = Math.round(res.averageRating);
       this.numberOfRatings = this.ratingArray.reduce((a, b) => a + b, 0);

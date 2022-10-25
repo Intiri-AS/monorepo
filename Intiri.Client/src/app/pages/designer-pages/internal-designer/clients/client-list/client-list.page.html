@@ -90,7 +90,7 @@
                       <div class="w-full">
                         <ion-row>
                           <ion-col size="5" class="text-start">
-                            <p class="text-lg text-black">Excelent</p>
+                            <p class="text-lg text-black">Excellent</p>
                             <p class="text-lg text-black mt-[10px]">Very good</p>
                             <p class="text-lg text-black mt-[10px]">Average</p>
                             <p class="text-lg text-black mt-[10px]">Poor</p>
@@ -98,23 +98,23 @@
                           </ion-col>
                           <ion-col size="7">
                             <div class="flex items-center w-full">
-                              <span class="w-[{{rate0}}px] bg-primary rounded-[7px] h-3 m-0 p-0"></span>
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate0 + 'px'}"></span>
                               <p class="text-black-2 text-[14px] ml-2">{{ratingArray[0]}}</p>
                             </div>
                             <div class="flex items-center mt-[18px] w-full">
-                              <span class="w-[{{rate1}}px] bg-primary rounded-[7px] h-3 m-0 p-0"></span>
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate1 + 'px'}"></span>
                               <p class="text-black-2 text-[14px] ml-2">{{ratingArray[1]}}</p>
                             </div>
                             <div class="flex items-center mt-[18px] w-full">
-                              <span class="w-[{{rate2}}px] bg-primary rounded-[7px] h-3 m-0 p-0"></span>
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate2 + 'px'}"></span>
                               <p class="text-black-2 text-[14px] ml-2">{{ratingArray[2]}}</p>
                             </div>
                             <div class="flex items-center mt-[18px] w-full">
-                              <span class="w-[{{rate3}}px] bg-primary rounded-[7px] h-3 m-0 p-0"></span>
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate3 + 'px'}"></span>
                               <p class="text-black-2 text-[14px] ml-2">{{ratingArray[3]}}</p>
                             </div>
                             <div class="flex items-center mt-[18px] w-full">
-                              <span class="w-[{{rate4}}px] bg-primary rounded-[7px] h-3 p-0 m-0"></span>
+                              <span class="bg-primary rounded-[7px] h-3 p-0 m-0" [ngStyle]="{width: rate4 + 'px'}"></span>
                               <p class="text-black-2 text-[14px] ml-2">{{ratingArray[4]}}</p>
                             </div>
                           </ion-col>
