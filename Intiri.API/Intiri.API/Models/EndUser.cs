@@ -11,6 +11,7 @@ namespace Intiri.API.Models
 			CreatedProjects = new HashSet<Project.Project>();
 			SendMoodboards = new HashSet<ShareMoodboard>();
 			ReceivedMoodboards = new HashSet<ShareMoodboard>();
+			Inspirations = new HashSet<Inspiration>();
 		}
 
 		#endregion Constructors
