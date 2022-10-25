@@ -39,11 +39,11 @@ export class DesignerPage {
     return role;
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, designer) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {designer: true},
+      componentProps: {designer: true, item: designer},
       dismissOnSelect: true
     });
 

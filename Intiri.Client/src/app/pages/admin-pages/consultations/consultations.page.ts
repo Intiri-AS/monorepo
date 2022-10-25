@@ -16,7 +16,7 @@ export class ConsultationsPage {
   initDuration: number;
   initPrice: number;
 
-  constructor(private service: CommonService, private notifier: NotifierService,  private spinner: NgxSpinnerService) {}
+  constructor(private service: CommonService, private notifier: NotifierService, private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
     this.spinner.show();

@@ -17,7 +17,7 @@ export class PartnerProductsPage implements OnInit {
   productTypes: any[];
   searchText: any;
 
-  constructor(public popoverController: PopoverController, 
+  constructor(public popoverController: PopoverController,
               private partnerService: PartnerService,
               private modalController: ModalController,) { }
 
@@ -33,11 +33,11 @@ export class PartnerProductsPage implements OnInit {
   }
 
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, product) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {product: true},
+      componentProps: {product: true, item: product},
       dismissOnSelect: true
     });
 
@@ -47,7 +47,7 @@ export class PartnerProductsPage implements OnInit {
   async openAddProductModal() {
     const popover = await this.popoverController.getTop();
         if (popover)
-            await popover.dismiss(null);  
+            await popover.dismiss(null);
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
       cssClass: 'product-modal-css'

@@ -58,6 +58,10 @@ export class PartnerService {
     return this.http.delete(this.apiUrl + 'account/delete-user/' + contactId);
   }
 
+  deleteProduct(productId) {
+    return this.http.delete(this.apiUrl + 'products/delete/' + productId);
+  }
+
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.getPartner(parseInt(route.paramMap.get('id')));
   }

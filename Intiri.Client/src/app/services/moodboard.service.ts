@@ -48,6 +48,10 @@ export class MoodboardService {
     return this.http.put(this.apiUrl + 'moodboards/edit', editMb);
   }
 
+  deleteMoodboard(moodboardId) {
+    return this.http.delete(this.apiUrl + 'moodboard/delete/' + moodboardId);
+  }
+
   setIsTemplate(req) {
     return this.http.patch(this.apiUrl + 'moodboards/templateSet', req);
   }
