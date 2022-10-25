@@ -39,7 +39,7 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboards();
 
-			IEnumerable<MoodboardOutDTO> moodboardsOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards); ;
+			IEnumerable<MoodboardOutDTO> moodboardsOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboards);
 
 			return Ok(moodboardsOut);
 		}
@@ -141,7 +141,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPatch("templateSet")]
-		public async Task<ActionResult> EditMoodboard(MoodboardAsTemplateInDTO moodboardInDTO)
+		public async Task<ActionResult> SetMoodboardAsTemplate(MoodboardAsTemplateInDTO moodboardInDTO)
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardInDTO.MoodboardId);
 

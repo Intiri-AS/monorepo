@@ -102,7 +102,7 @@ namespace Intiri.API.DataAccess.SeedData
 
 			u6.Partner.PartnerContacts.Add(u6);
 
-
+			// Rating
 			DesignerRating u2DesignerRating = new DesignerRating();
 			u2DesignerRating.Designer = u2;
 			DesignerRating u3DesignerRating = new DesignerRating();
@@ -111,6 +111,9 @@ namespace Intiri.API.DataAccess.SeedData
 			unitOfWork.DesignerRatingRepository.Insert(u3DesignerRating);
 			u2.DesignerRating = u2DesignerRating;
 			u3.DesignerRating = u3DesignerRating;
+
+			//Inspiration
+			await SeedInspirationFiles(unitOfWork, u4, u5);
 
 			await unitOfWork.SaveChanges();
 		}
@@ -336,6 +339,29 @@ namespace Intiri.API.DataAccess.SeedData
 				moodboards[i].Materials = (ICollection<Material>)await unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(inDTO[i].MaterialIds);
 				moodboards[i].ColorPalettes = (ICollection<ColorPalette>)await unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(inDTO[i].ColorPaletteIds);
 				moodboards[i].Products = (ICollection<Product>)await unitOfWork.ProductRepository.GetProductsByIdsListAsync(inDTO[i].ProductIds);
+			}
+
+			await unitOfWork.SaveChanges();
+		}
+
+		public static async Task SeedInspirationFiles(IUnitOfWork unitOfWork, EndUser u4, EndUser u5)
+		{
+			string inspirationsData = await File.ReadAllTextAsync("DataAccess/SeedData/InspirationsSeedData.json");
+
+			List<Inspiration> inspirations = JsonSerializer.Deserialize<List<Inspiration>>(inspirationsData);
+
+			for (int i = 0; i < 4; i++)
+			{
+				unitOfWork.InspirationRepository.Insert(inspirations[i]);
+				inspirations[i].EndUser = u4;
+				u4.Inspirations.Add(inspirations[i]);
+			}
+
+			for (int i = 4; i < 8; i++)
+			{
+				unitOfWork.InspirationRepository.Insert(inspirations[i]);
+				inspirations[i].EndUser = u5;
+				u5.Inspirations.Add(inspirations[i]);
 			}
 
 			await unitOfWork.SaveChanges();

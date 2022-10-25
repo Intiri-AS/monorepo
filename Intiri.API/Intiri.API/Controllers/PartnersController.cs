@@ -62,6 +62,18 @@ namespace Intiri.API.Controllers
 			return Ok(partnerOut);
 		}
 
+		[HttpGet("profile")]
+		public async Task<ActionResult<PartnerContactOutDTO>> GetPartnerProfile()
+		{
+			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
+			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
+			if (partner == null) return BadRequest("Invalid partner.");
+
+			return Ok(_mapper.Map<PartnerOutDTO>(partner));
+		}
+
 		[HttpGet("allPartnersContacts")]
 		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
 		{
@@ -145,7 +157,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		[HttpPut("profile")]
+		[HttpPut("update")]
 		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile(PartnerInDTO partnerInDTO)
 		{
 			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());

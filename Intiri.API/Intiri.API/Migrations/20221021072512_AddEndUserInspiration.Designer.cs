@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221021072512_AddEndUserInspiration")]
+    partial class AddEndUserInspiration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,33 +105,6 @@ namespace Intiri.API.Migrations
                     b.HasIndex("ChatMessageId");
 
                     b.ToTable("ChatMessageAttachment");
-                });
-
-            modelBuilder.Entity("Intiri.API.Models.Consultation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Consultations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Duration = 60,
-                            Price = 950f
-                        });
                 });
 
             modelBuilder.Entity("Intiri.API.Models.Inspiration", b =>

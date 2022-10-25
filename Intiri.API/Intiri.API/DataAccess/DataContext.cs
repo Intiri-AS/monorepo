@@ -45,6 +45,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<ShareMoodboard> ShareMoodboards { get; set; }
 		public DbSet<DesignerRating> DesignerRatings { get; set; }
 		public DbSet<DesignerReview> DesignerReviews { get; set; }
+		public DbSet<ConsultationPayment> ConsultationPayment { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -135,10 +136,11 @@ namespace Intiri.API.DataAccess
 				.WithOne(d => d.Designer)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			//builder.Entity<Designer>()
-			//	.HasOne(dr => dr.DesignerRating)
-			//	.WithOne(d => d.Designer)
-			//	.HasForeignKey<DesignerRating>(r => r.DesignerId);
+			builder.Entity<Consultation>()
+				.HasData
+				(
+					new Consultation { Id = 1, Duration = 60, Price = 950 }
+				);
 
 		}
 	}

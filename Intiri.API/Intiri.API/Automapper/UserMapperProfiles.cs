@@ -2,6 +2,7 @@
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Payment;
 
 namespace Intiri.API.Automapper
 {
@@ -22,7 +23,6 @@ namespace Intiri.API.Automapper
 			CreateMap<Designer, RegisterOutDTO>();
 			CreateMap<Designer, DesignerOutDTO>();
 			CreateMap<Designer, DesignerWithReviewsOutDTO>();
-
 		}
 	}
 }

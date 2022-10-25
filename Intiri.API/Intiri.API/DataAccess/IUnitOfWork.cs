@@ -26,6 +26,8 @@ namespace Intiri.API.DataAccess
 
 		IDesignerRatingRepository DesignerRatingRepository { get; }
 		IDesignerReviewRepository DesignerReviewRepository { get; }
+		IInspirationRepository InspirationRepository { get; }
+		IConsulatationRepository ConsulatationRepository { get; }
 
 		Task<bool> SaveChanges();
 	}

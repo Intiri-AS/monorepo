@@ -8,6 +8,7 @@
 		public static readonly string MaterialImages = "MaterialImages";
 		public static readonly string StyleCoverImages = "StyleCoverImages";
 		public static readonly string UserProfilePhotos = "UserProfilePhotos";
+		public static readonly string ClientInspirations = "ClientInspirations";
 		public static readonly string PartnerLogos = "PartnerLogos";
 	}
 }
