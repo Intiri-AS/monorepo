@@ -4,7 +4,7 @@
     </section>
 </div>
 
-<div *ngIf="slider" class="h-[61px] w-[100%] rounded-xl bg-light">
+<div *ngIf="slider" class="lg:h-[61px] w-[100%] rounded-xl bg-light">
   <section class="header-buttons">
       <ion-button *ngFor="let item of menuItems[menu]; index as i" (click)="goToSlide(i)"  [class.!text-primary]="activeTitle === i" fill="clear" class="btn">{{item | titlecase}}</ion-button>
     </section>
