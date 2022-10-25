@@ -1,4 +1,4 @@
-<ion-header id="main-content">
+<ion-header id="main-content" class="header">
     <ion-toolbar class="header-wrapper header-container">
       <ion-buttons slot="start">
         <ion-button slot="start">
@@ -12,7 +12,7 @@
       </ion-buttons>
       <ion-buttons class="header-buttons justify-end">
         <a routerLink="/partner/profile" routerDirection="root" class="py-1">
-          <img [title]="(loggedUser$ | async)?.fullName" [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/profile-img.png'" alt="Profile Img"/>
+          <img [title]="(loggedUser$ | async)?.fullName" [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/profile-img.png'" alt="Profile Img" class="header-profile-img"/>
         </a>
         <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon"  name="settings-sharp"></ion-icon></div>
       </ion-buttons>

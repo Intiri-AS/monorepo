@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
+import { AddProductModalComponent } from 'src/app/components/modals/add-product-modal/add-product-modal.component';
 import { PartnerService } from 'src/app/services/partner.service';
 
 
@@ -16,7 +17,9 @@ export class PartnerProductsPage implements OnInit {
   productTypes: any[];
   searchText: any;
 
-  constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
+  constructor(public popoverController: PopoverController, 
+              private partnerService: PartnerService,
+              private modalController: ModalController,) { }
 
   ngOnInit() {
     //TODO: change this to getProductsFromThatPartner
@@ -29,9 +32,6 @@ export class PartnerProductsPage implements OnInit {
     })
   }
 
-  addProduct() {
-    //TODO
-  }
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({
@@ -42,5 +42,17 @@ export class PartnerProductsPage implements OnInit {
     });
 
     await popover.present();
+  }
+
+  async openAddProductModal() {
+    const popover = await this.popoverController.getTop();
+        if (popover)
+            await popover.dismiss(null);  
+    const modal = await this.modalController.create({
+      component: AddProductModalComponent,
+      cssClass: 'product-modal-css'
+    });
+
+    await modal.present();
   }
 }

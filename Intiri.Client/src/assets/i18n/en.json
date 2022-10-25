@@ -253,6 +253,7 @@
   "PARTNERS": {
     "products": "Products",
     "add": "Add partner",
+    "addProduct": "Add Product",
     "type": "Product type",
     "partner-name": "Partner name",
     "street": "Street",

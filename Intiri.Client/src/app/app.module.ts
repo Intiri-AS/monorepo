@@ -122,7 +122,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule, DatePipe, LOCATION_INITIALIZED } from '@angular/common';
-import { take } from 'rxjs/operators';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -207,7 +206,7 @@ export function ApplicationInitializerFactory(
   return async () => {
     await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
-    const deaultLang = 'en';
+    const deaultLang = 'no';
     translate.addLangs(['en', 'no']);
     translate.setDefaultLang(deaultLang);
     try {

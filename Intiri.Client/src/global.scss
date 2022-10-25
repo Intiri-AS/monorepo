@@ -94,6 +94,15 @@
     border-radius: 16px;
     --height: 95%;
   }
+
+  .product-modal-css::part(content)  {
+    --width: 50%;
+    border-radius: 16px;
+    --height: 80%;
+    .max-w-md w-full space-y-8 mt-6 {
+      height: 100%c !important;
+    }
+  }
 }
 
 ion-popover {
@@ -227,3 +236,5 @@ code-input {
     height: 381px;
   }
 }
+
+
