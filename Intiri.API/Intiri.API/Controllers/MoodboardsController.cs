@@ -141,7 +141,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPatch("templateSet")]
-		public async Task<ActionResult> EditMoodboard(MoodboardAsTemplateInDTO moodboardInDTO)
+		public async Task<ActionResult> SetMoodboardAsTemplate(MoodboardAsTemplateInDTO moodboardInDTO)
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardInDTO.MoodboardId);
 

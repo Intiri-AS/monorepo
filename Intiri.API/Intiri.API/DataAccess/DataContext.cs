@@ -136,6 +136,12 @@ namespace Intiri.API.DataAccess
 				.WithOne(d => d.Designer)
 				.OnDelete(DeleteBehavior.Restrict);
 
+			builder.Entity<Consultation>()
+				.HasData
+				(
+					new Consultation { Id = 1, Duration = 60, Price = 950 }
+				);
+
 		}
 	}
 }
