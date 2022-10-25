@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-open-file-modal',
@@ -9,8 +12,9 @@ import { ModalController } from '@ionic/angular';
 export class OpenFileModalComponent implements OnInit {
 
   file;
+  isRemoving = false;
 
-  constructor( private modalController: ModalController) { }
+  constructor( private modalController: ModalController, private projectService: ProjectService, private notifier: NotifierService,  private spinner: NgxSpinnerService) { }
 
   ngOnInit() {}
 
@@ -28,6 +32,25 @@ export class OpenFileModalComponent implements OnInit {
 
   dismissModal() {
     this.modalController.dismiss();
+  }
+
+  deleteFile() {
+    this.spinner.show();
+    this.projectService.deleteInspiration(this.file.id).subscribe(res => {
+      this.projectService.getInspirations();
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Inspiration file removed successfully.',
+        type: 'success',
+      });
+      this.modalController.dismiss();
+    }, () => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Cannot remove inspiration file.',
+        type: 'error',
+      });
+    })
   }
 
 }

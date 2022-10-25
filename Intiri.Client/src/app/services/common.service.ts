@@ -18,4 +18,12 @@ export class CommonService {
     return this.http.get(this.apiUrl + 'admin/totalCount')
   }
 
+  getConsulationsInfo(){
+    return this.http.get(this.apiUrl + 'consultations')
+  }
+
+  updateConsulationsInfo(data){
+    return this.http.patch(this.apiUrl + 'consultations/update', data);
+  }
+
 }

@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs/operators';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -28,7 +29,8 @@ export class InspirationsPage {
 
   ngOnInit() {
     this.spinner.show();
-    this.projectService.getInspirations().subscribe((res: any[]) => {
+    this.projectService.getInspirations();
+    this.projectService.inspirations$.subscribe((res: any[]) => {
       this.spinner.hide();
       this.inspirations = res;
     })
@@ -36,7 +38,8 @@ export class InspirationsPage {
 
   addInspiration() {
     this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
-      this.projectService.getInspirations().subscribe((res: any[]) => {
+      this.projectService.getInspirations();
+      this.projectService.inspirations$.pipe(take(1)).subscribe((res: any[]) => {
         this.spinner.hide();
         this.inspirations = res;
         this.imagePath = null;

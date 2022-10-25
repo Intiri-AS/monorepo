@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of, ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Moodboard } from '../models/moodboard.model';
 import { Project } from '../models/project.model';
@@ -15,6 +16,8 @@ export class ProjectService implements Resolve<Project> {
   apiUrl = environment.apiUrl;
   private currentProjectSource = new ReplaySubject<Project>(1);
   currentProject$ = this.currentProjectSource.asObservable();
+  private inspirationsSource = new ReplaySubject<any>(1);
+  inspirations$ = this.inspirationsSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -107,13 +110,19 @@ export class ProjectService implements Resolve<Project> {
   };
 
   getInspirations() {
-    return this.http.get(this.apiUrl + 'inspirations');
+    return this.http.get(this.apiUrl + 'inspirations').pipe(map((inspirations) => {
+      this.inspirationsSource.next(inspirations);
+    })).toPromise()
   }
 
   addInspiration(file) {
     const formData = new FormData();
     formData.append('inFile', file);
     return this.http.post(this.apiUrl + 'inspirations/add', formData);
+  }
+
+  deleteInspiration(id) {
+    return this.http.delete(this.apiUrl + 'inspirations/delete/' + id);
   }
 
 }

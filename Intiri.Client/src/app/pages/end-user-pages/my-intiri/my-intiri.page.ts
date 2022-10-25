@@ -65,14 +65,16 @@ export class MyIntiriPage {
       this.isLoading = false;
       this.spinner.hide();
     });
-    this.projectService.getInspirations().subscribe((res: any[]) => {
+    this.projectService.getInspirations();
+    this.projectService.inspirations$.subscribe((res: any[]) => {
       this.inspirations = res;
     })
   }
 
   addInspiration() {
     this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
-      this.projectService.getInspirations().subscribe((res: any[]) => {
+      this.projectService.getInspirations();
+      this.projectService.inspirations$.subscribe((res: any[]) => {
         this.spinner.hide();
         this.inspirations = res;
         this.notifier.show({
