@@ -64,7 +64,7 @@ export class DesignerPage {
     const selectedStatus = event.detail.value;
     this.designers$.pipe(take(1)).subscribe(designers => {
       if(selectedStatus.length > 0) {
-        this.designers = designers.filter(designer => selectedStatus.includes(designer.roles[0].name));  
+        this.designers = designers.filter(designer => selectedStatus.includes(designer.roles[0].name));
       } else {
         this.designers = designers;
       }

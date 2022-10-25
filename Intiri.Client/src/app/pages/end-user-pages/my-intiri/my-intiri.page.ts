@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IonSlides, ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
@@ -19,6 +22,9 @@ export class MyIntiriPage {
 
   projects: Project[] = [];
   projectId = 0;
+  inspirations: any[] = [];
+  imagePath = null;
+  newInspiration = null
 
   options = {
     slidesPerView: 3,
@@ -47,7 +53,9 @@ export class MyIntiriPage {
   constructor(
     public projectService: ProjectService,
     private modalController: ModalController,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sanitizer: DomSanitizer,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -57,6 +65,33 @@ export class MyIntiriPage {
       this.isLoading = false;
       this.spinner.hide();
     });
+    this.projectService.getInspirations().subscribe((res: any[]) => {
+      this.inspirations = res;
+    })
+  }
+
+  addInspiration() {
+    this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
+      this.projectService.getInspirations().subscribe((res: any[]) => {
+        this.spinner.hide();
+        this.inspirations = res;
+        this.notifier.show({
+          message: 'New inspiration image added successfully',
+          type: 'success',
+        });
+      })
+    })
+  }
+
+  onFileChange(event) {
+    if(event.target.files[0]) {
+      this.newInspiration = event.target.files[0];
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.newInspiration));
+      this.spinner.show();
+      this.addInspiration();
+    } else {
+      this.imagePath = null;
+    }
   }
 
   // TODO: needs to be updated after project is allowed to have multiple moodboards!
@@ -92,6 +127,16 @@ export class MyIntiriPage {
   //   this.projectService.setCurrentProject(project);
   //   this.router.navigateByUrl('/project-details');
   // }
+
+  async openImageInModal(image) {
+    const modal = await this.modalController.create({
+      component: OpenFileModalComponent,
+      componentProps: {file: image},
+      cssClass: 'open-file-modal-css'
+    });
+
+    await modal.present();
+  }
 
   async openShare() {
     const modal = await this.modalController.create({

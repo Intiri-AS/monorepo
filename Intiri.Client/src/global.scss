@@ -39,6 +39,14 @@
     --height: 430px;
     border-radius: 16px;
   }
+
+  .open-file-modal-css::part(content) {
+    --width: auto;
+    --height: auto;
+    --max-width: 90vw;
+    --max-height: 90vh;
+    border-radius: 16px;
+  }
   .small-modal-css::part(content) {
     --width: 400px;
     border-radius: 16px;
@@ -121,7 +129,7 @@ ion-button {
 
 
 .main-title {
-  @apply font-medium text-black-1 text-4xl sm:text-5xl mt-0
+  @apply font-medium text-black-1 text-3xl sm:text-4xl mt-0
 }
 
 // without this change ion-grid does not work well, since slide is reducing container width based on given content (eg. size=12 will not take full width if content is not wide enough)

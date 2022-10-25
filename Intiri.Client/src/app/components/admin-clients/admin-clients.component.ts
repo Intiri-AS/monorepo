@@ -18,7 +18,7 @@ export class AdminClientsComponent implements OnInit {
   delete;
 
   item: {}
-  
+
   constructor(private modalController: ModalController, public popoverController: PopoverController, private userService: UserService) { }
 
   ngOnInit() {

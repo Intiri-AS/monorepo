@@ -106,4 +106,14 @@ export class ProjectService implements Resolve<Project> {
     } return moodboard;
   };
 
+  getInspirations() {
+    return this.http.get(this.apiUrl + 'inspirations');
+  }
+
+  addInspiration(file) {
+    const formData = new FormData();
+    formData.append('inFile', file);
+    return this.http.post(this.apiUrl + 'inspirations/add', formData);
+  }
+
 }

@@ -40,7 +40,7 @@
     </ion-grid>
     <div class="input">
       <span class="text-black-2">{{'NEW-PROJECT.room-area' | translate}}</span>
-      <ion-input [(ngModel)]="project.roomDetails.size" type="number" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
+      <ion-input [(ngModel)]="project.roomDetails.size" type="number" min="1" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
     </div>
     <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.budget' | translate}}</p>
     <div class="input">
