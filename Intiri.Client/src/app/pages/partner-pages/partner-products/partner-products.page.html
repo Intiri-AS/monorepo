@@ -16,7 +16,7 @@
             <div class="profile-input justify-end flex flex-1 gap-x-[1.65%] !mt-8 md:!mt-4">
               <div class="w-full">
                 <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
-                <ion-select class="w-full" interface="popover">
+                <ion-select class="w-full" interface="popover" [multiple]="true">
                   <ion-select-option value="{{productType.name}}" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
                 </ion-select>
               </div>

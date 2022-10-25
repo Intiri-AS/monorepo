@@ -1,5 +1,5 @@
 <ion-content>
-  <div id="home">
+  <div id="home" [formGroup]="profileForm">
     <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
     <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'"></app-header-internal-designer>
@@ -19,9 +19,12 @@
           </app-profile-img-section>
         </ion-col>
         <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="5">
-          <app-profile-info-section
-            [userInfo]="userInfo">
+          <div formGroupName="dataInfoGroup">
+            <app-profile-info-section
+            [dataInfo]="userInfo"
+            [userInfo]="true">
           </app-profile-info-section>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row>
