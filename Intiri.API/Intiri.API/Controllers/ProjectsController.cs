@@ -105,6 +105,8 @@ namespace Intiri.API.Controllers
 			{
 				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.Moodboard.Id);
 				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+				newMoodboard.Designer = null;
+				newMoodboard.EndUser = endUser;
 			}
 			else
 			{
@@ -114,8 +116,7 @@ namespace Intiri.API.Controllers
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				//Designer user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
-				//newMoodboard.Designer = user;
+				newMoodboard.Designer = null;
 				newMoodboard.EndUser = endUser;
 
 				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
@@ -133,15 +134,6 @@ namespace Intiri.API.Controllers
 				IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardProjectIn.Moodboard.ProductIds);
 				newMoodboard.Products = products.ToArray();
 			}
-
-			//// Is Moodboard an offer from designer to client
-			//if (moodboardProjectIn.Moodboard.EndUserId > 0)
-			//{
-			//	EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdAsync(moodboardProjectIn.Moodboard.EndUserId);
-			//	if (endUser == null) return NotFound();
-
-			//	moodboard.EndUser = endUser;
-			//}
 
 			project.ProjectMoodboards.Add(newMoodboard);
 

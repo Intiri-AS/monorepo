@@ -72,9 +72,9 @@ namespace Intiri.API.Controllers
 			List<Moodboard> moodboardOffers = new List<Moodboard>();
 			foreach (ConsultationPayment cp in endUser.ConsultationPayments)
 			{
-				if (cp.Moodboard.Designer != null)
+				if (cp.MoodboardOfferId != null)
 				{
-					moodboardOffers.Add(await _unitOfWork.MoodboardRepository.GetFullMoodboardById(cp.MoodboardId.Value));
+					moodboardOffers.Add(await _unitOfWork.MoodboardRepository.GetFullMoodboardById(cp.MoodboardOfferId.Value));
 				}
 			}
 
@@ -149,7 +149,7 @@ namespace Intiri.API.Controllers
 
 			_unitOfWork.MoodboardRepository.Insert(moodboard);
 			
-			consultationPayment.Moodboard = moodboard;
+			consultationPayment.MoodboardOffer = moodboard;
 			_unitOfWork.ConsultationPaymentRepository.Update(consultationPayment);
 
 
@@ -171,12 +171,12 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Moodboard with Id={modifyDTO.MoodboardId} not found");
 			}
 
-			// Is Moodboard an offer from designer to client
-			if (moodboard.Designer == null && (User.IsInRole(RoleNames.InternalDesigner) || User.IsInRole(RoleNames.ExternalDesigner)))
-			{
-				Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
-				moodboard.Designer = designer;
-			}
+			//// Is Moodboard an offer from designer to client
+			//if (moodboard.Designer == null && (User.IsInRole(RoleNames.InternalDesigner) || User.IsInRole(RoleNames.ExternalDesigner)))
+			//{
+			//	Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
+			//	moodboard.Designer = designer;
+			//}
 
 			if (modifyDTO.ColorPaletteIds != null)
 			{
