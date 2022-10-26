@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { ColorService } from '../../../services/color.service'
 
 @Component({
   selector: 'app-add-product-modal',
@@ -9,6 +11,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddProductModalComponent implements OnInit {
   imagePath = null;
+  userForm: FormGroup
+
+  colors$ = this.colorService.colorPalettes$
 
   room = {
     name: '',
@@ -17,9 +22,23 @@ export class AddProductModalComponent implements OnInit {
     description: ''
   }
 
-  constructor(private sanitizer: DomSanitizer, private modalController: ModalController) { }
+  constructor(private sanitizer: DomSanitizer,
+              private modalController: ModalController, 
+              private fb: FormBuilder,
+              private colorService: ColorService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.colorService.getColorPalettes()
+    this.userForm = this.fb.group({
+        productName: "",
+        productType: "",
+        productMaterial: "",
+        color: "",
+        price: "",
+        description: "",
+        productImage: ""
+  });
+  }
 
   onFileChange(event) {
     if(event.target.files[0]) {

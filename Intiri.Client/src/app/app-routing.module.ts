@@ -246,12 +246,12 @@ const routes: Routes = [
   {
     path: 'partner', //TODO Set up page guard (shared guard)
     component: PartnerProductsPage,
-    //canActivate: [PartnerGuard]
+    canActivate: [PartnerGuard]
   },
   {
     path: 'partner/profile', //TODO Set up page guard (shared guard)
     component: PartnerProfilePage,
-    //canActivate: [PartnerGuard]
+    canActivate: [PartnerGuard]
   }
 
 

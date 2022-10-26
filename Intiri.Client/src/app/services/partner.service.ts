@@ -14,7 +14,9 @@ export class PartnerService {
 
   apiUrl = environment.apiUrl;
   private partnersSource = new ReplaySubject<any>(1);
+  private productSource = new ReplaySubject<any>(undefined)
   partners$ = this.partnersSource.asObservable();
+  products$ = this.productSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +28,14 @@ export class PartnerService {
     })).toPromise();
   }
 
-  getProducts(){
-    return this.http.get(this.apiUrl + 'products');
+
+
+  getProductsFromThatPartner(){
+    return this.http.get(this.apiUrl + 'products').pipe(map((productResponse) => {
+      if (productResponse) {
+        this.productSource.next(productResponse)
+      }
+    }))
   }
 
   getProductsType(){
@@ -48,6 +56,10 @@ export class PartnerService {
 
   getPartner(id: number){
     return this.http.get<any>(this.apiUrl + 'partner/partner/' + id);
+  }
+
+  getPartnerProfile() {
+    return this.http.get<any>(this.apiUrl + 'partner/profile')
   }
 
   deletePartner(partnerId) {

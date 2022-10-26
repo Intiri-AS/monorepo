@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { AddProductModalComponent } from 'src/app/components/modals/add-product-modal/add-product-modal.component';
 import { PartnerService } from 'src/app/services/partner.service';
@@ -13,6 +15,7 @@ import { PartnerService } from 'src/app/services/partner.service';
 
 export class PartnerProductsPage implements OnInit {
 
+  products$: Observable<any> = this.partnerService.products$;
   products: any[];
   productTypes: any[];
   searchText: any;
@@ -22,13 +25,12 @@ export class PartnerProductsPage implements OnInit {
               private modalController: ModalController,) { }
 
   ngOnInit() {
-    //TODO: change this to getProductsFromThatPartner
-    this.partnerService.getProducts().subscribe((res: any[]) => {
-      this.products = res;
-    })
-
+    this.partnerService.getProductsFromThatPartner().subscribe();
     this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
+    })
+    this.products$.subscribe( response => {
+      this.products = response
     })
   }
 
@@ -54,5 +56,21 @@ export class PartnerProductsPage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  onFilterChange(event){
+    const selectedTypeNames = event.detail.value;
+    this.products$.pipe(take(1)).subscribe(products => {
+      if(selectedTypeNames.length > 0) {
+        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));  
+        console.log(this.products, 'produkti')
+      } else {
+        this.products = products;
+      }
+    })
+}
+
+selectAllChange(){
+  
   }
 }

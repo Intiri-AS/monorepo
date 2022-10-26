@@ -2,11 +2,15 @@
 <div *ngIf="formGroup" [formGroup]="formGroup">
   <div formGroupName="innerGroup">
 <section class="sm:flex">
-  <div class="profile-input">
+  <div class="profile-input" *ngIf="partnerProfile">
+    <span class="text-sm text-black-2">{{'PARTNERS.partner-name' | translate}}</span>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+  </div>
+  <div class="profile-input" *ngIf="userInfo">
     <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
   </div>
-  <div class="profile-input">
+  <div class="profile-input" *ngIf="userInfo">
     <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
   </div>
@@ -26,11 +30,11 @@
   <div class="phone-input">
     <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
     <ion-select class="" interface="popover" [value]="dataInput.countryCode" (ionChange)="countryCodeChange($event)" formControlName="countryCode">
-      <ion-select-option value="45">+45</ion-select-option>
-      <ion-select-option value="46">+46</ion-select-option>
-      <ion-select-option value="47">+47</ion-select-option>
-      <ion-select-option value="381">+381</ion-select-option>
-      <ion-select-option value="382">+382</ion-select-option>
+      <ion-select-option value="+45">+45</ion-select-option>
+      <ion-select-option value="+46">+46</ion-select-option>
+      <ion-select-option value="+47">+47</ion-select-option>
+      <ion-select-option value="+381">+381</ion-select-option>
+      <ion-select-option value="+382">+382</ion-select-option>
     </ion-select>
   </div>
   <div class="profile-input">
@@ -61,9 +65,9 @@
 <div class="profile-input">
   <span class="text-sm text-black-2">{{'PARTNERS.country' | translate}}</span>
   <ion-select interface="popover" [value]="dataInput.country" (ionChange)="countryChange($event)" formControlName="country">
-    <ion-select-option value="norway">Norway</ion-select-option>
-    <ion-select-option value="serbia">Serbia</ion-select-option>
-    <ion-select-option value="england">England</ion-select-option>
+    <ion-select-option value="Norway">Norway</ion-select-option>
+    <ion-select-option value="Serbia">Serbia</ion-select-option>
+    <ion-select-option value="England">England</ion-select-option>
   </ion-select>
 </div>
 </div>
