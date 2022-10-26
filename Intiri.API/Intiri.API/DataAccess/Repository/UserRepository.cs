@@ -68,7 +68,7 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Users.OfType<EndUser>()
 				.Include(i => i.ConsultationPayments)
-					.ThenInclude(mo => mo.Moodboard)
+					.ThenInclude(mo => mo.MoodboardOffer)
 					.ThenInclude(de => de.Designer)
 				.SingleOrDefaultAsync(eu => eu.Id == id);
 		}
@@ -130,6 +130,7 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Users.OfType<Designer>()
 				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.Payer)
 				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.Moodboard).ThenInclude(s => s.Style)
+				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.MoodboardOffer)
 				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 

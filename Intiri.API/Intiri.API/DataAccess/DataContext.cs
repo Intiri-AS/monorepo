@@ -63,7 +63,8 @@ namespace Intiri.API.DataAccess
 
 			builder.Entity<Designer>()
 				.HasMany(m => m.CreatedMoodboards)
-				.WithOne(d => d.Designer);
+				.WithOne(d => d.Designer)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.Entity<PartnerContact>()
 				.HasOne(p => p.Partner)
@@ -131,16 +132,16 @@ namespace Intiri.API.DataAccess
 				.WithMany(d => d.ConsultationPaymentsReceived)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			builder.Entity<Designer>()
-				.HasMany(m => m.CreatedMoodboards)
-				.WithOne(d => d.Designer)
-				.OnDelete(DeleteBehavior.Restrict);
-
 			builder.Entity<Consultation>()
 				.HasData
 				(
 					new Consultation { Id = 1, Duration = 60, Price = 950 }
 				);
+
+			//builder.Entity<Moodboard>()
+			//	.HasMany(p => p.ConsultationPayments)
+			//	.WithOne(x => x.MoodboardOffer);
+				
 
 		}
 	}

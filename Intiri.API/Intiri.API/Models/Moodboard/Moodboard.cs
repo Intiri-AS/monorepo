@@ -29,6 +29,5 @@ namespace Intiri.API.Models.Moodboard
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }
-        public ICollection<ConsultationPayment> ConsultationPayments { get; set; }
     }
 }
