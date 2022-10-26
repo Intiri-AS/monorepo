@@ -64,6 +64,15 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
+		public async Task<EndUser> GetEndUserWithConsultationPaymentsAsync(int id)
+		{
+			return await _context.Users.OfType<EndUser>()
+				.Include(i => i.ConsultationPayments)
+					.ThenInclude(mo => mo.Moodboard)
+					.ThenInclude(de => de.Designer)
+				.SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
 		#endregion EndUser
 
 		#region Designer
