@@ -1,6 +1,8 @@
 <ion-content>
   <!-- Add style modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <form [formGroup]="addStyleForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addStyle()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -11,7 +13,8 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.style-name' | translate}}</span>
-            <ion-input [(ngModel)]="style.name" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+            <ion-input [(ngModel)]="style.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">Field Required!</span>
           </div>
         </ion-col>
       </ion-row>
@@ -19,7 +22,8 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
-            <ion-textarea rows="5" [(ngModel)]="style.description" class="border border-black-2 rounded-2xl"></ion-textarea>
+            <ion-textarea rows="5" [(ngModel)]="style.description" class="border border-black-2 rounded-2xl" formControlName="description"></ion-textarea>
+            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">Field Required!</span>
           </div>
         </ion-col>
       </ion-row>
@@ -35,18 +39,20 @@
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
+            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">Image Required!</span>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-8">
           <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyle()">{{'COMMON.add' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
+    </form>
   </div>
   <!-- Style added modal -->
   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
