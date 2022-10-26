@@ -116,6 +116,12 @@ export class AddProductModalComponent implements OnInit {
       });
       this.partnerService.getProductsFromThatPartner();
       this.dismissModal()
+    }, error => {
+      this.notifier.show({
+        message: error.error,
+        type: 'error',
+      });
+      setTimeout(() => this.dismissModal(), 2000)
     });
   }
 
