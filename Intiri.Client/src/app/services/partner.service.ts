@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ReadPropExpr } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
@@ -27,8 +28,6 @@ export class PartnerService {
       }
     })).toPromise();
   }
-
-
 
   getProductsFromThatPartner(){
     return this.http.get(this.apiUrl + 'products').pipe(map((productResponse) => {
@@ -72,6 +71,14 @@ export class PartnerService {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.getPartner(parseInt(route.paramMap.get('id')));
+  }
+
+  addPartnerProduct(productData: any) {
+    const formData = new FormData();
+    Object.keys(productData).forEach(key => formData.append(key, productData[key]));
+    formData.delete('imageFile'); // removing it first so we can manually add a file name
+    formData.append('imageFile', productData.imageFile, `productImg${productData.name.replace(/\s/g,'_')}.png`)
+    return this.http.post(`${this.apiUrl}products/add`, formData);
   }
 
 }

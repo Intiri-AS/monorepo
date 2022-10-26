@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { AddProductModalComponent } from 'src/app/components/modals/add-product-modal/add-product-modal.component';
+import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service';
 
 
@@ -16,13 +17,15 @@ import { PartnerService } from 'src/app/services/partner.service';
 export class PartnerProductsPage implements OnInit {
 
   products$: Observable<any> = this.partnerService.products$;
+  material$: Observable<any> = this.materialService.materials$;
   products: any[];
   productTypes: any[];
   searchText: any;
 
   constructor(public popoverController: PopoverController, 
               private partnerService: PartnerService,
-              private modalController: ModalController,) { }
+              private modalController: ModalController,
+              private materialService: MaterialService) { }
 
   ngOnInit() {
     this.partnerService.getProductsFromThatPartner().subscribe();
@@ -70,7 +73,4 @@ export class PartnerProductsPage implements OnInit {
     })
 }
 
-selectAllChange(){
-  
-  }
 }
