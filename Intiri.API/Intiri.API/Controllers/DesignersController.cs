@@ -117,7 +117,7 @@ namespace Intiri.API.Controllers
 			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithClientsAsync(User.GetUserId());
 			if (designer == null) return Unauthorized("Invalid designer.");
 
-			ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetFullConsultationByIdAsync(consultationId);
+			ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetFullConsultationPaymentByIdAsync(consultationId);
 
 			DesignerClientFullOutDTO clientFullOutDTO = _mapper.Map<DesignerClientFullOutDTO>(consultationPayment);
 
