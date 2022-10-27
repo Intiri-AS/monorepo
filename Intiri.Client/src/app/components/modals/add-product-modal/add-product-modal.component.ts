@@ -117,7 +117,7 @@ export class AddProductModalComponent implements OnInit {
         message: 'Product added successfully',
         type: 'success',
       });
-      this.partnerService.getProductsFromThatPartner();
+      this.partnerService.getProductsFromThatPartner().subscribe();
       this.dismissModal()
     }, error => {
       this.spinner.hide();

@@ -1,0 +1,13 @@
+{
+    "PARTNERS": {
+        "product-name": "Product name",
+        "product-name-required" : "Product name is required",
+        "product-material": "Product material",
+        "product-material-required": "Material is required",
+        "color-required": "Color is required",
+        "price-required": "Price is required",
+        "product-image": "Product image",
+        "product-image-required": "Image is required",
+        "product-type-required": "Product type is required"
+    }
+}
