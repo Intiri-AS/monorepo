@@ -21,7 +21,7 @@
 
 <div *ngIf="client?.clientInspirations && client.clientInspirations.length > 0" class="flex justify-between items-center mb-6">
   <p class="text-black-2 text-2xl font-medium">Inspiration</p>
-  <div *ngIf="slides['el']['swiper']?.currentBreakpoint && client?.clientInspirations && client.clientInspirations.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
+  <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && client?.clientInspirations && client.clientInspirations.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
     <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
       <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
     </ion-button>
