@@ -144,6 +144,8 @@ ion-button {
   height: 46px !important;
   font-weight: 500 !important;
   font-size: 1.125rem !important;
+
+
 }
 
 .secondary-btn {
@@ -155,12 +157,38 @@ ion-button {
   font-size: 1.125rem !important;
 }
 
+.header-icon {
+  @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
+}
+
+.header-profile-img {
+  @apply object-cover rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
+}
+
+
 .header-container {
   @apply px-[75px];
 }
 
 .box-shadow {
   -webkit-box-shadow: 4px 4px 15px rgb(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1479px) {
+  .header-icon {
+    font-size: 18px !important;
+  }
+  .header-profile-img {
+    height: 36px !important;
+    width: 36px !important;
+  }
+
+  .primary-btn, .secondary-btn {
+    @apply px-2 rounded-[8px];
+    margin: 0 !important;
+    font-size: 16px !important;
+    height: 36px !important;
+  }
 }
 
 // should be wrapped around every main content of the page (main section below header)

@@ -17,7 +17,7 @@
                     <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
                     <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
                   </div>
-                  <img [src]="getMoodboardImage(d) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                  <img [src]="getMoodboardImage(d, 2) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
