@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { BookDesignerModalComponent } from 'src/app/components/modals/book-designer-modal/book-designer-modal.component';
 import { DesignerService } from 'src/app/services/designer.service';
@@ -12,15 +13,23 @@ import { DesignerService } from 'src/app/services/designer.service';
 export class BookDesignerPage {
 
   languages = this.designerService.languages;
-
   designers = [];
+  moodboard: any;
+  isContactDesigner: boolean = false;
 
-  constructor(private designerService: DesignerService, private modalController: ModalController) {}
+  constructor(private designerService: DesignerService, private modalController: ModalController, private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
     this.designerService.getContactDesigners().subscribe((res: any[]) => {
       this.designers = res;
     });
+    this.route.data.subscribe(data => {
+      this.moodboard = data.moodboard;
+      if(data.moodboard){
+        this.isContactDesigner = true;
+      }
+    })
   }
 
   getDesignerType(d) {

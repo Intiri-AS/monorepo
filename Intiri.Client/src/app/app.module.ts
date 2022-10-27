@@ -27,7 +27,6 @@ import { PreBookSelectionPage } from './pages/end-user-pages/pre-book-selection/
 import { MyIntiriPage } from './pages/end-user-pages/my-intiri/my-intiri.page';
 import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboard/customize-moodboard.page';
 import { InspirationsPage } from './pages/end-user-pages/inspirations/inspirations.page';
-import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
 import { ProjectDetailsPage } from './pages/end-user-pages/project-details/project-details.page';
@@ -134,7 +133,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
-    NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, InspirationsPage, ContactDesignerPage, BookDesignerPage,
+    NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, InspirationsPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
