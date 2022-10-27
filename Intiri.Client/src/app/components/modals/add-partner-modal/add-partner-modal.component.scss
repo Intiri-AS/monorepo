@@ -1,9 +1,9 @@
 .profile-input {
-    @apply mt-4 mx-2 flex-1
+    @apply mt-2 mx-2 flex-1
 }
 
 .phone-input {
-    @apply mt-4 mx-2 min-w-[130px]
+    @apply mt-2 mx-2 min-w-[130px]
 }
 
 ion-input {
@@ -23,7 +23,7 @@ ion-select {
   }
 
 .partner-form {
-    @apply h-[800px] w-[80%] overflow-auto;
+    @apply h-full mb-20 lg:mb-0 lg:h-[850px] w-[80%] overflow-auto;
 }
 .partner-form::-webkit-scrollbar {
 @apply opacity-0 w-[5px] bg-transparent;

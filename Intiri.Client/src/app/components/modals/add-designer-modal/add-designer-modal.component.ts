@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DesignerService } from 'src/app/services/designer.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,6 +12,28 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-designer-modal.component.scss'],
 })
 export class AddDesignerModalComponent implements OnInit {
+  public addDesignerForm: FormGroup;
+  public isFormSubmited = false;
+
+  get firstNameErrors() {
+    return this.addDesignerForm.controls.firstName.errors;
+  }
+
+  get lastNameErrors() {
+    return this.addDesignerForm.controls.lastName.errors;
+  }
+
+  get codeErrors() {
+    return this.addDesignerForm.controls.code.errors;
+  }
+
+  get phoneErrors() {
+    return this.addDesignerForm.controls.phone.errors;
+  }
+
+  get roleErrors() {
+    return this.addDesignerForm.controls.role.errors;
+  }
 
   add;
   added;
@@ -22,12 +47,32 @@ export class AddDesignerModalComponent implements OnInit {
     firstName: '',
     lastName: '',
     phoneNumber: '',
-    countryCode: '',
+    countryCode: '47',
     role: '',
     language: ''
   }
 
-  constructor(private modalController: ModalController, private designerService: DesignerService, private userService: UserService) { }
+  constructor(
+    private modalController: ModalController,
+    private designerService: DesignerService,
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
+  ) {
+    this.addDesignerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      phone: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
+      ])],
+      role: ['', [Validators.required]],
+      en: [''],
+      no: ['']
+    });
+  }
 
   ngOnInit() {}
 
@@ -36,13 +81,26 @@ export class AddDesignerModalComponent implements OnInit {
   }
 
   addDesigner() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.addDesignerForm.valid) {
+      this.spinner.hide();
+      return;
+    }
     this.designer.language = (this.EN && this.NO) ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
     this.designerService.addDesigner(this.designer).subscribe(res => {
+      this.spinner.hide();
       if (typeof (res) === 'object') {
         this.designerService.getDesigners();
         this.openSuccessModal();
         location.reload();
       }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
@@ -51,6 +109,15 @@ export class AddDesignerModalComponent implements OnInit {
         this.designerService.getDesigners();
         this.modalController.dismiss();
         location.reload();
+        this.notifier.show({
+          message: 'Designer deleted successfully',
+          type: 'success',
+        });
+    }, e => {
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 

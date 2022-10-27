@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PartnerService } from 'src/app/services/partner.service';
 
 @Component({
@@ -10,6 +13,61 @@ import { PartnerService } from 'src/app/services/partner.service';
   styleUrls: ['./add-partner-modal.component.scss'],
 })
 export class AddPartnerModalComponent implements OnInit {
+  public addPartnerForm: FormGroup;
+  public addPartnerContactForm: FormGroup;
+  public isFormSubmited = false;
+
+  get nameErrors() {
+    return this.addPartnerForm.controls.name.errors;
+  }
+
+  get codeErrors() {
+    return this.addPartnerForm.controls.code.errors;
+  }
+
+  get phoneErrors() {
+    return this.addPartnerForm.controls.phone.errors;
+  }
+
+  get emailErrors() {
+    return this.addPartnerForm.controls.email.errors;
+  }
+
+  get streetErrors() {
+    return this.addPartnerForm.controls.street.errors;
+  }
+
+  get postalErrors() {
+    return this.addPartnerForm.controls.postal.errors;
+  }
+
+  get cityErrors() {
+    return this.addPartnerForm.controls.city.errors;
+  }
+
+  get countryErrors() {
+    return this.addPartnerForm.controls.country.errors;
+  }
+
+  get logoErrors() {
+    return this.addPartnerForm.controls.logo.errors;
+  }
+
+  get contactFirstNameErrors() {
+    return this.addPartnerContactForm.controls.firstName.errors;
+  }
+
+  get contactLastNameErrors() {
+    return this.addPartnerContactForm.controls.lastName.errors;
+  }
+
+  get contactCodeErrors() {
+    return this.addPartnerContactForm.controls.code.errors;
+  }
+
+  get contactPhoneErrors() {
+    return this.addPartnerContactForm.controls.phone.errors;
+  }
 
   added;
   addedContact;
@@ -27,21 +85,55 @@ export class AddPartnerModalComponent implements OnInit {
     postalCode: '',
     city: '',
     country: '',
-    countryCode: '',
+    countryCode: '47',
     logoFile: null
   }
 
   partnerContact = {
     firstName: '',
     lastName: '',
-    countryCode: '+381',
+    countryCode: '47',
     phoneNumber: '',
     partnerId: 0
   }
 
   imagePath = null;
 
-  constructor(private modalController: ModalController, private partnerService: PartnerService, private sanitizer: DomSanitizer) { }
+  constructor(
+    private modalController: ModalController,
+    private partnerService: PartnerService,
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
+  ) {
+    this.addPartnerForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      phone: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
+      ])],
+      email: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+      ])],
+      street: ['', [Validators.required]],
+      postal: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      logo: ['', [Validators.required]],
+    });
+    this.addPartnerContactForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      phone: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
+      ])]
+    });
+  }
 
   ngOnInit() {}
 
@@ -64,11 +156,24 @@ export class AddPartnerModalComponent implements OnInit {
   }
 
   addPartner() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.addPartnerForm.valid) {
+      this.spinner.hide();
+      return;
+    }
     this.partnerService.addPartner(this.partner).subscribe(res => {
+      this.spinner.hide();
       if (typeof (res) === 'object') {
         this.partnerService.getPartners();
         this.openSuccessModal();
       }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
@@ -93,11 +198,24 @@ export class AddPartnerModalComponent implements OnInit {
   }
 
   addPartnerContact() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.addPartnerContactForm.valid) {
+      this.spinner.hide();
+      return;
+    }
     this.partnerContact.partnerId = this.partnerId;
     this.partnerService.addPartnerContact(this.partnerContact).subscribe(res => {
+      this.spinner.hide();
       if (typeof (res) === 'object') {
         this.openSuccessModalContact();
       }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
