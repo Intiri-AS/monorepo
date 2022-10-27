@@ -95,19 +95,29 @@
       <div class="flex justify-between items-center">
         <p class="text-2xl font-medium text-black-2 mt-8 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
         <ion-button fill="clear" class="text-primary">
-          <p class="capitalize">See all</p>
-          <ion-icon name="arrow-forward" class="h-4 w-4"></ion-icon>
+          <p class="capitalize hover:opacity-80" routerLink="/my-inspirations" routerDirection="root">See all</p>
         </ion-button>
       </div>
-      <ion-row class="gap-x-[1.45%] ">
-        <ion-col *ngFor="let style of [1,2,3,4,5,6] | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
-          <div >
+      <ion-row class="gap-x-[1.45%]">
+        <ion-col *ngFor="let i of inspirations.slice(-6)" size="12" size-sm="5.75" size-xl="1.85">
+          <div>
             <div class="h-full w-full">
-              <img src="../../../../assets/images/img-01.png" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
+              <img [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] shadow !w-full hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
             </div>
           </div>
-          <div class="flex justify-between">
-            <p class="py-2 text-black-2 font-semibold">{{style.name}}</p>
+        </ion-col>
+        <ion-col *ngIf="inspirations.length == 0" size="12" size-sm="5.75" size-xl="1.85">
+          <div class="profile-input w-full">
+            <label for="dropzone-file">
+              <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">
+                <div *ngIf="!imagePath" class="text-center mt-[85px]">
+                  <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Add first inspiration</p>
+                </div>
+                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
+              </div>
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+            </label>
           </div>
         </ion-col>
       </ion-row>

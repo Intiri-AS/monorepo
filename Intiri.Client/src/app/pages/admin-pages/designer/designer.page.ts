@@ -39,11 +39,11 @@ export class DesignerPage {
     return role;
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, designer) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {designer: true},
+      componentProps: {designer: true, item: designer},
       dismissOnSelect: true
     });
 
@@ -64,7 +64,7 @@ export class DesignerPage {
     const selectedStatus = event.detail.value;
     this.designers$.pipe(take(1)).subscribe(designers => {
       if(selectedStatus.length > 0) {
-        this.designers = designers.filter(designer => selectedStatus.includes(designer.roles[0].name));  
+        this.designers = designers.filter(designer => selectedStatus.includes(designer.roles[0].name));
       } else {
         this.designers = designers;
       }

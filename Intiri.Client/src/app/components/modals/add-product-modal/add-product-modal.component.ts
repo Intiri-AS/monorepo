@@ -16,6 +16,9 @@ import { ColorService } from '../../../services/color.service'
 export class AddProductModalComponent implements OnInit {
   submitted = false;
 
+  item: {}
+  delete;
+
   imagePath = null;
   userForm: FormGroup
 
@@ -117,6 +120,7 @@ export class AddProductModalComponent implements OnInit {
       this.partnerService.getProductsFromThatPartner();
       this.dismissModal()
     }, error => {
+      this.spinner.hide();
       this.notifier.show({
         message: error.error,
         type: 'error',
@@ -127,6 +131,21 @@ export class AddProductModalComponent implements OnInit {
 
   dismissModal() {
     this.modalController.dismiss();
+  }
+
+  deleteProduct() {
+    this.spinner.show();
+    this.partnerService.deleteProduct(this.item['id']).subscribe(res => {
+        this.spinner.hide();
+        this.modalController.dismiss();
+        location.reload();
+    }, () => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Cannot remove product.',
+        type: 'error',
+      });
+    });
   }
 
 }

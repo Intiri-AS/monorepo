@@ -8,7 +8,7 @@ import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboar
 import { StylePage } from './pages/admin-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
-import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
+import { InspirationsPage } from './pages/end-user-pages/inspirations/inspirations.page';
 import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboard/customize-moodboard.page';
 import { MyIntiriPage } from './pages/end-user-pages/my-intiri/my-intiri.page';
 import { NewProjectPage } from './pages/end-user-pages/new-project/new-project.page';
@@ -113,8 +113,8 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'craftsman-portal', //TODO Set up page guard (end-user guard)
-    component: CraftsmanPortalPage,
+    path: 'my-inspirations', //TODO Set up page guard (end-user guard)
+    component: InspirationsPage,
     canActivate: [EnduserGuard]
   },
   {

@@ -16,9 +16,13 @@ public class PaymentMapperProfile : Profile
 			.ForMember(cl => cl.ClientId, opt => opt.MapFrom(src => src.Payer.Id))
 			.ForMember(cl => cl.FirstName, opt => opt.MapFrom(src => src.Payer.FirstName))
 			.ForMember(cl => cl.LastName, opt => opt.MapFrom(src => src.Payer.LastName))
+			.ForMember(cl => cl.Email, opt => opt.MapFrom(src => src.Payer.Email))
+			.ForMember(cl => cl.CountryCode, opt => opt.MapFrom(src => src.Payer.CountryCode))
+			.ForMember(cl => cl.PhoneNumber, opt => opt.MapFrom(src => src.Payer.PhoneNumber))
 			.ForMember(cl => cl.PhotoPath, opt => opt.MapFrom(src => src.Payer.PhotoPath))
 			.ForMember(cl => cl.MoodboardId, opt => opt.MapFrom(src => src.Moodboard.Id))
-			.ForMember(cl => cl.MoodboardStyle, opt => opt.MapFrom(src => src.Moodboard.Style.Name));
+			.ForMember(cl => cl.MoodboardStyle, opt => opt.MapFrom(src => src.Moodboard.Style.Name))
+			.ForMember(cl => cl.MoodboardOfferId, opt => opt.MapFrom(src => src.MoodboardOffer.Id));
 
 
 		CreateMap<ConsultationPayment, DesignerClientFullOutDTO>()
@@ -26,10 +30,15 @@ public class PaymentMapperProfile : Profile
 			.ForMember(cl => cl.ClientId, opt => opt.MapFrom(src => src.Payer.Id))
 			.ForMember(cl => cl.FirstName, opt => opt.MapFrom(src => src.Payer.FirstName))
 			.ForMember(cl => cl.LastName, opt => opt.MapFrom(src => src.Payer.LastName))
+			.ForMember(cl => cl.Email, opt => opt.MapFrom(src => src.Payer.Email))
+			.ForMember(cl => cl.CountryCode, opt => opt.MapFrom(src => src.Payer.CountryCode))
+			.ForMember(cl => cl.PhoneNumber, opt => opt.MapFrom(src => src.Payer.PhoneNumber))
 			.ForMember(cl => cl.PhotoPath, opt => opt.MapFrom(src => src.Payer.PhotoPath))
+			.ForMember(cl => cl.ProjectId, opt => opt.MapFrom(src => src.Moodboard.Project.Id))
 			.ForMember(cl => cl.MoodboardId, opt => opt.MapFrom(src => src.Moodboard.Id))
 			.ForMember(cl => cl.MoodboardStyle, opt => opt.MapFrom(src => src.Moodboard.Style.Name))
-			.ForMember(cl => cl.ClientInspirations, opt => opt.MapFrom(src => src.Payer.Inspirations));
+			.ForMember(cl => cl.ClientInspirations, opt => opt.MapFrom(src => src.Payer.Inspirations))
+			.ForMember(cl => cl.MoodboardOfferId, opt => opt.MapFrom(src => src.MoodboardOffer.Id));
 
 	}
 }

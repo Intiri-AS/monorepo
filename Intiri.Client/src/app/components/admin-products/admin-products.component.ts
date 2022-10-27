@@ -34,11 +34,11 @@ export class AdminProductsComponent implements OnInit {
     })
   }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, product) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {product: true},
+      componentProps: {product: true, item: product},
       dismissOnSelect: true
     });
 

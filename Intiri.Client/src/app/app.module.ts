@@ -26,7 +26,7 @@ import { NewProjectPage } from './pages/end-user-pages/new-project/new-project.p
 import { PreBookSelectionPage } from './pages/end-user-pages/pre-book-selection/pre-book-selection.page';
 import { MyIntiriPage } from './pages/end-user-pages/my-intiri/my-intiri.page';
 import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboard/customize-moodboard.page';
-import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
+import { InspirationsPage } from './pages/end-user-pages/inspirations/inspirations.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { PricingPlansPage } from './pages/end-user-pages/pricing-plans/pricing-plans.page';
@@ -104,6 +104,8 @@ import { AddPictureModalComponent } from './components/modals/add-picture-modal/
 import { AddProductModalComponent } from './components/modals/add-product-modal/add-product-modal.component';
 import { DeleteMoodboardModalComponent } from './components/modals/delete-moodboard-modal/delete-moodboard-modal.component';
 import { MoodboardDetailsComponent } from './components/moodboard-details/moodboard-details.component';
+import { OpenFileModalComponent } from './components/modals/open-file-modal/open-file-modal.component';
+
 
 //plugins
 import { CodeInputModule } from 'angular-code-input';
@@ -131,7 +133,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
-    NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, CraftsmanPortalPage, ContactDesignerPage, BookDesignerPage,
+    NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, InspirationsPage, ContactDesignerPage, BookDesignerPage,
     ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
@@ -141,13 +143,13 @@ export function createTranslateLoader(http: HttpClient) {
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
-    ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent,
+    ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     RateModalComponent, RateSuccessfulModalComponent, ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent,
-    AddColorModalComponent, AddPictureModalComponent, AddProductModalComponent, DeleteMoodboardModalComponent
+    AddColorModalComponent, AddPictureModalComponent, AddProductModalComponent, DeleteMoodboardModalComponent, OpenFileModalComponent
   ],
   imports: [
     BrowserModule,

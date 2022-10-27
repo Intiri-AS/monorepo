@@ -8,10 +8,14 @@ using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Payment;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.RoleNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace Intiri.API.Controllers
 {
@@ -59,13 +63,30 @@ namespace Intiri.API.Controllers
 			return Ok(moodboardOut);
 		}
 
+		[HttpGet("client/moodboardOffers")]
+		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardOffers()
+		{
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithConsultationPaymentsAsync(User.GetUserId());
+			if (endUser == null) return Unauthorized("Invalid client.");
+
+			List<Moodboard> moodboardOffers = new List<Moodboard>();
+			foreach (ConsultationPayment cp in endUser.ConsultationPayments)
+			{
+				if (cp.MoodboardOfferId != null)
+				{
+					moodboardOffers.Add(await _unitOfWork.MoodboardRepository.GetFullMoodboardById(cp.MoodboardOfferId.Value));
+				}
+			}
+
+			IEnumerable<MoodboardOutDTO> moodboardOffersOut = _mapper.Map<IEnumerable<MoodboardOutDTO>>(moodboardOffers);
+
+			return Ok(moodboardOffersOut);
+		}
+
 		[HttpPost("add")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboard(MoodboardInDTO moodboardIn)
 		{
-
-            User user = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
-
-            Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
+			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
 
 			moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 
@@ -94,6 +115,52 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
+		[HttpPost("addMoodboardOffer")]
+		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
+		{
+			Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
+			if (designer == null) return Unauthorized("Invalid designer.");
+
+			ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetBaseConsultationPaymentByIdAsync(moodboardOfferIn.ConsultationPaymentId);
+			if (consultationPayment == null && consultationPayment.Receiver != designer)
+			{
+				return BadRequest("Invalid consultation payment.");
+			}
+			
+			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
+
+			moodboard.Designer = designer;
+			moodboard.EndUser = consultationPayment.Payer;
+
+			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
+			moodboard.Style = style;
+
+			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardOfferIn.MoodboardOffer.RoomId);
+			moodboard.Room = room;
+
+			IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardOfferIn.MoodboardOffer.MaterialIds);
+			moodboard.Materials = materials.ToArray();
+
+			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardOfferIn.MoodboardOffer.ColorPaletteIds);
+			moodboard.ColorPalettes = colorPalettes.ToArray();
+
+			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardOfferIn.MoodboardOffer.ProductIds);
+			moodboard.Products = products.ToArray();
+
+			_unitOfWork.MoodboardRepository.Insert(moodboard);
+			
+			consultationPayment.MoodboardOffer = moodboard;
+			_unitOfWork.ConsultationPaymentRepository.Update(consultationPayment);
+
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+			}
+
+			return BadRequest("Problem occured while adding moodboard offer");
+		}
+
 		[HttpPut("edit")]
 		public async Task<ActionResult<ProjectOutDTO>> EditMoodboard([FromBody] MoodboardEditInDTO modifyDTO)
 		{
@@ -103,6 +170,13 @@ namespace Intiri.API.Controllers
 			{
 				return BadRequest($"Moodboard with Id={modifyDTO.MoodboardId} not found");
 			}
+
+			//// Is Moodboard an offer from designer to client
+			//if (moodboard.Designer == null && (User.IsInRole(RoleNames.InternalDesigner) || User.IsInRole(RoleNames.ExternalDesigner)))
+			//{
+			//	Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
+			//	moodboard.Designer = designer;
+			//}
 
 			if (modifyDTO.ColorPaletteIds != null)
 			{

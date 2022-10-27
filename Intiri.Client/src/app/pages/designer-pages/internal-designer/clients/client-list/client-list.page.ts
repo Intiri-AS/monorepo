@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-client-list-page',
@@ -17,6 +19,20 @@ export class ClientListPage {
     slidesPerView: 1,
     initialSlide: 0
   }
+
+  star = 1;
+  rating = 0;
+  numberOfRatings = 0;
+
+  //Rating percentage for setting span width
+  rate0 = 0;
+  rate1 = 0;
+  rate2 = 0;
+  rate3 = 0;
+  rate4 = 0;
+
+  //Array with numbers of rating goin in order Excelent, Very Good, Average, Poor, Terrible
+  ratingArray = [];
 
   currentSlide = 0;
 
@@ -76,14 +92,34 @@ export class ClientListPage {
     }
   ]
 
-  constructor(private _route: ActivatedRoute, private _router: Router) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private dataService: DataService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
+    this.spinner.show();
     this._route.queryParams.subscribe(params => {
       if(params.section) {
         this.options.initialSlide = params.section;
       }
     });
+
+    this.dataService.getDesignerRate().subscribe((res: any) => {
+      this.spinner.hide();
+      this.ratingArray = [res.fiveStar, res.fourStar, res.threeStar, res.twoStar, res.oneStar];
+      this.rating = res.averageRating;
+      this.star = Math.round(res.averageRating);
+      this.numberOfRatings = this.ratingArray.reduce((a, b) => a + b, 0);
+
+      const max = Math.max(...this.ratingArray);
+      this.ratingArray.forEach((num, index) => {
+        this['rate' + index] = Math.round(num / max * 100);
+      });
+    })
+
   }
 
   changeSlide(id) {

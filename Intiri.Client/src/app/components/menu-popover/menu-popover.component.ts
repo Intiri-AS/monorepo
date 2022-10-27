@@ -9,6 +9,9 @@ import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-ma
 import { AddPictureModalComponent } from '../modals/add-picture-modal/add-picture-modal.component';
 import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.component';
 import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-modal.component';
+import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
+import { DeleteMoodboardModalComponent } from '../modals/delete-moodboard-modal/delete-moodboard-modal.component';
+import { AddDesignerModalComponent } from '../modals/add-designer-modal/add-designer-modal.component';
 
 @Component({
   selector: 'app-menu-popover',
@@ -44,8 +47,14 @@ export class MenuPopoverComponent implements OnInit {
     })
   }
 
-  openDeleteMoodboardModal() {
-    //TODO
+  async openDeleteMoodboardModal() {
+    const modal = await this.modalController.create({
+      component: DeleteMoodboardModalComponent,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
   }
 
   async openDeleteStyleModal() {
@@ -107,6 +116,26 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteClientModal() {
     const modal = await this.modalController.create({
       component: AdminClientsComponent,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  async openDeleteProductModal() {
+    const modal = await this.modalController.create({
+      component: AddProductModalComponent,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  async openDeleteDesignerModal() {
+    const modal = await this.modalController.create({
+      component: AddDesignerModalComponent,
       componentProps: {delete: true, item: this.item},
       cssClass: 'added-designer-modal-css'
     });
