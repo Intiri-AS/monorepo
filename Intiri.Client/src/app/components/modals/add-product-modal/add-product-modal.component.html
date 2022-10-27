@@ -7,29 +7,29 @@
           <h2 class="mt-6 text-center text-2xl font-bold text-black1">{{'PARTNERS.addProduct' | translate}}</h2>
         </div>
         <div class="profile-input">
-          <span class="text-sm text-black-2">Product name</span>
+          <span class="text-sm text-black-2">{{'PARTNERS.product-name' | translate}}</span>
           <ion-input formControlName="productName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           <div *ngIf="submitted && form.productName.errors" class="invalid-feedback">
-            <span slot="error" style="color: red;" *ngIf="form.productName.errors.required">*Product name is required</span>
+            <span slot="error" style="color: red;" *ngIf="form.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
           </div>
         </div>
         <section class="flex-row-product">
           <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">Product type</span>
+            <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
             <ion-select interface="popover"  formControlName="productType" class="border rounded-2xl h-14 border-black-2  ">
               <ion-select-option value="{{productType.id}}" *ngFor="let productType of productsType">{{productType.name}}</ion-select-option>
             </ion-select>
             <div *ngIf="submitted && form.productType.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*Product type is required</span>
+              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*{{'PARTNERS.product-type-required' | translate}}</span>
             </div>
           </div>
           <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">Product material</span>
+            <span class="text-sm text-black-2">{{'PARTNERS.product-material' | translate}}</span>
             <ion-select interface="popover"  formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
             <ion-select-option value="{{material.id}}" *ngFor="let material of materials">{{material.name}}</ion-select-option>
             </ion-select>
             <div *ngIf="submitted && form.productType.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*Material is required</span>
+              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
             </div>
             
           </div>
@@ -47,24 +47,24 @@
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2"></ion-input>
             <div *ngIf="submitted && form.color.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.color.errors.required">*Color is required</span>
+              <span slot="error" style="color: red;" *ngIf="form.color.errors.required">*{{'PARTNERS.color-required' | translate}}</span>
             </div>
             
         </div>
           <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">Price</span>
+            <span class="text-sm text-black-2">{{'CONSULTATIONS.price' | translate}}</span>
             <ion-input  type="text" class="border rounded-2xl h-14 border-black-2 " formControlName="price"></ion-input>
             <div *ngIf="submitted && form.price.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.price.errors.required">*Price is required</span>
+              <span slot="error" style="color: red;" *ngIf="form.price.errors.required">*{{'PARTNERS.price-required' | translate}}</span>
             </div>
           </div>
         </div>
         <div>
-          <span class="text-sm text-black-2">Description</span>
+          <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
           <ion-textarea rows="5" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
         </div>
         <div>
-          <span class="text-sm text-black-2">Product image</span>
+          <span class="text-sm text-black-2">{{'PARTNERS.product-image' | translate}}</span>
           <div class="profile-input w-fit">
             <label for="dropzone-file">
               <div class="w-[150px] border-2 border-dashed rounded-2xl h-[150px] border-black-3 hover:opacity-70 cursor-pointer">
@@ -78,7 +78,7 @@
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageUrl" />
             </label>
             <div *ngIf="submitted && form.imageUrl.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.imageUrl.errors.required">*Image is required</span>
+              <span slot="error" style="color: red;" *ngIf="form.imageUrl.errors.required">*{{'PARTNERS.product-image-required' | translate}}</span>
             </div>
           </div>
         </div>

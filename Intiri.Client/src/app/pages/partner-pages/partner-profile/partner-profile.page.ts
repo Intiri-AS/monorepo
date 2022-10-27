@@ -51,9 +51,7 @@ export class PartnerProfilePage implements OnInit {
     this.partnerProfileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-          name: "",
-        // firstName: "",
-        // lastName: "",
+        name: "",
         email:  "",
         phoneNumber: "",
         street: "",
