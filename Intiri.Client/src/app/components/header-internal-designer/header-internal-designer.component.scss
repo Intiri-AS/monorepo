@@ -10,14 +10,6 @@
   @apply hidden xl:flex flex-1 items-center gap-2 ml-8;
 }
 
-.header-icon {
-    @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
-}
-
-.header-profile-img {
-    @apply object-cover rounded-xl h-[45px] w-[45px] mr-4
-}
-
 
 ion-header::after {
   border-bottom: none;

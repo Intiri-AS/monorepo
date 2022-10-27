@@ -24,7 +24,7 @@
                     <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
                     <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
                   </div>
-                  <img [src]="getMoodboardImage(d) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                  <img [src]="getMoodboardImage(d, 2) || '../../../../assets/images/landing-img.png'"  class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -32,12 +32,12 @@
           <div class="flex items-center justify-between mt-4">
             <div class="flex items-center justify-start">
               <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/profile-img.png'" class="h-[30px] w-[30px] rounded-md object-cover">
-              <p class="text-black-2 text-2xl font-medium ml-2">{{d.firstName}} {{d.lastName}}</p>
+              <p class="text-black-2 text-lg mac:text-2xl font-medium ml-2">{{d.firstName}} {{d.lastName}}</p>
             </div>
             <ion-buttons routerLink="/designer-profile/{{d.id}}"><ion-button class="primary-btn !bg-none">Choose</ion-button></ion-buttons>
           </div>
           <div>
-            <p class="text-lg text-black-3">{{getDesignerType(d)}} / {{d.createdMoodboards.length}} designs / {{languages[d.language]}}</p>
+            <p class="text-base mac:text-lg text-black-3">{{getDesignerType(d)}} / {{d.createdMoodboards.length}} designs / {{languages[d.language]}}</p>
           </div>
         </ion-col>
       </ion-row>
