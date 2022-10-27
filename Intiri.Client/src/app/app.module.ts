@@ -80,6 +80,7 @@ import { AdminRoomsComponent } from './components/admin-rooms/admin-rooms.compon
 import { AdminColorsComponent } from './components/admin-colors/admin-colors.component';
 import { AdminPicturesComponent } from './components/admin-pictures/admin-pictures.component';
 import { AddMoodboardStepComponent } from './components/add-moodboard-step/add-moodboard-step.component';
+import { ClientRequestComponent } from './components/client-request/client-request.component';
 
 
 //app modals
@@ -139,7 +140,7 @@ export function createTranslateLoader(http: HttpClient) {
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
     StylePage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
     HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent, HeaderPartnerComponent,
-    NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent, MoodboardDetailsComponent,
+    NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent, MoodboardDetailsComponent, ClientRequestComponent,
     ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,

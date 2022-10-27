@@ -44,10 +44,6 @@ export class DesignerService {
     return this.http.get(this.apiUrl + 'designers/id/' + id);
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.getDesigner(parseInt(route.paramMap.get('id')));
-  }
-
   rateDesigner(payload) {
     return this.http.put(this.apiUrl + 'ratings/addRating', payload);
   }
@@ -58,6 +54,18 @@ export class DesignerService {
 
   getDesignerRating(){
     return this.http.get(this.apiUrl + 'ratings/designerRating');
+  }
+
+  getDesignerClients() {
+    return this.http.get(this.apiUrl + 'designers/designerClients');
+  }
+
+  getDesignerClient(consultationPaymentId) {
+    return this.http.get(this.apiUrl + 'designers/clientConsultation/' + consultationPaymentId);
+  }
+
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    return this.getDesigner(parseInt(route.paramMap.get('id')));
   }
 
 

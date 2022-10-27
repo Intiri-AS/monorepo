@@ -12,6 +12,7 @@ export class AddDesignerModalComponent implements OnInit {
 
   add;
   added;
+  delete;
 
   item: {}
 

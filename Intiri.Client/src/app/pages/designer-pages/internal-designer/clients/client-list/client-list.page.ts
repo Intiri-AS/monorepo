@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { DataService } from 'src/app/services/data.service';
+import { DesignerService } from 'src/app/services/designer.service';
 
 @Component({
   selector: 'app-client-list-page',
@@ -36,38 +36,7 @@ export class ClientListPage {
 
   currentSlide = 0;
 
-  clients = [
-    {
-      avatar: '../../../../../assets/images/profile-img.png',
-      name: 'Grace Dweler',
-      email: 'test@test.com',
-      style: 'Skandinavian Bright'
-    },
-    {
-      avatar: '../../../../../assets/images/profile-img.png',
-      name: 'Grace Dweler',
-      email: 'test@test.com',
-      style: 'Skandinavian Bright'
-    },
-    {
-      avatar: '../../../../../assets/images/profile-img.png',
-      name: 'Grace Dweler',
-      email: 'test@test.com',
-      style: 'Skandinavian Bright'
-    },
-    {
-      avatar: '../../../../../assets/images/profile-img.png',
-      name: 'Grace Dweler',
-      email: 'test@test.com',
-      style: 'Skandinavian Bright'
-    },
-    {
-      avatar: '../../../../../assets/images/profile-img.png',
-      name: 'Grace Dweler',
-      email: 'test@test.com',
-      style: 'Skandinavian Bright'
-    },
-  ]
+  clients = []
 
   moodboards = [
     {
@@ -95,8 +64,8 @@ export class ClientListPage {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private dataService: DataService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private designerService: DesignerService
   ) {}
 
   ngOnInit() {
@@ -107,7 +76,11 @@ export class ClientListPage {
       }
     });
 
-    this.dataService.getDesignerRate().subscribe((res: any) => {
+    this.designerService.getDesignerClients().subscribe((res: any[]) => {
+      this.clients = res
+    })
+
+    this.designerService.getDesignerRating().subscribe((res: any) => {
       this.spinner.hide();
       this.ratingArray = [res.fiveStar, res.fourStar, res.threeStar, res.twoStar, res.oneStar];
       this.rating = res.averageRating;

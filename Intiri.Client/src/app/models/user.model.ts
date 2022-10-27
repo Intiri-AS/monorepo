@@ -6,8 +6,6 @@ export class User {
   phoneNumber: string;
   photoPath: string;
 
-  //TODO This is example for User model
-
   constructor() {
     this.id = null;
     this.fullName = '';

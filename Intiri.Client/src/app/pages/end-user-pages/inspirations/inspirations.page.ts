@@ -61,7 +61,7 @@ export class InspirationsPage {
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: {file: image},
+      componentProps: {file: image, canDelete: true},
       cssClass: 'open-file-modal-css'
     });
 

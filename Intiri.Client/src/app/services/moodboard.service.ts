@@ -5,7 +5,6 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Moodboard } from '../models/moodboard.model';
-import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +30,10 @@ export class MoodboardService {
     return this.http.get<Moodboard>(this.apiUrl + 'moodboards/id/' + id);
   }
 
+  getMoodboardOffers(){
+    return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards/client/moodboardOffers');
+  }
+
   updateMoodboard(moodboard: Moodboard){
     return this.http.post<Moodboard>(this.apiUrl + 'moodboards/addMoodboard', moodboard);
   }
@@ -39,6 +42,12 @@ export class MoodboardService {
     const req_data = this.parseMoodboard(moodboard);
     return this.http.post(this.apiUrl + 'moodboards/add', req_data);
   }
+
+  addMoodboardOffer(moodboard, consultationPaymentId){
+    const req_data = { moodboardOffer: this.parseMoodboard(moodboard), consultationPaymentId };
+    return this.http.post(this.apiUrl + 'moodboards/addMoodboardOffer', req_data);
+  }
+
   editMoodboard(moodboard) {
     const editMb = {
       moodboardId: moodboard.id,

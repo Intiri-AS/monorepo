@@ -23,7 +23,11 @@ export class MoodboardDetailsPage implements OnInit {
     this.projectId = this.route.snapshot.paramMap.get('projectId');
   }
   backToProjectDetails() {
-    this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
+    if(this.projectId) {
+      this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
+    } else {
+      this.router.navigateByUrl('/my-intiri');
+    }
   }
 
 }

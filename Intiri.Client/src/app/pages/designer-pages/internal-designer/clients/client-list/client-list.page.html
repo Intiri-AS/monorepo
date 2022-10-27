@@ -9,26 +9,34 @@
         <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row class="gap-x-[1.45%]">
-              <ion-col *ngFor="let i of [1,2,3,4,5,6,7,8]" class="" size="12" size-sm="5.75" size-xl="2.25">
-                <div class="client" routerLink="/client-request" routerDirection="root">
-                  <div class="my-6 flex flex-1 justify-center pt-3">
+              <ion-col *ngFor="let user of clients" class="" size="12" size-sm="5.75" size-xl="2.25">
+                <div [class]="user.moodboardStyle && !user.moodboardOfferId ? 'client hover:opacity-80 cursor-pointer' : 'client'" [routerLink]="user.moodboardStyle && !user.moodboardOfferId ? ['/client-request/' + user.consultationId] : []" routerDirection="root">
+                  <div class=" flex flex-1 justify-center pt-3">
                     <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
                   </div>
                   <div class="my-4 text-center px-2">
-                      <p class="text-black-2 leading-8 font-semibold text-lg lg:text-xl xll:text-2xl text-clamp-2 " title="user.firstName user.lastName">user.firstName user.lastName</p>
+                      <p class="text-black-2 leading-8 font-semibold text-lg lg:text-xl xll:text-2xl text-clamp-2 " title="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</p>
+                      <p class="text-black-2">+{{user?.countryCode}}{{user?.phoneNumber}}</p>
                   </div>
-                  <div class="mt-4 text-center">
+                  <div *ngIf="user.moodboardStyle && !user.moodboardOfferId" class="mt-10 text-center">
                     <div class="w-full bg-light flex flex-col items-center mt-[15px] px-2">
                       <p class="text-sm text-primary mt-[15px]">Selected style</p>
-                      <p class="text-md lg:text-lg text-black-2 font-medium mb-[15px]">Scandinavian</p>
+                      <p class="text-md lg:text-lg text-black-2 font-medium mb-[15px]">{{user.moodboardStyle}}</p>
                     </div>
                   </div>
+                  <ion-button *ngIf="!user.moodboardStyle && !user.moodboardOfferId" fill="clear" class="primary-btn mt-12 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">Create an offer</ion-button>
+                  <div *ngIf="user.moodboardOfferId" class="mt-4 text-center">
+                    <div class="w-full bg-light flex flex-col items-center mt-[15px] px-2">
+                      <p class="text-sm text-primary my-[15px]">Offer sent</p>
+                    </div>
+                  </div>
+                  <ion-button *ngIf="user.moodboardOfferId" fill="clear" class="primary-btn mt-4 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">Update offer</ion-button>
                 </div>
               </ion-col>
             </ion-row>
           </div>
         </ion-slide>
-        <ion-slide>
+        <!-- <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row>
               <ion-col size="12" sizeLg="4" *ngFor="let moodboard of moodboards">
@@ -47,7 +55,7 @@
               </ion-col>
             </ion-row>
           </div>
-        </ion-slide>
+        </ion-slide> -->
         <ion-slide>
           <div class="w-full h-full mt-5 flex">
             <ion-row class="w-full">

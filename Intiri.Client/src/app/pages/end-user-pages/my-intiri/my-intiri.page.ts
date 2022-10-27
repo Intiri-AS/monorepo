@@ -5,7 +5,9 @@ import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
 
@@ -18,9 +20,11 @@ import { environment } from 'src/environments/environment';
 export class MyIntiriPage {
   @ViewChild('slides') slides: IonSlides;
   @ViewChild('projectSlides') projectSlides: IonSlides;
+  @ViewChild('offerSlides') offerSlides: IonSlides;
   apiUrl = environment.apiUrl;
 
   projects: Project[] = [];
+  offers: Moodboard[] = [];
   projectId = 0;
   inspirations: any[] = [];
   imagePath = null;
@@ -51,7 +55,8 @@ export class MyIntiriPage {
   isLoading = true;
 
   constructor(
-    public projectService: ProjectService,
+    private projectService: ProjectService,
+    private moodboardService: MoodboardService,
     private modalController: ModalController,
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
@@ -68,6 +73,9 @@ export class MyIntiriPage {
     this.projectService.getInspirations();
     this.projectService.inspirations$.subscribe((res: any[]) => {
       this.inspirations = res;
+    })
+    this.moodboardService.getMoodboardOffers().subscribe(res => {
+      this.offers = res;
     })
   }
 
@@ -105,6 +113,12 @@ export class MyIntiriPage {
     return result;
   }
 
+  getMbPiecesNo(moodboard){
+    let result = 0;
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    return result;
+  }
+
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
   }
@@ -125,6 +139,14 @@ export class MyIntiriPage {
     this.projectSlides.slidePrev();
   }
 
+  nextOffer() {
+    this.offerSlides.slideNext();
+  }
+
+  prevOffer() {
+    this.offerSlides.slidePrev();
+  }
+
   // goToProjectDetails(project: Project){
   //   this.projectService.setCurrentProject(project);
   //   this.router.navigateByUrl('/project-details');
@@ -133,7 +155,7 @@ export class MyIntiriPage {
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: {file: image},
+      componentProps: {file: image, canDelete: true},
       cssClass: 'open-file-modal-css'
     });
 

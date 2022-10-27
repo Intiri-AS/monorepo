@@ -12,7 +12,8 @@ export class DeleteMoodboardModalComponent implements OnInit {
   constructor(private moodboardService: MoodboardService, private modalController: ModalController) { }
 
   item: {}
-  
+  delete;
+
   ngOnInit() {}
 
   deleteMoodboard() {

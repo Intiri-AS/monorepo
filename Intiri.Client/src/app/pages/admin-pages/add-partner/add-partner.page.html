@@ -52,7 +52,7 @@
             </ion-row>
             <ion-row class="pt-20 flex justify-between items-center">
                 <p class="text-2xl text-black-2 font-medium">{{'PARTNERS.products' | translate}}</p>
-                <div *ngIf="partner.products.length > options.slidesPerView">
+                <div *ngIf="slides['el']['swiper']?.currentBreakpoint && partner.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
                   <ion-button fill="clear" class="text-black-2 hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>

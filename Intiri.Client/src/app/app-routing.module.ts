@@ -45,6 +45,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { DesignerGuard } from './guards/designer.guard';
 import { SharedGuard } from './guards/shared.guard';
 import { PartnerGuard } from './guards/partner.guard';
+import { AdminDesignerGuard } from './guards/admin-designer.guard';
+import { AdminInternalDesignerGuard } from './guards/admin-internal-designer.guard';
 import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 
@@ -143,8 +145,9 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'moodboard-details', //TODO Set up page guard (end-user guard)
+    path: 'moodboard-details/:id', //TODO Set up page guard (end-user guard)
     component: MoodboardDetailsPage,
+    resolve: {moodboard: MoodboardService},
     canActivate: [EnduserGuard]
   },
   {
@@ -219,7 +222,12 @@ const routes: Routes = [
   {
     path: 'add-moodboard',
     component: AddMoodboardPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminInternalDesignerGuard]
+  },
+  {
+    path: 'create-offer/:paymentId',
+    component: AddMoodboardPage,
+    canActivate: [AdminDesignerGuard]
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)
@@ -236,8 +244,9 @@ const routes: Routes = [
     canActivate: [DesignerGuard]
   },
   {
-    path: 'client-request', //TODO Set up page guard (designer guard)
-    component: ClientRequestPage
+    path: 'client-request/:paymentId',
+    component: ClientRequestPage,
+    canActivate: [DesignerGuard]
   },
   // {
   //   path: 'style-list', //TODO Set up page guard (internal designer guard)

@@ -12,6 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
 export class OpenFileModalComponent implements OnInit {
 
   file;
+  canDelete;
   isRemoving = false;
 
   constructor( private modalController: ModalController, private projectService: ProjectService, private notifier: NotifierService,  private spinner: NgxSpinnerService) { }

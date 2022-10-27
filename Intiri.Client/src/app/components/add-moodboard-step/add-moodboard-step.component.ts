@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class AddMoodboardStepComponent implements OnInit {
 
   apiUrl = environment.apiUrl;
+  @Input() disabledSteps: any;
   @Input() currentStep: any;
   @Input() moodboard: any;
   @Input() currentStepNo: number;
@@ -36,7 +37,7 @@ export class AddMoodboardStepComponent implements OnInit {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if(Array.isArray(this.moodboard[stepName])) {
-      if(this.moodboard[stepName].some(e => JSON.stringify(e) === JSON.stringify(item))) {
+      if(this.moodboard[stepName].some(e => e?.id === item?.id)) {
         return true;
       }
     } else { // else it's a single select
@@ -45,7 +46,7 @@ export class AddMoodboardStepComponent implements OnInit {
         return JSON.stringify(this.moodboard[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
        }
        else {
-        return JSON.stringify(this.moodboard[stepName]) === JSON.stringify(item)
+        return  this.moodboard[stepName]?.id === item?.id
        }
     }
     return false;
