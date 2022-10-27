@@ -34,7 +34,7 @@ export class PartnerService {
       if (productResponse) {
         this.productSource.next(productResponse)
       }
-    }))
+    })).toPromise();
   }
 
   getProductsType(){

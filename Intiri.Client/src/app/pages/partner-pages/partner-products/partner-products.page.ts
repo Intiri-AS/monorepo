@@ -28,7 +28,7 @@ export class PartnerProductsPage implements OnInit {
               private materialService: MaterialService) { }
 
   ngOnInit() {
-    this.partnerService.getProductsFromThatPartner().subscribe();
+    this.partnerService.getProductsFromThatPartner();
     this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
     })
