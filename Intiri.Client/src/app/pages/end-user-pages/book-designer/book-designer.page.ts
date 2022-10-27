@@ -34,11 +34,14 @@ export class BookDesignerPage {
   }
 
   getMoodboardImage(d, index = null) {
-    const style = d.createdMoodboards[0].style;
-    if(index >= 0) {
-      return style?.styleImages[index]?.imagePath;
-    }
+    if(d.createdMoodboards.length > 0) {
+      const style = d.createdMoodboards[0].style;
+      if(index >= 0) {
+        return style?.styleImages[index]?.imagePath;
+      }
     return style?.imagePath;
+    }
+    return false;
   }
 
   async paymentModal(designer) {
