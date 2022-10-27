@@ -48,7 +48,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.mainColor" disabled [style.background]="colorPallete.mainColor"
+            <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="main"></ion-input>
@@ -58,7 +58,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
-            <ion-input [(ngModel)]="colorPallete.shadeColorLight" disabled [style.background]="colorPallete.shadeColorLight"
+            <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorLight" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeOne"></ion-input>
@@ -70,7 +70,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
-            <ion-input [(ngModel)]="colorPallete.shadeColorMedium" disabled [style.background]="colorPallete.shadeColorMedium"
+            <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorMedium" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeTwo"></ion-input>
@@ -80,7 +80,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
-            <ion-input [(ngModel)]="colorPallete.shadeColorDark" disabled [style.background]="colorPallete.shadeColorDark"
+            <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorDark" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeThree"></ion-input>
