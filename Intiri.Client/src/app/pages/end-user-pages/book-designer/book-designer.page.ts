@@ -39,7 +39,7 @@ export class BookDesignerPage {
       if(index >= 0) {
         return style?.styleImages[index]?.imagePath;
       }
-    return style?.imagePath;
+      return style?.imagePath;
     }
     return false;
   }
