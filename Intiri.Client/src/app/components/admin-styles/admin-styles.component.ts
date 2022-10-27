@@ -22,7 +22,7 @@ export class AdminStylesComponent implements OnInit {
   ngOnInit() {
     this.styleService.getStyles();
 
-    this.styles$.pipe(take(1)).subscribe(styles => { 
+    this.styles$.subscribe(styles => {
       this.styles = styles;
     });
   }
@@ -52,7 +52,7 @@ export class AdminStylesComponent implements OnInit {
       const selectedStyleNames = event.detail.value;
       this.styles$.pipe(take(1)).subscribe(styles => {
         if(selectedStyleNames.length > 0) {
-          this.styles = styles.filter(style => selectedStyleNames.includes(style.name));  
+          this.styles = styles.filter(style => selectedStyleNames.includes(style.name));
         } else {
           this.styles = styles;
         }
