@@ -1,6 +1,8 @@
 <ion-content>
   <!-- Add designer modal -->
   <div *ngIf="add" class="justify-center items-center flex flex-col h-full">
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <form [formGroup]="addDesignerForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addDesigner()" autocomplete="off">
     <ion-grid class="main-container">
       <ion-row>
         <ion-col>
@@ -11,13 +13,15 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
-            <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+            <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">Field Required!</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">Last name</span>
-            <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+            <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">Field Required!</span>
           </div>
         </ion-col>
       </ion-row>
@@ -26,7 +30,7 @@
           <section class="flex">
             <div class="phone-input">
               <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
-              <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode">
+              <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode" formControlName="code">
                 <ion-select-option value="45">+45</ion-select-option>
                 <ion-select-option value="46">+46</ion-select-option>
                 <ion-select-option value="47">+47</ion-select-option>
@@ -36,7 +40,9 @@
             </div>
             <div class="profile-input">
               <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber"></ion-input>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone"></ion-input>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">Invalid Phone Number!</span>
             </div>
           </section>
         </ion-col>
@@ -44,23 +50,24 @@
       <ion-row>
         <ion-col class="ml-2.5">
           <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
-          <ion-radio-group [(ngModel)]="designer.role">
+          <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
             <ion-radio value="InternalDesigner"></ion-radio>
             <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.inhouse' | translate}}</span>
             <ion-radio value="ExternalDesigner"></ion-radio>
             <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
           </ion-radio-group>
+          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">Selection Required!</span>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ml-2.5">
           <p class="font-medium text-black-1 text-lg mt-7 mb-2">Language</p>
           <div class="flex items-center mb-3">
-            <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer">
+            <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer" formControlName="en">
             <label for="default-checkbox" class="ml-2 text-lg text-black-1">English</label>
           </div>
           <div class="flex items-center">
-            <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary">
+            <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary" formControlName="no">
             <label for="default-checkbox" class="ml-2 text-lg text-black-1">Norwegian</label>
           </div>
         </ion-col>
@@ -68,10 +75,11 @@
       <ion-row>
         <ion-col class="text-center mt-12">
           <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addDesigner()">{{'COMMON.add' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
+    </form>
   </div>
    <!-- Designer added modal -->
    <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
