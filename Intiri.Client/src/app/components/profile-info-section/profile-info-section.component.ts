@@ -9,8 +9,9 @@ import { ControlContainer, FormGroup } from '@angular/forms';
 })
 export class ProfileInfoSectionComponent implements OnInit {
   @Input () userInfo: boolean = false;
+  @Input () partnerProfile: boolean = false;
   @Input() dataInput? = {
-    firstName: '',
+    firstName: '' ,
     lastName: '',
     gender: '' || undefined,
     countryCode: '',
