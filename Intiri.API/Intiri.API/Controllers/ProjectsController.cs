@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
@@ -15,6 +16,7 @@ using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
@@ -24,16 +26,20 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly ILogger _logger;
 		private readonly IAccountService _accountService;
+		private readonly IFileUploadService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService) : base(unitOfWork)
+		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploadService fileUploadService, ILogger logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_accountService = accountService;
+			_fileUploadService = fileUploadService;
+			_logger = logger;
 		}
 
 		#endregion Constructors
@@ -162,6 +168,29 @@ namespace Intiri.API.Controllers
 			project.EndUser = user;
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+
+			IFormFile roomSketchFile = projectIn.RoomDetails.RoomSketchFile;
+			if (roomSketchFile != null && roomSketchFile.Length > 0)
+			{
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+				}
+				catch (Exception ex)
+				{
+					return BadRequest($"Failed to upload sketch: {ex.Message}");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest($"Failed to upload sketch: {uploadResult.Error.Message}");
+				}
+
+				roomDetails.SketchUrl = uploadResult.SecureUrl.AbsoluteUri;
+				roomDetails.SketchPublicId = uploadResult.PublicId;
+			}
+
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);

@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
+using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
@@ -13,14 +18,17 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly IFileUploadService _fileUploadService;
+		
 
 		#endregion Fields
 
 		#region Constructors
 
-		public RoomDetailsController(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork)
+		public RoomDetailsController(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService): base(unitOfWork)
 		{
 			_mapper = mapper;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors
@@ -50,6 +58,28 @@ namespace Intiri.API.Controllers
 		{
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
 
+			IFormFile roomSketchFile = roomDetailsIn.RoomSketchFile;
+			if (roomSketchFile != null && roomSketchFile.Length > 0)
+			{
+				ImageUploadResult uploadResult = null;
+				try
+				{
+					uploadResult = await _fileUploadService.UploadFileAsync(roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+				}
+				catch (Exception ex)
+				{
+					return BadRequest($"Failed to upload sketch: {ex.Message}");
+				}
+
+				if (uploadResult.Error != null)
+				{
+					return BadRequest($"Failed to upload sketch: {uploadResult.Error.Message}");
+				}
+
+				roomDetails.SketchUrl = uploadResult.SecureUrl.AbsoluteUri;
+				roomDetails.SketchPublicId = uploadResult.PublicId;
+			}
+
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 			
 			if (await _unitOfWork.SaveChanges())
@@ -68,6 +98,12 @@ namespace Intiri.API.Controllers
 			if (roomDetails == null)
 			{
 				return BadRequest($"Room details with Id={roomDetailsId} not found");
+			}
+
+			if (roomDetails.SketchPublicId != null)
+			{
+				var result = await _fileUploadService.DeleteFileAsync(roomDetails.SketchPublicId);
+				if (result.Error != null) return BadRequest(result.Error.Message);
 			}
 
 			await _unitOfWork.RoomDetailsRepository.Delete(roomDetailsId);

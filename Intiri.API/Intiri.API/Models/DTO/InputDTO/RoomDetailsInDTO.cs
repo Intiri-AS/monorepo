@@ -9,5 +9,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 
 		[Required]
 		public double Size { get; set; }
+
+		public IFormFile RoomSketchFile { get; set; }
 	}
 }
