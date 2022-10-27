@@ -12,14 +12,23 @@ public class ConsultationPaymentRepository : RepositoryBase<ConsultationPayment>
     {
     }
 
-	public async Task<ConsultationPayment> GetFullConsultationByIdAsync(int consultationId)
+	public async Task<ConsultationPayment> GetFullConsultationPaymentByIdAsync(int consultationId)
 	{
 		return await _context.ConsultationPayment
 				.Include(cp => cp.Payer).ThenInclude(i => i.Inspirations)
 				.Include(mu => mu.Moodboard).ThenInclude(ma => ma.Materials)
-				.Include(mu => mu.Moodboard).ThenInclude(co => co.ColorPalettes)
-				.Include(mu => mu.Moodboard).ThenInclude(co => co.Products)
+				.Include(mu => mu.Moodboard).ThenInclude(cp => cp.ColorPalettes)
+				.Include(mu => mu.Moodboard).ThenInclude(prod => prod.Products)
+				.Include(mu => mu.Moodboard).ThenInclude(proj => proj.Project)
 				.SingleOrDefaultAsync(cp => cp.Id == consultationId);
-		//return (await Get(materialType => materialType.Id == materialTypeId, includeProperties: "Materials")).SingleOrDefault();
+	}
+
+	public async Task<ConsultationPayment> GetBaseConsultationPaymentByIdAsync(int consultationId)
+	{
+		return await _context.ConsultationPayment
+				.Include(cp => cp.Payer)
+				.Include(cp => cp.Receiver)
+				.Include(mu => mu.Moodboard)
+				.SingleOrDefaultAsync(cp => cp.Id == consultationId);
 	}
 }

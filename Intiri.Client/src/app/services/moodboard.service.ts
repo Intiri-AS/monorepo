@@ -24,7 +24,7 @@ export class MoodboardService {
       if(mbs) {
         this.mbSource.next(mbs);
       }
-    })).toPromise();;
+    })).toPromise();
   }
 
   getMoodboard(id: number){
