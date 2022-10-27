@@ -53,6 +53,7 @@ export class MyIntiriPage {
   }
   searchText: any;
   isLoading = true;
+  isLoadingOffers = true;
 
   constructor(
     private projectService: ProjectService,
@@ -76,6 +77,7 @@ export class MyIntiriPage {
     })
     this.moodboardService.getMoodboardOffers().subscribe(res => {
       this.offers = res;
+      this.isLoadingOffers = false;
     })
   }
 

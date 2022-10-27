@@ -14,11 +14,11 @@
             <ion-grid class="border shadow-1 rounded-2xl">
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img src="{{mb.style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{mb.style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{mb.style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{mb.style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <img src="{{mb.style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{mb.style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <ion-card class="h-[350px] w-full md:w-[45%] xl:w-[30%] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-1 p-4 flex justify-center items-center flex-col cursor-pointer hover:opacity-80">
+          <ion-card class="h-[286px] mac:h-[350px] w-full md:w-[45%] xl:w-[30%] border border-black-3 border-dashed rounded-2xl shadow-none m-0 mt-1 p-4 flex justify-center items-center flex-col cursor-pointer hover:opacity-80">
             <ion-icon name="add" class="w-20 h-20" (click)="addMoodboardToProject()"></ion-icon>
             <p class="text-lg font-medium">{{'PROJECT-DETAILS.new' | translate}}</p>
           </ion-card>

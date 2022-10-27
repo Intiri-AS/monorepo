@@ -7,7 +7,6 @@ import { ConsultationsPage } from './pages/admin-pages/consultations/consultatio
 import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboard.page';
 import { StylePage } from './pages/admin-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
-import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
 import { InspirationsPage } from './pages/end-user-pages/inspirations/inspirations.page';
 import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboard/customize-moodboard.page';
 import { MyIntiriPage } from './pages/end-user-pages/my-intiri/my-intiri.page';
@@ -152,7 +151,7 @@ const routes: Routes = [
   },
   {
     path: 'contact-designer/:id', //TODO Set up page guard (end-user guard)
-    component: ContactDesignerPage,
+    component: BookDesignerPage,
     resolve: {moodboard: MoodboardService},
     canActivate: [EnduserGuard]
   },
