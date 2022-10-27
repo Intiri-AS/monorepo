@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
+import { AddProductModalComponent } from 'src/app/components/modals/add-product-modal/add-product-modal.component';
+import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service';
 
 
@@ -12,35 +16,61 @@ import { PartnerService } from 'src/app/services/partner.service';
 
 export class PartnerProductsPage implements OnInit {
 
+  products$: Observable<any> = this.partnerService.products$;
+  material$: Observable<any> = this.materialService.materials$;
   products: any[];
   productTypes: any[];
   searchText: any;
 
-  constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
+  constructor(public popoverController: PopoverController, 
+              private partnerService: PartnerService,
+              private modalController: ModalController,
+              private materialService: MaterialService) { }
 
   ngOnInit() {
-    //TODO: change this to getProductsFromThatPartner
-    this.partnerService.getProducts().subscribe((res: any[]) => {
-      this.products = res;
-    })
-
+    this.partnerService.getProductsFromThatPartner();
     this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
     })
+    this.products$.subscribe( response => {
+      this.products = response
+    })
   }
 
-  addProduct() {
-    //TODO
-  }
 
-  async showSettings(e: Event) {
+  async showSettings(e: Event, product) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {product: true},
+      componentProps: {product: true, item: product},
       dismissOnSelect: true
     });
 
     await popover.present();
   }
+
+  async openAddProductModal() {
+    const popover = await this.popoverController.getTop();
+        if (popover)
+            await popover.dismiss(null);  
+    const modal = await this.modalController.create({
+      component: AddProductModalComponent,
+      cssClass: 'product-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  onFilterChange(event){
+    const selectedTypeNames = event.detail.value;
+    this.products$.pipe(take(1)).subscribe(products => {
+      if(selectedTypeNames.length > 0) {
+        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));  
+        console.log(this.products, 'produkti')
+      } else {
+        this.products = products;
+      }
+    })
+}
+
 }

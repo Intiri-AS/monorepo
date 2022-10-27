@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { DesignerService } from 'src/app/services/designer.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-designer-modal',
@@ -11,6 +12,7 @@ export class AddDesignerModalComponent implements OnInit {
 
   add;
   added;
+  delete;
 
   item: {}
 
@@ -26,7 +28,7 @@ export class AddDesignerModalComponent implements OnInit {
     language: ''
   }
 
-  constructor(private modalController: ModalController, private designerService: DesignerService) { }
+  constructor(private modalController: ModalController, private designerService: DesignerService, private userService: UserService) { }
 
   ngOnInit() {}
 
@@ -40,7 +42,16 @@ export class AddDesignerModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.designerService.getDesigners();
         this.openSuccessModal();
+        location.reload();
       }
+    });
+  }
+
+  deleteDesigner() {
+    this.userService.deleteUser(this.item['id']).subscribe(res => {
+        this.designerService.getDesigners();
+        this.modalController.dismiss();
+        location.reload();
     });
   }
 

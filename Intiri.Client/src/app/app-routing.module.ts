@@ -8,7 +8,7 @@ import { MyMoodboardPage } from './pages/designer-pages/my-moodboard/my-moodboar
 import { StylePage } from './pages/admin-pages/style/style.page';
 import { BookDesignerPage } from './pages/end-user-pages/book-designer/book-designer.page';
 import { ContactDesignerPage } from './pages/end-user-pages/contact-designer/contact-designer.page';
-import { CraftsmanPortalPage } from './pages/end-user-pages/craftsman-portal/craftsman-portal.page';
+import { InspirationsPage } from './pages/end-user-pages/inspirations/inspirations.page';
 import { CustomizeMoodboardPage } from './pages/end-user-pages/customize-moodboard/customize-moodboard.page';
 import { MyIntiriPage } from './pages/end-user-pages/my-intiri/my-intiri.page';
 import { NewProjectPage } from './pages/end-user-pages/new-project/new-project.page';
@@ -45,6 +45,8 @@ import { AdminGuard } from './guards/admin.guard';
 import { DesignerGuard } from './guards/designer.guard';
 import { SharedGuard } from './guards/shared.guard';
 import { PartnerGuard } from './guards/partner.guard';
+import { AdminDesignerGuard } from './guards/admin-designer.guard';
+import { AdminInternalDesignerGuard } from './guards/admin-internal-designer.guard';
 import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 
@@ -113,8 +115,8 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'craftsman-portal', //TODO Set up page guard (end-user guard)
-    component: CraftsmanPortalPage,
+    path: 'my-inspirations', //TODO Set up page guard (end-user guard)
+    component: InspirationsPage,
     canActivate: [EnduserGuard]
   },
   {
@@ -143,8 +145,9 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
-    path: 'moodboard-details', //TODO Set up page guard (end-user guard)
+    path: 'moodboard-details/:id', //TODO Set up page guard (end-user guard)
     component: MoodboardDetailsPage,
+    resolve: {moodboard: MoodboardService},
     canActivate: [EnduserGuard]
   },
   {
@@ -219,7 +222,12 @@ const routes: Routes = [
   {
     path: 'add-moodboard',
     component: AddMoodboardPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminInternalDesignerGuard]
+  },
+  {
+    path: 'create-offer/:paymentId',
+    component: AddMoodboardPage,
+    canActivate: [AdminDesignerGuard]
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)
@@ -236,8 +244,9 @@ const routes: Routes = [
     canActivate: [DesignerGuard]
   },
   {
-    path: 'client-request', //TODO Set up page guard (designer guard)
-    component: ClientRequestPage
+    path: 'client-request/:paymentId',
+    component: ClientRequestPage,
+    canActivate: [DesignerGuard]
   },
   // {
   //   path: 'style-list', //TODO Set up page guard (internal designer guard)
@@ -246,12 +255,12 @@ const routes: Routes = [
   {
     path: 'partner', //TODO Set up page guard (shared guard)
     component: PartnerProductsPage,
-    //canActivate: [PartnerGuard]
+    canActivate: [PartnerGuard]
   },
   {
     path: 'partner/profile', //TODO Set up page guard (shared guard)
     component: PartnerProfilePage,
-    //canActivate: [PartnerGuard]
+    canActivate: [PartnerGuard]
   }
 
 

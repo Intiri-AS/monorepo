@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
+import { PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,13 +16,15 @@ import { environment } from 'src/environments/environment';
 })
 
 export class PartnerProfilePage implements OnInit {
+  partnerProfileForm: FormGroup;
 
   apiUrl = environment.apiUrl;
+  partners$: Observable<any> = this.partnerService.partners$;
+  partners: any[];
 
-  userInfo = {
+  partnerProfile = {
     firstName: '',
     lastName: '',
-    gender: '',
     countryCode: '',
     phoneNumber: '',
     email: '',
@@ -33,36 +40,58 @@ export class PartnerProfilePage implements OnInit {
   constructor(
     private http: HttpClient,
     private accountService: AccountService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private partnerService: PartnerService,
+    private fb: FormBuilder,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
     this.spinner.show();
-    this.http.get(this.apiUrl + 'users/profile').toPromise().then((res: any) => {
+    this.partnerProfileForm = this.fb.group({
+      dataInfoGroup: this.fb.group({
+        innerGroup: this.fb.group({
+        name: "",
+        email:  "",
+        phoneNumber: "",
+        street: "",
+        postalCode: "",
+        city: "",
+        country: "",
+        countryCode: ""
+      }),
+    }),
+  });
+    this.partnerService.getPartnerProfile().subscribe( response => {
       this.spinner.hide();
-      this.userInfo = res;
-      if (!res.photoPath) {
-        this.userInfo.photoPath = '../../../assets/images/profile-img.png'
-      }
+      this.partnerProfile = response;
+      this.patchValues(this.partnerProfile)
+      if (!response.photoPath) {
+            this.partnerProfile.photoPath = '../../../assets/images/profile-img.png'
+          }
     })
   }
 
+  patchValues(partnerInfo: any) {
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.name').patchValue(partnerInfo.name || null);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.email').patchValue(partnerInfo.email);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.phoneNumber').patchValue(partnerInfo.phoneNumber);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.street').patchValue(partnerInfo.street);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.postalCode').patchValue(partnerInfo.postalCode);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.city').patchValue(partnerInfo.city);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.country').patchValue(partnerInfo.country);
+    this.partnerProfileForm.get('dataInfoGroup.innerGroup.countryCode').patchValue(partnerInfo.countryCode);
+  }
+
   saveChanges() {
-    const userInfoModel = {
-      firstName: this.userInfo.firstName || "",
-      lastName: this.userInfo.lastName || "",
-      gender: this.userInfo.gender || "",
-      email: this.userInfo.email || "",
-      phoneNumber: this.userInfo.phoneNumber || "",
-      street: this.userInfo.street || "",
-      postalCode: this.userInfo.postalCode || "",
-      city: this.userInfo.city || "",
-      country: this.userInfo.country || "",
-      countryCode: this.userInfo.countryCode || ""
-    }
+    const userInfoModel = this.partnerProfileForm.value.dataInfoGroup.innerGroup;
     this.spinner.show();
-    this.http.put(this.apiUrl + 'users/profile', userInfoModel).subscribe(res => {
+    this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
       this.spinner.hide();
+      this.notifier.show({
+        message: 'Profile updated successfully',
+        type: 'success',
+      });
     })
   }
 }

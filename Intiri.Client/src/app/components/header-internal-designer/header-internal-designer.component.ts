@@ -44,7 +44,7 @@ export class HeaderInternalDesignerComponents {
   }
 
   isActiveRoute(route): boolean {
-    return this.router.url === route;
+    return this.router.url.startsWith(route);
   }
 
   async showSettings(e: Event) {

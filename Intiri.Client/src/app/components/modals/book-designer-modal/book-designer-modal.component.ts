@@ -3,6 +3,9 @@ import { ModalController, NavController } from '@ionic/angular';
 import { PaymentService } from 'src/app/services/payment.service';
 import { loadStripe } from '@stripe/stripe-js';
 import { LanguageService } from 'src/app/services/language.service';
+import { CommonService } from 'src/app/services/common.service';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -14,11 +17,13 @@ export class BookDesignerModalComponent {
 
   designer; //as modal prop
   moodboard;//as modal prop
-  price = 950;
+  price: number;
+  duration: number;
+  totalPrice: number;
   extraPayment = false;
   extraPaymentAmount = 3500;
   numberOfConsultations = 1;
-  totalPrice = this.price * this.numberOfConsultations;
+
   items = [
     {
       id: 1, name: 'Room sketch'
@@ -46,10 +51,29 @@ export class BookDesignerModalComponent {
   constructor(
     private modalController: ModalController,
     private paymentService: PaymentService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private commonService: CommonService,
+    private notifier: NotifierService,
+    private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.spinner.show();
+    this.commonService.getConsulationsInfo().subscribe((res: any) => {
+      this.spinner.hide();
+      this.duration = res?.duration;
+      this.price = res?.price;
+      this.totalPrice = this.price * this.numberOfConsultations;
+    }, () => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Cannot get consultations info.',
+        type: 'error',
+      });
+    })
+
+  }
 
   totalPriceSum(event) {
     const numberOfConsultations = event.detail.value;

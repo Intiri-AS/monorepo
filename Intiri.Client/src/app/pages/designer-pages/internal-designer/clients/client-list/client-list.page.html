@@ -1,6 +1,7 @@
 <ion-content>
   <div id="home">
     <app-header-internal-designer></app-header-internal-designer>
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <div class="main-container">
       <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
@@ -8,29 +9,37 @@
         <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row class="gap-x-[1.45%]">
-              <ion-col *ngFor="let i of [1,2,3,4,5,6,7,8]" class="" size="12" size-sm="5.75" size-xl="2.25">
-                <div class="client" routerLink="/client-request" routerDirection="root">
-                  <div class="my-6 flex flex-1 justify-center pt-3">
+              <ion-col *ngFor="let user of clients" class="" size="12" size-sm="5.75" size-xl="2.25">
+                <div [class]="user.moodboardStyle && !user.moodboardOfferId ? 'client hover:opacity-80 cursor-pointer' : 'client'" [routerLink]="user.moodboardStyle && !user.moodboardOfferId ? ['/client-request/' + user.consultationId] : []" routerDirection="root">
+                  <div class=" flex flex-1 justify-center pt-3">
                     <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
                   </div>
                   <div class="my-4 text-center px-2">
-                      <p class="text-black-2 leading-8 font-semibold text-lg lg:text-xl xll:text-2xl text-clamp-2 " title="user.firstName user.lastName">user.firstName user.lastName</p>
+                      <p class="text-black-2 leading-8 font-semibold text-lg lg:text-xl xll:text-2xl text-clamp-2 " title="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</p>
+                      <p class="text-black-2">+{{user?.countryCode}}{{user?.phoneNumber}}</p>
                   </div>
-                  <div class="mt-4 text-center">
+                  <div *ngIf="user.moodboardStyle && !user.moodboardOfferId" class="mt-10 text-center">
                     <div class="w-full bg-light flex flex-col items-center mt-[15px] px-2">
                       <p class="text-sm text-primary mt-[15px]">Selected style</p>
-                      <p class="text-md lg:text-lg text-black-2 font-medium mb-[15px]">Scandinavian</p>
+                      <p class="text-md lg:text-lg text-black-2 font-medium mb-[15px]">{{user.moodboardStyle}}</p>
                     </div>
                   </div>
+                  <ion-button *ngIf="!user.moodboardStyle && !user.moodboardOfferId" fill="clear" class="primary-btn mt-12 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">Create an offer</ion-button>
+                  <div *ngIf="user.moodboardOfferId" class="mt-4 text-center">
+                    <div class="w-full bg-light flex flex-col items-center mt-[15px] px-2">
+                      <p class="text-sm text-primary my-[15px]">Offer sent</p>
+                    </div>
+                  </div>
+                  <ion-button *ngIf="user.moodboardOfferId" fill="clear" class="primary-btn mt-4 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">Update offer</ion-button>
                 </div>
               </ion-col>
             </ion-row>
           </div>
         </ion-slide>
-        <ion-slide>
+        <!-- <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row>
-              <ion-col size="4" *ngFor="let moodboard of moodboards">
+              <ion-col size="12" sizeLg="4" *ngFor="let moodboard of moodboards">
                 <ion-card class="ion-card-container h-[350px] mt-[30px]">
                   <img src={{moodboard.image}} class="moodboard-img">
                 </ion-card>
@@ -46,17 +55,84 @@
               </ion-col>
             </ion-row>
           </div>
+        </ion-slide> -->
+        <ion-slide>
+          <div class="w-full h-full mt-5 flex">
+            <ion-row class="w-full">
+              <ion-col size="12" sizeLg="4">
+                <ion-card class="ion-card-container h-[200px] mt-[30px] flex flex-col items-start justify-center">
+                  <p class="text-lg text-primary ml-[20px]">{{'DASHBOARD.client-number' | translate}}</p>
+                  <p class="text-[60px] text-black font-medium ml-[20px]">25</p>
+                </ion-card>
+              </ion-col>
+              <ion-col size="12" sizeLg="4">
+                <ion-card class="ion-card-container h-[200px] mt-[30px] flex flex-col items-start justify-center">
+                  <p class="text-lg text-primary ml-[20px]">TOTAL INCOME</p>
+                  <p class="text-[60px] text-black font-medium ml-[20px]">$25.456</p>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </div>
         </ion-slide>
         <ion-slide>
           <div class="w-full h-full mt-5 flex">
-            <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">
-              <p class="text-lg text-primary ml-[20px]">{{'DASHBOARD.client-number' | translate}}</p>
-              <p class="text-[60px] text-black font-medium ml-[20px]">25</p>
-            </ion-card>
-            <ion-card class="ion-card-container w-[370px] h-[200px] mt-[30px] flex flex-col items-start justify-center">
-              <p class="text-lg text-primary ml-[20px]">TOTAL INCOME</p>
-              <p class="text-[60px] text-black font-medium ml-[20px]">$25.456</p>
-            </ion-card>
+            <ion-row class="w-full">
+              <ion-col size="12" sizeLg="6">
+                <ion-card class="ion-card-container xl:h-[330px] mt-[30px]">
+                  <ion-row class="w-full xl:h-full">
+                    <ion-col size="12" sizeXl="6" class="flex flex-col items-center justify-center">
+                      <div class="text-start w-[240px]">
+                        <div class="flex justify-between items-center w-full">
+                          <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=1"></ion-icon>
+                          <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=2"></ion-icon>
+                          <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=3"></ion-icon>
+                          <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=4"></ion-icon>
+                          <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=5"></ion-icon>
+                        </div>
+                        <p class="font-bold text-[65px] text-black mt-[10px]">{{rating}}</p>
+                        <p class="text-black-3 text-lg" *ngIf="numberOfRatings !== 1">{{numberOfRatings}} ratings</p>
+                        <p class="text-black-3 text-lg" *ngIf="numberOfRatings === 1">{{numberOfRatings}} rating</p>
+                      </div>
+                    </ion-col>
+                    <ion-col size="12" sizeXl="6" class="flex flex-col items-center justify-center w-full">
+                      <div class="w-full">
+                        <ion-row>
+                          <ion-col size="5" class="text-start">
+                            <p class="text-lg text-black">Excellent</p>
+                            <p class="text-lg text-black mt-[10px]">Very good</p>
+                            <p class="text-lg text-black mt-[10px]">Average</p>
+                            <p class="text-lg text-black mt-[10px]">Poor</p>
+                            <p class="text-lg text-black mt-[10px]">Terible</p>
+                          </ion-col>
+                          <ion-col size="7">
+                            <div class="flex items-center w-full">
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate0 + 'px'}"></span>
+                              <p class="text-black-2 text-[14px] ml-2">{{ratingArray[0]}}</p>
+                            </div>
+                            <div class="flex items-center mt-[18px] w-full">
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate1 + 'px'}"></span>
+                              <p class="text-black-2 text-[14px] ml-2">{{ratingArray[1]}}</p>
+                            </div>
+                            <div class="flex items-center mt-[18px] w-full">
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate2 + 'px'}"></span>
+                              <p class="text-black-2 text-[14px] ml-2">{{ratingArray[2]}}</p>
+                            </div>
+                            <div class="flex items-center mt-[18px] w-full">
+                              <span class="bg-primary rounded-[7px] h-3 m-0 p-0" [ngStyle]="{width: rate3 + 'px'}"></span>
+                              <p class="text-black-2 text-[14px] ml-2">{{ratingArray[3]}}</p>
+                            </div>
+                            <div class="flex items-center mt-[18px] w-full">
+                              <span class="bg-primary rounded-[7px] h-3 p-0 m-0" [ngStyle]="{width: rate4 + 'px'}"></span>
+                              <p class="text-black-2 text-[14px] ml-2">{{ratingArray[4]}}</p>
+                            </div>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+              </ion-col>
+            </ion-row>
           </div>
         </ion-slide>
       </ion-slides>

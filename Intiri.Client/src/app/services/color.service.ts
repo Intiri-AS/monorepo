@@ -13,8 +13,18 @@ export class ColorService {
   apiUrl = environment.apiUrl;
   private colorPalettesSource = new ReplaySubject<any>(1);
   colorPalettes$ = this.colorPalettesSource.asObservable();
+  private colorsSource = new ReplaySubject<any>(1)
+  colors$ = this.colorsSource.asObservable()
 
   constructor(private http: HttpClient) { }
+
+  getColors() {
+    return this.http.get(this.apiUrl + 'Colors').pipe(map((colors) => {
+      if(colors) {
+        this.colorsSource.next(colors);
+      }
+    })).toPromise();
+  }
 
   getColorPalettes(){
     return this.http.get(this.apiUrl + 'colorPalettes').pipe(map((color) => {

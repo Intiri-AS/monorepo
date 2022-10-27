@@ -1,5 +1,5 @@
 .header-buttons {
-    @apply flex flex-1 items-center gap-2 ml-8 h-[100%];
+    @apply flex flex-1 flex-wrap items-start lg:items-center gap-2 ml-8 h-[100%];
   }
 .btn {
     @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 tracking-normal text-[18px];

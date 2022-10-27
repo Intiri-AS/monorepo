@@ -105,6 +105,57 @@ namespace Intiri.API.Migrations
                     b.ToTable("ChatMessageAttachment");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Consultation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Consultations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Duration = 60,
+                            Price = 950f
+                        });
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.Inspiration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EndUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndUserId");
+
+                    b.ToTable("Inspirations");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.Color", b =>
                 {
                     b.Property<int>("Id")
@@ -350,6 +401,9 @@ namespace Intiri.API.Migrations
                     b.Property<int?>("MoodboardId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MoodboardOfferId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -366,6 +420,8 @@ namespace Intiri.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MoodboardId");
+
+                    b.HasIndex("MoodboardOfferId");
 
                     b.HasIndex("PayerId");
 
@@ -1021,6 +1077,17 @@ namespace Intiri.API.Migrations
                     b.Navigation("ChatMessage");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.Inspiration", b =>
+                {
+                    b.HasOne("Intiri.API.Models.EndUser", "EndUser")
+                        .WithMany("Inspirations")
+                        .HasForeignKey("EndUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EndUser");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.IntiriColor.ColorPalette", b =>
                 {
                     b.HasOne("Intiri.API.Models.Project.Project", null)
@@ -1108,8 +1175,12 @@ namespace Intiri.API.Migrations
             modelBuilder.Entity("Intiri.API.Models.Payment.ConsultationPayment", b =>
                 {
                     b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "Moodboard")
-                        .WithMany("ConsultationPayments")
+                        .WithMany()
                         .HasForeignKey("MoodboardId");
+
+                    b.HasOne("Intiri.API.Models.Moodboard.Moodboard", "MoodboardOffer")
+                        .WithMany()
+                        .HasForeignKey("MoodboardOfferId");
 
                     b.HasOne("Intiri.API.Models.EndUser", "Payer")
                         .WithMany("ConsultationPayments")
@@ -1124,6 +1195,8 @@ namespace Intiri.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Moodboard");
+
+                    b.Navigation("MoodboardOffer");
 
                     b.Navigation("Payer");
 
@@ -1346,11 +1419,6 @@ namespace Intiri.API.Migrations
                     b.Navigation("Materials");
                 });
 
-            modelBuilder.Entity("Intiri.API.Models.Moodboard.Moodboard", b =>
-                {
-                    b.Navigation("ConsultationPayments");
-                });
-
             modelBuilder.Entity("Intiri.API.Models.Partner", b =>
                 {
                     b.Navigation("PartnerContacts");
@@ -1410,6 +1478,8 @@ namespace Intiri.API.Migrations
                     b.Navigation("ConsultationPayments");
 
                     b.Navigation("CreatedProjects");
+
+                    b.Navigation("Inspirations");
 
                     b.Navigation("ReceivedMoodboards");
 

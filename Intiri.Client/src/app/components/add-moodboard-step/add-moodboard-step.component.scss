@@ -105,3 +105,8 @@ ion-input {
 ion-select {
   @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

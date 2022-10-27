@@ -9,6 +9,7 @@ export class Moodboard {
   colorPalettes: Array<any>;
   materials: Array<any>;
   products: Array<any>;
+  created: any
 
   constructor()
   {
@@ -22,5 +23,6 @@ export class Moodboard {
     this.colorPalettes = [];
     this.materials = [];
     this.products = [];
+    this.created = null;
   }
 }

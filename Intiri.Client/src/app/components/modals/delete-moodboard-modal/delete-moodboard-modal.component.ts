@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 
 @Component({
   selector: 'app-delete-moodboard-modal',
@@ -7,8 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteMoodboardModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private moodboardService: MoodboardService, private modalController: ModalController) { }
+
+  item: {}
+  delete;
 
   ngOnInit() {}
+
+  deleteMoodboard() {
+    this.moodboardService.deleteMoodboard(this.item['id']).subscribe(res => {
+        this.moodboardService.getMoodboards();
+        this.modalController.dismiss();
+        location.reload();
+    });
+  }
+
+  dismissModal() {
+    this.modalController.dismiss();
+  }
 
 }

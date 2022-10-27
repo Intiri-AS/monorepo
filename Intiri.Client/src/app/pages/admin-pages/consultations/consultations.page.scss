@@ -9,3 +9,7 @@
 .currency-label {
     @apply absolute bottom-[16px] right-[13px] z-50 text-black-3;
 }
+
+.disabled {
+    @apply pointer-events-none opacity-70;
+}

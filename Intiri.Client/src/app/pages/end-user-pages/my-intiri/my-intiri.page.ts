@@ -1,8 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IonSlides, ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
+import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,10 +20,15 @@ import { environment } from 'src/environments/environment';
 export class MyIntiriPage {
   @ViewChild('slides') slides: IonSlides;
   @ViewChild('projectSlides') projectSlides: IonSlides;
+  @ViewChild('offerSlides') offerSlides: IonSlides;
   apiUrl = environment.apiUrl;
 
   projects: Project[] = [];
+  offers: Moodboard[] = [];
   projectId = 0;
+  inspirations: any[] = [];
+  imagePath = null;
+  newInspiration = null
 
   options = {
     slidesPerView: 3,
@@ -45,9 +55,12 @@ export class MyIntiriPage {
   isLoading = true;
 
   constructor(
-    public projectService: ProjectService,
+    private projectService: ProjectService,
+    private moodboardService: MoodboardService,
     private modalController: ModalController,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sanitizer: DomSanitizer,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -57,6 +70,38 @@ export class MyIntiriPage {
       this.isLoading = false;
       this.spinner.hide();
     });
+    this.projectService.getInspirations();
+    this.projectService.inspirations$.subscribe((res: any[]) => {
+      this.inspirations = res;
+    })
+    this.moodboardService.getMoodboardOffers().subscribe(res => {
+      this.offers = res;
+    })
+  }
+
+  addInspiration() {
+    this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
+      this.projectService.getInspirations();
+      this.projectService.inspirations$.subscribe((res: any[]) => {
+        this.spinner.hide();
+        this.inspirations = res;
+        this.notifier.show({
+          message: 'New inspiration image added successfully',
+          type: 'success',
+        });
+      })
+    })
+  }
+
+  onFileChange(event) {
+    if(event.target.files[0]) {
+      this.newInspiration = event.target.files[0];
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.newInspiration));
+      this.spinner.show();
+      this.addInspiration();
+    } else {
+      this.imagePath = null;
+    }
   }
 
   // TODO: needs to be updated after project is allowed to have multiple moodboards!
@@ -65,6 +110,12 @@ export class MyIntiriPage {
     project.projectMoodboards.forEach(moodboard => {
       result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
     });
+    return result;
+  }
+
+  getMbPiecesNo(moodboard){
+    let result = 0;
+      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
     return result;
   }
 
@@ -88,10 +139,28 @@ export class MyIntiriPage {
     this.projectSlides.slidePrev();
   }
 
+  nextOffer() {
+    this.offerSlides.slideNext();
+  }
+
+  prevOffer() {
+    this.offerSlides.slidePrev();
+  }
+
   // goToProjectDetails(project: Project){
   //   this.projectService.setCurrentProject(project);
   //   this.router.navigateByUrl('/project-details');
   // }
+
+  async openImageInModal(image) {
+    const modal = await this.modalController.create({
+      component: OpenFileModalComponent,
+      componentProps: {file: image, canDelete: true},
+      cssClass: 'open-file-modal-css'
+    });
+
+    await modal.present();
+  }
 
   async openShare() {
     const modal = await this.modalController.create({

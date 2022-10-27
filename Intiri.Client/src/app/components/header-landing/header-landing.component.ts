@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { from } from 'rxjs';
+import { LanguageService } from 'src/app/services/language.service';
 import { LanguagePopoverComponent } from '../popovers/language-popover/language-popover.component';
 
 @Component({
@@ -13,20 +15,20 @@ export class HeaderLandingComponent {
   @Input() isScrolledDown: boolean;
 
   languageImg: string = ''
-  language: string = ''
 
-  constructor(private popoverController: PopoverController, private translate: TranslateService) {}
+  constructor(private popoverController: PopoverController, 
+              private translate: TranslateService,
+              private languageService: LanguageService) {}
 
-  ngOnInit() {
-    this.language = this.translate.getBrowserLang();
-    this.chosenLanguage(this.language);
+   ngOnInit(){
+    this.languageService.languageChange$.subscribe( response => this.chosenLanguage(response)),
     this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
       this.chosenLanguage(event.lang);
     });
   }
 
   chosenLanguage(lng:string) {
-    if (lng === 'en-US' || lng === 'en') {
+    if (lng === 'en') {
       this.languageImg = 'assets/icon/flags/us.svg'
     } else if (lng === 'no') {
       this.languageImg = 'assets/icon/flags/no.svg'

@@ -1,6 +1,8 @@
 <ion-content>
   <!-- Add picture modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <form [formGroup]="addPictureForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addStyleImage()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -11,9 +13,10 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.select-style' | translate}}</span>
-            <ion-select [(ngModel)]="styleImage.styleId" interface="popover">
+            <ion-select [(ngModel)]="styleImage.styleId" interface="popover" formControlName="style">
               <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.id}}">{{style.name}}</ion-select-option>
             </ion-select>
+            <span class="ion-warning" *ngIf="isFormSubmited && styleErrors?.required">Field Required!</span>
           </div>
         </ion-col>
       </ion-row>
@@ -26,22 +29,24 @@
               <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
                 <div *ngIf="!imagePath" class="text-center mt-[65px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'STYLE.upload' | translate}}</p>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="pictureImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
+            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">Image Required!</span>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" (click)="addStyleImage()">{{'COMMON.add' | translate}}</ion-button>
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.add' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
+    </form>
   </div>
    <!-- Picture modal -->
    <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
@@ -69,7 +74,7 @@
         </div>
         <ion-buttons class="justify-center">
           <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyleImage()">Remove picture</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel | translate}}</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>

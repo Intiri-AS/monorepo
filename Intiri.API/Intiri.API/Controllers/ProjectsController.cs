@@ -88,6 +88,9 @@ namespace Intiri.API.Controllers
 		[HttpPost("addMoodboard")]
 		public async Task<ActionResult<ProjectOutDTO>> AddMoodboardToProject([FromBody] MoodboardToProjectInDTO moodboardProjectIn)
 		{
+			EndUser endUser = await _accountService.GetUserByIdAsync<EndUser>(User.GetUserId());
+			if (endUser == null) return Unauthorized();
+
 			Project project = await _unitOfWork.ProjectRepository.GetProjectById(moodboardProjectIn.ProjectId);
 
 			if (project == null)
@@ -102,6 +105,8 @@ namespace Intiri.API.Controllers
 			{
 				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.Moodboard.Id);
 				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+				newMoodboard.Designer = null;
+				newMoodboard.EndUser = endUser;
 			}
 			else
 			{
@@ -111,8 +116,8 @@ namespace Intiri.API.Controllers
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				Designer user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
-				newMoodboard.Designer = user;
+				newMoodboard.Designer = null;
+				newMoodboard.EndUser = endUser;
 
 				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
 				newMoodboard.Room = room;
@@ -175,6 +180,8 @@ namespace Intiri.API.Controllers
 			{
 				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.Moodboard.Id);
 				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+				newMoodboard.Designer = null;
+				newMoodboard.EndUser = user;
 			}
 			else
 			{
@@ -184,7 +191,9 @@ namespace Intiri.API.Controllers
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+				//newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+				newMoodboard.Designer = null;
+				newMoodboard.EndUser = user;
 
 				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.Moodboard.RoomId);
 				newMoodboard.Room = mRoom;

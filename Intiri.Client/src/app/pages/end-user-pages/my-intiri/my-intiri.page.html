@@ -12,7 +12,7 @@
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
                 <p class="text-2xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
-                <div *ngIf="projects[projects.length-1].projectMoodboards.length > options.slidesPerView">
+                <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && projects[projects.length-1].projectMoodboards.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>
@@ -28,7 +28,7 @@
                 </ion-button>
               </div>
               <div>
-                <p class="text-black-3 text-lg">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
+                <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
               <div class="flex flex-wrap gap-x-[2%]">
                 <ion-slides #slides [options]="options" class="py-4 pr-4 w-full">
@@ -81,7 +81,49 @@
                           </ion-button>
                         </div>
                         <div class="w-full text-left">
-                          <p class="text-black-3 text-lg">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                        </div>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-slide>
+                </ion-slides>
+              </div>
+            </div>
+            <div *ngIf="offers.length > 0" class="mt-8">
+              <div class="flex justify-between items-center ">
+                <p class="text-2xl font-medium text-black-2">Offers</p>
+                <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && offers.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
+                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevOffer()">
+                    <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="nextOffer()">
+                    <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-x-[2%]">
+                <ion-slides #offerSlides [options]="options" class="pb-20 py-4 pr-4 w-full">
+                  <ion-slide *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="4.5" class="!p-3 !pr-2">
+                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                        </ion-col>
+                        <ion-col size="7.5" class="!p-3 !pl-0">
+                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <div class="flex items-center justify-start pt-2 cursor-pointer hover:opacity-80" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
+                          <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
+                          <ion-button fill="clear" class="text-black" >
+                            <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                          </ion-button>
+                        </div>
+                        <div>
+                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>
@@ -95,19 +137,29 @@
       <div class="flex justify-between items-center">
         <p class="text-2xl font-medium text-black-2 mt-8 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
         <ion-button fill="clear" class="text-primary">
-          <p class="capitalize">See all</p>
-          <ion-icon name="arrow-forward" class="h-4 w-4"></ion-icon>
+          <p class="capitalize hover:opacity-80" routerLink="/my-inspirations" routerDirection="root">See all</p>
         </ion-button>
       </div>
-      <ion-row class="gap-x-[1.45%] ">
-        <ion-col *ngFor="let style of [1,2,3,4,5,6] | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
-          <div >
+      <ion-row class="gap-x-[1.45%]">
+        <ion-col *ngFor="let i of inspirations.slice(-5)" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
+          <div>
             <div class="h-full w-full">
-              <img src="../../../../assets/images/img-01.png" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
+              <img [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] shadow !w-full hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
             </div>
           </div>
-          <div class="flex justify-between">
-            <p class="py-2 text-black-2 font-semibold">{{style.name}}</p>
+        </ion-col>
+        <ion-col *ngIf="inspirations.length == 0" size="12" size-sm="5.75" size-lg="2.8" size-xl="2.25">
+          <div class="profile-input w-full">
+            <label for="dropzone-file">
+              <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">
+                <div *ngIf="!imagePath" class="text-center mt-[85px]">
+                  <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Add first inspiration</p>
+                </div>
+                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
+              </div>
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
+            </label>
           </div>
         </ion-col>
       </ion-row>
