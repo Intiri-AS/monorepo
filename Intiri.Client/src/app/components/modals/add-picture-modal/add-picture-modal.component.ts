@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { StyleService } from 'src/app/services/style.service';
 
@@ -10,8 +13,30 @@ import { StyleService } from 'src/app/services/style.service';
   styleUrls: ['./add-picture-modal.component.scss'],
 })
 export class AddPictureModalComponent implements OnInit {
+  public addPictureForm: FormGroup;
+  public isFormSubmited = false;
 
-  constructor(private modalController: ModalController, private styleService: StyleService, private sanitizer: DomSanitizer) { }
+  get styleErrors() {
+    return this.addPictureForm.controls.style.errors;
+  }
+
+  get imageFileErrors() {
+    return this.addPictureForm.controls.imageFile.errors;
+  }
+
+  constructor(
+    private modalController: ModalController,
+    private styleService: StyleService,
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
+  ) {
+    this.addPictureForm = this.formBuilder.group({
+      style: ['', [Validators.required]],
+      imageFile: ['', [Validators.required]]
+    });
+  }
 
   add: boolean;
   added: boolean;
@@ -46,11 +71,24 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   addStyleImage() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.addPictureForm.valid) {
+      this.spinner.hide();
+      return;
+    }
     this.styleService.addStyleImage(this.styleImage).subscribe(res => {
+      this.spinner.hide();
       if (typeof (res) === 'object') {
         this.styleService.getStyleImages();
         this.openSuccessModal();
       }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
@@ -58,6 +96,15 @@ export class AddPictureModalComponent implements OnInit {
     this.styleService.deleteStyleImage(this.item['id']).subscribe(res => {
         this.styleService.getStyleImages();
         this.modalController.dismiss();
+        this.notifier.show({
+          message: 'Picture deleted successfully',
+          type: 'success',
+        });
+    }, e => {
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
