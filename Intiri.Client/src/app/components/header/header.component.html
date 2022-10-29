@@ -19,7 +19,7 @@
           <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon"  name="settings-sharp"></ion-icon></div>
         </ng-container>
         <ion-button *ngIf="!(loggedUser$ | async)" fill="clear" class="secondary-btn" routerLink="/login" routerDirection="root">{{'NEW-COMMON.login' | translate}}</ion-button>
-        <ion-button fill="clear" class="primary-btn" (click)="removeProjectDraft()" href="/new-project">{{'MY-INTIRI.create' | translate}}</ion-button>
+        <ion-button fill="clear" class="primary-btn-responsive" (click)="removeProjectDraft()" href="/new-project">{{'MY-INTIRI.create' | translate}}</ion-button>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
         <ion-menu-button></ion-menu-button>

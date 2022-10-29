@@ -147,7 +147,7 @@ const routes: Routes = [
     path: 'moodboard-details/:id', //TODO Set up page guard (end-user guard)
     component: MoodboardDetailsPage,
     resolve: {moodboard: MoodboardService},
-    canActivate: [EnduserGuard]
+    canActivate: [SharedGuard]
   },
   {
     path: 'contact-designer/:id', //TODO Set up page guard (end-user guard)
