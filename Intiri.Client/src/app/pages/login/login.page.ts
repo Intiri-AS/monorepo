@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   public isFormSubmited = false;
   public activeCode = '47';
+  error: HttpErrorResponse;
 
   constructor(
     public accountService: AccountService,
@@ -73,7 +75,7 @@ export class LoginPage implements OnInit {
           phoneNumber: loginModel.phoneNumber } });
       },
       (error) => {
-        console.log(error);
+        this.error = error;
       });
   }
 

@@ -33,6 +33,7 @@
             </div>
           </div>
           <div class="flex flex-col justify-center items-center">
+            <span class="inline-block w-1/2 mt-2 text-center text-red-500" *ngIf="error">{{error.error}}</span>
             <ion-button fill="clear" class="primary-btn mt-[30px]" type="submit">{{'LOGIN.login' | translate}}</ion-button>
             <p class="text-lg text-black-2 mt-7">{{'LOGIN.or' | translate}}</p>
             <ion-button fill="clear" class="vipps-btn" (click)="initiateVippsLogin()">

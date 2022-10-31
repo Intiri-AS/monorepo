@@ -45,7 +45,7 @@ export class NewProjectStepComponent implements OnInit {
         return JSON.stringify(this.project[stepName.split('.')[0]][stepName.split('.')[1]]) === JSON.stringify(item)
        }
        else {
-        return this.project[stepName].id === item.id
+        return this.project[stepName]?.id === item.id
        }
     }
     return false;
