@@ -2,7 +2,7 @@
   <div id="home">
     <app-header></app-header>
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <div *ngIf="!isLoading" class="main-container">
+    <div *ngIf="!isLoading && !isLoadingOffers" class="main-container">
       <div class="flex justify-between">
         <p class="main-title">{{'MY-INTIRI.intiri' | translate}}</p>
       </div>
@@ -12,7 +12,7 @@
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
                 <p class="text-2xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
-                <div *ngIf="projects[projects.length-1].projectMoodboards.length > options.slidesPerView">
+                <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && projects[projects.length-1].projectMoodboards.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
                   </ion-button>
@@ -28,19 +28,19 @@
                 </ion-button>
               </div>
               <div>
-                <p class="text-black-3 text-lg">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
+                <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
               <div class="flex flex-wrap gap-x-[2%]">
                 <ion-slides #slides [options]="options" class="py-4 pr-4 w-full">
-                  <ion-slide *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+                  <ion-slide *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
-                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
-                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                         <ion-col size="7.5" class="!p-3 !pl-0">
-                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                       </ion-row>
                     </ion-grid>
@@ -62,15 +62,15 @@
               </div>
               <div class="flex flex-wrap gap-x-[2%]">
                 <ion-slides #projectSlides [options]="options" class="pb-20 pr-4 pt-4 w-full">
-                  <ion-slide *ngFor="let project of projects" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+                  <ion-slide *ngFor="let project of projects" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
-                          <img src="{{project.projectMoodboards[0].style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
-                          <img src="{{project.projectMoodboards[0].style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{project.projectMoodboards[0].style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                          <img src="{{project.projectMoodboards[0].style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                         <ion-col size="7.5" class="!p-3 !pl-0">
-                          <img src="{{project.projectMoodboards[0].style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{project.projectMoodboards[0].style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                       </ion-row>
                       <ion-row>
@@ -81,7 +81,49 @@
                           </ion-button>
                         </div>
                         <div class="w-full text-left">
-                          <p class="text-black-3 text-lg">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                        </div>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-slide>
+                </ion-slides>
+              </div>
+            </div>
+            <div *ngIf="offers.length > 0" class="mt-8">
+              <div class="flex justify-between items-center ">
+                <p class="text-2xl font-medium text-black-2">Offers</p>
+                <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && offers.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
+                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevOffer()">
+                    <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="nextOffer()">
+                    <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-x-[2%]">
+                <ion-slides #offerSlides [options]="options" class="pb-20 py-4 pr-4 w-full">
+                  <ion-slide *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="4.5" class="!p-3 !pr-2">
+                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                        </ion-col>
+                        <ion-col size="7.5" class="!p-3 !pl-0">
+                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <div class="flex items-center justify-start pt-2 cursor-pointer hover:opacity-80" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
+                          <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
+                          <ion-button fill="clear" class="text-black" >
+                            <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
+                          </ion-button>
+                        </div>
+                        <div>
+                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>
@@ -99,14 +141,14 @@
         </ion-button>
       </div>
       <ion-row class="gap-x-[1.45%]">
-        <ion-col *ngFor="let i of inspirations.slice(-6)" size="12" size-sm="5.75" size-xl="1.85">
+        <ion-col *ngFor="let i of inspirations.slice(-5)" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
           <div>
             <div class="h-full w-full">
               <img [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] shadow !w-full hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
             </div>
           </div>
         </ion-col>
-        <ion-col *ngIf="inspirations.length == 0" size="12" size-sm="5.75" size-xl="1.85">
+        <ion-col *ngIf="inspirations.length == 0" size="12" size-sm="5.75" size-lg="2.8" size-xl="2.25">
           <div class="profile-input w-full">
             <label for="dropzone-file">
               <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">

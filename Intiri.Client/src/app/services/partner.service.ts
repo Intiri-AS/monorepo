@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ReadPropExpr } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
@@ -14,7 +15,9 @@ export class PartnerService {
 
   apiUrl = environment.apiUrl;
   private partnersSource = new ReplaySubject<any>(1);
+  private productSource = new ReplaySubject<any>(undefined)
   partners$ = this.partnersSource.asObservable();
+  products$ = this.productSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +29,12 @@ export class PartnerService {
     })).toPromise();
   }
 
-  getProducts(){
-    return this.http.get(this.apiUrl + 'products');
+  getProductsFromThatPartner(){
+    return this.http.get(this.apiUrl + 'products').pipe(map((productResponse) => {
+      if (productResponse) {
+        this.productSource.next(productResponse)
+      }
+    })).toPromise();
   }
 
   getProductsType(){
@@ -50,6 +57,10 @@ export class PartnerService {
     return this.http.get<any>(this.apiUrl + 'partner/partner/' + id);
   }
 
+  getPartnerProfile() {
+    return this.http.get<any>(this.apiUrl + 'partner/profile')
+  }
+
   deletePartner(partnerId) {
     return this.http.delete(this.apiUrl + 'partner/delete/' + partnerId);
   }
@@ -64,6 +75,14 @@ export class PartnerService {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     return this.getPartner(parseInt(route.paramMap.get('id')));
+  }
+
+  addPartnerProduct(productData: any) {
+    const formData = new FormData();
+    Object.keys(productData).forEach(key => formData.append(key, productData[key]));
+    formData.delete('imageFile'); // removing it first so we can manually add a file name
+    formData.append('imageFile', productData.imageFile, `productImg${productData.name.replace(/\s/g,'_')}.png`)
+    return this.http.post(`${this.apiUrl}products/add`, formData);
   }
 
 }

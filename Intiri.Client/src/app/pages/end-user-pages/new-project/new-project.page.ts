@@ -304,7 +304,7 @@ export class NewProjectPage implements OnInit {
     if (Array.isArray(this.project[stepName])) {
       if (
         this.project[stepName].some(
-          (e) => JSON.stringify(e) === JSON.stringify(item)
+          (e) => e.id === item.id
         )
       ) {
         this.project[stepName] = this.project[stepName].filter(

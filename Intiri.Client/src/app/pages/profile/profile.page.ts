@@ -66,7 +66,7 @@ export class ProfilePage implements OnInit {
     this.http.get(this.apiUrl + 'users/profile').toPromise().then((res: any) => {
       this.spinner.hide();
       this.userInfo = res;
-    
+
       this.patchValues(this.userInfo)
       if (!res.photoPath) {
         this.userInfo.photoPath = '../../../assets/images/profile-img.png'

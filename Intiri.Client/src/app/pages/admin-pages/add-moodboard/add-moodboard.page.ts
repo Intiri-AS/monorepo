@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Moodboard } from 'src/app/models/moodboard.model';
+import { AccountService } from 'src/app/services/account.service';
+import { DesignerService } from 'src/app/services/designer.service';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { StyleService } from 'src/app/services/style.service';
@@ -49,12 +53,47 @@ export class AddMoodboardPage implements OnInit {
   };
 
   moodboard = new Moodboard();
+  clientMoodboard = new Moodboard();
+
+  isInternalDesigner: boolean;
+  //addType: 'add' | 'addForClient' | 'editForClient';
+  consultationPaymentId = null;
+  client = null;
+  clientRequestStep = false;
+  loggedUser$ = this.accountService.currentUser$;
 
   currentStepNo: number = 0;
 
-  constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService, private router: Router) { }
+  constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService,
+    private router: Router, private route: ActivatedRoute, private designerService: DesignerService,
+    private accountService: AccountService, private notifier: NotifierService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
+    this.consultationPaymentId = this.route.snapshot.params.paymentId;
+      if(this.consultationPaymentId) {
+        this.designerService.getDesignerClient(this.consultationPaymentId).subscribe((client: any) => {
+          this.client = client;
+          this.clientRequestStep = true;
+          this.currentStepNo = -1;
+          if(client.moodboard) {
+            this.moodboard = {...client.moodboard};
+            this.clientMoodboard = {...client.moodboard};
+          }
+          if(client.moodboardOfferId) {
+            this.moodboardSrv.getMoodboard(client.moodboardOfferId).subscribe(mb => {
+              this.moodboard = {...mb};
+            })
+          }
+        }, () => {
+          // TODO: redirect to 404
+          alert('404')
+        })
+      } else {
+        //this.addType = 'add';
+      }
+
+
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
@@ -77,18 +116,21 @@ export class AddMoodboardPage implements OnInit {
     if (this.canChangeToStep(this.currentStepNo - 1)) {
       this.currentStepNo--;
     }
+    this.clientRequestStep = false;
   }
 
   nextStep() {
     if (this.canChangeToStep(this.currentStepNo + 1)) {
       this.currentStepNo++;
     }
+    this.clientRequestStep = false;
   }
 
   goToStep(stepNo) {
     if (this.canChangeToStep(stepNo)) {
       this.currentStepNo = stepNo;
     }
+    this.clientRequestStep = false;
   }
 
   canChangeToStep(step): boolean {
@@ -143,7 +185,7 @@ export class AddMoodboardPage implements OnInit {
     if (Array.isArray(this.moodboard[stepName])) {
       if (
         this.moodboard[stepName].some(
-          (e) => JSON.stringify(e) === JSON.stringify(item)
+          (e) => e.id === item.id
         )
       ) {
         this.moodboard[stepName] = this.moodboard[stepName].filter(
@@ -161,16 +203,76 @@ export class AddMoodboardPage implements OnInit {
     }
   }
 
+  sendOffer() {
+    console.log(this.moodboard);
+    console.log(this.client.moodboard);
+    this.spinner.show();
+    if(this.client.moodboardOfferId) {
+      this.moodboardSrv.editMoodboard(this.moodboard).subscribe(res => {
+        if(res['id']) {
+          this.spinner.hide();
+          this.notifier.show({
+            message: 'Offer is successfully updated.',
+            type: 'success',
+          });
+          this.router.navigateByUrl('/client-list');
+         }
+      }, () => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: 'Cannot update offer.',
+          type: 'error',
+        });
+       })
+    } else {
+      this.moodboardSrv.addMoodboardOffer(this.moodboard, this.consultationPaymentId).subscribe(res => {
+        if(res['id']) {
+         this.spinner.hide();
+         this.notifier.show({
+           message: 'Offer is successfully created and sent to client.',
+           type: 'success',
+         });
+         this.router.navigateByUrl('/client-list');
+        }
+      }, () => {
+       this.spinner.hide();
+       this.notifier.show({
+         message: 'Cannot create offer.',
+         type: 'error',
+       });
+      })
+    }
+
+  }
+
   saveMoodboard() {
+    this.spinner.show();
     this.moodboardSrv.addMoodboard(this.moodboard).subscribe(
       (res) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: 'Moodboard has been created successfully.',
+          type: 'success',
+        });
         this.moodboardSrv.getMoodboards();
         this.router.navigateByUrl('/moodboards');
       },
       (error) => {
-        console.log(error);
+        this.spinner.hide();
+        this.notifier.show({
+          message: 'Cannot save moodboard.',
+          type: 'error',
+        });
       }
     );
+  }
+
+  cancel() {
+    if(this.client) {
+      this.router.navigateByUrl('/client-list');
+    } else {
+      this.router.navigateByUrl('/moodboards');
+    }
   }
 
   isEmpty(object): boolean {

@@ -1,64 +1,110 @@
 <ion-content>
   <div id="home">
     <app-header-internal-designer></app-header-internal-designer>
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <div class="main-container">
       <p class="main-title mb-[30px]">Moodboard</p>
       <app-sub-header [menu]="'designerMoodboards'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
         <ion-slide>
-          <div class="w-full h-full mt-5">
+          <ion-grid>
             <ion-row>
-              <ion-col size="4" *ngFor="let moodboard of myMoodboards">
-                <ion-card class="ion-card-container h-[350px]">
-                  <img src={{moodboard.image}} class="moodboard-img">
-                </ion-card>
-                <div class="flex justify-between items-center ml-3 mt-2">
-                  <div class="flex items-center justify-start">
-                    <p class="text-2xl text-medium">{{moodboard.style}}</p>
-                    <ion-button fill="clear" class="text-black" routerLink="#" routerDirection="root">
-                      <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
-                    </ion-button>
-                  </div>
-                  <button (click)="showSettings($event)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-                  </button>
+              <ion-col size="12" size-md="3.9" size-xl="2.75">
+                <div class="mt-6">
+                  <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
                 </div>
               </ion-col>
+              <ion-col class="grid sm-ion:flex gap-x-2" size="12" size-md="7.9" offset-md="0.2" offset-xl="3.95" size-xl="5.3" [ngStyle]="{ justifyContent: ((loggedUser$ | async)?.roles[0] === 'InternalDesigner') ? '' : 'end' }">
+                <div class="sm-ion:w-1/2 w-full">
+                  <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
+                  <div class="h-[52px]">
+                    <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
+                      <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
+                    </ion-select>
+                  </div>
+                </div>
+                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">Add moodboard</ion-button>
+              </ion-col>
             </ion-row>
-          </div>
+
+            <ion-row class="mt-8 gap-x-[1.65%]">
+              <ion-col *ngFor="let moodboard of myMoodboards | filter:searchText" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
+                <div class="designer">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="4.5" class="!p-3 !pr-2">
+                        <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[113px] lg:!h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
+                        <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[113px] lg:!h-[155px] w-full object-cover" alt="moodboard-img"/>
+                      </ion-col>
+                      <ion-col size="7.5" class="!p-3 !pl-0">
+                        <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[235px] lg:!h-[318px] w-full object-cover" alt="moodboard-img"/>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+                <div class="flex">
+                  <p class="text-black-2 font-semibold my-[3px] text-xl">{{moodboard.style.name}} </p>
+                  <div class="absolute right-[-5px]">
+                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+                    </button>
+                  </div>
+                </div>
+                <p class="text-black-3 mt-1">{{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-slide>
         <ion-slide>
-          <div class="w-full h-full mt-5">
+          <ion-grid>
             <ion-row>
-              <ion-col size="4" class="px-3">
-                <ion-select class="border rounded-2xl border-black-2 h-[52px] w-full text-left" interface="popover" placeholder="Select style">
-                  <ion-select-option>Vintage</ion-select-option>
-                  <ion-select-option>Traditional</ion-select-option>
-                  <ion-select-option>Minimal</ion-select-option>
-                  <ion-select-option>Industrial</ion-select-option>
-                </ion-select>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="4" *ngFor="let moodboard of allMoodboards">
-                <ion-card class="ion-card-container h-[350px]">
-                  <img src={{moodboard.image}} class="moodboard-img">
-                </ion-card>
-                <div class="flex flex-col ml-3 mt-2">
-                  <div class="flex items-center justify-start">
-                    <p class="text-2xl text-medium">{{moodboard.style}}</p>
-                    <ion-button fill="clear" class="text-black" routerLink="#" routerDirection="root">
-                      <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
-                    </ion-button>
-                  </div>
-                  <div class="flex items-center justify-start">
-                    <img src="../../../../assets/images/profile-img.png" class="avatar-img rounded-md">
-                    <p class="text-lg ml-2 text-black-2">Monica Bing</p>
-                  </div>
+              <ion-col size="12" size-md="3.9" size-xl="2.75">
+                <div class="mt-6">
+                  <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
                 </div>
               </ion-col>
+              <ion-col class="grid sm-ion:flex gap-x-2" size="12" size-md="7.9" offset-md="0.2" offset-xl="3.95" size-xl="5.3" [ngStyle]="{ justifyContent: ((loggedUser$ | async)?.roles[0] === 'InternalDesigner' || innerWidth < 768) ? '' : 'end' }">
+                <div class="sm-ion:w-1/2 w-full">
+                  <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
+                  <div class="h-[52px]">
+                    <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
+                      <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
+                    </ion-select>
+                  </div>
+                </div>
+                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">Add moodboard</ion-button>
+              </ion-col>
             </ion-row>
-          </div>
+
+            <ion-row class="mt-8 gap-x-[1.65%]">
+              <ion-col *ngFor="let moodboard of moodboards | filter:searchText" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
+                <div class="designer">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="4.5" class="!p-3 !pr-2">
+                        <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[113px] lg:!h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
+                        <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[113px] lg:!h-[155px] w-full object-cover" alt="moodboard-img"/>
+                      </ion-col>
+                      <ion-col size="7.5" class="!p-3 !pl-0">
+                        <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[235px] lg:!h-[318px] w-full object-cover" alt="moodboard-img"/>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+                <div class="flex">
+                  <img src="../../../assets/images/profile-img.png" class="w-[30ppx] !h-[30px] rounded object-cover "
+                    alt="Profile Img" />
+                  <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
+                  <div class="absolute right-[-5px]">
+                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+                    </button>
+                  </div>
+                </div>
+                <p class="text-black-3 mt-1">{{moodboard.style.name}} / {{moodboard.room.name}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-slide>
       </ion-slides>
     </div>

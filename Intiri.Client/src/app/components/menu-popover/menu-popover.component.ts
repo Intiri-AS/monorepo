@@ -21,6 +21,7 @@ import { AddDesignerModalComponent } from '../modals/add-designer-modal/add-desi
 export class MenuPopoverComponent implements OnInit {
 
   designer: boolean;
+  designerMb: boolean;
   product: boolean;
   moodboard: boolean;
   client: boolean;

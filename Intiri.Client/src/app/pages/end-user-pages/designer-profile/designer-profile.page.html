@@ -5,8 +5,8 @@
       <h1 class="main-title">{{'BOOK-DESIGNER-PROFILE.profile' | translate}}</h1>
       <div class="mt-[30px]">
         <ion-row>
-          <ion-col size="12" size-xl="4" class="p-0">
-            <div class="p-2 xl:p-0">
+          <ion-col size="12" size-md="4" class="p-0">
+            <div class="p-2 mac:p-0">
               <div class="bg-light rounded-2xl flex flex-col items-center">
                 <img [src]="designer.photoPath || '../../../../assets/images/profile-img.png'" class="w-[240px] h-[240px] rounded-full mt-[65px]">
                 <div class="w-[144px] h-[30px] bg-secondary rounded-[5px] flex items-center justify-center mt-[30px]">
@@ -28,7 +28,7 @@
               </div>
             </div>
           </ion-col>
-          <ion-col *ngIf="designer.createdMoodboards.length > 0" size="12" size-xl="8" class="p-2 xl:p-0 xl:pl-5">
+          <ion-col *ngIf="designer.createdMoodboards.length > 0" size="12" size-md="8" class="p-2 xl:p-0 xl:pl-5">
             <p class="text-2xl text-black-2 font-medium">{{'MY-INTIRI.latest-project' | translate}}</p>
             <ion-card class="border shadow-1 rounded-2xl w-full xl:w-[866px] h-[410px] m-0 mt-7 p-4">
               <div class="result-grid">
@@ -45,7 +45,7 @@
                 <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(designer.createdMoodboards[designer.createdMoodboards.length-1].materials[2].imagePath) + ')'}"></div>
                 <div class="item-md" [ngStyle]="{background: 'url(' + normalizeSlashes(designer.createdMoodboards[designer.createdMoodboards.length-1].materials[3].imagePath) + ')'}"></div>
               </div>
-          </ion-card>
+            </ion-card>
             <div class="flex items-center justify-start">
               <p class="text-black-2 text-2xl font-medium mt-2">{{designer.createdMoodboards[designer.createdMoodboards.length-1].style.name}}</p>
             </div>
@@ -64,7 +64,7 @@
                           <img [src]="getMoodboardImage(mb, 1) || '../../../../assets/images/landing-img.png'" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                         <ion-col size="7.5" class="!p-3 !pl-0">
-                          <img [src]="getMoodboardImage(mb) || '../../../../assets/images/landing-img.png'" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                          <img [src]="getMoodboardImage(mb, 2) || '../../../../assets/images/landing-img.png'" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                       </ion-row>
                     </ion-grid>

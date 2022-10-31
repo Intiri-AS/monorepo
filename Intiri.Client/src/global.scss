@@ -43,8 +43,8 @@
   .open-file-modal-css::part(content) {
     --width: auto;
     --height: auto;
-    --max-width: 90vw;
-    --max-height: 90vh;
+    --max-width: 75vw;
+    --max-height: 75vh;
     border-radius: 16px;
   }
   .small-modal-css::part(content) {
@@ -138,6 +138,16 @@ ion-button {
 }
 
 .primary-btn {
+  //this one don't resize on smaller screens (don't have media queries)
+  @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  height: 46px !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+}
+
+.primary-btn-responsive {
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
@@ -147,6 +157,7 @@ ion-button {
 }
 
 .secondary-btn {
+  //this one don't resize on smaller screens (don't have media queries)
   @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
@@ -155,12 +166,47 @@ ion-button {
   font-size: 1.125rem !important;
 }
 
+.secondary-btn-responsive {
+  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  height: 46px !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+}
+
+.header-icon {
+  @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
+}
+
+.header-profile-img {
+  @apply object-cover rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
+}
+
+
 .header-container {
   @apply px-[75px];
 }
 
 .box-shadow {
   -webkit-box-shadow: 4px 4px 15px rgb(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1479px) {
+  .header-icon {
+    font-size: 18px !important;
+  }
+  .header-profile-img {
+    height: 36px !important;
+    width: 36px !important;
+  }
+
+  .primary-btn-responsive, .secondary-btn-responsive {
+    @apply px-2 rounded-[8px];
+    margin: 0 !important;
+    font-size: 16px !important;
+    height: 36px !important;
+  }
 }
 
 // should be wrapped around every main content of the page (main section below header)
@@ -200,6 +246,16 @@ ion-button {
   top: auto !important;
   bottom: 85px !important;
   left: 30% !important;
+}
+
+.ion-warning {
+  display: flex;
+  font-size: 12px;
+  color: red;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  padding-top: 1px;
 }
 
 code-input {

@@ -17,7 +17,7 @@
   <div *ngIf="!bigCardOnly" class="mt-16 xl:text-left">
     <div class="flex justify-between items-center mb-6">
       <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
-      <div *ngIf="withSlides && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.slidesPerView">
+      <div *ngIf="withSlides && slides && slides['el']['swiper']?.currentBreakpoint && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
         <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
           <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
         </ion-button>

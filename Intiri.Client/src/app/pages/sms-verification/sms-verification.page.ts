@@ -47,8 +47,10 @@ export class SmsVerificationPage implements OnInit {
                     this.nav.navigateRoot('/my-intiri');
                   } else if (loggedUser.roles[0] === 'Admin') {
                     this.nav.navigateRoot('/dashboard');
-                  } else if (loggedUser.roles[0] === 'InternalDesigner') {
+                  } else if (loggedUser.roles[0] === 'InternalDesigner' || loggedUser.roles[0] === 'ExternalDesigner') {
                     this.nav.navigateRoot('/client-list')
+                  } else if (loggedUser.roles[0] === 'Partner') {
+                    this.nav.navigateRoot('/partner')
                   }
                 }
               })

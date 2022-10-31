@@ -7,3 +7,20 @@
   height: 20px !important;
   width: 20px !important;
 }
+
+ion-select {
+  @apply border rounded-2xl h-12 border-black-2 pr-4
+}
+
+ion-col {
+  @apply p-0
+}
+
+.designer {
+  @apply  border rounded-2xl h-[270px] lg:h-[350px] mb-[10px] overflow-hidden shadow-1;
+}
+
+.swiper-slide {
+  text-align: left;
+  width: 100% !important;
+}

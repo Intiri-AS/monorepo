@@ -27,7 +27,7 @@ export class AdminMaterialsComponent implements OnInit {
     this.materialService.getMaterialTypes().subscribe((res: []) => {
       this.materialTypes = res;
     })
-    this.materials$.pipe(take(1)).subscribe(materials => { 
+    this.materials$.subscribe(materials => {
       this.materials = materials;
     });
   }
@@ -57,7 +57,7 @@ export class AdminMaterialsComponent implements OnInit {
     const selectedTypeNames = event.detail.value;
     this.materials$.pipe(take(1)).subscribe(materials => {
       if(selectedTypeNames.length > 0) {
-        this.materials = materials.filter(material => selectedTypeNames.includes(material.materialTypeName));  
+        this.materials = materials.filter(material => selectedTypeNames.includes(material.materialTypeName));
       } else {
         this.materials = materials;
       }

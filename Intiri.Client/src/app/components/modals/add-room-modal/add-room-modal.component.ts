@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -9,8 +12,40 @@ import { RoomService } from 'src/app/services/room.service';
   styleUrls: ['./add-room-modal.component.scss'],
 })
 export class AddRoomModalComponent implements OnInit {
+  public addRoomForm: FormGroup;
+  public isFormSubmited = false;
 
-  constructor(private modalController: ModalController, private roomService: RoomService, private sanitizer: DomSanitizer) { }
+  get nameErrors() {
+    return this.addRoomForm.controls.name.errors;
+  }
+
+  get typeErrors() {
+    return this.addRoomForm.controls.type.errors;
+  }
+
+  get descriptionErrors() {
+    return this.addRoomForm.controls.description.errors;
+  }
+
+  get imageFileErrors() {
+    return this.addRoomForm.controls.imageFile.errors;
+  }
+
+  constructor(
+    private modalController: ModalController,
+    private roomService: RoomService,
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService
+  ) {
+    this.addRoomForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      imageFile: ['', [Validators.required]]
+    });
+  }
 
   add: boolean;
   added: boolean;
@@ -49,11 +84,24 @@ export class AddRoomModalComponent implements OnInit {
   }
 
   addRoom() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.addRoomForm.valid) {
+      this.spinner.hide();
+      return;
+    }
     this.roomService.addRoom(this.room).subscribe(res => {
+      this.spinner.hide();
       if (typeof (res) === 'object') {
         this.roomService.getRooms();
         this.openSuccessModal();
       }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 
@@ -61,6 +109,15 @@ export class AddRoomModalComponent implements OnInit {
     this.roomService.deleteRoom(this.item['id']).subscribe(res => {
         this.roomService.getRooms();
         this.modalController.dismiss();
+        this.notifier.show({
+          message: 'Room deleted successfully',
+          type: 'success',
+        });
+    }, e => {
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
     });
   }
 

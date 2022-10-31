@@ -10,12 +10,12 @@
         <p class="main-title">My Inspiration</p>
         <ion-grid class="mt-8 p-0">
             <ion-row class="gap-x-[1.45%]">
-                <ion-col *ngFor="let i of inspirations" class="p-0" size="12" size-sm="5.75" size-xl="1.85">
+                <ion-col *ngFor="let i of inspirations" class="p-0" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
                     <div class="h-full w-full mb-4">
                       <img [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
                     </div>
                 </ion-col>
-                <ion-col size="12" size-sm="5.75" size-xl="1.85" class="p-0">
+                <ion-col size="12" size-sm="5.75" size-lg="2.8" size-xl="2.25" class="p-0">
                     <div class="profile-input w-full">
                       <label for="dropzone-file">
                         <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">

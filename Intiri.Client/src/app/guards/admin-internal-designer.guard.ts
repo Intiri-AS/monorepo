@@ -9,7 +9,7 @@ import { AccountService } from '../services/account.service';
   providedIn: 'root'
 })
 
-export class DesignerGuard implements CanActivate {
+export class AdminInternalDesignerGuard implements CanActivate {
 
   constructor(
     private nav: NavController,
@@ -21,7 +21,7 @@ export class DesignerGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.accountService.currentUser$.pipe(map(user => {
-      if (user && (user.roles[0] === 'InternalDesigner' || user.roles[0] === 'ExternalDesigner')) {
+      if (user && user.roles[0] === 'Admin' || user.roles[0] === 'InternalDesigner') {
         return true;
       } else {
         this.nav.navigateRoot('/login');
