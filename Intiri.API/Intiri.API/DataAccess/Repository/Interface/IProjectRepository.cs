@@ -9,5 +9,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Project> GetProjectById(int id);
 		Task<Project> GetLastProjectForUser(int userId);
 		Task<Project> GetProjectByName(string projectName);
+
+		Task<Project> GetProjectWithMoodboardsForUser(int projectId);
 	}
 }

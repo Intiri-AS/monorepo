@@ -49,7 +49,7 @@ try
 	UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
 	RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
 	IAccountService accountService = _serviceProvider.GetRequiredService<IAccountService>();
-	IFileUploadService fileUploadService = _serviceProvider.GetRequiredService<IFileUploadService>();
+	ICloudinaryService fileUploadService = _serviceProvider.GetRequiredService<ICloudinaryService>();
 
 	logger.Info("Migrate db..");
 	//add migrations

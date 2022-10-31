@@ -11,8 +11,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public string Name { get; set; }
 		public string Created { get; set; }
 		public RoomOutDTO Room { get; set; }
-		public int BudgetRate { get; set; }
-		public RoomDetails RoomDetails { get; set; }
+
 		public ICollection<ColorPaletteOutDTO> ColorPalettes { get; set; }
 		public ICollection<StyleImageOutDTO> StyleImages { get; set; }
 		public ICollection<MoodboardOutDTO> ProjectMoodboards { get; set; }

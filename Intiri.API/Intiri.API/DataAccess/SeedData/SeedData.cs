@@ -48,8 +48,8 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedProducts(unitOfWork);
 			await SeedColorPalettes(unitOfWork);
 			await SeedMoodboards(unitOfWork);
-			await SeedProjects(unitOfWork);
-			await SeedRoomDetails(unitOfWork);
+			//await SeedProjects(unitOfWork);
+			//await SeedRoomDetails(unitOfWork);
 		}
 
 		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork)

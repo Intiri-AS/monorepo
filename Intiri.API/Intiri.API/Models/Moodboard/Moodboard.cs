@@ -1,6 +1,7 @@
 ﻿using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Payment;
 using Intiri.API.Models.Product;
+using Intiri.API.Models.Room;
 
 namespace Intiri.API.Models.Moodboard
 {
@@ -25,7 +26,8 @@ namespace Intiri.API.Models.Moodboard
         public Moodboard SourceMoodboard { get; set; }
 		public Project.Project Project { get; set; }
         public EndUser EndUser { get; set; }
-        public bool IsTemplate { get; set; }
+		public RoomDetails RoomDetails { get; set; }
+		public bool IsTemplate { get; set; }
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }

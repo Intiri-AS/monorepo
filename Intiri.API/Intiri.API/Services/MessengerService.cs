@@ -27,13 +27,13 @@ public class MessengerService : IMessengerService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IConsultationPaymentRepository _consultationPaymentRepository;
     private readonly UserManager<User> _userManager;
-    private readonly IFileUploadService _fileUploadService;
+    private readonly ICloudinaryService _fileUploadService;
     private readonly IMapper _mapper;
 
     public MessengerService(IMessenger messenger,
                             IUnitOfWork unitOfWork,
                             UserManager<User> userManager,
-                            IFileUploadService fileUploadService,
+                            ICloudinaryService fileUploadService,
                             IMapper mapper)
     {
         _messenger = messenger;

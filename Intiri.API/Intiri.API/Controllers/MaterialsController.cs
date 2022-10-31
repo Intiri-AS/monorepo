@@ -19,7 +19,7 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 
 		#endregion Fields
 
@@ -28,7 +28,7 @@ namespace Intiri.API.Controllers
 		public MaterialsController(
 			IUnitOfWork unitOfWork,
 			IMapper mapper,
-			IFileUploadService fileUploadService) : base(unitOfWork)
+			ICloudinaryService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;

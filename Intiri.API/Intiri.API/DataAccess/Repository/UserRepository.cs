@@ -61,7 +61,7 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<EndUser> GetEndUserByIdWithInspirationsAsync(int id)
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
-			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).SingleOrDefaultAsync(eu => eu.Id == id);
+			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).Include(i => i.CreatedProjects).SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
 		public async Task<EndUser> GetEndUserWithConsultationPaymentsAsync(int id)

@@ -126,7 +126,7 @@ namespace Intiri.API.Controllers
 			{
 				return BadRequest("Invalid consultation payment.");
 			}
-			
+
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
 
 			moodboard.Designer = designer;
@@ -148,7 +148,7 @@ namespace Intiri.API.Controllers
 			moodboard.Products = products.ToArray();
 
 			_unitOfWork.MoodboardRepository.Insert(moodboard);
-			
+
 			consultationPayment.MoodboardOffer = moodboard;
 			_unitOfWork.ConsultationPaymentRepository.Update(consultationPayment);
 

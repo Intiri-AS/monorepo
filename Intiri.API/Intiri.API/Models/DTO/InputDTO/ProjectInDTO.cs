@@ -12,9 +12,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 		public int RoomId { get; set; }
 
 		[Required]
-		public int BudgetRate { get; set; }
-
-		[Required]
 		public RoomDetailsInDTO RoomDetails { get; set; }
 
 		[Required]

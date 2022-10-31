@@ -18,9 +18,7 @@ namespace Intiri.API.Models.Project
         public DateTime Updated { get; set; } = DateTime.UtcNow;
         public EndUser EndUser { get; set; }
         public int EndUserId { get; set; }
-        public int BudgetRate { get; set; }
         public Room.Room Room { get; set; }
-		public RoomDetails RoomDetails { get; set; }
 		public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Style.StyleImage> StyleImages { get; set; }
         public ICollection<Moodboard.Moodboard> ProjectMoodboards { get; set; }
