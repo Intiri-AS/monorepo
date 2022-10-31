@@ -21,7 +21,8 @@ public class ConsultationPaymentRepository : RepositoryBase<ConsultationPayment>
 				.Include(mu => mu.Moodboard).ThenInclude(prod => prod.Products)
 				.Include(mu => mu.Moodboard).ThenInclude(co => co.Room)
 				.Include(mu => mu.Moodboard).ThenInclude(co => co.Style).ThenInclude(s => s.StyleImages)
-				.Include(mu => mu.Moodboard).ThenInclude(proj => proj.Project)
+				.Include(mu => mu.Moodboard).ThenInclude(co => co.Style).ThenInclude(s => s.StyleImages)
+				.Include(mu => mu.Moodboard).ThenInclude(rd => rd.RoomDetails)
 				.SingleOrDefaultAsync(cp => cp.Id == consultationId);
 	}
 
