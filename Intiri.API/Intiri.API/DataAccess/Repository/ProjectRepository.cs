@@ -31,7 +31,6 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
 				.Include(p => p.ColorPalettes)
-				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
 				.ToListAsync();
 		}
@@ -43,7 +42,6 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
 				.Include(p => p.ColorPalettes)
-				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
 					.ThenInclude(p => p.Style)
 					.ThenInclude(p => p.StyleImages)
@@ -57,7 +55,6 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(p => p.Room)
 				.Include(p => p.StyleImages)
 				.Include(p => p.ColorPalettes)
-				.Include(p => p.RoomDetails)
 				.Include(p => p.ProjectMoodboards)
 				.ThenInclude(p => p.Style)
 				.ThenInclude(p => p.StyleImages)
@@ -88,6 +85,15 @@ namespace Intiri.API.DataAccess.Repository
 			//	.Include(p => p.ColorPalettes)
 			//	.Include(p => p.ProjectMoodboards)
 			//	.ToListAsync();
+		}
+
+		public async Task<Project> GetProjectWithMoodboardsForUser(int projectId)
+		{
+			return await _context.Projects
+				.Include(eu => eu.EndUser).ThenInclude(cp => cp.CreatedProjects)
+				.Include(p => p.ProjectMoodboards)
+				.ThenInclude(rd => rd.RoomDetails)
+				.SingleOrDefaultAsync(p => p.Id == projectId);
 		}
 	}
 }

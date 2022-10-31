@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Intiri.API.Services;
 
-public class CloudinaryService : IFileUploadService
+public class CloudinaryService : ICloudinaryService
 {
     private readonly CloudinaryDotNet.Cloudinary _cloudinary;
     private readonly IContentTypesService _contentTypesService;

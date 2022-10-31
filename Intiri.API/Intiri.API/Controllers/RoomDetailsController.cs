@@ -18,14 +18,14 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 		
 
 		#endregion Fields
 
 		#region Constructors
 
-		public RoomDetailsController(IUnitOfWork unitOfWork, IMapper mapper, IFileUploadService fileUploadService): base(unitOfWork)
+		public RoomDetailsController(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService fileUploadService): base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
@@ -81,7 +81,7 @@ namespace Intiri.API.Controllers
 			}
 
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
-			
+
 			if (await _unitOfWork.SaveChanges())
 			{
 				return Ok(_mapper.Map<RoomDetailsOutDTO>(roomDetails));

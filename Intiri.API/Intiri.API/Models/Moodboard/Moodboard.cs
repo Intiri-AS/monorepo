@@ -27,7 +27,6 @@ namespace Intiri.API.Models.Moodboard
 		public Project.Project Project { get; set; }
         public EndUser EndUser { get; set; }
 		public RoomDetails RoomDetails { get; set; }
-		public int BudgetRate { get; set; }
 		public bool IsTemplate { get; set; }
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }

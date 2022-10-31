@@ -9,5 +9,9 @@ namespace Intiri.API.Models.Room
         public double Size { get; set; }
 		public string SketchUrl { get; set; }
 		public string SketchPublicId { get; set; }
-	}
+        public int BudgetRate { get; set; }
+
+        public Moodboard.Moodboard Moodboard { get; set; }
+        public int MoodboardId { get; set; }
+    }
 }

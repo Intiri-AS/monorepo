@@ -22,7 +22,7 @@ namespace Intiri.API.Controllers
 
 		#region Fields
 
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 		private readonly ILogger<UsersController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -31,7 +31,7 @@ namespace Intiri.API.Controllers
 
 		#region ctors
 
-		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploadService fileUploadService, ILogger<UsersController> logger) : base(unitOfWork)
+		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService, ILogger<UsersController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_logger = logger;

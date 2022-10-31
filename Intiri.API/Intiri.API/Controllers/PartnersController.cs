@@ -23,13 +23,13 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly IAccountService _accountService;
 		private readonly ILogger<UsersController> _logger;
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploadService fileUploadService, ILogger<UsersController> logger) 
+		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService, ILogger<UsersController> logger) 
 			: base(unitOfWork)
 		{
 			_mapper = mapper;
