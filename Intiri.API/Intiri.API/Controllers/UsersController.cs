@@ -52,34 +52,6 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
-		//[HttpGet("designerClients")]
-		//public async Task<ActionResult<IEnumerable<DesignerClientOutDTO>>> GetAllDesignerClients()
-		//{
-		//	Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithClientsAsync(User.GetUserId());
-		//	if (designer == null) return Unauthorized("Invalid designer.");
-
-		//	IEnumerable<DesignerClientOutDTO> clientsToReturn = _mapper.Map<IEnumerable<DesignerClientOutDTO>>(designer.ConsultationPaymentsReceived);
-
-		//	return Ok(clientsToReturn);
-		//}
-
-		//[HttpGet("clientConsultation/{consultationId}")]
-		//public async Task<ActionResult<DesignerClientFullOutDTO>> GetDesignerClient(int consultationId)
-		//{
-		//	Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithClientsAsync(User.GetUserId());
-		//	if (designer == null) return Unauthorized("Invalid designer.");
-
-		//	ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetFullConsultationByIdAsync(consultationId);
-
-		//	//DesignerClientOutDTO clientOutDTO = _mapper.Map<DesignerClientOutDTO>(consultationPayment);
-		//	//MoodboardOutDTO moodboardOutDTO = _mapper.Map<MoodboardOutDTO>(consultationPayment.Moodboard);
-		//	//IEnumerable<InspirationOutDTO> inspirationsOutDTO = _mapper.Map<IEnumerable<InspirationOutDTO>>(consultationPayment.Payer.Inspirations);
-
-		//	DesignerClientFullOutDTO clientFullOutDTO = _mapper.Map<DesignerClientFullOutDTO>(consultationPayment);
-
-		//	return Ok(clientFullOutDTO);
-		//}
-
 		[HttpGet("profile")]
 		public async Task<ActionResult<UserOutDTO>> GetUserProfile()
 		{
