@@ -1,15 +1,14 @@
 <ion-grid class="px-0 m">
   <ion-row class="mt-2">
-    <ion-col size="6" size-xl="3">
+    <ion-col size="12" size-sm="6" size-lg="3" class="flex">
       <div class="profile-input">
         <div class="mt-6">
           <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
-
-    <ion-col size="6" offset-xl="6.5" size-xl="2.5" class="flex justify-end">
-      <ion-button (click)="addColor()" fill="clear" class="primary-btn mt-4">{{'STYLE.add-color' | translate}}</ion-button>
+    <ion-col size="12" size-sm="6" offset-lg="6" size-lg="3" class="flex items-end justify-center sm-ion:justify-end">
+      <ion-button (click)="addColor()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-color' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

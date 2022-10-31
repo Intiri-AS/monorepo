@@ -1,15 +1,15 @@
 <ion-grid class="px-0 m">
   <ion-row class="mt-2">
-    <ion-col size="6" size-md="4" size-xl="3">
+    <ion-col size="12" size-md="4" size-lg="3" class="flex">
       <div class="profile-input">
         <div class="mt-6">
           <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
         </div>
       </div>
     </ion-col>
-    <ion-col size="6" size-md="4" offset-xl="3.5" size-xl="3" class="relative bottom-[27px] ">
-      <div class="profile-input justify-end">
-        <div class="w-full">
+    <ion-col size="12" size-md="3" offset-md="1" size-lg="3" offset-lg="3" class="flex items-end">
+      <div class="w-full">
+        <div class="text-left">
           <span class="text-sm text-black-2">Type</span>
           <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
             <ion-select-option *ngFor="let materialType of materialTypes" value="{{materialType.name}}">{{materialType.name}}</ion-select-option>
@@ -17,8 +17,8 @@
         </div>
       </div>
     </ion-col>
-    <ion-col size="12" size-md="4" size-xl="2.5" class="flex justify-end">
-      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4">{{'STYLE.add-material' | translate}}</ion-button>
+    <ion-col size="12" size-md="4" size-lg="3" class="flex items-end justify-center">
+      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-material' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

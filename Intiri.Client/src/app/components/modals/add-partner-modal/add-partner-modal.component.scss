@@ -1,42 +1,42 @@
 .profile-input {
-    @apply mt-2 mx-2 flex-1
+  @apply mt-2 mx-2 flex-1
 }
 
 .phone-input {
-    @apply mt-2 mx-2 min-w-[130px]
+  @apply mt-2 mx-2 min-w-[130px]
 }
 
 ion-input {
-    @apply h-12
+  @apply h-12
 }
 
 ion-select {
-    @apply border rounded-2xl h-12 border-black-2 pr-4
+  @apply border rounded-2xl h-12 border-black-2 pr-4
 }
 
 .plus-icon-wrapper {
-    @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[81px] w-[81px]
+  @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[81px] w-[81px]
 }
 
 .disabled {
-    @apply pointer-events-none opacity-60
-  }
+  @apply pointer-events-none opacity-60
+}
 
 .partner-form {
-    @apply h-full mb-20 lg:mb-0 lg:h-[850px] w-[80%] overflow-auto;
+  @apply h-full mb-20 w-[80%] overflow-auto;
 }
 .partner-form::-webkit-scrollbar {
-@apply opacity-0 w-[5px] bg-transparent;
+  @apply opacity-0 w-[5px] bg-transparent;
 }
 
 .partner-form:hover::-webkit-scrollbar-thumb {
-@apply bg-[#cfcfcf];
+  @apply bg-[#cfcfcf];
 }
 
 .partner-form::-webkit-scrollbar-thumb {
-@apply bg-[#dfdfdf] duration-1000;
+  @apply bg-[#dfdfdf] duration-1000;
 }
 
 ion-icon {
-    --ionicon-stroke-width: 60px;
-  }
+  --ionicon-stroke-width: 60px;
+}
