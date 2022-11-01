@@ -25,7 +25,7 @@ export class MyMoodboardPage implements OnInit {
   }
 
 
-
+  searchText: any;
   innerWidth;
   currentSlide = 0;
   moodboards$ = this.moodboardService.moodboards$;

@@ -12,7 +12,7 @@ import { VerificationTarget } from 'src/app/types/types';
 })
 
 export class SmsVerificationPage implements OnInit {
-  error: string;
+  error: any;
   verificationTarget: VerificationTarget;
   @ViewChild('codeInput') codeInput !: CodeInputComponent;
 

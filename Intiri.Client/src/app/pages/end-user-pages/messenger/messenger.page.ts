@@ -18,7 +18,6 @@ import { DesignerService } from 'src/app/services/designer.service';
   styleUrls: ['./messenger.page.scss'],
 })
 export class MessengerPage implements OnInit {
-  username = 'vladk2';
   messages = [];
   message = '';
   attachments;
