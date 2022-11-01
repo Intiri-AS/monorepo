@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map, take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { environment } from 'src/environments/environment';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-profile-img-section',
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./profile-img-section.component.scss'],
 })
 export class ProfileImgSectionComponent implements OnInit {
+  @Output() newImageEvent = new EventEmitter<string>();
 
   @Input() image = null;
   @Input() firstName = null;
@@ -26,7 +28,8 @@ export class ProfileImgSectionComponent implements OnInit {
     private notifier: NotifierService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+   }
 
   openFile() {
     document.querySelector('input').click();
@@ -40,7 +43,8 @@ export class ProfileImgSectionComponent implements OnInit {
       this.http.post(this.apiUrl + 'users/addPhoto', formData).subscribe((res: any) => {
         this.spinner.hide();
         if (res.photoPath) {
-          this.image = res.photoPath
+          this.image = res.photoPath;
+          this.addNewImage(res.photoPath);
           this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
             this.accountService.setCurrentUser({...user, photoPath: res.photoPath});
           });
@@ -49,10 +53,14 @@ export class ProfileImgSectionComponent implements OnInit {
             type: 'success',
           });
         }
-      })
+      });
     } else {
       this.image = null;
     }
+  }
+
+  addNewImage(value: string) {
+    this.newImageEvent.emit(value);
   }
 
 }

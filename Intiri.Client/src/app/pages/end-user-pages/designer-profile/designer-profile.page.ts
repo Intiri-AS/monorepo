@@ -11,6 +11,10 @@ import { DesignerService } from 'src/app/services/designer.service';
 })
 
 export class DesignerProfilePage {
+  showMore = false;
+
+  // eslint-disable-next-line max-len
+  designerText ='';
 
   languages = this.designerService.languages;
 
@@ -28,6 +32,7 @@ export class DesignerProfilePage {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.designer = data.designer;
+      this.designerText = data.designer.description;
     })
   }
 
