@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,12 +16,22 @@ export class NewProjectStepComponent implements OnInit {
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
 
-  constructor() { }
+  imagePath = null;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+  ) { }
 
   ngOnInit() {}
 
   toggleItem(item) {
     this.toggleSelection.emit(item);
+  }
+
+  toggleRoomSketch(item) {
+    this.toggleSelection.emit(item);
+    this.imagePath = null;
+    this.project.roomDetails.imageFile = null;
   }
 
   isArray(item) {
@@ -31,6 +42,16 @@ export class NewProjectStepComponent implements OnInit {
     return string.replaceAll("\\", "/")
   }
 
+  onFileChange(event) {
+    if(event.target.files[0]) {
+      this.project.roomDetails.imageFile = event.target.files[0];
+      this.project.roomDetails.shape = {shape: "", imagePath: ""};
+      event.srcElement.value = "";
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.project.roomDetails.imageFile));
+    } else {
+      this.imagePath = null;
+    }
+  }
 
   isItemSelected(item): boolean {
     const stepName = this.stepsOrder[this.currentStepNo];
