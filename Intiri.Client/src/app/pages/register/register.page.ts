@@ -88,7 +88,6 @@ export class RegisterPage {
         );
       }, error => {
         this.error = error;
-        console.log(error);
       });
   }
 }

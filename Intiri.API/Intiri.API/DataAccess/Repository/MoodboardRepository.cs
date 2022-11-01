@@ -3,6 +3,7 @@ using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Project;
+using Intiri.API.Models.Room;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -122,7 +123,7 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
-		public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard)
+		public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails)
 		{
 			PropertyValues moodboardValues = _context.Entry(moodboard).CurrentValues.Clone();
 			Moodboard clonedMoodboard = new();
@@ -133,13 +134,13 @@ namespace Intiri.API.DataAccess.Repository
 			_context.Entry(clonedMoodboard).State = EntityState.Added;
 
 			_context.Moodboards.Add(clonedMoodboard);
+			roomDetails.Moodboard = clonedMoodboard;
 			await _context.SaveChangesAsync();
 
 			clonedMoodboard.SourceMoodboard = moodboard;
 			clonedMoodboard.Materials = moodboard.Materials.ToArray();
 			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
 			clonedMoodboard.Products = moodboard.Products.ToArray();
-			clonedMoodboard.IsTemplate = false;
 
 			return clonedMoodboard;
 		}

@@ -138,10 +138,10 @@ namespace Intiri.API.DataAccess
 					new Consultation { Id = 1, Duration = 60, Price = 950 }
 				);
 
-			//builder.Entity<Moodboard>()
-			//	.HasMany(p => p.ConsultationPayments)
-			//	.WithOne(x => x.MoodboardOffer);
-				
+			builder.Entity<Project>()
+				.HasMany(p => p.ProjectMoodboards)
+				.WithOne(x => x.Project).OnDelete(DeleteBehavior.Cascade);
+
 
 		}
 	}

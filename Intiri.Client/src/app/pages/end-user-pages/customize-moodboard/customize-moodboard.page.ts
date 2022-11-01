@@ -58,16 +58,11 @@ export class CustomizeMoodboardPage {
           this.isEdit = false;
         });
       }
+      this.steps[0]['data'] = [...this.moodboard.colorPalettes];
+      this.steps[1]['data'] = [...this.moodboard.materials];
+      this.steps[2]['data'] = [...this.moodboard.products];
+
     })
-    this.projectService.getColorPalettes().subscribe((res: Array<any>) => {
-      this.steps[0]['data'] = res;
-    });
-    this.projectService.getMaterials().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res;
-    });
-    this.projectService.getProducts().subscribe((res: Array<any>) => {
-      this.steps[2]['data'] = res;
-    });
   }
 
   backStep() {

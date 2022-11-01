@@ -48,8 +48,8 @@ namespace Intiri.API.DataAccess.SeedData
 			await SeedProducts(unitOfWork);
 			await SeedColorPalettes(unitOfWork);
 			await SeedMoodboards(unitOfWork);
-			await SeedProjects(unitOfWork);
-			await SeedRoomDetails(unitOfWork);
+			//await SeedProjects(unitOfWork);
+			//await SeedRoomDetails(unitOfWork);
 		}
 
 		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork)
@@ -76,7 +76,9 @@ namespace Intiri.API.DataAccess.SeedData
 
 			User u1 = new User() { FirstName = "Dina", LastName = "Admin", CountryCode = "47", PhoneNumber = "1231231", UserName = "471231231" };
 			Designer u2 = new Designer() { FirstName = "Cora", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231232", UserName = "471231232", Language = Language.Norway };
+			u2.Description = "I'm a top-level designer, with more than 13 year experience who is addicted to the visual arts.";
 			Designer u3 = new Designer() { FirstName = "Drina", LastName = "InternalDesigner", CountryCode = "47", PhoneNumber = "1231233", UserName = "471231233", Language = Language.NorwayEnglish };
+			u3.Description = "Professional traditional designer with more than 10-year experience who is addicted to minimal and classical.";
 			EndUser u4 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231234", UserName = "471231234" };
 			EndUser u5 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231235", UserName = "471231235" };
 			PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };

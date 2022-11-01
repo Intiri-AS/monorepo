@@ -2,7 +2,7 @@
   <div id="home" [formGroup]="profileForm">
     <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
-    <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'"></app-header-internal-designer>
+    <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <ion-grid class="main-container">
       <ion-row>

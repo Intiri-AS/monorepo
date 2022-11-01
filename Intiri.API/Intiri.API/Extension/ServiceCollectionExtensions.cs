@@ -39,7 +39,8 @@ namespace Intiri.API.Extension
 
 			services.AddScoped<IVippsLoginService, VippsLoginService>();
 			services.AddSingleton<ISmsSender, AuthMessageSenderService>();
-			services.AddScoped<IFileUploadService, CloudinaryService>();
+			services.AddScoped<ICloudinaryService, CloudinaryService>();
+			services.AddScoped<IFileUploudService, FileUploudService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
 			services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
 			services.AddSingleton<IMessenger, Messenger.Messenger>();

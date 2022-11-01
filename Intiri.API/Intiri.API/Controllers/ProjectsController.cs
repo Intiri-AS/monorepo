@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
@@ -15,7 +16,9 @@ using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -24,16 +27,20 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly ILogger<ProjectsController> _logger;
 		private readonly IAccountService _accountService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService) : base(unitOfWork)
+		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, ILogger<ProjectsController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_accountService = accountService;
+			_fileUploadService = fileUploadService;
+			_logger = logger;
 		}
 
 		#endregion Constructors
@@ -92,11 +99,23 @@ namespace Intiri.API.Controllers
 			if (endUser == null) return Unauthorized();
 
 			Project project = await _unitOfWork.ProjectRepository.GetProjectById(moodboardProjectIn.ProjectId);
-
 			if (project == null)
 			{
 				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
 			}
+
+			RoomDetails roomDetails = _mapper.Map<RoomDetails>(moodboardProjectIn.RoomDetails);
+			IFormFile roomSketchFile = moodboardProjectIn.RoomDetails.RoomSketchFile;
+			if (roomSketchFile != null && roomSketchFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+			}
+
+			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 
 			Moodboard moodboard = null;
 			Moodboard newMoodboard = null;
@@ -104,7 +123,8 @@ namespace Intiri.API.Controllers
 			if (moodboardProjectIn.Moodboard.Id > 0)
 			{
 				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardProjectIn.Moodboard.Id);
-				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard, roomDetails);
+				// TODO: Find another way to make a difference between designer and client moodboards
 				newMoodboard.Designer = null;
 				newMoodboard.EndUser = endUser;
 			}
@@ -112,20 +132,23 @@ namespace Intiri.API.Controllers
 			{
 				moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardProjectIn.Moodboard.SourceMoodboardId);
 				newMoodboard = _mapper.Map<Moodboard>(moodboardProjectIn.Moodboard);
-				newMoodboard.SourceMoodboard = moodboard; 
+				newMoodboard.SourceMoodboard = moodboard;
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				newMoodboard.Designer = null;
+				roomDetails.Moodboard = newMoodboard;
+
+				// TODO: Find another way to make a difference between designer and client moodboards
+				newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 				newMoodboard.EndUser = endUser;
 
 				Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardProjectIn.Moodboard.RoomId);
 				newMoodboard.Room = room;
 
-                Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(moodboardProjectIn.Moodboard.StyleId);
-                newMoodboard.Style = style;
+				Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(moodboardProjectIn.Moodboard.StyleId);
+				newMoodboard.Style = style;
 
-                IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardProjectIn.Moodboard.ColorPaletteIds);
+				IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardProjectIn.Moodboard.ColorPaletteIds);
 				newMoodboard.ColorPalettes = colorPalettes.ToArray();
 
 				IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardProjectIn.Moodboard.MaterialIds);
@@ -162,8 +185,18 @@ namespace Intiri.API.Controllers
 			project.EndUser = user;
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+			IFormFile roomSketchFile = projectIn.RoomDetails.RoomSketchFile;
+			if (roomSketchFile != null && roomSketchFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string> uploadResult =  await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+			}
+			
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
-
+			
 			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
@@ -178,8 +211,9 @@ namespace Intiri.API.Controllers
 
 			if (projectIn.Moodboard.Id > 0)
 			{
+				// TODO: Find another way to make a difference between designer and client moodboards
 				moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(projectIn.Moodboard.Id);
-				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard);
+				newMoodboard = await _unitOfWork.MoodboardRepository.CloneMoodboardAsync(moodboard, roomDetails);
 				newMoodboard.Designer = null;
 				newMoodboard.EndUser = user;
 			}
@@ -189,19 +223,22 @@ namespace Intiri.API.Controllers
 				newMoodboard = _mapper.Map<Moodboard>(projectIn.Moodboard);
 				newMoodboard.SourceMoodboard = moodboard;
 				newMoodboard.IsTemplate = false;
+				
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				//newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
-				newMoodboard.Designer = null;
+				roomDetails.Moodboard = newMoodboard;
+
+				// TODO: Find another way to make a difference between designer and client moodboards
+				newMoodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 				newMoodboard.EndUser = user;
 
 				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.Moodboard.RoomId);
 				newMoodboard.Room = mRoom;
 
-                Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(projectIn.Moodboard.StyleId);
-                newMoodboard.Style = style;
+				Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(projectIn.Moodboard.StyleId);
+				newMoodboard.Style = style;
 
-                IEnumerable<ColorPalette> mColorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.Moodboard.ColorPaletteIds);
+				IEnumerable<ColorPalette> mColorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.Moodboard.ColorPaletteIds);
 				newMoodboard.ColorPalettes = mColorPalettes.ToArray();
 
 				IEnumerable<Material> mMaterials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(projectIn.Moodboard.MaterialIds);
@@ -224,22 +261,34 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding project");
 		}
 
+		// TODO: Fix delete project bug
 		[HttpDelete("delete/{projectId}")]
 		public async Task<ActionResult> DeleteProject(int projectId)
 		{
-			Project project = await _unitOfWork.ProjectRepository.GetByID(projectId);
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
+			Project project = endUser.CreatedProjects.FirstOrDefault(p => p.Id == projectId);
 
 			if (project == null)
 			{
 				return BadRequest($"Project with Id={projectId} not found");
 			}
 
-			await _unitOfWork.ProjectRepository.Delete(projectId);
+			endUser.CreatedProjects.Remove(project);
+			_unitOfWork.ProjectRepository.Delete(project);
 
-			if (await _unitOfWork.SaveChanges())
+			try
 			{
-				return Ok();
+				await _unitOfWork.SaveChanges();
 			}
+			catch (Exception ex)
+			{
+
+				Console.WriteLine(ex.InnerException.Message);
+			}
+			//if (await _unitOfWork.SaveChanges())
+			//{
+			//	return Ok();
+			//}
 			return BadRequest("Problem occured while deleting the project)");
 		}
 
@@ -303,6 +352,7 @@ namespace Intiri.API.Controllers
 
 			return Ok(suggestions);
 		}
+
 		#endregion Public methods
 	}
 }

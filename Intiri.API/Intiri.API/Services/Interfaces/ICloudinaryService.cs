@@ -2,7 +2,7 @@
 
 namespace Intiri.API.Services.Interfaces;
 
-public interface IFileUploadService
+public interface ICloudinaryService
 {
     Task<ImageUploadResult> UploadFileAsync(IFormFile file, string folderName = null);
 

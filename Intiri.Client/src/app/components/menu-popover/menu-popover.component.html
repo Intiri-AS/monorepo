@@ -8,9 +8,10 @@
   <ion-item class="text-black-1 font-medium" (click)="openDeleteProductModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
-<ion-list *ngIf="moodboard " lines="none" >
-  <ion-item class="text-black-1 font-medium" (click)="openDeleteMoodboardModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
-  <ion-item class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? 'Remove from template moodboards' : 'Make a template moodboard'}}</ion-item>
+<ion-list *ngIf="moodboard" lines="none" >
+  <ion-item class="text-black-1 font-medium" [routerLink]="['/moodboard-details/' + item.id]"  [button]="true">View Details</ion-item>
+  <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="openDeleteMoodboardModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
+  <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? 'Remove from template moodboards' : 'Make a template moodboard'}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="client" lines="none" >

@@ -22,6 +22,7 @@ namespace Intiri.API.Models
 		public string City { get; set; }
 		public string Country { get; set; }
 		public string CountryCode { get; set; }
+		public string Description { get; set; }
 		public virtual ICollection<UserRole> Roles { get; set; }
 		public ICollection<ChatMessage.ChatMessage> MessagesSent { get; set; }
 		public ICollection<ChatMessage.ChatMessage> MessagesReceived { get; set; }

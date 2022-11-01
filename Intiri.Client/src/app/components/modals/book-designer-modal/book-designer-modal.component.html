@@ -4,7 +4,7 @@
     <p class="mt-[30px] text-2xl text-primary font-medium">{{price}} Nok / {{'BOOK-MODAL.consultation' | translate}}</p>
     <p class="text-lg text-black-2">{{'BOOK-MODAL.duration' | translate}} {{duration}}min</p>
     <div class="mt-[30px]">
-      <span class="text-sm text-black-2">{{'BOOK-MODAL.duration' | translate}}</span>
+      <span class="text-sm text-black-2">{{'BOOK-MODAL.number' | translate}}</span>
       <ion-input type="number" min="1" class="border rounded-2xl border-black-2 w-[310px] h-14 focus:ring-transparent" [(ngModel)]="numberOfConsultations" (ionChange)="totalPriceSum($event)"></ion-input>
     </div>
     <p class="mt-[30px] text-lg text-black-2 font-medium">{{'BOOK-MODAL.total' | translate}}</p>

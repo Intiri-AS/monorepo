@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 
 @Component({
@@ -12,8 +13,9 @@ export class MoodboardDetailsPage implements OnInit {
 
   moodboard: any;
   projectId: string;
+  loggedUser$ = this.accountService.currentUser$;
 
-  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router)
+  constructor(public moodboardService: MoodboardService, private route: ActivatedRoute, private router: Router, private accountService: AccountService)
   {}
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class MoodboardDetailsPage implements OnInit {
     if(this.projectId) {
       this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
     } else {
-      this.router.navigateByUrl('/my-intiri');
+      history.back();
     }
   }
 

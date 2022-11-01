@@ -13,13 +13,13 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 		
 		#endregion Fields
 
 		#region Constructors
 
-		public AdminController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploadService fileUploadService) : base(unitOfWork)
+		public AdminController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;

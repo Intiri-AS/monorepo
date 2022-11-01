@@ -19,7 +19,7 @@ namespace Intiri.API.Controllers
 	{
 		#region Fields
 
-		private readonly IFileUploadService _fileUploadService;
+		private readonly ICloudinaryService _fileUploadService;
 		private readonly ILogger<InspirationsController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace Intiri.API.Controllers
 
 		#region Constructors
 
-		public InspirationsController(IUnitOfWork unitOfWork, IFileUploadService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
+		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
 		{
 			_fileUploadService = fileUploadService;
 			_accountService = accountService;

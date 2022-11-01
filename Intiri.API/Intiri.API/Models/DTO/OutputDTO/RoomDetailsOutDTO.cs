@@ -5,6 +5,8 @@
 		public int Id { get; set; }
 		public string Shape { get; set; }
 		public double Size { get; set; }
-		public int ProjectId { get; set; }
+		public string SketchUrl { get; set; }
+		public int BudgetRate { get; set; }
+		public int MoodboardId { get; set; }
 	}
 }
