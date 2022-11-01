@@ -38,10 +38,20 @@ export class LanguageService {
     ]
   }
 
+  getLanguage() {
+    this.storage.get(LNG_KEY).then(val => {
+      if (val) {
+        this.setLanguage(val);
+        this.selected = val;
+      } else if (!val) {
+        this.setLanguage('no');
+      }});
+  }
+
   setLanguage(lng) {
     this.translate.use(lng);
     this.selected = lng;
-    this.storage.set(LNG_KEY, lng)
+    this.storage.set(LNG_KEY, lng);
     this.languageChange$.next(lng);
   }
 }

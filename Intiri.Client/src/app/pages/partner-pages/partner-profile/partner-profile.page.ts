@@ -32,8 +32,8 @@ export class PartnerProfilePage implements OnInit {
     postalCode: '',
     city: '',
     country: '',
-    photoPath: ''
-  }
+    logoPath: ''
+  };
 
   loggedUser$ = this.accountService.currentUser$;
 
@@ -51,25 +51,25 @@ export class PartnerProfilePage implements OnInit {
     this.partnerProfileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-        name: "",
-        email:  "",
-        phoneNumber: "",
-        street: "",
-        postalCode: "",
-        city: "",
-        country: "",
-        countryCode: ""
+        name: '',
+        email:  '',
+        phoneNumber: '',
+        street: '',
+        postalCode: '',
+        city: '',
+        country: '',
+        countryCode: ''
       }),
     }),
   });
     this.partnerService.getPartnerProfile().subscribe( response => {
       this.spinner.hide();
       this.partnerProfile = response;
-      this.patchValues(this.partnerProfile)
-      if (!response.photoPath) {
-            this.partnerProfile.photoPath = '../../../assets/images/profile-img.png'
+      this.patchValues(this.partnerProfile);
+      if (!response.logoPath) {
+            this.partnerProfile.logoPath = '../../../assets/images/profile-img.png';
           }
-    })
+    });
   }
 
   patchValues(partnerInfo: any) {
@@ -84,14 +84,20 @@ export class PartnerProfilePage implements OnInit {
   }
 
   saveChanges() {
-    const userInfoModel = this.partnerProfileForm.value.dataInfoGroup.innerGroup;
+    const userInfoModel =  this.partnerProfileForm.value.dataInfoGroup.innerGroup;
+    const userInfoData = {...userInfoModel, logoPath: this.partnerProfile.logoPath};
     this.spinner.show();
-    this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
+    this.http.put(this.apiUrl + 'partner/update', userInfoData).subscribe(res => {
       this.spinner.hide();
       this.notifier.show({
         message: 'Profile updated successfully',
         type: 'success',
       });
-    })
+    });
   }
+
+
+addImage(newImage: string) {
+  this.partnerProfile.logoPath = newImage;
+}
 }

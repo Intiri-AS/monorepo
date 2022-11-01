@@ -62,9 +62,9 @@ export class ProjectService implements Resolve<Project> {
       styleImageIds: project.styleImages.map(e=> e['id']),
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
-      budgetRate: 0, // ?
+      // budgetRate: 0,
       moodboard: this.parseMoodboard(project.currentMoodboard),
-      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape},
+      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
       name: project.name}
 
     return parsedProj;

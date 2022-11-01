@@ -12,9 +12,20 @@ import { SmsVerificationDTO } from '../DTOs/sms-verification.dto';
   providedIn: 'root',
 })
 export class AccountService {
+
+  public homepageRoutes = {
+    Admin: '/dashboard',
+    FreeEndUser: '/my-intiri',
+    InternalDesigner: '/client-list',
+    ExternalDesigner: '/client-list',
+    Partner: '/partner'
+  };
+
   apiUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
+
+
 
   constructor(private http: HttpClient) { }
 

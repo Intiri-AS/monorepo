@@ -40,7 +40,7 @@ export class StepPickerComponent implements OnInit {
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['shape'] && this.project.roomDetails['size'] && !!this.project.budget;
+    return (this.project.roomDetails['shape'] || this.project.roomDetails['imageFile']) && this.project.roomDetails['size'] && !!this.project.roomDetails['budgetRate'];
   }
 
   canChangeStep(step) {

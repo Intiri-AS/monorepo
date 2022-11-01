@@ -43,18 +43,10 @@ export class SmsVerificationPage implements OnInit {
             .subscribe(response => {
               this.accountService.currentUser$.subscribe(loggedUser => {
                 if (loggedUser) {
-                  if (loggedUser.roles[0] === 'FreeEndUser') {
-                    this.nav.navigateRoot('/my-intiri');
-                  } else if (loggedUser.roles[0] === 'Admin') {
-                    this.nav.navigateRoot('/dashboard');
-                  } else if (loggedUser.roles[0] === 'InternalDesigner' || loggedUser.roles[0] === 'ExternalDesigner') {
-                    this.nav.navigateRoot('/client-list')
-                  } else if (loggedUser.roles[0] === 'Partner') {
-                    this.nav.navigateRoot('/partner')
-                  }
+                  const routes = this.accountService.homepageRoutes;
+                  this.nav.navigateRoot(routes[loggedUser.roles[0]]);
                 }
-              })
-              // this.router.navigate(['/my-intiri']);
+              });
             }, error => {
               this.error = error;
               console.log(error);

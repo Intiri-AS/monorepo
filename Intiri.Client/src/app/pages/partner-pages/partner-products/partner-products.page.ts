@@ -22,7 +22,7 @@ export class PartnerProductsPage implements OnInit {
   productTypes: any[];
   searchText: any;
 
-  constructor(public popoverController: PopoverController, 
+  constructor(public popoverController: PopoverController,
               private partnerService: PartnerService,
               private modalController: ModalController,
               private materialService: MaterialService) { }
@@ -31,10 +31,10 @@ export class PartnerProductsPage implements OnInit {
     this.partnerService.getProductsFromThatPartner();
     this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
-    })
+    });
     this.products$.subscribe( response => {
-      this.products = response
-    })
+      this.products = response;
+    });
   }
 
 
@@ -65,7 +65,7 @@ export class PartnerProductsPage implements OnInit {
     const selectedTypeNames = event.detail.value;
     this.products$.pipe(take(1)).subscribe(products => {
       if(selectedTypeNames.length > 0) {
-        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));  
+        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));
         console.log(this.products, 'produkti')
       } else {
         this.products = products;

@@ -6,7 +6,7 @@ export class Project {
   styleImages: Array<any>;
   room: object;
   colorPalettes: Array<any>;
-  budget: string;
+  // budget: string;
   created: any;
   roomDetails: object;
   projectMoodboards: Array<any>;
@@ -17,7 +17,7 @@ export class Project {
     this.name = '';
     this.styleImages = [];
     this.room = {};
-    this.budget = '';
+    // this.budget = '';
     this.roomDetails = {};
     this.colorPalettes = [];
     this.projectMoodboards = [];

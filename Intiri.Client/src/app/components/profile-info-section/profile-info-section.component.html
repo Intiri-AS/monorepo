@@ -70,6 +70,10 @@
     <ion-select-option value="England">England</ion-select-option>
   </ion-select>
 </div>
+<div *ngIf="userInfo">
+  <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
+  <ion-textarea rows="5" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
+</div>
 </div>
 </div>
 
