@@ -7,7 +7,8 @@
 }
 
 .hero-wrapper {
-  @apply bg-landing-img rounded-2xl bg-cover h-[800px] md:h-[1030px] mb-16 mt-[-72px] mx-4 md:mx-12
+  @apply bg-landing-img rounded-2xl bg-cover mb-16 mt-[-72px] mx-4 md:mx-12;
+  height: calc(100vh - 7rem);
 }
 
 .hero-text-wrapper {
