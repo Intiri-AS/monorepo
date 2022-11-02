@@ -1,7 +1,7 @@
 <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <ion-content>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="!delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+  <div *ngIf="!delete && !added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <div class="max-w-md w-full h-full space-y-8 mt-6  h-100">
         <div>
@@ -37,11 +37,6 @@
         </section>
         <div class="flex-row-product">
           <div class="profile-input fixed-width">
-            <!-- <span class="text-sm text-black-2">Select color</span>
-            <ion-select interface="popover"  formControlName="color" class="border rounded-2xl h-14 border-black-2  ">
-              <ion-select-option value="{{color.hexValue}}" *ngFor="let color of colors"  >{{color.name}}
-              </ion-select-option> -->
-            <!-- </ion-select> -->
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.mainColor"  [style.background]="colorPallete.mainColor"
             [cpPosition]="'top'" formControlName="color"
@@ -91,6 +86,21 @@
     </div>
   </div>
 </form>
+  <!-- Product added modal -->
+  <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mt-[7px]" src="../../../../assets/icon/success.svg" alt="success"></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'PARTNERS.product-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'PARTNERS.product-added-text' | translate}}</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'PARTNERS.go-to-products' | translate}}</ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
   <!-- Product delete modal -->
   <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
     <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">

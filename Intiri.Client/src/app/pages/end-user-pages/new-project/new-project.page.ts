@@ -288,9 +288,9 @@ export class NewProjectPage implements OnInit {
 
   areProjectDetailsValid(): boolean {
     return (
-      this.project.roomDetails['shape'] &&
+      (this.project.roomDetails['shape'] || this.project.roomDetails['imageFile']) &&
       this.project.roomDetails['size'] &&
-      !!this.project.budget
+      !!this.project.roomDetails['budgetRate']
     );
   }
 

@@ -275,7 +275,10 @@
     "add-new-partner": "Add new partner contact",
     "partner-added": "Partner added!",
     "partner-added-text": "You successfully added partner.",
-    "go-to": "Go to Partners"
+    "go-to": "Go to Partners",
+    "product-added": "Product added",
+    "product-added-text": "You successfully added new style",
+    "go-to-products": "Go to products"
   },
   "DESIGNERS": {
     "add": "Add designer",

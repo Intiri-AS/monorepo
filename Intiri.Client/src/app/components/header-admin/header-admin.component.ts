@@ -36,6 +36,7 @@ export class HeaderAdminComponent implements OnInit {
         this.translate.setDefaultLang(event.lang);
         this.revokeTranslations();
       });
+
     }
 
   isActiveRoute(route): boolean {
