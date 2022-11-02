@@ -10,6 +10,10 @@
   @apply hidden xl:flex flex-1 items-center gap-2 ml-8;
 }
 
+.selected-border {
+  @apply border rounded-xl border-primary
+}
+
 
 
 ion-header::after {

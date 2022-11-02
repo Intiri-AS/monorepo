@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { NotifierService } from 'angular-notifier';
 import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
 import { VerificationTarget } from 'src/app/types/types';
@@ -23,7 +24,8 @@ export class LoginPage implements OnInit {
     public accountService: AccountService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private nav: NavController
+    private nav: NavController,
+    private notifier: NotifierService
   ) {
     this.loginForm = this.formBuilder.group({
       phoneNumber: ['', Validators.compose([
@@ -66,9 +68,11 @@ export class LoginPage implements OnInit {
           target: VerificationTarget.LOGIN,
           countryCode: loginModel.countryCode,
           phoneNumber: loginModel.phoneNumber } });
-      },
-      (error) => {
-        this.error = error;
+      }, e => {
+        this.notifier.show({
+          message: 'Something went wrong!',
+          type: 'error',
+        });
       });
   }
 

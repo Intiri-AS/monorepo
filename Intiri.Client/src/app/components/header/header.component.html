@@ -16,7 +16,7 @@
             <img [title]="loggedUser.fullName" [src]="loggedUser.photoPath || '../../../assets/images/profile-img.png'" class="header-profile-img" alt="Profile Img"/>
           </a>
           <div title="Messenger" routerLink="/messenger" routerDirection="root" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon pointer-events-none" name="chatbox-ellipses-sharp"></ion-icon></div>
-          <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon"  name="settings-sharp"></ion-icon></div>
+          <div title="Settings" (click)="showSettings($event)" class="cursor-pointer hover:opacity-80 relative top-[4px]"><ion-icon class="header-icon" [class.selected-border]="isSelected"  name="settings-sharp"></ion-icon></div>
         </ng-container>
         <ion-button *ngIf="!(loggedUser$ | async)" fill="clear" class="secondary-btn" routerLink="/login" routerDirection="root">{{'NEW-COMMON.login' | translate}}</ion-button>
         <ion-button fill="clear" class="primary-btn-responsive" (click)="removeProjectDraft()" href="/new-project">{{'MY-INTIRI.create' | translate}}</ion-button>

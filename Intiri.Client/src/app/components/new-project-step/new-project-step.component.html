@@ -82,7 +82,11 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
+            <span *ngIf="item.percentageMatch >= 66" class="text-base font-normal text-primary">/ High match</span>
+            <span *ngIf="item.percentageMatch < 66 && item.percentageMatch >= 33" class="text-base font-normal text-primary">/ Medium match</span>
+            <span *ngIf="item.percentageMatch < 3" class="text-base font-normal text-primary">/ Low match</span>
+          </p>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -101,7 +105,11 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
+            <span *ngIf="item.percentageMatch >= 66" class="text-base font-normal text-primary">/ high match</span>
+            <span *ngIf="item.percentageMatch < 66 && item.percentageMatch >= 33" class="text-base font-normal text-primary">/ medium match</span>
+            <span *ngIf="item.percentageMatch < 3" class="text-base font-normal text-primary">/ low match</span>
+          </p>
         </ion-col>
       </ion-row>
       <ion-row>
