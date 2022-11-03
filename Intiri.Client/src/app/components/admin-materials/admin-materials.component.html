@@ -7,18 +7,16 @@
         </div>
       </div>
     </ion-col>
-    <ion-col size="12" size-md="3" offset-md="1" size-lg="3" offset-lg="3" class="flex items-end">
-      <div class="w-full">
-        <div class="text-left">
+    <ion-col size="12" size-md="8" size-lg="9" class="flex items-end">
+      <div class="flex flex-col md:flex-row items-center md:items-end w-full justify-center md:justify-end">
+        <div class="text-left w-full md:w-[260px]">
           <span class="text-sm text-black-2">Type</span>
           <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
             <ion-select-option *ngFor="let materialType of materialTypes" value="{{materialType.name}}">{{materialType.name}}</ion-select-option>
           </ion-select>
         </div>
+        <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-material' | translate}}</ion-button>
       </div>
-    </ion-col>
-    <ion-col size="12" size-md="4" size-lg="3" class="flex items-end justify-center">
-      <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-material' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">

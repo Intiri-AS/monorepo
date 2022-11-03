@@ -15,8 +15,10 @@ export class HeaderAdminComponent implements OnInit {
 
   loggedUser$ = this.accountService.currentUser$;
 
-  constructor(private router: Router, 
-    private accountService: AccountService, 
+  isSettingsSelected: boolean;
+
+  constructor(private router: Router,
+    private accountService: AccountService,
     private popoverController: PopoverController,
     private languageService: LanguageService,
     private translate: TranslateService) {}
@@ -66,6 +68,7 @@ export class HeaderAdminComponent implements OnInit {
   }
 
   async showSettings(e: Event) {
+    this.isSettingsSelected = true;
     const popover = await this.popoverController.create({
       component: SettingsPopoverComponent,
       componentProps: { headerType: 'admin'},
@@ -74,6 +77,10 @@ export class HeaderAdminComponent implements OnInit {
     });
 
     await popover.present();
+
+    popover.onDidDismiss().then(() => {
+      this.isSettingsSelected = false;
+    })
   }
 
 }

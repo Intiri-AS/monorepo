@@ -1,9 +1,9 @@
 <ion-content>
   <ion-row>
     <ion-col offset-xl="1" size-xl="5" class="p-2 xl-ion:p-12 h-full">
-      <div class="w-full ">
+      <div class="w-full xl:w-[470px]">
         <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" routerLink="/landing">
-        <div class="text-center">
+        <div class="text-center xl:text-left">
           <h1 class="font-['Allison'] text-7xl mt-16 text-black-2">{{'LOGIN.welcome' | translate}}</h1>
           <h1 class="text-5xl font-semibold">{{'LOGIN.login' | translate}}</h1>
           <p class="text-lg text-black-2">
@@ -29,17 +29,17 @@
                 <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"></ion-input>
                 <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
                 <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
+                <span class="ion-warning" *ngIf="error">{{error}}</span>
               </div>
             </div>
           </div>
           <div class="flex flex-col justify-center items-center">
-            <span class="inline-block w-1/2 mt-2 text-center text-red-500" *ngIf="error">{{error.error}}</span>
             <ion-button fill="clear" class="primary-btn mt-[30px]" type="submit">{{'LOGIN.login' | translate}}</ion-button>
-            <p class="text-lg text-black-2 mt-7">{{'LOGIN.or' | translate}}</p>
-            <ion-button fill="clear" class="vipps-btn" (click)="initiateVippsLogin()">
+            <p class="text-lg text-black-2 mt-4">{{'LOGIN.or' | translate}}</p>
+            <ion-button fill="clear" class="vipps-btn mt-4" (click)="initiateVippsLogin()">
               <img src="../../../assets/icon/vipps-white.svg">
             </ion-button>
-            <p class="text-lg text-black-2 mt-20">{{'LOGIN.no-account' | translate}}</p>
+            <p class="text-lg text-black-2 mt-4">{{'LOGIN.no-account' | translate}}</p>
             <ion-button fill="clear" class="secondary-btn" routerLink="/register" routerDirection="root">{{'LOGIN.create' | translate}}</ion-button>
           </div>
           </form>
