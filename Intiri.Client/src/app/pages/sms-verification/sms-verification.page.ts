@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CodeInputComponent } from 'angular-code-input';
+import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { VerificationTarget } from 'src/app/types/types';
 
@@ -20,7 +21,7 @@ export class SmsVerificationPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
-    private nav: NavController
+    private nav: NavController,
   ) { }
 
   ngOnInit(): void {
@@ -41,23 +42,14 @@ export class SmsVerificationPage implements OnInit {
           const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
           this.accountService.smsVerificationLogin(countryCode, phoneNumber, verificationCode)
             .subscribe(response => {
-              this.accountService.currentUser$.subscribe(loggedUser => {
+              this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
                 if (loggedUser) {
-                  if (loggedUser.roles[0] === 'FreeEndUser') {
-                    this.nav.navigateRoot('/my-intiri');
-                  } else if (loggedUser.roles[0] === 'Admin') {
-                    this.nav.navigateRoot('/dashboard');
-                  } else if (loggedUser.roles[0] === 'InternalDesigner' || loggedUser.roles[0] === 'ExternalDesigner') {
-                    this.nav.navigateRoot('/client-list')
-                  } else if (loggedUser.roles[0] === 'Partner') {
-                    this.nav.navigateRoot('/partner')
-                  }
+                  const routes = this.accountService.homepageRoutes;
+                  this.nav.navigateRoot(routes[loggedUser.roles[0]]);
                 }
-              })
-              // this.router.navigate(['/my-intiri']);
+              });
             }, error => {
               this.error = error;
-              console.log(error);
             });
           break;
         }
@@ -83,7 +75,6 @@ export class SmsVerificationPage implements OnInit {
             }
           }, error => {
             this.error = error;
-            console.log(error);
           });
           break;
         }
@@ -101,7 +92,6 @@ export class SmsVerificationPage implements OnInit {
         // nothing to do here
       }, error => {
         this.error = error.error;
-        console.log(error);
       }
     );
   }
@@ -117,3 +107,4 @@ export class SmsVerificationPage implements OnInit {
     return this.route.snapshot.queryParamMap.get(param);
   }
 }
+

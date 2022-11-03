@@ -127,6 +127,26 @@ ion-button {
   opacity: 1;
 }
 
+ion-input {
+  background-color: #F8F5F1 !important;
+}
+
+ion-toolbar {
+  --background: var(--ion-color-light);
+}
+
+.fixed-bottom {
+  @apply xl:pl-[75px] h-[90px];
+  padding-top: 17px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #EFE8DE;
+  left: 0;
+  border-top: 1px solid #CFBBA7;
+  z-index: 99;
+}
+
 
 .main-title {
   @apply font-medium text-black-1 text-3xl sm:text-4xl mt-0
@@ -145,7 +165,13 @@ ion-button {
   height: 46px !important;
   font-weight: 500 !important;
   font-size: 1.125rem !important;
+
+  &.large {
+    height: 60px !important;
+    font-size: 1.5rem !important;
+  }
 }
+
 
 .primary-btn-responsive {
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
@@ -176,13 +202,16 @@ ion-button {
 }
 
 .header-icon {
-  @apply text-primary text-2xl rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
+  @apply text-primary text-2xl border border-transparent rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
 }
 
 .header-profile-img {
   @apply object-cover rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
 }
 
+.selected-border {
+  @apply border rounded-xl border-primary
+}
 
 .header-container {
   @apply px-[75px];
@@ -271,34 +300,68 @@ code-input {
 .item {
   &-sm {
     @apply bg-light;
-    height: 53px;
+    height: 80px;
   }
   &-sm-tall {
     @apply bg-secondary;
     grid-row: auto / span 3;
-    height: 184px;
+    height: 284px;
   }
   &-md {
     @apply bg-primary;
     background-size: cover !important;
     grid-column: auto / span 2;
     grid-row: auto / span 1.5;
-    height: 86px;
+    height: 136px;
   }
   &-lg {
     @apply bg-landing-img;
     background-size: cover !important;
     grid-column: auto / span 4;
     grid-row: auto / span 3;
-    height: 184px;
+    height: 284px;
   }
   &-lg-tall {
     @apply bg-img-01;
     background-size: cover !important;
     grid-column: auto / span 4;
     grid-row: auto / span 6;
-    height: 381px;
+    height: 581px;
   }
 }
 
 
+@media (max-width: 1340px) {
+  .item {
+    &-sm {
+      @apply bg-light;
+      height: 53px;
+    }
+    &-sm-tall {
+      @apply bg-secondary;
+      grid-row: auto / span 3;
+      height: 184px;
+    }
+    &-md {
+      @apply bg-primary;
+      background-size: cover !important;
+      grid-column: auto / span 2;
+      grid-row: auto / span 1.5;
+      height: 86px;
+    }
+    &-lg {
+      @apply bg-landing-img;
+      background-size: cover !important;
+      grid-column: auto / span 4;
+      grid-row: auto / span 3;
+      height: 184px;
+    }
+    &-lg-tall {
+      @apply bg-img-01;
+      background-size: cover !important;
+      grid-column: auto / span 4;
+      grid-row: auto / span 6;
+      height: 381px;
+    }
+  }
+}

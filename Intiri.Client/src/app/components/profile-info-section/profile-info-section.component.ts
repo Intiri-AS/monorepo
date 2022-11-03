@@ -8,8 +8,8 @@ import { ControlContainer, FormGroup } from '@angular/forms';
   styleUrls: ['./profile-info-section.component.scss'],
 })
 export class ProfileInfoSectionComponent implements OnInit {
-  @Input () userInfo: boolean = false;
-  @Input () partnerProfile: boolean = false;
+  @Input () userInfo  = false;
+  @Input () partnerProfile  = false;
   @Input() dataInput? = {
     firstName: '' ,
     lastName: '',
@@ -20,8 +20,9 @@ export class ProfileInfoSectionComponent implements OnInit {
     street: '',
     postalCode: '',
     city: '',
-    country: ''
-  }
+    country: '',
+    description: '',
+  };
 
   public formGroup: FormGroup;
 
@@ -47,18 +48,26 @@ export class ProfileInfoSectionComponent implements OnInit {
     this.dataInput.country = event.detail.value;
   }
 
+  getPartner() {
+    if (this.partnerProfile) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   //Depending od form properties while creating reusable component, we will decide which method we will take in action
 
   submitForm() {
     if (!this.dataInput.gender) {
       this.sendPartnerProfile();
     } else if (this.dataInput.gender) {
-      this.sendUserInfo()
+      this.sendUserInfo();
     }
   }
 
   sendPartnerProfile() {
-    console.log()
+    console.log();
   }
 
   sendUserInfo() {

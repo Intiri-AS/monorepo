@@ -13,6 +13,10 @@ using Intiri.API.Services;
 using Intiri.API.Extension;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
+using Intiri.API.Models.Room;
+using System.Net;
+using Intiri.API.Models.Project;
+using NLog.Fluent;
 
 namespace Intiri.API.Controllers
 {
@@ -23,13 +27,13 @@ namespace Intiri.API.Controllers
 		private readonly IMapper _mapper;
 		private readonly IAccountService _accountService;
 		private readonly ILogger<UsersController> _logger;
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService, ILogger<UsersController> logger) 
+		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, ILogger<UsersController> logger) 
 			: base(unitOfWork)
 		{
 			_mapper = mapper;
@@ -88,27 +92,17 @@ namespace Intiri.API.Controllers
 		{
 			Partner partner = _mapper.Map<Partner>(partnerInDTO);
 
-			IFormFile file = partnerInDTO.LogoFile;
-
-			if (file != null && file.Length > 0)
+			IFormFile logoFile = partnerInDTO.LogoFile;
+			if (logoFile != null && logoFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to upload partner logo.");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest("Failed to upload material image.");
-				}
-
-				partner.LogoPath = uploadResult.SecureUri.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.PublicId;
+				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.Item3.PublicId;
 			}
 
 			_unitOfWork.PartnerRepository.Insert(partner);
@@ -131,17 +125,9 @@ namespace Intiri.API.Controllers
 				return BadRequest("Partner doesn' exist.");
 			}
 
-			DeletionResult deletionResult = null;
-			if (partner.LogoPath != null)
+			if (!string.IsNullOrEmpty(partner.LogoPublicId) && !await _fileUploadService.TryDeleteFileFromCloudinaryAsync(partner.LogoPublicId))
 			{
-				try
-				{
-					deletionResult = await _fileUploadService.DeleteFileAsync(partner.LogoPublicId);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to delete partner logo.");
-				}
+				_logger.LogWarning("Failed to delete partner logo file.");
 			}
 
 			try
@@ -166,6 +152,20 @@ namespace Intiri.API.Controllers
 			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
+			IFormFile logoFile = partnerInDTO.LogoFile;
+
+			if (logoFile != null && logoFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.Item3.PublicId;
+			}
+
 			_mapper.Map(partnerInDTO, partner);
 			_unitOfWork.PartnerRepository.Update(partner);
 
@@ -177,8 +177,8 @@ namespace Intiri.API.Controllers
 			return BadRequest("Failed to update user.");
 		}
 
-		[HttpPost("addPhoto")]
-		public async Task<ActionResult<PartnerLogoPathOutDTO>> AddPhoto([FromForm] UserPhotoFileInDTO inFile)
+		[HttpPost("addLogo")]
+		public async Task<ActionResult<PartnerLogoPathOutDTO>> AddLogo([FromForm] UserPhotoFileInDTO inFile)
 		{
 			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
 			if (pUser == null) return Unauthorized("Invalid partner contact user.");
@@ -186,45 +186,18 @@ namespace Intiri.API.Controllers
 			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
-			IFormFile file = inFile.PhotoPath;
+			IFormFile logoFile = inFile.PhotoPath;
 
-			if (file.Length > 0)
+			if (logoFile != null && logoFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.PartnerLogos);
-				}
-				catch (Exception ex)
-				{
-					return BadRequest($"Failed to upload partner logo: {ex.Message}");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest($"Failed to upload partner logo: {uploadResult.Error.Message}");
-				}
-
-				if (partner.LogoPath != null)
-				{
-					DeletionResult deletionResult = null;
-					try
-					{
-						deletionResult = await _fileUploadService.DeleteFileAsync(partner.LogoPublicId);
-					}
-					catch (Exception)
-					{
-						return BadRequest("Failed to delete partner logo.");
-					}
-
-					if (deletionResult.Error != null)
-					{
-						_logger.LogWarning("Faild delete all photo from cloudinary services");
-					}
-				}
-
-				partner.LogoPath = uploadResult.SecureUrl.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.PublicId;
+				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.Item3.PublicId;
 
 				_unitOfWork.PartnerRepository.Update(partner);
 
@@ -234,7 +207,7 @@ namespace Intiri.API.Controllers
 				}
 			}
 
-			return BadRequest("Problem adding user photo.");
+			return BadRequest("Problem adding partner logo.");
 		}
 	}
 }

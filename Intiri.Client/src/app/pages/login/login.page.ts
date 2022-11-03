@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { take } from 'rxjs/operators';
 import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
 import { VerificationTarget } from 'src/app/types/types';
@@ -38,17 +39,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.currentUser$.subscribe(loggedUser => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
       if (loggedUser) {
-        if (loggedUser.roles[0] === 'FreeEndUser') {
-          this.nav.navigateRoot('/my-intiri');
-        } else if (loggedUser.roles[0] === 'Admin') {
-          this.nav.navigateRoot('/dashboard');
-        } else if (loggedUser.roles[0] === 'InternalDesigner') {
-          this.nav.navigateRoot('/client-list')
-        } else if (loggedUser.roles[0] === 'Partner') {
-          this.nav.navigateRoot('/partner')
-        }
+        const routes = this.accountService.homepageRoutes;
+        this.nav.navigateRoot(routes[loggedUser.roles[0]]);
       }
     });
   }
@@ -66,16 +60,14 @@ export class LoginPage implements OnInit {
       countryCode: this.activeCode,
       phoneNumber: this.loginForm.value.phoneNumber
     };
-    //const phoneNumberFull = `${loginModel.countryCode}${loginModel.phoneNumber}`;
     this.accountService.login(loginModel).subscribe(
       (response) => {
         this.router.navigate(['/sms-verification'], { queryParams: {
           target: VerificationTarget.LOGIN,
           countryCode: loginModel.countryCode,
           phoneNumber: loginModel.phoneNumber } });
-      },
-      (error) => {
-        this.error = error;
+      }, e => {
+        this.error = e.error;
       });
   }
 

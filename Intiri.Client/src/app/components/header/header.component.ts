@@ -20,6 +20,8 @@ export class HeaderComponent {
 
   loggedUser$ = this.accountService.currentUser$;
 
+  isSettingsSelected: boolean;
+
   constructor(private projectService: ProjectService, private accountService: AccountService,  private router: Router, public popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
@@ -27,6 +29,7 @@ export class HeaderComponent {
   }
 
   async showSettings(e: Event) {
+    this.isSettingsSelected = true;
     const popover = await this.popoverController.create({
       component: SettingsPopoverComponent,
       componentProps: { headerType: 'user'},
@@ -35,6 +38,10 @@ export class HeaderComponent {
     });
 
     await popover.present();
+
+    popover.onDidDismiss().then(() => {
+      this.isSettingsSelected = false;
+    })
   }
 
   menuOpened() {

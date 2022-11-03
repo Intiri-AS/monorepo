@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Intiri.API.Models.Moodboard;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Intiri.API.Models.Room
 {
@@ -11,7 +12,8 @@ namespace Intiri.API.Models.Room
 		public string SketchPublicId { get; set; }
         public int BudgetRate { get; set; }
 
-        public Moodboard.Moodboard Moodboard { get; set; }
-        public int MoodboardId { get; set; }
+        //public Moodboard.Moodboard Moodboard { get; set; }
+        public ClientMoodboard Moodboard { get; set; }
+        public int? MoodboardId { get; set; }
     }
 }

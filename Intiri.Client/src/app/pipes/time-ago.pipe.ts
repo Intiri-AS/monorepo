@@ -8,7 +8,7 @@ export class TimeAgoPipe implements PipeTransform {
     let year = currentDate.getFullYear() - date.getFullYear();
     let month = currentDate.getMonth() - date.getMonth();
     let day = currentDate.getDate() - date.getDate();
-    let hour = currentDate.getHours() - date.getHours() - 2; // remove -2, set timezone (now is pulling UTC from database)
+    let hour = currentDate.getHours() - date.getHours() - 1; // TODO: remove -1, set timezone (now is pulling UTC from database)
     let minute = currentDate.getMinutes() - date.getMinutes();
     let second = currentDate.getSeconds() - date.getSeconds();
 

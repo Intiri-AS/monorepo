@@ -58,7 +58,7 @@ export class BookDesignerPage {
   async paymentModal(designer) {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
-      componentProps: {designer},
+      componentProps: {designer, moodboard: this.isContactDesigner ? this.moodboard : null},
       cssClass: 'book-designer-modal-css',
     });
 

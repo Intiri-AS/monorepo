@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
@@ -32,8 +31,8 @@ export class PartnerProfilePage implements OnInit {
     postalCode: '',
     city: '',
     country: '',
-    photoPath: ''
-  }
+    logoPath: ''
+  };
 
   loggedUser$ = this.accountService.currentUser$;
 
@@ -51,25 +50,25 @@ export class PartnerProfilePage implements OnInit {
     this.partnerProfileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-        name: "",
-        email:  "",
-        phoneNumber: "",
-        street: "",
-        postalCode: "",
-        city: "",
-        country: "",
-        countryCode: ""
+        name: '',
+        email:  '',
+        phoneNumber: '',
+        street: '',
+        postalCode: '',
+        city: '',
+        country: '',
+        countryCode: ''
       }),
     }),
   });
     this.partnerService.getPartnerProfile().subscribe( response => {
       this.spinner.hide();
       this.partnerProfile = response;
-      this.patchValues(this.partnerProfile)
-      if (!response.photoPath) {
-            this.partnerProfile.photoPath = '../../../assets/images/profile-img.png'
+      this.patchValues(this.partnerProfile);
+      if (!response.logoPath) {
+            this.partnerProfile.logoPath = '../../../assets/images/profile-img.png';
           }
-    })
+    });
   }
 
   patchValues(partnerInfo: any) {
@@ -84,7 +83,7 @@ export class PartnerProfilePage implements OnInit {
   }
 
   saveChanges() {
-    const userInfoModel = this.partnerProfileForm.value.dataInfoGroup.innerGroup;
+    const userInfoModel =  this.partnerProfileForm.value.dataInfoGroup.innerGroup;
     this.spinner.show();
     this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
       this.spinner.hide();
@@ -92,6 +91,7 @@ export class PartnerProfilePage implements OnInit {
         message: 'Profile updated successfully',
         type: 'success',
       });
-    })
+    });
   }
+
 }

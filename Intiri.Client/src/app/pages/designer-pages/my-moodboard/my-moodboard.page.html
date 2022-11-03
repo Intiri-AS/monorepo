@@ -9,8 +9,8 @@
         <ion-slide>
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-md="3.9" size-xl="2.75">
-                <div class="mt-6">
+              <ion-col size="12" size-md="3.9" size-xl="2.75" class="flex items-end mb-[3px]">
+                <div class="mt-6 w-full">
                   <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
                 </div>
               </ion-col>
@@ -45,7 +45,7 @@
                 <div class="flex">
                   <p class="text-black-2 font-semibold my-[3px] text-xl">{{moodboard.style.name}} </p>
                   <div class="absolute right-[-5px]">
-                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                     </button>
                   </div>
@@ -58,8 +58,8 @@
         <ion-slide>
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-md="3.9" size-xl="2.75">
-                <div class="mt-6">
+              <ion-col size="12" size-md="3.9" size-xl="2.75" class="flex items-end mb-[3px]">
+                <div class="mt-6 w-full">
                   <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
                 </div>
               </ion-col>
@@ -96,7 +96,7 @@
                     alt="Profile Img" />
                   <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
                   <div class="absolute right-[-5px]">
-                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                    <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                     </button>
                   </div>

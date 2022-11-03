@@ -219,7 +219,8 @@
     "my-profile": "Min profil",
     "settings": "Innstillinger",
     "notifications": "Varsler",
-    "delete": "Slett"
+    "delete": "Slett",
+    "skip-page": "Hopp over siden"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",

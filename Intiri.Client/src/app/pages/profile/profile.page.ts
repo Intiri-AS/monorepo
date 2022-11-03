@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { map } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { environment } from 'src/environments/environment';
 
@@ -30,8 +29,9 @@ export class ProfilePage implements OnInit {
     postalCode: '',
     city: '',
     country: '',
-    photoPath: ''
-  }
+    photoPath: '',
+    description: '',
+  };
 
   loggedUser$ = this.accountService.currentUser$;
 
@@ -50,16 +50,17 @@ export class ProfilePage implements OnInit {
     this.profileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-        firstName: "",
-        lastName: "",
-        gender: "",
-        email:  "",
-        phoneNumber: "",
-        street: "",
-        postalCode: "",
-        city: "",
-        country: "",
-        countryCode: ""
+        firstName: '',
+        lastName: '',
+        gender: '',
+        email:  '',
+        phoneNumber: '',
+        street: '',
+        postalCode: '',
+        city: '',
+        country: '',
+        countryCode: '',
+        description: '',
       }),
     }),
   });
@@ -67,11 +68,11 @@ export class ProfilePage implements OnInit {
       this.spinner.hide();
       this.userInfo = res;
 
-      this.patchValues(this.userInfo)
+      this.patchValues(this.userInfo);
       if (!res.photoPath) {
-        this.userInfo.photoPath = '../../../assets/images/profile-img.png'
+        this.userInfo.photoPath = '../../../assets/images/profile-img.png';
       }
-    })
+    });
   }
 
   patchValues(userInfo: any) {
@@ -88,6 +89,7 @@ export class ProfilePage implements OnInit {
     this.profileForm.get('dataInfoGroup.innerGroup.lastName').patchValue(userInfo.lastName);
     this.profileForm.get('dataInfoGroup.innerGroup.country').patchValue(userInfo.country);
     this.profileForm.get('dataInfoGroup.innerGroup.countryCode').patchValue(userInfo.countryCode);
+    this.profileForm.get('dataInfoGroup.innerGroup.description').patchValue(userInfo.description);
   }
 
   saveChanges() {
@@ -99,6 +101,8 @@ export class ProfilePage implements OnInit {
         message: 'Profile updated successfully',
         type: 'success',
       });
-    })
+    });
   }
+
+
 }

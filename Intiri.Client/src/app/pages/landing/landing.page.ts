@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,9 +9,12 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./landing.page.scss'],
 })
 
-export class LandingPage {
+export class LandingPage implements OnInit {
 
   @ViewChild('slides') slides: IonSlides;
+
+  @ViewChild(IonContent) content: IonContent;
+
 
   public comments = [
     {
@@ -36,8 +39,10 @@ export class LandingPage {
 
   constructor(private translate: TranslateService) {}
 
+  ngOnInit(): void {
+  }
 
-  @ViewChild(IonContent) content: IonContent;
+
 
   next() {
     this.slides.slideNext();

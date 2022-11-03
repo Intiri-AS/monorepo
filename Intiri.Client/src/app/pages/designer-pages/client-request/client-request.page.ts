@@ -1,8 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonSlides, ModalController } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { DesignerService } from 'src/app/services/designer.service';
 
 @Component({

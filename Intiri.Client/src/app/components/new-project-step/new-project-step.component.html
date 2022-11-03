@@ -29,15 +29,28 @@
   <div *ngIf="currentStep.data.roomShapes">
     <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.room-details' | translate}}</p>
     <p class="text-black-2">{{'NEW-PROJECT.room-shape' | translate}}</p>
-    <ion-grid class="step-items" style="min-height: 300px;">
+    <ion-grid class="step-items" style="min-height: 220px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleItem(item)" size="5.8" size-sm="2.2" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleRoomSketch(item)" size="5.8" size-sm="2.2" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
           <div class="step-icon-wrapper" >
             <img src="../../../assets/{{item.imagePath}}" class="step-icon" alt="room-icon"/>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="w-[200px]">
+      <span class="text-black-2">Or upload room sketch</span>
+      <label for="dropzone-file">
+        <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
+          <div *ngIf="!imagePath" class="text-center mt-[65px]">
+            <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
+          </div>
+          <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-1 h-full w-full" alt="roomImg" />
+        </div>
+        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
+      </label>
+    </div>
     <div class="input">
       <span class="text-black-2">{{'NEW-PROJECT.room-area' | translate}}</span>
       <ion-input [(ngModel)]="project.roomDetails.size" type="number" min="1" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
@@ -45,10 +58,10 @@
     <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.budget' | translate}}</p>
     <div class="input">
       <span class="text-black-2">{{'NEW-PROJECT.select-budget' | translate}}</span>
-      <ion-select  [(ngModel)]="project.budget" interface="popover">
-        <ion-select-option value="low">{{'COMMON.low' | translate}}</ion-select-option>
-        <ion-select-option value="medium">{{'COMMON.medium' | translate}}</ion-select-option>
-        <ion-select-option value="high">{{'COMMON.high' | translate}}</ion-select-option>
+      <ion-select  [(ngModel)]="project.roomDetails.budgetRate" interface="popover">
+        <ion-select-option value=1>{{'COMMON.low' | translate}}</ion-select-option>
+        <ion-select-option value=2>{{'COMMON.medium' | translate}}</ion-select-option>
+        <ion-select-option value=3>{{'COMMON.high' | translate}}</ion-select-option>
       </ion-select>
     </div>
   </div>
@@ -69,7 +82,11 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
+            <span *ngIf="item.percentageMatch >= 66" class="text-base font-normal text-primary">/ High match</span>
+            <span *ngIf="item.percentageMatch < 66 && item.percentageMatch >= 33" class="text-base font-normal text-primary">/ Medium match</span>
+            <span *ngIf="item.percentageMatch < 3" class="text-base font-normal text-primary">/ Low match</span>
+          </p>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -88,7 +105,11 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}} <span *ngIf="item.percentageMatch" class="text-base font-normal text-primary">/ {{item.percentageMatch}}% match</span></p>
+          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
+            <span *ngIf="item.percentageMatch >= 66" class="text-base font-normal text-primary">/ high match</span>
+            <span *ngIf="item.percentageMatch < 66 && item.percentageMatch >= 33" class="text-base font-normal text-primary">/ medium match</span>
+            <span *ngIf="item.percentageMatch < 3" class="text-base font-normal text-primary">/ low match</span>
+          </p>
         </ion-col>
       </ion-row>
       <ion-row>
