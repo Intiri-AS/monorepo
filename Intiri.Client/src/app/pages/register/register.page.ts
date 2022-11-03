@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
 import { RegisterInDTO } from 'src/app/DTOs/In/register-in.dto';
 import { RegisterOutDTO } from 'src/app/DTOs/Out/register-out.dto';
 import { AccountService } from 'src/app/services/account.service';
@@ -37,8 +36,7 @@ export class RegisterPage {
   constructor(
     private accountService: AccountService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private notifier: NotifierService
+    private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -88,11 +86,8 @@ export class RegisterPage {
           ['/sms-verification'],
           { queryParams: queryParams }
         );
-      }, error => {
-        this.notifier.show({
-          message: 'Something went wrong!',
-          type: 'error',
-        });
+      }, e => {
+        this.error = e.error;
       });
   }
 }
