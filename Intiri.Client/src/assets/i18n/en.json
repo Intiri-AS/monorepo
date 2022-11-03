@@ -220,7 +220,8 @@
     "my-profile":"My Profile",
     "settings": "Settings",
     "notifications": "Notifications",
-    "delete": "Delete"
+    "delete": "Delete",
+    "skip-page": "Skip Page"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",

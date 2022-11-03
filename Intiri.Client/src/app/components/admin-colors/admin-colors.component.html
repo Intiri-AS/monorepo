@@ -12,7 +12,7 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
-    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="1.85">
+    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
       <div class="card">
         <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: colorPalette.mainColor}"></div>
         <div class="w-[47.5%] h-full inline-block float-right">

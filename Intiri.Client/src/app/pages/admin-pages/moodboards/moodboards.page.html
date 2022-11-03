@@ -8,21 +8,23 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="12" size-md="3.9" size-xl="2.75">
-          <div class="mt-6">
-            <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
+        <ion-col size="12" size-md="4" size-lg="3" class="flex">
+          <div class="profile-input w-full">
+            <div class="mt-6">
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
+            </div>
           </div>
         </ion-col>
-        <ion-col class="grid sm-ion:flex gap-x-2" size="12" size-md="7.9" offset-md="0.2" offset-xl="3.95" size-xl="5.3">
-          <div class="sm-ion:w-1/2">
-            <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
-            <div class="h-[52px]">
+        <ion-col size="12" size-md="8" size-lg="9" class="flex items-end">
+          <div class="flex flex-col md:flex-row items-center md:items-end w-full justify-center md:justify-end">
+            <div class="text-left w-full md:w-[260px]">
+              <span class="text-sm text-black-2">{{'DASHBOARD.style' | translate}}</span>
               <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
                 <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
               </ion-select>
             </div>
+            <ion-button routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-4 mb-[1px]">Add moodboard</ion-button>
           </div>
-          <ion-button routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2">Add moodboard</ion-button>
         </ion-col>
       </ion-row>
 
@@ -49,7 +51,7 @@
               alt="Profile Img" />
             <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
             <div class="absolute right-[-5px]">
-              <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+              <button (click)="showSettings($event, moodboard)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
                   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
               </button>
             </div>

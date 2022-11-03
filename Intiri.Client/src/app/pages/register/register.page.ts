@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterInDTO } from 'src/app/DTOs/In/register-in.dto';
@@ -51,8 +51,6 @@ export class RegisterPage {
     if (state) {
       this.newProjectPageStep = state['step'];
     }
-    console.log(this.newProjectPageStep);
-    
   }
 
   setActiveCode(event) {
@@ -86,8 +84,8 @@ export class RegisterPage {
           ['/sms-verification'],
           { queryParams: queryParams }
         );
-      }, error => {
-        this.error = error;
+      }, e => {
+        this.error = e.error;
       });
   }
 }

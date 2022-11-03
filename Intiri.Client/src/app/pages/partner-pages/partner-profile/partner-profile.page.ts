@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
@@ -85,9 +84,8 @@ export class PartnerProfilePage implements OnInit {
 
   saveChanges() {
     const userInfoModel =  this.partnerProfileForm.value.dataInfoGroup.innerGroup;
-    const userInfoData = {...userInfoModel, logoPath: this.partnerProfile.logoPath};
     this.spinner.show();
-    this.http.put(this.apiUrl + 'partner/update', userInfoData).subscribe(res => {
+    this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
       this.spinner.hide();
       this.notifier.show({
         message: 'Profile updated successfully',
@@ -96,8 +94,4 @@ export class PartnerProfilePage implements OnInit {
     });
   }
 
-
-addImage(newImage: string) {
-  this.partnerProfile.logoPath = newImage;
-}
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -17,7 +17,7 @@ export class CreateProjectModalComponent implements OnInit {
   final: boolean;
   existing: boolean;
 
-  constructor(private modalController: ModalController, private projectService: ProjectService, private router: Router) { }
+  constructor(private modalController: ModalController, private projectService: ProjectService, private router: Router, private nav: NavController) { }
 
   ngOnInit() {}
 
@@ -44,6 +44,11 @@ export class CreateProjectModalComponent implements OnInit {
 
   dismiss() {
     this.modalController.dismiss({'dismissed': true})
+  }
+
+  goToBookDesigner() {
+    this.dismiss();
+    this.nav.navigateRoot('/book-designer');
   }
 
 }
