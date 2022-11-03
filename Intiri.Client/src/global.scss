@@ -189,6 +189,9 @@ ion-button {
   @apply object-cover rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
 }
 
+.selected-border {
+  @apply border rounded-xl border-primary
+}
 
 .header-container {
   @apply px-[75px];

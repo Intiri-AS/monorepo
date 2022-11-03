@@ -15,7 +15,7 @@
         <img [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/profile-img.png'" class="header-profile-img" alt="Profile Img"/>
       </a>
       <ion-icon class="header-icon" routerLink="/messenger" routerDirection="root" name="chatbox-ellipses-sharp"></ion-icon>
-      <ion-icon class="header-icon" (click)="showSettings($event)" name="settings-sharp"></ion-icon>
+      <ion-icon class="header-icon" (click)="showSettings($event)" name="settings-sharp" [class.selected-border]="isSettingsSelected"></ion-icon>
       <!-- <ion-icon class="header-icon" name="notifications-sharp"></ion-icon> -->
     </ion-buttons>
     <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
