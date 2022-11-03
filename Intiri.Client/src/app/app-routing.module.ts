@@ -25,10 +25,8 @@ import { ProjectDetailsPage } from './pages/end-user-pages/project-details/proje
 import { MoodboardDetailsPage } from './pages/end-user-pages/moodboard-details/moodboard-details.page';
 import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
 import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/designer-profile.page';
-import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
 import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-profile/book-designer-profile.page';
 import { ClientListPage } from './pages/designer-pages/internal-designer/clients/client-list/client-list.page';
-import { StyleListPage } from './pages/designer-pages/internal-designer/styles/style-list/style-list.page';
 import { ClientRequestPage } from './pages/designer-pages/client-request/client-request.page';
 import { MoodboardsPage } from './pages/admin-pages/moodboards/moodboards.page';
 import { ClientPage } from './pages/admin-pages/client/client.page';
@@ -48,6 +46,7 @@ import { AdminDesignerGuard } from './guards/admin-designer.guard';
 import { AdminInternalDesignerGuard } from './guards/admin-internal-designer.guard';
 import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
+import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
 
 
 const routes: Routes = [
@@ -141,6 +140,11 @@ const routes: Routes = [
   {
     path: 'project-details', //TODO Set up page guard (end-user guard)
     component: ProjectDetailsPage,
+    canActivate: [EnduserGuard]
+  },
+  {
+    path: 'projects', //TODO Set up page guard (end-user guard)
+    component: ProjectsPage,
     canActivate: [EnduserGuard]
   },
   {

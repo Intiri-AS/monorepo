@@ -1,0 +1,9 @@
+.back-btn {
+  @apply text-lg font-medium text-black mb-0 pl-2 xl:pl-0;
+  --padding-start: 4px;
+  text-transform: none;
+}
+
+.designer {
+  @apply  border rounded-2xl h-[270px] lg:h-[350px] mb-[10px] overflow-hidden shadow-1;
+}

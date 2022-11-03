@@ -35,6 +35,7 @@ import { MessengerPage } from './pages/end-user-pages/messenger/messenger.page';
 import { DesignerProfilePage } from './pages/end-user-pages/designer-profile/designer-profile.page';
 import { PaymentDetailsPage } from './pages/end-user-pages/payment-details/payment-details.page';
 import { BookDesignerProfilePage } from './pages/end-user-pages/book-designer-profile/book-designer-profile.page';
+import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
 
 //pages for admins
 import { DashboardPage } from './pages/admin-pages/dashboard/dashboard.page';
@@ -134,7 +135,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
     SmsVerificationPage,
     NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, InspirationsPage, BookDesignerPage,
-    ProjectDetailsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
+    ProjectDetailsPage, ProjectsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
     DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
     MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
     StylePage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
