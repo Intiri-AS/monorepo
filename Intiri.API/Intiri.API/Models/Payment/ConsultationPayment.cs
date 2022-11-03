@@ -12,11 +12,13 @@ public class ConsultationPayment : PaymentBase
 
     public int ReceiverId { get; set; }
 
-    public Moodboard Moodboard { get; set; }
+    //public Moodboard Moodboard { get; set; }
+    public ClientMoodboard Moodboard { get; set; }
 
     public int? MoodboardId { get; set; }
 
-    public Moodboard MoodboardOffer { get; set; }
+    //public Moodboard MoodboardOffer { get; set; }
+    public ClientMoodboard MoodboardOffer { get; set; }
 
     public int? MoodboardOfferId { get; set; }
 

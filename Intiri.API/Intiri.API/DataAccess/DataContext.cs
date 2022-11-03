@@ -61,15 +61,20 @@ namespace Intiri.API.DataAccess
 				.HasMany(p => p.CreatedProjects)
 				.WithOne(eu => eu.EndUser);
 
-			builder.Entity<Designer>()
-				.HasMany(m => m.CreatedMoodboards)
-				.WithOne(d => d.Designer)
-				.OnDelete(DeleteBehavior.Restrict);
+			//builder.Entity<User>()
+			//	.HasMany(m => m.CreatedMoodboards)
+			//	.WithOne(d => d.Designer)
+			//	.OnDelete(DeleteBehavior.Restrict);
+
+			//builder.Entity<Moodboard>()
+			//	.HasOne(p => p.Designer)
+			//	.WithMany(pc => pc.CreatedMoodboards)
+			//	.HasForeignKey(f => f.DesignerId)
+			//	.OnDelete(DeleteBehavior.Restrict);
 
 			builder.Entity<PartnerContact>()
 				.HasOne(p => p.Partner)
 				.WithMany(pc => pc.PartnerContacts);
-
 
 			builder.Entity<Role>()
 				.HasMany(ur => ur.Users)
@@ -138,9 +143,9 @@ namespace Intiri.API.DataAccess
 					new Consultation { Id = 1, Duration = 60, Price = 950 }
 				);
 
-			builder.Entity<Project>()
-				.HasMany(p => p.ProjectMoodboards)
-				.WithOne(x => x.Project).OnDelete(DeleteBehavior.Cascade);
+			//builder.Entity<Project>()
+			//	.HasMany(p => p.ProjectMoodboards)
+			//	.WithOne(x => x.Project).OnDelete(DeleteBehavior.Cascade);
 
 
 		}

@@ -13,6 +13,9 @@ namespace Intiri.API.Automapper
 			CreateMap<Moodboard, MoodboardOutDTO>();
 			
 			CreateMap<Moodboard, MoodboardOutDTO>();
+
+			CreateMap<MoodboardInDTO, ClientMoodboard>();
+			CreateMap<ClientMoodboard, MoodboardOutDTO>();
 		}
 	}
 }

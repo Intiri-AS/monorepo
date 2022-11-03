@@ -21,7 +21,6 @@ namespace Intiri.API.Models
 		public string Language { get; set; }
 		public DesignerRating DesignerRating { get; set; }
 		public ICollection<DesignerReview> DesignerReviews { get; set; }
-		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
 		public ICollection<ConsultationPayment> ConsultationPaymentsReceived { get; set; }
 
 		#endregion Properties

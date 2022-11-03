@@ -88,7 +88,8 @@ namespace Intiri.API.Controllers
 		{
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
 
-			moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+			//moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+			moodboard.Designer = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
 			moodboard.Style = style;
@@ -115,6 +116,52 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
+		//[HttpPost("addMoodboardOffer")]
+		//public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
+		//{
+		//	Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
+		//	if (designer == null) return Unauthorized("Invalid designer.");
+
+		//	ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetBaseConsultationPaymentByIdAsync(moodboardOfferIn.ConsultationPaymentId);
+		//	if (consultationPayment == null && consultationPayment.Receiver != designer)
+		//	{
+		//		return BadRequest("Invalid consultation payment.");
+		//	}
+
+		//	Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
+
+		//	moodboard.Designer = designer;
+		//	//moodboard.EndUser = consultationPayment.Payer;
+
+		//	Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
+		//	moodboard.Style = style;
+
+		//	Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardOfferIn.MoodboardOffer.RoomId);
+		//	moodboard.Room = room;
+
+		//	IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardOfferIn.MoodboardOffer.MaterialIds);
+		//	moodboard.Materials = materials.ToArray();
+
+		//	IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardOfferIn.MoodboardOffer.ColorPaletteIds);
+		//	moodboard.ColorPalettes = colorPalettes.ToArray();
+
+		//	IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardOfferIn.MoodboardOffer.ProductIds);
+		//	moodboard.Products = products.ToArray();
+
+		//	_unitOfWork.MoodboardRepository.Insert(moodboard);
+
+		//	consultationPayment.MoodboardOffer = moodboard;
+		//	_unitOfWork.ConsultationPaymentRepository.Update(consultationPayment);
+
+
+		//	if (await _unitOfWork.SaveChanges())
+		//	{
+		//		return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+		//	}
+
+		//	return BadRequest("Problem occured while adding moodboard offer");
+		//}
+
 		[HttpPost("addMoodboardOffer")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
 		{
@@ -127,10 +174,11 @@ namespace Intiri.API.Controllers
 				return BadRequest("Invalid consultation payment.");
 			}
 
-			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
+			//Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
+			ClientMoodboard moodboard = _mapper.Map<ClientMoodboard>(moodboardOfferIn.MoodboardOffer);
 
 			moodboard.Designer = designer;
-			moodboard.EndUser = consultationPayment.Payer;
+			//moodboard.EndUser = consultationPayment.Payer;
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
 			moodboard.Style = style;

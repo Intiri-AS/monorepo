@@ -311,9 +311,9 @@ namespace Intiri.API.DataAccess.SeedData
 				project.StyleImages.Add(await unitOfWork.StyleImageRepository.GetByID(3));
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(1));
 				project.ColorPalettes.Add(await unitOfWork.ColorPaletteRepository.GetByID(3));
-				Moodboard moodboard = await unitOfWork.MoodboardRepository.GetByID(2);
-				project.ProjectMoodboards.Add(moodboard);
-				moodboard.Project = project;
+				//Moodboard moodboard = await unitOfWork.MoodboardRepository.GetByID(2);
+				//project.ProjectMoodboards.Add(moodboard);
+				//moodboard.Project = project;
 			}
 			await unitOfWork.SaveChanges();
 		}
