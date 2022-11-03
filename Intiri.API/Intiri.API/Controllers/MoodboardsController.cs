@@ -88,7 +88,8 @@ namespace Intiri.API.Controllers
 		{
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
 
-			moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+			//moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
+			moodboard.Designer = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
 			moodboard.Style = style;
@@ -130,7 +131,7 @@ namespace Intiri.API.Controllers
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
 
 			moodboard.Designer = designer;
-			moodboard.EndUser = consultationPayment.Payer;
+			//moodboard.EndUser = consultationPayment.Payer;
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
 			moodboard.Style = style;
