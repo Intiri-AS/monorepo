@@ -1,4 +1,4 @@
-<div *ngIf="page === 'create-project'" class="bg-light xl-ion:w-[240px] xl-ion:h-[820px] rounded-lg text-center">
+<div *ngIf="page === 'create-project'" class="flex flex-col justify-around bg-light xl-ion:w-[240px] xl-ion:h-[820px] rounded-lg text-center">
   <section [class.opacity-50]="currentStepNo !== 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="project-step">
     <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room"></div>
     <p class="project-step-text">{{'NEW-PROJECT.room' | translate}}</p>

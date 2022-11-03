@@ -49,12 +49,23 @@
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
-              class="primary-btn"
+              class="secondary-btn"
               (click)="saveCurrentProject()"
               >{{'NEW-PROJECT.finish' | translate}}</ion-button
             >
           </ion-buttons>
         </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-xl="3">
+        <ion-buttons class="justify-center">
+          <ion-button
+            *ngIf="currentStepNo === 3"
+            class="secondary-btn skip-btn"
+            (click)="skipPage()"
+            >{{'COMMON.skip-page' | translate}}</ion-button
+          ></ion-buttons>
+          </ion-col>
       </ion-row>
     </ion-grid>
   </div>

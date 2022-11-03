@@ -42,7 +42,7 @@
           <label>{{'COMMON.or' | translate}}</label>
           <ion-buttons class="justify-center">
             <ion-button  class="secondary-btn" (click)="dismiss()">{{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
-            <ion-button class="primary-btn" routerLink="/book-designer">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
+            <ion-button class="primary-btn"  (click)="goToBookDesigner()">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
           </ion-buttons>
         </div>
         <!-- <p class="text-primary text-center cursor-pointer hover:opacity-80" [class.disabled]="true"><ion-icon class="text-xl relative top-[6px] mr-2" name="share-social"></ion-icon>Share via email</p> -->
