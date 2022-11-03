@@ -38,7 +38,7 @@
                 </div>
               </div>
             </div>
-            <div class="mt-8">
+            <div *ngIf="projects.length > 0" class="mt-8">
               <div class="flex justify-between items-center">
                 <p class="text-3xl font-medium text-black-2">{{'MY-INTIRI.all-projects' | translate}}</p>
                 <ion-button fill="clear" class="text-primary">
@@ -75,19 +75,11 @@
             <div *ngIf="offers.length > 0" class="mt-8">
               <div class="flex justify-between items-center ">
                 <p class="text-3xl font-medium text-black-2">Offers</p>
-                <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && offers.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
-                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevOffer()">
-                    <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-                  </ion-button>
-                  <ion-button fill="clear" class="text-black hover:opacity-50" (click)="nextOffer()">
-                    <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-                  </ion-button>
-                </div>
               </div>
 
               <div class="flex flex-wrap gap-x-[2%]">
-                <ion-slides #offerSlides [options]="options" class="pb-20 py-4 pr-4 w-full">
-                  <ion-slide *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-4">
+                  <div *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
@@ -99,19 +91,17 @@
                         </ion-col>
                       </ion-row>
                       <ion-row>
-                        <div class="flex items-center justify-start pt-2 cursor-pointer hover:opacity-80" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
+                        <div class="flex items-center justify-between w-full pt-2 cursor-pointer hover:opacity-80" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
                           <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
-                          <ion-button fill="clear" class="text-black" >
-                            <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
-                          </ion-button>
+                          <ion-button fill="clear" class="primary-btn !bg-none mt-3 !px-1">Choose</ion-button>
                         </div>
                         <div>
                           <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>
-                  </ion-slide>
-                </ion-slides>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
