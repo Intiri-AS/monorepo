@@ -3,3 +3,14 @@
   --padding-start: 4px;
   text-transform: none;
 }
+
+.fixed-bottom {
+  @apply xl:pl-[75px] h-[160px] lg:h-[90px];
+  padding-top: 17px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #EFE8DE;
+  left: 0;
+  border-top: 1px solid #CFBBA7;
+}

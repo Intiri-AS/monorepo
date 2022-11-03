@@ -11,7 +11,7 @@
           <div>
             <div *ngIf="projects.length > 0">
               <div class="flex justify-between items-center ">
-                <p class="text-2xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
+                <p class="text-3xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
                 <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && projects[projects.length-1].projectMoodboards.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
@@ -50,7 +50,7 @@
             </div>
             <div class="mt-8">
               <div class="flex justify-between items-center">
-                <p class="text-2xl font-medium text-black-2">{{'MY-INTIRI.all-projects' | translate}}</p>
+                <p class="text-3xl font-medium text-black-2">{{'MY-INTIRI.all-projects' | translate}}</p>
                 <div *ngIf="projects.length > options.slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevProject()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
@@ -91,7 +91,7 @@
             </div>
             <div *ngIf="offers.length > 0" class="mt-8">
               <div class="flex justify-between items-center ">
-                <p class="text-2xl font-medium text-black-2">Offers</p>
+                <p class="text-3xl font-medium text-black-2">Offers</p>
                 <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && offers.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
                   <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prevOffer()">
                     <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
@@ -135,7 +135,7 @@
         </ion-col>
       </ion-row>
       <div class="flex justify-between items-center">
-        <p class="text-2xl font-medium text-black-2 mt-8 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
+        <p class="text-3xl font-medium text-black-2 mt-8 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
         <ion-button fill="clear" class="text-primary">
           <p class="capitalize hover:opacity-80" routerLink="/my-inspirations" routerDirection="root">See all</p>
         </ion-button>

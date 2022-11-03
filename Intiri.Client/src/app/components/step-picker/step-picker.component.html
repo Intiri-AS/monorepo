@@ -25,7 +25,7 @@
   </section>
 </div>
 
-<div *ngIf="page === 'customize-moodboard'" class="bg-light xl-ion:w-[240px] xl-ion:h-[680px] rounded-lg text-center">
+<div *ngIf="page === 'customize-moodboard'" class="bg-light xl-ion:w-[240px] xl-ion:h-[440px] rounded-lg text-center">
   <section [class.opacity-50]="currentStepNo !== 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="project-step">
     <div class="project-step-icon bg-color-pallete"></div>
     <p class="project-step-text">{{'NEW-PROJECT.color-pallete' | translate}}</p>
