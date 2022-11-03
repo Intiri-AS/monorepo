@@ -74,7 +74,6 @@ export class SmsVerificationPage implements OnInit {
             }
           }, error => {
             this.error = error;
-            console.log(error);
           });
           break;
         }
@@ -92,7 +91,6 @@ export class SmsVerificationPage implements OnInit {
         // nothing to do here
       }, error => {
         this.error = error.error;
-        console.log(error);
       }
     );
   }

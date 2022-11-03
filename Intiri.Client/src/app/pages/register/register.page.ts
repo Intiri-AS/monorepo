@@ -51,8 +51,6 @@ export class RegisterPage {
     if (state) {
       this.newProjectPageStep = state['step'];
     }
-    console.log(this.newProjectPageStep);
-
   }
 
   setActiveCode(event) {
