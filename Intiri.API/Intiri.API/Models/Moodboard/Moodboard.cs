@@ -24,8 +24,6 @@ namespace Intiri.API.Models.Moodboard
         public Style.Style Style { get; set; }
         public Room.Room Room { get; set; }
         public Moodboard SourceMoodboard { get; set; }
-		public Project.Project Project { get; set; }
-		public RoomDetails RoomDetails { get; set; }
 		public bool IsTemplate { get; set; }
 
         public ICollection<Material.Material> Materials { get; set; }

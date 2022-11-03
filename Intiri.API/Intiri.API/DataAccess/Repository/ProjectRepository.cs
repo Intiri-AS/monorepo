@@ -77,14 +77,6 @@ namespace Intiri.API.DataAccess.Repository
 			IEnumerable<int> result = (await Get(project => project.EndUserId == userId)).Select(x => x.Id);
 
 			return (await Get(project => project.Id == result.Max(), includeProperties: "ColorPalettes,StyleImages,ProjectMoodboards")).FirstOrDefault();
-
-			//return await _context.Projects
-			//	.Where(p => p.EndUserId == userId)
-			//	.Include(p => p.Room)
-			//	.Include(p => p.StyleImages)
-			//	.Include(p => p.ColorPalettes)
-			//	.Include(p => p.ProjectMoodboards)
-			//	.ToListAsync();
 		}
 
 		public async Task<Project> GetProjectWithMoodboardsForUser(int projectId)
