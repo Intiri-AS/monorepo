@@ -124,6 +124,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule, DatePipe, LOCATION_INITIALIZED } from '@angular/common';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChartComponent } from './components/chart/chart.component';
+import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -144,7 +147,8 @@ export function createTranslateLoader(http: HttpClient) {
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
-    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent
+    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
+    ChartComponent, DonutChartComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
@@ -163,6 +167,7 @@ export function createTranslateLoader(http: HttpClient) {
     CommonModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    NgApexchartsModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
