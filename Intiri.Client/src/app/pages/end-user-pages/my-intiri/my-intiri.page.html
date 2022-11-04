@@ -15,13 +15,13 @@
               </div>
               <div class="flex justify-between items-center cursor-pointer hover:opacity-80 sm:w-[48%] lg:w-[32%]" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">
                 <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{projects[projects.length-1].name}}</p>
-                <ion-button fill="clear" class="primary-btn !bg-none !px-1">Choose</ion-button>
+                <ion-button fill="clear" class="primary-btn-responsive !bg-none !px-1">Choose</ion-button>
               </div>
               <div>
                 <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
-              <div class="flex flex-wrap gap-x-[2%]">
-                <div class="py-4 pr-4 w-full grid-cols-3 grid gap-x-4">
+              <div class="flex flex-wrap">
+                <div class="py-4 pr-4 w-full grid-cols-3 grid gap-8">
                   <div *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
@@ -45,8 +45,7 @@
                   <p class="capitalize hover:opacity-80 text-lg" routerLink="/projects" routerDirection="root">See all</p>
                 </ion-button>
               </div>
-              <div class="flex flex-wrap gap-x-[2%]">
-                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-4">
+                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-8 gap-y-[120px]">
                   <div *ngFor="let project of projects" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
@@ -59,41 +58,40 @@
                         </ion-col>
                       </ion-row>
                       <ion-row>
-                        <div class="flex items-center justify-between pt-2 cursor-pointer hover:opacity-80 w-full" routerLink="/project-details/{{project.id}}" routerDirection="root">
-                          <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{project.name}}</p>
-                          <ion-button fill="clear" class="primary-btn !bg-none mt-3 !px-1">Choose</ion-button>
+                        <div class="flex items-center justify-between pt-2 cursor-pointer hover:opacity-80 w-full mt-3 mac:mt-0" routerLink="/project-details/{{project.id}}" routerDirection="root">
+                          <p class="text-black-2 text-lg xl:text-2xl font-medium min-w-[45px]">{{project.name}}</p>
+                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1">Choose</ion-button>
                         </div>
                         <div class="w-full text-left">
-                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                          <p class="text-black-3 text-sm xl:text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>
                   </div>
                 </div>
-              </div>
             </div>
             <div *ngIf="offers.length > 0" class="mt-8">
               <div class="flex justify-between items-center ">
                 <p class="text-3xl font-medium text-black-2">Offers</p>
               </div>
 
-              <div class="flex flex-wrap gap-x-[2%]">
-                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-4">
-                  <div *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[350px] min-w-[300px]">
+              <div class="flex flex-wrap">
+                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-8 gap-y-[120px]">
+                  <div *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
-                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
-                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[153.5px] lg:h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                         <ion-col size="7.5" class="!p-3 !pl-0">
-                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[315px] lg:h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                          <img src="{{moodboard.style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
                         </ion-col>
                       </ion-row>
                       <ion-row>
-                        <div class="flex items-center justify-between w-full pt-2 cursor-pointer hover:opacity-80" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
+                        <div class="flex items-center justify-between w-full pt-2 cursor-pointer hover:opacity-80 mt-3 mac:mt-0" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">
                           <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
-                          <ion-button fill="clear" class="primary-btn !bg-none mt-3 !px-1">Choose</ion-button>
+                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1">Choose</ion-button>
                         </div>
                         <div>
                           <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>

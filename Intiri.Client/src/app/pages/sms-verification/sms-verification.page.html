@@ -8,8 +8,8 @@
             <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
             <p>{{'SMS.create' | translate}}</p>
           </ion-button>
-          <h1 class="text-5xl font-semibold">{{'SMS.code' | translate}}</h1>
-          <p class="text-lg text-black-2">
+          <h1 class="text-3xl 2xl:text-5xl font-semibold">{{'SMS.code' | translate}}</h1>
+          <p class="text-sm 2xl:text-lg text-black-2">
             {{'SMS.sms-msg' | translate}}
           </p>
           <div class="mt-8 max-w-[500px] mx-auto">
@@ -18,14 +18,14 @@
             </code-input>
             <span class="ion-warning mt-2" *ngIf="error">{{ error.error }}</span>
           </div>
-          <div class="flex flex-col justify-center items-center">
-            <ion-button fill="clear" class="primary-btn mt-[30px]">{{'SMS.proceed' | translate}}</ion-button>
+          <div class="flex flex-col justify-center items-center mt-[30px]">
+            <ion-button fill="clear" class="primary-btn-responsive">{{'SMS.proceed' | translate}}</ion-button>
             <ion-button fill="clear" class="send-btn">{{'SMS.again' | translate}}</ion-button>
           </div>
         </div>
       </ion-col>
       <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full hidden xl:flex justify-end">
-        <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
+        <div class="bg-img-01 rounded-2xl bg-cover w-[900px]"  style="height: calc(100vh - 6rem);"></div>
       </ion-col>
     </ion-row>
   </ion-grid>
