@@ -127,6 +127,26 @@ ion-button {
   opacity: 1;
 }
 
+ion-input {
+  background-color: #F8F5F1 !important;
+}
+
+ion-toolbar {
+  --background: var(--ion-color-light);
+}
+
+.fixed-bottom {
+  @apply xl:pl-[75px] h-[90px];
+  padding-top: 17px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #EFE8DE;
+  left: 0;
+  border-top: 1px solid #CFBBA7;
+  z-index: 99;
+}
+
 
 .main-title {
   @apply font-medium text-black-1 text-3xl sm:text-4xl mt-0
@@ -277,6 +297,7 @@ code-input {
 .result-grid {
   @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
 }
+
 .item {
   &-sm {
     @apply bg-light;
@@ -310,4 +331,38 @@ code-input {
   }
 }
 
-
+@media (min-width: 1480px) {
+  .item {
+    &-sm {
+      @apply bg-light;
+      height: 80px;
+    }
+    &-sm-tall {
+      @apply bg-secondary;
+      grid-row: auto / span 3;
+      height: 284px;
+    }
+    &-md {
+      @apply bg-primary;
+      background-size: cover !important;
+      grid-column: auto / span 2;
+      grid-row: auto / span 1.5;
+      height: 136px;
+    }
+    &-lg {
+      @apply bg-landing-img;
+      background-size: cover !important;
+      grid-column: auto / span 4;
+      grid-row: auto / span 3;
+      height: 284px;
+    }
+    &-lg-tall {
+      @apply bg-img-01;
+      background-size: cover !important;
+      grid-column: auto / span 4;
+      grid-row: auto / span 6;
+      height: 581px;
+    }
+  }
+ 
+}

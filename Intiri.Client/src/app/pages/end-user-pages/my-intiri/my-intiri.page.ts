@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
@@ -18,9 +18,6 @@ import { environment } from 'src/environments/environment';
 })
 
 export class MyIntiriPage {
-  @ViewChild('slides') slides: IonSlides;
-  @ViewChild('projectSlides') projectSlides: IonSlides;
-  @ViewChild('offerSlides') offerSlides: IonSlides;
   apiUrl = environment.apiUrl;
 
   projects: Project[] = [];
@@ -30,27 +27,6 @@ export class MyIntiriPage {
   imagePath = null;
   newInspiration = null
 
-  options = {
-    slidesPerView: 3,
-    spaceBetween: 20,
-    breakpoints: {
-      100: {
-        slidesPerView: 1,
-      },
-      480: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-      800: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      },
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      }
-    }
-  }
   searchText: any;
   isLoading = true;
   isLoadingOffers = true;
@@ -123,30 +99,6 @@ export class MyIntiriPage {
 
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
-  }
-
-  next() {
-    this.slides.slideNext();
-  }
-
-  prev() {
-    this.slides.slidePrev();
-  }
-
-  nextProject() {
-    this.projectSlides.slideNext();
-  }
-
-  prevProject() {
-    this.projectSlides.slidePrev();
-  }
-
-  nextOffer() {
-    this.offerSlides.slideNext();
-  }
-
-  prevOffer() {
-    this.offerSlides.slidePrev();
   }
 
   // goToProjectDetails(project: Project){

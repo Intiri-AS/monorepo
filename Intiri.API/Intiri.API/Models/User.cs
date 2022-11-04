@@ -24,6 +24,7 @@ namespace Intiri.API.Models
 		public string CountryCode { get; set; }
 		public string Description { get; set; }
 		public virtual ICollection<UserRole> Roles { get; set; }
+		public ICollection<Moodboard.Moodboard> CreatedMoodboards { get; set; }
 		public ICollection<ChatMessage.ChatMessage> MessagesSent { get; set; }
 		public ICollection<ChatMessage.ChatMessage> MessagesReceived { get; set; }
 

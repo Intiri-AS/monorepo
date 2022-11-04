@@ -162,7 +162,7 @@ export class AddMoodboardPage implements OnInit {
           this.moodboard.materials.length > 3 &&
           !this.isEmpty(this.moodboard.room) &&
           !this.isEmpty(this.moodboard.style) &&
-          this.moodboard.colorPalettes.length > 1
+          this.moodboard.colorPalettes.length > 0
         );
       }
       case 5: {
@@ -171,7 +171,7 @@ export class AddMoodboardPage implements OnInit {
           this.moodboard.products.length > 1 &&
           !this.isEmpty(this.moodboard.room) &&
           !this.isEmpty(this.moodboard.style) &&
-          this.moodboard.colorPalettes.length > 1
+          this.moodboard.colorPalettes.length > 0
         );
       }
     }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { NavController, PopoverController } from '@ionic/angular';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { LanguagePopoverComponent } from '../popovers/language-popover/language-popover.component';
@@ -77,7 +78,7 @@ export class HeaderLandingComponent implements OnInit {
   }
 
   goToDashboard() {
-    this.accountService.currentUser$.subscribe(loggedUser => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
       if (loggedUser) {
         const routes = this.accountService.homepageRoutes;
        this.nav.navigateRoot(routes[loggedUser.roles[0]]);

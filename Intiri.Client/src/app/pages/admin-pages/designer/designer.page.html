@@ -29,33 +29,33 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="mt-8 gap-x-[1.45%]">
-        <ion-col *ngFor="let designer of designers | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
-          <div class="designer">
-            <div class="my-6 flex flex-1 justify-center">
-              <img [src]="designer.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
-            </div>
-            <div class="absolute top-[12px] right-[12px]">
-              <button (click)="showSettings($event, designer)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-              </button>
-            </div>
-            <div class="my-4 text-center">
-              <p class="text-black-2 leading-5 font-semibold text-2xl text-clamp-2 cursor-default pb-[4px]" title="{{designer.firstName}} {{designer.lastName}}">{{designer.firstName}} {{designer.lastName}}</p>
-              <p class="text-black-2 size-[22px] leading-5 mt-2">{{languages[designer.language]}}</p>
-              <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">{{getDesignerType(designer) | uppercase}}</p>
-              <div class="py-4 px-1 m-4 bg-light">
-                <ul>
-                  <li *ngFor="let number of [0,1,2,3,4]" class="inline-block">
-                      <ion-icon name="star" class="text-primary mr-1"></ion-icon>
-                  </li>
-                </ul>
-                <p class="text-primary size-[20px] leading-5 text-clamp-1">{{designer.createdMoodboards.length}} {{'CONTACT-DESIGNER.completed' | translate}}</p>
-              </div>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</ion-content>
+        <ion-row class="mt-8 gap-x-[1.45%]">
+            <ion-col *ngFor="let designer of designers | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+                <div class="designer">
+                    <div class="my-6 flex flex-1 justify-center">
+                        <img [src]="designer.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
+                    </div>
+                    <div class="absolute top-[12px] right-[12px]">
+                        <button (click)="showSettings($event, designer)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
+                            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+                        </button>
+                    </div>
+                    <div class="my-4 text-center">
+                        <p class="text-black-2 leading-5 font-semibold text-2xl text-clamp-2 cursor-default pb-[4px]" title="{{designer.firstName}} {{designer.lastName}}">{{designer.firstName}} {{designer.lastName}}</p>
+                        <p class="text-black-2 size-[22px] leading-5 mt-2">{{languages[designer.language]}}</p>
+                        <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">{{getDesignerType(designer) | uppercase}}</p>
+                        <div class="py-4 px-1 m-4 bg-light">
+                            <ul>
+                                <li *ngFor="let number of [0,1,2,3,4]" class="inline-block">
+                                    <ion-icon name="star" class="text-primary mr-1"></ion-icon>
+                                </li>
+                            </ul>
+                            <p class="text-primary size-[20px] leading-5 text-clamp-1">{{designer.createdMoodboards.length}} {{'CONTACT-DESIGNER.completed' | translate}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>

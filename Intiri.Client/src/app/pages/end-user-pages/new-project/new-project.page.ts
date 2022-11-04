@@ -162,6 +162,22 @@ export class NewProjectPage implements OnInit {
     }
   }
 
+
+  //Fixed values for skip page button
+  skipPage() {
+    const colorPalettes
+    = [{"id":1,"name":"Space Gray","number":3043,"mainColor":"#696868","shadeColorLight":"#B4B3B3","shadeColorMedium":"#808080","shadeColorDark":"#3A3A3A"}];
+    if (this.currentStepNo === 3) {
+      this.currentStepNo++;
+      this.changeQueryParam(this.currentStepNo);
+      const projectData: Project = {...this.project, colorPalettes };
+      this.projectService.setCurrentProject(projectData);
+    }
+    if (this.currentStepNo === 4) {
+      this.getMoodboardMatches();
+    }
+  }
+
   goToStep(stepNo) {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
     if (stepNo === 4 && !isUserLoggedIn) {
@@ -381,4 +397,6 @@ export class NewProjectPage implements OnInit {
     });
     return isUserLoggedIn;
   }
+
+
 }

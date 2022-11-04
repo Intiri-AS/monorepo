@@ -19,15 +19,13 @@ namespace Intiri.API.Models.Moodboard
         public string Description { get; set; }
 		public DateTime Created { get; set; } = DateTime.UtcNow;
 		public DateTime Updated { get; set; } = DateTime.UtcNow;
-		public Designer Designer { get; set; }
+		public User Designer { get; set; }
         public int DesignerId { get; set; }
         public Style.Style Style { get; set; }
         public Room.Room Room { get; set; }
         public Moodboard SourceMoodboard { get; set; }
-		public Project.Project Project { get; set; }
-        public EndUser EndUser { get; set; }
-		public RoomDetails RoomDetails { get; set; }
 		public bool IsTemplate { get; set; }
+
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }

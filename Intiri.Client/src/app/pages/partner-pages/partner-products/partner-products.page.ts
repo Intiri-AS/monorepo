@@ -66,7 +66,6 @@ export class PartnerProductsPage implements OnInit {
     this.products$.pipe(take(1)).subscribe(products => {
       if(selectedTypeNames.length > 0) {
         this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));
-        console.log(this.products, 'produkti')
       } else {
         this.products = products;
       }

@@ -13,22 +13,22 @@
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
           <p>{{'COMMON.login' | translate}}</p>
         </ion-button>
-        <h1 class="font-['Allison'] text-7xl mt-0 text-black-2">
+        <h1 class="font-['Allison'] text-5xl 2xl:text-7xl mt-0 text-black-2">
           {{'REGISTER.start' | translate}}
         </h1>
-        <h1 class="text-5xl font-semibold">{{'LOGIN.create' | translate}}</h1>
-        <p class="text-lg text-black-2">
+        <h1 class="text-3xl 2xl:text-5xl font-semibold">{{'LOGIN.create' | translate}}</h1>
+        <p class="text-sm 2xl:text-lg text-black-2">
           {{'LOGIN.login-msg' | translate}}
         </p>
         <form [formGroup]="registerForm" (ngSubmit)="register()" class="w-max mx-auto">
           <div class="mt-8 flex flex-col xl:flex-row justify-between">
             <div>
-              <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
+              <span class="text-xs 2xl:text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
               <ion-input
                 type="text"
                 #firstName
                 formControlName="firstName"
-                class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"
+                class="border rounded-xl 2xl:rounded-2xl h-10 2xl:h-14 border-black-2 w-full xl:w-56"
               ></ion-input>
               <span
                 class="ion-warning"
@@ -37,12 +37,12 @@
               >
             </div>
             <div class="mt-[30px] xl:mt-0">
-              <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
+              <span class="text-xs 2xl:text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
               <ion-input
                 type="text"
                 #lastName
                 formControlName="lastName"
-                class="border rounded-2xl h-14 border-black-2 w-full xl:w-56"
+                class="border rounded-xl 2xl:rounded-2xl h-10 2xl:h-14 border-black-2 w-full xl:w-56"
               ></ion-input>
               <span
                 class="ion-warning"
@@ -51,23 +51,23 @@
               >
             </div>
           </div>
-          <div class="mt-7">
-            <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
+          <div class="mt-3 2xl:mt-7">
+            <span class="text-xs 2xl:text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
             <div class="flex gap-x-2">
               <div>
                 <ion-select
-                  class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32"
+                  class="border rounded-xl 2xl:rounded-2xl border-black-2 h-10 2xl:h-14 w-24 xl:w-32"
                   interface="popover"
                   (ionChange)="setActiveCode($event)"
                   [value]="activeCode"
                 >
                   <ion-select-option value="47">
                     <div>
-                      <p class="text-lg text-black">+47</p>
+                      <p class="text-sm 2xl:text-lg text-black">+47</p>
                     </div>
                   </ion-select-option>
                   <ion-select-option value="381">
-                    <p class="text-lg text-black">+381</p>
+                    <p class="text-sm 2xl:text-lg text-black">+381</p>
                   </ion-select-option>
                 </ion-select>
               </div>
@@ -75,7 +75,7 @@
                 <ion-input
                   #phoneNumber
                   formControlName="phoneNumber"
-                  class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80"
+                  class="border rounded-xl 2xl:rounded-2xl h-10 2xl:h-14 border-black-2 w-60 xl:w-80"
                 ></ion-input>
                 <span
                   class="ion-warning"
@@ -90,8 +90,8 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col justify-center items-center">
-            <ion-button type="submit" fill="clear" class="primary-btn mt-[30px]"
+          <div class="flex flex-col justify-center items-center mt-[30px]">
+            <ion-button type="submit" fill="clear" class="primary-btn-responsive"
               >{{'COMMON.register' | translate}}</ion-button
             >
             <p class="text-lg text-black-2 mt-4">Or</p>
@@ -105,7 +105,7 @@
       </div>
     </ion-col>
     <ion-col size="12" size-xl="6" class="p-2 xl:p-12 h-full hidden xl:flex justify-center xl:justify-end">
-      <div class="bg-img-01 rounded-2xl bg-cover h-[980px] w-[900px]"></div>
+      <div class="bg-img-01 rounded-2xl bg-cover w-[900px]" style="height: calc(100vh - 6rem);"></div>
     </ion-col>
   </ion-row>
 </ion-content>

@@ -48,21 +48,11 @@ export class ProfileInfoSectionComponent implements OnInit {
     this.dataInput.country = event.detail.value;
   }
 
-  //Depending od form properties while creating reusable component, we will decide which method we will take in action
-
-  submitForm() {
-    if (!this.dataInput.gender) {
-      this.sendPartnerProfile();
-    } else if (this.dataInput.gender) {
-      this.sendUserInfo();
+  getPartner() {
+    if (this.partnerProfile) {
+      return false;
+    } else {
+      return true;
     }
-  }
-
-  sendPartnerProfile() {
-    console.log();
-  }
-
-  sendUserInfo() {
-
   }
 }

@@ -1,4 +1,3 @@
-
 <ion-content>
   <div id="home" [formGroup]="partnerProfileForm">
     <app-header-partner></app-header-partner>
@@ -15,7 +14,7 @@
             [image]="partnerProfile.logoPath"
             [firstName]="partnerProfile.firstName"
             [lastName]="partnerProfile.lastName"
-            (newImageEvent)="addImage($event)"
+            [partnerProfilePhoto]="true"
             >
           </app-profile-img-section>
         </ion-col>
