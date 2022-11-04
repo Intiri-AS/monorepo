@@ -1,18 +1,28 @@
 .hero-pencraft {
-  @apply text-black-2 font-Allison text-5xl md:text-6xl mb-8 leading-[90px]
+  @apply text-black-2 font-Allison text-4xl md:text-6xl mb-8 leading-[90px]
 }
 
 .hero-text {
-  @apply text-black-1 text-xl md:text-2xl xl:text-4xl 2xl:text-6xl lg:text-left mb-6 leading-[60px] xl:leading-[50px] 2xl:leading-[90px] font-bold
+  @apply text-black-1 text-3xl md:text-4xl xl:text-4xl 2xl:text-6xl lg:text-left mb-6 leading-[60px] xl:leading-[50px] 2xl:leading-[90px] font-bold
 }
 
 .hero-wrapper {
-  @apply bg-landing-img rounded-2xl bg-cover mb-16 mt-[-72px] mx-4 md:mx-12;
+  @apply bg-landing-img rounded-2xl bg-cover mb-4 2xl:mb-16 mt-[-72px] mx-4 2xl:mx-12;
   height: calc(100vh - 7rem);
+}
+@media (max-width: 1536px) {
+  .hero-wrapper {
+    height: calc(100vh - 2.5rem);
+  }
+}
+@media (max-height: 850px) {
+  .hero-text {
+    @apply text-4xl leading-[50px]
+  }
 }
 
 .hero-text-wrapper {
-  @apply lg:w-[610px] top-[150px] absolute flex flex-1 flex-col items-start
+  @apply lg:w-[610px] top-[90px] 2xl:top-[150px] absolute flex flex-1 flex-col items-start
 }
 
 .pencraft {
