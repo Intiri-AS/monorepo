@@ -1,5 +1,5 @@
 .vipps-btn {
-  @apply flex justify-center items-center text-white w-[151px] h-[46px] rounded-2xl text-lg font-medium pt-1;
+  @apply flex justify-center items-center text-white w-[130px] h-[40px] 2xl:w-[151px] 2xl:h-[46px] rounded-xl 2xl:rounded-2xl text-lg font-medium pt-1;
   background: #FF5B24;
   text-transform: none;
 }
