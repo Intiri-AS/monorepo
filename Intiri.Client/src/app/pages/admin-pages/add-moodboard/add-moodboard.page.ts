@@ -255,7 +255,12 @@ export class AddMoodboardPage implements OnInit {
           type: 'success',
         });
         this.moodboardSrv.getMoodboards();
-        this.router.navigateByUrl('/moodboards');
+        const userType = JSON.parse(localStorage.getItem('user'));
+        if (userType.roles[0] === 'Admin') {
+          this.router.navigateByUrl('/moodboards');
+        } else {
+          this.router.navigateByUrl('/my-moodboard');
+        }
       },
       (error) => {
         this.spinner.hide();
