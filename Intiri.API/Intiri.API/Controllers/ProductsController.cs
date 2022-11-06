@@ -116,10 +116,10 @@ namespace Intiri.API.Controllers
 
 			Product product = _mapper.Map<Product>(productInDTO);
 
-			IFormFile imageFileFile = productInDTO.ImageFile;
-			if (imageFileFile != null && imageFileFile.Length > 0)
+			IFormFile imageFile = productInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.PartnerLogos);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.PartnerLogos);
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
@@ -194,10 +194,10 @@ namespace Intiri.API.Controllers
 				.GetByID(productInDTO.MaterialId);
 			if (material == null) return BadRequest("Material doesn't exist");
 
-			IFormFile imageFileFile = productInDTO.ImageFile;
-			if (imageFileFile != null && imageFileFile.Length > 0)
+			IFormFile imageFile = productInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.PartnerLogos, product.ImagePublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.PartnerLogos, product.ImagePublicId);
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
