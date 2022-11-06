@@ -81,7 +81,9 @@ namespace Intiri.API.Controllers
 			IFormFile imageFile = roomInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.RoomImages);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.RoomImages);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
@@ -104,7 +106,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPatch("update/{roomId}")]
-		public async Task<IActionResult> UpdateRoom(int roomId, [FromForm] RoomInDTO roomInDTO)
+		public async Task<ActionResult<RoomOutDTO>> UpdateRoom(int roomId, [FromForm] RoomInDTO roomInDTO)
 		{
 			Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
 			if (room == null) return BadRequest("Room doesn't exist");
@@ -117,7 +119,9 @@ namespace Intiri.API.Controllers
 			IFormFile imageFileFile = roomInDTO.ImageFile;
 			if (imageFileFile != null && imageFileFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.PartnerLogos, room.IconPublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.RoomImages, room.IconPublicId);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);

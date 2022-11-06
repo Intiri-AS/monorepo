@@ -15,6 +15,9 @@ using System.Xml.Linq;
 using Intiri.API.Models.DTO.OutputDTO.Style;
 using CloudinaryDotNet.Actions;
 using Intiri.API.Shared;
+using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.Room;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -23,7 +26,7 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
@@ -32,7 +35,7 @@ namespace Intiri.API.Controllers
 		public StylesController(
 			IUnitOfWork unitOfWork,
 			IMapper mapper,
-			ICloudinaryService fileUploadService) : base(unitOfWork)
+			IFileUploudService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
@@ -84,33 +87,24 @@ namespace Intiri.API.Controllers
 				return BadRequest("Style name is taken.");
 			}
 
-			IFormFile file = styleInDTO.ImageFile;
+			Style style = _mapper.Map<Style>(styleInDTO);
 
-			if (file.Length > 0)
+			IFormFile imageFile = styleInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleCoverImages);
+				
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(
-						file, FileUploadDestinations.StyleCoverImages);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to upload style cover image.");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest("Failed to upload style cover image.");
-				}
-
-				Style style = _mapper.Map<Style>(styleInDTO);
-
-				style.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
-				style.ImagePublicId = uploadResult.PublicId;
+				style.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				style.ImagePublicId = uploadResult.Item3.PublicId;
 
 				_unitOfWork.StyleRepository.Insert(style);
-				
+
 				if (await _unitOfWork.SaveChanges())
 				{
 					return _mapper.Map<StyleOutDTO>(style);
@@ -123,35 +117,14 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{styleId}")]
 		public async Task<IActionResult>DeleteStyle(int styleId)
 		{
-			Style style = await _unitOfWork.StyleRepository
-				.GetStyleWithStyleImagesByIdAsync(styleId);
+			Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(styleId);
 
-			if (style == null)
-			{
-				return BadRequest("Style name is not found.");
-			}
+			if (style == null) return BadRequest("Style name is not found.");
+
+			List<StyleImage> styleImages = style.StyleImages.ToList();
 
 			try
 			{
-				DeletionResult deletionResult = await _fileUploadService
-					.DeleteFileAsync(style.ImagePublicId);
-
-				if (deletionResult.Error != null)
-				{
-					return BadRequest("Failed to delete style cover image.");
-				}
-
-				foreach (StyleImage	si in style.StyleImages)
-				{
-					deletionResult = await _fileUploadService
-						.DeleteFileAsync(si.PublicId);
-
-					if (deletionResult.Error != null)
-					{
-						return BadRequest("Failed to delete style cover image.");
-					}
-				}
-
 				await _unitOfWork.StyleRepository.Delete(styleId);
 				await _unitOfWork.SaveChanges();
 			}
@@ -160,7 +133,56 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Internal error: {ex}");
 			}
 
+			if (!string.IsNullOrEmpty(style.ImagePublicId))
+			{
+				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(style.ImagePublicId);
+
+				if (tuple.Item1 != HttpStatusCode.OK)
+				{
+					return Problem(title: "Style is deleted. Faild delete style cover image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
+				}
+			}
+
+			// delete all style images from cloudinary
+			foreach (StyleImage si in styleImages)
+			{
+				await _fileUploadService.TryDeleteFileFromCloudinaryAsync(si.PublicId);
+			}
+
 			return Ok();
+		}
+
+		[HttpPatch("update/{styleId}")]
+		public async Task<ActionResult<StyleOutDTO>> UpdateStyle(int styleId, [FromForm] StyleInDTO styleInDTO)
+		{
+			Style style = await _unitOfWork.StyleRepository.GetByID(styleId);
+			if(style == null) return BadRequest("Style is not found.");
+
+			_mapper.Map(styleInDTO, style);
+
+			IFormFile imageFile = styleInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleCoverImages, style.ImagePublicId);
+				
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				style.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				style.ImagePublicId = uploadResult.Item3.PublicId;
+			}
+
+			_unitOfWork.StyleRepository.Update(style);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<StyleOutDTO>(style));
+			}
+
+			return BadRequest("Faild to update style.");
 		}
 	}
 }

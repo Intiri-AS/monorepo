@@ -119,7 +119,9 @@ namespace Intiri.API.Controllers
 			IFormFile imageFile = productInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.PartnerLogos);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
@@ -197,7 +199,9 @@ namespace Intiri.API.Controllers
 			IFormFile imageFile = productInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.PartnerLogos, product.ImagePublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages, product.ImagePublicId);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
