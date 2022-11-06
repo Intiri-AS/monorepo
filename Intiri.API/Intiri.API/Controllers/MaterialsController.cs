@@ -112,14 +112,9 @@ namespace Intiri.API.Controllers
 			Material material = await _unitOfWork.MaterialRepository.GetByID(materialId);
 			if (material == null) return BadRequest("Material is not found.");
 
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(material.MaterialTypeId);
-			if (materialType == null) return BadRequest("Material type is not found.");
-
 			try
 			{
 				await _unitOfWork.MaterialRepository.Delete(materialId);
-				materialType.Materials.Remove(material);
-
 				await _unitOfWork.SaveChanges();
 			}
 			catch (Exception ex)
