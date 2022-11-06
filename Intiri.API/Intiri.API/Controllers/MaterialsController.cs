@@ -2,15 +2,22 @@
 using CloudinaryDotNet.Actions;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
+using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
+using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -19,7 +26,7 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
@@ -28,7 +35,7 @@ namespace Intiri.API.Controllers
 		public MaterialsController(
 			IUnitOfWork unitOfWork,
 			IMapper mapper,
-			ICloudinaryService fileUploadService) : base(unitOfWork)
+			IFileUploudService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
@@ -70,36 +77,28 @@ namespace Intiri.API.Controllers
 				return BadRequest("Material name with material type already exist");
 			}
 
-			IFormFile file = materialInDTO.ImageFile;
+			Material material = _mapper.Map<Material>(materialInDTO);
 
-			if (file.Length > 0)
+			IFormFile imageFile = materialInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.MaterialImages);
+
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService
-						.UploadFileAsync(file, FileUploadDestinations.MaterialImages);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to upload material image.");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest("Failed to upload material image.");
-				}
+				material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				material.ImagePublicId = uploadResult.Item3.PublicId;
 
-				Material material = _mapper.Map<Material>(materialInDTO);
-
-				material.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
-				material.ImagePublicId = uploadResult.PublicId;
+				material.MaterialType = materialType;
 
 				_unitOfWork.MaterialRepository.Insert(material);
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					materialType.Materials.Add(material);
 					return _mapper.Map<MaterialOutDTO>(material);
 				}
 			}
@@ -111,18 +110,13 @@ namespace Intiri.API.Controllers
 		public async Task<IActionResult> DeleteMaterial(int materialId)
 		{
 			Material material = await _unitOfWork.MaterialRepository.GetByID(materialId);
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(material.MaterialTypeId);
+			if (material == null) return BadRequest("Material is not found.");
 
-			if (material == null)
-			{
-				return BadRequest("Material is not found.");
-			}
+			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(material.MaterialTypeId);
+			if (materialType == null) return BadRequest("Material type is not found.");
 
 			try
 			{
-				DeletionResult deletionResult = await _fileUploadService
-					.DeleteFileAsync(material.ImagePublicId);
-
 				await _unitOfWork.MaterialRepository.Delete(materialId);
 				materialType.Materials.Remove(material);
 
@@ -133,7 +127,53 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Internal error: {ex}");
 			}
 
+			if (!string.IsNullOrEmpty(material.ImagePublicId))
+			{
+				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(material.ImagePublicId);
+
+				if (tuple.Item1 != HttpStatusCode.OK)
+					return Problem(title: "Product is deleted. Faild delete product image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
+			}
+
 			return Ok();
+		}
+
+		[HttpPatch("update/{materialId}")]
+		public async Task<ActionResult<MaterialOutDTO>> UpdateMaterial(int materialId, [FromForm] MaterialInDTO materialInDTO)
+		{
+			Material material = await _unitOfWork.MaterialRepository.GetByID(materialId);
+			if (material == null) return BadRequest("Material is not found.");
+
+			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(materialInDTO.MaterialTypeId);
+			if (materialType == null) return BadRequest("Material type is not found.");
+
+			_mapper.Map(materialInDTO, material);
+
+			IFormFile imageFile = materialInDTO.ImageFile;
+			if (imageFile != null && imageFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.MaterialImages, material.ImagePublicId);
+
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				material.ImagePublicId = uploadResult.Item3.PublicId;
+
+				material.MaterialType = materialType;
+			}
+
+			_unitOfWork.MaterialRepository.Update(material);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<MaterialOutDTO>(material));
+			}
+
+			return BadRequest("Faild to update material.");
 		}
 	}
 }
