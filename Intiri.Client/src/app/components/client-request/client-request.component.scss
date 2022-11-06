@@ -1,3 +1,9 @@
 .step-image {
   @apply object-cover h-full w-full rounded-2xl hover:shadow-lg hover:opacity-80 cursor-pointer shadow;
 }
+
+@media (max-width: 768px) {
+  .request-card {
+    width: 100% !important;
+  }
+}

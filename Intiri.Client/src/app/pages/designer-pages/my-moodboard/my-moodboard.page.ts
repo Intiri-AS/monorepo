@@ -4,7 +4,6 @@ import { IonSlides, PopoverController } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
-import { StylePopoverComponent } from 'src/app/components/popovers/style-popover/style-popover.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { AccountService } from 'src/app/services/account.service';
 import { MoodboardService } from 'src/app/services/moodboard.service';

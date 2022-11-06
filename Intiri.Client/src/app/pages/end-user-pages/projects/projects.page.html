@@ -3,14 +3,14 @@
     <app-header></app-header>
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <div class="main-container">
-      <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
+      <!-- <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>{{'MY-INTIRI.intiri' | translate}}</p>
-      </ion-button>
+      </ion-button> -->
       <!-- <p class="main-title">Skandinavian bright</p> -->
       <div>
         <p class="main-title">All projects</p>
-        <div class="mt-7 flex flex-wrap gap-x-[2.4%] p-2 xl:p-0">
+        <div class="mt-7 flex flex-wrap gap-x-[2.4%] p-2 xl:p-0 mb-20">
           <div *ngFor="let project of projects" class="w-full md:w-[45%] xl:w-[31.5%] mb-4">
             <ion-grid class="border shadow-1 rounded-2xl">
               <ion-row>
@@ -23,9 +23,9 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <div class="flex items-center justify-between cursor-pointer hover:opacity-90" routerLink="/project-details/{{project.id}}" routerDirection="root">
+            <div class="flex items-center justify-between cursor-default mt-3 mac:mt-0" >
               <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{project.name}}</p>
-              <ion-button fill="clear" class="primary-btn !bg-none mt-3 !px-1">Choose</ion-button>
+              <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">Choose</ion-button>
               <!-- <ion-button fill="clear" class="text-black" (click)="goToMoodboardDetails(mb)">
                 <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
               </ion-button> -->
@@ -37,6 +37,7 @@
           </div>
         </div>
       </div>
+      <app-back backPath="/my-intiri"></app-back>
     </div>
   </div>
 </ion-content>
