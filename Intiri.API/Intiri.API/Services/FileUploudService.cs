@@ -99,6 +99,7 @@ namespace Intiri.API.Services
 		public async Task<Tuple<HttpStatusCode, string, ImageUploadResult>> TryAddFileToCloudinaryAsync(IFormFile file, string fileUploadDestinations, string oldPublicId = null)
 		{
 			ImageUploadResult uploadResult = null;
+
 			try
 			{
 				uploadResult = await _cloudinaryUploadService.UploadFileAsync(file, fileUploadDestinations);
@@ -122,7 +123,7 @@ namespace Intiri.API.Services
 		}
 
 
-		public async Task<bool> TryDeleteFileFromCloudinaryAsync(string oldPublicId)
+		public async Task<Tuple<HttpStatusCode, string>> TryDeleteFileFromCloudinaryAsync(string oldPublicId)
 		{
 			DeletionResult deletionResult = null;
 			try
@@ -131,17 +132,21 @@ namespace Intiri.API.Services
 			}
 			catch (Exception ex)
 			{
-				_logger.LogWarning($"Failed to delete partner logo: {ex.Message}");
-				return false;
+				string exc = $"Failed to delete partner logo: {ex.Message}";
+				_logger.LogWarning(exc);
+
+				return Tuple.Create(deletionResult.StatusCode, exc);
 			}
 
 			if (deletionResult.Error != null)
 			{
-				_logger.LogWarning($"Faild delete file from cloudinary services: {deletionResult.Error.Message}");
-				return false;
+				string err = $"Faild delete file from cloudinary services: {deletionResult.Error.Message}";
+				_logger.LogWarning(err);
+
+				return Tuple.Create(deletionResult.StatusCode, err);
 			}
 
-			return true;
+			return Tuple.Create(HttpStatusCode.OK, "Succeeded");
 		}
 
 	}

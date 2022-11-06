@@ -6,10 +6,14 @@ using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.Material;
 using Intiri.API.Models.Product;
+using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+
 
 namespace Intiri.API.Controllers
 {
@@ -18,7 +22,7 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
@@ -26,7 +30,7 @@ namespace Intiri.API.Controllers
 		public ProductsController(
 			IUnitOfWork unitOfWork,
 			IMapper mapper,
-			ICloudinaryService fileUploadService) : base(unitOfWork)
+			IFileUploudService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_fileUploadService = fileUploadService;
@@ -96,10 +100,12 @@ namespace Intiri.API.Controllers
 			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
-			ProductType productType = await _unitOfWork.ProductTypeRepository
-				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
-
+			ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
 			if (productType == null) return BadRequest("Product type doesn't exist");
+
+			Material material = await _unitOfWork.MaterialRepository.GetByID(productInDTO.MaterialId);
+			if (material == null) return BadRequest("Material doesn't exist");
+
 
 			if (productType.Products.Any(p => p.Name == productInDTO.Name))
 			{
@@ -108,46 +114,34 @@ namespace Intiri.API.Controllers
 					$" for product type: {productInDTO.ProductTypeId}");
 			}
 
-			IFormFile file = productInDTO.ImageFile;
+			Product product = _mapper.Map<Product>(productInDTO);
 
-			if (file.Length > 0)
+			IFormFile imageFileFile = productInDTO.ImageFile;
+			if (imageFileFile != null && imageFileFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.PartnerLogos);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(
-							file, FileUploadDestinations.ProductImages);
-				}
-				catch (Exception)
-				{
-					return BadRequest("Failed to upload product image.");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null) return BadRequest("Failed to upload product image.");
+				product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				product.ImagePublicId = uploadResult.Item3.PublicId;
 
-				Product product = _mapper.Map<Product>(productInDTO);
-
-				product.ImagePath = uploadResult.SecureUrl.AbsoluteUri;
-				product.ImagePublicId = uploadResult.PublicId;
 				product.ProductType = productType;
-
-				product.Material = await _unitOfWork.MaterialRepository.GetByID(productInDTO.MaterialId);
+				product.Material =material;
 				product.Partner = partner;
 
 				_unitOfWork.ProductRepository.Insert(product);
 
 				if (await _unitOfWork.SaveChanges())
 				{
-					productType.Products.Add(product);
-					partner.Products.Add(product);
-
 					return Ok(_mapper.Map<ProductOutDTO>(product));
 				}
 			}
 
 			return BadRequest("Probem occured while adding product");
 		}
-
 
 		[HttpDelete("delete/{productId}")]
 		public async Task<IActionResult> DeleteProduct(int productId)
@@ -163,24 +157,67 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				if (product.ImagePublicId != null)
-				{
-					DeletionResult deletionResult = await _fileUploadService.DeleteFileAsync(product.ImagePublicId);
-					if (deletionResult.Error != null) return BadRequest("Failed to delete product image.");
-				}
-
 				partner.Products.Remove(product);
-
 				await _unitOfWork.ProductRepository.Delete(productId);
 
 				await _unitOfWork.SaveChanges();
 			}
 			catch (Exception ex)
 			{
-				return BadRequest($"Internal server error: {ex}");
+				return BadRequest($"Internal error: {ex}");
+			}
+
+			if (!string.IsNullOrEmpty(product.ImagePublicId))
+			{
+				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(product.ImagePublicId);
+
+				if (tuple.Item1 != HttpStatusCode.OK)
+					return Problem(title: "Product is deleted. Faild delete product image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
 			}
 
 			return Ok();
+		}
+
+		[HttpPatch("update/{productId}")]
+		public async Task<IActionResult> UpdateProduct(int productId, ProductInDTO productInDTO)
+		{
+			Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
+			if (product == null) return BadRequest($"Product '{product.Name}' not found");
+
+			_mapper.Map(productInDTO, product);
+
+			ProductType productType = await _unitOfWork.ProductTypeRepository
+				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
+			if (productType == null) return BadRequest("Product type doesn't exist");
+
+			Material material = await _unitOfWork.MaterialRepository
+				.GetByID(productInDTO.MaterialId);
+			if (material == null) return BadRequest("Material doesn't exist");
+
+			IFormFile imageFileFile = productInDTO.ImageFile;
+			if (imageFileFile != null && imageFileFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.PartnerLogos, product.ImagePublicId);
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				product.ImagePublicId = uploadResult.Item3.PublicId;
+			}
+
+			product.ProductType = productType;
+			product.Material = material;
+
+			_unitOfWork.ProductRepository.Update(product);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<ProductOutDTO>(product)); ;
+			}
+
+			return BadRequest("Faild to update product.");
 		}
 	}
 }
