@@ -13,15 +13,15 @@ export class DonutChartComponent implements AfterViewInit{
     this.chartOptions.labels = value.labels;
   }
 
-  @HostListener("window:resize", ["$event"]) updateChart(event) {
+  public chartOptions;
+
+  @HostListener("window:resize", []) updateChart() {
     if (window.innerWidth >= 480) {
-      this.chartOptions.legend.show = true;
+      this.chartOptions.legend.position = "right";
     } else if (window.innerWidth < 480) {
-      this.chartOptions.legend.show = false;
+      this.chartOptions.legend.position = "bottom";
     }
   }
-
-  public chartOptions;
 
   constructor() {
     this.chartOptions = {
@@ -40,7 +40,6 @@ export class DonutChartComponent implements AfterViewInit{
       legend: {
         offsetX: 5,
         fontSize: "18px",
-        position: "right",
         markers: {
           width: 20,
           height: 20,
