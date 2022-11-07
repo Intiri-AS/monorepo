@@ -17,9 +17,29 @@ export class DonutChartComponent implements AfterViewInit{
 
   @HostListener("window:resize", []) updateChart() {
     if (window.innerWidth >= 480) {
-      this.chartOptions.legend.position = "right";
+      this.chartOptions.legend = {
+        position: "right",
+        offsetX: 5,
+        fontSize: "18px",
+        markers: {
+          width: 20,
+          height: 20,
+          radius: 5,
+          offsetY: 3
+        }
+      }
     } else if (window.innerWidth < 480) {
-      this.chartOptions.legend.position = "bottom";
+      this.chartOptions.legend = {
+        position: "bottom",
+        offsetX: 0,
+        fontSize: "16px",
+        markers: {
+          width: 18,
+          height: 18,
+          radius: 5,
+          offsetY: -2
+        }
+      };
     }
   }
 
@@ -37,16 +57,6 @@ export class DonutChartComponent implements AfterViewInit{
       dataLabels: {
         enabled: false
       },
-      legend: {
-        offsetX: 5,
-        fontSize: "18px",
-        markers: {
-          width: 20,
-          height: 20,
-          radius: 5,
-          offsetY: 3
-        }
-      }
     };
   }
 
