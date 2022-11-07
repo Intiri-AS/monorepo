@@ -13,13 +13,7 @@
           </div>
         </ion-col>
         <ion-col size="12" size-md="7.7" offset="0.2" size-lg="9.3">
-          <ion-grid>
-            <ion-row>
-              <ion-button fill="clear" class="text-black hover:opacity-50 relative right-[18px]" routerLink="/partners" routerDirection="root">
-                <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-                <p class="capitalize ml-2 text-lg">{{'DASHBOARD.partners' | translate}}</p>
-              </ion-button>
-            </ion-row>
+          <ion-grid class="mb-24">
             <ion-row>
               <p class="text-black-2 text-2xl font-medium cursor-default">Partners contacts</p>
             </ion-row>
@@ -50,37 +44,26 @@
                 </div>
               </ion-col>
             </ion-row>
-            <ion-row class="pt-20 flex justify-between items-center">
-                <p class="text-2xl text-black-2 font-medium">{{'PARTNERS.products' | translate}}</p>
-                <div *ngIf="slides && slides['el']['swiper']?.currentBreakpoint && partner.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
-                  <ion-button fill="clear" class="text-black-2 hover:opacity-50" (click)="prev()">
-                    <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-                  </ion-button>
-                  <ion-button fill="clear" class="text-black-2 hover:opacity-50" (click)="next()">
-                    <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-                  </ion-button>
-                </div>
-            </ion-row>
-            <ion-row class="gap-x-[1.65%]">
-              <ion-slides #slides [options]="options" class="w-full">
-                <ion-slide *ngFor="let product of partner.products" >
+            <p class="text-2xl text-black-2 font-medium pt-20">{{'PARTNERS.products' | translate}}</p>
+            <ion-row>
+              <div class="grid-cols-5 grid gap-x-4">
+                <div *ngFor="let product of partner.products" >
                   <ion-col size="12" size-sm="5.75" size-xl="1.83">
                     <div class="card">
                       <div class="h-full w-full">
                         <img src="{{product.imagePath}}" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
                       </div>
                     </div>
-                    <div class="flex justify-between">
-                      <p class="py-2 text-black-2 font-semibold">{{product.name}}</p>
-                    </div>
+                    <p class="py-2 text-black-2 font-semibold">{{product.name}}</p>
                   </ion-col>
-                </ion-slide>
-              </ion-slides>
+                </div>
+              </div>
             </ion-row>
           </ion-grid>
         </ion-col>
       </ion-row>
     </ion-grid>
+    <app-back backPath="/partners"></app-back>
   </div>
   <!-- Picture delete modal -->
   <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">

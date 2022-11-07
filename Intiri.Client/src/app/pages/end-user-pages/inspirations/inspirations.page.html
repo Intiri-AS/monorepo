@@ -3,12 +3,12 @@
       <app-header></app-header>
       <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
       <div class="main-container">
-        <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
+        <!-- <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
           <p>{{'MY-INTIRI.intiri' | translate}}</p>
-        </ion-button>
+        </ion-button> -->
         <p class="main-title">My Inspiration</p>
-        <ion-grid class="mt-8 p-0">
+        <ion-grid class="mt-8 p-0 mb-28">
             <ion-row class="gap-x-[1.45%]">
                 <ion-col *ngFor="let i of inspirations" class="p-0" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
                     <div class="h-full w-full mb-4">
@@ -31,6 +31,7 @@
                   </ion-col>
             </ion-row>
         </ion-grid>
+        <app-back backPath="/my-intiri"></app-back>
       </div>
     </div>
 </ion-content>

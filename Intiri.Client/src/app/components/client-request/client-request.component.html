@@ -1,5 +1,6 @@
 
-<ion-card *ngIf="includeClientDetails" class="border shadow-1 rounded-2xl w-full xl:w-[866px] h-[120px] mb-8 mx-0 p-4 bg-light" [ngStyle]="{width: client.moodboard?.style?.name ? '866px' : '600px'}">
+<!-- Client request card (big screen) -->
+<ion-card *ngIf="includeClientDetails && screenWidth > 768" class="border shadow-1 rounded-2xl w-full xl:w-[866px] h-[120px] mb-8 mx-0 p-4 bg-light request-card" [ngStyle]="{width: client.moodboard?.style?.name ? '866px' : '600px'}">
   <ion-grid>
     <ion-row>
       <ion-col size="2"><img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-full object-cover"></ion-col>
@@ -15,24 +16,28 @@
     </ion-row>
   </ion-grid>
 </ion-card>
+<!-- Client request card (small screen) -->
+<ion-card *ngIf="includeClientDetails && screenWidth <= 768" class="border shadow-1 rounded-2xl w-full mb-8 mx-0 py-4 bg-light request-card text-center" >
+  <img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] text-center mx-auto rounded-full object-cover mb-4">
+  <div>
+    <p class="text-lg text-black-1 font-medium mb-4">{{client?.firstName}} {{client?.lastName}}</p>
+    <p class="text-base text-black-2 mt-[5px] mb-4">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
+  </div>
+  <div *ngIf="client.moodboard?.style?.name">
+    <p class="text-lg text-primary">SELECTED STYLE</p>
+    <p class="text-lg text-black-2 mt-[5px]">{{client.moodboard?.style?.name}}</p>
+  </div>
+  <div><ion-button fill="clear" class="primary-btn" (click)="goToChat()">Open chat</ion-button></div>
+</ion-card>
 
 <p *ngIf="client?.moodboard" class="text-2xl text-black-2 font-medium">{{'COMMON.moodboard' | translate}}</p>
-<app-moodboard-details *ngIf="client?.moodboard" [moodboard]="client.moodboard" [withSlides]="true"></app-moodboard-details>
+<app-moodboard-details *ngIf="client?.moodboard" [moodboard]="client.moodboard" [withSlides]="false"></app-moodboard-details>
 
 <div *ngIf="client?.clientInspirations && client.clientInspirations.length > 0" class="flex justify-between items-center mb-6">
   <p class="text-black-2 text-2xl font-medium">Inspiration</p>
-  <div *ngIf="slides && slides['el'] && slides['el']['swiper']?.currentBreakpoint && client?.clientInspirations && client.clientInspirations.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
-    <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
-      <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-    </ion-button>
-    <ion-button fill="clear" class="text-black hover:opacity-50" (click)="next()">
-      <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-    </ion-button>
+</div>
+<div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4">
+  <div *ngFor="let item of client?.clientInspirations" class="h-[130px] lg:h-[180px]">
+    <img *ngIf="item.url" src="{{item.url}}" class="step-image" (click)="openImageInModal(item)" alt="inspiration-img"/>
   </div>
 </div>
-
-<ion-slides *ngIf="client?.clientInspirations && client.clientInspirations.length > 0" #slides [options]="options" class="py-4 pr-4 w-full">
-  <ion-slide *ngFor="let item of client?.clientInspirations" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0">
-    <img *ngIf="item.url" src="{{item.url}}" class="step-image" (click)="openImageInModal(item)" alt="inspiration-img"/>
-  </ion-slide>
-</ion-slides>

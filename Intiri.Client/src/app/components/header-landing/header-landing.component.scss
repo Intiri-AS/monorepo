@@ -3,11 +3,11 @@
 }
 
 .btn {
-  @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 text-[18px] tracking-tight
+  @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 text-[16px] 2xl:text-[18px] tracking-tight
 }
 
 .header-wrapper {
-  @apply container flex items-center py-4 mt-4 sm:mt-12
+  @apply container flex items-center py-4 mt-4 2xl:mt-12
 }
 
 .header-buttons {
