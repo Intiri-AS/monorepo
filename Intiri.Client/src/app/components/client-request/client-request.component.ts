@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 
 @Component({
@@ -12,38 +12,18 @@ export class ClientRequestComponent implements OnInit {
 
   @Input() client: any;
   @Input() includeClientDetails: boolean = false;
-
-  @ViewChild('slides') slides: IonSlides;
-
-  options = {
-    slidesPerView: 3,
-    spaceBetween: 20,
-    breakpoints: {
-      100: {
-        slidesPerView: 1,
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      },
-      800: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      },
-      1200: {
-        slidesPerView: 4,
-        spaceBetween: 20
-      },
-      1400: {
-        slidesPerView: 5,
-        spaceBetween: 20
-      }
-    }
-  }
+  screenWidth: any;
 
   constructor(private modalController: ModalController, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.screenWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenWidth = window.innerWidth;
+  }
 
   async openImageInModal(image) {
     const modal = await this.modalController.create({
@@ -53,14 +33,6 @@ export class ClientRequestComponent implements OnInit {
     });
 
     await modal.present();
-  }
-
-  next() {
-    this.slides.slideNext();
-  }
-
-  prev() {
-    this.slides.slidePrev();
   }
 
   goToChat() {

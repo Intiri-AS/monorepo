@@ -17,10 +17,11 @@
             <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">{{'MOODBOARDS.moodboard-preview' | translate}}</p>
           </div>
         </ion-col>
-        <ion-col *ngIf="clientRequestStep" size="12" offset="0.1" size-xl="9.4">
+        <ion-col *ngIf="clientRequestStep" size="12" offset-xl="0.5" size-xl="9">
             <app-client-request [client]="client" [includeClientDetails]="true"></app-client-request>
+            <app-back backPath="/client-list"></app-back>
         </ion-col>
-        <ion-col *ngIf="!clientRequestStep" size="12" offset="0.1" size-xl="9.4">
+        <ion-col *ngIf="!clientRequestStep" size="12" offset-xl="0.5" size-xl="9">
           <app-add-moodboard-step
           (toggleSelection)="toggleItem($event)"
           [stepsOrder]="stepsOrder"
