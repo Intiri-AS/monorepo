@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-chart',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 
-export class ChartComponent{
+export class ChartComponent implements AfterViewInit{
   @Input()
   set chartData(value) {
     this.chartOptions.series[0].name = value.name;
@@ -40,5 +40,9 @@ export class ChartComponent{
         enabled: false
       }
     };
+  }
+
+  ngAfterViewInit() {
+    window.dispatchEvent(new Event('resize'));
   }
 }
