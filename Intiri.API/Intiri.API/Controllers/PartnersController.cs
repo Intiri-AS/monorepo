@@ -150,7 +150,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPut("update")]
-		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile(PartnerInDTO partnerInDTO)
+		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile([FromForm]PartnerInDTO partnerInDTO)
 		{
 			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
 			if (pUser == null) return Unauthorized("Invalid partner contact user.");

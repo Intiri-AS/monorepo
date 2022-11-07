@@ -221,7 +221,8 @@
     "settings": "Settings",
     "notifications": "Notifications",
     "delete": "Delete",
-    "skip-page": "Skip Page"
+    "skip-page": "Skip Page",
+    "close": "Close"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",

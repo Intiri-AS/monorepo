@@ -8,7 +8,7 @@ export class Project {
   colorPalettes: Array<any>;
   // budget: string;
   created: any;
-  roomDetails: object;
+  roomDetails: any;
   projectMoodboards: Array<any>;
   currentMoodboard: Moodboard;
 
