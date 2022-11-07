@@ -11,6 +11,6 @@ namespace Intiri.API.Services.Interfaces
 		Task<Tuple<HttpStatusCode, string>> TryAddPartnerLogoFileAsync(Partner partner, IFormFile file, string fileUploadDestinations);
 
 		Task<Tuple<HttpStatusCode, string, ImageUploadResult>> TryAddFileToCloudinaryAsync(IFormFile file, string fileUploadDestinations, string oldPublicId = null);
-		Task<bool> TryDeleteFileFromCloudinaryAsync(string oldPublicId);
+		Task<Tuple<HttpStatusCode, string>> TryDeleteFileFromCloudinaryAsync(string oldPublicId);
 	}
 }

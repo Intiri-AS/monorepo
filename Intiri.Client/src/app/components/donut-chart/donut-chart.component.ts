@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-donut-chart',
@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./donut-chart.component.scss']
 })
 
-export class DonutChartComponent{
+export class DonutChartComponent implements AfterViewInit{
   @Input()
   set chartData(value) {
     this.chartOptions.series = value.series;
@@ -14,6 +14,34 @@ export class DonutChartComponent{
   }
 
   public chartOptions;
+
+  @HostListener("window:resize", []) updateChart() {
+    if (window.innerWidth >= 480) {
+      this.chartOptions.legend = {
+        position: "right",
+        offsetX: 5,
+        fontSize: "18px",
+        markers: {
+          width: 20,
+          height: 20,
+          radius: 5,
+          offsetY: 3
+        }
+      }
+    } else if (window.innerWidth < 480) {
+      this.chartOptions.legend = {
+        position: "bottom",
+        offsetX: 0,
+        fontSize: "16px",
+        markers: {
+          width: 18,
+          height: 18,
+          radius: 5,
+          offsetY: -2
+        }
+      };
+    }
+  }
 
   constructor() {
     this.chartOptions = {
@@ -29,17 +57,10 @@ export class DonutChartComponent{
       dataLabels: {
         enabled: false
       },
-      legend: {
-        offsetX: 5,
-        fontSize: "18px",
-        position: "right",
-        markers: {
-          width: 20,
-          height: 20,
-          radius: 5,
-          offsetY: 3
-        }
-      }
     };
+  }
+
+  ngAfterViewInit() {
+    window.dispatchEvent(new Event('resize'));
   }
 }

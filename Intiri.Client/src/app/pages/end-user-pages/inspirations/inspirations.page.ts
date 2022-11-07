@@ -32,8 +32,12 @@ export class InspirationsPage {
     this.projectService.getInspirations();
     this.projectService.inspirations$.subscribe((res: any[]) => {
       this.spinner.hide();
-      this.inspirations = res;
+      this.inspirations = res.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
     })
+  }
+
+  isExtension(file, extension) {
+    return file.filename.endsWith(extension);
   }
 
   addInspiration() {
@@ -56,6 +60,18 @@ export class InspirationsPage {
         type: 'error',
       });
     })
+  }
+
+  downloadFile(file) {
+    const sourceSplit = file.url.split('/upload/');
+    const source = sourceSplit[0] + '/upload/fl_attachment/' + sourceSplit[1];
+    const fileName = source.split('/').pop();
+    const el = document.createElement('a');
+    el.setAttribute('href', source);
+    el.setAttribute('download', fileName);
+    document.body.appendChild(el);
+    el.click();
+    el.remove();
   }
 
   async openImageInModal(image) {

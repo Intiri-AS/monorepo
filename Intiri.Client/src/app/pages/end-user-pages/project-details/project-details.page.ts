@@ -30,11 +30,9 @@ export class ProjectDetailsPage implements OnInit {
     })
   }
 
-  getPiecesNo(project){
+  getMbPiecesNo(moodboard){
     let result = 0;
-    project.projectMoodboards.forEach(moodboard => {
       result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
-    });
     return result;
   }
 

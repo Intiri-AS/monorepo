@@ -81,6 +81,7 @@ import { AdminColorsComponent } from './components/admin-colors/admin-colors.com
 import { AdminPicturesComponent } from './components/admin-pictures/admin-pictures.component';
 import { AddMoodboardStepComponent } from './components/add-moodboard-step/add-moodboard-step.component';
 import { ClientRequestComponent } from './components/client-request/client-request.component';
+import { BackComponent } from './components/back/back.component';
 
 
 //app modals
@@ -149,7 +150,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent
+    ChartComponent, DonutChartComponent, BackComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,

@@ -9,13 +9,19 @@ export class Moodboard {
   colorPalettes: Array<any>;
   materials: Array<any>;
   products: Array<any>;
-  created: any
+  created: any;
+  roomDetails?: {
+    shape: string;
+    size: number;
+    budgetRate: number;
+    roomSketchFile: string;
+  };
 
   constructor()
   {
     this.id = null;
     this.sourceMoodboardId = null;
-    this.name = ''
+    this.name = '';
     this.description = '';
     this.designer = null;
     this.style = null;
@@ -24,5 +30,11 @@ export class Moodboard {
     this.materials = [];
     this.products = [];
     this.created = null;
+    this.roomDetails = {
+      shape: '',
+      size: null,
+      budgetRate: null,
+      roomSketchFile: ''
+    };
   }
 }

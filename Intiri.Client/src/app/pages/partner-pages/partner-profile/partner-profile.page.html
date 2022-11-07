@@ -8,7 +8,7 @@
           <h1 class="main-title">{{'PROFILE.profile' | translate}}</h1>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="mb-10">
         <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="3.5">
           <app-profile-img-section
             [image]="partnerProfile.logoPath"
@@ -27,8 +27,8 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-xl="4" size-xl="5">
-          <ion-buttons class="justify-center mt-8">
+        <ion-col size-xl="12" class="fixed-bottom">
+          <ion-buttons class="justify-center">
             <ion-button class="primary-btn" (click)="saveChanges()">{{'PROFILE.save' | translate}}</ion-button>
           </ion-buttons>
         </ion-col>
