@@ -86,6 +86,29 @@ namespace Intiri.API.Controllers
 			return BadRequest("Faild to update color palette.");
 		}
 
+		[HttpDelete("delete/colorPaletteId")]
+		public async Task<ActionResult> DeleteColorPalette(int colorPaletteId)
+		{
+			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(colorPaletteId);
+
+			if (colorPalette == null)
+			{
+				return BadRequest("Color palette doesn' exist.");
+			}
+
+			try
+			{
+				await _unitOfWork.ColorPaletteRepository.Delete(colorPaletteId);
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal error: {ex}");
+			}
+
+			return Ok();
+		}
+
 		#endregion Public methods
 	}
 }
