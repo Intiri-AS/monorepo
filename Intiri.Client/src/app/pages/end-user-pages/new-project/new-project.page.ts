@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
@@ -77,7 +78,8 @@ export class NewProjectPage implements OnInit {
     public projectService: ProjectService,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit() {
@@ -195,8 +197,10 @@ export class NewProjectPage implements OnInit {
   }
 
   getMoodboardMatches() {
+    this.spinner.show();
     this.projectService.getMoodboardMatches(this.project).subscribe(
       (res) => {
+        this.spinner.hide();
         this.steps[4]['data'] = {
           moodboardFamily: res['moodboardFamily'],
           moodboards: res['moodboards'].map((e) => {
@@ -205,6 +209,7 @@ export class NewProjectPage implements OnInit {
         };
       },
       (error) => {
+        this.spinner.hide();
         console.log(error);
       }
     );
@@ -212,14 +217,17 @@ export class NewProjectPage implements OnInit {
 
   saveCurrentProject()
   {
+    this.spinner.show();
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
+          this.spinner.hide();
           this.project.projectMoodboards.push(this.project.currentMoodboard);
           this.projectService.setCurrentProject(this.project);
           this.openFinalModal(true);
         },
         (error) => {
+          this.spinner.hide();
           console.log(error);
         }
       );
@@ -232,12 +240,14 @@ export class NewProjectPage implements OnInit {
   saveProject() {
     this.projectService.saveProject(this.project).subscribe(
       (res: Project) => {
+        this.spinner.hide();
         this.project.projectMoodboards.push(this.project.currentMoodboard);
         this.project.id = res.id;
         this.projectService.setCurrentProject(this.project);
         this.openFinalModal();
       },
       (error) => {
+        this.spinner.hide();
         console.log(error);
       }
     );
