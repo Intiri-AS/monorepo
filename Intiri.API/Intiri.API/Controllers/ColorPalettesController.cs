@@ -5,6 +5,7 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Intiri.API.Controllers
 {
@@ -61,6 +62,28 @@ namespace Intiri.API.Controllers
 			}
 
 			return BadRequest("Problem occured while adding color pallete");
+		}
+
+		[HttpPatch("update/colorPaletteId")]
+		public async Task<ActionResult> UpdateColorPalette(int colorPaletteId, [FromForm] ColorPaletteInDTO colorPaletteIn)
+		{
+			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(colorPaletteId);
+
+			if (colorPalette == null)
+			{
+				return BadRequest("Color palette doesn' exist.");
+			}
+
+			_mapper.Map(colorPaletteIn, colorPalette);
+
+			_unitOfWork.ColorPaletteRepository.Update(colorPalette);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return Ok(_mapper.Map<ColorPalette>(colorPalette));
+			}
+
+			return BadRequest("Faild to update color palette.");
 		}
 
 		#endregion Public methods

@@ -15,8 +15,6 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.Room;
 using System.Net;
-using Intiri.API.Models.Project;
-using NLog.Fluent;
 
 namespace Intiri.API.Controllers
 {
@@ -90,12 +88,17 @@ namespace Intiri.API.Controllers
 		[HttpPost("createPartner")]
 		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
 		{
+			if (await _unitOfWork.PartnerRepository.DoesAnyExist(p => p.Name == partnerInDTO.Name))
+			{
+				return BadRequest($"Partner name: '{partnerInDTO.Name}' already exists.");
+			}
+
 			Partner partner = _mapper.Map<Partner>(partnerInDTO);
 
 			IFormFile logoFile = partnerInDTO.LogoFile;
 			if (logoFile != null && logoFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos);
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
@@ -125,11 +128,6 @@ namespace Intiri.API.Controllers
 				return BadRequest("Partner doesn' exist.");
 			}
 
-			if (!string.IsNullOrEmpty(partner.LogoPublicId) && !await _fileUploadService.TryDeleteFileFromCloudinaryAsync(partner.LogoPublicId))
-			{
-				_logger.LogWarning("Failed to delete partner logo file.");
-			}
-
 			try
 			{
 				await _unitOfWork.PartnerRepository.Delete(partner.Id);
@@ -138,6 +136,14 @@ namespace Intiri.API.Controllers
 			catch (Exception ex)
 			{
 				return BadRequest($"Internal error: {ex}");
+			}
+
+			if (!string.IsNullOrEmpty(partner.LogoPublicId))
+			{
+				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(partner.LogoPublicId);
+
+				if (tuple.Item1 != HttpStatusCode.OK)
+					return Problem(title: "Partner is deleted. Faild delete partner logo.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
 			}
 
 			return Ok();
@@ -156,7 +162,9 @@ namespace Intiri.API.Controllers
 
 			if (logoFile != null && logoFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
@@ -174,7 +182,7 @@ namespace Intiri.API.Controllers
 				return _mapper.Map<PartnerOutDTO>(partner);
 			}
 
-			return BadRequest("Failed to update user.");
+			return BadRequest("Failed to update partner.");
 		}
 
 		[HttpPost("addLogo")]
@@ -190,7 +198,9 @@ namespace Intiri.API.Controllers
 
 			if (logoFile != null && logoFile.Length > 0)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
+					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+				
 				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
 					return BadRequest(uploadResult.Item2);
