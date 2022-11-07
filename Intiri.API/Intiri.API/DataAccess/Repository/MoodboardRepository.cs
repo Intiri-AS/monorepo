@@ -137,6 +137,11 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
+		public async Task<Moodboard> GetMoodboardWithCollections(int moodboardId)
+		{
+			return (await Get(mood => mood.Id == moodboardId, includeProperties: "ColorPalettes,Materials,Products")).FirstOrDefault();
+		}
+
 		//public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails)
 		//{
 		//	PropertyValues moodboardValues = _context.Entry(moodboard).CurrentValues.Clone();

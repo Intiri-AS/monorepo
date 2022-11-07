@@ -20,5 +20,8 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<ClientMoodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails, Project project);
 		Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids);
 		Task<int> GetMoodboardsCountAsync();
+
+
+		Task<Moodboard> GetMoodboardWithCollections(int moodboardId);
 	}
 }
