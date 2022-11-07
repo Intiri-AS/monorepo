@@ -84,8 +84,9 @@ export class ProjectService implements Resolve<Project> {
   {
     const reqData = {
       projectId: project.id,
-      moodboard: this.parseMoodboard(project.currentMoodboard)
-    }
+      moodboard: this.parseMoodboard(project.currentMoodboard),
+      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
+    };
     return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
   }
 

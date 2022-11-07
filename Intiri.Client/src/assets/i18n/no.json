@@ -220,7 +220,8 @@
     "settings": "Innstillinger",
     "notifications": "Varsler",
     "delete": "Slett",
-    "skip-page": "Hopp over siden"
+    "skip-page": "Hopp over siden",
+    "close": "Lukke"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
