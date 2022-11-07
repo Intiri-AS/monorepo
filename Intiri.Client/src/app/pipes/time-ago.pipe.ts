@@ -29,10 +29,10 @@ export class TimeAgoPipe implements PipeTransform {
     } else if (createdSecond >= 60) {
       let minuteAgo = Math.floor(createdSecond / 60);
       return minuteAgo > 1 ? minuteAgo + " minutes ago" : minuteAgo + " minute ago";
+    } else if (createdSecond < 0) {
+      return "Just now";
     } else if (createdSecond < 60) {
       return createdSecond > 1 ? createdSecond + " seconds ago" : createdSecond + " second ago";
-    } else if (createdSecond < 0) {
-      return "0 second ago";
     }
   }
 }
