@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -16,7 +18,7 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
 
@@ -50,6 +52,17 @@ export class AddMoodboardStepComponent implements OnInit {
        }
     }
     return false;
+  }
+
+  async openImageInModal(item, image) {
+    this.toggleSelection.emit(item);
+    const modal = await this.modalController.create({
+      component: OpenFileModalComponent,
+      componentProps: {file: image, canDelete: false},
+      cssClass: 'open-file-modal-css'
+    });
+
+    await modal.present();
   }
 
 }
