@@ -235,20 +235,37 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/moodboardId")]
 		public async Task<ActionResult> DeleteMoodboard(int moodboardId)
 		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetMoodboardWithCollections(moodboardId);
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
 			if (moodboard == null) return BadRequest("Moodboard doesn't exist");
 
 			try
 			{
 				await _unitOfWork.MoodboardRepository.Delete(moodboard.Id);
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal error: {ex}");
+			}
 
+			return Ok();
+		}
+
+		[HttpDelete("deleteClient/moodboardId")]
+		public async Task<ActionResult> DeleteClientMoodboard(int moodboardId)
+		{
+			ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardById(moodboardId);
+			if (moodboard == null) return BadRequest("Client moodboard doesn't exist");
+
+			try
+			{
+				await _unitOfWork.MoodboardRepository.Delete(moodboard.Id);
 				await _unitOfWork.SaveChanges();
 			}
 			catch (Exception ex)
 			{
 				return BadRequest($"Internal error: {ex.InnerException.Message}");
 			}
-
 
 			return Ok();
 		}

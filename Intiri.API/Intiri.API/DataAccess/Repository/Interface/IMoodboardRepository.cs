@@ -16,12 +16,11 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard);
 		Task<IEnumerable<Moodboard>> GetMoodboardsWithImagesByIds(ICollection<int> ids);
 
-		//Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails);
 		Task<ClientMoodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails, Project project);
 		Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids);
 		Task<int> GetMoodboardsCountAsync();
 
 
-		Task<Moodboard> GetMoodboardWithCollections(int moodboardId);
+		Task<ClientMoodboard> GetClientMoodboardById(int moodboardId);
 	}
 }

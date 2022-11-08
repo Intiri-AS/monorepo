@@ -70,6 +70,12 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
+		public async Task<ClientMoodboard> GetClientMoodboardById(int moodboardId)
+		{
+			return await _context.Moodboards.OfType<ClientMoodboard>()
+				.SingleOrDefaultAsync(cm => cm.Id == moodboardId);
+		}
+
 		public async Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids)
 		{
 			return await _context.Moodboards.OfType<ClientMoodboard>()
@@ -137,11 +143,6 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
-		public async Task<Moodboard> GetMoodboardWithCollections(int moodboardId)
-		{
-			return (await Get(mood => mood.Id == moodboardId, includeProperties: "ColorPalettes,Materials,Products")).FirstOrDefault();
-		}
-
 		//public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails)
 		//{
 		//	PropertyValues moodboardValues = _context.Entry(moodboard).CurrentValues.Clone();
@@ -175,7 +176,7 @@ namespace Intiri.API.DataAccess.Repository
 			clonedMoodboard.Description = moodboard.Description;
 			clonedMoodboard.Room = moodboard.Room;
 			clonedMoodboard.Style = moodboard.Style;
-			clonedMoodboard.SourceMoodboard = moodboard;
+			clonedMoodboard.SourceMoodboardId = moodboard.Id;
 			clonedMoodboard.Materials = moodboard.Materials.ToArray();
 			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
 			clonedMoodboard.Products = moodboard.Products.ToArray();
