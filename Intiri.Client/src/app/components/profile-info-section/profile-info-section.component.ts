@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-profile-info-section',
@@ -24,15 +26,19 @@ export class ProfileInfoSectionComponent implements OnInit {
     description: '',
   };
 
+  currentUser: User;
+
   public formGroup: FormGroup;
 
   constructor(
     private http: HttpClient,
-    private _parentContainer: ControlContainer
+    private _parentContainer: ControlContainer,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
     this.formGroup = this._parentContainer.control as FormGroup;
+    this.accountService.currentUser$.subscribe( user => this.currentUser = user);
   }
 
 

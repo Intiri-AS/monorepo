@@ -115,7 +115,12 @@
         <ion-col *ngFor="let i of inspirations.slice(-5)" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
           <div>
             <div class="h-full w-full">
-              <img [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] shadow !w-full hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
+              <img *ngIf="!isExtension(i, '.pdf')" [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
+                <div *ngIf="isExtension(i, '.pdf')" (click)="downloadFile(i)" title="Download file" class="document-wrapper text-center pt-[75px] object-cover rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer">
+                    <ion-icon class="text-7xl document-icon" name="document-text-outline"></ion-icon>
+                    <ion-icon class="text-7xl hidden download-icon pointer-events-none" name="cloud-download-outline"></ion-icon>
+                    <p class="px-3 text-clamp-2" [title]="i.filename">{{i.filename}}</p>
+                </div>
             </div>
           </div>
         </ion-col>

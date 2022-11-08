@@ -4,3 +4,12 @@
   margin-top: 4px;
   background-size: cover !important;
 }
+
+.document-wrapper:hover {
+  .document-icon {
+    display: none;
+  }
+  .download-icon {
+    display: inline-block;
+  }
+}

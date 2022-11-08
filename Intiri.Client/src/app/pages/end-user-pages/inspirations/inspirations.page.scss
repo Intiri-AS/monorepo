@@ -3,3 +3,12 @@
     --padding-start: 4px;
     text-transform: none;
   }
+
+.document-wrapper:hover {
+  .document-icon {
+    display: none;
+  }
+  .download-icon {
+    display: inline-block;
+  }
+}

@@ -1,5 +1,9 @@
 .project-step {
-  @apply inline-block xl-ion:block w-[60px] py-[32px]  xl-ion:border-r-0  border-secondary mx-[5%] xl-ion:mx-auto cursor-pointer hover:opacity-80;
+  @apply inline-block xl-ion:block w-[60px] py-[32px] xl-ion:border-r-0 border-secondary mx-[5%] xl-ion:mx-auto cursor-pointer;
+}
+
+.new-project-step {
+  @apply flex flex-col w-full min-h-[120px] h-full justify-center items-center cursor-pointer text-primary;
 }
 
 .disabled {
@@ -15,5 +19,17 @@
 }
 
 .project-step-text {
-  @apply text-center mt-4 text-primary w-[98px] ml-[-17px];
+  @apply text-center mt-4 w-[98px];
+}
+
+.first-step-selected {
+  @apply bg-primary rounded-l-2xl xl-ion:rounded-l-none xl-ion:rounded-t-2xl
+}
+
+.step-selected {
+  @apply bg-primary
+}
+
+.last-step-selected {
+  @apply bg-primary rounded-r-2xl xl-ion:rounded-r-none xl-ion:rounded-b-2xl
 }
