@@ -52,4 +52,21 @@ export class MoodboardsPage implements OnInit {
     })
   }
 
+  onTypeFilterChange(event){
+    const selectedTypes = event.detail.value;
+    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
+      if(selectedTypes.length > 0) {
+        this.moodboards = []
+        if(selectedTypes.includes('Template Moodboards')) {
+          this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+        }
+        if(selectedTypes.includes('Non-Template Moodboards')) {
+          this.moodboards = [...this.moodboards, ...moodboards.filter(moodboard => !moodboard.isTemplate)];
+        }
+      } else {
+        this.moodboards = moodboards;
+      }
+    })
+  }
+
 }
