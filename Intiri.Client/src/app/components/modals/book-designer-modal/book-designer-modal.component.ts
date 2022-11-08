@@ -26,25 +26,25 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'Room sketch'
+      id: 1, name: 'Room sketch', isChecked: false
     },
     {
-      id: 2, name: 'Color advice'
+      id: 2, name: 'Color advice', isChecked: false
     },
     {
-      id: 3, name: 'Moodboard adjustments'
+      id: 3, name: 'Moodboard adjustments', isChecked: false
     },
     {
-      id: 4, name: 'Select products'
+      id: 4, name: 'Select products', isChecked: false
     },
     {
-      id: 5, name: 'Lining plan'
+      id: 5, name: 'Lining plan', isChecked: false
     },
     {
-      id: 6, name: 'Decoration'
+      id: 6, name: 'Decoration', isChecked: false
     },
     {
-      id: 7, name: 'Other questions'
+      id: 7, name: 'Other questions', isChecked: false
     }
   ];
 
