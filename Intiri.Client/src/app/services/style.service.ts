@@ -30,7 +30,7 @@ export class StyleService {
     const formData = new FormData();
     Object.keys(styleObj).forEach(key => formData.append(key, styleObj[key]));
     formData.delete('imageFile'); // removing it first so we can manually add a file name
-    formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.name.replace(/\s/g,'_')}.png`)
+    formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.name.replace(/\s/g,'_')}.png`);
     return this.http.post(`${this.apiUrl}styles/add`, formData);
   }
 
@@ -38,8 +38,16 @@ export class StyleService {
     return this.http.delete(this.apiUrl + 'styles/delete/' + styleId);
   }
 
-  editStyle(styleId, styleModel) {
-    return this.http.patch(this.apiUrl + 'styles/update/' + styleId, {styleId, styleModel})
+  editStyle(styleId, styleObj) {
+    const formData = new FormData();
+    Object.keys(styleObj).forEach(key => formData.append(key, styleObj[key]));
+    if (styleObj.imageFile) {
+      formData.delete('imageFile'); // removing it first so we can manually add a file name
+      formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.name.replace(/\s/g,'_')}.png`);
+      return this.http.patch(this.apiUrl + 'styles/update/' + styleId, formData)
+    } else {
+      return this.http.patch(this.apiUrl + 'styles/update/' + styleId, formData)
+    }
   }
 
   //StyleImages

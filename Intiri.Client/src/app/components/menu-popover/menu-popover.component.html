@@ -24,7 +24,7 @@
 </ion-list>
 
 <ion-list *ngIf="material" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditMaterialModal()" [button]="true">Edit material</ion-item> <!-- TODO Translate -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteMaterialsModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 

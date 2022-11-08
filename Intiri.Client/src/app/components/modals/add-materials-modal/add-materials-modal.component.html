@@ -94,4 +94,74 @@
       </div>
     </div>
   </div>
+  <!-- Edit Material modal -->
+  <div *ngIf="edit" class="justify-center items-center h-full">
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <form [formGroup]="editMaterialForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="editMaterial()" autocomplete="off">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-material' | translate}}</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+        <ion-col>
+          <div class="pr-2">
+            <span class="text-sm text-black-2">{{'STYLE.material-name' | translate}}</span>
+            <ion-input [(ngModel)]="material.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">Field Required!</span>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="pl-2">
+            <span class="text-sm text-black-2">Type</span>
+          <ion-select [(ngModel)]="material.materialTypeId" interface="popover" class=" h-[56px]" formControlName="type">
+            <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>{{materialType.name}}</ion-select-option>
+          </ion-select>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="profile-input">
+            <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
+            <ion-textarea rows="5" [(ngModel)]="material.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
+            <span class="ion-warning" *ngIf="isFormSubmited && editDescriptionErrors?.required">Field Required!</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="pl-0 md:pl-[100px]">
+        <ion-col size="12" sizeMd="6">
+          <div class="mt-4 mx-2 px-0 w-fit">
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Current image</p> <!-- TODO Translate -->
+            <div class="w-[200px] border-2 border-solid rounded-2xl h-[200px] border-primary">
+              <img [src]="item.imagePath" class="object-cover rounded-2xl p-1 h-full w-full" alt="oldImg">
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="12" sizeMd="6">
+          <div class="mt-4 mx-2 px-0 w-fit">
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">New image</p> <!-- TODO Translate -->
+            <label for="dropzone-file">
+              <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
+                <div *ngIf="!imagePath" class="text-center mt-[65px]">
+                  <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
+                </div>
+                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
+              </div>
+              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="text-center mt-8">
+          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">Save changes</ion-button> <!-- TODO Translate -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </form>
+  </div>
 </ion-content>

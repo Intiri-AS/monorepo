@@ -138,7 +138,13 @@ export class AddStyleModalComponent implements OnInit {
     this.styleService.editStyle(this.item.id, this.style).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
-      console.log(res);
+      if (typeof (res) === 'object') {
+        this.styleService.getStyles();
+        this.notifier.show({
+          message: "Style changes saved successfully!",
+          type: 'success'
+        });
+      }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
