@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { MoodboardService } from 'src/app/services/moodboard.service';
@@ -17,12 +18,14 @@ export class MoodboardsPage implements OnInit {
   styles$ = this.styleService.styles$;
   searchText: any;
 
-  constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService) { }
+  constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.moodboardService.getMoodboards();
     this.styleService.getStyles();
     this.moodboards$.subscribe(moodboards => {
+      this.spinner.hide();
       this.moodboards = moodboards;
     });
   }

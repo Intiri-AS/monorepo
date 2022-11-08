@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 
 @Component({
   selector: 'app-new-project-step',
@@ -20,6 +22,7 @@ export class NewProjectStepComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {}
@@ -70,6 +73,17 @@ export class NewProjectStepComponent implements OnInit {
        }
     }
     return false;
+  }
+
+  async openImageInModal(item, image) {
+    this.toggleSelection.emit(item);
+    const modal = await this.modalController.create({
+      component: OpenFileModalComponent,
+      componentProps: {file: image, canDelete: false},
+      cssClass: 'open-file-modal-css'
+    });
+
+    await modal.present();
   }
 
 }
