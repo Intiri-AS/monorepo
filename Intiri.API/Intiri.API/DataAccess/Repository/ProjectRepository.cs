@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Intiri.API.DataAccess.Repository.Interface;
+using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Moodboard;
@@ -77,6 +78,16 @@ namespace Intiri.API.DataAccess.Repository
 			IEnumerable<int> result = (await Get(project => project.EndUserId == userId)).Select(x => x.Id);
 
 			return (await Get(project => project.Id == result.Max(), includeProperties: "ColorPalettes,StyleImages,ProjectMoodboards")).FirstOrDefault();
+		}
+
+		public async Task<Project> GetProjectWithCollections(int projectId)
+		{
+			return await _context.Projects
+				.Include(p => p.StyleImages)
+				.Include(p => p.ColorPalettes)
+				.Include(p => p.ProjectMoodboards)
+				.ThenInclude(rd => rd.RoomDetails)
+				.SingleOrDefaultAsync(pr => pr.Id == projectId);
 		}
 
 		public async Task<Project> GetProjectWithMoodboardsForUser(int projectId)

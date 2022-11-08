@@ -156,14 +156,36 @@ namespace Intiri.API.Controllers
 			return Ok("SMS verification code sent.");
 		}
 
+		//TODO: Clear cloudinary files
 		[HttpDelete("delete-user/{id}")]
 		public async Task<ActionResult> DeleteUser(int id)
 		{
-			User user = await _accountService.GetUserByIdAsync<User>(id);
-			if (user == null) return BadRequest("User does not exist in dB");
+			User user = await _unitOfWork.UserRepository.GetByID(id);
+
+			if (user == null) 
+				return BadRequest("User doesn't exist ");
 
 			IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
-			if (!identityResult.Succeeded) return BadRequest("Faild to delete user");
+
+			if (!identityResult.Succeeded) 
+				return BadRequest("Faild to delete user");
+
+			return Ok();
+		}
+
+		//TODO: Clear cloudinary files
+		[HttpDelete("deleteEndUser/{id}")]
+		public async Task<ActionResult> DeleteEndUser(int id)
+		{
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionssAsync(id);
+
+			if (endUser == null) 
+				return BadRequest("End user doesn't exist ");
+
+			IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
+
+			if (!identityResult.Succeeded) 
+				return BadRequest("Faild to delete End user");
 
 			return Ok();
 		}

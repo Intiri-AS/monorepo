@@ -73,6 +73,15 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
+		public async Task<EndUser> GetEndUserWithCollectionssAsync(int id)
+		{
+			return await _context.Users.OfType<EndUser>()
+				.Include(p => p.CreatedProjects)
+					.ThenInclude(cm => cm.ProjectMoodboards)
+					.ThenInclude(rd => rd.RoomDetails)
+				.SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
 		#endregion EndUser
 
 		#region Designer
