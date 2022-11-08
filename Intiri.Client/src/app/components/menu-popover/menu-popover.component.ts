@@ -67,6 +67,17 @@ export class MenuPopoverComponent implements OnInit {
 
     await modal.present();
   }
+
+  async openEditStyleModal() {
+    const modal = await this.modalController.create({
+      component: AddStyleModalComponent,
+      componentProps: {edit: true, item: this.item},
+      cssClass: 'add-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
   async openDeleteMaterialsModal() {
     const modal = await this.modalController.create({
       component: AddMaterialsModalComponent,

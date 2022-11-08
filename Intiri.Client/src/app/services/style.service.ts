@@ -38,6 +38,10 @@ export class StyleService {
     return this.http.delete(this.apiUrl + 'styles/delete/' + styleId);
   }
 
+  editStyle(styleId, styleModel) {
+    return this.http.patch(this.apiUrl + 'styles/update/' + styleId, {styleId, styleModel})
+  }
+
   //StyleImages
   getStyleImages(){
     return this.http.get(this.apiUrl + 'styleImages').pipe(map((styleImages) => {
