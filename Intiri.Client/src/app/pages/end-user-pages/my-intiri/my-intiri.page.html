@@ -21,7 +21,7 @@
                 <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
               <div class="flex flex-wrap">
-                <div class="py-4 pr-4 w-full grid-cols-3 grid gap-8">
+                <div class="py-4 pr-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-8">
                   <div *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
@@ -45,7 +45,7 @@
                   <p class="capitalize hover:opacity-80 text-lg" routerLink="/projects" routerDirection="root">See all</p>
                 </ion-button>
               </div>
-                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-8 gap-y-[120px]">
+                <div class="pb-20 pr-4 pt-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-x-8 gap-y-[120px]">
                   <div *ngFor="let project of projects.slice(-3)" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>
@@ -76,7 +76,7 @@
               </div>
 
               <div class="flex flex-wrap">
-                <div class="pb-20 pr-4 pt-4 w-full grid-cols-3 grid gap-x-8 gap-y-[120px]">
+                <div class="pb-20 pr-4 pt-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-x-8 gap-y-[120px]">
                   <div *ngFor="let moodboard of offers" class="rounded-2xl border shadow-1 h-[286px] mac:h-[350px] min-w-[300px]">
                     <ion-grid>
                       <ion-row>

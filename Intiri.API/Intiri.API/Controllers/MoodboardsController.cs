@@ -16,6 +16,7 @@ using Intiri.API.Models.Style;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -116,52 +117,6 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
-		//[HttpPost("addMoodboardOffer")]
-		//public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
-		//{
-		//	Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
-		//	if (designer == null) return Unauthorized("Invalid designer.");
-
-		//	ConsultationPayment consultationPayment = await _unitOfWork.ConsultationPaymentRepository.GetBaseConsultationPaymentByIdAsync(moodboardOfferIn.ConsultationPaymentId);
-		//	if (consultationPayment == null && consultationPayment.Receiver != designer)
-		//	{
-		//		return BadRequest("Invalid consultation payment.");
-		//	}
-
-		//	Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
-
-		//	moodboard.Designer = designer;
-		//	//moodboard.EndUser = consultationPayment.Payer;
-
-		//	Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
-		//	moodboard.Style = style;
-
-		//	Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardOfferIn.MoodboardOffer.RoomId);
-		//	moodboard.Room = room;
-
-		//	IEnumerable<Material> materials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardOfferIn.MoodboardOffer.MaterialIds);
-		//	moodboard.Materials = materials.ToArray();
-
-		//	IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardOfferIn.MoodboardOffer.ColorPaletteIds);
-		//	moodboard.ColorPalettes = colorPalettes.ToArray();
-
-		//	IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardOfferIn.MoodboardOffer.ProductIds);
-		//	moodboard.Products = products.ToArray();
-
-		//	_unitOfWork.MoodboardRepository.Insert(moodboard);
-
-		//	consultationPayment.MoodboardOffer = moodboard;
-		//	_unitOfWork.ConsultationPaymentRepository.Update(consultationPayment);
-
-
-		//	if (await _unitOfWork.SaveChanges())
-		//	{
-		//		return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
-		//	}
-
-		//	return BadRequest("Problem occured while adding moodboard offer");
-		//}
-
 		[HttpPost("addMoodboardOffer")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
 		{
@@ -219,13 +174,6 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Moodboard with Id={modifyDTO.MoodboardId} not found");
 			}
 
-			//// Is Moodboard an offer from designer to client
-			//if (moodboard.Designer == null && (User.IsInRole(RoleNames.InternalDesigner) || User.IsInRole(RoleNames.ExternalDesigner)))
-			//{
-			//	Designer designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(User.GetUserId());
-			//	moodboard.Designer = designer;
-			//}
-
 			if (modifyDTO.ColorPaletteIds != null)
 			{
 				IEnumerable<ColorPalette> colorPalettes =
@@ -282,6 +230,44 @@ namespace Intiri.API.Controllers
 			}
 
 			return BadRequest("Something went wrong while set template moodboard");
+		}
+
+		[HttpDelete("delete/moodboardId")]
+		public async Task<ActionResult> DeleteMoodboard(int moodboardId)
+		{
+			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
+			if (moodboard == null) return BadRequest("Moodboard doesn't exist");
+
+			try
+			{
+				await _unitOfWork.MoodboardRepository.Delete(moodboard.Id);
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal error: {ex}");
+			}
+
+			return Ok();
+		}
+
+		[HttpDelete("deleteClient/moodboardId")]
+		public async Task<ActionResult> DeleteClientMoodboard(int moodboardId)
+		{
+			ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardById(moodboardId);
+			if (moodboard == null) return BadRequest("Client moodboard doesn't exist");
+
+			try
+			{
+				await _unitOfWork.MoodboardRepository.Delete(moodboard.Id);
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Internal error: {ex.InnerException.Message}");
+			}
+
+			return Ok();
 		}
 
 		#endregion Public methods

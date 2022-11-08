@@ -26,25 +26,25 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'Room sketch'
+      id: 1, name: 'Room sketch', isChecked: false
     },
     {
-      id: 2, name: 'Color advice'
+      id: 2, name: 'Color advice', isChecked: false
     },
     {
-      id: 3, name: 'Moodboard adjustments'
+      id: 3, name: 'Moodboard adjustments', isChecked: false
     },
     {
-      id: 4, name: 'Select products'
+      id: 4, name: 'Select products', isChecked: false
     },
     {
-      id: 5, name: 'Lining plan'
+      id: 5, name: 'Lining plan', isChecked: false
     },
     {
-      id: 6, name: 'Decoration'
+      id: 6, name: 'Decoration', isChecked: false
     },
     {
-      id: 7, name: 'Other questions'
+      id: 7, name: 'Other questions', isChecked: false
     }
   ];
 
@@ -101,6 +101,7 @@ export class BookDesignerModalComponent {
   }
 
   checkout(): void {
+    const consultationDetails = this.getConsultationDetails();
     this.paymentService.sendPayment(
       {
         name: 'Consulatations', //required
@@ -110,6 +111,7 @@ export class BookDesignerModalComponent {
         successUrlPath: `messenger?contact=${this.designer.id}`,//required
         cancelUrlPath: '',//optional, if not specified path is ''
         moodboardId: this.moodboard?.id, //optional
+        consultationDetails,
         numberOfConsultations: this.numberOfConsultations //required
       }).subscribe(async (res: any) => {
       let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
@@ -117,6 +119,19 @@ export class BookDesignerModalComponent {
         sessionId: res.id
       })
     })
+  }
+
+  getConsultationDetails() {
+    let details = [];
+    this.items.forEach(e => {
+      if(e['isChecked']) {
+        details.push(e.name);
+      }
+    })
+    if(this.extraPayment) {
+      details.push('2D & 3D drawings');
+    }
+    return String(details);
   }
 
   isChecked(event) {

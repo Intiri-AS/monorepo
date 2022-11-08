@@ -11,5 +11,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Project> GetProjectByName(string projectName);
 
 		Task<Project> GetProjectWithMoodboardsForUser(int projectId);
+
+		Task<Project> GetProjectWithCollections(int projectId);
 	}
 }

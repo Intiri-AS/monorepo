@@ -59,13 +59,15 @@ export class HeaderLandingComponent implements OnInit {
   }
 
   menuOpened() {
-    const x = document.querySelector('#home');
+    const x = document.querySelector('#main');
     x['style'].overflow = 'hidden'
     x['style'].height = '100vh'
   }
   menuClosed() {
-    const x = document.querySelector('#home');
+    const x = document.querySelector('#main');
+    x['style'].overflow = 'visible'
     x['style'].height = 'auto'
+
   }
 
   async showLanguage(e: Event) {

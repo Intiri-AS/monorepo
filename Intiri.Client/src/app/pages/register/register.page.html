@@ -4,16 +4,7 @@
       <div class="w-full xl:w-[470px] text-center xl:text-left">
         <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" />
         <div>
-        <ion-button
-          fill="clear"
-          class="login-btn"
-          routerLink="/login"
-          routerDirection="root"
-        >
-          <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
-          <p>{{'COMMON.login' | translate}}</p>
-        </ion-button>
-        <h1 class="font-['Allison'] text-5xl xl:text-7xl mt-0 text-black-2">
+        <h1 class="font-['Allison'] text-5xl 2xl:text-7xl text-black-2 mt-[30px]">
           {{'REGISTER.start' | translate}}
         </h1>
         <h1 class="text-3xl xl:text-5xl font-semibold">{{'LOGIN.create' | translate}}</h1>
@@ -99,6 +90,9 @@
               <img src="../../../assets/icon/vipps-white.svg" />
             </ion-button>
             <span class="ion-warning" *ngIf="error">{{error}}</span>
+            <div class="mt-6">
+              <ion-button fill="clear" class="secondary-btn-responsive" routerLink="/landing" routerDirection="root">{{'COMMON.back' | translate}}</ion-button>
+            </div>
           </div>
         </form>
       </div>
