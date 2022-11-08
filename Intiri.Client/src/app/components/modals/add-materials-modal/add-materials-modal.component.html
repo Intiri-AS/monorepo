@@ -116,7 +116,7 @@
           <div class="pl-2">
             <span class="text-sm text-black-2">Type</span>
           <ion-select [(ngModel)]="material.materialTypeId" interface="popover" class=" h-[56px]" formControlName="type">
-            <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>{{materialType.name}}</ion-select-option>
+            <ion-select-option *ngFor="let materialType of materialTypes" [value]="materialType.id">{{materialType.name}}</ion-select-option>
           </ion-select>
           </div>
         </ion-col>
