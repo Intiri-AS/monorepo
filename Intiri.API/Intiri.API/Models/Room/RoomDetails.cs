@@ -14,6 +14,6 @@ namespace Intiri.API.Models.Room
 
         //public Moodboard.Moodboard Moodboard { get; set; }
         public ClientMoodboard Moodboard { get; set; }
-        public int? MoodboardId { get; set; }
+        public int MoodboardId { get; set; }
     }
 }
