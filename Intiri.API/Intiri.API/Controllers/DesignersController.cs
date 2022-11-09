@@ -11,6 +11,8 @@ using Intiri.API.Services.Interfaces;
 using Intiri.API.Extension;
 using Intiri.API.Models.Rating;
 using Intiri.API.Models.Payment;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Intiri.API.DataAccess.Repository;
 
 namespace Intiri.API.Controllers
 {
@@ -122,6 +124,34 @@ namespace Intiri.API.Controllers
 			DesignerClientFullOutDTO clientFullOutDTO = _mapper.Map<DesignerClientFullOutDTO>(consultationPayment);
 
 			return Ok(clientFullOutDTO);
+		}
+
+		[HttpGet("statistic")]
+		public async Task<ActionResult<DesignerStatisticsOutDTO>> GetDesignerStatistics()
+		{
+			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithStatisticsAsync(User.GetUserId());
+			if (designer == null) return Unauthorized("Invalid designer.");
+
+			ICollection<ConsultationPayment> payments = designer.ConsultationPaymentsReceived;
+
+			// [key] -> clientId, [value] -> counsultations number
+			Dictionary<int, int> clientsWithConsultation = new Dictionary<int, int>();
+
+			foreach (ConsultationPayment cp in payments)
+			{
+				clientsWithConsultation[cp.Payer.Id] = clientsWithConsultation.ContainsKey(cp.Payer.Id) 
+					? clientsWithConsultation[cp.Payer.Id] + cp.NumberOfConsultations : cp.NumberOfConsultations;
+			}
+
+			float consultationPrice = (await _unitOfWork.ConsulatationRepository.GetByID(1)).Price;
+
+			DesignerStatisticsOutDTO designerStatisticsOutDTO = new DesignerStatisticsOutDTO()
+			{
+				ClientsNumber = clientsWithConsultation.Keys.Count,
+				TotalIncome = clientsWithConsultation.Values.Sum() * consultationPrice
+			};
+
+			return Ok(designerStatisticsOutDTO);
 		}
 	}
 }

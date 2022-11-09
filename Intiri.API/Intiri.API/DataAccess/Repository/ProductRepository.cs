@@ -29,6 +29,7 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Products
 				.Include(pt => pt.ProductType)
+				.Include(m => m.Material)
 				.ToListAsync();
 		}
 
@@ -39,6 +40,7 @@ namespace Intiri.API.DataAccess.Repository
 				.Where(p => p.Id == id)
 				.Include(p => p.ProductType)
 				.Include(p => p.Partner)
+				.Include(m => m.Material)
 				.FirstOrDefaultAsync();
 		}
 
