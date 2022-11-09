@@ -85,10 +85,6 @@ export class AddMaterialsModalComponent implements OnInit {
       this.materialTypes = res;
     });
     if (this.edit) {
-      // this.material.name = this.item.name;
-      // this.material.description = this.item.description;
-      // this.material.materialTypeId = this.item.materialTypeId;
-      // other way you can type this too:
       const {id, imagePath, ...others } = this.item;
       this.material = others;
     }

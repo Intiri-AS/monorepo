@@ -17,12 +17,15 @@ export class AddProductModalComponent implements OnInit {
   submitted = false;
 
   added;
+  add: boolean;
+  edit: boolean;
 
   item: any = {};
   delete;
 
   imagePath = null;
   userForm: FormGroup;
+  editProductForm: FormGroup;
 
   colorPallete = {
     name: '',
@@ -47,6 +50,16 @@ export class AddProductModalComponent implements OnInit {
     imageFile: ''
   };
 
+  product: any = {
+    name: '',
+    materialId: null,
+    productTypeId: null,
+    price: null,
+    color: '',
+    description: '',
+    imageFile: null,
+  }
+
   constructor(private sanitizer: DomSanitizer,
               private modalController: ModalController,
               private fb: FormBuilder,
@@ -55,9 +68,20 @@ export class AddProductModalComponent implements OnInit {
               private partnerService: PartnerService,
               private notifier: NotifierService,
               private spinner: NgxSpinnerService,
-              ) { }
+              ) {
+                this.editProductForm = this.fb.group({
+                  productName: ['' || undefined, Validators.required],
+                  productType: ['', Validators.required],
+                  productMaterial: ['', Validators.required],
+                  color: ['', Validators.required],
+                  price: ['', Validators.required],
+                  imageFile: [''],
+                  description: [''],
+                });
+              }
 
   get form() { return this.userForm.controls; }
+  get editForm() { return this.editProductForm.controls; }
 
   ngOnInit() {
     this.colorService.getColors();
@@ -65,13 +89,16 @@ export class AddProductModalComponent implements OnInit {
     this.partnerService.getProductsType().subscribe( response => {
       this.productsType = response;
     });
-   this.colors$.subscribe(response => {
-    this.colors = response;
-   }) ;
-   this.materials$.subscribe(response => {
-    this.materials = response;
-   }) ;
-
+    this.colors$.subscribe(response => {
+      this.colors = response;
+    }) ;
+    this.materials$.subscribe(response => {
+      this.materials = response;
+    }) ;
+    if (this.edit) {
+      const {id, imagePath, ...others} = this.item;
+      this.product = others;
+    }
     this.userForm = this.fb.group({
         productName: ['' || undefined, Validators.required],
         productType: ['', Validators.required],
@@ -80,12 +107,13 @@ export class AddProductModalComponent implements OnInit {
         price: ['', Validators.required],
         imageUrl: ['', Validators.required],
         description: '',
-  });
+    });
   }
 
   onFileChange(event) {
     if(event.target.files[0]) {
       this.productData.imageFile = event.target.files[0];
+      this.product.imageFile = event.target.files[0];
       this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.productData.imageFile));
     } else {
       this.imagePath = null;
@@ -144,6 +172,32 @@ export class AddProductModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editProduct() {
+    this.spinner.show();
+    this.submitted = true;
+    if (!this.editProductForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.partnerService.editProduct(this.item.id, this.product).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.partnerService.getProductsFromThatPartner();
+        this.notifier.show({
+          message: "Material changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
     async openSuccessModal() {

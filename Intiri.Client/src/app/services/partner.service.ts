@@ -85,4 +85,16 @@ export class PartnerService {
     return this.http.post(`${this.apiUrl}products/add`, formData);
   }
 
+  editProduct(productId, productObj) {
+    const formData = new FormData();
+    Object.keys(productObj).forEach(key => formData.append(key, productObj[key]));
+    if (productObj.imageFile) {
+      formData.delete('imageFile'); // removing it first so we can manually add a file name
+      formData.append('imageFile', productObj.imageFile, `styleImg${productObj.name.replace(/\s/g,'_')}.png`);
+      return this.http.patch(this.apiUrl + 'products/update/' + productId, formData)
+    } else {
+      return this.http.patch(this.apiUrl + 'products/update/' + productId, formData)
+    }
+  }
+
 }
