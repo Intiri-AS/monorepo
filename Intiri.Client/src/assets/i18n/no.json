@@ -221,7 +221,8 @@
     "notifications": "Varsler",
     "delete": "Slett",
     "skip-page": "Hopp over siden",
-    "close": "Lukke"
+    "close": "Lukke",
+    "edit": "Redigere"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",

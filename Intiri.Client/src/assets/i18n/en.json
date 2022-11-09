@@ -222,7 +222,8 @@
     "notifications": "Notifications",
     "delete": "Delete",
     "skip-page": "Skip Page",
-    "close": "Close"
+    "close": "Close",
+    "edit": "Edit"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
