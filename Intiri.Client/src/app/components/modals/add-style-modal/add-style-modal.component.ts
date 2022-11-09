@@ -12,6 +12,7 @@ import { StyleService } from 'src/app/services/style.service';
 })
 export class AddStyleModalComponent implements OnInit {
   public addStyleForm: FormGroup;
+  public editStyleForm: FormGroup;
   public isFormSubmited = false;
 
   get nameErrors() {
@@ -24,6 +25,14 @@ export class AddStyleModalComponent implements OnInit {
 
   get imageFileErrors() {
     return this.addStyleForm.controls.imageFile.errors;
+  }
+
+  get editNameErrors() {
+    return this.editStyleForm.controls.name.errors;
+  }
+
+  get editDescriptionErrors() {
+    return this.editStyleForm.controls.description.errors;
   }
 
   constructor(
@@ -39,13 +48,19 @@ export class AddStyleModalComponent implements OnInit {
       description: ['', [Validators.required]],
       imageFile: ['', [Validators.required]]
     });
+    this.editStyleForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      imageFile: ['']
+    });
   }
 
   add: boolean;
   added: boolean;
   delete: boolean;
+  edit: boolean;
 
-  item: {}
+  item: any
 
   style = {
     name: '',
@@ -55,7 +70,12 @@ export class AddStyleModalComponent implements OnInit {
 
   imagePath = null;
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.edit) {
+      this.style.name = this.item.name;
+      this.style.description = this.item.description;
+    }
+  }
 
   dismissModal() {
     this.modalController.dismiss();
@@ -106,6 +126,32 @@ export class AddStyleModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editStyle() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editStyleForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.styleService.editStyle(this.item.id, this.style).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.styleService.getStyles();
+        this.notifier.show({
+          message: "Style changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
   async openSuccessModal() {

@@ -4,7 +4,7 @@
 </ion-list>
 
 <ion-list *ngIf="product" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Edit product</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditProductModal()" [button]="true">Edit product</ion-item> <!-- TODO Translate -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteProductModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
@@ -19,12 +19,12 @@
 </ion-list>
 
 <ion-list *ngIf="style" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Edit style</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditStyleModal()" [button]="true">Edit style</ion-item> <!--TODO Translate-->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteStyleModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="material" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditMaterialModal()" [button]="true">Edit material</ion-item> <!-- TODO Translate -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteMaterialsModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 

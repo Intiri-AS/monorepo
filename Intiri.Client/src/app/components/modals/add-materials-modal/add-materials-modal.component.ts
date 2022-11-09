@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
@@ -13,6 +13,7 @@ import { MaterialService } from 'src/app/services/material.service';
 })
 export class AddMaterialsModalComponent implements OnInit {
   public addMaterialForm: FormGroup;
+  public editMaterialForm: FormGroup;
   public isFormSubmited = false;
 
   get nameErrors() {
@@ -31,13 +32,21 @@ export class AddMaterialsModalComponent implements OnInit {
     return this.addMaterialForm.controls.imageFile.errors;
   }
 
+  get editNameErrors() {
+    return this.editMaterialForm.controls.name.errors;
+  }
+
+  get editDescriptionErrors() {
+    return this.editMaterialForm.controls.description.errors;
+  }
+
   constructor(
     private modalController: ModalController,
     private materialService: MaterialService,
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
   ) {
     this.addMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -45,13 +54,20 @@ export class AddMaterialsModalComponent implements OnInit {
       description: ['', [Validators.required]],
       imageFile: ['', [Validators.required]]
     });
+    this.editMaterialForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      type: [''],
+      description: ['', [Validators.required]],
+      imageFile: ['']
+    });
   }
 
   add: boolean;
   added: boolean;
   delete: boolean;
+  edit: boolean;
 
-  item: {}
+  item: any;
 
   material = {
     name: '',
@@ -67,7 +83,11 @@ export class AddMaterialsModalComponent implements OnInit {
   ngOnInit() {
     this.materialService.getMaterialTypes().subscribe((res: []) => {
       this.materialTypes = res;
-    })
+    });
+    if (this.edit) {
+      const {id, imagePath, ...others } = this.item;
+      this.material = others;
+    }
   }
 
   dismissModal() {
@@ -119,6 +139,32 @@ export class AddMaterialsModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editMaterial() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editMaterialForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.materialService.editMaterial(this.item.id, this.material).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.materialService.getMaterials();
+        this.notifier.show({
+          message: "Material changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
   async openSuccessModal() {

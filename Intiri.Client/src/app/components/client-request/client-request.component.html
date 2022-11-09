@@ -38,6 +38,11 @@
 </div>
 <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4">
   <div *ngFor="let item of client?.clientInspirations" class="h-[130px] lg:h-[180px]">
-    <img *ngIf="item.url" src="{{item.url}}" class="step-image" (click)="openImageInModal(item)" alt="inspiration-img"/>
+    <img *ngIf="!isExtension(item, '.pdf')" [src]="item.url" (click)="openImageInModal(item)" class="step-image" alt="Inspiration Img" />
+    <div *ngIf="isExtension(item, '.pdf')" (click)="downloadFile(item)" title="Download file" class="document-wrapper step-image text-center pt-6">
+        <ion-icon class="text-7xl document-icon" name="document-text-outline"></ion-icon>
+        <ion-icon class="text-7xl hidden download-icon pointer-events-none" name="cloud-download-outline"></ion-icon>
+        <p class="px-3 text-clamp-2" [title]="item?.filename">{{item?.filename}}</p>
+    </div>
   </div>
 </div>

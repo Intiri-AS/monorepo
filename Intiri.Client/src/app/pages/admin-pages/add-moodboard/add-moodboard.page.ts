@@ -204,8 +204,6 @@ export class AddMoodboardPage implements OnInit {
   }
 
   sendOffer() {
-    console.log(this.moodboard);
-    console.log(this.client.moodboard);
     this.spinner.show();
     if(this.client.moodboardOfferId) {
       this.moodboardSrv.editMoodboard(this.moodboard).subscribe(res => {
@@ -254,6 +252,8 @@ export class AddMoodboardPage implements OnInit {
           message: 'Moodboard has been created successfully.',
           type: 'success',
         });
+        this.moodboard = new Moodboard();
+        this.currentStepNo = 0;
         this.moodboardSrv.getMoodboards();
         const userType = JSON.parse(localStorage.getItem('user'));
         if (userType.roles[0] === 'Admin') {

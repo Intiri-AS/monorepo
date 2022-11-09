@@ -52,9 +52,10 @@ export class PartnerProductsPage implements OnInit {
   async openAddProductModal() {
     const popover = await this.popoverController.getTop();
         if (popover)
-            await popover.dismiss(null);  
+            await popover.dismiss(null);
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
+      componentProps: {add: true},
       cssClass: 'product-modal-css'
     });
 

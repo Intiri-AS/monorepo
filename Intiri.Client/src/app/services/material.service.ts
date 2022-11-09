@@ -36,6 +36,18 @@ export class MaterialService {
     return this.http.delete(this.apiUrl + 'materials/delete/' + materialId);
   }
 
+  editMaterial(materialId, materialObj) {
+    const formData = new FormData();
+    Object.keys(materialObj).forEach(key => formData.append(key, materialObj[key]));
+    if (materialObj.imageFile) {
+      formData.delete('imageFile'); // removing it first so we can manually add a file name
+      formData.append('imageFile', materialObj.imageFile, `styleImg${materialObj.name.replace(/\s/g,'_')}.png`);
+      return this.http.patch(this.apiUrl + 'materials/update/' + materialId, formData)
+    } else {
+      return this.http.patch(this.apiUrl + 'materials/update/' + materialId, formData)
+    }
+  }
+
   getMaterialTypes(){
     return this.http.get(this.apiUrl + 'materialTypes');
   }
