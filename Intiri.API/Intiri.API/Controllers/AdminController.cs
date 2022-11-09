@@ -2,9 +2,12 @@
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
+using Intiri.API.Models.IntiriColor;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Intiri.API.Controllers
 {
@@ -38,6 +41,14 @@ namespace Intiri.API.Controllers
 			dashboardTotalDTO.TotalMoodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsCountAsync();
 
 			return Ok(dashboardTotalDTO);
+		}
+
+		[HttpGet("inspirations")]
+		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetAllInspirations()
+		{
+			IEnumerable<Inspiration> inspirations = await _unitOfWork.InspirationRepository.Get();
+
+			return Ok(_mapper.Map<IEnumerable<InspirationOutDTO>>(inspirations));
 		}
 	}
 }
