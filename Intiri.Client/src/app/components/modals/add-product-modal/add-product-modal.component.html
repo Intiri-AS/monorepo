@@ -144,7 +144,7 @@
             </div>
             <div class="profile-input fixed-width">
               <span class="text-sm text-black-2">{{'PARTNERS.product-material' | translate}}</span>
-              <ion-select [(ngModel)]="product.productMaterial" interface="popover" formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
+              <ion-select [(ngModel)]="product.materialId" interface="popover" formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
               <ion-select-option [value]="material.id" *ngFor="let material of materials">{{material.name}}</ion-select-option>
               </ion-select>
               <div *ngIf="submitted && editForm.productType.errors" class="invalid-feedback">
