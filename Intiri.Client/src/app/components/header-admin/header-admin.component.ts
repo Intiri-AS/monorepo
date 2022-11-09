@@ -73,7 +73,7 @@ export class HeaderAdminComponent implements OnInit {
       component: SettingsPopoverComponent,
       componentProps: { headerType: 'admin'},
       event: e,
-      dismissOnSelect: true
+      dismissOnSelect: false
     });
 
     await popover.present();
