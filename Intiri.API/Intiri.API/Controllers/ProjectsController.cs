@@ -39,7 +39,7 @@ namespace Intiri.API.Controllers
 
 		#region Constructors
 
-		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, 
+		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService,
 			IFileUploudService fileUploadService, IMoodboardSevice moodboardSevice, ILogger<ProjectsController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
@@ -67,6 +67,15 @@ namespace Intiri.API.Controllers
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
 			return Ok(projectsOut);
+		}
+
+		[HttpGet("isProjectExist/{projectName}")]
+		public async Task<ActionResult<bool>> CheckIfProjectAlreadyExist( string projectName)
+		{
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdWithProjectsAsync(User.GetUserId());
+			if (endUser == null) return Unauthorized();
+
+			return endUser.CreatedProjects.Any(project => project.Name == projectName);
 		}
 
 		[HttpGet("lastProject")]
