@@ -28,4 +28,6 @@ public class StripePaymentDTO
     public string SuccessUrlPath { get; set; }
 
     public string CancelUrlPath { get; set; }
+
+    public string ConsultationDetails { get; set; }
 }
