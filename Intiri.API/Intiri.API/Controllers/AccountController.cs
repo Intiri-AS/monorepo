@@ -177,7 +177,7 @@ namespace Intiri.API.Controllers
 		[HttpDelete("deleteEndUser/{id}")]
 		public async Task<ActionResult> DeleteEndUser(int id)
 		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionssAsync(id);
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
 			if (endUser == null) 
 				return BadRequest("End user doesn't exist ");

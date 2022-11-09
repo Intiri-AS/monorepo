@@ -181,7 +181,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpPatch("update/{productId}")]
-		public async Task<IActionResult> UpdateProduct(int productId, ProductInDTO productInDTO)
+		public async Task<IActionResult> UpdateProduct(int productId, [FromForm]ProductInDTO productInDTO)
 		{
 			Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
 			if (product == null) return BadRequest($"Product '{product.Name}' not found");
