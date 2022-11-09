@@ -187,7 +187,7 @@ export class AddProductModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.partnerService.getProductsFromThatPartner();
         this.notifier.show({
-          message: "Material changes saved successfully!",
+          message: "Product changes saved successfully!",
           type: 'success'
         });
       }
