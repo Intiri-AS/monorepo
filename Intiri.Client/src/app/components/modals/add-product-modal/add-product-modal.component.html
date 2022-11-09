@@ -38,7 +38,7 @@
         <div class="flex-row-product">
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.mainColor"  [style.background]="colorPallete.mainColor"
+            <ion-input [(ngModel)]="colorPallete.mainColor"  [style.background]="colorPallete.mainColor + ' !important'"
             [cpPosition]="'top'" formControlName="color" [disabled]="true"
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -156,7 +156,7 @@
           <div class="flex-row-product">
             <div class="profile-input fixed-width">
               <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-              <ion-input [(ngModel)]="product.color" [style.background]="product.color"
+              <ion-input [(ngModel)]="product.color" [style.background]="product.color + ' !important'"
               [cpPosition]="'top'" formControlName="color"
               [disabled]="true"
               [(colorPicker)]="product.color" type="text"
