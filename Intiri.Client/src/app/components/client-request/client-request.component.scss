@@ -7,3 +7,12 @@
     width: 100% !important;
   }
 }
+
+.document-wrapper:hover {
+  .document-icon {
+    display: none;
+  }
+  .download-icon {
+    display: inline-block;
+  }
+}

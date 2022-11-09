@@ -15,7 +15,7 @@
     <div class="flex flex-wrap mt-[30px]">
       <ion-item *ngFor="let item of items" class="w-full xl:w-1/2" lines="none">
         <div class="flex items-center">
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox [(ngModel)]="item.isChecked" ></ion-checkbox>
           <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{item.name}}</p>
         </div>
       </ion-item>
