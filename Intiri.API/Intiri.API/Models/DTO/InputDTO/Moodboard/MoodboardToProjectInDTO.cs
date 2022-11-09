@@ -9,7 +9,8 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
 
 		[Required]
 		public MoodboardInDTO Moodboard { get; set; }
-		
+
+        [Required]
 		public RoomDetailsInDTO RoomDetails { get; set; }
     }
 }

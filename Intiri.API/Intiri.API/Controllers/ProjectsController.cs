@@ -17,8 +17,11 @@ using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Intiri.API.Shared.Enums;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Intiri.API.Controllers
 {
@@ -30,17 +33,20 @@ namespace Intiri.API.Controllers
 		private readonly ILogger<ProjectsController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IFileUploudService _fileUploadService;
+		private readonly IMoodboardSevice _moodboardSevice;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, ILogger<ProjectsController> logger) : base(unitOfWork)
+		public ProjectsController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, 
+			IFileUploudService fileUploadService, IMoodboardSevice moodboardSevice, ILogger<ProjectsController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_accountService = accountService;
 			_fileUploadService = fileUploadService;
 			_logger = logger;
+			_moodboardSevice = moodboardSevice;
 		}
 
 		#endregion Constructors
@@ -106,6 +112,7 @@ namespace Intiri.API.Controllers
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(moodboardProjectIn.RoomDetails);
 			IFormFile roomSketchFile = moodboardProjectIn.RoomDetails.RoomSketchFile;
+
 			if (roomSketchFile != null && roomSketchFile.Length > 0)
 			{
 				Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
@@ -182,6 +189,7 @@ namespace Intiri.API.Controllers
 
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
 			IFormFile roomSketchFile = projectIn.RoomDetails.RoomSketchFile;
+
 			if (roomSketchFile != null && roomSketchFile.Length > 0)
 			{
 				Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
@@ -282,65 +290,42 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		[HttpPost("moodboard-match")]
+		[HttpPost("moodboardMatch")]
 		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
 		{
-			IEnumerable<Moodboard> roomMoodboards =
-				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(projectIn.RoomId);
+			if (projectIn == null) return BadRequest();
 
-			Dictionary<Moodboard, double> moodboardToMatchPercentage = new();
-			foreach (Moodboard moodboard in roomMoodboards)
-			{
-				int styleImageMatches = moodboard.Style.StyleImages
-					.Select(si => si.Id)
-					.ToList()
-					.Intersect(projectIn.StyleImageIds)
-					.Count();
-
-				int styleImagesCount = moodboard.Style.StyleImages.Count();
-
-				double matchPercentage = (int)(100 * (double)styleImageMatches / styleImagesCount);
-
-				moodboardToMatchPercentage.Add(moodboard, matchPercentage);
-			}
-
-			IEnumerable<KeyValuePair<Moodboard, double>> topMatches = moodboardToMatchPercentage
-				.OrderByDescending(key => key.Value)
-				.Take(3);
-
-			bool isFirst = true;
-			Moodboard topMatch = null;
 			MoodboardSuggestionDTO suggestions = new()
 			{
 				Moodboards = new List<MoodboardMatchDTO>(),
 				MoodboardFamily = new List<MoodboardOutDTO>()
 			};
-			foreach (KeyValuePair<Moodboard, double> match in topMatches)
-			{
-				Moodboard moodboard =
-					await _unitOfWork.MoodboardRepository.GetFullMoodboardById(match.Key.Id);
 
-				if (isFirst)
-				{
-					topMatch = moodboard;
-					isFirst = false;
-				}
+			suggestions.Moodboards = await _moodboardSevice.FindMoodboardMatchesAsync(projectIn);
+			MoodboardOutDTO highMatch = suggestions.Moodboards.First().Moodboard;
 
-				MoodboardMatchDTO moodboardMatch = new()
-				{
-					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-					PercentageMatch = (int)match.Value
-				};
-
-				suggestions.Moodboards.Add(moodboardMatch);
-			}
-
-			IEnumerable<Moodboard> moodboardFamily =
-				(await _unitOfWork.MoodboardRepository.GetMoodboardFamily(topMatch)).Take(3);
-
-			suggestions.MoodboardFamily = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
+			suggestions.MoodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(highMatch.Style.Id, highMatch.Room.Id);
 
 			return Ok(suggestions);
+		}
+
+		// Get moodboards with target style ID and with all rooms other than the target room ID
+		[HttpGet("moodboardStyleFamily/{styleId}/{roomId}")]
+		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardStyleFamily(int styleId, int roomId)
+		{
+			if (!await _unitOfWork.StyleRepository.DoesAnyExist(st => st.Id == styleId))
+			{
+				return BadRequest("Style doesn't exist.");
+			}
+
+			if (!await _unitOfWork.RoomRepository.DoesAnyExist(ro => ro.Id == roomId))
+			{
+				return BadRequest("Room doesn't exist.");
+			}
+
+			IEnumerable<MoodboardOutDTO> moodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(styleId, roomId);
+
+			return Ok(moodboardFamily);
 		}
 
 		#endregion Public methods
