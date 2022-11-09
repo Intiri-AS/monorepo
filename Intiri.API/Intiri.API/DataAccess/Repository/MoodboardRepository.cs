@@ -139,6 +139,7 @@ namespace Intiri.API.DataAccess.Repository
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
+					.ThenInclude(s => s.StyleImages)
 				.Where(m => m.Style.Id == styleId && m.Room.Id != roomId)
 				.ToListAsync();
 		}

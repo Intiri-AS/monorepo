@@ -143,6 +143,14 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(d => d.Id == id);
 		}
 
+		public async Task<Designer> GetDesignerByIdWithStatisticsAsync(int id)
+		{
+			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>()
+				.Include(cp => cp.ConsultationPaymentsReceived).ThenInclude(cl => cl.Payer)
+				.SingleOrDefaultAsync(d => d.Id == id);
+		}
+
 		public async Task<bool> IsDesignerExistByAsync(int id)
 		{
 			return await _context.Users.OfType<Designer>().AnyAsync(d => d.Id == id);
