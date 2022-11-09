@@ -24,6 +24,8 @@ export class ClientListPage {
   rating = 0;
   numberOfRatings = 0;
 
+  designerStatistic = null;
+
   //Rating percentage for setting span width
   rate0 = 0;
   rate1 = 0;
@@ -78,6 +80,10 @@ export class ClientListPage {
 
     this.designerService.getDesignerClients().subscribe((res: any[]) => {
       this.clients = res
+    })
+
+    this.designerService.getDesignerStatistic().subscribe(res => {
+      this.designerStatistic = res;
     })
 
     this.designerService.getDesignerRating().subscribe((res: any) => {

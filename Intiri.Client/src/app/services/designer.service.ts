@@ -56,6 +56,10 @@ export class DesignerService {
     return this.http.get(this.apiUrl + 'ratings/designerRating');
   }
 
+  getDesignerStatistic(){
+    return this.http.get(this.apiUrl + 'designers/statistic');
+  }
+
   getDesignerClients() {
     return this.http.get(this.apiUrl + 'designers/designerClients');
   }
