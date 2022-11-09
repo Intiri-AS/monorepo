@@ -19,6 +19,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public double Price { get; set; }
 
+		[Required]
 		public IFormFile ImageFile { get; set; }
 
 		public string Description { get; set; }

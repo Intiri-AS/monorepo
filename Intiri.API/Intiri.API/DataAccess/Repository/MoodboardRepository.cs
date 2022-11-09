@@ -92,7 +92,8 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
 		{
 			return await _context.Moodboards
-				.Where(m => roomId == m.Room.Id)
+				.Where(m => roomId == m.Room.Id && m.IsTemplate == true)
+				.Include(cp => cp.ColorPalettes)
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)
 				.ToListAsync();
@@ -128,7 +129,7 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
-		public async Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard)
+		public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
 		{
 			return await _context.Moodboards
 				.Include(m => m.Room)
@@ -138,8 +139,7 @@ namespace Intiri.API.DataAccess.Repository
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
-				.Where(m => m.Id != moodboard.Id)
-				.Where(m => m.Style.Id == moodboard.Style.Id)
+				.Where(m => m.Style.Id == styleId && m.Room.Id != roomId)
 				.ToListAsync();
 		}
 
