@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 
@@ -19,10 +20,13 @@ export class NewProjectStepComponent implements OnInit {
   @Output() toggleSelection = new EventEmitter<object>();
 
   imagePath = null;
+  mbFamilyAll: any[];
+  mbsExpanded: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {}
@@ -35,6 +39,19 @@ export class NewProjectStepComponent implements OnInit {
     this.toggleSelection.emit(item);
     this.imagePath = null;
     this.project.roomDetails.imageFile = null;
+  }
+
+  getMbFamily(mb) {
+    this.mbsExpanded = false;
+    this.projectService.getMbFamily(mb.style.id, mb.room.id).subscribe((res: any[]) => {
+      this.mbFamilyAll = res;
+      this.currentStep.data.moodboardFamily = res.slice(-3);
+    })
+  }
+
+  expandMbs() {
+    this.currentStep.data.moodboardFamily = [...this.mbFamilyAll]
+    this.mbsExpanded = true;
   }
 
   isArray(item) {

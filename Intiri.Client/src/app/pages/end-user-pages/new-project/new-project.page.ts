@@ -83,18 +83,6 @@ export class NewProjectPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const isRedirectedFromLogin = this.checkIfRedirectedFromLogin();
-    if (isRedirectedFromLogin) {
-      const stepNum = this.route.snapshot.queryParamMap.get('step');
-      const step = parseInt(stepNum, 10);
-      if (!isNaN(step))
-      {
-        this.currentStepNo = step;
-      } else {
-        console.log(`Invalid value received for step param: ${stepNum}`);
-      }
-    }
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
@@ -112,6 +100,9 @@ export class NewProjectPage implements OnInit {
       // initial path parameter check (and redirect to that step if possible)
       if(stepParam && this.canChangeToStep(stepParam)) {
         this.currentStepNo = stepParam;
+        if(this.currentStepNo === 4) {
+          this.getMoodboardMatches()
+        }
       } else this.currentStepNo = 0;
     });
 
@@ -201,10 +192,12 @@ export class NewProjectPage implements OnInit {
     this.projectService.getMoodboardMatches(this.project).subscribe(
       (res) => {
         this.spinner.hide();
+        this.project.currentMoodboard = new Moodboard();
         this.steps[4]['data'] = {
-          moodboardFamily: res['moodboardFamily'],
+          //moodboardFamily: res['moodboardFamily'],
+          moodboardFamily: [],
           moodboards: res['moodboards'].map((e) => {
-            return { ...e.moodboard, percentageMatch: e.percentageMatch };
+            return { ...e.moodboard, moodboardMatch: e.moodboardMatch };
           }),
         };
       },

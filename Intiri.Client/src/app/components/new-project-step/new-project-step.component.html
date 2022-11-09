@@ -73,7 +73,7 @@
   <div *ngIf="currentStep.data.moodboards">
     <ion-grid class="step-items" style="min-height: 400px;">
       <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of currentStep.data.moodboards; let i = index" (click)="toggleItem(item)" size="5.8" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
+        <ion-col *ngFor="let item of currentStep.data.moodboards; let i = index" (click)="toggleItem(item); getMbFamily(item);" size="5.8" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
@@ -86,15 +86,13 @@
               </ion-row>
             </ion-grid>
           <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
-            <span *ngIf="i === 0" class="text-base font-normal text-primary">/ High match</span>
-            <span *ngIf="i === 1" class="text-base font-normal text-primary">/ Medium match</span>
-            <span *ngIf="i === 2" class="text-base font-normal text-primary">/ Low match</span>
+            <span class="text-base font-normal text-primary">/ {{item.moodboardMatch}} match</span>
           </p>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.see-rooms-style' | translate}}</p>
-    <ion-grid class="step-items" style="min-height: 785px;">
+    <p *ngIf="currentStep.data.moodboardFamily.length > 0" class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.see-rooms-style' | translate}}</p>
+    <ion-grid class="step-items" style="min-height: 810px;">
       <ion-row class="step-items-row">
         <ion-col *ngFor="let item of currentStep.data.moodboardFamily; let i = index" (click)="toggleItem(item)" size="5.5" size-sm="3" class="moodboard-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
             <ion-grid>
@@ -109,23 +107,24 @@
               </ion-row>
             </ion-grid>
           <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
-            <span *ngIf="i === 0" class="text-base font-normal text-primary">/ High match</span>
-            <span *ngIf="i === 1" class="text-base font-normal text-primary">/ Medium match</span>
-            <span *ngIf="i === 2" class="text-base font-normal text-primary">/ Low match</span>
+            <span *ngIf="item.room?.name" class="text-base font-normal text-primary">/ {{item.room.name}}</span>
           </p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="!mbsExpanded && currentStep.data.moodboardFamily.length > 3">
+        <ion-col  size="12" size-sm="10">
         <div class="h-full w-full relative">
           <div class="mt-8 w-full h-[360px] bg-landing-img bg-cover blur rounded-lg "></div>
           <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2" style="transform: translate(-50%, -50%)">
-            <p class="text-black-1 text-xl font-bold mb-2">{{'NEW-PROJECT.upgrade' | translate}}</p>
-            <p class="text-black-2 font-bold mb-4">{{'NEW-PROJECT.upgrade-text' | translate}}</p>
+            <p class="text-black-1 text-xl font-bold mb-2">Premium content</p>
+            <p class="text-black-2 font-bold mb-4">For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member.</p>
             <ion-buttons class="justify-center">
-              <ion-button class="primary-btn" routerLink="/pricing-plans" routerDirection="root">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-button>
+              <ion-button class="primary-btn" (click)="expandMbs()">See all for free</ion-button>
+              <ion-button class="secondary-btn !bg-[#F8F5F1]" routerLink="/pricing-plans" routerDirection="root">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-button>
             </ion-buttons>
           </div>
         </div>
+      </ion-col>
       </ion-row>
     </ion-grid>
   </div>

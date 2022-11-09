@@ -3,11 +3,11 @@
 }
 
 .new-project-step {
-  @apply flex flex-col w-full min-h-[120px] h-full justify-center items-center cursor-pointer text-primary;
+  @apply flex flex-col w-full min-h-[120px] h-full justify-center items-center cursor-pointer text-primary hover:opacity-70;
 }
 
 .disabled {
-  @apply pointer-events-none cursor-default
+  @apply pointer-events-none cursor-default opacity-50;
 }
 
 .no-border {
