@@ -23,6 +23,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Designer> GetDesignerByIdWithRatingsAsync(int id);
 		Task<Designer> GetDesignerByIdWithReviewsAsync(int id);
 		Task<Designer> GetDesignerByIdWithClientsAsync(int id);
+		Task<Designer> GetDesignerByIdWithStatisticsAsync(int id);
 		Task<bool> IsDesignerExistByAsync(int id);
 
 		Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync();

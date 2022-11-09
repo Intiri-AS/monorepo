@@ -57,6 +57,10 @@ export class ProjectService implements Resolve<Project> {
     return this.http.get<Project>(this.apiUrl + 'projects/id/' + id);
   }
 
+  getMbFamily(styleId, roomId) {
+    return this.http.get(`${this.apiUrl}projects/moodboardStyleFamily/${styleId}/${roomId}`);
+  }
+
   parseProject(project: Project) {
     let parsedProj = {
       styleImageIds: project.styleImages.map(e=> e['id']),
@@ -72,7 +76,7 @@ export class ProjectService implements Resolve<Project> {
 
   getMoodboardMatches(project) {
     const req_data = this.parseProject(project);
-    return this.http.post(this.apiUrl + 'projects/moodboard-match', req_data);
+    return this.http.post(this.apiUrl + 'projects/moodboardMatch', req_data);
   }
 
   saveProject(project) {

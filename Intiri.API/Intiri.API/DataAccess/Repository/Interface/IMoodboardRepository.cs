@@ -13,7 +13,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Moodboard> GetFullMoodboardByName(string moodboardName);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsByIdsList(ICollection<int> ids);
-		Task<IEnumerable<Moodboard>> GetMoodboardFamily(Moodboard moodboard);
+		Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsWithImagesByIds(ICollection<int> ids);
 
 		Task<ClientMoodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails, Project project);

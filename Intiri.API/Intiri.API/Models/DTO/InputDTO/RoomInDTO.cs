@@ -11,7 +11,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public int RoomTypeId { get; set; }
 
-		[Required]
 		public IFormFile ImageFile { get; set; }
 
 		public string Description { get; set; }

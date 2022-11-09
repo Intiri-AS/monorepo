@@ -12,9 +12,11 @@ namespace Intiri.API.Automapper
 			CreateMap<ProductType, ProductTypeOutDTO>();
 			CreateMap<ProductTypeInDTO, ProductType>();
 
-			CreateMap<Product, ProductOutDTO>();
+			CreateMap<Product, ProductOutDTO>()
+				.ForMember(pr => pr.MaterialId, opt => opt.MapFrom(src => src.Material.Id))
+				.ForMember(pr => pr.ProductTypeId, opt => opt.MapFrom(src => src.ProductType.Id));
 
-			CreateMap<ProductInDTO, Product>();
+			CreateMap<ProductInDTO, Product>(); 
 		}
 	}
 }
