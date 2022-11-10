@@ -5,6 +5,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 	public class DesignerClientOutDTO
 	{
 		public int ConsultationId { get; set; }
+		public string ConsultationDetails { get; set; }
 		public int ClientId { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
