@@ -10,6 +10,8 @@ public class StripePaymentDTO
     [Required]
     public long Amount { get; set; }
 
+    public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
+
     public DateTime ExpirationDate { get; set; } = DateTime.UtcNow + TimeSpan.FromMinutes(5);
 
     public string Locale { get; set; }
