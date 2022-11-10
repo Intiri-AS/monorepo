@@ -2,7 +2,7 @@
   <!-- Add color modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addColorForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addColor()" autocomplete="off">
+    <form [formGroup]="addColorForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addColor()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>

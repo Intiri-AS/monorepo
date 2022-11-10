@@ -2,7 +2,7 @@
   <!-- Add style modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addStyleForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addStyle()" autocomplete="off">
+    <form [formGroup]="addStyleForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addStyle()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -88,7 +88,7 @@
   <!-- Edit Style modal -->
   <div *ngIf="edit" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="editStyleForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="editStyle()" autocomplete="off">
+    <form [formGroup]="editStyleForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="editStyle()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>

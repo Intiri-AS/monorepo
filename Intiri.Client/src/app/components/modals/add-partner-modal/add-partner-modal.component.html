@@ -4,7 +4,7 @@
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <h1 class="font-medium text-black-1 text-5xl mt-8 mb-4 text-center">{{'PARTNERS.add' | translate}}</h1>
     <div class="partner-form">
-      <form [formGroup]="addPartnerForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addPartner()" autocomplete="off">
+      <form [formGroup]="addPartnerForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addPartner()" autocomplete="off">
       <ion-grid>
         <ion-row>
           <ion-col>
@@ -116,7 +116,7 @@
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <h1 class="font-medium text-black-1 text-5xl mt-16 mb-8 text-center">{{'PARTNERS.add-contact' | translate}}</h1>
     <div class="partner-form">
-      <form [formGroup]="addPartnerContactForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addPartnerContact()" autocomplete="off">
+      <form [formGroup]="addPartnerContactForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addPartnerContact()" autocomplete="off">
       <ion-grid>
         <ion-row>
           <ion-col>
