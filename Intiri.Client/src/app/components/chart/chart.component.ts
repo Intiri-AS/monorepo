@@ -43,6 +43,6 @@ export class ChartComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    window.dispatchEvent(new Event('resize'));
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 2000);
   }
 }
