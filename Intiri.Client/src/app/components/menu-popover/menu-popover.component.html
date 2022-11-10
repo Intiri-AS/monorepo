@@ -1,3 +1,4 @@
+<ion-content> <!-- Adding everyting in ion-conter fixed issue with popover going out of screen -->
 <ion-list *ngIf="designer" lines="none" >
   <!-- <ion-item class="text-black-1" [button]="true">Edit designer</ion-item> -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteDesignerModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
@@ -47,3 +48,4 @@
   <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteContactModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
+</ion-content>

@@ -164,7 +164,7 @@ export class AddProductModalComponent implements OnInit {
     this.partnerService.deleteProduct(this.item.id).subscribe(res => {
         this.spinner.hide();
         this.modalController.dismiss();
-        location.reload();
+        this.partnerService.getProductsFromThatPartner();
     }, () => {
       this.spinner.hide();
       this.notifier.show({
