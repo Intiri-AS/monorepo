@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models;
+using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository.Interface
@@ -16,6 +17,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<EndUser> GetEndUserWithConsultationPaymentsAsync(int id);
 		Task<EndUser> GetEndUserWithCollectionsAsync(int id);
 		Task<EndUser> GetEndUserByIdWithProjectsAsync(int id);
+		Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync();
 
 
 		Task<IEnumerable<Designer>> GetDesignerUsersAsync();
