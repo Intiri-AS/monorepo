@@ -9,7 +9,7 @@
           <p class="text-sm xl:text-lg text-black-2">
             {{'LOGIN.login-msg' | translate}}
           </p>
-          <form [formGroup]="loginForm" class="d-flex mt-2 mt-md-0 text-left" (ngSubmit)="login()" autocomplete="off">
+          <form [formGroup]="loginForm" class="d-flex mt-2 md:mt-0 text-left" (ngSubmit)="login()" autocomplete="off">
           <div class="mt-8 mx-auto w-max">
             <span class="text-xs xl:text-sm text-black-2 text-left block mb-[3px]">{{'LOGIN.phone' | translate}}</span>
             <div class="flex gap-x-2">

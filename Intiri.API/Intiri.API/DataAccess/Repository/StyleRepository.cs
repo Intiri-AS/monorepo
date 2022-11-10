@@ -37,5 +37,10 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await DoesAnyExist(style => style.Name == styleName);
 		}
+
+		public async Task<IEnumerable<int>> GetAllStylesIdsAsync()
+		{
+			return await _context.Styles.Select(s => s.Id).ToListAsync();
+		}
 	}
 }

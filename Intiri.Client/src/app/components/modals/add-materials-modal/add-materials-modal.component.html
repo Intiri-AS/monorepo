@@ -2,7 +2,7 @@
   <!-- Add material modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addMaterialForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addMaterial()" autocomplete="off">
+    <form [formGroup]="addMaterialForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addMaterial()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -97,11 +97,11 @@
   <!-- Edit Material modal -->
   <div *ngIf="edit" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="editMaterialForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="editMaterial()" autocomplete="off">
+    <form [formGroup]="editMaterialForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="editMaterial()" autocomplete="off">
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-material' | translate}}</h1>
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Edit material</h1> <!-- TODO Translate -->
         </ion-col>
       </ion-row>
       <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">

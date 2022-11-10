@@ -25,4 +25,6 @@ public class ConsultationPayment : PaymentBase
 
     public string ConsultationDetails { get; set; }
 
+	public DateTime PaymentDate { get; set; }
+
 }

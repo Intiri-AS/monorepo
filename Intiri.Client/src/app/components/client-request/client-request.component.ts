@@ -18,7 +18,9 @@ export class ClientRequestComponent implements OnInit {
 
   ngOnInit() {
     this.screenWidth = window.innerWidth;
-    this.client.clientInspirations = this.client.clientInspirations.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
+    if (this.client.clientInspirations) {
+      this.client.clientInspirations = this.client.clientInspirations.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
+    }
   }
 
   @HostListener('window:resize', ['$event'])

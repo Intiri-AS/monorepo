@@ -4,7 +4,7 @@
       <div class="h-full w-full">
         <img class="h-7 w-full text-center" src="../../../assets/images/intiri-logo.svg">
         <h1 class="text-2xl font-semibold mt-5 text-center">{{'LOGIN.login' | translate}}</h1>
-        <form [formGroup]="loginForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+        <form [formGroup]="loginForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="login()" autocomplete="off">
           <div class="mt-2">
             <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
             <div class="flex justify-center space-x-1">

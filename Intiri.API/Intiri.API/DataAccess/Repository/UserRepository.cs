@@ -3,7 +3,10 @@ using AutoMapper.QueryableExtensions;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Globalization;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -61,7 +64,13 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<EndUser> GetEndUserByIdWithInspirationsAsync(int id)
 		{
 			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
-			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).Include(i => i.CreatedProjects).SingleOrDefaultAsync(eu => eu.Id == id);
+			return await _context.Users.OfType<EndUser>().Include(i => i.Inspirations).SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
+		public async Task<EndUser> GetEndUserByIdWithProjectsAsync(int id)
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<EndUser>().Include(pr => pr.CreatedProjects).SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
 		public async Task<EndUser> GetEndUserWithConsultationPaymentsAsync(int id)
@@ -73,13 +82,30 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
-		public async Task<EndUser> GetEndUserWithCollectionssAsync(int id)
+		public async Task<EndUser> GetEndUserWithCollectionsAsync(int id)
 		{
 			return await _context.Users.OfType<EndUser>()
 				.Include(p => p.CreatedProjects)
 					.ThenInclude(cm => cm.ProjectMoodboards)
 					.ThenInclude(rd => rd.RoomDetails)
 				.SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
+		public async Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync()
+		{
+			//var articlesGrouped1 = _context.Users.OfType<EndUser>()
+			//	.Where(x => x.Id > 0)
+			//	.GroupBy(s => new { user = s.Id, date = s.Created.Month })
+			//	.Select(x => new { count = x.Count(), district = x.Key.user, date = x.Key.date })
+			//	.ToList();
+
+			IEnumerable<ClientsPerMonthDTO> clientsPerMonth2 =
+				(from mnt in Enumerable.Range(1, 12)
+				 join clt in _context.Users.OfType<EndUser>() on mnt equals clt.Created.Month into monthGroup
+				 select new ClientsPerMonthDTO { Month = mnt, ClientCount = monthGroup.Count() })
+				.ToList();
+
+			return clientsPerMonth2;
 		}
 
 		#endregion EndUser

@@ -2,7 +2,7 @@
   <!-- Add designer modal -->
   <div *ngIf="add" class="justify-center items-center flex flex-col h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addDesignerForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="addDesigner()" autocomplete="off">
+    <form [formGroup]="addDesignerForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addDesigner()" autocomplete="off">
     <ion-grid class="main-container">
       <ion-row>
         <ion-col>

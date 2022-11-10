@@ -55,7 +55,7 @@ export class HeaderInternalDesignerComponents {
       component: SettingsPopoverComponent,
       componentProps: { headerType: 'designer'},
       event: e,
-      dismissOnSelect: true
+      dismissOnSelect: false
     });
 
     await popover.present();
