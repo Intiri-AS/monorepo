@@ -3,7 +3,10 @@ using AutoMapper.QueryableExtensions;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Globalization;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -86,6 +89,23 @@ namespace Intiri.API.DataAccess.Repository
 					.ThenInclude(cm => cm.ProjectMoodboards)
 					.ThenInclude(rd => rd.RoomDetails)
 				.SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
+		public async Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync()
+		{
+			//var articlesGrouped1 = _context.Users.OfType<EndUser>()
+			//	.Where(x => x.Id > 0)
+			//	.GroupBy(s => new { user = s.Id, date = s.Created.Month })
+			//	.Select(x => new { count = x.Count(), district = x.Key.user, date = x.Key.date })
+			//	.ToList();
+
+			IEnumerable<ClientsPerMonthDTO> clientsPerMonth2 =
+				(from mnt in Enumerable.Range(1, 12)
+				 join clt in _context.Users.OfType<EndUser>() on mnt equals clt.Created.Month into monthGroup
+				 select new ClientsPerMonthDTO { Month = mnt, ClientCount = monthGroup.Count() })
+				.ToList();
+
+			return clientsPerMonth2;
 		}
 
 		#endregion EndUser

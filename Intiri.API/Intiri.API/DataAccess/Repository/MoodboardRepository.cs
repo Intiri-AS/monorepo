@@ -4,6 +4,7 @@ using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
+using Intiri.API.Models.Style;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -31,6 +32,19 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<int> GetMoodboardsCountAsync()
 		{
 			return await _context.Moodboards.Where(m => !(m is ClientMoodboard)).CountAsync();
+		}
+
+		public async Task<Dictionary<int, int>> GetMoodboardStylesCountAsync()
+		{
+			List<int> stylesIds = await _context.Moodboards
+				.Include(s => s.Style).Select(s => s.Style.Id).ToListAsync();
+
+			Dictionary<int, int> kvpList = stylesIds.GroupBy(x => x)
+				.Select(g => new { Value = g.Key, Count = g.Count() })
+				.OrderByDescending(x => x.Count)
+				.ToDictionary(x => x.Value, x => x.Count);
+
+			return kvpList;
 		}
 
 		public async Task<IEnumerable<Moodboard>> GetMoodboards()

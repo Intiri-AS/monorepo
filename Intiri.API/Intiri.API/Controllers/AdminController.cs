@@ -5,6 +5,7 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -49,6 +50,40 @@ namespace Intiri.API.Controllers
 			IEnumerable<Inspiration> inspirations = await _unitOfWork.InspirationRepository.Get();
 
 			return Ok(_mapper.Map<IEnumerable<InspirationOutDTO>>(inspirations));
+		}
+
+		[HttpGet("clientsNumber")]
+		public async Task<ActionResult<IEnumerable<ClientsPerMonthDTO>>> GetClientNumberPerMonth()
+		{
+			IEnumerable<ClientsPerMonthDTO> clientsPerMonth =  await _unitOfWork.UserRepository.GetClientsPerMonthAsync();
+
+			return Ok(clientsPerMonth);
+		}
+
+		[HttpGet("salesOverview")]
+		public async Task<ActionResult<IEnumerable<PaymentsPerMonthDTO>>> GetTotalIncomePerMonth()
+		{
+			IEnumerable<PaymentsPerMonthDTO> paymentsPerMonth = await _unitOfWork.ConsultationPaymentRepository.GetAllPaymentPerMonthAsync();
+
+			return Ok(paymentsPerMonth);
+		}
+
+		[HttpGet("styleTrends")]
+		public async Task<ActionResult<IEnumerable<StyleTrendDTO>>> GetMoodboardStylesStatistic()
+		{
+			IEnumerable<Style> styles = await _unitOfWork.StyleRepository.Get();
+			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
+
+			List<StyleTrendDTO> styleTrendDTOs = new List<StyleTrendDTO>();
+			foreach (var style in styles)
+			{
+				styleTrendDTOs.Add(new StyleTrendDTO
+				{
+					StyleName = style.Name,
+					StyleTrend = styleTrends.ContainsKey(style.Id) ? styleTrends[style.Id] : 0
+				});
+			}
+			return Ok(styleTrendDTOs);
 		}
 	}
 }

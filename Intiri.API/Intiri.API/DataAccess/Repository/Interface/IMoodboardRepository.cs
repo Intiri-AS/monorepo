@@ -22,5 +22,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 
 
 		Task<ClientMoodboard> GetClientMoodboardById(int moodboardId);
+		Task<Dictionary<int, int>> GetMoodboardStylesCountAsync();
 	}
 }
