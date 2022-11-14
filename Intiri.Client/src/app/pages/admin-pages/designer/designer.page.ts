@@ -24,7 +24,7 @@ export class DesignerPage {
 
   ngOnInit() {
     this.designerService.getDesigners();
-    this.designers$.pipe(take(1)).subscribe(designers => { 
+    this.designers$.subscribe(designers => {
       this.designers = designers;
     });
   }

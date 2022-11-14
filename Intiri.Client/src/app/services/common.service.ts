@@ -26,4 +26,20 @@ export class CommonService {
     return this.http.patch(this.apiUrl + 'consultations/update', data);
   }
 
+  getPaymentsPerMonth() {
+    return this.http.get(this.apiUrl + 'admin/salesOverview');
+  }
+
+  getClientsPerMonth() {
+    return this.http.get(this.apiUrl + 'admin/clientsNumber');
+  }
+
+  getTrendingStyles() {
+    return this.http.get(this.apiUrl + 'admin/styleTrends');
+  }
+
+  getAllInspirations() {
+    return this.http.get(this.apiUrl + 'admin/inspirations');
+  }
+
 }

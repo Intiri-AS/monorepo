@@ -94,7 +94,6 @@ export class AddDesignerModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.designerService.getDesigners();
         this.openSuccessModal();
-        location.reload();
       }
     }, e => {
       this.spinner.hide();
