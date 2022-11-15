@@ -1,6 +1,7 @@
 <div>
   <h2 class="step-title">{{currentStep.title}}</h2>
-  <p class="step-subtitle">{{currentStep.subtitle}}</p>
+  <p *ngIf="!currentStep.data === 'final'" class="step-subtitle">{{currentStep.subtitle}}</p>
+  <p *ngIf="currentStep.data === 'final'" class="step-subtitle">{{project.currentMoodboard.style?.description}} <br/> {{project.currentMoodboard.room?.description}}</p>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
