@@ -6,7 +6,7 @@ public class ConsultationPayment : PaymentBase
 {
     public EndUser Payer { get; set; }
 
-    public int PayerId { get; set; }
+    public int? PayerId { get; set; }
 
     public Designer Receiver { get; set; }
 

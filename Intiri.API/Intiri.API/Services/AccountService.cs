@@ -102,6 +102,12 @@ namespace Intiri.API.Services
 
 		#endregion Generic methods
 
+		public async Task<IList<string>> GetUserRolesByIdAsync(string userId)
+		{
+
+			return await _userManager.GetRolesAsync( await FindUserByIdAsync(userId));
+		}
+
 		#endregion IAccountService members
 	}
 }

@@ -87,6 +87,8 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<ClientMoodboard> GetClientMoodboardById(int moodboardId)
 		{
 			return await _context.Moodboards.OfType<ClientMoodboard>()
+				.Include(cp => cp.ConsultationPaymentSend)
+				.Include(cp => cp.ConsultationPaymentReceive)
 				.SingleOrDefaultAsync(cm => cm.Id == moodboardId);
 		}
 

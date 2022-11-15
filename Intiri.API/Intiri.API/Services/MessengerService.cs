@@ -120,7 +120,7 @@ public class MessengerService : IMessengerService
 
     private Expression<Func<ConsultationPayment, PaymentData>> ProjectToPayerPaymentData()
     {
-        return payment => new PaymentData { ParticipantId = payment.PayerId, ExpirationDate = payment.ExpirationDate };
+        return payment => new PaymentData { ParticipantId = payment.PayerId ?? 0, ExpirationDate = payment.ExpirationDate };
     }
 
     private Expression<Func<ConsultationPayment, PaymentData>> ProjectToReceiverPaymentData()
