@@ -67,12 +67,39 @@ export class ProjectService implements Resolve<Project> {
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
       // budgetRate: 0,
-      moodboard: this.parseMoodboard(project.currentMoodboard),
-      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
-      name: project.name}
+      // moodboard: this.parseMoodboard(project.currentMoodboard),
+      // roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
+      name: project.name};
 
     return parsedProj;
   };
+
+  parseProjectAsFormData(project) {
+    const moodboard = this.parseMoodboardFormData(project.currentMoodboard);
+    const parsedFormData = {
+      styleImageIds: project.styleImages.map(e=> e['id']),
+      projectColorPaletteIds: project.colorPalettes.map(e=> e['id']),
+      projectRoomId: project.room['id'],
+      projectName: project.name,
+      shape: project.roomDetails['shape'].shape,
+      size: project.roomDetails['size'],
+      budgetRate: project.roomDetails['budgetRate'],
+      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
+      id: moodboard.id,
+      name: moodboard.name,
+      // sourceMoodboardId: moodboard.sourceMoodboardId,
+      styleId: moodboard.styleId,
+      // designerId: moodboard.designerId,
+      roomId: moodboard.roomId,
+      isTemplate: moodboard.template,
+      materialsId: moodboard.materialIds,
+      colorPaletteIds: moodboard.colorPaletteIds,
+      productIds: moodboard.productIds
+    };
+    const formData = new FormData();
+    Object.keys(parsedFormData).forEach(key => formData.append(key, parsedFormData[key]));
+    return formData;
+  }
 
   getMoodboardMatches(project) {
     const req_data = this.parseProject(project);
@@ -80,25 +107,41 @@ export class ProjectService implements Resolve<Project> {
   }
 
   saveProject(project) {
-    const req_data = this.parseProject(project);
+    const req_data = this.parseProjectAsFormData(project);
     return this.http.post(this.apiUrl + 'projects/create', req_data);
   }
 
   addMoodboardToProject(project: Project)
   {
+    const moodboard = this.parseMoodboardFormData(project.currentMoodboard);
     const reqData = {
       projectId: project.id,
-      moodboard: this.parseMoodboard(project.currentMoodboard),
-      roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
+      shape: project.roomDetails['shape'].shape,
+      size: project.roomDetails['size'],
+      budgetRate: project.roomDetails['budgetRate'],
+      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
+      id: moodboard.id,
+      name: moodboard.name,
+      description: moodboard.description,
+      // sourceMoodboardId: moodboard.sourceMoodboardId,
+      styleId: moodboard.styleId,
+      // designerId: moodboard.designerId,
+      roomId: moodboard.roomId,
+      isTemplate: moodboard.template,
+      materialsId: moodboard.materialIds,
+      colorPaletteIds: moodboard.colorPaletteIds,
+      productIds: moodboard.productIds
     };
-    return this.http.post(this.apiUrl + 'projects/addMoodboard', reqData);
+    const formData = new FormData();
+    Object.keys(reqData).forEach(key => formData.append(key, reqData[key]));
+    return this.http.post(this.apiUrl + 'projects/addMoodboard', formData);
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Project> {
     return this.getProject(parseInt(route.paramMap.get('id')));
   }
 
-  parseMoodboard(moodboard: Moodboard) {
+  parseMoodboard(moodboard: any) {
     if(moodboard.room && moodboard.style) {
       let parsedMdb = {
         styleId: moodboard.style ? moodboard.style['id'] : null,
@@ -114,10 +157,28 @@ export class ProjectService implements Resolve<Project> {
     } return moodboard;
   };
 
+  parseMoodboardFormData(moodboard: any) {
+      const parsedMdb = {
+        styleId: moodboard.style ? moodboard.style['id'] : null,
+        colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+        roomId: moodboard.room['id'],
+        materialIds: moodboard?.materials.map(e=> e['id']),
+        productIds: moodboard?.products.map(e=> e['id']),
+        id: moodboard.id,
+        name: moodboard.name, // remove later
+        // sourceMoodboardId: moodboard.sourceMoodboardId, //provera
+        // designerId: moodboard.designerId,
+        template: moodboard.isTemplate,
+        description: moodboard.description
+
+      };
+      return parsedMdb;
+  };
+
   getInspirations() {
     return this.http.get(this.apiUrl + 'inspirations').pipe(map((inspirations) => {
       this.inspirationsSource.next(inspirations);
-    })).toPromise()
+    })).toPromise();
   }
 
   addInspiration(file) {
