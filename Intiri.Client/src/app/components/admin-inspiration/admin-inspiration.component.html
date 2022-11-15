@@ -1,5 +1,5 @@
-<ion-grid class="px-0 m">
-  <ion-row class="mt-2">
+<ion-grid class="px-0 mt-8">
+  <!-- <ion-row class="mt-2">
     <ion-col size="12" size-md="4" size-lg="3">
       <div class="profile-input">
         <div class="mt-6">
@@ -19,16 +19,18 @@
         </div>
       </div>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
   <ion-row class="gap-x-[1.45%]">
-    <ion-col *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]" size="12" size-sm="5.75" size-xl="2.25">
-      <div class="card">
+    <ion-col *ngFor="let i of inspirations" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
+      <div>
         <div class="h-full w-full">
-          <img src="../../../assets/images/img-01.png" class="object-cover rounded-2xl !h-full !w-full" alt="Profile Img" />
+          <img *ngIf="!isExtension(i, '.pdf')" [src]="i.url" (click)="openImageInModal(i)" class="object-cover rounded-2xl !h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
+            <div *ngIf="isExtension(i, '.pdf')" (click)="downloadFile(i)" title="Download file" class="document-wrapper text-center pt-[75px] object-cover rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer">
+                <ion-icon class="text-7xl document-icon" name="document-text-outline"></ion-icon>
+                <ion-icon class="text-7xl hidden download-icon pointer-events-none" name="cloud-download-outline"></ion-icon>
+                <p class="px-3 text-clamp-2" [title]="i.filename">{{i.filename}}</p>
+            </div>
         </div>
-      </div>
-      <div class="flex justify-between">
-        <p class="text-2xl py-2 text-black-2 font-semibold">Vintage</p>
       </div>
     </ion-col>
   </ion-row>

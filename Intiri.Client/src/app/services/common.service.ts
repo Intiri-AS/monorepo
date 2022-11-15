@@ -38,4 +38,8 @@ export class CommonService {
     return this.http.get(this.apiUrl + 'admin/styleTrends');
   }
 
+  getAllInspirations() {
+    return this.http.get(this.apiUrl + 'admin/inspirations');
+  }
+
 }
