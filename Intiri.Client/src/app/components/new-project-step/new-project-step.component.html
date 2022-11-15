@@ -1,6 +1,6 @@
 <div>
   <h2 class="step-title">{{currentStep.title}}</h2>
-  <p *ngIf="!currentStep.data === 'final'" class="step-subtitle">{{currentStep.subtitle}}</p>
+  <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle}}</p>
   <p *ngIf="currentStep.data === 'final'" class="step-subtitle">{{project.currentMoodboard.style?.description}} <br/> {{project.currentMoodboard.room?.description}}</p>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
