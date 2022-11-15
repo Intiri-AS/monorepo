@@ -20,6 +20,7 @@ using Intiri.API.Shared;
 using Intiri.API.Shared.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -321,6 +322,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding project");
 		}
 
+		// TODO: Clear moodboard cloudinary sketch file
 		[HttpDelete("delete/{projectId}")]
 		public async Task<ActionResult> DeleteProject(int projectId)
 		{

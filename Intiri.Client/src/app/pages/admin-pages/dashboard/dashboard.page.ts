@@ -13,21 +13,36 @@ export class DashboardPage {
 
   salesChartData = {
     name: "Sales",
-    data: [1232, 22222, 490, 5219, 11111, 7878, 54333, 7823, 99111, 23754, 5734, 4343],
+    data: [],
     type: "line",
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    categories: []
   }
 
   clientsChartData = {
     name: "New clients",
-    data: [120, 222, 490, 521, 1111, 787, 543, 782, 991, 2375, 573, 4343],
+    data: [],
     type: "bar",
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    categories: []
   }
 
   trendingChartData = {
-    series: [22, 35, 65, 123],
-    labels: ["Skandinavian", "Classic", "Nordic", "Norwegian"]
+    series: [],
+    labels: []
+  }
+
+  private monthToString = {
+    1: 'Jan',
+    2: 'Feb',
+    3: 'Mar',
+    4: 'Apr',
+    5: 'May',
+    6: 'Jun',
+    7: 'Jul',
+    8: 'Aug',
+    9: 'Sep',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec'
   }
 
   constructor(private commonService: CommonService) {}
@@ -35,6 +50,33 @@ export class DashboardPage {
   ngOnInit(){
     this.commonService.getDashboardData().subscribe((res:any) => {
       this.totalCountData = res;
-    })
+    });
+    this.commonService.getPaymentsPerMonth().subscribe((res:any) => {
+      if (res) {
+        const payments = res;
+        payments.forEach(payment => {
+          this.salesChartData.data.push(payment.monthPayment);
+          this.salesChartData.categories.push(this.monthToString[payment.month]);
+        })
+      }
+    });
+    this.commonService.getClientsPerMonth().subscribe((res:any) => {
+      if (res) {
+        const clients = res;
+        clients.forEach(client => {
+          this.clientsChartData.data.push(client.clientCount);
+          this.clientsChartData.categories.push(this.monthToString[client.month]);
+        })
+      }
+    });
+    this.commonService.getTrendingStyles().subscribe((res:any) => {
+      if (res) {
+        const styles = res;
+        styles.forEach(style => {
+          this.trendingChartData.series.push(style.styleTrend);
+          this.trendingChartData.labels.push(style.styleName);
+        })
+      }
+    });
   }
 }
