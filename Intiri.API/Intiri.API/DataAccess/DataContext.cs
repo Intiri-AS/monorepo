@@ -136,6 +136,32 @@ namespace Intiri.API.DataAccess
 				(
 					new Consultation { Id = 1, Duration = 60, Price = 950 }
 				);
+
+			// Payment user dependency
+			builder.Entity<Designer>()
+				.HasMany(s => s.ConsultationPaymentsReceived)
+				.WithOne(l => l.Receiver)
+				.HasForeignKey(s => s.ReceiverId)
+				.OnDelete(DeleteBehavior.Cascade);
+
+			builder.Entity<EndUser>()
+				.HasMany(s => s.ConsultationPayments)
+				.WithOne(l => l.Payer)
+				.HasForeignKey(s => s.PayerId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+
+			// Moodboard payment dependency
+			builder.Entity<ClientMoodboard>()
+				.HasOne(c => c.ConsultationPaymentSend)
+				.WithOne(m => m.Moodboard)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<ClientMoodboard>()
+				.HasOne(c => c.ConsultationPaymentReceive)
+				.WithOne(m => m.MoodboardOffer)
+				.OnDelete(DeleteBehavior.Restrict);
+
 		}
 	}
 }

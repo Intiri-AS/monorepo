@@ -133,7 +133,7 @@ namespace Intiri.API.Controllers
 			ClientMoodboard moodboard = _mapper.Map<ClientMoodboard>(moodboardOfferIn.MoodboardOffer);
 
 			moodboard.Designer = designer;
-			//moodboard.EndUser = consultationPayment.Payer;
+			//moodboard.Designer = consultationPayment.Payer;
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
 			moodboard.Style = style;
@@ -251,6 +251,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		// TODO: Clear cloudinary sketch file
 		[HttpDelete("deleteClient/moodboardId")]
 		public async Task<ActionResult> DeleteClientMoodboard(int moodboardId)
 		{

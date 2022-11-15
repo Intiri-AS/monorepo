@@ -85,6 +85,7 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<EndUser> GetEndUserWithCollectionsAsync(int id)
 		{
 			return await _context.Users.OfType<EndUser>()
+				.Include(cp => cp.ConsultationPayments)
 				.Include(p => p.CreatedProjects)
 					.ThenInclude(cm => cm.ProjectMoodboards)
 					.ThenInclude(rd => rd.RoomDetails)
@@ -133,6 +134,7 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			//return _context.Set<Designer>().SingleOrDefault(x => x.Id == id);
 			return await _context.Users.OfType<Designer>()
+				.Include(co => co.ConsultationPaymentsReceived)
 				.Include(m => m.CreatedMoodboards)
 				.Include(u => u.Roles).ThenInclude(r => r.Role)
 				.SingleOrDefaultAsync(d => d.Id == id);

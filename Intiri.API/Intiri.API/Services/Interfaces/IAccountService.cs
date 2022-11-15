@@ -1,5 +1,6 @@
 ﻿using Intiri.API.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace Intiri.API.Services.Interfaces
 {
@@ -33,5 +34,7 @@ namespace Intiri.API.Services.Interfaces
 		Task<TEntity> GetUserByUsernameAsync<TEntity>(string username) where TEntity : User;
 
 		Task<IEnumerable<TEntity>> GetAllUsersAsync<TEntity>() where TEntity : class;
+
+		Task<IList<string>> GetUserRolesByIdAsync(string userId);
 	}
 }
