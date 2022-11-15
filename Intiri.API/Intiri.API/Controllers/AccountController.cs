@@ -160,15 +160,36 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete-user/{id}")]
 		public async Task<ActionResult> DeleteUser(int id)
 		{
-			User user = await _unitOfWork.UserRepository.GetByID(id);
+			User user = null;
+
+			IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
+
+			if (userRoles.Contains(RoleNames.Partner))
+			{
+				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
+			}
+			else if(userRoles.Contains(RoleNames.InternalDesigner))
+			{
+				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
+			}
+			else if(userRoles.Contains(RoleNames.FreeEndUser))
+			{
+				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+			}
 
 			if (user == null) 
 				return BadRequest("User doesn't exist ");
 
-			IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
-
-			if (!identityResult.Succeeded) 
-				return BadRequest("Faild to delete user");
+			try
+			{
+				IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
+				if (!identityResult.Succeeded)
+					return BadRequest("Faild to delete user");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Faild to delete user: {ex.Message}");
+			}
 
 			return Ok();
 		}
@@ -180,12 +201,18 @@ namespace Intiri.API.Controllers
 			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
 			if (endUser == null) 
-				return BadRequest("End user doesn't exist ");
+				return BadRequest("End user doesn't exist");
 
-			IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
-
-			if (!identityResult.Succeeded) 
-				return BadRequest("Faild to delete End user");
+			try
+			{
+				IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
+				if (!identityResult.Succeeded)
+					return BadRequest("Faild to delete End user");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Faild to delete End user: {ex.Message}");
+			}
 
 			return Ok();
 		}
