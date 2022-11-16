@@ -98,7 +98,7 @@ export class AddDesignerModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: e.error,
         type: 'error',
       });
     });

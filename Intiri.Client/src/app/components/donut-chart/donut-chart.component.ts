@@ -57,6 +57,7 @@ export class DonutChartComponent implements AfterViewInit{
       dataLabels: {
         enabled: false
       },
+      legend: {}
     };
   }
 

@@ -48,7 +48,7 @@ export class AdminProductsComponent implements OnInit {
   onPartnersFilterChange(event){
     const selectedPartnerNames = event.detail.value;
       if(selectedPartnerNames.length > 0) {
-        this.products = this.allProducts.filter(product => selectedPartnerNames.includes(product.partner.name));  
+        this.products = this.allProducts.filter(product => selectedPartnerNames.includes(product.partnerId));
       } else {
         this.products = this.allProducts;
       }
@@ -56,9 +56,8 @@ export class AdminProductsComponent implements OnInit {
 
   onProductTypeFilterChange(event){
     const selectedProductTypes = event.detail.value;
-    console.log(selectedProductTypes)
       if(selectedProductTypes.length > 0) {
-        this.products = this.allProducts.filter(product => selectedProductTypes.includes(product.productType.name));  
+        this.products = this.allProducts.filter(product => selectedProductTypes.includes(product.productTypeId));
       } else {
         this.products = this.allProducts;
       }

@@ -12,13 +12,13 @@
         <div class="w-full">
           <span class="text-sm text-black-2">Partners</span>
           <ion-select (ionChange)="onPartnersFilterChange($event)" class="w-full" interface="popover" [multiple]="true">
-            <ion-select-option *ngFor="let partner of (partners$ | async)" value="{{partner.name}}">{{partner.name}}</ion-select-option>
+            <ion-select-option [value]="partner.id" *ngFor="let partner of (partners$ | async)">{{partner.name}}</ion-select-option>
           </ion-select>
         </div>
         <div class="w-full">
           <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
           <ion-select (ionChange)="onProductTypeFilterChange($event)" class="w-full" interface="popover" [multiple]="true">
-            <ion-select-option value="{{productType.name}}" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
+            <ion-select-option [value]="productType.id" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
           </ion-select>
         </div>
       </div>

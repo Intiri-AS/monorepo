@@ -68,7 +68,7 @@ export class AddColorModalComponent implements OnInit {
     });
   }
 
-  item: {}
+  item: any
 
   ngOnInit() {}
 
@@ -99,7 +99,7 @@ export class AddColorModalComponent implements OnInit {
   }
 
   deleteColor() {
-    this.colorService.deleteColorPalette(this.item['id']).subscribe(res => {
+    this.colorService.deleteColorPalette(this.item.id).subscribe(res => {
         this.colorService.getColorPalettes();
         this.modalController.dismiss();
         this.notifier.show({
