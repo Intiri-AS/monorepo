@@ -86,7 +86,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Faild to update color palette.");
 		}
 
-		[HttpDelete("delete/colorPaletteId")]
+		[HttpDelete("delete/{colorPaletteId}")]
 		public async Task<ActionResult> DeleteColorPalette(int colorPaletteId)
 		{
 			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(colorPaletteId);

@@ -12,8 +12,7 @@ namespace Intiri.API.Automapper
 			CreateMap<ProjectNameInDTO, Project>();
 
 			CreateMap<ProjectInDTO, Project>()
-				.ForMember(cl => cl.Name, opt => opt.MapFrom(src => src.ProjectName))
-				.ForMember(cl => cl.ColorPalettes, opt => opt.MapFrom(src => src.ProjectColorPaletteIds));
+				.ForMember(cl => cl.Name, opt => opt.MapFrom(src => src.ProjectName));
 
 			CreateMap<Project, ProjectOutDTO>();
 		}
