@@ -29,8 +29,7 @@
                 <ion-button
                 *ngIf="currentStepNo === 0"
                 class="secondary-btn"
-                routerLink="/new-project"
-                routerDirection="root"
+                (click)="goBack()"
                 >{{'COMMON.cancel' | translate}}</ion-button
               >
               <ion-button
