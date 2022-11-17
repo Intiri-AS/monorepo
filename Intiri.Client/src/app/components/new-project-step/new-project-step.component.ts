@@ -66,6 +66,8 @@ export class NewProjectStepComponent implements OnInit {
     if(event.target.files[0]) {
       this.project.roomDetails.imageFile = event.target.files[0];
       this.project.roomDetails.shape = {shape: "", imagePath: ""};
+      this.project.roomDetails.roomSketchFile = event.target.files[0];
+      console.log(this.project.roomDetails.roomSketchFile);
       event.srcElement.value = "";
       this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.project.roomDetails.imageFile));
     } else {
