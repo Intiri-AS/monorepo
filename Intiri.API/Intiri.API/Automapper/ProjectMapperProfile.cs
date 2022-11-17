@@ -10,7 +10,10 @@ namespace Intiri.API.Automapper
 		public ProjectMapperProfile()
 		{
 			CreateMap<ProjectNameInDTO, Project>();
-			CreateMap<ProjectInDTO, Project>();
+
+			CreateMap<ProjectInDTO, Project>()
+				.ForMember(cl => cl.Name, opt => opt.MapFrom(src => src.ProjectName));
+
 			CreateMap<Project, ProjectOutDTO>();
 		}
 	}

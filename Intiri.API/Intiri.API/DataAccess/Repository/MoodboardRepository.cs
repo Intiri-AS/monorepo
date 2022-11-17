@@ -160,54 +160,6 @@ namespace Intiri.API.DataAccess.Repository
 				.ToListAsync();
 		}
 
-		//public async Task<Moodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails)
-		//{
-		//	PropertyValues moodboardValues = _context.Entry(moodboard).CurrentValues.Clone();
-		//	Moodboard clonedMoodboard = new();
-		//	moodboardValues[nameof(clonedMoodboard.Id)] = 0;
-		//	moodboardValues[nameof(clonedMoodboard.IsTemplate)] = false;
-
-		//	_context.Entry(clonedMoodboard).CurrentValues.SetValues(moodboardValues);
-		//	_context.Entry(clonedMoodboard).State = EntityState.Added;
-
-		//	_context.Moodboards.Add(clonedMoodboard);
-		//	roomDetails.Moodboard = clonedMoodboard;
-		//	await _context.SaveChangesAsync();
-
-		//	clonedMoodboard.SourceMoodboard = moodboard;
-		//	clonedMoodboard.Materials = moodboard.Materials.ToArray();
-		//	clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
-		//	clonedMoodboard.Products = moodboard.Products.ToArray();
-
-		//	return clonedMoodboard;
-		//}
-
-		public async Task<ClientMoodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails, Project project)
-		{
-			ClientMoodboard clonedMoodboard = new ();
-			
-			clonedMoodboard.Name = moodboard.Name;
-			clonedMoodboard.IsTemplate = false;
-			clonedMoodboard.Created = DateTime.UtcNow;
-			clonedMoodboard.Updated = DateTime.UtcNow;
-			clonedMoodboard.Description = moodboard.Description;
-			clonedMoodboard.Room = moodboard.Room;
-			clonedMoodboard.Style = moodboard.Style;
-			clonedMoodboard.SourceMoodboardId = moodboard.Id;
-			clonedMoodboard.Materials = moodboard.Materials.ToArray();
-			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
-			clonedMoodboard.Products = moodboard.Products.ToArray();
-
-			clonedMoodboard.Project = project;
-
-			_context.Moodboards.Add(clonedMoodboard);
-
-			roomDetails.Moodboard = clonedMoodboard;
-
-
-			return clonedMoodboard;
-		}
-
 		#endregion Public methods
 	}
 }

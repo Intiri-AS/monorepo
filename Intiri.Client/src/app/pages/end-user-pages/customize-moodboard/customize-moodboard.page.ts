@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
@@ -42,7 +43,14 @@ export class CustomizeMoodboardPage {
 
   currentStepNo: number = 0;
 
-  constructor(public projectService: ProjectService, private route: ActivatedRoute, private router: Router, private moodboardService: MoodboardService, private notifier: NotifierService) {}
+  constructor (
+    public projectService: ProjectService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private moodboardService: MoodboardService,
+    private notifier: NotifierService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
 
@@ -63,6 +71,10 @@ export class CustomizeMoodboardPage {
       this.steps[2]['data'] = [...this.moodboard.products];
 
     })
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   backStep() {

@@ -16,7 +16,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId);
 		Task<IEnumerable<Moodboard>> GetMoodboardsWithImagesByIds(ICollection<int> ids);
 
-		Task<ClientMoodboard> CloneMoodboardAsync(Moodboard moodboard, RoomDetails roomDetails, Project project);
 		Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids);
 		Task<int> GetMoodboardsCountAsync();
 
