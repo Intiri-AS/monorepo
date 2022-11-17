@@ -57,7 +57,7 @@ export class ProjectService implements Resolve<Project> {
     return this.http.get<Project>(this.apiUrl + 'projects/id/' + id);
   }
 
-  getMbFamily(styleId, roomId) {
+  getMbFamily(styleId: any, roomId: any) {
     return this.http.get(`${this.apiUrl}projects/moodboardStyleFamily/${styleId}/${roomId}`);
   }
 
@@ -66,74 +66,49 @@ export class ProjectService implements Resolve<Project> {
       styleImageIds: project.styleImages.map(e=> e['id']),
       colorPaletteIds: project.colorPalettes.map(e=> e['id']),
       roomId: project.room['id'],
-      // budgetRate: 0,
-      // moodboard: this.parseMoodboard(project.currentMoodboard),
-      // roomDetails: {size: project.roomDetails['size'], shape: project.roomDetails['shape'].shape, budgetRate: project.roomDetails['budgetRate']},
       name: project.name};
 
     return parsedProj;
   };
 
-  parseProjectAsFormData(project) {
-    const moodboard = this.parseMoodboardFormData(project.currentMoodboard);
+  parseProjectAsFormData(project: Project) {
     const parsedFormData = {
-      styleImageIds: project.styleImages.map(e=> e['id']),
-      projectColorPaletteIds: project.colorPalettes.map(e=> e['id']),
       projectRoomId: project.room['id'],
-      projectName: project.name,
-      shape: project.roomDetails['shape'].shape,
-      size: project.roomDetails['size'],
-      budgetRate: project.roomDetails['budgetRate'],
-      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
-      id: moodboard.id,
-      name: moodboard.name,
-      // sourceMoodboardId: moodboard.sourceMoodboardId,
-      styleId: moodboard.styleId,
-      // designerId: moodboard.designerId,
-      roomId: moodboard.roomId,
-      isTemplate: moodboard.template,
-      materialsId: moodboard.materialIds,
-      colorPaletteIds: moodboard.colorPaletteIds,
-      productIds: moodboard.productIds
+      projectName: project.name
     };
+    const styleImageIds = project.styleImages.map((e: { [x: string]: any; })=> e['id']);
+    const projectColorPaletteIds = project.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
+
     const formData = new FormData();
+    
     Object.keys(parsedFormData).forEach(key => formData.append(key, parsedFormData[key]));
+    this.formDataAppendCollection("StyleImageIds", styleImageIds, formData);
+    this.formDataAppendCollection("ProjectColorPaletteIds", projectColorPaletteIds, formData);
+
+    this.parseRoomDetailsFormData(project, formData);
+    this.parseMoodboardFormData(project.currentMoodboard, formData);
+
     return formData;
   }
 
-  getMoodboardMatches(project) {
+  getMoodboardMatches(project: Project) {
     const req_data = this.parseProject(project);
     return this.http.post(this.apiUrl + 'projects/moodboardMatch', req_data);
   }
 
-  saveProject(project) {
+  saveProject(project: Project) {
     const req_data = this.parseProjectAsFormData(project);
     return this.http.post(this.apiUrl + 'projects/create', req_data);
   }
 
   addMoodboardToProject(project: Project)
   {
-    const moodboard = this.parseMoodboardFormData(project.currentMoodboard);
-    const reqData = {
-      projectId: project.id,
-      shape: project.roomDetails['shape'].shape,
-      size: project.roomDetails['size'],
-      budgetRate: project.roomDetails['budgetRate'],
-      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
-      id: moodboard.id,
-      name: moodboard.name,
-      description: moodboard.description,
-      // sourceMoodboardId: moodboard.sourceMoodboardId,
-      styleId: moodboard.styleId,
-      // designerId: moodboard.designerId,
-      roomId: moodboard.roomId,
-      isTemplate: moodboard.template,
-      materialsId: moodboard.materialIds,
-      colorPaletteIds: moodboard.colorPaletteIds,
-      productIds: moodboard.productIds
-    };
     const formData = new FormData();
-    Object.keys(reqData).forEach(key => formData.append(key, reqData[key]));
+
+    formData.append('projectId', project.id.toString());
+    this.parseRoomDetailsFormData(project, formData);
+    this.parseMoodboardFormData(project.currentMoodboard, formData);
+
     return this.http.post(this.apiUrl + 'projects/addMoodboard', formData);
   }
 
@@ -145,10 +120,10 @@ export class ProjectService implements Resolve<Project> {
     if(moodboard.room && moodboard.style) {
       let parsedMdb = {
         styleId: moodboard.style ? moodboard.style['id'] : null,
-        colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+        colorPaletteIds: moodboard.colorPalettes.map((e: { [x: string]: any; })=> e['id']),
         roomId: moodboard.room['id'],
-        materialIds: moodboard?.materials.map(e=> e['id']),
-        productIds: moodboard?.products.map(e=> e['id']),
+        materialIds: moodboard?.materials.map((e: { [x: string]: any; })=> e['id']),
+        productIds: moodboard?.products.map((e: { [x: string]: any; })=> e['id']),
         id: moodboard.id,
         name: moodboard.name, // remove later
         sourceMoodboardId: moodboard.sourceMoodboardId
@@ -157,22 +132,41 @@ export class ProjectService implements Resolve<Project> {
     } return moodboard;
   };
 
-  parseMoodboardFormData(moodboard: any) {
-      const parsedMdb = {
-        styleId: moodboard.style ? moodboard.style['id'] : null,
-        colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
-        roomId: moodboard.room['id'],
-        materialIds: moodboard?.materials.map(e=> e['id']),
-        productIds: moodboard?.products.map(e=> e['id']),
-        id: moodboard.id,
-        name: moodboard.name, // remove later
-        // sourceMoodboardId: moodboard.sourceMoodboardId, //provera
-        // designerId: moodboard.designerId,
-        template: moodboard.isTemplate,
-        description: moodboard.description
+  parseMoodboardFormData(moodboard: any, formData: FormData) {
+    const parsedMdb = {
+      styleId: moodboard.style ? moodboard.style['id'] : null,
+      roomId: moodboard.room['id'],
+      id: moodboard.id,
+      name: moodboard.name, // remove later
+      sourceMoodboardId: moodboard.sourceMoodboardId ? moodboard.sourceMoodboardId : 0,
+      isTemplate: moodboard.isTemplate,
+      description: moodboard.description
+    };
 
-      };
-      return parsedMdb;
+    const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
+    const colorPaletteIds = moodboard.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
+    const productIds = moodboard?.products.map((e: { [x: string]: any; })=> e['id']);
+
+    Object.keys(parsedMdb).forEach(key => formData.append("Moodboard." + key, parsedMdb[key]));
+
+    this.formDataAppendCollection("Moodboard.MaterialIds", materialIds, formData);
+    this.formDataAppendCollection("Moodboard.ColorPaletteIds", colorPaletteIds, formData);
+    this.formDataAppendCollection("Moodboard.ProductIds", productIds, formData);
+
+    return parsedMdb;
+  };
+
+  parseRoomDetailsFormData(project: any, formData: FormData) {
+    const parsedRDFormData = {
+      shape: project.roomDetails['shape'].shape,
+      size: project.roomDetails['size'],
+      budgetRate: project.roomDetails['budgetRate'],
+      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
+    };
+
+    Object.keys(parsedRDFormData).forEach(key => formData.append("RoomDetails." + key, parsedRDFormData[key]));
+
+    return parsedRDFormData;
   };
 
   getInspirations() {
@@ -181,14 +175,21 @@ export class ProjectService implements Resolve<Project> {
     })).toPromise();
   }
 
-  addInspiration(file) {
+  addInspiration(file: string | Blob) {
     const formData = new FormData();
     formData.append('inFile', file);
     return this.http.post(this.apiUrl + 'inspirations/add', formData);
   }
 
-  deleteInspiration(id) {
+  deleteInspiration(id: string) {
     return this.http.delete(this.apiUrl + 'inspirations/delete/' + id);
   }
 
+  formDataAppendCollection(arrayName: string, arrayValues: any[], formData: FormData) {
+    for (const index in arrayValues) 
+    {
+      // iterate for each item and append it to form.
+      formData.append(`${arrayName}[${index}]`,arrayValues[index]);
+    }
+  }
 }
