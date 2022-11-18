@@ -109,8 +109,10 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{materialId}")]
 		public async Task<IActionResult> DeleteMaterial(int materialId)
 		{
-			Material material = await _unitOfWork.MaterialRepository.GetByID(materialId);
+			Material material = await _unitOfWork.MaterialRepository.GetMaterialByIdWithMoodboardsAsync(materialId);
 			if (material == null) return BadRequest("Material is not found.");
+
+			if(material.Moodboards.Count > 0) return BadRequest("Deletion restricted. Material is part of Moodboard.");
 
 			try
 			{
@@ -127,7 +129,7 @@ namespace Intiri.API.Controllers
 				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(material.ImagePublicId);
 
 				if (tuple.Item1 != HttpStatusCode.OK)
-					return Problem(title: "Product is deleted. Faild delete product image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
+					return Problem(title: "Material is deleted. Faild delete material image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
 			}
 
 			return Ok();
