@@ -11,7 +11,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public string Description { get; set; }
 		public string ImagePath { get; set; }
 		public int MaterialId { get; set; }
+		public int PartnerId { get; set; }
 		public int ProductTypeId { get; set; }
-		//public ProductTypeOutDTO ProductType { get; set; }
 	}
 }
