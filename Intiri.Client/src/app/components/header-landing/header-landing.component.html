@@ -31,11 +31,14 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item>
+      <ion-item *ngIf="!loggedInUser">
         <ion-label class="cursor-pointer" routerLink="/login" >{{'COMMON.login' | translate}}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="!loggedInUser">
         <ion-label class="cursor-pointer" routerLink="/register" >{{'COMMON.register' | translate}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="loggedInUser">
+        <ion-label class="cursor-pointer" (click)="goToDashboard()">{{'MY-INTIRI.intiri' | translate}}</ion-label>
       </ion-item>
       <ion-button fill="clear" class="btn hover:opacity-80" (click)="showLanguage($event)">
         <ion-img [src]="languageImg"></ion-img>
