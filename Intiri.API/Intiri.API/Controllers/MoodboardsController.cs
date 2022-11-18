@@ -89,7 +89,6 @@ namespace Intiri.API.Controllers
 		{
 			Moodboard moodboard = _mapper.Map<Moodboard>(moodboardIn);
 
-			//moodboard.Designer = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(moodboard.DesignerId);
 			moodboard.Designer = await _unitOfWork.UserRepository.GetByID(User.GetUserId());
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardIn.StyleId);
@@ -129,11 +128,9 @@ namespace Intiri.API.Controllers
 				return BadRequest("Invalid consultation payment.");
 			}
 
-			//Moodboard moodboard = _mapper.Map<Moodboard>(moodboardOfferIn.MoodboardOffer);
 			ClientMoodboard moodboard = _mapper.Map<ClientMoodboard>(moodboardOfferIn.MoodboardOffer);
 
 			moodboard.Designer = designer;
-			//moodboard.Designer = consultationPayment.Payer;
 
 			Style style = await _unitOfWork.StyleRepository.GetByID(moodboardOfferIn.MoodboardOffer.StyleId);
 			moodboard.Style = style;

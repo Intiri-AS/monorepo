@@ -6,5 +6,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 	{
 		Task<IEnumerable<Material>> GetAllMaterialsAsync();
 		Task<IEnumerable<Material>> GetMaterialsByIdsListAsync(ICollection<int> materialIds);
+		Task<Material> GetMaterialByIdWithMoodboardsAsync(int materialId);
 	}
 }
