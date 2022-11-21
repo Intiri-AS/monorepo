@@ -1,4 +1,5 @@
 ﻿using Intiri.API.Models;
+using Intiri.API.Models.ChatMessage;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,9 @@ namespace Intiri.API.DataAccess.Repository.Interface
 
 		Task<IEnumerable<PartnerContact>> GetPartnerUsersAsync();
 		Task<PartnerContact> GetPartnerUserByIdAsync(int id);
+
+		Task<List<ChatMessage>> GetUserMassegesByUserIdAsync(int userId);
+		Task<bool> DoesAnyUserExistWithId(int userId);
 
 		void UpdateUser(User user);
 	}

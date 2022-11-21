@@ -28,6 +28,7 @@ namespace Intiri.API.Controllers
 		private readonly ISmsVerificationService _smsVerificationService;
 		private readonly ILogger<AccountController> _logger;
 		private readonly IRatingService _ratingService;
+		private readonly IUserService _userService;
 
 		#endregion  Fields
 
@@ -41,7 +42,8 @@ namespace Intiri.API.Controllers
 			IVippsLoginService vippsLoginService,
 			ISmsVerificationService smsVerificationService,
 			ILogger<AccountController> logger,
-			IRatingService ratingService) : base(unitOfWork)
+			IRatingService ratingService,
+			IUserService userService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
@@ -50,6 +52,7 @@ namespace Intiri.API.Controllers
 			_smsVerificationService = smsVerificationService;
 			_logger = logger;
 			_ratingService = ratingService;
+			_userService = userService;
 		}
 
 		#endregion Constructors
@@ -160,9 +163,15 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete-user/{id}")]
 		public async Task<ActionResult> DeleteUser(int id)
 		{
-			User user = null;
+			if (!await _unitOfWork.UserRepository.DoesAnyUserExistWithId(id))
+			{
+				return BadRequest("User doesn't exist ");
+			}
+
+			User user = null; 
 
 			IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
+			List<string> cloudinaryPublicIds = null;
 
 			if (userRoles.Contains(RoleNames.Partner))
 			{
@@ -171,10 +180,16 @@ namespace Intiri.API.Controllers
 			else if(userRoles.Contains(RoleNames.InternalDesigner))
 			{
 				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
+
+				await _userService.DeleteUserRelatedMessagesAsync(id);
+				cloudinaryPublicIds = new List<string>() { user.PublicId };
 			}
 			else if(userRoles.Contains(RoleNames.FreeEndUser))
 			{
 				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+				
+				await _userService.DeleteUserRelatedMessagesAsync(id);
+				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
 			}
 
 			if (user == null) 
@@ -183,12 +198,21 @@ namespace Intiri.API.Controllers
 			try
 			{
 				IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
-				if (!identityResult.Succeeded)
+				
+				if (!identityResult.Succeeded) 
 					return BadRequest("Faild to delete user");
+
+				await _unitOfWork.SaveChanges();
 			}
 			catch (Exception ex)
 			{
 				return BadRequest($"Faild to delete user: {ex.Message}");
+			}
+
+			// delete all user cloudinary files
+			if (cloudinaryPublicIds.Count > 0)
+			{
+				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
 			}
 
 			return Ok();

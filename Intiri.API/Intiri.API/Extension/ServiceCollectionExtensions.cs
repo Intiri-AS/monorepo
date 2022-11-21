@@ -47,6 +47,7 @@ namespace Intiri.API.Extension
 			services.AddScoped<IMessengerService, MessengerService>();
 			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
 			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
+			services.AddScoped<IUserService, UserService>();
 
 			return services;
 		}

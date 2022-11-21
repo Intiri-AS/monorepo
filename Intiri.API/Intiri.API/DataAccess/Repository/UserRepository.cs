@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models;
+using Intiri.API.Models.ChatMessage;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Microsoft.EntityFrameworkCore;
@@ -85,6 +86,7 @@ namespace Intiri.API.DataAccess.Repository
 		public async Task<EndUser> GetEndUserWithCollectionsAsync(int id)
 		{
 			return await _context.Users.OfType<EndUser>()
+				.Include(ins => ins.Inspirations)
 				.Include(cp => cp.ConsultationPayments)
 				.Include(p => p.CreatedProjects)
 					.ThenInclude(cm => cm.ProjectMoodboards)
@@ -92,7 +94,8 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(eu => eu.Id == id);
 		}
 
-		public async Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync()
+		//public async Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync()
+		public Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync()
 		{
 			//var articlesGrouped1 = _context.Users.OfType<EndUser>()
 			//	.Where(x => x.Id > 0)
@@ -104,9 +107,9 @@ namespace Intiri.API.DataAccess.Repository
 				(from mnt in Enumerable.Range(1, 12)
 				 join clt in _context.Users.OfType<EndUser>() on mnt equals clt.Created.Month into monthGroup
 				 select new ClientsPerMonthDTO { Month = mnt, ClientCount = monthGroup.Count() })
-				.ToList();
+				 .ToList();
 
-			return clientsPerMonth2;
+			return Task.FromResult(clientsPerMonth2);
 		}
 
 		#endregion EndUser
@@ -205,6 +208,20 @@ namespace Intiri.API.DataAccess.Repository
 		public void UpdateUser(User user)
 		{
 			Update(user);
+		}
+
+		public async Task<List<ChatMessage>> GetUserMassegesByUserIdAsync(int userId)
+		{
+			User user = await _context.Users.Include(ms => ms.MessagesSent).Include(mr => mr.MessagesReceived).SingleOrDefaultAsync(eu => eu.Id == userId);
+			List<ChatMessage> messages = new List<ChatMessage>(user.MessagesSent);
+			messages.AddRange(user.MessagesReceived);
+			
+			return messages;
+		}
+
+		public async Task<bool> DoesAnyUserExistWithId(int userId)
+		{
+			return await _context.Users.AnyAsync(us => us.Id == userId);
 		}
 	}
 }

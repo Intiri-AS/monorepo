@@ -68,7 +68,8 @@ public class CloudinaryService : ICloudinaryService
 
     public async Task<DeletionResult> DeleteFileAsync(string publicId)
     {
-        return await _cloudinary.DestroyAsync(new DeletionParams(publicId));
+		DeletionParams deleteParams = new(publicId);
+		return await _cloudinary.DestroyAsync(deleteParams);
     }
 
     public async Task<bool> TryCreateFolder(string name)
