@@ -19,7 +19,7 @@ namespace Intiri.API.Controllers
 	{
 		#region Fields
 
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly ICloudinaryService _cloudinaryUploadService;
 		private readonly ILogger<InspirationsController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -29,9 +29,9 @@ namespace Intiri.API.Controllers
 
 		#region Constructors
 
-		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
+		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
 		{
-			_fileUploadService = fileUploadService;
+			_cloudinaryUploadService = cloudinaryUploadService;
 			_accountService = accountService;
 			_logger = logger;
 			_mapper = mapper;
@@ -61,7 +61,7 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
+					uploadResult = await _cloudinaryUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
 				}
 				catch (Exception ex)
 				{
@@ -101,7 +101,7 @@ namespace Intiri.API.Controllers
 
 			if (inspiration.PublicId != null)
 			{
-				var result = await _fileUploadService.DeleteFileAsync(inspiration.PublicId);
+				var result = await _cloudinaryUploadService.DeleteFileAsync(inspiration.PublicId);
 				if (result.Error != null) return BadRequest(result.Error.Message);
 			}
 			 

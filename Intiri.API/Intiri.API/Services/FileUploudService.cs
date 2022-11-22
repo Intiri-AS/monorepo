@@ -132,18 +132,18 @@ namespace Intiri.API.Services
 			}
 			catch (Exception ex)
 			{
-				string exc = $"Failed to delete partner logo: {ex.Message}";
-				_logger.LogWarning(exc);
+				string messageEx = $"Faild delete file from cloudinary services: {ex.Message}";
+				_logger.LogWarning("{messageEx}", messageEx);
 
-				return Tuple.Create(deletionResult.StatusCode, exc);
+				return Tuple.Create(deletionResult.StatusCode, messageEx);
 			}
 
 			if (deletionResult.Error != null)
 			{
-				string err = $"Faild delete file from cloudinary services: {deletionResult.Error.Message}";
-				_logger.LogWarning(err);
+				string messageErr = $"Faild delete file from cloudinary services: {deletionResult.Error.Message}";
+				_logger.LogWarning("{messageErr}", messageErr);
 
-				return Tuple.Create(deletionResult.StatusCode, err);
+				return Tuple.Create(deletionResult.StatusCode, messageErr);
 			}
 
 			return Tuple.Create(HttpStatusCode.OK, "Succeeded");
