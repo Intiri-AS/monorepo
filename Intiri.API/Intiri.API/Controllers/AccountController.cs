@@ -7,11 +7,13 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.DTO.Vipps;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Rating;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +30,7 @@ namespace Intiri.API.Controllers
 		private readonly ISmsVerificationService _smsVerificationService;
 		private readonly ILogger<AccountController> _logger;
 		private readonly IRatingService _ratingService;
+		private readonly IUserService _userService;
 
 		#endregion  Fields
 
@@ -41,7 +44,8 @@ namespace Intiri.API.Controllers
 			IVippsLoginService vippsLoginService,
 			ISmsVerificationService smsVerificationService,
 			ILogger<AccountController> logger,
-			IRatingService ratingService) : base(unitOfWork)
+			IRatingService ratingService,
+			IUserService userService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_tokenService = tokenService;
@@ -50,6 +54,7 @@ namespace Intiri.API.Controllers
 			_smsVerificationService = smsVerificationService;
 			_logger = logger;
 			_ratingService = ratingService;
+			_userService = userService;
 		}
 
 		#endregion Constructors
@@ -79,7 +84,7 @@ namespace Intiri.API.Controllers
 
 			return Ok(registerOut);
 		}
-
+		
 		[HttpPost("login")]
 		public async Task<ActionResult> Login(LoginInDTO loginDto)
 		{
@@ -154,67 +159,6 @@ namespace Intiri.API.Controllers
 			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
 
 			return Ok("SMS verification code sent.");
-		}
-
-		//TODO: Clear cloudinary files
-		[HttpDelete("delete-user/{id}")]
-		public async Task<ActionResult> DeleteUser(int id)
-		{
-			User user = null;
-
-			IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
-
-			if (userRoles.Contains(RoleNames.Partner))
-			{
-				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
-			}
-			else if(userRoles.Contains(RoleNames.InternalDesigner))
-			{
-				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
-			}
-			else if(userRoles.Contains(RoleNames.FreeEndUser))
-			{
-				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
-			}
-
-			if (user == null) 
-				return BadRequest("User doesn't exist ");
-
-			try
-			{
-				IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
-				if (!identityResult.Succeeded)
-					return BadRequest("Faild to delete user");
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Faild to delete user: {ex.Message}");
-			}
-
-			return Ok();
-		}
-
-		//TODO: Clear cloudinary files
-		[HttpDelete("deleteEndUser/{id}")]
-		public async Task<ActionResult> DeleteEndUser(int id)
-		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
-
-			if (endUser == null) 
-				return BadRequest("End user doesn't exist");
-
-			try
-			{
-				IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
-				if (!identityResult.Succeeded)
-					return BadRequest("Faild to delete End user");
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Faild to delete End user: {ex.Message}");
-			}
-
-			return Ok();
 		}
 
 		[HttpPost("vipps-auth-url")]
@@ -360,6 +304,7 @@ namespace Intiri.API.Controllers
 			});
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("register/partnerContact")]
 		public async Task<ActionResult<RegisterOutDTO>> AddPartnerContact(PartnerContactInDTO registerIn)
 		{
@@ -388,6 +333,7 @@ namespace Intiri.API.Controllers
 			return Ok(_mapper.Map<PartnerContactOutDTO>(pUser));
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("register/designer")]
 		public async Task<ActionResult<RegisterOutDTO>> AddDesigner(DesignerInDTO registerIn)
 		{
@@ -412,6 +358,94 @@ namespace Intiri.API.Controllers
 			}
 
 			return Ok(_mapper.Map<RegisterOutDTO>(dUser));
+		}
+
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
+		[HttpDelete("delete-user/{id}")]
+		public async Task<ActionResult> DeleteUser(int id)
+		{
+			if (!await _unitOfWork.UserRepository.DoesAnyUserExistWithId(id))
+			{
+				return BadRequest("User doesn't exist ");
+			}
+
+			User user = null;
+
+			IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
+			List<string> cloudinaryPublicIds = null;
+
+			if (userRoles.Contains(RoleNames.Partner))
+			{
+				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
+			}
+			else if (userRoles.Contains(RoleNames.InternalDesigner))
+			{
+				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
+
+				await _userService.DeleteUserRelatedMessagesAsync(id);
+				cloudinaryPublicIds = new List<string>() { user.PublicId };
+			}
+			else if (userRoles.Contains(RoleNames.FreeEndUser))
+			{
+				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+
+				await _userService.DeleteUserRelatedMessagesAsync(id);
+				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
+			}
+
+			try
+			{
+				IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
+
+				if (!identityResult.Succeeded)
+					return BadRequest("Faild to delete user");
+
+				await _unitOfWork.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Faild to delete user: {ex.Message}");
+			}
+
+			// delete all user cloudinary files
+			if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
+			{
+				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
+			}
+
+			return Ok();
+		}
+
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
+		[HttpDelete("deleteEndUser/{id}")]
+		public async Task<ActionResult> DeleteEndUser(int id)
+		{
+			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+
+			if (endUser == null)
+				return BadRequest("End user doesn't exist");
+
+			await _userService.DeleteUserRelatedMessagesAsync(id);
+			List<string> cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(endUser);
+
+			try
+			{
+				IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
+				if (!identityResult.Succeeded)
+					return BadRequest("Faild to delete End user");
+			}
+			catch (Exception ex)
+			{
+				return BadRequest($"Faild to delete End user: {ex.Message}");
+			}
+
+			// delete all user cloudinary files
+			if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
+			{
+				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
+			}
+
+			return Ok();
 		}
 	}
 }

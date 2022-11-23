@@ -4,11 +4,14 @@ using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class MaterialTypesController : BaseApiController
 	{
 		#region Fields
@@ -53,6 +56,7 @@ namespace Intiri.API.Controllers
 			return Ok(materialTypeMaterialsOutDTO);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult> AddMaterialType(MaterialTypeInDTO materialTypeInDTO)
 		{
@@ -72,6 +76,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{materialTypeId}")]
 		public async Task<ActionResult> DeleteMaterialType(int materialTypeId)
 		{
@@ -84,11 +89,6 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-				foreach (Material material in materialType.Materials)
-				{
-					//await _imageService.DeleteImageFromFileSystemAsync(material.ImagePath);
-				}
-
 				await _unitOfWork.MaterialTypeRepository.Delete(materialType.Id);
 				await _unitOfWork.SaveChanges();
 			}

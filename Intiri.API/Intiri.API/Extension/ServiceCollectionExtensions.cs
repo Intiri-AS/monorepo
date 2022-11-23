@@ -2,6 +2,8 @@
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO;
+using Intiri.API.Models.PolicyNames;
+using Intiri.API.Models.RoleNames;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Messenger;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Stripe.Checkout;
 using System.Text;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Extension
 {
@@ -47,6 +50,7 @@ namespace Intiri.API.Extension
 			services.AddScoped<IMessengerService, MessengerService>();
 			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
 			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
+			services.AddScoped<IUserService, UserService>();
 
 			return services;
 		}
@@ -77,6 +81,17 @@ namespace Intiri.API.Extension
 						ValidateAudience = false,
 					};
 				});
+
+			services.AddAuthorization(opt =>
+			{
+				opt.AddPolicy(PolicyNames.AdminPolicy, policy => policy.RequireRole(RoleNames.Admin));
+				opt.AddPolicy(PolicyNames.ClientPolicy, policy => policy.RequireRole(RoleNames.FreeEndUser));
+				opt.AddPolicy(PolicyNames.DesignerPolicy, policy => policy.RequireRole(RoleNames.InternalDesigner));
+				opt.AddPolicy(PolicyNames.PartnerPolicy, policy => policy.RequireRole(RoleNames.Partner));
+				opt.AddPolicy(PolicyNames.MoodboardPolicy, policy => policy.RequireRole(RoleNames.Admin, RoleNames.InternalDesigner));
+				opt.AddPolicy(PolicyNames.ClientMoodboardPolicy, policy => policy.RequireRole(RoleNames.FreeEndUser, RoleNames.InternalDesigner));
+				opt.AddPolicy(PolicyNames.ProductPolicy, policy => policy.RequireRole(RoleNames.Admin, RoleNames.Partner));
+			});
 
 			return services;
 		}

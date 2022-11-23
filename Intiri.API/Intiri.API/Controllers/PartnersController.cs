@@ -15,14 +15,18 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.Room;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class PartnerController : BaseApiController
 	{
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly IUserService _userService;
 		private readonly IAccountService _accountService;
 		private readonly ILogger<UsersController> _logger;
 		private readonly IFileUploudService _fileUploadService;
@@ -31,18 +35,17 @@ namespace Intiri.API.Controllers
 
 		#region Constructors
 
-		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, ILogger<UsersController> logger) 
+		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, IUserService userService, ILogger<UsersController> logger) 
 			: base(unitOfWork)
 		{
 			_mapper = mapper;
 			_logger = logger;
+			_userService = userService;
 			_fileUploadService = fileUploadService;
 			_accountService = accountService;
 		}
 
 		#endregion Constructors
-
-
 
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
@@ -85,6 +88,7 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("createPartner")]
 		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
 		{
@@ -118,15 +122,18 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding partner");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{partnerId}")]
 		public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
 		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(partnerId);
 
 			if (partner == null)
 			{
 				return BadRequest("Partner doesn' exist.");
 			}
+
+			List<string> cloudinaryPublicIds = _userService.GetPartnerCloudinaryFilesAsync(partner);
 
 			try
 			{
@@ -138,17 +145,16 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Internal error: {ex}");
 			}
 
-			if (!string.IsNullOrEmpty(partner.LogoPublicId))
+			// delete all partner and partner products cloudinary files
+			if (cloudinaryPublicIds.Count > 0)
 			{
-				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(partner.LogoPublicId);
-
-				if (tuple.Item1 != HttpStatusCode.OK)
-					return Problem(title: "Partner is deleted. Faild delete partner logo.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
+				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
 			}
 
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.PartnerPolicy)]
 		[HttpPut("update")]
 		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile([FromForm]PartnerInDTO partnerInDTO)
 		{

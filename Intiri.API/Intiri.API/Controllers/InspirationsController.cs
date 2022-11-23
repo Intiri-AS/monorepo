@@ -12,14 +12,17 @@ using Microsoft.AspNetCore.Mvc;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.Moodboard;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class InspirationsController : BaseApiController
 	{
 		#region Fields
 
-		private readonly ICloudinaryService _fileUploadService;
+		private readonly ICloudinaryService _cloudinaryUploadService;
 		private readonly ILogger<InspirationsController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -29,9 +32,9 @@ namespace Intiri.API.Controllers
 
 		#region Constructors
 
-		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService fileUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
+		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
 		{
-			_fileUploadService = fileUploadService;
+			_cloudinaryUploadService = cloudinaryUploadService;
 			_accountService = accountService;
 			_logger = logger;
 			_mapper = mapper;
@@ -39,6 +42,7 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
 		{
@@ -50,6 +54,7 @@ namespace Intiri.API.Controllers
 			return Ok(inspirationsOut);
 		}
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
 		{
@@ -61,7 +66,7 @@ namespace Intiri.API.Controllers
 				ImageUploadResult uploadResult = null;
 				try
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
+					uploadResult = await _cloudinaryUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
 				}
 				catch (Exception ex)
 				{
@@ -90,6 +95,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding user inspiration.");
 		}
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpDelete("delete/{inspirationId}")]
 		public async Task<IActionResult> DeleteInspiration(int inspirationId)
 		{
@@ -101,7 +107,7 @@ namespace Intiri.API.Controllers
 
 			if (inspiration.PublicId != null)
 			{
-				var result = await _fileUploadService.DeleteFileAsync(inspiration.PublicId);
+				var result = await _cloudinaryUploadService.DeleteFileAsync(inspiration.PublicId);
 				if (result.Error != null) return BadRequest(result.Error.Message);
 			}
 			 

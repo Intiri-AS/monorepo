@@ -5,13 +5,17 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize(Policy = PolicyNames.AdminPolicy)]
 	public class AdminController : BaseApiController
 	{
 		#region Fields

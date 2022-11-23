@@ -3,14 +3,18 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Room;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class RoomTypesController : BaseApiController
 	{
 		#region Fields
@@ -55,6 +59,7 @@ namespace Intiri.API.Controllers
 			return Ok(roomTypeRoomsOutDTO);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult> AddRoomType(RoomTypeInDTO roomTypeInDTO)
 		{
@@ -74,6 +79,8 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		// TODO: Clear cloudinary file
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{roomTypeId}")]
 		public async Task<ActionResult> DeleteRoomType(int roomTypeId)
 		{

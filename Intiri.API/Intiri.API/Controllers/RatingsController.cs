@@ -10,9 +10,11 @@ using Intiri.API.Services.Interfaces;
 using Intiri.API.Models.DTO.OutputDTO.DesignerRating;
 using AutoMapper;
 using Intiri.API.Models.DTO.InputDTO.Moodboard;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class RatingsController : BaseApiController
 	{
 		#region Fields

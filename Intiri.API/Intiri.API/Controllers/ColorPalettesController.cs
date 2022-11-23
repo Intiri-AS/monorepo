@@ -4,8 +4,11 @@ using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.PolicyNames;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
@@ -37,6 +40,7 @@ namespace Intiri.API.Controllers
 			return Ok(colorPalettesOut);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<ColorPaletteOutDTO>> AddColorPalette([FromForm] ColorPaletteInDTO colorPaletteIn)
 		{
@@ -64,6 +68,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding color pallete");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("update/colorPaletteId")]
 		public async Task<ActionResult> UpdateColorPalette(int colorPaletteId, [FromForm] ColorPaletteInDTO colorPaletteIn)
 		{
@@ -86,6 +91,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Faild to update color palette.");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{colorPaletteId}")]
 		public async Task<ActionResult> DeleteColorPalette(int colorPaletteId)
 		{

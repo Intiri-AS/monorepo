@@ -12,11 +12,13 @@ using Intiri.API.Models.Payment;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class UsersController : BaseApiController
 	{
 
