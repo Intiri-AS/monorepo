@@ -9,10 +9,12 @@ using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
     public class RoomDetailsController : BaseApiController
 	{
 		#region Fields

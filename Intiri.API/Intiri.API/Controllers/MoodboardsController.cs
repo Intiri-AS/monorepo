@@ -9,10 +9,12 @@ using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Payment;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.RoleNames;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -20,6 +22,7 @@ using System.Net;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class MoodboardsController : BaseApiController
 	{
 		#region Fields
@@ -64,6 +67,7 @@ namespace Intiri.API.Controllers
 			return Ok(moodboardOut);
 		}
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpGet("client/moodboardOffers")]
 		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardOffers()
 		{
@@ -84,6 +88,7 @@ namespace Intiri.API.Controllers
 			return Ok(moodboardOffersOut);
 		}
 
+		[Authorize(Policy = PolicyNames.MoodboardPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboard(MoodboardInDTO moodboardIn)
 		{
@@ -116,6 +121,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding moodboard");
 		}
 
+		[Authorize(Policy = PolicyNames.DesignerPolicy)]
 		[HttpPost("addMoodboardOffer")]
 		public async Task<ActionResult<MoodboardOutDTO>> AddMoodboardOffer(MoodboardOfferInDTO moodboardOfferIn)
 		{
@@ -207,6 +213,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Something went wrong while modifying moodboard");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("templateSet")]
 		public async Task<ActionResult> SetMoodboardAsTemplate(MoodboardAsTemplateInDTO moodboardInDTO)
 		{
@@ -229,7 +236,8 @@ namespace Intiri.API.Controllers
 			return BadRequest("Something went wrong while set template moodboard");
 		}
 
-		[HttpDelete("delete/moodboardId")]
+		[Authorize(Policy = PolicyNames.MoodboardPolicy)]
+		[HttpDelete("delete/{moodboardId}")]
 		public async Task<ActionResult> DeleteMoodboard(int moodboardId)
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
@@ -249,7 +257,8 @@ namespace Intiri.API.Controllers
 		}
 
 		// TODO: Clear cloudinary sketch file
-		[HttpDelete("deleteClient/moodboardId")]
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
+		[HttpDelete("deleteClient/{moodboardId}")]
 		public async Task<ActionResult> DeleteClientMoodboard(int moodboardId)
 		{
 			ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardById(moodboardId);

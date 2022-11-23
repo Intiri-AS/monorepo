@@ -3,11 +3,15 @@ using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize(Policy = PolicyNames.AdminPolicy)]
 	public class ProductTypesController : BaseApiController
 	{
 		#region Fields

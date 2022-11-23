@@ -11,6 +11,7 @@ using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Material;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
@@ -18,6 +19,7 @@ using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Intiri.API.Shared.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,6 +28,7 @@ using System.Text.RegularExpressions;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize(Policy = PolicyNames.ClientPolicy)]
 	public class ProjectsController : BaseApiController
 	{
 		#region Fields

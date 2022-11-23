@@ -39,9 +39,6 @@ namespace Intiri.API.Services
 
 		public async Task<bool> DeleteUserRelatedMessagesAsync(int userId)
 		{
-			//List<ChatMessage> chatMessages = new List<ChatMessage>(endUser.MessagesSent);
-			//chatMessages.AddRange(endUser.MessagesSent);
-
 			List<ChatMessage> chatMessages = await _unitOfWork.UserRepository.GetUserMassegesByUserIdAsync(userId);
 
 			if (chatMessages.Count > 0)
@@ -61,7 +58,6 @@ namespace Intiri.API.Services
 
 			foreach (Project project in endUser.CreatedProjects)
 			{
-				//cloudinaryPublicIds.AddRange(project.ProjectMoodboards.Select(x => x.RoomDetails?.SketchPublicId).ToList());
 				cloudinaryPublicIds.AddRange(project.ProjectMoodboards.Where(rs => rs.RoomDetails != null && !string.IsNullOrEmpty(rs.RoomDetails.SketchPublicId)).
 					Select(x => x.RoomDetails.SketchPublicId).ToList());
 			}

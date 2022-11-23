@@ -15,9 +15,12 @@ using Intiri.API.Models.Product;
 using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.Room;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class PartnerController : BaseApiController
 	{
 		#region Fields
@@ -43,8 +46,6 @@ namespace Intiri.API.Controllers
 		}
 
 		#endregion Constructors
-
-
 
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
@@ -87,6 +88,7 @@ namespace Intiri.API.Controllers
 			return Ok(usersToReturn);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("createPartner")]
 		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
 		{
@@ -120,6 +122,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem occured while adding partner");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{partnerId}")]
 		public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
 		{
@@ -151,6 +154,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.PartnerPolicy)]
 		[HttpPut("update")]
 		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile([FromForm]PartnerInDTO partnerInDTO)
 		{

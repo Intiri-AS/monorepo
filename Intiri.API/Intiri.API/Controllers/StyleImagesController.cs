@@ -5,9 +5,11 @@ using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,6 +59,7 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<StyleImageOutDTO>(styleImage);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleImageInDTO styleImageInDTO)
 		{
@@ -101,6 +104,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding style image");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{imageId}")]
 		public async Task<IActionResult> DeleteStyleImage(int imageId)
 		{
