@@ -6,12 +6,16 @@ using Intiri.API.Models.DTO;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.RoleNames;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class ConsultationsController : BaseApiController
 	{
 		#region Fields
@@ -37,6 +41,7 @@ namespace Intiri.API.Controllers
 			return Ok(new ConsulatationDTO { Price = consultation.Price, Duration = consultation.Duration });
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("update")]
 		public async Task<ActionResult<ConsulatationDTO>> UpdateConsultation(ConsulatationDTO consulatationDTO)
 		{

@@ -6,16 +6,19 @@ using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Stripe;
 using System.Net;
+using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
@@ -63,6 +66,7 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<RoomOutDTO>(room);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<RoomOutDTO>> AddRoom([FromForm] RoomInDTO roomInDTO)
 		{
@@ -105,6 +109,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding room");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("update/{roomId}")]
 		public async Task<ActionResult<RoomOutDTO>> UpdateRoom(int roomId, [FromForm] RoomInDTO roomInDTO)
 		{
@@ -143,6 +148,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Faild to update room.");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{roomId}")]
 		public async Task<IActionResult> DeleteRoom(int roomId)
 		{

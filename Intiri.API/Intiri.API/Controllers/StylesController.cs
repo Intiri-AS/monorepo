@@ -18,9 +18,12 @@ using Intiri.API.Shared;
 using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.Room;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class StylesController : BaseApiController
 	{
 		#region Fields
@@ -79,6 +82,7 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<StyleWithImagesOutDTO>(style);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<StyleOutDTO>> AddStyle([FromForm]StyleInDTO styleInDTO)
 		{
@@ -114,6 +118,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding style");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{styleId}")]
 		public async Task<IActionResult>DeleteStyle(int styleId)
 		{
@@ -152,6 +157,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("update/{styleId}")]
 		public async Task<ActionResult<StyleOutDTO>> UpdateStyle(int styleId, [FromForm] StyleInDTO styleInDTO)
 		{

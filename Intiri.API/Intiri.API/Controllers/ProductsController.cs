@@ -7,16 +7,19 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Services;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class ProductsController : BaseApiController
 	{
 		#region Fields
@@ -90,6 +93,7 @@ namespace Intiri.API.Controllers
 			return Ok(_mapper.Map<ProductOutDTO>(product));
 		}
 
+		[Authorize(Policy = PolicyNames.PartnerPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct([FromForm] ProductInDTO productInDTO)
 		{
@@ -145,6 +149,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Probem occured while adding product");
 		}
 
+		[Authorize(Policy = PolicyNames.ProductPolicy)]
 		[HttpDelete("delete/{productId}")]
 		public async Task<IActionResult> DeleteProduct(int productId)
 		{
@@ -180,6 +185,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.ProductPolicy)]
 		[HttpPatch("update/{productId}")]
 		public async Task<IActionResult> UpdateProduct(int productId, [FromForm]ProductInDTO productInDTO)
 		{

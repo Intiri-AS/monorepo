@@ -13,9 +13,12 @@ using Intiri.API.Models.Rating;
 using Intiri.API.Models.Payment;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Intiri.API.DataAccess.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class DesignersController : BaseApiController
 	{
 		#region Fields
@@ -83,7 +86,7 @@ namespace Intiri.API.Controllers
 			return Ok(userToReturn);
 		}
 
-		// Admin panel
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpGet("withReviews/id/{designerId}")]
 		public async Task<ActionResult<DesignerOutDTO>> GetAllDesignerWithMoodboardsAndReviews(int designerId)
 		{
@@ -102,6 +105,7 @@ namespace Intiri.API.Controllers
 			return Ok(userToReturn);
 		}
 
+		[Authorize(Policy = PolicyNames.DesignerPolicy)]
 		[HttpGet("designerClients")]
 		public async Task<ActionResult<IEnumerable<DesignerClientOutDTO>>> GetAllDesignerClients()
 		{
@@ -113,6 +117,7 @@ namespace Intiri.API.Controllers
 			return Ok(clientsToReturn);
 		}
 
+		[Authorize(Policy = PolicyNames.DesignerPolicy)]
 		[HttpGet("clientConsultation/{consultationId}")]
 		public async Task<ActionResult<DesignerClientFullOutDTO>> GetDesignerClient(int consultationId)
 		{
@@ -126,6 +131,7 @@ namespace Intiri.API.Controllers
 			return Ok(clientFullOutDTO);
 		}
 
+		[Authorize(Policy = PolicyNames.DesignerPolicy)]
 		[HttpGet("statistic")]
 		public async Task<ActionResult<DesignerStatisticsOutDTO>> GetDesignerStatistics()
 		{

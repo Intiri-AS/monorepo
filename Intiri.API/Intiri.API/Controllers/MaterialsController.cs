@@ -9,11 +9,13 @@ using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Material;
+using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -21,6 +23,7 @@ using System.Net;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class MaterialsController : BaseApiController
 	{
 		#region Fields
@@ -65,6 +68,7 @@ namespace Intiri.API.Controllers
 			return _mapper.Map<MaterialOutDTO>(material);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<MaterialOutDTO>> AddMaterial([FromForm] MaterialInDTO materialInDTO)
 		{
@@ -106,6 +110,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding material.");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{materialId}")]
 		public async Task<IActionResult> DeleteMaterial(int materialId)
 		{
@@ -135,6 +140,7 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPatch("update/{materialId}")]
 		public async Task<ActionResult<MaterialOutDTO>> UpdateMaterial(int materialId, [FromForm] MaterialInDTO materialInDTO)
 		{

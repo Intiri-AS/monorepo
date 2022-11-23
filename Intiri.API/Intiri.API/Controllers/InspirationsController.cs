@@ -12,9 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.Moodboard;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
+	[Authorize]
 	public class InspirationsController : BaseApiController
 	{
 		#region Fields
@@ -39,6 +42,7 @@ namespace Intiri.API.Controllers
 
 		#endregion Constructors
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
 		{
@@ -50,6 +54,7 @@ namespace Intiri.API.Controllers
 			return Ok(inspirationsOut);
 		}
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
 		{
@@ -90,6 +95,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Problem adding user inspiration.");
 		}
 
+		[Authorize(Policy = PolicyNames.ClientPolicy)]
 		[HttpDelete("delete/{inspirationId}")]
 		public async Task<IActionResult> DeleteInspiration(int inspirationId)
 		{
