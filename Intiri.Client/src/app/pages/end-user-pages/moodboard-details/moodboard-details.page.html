@@ -16,7 +16,7 @@
           <ion-button fill="clear" class="primary-btn" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
           <ion-button *ngIf="projectId" fill="clear" class="secondary-btn" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
           <ion-button *ngIf="projectId" fill="clear" class="primary-btn" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
-          <ion-button *ngIf="projectId" fill="clear" class="secondary-btn opacity-60" disabled>{{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
+          <ion-button *ngIf="projectId" fill="clear" class="secondary-btn" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
         </div>
       </div>
 

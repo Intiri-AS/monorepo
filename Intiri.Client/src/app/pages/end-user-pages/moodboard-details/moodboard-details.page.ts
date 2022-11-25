@@ -31,5 +31,18 @@ export class MoodboardDetailsPage implements OnInit {
       history.back();
     }
   }
+  getCraftsmanPage() {
+    const craftsmanPages = {
+      default: 'https://prosjekt.luado.no/',
+      kitchen: 'https://prosjekt.luado.no/project-types/136/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard',
+      bathroom: 'https://prosjekt.luado.no/project-types/137/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard',
+      bedroom: 'https://prosjekt.luado.no/project-types/138/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard',
+      livingroom: 'https://prosjekt.luado.no/project-types/139/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard',
+      diningroom: 'https://prosjekt.luado.no/project-types/139/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard',
+      youthroom: 'https://prosjekt.luado.no/projects/?utm_source=intiri&utm_medium=affiliate&utm_campaign=moodboard/',
+    }
+    const roomIndex = this.moodboard.room.name.toLowerCase().replace(/ /g,'');
+    return craftsmanPages[roomIndex] ? craftsmanPages[roomIndex] : craftsmanPages['default'];
+  }
 
 }
