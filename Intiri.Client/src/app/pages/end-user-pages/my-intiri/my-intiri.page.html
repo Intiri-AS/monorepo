@@ -108,7 +108,7 @@
       <div class="flex justify-between items-center">
         <p class="text-3xl font-medium text-black-2 mt-16 mb-4">{{'MY-INTIRI.inspirations' | translate}}</p>
         <ion-button fill="clear" class="text-primary">
-          <p class="capitalize hover:opacity-80 text-lg" routerLink="/my-inspirations" routerDirection="root">See all</p>
+          <p class="capitalize hover:opacity-80 text-lg" routerLink="/my-inspirations" routerDirection="root">{{'MY-INTIRI.see-all' | translate}}</p>
         </ion-button>
       </div>
       <ion-row class="gap-x-[1.45%]">
@@ -130,7 +130,7 @@
               <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">
                 <div *ngIf="!imagePath" class="text-center mt-[85px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                  <p class="leading-[22px] font-semibold text-black-3 text-lg">Add first inspiration</p>
+                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'MY-INTIRI.add-first-inspiration' | translate}}</p>
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>

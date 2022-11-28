@@ -1,6 +1,6 @@
 <div>
-  <h2 class="step-title">{{currentStep.title}}</h2>
-  <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle}}</p>
+  <h2 class="step-title">{{currentStep.title | translate}}</h2>
+  <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
   <p *ngIf="currentStep.data === 'final'" class="step-subtitle">{{project.currentMoodboard.style?.description}} <br/> {{project.currentMoodboard.room?.description}}</p>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
@@ -43,7 +43,7 @@
       </ion-row>
     </ion-grid>
     <div class="w-[200px]">
-      <span class="text-black-2">Or upload room sketch</span>
+      <span class="text-black-2">{{'NEW-PROJECT.upload-sketch' | translate}}</span>
       <label for="dropzone-file">
         <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
           <div *ngIf="!imagePath" class="text-center mt-[65px]">

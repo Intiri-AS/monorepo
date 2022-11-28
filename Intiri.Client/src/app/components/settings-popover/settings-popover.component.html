@@ -5,26 +5,26 @@
       <span class="text-primary font-medium ml-2">{{'PRICING-PLAN.free-plan' | translate}}</span><br/><br/>
     </ion-item>
     <hr class="border-light border-t mx-[16px] my-[16px]" />
-    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">{{'COMMON.language' | translate}}</ion-item>
     <ion-item class="text-black-1" [button]="true" [detail]="true">{{'LANDING.terms' | translate}}</ion-item>
     <!-- <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openPricingPlans()">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-item> -->
     <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">{{'COMMON.logout' | translate}}</ion-item>
   </ion-list>
 
   <ion-list *ngIf="headerType === 'admin'" lines="none" >
-    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">{{'COMMON.language' | translate}}</ion-item>
     <ion-item class="text-black-1" [button]="true" [detail]="true">{{'LANDING.terms' | translate}}</ion-item>
     <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">{{'COMMON.logout' | translate}}</ion-item>
   </ion-list>
 
   <ion-list *ngIf="headerType === 'partner'" lines="none" >
-    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">{{'COMMON.language' | translate}}</ion-item>
     <ion-item class="text-black-1" [button]="true" [detail]="true">{{'LANDING.terms' | translate}}</ion-item>
     <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">{{'COMMON.logout' | translate}}</ion-item>
   </ion-list>
 
   <ion-list *ngIf="headerType === 'designer'" lines="none" >
-    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">Language</ion-item>
+    <ion-item class="text-black-1" [button]="true" [detail]="true" (click)="openLanguagePopover($event)">{{'COMMON.language' | translate}}</ion-item>
     <ion-item class="text-black-1" [button]="true" [detail]="true">{{'LANDING.terms' | translate}}</ion-item>
     <ion-item class="text-black-1 font-medium" [button]="true" [detail]="true" (click)="openLogoutModal()">{{'COMMON.logout' | translate}}</ion-item>
   </ion-list>

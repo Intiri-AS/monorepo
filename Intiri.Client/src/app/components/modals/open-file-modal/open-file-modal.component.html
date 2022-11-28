@@ -6,10 +6,10 @@
   <ion-icon name="close" class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]" (click)="dismissModal()"></ion-icon>
 </div>
 <div *ngIf="isRemoving" class="p-16">
-  <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove inspiration</h2>
-  <p class="text-center text-base text-[18px] text-black-2 mb-6">Are you sure that you want to remove this inspiration? This action cannot be undone.</p>
+  <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'MY-INTIRI.remove-inspiration' | translate}}</h2>
+  <p class="text-center text-base text-[18px] text-black-2 mb-6">{{'MY-INTIRI.remove-inspiration-text' | translate}}</p>
 <ion-buttons class="justify-center">
-  <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteFile()">Remove</ion-button>
-  <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+  <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteFile()">{{'COMMON.remove' | translate}}</ion-button>
+  <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
 </ion-buttons>
 </div>

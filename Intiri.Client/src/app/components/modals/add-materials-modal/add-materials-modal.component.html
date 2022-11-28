@@ -84,11 +84,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove material</h2>
-          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this material? This action cannot be undone.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.material' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.material' | translate) } }}</p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteMaterial()">Remove material</ion-button>
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteMaterial()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.material' | translate) } }}</ion-button>
           <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>
@@ -101,7 +101,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">Edit material</h1> <!-- TODO Translate -->
+          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.material' | translate) } }}</h1> <!-- TODO Translate -->
         </ion-col>
       </ion-row>
       <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
@@ -133,7 +133,7 @@
       <ion-row class="pl-0 md:pl-[100px]">
         <ion-col size="12" sizeMd="6">
           <div class="mt-4 mx-2 px-0 w-fit">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">Current image</p> <!-- TODO Translate -->
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'COMMON-MODAL.current-picture' | translate}}</p>
             <div class="w-[200px] border-2 border-solid rounded-2xl h-[200px] border-primary">
               <img [src]="item.imagePath" class="object-cover rounded-2xl p-1 h-full w-full" alt="oldImg">
             </div>
@@ -141,7 +141,7 @@
         </ion-col>
         <ion-col size="12" sizeMd="6">
           <div class="mt-4 mx-2 px-0 w-fit">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">New image</p> <!-- TODO Translate -->
+            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'COMMON-MODAL.new-picture' | translate}}</p>
             <label for="dropzone-file">
               <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
                 <div *ngIf="!imagePath" class="text-center mt-[65px]">
@@ -158,7 +158,7 @@
       <ion-row>
         <ion-col class="text-center mt-8">
           <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">Save changes</ion-button> <!-- TODO Translate -->
+          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.save-changes' | translate}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

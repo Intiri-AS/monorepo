@@ -69,11 +69,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove picture</h2>
-          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this picture? This action cannot be undone.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.picture' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.picture' | translate) } }}</p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyleImage()">Remove picture</ion-button>
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteStyleImage()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.picture' | translate) } }}</ion-button>
           <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>

@@ -121,14 +121,14 @@
         <ion-row>
           <ion-col>
             <div class="profile-input">
-              <span class="text-sm text-black-2">Partner contact first name</span>
+              <span class="text-sm text-black-2">{{'PARTNERS.contact-firstName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && contactFirstNameErrors?.required">Field Required!</span>
             </div>
           </ion-col>
           <ion-col>
             <div class="profile-input">
-              <span class="text-sm text-black-2">Partner contact last name</span>
+              <span class="text-sm text-black-2">{{'PARTNERS.contact-lastName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && contactLastNameErrors?.required">Field Required!</span>
             </div>
@@ -189,11 +189,11 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Partner contact added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new partner contact.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'PARTNERS.contact-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'PARTNERS.contact-added-text' | translate}}</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissContactModal()">Go to Partner</ion-button>
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissContactModal()">{{'PARTNERS.go-to' | translate}}</ion-button>
           </ion-buttons>
         </div>
     </div>

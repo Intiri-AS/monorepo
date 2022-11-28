@@ -19,7 +19,7 @@ export class PaymentDetailsPage {
   ];
 
   consultationPrice = 950;
-  currency = 'Nok';
+  currency = 'NOK';
   consultationNumber = 3;
   totalPrice = 2850;
 

@@ -18,10 +18,10 @@
 <div class="profile-input" *ngIf="userInfo">
   <span class="text-sm text-black-2">{{'PROFILE.gender' | translate}}</span>
   <ion-select interface="popover" [value]="dataInput.gender" formControlName="gender" (ionChange)="genderChange($event)">
-    <ion-select-option value="male">Male</ion-select-option>
-    <ion-select-option value="female">Female</ion-select-option>
-    <ion-select-option value="non-binary">Non-binary</ion-select-option>
-    <ion-select-option value="not-to-say">I prefer not to say</ion-select-option>
+    <ion-select-option value="male">{{'PROFILE.male' | translate}}</ion-select-option>
+    <ion-select-option value="female">{{'PROFILE.female' | translate}}</ion-select-option>
+    <ion-select-option value="non-binary">{{'PROFILE.non-binary' | translate}}</ion-select-option>
+    <ion-select-option value="not-to-say">{{'PROFILE.not-to-say' | translate}}</ion-select-option>
   </ion-select>
 </div>
 

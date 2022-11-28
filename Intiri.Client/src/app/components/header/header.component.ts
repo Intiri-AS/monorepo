@@ -14,8 +14,8 @@ import { SettingsPopoverComponent } from '../settings-popover/settings-popover.c
 export class HeaderComponent {
 
   menuItems = [
-    {title: 'My Intiri', url: '/my-intiri'},
-    {title: 'Book a designer', url: '/book-designer'},
+    {title: 'MY-INTIRI.intiri', url: '/my-intiri'},
+    {title: 'MY-INTIRI.book', url: '/book-designer'},
   ]
 
   loggedUser$ = this.accountService.currentUser$;

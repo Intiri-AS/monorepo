@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -24,7 +25,8 @@ export class InspirationsPage {
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
     private notifier: NotifierService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class InspirationsPage {
         this.inspirations = res;
         this.imagePath = null;
         this.notifier.show({
-          message: 'New inspiration image added successfully',
+          message: this.translate.instant('MY-INTIRI.add-inspiration-message'),
           type: 'success',
         });
       })
@@ -56,7 +58,7 @@ export class InspirationsPage {
       this.spinner.hide();
       this.imagePath = null;
       this.notifier.show({
-        message: 'Cannot upload this file',
+        message: this.translate.instant('MY-INTIRI.add-inspiration-message-error'),
         type: 'error',
       });
     })
@@ -94,6 +96,5 @@ export class InspirationsPage {
       this.imagePath = null;
     }
   }
-
 
 }
