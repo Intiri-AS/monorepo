@@ -14,14 +14,18 @@ import { SettingsPopoverComponent } from '../settings-popover/settings-popover.c
 export class HeaderPartnerComponent {
 
   menuItems = [
-    {title: 'Product', url: '/partner'}
+    {title: 'PARTNERS.product', url: '/partner'}
   ]
 
   loggedUser$ = this.accountService.currentUser$;
 
   isSettingsSelected: boolean;
 
-  constructor(private projectService: ProjectService, private accountService: AccountService,  private router: Router, public popoverController: PopoverController) {}
+  constructor(
+    private projectService: ProjectService, 
+    private accountService: AccountService,  
+    private router: Router, 
+    public popoverController: PopoverController) {}
 
   isActiveRoute(route): boolean {
     return this.router.url === route;

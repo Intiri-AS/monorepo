@@ -22,7 +22,7 @@ export class SubHeaderComponent {
     partners: [this.translate.instant("DASHBOARD.partners"), this.translate.instant("PARTNERS.products")],
     clients: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("CLIENTS.inspiration")],
     moodboards: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")],
-    clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.statistic"), 'ratings'],
+    clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.statistic"), this.translate.instant("DASHBOARD.ratings")],
     designerMoodboards: [this.translate.instant("DASHBOARD.my-moodboards"), this.translate.instant("DASHBOARD.all-moodboards")],
     style: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")]
   }
@@ -36,13 +36,13 @@ export class SubHeaderComponent {
 
   revokeTranslations() {
   this.menuItems = {
-    partners: [this.translate.instant("DASHBOARD.partners"), this.translate.instant("PARTNERS.products")],
-    clients: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("CLIENTS.inspiration")],
-    moodboards: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")],
-    clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.statistic"), 'ratings'],
-    designerMoodboards: [this.translate.instant("DASHBOARD.my-moodboards"), this.translate.instant("DASHBOARD.all-moodboards")],
-    style: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")]
-  }
+      partners: [this.translate.instant("DASHBOARD.partners"), this.translate.instant("PARTNERS.products")],
+      clients: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("CLIENTS.inspiration")],
+      moodboards: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")],
+      clientList: [this.translate.instant("DASHBOARD.clients"), this.translate.instant("DASHBOARD.statistic"), this.translate.instant("DASHBOARD.ratings")],
+      designerMoodboards: [this.translate.instant("DASHBOARD.my-moodboards"), this.translate.instant("DASHBOARD.all-moodboards")],
+      style: [this.translate.instant("STYLE.styles"), this.translate.instant("STYLE.materials"), this.translate.instant("STYLE.rooms"), this.translate.instant("MY-INTIRI.colors"), this.translate.instant("STYLE.pictures")]
+    }
   }
 
   goToSlide(id) {

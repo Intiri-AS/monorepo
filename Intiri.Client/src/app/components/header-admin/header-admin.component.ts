@@ -24,38 +24,37 @@ export class HeaderAdminComponent implements OnInit {
     private translate: TranslateService) {}
 
     menuItems = [
-      {title: this.translate.instant("DASHBOARD.dashboard"), url: '/dashboard'},
-      {title: this.translate.instant("DASHBOARD.consultations"), url: '/consultations'},
-      {title: this.translate.instant("DASHBOARD.partners"), url: '/partners'},
-      {title: this.translate.instant("DASHBOARD.designers"), url: '/designers'},
-      {title: this.translate.instant("DASHBOARD.clients"), url: '/clients'},
-      {title: this.translate.instant("DASHBOARD.moodboards"), url: '/moodboards'},
-      {title: this.translate.instant("DASHBOARD.style"), url: '/style'},
+      {title: 'DASHBOARD.dashboard', url: '/dashboard'},
+      {title: 'DASHBOARD.consultations', url: '/consultations'},
+      {title: 'DASHBOARD.partners', url: '/partners'},
+      {title: 'DASHBOARD.designers', url: '/designers'},
+      {title: 'DASHBOARD.clients', url: '/clients'},
+      {title: 'DASHBOARD.moodboards', url: '/moodboards'},
+      {title: 'DASHBOARD.style', url: '/style'},
     ]
 
     ngOnInit() {
-      this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-        this.translate.setDefaultLang(event.lang);
-        this.revokeTranslations();
-      });
-
+      // this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+      //   this.translate.setDefaultLang(event.lang);
+      //   //this.revokeTranslations();
+      // });
     }
 
   isActiveRoute(route): boolean {
     return this.router.url.split('?')[0] === route;
   }
 
-  revokeTranslations() {
-    this.menuItems = [
-      {title: this.translate.instant("DASHBOARD.dashboard"), url: '/dashboard'},
-      {title: this.translate.instant("DASHBOARD.consultations"), url: '/consultations'},
-      {title: this.translate.instant("DASHBOARD.partners"), url: '/partners'},
-      {title: this.translate.instant("DASHBOARD.designers"), url: '/designers'},
-      {title: this.translate.instant("DASHBOARD.clients"), url: '/clients'},
-      {title: this.translate.instant("DASHBOARD.moodboards"), url: '/moodboards'},
-      {title: this.translate.instant("DASHBOARD.style"), url: '/style'},
-    ]
-  }
+  // revokeTranslations() {
+  //   this.menuItems = [
+  //     {title: this.translate.instant("DASHBOARD.dashboard"), url: '/dashboard'},
+  //     {title: this.translate.instant("DASHBOARD.consultations"), url: '/consultations'},
+  //     {title: this.translate.instant("DASHBOARD.partners"), url: '/partners'},
+  //     {title: this.translate.instant("DASHBOARD.designers"), url: '/designers'},
+  //     {title: this.translate.instant("DASHBOARD.clients"), url: '/clients'},
+  //     {title: this.translate.instant("DASHBOARD.moodboards"), url: '/moodboards'},
+  //     {title: this.translate.instant("DASHBOARD.style"), url: '/style'},
+  //   ]
+  // }
 
   menuOpened() {
     const x = document.querySelector('#home');
