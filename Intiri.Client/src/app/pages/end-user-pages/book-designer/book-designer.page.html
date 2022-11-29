@@ -2,7 +2,7 @@
   <div id="home">
     <app-header></app-header>
     <div class="main-container">
-      <h1 class="main-title">{{(isContactDesigner ? 'CONTACT-DESIGNER.select' : 'MY-INTIRI.book') | translate}}</h1>
+      <h1 class="main-title">{{(isContactDesigner ? 'CONTACT-DESIGNER.select' : 'MY-INTIRI.book-title') | translate}}</h1>
       <ion-row class="mt-8 gap-x-[1.65%]">
         <ion-col *ngFor="let d of designers" class="!pb-8" size="12" size-sm="5.75" size-xl="3.86" >
           <div class="designer">
@@ -27,11 +27,12 @@
               <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/profile-img.png'" class="h-[30px] w-[30px] rounded-md object-cover">
               <p class="text-black-2 text-lg mac:text-2xl font-medium ml-2">{{d.firstName}} {{d.lastName}}</p>
             </div>
-            <ion-buttons *ngIf="isContactDesigner" (click)="paymentModal(d)"><ion-button class="primary-btn !bg-none">Choose</ion-button></ion-buttons>
-            <ion-buttons *ngIf="!isContactDesigner" routerLink="/designer-profile/{{d.id}}"><ion-button class="primary-btn !bg-none">Choose</ion-button></ion-buttons>
+            <ion-buttons *ngIf="isContactDesigner" (click)="paymentModal(d)"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>
+            <ion-buttons *ngIf="!isContactDesigner" routerLink="/designer-profile/{{d.id}}"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>
           </div>
           <div>
-            <p class="text-base mac:text-lg text-black-3">{{getDesignerType(d)}} / {{d.createdMoodboards.length}} designs / {{languages[d.language]}}</p>
+            <p class="text-base mac:text-lg text-black-3">{{getDesignerType(d)}} / {{ 'CARD-INFO.designs' | translate:{'length': d.createdMoodboards.length} }} 
+              / {{ 'COMMON.language' | translate }} {{ 'COMMON.' + d.language | translate }}</p>
           </div>
         </ion-col>
       </ion-row>

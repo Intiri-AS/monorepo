@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
@@ -42,7 +43,8 @@ export class PartnerProfilePage implements OnInit {
     private spinner: NgxSpinnerService,
     private partnerService: PartnerService,
     private fb: FormBuilder,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -88,7 +90,7 @@ export class PartnerProfilePage implements OnInit {
     this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Profile updated successfully',
+        message: this.translate.instant('PROFILE.update-message'),
         type: 'success',
       });
     });

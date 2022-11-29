@@ -26,25 +26,25 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'Room sketch', isChecked: false
+      id: 1, name: 'BOOK-MODAL.room-sketch', isChecked: false
     },
     {
-      id: 2, name: 'Color advice', isChecked: false
+      id: 2, name: 'BOOK-MODAL.color-advice', isChecked: false
     },
     {
-      id: 3, name: 'Moodboard adjustments', isChecked: false
+      id: 3, name: 'BOOK-MODAL.moodboard-adjustment', isChecked: false
     },
     {
-      id: 4, name: 'Select products', isChecked: false
+      id: 4, name: 'BOOK-MODAL.select-products', isChecked: false
     },
     {
-      id: 5, name: 'Lining plan', isChecked: false
+      id: 5, name: 'BOOK-MODAL.lining-plan', isChecked: false
     },
     {
-      id: 6, name: 'Decoration', isChecked: false
+      id: 6, name: 'BOOK-MODAL.decoration', isChecked: false
     },
     {
-      id: 7, name: 'Other questions', isChecked: false
+      id: 7, name: 'BOOK-MODAL.other-quesiton', isChecked: false
     }
   ];
 

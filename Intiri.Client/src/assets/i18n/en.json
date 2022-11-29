@@ -25,9 +25,12 @@
     "stories": "Stories",
     "contact": "Contact",
     "welcome": "Welcome to Intiri",
-    "ideas": "Get IDEAS for furnishing and decorating your home!",
+    "ideas-get": "Get",
+    "ideas": "IDEAS",
+    "ideas-content": "for furnishing and decorating your home!",
     "find": "Find your style",
     "said": "You said about us",
+    "said-second": "We love feedback from our customers, to improve, grow and develop Intiri..",
     "contact-us": "Contact us",
     "hesitate": "Don't hesitate to say hi",
     "navigation": "Navigation",
@@ -38,17 +41,27 @@
   "MY-INTIRI": {
     "intiri": "My Intiri",
     "book": "Book a designer",
+    "book-title": "Book your designer",
     "create": "Create new project",
     "news": "Intiri news",
     "latest-project": "Latest project",
     "all-projects": "All projects",
-    "inspirations": "My inspirations",
-    "logout-text": "Are you sure you want to logout from the app?",
+    "inspirations": "Inspirations and My home",
+    "see-all": "See all",
+    "offers": "Offers",
+    "logout-text": "Are you sure you want to log out of Intiri?",
     "invite": "Invite a friend",
     "invite-text": "Enter your friends phone number and invite them to Intiri journey.",
     "colors": "Colors",
     "material": "Material",
-    "furniture": "Furniture"
+    "furniture": "Furniture",
+    "add-first-inspiration": "Add first inspiration",
+    "add-inspiration-message": "New inspiration image added successfully.",
+    "add-inspiration-message-error": "Cannot upload this file!",
+    "remove-inspiration": "Remove inspiration",
+    "remove-inspiration-text": "Are you sure that you want to remove this inspiration? This action cannot be undone.",
+    "remove-inspiration-message": "Inspiration file removed successfully.",
+    "remove-inspiration-message-error": "Cannot remove inspiration file!"
   },
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
@@ -66,7 +79,7 @@
   "BOOK-MODAL": {
     "book": "Book your design consultation",
     "consultation": "consultation",
-    "duration": "*Consultation duration is ",
+    "duration": "*Consultation duration is {{duration}} min.",
     "number": "Number of consultations",
     "total": "Total to pay",
     "tell": "Tell us what you need",
@@ -75,7 +88,7 @@
     "moodboard-adjustment": "Moodboard adjustment",
     "lining-plan": "Lining plan",
     "color-advice": "Color advice",
-    "select-products": "Select products",
+    "select-products": "Select products and furnishings",
     "decoration": "Decoration",
     "other-quesiton": "Other questions",
     "2d-3d": "2D & 3D drawings",
@@ -96,7 +109,8 @@
     "expiration": "Expiration date",
     "summary": "Order summary",
     "price": "Consultation price",
-    "total": "Total"
+    "total": "Total",
+    "consultation": "Consultation with designer"
   },
   "BOOK-DESIGNER-PROFILE": {
     "profile": "Designer profile",
@@ -110,36 +124,41 @@
     "book": "Book consultation",
     "latest-moodboard": "Latest moodboard",
     "other-moodboards": "Other moodboards"
-
   },
   "MESSENGER": {
     "messages": "Messages",
     "search": "Search",
-    "type": "Type a message..."
+    "type": "Type a message...",
+    "empty-inbox": "Your inbox is empty.",
+    "book-designer-text": "in order to start conversation.",
+    "session-expired": "Your chat session with {{name}} has expired."
   },
   "NEW-PROJECT": {
     "create": "Let's create new project",
     "project": "Name the project first",
     "project-name": "Project name",
     "room": "Room",
+    "select-room-title": "Select the room you want to improve",
+    "select-room-text": "Don't worry, you can improve more rooms later.",
     "style": "Style",
+    "select-style-title": "Select pictures that you like",
+    "select-style-text": "Decisions are hard, pick as many as you want.",
     "room-details": "Room Details",
+    "room-details-title": "If you want, enter some info about your room",
+    "room-details-text": "Don't worry, you can improve rooms details later.",
     "color-pallete": "Color Pallete",
+    "select-color-title": "If you want, select colors you like",
+    "select-color-text": "Don't worry, you can change color later.",
+    "match": "match",
     "final": "Final result",
-    "select-room": "Select the room you want to improve",
-    "room-text": "Don't worry, you can improve more rooms later.",
-    "select-style": "Select pictures that you like",
-    "style-text": "Decisions are hard, pick as many as you want",
     "select-details": "Enter more detail about selected room",
     "room-shape": "Select room shape",
     "upload-sketch": "Or upload room sketch",
     "room-area": "Room area (m2)",
     "budget": "Budget for products",
     "select-budget": "Select your budget for products",
-    "select-color": "Select color pallet",
-    "color-text": "Don't worry, you can change color later",
-    "select-moodboard": "Select the moodboard you like the most",
-    "moodboard-text": "We have found you style match. Choose moodboard you like the most.",
+    "select-moodboard-title": "Select the moodboard you like the most",
+    "select-moodboard-text": "We have found you style match. Choose moodboard you like the most.",
     "see-rooms-style": "See rooms in this style",
     "upgrade": "Upgrade!",
     "upgrade-text": "To see more rooms from this style upgrade to Premium plan.",
@@ -150,7 +169,10 @@
     "products": "Products",
     "edit-select-color": "Select colors",
     "edit-select-materials": "Select materials",
-    "edit-select-products": "Select products"
+    "edit-select-products": "Select products",
+    "premium-content": "Premium content",
+    "see-all-free": "See all for free",
+    "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member."
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
@@ -158,6 +180,8 @@
     "save-text2" : " and first moodboard are saved. You can add new moodboard to the same project or review it.",
     "go-to": "Go to project",
     "add-new": "Add new moodboard",
+    "added-moodboard-text1": "You have successfully added new moodboard to project",
+    "added-moodboard-text2": "You can now add new moodboard to the same project or review it.",
     "share": "Share via email"
   },
   "LOGIN-REGISTER-MODAL": {
@@ -181,10 +205,15 @@
   },
   "PROFILE": {
     "profile": "Profile",
+    "personal": "Pesonal Info",
     "gender": "Gender",
     "change-profile-pic": "Change profile picture",
     "email": "Email",
-    "save": "Save changes"
+    "male": "Male",
+    "female": "Female",
+    "non-binary": "Non-binary",
+    "not-to-say": "I prefer not to say",
+    "update-message": "Profile updated sucessfully."
   },
   "PRICING-PLAN": {
     "pricing-plans": "Pricing plans",
@@ -221,9 +250,21 @@
     "settings": "Settings",
     "notifications": "Notifications",
     "delete": "Delete",
+    "remove": "Remove",
     "skip-page": "Skip Page",
+    "skip": "Skip",
     "close": "Close",
-    "edit": "Edit"
+    "edit": "Edit",
+    "choose": "Choose",
+    "language": "Language",
+    "EN": "English",
+    "NO": "Norwegian",
+    "NO/EN": "Norwegian/English",
+    "show-more": "Show More",
+    "save": "Save",
+    "save-changes": "Save changes",
+    "pieces": "pieces",
+    "file-selected": "file(s) selected"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
@@ -254,6 +295,9 @@
     "save": "Save changes"
   },
   "PARTNERS": {
+    "contacts": "Partner contacts",
+    "contact-firstName": "Partner contact first name",
+    "contact-lastName": "Partner contact last name",
     "products": "Products",
     "product-name": "Product name",
     "product-name-required" : "Product name is required",
@@ -278,9 +322,11 @@
     "add-new-partner": "Add new partner contact",
     "partner-added": "Partner added!",
     "partner-added-text": "You successfully added partner.",
+    "contact-added": "Partner contact added!",
+    "contact-added-text": "You successfully added new partner contact.",
     "go-to": "Go to Partners",
     "product-added": "Product added",
-    "product-added-text": "You successfully added new style",
+    "product-added-text": "You successfully added new product",
     "go-to-products": "Go to products"
   },
   "DESIGNERS": {
@@ -288,7 +334,7 @@
     "designer-name": "Designer name",
     "hourly-rate": "Hourly rate",
     "designer-status": "Designer status",
-    "inhouse": "Inhouse designer",
+    "internal": "Internal designer",
     "external": "External designer",
     "designer-added": "Designer added!",
     "designer-added-text": "You successfully added designer.",
@@ -312,7 +358,12 @@
     "bathroom": "Bathroom",
     "entry-ways": "Entry ways",
     "moodboard-preview": "Moodboard preview",
-    "save": "Save moodboard"
+    "save": "Save moodboard",
+    "add": "Add moodboard",
+    "templates": "Template moodboards",
+    "non-templates": "Non-Template moodboards",
+    "create-offer": "Create offer",
+    "update-offer": "Update offer"
   },
   "STYLE": {
     "styles": "Styles",
@@ -362,5 +413,50 @@
     "textile": "Textile",
     "wool": "Wool",
     "stone": "Stone"
+  },
+  "CARD-INFO": {
+    "designs": "{{length}} designs",
+    "language": "Language {{language}}"
+  },
+  "COMMON-MODAL": {
+    "style": "style",
+    "designer": "designer",
+    "client": "client",
+    "color": "color",
+    "partner": "partner",
+    "product": "product",
+    "material": "material",
+    "room": "room",
+    "picture": "image",
+    "current-picture": "Current image",
+    "new-picture": "New image",
+    "partner-contact": "partner contact",
+    "edit-title": "Edit {{name}}",
+    "remove-title": "Remove {{name}}",
+    "remove-text": "Are you sure that you want to remove this {{name}}? This action cannot be undone."
+  },
+  "VALIDATION": {
+    "field": "Field required!",
+    "selection": "Selection required!",
+    "phone": "Invalid phone number!",
+    "phone-req": "Phone is required!",
+    "phone-format": "Invalid phone format!",
+    "image": "Image required!",
+    "first-name": "First name is required!",
+    "last-name": "Last name is required!"
+  },
+  "TIME": {
+    "second": " second ago",
+    "seconds": " seconds ago",
+    "minute": " minute ago",
+    "minutes": " minutes ago",
+    "hour": " hour ago",
+    "hours": " hours ago",
+    "day": " day ago",
+    "days": " days ago",
+    "month": " month ago",
+    "months": " months ago",
+    "year": " year ago",
+    "years": " years ago"
   }
 }

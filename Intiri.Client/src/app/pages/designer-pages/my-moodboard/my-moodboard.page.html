@@ -23,7 +23,7 @@
                     </ion-select>
                   </div>
                 </div>
-                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">Add moodboard</ion-button>
+                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">{{'MOODBOARDS.add' | translate}}</ion-button>
               </ion-col>
             </ion-row>
 
@@ -50,7 +50,7 @@
                     </button>
                   </div>
                 </div>
-                <p class="text-black-3 mt-1">{{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
+                <p class="text-black-3 mt-1">{{getMbPiecesNo(moodboard)}} {{'COMMON.pieces' | translate}} / {{moodboard.created | timeAgo }}</p>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -72,7 +72,7 @@
                     </ion-select>
                   </div>
                 </div>
-                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">Add moodboard</ion-button>
+                <ion-button *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner'" routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-6 sm-ion:w-1/2 relative top-[3px]">{{'MOODBOARDS.add' | translate}}</ion-button>
               </ion-col>
             </ion-row>
 

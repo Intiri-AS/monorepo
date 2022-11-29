@@ -25,9 +25,12 @@
     "stories": "Historier",
     "contact": "Kontakt",
     "welcome": "Velkommen til Intiri",
-    "ideas": "Få ideer for innredning og dekorering av ditt hjem!",
+    "ideas-get": "Få",
+    "ideas": "IDEER",
+    "ideas-content": "til innredning og oppussing av ditt hjem!",
     "find": "Finn din stil",
-    "said": "Kundevurdering",
+    "said": "Dette sier kundene om oss",
+    "said-second": "Vi digger tilbakemeldinger fra våre kunder, for å forbedre, vokse og utvikle Intiri..",
     "contact-us": "Kontakt oss",
     "hesitate": "Ikke nøl med å si hei",
     "navigation": "Navigering",
@@ -38,17 +41,27 @@
   "MY-INTIRI": {
     "intiri": "Min Intiri",
     "book": "Book en designer",
+    "book-title": "Book din designer",
     "create": "Lag et nytt prosjekt",
     "news": "Intiri nyheter",
     "latest-project": "Siste prosjekt",
     "all-projects": "Alle prosjekter",
-    "inspirations": "Inspirasjoner",
+    "inspirations": "Inspirasjon og Mitt hjem",
+    "see-all": "Se alle",
+    "offers": "Tilbud",
     "logout-text": "Er du sikker på at du vil logge ut fra Intiri?",
     "invite": "Inviter en venn",
     "invite-text": "Legg inn telefonnummer og inviter venner til Intiri.",
     "colors": "Farger",
     "material": "Materialer",
-    "furniture": "Møbler"
+    "furniture": "Møbler",
+    "add-first-inspiration": "Legg til første inspirasjon",
+    "add-inspiration-message": "Nytt bilde lagt til med suksess.",
+    "add-inspiration-message-error": "Kan ikke laste opp denne filen!",
+    "remove-inspiration": "Slett bilde/fil",
+    "remove-inspiration-text": " Er du sikker på at du vil slette filen? Handlingen kan ikke angres",
+    "remove-inspiration-message": "Inspirasjonsfilmen ble fjernet.",
+    "remove-inspiration-message-error": "Kan ikke fjerne inspirasjonsfilmen!"
   },
   "PROJECT-DETAILS": {
     "new": "Legg til nytt stilkonsept"
@@ -65,18 +78,18 @@
   },
   "BOOK-MODAL": {
     "book": "Book din designkonsultasjon",
-    "consultation": "Konsultering",
-    "duration": "*Konsulteringen varer i 45 min",
-    "number": "Antall konsultasjoner",
+    "consultation": "Veiledning",
+    "duration": "*En veiledning varer i {{duration}} min.",
+    "number": "Antall veiledninger",
     "total": "Sum å betale",
     "tell": "Fortell oss hva du trenger hjelp med",
     "help": "Du møter snart din designer, fortell oss hva du trenger hjelp med.",
-    "room-sketch": "Planløsning",
+    "room-sketch": "Romskisse",
     "moodboard-adjustment": "Tilpasning av stilforslag",
-    "lining-plan": "Belysning",
+    "lining-plan": "Innredningsplan",
     "color-advice": "Fargerådgivning",
-    "select-products": "Velge produkter",
-    "decoration": "Dekorering",
+    "select-products": "Forslag til produkter og innredning",
+    "decoration": " Dekorasjon",
     "other-quesiton": "Andre spørsmål",
     "2d-3d": "2D eller 3D tegninger",
     "proceed": "Gå videre"
@@ -96,7 +109,8 @@
     "expiration": "Utløpsdato",
     "summary": "Ordresum",
     "price": "Konsultasjonspris",
-    "total": "Sum total"
+    "total": "Sum total",
+    "consultation": "Konsultasjon med designer"
   },
   "BOOK-DESIGNER-PROFILE": {
     "profile": "Designerprofil",
@@ -105,7 +119,7 @@
     "available": "Tilgjengelige tider"
   },
   "DESIGNER-PROFILE": {
-    "other": "Annet",
+    "other": "Flere prosjekter",
     "languages": "Språk",
     "book": "Book konsultasjon",
     "latest-moodboard": "Siste moodboard",
@@ -114,31 +128,37 @@
   "MESSENGER": {
     "messages": "Meldinger",
     "search": "Søk",
-    "type": "Skriv inn en melding..."
+    "type": "Skriv inn en melding...",
+    "empty-inbox": "Din innboks er tom.",
+    "book-designer-text": "for å start dialog.",
+    "session-expired": "Din chatt med {{name}} har utløp."
   },
   "NEW-PROJECT": {
     "create": "La oss lage et nytt prosjekt",
     "project": "Gi prosjektet navn",
-    "project-name": "Prosjektetsnavn",
+    "project-name": "Prosjektets navn",
     "room": "Rom",
+    "select-room-title": "Velg rommet du vil jobbe med",
+    "select-room-text": "Ikke stress, du kan velge flere rom senere.",
     "style": "Stil",
+    "select-style-title": "Velg bildene du liker",
+    "select-style-text": "Valg er vanskelig, velg så mange du vil.",
     "room-details": "Romdetaljer",
+    "room-details-title": "Hvis du har lyst, legg inn litt info om rommet",
+    "room-details-text": "Ikke stress, du kan velge flere romdetaljer senere.",
     "color-pallete": "Fargepalett",
+    "select-color-title": "Hvis du vil, velg farger du liker",
+    "select-color-text": "Ikke stress, du kan endre farger senere.",
+    "match": "kampen",
     "final": "Sluttresultat",
     "select-room": "Velg rommet du vil jobbe med",
-    "room-text": "Ikke stress, du kan velge flere rom senere.",
-    "select-style": "Velg bildene du liker",
-    "style-text": "Valg er vanskelig, velg så mange du vil",
-    "select-details": "Legg inn mer detaljer om rommet",
     "room-shape": "Velg formen på rommet",
-    "upload-sketch": "Eller last opp planskisse eller annen tegning",
+    "upload-sketch": "Eller last opp romskisse",
     "room-area": "Romstørrelse (m2)",
     "budget": "Innredningsbudsjett",
     "select-budget": "Velg ditt innredningsbudsjett",
-    "select-color": "Velg fargepalett",
-    "color-text": "Ikke stress, du kan endre farger senere",
-    "select-moodboard": "Velg stilforslaget du liker best",
-    "moodboard-text": "Vi har funnet din stilmatch. Velg stilforslaget du liker best.",
+    "select-moodboard-title": "Velg stilforslaget du liker best",
+    "select-moodboard-text": "Vi har funnet din stilmatch. Velg stilforslaget du liker best.",
     "see-rooms-style": "Se flere rom med denne stilen",
     "upgrade": "Oppgrader!",
     "upgrade-text": "For å se alle rom i denne stilen, skaff deg Premium.",
@@ -149,7 +169,10 @@
     "products": "Produkter",
     "edit-select-color": "Velg farger",
     "edit-select-materials": "Velg materialer",
-    "edit-select-products": "Velg produkter"
+    "edit-select-products": "Velg produkter",
+    "premium-content": "Premium innhold",
+    "see-all-free": "Se alt gratis",
+    "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem."
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
@@ -157,6 +180,8 @@
     "save-text2" : "og første stilforslag er lagret. Nå kan du legge til nye stilforslag til prosjektet, eller se gjennom på nytt.",
     "go-to": "Gå til prosjekt",
     "add-new": "Legg til nytt stilforslag",
+    "added-moodboard-text1": "Du har med suksess lagret et nytt stil forslag til prosjekt",
+    "added-moodboard-text2": "Du kan nå legge til ett nytt stilforslag til prosjektet eller se gjennom.",
     "share": "Del via e-post"
   },
   "LOGIN-REGISTER-MODAL": {
@@ -180,10 +205,15 @@
   },
   "PROFILE": {
     "profile": "Profil",
+    "personal": "Personlig Informasjon",
     "gender": "Kjønn",
     "change-profile-pic": "Endre profilbilde",
     "email": "E-post",
-    "save": "Lagre endringer"
+    "male": "Mann",
+    "female": "Kvinne",
+    "non-binary": "Ikke binær",
+    "not-to-say": "Ønsker ikke å oppgi",
+    "update-message": "Profil suksessfullt oppdatert."
   },
   "PRICING-PLAN": {
     "pricing-plans": "Prisoversikt",
@@ -220,9 +250,21 @@
     "settings": "Innstillinger",
     "notifications": "Varsler",
     "delete": "Slett",
+    "remove": "Fjerne",
     "skip-page": "Hopp over siden",
+    "skip": "Hopp over",
     "close": "Lukke",
-    "edit": "Redigere"
+    "edit": "Redigere",
+    "choose": "Velge",
+    "language": "Språk",
+    "EN": "Engelsk",
+    "NO": "Norsk",
+    "NO/EN": "Norsk/Engelsk",
+    "show-more": "Vis Mer",
+    "save": "Lagre",
+    "save-changes": "Lagre endringer",
+    "pieces": "stykker",
+    "file-selected": "fil(er) valgt"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -253,6 +295,9 @@
     "save": "Lagre endringer"
   },
   "PARTNERS": {
+    "contacts": "Partner kontakter",
+    "contact-firstName": "Fornavn kontakt",
+    "contact-lastName": "Etternavn kontakt",
     "products": "Produkter",
     "product-name": "Produktnavn",
     "add": "Legg til samarbeidspartner",
@@ -272,19 +317,24 @@
     "city": "By",
     "country": "Land",
     "partner-logo": "Logo samarbeidspartner",
-    "add-contact": "Legg til kontakt hos samarbeidspartner",
+    "add-contact": "Legg til partnerkontakt",
     "partner-contact-name": "Navn kontaktperson hos samarbeidspartner",
     "add-new-partner": "Legg til ny kontakt hos samarbeidspartner",
     "partner-added": "Samarbeidspartner lagt til",
     "partner-added-text": "Samarbeidspartner lagt til med suksess.",
-    "go-to": "Gå til Samarbeidspartnere"
+    "contact-added": "Partner kontakt lagt til!",
+    "contact-added-text": "Kontakt lagt til suksessfullt.",
+    "go-to": "Gå til Samarbeidspartnere",
+    "product-added": "Producte lagt til!",
+    "product-added-text": "Producte lagt til suksessfullt.",
+    "go-to-products": "Gå til produkter"
   },
   "DESIGNERS": {
     "add": "Legg til designer",
     "designer-name": "Navn designer",
     "hourly-rate": "Timespris",
     "designer-status": "Designerstatus",
-    "inhouse": "Intiri designer",
+    "internal": "Intern designer",
     "external": "Ekstern designer",
     "designer-added": "Designer lagt til!",
     "designer-added-text": "Du la til designer med suksess.",
@@ -308,7 +358,12 @@
     "bathroom": "Bad",
     "entry-ways": "Gang",
     "moodboard-preview": "Stilforslag visning",
-    "save": "Lagre stilforslag"
+    "save": "Lagre stilforslag",
+    "add": "Legg til moodboard",
+    "templates": "Mal moodboards",
+    "non-templates": "Uten-mal moodboards",
+    "create-offer": "Opprett tilbud",
+    "update-offer": "Oppdater tilbud"
   },
   "STYLE": {
     "styles": "Stiler",
@@ -358,5 +413,50 @@
     "textile": "Tekstil",
     "wool": "Ull",
     "stone": "Stein"
+  },
+  "CARD-INFO": {
+    "designs": "{{length}} designs",
+    "language": "Språk {{language}}"
+  },
+  "COMMON-MODAL": {
+    "style": "stil",
+    "designer": "designer",
+    "client": "klient",
+    "color": "farge",
+    "partner": "partner",
+    "product": "produkt",
+    "picture": "bilde",
+    "material": "materiale",
+    "room": "rom",
+    "current-picture": "Gjeldende bilde",
+    "new-picture": "Nytt bilde",
+    "partner-contact": "partnerkontakt",
+    "edit-title": "Redigere  {{name}}",
+    "remove-title": "Fjern  {{name}}",
+    "remove-text": "Er du sikker på at du vil fjerne denne {{name}}? Handlingen kan ikke omgjøres!"
+  },
+  "VALIDATION": {
+    "field": "Felt kreves!",
+    "selection": "Utvalg kreves!",
+    "phone": "Ugyldig telefonnummer!",
+    "phone-req": "Telefon er påkrevd!",
+    "phone-format": "Ugyldig telefonformat!",
+    "image": "Bilde kreves!",
+    "first-name": "Fornavn er påkrevd!",
+    "last-name": "Etternavn er påkrevd!"
+  },
+  "TIME": {
+    "second": " sekund siden",
+    "seconds": " sekunder siden",
+    "minute": " minutt siden",
+    "minutes": " minutter siden",
+    "hour": " time siden",
+    "hours": " timer siden",
+    "day": " dag siden",
+    "days": " dager siden",
+    "month": " måned siden",
+    "months": " måneder siden",
+    "year": " år ago",
+    "years": " år ago"
   }
 }

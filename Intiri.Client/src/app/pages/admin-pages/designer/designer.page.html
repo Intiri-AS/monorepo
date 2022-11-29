@@ -11,7 +11,7 @@
         <ion-col size="12" size-md="4" size-lg="3" class="flex">
           <div class="profile-input w-full">
             <div class="mt-6">
-              <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="Search" [(ngModel)]="searchText"></ion-input>
+              <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
             </div>
           </div>
         </ion-col>
@@ -20,8 +20,8 @@
             <div class="text-left w-full md:w-[260px]">
               <span class="text-sm text-black-2">{{'DESIGNERS.designer-status' | translate}}</span>
               <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
-                <ion-select-option value="InternalDesigner">In-house designer</ion-select-option>
-                <ion-select-option value="ExternalDesigner">External designer</ion-select-option>
+                <ion-select-option value="InternalDesigner">{{'DESIGNERS.internal' | translate}}</ion-select-option>
+                <ion-select-option value="ExternalDesigner">{{'DESIGNERS.external' | translate}}</ion-select-option>
               </ion-select>
             </div>
             <ion-button (click)="addDesigner()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'DESIGNERS.add' | translate}}</ion-button>
@@ -42,7 +42,8 @@
                     </div>
                     <div class="my-4 text-center">
                         <p class="text-black-2 leading-5 font-semibold text-2xl text-clamp-2 cursor-default pb-[4px]" title="{{designer.firstName}} {{designer.lastName}}">{{designer.firstName}} {{designer.lastName}}</p>
-                        <p class="text-black-2 size-[22px] leading-5 mt-2">{{languages[designer.language]}}</p>
+                        <!-- <p class="text-black-2 size-[22px] leading-5 mt-2">{{languages[designer.language]}}</p> -->
+                        <p class="text-black-2 size-[22px] leading-5 mt-2">{{'COMMON.' + designer.language | translate}}</p>
                         <p class="px-2 py-2 bg-secondary rounded-lg text-white inline-block mt-4 leading-5">{{getDesignerType(designer) | uppercase}}</p>
                         <div class="py-4 px-1 m-4 bg-light">
                             <ul>

@@ -21,8 +21,8 @@
             <div class="text-left w-full md:w-[260px] mr-2">
               <span class="text-sm text-black-2">Type</span>
               <ion-select (ionChange)="onTypeFilterChange($event)" interface="popover" [multiple]="true">
-                <ion-select-option  value="Template Moodboards">Template Moodboards</ion-select-option>
-                <ion-select-option  value="Non-Template Moodboards">Non-Template Moodboards</ion-select-option>
+                <ion-select-option  value="Template Moodboards">{{'MOODBOARDS.templates' | translate}}</ion-select-option>
+                <ion-select-option  value="Non-Template Moodboards">{{'MOODBOARDS.non-templates' | translate}}</ion-select-option>
               </ion-select>
             </div>
             <div class="text-left w-full md:w-[260px]">
@@ -31,7 +31,7 @@
                 <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.name}}">{{style.name}}</ion-select-option>
               </ion-select>
             </div>
-            <ion-button routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-4 mb-[1px]">Add moodboard</ion-button>
+            <ion-button routerLink="/add-moodboard" routerDirection="root" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'MOODBOARDS.add' | translate}}</ion-button>
           </div>
         </ion-col>
       </ion-row>

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
@@ -37,7 +38,8 @@ export class MyIntiriPage {
     private modalController: ModalController,
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class MyIntiriPage {
         this.spinner.hide();
         this.inspirations = res;
         this.notifier.show({
-          message: 'New inspiration image added successfully',
+          message: this.translate.instant('MY-INTIRI.add-inspiration-message'),
           type: 'success',
         });
       })

@@ -14,14 +14,14 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
             <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">Last name</span>
             <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -41,8 +41,8 @@
             <div class="profile-input">
               <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
               <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">Field Required!</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">Invalid Phone Number!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
             </div>
           </section>
         </ion-col>
@@ -52,23 +52,23 @@
           <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
           <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
             <ion-radio value="InternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.inhouse' | translate}}</span>
+            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.internal' | translate}}</span>
             <ion-radio value="ExternalDesigner"></ion-radio>
             <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
           </ion-radio-group>
-          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">Selection Required!</span>
+          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">{{'VALIDATION.selection' | translate}}</span>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">Language</p>
+          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'COMMON.language' | translate}}</p>
           <div class="flex items-center mb-3">
             <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer" formControlName="en">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">English</label>
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.EN' | translate}}</label>
           </div>
           <div class="flex items-center">
             <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary" formControlName="no">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">Norwegian</label>
+            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.NO' | translate}}</label>
           </div>
         </ion-col>
       </ion-row>
@@ -102,11 +102,11 @@
     <div class="max-w-md w-full space-y-8">
       <div>
         <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-        <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove designer</h2>
-        <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this designer? This action cannot be undone.</p>
+        <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</h2>
+        <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</p>
       </div>
       <ion-buttons class="justify-center">
-        <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteDesigner()">Remove designer</ion-button>
+        <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteDesigner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</ion-button>
         <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
       </ion-buttons>
     </div>

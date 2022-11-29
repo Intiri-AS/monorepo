@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AccountService } from 'src/app/services/account.service';
@@ -40,7 +41,8 @@ export class ProfilePage implements OnInit {
     private accountService: AccountService,
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private translate: TranslateService
   ) {
 
   }
@@ -98,7 +100,7 @@ export class ProfilePage implements OnInit {
     this.http.put(this.apiUrl + 'users/profile', userInfoModel).subscribe(res => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Profile updated successfully',
+        message: this.translate.instant('PROFILE.update-message'),
         type: 'success',
       });
     });
