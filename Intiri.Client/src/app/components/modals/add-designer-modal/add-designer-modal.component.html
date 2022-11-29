@@ -14,14 +14,14 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
             <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">Last name</span>
             <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -41,8 +41,8 @@
             <div class="profile-input">
               <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
               <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">Field Required!</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">Invalid Phone Number!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
             </div>
           </section>
         </ion-col>
@@ -52,11 +52,11 @@
           <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
           <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
             <ion-radio value="InternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.inhouse' | translate}}</span>
+            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.internal' | translate}}</span>
             <ion-radio value="ExternalDesigner"></ion-radio>
             <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
           </ion-radio-group>
-          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">Selection Required!</span>
+          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">{{'VALIDATION.selection' | translate}}</span>
         </ion-col>
       </ion-row>
       <ion-row>

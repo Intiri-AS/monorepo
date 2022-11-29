@@ -16,7 +16,7 @@
             <ion-select [(ngModel)]="styleImage.styleId" interface="popover" formControlName="style">
               <ion-select-option *ngFor="let style of (styles$ | async)" value="{{style.id}}">{{style.name}}</ion-select-option>
             </ion-select>
-            <span class="ion-warning" *ngIf="isFormSubmited && styleErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && styleErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -35,7 +35,7 @@
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
-            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">Image Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

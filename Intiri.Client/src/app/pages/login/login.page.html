@@ -27,8 +27,8 @@
               </div>
               <div>
                 <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-60 xl:w-80 text-xs xl:text-base"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone Number!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">{{'VALIDATION.phone-req' | translate}}</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">I{{'VALIDATION.phone' | translate}}</span>
                 <span class="ion-warning" *ngIf="error">{{error}}</span>
               </div>
             </div>

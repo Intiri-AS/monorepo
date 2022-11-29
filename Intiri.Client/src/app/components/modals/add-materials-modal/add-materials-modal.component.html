@@ -14,7 +14,7 @@
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.material-name' | translate}}</span>
             <ion-input [(ngModel)]="material.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
@@ -23,7 +23,7 @@
           <ion-select [(ngModel)]="material.materialTypeId" interface="popover" class=" h-[56px]" formControlName="type">
             <ion-select-option  *ngFor="let materialType of materialTypes" value="{{materialType.id}}">{{materialType.name}}</ion-select-option>
           </ion-select>
-          <span class="ion-warning" *ngIf="isFormSubmited && typeErrors?.required">Field Required!</span>
+          <span class="ion-warning" *ngIf="isFormSubmited && typeErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -32,7 +32,7 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="material.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
-            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -50,7 +50,7 @@
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
-            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">Image Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -109,7 +109,7 @@
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.material-name' | translate}}</span>
             <ion-input [(ngModel)]="material.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
@@ -126,7 +126,7 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="material.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
-            <span class="ion-warning" *ngIf="isFormSubmited && editDescriptionErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && editDescriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

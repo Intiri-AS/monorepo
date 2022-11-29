@@ -14,7 +14,7 @@
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.room-name'| translate}}</span>
             <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
@@ -24,7 +24,7 @@
             <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class=" h-[56px]" formControlName="type">
               <ion-select-option  *ngFor="let roomType of roomTypes" value="{{roomType.id}}">{{roomType.name}}</ion-select-option>
             </ion-select>
-            <span class="ion-warning" *ngIf="isFormSubmited && typeErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && typeErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </div>
         </ion-col>
@@ -34,7 +34,7 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description'| translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description"></ion-textarea>
-            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -52,7 +52,7 @@
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
-            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">Image Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

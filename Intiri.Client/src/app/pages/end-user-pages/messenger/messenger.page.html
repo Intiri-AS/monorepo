@@ -78,9 +78,9 @@
               <div class="chat-input relative">
                 <ngx-spinner [fullScreen]="false" size="medium" bdColor="rgba(51,51,51,0.1)" color="#9B7E60" type="ball-spin-clockwise"></ngx-spinner>
                 <ng-container *ngIf="!activeChatUser.chatPeriodExpired">
-                  <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="Type a message..." class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                  <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="{{'MESSENGER.type' | translate}}" class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
                   <label for="dropzone-file">
-                    <div *ngIf="attachments" class="text-primary cursor-pointer relative bottom-[10px] inline-block">{{attachments.length}} file(s) selected</div>
+                    <div *ngIf="attachments" class="text-primary cursor-pointer relative bottom-[10px] inline-block">{{attachments.length}} {{'COMMON.file-selected' | translate}}</div>
                     <ion-icon class="img-btn" name="attach-outline"></ion-icon>
                     <input (change)="onFileChange($event)" id="dropzone-file" multiple type="file" class="hidden" />
                   </label>

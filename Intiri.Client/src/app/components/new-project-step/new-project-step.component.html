@@ -87,7 +87,7 @@
               </ion-row>
             </ion-grid>
           <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
-            <span class="text-base font-normal text-primary">/ {{item.moodboardMatch}} match</span>
+            <span class="text-base font-normal text-primary">/ {{item.moodboardMatch}} {{'NEW-PROJECT.match' | translate}}</span>
           </p>
         </ion-col>
       </ion-row>
@@ -117,10 +117,10 @@
         <div class="h-full w-full relative">
           <div class="mt-8 w-full h-[360px] bg-landing-img bg-cover blur rounded-lg "></div>
           <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2" style="transform: translate(-50%, -50%)">
-            <p class="text-black-1 text-xl font-bold mb-2">Premium content</p>
-            <p class="text-black-2 font-bold mb-4">For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member.</p>
+            <p class="text-black-1 text-xl font-bold mb-2">{{'NEW-PROJECT.premium-content' | translate}}</p>
+            <p class="text-black-2 font-bold mb-4">{{'NEW-PROJECT.trial-period-txt' | translate}}</p>
             <ion-buttons class="justify-center">
-              <ion-button class="primary-btn" (click)="expandMbs()">See all for free</ion-button>
+              <ion-button class="primary-btn" (click)="expandMbs()">{{'NEW-PROJECT.see-all-free' | translate}}</ion-button>
               <ion-button class="secondary-btn !bg-[#F8F5F1]" routerLink="/pricing-plans" routerDirection="root">{{'PRICING-PLAN.pricing-plans' | translate}}</ion-button>
             </ion-buttons>
           </div>

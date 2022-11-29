@@ -47,7 +47,8 @@
     "latest-project": "Latest project",
     "all-projects": "All projects",
     "inspirations": "Inspirations and My home",
-    "see-all": "See All",
+    "see-all": "See all",
+    "offers": "Offers",
     "logout-text": "Are you sure you want to log out of Intiri?",
     "invite": "Invite a friend",
     "invite-text": "Enter your friends phone number and invite them to Intiri journey.",
@@ -108,7 +109,8 @@
     "expiration": "Expiration date",
     "summary": "Order summary",
     "price": "Consultation price",
-    "total": "Total"
+    "total": "Total",
+    "consultation": "Consultation with designer"
   },
   "BOOK-DESIGNER-PROFILE": {
     "profile": "Designer profile",
@@ -147,6 +149,7 @@
     "color-pallete": "Color Pallete",
     "select-color-title": "If you want, select colors you like",
     "select-color-text": "Don't worry, you can change color later.",
+    "match": "match",
     "final": "Final result",
     "select-details": "Enter more detail about selected room",
     "room-shape": "Select room shape",
@@ -166,7 +169,10 @@
     "products": "Products",
     "edit-select-color": "Select colors",
     "edit-select-materials": "Select materials",
-    "edit-select-products": "Select products"
+    "edit-select-products": "Select products",
+    "premium-content": "Premium content",
+    "see-all-free": "See all for free",
+    "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member."
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
@@ -256,7 +262,9 @@
     "NO/EN": "Norwegian/English",
     "show-more": "Show More",
     "save": "Save",
-    "save-changes": "Save changes"
+    "save-changes": "Save changes",
+    "pieces": "pieces",
+    "file-selected": "file(s) selected"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
@@ -326,7 +334,7 @@
     "designer-name": "Designer name",
     "hourly-rate": "Hourly rate",
     "designer-status": "Designer status",
-    "inhouse": "Inhouse designer",
+    "internal": "Internal designer",
     "external": "External designer",
     "designer-added": "Designer added!",
     "designer-added-text": "You successfully added designer.",
@@ -350,7 +358,12 @@
     "bathroom": "Bathroom",
     "entry-ways": "Entry ways",
     "moodboard-preview": "Moodboard preview",
-    "save": "Save moodboard"
+    "save": "Save moodboard",
+    "add": "Add moodboard",
+    "templates": "Template moodboards",
+    "non-templates": "Non-Template moodboards",
+    "create-offer": "Create offer",
+    "update-offer": "Update offer"
   },
   "STYLE": {
     "styles": "Styles",
@@ -421,5 +434,29 @@
     "edit-title": "Edit {{name}}",
     "remove-title": "Remove {{name}}",
     "remove-text": "Are you sure that you want to remove this {{name}}? This action cannot be undone."
+  },
+  "VALIDATION": {
+    "field": "Field required!",
+    "selection": "Selection required!",
+    "phone": "Invalid phone number!",
+    "phone-req": "Phone is required!",
+    "phone-format": "Invalid phone format!",
+    "image": "Image required!",
+    "first-name": "First name is required!",
+    "last-name": "Last name is required!"
+  },
+  "TIME": {
+    "second": " second ago",
+    "seconds": " seconds ago",
+    "minute": " minute ago",
+    "minutes": " minutes ago",
+    "hour": " hour ago",
+    "hours": " hours ago",
+    "day": " day ago",
+    "days": " days ago",
+    "month": " month ago",
+    "months": " months ago",
+    "year": " year ago",
+    "years": " years ago"
   }
 }

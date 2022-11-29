@@ -37,7 +37,7 @@
               <p class="text-black-2 text-2xl font-medium mt-2">{{designer.createdMoodboards[designer.createdMoodboards.length-1].style.name}}</p>
             </div>
             <div>
-              <p class="text-black-3 text-lg">{{getPiecesNo(designer.createdMoodboards[designer.createdMoodboards.length-1])}} pieces / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
+              <p class="text-black-3 text-lg">{{getPiecesNo(designer.createdMoodboards[designer.createdMoodboards.length-1])}} {{'COMMON.pieces' | translate}} / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
             </div>
             <div class="mt-16">
               <p class="text-2xl font-medium text-black-2">{{'DESIGNER-PROFILE.other' | translate}}</p>
@@ -62,7 +62,7 @@
                     </div>
                   </div>
                   <div>
-                    <p class="text-black-3 text-lg">{{getPiecesNo(mb)}} pieces / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
+                    <p class="text-black-3 text-lg">{{getPiecesNo(mb)}} {{'COMMON.pieces' | translate}} / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
                   </div>
                 </ion-col>
               </ion-row>

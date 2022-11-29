@@ -15,10 +15,10 @@
               </div>
               <div class="flex justify-between items-center cursor-default sm:w-[48%] lg:w-[32%]" >
                 <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{projects[projects.length-1].name}}</p>
-                <ion-button fill="clear" class="primary-btn-responsive !bg-none !px-1" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">Choose</ion-button>
+                <ion-button fill="clear" class="primary-btn-responsive !bg-none !px-1" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
               </div>
               <div>
-                <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} pieces / {{projects[projects.length-1].created | timeAgo }}</p>
+                <p class="text-black-3 text-lg min-w-[350px] text-left">{{projects[projects.length-1].projectMoodboards.length }} moodboards / {{getPiecesNo(projects[projects.length-1])}} {{'COMMON.pieces' | translate}} / {{projects[projects.length-1].created | timeAgo }}</p>
               </div>
               <div class="flex flex-wrap">
                 <div class="py-4 pr-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-8">
@@ -42,7 +42,7 @@
               <div class="flex justify-between items-center">
                 <p class="text-3xl font-medium text-black-2">{{'MY-INTIRI.all-projects' | translate}}</p>
                 <ion-button fill="clear" class="text-primary">
-                  <p class="capitalize hover:opacity-80 text-lg" routerLink="/projects" routerDirection="root">See all</p>
+                  <p class="capitalize hover:opacity-80 text-lg" routerLink="/projects" routerDirection="root">{{'MY-INTIRI.see-all' | translate}}</p>
                 </ion-button>
               </div>
                 <div class="pb-20 pr-4 pt-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-x-8 gap-y-[120px]">
@@ -60,10 +60,10 @@
                       <ion-row>
                         <div class="flex items-center justify-between pt-2 cursor-default w-full mt-3 mac:mt-0">
                           <p class="text-black-2 text-lg xl:text-2xl font-medium min-w-[45px]">{{project.name}}</p>
-                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">Choose</ion-button>
+                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
                         </div>
                         <div class="w-full text-left">
-                          <p class="text-black-3 text-sm xl:text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} pieces / {{project.created | timeAgo }}</p>
+                          <p class="text-black-3 text-sm xl:text-lg min-w-[350px] text-left">{{project.projectMoodboards.length }} moodboards / {{getPiecesNo(project)}} {{'COMMON.pieces' | translate}} / {{project.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>
@@ -72,7 +72,7 @@
             </div>
             <div *ngIf="offers.length > 0" class="mt-16">
               <div class="flex justify-between items-center ">
-                <p class="text-3xl font-medium text-black-2">Offers</p>
+                <p class="text-3xl font-medium text-black-2">{{'MY-INTIRI.offers' | translate}}</p>
               </div>
 
               <div class="flex flex-wrap">
@@ -91,10 +91,10 @@
                       <ion-row>
                         <div class="flex items-center justify-between w-full pt-2 cursor-default mt-3 mac:mt-0">
                           <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
-                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">Choose</ion-button>
+                          <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
                         </div>
                         <div>
-                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} pieces / {{moodboard.created | timeAgo }}</p>
+                          <p class="text-black-3 text-lg min-w-[350px] text-left">{{moodboard.style.name}} / {{getMbPiecesNo(moodboard)}} {{'COMMON.pieces' | translate}} / {{moodboard.created | timeAgo }}</p>
                         </div>
                       </ion-row>
                     </ion-grid>

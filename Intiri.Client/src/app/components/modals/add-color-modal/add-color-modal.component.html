@@ -33,14 +33,14 @@
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.color-name' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
             <ion-input [(ngModel)]="colorPallete.number" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && numberErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && numberErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -52,7 +52,7 @@
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="main"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && mainErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && mainErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
@@ -62,7 +62,7 @@
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorLight" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeOne"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeOneErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && shadeOneErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
@@ -74,7 +74,7 @@
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorMedium" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeTwo"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeTwoErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && shadeTwoErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
@@ -84,7 +84,7 @@
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorDark" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeThree"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeThreeErrors?.required">Field Required!</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && shadeThreeErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

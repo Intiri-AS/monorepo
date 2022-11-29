@@ -47,7 +47,8 @@
     "latest-project": "Siste prosjekt",
     "all-projects": "Alle prosjekter",
     "inspirations": "Inspirasjon og Mitt hjem",
-    "see-all": "Se Alle",
+    "see-all": "Se alle",
+    "offers": "Tilbud",
     "logout-text": "Er du sikker på at du vil logge ut fra Intiri?",
     "invite": "Inviter en venn",
     "invite-text": "Legg inn telefonnummer og inviter venner til Intiri.",
@@ -108,7 +109,8 @@
     "expiration": "Utløpsdato",
     "summary": "Ordresum",
     "price": "Konsultasjonspris",
-    "total": "Sum total"
+    "total": "Sum total",
+    "consultation": "Konsultasjon med designer"
   },
   "BOOK-DESIGNER-PROFILE": {
     "profile": "Designerprofil",
@@ -147,6 +149,7 @@
     "color-pallete": "Fargepalett",
     "select-color-title": "Hvis du vil, velg farger du liker",
     "select-color-text": "Ikke stress, du kan endre farger senere.",
+    "match": "kampen",
     "final": "Sluttresultat",
     "select-room": "Velg rommet du vil jobbe med",
     "room-shape": "Velg formen på rommet",
@@ -166,7 +169,10 @@
     "products": "Produkter",
     "edit-select-color": "Velg farger",
     "edit-select-materials": "Velg materialer",
-    "edit-select-products": "Velg produkter"
+    "edit-select-products": "Velg produkter",
+    "premium-content": "Premium innhold",
+    "see-all-free": "Se alt gratis",
+    "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem."
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
@@ -256,7 +262,9 @@
     "NO/EN": "Norsk/Engelsk",
     "show-more": "Vis Mer",
     "save": "Lagre",
-    "save-changes": "Lagre endringer"
+    "save-changes": "Lagre endringer",
+    "pieces": "stykker",
+    "file-selected": "fil(er) valgt"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -326,7 +334,7 @@
     "designer-name": "Navn designer",
     "hourly-rate": "Timespris",
     "designer-status": "Designerstatus",
-    "inhouse": "Intiri designer",
+    "internal": "Intern designer",
     "external": "Ekstern designer",
     "designer-added": "Designer lagt til!",
     "designer-added-text": "Du la til designer med suksess.",
@@ -350,7 +358,12 @@
     "bathroom": "Bad",
     "entry-ways": "Gang",
     "moodboard-preview": "Stilforslag visning",
-    "save": "Lagre stilforslag"
+    "save": "Lagre stilforslag",
+    "add": "Legg til moodboard",
+    "templates": "Mal moodboards",
+    "non-templates": "Uten-mal moodboards",
+    "create-offer": "Opprett tilbud",
+    "update-offer": "Oppdater tilbud"
   },
   "STYLE": {
     "styles": "Stiler",
@@ -421,5 +434,29 @@
     "edit-title": "Redigere  {{name}}",
     "remove-title": "Fjern  {{name}}",
     "remove-text": "Er du sikker på at du vil fjerne denne {{name}}? Handlingen kan ikke omgjøres!"
+  },
+  "VALIDATION": {
+    "field": "Felt kreves!",
+    "selection": "Utvalg kreves!",
+    "phone": "Ugyldig telefonnummer!",
+    "phone-req": "Telefon er påkrevd!",
+    "phone-format": "Ugyldig telefonformat!",
+    "image": "Bilde kreves!",
+    "first-name": "Fornavn er påkrevd!",
+    "last-name": "Etternavn er påkrevd!"
+  },
+  "TIME": {
+    "second": " sekund siden",
+    "seconds": " sekunder siden",
+    "minute": " minutt siden",
+    "minutes": " minutter siden",
+    "hour": " time siden",
+    "hours": " timer siden",
+    "day": " dag siden",
+    "days": " dager siden",
+    "month": " måned siden",
+    "months": " måneder siden",
+    "year": " år ago",
+    "years": " år ago"
   }
 }
