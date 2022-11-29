@@ -91,7 +91,7 @@
                     <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                     <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                   </div>
-                  <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="partnerLogoImg" />
+                  <img *ngIf="imagePath" [src]="imagePath" class="object-contain rounded-2xl p-2 h-full w-full" alt="partnerLogoImg" />
                 </div>
                 <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="logo"/>
               </label>
