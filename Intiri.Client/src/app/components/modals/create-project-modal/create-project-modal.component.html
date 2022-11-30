@@ -13,7 +13,7 @@
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
               <label for="project-name" class="sr-only">{{'NEW-PROJECT.project-name' | translate}}</label>
-              <input id="project-name" name="email" type="email" autocomplete="email" [(ngModel)]="projectName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-[8px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" placeholder="Project name">
+              <input id="project-name" name="email" type="text" autocomplete="text" [(ngModel)]="projectName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-[8px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" placeholder="{{'NEW-PROJECT.project-name' | translate}}" />
             </div>
           </div>
           <ion-buttons class="justify-center">
@@ -32,7 +32,7 @@
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="text-primary h-[34px] w-[34px] mx-auto mt-[5px]" name="bookmark"></ion-icon></div>
           <h2 class="mt-6 text-center text-2xl font-bold text-black-1">{{'PROJECT-SAVED-MODAL.save' | translate}}</h2>
           <p *ngIf="!existing" class="text-center text-base text-black-2">{{'PROJECT-SAVED-MODAL.save-text1' | translate}} <span class="font-medium">{{project.name}}</span> {{'PROJECT-SAVED-MODAL.save-text2' | translate}}</p>
-          <p *ngIf="existing" class="text-center text-base text-black-2">You have successfully added new moodboard to project <span class="font-medium">{{project.name}}</span>. You can now add new moodboard to the same project or review it.</p>
+          <p *ngIf="existing" class="text-center text-base text-black-2">{{'PROJECT-SAVED-MODAL.added-moodboard-text1' | translate}} <span class="font-medium">{{project.name}}</span>. {{'PROJECT-SAVED-MODAL.added-moodboard-text2' | translate}}</p>
         </div>
         <div class="flex-col space-y-4 flex items-center">
           <div class="flex flex-col sm:flex-row items-center justify-center">

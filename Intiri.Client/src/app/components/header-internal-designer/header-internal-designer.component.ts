@@ -25,25 +25,24 @@ export class HeaderInternalDesignerComponents {
   ) {}
 
   menuItems = [
-    {title: this.translate.instant("COMMON.client"), url: '/client-list'},
-    // {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
-    {title: this.translate.instant("COMMON.moodboard"), url: '/my-moodboard'},
+    {title: 'COMMON.client', url: '/client-list'},
+    {title: 'COMMON.moodboard', url: '/my-moodboard'},
   ]
 
   ngOnInit() {
-    this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-      this.translate.setDefaultLang(event.lang);
-      this.revokeTranslations();
-    });
+    // this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+    //   this.translate.setDefaultLang(event.lang);
+    //   this.revokeTranslations();
+    // });
   }
 
-  revokeTranslations() {
-    this.menuItems = [
-      {title: this.translate.instant("COMMON.client"), url: '/client-list'},
-      // {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
-      {title: this.translate.instant("COMMON.moodboard"), url: '/my-moodboard'},
-    ]
-  }
+  // revokeTranslations() {
+  //   this.menuItems = [
+  //     {title: this.translate.instant("COMMON.client"), url: '/client-list'},
+  //     // {title: this.translate.instant("NEW-PROJECT.style"), url: '/style-list'},
+  //     {title: this.translate.instant("COMMON.moodboard"), url: '/my-moodboard'},
+  //   ]
+  // }
 
   isActiveRoute(route): boolean {
     return this.router.url.startsWith(route);

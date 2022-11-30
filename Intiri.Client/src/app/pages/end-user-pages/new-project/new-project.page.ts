@@ -21,18 +21,18 @@ export class NewProjectPage implements OnInit {
 
   steps: Array<object> = [
     {
-      title: 'Select the room you want to improve',
-      subtitle: 'Don’t worry, you can improve more rooms later.',
+      title: 'NEW-PROJECT.select-room-title',
+      subtitle: 'NEW-PROJECT.select-room-text',
       data: [],
     },
     {
-      title: 'Select pictures that you like',
-      subtitle: 'Decisions are hard, pick as many as you want.',
+      title: 'NEW-PROJECT.select-style-title',
+      subtitle: 'NEW-PROJECT.select-style-text',
       data: [],
     },
     {
-      title: 'Enter more detail about selected room',
-      subtitle: 'Don’t worry, you can improve more rooms later.',
+      title: 'NEW-PROJECT.room-details-title',
+      subtitle: 'NEW-PROJECT.room-details-text',
       data: {
         roomShapes: [
           { shape: 'rectangular', imagePath: 'icon/rectangle.png' },
@@ -42,18 +42,17 @@ export class NewProjectPage implements OnInit {
       },
     },
     {
-      title: 'Select color pallet',
-      subtitle: 'Don’t worry, you can chage color later.',
+      title: 'NEW-PROJECT.select-color-title',
+      subtitle: 'NEW-PROJECT.select-color-text',
       data: [],
     },
     {
-      title: 'Select the moodboard you like the most',
-      subtitle:
-        'We have found you style match. Choose moodboard you like the most. ',
+      title: 'NEW-PROJECT.select-moodboard-title',
+      subtitle:'NEW-PROJECT.select-moodboard-text',
       data: [],
     },
     {
-      title: 'This is your style',
+      title: 'NEW-PROJECT.your-style',
       subtitle:
         'This style captures the balance between comfort and minimalism characteristic of Scandinavial bright design. This include clean lines, minimal decoration and the importance of artwork. Try to create an environment that encourages feelings of strenght, contentmentt and clean lines. Typicalcoloors are calming and neutral with palettes sticking to whites, grays, greens, black and blue accents. The syle allso reflects the wooden landscape and trees of the Nordic countries.',
       data: 'final',
@@ -87,7 +86,7 @@ export class NewProjectPage implements OnInit {
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
 
-    this.projectService.currentProject$.subscribe((project) => {
+    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
       this.project = project;
       if (project.name === "") {
         this.openStartModal();
@@ -385,6 +384,9 @@ export class NewProjectPage implements OnInit {
     });
 
     await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    console.log(data);
   }
 
   private checkIfRedirectedFromLogin(): boolean {

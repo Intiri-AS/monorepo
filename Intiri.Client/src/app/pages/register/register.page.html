@@ -23,9 +23,7 @@
               ></ion-input>
               <span
                 class="ion-warning"
-                *ngIf="isFormSubmited && firstNameErrors?.required"
-                >First name is Required!</span
-              >
+                *ngIf="isFormSubmited && firstNameErrors?.required">{{'VALIDATION.first-name' | translate}}</span>
             </div>
             <div class="mt-[30px] xl:mt-0">
               <span class="text-xs xl:text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
@@ -37,9 +35,7 @@
               ></ion-input>
               <span
                 class="ion-warning"
-                *ngIf="isFormSubmited && lastNameErrors?.required"
-                >Last name is Required!</span
-              >
+                *ngIf="isFormSubmited && lastNameErrors?.required">{{'VALIDATION.last-name' | translate}}</span>
             </div>
           </div>
           <div class="mt-3 xl:mt-7">
@@ -67,17 +63,14 @@
                   #phoneNumber
                   formControlName="phoneNumber"
                   class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-60 xl:w-80"
+                  maxlength="8"
                 ></ion-input>
                 <span
                   class="ion-warning"
-                  *ngIf="isFormSubmited && phoneNumberErrors?.required"
-                  >Phone is Required!</span
-                >
+                  *ngIf="isFormSubmited && phoneNumberErrors?.required">{{'VALIDATION.phone-req' | translate}}</span>
                 <span
                   class="ion-warning"
-                  *ngIf="isFormSubmited && phoneNumberErrors?.pattern"
-                  >Invalid Phone Number!</span
-                >
+                  *ngIf="isFormSubmited && phoneNumberErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
               </div>
             </div>
           </div>

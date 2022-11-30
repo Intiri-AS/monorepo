@@ -11,6 +11,7 @@ using Intiri.API.Models.PolicyNames;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Rating;
 using Intiri.API.Models.RoleNames;
+using Intiri.API.Models.UserLanguage;
 using Intiri.API.Services.Interfaces;
 using Intiri.API.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -345,6 +346,11 @@ namespace Intiri.API.Controllers
 			}
 
 			Designer dUser = _mapper.Map<Designer>(registerIn);
+			
+			if (string.IsNullOrEmpty(dUser.Language))
+			{
+				dUser.Language = Language.Norway;
+			}
 
 			IdentityResult result = await _accountService.CreateUserAsync(dUser);
 			if (!result.Succeeded) return BadRequest(result.Errors);
@@ -378,7 +384,7 @@ namespace Intiri.API.Controllers
 			{
 				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
 			}
-			else if (userRoles.Contains(RoleNames.InternalDesigner))
+			else if (userRoles.Contains(RoleNames.InternalDesigner) || userRoles.Contains(RoleNames.ExternalDesigner))
 			{
 				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
 

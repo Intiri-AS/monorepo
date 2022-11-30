@@ -22,12 +22,10 @@
                 </ion-select>
               </div>
               <div>
-                <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber"
+                <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" maxlength="8"
                   class="border rounded-2xl h-14 border-black-2 w-72"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">Phone is
-                  Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">Invalid Phone
-                  Number!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">{{'VALIDATION.phone-req' | translate}}</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
               </div>
             </div>
           </div>

@@ -42,8 +42,6 @@ export class LandingPage implements OnInit {
   ngOnInit(): void {
   }
 
-
-
   next() {
     this.slides.slideNext();
   }
@@ -58,7 +56,7 @@ export class LandingPage implements OnInit {
 
   async logScrollEnd() {
     const scrollElement = await this.content.getScrollElement(); // get scroll element
-    this.isScrolledDown = scrollElement.scrollTop > 50;
+    this.isScrolledDown = scrollElement.scrollTop > 70;
 
   }
 }

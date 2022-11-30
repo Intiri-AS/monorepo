@@ -5,14 +5,15 @@
 </ion-list>
 
 <ion-list *ngIf="product" lines="none" >
-  <ion-item class="text-black-1" (click)="openEditProductModal()" [button]="true">Edit product</ion-item> <!-- TODO Translate -->
+  <ion-item class="text-black-1" (click)="openEditProductModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.product' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteProductModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="moodboard" lines="none" >
-  <ion-item class="text-black-1 font-medium" [routerLink]="['/moodboard-details/' + item.id]"  [button]="true">View Details</ion-item>
+  <ion-item class="text-black-1 font-medium" [routerLink]="['/moodboard-details/' + item.id]"  [button]="true">{{'COMMON.view-details' | translate}}</ion-item>
   <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="openDeleteMoodboardModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
-  <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? 'Remove from template moodboards' : 'Make a template moodboard'}}</ion-item>
+  <!-- <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? 'Remove from template moodboards' : 'Make a template moodboard'}}</ion-item> -->
+  <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? ('MOODBOARDS.unset-template' | translate) : ('MOODBOARDS.set-template' | translate) }}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="client" lines="none" >
@@ -20,12 +21,12 @@
 </ion-list>
 
 <ion-list *ngIf="style" lines="none" >
-  <ion-item class="text-black-1" (click)="openEditStyleModal()" [button]="true">Edit style</ion-item> <!--TODO Translate-->
+  <ion-item class="text-black-1" (click)="openEditStyleModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.style' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteStyleModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="material" lines="none" >
-  <ion-item class="text-black-1" (click)="openEditMaterialModal()" [button]="true">Edit material</ion-item> <!-- TODO Translate -->
+  <ion-item class="text-black-1" (click)="openEditMaterialModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.material' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteMaterialsModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
@@ -47,5 +48,9 @@
 <ion-list *ngIf="contact" lines="none" >
   <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteContactModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
+</ion-list>
+
+<ion-list *ngIf="partner" lines="none">
+  <ion-item class="text-black-1 font-medium" (click)="openDeletePartnerModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 </ion-content>

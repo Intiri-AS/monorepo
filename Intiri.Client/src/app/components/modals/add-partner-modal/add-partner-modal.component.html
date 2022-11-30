@@ -1,6 +1,6 @@
 <ion-content>
   <!-- Add partner modal -->
-  <div *ngIf="!nextPage && !added && !addedContact" class="items-center flex flex-col h-full w-full">
+  <div *ngIf="!nextPage && !added && !addedContact && !delete" class="items-center flex flex-col h-full w-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <h1 class="font-medium text-black-1 text-5xl mt-8 mb-4 text-center">{{'PARTNERS.add' | translate}}</h1>
     <div class="partner-form">
@@ -11,7 +11,7 @@
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PARTNERS.partner-name' | translate}}</span>
               <ion-input [(ngModel)]="partner.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -31,8 +31,8 @@
               <div class="profile-input">
                 <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
                 <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="partner.phoneNumber" formControlName="phone"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">Field Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">Inalid Phone Format!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">{{'VALIDATION.phone-format' | translate}}</span>
               </div>
             </section>
           </ion-col>
@@ -42,8 +42,8 @@
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'COMMON.email' | translate}}</span>
               <ion-input [(ngModel)]="partner.email" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="email"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.required">Field Required!</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.pattern">Invalid Email Format!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.required">{{'VALIDATION.field' | translate}}</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.pattern">{{'VALIDATION.phone-format' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -52,7 +52,7 @@
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PAYMENT.street' | translate}}</span>
               <ion-input [(ngModel)]="partner.street" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="street"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && streetErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && streetErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -61,12 +61,12 @@
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PARTNERS.postal-code' | translate}}</span>
               <ion-input [(ngModel)]="partner.postalCode" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="postal"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && postalErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && postalErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PARTNERS.city' | translate}}</span>
               <ion-input [(ngModel)]="partner.city" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="city"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && cityErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && cityErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -77,7 +77,7 @@
               <ion-select [(ngModel)]="partner.country" interface="popover" formControlName="country">
                 <ion-select-option value="Norway">Norway</ion-select-option>
               </ion-select>
-              <span class="ion-warning" *ngIf="isFormSubmited && countryErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && countryErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -91,11 +91,11 @@
                     <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                     <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                   </div>
-                  <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="partnerLogoImg" />
+                  <img *ngIf="imagePath" [src]="imagePath" class="object-contain rounded-2xl p-2 h-full w-full" alt="partnerLogoImg" />
                 </div>
                 <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="logo"/>
               </label>
-              <span class="ion-warning" *ngIf="isFormSubmited && logoErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && logoErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -121,14 +121,14 @@
         <ion-row>
           <ion-col>
             <div class="profile-input">
-              <span class="text-sm text-black-2">Partner contact first name</span>
+              <span class="text-sm text-black-2">{{'PARTNERS.contact-firstName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && contactFirstNameErrors?.required">Field Required!</span>
             </div>
           </ion-col>
           <ion-col>
             <div class="profile-input">
-              <span class="text-sm text-black-2">Partner contact last name</span>
+              <span class="text-sm text-black-2">{{'PARTNERS.contact-lastName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && contactLastNameErrors?.required">Field Required!</span>
             </div>
@@ -189,13 +189,29 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Partner contact added!</h2>
-          <p class="text-center text-base text-[18px] text-black-2">You successfully added new partner contact.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'PARTNERS.contact-added' | translate}}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{'PARTNERS.contact-added-text' | translate}}</p>
         </div>
           <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissContactModal()">Go to Partner</ion-button>
+            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissContactModal()">{{'PARTNERS.go-to' | translate}}</ion-button>
           </ion-buttons>
         </div>
+    </div>
+  </div>
+  <!-- Partner delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper flex items-center justify-center"><ion-icon class="h-[32px] w-[32px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deletePartner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+        </ion-buttons>
+      </div>
     </div>
   </div>
 </ion-content>

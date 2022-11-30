@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class DesignerService {
   private designersSource = new ReplaySubject<any>(1);
   designers$ = this.designersSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private translate: TranslateService) { }
 
   getDesigners(){
     return this.http.get(this.apiUrl + 'designers').pipe(map((designer) => {

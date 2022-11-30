@@ -11,7 +11,7 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize(Policy = PolicyNames.AdminPolicy)]
+	[Authorize]
 	public class ProductTypesController : BaseApiController
 	{
 		#region Fields
@@ -47,6 +47,7 @@ namespace Intiri.API.Controllers
 			return Ok(productTypeOutDTO);
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
 		public async Task<ActionResult> AddProductType(ProductTypeInDTO productTypeInDTO)
 		{
@@ -66,6 +67,7 @@ namespace Intiri.API.Controllers
 			return BadRequest("Something went wrong while adding product type");
 		}
 
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpDelete("delete/{productTypeId}")]
 		public async Task<IActionResult> DeleteProductType(int productTypeId)
 		{

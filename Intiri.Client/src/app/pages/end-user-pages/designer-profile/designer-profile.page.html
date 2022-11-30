@@ -16,7 +16,7 @@
                 <p class="text-lg text-black-3">{{designer.createdMoodboards.length}} {{'BOOK-DESIGNER-PROFILE.projects' | translate}}</p>
                 <p class="text-lg text-black-2 px-[30px] xl:px-[60px] mt-[30px]">
                   {{(showMore) ? designerText : designerText | slice:0:200}} <span *ngIf="!showMore">...</span> 
-                  <a href="javascript:;" *ngIf="!showMore" (click)="showMore=true">Show More</a>
+                  <a href="javascript:;" *ngIf="!showMore" (click)="showMore=true">{{'COMMON.show-more' | translate}}</a>
                   <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui. Maecenas congue vel leo ac feugiat. -->
                   <br>
                   <br>
@@ -24,9 +24,9 @@
                 </p>
                 <div class="flex flex-col items-start w-full px-[30px] xl:px-[60px]">
                   <p class="text-primary text-lg mt-[20px]">{{'DESIGNER-PROFILE.languages' | translate}}</p>
-                  <p class="text-black-2 text-lg">{{languages[designer.language]}}</p>
+                  <p class="text-black-2 text-lg">{{'COMMON.' + designer.language | translate}}</p>
                 </div>
-                <ion-button fill="clear" class="primary-btn mb-[60px] mt-[30px]" (click)="bookConsultationModal()">Book consultation</ion-button>
+                <ion-button fill="clear" class="primary-btn mb-[60px] mt-[30px]" (click)="bookConsultationModal()">{{'DESIGNER-PROFILE.book' | translate}}</ion-button>
               </div>
             </div>
           </ion-col>
@@ -37,7 +37,7 @@
               <p class="text-black-2 text-2xl font-medium mt-2">{{designer.createdMoodboards[designer.createdMoodboards.length-1].style.name}}</p>
             </div>
             <div>
-              <p class="text-black-3 text-lg">{{getPiecesNo(designer.createdMoodboards[designer.createdMoodboards.length-1])}} pieces / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
+              <p class="text-black-3 text-lg">{{getPiecesNo(designer.createdMoodboards[designer.createdMoodboards.length-1])}} {{'COMMON.pieces' | translate}} / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
             </div>
             <div class="mt-16">
               <p class="text-2xl font-medium text-black-2">{{'DESIGNER-PROFILE.other' | translate}}</p>
@@ -62,7 +62,7 @@
                     </div>
                   </div>
                   <div>
-                    <p class="text-black-3 text-lg">{{getPiecesNo(mb)}} pieces / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
+                    <p class="text-black-3 text-lg">{{getPiecesNo(mb)}} {{'COMMON.pieces' | translate}} / {{designer.createdMoodboards[designer.createdMoodboards.length-1].created | timeAgo }}</p>
                   </div>
                 </ion-col>
               </ion-row>

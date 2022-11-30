@@ -33,8 +33,8 @@ export class LanguageService {
 
   getLanguages() {
     return [
-      { text: 'English', value: 'en', img: 'assets/icon/flags/us.svg'},
-      { text: 'Norwegian', value: 'no', img: 'assets/icon/flags/no.svg'},
+      { text: this.translate.instant('COMMON.EN'), value: 'en', img: 'assets/icon/flags/us.svg'},
+      { text: this.translate.instant('COMMON.NO'), value: 'no', img: 'assets/icon/flags/no.svg'},
     ]
   }
 

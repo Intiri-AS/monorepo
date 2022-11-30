@@ -16,6 +16,11 @@
   <ion-row class="mt-8 gap-x-[1.45%]">
     <ion-col *ngFor="let partner of (partners$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
       <div class="logo cursor-pointer hover:opacity-70" routerLink="/partner-profile/{{partner.id}}" routerDirection="root">
+        <div class="absolute top-2 right-2">
+          <button (click)="showSettings($event, partner)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg" type="button">
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          </button>
+        </div>
         <div class="my-6 mx-5 h-[60px] flex flex-1 justify-center">
           <img src="{{partner.logoPath}}" class="object-scale-down" alt="Profile Img" />
         </div>
@@ -25,13 +30,13 @@
             <p class="leading-[26px] text-black-2 text-lg text-clamp-1" title="{{partner.email}}">{{partner.email}}</p>
             <p class="leading-[26px] text-black-2 text-lg text-clamp-1" title="{{partner.street}}">{{partner.street}}</p>
           </div>
-          <div class="p-4 mt-6 mx-5 bg-light">
+          <!-- <div class="p-4 mt-6 mx-5 bg-light">
             <ul>
               <li *ngFor="let number of [0,1,2,3,4]" class="inline-block">
                 <ion-icon name="star" class="text-primary rounded text-xl mr-1"></ion-icon>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </ion-col>

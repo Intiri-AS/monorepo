@@ -15,7 +15,7 @@
         <ion-col size="12" size-md="7.7" offset="0.2" size-lg="9.3">
           <ion-grid class="mb-24">
             <ion-row>
-              <p class="text-black-2 text-2xl font-medium cursor-default">Partners contacts</p>
+              <p class="text-black-2 text-2xl font-medium cursor-default">{{'PARTNERS.contacts' | translate}}</p>
             </ion-row>
             <ion-row class="w-[85%]">
               <ion-col *ngFor="let contact of partner.partnerContacts" size="12" size-md="5" size-lg="3">
@@ -38,7 +38,7 @@
                   <div (click)="openAddContactModal(partner.id)" class="border-2 border-dashed rounded-2xl h-[128px] border-black-3 hover:opacity-70 cursor-pointer">
                     <div class="text-center mt-[35px]">
                       <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                      <p class="font-semibold text-black-3 text-lg">Add contact person</p>
+                      <p class="font-semibold text-black-3 text-lg">{{'PARTNERS.add-contact' | translate}}</p>
                     </div>
                   </div>
                 </div>
@@ -71,12 +71,12 @@
       <div class="max-w-md w-full space-y-8">
         <div>
           <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">Remove partner contact</h2>
-          <p class="text-center text-base text-[18px] text-black-2">Are you sure that you want to remove this partner contact? This action cannot be undone.</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner-contact' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.partner-contact' | translate) } }}</p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteContact()">Remove</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">Cancel</ion-button>
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteContact()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner-contact' | translate) } }}</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
         </ion-buttons>
       </div>
     </div>
