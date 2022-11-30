@@ -170,7 +170,7 @@ export class MessengerPage implements OnInit {
 
   parseDate(dateString) {
     const date = new Date(dateString);
-    return this.datepipe.transform(date, 'MMM d');
+    return this.datepipe.transform(date, 'MMM d YYYY');
   }
 
   getChatClassName(msg, rightClass, leftClass) {
