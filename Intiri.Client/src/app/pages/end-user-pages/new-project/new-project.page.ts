@@ -86,7 +86,7 @@ export class NewProjectPage implements OnInit {
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
 
-    this.projectService.currentProject$.subscribe((project) => {
+    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
       this.project = project;
       if (project.name === "") {
         this.openStartModal();
@@ -384,6 +384,9 @@ export class NewProjectPage implements OnInit {
     });
 
     await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    console.log(data);
   }
 
   private checkIfRedirectedFromLogin(): boolean {

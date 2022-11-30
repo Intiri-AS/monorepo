@@ -49,4 +49,8 @@
   <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
   <ion-item class="text-black-1 font-medium" (click)="openDeleteContactModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
+
+<ion-list *ngIf="partner" lines="none">
+  <ion-item class="text-black-1 font-medium" (click)="openDeletePartnerModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
+</ion-list>
 </ion-content>

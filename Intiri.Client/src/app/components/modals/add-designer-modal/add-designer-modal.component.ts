@@ -108,7 +108,6 @@ export class AddDesignerModalComponent implements OnInit {
     this.userService.deleteUser(this.item['id']).subscribe(res => {
         this.designerService.getDesigners();
         this.modalController.dismiss();
-        location.reload();
         this.notifier.show({
           message: 'Designer deleted successfully',
           type: 'success',

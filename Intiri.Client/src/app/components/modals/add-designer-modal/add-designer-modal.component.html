@@ -40,7 +40,7 @@
             </div>
             <div class="profile-input">
               <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone"></ion-input>
+              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone" maxlength="8"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
               <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
             </div>
@@ -96,20 +96,20 @@
         </div>
     </div>
   </div>
-   <!-- Designer delete modal -->
- <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-  <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
-    <div class="max-w-md w-full space-y-8">
-      <div>
-        <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-        <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</h2>
-        <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</p>
+  <!-- Designer delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper flex items-center justify-center"><ion-icon class="h-[32px] w-[32px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteDesigner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+        </ion-buttons>
       </div>
-      <ion-buttons class="justify-center">
-        <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteDesigner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</ion-button>
-        <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-      </ion-buttons>
     </div>
   </div>
-</div>
 </ion-content>

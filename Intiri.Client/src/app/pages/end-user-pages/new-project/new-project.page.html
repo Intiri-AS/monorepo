@@ -27,7 +27,6 @@
         <ion-col class="fixed-bottom" offset-xl="0">
           <ion-buttons class="justify-center">
             <ion-button
-              *ngIf="steps[currentStepNo]['data'] !== 'final'"
               class="secondary-btn"
               [class.disabled]="!canChangeToStep(currentStepNo-1)"
               (click)="backStep()"

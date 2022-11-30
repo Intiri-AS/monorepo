@@ -46,7 +46,7 @@ export class RegisterPage {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern('^[0-9]+$'),
+          Validators.pattern('^[0-9]+$')
         ]),
       ],
     });

@@ -12,6 +12,7 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
 import { AddProductModalComponent } from '../modals/add-product-modal/add-product-modal.component';
 import { DeleteMoodboardModalComponent } from '../modals/delete-moodboard-modal/delete-moodboard-modal.component';
 import { AddDesignerModalComponent } from '../modals/add-designer-modal/add-designer-modal.component';
+import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partner-modal.component';
 
 @Component({
   selector: 'app-menu-popover',
@@ -31,6 +32,7 @@ export class MenuPopoverComponent implements OnInit {
   color: boolean;
   picture: boolean;
   contact: boolean;
+  partner: boolean;
 
   item: any
 
@@ -172,6 +174,16 @@ export class MenuPopoverComponent implements OnInit {
       componentProps: {delete: true, item: this.item},
       cssClass: 'added-designer-modal-css'
     });
+
+    await modal.present();
+  }
+
+  async openDeletePartnerModal() {
+    const modal = await this.modalController.create({
+      component: AddPartnerModalComponent,
+      componentProps: {delete: true, item: this.item},
+      cssClass: 'added-designer-modal-css'
+    })
 
     await modal.present();
   }

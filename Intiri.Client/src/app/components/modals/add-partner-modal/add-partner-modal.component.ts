@@ -219,4 +219,20 @@ export class AddPartnerModalComponent implements OnInit {
     });
   }
 
+  deletePartner() {
+    this.partnerService.deletePartner(this.item['id']).subscribe(res => {
+      this.partnerService.getPartners();
+      this.modalController.dismiss();
+      this.notifier.show({
+        message: 'Partner deleted successfully',
+        type: 'success',
+      });
+    }, e => {
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
+  }
+
 }

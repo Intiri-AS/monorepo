@@ -1,6 +1,6 @@
 <ion-content>
   <!-- Add partner modal -->
-  <div *ngIf="!nextPage && !added && !addedContact" class="items-center flex flex-col h-full w-full">
+  <div *ngIf="!nextPage && !added && !addedContact && !delete" class="items-center flex flex-col h-full w-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <h1 class="font-medium text-black-1 text-5xl mt-8 mb-4 text-center">{{'PARTNERS.add' | translate}}</h1>
     <div class="partner-form">
@@ -196,6 +196,22 @@
             <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissContactModal()">{{'PARTNERS.go-to' | translate}}</ion-button>
           </ion-buttons>
         </div>
+    </div>
+  </div>
+  <!-- Partner delete modal -->
+  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
+    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <div class="plus-icon-wrapper flex items-center justify-center"><ion-icon class="h-[32px] w-[32px]" name="trash-outline"></ion-icon></div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</h2>
+          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</p>
+        </div>
+        <ion-buttons class="justify-center">
+          <ion-button class="primary-btn h-[52px] mt-10" (click)="deletePartner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.partner' | translate) } }}</ion-button>
+          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+        </ion-buttons>
+      </div>
     </div>
   </div>
 </ion-content>
