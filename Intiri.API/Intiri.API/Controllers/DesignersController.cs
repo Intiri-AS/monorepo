@@ -15,6 +15,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Intiri.API.DataAccess.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Intiri.API.Models.PolicyNames;
+using CloudinaryDotNet.Actions;
+using Intiri.API.Services;
+using Intiri.API.Shared;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -25,15 +29,19 @@ namespace Intiri.API.Controllers
 
 		private readonly IMapper _mapper;
 		private readonly IRatingService _ratingService;
+		private readonly IAccountService _accountService;
+		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public DesignersController(IUnitOfWork unitOfWork, IMapper mapper, IRatingService ratingService) : base(unitOfWork)
+		public DesignersController(IUnitOfWork unitOfWork, IMapper mapper, IRatingService ratingService, IAccountService accountService, IFileUploudService fileUploadService) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_ratingService = ratingService;
+			_accountService = accountService;
+			_fileUploadService = fileUploadService;
 		}
 
 		#endregion Constructors
@@ -158,6 +166,44 @@ namespace Intiri.API.Controllers
 			};
 
 			return Ok(designerStatisticsOutDTO);
+		}
+
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
+		[HttpPut("update/{designerId}")]
+		public async Task<ActionResult<UserOutDTO>> UpdateDesigner(int designerId, [FromForm]UserUpdateInDTO userUpdateDto)
+		{
+			User user = await _unitOfWork.UserRepository.GetDesignerByIdAsync(designerId);
+
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			IFormFile photoFile = userUpdateDto.PhotoPath;
+
+			if (photoFile != null && photoFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+					await _fileUploadService.TryAddFileToCloudinaryAsync(photoFile, FileUploadDestinations.UserProfilePhotos, user.PublicId);
+
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				user.PhotoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				user.PublicId = uploadResult.Item3.PublicId;
+			}
+
+			_mapper.Map(userUpdateDto, user);
+			_unitOfWork.UserRepository.UpdateUser(user);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return _mapper.Map<UserOutDTO>(user);
+			}
+
+			return BadRequest("Failed to update designer.");
 		}
 	}
 }
