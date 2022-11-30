@@ -39,7 +39,7 @@
   </div>
   <div class="profile-input">
     <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" formControlName="phoneNumber" [disabled]="getPartner()"></ion-input>
+    <ion-input type="text" class="border rounded-2xl h-14 border-black-2" formControlName="phoneNumber" maxlength="8" [disabled]="getPartner()"></ion-input>
   </div>
 </section>
 
