@@ -264,7 +264,8 @@
     "save": "Lagre",
     "save-changes": "Lagre endringer",
     "pieces": "stykker",
-    "file-selected": "fil(er) valgt"
+    "file-selected": "fil(er) valgt",
+    "view-details": "Se detaljer"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -274,6 +275,7 @@
     "designers": "Designere",
     "clients": "Kunder",
     "statistic":"Statistikk",
+    "ratings":"Rangeringer",
     "moodboards": "Stilforslag",
     "my-moodboards":"Mine moodboards",
     "all-moodboards":"Alle moodboards",
@@ -286,7 +288,8 @@
     "client-number": "Antall kunder",
     "top-designers": "Topp designere",
     "trending-styles": "Trendende stiler",
-    "recent-activity": "Sist aktivitet"
+    "recent-activity": "Sist aktivitet",
+    "income": "Total inntekt"
   },
   "CONSULTATIONS": {
     "details": "Detaljer",
@@ -327,7 +330,8 @@
     "go-to": "Gå til Samarbeidspartnere",
     "product-added": "Producte lagt til!",
     "product-added-text": "Producte lagt til suksessfullt.",
-    "go-to-products": "Gå til produkter"
+    "go-to-products": "Gå til produkter",
+    "product": "Produkt"
   },
   "DESIGNERS": {
     "add": "Legg til designer",
@@ -338,7 +342,9 @@
     "external": "Ekstern designer",
     "designer-added": "Designer lagt til!",
     "designer-added-text": "Du la til designer med suksess.",
-    "go-to": "Gå til Designere"
+    "go-to": "Gå til Designere",
+    "selected-style": "Valgt stil",
+    "offer-sent": "Tilbud sendt"
   },
   "CLIENTS": {
     "inspiration": "Inspirasjon",
@@ -360,10 +366,13 @@
     "moodboard-preview": "Stilforslag visning",
     "save": "Lagre stilforslag",
     "add": "Legg til moodboard",
+    "template": "Mal",
     "templates": "Mal moodboards",
     "non-templates": "Uten-mal moodboards",
     "create-offer": "Opprett tilbud",
-    "update-offer": "Oppdater tilbud"
+    "update-offer": "Oppdater tilbud",
+    "unset-template": "Opphevet som moodboard mal",
+    "set-template": "Angi som moodboard mal"
   },
   "STYLE": {
     "styles": "Stiler",
@@ -458,5 +467,14 @@
     "months": " måneder siden",
     "year": " år ago",
     "years": " år ago"
+  },
+  "RATE": {
+    "excellent": "Utmerket",
+    "good": "Veldig bra",
+    "average": "Gjennomsnitt",
+    "poor": "Dårlig",
+    "terible": "Forferdelig",
+    "rating": "vurdering",
+    "ratings": "vurderinger"
   }
 }

@@ -32,9 +32,9 @@ export class DesignerPage {
   getDesignerType(d) {
     const role = d.roles[0].name;
     if(role === 'InternalDesigner') {
-      return 'Intiri Designer'
+      return 'DESIGNERS.internal'
     } else if(role === 'ExternalDesigner') {
-      return 'External Designer'
+      return 'DESIGNERS.external'
     }
     return role;
   }

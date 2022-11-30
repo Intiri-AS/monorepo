@@ -114,7 +114,7 @@
   },
   "BOOK-DESIGNER-PROFILE": {
     "profile": "Designer profile",
-    "inhouse": "Inhouse designer",
+    "internal": "Internal designer",
     "projects": "projects",
     "available": "Available slots"
   },
@@ -264,7 +264,8 @@
     "save": "Save",
     "save-changes": "Save changes",
     "pieces": "pieces",
-    "file-selected": "file(s) selected"
+    "file-selected": "file(s) selected",
+    "view-details": "View details"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
@@ -274,6 +275,7 @@
     "designers": "Designers",
     "clients": "Clients",
     "statistic":"Statistic",
+    "ratings":"Ratings",
     "moodboards": "Moodboards",
     "my-moodboards":"My moodboards",
     "all-moodboards":"All moodboards",
@@ -286,7 +288,8 @@
     "client-number": "Number of clients",
     "top-designers": "Top designers",
     "trending-styles": "Trending styles",
-    "recent-activity": "Recent activity"
+    "recent-activity": "Recent activity",
+    "income": "Total income"
   },
   "CONSULTATIONS": {
     "details": "Details",
@@ -327,7 +330,8 @@
     "go-to": "Go to Partners",
     "product-added": "Product added",
     "product-added-text": "You successfully added new product",
-    "go-to-products": "Go to products"
+    "go-to-products": "Go to products",
+    "product": "Product"
   },
   "DESIGNERS": {
     "add": "Add designer",
@@ -338,7 +342,9 @@
     "external": "External designer",
     "designer-added": "Designer added!",
     "designer-added-text": "You successfully added designer.",
-    "go-to": "Go to Designers"
+    "go-to": "Go to Designers",
+    "selected-style": "Selected style",
+    "offer-sent": "Offer sent"
   },
   "CLIENTS": {
     "inspiration": "Inspiration",
@@ -360,10 +366,13 @@
     "moodboard-preview": "Moodboard preview",
     "save": "Save moodboard",
     "add": "Add moodboard",
+    "template": "Template",
     "templates": "Template moodboards",
     "non-templates": "Non-Template moodboards",
     "create-offer": "Create offer",
-    "update-offer": "Update offer"
+    "update-offer": "Update offer",
+    "unset-template": "Unset as moodboard template",
+    "set-template": "Set as moodboard template"
   },
   "STYLE": {
     "styles": "Styles",
@@ -458,5 +467,14 @@
     "months": " months ago",
     "year": " year ago",
     "years": " years ago"
+  },
+  "RATE": {
+    "excellent": "Excellent",
+    "good": "Very good",
+    "average": "Average",
+    "poor": "Poor",
+    "terible": "Terible",
+    "rating": "rating",
+    "ratings": "ratings"
   }
 }
