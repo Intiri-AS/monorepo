@@ -187,6 +187,12 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Users.OfType<Designer>().AnyAsync(d => d.Id == id);
 		}
 
+		public async Task<Designer> GetDesignerByIdAsync(int id)
+		{
+			//return _context.Set<EndUser>().SingleOrDefault(x => x.Id == id);
+			return await _context.Users.OfType<Designer>().SingleOrDefaultAsync(eu => eu.Id == id);
+		}
+
 		#endregion Designer
 
 		#region Partner

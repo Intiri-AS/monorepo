@@ -63,10 +63,19 @@ namespace Intiri.API.Services
 
 			List<KeyValuePair<Moodboard, int>> moodboardTopMatchOrder = moodboardToMatchDictionary.OrderByDescending(d => d.Value).ToList();
 
+			if (moodboardTopMatchOrder.Count == 0)
+			{
+				return null;
+			}
+
 			// take first two with high match
 			List<KeyValuePair<Moodboard, int>> moodboardTopMatch = moodboardTopMatchOrder.Take(2).ToList();
+			
 			// take last with the lowest match
-			moodboardTopMatch.Add(moodboardTopMatchOrder.Last());
+			if (moodboardTopMatchOrder.Count > 2)
+			{
+				moodboardTopMatch.Add(moodboardTopMatchOrder.Last());
+			}
 
 			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
 
