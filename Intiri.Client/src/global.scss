@@ -276,6 +276,12 @@ ion-toolbar {
   left: 30% !important;
 }
 
+.color-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .ion-warning {
   display: flex;
   font-size: 12px;

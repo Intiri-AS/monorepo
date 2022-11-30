@@ -46,14 +46,14 @@ export class RegisterPage {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern('^[0-9]+$')
+          Validators.pattern('^[0-9]+$'),
         ]),
       ],
     });
 
     const state = router.getCurrentNavigation().extras.state;
     if (state) {
-      this.newProjectPageStep = state['step'];
+      this.newProjectPageStep = state.step;
     }
   }
 
@@ -91,7 +91,7 @@ export class RegisterPage {
           .forEach((key) => delete queryParams[key]);
 
         this.router.navigate(['/sms-verification'], {
-          queryParams: queryParams,
+          queryParams,
         });
       },
       (e) => {
