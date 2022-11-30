@@ -243,6 +243,12 @@ namespace Intiri.API.Controllers
 			};
 
 			suggestions.Moodboards = await _moodboardSevice.FindMoodboardMatchesAsync(projectIn);
+
+			if (suggestions.Moodboards == null )
+			{
+				return NotFound();
+			}
+
 			MoodboardOutDTO highMatch = suggestions.Moodboards.First().Moodboard;
 
 			suggestions.MoodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(highMatch.Style.Id, highMatch.Room.Id);

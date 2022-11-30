@@ -378,7 +378,7 @@ namespace Intiri.API.Controllers
 			{
 				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
 			}
-			else if (userRoles.Contains(RoleNames.InternalDesigner))
+			else if (userRoles.Contains(RoleNames.InternalDesigner) || userRoles.Contains(RoleNames.ExternalDesigner))
 			{
 				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
 
