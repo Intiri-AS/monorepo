@@ -35,19 +35,19 @@ namespace Intiri.API.DataAccess.SeedData
 				return;
 			}
 
-			//await SeedPartners(unitOfWork);
+			await SeedPartners(unitOfWork);
 			await SeedUsers(accountService, userManager, roleManager, unitOfWork);
-			//await SeedStyles(unitOfWork);
+			await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
 			await SeedMaterialTypes(unitOfWork);
 			await SeedProductTypes(unitOfWork);
-			//await SeedColors(unitOfWork);
-			//await SeedStylesImages(unitOfWork);
-			//await SeedRooms(unitOfWork);
-			//await SeedMaterials(unitOfWork);
-			//await SeedProducts(unitOfWork);
+			await SeedColors(unitOfWork);
+			await SeedStylesImages(unitOfWork);
+			await SeedRooms(unitOfWork);
+			await SeedMaterials(unitOfWork);
+			await SeedProducts(unitOfWork);
 			await SeedColorPalettes(unitOfWork);
-			//await SeedMoodboards(unitOfWork);
+			await SeedMoodboards(unitOfWork);
 			//await SeedProjects(unitOfWork);
 			//await SeedRoomDetails(unitOfWork);
 		}
@@ -81,8 +81,8 @@ namespace Intiri.API.DataAccess.SeedData
 			u3.Description = "Professional traditional designer with more than 10-year experience who is addicted to minimal and classical.";
 			EndUser u4 = new EndUser() { FirstName = "Tod", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231234", UserName = "471231234" };
 			EndUser u5 = new EndUser() { FirstName = "Moss", LastName = "FreeEndUser", CountryCode = "47", PhoneNumber = "1231235", UserName = "471231235" };
-			//PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };
-			//u6.Partner = await unitOfWork.PartnerRepository.GetByID(1);
+			PartnerContact u6 = new PartnerContact() { FirstName = "Day", LastName = "Partner", CountryCode = "47", PhoneNumber = "1231236", UserName = "471231236" };
+			u6.Partner = await unitOfWork.PartnerRepository.GetByID(1);
 
 			EndUser uChanette = new EndUser() { FirstName = "Chanette", LastName = "Suopanki Blindheim", CountryCode = "47", PhoneNumber = "95970309", UserName = "4795970309" };
 
@@ -91,7 +91,7 @@ namespace Intiri.API.DataAccess.SeedData
 			await accountService.CreateUserAsync(u3);
 			await accountService.CreateUserAsync(u4);
 			await accountService.CreateUserAsync(u5);
-			//await accountService.CreateUserAsync(u6);
+			await accountService.CreateUserAsync(u6);
 			await accountService.CreateUserAsync(uChanette);
 
 			await userManager.AddToRoleAsync(u1, RoleNames.Admin);
@@ -99,10 +99,10 @@ namespace Intiri.API.DataAccess.SeedData
 			await userManager.AddToRoleAsync(u3, RoleNames.InternalDesigner);
 			await userManager.AddToRoleAsync(u4, RoleNames.FreeEndUser);
 			await userManager.AddToRoleAsync(u5, RoleNames.FreeEndUser);
-			//await userManager.AddToRoleAsync(u6, RoleNames.Partner);
+			await userManager.AddToRoleAsync(u6, RoleNames.Partner);
 			await userManager.AddToRoleAsync(uChanette, RoleNames.FreeEndUser);
 
-			//u6.Partner.PartnerContacts.Add(u6);
+			u6.Partner.PartnerContacts.Add(u6);
 
 			// Rating
 			DesignerRating u2DesignerRating = new DesignerRating();

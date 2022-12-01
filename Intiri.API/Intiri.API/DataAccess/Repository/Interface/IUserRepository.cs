@@ -20,7 +20,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<EndUser> GetEndUserByIdWithProjectsAsync(int id);
 		Task<IEnumerable<ClientsPerMonthDTO>> GetClientsPerMonthAsync();
 
-
 		Task<IEnumerable<Designer>> GetDesignerUsersAsync();
 		Task<IEnumerable<Designer>> GetDesignersWithRatingsAsync();
 		Task<Designer> GetDesignerUserByIdAsync(int id);

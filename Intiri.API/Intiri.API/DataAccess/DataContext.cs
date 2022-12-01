@@ -96,6 +96,11 @@ namespace Intiri.API.DataAccess
 				.WithMany(prod => prod.Moodboards)
 				.UsingEntity(mp => mp.ToTable("MoodboardProduct"));
 
+			builder.Entity<Moodboard>()
+				.HasMany<StyleImage>(img => img.StyleImages)
+				.WithMany(si => si.Moodboards)
+				.UsingEntity(mp => mp.ToTable("MoodboardStyleImage"));
+
 			builder.Entity<ShareMoodboard>()
 				.HasKey(k => new { k.SenderUserId, k.RecipientUserId });
 
@@ -160,6 +165,18 @@ namespace Intiri.API.DataAccess
 			builder.Entity<ClientMoodboard>()
 				.HasOne(c => c.ConsultationPaymentReceive)
 				.WithOne(m => m.MoodboardOffer)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			// StyleImage and room dependency
+			builder.Entity<StyleImage>()
+				.HasOne(c => c.Room)
+				.WithMany(m => m.StyleImages)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<Room>()
+				.HasMany(si => si.StyleImages)
+				.WithOne(r => r.Room)
+				.HasForeignKey(r => r.RoomId)
 				.OnDelete(DeleteBehavior.Restrict);
 
 		}

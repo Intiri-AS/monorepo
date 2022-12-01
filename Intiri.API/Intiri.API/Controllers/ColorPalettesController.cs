@@ -69,7 +69,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPatch("update/colorPaletteId")]
+		[HttpPatch("update/{colorPaletteId}")]
 		public async Task<ActionResult> UpdateColorPalette(int colorPaletteId, [FromForm] ColorPaletteInDTO colorPaletteIn)
 		{
 			ColorPalette colorPalette = await _unitOfWork.ColorPaletteRepository.GetColorPaletteById(colorPaletteId);

@@ -9,5 +9,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<IEnumerable<Room>> GetAllRoomsAsync();
 		Task<Room> GetRoomByIdAsync(int roomId);
 		Task<IEnumerable<Room>> GetRoomsByIdsListAsync(ICollection<int> roomIds);
+		Task<Room> GetRoomByIdWithStyleImagesAsync(int roomId);
 	}
 }
