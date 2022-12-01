@@ -109,6 +109,17 @@ export class MenuPopoverComponent implements OnInit {
 
     await modal.present();
   }
+
+  async openEditRoomModal() {
+    const modal = await this.modalController.create({
+      component: AddRoomModalComponent,
+      componentProps: {edit: true, item: this.item},
+      cssClass: 'add-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
   async openDeleteColorModal() {
     const modal = await this.modalController.create({
       component: AddColorModalComponent,
@@ -118,11 +129,32 @@ export class MenuPopoverComponent implements OnInit {
 
     await modal.present();
   }
+
+  async openEditColorModal() {
+    const modal = await this.modalController.create({
+      component: AddColorModalComponent,
+      componentProps: {edit: true, item: this.item},
+      cssClass: 'add-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
   async openDeletePictureModal() {
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
       componentProps: {delete: true, item: this.item},
       cssClass: 'added-designer-modal-css'
+    });
+
+    await modal.present();
+  }
+
+  async openEditPictureModal() {
+    const modal = await this.modalController.create({
+      component: AddPictureModalComponent,
+      componentProps: {edit: true, item: this.item},
+      cssClass: 'add-designer-modal-css'
     });
 
     await modal.present();
