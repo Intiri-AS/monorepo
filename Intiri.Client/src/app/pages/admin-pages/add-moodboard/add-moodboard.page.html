@@ -64,7 +64,7 @@
               *ngIf="steps[currentStepNo]['data'] === 'final' && !!client"
               class="primary-btn"
               (click)="sendOffer()"
-              >{{client.moodboardOfferId ? 'Update offer' : 'Send Offer'}}</ion-button
+              >{{client.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.send-offer' | translate) }}</ion-button
             >
           </ion-buttons>
         </ion-col>
