@@ -34,6 +34,11 @@ namespace Intiri.API.DataAccess.Repository
 			return await GetByID(roomId);
 		}
 
+		public async Task<Room> GetRoomByIdWithStyleImagesAsync(int roomId)
+		{
+			return (await Get(room => room.Id == roomId, includeProperties: "StyleImages")).SingleOrDefault();
+		}
+
 		public async Task<IEnumerable<Room>> GetRoomsByIdsListAsync(ICollection<int> roomIds)
 		{
 			return await _context.Rooms.Where(r => roomIds.Contains(r.Id)).ToListAsync();

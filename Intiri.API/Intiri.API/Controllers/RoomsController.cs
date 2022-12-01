@@ -152,7 +152,7 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{roomId}")]
 		public async Task<IActionResult> DeleteRoom(int roomId)
 		{
-			Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
+			Room room = await _unitOfWork.RoomRepository.GetRoomByIdWithStyleImagesAsync(roomId);
 			if (room == null) return BadRequest("Room is not found.");
 
 			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(room.RoomTypeId);
