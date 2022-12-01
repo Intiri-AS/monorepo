@@ -36,6 +36,18 @@ export class RoomService {
     return this.http.delete(this.apiUrl + 'rooms/delete/' + roomId);
   }
 
+  editRoom(roomId, roomObj) {
+    const formData = new FormData();
+    Object.keys(roomObj).forEach(key => formData.append(key, roomObj[key]));
+    if (roomObj.imageFile) {
+      formData.delete('imageFile'); // removing it first so we can manually add a file name
+      formData.append('imageFile', roomObj.imageFile, `styleImg${roomObj.name.replace(/\s/g,'_')}.png`);
+      return this.http.patch(this.apiUrl + 'rooms/update/' + roomId, formData)
+    } else {
+      return this.http.patch(this.apiUrl + 'rooms/update/' + roomId, formData)
+    }
+  }
+
   getRoomTypes(){
     return this.http.get(this.apiUrl + 'roomTypes');
   }

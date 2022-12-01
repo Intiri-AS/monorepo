@@ -13,6 +13,7 @@ import { RoomService } from 'src/app/services/room.service';
 })
 export class AddRoomModalComponent implements OnInit {
   public addRoomForm: FormGroup;
+  public editRoomForm: FormGroup;
   public isFormSubmited = false;
 
   get nameErrors() {
@@ -31,6 +32,18 @@ export class AddRoomModalComponent implements OnInit {
     return this.addRoomForm.controls.imageFile.errors;
   }
 
+  get editNameErrors() {
+    return this.editRoomForm.controls.name.errors;
+  }
+
+  get editTypeErrors() {
+    return this.editRoomForm.controls.type.errors;
+  }
+
+  get editDescriptionErrors() {
+    return this.editRoomForm.controls.description.errors;
+  }
+
   constructor(
     private modalController: ModalController,
     private roomService: RoomService,
@@ -45,13 +58,20 @@ export class AddRoomModalComponent implements OnInit {
       description: ['', [Validators.required]],
       imageFile: ['', [Validators.required]]
     });
+    this.editRoomForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      imageFile: ['']
+    });
   }
 
   add: boolean;
   added: boolean;
   delete: boolean;
+  edit: boolean;
 
-  item: {}
+  item: any;
 
   room = {
     name: '',
@@ -68,6 +88,11 @@ export class AddRoomModalComponent implements OnInit {
     this.roomService.getRoomTypes().subscribe((res: []) => {
       this.roomTypes = res;
     })
+    if (this.edit) {
+      this.room.name = this.item.name;
+      this.room.roomTypeId = this.item.roomTypeId;
+      this.room.description = this.item.description;
+    }
   }
 
   dismissModal() {
@@ -119,6 +144,32 @@ export class AddRoomModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editRoom() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editRoomForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.roomService.editRoom(this.item.id, this.room).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.roomService.getRooms();
+        this.notifier.show({
+          message: "Room changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
   async openSuccessModal() {

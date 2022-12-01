@@ -40,6 +40,12 @@ export class ColorService {
     return this.http.post(`${this.apiUrl}colorPalettes/add`, formData);
   }
 
+  editColorPalette(colorId, colorObj) {
+    const formData = new FormData();
+    Object.keys(colorObj).forEach(key => formData.append(key, colorObj[key]));
+    return this.http.patch(this.apiUrl + 'colorPalettes/update/' + colorId, formData);
+  }
+
   deleteColorPalette(colorId) {
     return this.http.delete(this.apiUrl + 'colorPalettes/delete/' + colorId);
   }

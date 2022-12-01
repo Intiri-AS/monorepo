@@ -31,17 +31,17 @@
 </ion-list>
 
 <ion-list *ngIf="room" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditRoomModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.room' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteRoomModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="color" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditColorModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.color' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteColorModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
 <ion-list *ngIf="picture" lines="none" >
-  <!-- <ion-item class="text-black-1" [button]="true">Connect to moodboard</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditPictureModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.picture' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeletePictureModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
