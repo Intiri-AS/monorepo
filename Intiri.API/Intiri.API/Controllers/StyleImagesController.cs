@@ -23,7 +23,6 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-		//private readonly ICloudinaryService _fileUploadService;
 		private readonly IFileUploudService _fileUploadService;
 
 		#endregion Fields
