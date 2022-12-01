@@ -132,7 +132,7 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {
-        this.styleService.getStyles();
+        this.styleService.getStyleImages();
         this.notifier.show({
           message: "Picture changes saved successfully!",
           type: 'success'
