@@ -37,14 +37,14 @@ namespace Intiri.API.DataAccess.SeedData
 
 			//await SeedPartners(unitOfWork);
 			await SeedUsers(accountService, userManager, roleManager, unitOfWork);
-			await SeedStyles(unitOfWork);
+			//await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
 			await SeedMaterialTypes(unitOfWork);
 			await SeedProductTypes(unitOfWork);
 			//await SeedColors(unitOfWork);
 			//await SeedStylesImages(unitOfWork);
 			//await SeedRooms(unitOfWork);
-			//await SeedMaterials(unitOfWork);
+			await SeedMaterials(unitOfWork);
 			//await SeedProducts(unitOfWork);
 			await SeedColorPalettes(unitOfWork);
 			//await SeedMoodboards(unitOfWork);
