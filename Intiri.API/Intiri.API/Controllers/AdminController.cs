@@ -84,7 +84,7 @@ namespace Intiri.API.Controllers
 
 			#region cliens moodboards
 
-			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
+			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetClientMoodboardStylesCountAsync();
 
 			#endregion
 
