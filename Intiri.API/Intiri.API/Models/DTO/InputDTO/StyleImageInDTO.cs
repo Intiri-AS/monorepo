@@ -8,7 +8,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public int StyleId { get; set; }
 
-		[Required]
 		public IFormFile ImageFile { get; set; }
 	}
 }

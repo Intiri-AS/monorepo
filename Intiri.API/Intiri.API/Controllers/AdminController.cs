@@ -76,7 +76,17 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<IEnumerable<StyleTrendDTO>>> GetMoodboardStylesStatistic()
 		{
 			IEnumerable<Style> styles = await _unitOfWork.StyleRepository.Get();
-			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
+
+			#region all moodboards
+			//Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
+
+			#endregion
+
+			#region cliens moodboards
+
+			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetClientMoodboardStylesCountAsync();
+
+			#endregion
 
 			List<StyleTrendDTO> styleTrendDTOs = new List<StyleTrendDTO>();
 			foreach (var style in styles)

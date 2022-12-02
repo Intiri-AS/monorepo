@@ -34,6 +34,19 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Moodboards.Where(m => !(m is ClientMoodboard)).CountAsync();
 		}
 
+		public async Task<Dictionary<int, int>> GetClientMoodboardStylesCountAsync()
+		{
+			List<int> stylesIds = await _context.Moodboards.OfType<ClientMoodboard>()
+				.Include(s => s.Style).Select(s => s.Style.Id).ToListAsync();
+
+			Dictionary<int, int> kvpList = stylesIds.GroupBy(x => x)
+				.Select(g => new { Value = g.Key, Count = g.Count() })
+				.OrderByDescending(x => x.Count)
+				.ToDictionary(x => x.Value, x => x.Count);
+
+			return kvpList;
+		}
+
 		public async Task<Dictionary<int, int>> GetMoodboardStylesCountAsync()
 		{
 			List<int> stylesIds = await _context.Moodboards
