@@ -8,57 +8,74 @@ import { environment } from 'src/environments/environment';
 import { Project } from '../models/project.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class PartnerService {
-
   apiUrl = environment.apiUrl;
   private partnersSource = new ReplaySubject<any>(1);
-  private productSource = new ReplaySubject<any>(undefined)
+  private productSource = new ReplaySubject<any>(undefined);
   partners$ = this.partnersSource.asObservable();
   products$ = this.productSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getPartners(){
-    return this.http.get(this.apiUrl + 'partner').pipe(map((partner) => {
-      if(partner) {
-        this.partnersSource.next(partner);
-      }
-    })).toPromise();
+  getPartners() {
+    return this.http
+      .get(this.apiUrl + 'partner')
+      .pipe(
+        map((partner) => {
+          if (partner) {
+            this.partnersSource.next(partner);
+          }
+        })
+      )
+      .toPromise();
   }
 
-  getProductsFromThatPartner(){
-    return this.http.get(this.apiUrl + 'products').pipe(map((productResponse) => {
-      if (productResponse) {
-        this.productSource.next(productResponse)
-      }
-    })).toPromise();
+  getProductsFromThatPartner() {
+    return this.http
+      .get(this.apiUrl + 'products')
+      .pipe(
+        map((productResponse) => {
+          if (productResponse) {
+            this.productSource.next(productResponse);
+          }
+        })
+      )
+      .toPromise();
   }
 
-  getProductsType(){
+  getProductsType() {
     return this.http.get(this.apiUrl + 'productTypes');
   }
 
   addPartner(partnerObj) {
     const formData = new FormData();
-    Object.keys(partnerObj).forEach(key => formData.append(key, partnerObj[key]));
+    Object.keys(partnerObj).forEach((key) =>
+      formData.append(key, partnerObj[key])
+    );
     formData.delete('logoFile'); // removing it first so we can manually add a file name
-    formData.append('logoFile', partnerObj.logoFile, `partnerImg${partnerObj.name.replace(/\s/g,'_')}.png`)
+    formData.append(
+      'logoFile',
+      partnerObj.logoFile,
+      `partnerImg${partnerObj.name.replace(/\s/g, '_')}.png`
+    );
     return this.http.post(`${this.apiUrl}partner/createPartner`, formData);
   }
 
   addPartnerContact(partnerObj) {
-    return this.http.post(`${this.apiUrl}account/register/partnerContact`, partnerObj);
+    return this.http.post(
+      `${this.apiUrl}account/register/partnerContact`,
+      partnerObj
+    );
   }
 
-  getPartner(id: number){
+  getPartner(id: number) {
     return this.http.get<any>(this.apiUrl + 'partner/partner/' + id);
   }
 
   getPartnerProfile() {
-    return this.http.get<any>(this.apiUrl + 'partner/profile')
+    return this.http.get<any>(this.apiUrl + 'partner/profile');
   }
 
   deletePartner(partnerId) {
@@ -79,22 +96,39 @@ export class PartnerService {
 
   addPartnerProduct(productData: any) {
     const formData = new FormData();
-    Object.keys(productData).forEach(key => formData.append(key, productData[key]));
+    Object.keys(productData).forEach((key) =>
+      formData.append(key, productData[key])
+    );
     formData.delete('imageFile'); // removing it first so we can manually add a file name
-    formData.append('imageFile', productData.imageFile, `productImg${productData.name.replace(/\s/g,'_')}.png`)
+    formData.append(
+      'imageFile',
+      productData.imageFile,
+      `productImg${productData.name.replace(/\s/g, '_')}.png`
+    );
     return this.http.post(`${this.apiUrl}products/add`, formData);
   }
 
   editProduct(productId, productObj) {
     const formData = new FormData();
-    Object.keys(productObj).forEach(key => formData.append(key, productObj[key]));
+    Object.keys(productObj).forEach((key) =>
+      formData.append(key, productObj[key])
+    );
     if (productObj.imageFile) {
       formData.delete('imageFile'); // removing it first so we can manually add a file name
-      formData.append('imageFile', productObj.imageFile, `styleImg${productObj.name.replace(/\s/g,'_')}.png`);
-      return this.http.patch(this.apiUrl + 'products/update/' + productId, formData)
+      formData.append(
+        'imageFile',
+        productObj.imageFile,
+        `styleImg${productObj.name.replace(/\s/g, '_')}.png`
+      );
+      return this.http.patch(
+        this.apiUrl + 'products/update/' + productId,
+        formData
+      );
     } else {
-      return this.http.patch(this.apiUrl + 'products/update/' + productId, formData)
+      return this.http.patch(
+        this.apiUrl + 'products/update/' + productId,
+        formData
+      );
     }
   }
-
 }

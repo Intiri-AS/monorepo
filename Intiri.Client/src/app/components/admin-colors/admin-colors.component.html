@@ -15,7 +15,7 @@
     <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
       <div class="card">
         <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: colorPalette.mainColor}"></div>
-        <div class="w-[47.5%] h-full inline-block float-right">
+        <div class="w-[47.5%] h-full inline-block color-container float-right">
           <div class="h-[31%] mb-[6%]" [ngStyle]="{background: colorPalette.shadeColorLight}"></div>
           <div class="h-[31%] mb-[6%]" [ngStyle]="{background: colorPalette.shadeColorMedium}"></div>
           <div class="h-[32%]" [ngStyle]="{background: colorPalette.shadeColorDark}"></div>

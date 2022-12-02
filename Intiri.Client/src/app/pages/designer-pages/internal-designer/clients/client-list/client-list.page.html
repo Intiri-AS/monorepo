@@ -27,7 +27,7 @@
                   <ion-button *ngIf="!user.moodboardStyle && !user.moodboardOfferId" fill="clear" class="primary-btn mt-12 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">{{'MOODBOARDS.create-offer' | translate}}</ion-button>
                   <div *ngIf="user.moodboardOfferId" class="mt-4 text-center">
                     <div class="w-full bg-light flex flex-col items-center mt-[15px] px-2">
-                      <p class="text-sm text-primary my-[15px]">{{'DESIGNERS.Offer sent' | translate}}</p>
+                      <p class="text-sm text-primary my-[15px]">{{'DESIGNERS.offer-sent' | translate}}</p>
                     </div>
                   </div>
                   <ion-button *ngIf="user.moodboardOfferId" fill="clear" class="primary-btn mt-4 !px-0" [routerLink]="['/create-offer/' + user.consultationId]" routerDirection="root">{{'MOODBOARDS.update-offer' | translate}}</ion-button>

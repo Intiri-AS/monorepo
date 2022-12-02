@@ -17,7 +17,7 @@
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
-          <div class="w-[47.5%] h-full inline-block float-right">
+          <div class="w-[47.5%] h-full inline-block color-container float-right">
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
             <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>

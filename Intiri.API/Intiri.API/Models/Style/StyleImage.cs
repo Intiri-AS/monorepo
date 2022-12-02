@@ -1,4 +1,7 @@
-﻿namespace Intiri.API.Models.Style
+﻿using Intiri.API.Models.Moodboard;
+using Intiri.API.Models.Room;
+
+namespace Intiri.API.Models.Style
 {
     public class StyleImage
     {
@@ -13,6 +16,9 @@
 		public string PublicId { get; set; }
         public Style Style { get; set; }
         public int StyleId { get; set; }
-		public ICollection<Project.Project> Projects { get; set; }
+        public Room.Room Room { get; set; }
+        public int? RoomId { get; set; }
+        public ICollection<Project.Project> Projects { get; set; }
+        public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
     }
 }

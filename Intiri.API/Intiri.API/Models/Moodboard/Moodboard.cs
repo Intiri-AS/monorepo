@@ -2,6 +2,7 @@
 using Intiri.API.Models.Payment;
 using Intiri.API.Models.Product;
 using Intiri.API.Models.Room;
+using Intiri.API.Models.Style;
 using System.Xml.Linq;
 
 namespace Intiri.API.Models.Moodboard
@@ -16,6 +17,7 @@ namespace Intiri.API.Models.Moodboard
             Materials = new HashSet<Material.Material>();
 			ColorPalettes = new HashSet<ColorPalette>();
 			Products = new HashSet<Product.Product>();
+			StyleImages = new HashSet<StyleImage>();
 		}
 
         public Moodboard(Moodboard moodboard)
@@ -50,6 +52,7 @@ namespace Intiri.API.Models.Moodboard
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }
+		public ICollection<StyleImage> StyleImages { get; set; }
 
 		#endregion Properties
 	}

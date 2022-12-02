@@ -44,7 +44,7 @@ namespace Intiri.API.DataAccess.SeedData
 			//await SeedColors(unitOfWork);
 			//await SeedStylesImages(unitOfWork);
 			//await SeedRooms(unitOfWork);
-			//await SeedMaterials(unitOfWork);
+			await SeedMaterials(unitOfWork);
 			//await SeedProducts(unitOfWork);
 			await SeedColorPalettes(unitOfWork);
 			//await SeedMoodboards(unitOfWork);

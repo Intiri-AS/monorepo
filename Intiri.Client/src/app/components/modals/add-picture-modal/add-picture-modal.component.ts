@@ -14,6 +14,7 @@ import { StyleService } from 'src/app/services/style.service';
 })
 export class AddPictureModalComponent implements OnInit {
   public addPictureForm: FormGroup;
+  public editPictureForm: FormGroup;
   public isFormSubmited = false;
 
   get styleErrors() {
@@ -22,6 +23,10 @@ export class AddPictureModalComponent implements OnInit {
 
   get imageFileErrors() {
     return this.addPictureForm.controls.imageFile.errors;
+  }
+
+  get editStyleErrors() {
+    return this.editPictureForm.controls.style.errors;
   }
 
   constructor(
@@ -36,13 +41,18 @@ export class AddPictureModalComponent implements OnInit {
       style: ['', [Validators.required]],
       imageFile: ['', [Validators.required]]
     });
+    this.editPictureForm = this.formBuilder.group({
+      style: ['', [Validators.required]],
+      imageFile: ['']
+    });
   }
 
   add: boolean;
   added: boolean;
   delete: boolean;
+  edit: boolean;
 
-  item: {}
+  item: any
 
   styleImage = {
     styleId: null,
@@ -55,6 +65,9 @@ export class AddPictureModalComponent implements OnInit {
 
   ngOnInit() {
     this.styleService.getStyles();
+    if (this.edit) {
+      this.styleImage.styleId = this.item.styleId;
+    }
   }
 
   dismissModal() {
@@ -106,6 +119,32 @@ export class AddPictureModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editStyleImage() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editPictureForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.styleService.editStyleImage(this.item.id, this.styleImage).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.styleService.getStyleImages();
+        this.notifier.show({
+          message: "Picture changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
   async openSuccessModal() {

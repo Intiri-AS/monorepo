@@ -4,7 +4,7 @@
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
     <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
     <ion-grid class="main-container">
-      <p class="main-title mb-[34px] pl-2">{{client && !client?.moodboardOfferId ? "{{'MOODBOARDS.create-offer' | translate}}" : client && client?.moodboardOfferId ? "{{'MOODBOARDS.update-offer' | translate}}" : "{{'MOODBOARDS.add' | translate}}"}}</p>
+      <p class="main-title mb-[34px] pl-2">{{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}</p>
       <ion-row class="mb-20">
         <ion-col size="12" size-xl="2.3">
           <div class="bg-light xl-ion:w-[240px]  rounded-lg text-center pb-1">
@@ -64,7 +64,7 @@
               *ngIf="steps[currentStepNo]['data'] === 'final' && !!client"
               class="primary-btn"
               (click)="sendOffer()"
-              >{{client.moodboardOfferId ? 'Update offer' : 'Send Offer'}}</ion-button
+              >{{client.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.send-offer' | translate) }}</ion-button
             >
           </ion-buttons>
         </ion-col>

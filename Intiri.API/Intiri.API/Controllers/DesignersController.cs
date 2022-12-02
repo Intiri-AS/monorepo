@@ -148,22 +148,44 @@ namespace Intiri.API.Controllers
 
 			ICollection<ConsultationPayment> payments = designer.ConsultationPaymentsReceived;
 
-			// [key] -> clientId, [value] -> counsultations number
-			Dictionary<int, int> clientsWithConsultation = new Dictionary<int, int>();
+			#region counsultations number version
+
+			//// [key] -> clientId, [value] -> counsultations number
+			//Dictionary<int, int> clientsWithConsultation = new Dictionary<int, int>();
+			//foreach (ConsultationPayment cp in payments)
+			//{
+			//	clientsWithConsultation[cp.Payer.Id] = clientsWithConsultation.ContainsKey(cp.Payer.Id) 
+			//		? clientsWithConsultation[cp.Payer.Id] + cp.NumberOfConsultations : cp.NumberOfConsultations;
+			//}
+
+			//float consultationPrice = (await _unitOfWork.ConsulatationRepository.GetByID(1)).Price;
+
+			//DesignerStatisticsOutDTO designerStatisticsOutDTO = new DesignerStatisticsOutDTO()
+			//{
+			//	ClientsNumber = clientsWithConsultation.Keys.Count,
+			//	TotalIncome = clientsWithConsultation.Values.Sum() * consultationPrice
+			//};
+
+			#endregion
+
+			#region paymant amount version 
+
+			// [key] -> clientId, [value] -> paymant amount
+			Dictionary<int, double> clientsWithConsultation = new Dictionary<int, double>();
 
 			foreach (ConsultationPayment cp in payments)
 			{
-				clientsWithConsultation[cp.Payer.Id] = clientsWithConsultation.ContainsKey(cp.Payer.Id) 
-					? clientsWithConsultation[cp.Payer.Id] + cp.NumberOfConsultations : cp.NumberOfConsultations;
+				clientsWithConsultation[cp.Payer.Id] = clientsWithConsultation.ContainsKey(cp.Payer.Id)
+					? clientsWithConsultation[cp.Payer.Id] + cp.Amount : cp.Amount;
 			}
-
-			float consultationPrice = (await _unitOfWork.ConsulatationRepository.GetByID(1)).Price;
 
 			DesignerStatisticsOutDTO designerStatisticsOutDTO = new DesignerStatisticsOutDTO()
 			{
 				ClientsNumber = clientsWithConsultation.Keys.Count,
-				TotalIncome = clientsWithConsultation.Values.Sum() * consultationPrice
+				TotalIncome = clientsWithConsultation.Values.Sum()
 			};
+
+			#endregion
 
 			return Ok(designerStatisticsOutDTO);
 		}

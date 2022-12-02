@@ -12,6 +12,7 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class AddColorModalComponent implements OnInit {
   public addColorForm: FormGroup;
+  public editColorForm: FormGroup;
   public isFormSubmited = false;
 
   get nameErrors() {
@@ -38,9 +39,34 @@ export class AddColorModalComponent implements OnInit {
     return this.addColorForm.controls.shadeThree.errors;
   }
 
+  get editNameErrors() {
+    return this.editColorForm.controls.name.errors;
+  }
+
+  get editNumberErrors() {
+    return this.editColorForm.controls.number.errors;
+  }
+
+  get editMainErrors() {
+    return this.editColorForm.controls.main.errors;
+  }
+
+  get editShadeOneErrors() {
+    return this.editColorForm.controls.shadeOne.errors;
+  }
+
+  get editShadeTwoErrors() {
+    return this.editColorForm.controls.shadeTwo.errors;
+  }
+
+  get editShadeThreeErrors() {
+    return this.editColorForm.controls.shadeThree.errors;
+  }
+
   add: boolean;
   added: boolean;
   delete: boolean;
+  edit: boolean;
 
   colorPallete = {
     name: '',
@@ -66,11 +92,24 @@ export class AddColorModalComponent implements OnInit {
       shadeTwo: ['', [Validators.required]],
       shadeThree: ['', [Validators.required]]
     });
+    this.editColorForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      number: ['', [Validators.required]],
+      main: ['', [Validators.required]],
+      shadeOne: ['', [Validators.required]],
+      shadeTwo: ['', [Validators.required]],
+      shadeThree: ['', [Validators.required]]
+    });
   }
 
   item: any
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.edit) {
+      const {id, ...others } = this.item;
+      this.colorPallete = others;
+    }
+  }
 
   dismissModal() {
     this.modalController.dismiss();
@@ -112,6 +151,32 @@ export class AddColorModalComponent implements OnInit {
         type: 'error',
       });
     });
+  }
+
+  editColor() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editColorForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.colorService.editColorPalette(this.item.id, this.colorPallete).subscribe(res => {
+      this.spinner.hide();
+      this.modalController.dismiss();
+      if (typeof (res) === 'object') {
+        this.colorService.getColorPalettes();
+        this.notifier.show({
+          message: "Color changes saved successfully!",
+          type: 'success'
+        });
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: 'Something went wrong!',
+        type: 'error',
+      });
+    })
   }
 
   async openSuccessModal() {
