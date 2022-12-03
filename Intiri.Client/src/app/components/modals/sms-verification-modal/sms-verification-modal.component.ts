@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { ModalController } from "@ionic/angular";
 import { CodeInputComponent } from "angular-code-input";
 import { AccountService } from "src/app/services/account.service";
@@ -10,7 +10,7 @@ import { VerificationTarget } from "src/app/types/types";
     templateUrl: './sms-verification-modal.component.html',
     styleUrls: ['./sms-verification-modal.component.scss'],
 })
-export class SmsVerificationModalComponent implements OnInit {
+export class SmsVerificationModalComponent {
     @ViewChild('codeInput') codeInput !: CodeInputComponent;
     error: string;
     step: string;
@@ -21,14 +21,6 @@ export class SmsVerificationModalComponent implements OnInit {
         private accountService: AccountService,
         private router: Router,
         private modalController: ModalController) { }
-
-    ngOnInit(): void {
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.modalController.dismiss();
-            }
-        })
-    }
 
     onCodeChanged(verificationCode) {
         //console.log('change', code);
@@ -41,7 +33,6 @@ export class SmsVerificationModalComponent implements OnInit {
                 this.modalController.dismiss({ dismissed: true });
             }, error => {
                 this.error = error.error;
-                console.log(error);
             });
     }
 

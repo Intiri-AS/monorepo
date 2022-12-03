@@ -81,7 +81,7 @@ export class LoginModalComponent implements OnInit {
     this.modalController.dismiss({ dismissed: true });
     this.router.navigate(['/register'], {
       state: {
-        step: "4"
+        step: '4'
       }
     });
   }
@@ -89,7 +89,7 @@ export class LoginModalComponent implements OnInit {
   private async openSmsVerificationModal(phoneModel): Promise<void> {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
-      componentProps: { phoneModel, step: '3', verificationTarget: VerificationTarget.LOGIN },
+      componentProps: { phoneModel, step: '4', verificationTarget: VerificationTarget.LOGIN },
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CreateProjectModalComponent } from 'src/app/components/modals/create-project-modal/create-project-modal.component';
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
@@ -15,7 +16,7 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './new-project.page.html',
   styleUrls: ['./new-project.page.scss'],
 })
-export class NewProjectPage implements OnInit {
+export class NewProjectPage implements OnInit, OnDestroy {
   isScrolledDown: boolean;
   isExistingProject: boolean = false;
 
@@ -72,6 +73,8 @@ export class NewProjectPage implements OnInit {
 
   currentStepNo: number = 0;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private modalController: ModalController,
     public projectService: ProjectService,
@@ -86,24 +89,33 @@ export class NewProjectPage implements OnInit {
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
 
-    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
-      this.project = project;
-      if (project.name === "") {
-        this.openStartModal();
-      } if (project.id) {
-        this.isExistingProject = true;
+    this.route.queryParams.subscribe((stepParam: any) => {
+      if (+stepParam.step === 4 && this.checkIfUserLoggedIn() && this.canChangeToStep(+stepParam.step)) {
+        this.currentStepNo = +stepParam.step;
+        this.goToStep(4);
       }
-    });
+    })
 
-    this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
-      // initial path parameter check (and redirect to that step if possible)
-      if(stepParam && this.canChangeToStep(stepParam)) {
-        this.currentStepNo = stepParam;
-        if(this.currentStepNo === 4) {
-          this.getMoodboardMatches()
+    const checkForProject = JSON.parse(sessionStorage.getItem('project'));
+    if (checkForProject.name.length) {
+      this.project = checkForProject;
+    }
+
+    if (stepParam === 5 && this.canChangeToStep(stepParam)) {
+      this.currentStepNo = stepParam;
+      this.goToStep(5);
+    }
+
+    this.subscriptions.push(
+      this.projectService.currentProject$.subscribe((project) => {
+        this.project = project;
+        if (project.name === "") {
+          this.openStartModal();
+        } if (project.id) {
+          this.isExistingProject = true;
         }
-      } else this.currentStepNo = 0;
-    });
+      })
+    );
 
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
@@ -116,6 +128,11 @@ export class NewProjectPage implements OnInit {
     this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
+
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   changeQueryParam(step){
@@ -134,6 +151,7 @@ export class NewProjectPage implements OnInit {
       this.projectService.setCurrentProject(this.project);
     }
     if (this.currentStepNo === 4) {
+      this.projectService.setCurrentProject(this.project);
       this.getMoodboardMatches();
     }
   }
@@ -141,6 +159,7 @@ export class NewProjectPage implements OnInit {
   nextStep() {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
     if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+      this.projectService.setCurrentProject(this.project);
       this.openLoginModal();
     } else {
       if (this.canChangeToStep(this.currentStepNo + 1)) {
@@ -384,9 +403,6 @@ export class NewProjectPage implements OnInit {
     });
 
     await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-    console.log(data);
   }
 
   private checkIfRedirectedFromLogin(): boolean {
