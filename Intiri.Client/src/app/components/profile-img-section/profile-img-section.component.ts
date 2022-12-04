@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
@@ -24,7 +25,8 @@ export class ProfileImgSectionComponent implements OnInit {
     private http: HttpClient,
     private spinner: NgxSpinnerService,
     private accountService: AccountService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class ProfileImgSectionComponent implements OnInit {
           this.accountService.setCurrentUser({...user, photoPath: res.photoPath});
         });
         this.notifier.show({
-          message: 'Profile image updated successfully',
+          message: this.translate.instant('NOTIFY.profile-image-updated'),
           type: 'success',
         });
       }
@@ -74,7 +76,7 @@ export class ProfileImgSectionComponent implements OnInit {
           this.accountService.setCurrentUser({...user, photoPath: res.logoPath});
         });
         this.notifier.show({
-          message: 'Profile image updated successfully',
+          message: this.translate.instant('NOTIFY.profile-image-updated'),
           type: 'success',
         });
       }

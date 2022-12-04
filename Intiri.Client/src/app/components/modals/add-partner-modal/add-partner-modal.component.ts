@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PartnerService } from 'src/app/services/partner.service';
@@ -104,7 +105,8 @@ export class AddPartnerModalComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService, 
+    private translate: TranslateService
   ) {
     this.addPartnerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -170,7 +172,7 @@ export class AddPartnerModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -212,7 +214,7 @@ export class AddPartnerModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -223,12 +225,12 @@ export class AddPartnerModalComponent implements OnInit {
       this.partnerService.getPartners();
       this.modalController.dismiss();
       this.notifier.show({
-        message: 'Partner deleted successfully',
+        message: this.translate.instant('NOTIFY.partner-deleted'),
         type: 'success',
       });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })

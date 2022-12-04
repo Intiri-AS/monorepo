@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ColorService } from 'src/app/services/color.service';
@@ -82,7 +83,8 @@ export class AddColorModalComponent implements OnInit {
     private colorService: ColorService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.addColorForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -131,7 +133,7 @@ export class AddColorModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -142,12 +144,12 @@ export class AddColorModalComponent implements OnInit {
         this.colorService.getColorPalettes();
         this.modalController.dismiss();
         this.notifier.show({
-          message: 'Color deleted successfully',
+          message: this.translate.instant('NOTIFY.color-deleted'),
           type: 'success',
         });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -166,14 +168,14 @@ export class AddColorModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.colorService.getColorPalettes();
         this.notifier.show({
-          message: "Color changes saved successfully!",
+          message: this.translate.instant('NOTIFY.color-saved'),
           type: 'success'
         });
       }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })

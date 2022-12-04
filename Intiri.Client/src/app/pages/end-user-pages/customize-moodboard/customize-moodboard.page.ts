@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
@@ -49,7 +50,8 @@ export class CustomizeMoodboardPage {
     private router: Router,
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
-    private location: Location
+    private location: Location,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -137,7 +139,7 @@ export class CustomizeMoodboardPage {
   finishEditing() {
     this.moodboardService.editMoodboard(this.moodboard).subscribe(res => {
       this.notifier.show({
-        message: 'Moodboard updated successfully',
+        message: this.translate.instant('NOTIFY.moodboard-updated'),
         type: 'success',
       });
       const projectId = this.route.snapshot.paramMap.get('projectId')

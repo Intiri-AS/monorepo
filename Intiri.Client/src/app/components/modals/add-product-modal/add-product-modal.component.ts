@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MaterialService } from 'src/app/services/material.service';
@@ -68,6 +69,7 @@ export class AddProductModalComponent implements OnInit {
               private partnerService: PartnerService,
               private notifier: NotifierService,
               private spinner: NgxSpinnerService,
+              private translate: TranslateService
               ) {
                 this.editProductForm = this.fb.group({
                   productName: ['' || undefined, Validators.required],
@@ -168,7 +170,7 @@ export class AddProductModalComponent implements OnInit {
     }, () => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Cannot remove product.',
+        message: this.translate.instant('NOTIFY.product-error'),
         type: 'error',
       });
     });
@@ -187,14 +189,14 @@ export class AddProductModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.partnerService.getProductsFromThatPartner();
         this.notifier.show({
-          message: "Product changes saved successfully!",
+          message: this.translate.instant('NOTIFY.product-saved'),
           type: 'success'
         });
       }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })

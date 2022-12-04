@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RoomService } from 'src/app/services/room.service';
@@ -50,7 +51,8 @@ export class AddRoomModalComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.addRoomForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -124,7 +126,7 @@ export class AddRoomModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -135,12 +137,12 @@ export class AddRoomModalComponent implements OnInit {
         this.roomService.getRooms();
         this.modalController.dismiss();
         this.notifier.show({
-          message: 'Room deleted successfully',
+          message: this.translate.instant('NOTIFY.room-deleted'),
           type: 'success',
         });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -159,14 +161,14 @@ export class AddRoomModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.roomService.getRooms();
         this.notifier.show({
-          message: "Room changes saved successfully!",
+          message: this.translate.instant('NOTIFY.room-saved'),
           type: 'success'
         });
       }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })
