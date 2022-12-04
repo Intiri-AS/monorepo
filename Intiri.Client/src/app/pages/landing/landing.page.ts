@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Project } from 'src/app/models/project.model';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -37,7 +39,7 @@ export class LandingPage implements OnInit {
 
   isScrolledDown: boolean;
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService, private projectService: ProjectService) {}
 
   ngOnInit(): void {
   }
@@ -58,5 +60,9 @@ export class LandingPage implements OnInit {
     const scrollElement = await this.content.getScrollElement(); // get scroll element
     this.isScrolledDown = scrollElement.scrollTop > 70;
 
+  }
+
+  removeProjectDraft(){
+    this.projectService.setCurrentProject(new Project());
   }
 }
