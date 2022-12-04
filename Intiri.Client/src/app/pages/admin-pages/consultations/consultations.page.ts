@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/services/common.service';
@@ -16,7 +17,12 @@ export class ConsultationsPage {
   initDuration: number;
   initPrice: number;
 
-  constructor(private service: CommonService, private notifier: NotifierService, private spinner: NgxSpinnerService) {}
+  constructor(
+    private service: CommonService, 
+    private notifier: NotifierService, 
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
+    ) {}
 
   ngOnInit() {
     this.spinner.show();
@@ -29,7 +35,7 @@ export class ConsultationsPage {
     }, () => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Cannot get consultations info.',
+        message: this.translate.instant('NOTIFY.consultation-get-error'),
         type: 'error',
       });
     })
@@ -42,13 +48,13 @@ export class ConsultationsPage {
       this.initDuration = this.duration;
       this.initPrice = this.price;
       this.notifier.show({
-        message: 'Consultations info updated successfully.',
+        message: this.translate.instant('NOTIFY.consultation-updated'),
         type: 'success',
       });
     }, () => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Cannot update consultations info.',
+        message: this.translate.instant('NOTIFY.consultation-updated--error'),
         type: 'error',
       });
     })

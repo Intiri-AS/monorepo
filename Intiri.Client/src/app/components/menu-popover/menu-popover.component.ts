@@ -13,6 +13,7 @@ import { AddProductModalComponent } from '../modals/add-product-modal/add-produc
 import { DeleteMoodboardModalComponent } from '../modals/delete-moodboard-modal/delete-moodboard-modal.component';
 import { AddDesignerModalComponent } from '../modals/add-designer-modal/add-designer-modal.component';
 import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partner-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu-popover',
@@ -36,7 +37,12 @@ export class MenuPopoverComponent implements OnInit {
 
   item: any
 
-  constructor(private modalController: ModalController, private moodboardService: MoodboardService, private notifier: NotifierService) { }
+  constructor(
+    private modalController: ModalController, 
+    private moodboardService: MoodboardService, 
+    private notifier: NotifierService,
+    private translate: TranslateService
+    ) { }
 
   ngOnInit() {}
 
@@ -44,7 +50,7 @@ export class MenuPopoverComponent implements OnInit {
     this.moodboardService.setIsTemplate({moodboardId: this.item.id, isTemplate: !this.item.isTemplate}).subscribe(() => {
       this.moodboardService.getMoodboards();
       this.notifier.show({
-        message: `Moodboard ${this.item.isTemplate ? 'removed from' : 'added to'} templates successfully`,
+        message: `Moodboard ${this.item.isTemplate ? this.translate.instant('NOTIFY.template-removed') : this.translate.instant('NOTIFY.template-added')}`,
         type: 'success',
       });
     })

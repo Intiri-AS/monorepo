@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Moodboard } from 'src/app/models/moodboard.model';
@@ -66,7 +67,8 @@ export class AddMoodboardPage implements OnInit {
 
   constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService,
     private router: Router, private route: ActivatedRoute, private designerService: DesignerService,
-    private accountService: AccountService, private notifier: NotifierService, private spinner: NgxSpinnerService) { }
+    private accountService: AccountService, private notifier: NotifierService, private spinner: NgxSpinnerService,
+    private translate: TranslateService) { }
 
   ngOnInit() {
 
@@ -210,7 +212,7 @@ export class AddMoodboardPage implements OnInit {
         if(res['id']) {
           this.spinner.hide();
           this.notifier.show({
-            message: 'Offer is successfully updated.',
+            message: this.translate.instant('NOTIFY.offer-updated'),
             type: 'success',
           });
           this.router.navigateByUrl('/client-list');
@@ -218,7 +220,7 @@ export class AddMoodboardPage implements OnInit {
       }, () => {
         this.spinner.hide();
         this.notifier.show({
-          message: 'Cannot update offer.',
+          message: this.translate.instant('NOTIFY.offer-updated-error'),
           type: 'error',
         });
        })
@@ -227,7 +229,7 @@ export class AddMoodboardPage implements OnInit {
         if(res['id']) {
          this.spinner.hide();
          this.notifier.show({
-           message: 'Offer is successfully created and sent to client.',
+           message: this.translate.instant('NOTIFY.offer-created'),
            type: 'success',
          });
          this.router.navigateByUrl('/client-list');
@@ -235,7 +237,7 @@ export class AddMoodboardPage implements OnInit {
       }, () => {
        this.spinner.hide();
        this.notifier.show({
-         message: 'Cannot create offer.',
+         message: this.translate.instant('NOTIFY.offer-created-error'),
          type: 'error',
        });
       })
@@ -249,7 +251,7 @@ export class AddMoodboardPage implements OnInit {
       (res) => {
         this.spinner.hide();
         this.notifier.show({
-          message: 'Moodboard has been created successfully.',
+          message: this.translate.instant('NOTIFY.moodboard-created'),
           type: 'success',
         });
         this.moodboard = new Moodboard();
@@ -265,7 +267,7 @@ export class AddMoodboardPage implements OnInit {
       (error) => {
         this.spinner.hide();
         this.notifier.show({
-          message: 'Cannot save moodboard.',
+          message: this.translate.instant('NOTIFY.moodboard-created-error'),
           type: 'error',
         });
       }

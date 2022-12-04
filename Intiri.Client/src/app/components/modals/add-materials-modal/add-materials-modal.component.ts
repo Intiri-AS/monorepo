@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MaterialService } from 'src/app/services/material.service';
@@ -47,6 +48,7 @@ export class AddMaterialsModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.addMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -130,12 +132,12 @@ export class AddMaterialsModalComponent implements OnInit {
         this.materialService.getMaterials();
         this.modalController.dismiss();
         this.notifier.show({
-          message: 'Material deleted successfully',
+          message: this.translate.instant('NOTIFY.material-deleted'),
           type: 'success',
         });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -154,14 +156,14 @@ export class AddMaterialsModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.materialService.getMaterials();
         this.notifier.show({
-          message: "Material changes saved successfully!",
+          message: this.translate.instant('NOTIFY.saved-deleted'),
           type: 'success'
         });
       }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })
