@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
@@ -35,7 +36,8 @@ export class AddPictureModalComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
@@ -99,7 +101,7 @@ export class AddPictureModalComponent implements OnInit {
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -110,12 +112,12 @@ export class AddPictureModalComponent implements OnInit {
         this.styleService.getStyleImages();
         this.modalController.dismiss();
         this.notifier.show({
-          message: 'Picture deleted successfully',
+          message: this.translate.instant('NOTIFY.picture-deleted'),
           type: 'success',
         });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });
@@ -134,14 +136,14 @@ export class AddPictureModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.styleService.getStyleImages();
         this.notifier.show({
-          message: "Picture changes saved successfully!",
+          message: this.translate.instant('NOTIFY.picture-saved'),
           type: 'success'
         });
       }
     }, e => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     })

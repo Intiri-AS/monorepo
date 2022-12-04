@@ -21,8 +21,8 @@ export class SmsVerificationPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
-    private nav: NavController,
-  ) { }
+    private nav: NavController
+  ) {}
 
   ngOnInit(): void {
     this.getVerificationTarget();
@@ -69,7 +69,7 @@ export class SmsVerificationPage implements OnInit {
             lastName
           ).subscribe(response => {
             if (step) {
-              this.router.navigate(['/new-project'], {queryParams: {step}});
+              this.nav.navigateRoot(['/new-project'], {queryParams: {step}});
             } else {
               this.router.navigate(['/my-intiri']);
             }

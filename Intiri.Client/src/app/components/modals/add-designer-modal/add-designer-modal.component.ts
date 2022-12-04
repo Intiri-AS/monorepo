@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DesignerService } from 'src/app/services/designer.service';
@@ -59,7 +60,8 @@ export class AddDesignerModalComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private translate: TranslateService
   ) {
     this.addDesignerForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
@@ -109,12 +111,12 @@ export class AddDesignerModalComponent implements OnInit {
         this.designerService.getDesigners();
         this.modalController.dismiss();
         this.notifier.show({
-          message: 'Designer deleted successfully',
+          message: this.translate.instant('NOTIFY.designer-deleted'),
           type: 'success',
         });
     }, e => {
       this.notifier.show({
-        message: 'Something went wrong!',
+        message: this.translate.instant('NOTIFY.error'),
         type: 'error',
       });
     });

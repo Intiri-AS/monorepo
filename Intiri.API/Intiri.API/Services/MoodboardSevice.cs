@@ -111,8 +111,6 @@ namespace Intiri.API.Services
 
 			if (moodboardIn.Id > 0)
 			{
-				// TODO: Find another way to make a difference between designer and client moodboards
-				//moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardIn.Id);
 				newMoodboard = await CloneMoodboardAsync(moodboardIn.Id, roomDetails, project);
 				newMoodboard.Designer = endUser;
 			}
@@ -149,18 +147,6 @@ namespace Intiri.API.Services
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 			ClientMoodboard clonedMoodboard = new(moodboard);
-
-			//clonedMoodboard.Name = moodboard.Name;
-			//clonedMoodboard.IsTemplate = false;
-			//clonedMoodboard.Created = DateTime.UtcNow;
-			//clonedMoodboard.Updated = DateTime.UtcNow;
-			//clonedMoodboard.Description = moodboard.Description;
-			//clonedMoodboard.Room = moodboard.Room;
-			//clonedMoodboard.Style = moodboard.Style;
-			//clonedMoodboard.SourceMoodboardId = moodboard.Id;
-			//clonedMoodboard.Materials = moodboard.Materials.ToArray();
-			//clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.ToArray();
-			//clonedMoodboard.Products = moodboard.Products.ToArray();
 
 			clonedMoodboard.Project = project;
 
