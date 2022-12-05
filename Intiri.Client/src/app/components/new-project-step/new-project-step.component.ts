@@ -23,6 +23,8 @@ export class NewProjectStepComponent implements OnInit {
   mbFamilyAll: any[];
   mbsExpanded: boolean = false;
 
+  expandText: boolean = false;
+
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
@@ -39,6 +41,10 @@ export class NewProjectStepComponent implements OnInit {
     this.toggleSelection.emit(item);
     this.imagePath = null;
     this.project.roomDetails.imageFile = null;
+  }
+
+  seeMoreLess(state) {
+    this.expandText = state;
   }
 
   getMbFamily(mb) {
