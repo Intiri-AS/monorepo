@@ -105,3 +105,9 @@ ion-input {
 ion-select {
   @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
+
+.see-more-less {
+  @apply p-0 m-0 normal-case text-black-2 text-base;
+  --padding-start: 0;
+  --padding-end: 0;
+}

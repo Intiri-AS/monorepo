@@ -156,6 +156,12 @@ ion-toolbar {
   display: block;
 }
 
+.no-visible-area {
+  .textarea-wrapper.sc-ion-textarea-md {
+    display: none;
+  }
+}
+
 .primary-btn {
   //this one don't resize on smaller screens (don't have media queries)
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
@@ -266,6 +272,16 @@ ion-toolbar {
 .text-clamp-2 {
   @extend .clamp;
   -webkit-line-clamp: 2;
+}
+
+.text-clamp-3 {
+  @extend .clamp;
+  -webkit-line-clamp: 3;
+}
+
+.text-clamp-4 {
+  @extend .clamp;
+  -webkit-line-clamp: 4;
 }
 
 // override for color picker from ngx-color-picker library (cannot be overriden inside a component)
