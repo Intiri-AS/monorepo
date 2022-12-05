@@ -37,9 +37,14 @@ namespace Intiri.API.Services
 			return await _userManager.CreateAsync(user, password);
 		}
 
-		public async Task<IdentityResult> AddUserToRolesAsync(User user, string desiredRole)
+		public async Task<IdentityResult> AddUserToRoleAsync(User user, string desiredRole)
 		{
 			return await _userManager.AddToRoleAsync(user, desiredRole); ;
+		}
+
+		public async Task<IdentityResult> RemoveUserFromRoleAsync(User user, string desiredRole)
+		{
+			return await _userManager.RemoveFromRoleAsync(user, desiredRole); ;
 		}
 
 		public async Task<IdentityResult> DeleteUserAsync(User user)
@@ -106,6 +111,12 @@ namespace Intiri.API.Services
 		{
 
 			return await _userManager.GetRolesAsync(await FindUserByIdAsync(userId));
+		}
+
+		public async Task<IList<string>> GetUserRolesAsync(User user)
+		{
+
+			return await _userManager.GetRolesAsync(user);
 		}
 
 		#endregion IAccountService members

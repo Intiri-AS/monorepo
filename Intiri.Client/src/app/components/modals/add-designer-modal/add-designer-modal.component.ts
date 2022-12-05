@@ -186,9 +186,14 @@ export class AddDesignerModalComponent implements OnInit {
     this.designer.language = (this.EN && this.NO) ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
     this.designerService.editDesigner(this.item.id, this.designer).subscribe(res => {
       this.spinner.hide();
+      this.modalController.dismiss();
       if (typeof (res) === 'object') {
         this.designerService.getDesigners();
-        this.openSuccessModal();
+        //this.openSuccessModal();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.designer-updated'),
+          type: 'success',
+        });
       }
     }, e => {
       this.spinner.hide();
