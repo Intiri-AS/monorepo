@@ -117,7 +117,7 @@ namespace Intiri.API.Controllers
 			IdentityResult result = await _accountService.CreateUserAsync(eUser);
 			if (!result.Succeeded) return BadRequest(result.Errors);
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(eUser, RoleNames.FreeEndUser);
+			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(eUser, RoleNames.FreeEndUser);
 			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
 			return new LoginOutDTO
@@ -289,7 +289,7 @@ namespace Intiri.API.Controllers
 				return BadRequest(result.Errors);
 			}
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(newUser, RoleNames.FreeEndUser);
+			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(newUser, RoleNames.FreeEndUser);
 
 			if (!roleResult.Succeeded)
 			{
@@ -328,7 +328,7 @@ namespace Intiri.API.Controllers
 
 			partner.PartnerContacts.Add(pUser);
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(pUser, RoleNames.Partner);
+			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(pUser, RoleNames.Partner);
 			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
 			return Ok(_mapper.Map<PartnerContactOutDTO>(pUser));
@@ -355,7 +355,7 @@ namespace Intiri.API.Controllers
 			IdentityResult result = await _accountService.CreateUserAsync(dUser);
 			if (!result.Succeeded) return BadRequest(result.Errors);
 
-			IdentityResult roleResult = await _accountService.AddUserToRolesAsync(dUser, registerIn.Role);
+			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(dUser, registerIn.Role);
 			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
 			if (!await _ratingService.InitRatingAndSaveDesignerAsync(dUser))

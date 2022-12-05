@@ -19,6 +19,8 @@ using CloudinaryDotNet.Actions;
 using Intiri.API.Services;
 using Intiri.API.Shared;
 using System.Net;
+using Microsoft.AspNetCore.Identity;
+using Intiri.API.Models.UserLanguage;
 
 namespace Intiri.API.Controllers
 {
@@ -191,38 +193,38 @@ namespace Intiri.API.Controllers
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPut("update/{designerId}")]
-		public async Task<ActionResult<UserOutDTO>> UpdateDesigner(int designerId, [FromForm]UserUpdateInDTO userUpdateDto)
+		[HttpPatch("update/{designerId}")]
+		public async Task<ActionResult<UserOutDTO>> UpdateDesigner(int designerId, [FromForm]DesignerInDTO designerUpdateDto)
 		{
-			User user = await _unitOfWork.UserRepository.GetDesignerByIdAsync(designerId);
+			Designer dUser = await _unitOfWork.UserRepository.GetDesignerByIdAsync(designerId);
 
-			if (user == null)
+			if (dUser == null)
 			{
 				return NotFound();
 			}
-
-			IFormFile photoFile = userUpdateDto.PhotoPath;
-
-			if (photoFile != null && photoFile.Length > 0)
+			
+			IList<string> userRoles = await _accountService.GetUserRolesAsync(dUser);
+			if (!string.IsNullOrEmpty(designerUpdateDto.Role) && userRoles[0] != designerUpdateDto.Role)
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-					await _fileUploadService.TryAddFileToCloudinaryAsync(photoFile, FileUploadDestinations.UserProfilePhotos, user.PublicId);
+				IdentityResult result = await _accountService.AddUserToRoleAsync(dUser, designerUpdateDto.Role);
+				if (!result.Succeeded) return BadRequest("Failed to add to roles");
 
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
-
-				user.PhotoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				user.PublicId = uploadResult.Item3.PublicId;
+				result = await _accountService.RemoveUserFromRoleAsync(dUser, userRoles[0]);
+				if (!result.Succeeded) return BadRequest("Failed to remove from roles");
 			}
 
-			_mapper.Map(userUpdateDto, user);
-			_unitOfWork.UserRepository.UpdateUser(user);
+			_mapper.Map(designerUpdateDto, dUser);
+
+			if (string.IsNullOrEmpty(dUser.Language))
+			{
+				dUser.Language = Language.Norway;
+			}
+
+			_unitOfWork.UserRepository.UpdateUser(dUser);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				return _mapper.Map<UserOutDTO>(user);
+				return _mapper.Map<DesignerUpdateOutDTO>(dUser);
 			}
 
 			return BadRequest("Failed to update designer.");

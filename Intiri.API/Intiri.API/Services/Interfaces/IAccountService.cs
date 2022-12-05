@@ -10,7 +10,9 @@ namespace Intiri.API.Services.Interfaces
 
 		Task<IdentityResult> CreateUserAsync(User user, string password);
 
-		Task<IdentityResult> AddUserToRolesAsync(User user, string desiredRole);
+		Task<IdentityResult> AddUserToRoleAsync(User user, string desiredRole);
+
+		Task<IdentityResult> RemoveUserFromRoleAsync(User user, string desiredRole);
 
 		Task<IdentityResult> DeleteUserAsync(User user);
 
@@ -36,5 +38,6 @@ namespace Intiri.API.Services.Interfaces
 		Task<IEnumerable<TEntity>> GetAllUsersAsync<TEntity>() where TEntity : class;
 
 		Task<IList<string>> GetUserRolesByIdAsync(string userId);
+		Task<IList<string>> GetUserRolesAsync(User user);
 	}
 }
