@@ -4,8 +4,8 @@
   <div [ngClass]="{'text-clamp-3' : !expandText}">
     <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea>
   </div>
-  <ion-button fill="clear" *ngIf="!expandText" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
-  <ion-button fill="clear" *ngIf="expandText" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
+  <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
+  <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
   <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
