@@ -37,6 +37,12 @@ export class DesignerService {
     return this.http.post(`${this.apiUrl}account/register/designer`, designerObj);
   }
 
+  editDesigner(designerId, designerObj) {
+    const formData = new FormData();
+    Object.keys(designerObj).forEach(key => formData.append(key, designerObj[key]));
+    return this.http.patch(this.apiUrl + 'designers/update/' + designerId, formData);
+  }
+
   getContactDesigners() {
     return this.http.get(this.apiUrl + 'designers/contactDesigners');
   }

@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddDesignerModalComponent implements OnInit {
   public addDesignerForm: FormGroup;
+  public editDesignerForm: FormGroup;
   public isFormSubmited = false;
 
   get firstNameErrors() {
@@ -36,11 +37,32 @@ export class AddDesignerModalComponent implements OnInit {
     return this.addDesignerForm.controls.role.errors;
   }
 
+  get editFirstNameErrors() {
+    return this.editDesignerForm.controls.firstName.errors;
+  }
+
+  get editLastNameErrors() {
+    return this.editDesignerForm.controls.lastName.errors;
+  }
+
+  get editCodeErrors() {
+    return this.editDesignerForm.controls.code.errors;
+  }
+
+  get editPhoneErrors() {
+    return this.editDesignerForm.controls.phone.errors;
+  }
+
+  get editRoleErrors() {
+    return this.editDesignerForm.controls.role.errors;
+  }
+
   add;
   added;
   delete;
+  edit;
 
-  item: {}
+  item: any;
 
   EN: boolean = false;
   NO: boolean = false;
@@ -75,9 +97,41 @@ export class AddDesignerModalComponent implements OnInit {
       en: [''],
       no: ['']
     });
+    this.editDesignerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      code: ['', [Validators.required]],
+      phone: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
+      ])],
+      role: ['', [Validators.required]],
+      en: [''],
+      no: ['']
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.edit) {
+      console.log(this.item);
+      this.designer.firstName = this.item.firstName;
+      this.designer.lastName = this.item.lastName;
+      this.designer.phoneNumber = this.item.phoneNumber;
+      this.designer.countryCode = this.item.countryCode;
+      this.designer.role = this.item.roles[0].name;
+      this.designer.language = this.item.language;
+      if (this.item.language === 'EN') {
+        this.EN = true;
+      }
+      if (this.item.language === 'NO') {
+        this.NO = true;
+      }
+      if (this.item.language === 'NO/EN') {
+        this.EN = true;
+        this.NO = true;
+      }
+    }
+  }
 
   dismissModal() {
     this.modalController.dismiss();
@@ -117,6 +171,29 @@ export class AddDesignerModalComponent implements OnInit {
     }, e => {
       this.notifier.show({
         message: this.translate.instant('NOTIFY.error'),
+        type: 'error',
+      });
+    });
+  }
+
+  editDesigner() {
+    this.spinner.show();
+    this.isFormSubmited = true;
+    if (!this.editDesignerForm.valid) {
+      this.spinner.hide();
+      return;
+    }
+    this.designer.language = (this.EN && this.NO) ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
+    this.designerService.editDesigner(this.item.id, this.designer).subscribe(res => {
+      this.spinner.hide();
+      if (typeof (res) === 'object') {
+        this.designerService.getDesigners();
+        this.openSuccessModal();
+      }
+    }, e => {
+      this.spinner.hide();
+      this.notifier.show({
+        message: e.error,
         type: 'error',
       });
     });

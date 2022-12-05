@@ -1,6 +1,7 @@
 <ion-content> <!-- Adding everyting in ion-conter fixed issue with popover going out of screen -->
 <ion-list *ngIf="designer" lines="none" >
   <!-- <ion-item class="text-black-1" [button]="true">Edit designer</ion-item> -->
+  <ion-item class="text-black-1" (click)="openEditDesignerModal()" [button]="true">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</ion-item>
   <ion-item class="text-black-1 font-medium" (click)="openDeleteDesignerModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
 </ion-list>
 
