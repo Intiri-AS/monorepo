@@ -172,19 +172,23 @@ namespace Intiri.API.Controllers
 
 			#region paymant amount version 
 
-			// [key] -> clientId, [value] -> paymant amount
-			Dictionary<int, double> clientsWithConsultation = new Dictionary<int, double>();
+			HashSet<int> clients = new();
+			double totalIncome = 0;
 
 			foreach (ConsultationPayment cp in payments)
 			{
-				clientsWithConsultation[cp.Payer.Id] = clientsWithConsultation.ContainsKey(cp.Payer.Id)
-					? clientsWithConsultation[cp.Payer.Id] + cp.Amount : cp.Amount;
+				if (cp.Payer != null)
+				{
+					clients.Add(cp.Payer.Id);
+				}
+
+				totalIncome += cp.Amount;
 			}
 
 			DesignerStatisticsOutDTO designerStatisticsOutDTO = new DesignerStatisticsOutDTO()
 			{
-				ClientsNumber = clientsWithConsultation.Keys.Count,
-				TotalIncome = clientsWithConsultation.Values.Sum()
+				ClientsNumber = clients.Count,
+				TotalIncome = totalIncome
 			};
 
 			#endregion

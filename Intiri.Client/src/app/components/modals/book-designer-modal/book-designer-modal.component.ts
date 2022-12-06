@@ -6,6 +6,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { CommonService } from 'src/app/services/common.service';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -26,25 +27,25 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'BOOK-MODAL.room-sketch', isChecked: false
+      id: 1, name: 'sketch', isChecked: false
     },
     {
-      id: 2, name: 'BOOK-MODAL.color-advice', isChecked: false
+      id: 2, name: 'color', isChecked: false
     },
     {
-      id: 3, name: 'BOOK-MODAL.moodboard-adjustment', isChecked: false
+      id: 3, name: 'adjustment', isChecked: false
     },
     {
-      id: 4, name: 'BOOK-MODAL.select-products', isChecked: false
+      id: 4, name: 'product', isChecked: false
     },
     {
-      id: 5, name: 'BOOK-MODAL.lining-plan', isChecked: false
+      id: 5, name: 'lining', isChecked: false
     },
     {
-      id: 6, name: 'BOOK-MODAL.decoration', isChecked: false
+      id: 6, name: 'decoration', isChecked: false
     },
     {
-      id: 7, name: 'BOOK-MODAL.other-quesiton', isChecked: false
+      id: 7, name: 'quesiton', isChecked: false
     }
   ];
 
@@ -54,7 +55,8 @@ export class BookDesignerModalComponent {
     private languageService: LanguageService,
     private commonService: CommonService,
     private notifier: NotifierService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -68,7 +70,7 @@ export class BookDesignerModalComponent {
     }, () => {
       this.spinner.hide();
       this.notifier.show({
-        message: 'Cannot get consultations info.',
+        message: this.translate.instant('NOTIFY.consultation-get-error'),
         type: 'error',
       });
     })
@@ -129,7 +131,8 @@ export class BookDesignerModalComponent {
       }
     })
     if(this.extraPayment) {
-      details.push('2D & 3D drawings');
+      // details.push('2D & 3D drawings');
+      details.push('2d3d');
     }
     return String(details);
   }

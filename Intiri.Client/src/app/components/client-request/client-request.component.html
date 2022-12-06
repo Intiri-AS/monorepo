@@ -9,14 +9,14 @@
         <p class="text-base text-black-2 mt-[5px]">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
       </ion-col>
       <ion-col *ngIf="client.moodboard?.style?.name" size="2.5">
-        <p class="text-lg text-primary">SELECTED STYLE</p>
+        <p class="text-lg text-primary">{{'CLIENT-REQ.style' | translate}}</p>
         <p class="text-lg text-black-2 mt-[5px]">{{client.moodboard?.style?.name}}</p>
       </ion-col>
       <ion-col *ngIf="client?.consultationDetails" [size]="client.moodboard?.style?.name ? 3 : 5">
-        <p class="text-lg text-primary">ABOUT</p>
+        <p class="text-lg text-primary">{{'CLIENT-REQ.about' | translate}}</p>
         <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p>
       </ion-col>
-      <ion-col size="2.5" ><ion-button fill="clear" class="primary-btn" (click)="goToChat()">Open chat</ion-button></ion-col>
+      <ion-col size="2.5" ><ion-button fill="clear" class="primary-btn" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 </ion-card>
@@ -28,21 +28,24 @@
     <p class="text-base text-black-2 mt-[5px] mb-4">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
   </div>
   <div *ngIf="client.moodboard?.style?.name">
-    <p class="text-lg text-primary">SELECTED STYLE</p>
+    <p class="text-lg text-primary">{{'CLIENT-REQ.style' | translate}}</p>
     <p class="text-lg text-black-2 mt-[5px]">{{client.moodboard?.style?.name}}</p>
   </div>
   <ion-col *ngIf="client?.consultationDetails">
-    <p class="text-lg text-primary">ABOUT</p>
-    <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p>
+    <p class="text-lg text-primary">{{'CLIENT-REQ.about' | translate}}</p>
+    <!-- <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p> -->
+    <p class="text-lg text-black-2 mt-[5px]" style="display:inline" *ngFor="let item of parseConsultationDetails(client?.consultationDetails)">
+      {{'BOOK-WHY.' + item | translate}}. 
+    </p>
   </ion-col>
-  <div><ion-button fill="clear" class="primary-btn" (click)="goToChat()">Open chat</ion-button></div>
+  <div><ion-button fill="clear" class="primary-btn" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button></div>
 </ion-card>
 
 <p *ngIf="client?.moodboard" class="text-2xl text-black-2 font-medium">{{'COMMON.moodboard' | translate}}</p>
 <app-moodboard-details *ngIf="client?.moodboard" [moodboard]="client.moodboard" [withSlides]="false"></app-moodboard-details>
 
 <div *ngIf="client?.clientInspirations && client.clientInspirations.length > 0" class="flex justify-between items-center mb-6">
-  <p class="text-black-2 text-2xl font-medium">Inspiration</p>
+  <p class="text-black-2 text-2xl font-medium">{{'CLIENT-REQ.inspiration' | translate}}</p>
 </div>
 <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4 mb-20">
   <div *ngFor="let item of client?.clientInspirations" class="h-[130px] lg:h-[180px]">
@@ -56,22 +59,22 @@
 </div>
 
 <div class="flex justify-between items-center mb-6">
-  <p class="text-black-2 text-2xl font-medium">Additional info</p>
+  <p class="text-black-2 text-2xl font-medium">{{'CLIENT-REQ.info' | translate}}</p>
 </div>
 <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4 mb-10">
   <div class="h-[130px] lg:h-[180px]">
     <img class="step-image" alt="Additional Img" src="../../../../assets/images/profile-img.png"/>
-    <p class="text-black-2 text-2xl font-medium mt-2">Room shape</p>
+    <p class="text-black-2 text-2xl font-medium mt-2">{{'CLIENT-REQ.shape' | translate}}</p>
   </div>
 </div>
 
 <div class="flex grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4">
   <div class="profile-input w-full">
-    <span class="text-sm text-black-2">Room area (m2)</span>
+    <span class="text-sm text-black-2">{{'CLIENT-REQ.area' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light"></ion-input>
   </div>
   <div class="profile-input w-full">
-    <span class="text-sm text-black-2">Budget for products</span>
+    <span class="text-sm text-black-2">{{'CLIENT-REQ.budget' | translate}}</span>
     <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light"></ion-input>
   </div>
 </div>
