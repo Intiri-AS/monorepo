@@ -8,7 +8,9 @@
       <ion-row class="mb-20">
         <ion-col size="12" size-xl="2.3">
           <div class="bg-light xl-ion:w-[240px]  rounded-lg text-center pb-1">
-            <p *ngIf="client" [class.!text-primary]="clientRequestStep" (click)="clientRequestStep = true; currentStepNo = -1" class="side-menu-item pt-[45px]">{{client?.moodboard ? 'Client Request' : 'Client Details'}}</p>
+            <p *ngIf="client" [class.!text-primary]="clientRequestStep" (click)="clientRequestStep = true; currentStepNo = -1" class="side-menu-item pt-[45px]">
+              {{client?.moodboard ? ('DESIGNERS.client-request' | translate) : ('DESIGNERS.client-details' | translate) }}
+            </p>
             <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item" [class]="client ? '' : 'pt-[45px]'">{{'NEW-PROJECT.room' | translate}}</p>
             <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">{{'NEW-PROJECT.style' | translate}}</p>
             <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">{{'NEW-PROJECT.materials' | translate}}</p>

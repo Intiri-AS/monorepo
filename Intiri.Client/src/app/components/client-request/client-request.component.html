@@ -14,7 +14,10 @@
       </ion-col>
       <ion-col *ngIf="client?.consultationDetails" [size]="client.moodboard?.style?.name ? 3 : 5">
         <p class="text-lg text-primary">{{'CLIENT-REQ.about' | translate}}</p>
-        <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p>
+        <!-- <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p> -->
+        <p class="text-lg text-black-2 mt-[5px]" style="display:inline" *ngFor="let item of parseConsultationDetails(client?.consultationDetails)">
+          {{'BOOK-WHY.' + item | translate}}. 
+        </p>
       </ion-col>
       <ion-col size="2.5" ><ion-button fill="clear" class="primary-btn" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button></ion-col>
     </ion-row>

@@ -347,7 +347,9 @@
     "designer-added-text": "Du la til designer med suksess.",
     "go-to": "Gå til Designere",
     "selected-style": "Valgt stil",
-    "offer-sent": "Tilbud sendt"
+    "offer-sent": "Tilbud sendt",
+    "client-request": "Kundeforespørsel",
+    "client-details": "Kundedetaljer"
   },
   "CLIENTS": {
     "inspiration": "Inspirasjon",
@@ -456,7 +458,8 @@
     "phone-format": "Ugyldig telefonformat!",
     "image": "Bilde kreves!",
     "first-name": "Fornavn er påkrevd!",
-    "last-name": "Etternavn er påkrevd!"
+    "last-name": "Etternavn er påkrevd!",
+    "project-name": "Prosjektnavnet finnes allerede!"
   },
   "TIME": {
     "second": " sekund siden",

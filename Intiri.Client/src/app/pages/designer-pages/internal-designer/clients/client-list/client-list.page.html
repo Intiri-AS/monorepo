@@ -5,11 +5,11 @@
     <div class="main-container">
       <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
-      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()" class="swiper-no-swiping">
         <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row class="gap-x-[1.45%]">
-              <ion-col *ngFor="let user of clients" class="" size="12" size-sm="5.75" size-xl="2.25">
+              <ion-col *ngFor="let user of clients" size="12" size-sm="5.75" size-xl="2.25" [hidden]="!user.phoneNumber">
                 <div *ngIf="user.phoneNumber" [class]="user.moodboardStyle && !user.moodboardOfferId ? 'client hover:opacity-80 cursor-pointer' : 'client'" [routerLink]="user.moodboardStyle && !user.moodboardOfferId ? ['/client-request/' + user.consultationId] : []" routerDirection="root">
                   <div class=" flex flex-1 justify-center pt-3 mt-4">
                     <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
@@ -68,7 +68,7 @@
               <ion-col size="12" sizeLg="4">
                 <ion-card class="ion-card-container h-[200px] mt-[30px] flex flex-col items-start justify-center">
                   <p class="text-lg text-primary ml-[20px]">{{'DASHBOARD.income' | translate}}</p>
-                  <p class="text-[60px] text-black font-medium ml-[20px]">${{designerStatistic?.totalIncome}}</p>
+                  <p class="text-[60px] text-black font-medium ml-[20px]">{{designerStatistic?.totalIncome}} NOK</p>
                 </ion-card>
               </ion-col>
             </ion-row>
