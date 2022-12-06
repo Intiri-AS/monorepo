@@ -84,15 +84,17 @@
     "total": "Sum å betale",
     "tell": "Fortell oss hva du trenger hjelp med",
     "help": "Du møter snart din designer, fortell oss hva du trenger hjelp med.",
-    "room-sketch": "Romskisse",
-    "moodboard-adjustment": "Tilpasning av stilforslag",
-    "lining-plan": "Innredningsplan",
-    "color-advice": "Fargerådgivning",
-    "select-products": "Forslag til produkter og innredning",
-    "decoration": " Dekorasjon",
-    "other-quesiton": "Andre spørsmål",
-    "2d-3d": "2D eller 3D tegninger",
     "proceed": "Gå videre"
+  },
+  "BOOK-WHY": {
+    "sketch": "Romskisse",
+    "adjustment": "Tilpasning av stilforslag",
+    "lining": "Innredningsplan",
+    "color": "Fargerådgivning",
+    "product": "Forslag til produkter og innredning",
+    "decoration": " Dekorasjon",
+    "quesiton": "Andre spørsmål",
+    "2d3d": "2D eller 3D tegninger"
   },
   "PAYMENT": {
     "details": "Betalingsdetaljer",
@@ -265,7 +267,8 @@
     "save-changes": "Lagre endringer",
     "pieces": "stykker",
     "file-selected": "fil(er) valgt",
-    "view-details": "Se detaljer"
+    "view-details": "Se detaljer",
+    "messenger": "Budbringer"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -478,10 +481,21 @@
     "rating": "vurdering",
     "ratings": "vurderinger"
   },
+  "CLIENT-REQ": {
+    "style": "VALGT STIL",
+    "about": "OM",
+    "chat": "Åpne chat",
+    "info": "Ytterligere informasjon",
+    "shape": "Romform",
+    "area": "Romområde (m2)",
+    "budget": "Budsjett for produkter",
+    "inspiration": "Inspirasjoner"
+  },
   "NOTIFY": {
     "color-saved": "Fargeendringer lagret vellykket.",
     "color-deleted": "Farge slettet vellykket.",
     "designer-deleted": "Designer slettet vellykket.",
+    "designer-updated": "Designer endringer er lagret.",
     "material-saved": "Materielle endringer reddet.",
     "material-deleted": "Materiale slettet vellykket.",
     "partner-deleted": "Partner slettet vellykket.",
