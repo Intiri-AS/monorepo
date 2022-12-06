@@ -347,7 +347,9 @@
     "designer-added-text": "You successfully added designer.",
     "go-to": "Go to Designers",
     "selected-style": "Selected style",
-    "offer-sent": "Offer sent"
+    "offer-sent": "Offer sent",
+    "client-request": "Client Request",
+    "client-details": "Client Details"
   },
   "CLIENTS": {
     "inspiration": "Inspiration",

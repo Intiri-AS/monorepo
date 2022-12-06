@@ -74,7 +74,7 @@ namespace Intiri.API.Controllers
 		}
 
 		[HttpGet("isProjectExist/{projectName}")]
-		public async Task<ActionResult<bool>> CheckIfProjectAlreadyExist( string projectName)
+		public async Task<ActionResult<bool>> CheckIfProjectAlreadyExist(string projectName)
 		{
 			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdWithProjectsAsync(User.GetUserId());
 			if (endUser == null) return Unauthorized();
