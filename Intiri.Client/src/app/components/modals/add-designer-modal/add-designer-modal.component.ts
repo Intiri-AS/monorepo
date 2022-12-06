@@ -113,7 +113,6 @@ export class AddDesignerModalComponent implements OnInit {
 
   ngOnInit() {
     if (this.edit) {
-      console.log(this.item);
       this.designer.firstName = this.item.firstName;
       this.designer.lastName = this.item.lastName;
       this.designer.phoneNumber = this.item.phoneNumber;
@@ -189,7 +188,6 @@ export class AddDesignerModalComponent implements OnInit {
       this.modalController.dismiss();
       if (typeof (res) === 'object') {
         this.designerService.getDesigners();
-        //this.openSuccessModal();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.designer-updated'),
           type: 'success',
