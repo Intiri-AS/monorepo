@@ -347,7 +347,9 @@
     "designer-added-text": "You successfully added designer.",
     "go-to": "Go to Designers",
     "selected-style": "Selected style",
-    "offer-sent": "Offer sent"
+    "offer-sent": "Offer sent",
+    "client-request": "Client Request",
+    "client-details": "Client Details"
   },
   "CLIENTS": {
     "inspiration": "Inspiration",
@@ -456,7 +458,8 @@
     "phone-format": "Invalid phone format!",
     "image": "Image required!",
     "first-name": "First name is required!",
-    "last-name": "Last name is required!"
+    "last-name": "Last name is required!",
+    "project-name": "Project name already exists!"
   },
   "TIME": {
     "second": " second ago",
