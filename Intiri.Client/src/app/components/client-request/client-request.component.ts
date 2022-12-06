@@ -57,4 +57,10 @@ export class ClientRequestComponent implements OnInit {
   isExtension(file, extension) {
     return file?.filename.endsWith(extension);
   }
+
+  parseConsultationDetails(consultations: string){
+    var splitted = consultations.split(',');
+    return splitted;
+  }
+
 }

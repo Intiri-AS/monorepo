@@ -16,14 +16,14 @@
       <ion-item *ngFor="let item of items" class="w-full xl:w-1/2" lines="none">
         <div class="flex items-center">
           <ion-checkbox [(ngModel)]="item.isChecked" ></ion-checkbox>
-          <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{item.name | translate}}</p>
+          <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-WHY.' + item.name | translate}}</p>
         </div>
       </ion-item>
       <ion-item class="w-full xl:w-1/2" lines="none">
         <div class="flex items-center">
           <ion-checkbox (ionChange)="isChecked($event)"></ion-checkbox>
           <div>
-            <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-MODAL.2d-3d' | translate}}</p>
+            <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-WHY.2d3d' | translate}}</p>
             <p class="text-[18px] text-primary ml-2 leading-[26px]">(+3500 NOK)</p>
           </div>
         </div>

@@ -6,6 +6,7 @@ using Intiri.API.Extension;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.DTO.OutputDTO.Partner;
 using Intiri.API.Models.DTO.OutputDTO.Style;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Payment;
@@ -15,6 +16,7 @@ using Intiri.API.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Intiri.API.Controllers
 {
@@ -24,7 +26,8 @@ namespace Intiri.API.Controllers
 
 		#region Fields
 
-		private readonly ICloudinaryService _fileUploadService;
+		//private readonly ICloudinaryService _fileUploadService;
+		private readonly IFileUploudService _fileUploadService;
 		private readonly ILogger<UsersController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
@@ -33,7 +36,7 @@ namespace Intiri.API.Controllers
 
 		#region ctors
 
-		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService, ILogger<UsersController> logger) : base(unitOfWork)
+		public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, ILogger<UsersController> logger) : base(unitOfWork)
 		{
 			_mapper = mapper;
 			_logger = logger;
@@ -77,46 +80,20 @@ namespace Intiri.API.Controllers
 				return Unauthorized("Invalid clent.");
 			}
 
-			IFormFile file = inFile.PhotoPath;
+			IFormFile photoFile = inFile.PhotoPath;
 
-			if (file.Length > 0)
+			if (photoFile != null && photoFile.Length > 0)
 			{
-				ImageUploadResult uploadResult = null;
-				try
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+					await _fileUploadService.TryAddFileToCloudinaryAsync(photoFile, FileUploadDestinations.UserProfilePhotos, user.PublicId);
+
+				if (uploadResult.Item1 != HttpStatusCode.OK)
 				{
-					uploadResult = await _fileUploadService.UploadFileAsync(file, FileUploadDestinations.UserProfilePhotos);
-				}
-				catch (Exception ex)
-				{
-					return BadRequest($"Failed to upload user photo: {ex.Message}");
+					return BadRequest(uploadResult.Item2);
 				}
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest($"Failed to upload user photo: {uploadResult.Error.Message}");
-				}
-				
-				if(user.PhotoPath != null)
-				{
-					DeletionResult deletionResult = null;
-					try
-					{
-						deletionResult = await _fileUploadService
-							.DeleteFileAsync(user.PublicId);
-					}
-					catch (Exception)
-					{
-						return BadRequest("Failed to delete partner logo.");
-					}
-
-					if (deletionResult.Error != null)
-					{
-						_logger.LogWarning("Faild delete all photo from cloudinary services");
-					}
-				}
-
-				user.PhotoPath = uploadResult.SecureUrl.AbsoluteUri;
-				user.PublicId = uploadResult.PublicId;
+				user.PhotoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				user.PublicId = uploadResult.Item3.PublicId;
 
 				_unitOfWork.UserRepository.UpdateUser(user);
 
