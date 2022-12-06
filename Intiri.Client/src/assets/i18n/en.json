@@ -267,7 +267,8 @@
     "save-changes": "Save changes",
     "pieces": "pieces",
     "file-selected": "file(s) selected",
-    "view-details": "View details"
+    "view-details": "View details",
+    "messenger": "Messenger"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",

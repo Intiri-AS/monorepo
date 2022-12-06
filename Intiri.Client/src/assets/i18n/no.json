@@ -267,7 +267,8 @@
     "save-changes": "Lagre endringer",
     "pieces": "stykker",
     "file-selected": "fil(er) valgt",
-    "view-details": "Se detaljer"
+    "view-details": "Se detaljer",
+    "messenger": "Budbringer"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
