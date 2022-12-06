@@ -4,7 +4,7 @@
     <div class="main-container">
       <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clients'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
-      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()">
+      <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()" class="swiper-no-swiping">
         <ion-slide>
           <app-admin-clients></app-admin-clients>
         </ion-slide>
