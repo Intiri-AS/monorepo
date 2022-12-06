@@ -458,7 +458,8 @@
     "phone-format": "Invalid phone format!",
     "image": "Image required!",
     "first-name": "First name is required!",
-    "last-name": "Last name is required!"
+    "last-name": "Last name is required!",
+    "project-name": "Project name already exists!"
   },
   "TIME": {
     "second": " second ago",

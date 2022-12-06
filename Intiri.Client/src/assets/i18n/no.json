@@ -458,7 +458,8 @@
     "phone-format": "Ugyldig telefonformat!",
     "image": "Bilde kreves!",
     "first-name": "Fornavn er påkrevd!",
-    "last-name": "Etternavn er påkrevd!"
+    "last-name": "Etternavn er påkrevd!",
+    "project-name": "Prosjektnavnet finnes allerede!"
   },
   "TIME": {
     "second": " sekund siden",

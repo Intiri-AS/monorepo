@@ -16,8 +16,14 @@ export class CreateProjectModalComponent implements OnInit {
   start: boolean;
   final: boolean;
   existing: boolean;
+  public isPrNameExist = false;
 
-  constructor(private modalController: ModalController, private projectService: ProjectService, private router: Router, private nav: NavController) { }
+  constructor(
+    private modalController: ModalController, 
+    private projectService: ProjectService, 
+    private router: Router, 
+    private nav: NavController
+    ) { }
 
   ngOnInit() {}
 
@@ -26,10 +32,15 @@ export class CreateProjectModalComponent implements OnInit {
   }
 
   startProjectCreation() {
-    let project = new Project();
-    project.name = this.projectName;
-    this.projectService.setCurrentProject(project);
-    this.dismiss();
+    this.projectService.checkProjectName(this.projectName).subscribe(result =>{
+      this.isPrNameExist = result as boolean;
+      if(!result){
+        let project = new Project();
+        project.name = this.projectName;
+        this.projectService.setCurrentProject(project);
+        this.dismiss();
+      }
+    });
   }
 
   addNewMoodboard() {

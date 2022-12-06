@@ -13,7 +13,8 @@
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
               <label for="project-name" class="sr-only">{{'NEW-PROJECT.project-name' | translate}}</label>
-              <input id="project-name" name="email" type="text" autocomplete="text" [(ngModel)]="projectName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-[8px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" placeholder="{{'NEW-PROJECT.project-name' | translate}}" />
+              <input id="project-name" name="email" type="text" (focus)='isPrNameExist = false' autocomplete="text" [(ngModel)]="projectName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-[8px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" placeholder="{{'NEW-PROJECT.project-name' | translate}}" />
+              <span class="ion-warning" *ngIf="isPrNameExist">{{'VALIDATION.project-name' | translate}}</span>
             </div>
           </div>
           <ion-buttons class="justify-center">

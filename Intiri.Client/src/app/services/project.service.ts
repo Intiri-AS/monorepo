@@ -61,6 +61,10 @@ export class ProjectService implements Resolve<Project> {
     return this.http.get(`${this.apiUrl}projects/moodboardStyleFamily/${styleId}/${roomId}`);
   }
 
+  checkProjectName(projectName: string){
+    return this.http.get(`${this.apiUrl}projects/checkProjectName/${projectName}`);
+  }
+
   parseProject(project: Project) {
     let parsedProj = {
       styleImageIds: project.styleImages.map(e=> e['id']),
