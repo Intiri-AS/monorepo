@@ -9,7 +9,7 @@
         <ion-slide>
           <div class="w-full h-full mt-5">
             <ion-row class="gap-x-[1.45%]">
-              <ion-col *ngFor="let user of clients" class="" size="12" size-sm="5.75" size-xl="2.25">
+              <ion-col *ngFor="let user of clients" size="12" size-sm="5.75" size-xl="2.25" [hidden]="!user.phoneNumber">
                 <div *ngIf="user.phoneNumber" [class]="user.moodboardStyle && !user.moodboardOfferId ? 'client hover:opacity-80 cursor-pointer' : 'client'" [routerLink]="user.moodboardStyle && !user.moodboardOfferId ? ['/client-request/' + user.consultationId] : []" routerDirection="root">
                   <div class=" flex flex-1 justify-center pt-3 mt-4">
                     <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
