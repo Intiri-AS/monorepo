@@ -84,15 +84,17 @@
     "total": "Total to pay",
     "tell": "Tell us what you need",
     "help": "You are soon ready to meet your designer, just tell us what you need help with.",
-    "room-sketch": "Room sketch",
-    "moodboard-adjustment": "Moodboard adjustment",
-    "lining-plan": "Lining plan",
-    "color-advice": "Color advice",
-    "select-products": "Select products and furnishings",
-    "decoration": "Decoration",
-    "other-quesiton": "Other questions",
-    "2d-3d": "2D & 3D drawings",
     "proceed": "Proceed"
+  },
+  "BOOK-WHY": {
+    "sketch": "Room sketch",
+    "adjustment": "Moodboard adjustment",
+    "lining": "Lining plan",
+    "color": "Color advice",
+    "product": "Select products and furnishings",
+    "decoration": "Decoration",
+    "quesiton": "Other questions",
+    "2d3d": "2D & 3D drawings"
   },
   "PAYMENT": {
     "details": "Payment details",
@@ -477,6 +479,16 @@
     "terible": "Terible",
     "rating": "rating",
     "ratings": "ratings"
+  },
+  "CLIENT-REQ": {
+    "style": "SELECTED STYLE",
+    "about": "ABOUT",
+    "chat": "Open chat",
+    "info": "Additional info",
+    "shape": "Room shape",
+    "area": "Room area (m2)",
+    "budget": "Budget for products",
+    "inspiration": "Inspirations"
   },
   "NOTIFY": {
     "color-saved": "Color changes saved successfully.",
