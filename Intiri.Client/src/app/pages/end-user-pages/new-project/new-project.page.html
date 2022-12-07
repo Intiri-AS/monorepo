@@ -25,39 +25,43 @@
       </ion-row>
       <ion-row>
         <ion-col class="fixed-bottom" offset-xl="0">
-          <ion-buttons class="justify-center">
-            <ion-button
-              class="secondary-btn"
-              [class.disabled]="!canChangeToStep(currentStepNo-1)"
-              (click)="backStep()"
-              >{{'COMMON.back' | translate}}</ion-button
-            >
-            <ion-button
-              *ngIf="steps[currentStepNo]['data'] !== 'final'"
-              class="primary-btn"
-              [class.disabled]="!canChangeToStep(currentStepNo+1)"
-              (click)="nextStep()"
-              >{{'COMMON.next' | translate}}</ion-button
-            >
-            <ion-button
-            *ngIf="currentStepNo === 3"
-            class="secondary-btn skip-btn"
-            (click)="skipPage()"
-            >{{'COMMON.skip-page' | translate}}</ion-button>
-            <ion-button
-              *ngIf="steps[currentStepNo]['data'] === 'final'"
-              class="secondary-btn"
-              [class.disabled]="!canChangeToStep(currentStepNo-1)"
-              routerLink="/customize-moodboard"
-              routerDirection="root"
-              >{{'NEW-PROJECT.customize' | translate}}</ion-button
-            >
-            <ion-button
-              *ngIf="steps[currentStepNo]['data'] === 'final'"
-              class="primary-btn"
-              (click)="saveCurrentProject()"
-              >{{'NEW-PROJECT.finish' | translate}}</ion-button
-            >
+          <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row">
+            <div>
+              <ion-button
+                class="secondary-btn"
+                [class.disabled]="!canChangeToStep(currentStepNo-1)"
+                (click)="backStep()"
+                >{{'COMMON.back' | translate}}</ion-button
+              >
+              <ion-button
+                *ngIf="steps[currentStepNo]['data'] !== 'final'"
+                class="primary-btn"
+                [class.disabled]="!canChangeToStep(currentStepNo+1)"
+                (click)="nextStep()"
+                >{{'COMMON.next' | translate}}</ion-button
+              >
+            </div>
+            <div class="mt-2 lg:mt-0">
+              <ion-button
+              *ngIf="currentStepNo === 3"
+              class="secondary-btn skip-btn"
+              (click)="skipPage()"
+              >{{'COMMON.skip-page' | translate}}</ion-button>
+              <ion-button
+                *ngIf="steps[currentStepNo]['data'] === 'final'"
+                class="secondary-btn"
+                [class.disabled]="!canChangeToStep(currentStepNo-1)"
+                routerLink="/customize-moodboard"
+                routerDirection="root"
+                >{{'NEW-PROJECT.customize' | translate}}</ion-button
+              >
+              <ion-button
+                *ngIf="steps[currentStepNo]['data'] === 'final'"
+                class="primary-btn"
+                (click)="saveCurrentProject()"
+                >{{'NEW-PROJECT.finish' | translate}}</ion-button
+              >
+            </div>
           </ion-buttons>
         </ion-col>
       </ion-row>

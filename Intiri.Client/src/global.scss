@@ -136,8 +136,7 @@ ion-toolbar {
 }
 
 .fixed-bottom {
-  @apply xl:pl-[75px] h-[90px];
-  padding-top: 17px;
+  @apply xl:pl-[75px] h-[130px] lg:h-[90px];
   position: fixed;
   bottom: 0;
   width: 100%;
