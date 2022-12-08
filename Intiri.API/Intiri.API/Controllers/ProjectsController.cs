@@ -73,13 +73,21 @@ namespace Intiri.API.Controllers
 			return Ok(projectsOut);
 		}
 
+		[AllowAnonymous]
 		[HttpGet("checkProjectName/{projectName}")]
 		public async Task<ActionResult<bool>> CheckIfProjectAlreadyExist(string projectName)
 		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdWithProjectsAsync(User.GetUserId());
-			if (endUser == null) return Unauthorized();
+			bool isAuthenticated = User.Identity.IsAuthenticated;
+			
+			if (isAuthenticated)
+			{
+				EndUser endUser = await _unitOfWork.UserRepository.GetEndUserByIdWithProjectsAsync(User.GetUserId());
+				if (endUser == null) return Unauthorized();
 
-			return endUser.CreatedProjects.Any(project => project.Name == projectName);
+				return endUser.CreatedProjects.Any(project => project.Name == projectName);
+			}
+
+			return isAuthenticated;
 		}
 
 		[HttpGet("lastProject")]

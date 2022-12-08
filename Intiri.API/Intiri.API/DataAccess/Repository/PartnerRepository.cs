@@ -26,6 +26,14 @@ namespace Intiri.API.DataAccess.Repository
 			return (await Get(partner => partner.Id == partnerId, includeProperties: "Products")).FirstOrDefault();
 		}
 
+		public async Task<Partner> GetPartnerWithFullProductsAsync(int partnerId)
+		{
+			return await _context.Partners
+				.Include(pt => pt.Products).ThenInclude(pr => pr.ProductType)
+				.Include(pt => pt.Products).ThenInclude(pr => pr.Material)
+				.SingleOrDefaultAsync(part => part.Id == partnerId);
+		}
+
 		public async Task<Partner> GetPartnerWithContactsAsync(int partnerId)
 		{
 			return (await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts")).FirstOrDefault();

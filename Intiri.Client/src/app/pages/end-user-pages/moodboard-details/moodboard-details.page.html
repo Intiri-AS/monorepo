@@ -12,11 +12,17 @@
       <p class="main-title">{{moodboard.style.name}}</p>
       <div class="p-2 xl:p-0 mb-[160px] lg:mb-[90px]">
         <app-moodboard-details [moodboard]="moodboard"></app-moodboard-details>
-        <div class="flex flex-col lg:flex-row justify-center mt-10 xl:mt-40 fixed-bottom">
-          <ion-button fill="clear" class="primary-btn" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
-          <ion-button *ngIf="projectId" fill="clear" class="secondary-btn" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
-          <ion-button *ngIf="projectId" fill="clear" class="primary-btn" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
-          <ion-button *ngIf="projectId" fill="clear" class="secondary-btn" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
+        <div class="fixed-bottom">
+          <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row lg:mx-[200px]">
+            <div class="flex justify-evenly lg:justify-around w-full">
+              <ion-button fill="clear" class="primary-btn-responsive" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
+              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-responsive" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
+            </div>
+            <div class="mt-2 lg:mt-0 flex justify-evenly lg:justify-around w-full">
+              <ion-button *ngIf="projectId" fill="clear" class="primary-btn-responsive" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
+              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-responsive" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
+            </div>
+          </ion-buttons>
         </div>
       </div>
 

@@ -57,7 +57,7 @@ namespace Intiri.API.Controllers
 			PartnerContact pUser = await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
 			if (pUser == null) return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
+			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithFullProductsAsync(pUser.PartnerId);
 			if (partner == null) return BadRequest("Invalid partner.");
 
 			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(partner.Products);

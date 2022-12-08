@@ -28,7 +28,7 @@ export class PartnerProductsPage implements OnInit {
               private materialService: MaterialService) { }
 
   ngOnInit() {
-    this.partnerService.getProductsFromThatPartner();
+    this.partnerService.getPartnerProducts();
     this.partnerService.getProductsType().subscribe((res: any[]) => {
       this.productTypes = res;
     });
@@ -64,9 +64,9 @@ export class PartnerProductsPage implements OnInit {
 
   onFilterChange(event){
     const selectedTypeNames = event.detail.value;
-    this.products$.pipe(take(1)).subscribe(products => {
+    this.products$.subscribe(products => {
       if(selectedTypeNames.length > 0) {
-        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));
+        this.products = products.filter(products => selectedTypeNames.includes(products.productTypeId));
       } else {
         this.products = products;
       }

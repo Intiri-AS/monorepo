@@ -5,6 +5,8 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs/operators';
+import { AccountService } from 'src/app/services/account.service';
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { ColorService } from '../../../services/color.service';
@@ -20,6 +22,7 @@ export class AddProductModalComponent implements OnInit {
   added;
   add: boolean;
   edit: boolean;
+  userRole: string;
 
   item: any = {};
   delete;
@@ -69,7 +72,8 @@ export class AddProductModalComponent implements OnInit {
               private partnerService: PartnerService,
               private notifier: NotifierService,
               private spinner: NgxSpinnerService,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private accountService: AccountService
               ) {
                 this.editProductForm = this.fb.group({
                   productName: ['' || undefined, Validators.required],
@@ -110,6 +114,13 @@ export class AddProductModalComponent implements OnInit {
         imageUrl: ['', Validators.required],
         description: '',
     });
+
+    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
+      if (loggedUser) {
+        this.userRole = loggedUser.roles[0];
+      }
+    });
+
   }
 
   onFileChange(event) {
@@ -145,7 +156,7 @@ export class AddProductModalComponent implements OnInit {
     this.partnerService.addPartnerProduct(this.productData).subscribe( response => {
       this.spinner.hide();
       this.openSuccessModal();
-      this.partnerService.getProductsFromThatPartner();
+      this.partnerService.getPartnerProducts();
       this.dismissModal();
     }, error => {
       this.spinner.hide();
@@ -166,7 +177,13 @@ export class AddProductModalComponent implements OnInit {
     this.partnerService.deleteProduct(this.item.id).subscribe(res => {
         this.spinner.hide();
         this.modalController.dismiss();
-        this.partnerService.getProductsFromThatPartner();
+
+        if (this.userRole === 'Partner') {
+          this.partnerService.getPartnerProducts();
+        } else {
+          this.partnerService.getProductsFromAllPartners();
+        }
+
     }, () => {
       this.spinner.hide();
       this.notifier.show({
@@ -187,7 +204,13 @@ export class AddProductModalComponent implements OnInit {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {
-        this.partnerService.getProductsFromThatPartner();
+
+        if (this.userRole === 'Partner') {
+          this.partnerService.getPartnerProducts();
+        } else {
+          this.partnerService.getProductsFromAllPartners();
+        }
+        
         this.notifier.show({
           message: this.translate.instant('NOTIFY.product-saved'),
           type: 'success'
