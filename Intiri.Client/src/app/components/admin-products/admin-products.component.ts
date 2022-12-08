@@ -19,12 +19,15 @@ export class AdminProductsComponent implements OnInit {
   partners$ = this.partnerService.partners$;
   products$: Observable<any> = this.partnerService.products$;
 
+  private selectedPartnerNames: any[] = [];
+  private selectedProductTypes: any[] = [];
+
 
   constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
 
   ngOnInit() {
     this.partnerService.getProductsFromThatPartner();
-    this.products$.pipe(take(1)).subscribe(product => {
+    this.products$.subscribe(product => {
       this.allProducts = product;
       this.products = product;
     })
@@ -46,21 +49,31 @@ export class AdminProductsComponent implements OnInit {
   }
 
   onPartnersFilterChange(event){
-    const selectedPartnerNames = event.detail.value;
-      if(selectedPartnerNames.length > 0) {
-        this.products = this.allProducts.filter(product => selectedPartnerNames.includes(product.partnerId));
-      } else {
-        this.products = this.allProducts;
-      }
+    this.selectedPartnerNames = event.detail.value;
+    if (this.selectedProductTypes.length > 0 && this.selectedPartnerNames.length > 0) {
+      this.products = this.allProducts.filter(product => this.selectedPartnerNames.includes(product.partnerId));
+      this.products = this.products.filter(product => this.selectedProductTypes.includes(product.productTypeId));
+    } else if (this.selectedPartnerNames.length > 0 && this.selectedProductTypes.length == 0) {
+      this.products = this.allProducts.filter(product => this.selectedPartnerNames.includes(product.partnerId));
+    } else if (this.selectedPartnerNames.length == 0 && this.selectedProductTypes.length > 0) {
+      this.products = this.allProducts.filter(product => this.selectedProductTypes.includes(product.productTypeId));
+    } else {
+      this.products = this.allProducts;
+    }
   }
 
   onProductTypeFilterChange(event){
-    const selectedProductTypes = event.detail.value;
-      if(selectedProductTypes.length > 0) {
-        this.products = this.allProducts.filter(product => selectedProductTypes.includes(product.productTypeId));
-      } else {
-        this.products = this.allProducts;
-      }
+    this.selectedProductTypes = event.detail.value;
+    if (this.selectedProductTypes.length > 0 && this.selectedPartnerNames.length > 0) {
+      this.products = this.allProducts.filter(product => this.selectedPartnerNames.includes(product.partnerId));
+      this.products = this.products.filter(product => this.selectedProductTypes.includes(product.productTypeId));
+    } else if (this.selectedProductTypes.length > 0 && this.selectedPartnerNames.length == 0) {
+      this.products = this.allProducts.filter(product => this.selectedProductTypes.includes(product.productTypeId));
+    } else if (this.selectedProductTypes.length == 0 && this.selectedPartnerNames.length > 0) {
+      this.products = this.allProducts.filter(product => this.selectedPartnerNames.includes(product.partnerId));
+    } else {
+      this.products = this.allProducts;
+    }
   }
 
 }

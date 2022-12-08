@@ -66,7 +66,7 @@ export class PartnerProductsPage implements OnInit {
     const selectedTypeNames = event.detail.value;
     this.products$.pipe(take(1)).subscribe(products => {
       if(selectedTypeNames.length > 0) {
-        this.products = products.filter(products => selectedTypeNames.includes(products.productType.name));
+        this.products = products.filter(products => selectedTypeNames.includes(products.productTypeId));
       } else {
         this.products = products;
       }
