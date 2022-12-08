@@ -9,5 +9,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Partner> GetPartnerAllAsync(int partnerId);
 		Task<IEnumerable<Partner>> GetPartnersAsync();
 		Task<int> GetPartnersCountAsync();
+		Task<Partner> GetPartnerWithFullProductsAsync(int partnerId);
 	}
 }
