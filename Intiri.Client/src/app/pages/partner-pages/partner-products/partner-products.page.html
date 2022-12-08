@@ -17,7 +17,7 @@
               <div class="w-full">
                 <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
                 <ion-select (ionChange)="onFilterChange($event)" class="w-full" interface="popover" [multiple]="true">
-                  <ion-select-option value="{{productType.name}}" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
+                  <ion-select-option [value]="productType.id" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
                 </ion-select>
               </div>
                 <ion-buttons class="justify-end mt-[25px]">
