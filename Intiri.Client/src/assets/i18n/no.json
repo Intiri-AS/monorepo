@@ -459,7 +459,8 @@
     "image": "Bilde kreves!",
     "first-name": "Fornavn er påkrevd!",
     "last-name": "Etternavn er påkrevd!",
-    "project-name": "Prosjektnavnet finnes allerede!"
+    "project-name": "Prosjektnavnet finnes allerede!",
+    "wrong-format": "Feil format!"
   },
   "TIME": {
     "second": " sekund siden",

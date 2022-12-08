@@ -207,7 +207,7 @@
   },
   "PROFILE": {
     "profile": "Profile",
-    "personal": "Pesonal Info",
+    "personal": "Personal Info",
     "gender": "Gender",
     "change-profile-pic": "Change profile picture",
     "email": "Email",
@@ -459,7 +459,8 @@
     "image": "Image required!",
     "first-name": "First name is required!",
     "last-name": "Last name is required!",
-    "project-name": "Project name already exists!"
+    "project-name": "Project name already exists!",
+    "wrong-format": "Wrong format!"
   },
   "TIME": {
     "second": " second ago",
