@@ -26,7 +26,7 @@ export class AdminProductsComponent implements OnInit {
   constructor(public popoverController: PopoverController, private partnerService: PartnerService) { }
 
   ngOnInit() {
-    this.partnerService.getProductsFromThatPartner();
+    this.partnerService.getProductsFromAllPartners();
     this.products$.subscribe(product => {
       this.allProducts = product;
       this.products = product;
