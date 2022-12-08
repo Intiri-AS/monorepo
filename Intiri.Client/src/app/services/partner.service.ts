@@ -32,9 +32,23 @@ export class PartnerService {
       .toPromise();
   }
 
-  getProductsFromThatPartner() {
+  getProductsFromAllPartners() {
     return this.http
       .get(this.apiUrl + 'products')
+      .pipe(
+        map((productResponse) => {
+          if (productResponse) {
+            this.productSource.next(productResponse);
+          }
+        })
+      )
+      .toPromise();
+  }
+
+  getPartnerProducts() {
+    //return this.http.get(this.apiUrl + 'products/partnerProducts');
+    return this.http
+      .get(this.apiUrl + 'products/partnerProducts')
       .pipe(
         map((productResponse) => {
           if (productResponse) {

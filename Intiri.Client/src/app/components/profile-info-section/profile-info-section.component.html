@@ -1,4 +1,4 @@
-<h3 class="text-black-2 text-[24px] my-0 mx-2">Personal Info</h3>
+<h3 class="text-black-2 text-[24px] my-0 mx-2">{{'PROFILE.personal' | translate}}</h3>
 <div *ngIf="formGroup" [formGroup]="formGroup">
   <div formGroupName="innerGroup">
 <section class="sm:flex">
@@ -46,7 +46,7 @@
 <div class="profile-input">
   <span class="text-sm text-black-2">{{'COMMON.email' | translate}}</span>
   <ion-input type="email" class="border rounded-2xl h-14 border-black-2" formControlName="email"></ion-input>
-  <span class="text-sm text-[#eb445a] hidden">Wrong format</span>
+  <span class="text-sm text-[#eb445a] hidden">{{'VALIDATION.wrong-format' | translate}}</span>
 </div>
 <div class="profile-input">
   <span class="text-sm text-black-2">{{'PARTNERS.street' | translate}}</span>

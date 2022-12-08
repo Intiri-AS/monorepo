@@ -3,7 +3,7 @@
     <app-header-internal-designer></app-header-internal-designer>
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <div class="main-container">
-      <p class="main-title mb-[30px]">Client request</p>
+      <p class="main-title mb-[30px]">{{'DESIGNERS.client-request' | translate}}</p>
       <ion-row>
         <ion-col size="12" size-xl="2.5" class="p-0">
           <div class="p-2 xl:p-0">
@@ -11,9 +11,9 @@
               <img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[120px] h-[120px] rounded-full mt-[65px] object-cover">
               <p class="text-2xl text-black-2 font-medium mt-[30px]">{{client?.firstName}} {{client?.lastName}}</p>
               <p class="text-lg text-black-2 mt-[5px]">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
-              <p class="text-lg text-primary mt-[30px]">SELECTED STYLE</p>
+              <p class="text-lg text-primary mt-[30px]">{{'CLIENT-REQ.style' | translate}}</p>
               <p class="text-lg text-black-2 mt-[5px]">{{client.moodboard?.style?.name}}</p>
-              <ion-button fill="clear" class="primary-btn mt-[30px] mb-8" (click)="goToChat()">Open chat</ion-button>
+              <ion-button fill="clear" class="primary-btn mt-[30px] mb-8" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button>
             </div>
           </div>
         </ion-col>
@@ -30,7 +30,7 @@
             <ion-button
               (click)="goToCreateOffer()"
               class="primary-btn"
-              >Create offer</ion-button
+              >{{'MOODBOARDS.create-offer' | translate}}</ion-button
             >
           </ion-buttons>
         </div>
