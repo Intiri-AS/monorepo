@@ -64,7 +64,7 @@ export class PartnerProductsPage implements OnInit {
 
   onFilterChange(event){
     const selectedTypeNames = event.detail.value;
-    this.products$.pipe(take(1)).subscribe(products => {
+    this.products$.subscribe(products => {
       if(selectedTypeNames.length > 0) {
         this.products = products.filter(products => selectedTypeNames.includes(products.productTypeId));
       } else {
