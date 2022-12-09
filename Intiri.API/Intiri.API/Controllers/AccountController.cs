@@ -398,6 +398,12 @@ namespace Intiri.API.Controllers
 
 				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
 				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+
+				IEnumerable<DesignerReview> clientReviews = await _unitOfWork.DesignerReviewRepository.GetAllReviewsByClientIdAsync(user.Id);
+				foreach (DesignerReview review in clientReviews)
+				{
+					review.EndUser = null;
+				}
 			}
 
 			try
