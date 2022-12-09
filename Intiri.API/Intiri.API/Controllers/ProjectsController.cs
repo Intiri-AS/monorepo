@@ -161,10 +161,10 @@ namespace Intiri.API.Controllers
 		[HttpPost("create")]
 		public async Task<ActionResult<ProjectOutDTO>> Create([FromForm] ProjectInDTO projectIn)
 		{
-			if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.ProjectName))
-			{
-				return BadRequest($"Project with name '{projectIn.ProjectName}' already exists");
-			}
+			//if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.ProjectName))
+			//{
+			//	return BadRequest($"Project with name '{projectIn.ProjectName}' already exists");
+			//}
 
 			EndUser user = await _accountService.GetUserByIdAsync<EndUser>(User.GetUserId());
 			if (user == null) return Unauthorized();
