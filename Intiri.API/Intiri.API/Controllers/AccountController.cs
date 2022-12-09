@@ -411,7 +411,8 @@ namespace Intiri.API.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest($"Faild to delete user: {ex.Message}");
+				string message = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+				return BadRequest($"Faild to delete user: {message}");
 			}
 
 			// delete all user cloudinary files
