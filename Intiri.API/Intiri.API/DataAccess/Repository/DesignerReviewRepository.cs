@@ -23,5 +23,11 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.DesignerReviews.AnyAsync(e => e.DesignerId == designerId && e.EndUser.Id == endUserId);
 		}
+
+		public async Task<IEnumerable<DesignerReview>> GetAllReviewsByClientIdAsync(int endUserId)
+		{
+			return await _context.DesignerReviews
+				.Where(e => e.EndUser.Id == endUserId ).ToListAsync();
+		}
 	}
 }
