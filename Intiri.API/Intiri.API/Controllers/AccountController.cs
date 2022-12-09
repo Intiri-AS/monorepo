@@ -388,15 +388,16 @@ namespace Intiri.API.Controllers
 			{
 				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
 
-				await _userService.DeleteUserRelatedMessagesAsync(id);
 				cloudinaryPublicIds = new List<string>() { user.PublicId };
+				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+
 			}
 			else if (userRoles.Contains(RoleNames.FreeEndUser))
 			{
 				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
-				await _userService.DeleteUserRelatedMessagesAsync(id);
 				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
+				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
 			}
 
 			try
@@ -410,7 +411,8 @@ namespace Intiri.API.Controllers
 			}
 			catch (Exception ex)
 			{
-				return BadRequest($"Faild to delete user: {ex.Message}");
+				string message = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+				return BadRequest($"Faild to delete user: {message}");
 			}
 
 			// delete all user cloudinary files
