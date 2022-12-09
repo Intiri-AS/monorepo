@@ -37,19 +37,24 @@ namespace Intiri.API.Services
 
 		#region IUserService members
 
-		public async Task<bool> DeleteUserRelatedMessagesAsync(int userId)
+		public async Task<List<string>> DeleteUserRelatedMessagesAsync(int userId)
 		{
 			List<ChatMessage> chatMessages = await _unitOfWork.UserRepository.GetUserMassegesByUserIdAsync(userId);
+			List<string> attachmentsPublicIds = new();
 
 			if (chatMessages.Count > 0)
 			{
 				foreach (ChatMessage message in chatMessages)
 				{
+					if (message.Attachments != null)
+					{
+						attachmentsPublicIds.AddRange(message.Attachments.Select(x => x.PublicId));
+					}
 					_unitOfWork.ChatMessageRepository.Delete(message);
 				}
 			}
 
-			return true;
+			return attachmentsPublicIds;
 		}
 
 		public List<string> GetEndUserCloudinaryFilesAsync(EndUser endUser)

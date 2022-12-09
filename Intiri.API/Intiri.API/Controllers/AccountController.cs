@@ -388,15 +388,16 @@ namespace Intiri.API.Controllers
 			{
 				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
 
-				await _userService.DeleteUserRelatedMessagesAsync(id);
 				cloudinaryPublicIds = new List<string>() { user.PublicId };
+				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+
 			}
 			else if (userRoles.Contains(RoleNames.FreeEndUser))
 			{
 				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
-				await _userService.DeleteUserRelatedMessagesAsync(id);
 				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
+				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
 			}
 
 			try

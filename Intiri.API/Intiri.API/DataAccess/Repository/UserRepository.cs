@@ -218,7 +218,11 @@ namespace Intiri.API.DataAccess.Repository
 
 		public async Task<List<ChatMessage>> GetUserMassegesByUserIdAsync(int userId)
 		{
-			User user = await _context.Users.Include(ms => ms.MessagesSent).Include(mr => mr.MessagesReceived).SingleOrDefaultAsync(eu => eu.Id == userId);
+			User user = await _context.Users
+				.Include(ms => ms.MessagesSent).ThenInclude(at => at.Attachments)
+				.Include(mr => mr.MessagesReceived)
+				.SingleOrDefaultAsync(eu => eu.Id == userId);
+
 			List<ChatMessage> messages = new List<ChatMessage>(user.MessagesSent);
 			messages.AddRange(user.MessagesReceived);
 			
