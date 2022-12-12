@@ -12,14 +12,14 @@
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
+            <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
             <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Last name</span>
+            <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
             <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
@@ -31,11 +31,8 @@
             <div class="phone-input">
               <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
               <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode" formControlName="code">
-                <ion-select-option value="45">+45</ion-select-option>
-                <ion-select-option value="46">+46</ion-select-option>
                 <ion-select-option value="47">+47</ion-select-option>
                 <ion-select-option value="381">+381</ion-select-option>
-                <ion-select-option value="382">+382</ion-select-option>
               </ion-select>
             </div>
             <div class="profile-input">
@@ -125,14 +122,14 @@
       <ion-row>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">{{'DESIGNERS.designer-name' | translate}}</span>
+            <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
             <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editFirstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="profile-input">
-            <span class="text-sm text-black-2">Last name</span>
+            <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
             <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editLastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
@@ -144,11 +141,8 @@
             <div class="phone-input">
               <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
               <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode" formControlName="code">
-                <ion-select-option value="45">+45</ion-select-option>
-                <ion-select-option value="46">+46</ion-select-option>
                 <ion-select-option value="47">+47</ion-select-option>
                 <ion-select-option value="381">+381</ion-select-option>
-                <ion-select-option value="382">+382</ion-select-option>
               </ion-select>
             </div>
             <div class="profile-input">

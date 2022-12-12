@@ -145,13 +145,12 @@ namespace Intiri.API.Controllers
 
 			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 
-			ClientMoodboard newMoodboard = await _moodboardSevice.CreateClientMoodboardAsync(project, roomDetails, moodboardProjectIn.Moodboard, endUser);
+			ClientMoodboard newMoodboard = await _moodboardSevice.CreateClientMoodboardAsync(roomDetails, moodboardProjectIn.Moodboard, endUser);
 
 			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
-				project.ProjectMoodboards.Add(newMoodboard);
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
@@ -161,11 +160,6 @@ namespace Intiri.API.Controllers
 		[HttpPost("create")]
 		public async Task<ActionResult<ProjectOutDTO>> Create([FromForm] ProjectInDTO projectIn)
 		{
-			//if (await _unitOfWork.ProjectRepository.DoesAnyExist(p => p.Name == projectIn.ProjectName))
-			//{
-			//	return BadRequest($"Project with name '{projectIn.ProjectName}' already exists");
-			//}
-
 			EndUser user = await _accountService.GetUserByIdAsync<EndUser>(User.GetUserId());
 			if (user == null) return Unauthorized();
 
@@ -195,12 +189,11 @@ namespace Intiri.API.Controllers
 			Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(projectIn.ProjectRoomId);
 			project.Room = room;
 
-			ClientMoodboard newMoodboard = await _moodboardSevice.CreateClientMoodboardAsync(project, roomDetails, projectIn.Moodboard, user);
+			ClientMoodboard newMoodboard = await _moodboardSevice.CreateClientMoodboardAsync(roomDetails, projectIn.Moodboard, user);
 
 			_unitOfWork.ProjectRepository.Insert(project);
 
-			//project.ProjectMoodboards.Add(newMoodboard);
-			//user.CreatedProjects.Add(project);
+			project.ProjectMoodboards.Add(newMoodboard);
 
 			if (await _unitOfWork.SaveChanges())
 			{
