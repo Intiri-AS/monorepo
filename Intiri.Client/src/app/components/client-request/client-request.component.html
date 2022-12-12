@@ -16,7 +16,7 @@
         <p class="text-lg text-primary">{{'CLIENT-REQ.about' | translate}}</p>
         <!-- <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p> -->
         <p class="text-lg text-black-2 mt-[5px]" style="display:inline" *ngFor="let item of parseConsultationDetails(client?.consultationDetails)">
-          {{'BOOK-WHY.' + item | translate}}. 
+          {{'BOOK-WHY.' + item | translate}}.
         </p>
       </ion-col>
       <ion-col size="2.5" ><ion-button fill="clear" class="primary-btn" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button></ion-col>
@@ -38,7 +38,7 @@
     <p class="text-lg text-primary">{{'CLIENT-REQ.about' | translate}}</p>
     <!-- <p class="text-lg text-black-2 mt-[5px]">{{client.consultationDetails}}</p> -->
     <p class="text-lg text-black-2 mt-[5px]" style="display:inline" *ngFor="let item of parseConsultationDetails(client?.consultationDetails)">
-      {{'BOOK-WHY.' + item | translate}}. 
+      {{'BOOK-WHY.' + item | translate}}.
     </p>
   </ion-col>
   <div><ion-button fill="clear" class="primary-btn" (click)="goToChat()">{{'CLIENT-REQ.chat' | translate}}</ion-button></div>
@@ -51,7 +51,7 @@
   <p class="text-black-2 text-2xl font-medium">{{'CLIENT-REQ.inspiration' | translate}}</p>
 </div>
 <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4 mb-20">
-  <div *ngFor="let item of client?.clientInspirations" class="h-[130px] lg:h-[180px]">
+  <div *ngFor="let item of client?.clientInspirations" class="h-[130px] lg:h-[180px] cursor-pointer">
     <img *ngIf="!isExtension(item, '.pdf')" [src]="item.url" (click)="openImageInModal(item)" class="step-image" alt="Inspiration Img" />
     <div *ngIf="isExtension(item, '.pdf')" (click)="downloadFile(item)" title="Download file" class="document-wrapper step-image text-center pt-6">
         <ion-icon class="text-7xl document-icon" name="document-text-outline"></ion-icon>
@@ -61,24 +61,25 @@
   </div>
 </div>
 
-<div class="flex justify-between items-center mb-6">
-  <p class="text-black-2 text-2xl font-medium">{{'CLIENT-REQ.info' | translate}}</p>
-</div>
-<div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4 mb-10">
-  <div class="h-[130px] lg:h-[180px]">
-    <img class="step-image" alt="Additional Img" src="../../../../assets/images/profile-img.png"/>
-    <p class="text-black-2 text-2xl font-medium mt-2">{{'CLIENT-REQ.shape' | translate}}</p>
+<div *ngIf="client.moodboard" class="mb-[80px]">
+  <div class="flex justify-between items-center mb-6">
+    <p class="text-black-2 text-2xl font-medium">{{'CLIENT-REQ.info' | translate}}</p>
   </div>
-</div>
+  <div class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4 mb-10">
+    <div class="h-[200px] w-[200px] border-[1px] border-black rounded-2xl bg-light">
+      <img class="step-image p-2" alt="Additional Img" [src]="shape"/>
+      <p class="text-black-2 text-2xl font-medium mt-2">{{'CLIENT-REQ.shape' | translate}}</p>
+    </div>
+  </div>
 
-<div class="flex grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4">
-  <div class="profile-input w-full">
-    <span class="text-sm text-black-2">{{'CLIENT-REQ.area' | translate}}</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light"></ion-input>
-  </div>
-  <div class="profile-input w-full">
-    <span class="text-sm text-black-2">{{'CLIENT-REQ.budget' | translate}}</span>
-    <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light"></ion-input>
+  <div class="flex grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid gap-4">
+    <div class="profile-input w-full">
+      <span class="text-sm text-black-2">{{'CLIENT-REQ.area' | translate}}</span>
+      <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light" [disabled]="true">{{client.moodboard.roomDetails.size}}</ion-input>
+    </div>
+    <div class="profile-input w-full">
+      <span class="text-sm text-black-2">{{'CLIENT-REQ.budget' | translate}}</span>
+      <ion-input type="text" class="border rounded-2xl h-14 border-black-2 !bg-light" [disabled]="true">{{budget}}</ion-input>
+    </div>
   </div>
 </div>
-

@@ -1,5 +1,5 @@
 .step-image {
-  @apply object-cover h-full w-full rounded-2xl hover:shadow-lg hover:opacity-80 cursor-pointer shadow;
+  @apply object-cover h-full w-full rounded-2xl shadow;
 }
 
 @media (max-width: 768px) {
@@ -19,4 +19,8 @@
 
 .profile-input {
   @apply mt-2 mx-2 flex-1
+}
+
+ion-input {
+  padding-left: 10px !important;
 }

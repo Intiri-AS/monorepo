@@ -5,10 +5,10 @@
       <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clients'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()" class="swiper-no-swiping">
-        <ion-slide>
+        <ion-slide class="md:px-[20px]">
           <app-admin-clients></app-admin-clients>
         </ion-slide>
-        <ion-slide>
+        <ion-slide class="md:px-[20px]">
           <app-admin-inspiration></app-admin-inspiration>
         </ion-slide>
       </ion-slides>

@@ -35,12 +35,12 @@
           <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2">{{item.name}} </p>
           <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
         </ion-col>
-        <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
+        <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0 cursor-pointer" [class.bigger-margin]="item.name">
+          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
           <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.name}} </p>
         </ion-col>
-        <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" class="step-image" alt="style-img"/>
+        <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0 cursor-pointer" [class.bigger-margin]="item.name">
+          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
           <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px]">{{item.name}} </p>
         </ion-col>
       </ion-row>

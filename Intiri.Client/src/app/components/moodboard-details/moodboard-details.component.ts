@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { Moodboard } from 'src/app/models/moodboard.model';
+import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -40,7 +41,9 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {}
 
@@ -54,6 +57,16 @@ export class MoodboardDetailsComponent implements OnInit {
 
   prev() {
     this.slides.slidePrev();
+  }
+
+  async openImageInModal(image) {
+    const modal = await this.modalController.create({
+      component: OpenFileModalComponent,
+      componentProps: {file: image},
+      cssClass: 'open-file-modal-css'
+    });
+
+    await modal.present();
   }
 
 }

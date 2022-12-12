@@ -25,7 +25,6 @@ export class ProjectsPage implements OnInit {
     this.spinner.show();
     this.projectService.getAllProjects().subscribe(res => {
       this.projects = res;
-      console.log(this.projects)
       this.spinner.hide();
     });
   }
