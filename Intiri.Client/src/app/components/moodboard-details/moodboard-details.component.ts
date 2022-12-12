@@ -60,7 +60,6 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   async openImageInModal(image) {
-    console.log(image);
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
       componentProps: {file: image},
