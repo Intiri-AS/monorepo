@@ -24,3 +24,11 @@ ion-col {
   text-align: left;
   width: 100% !important;
 }
+
+.important-fix {
+  @apply h-[113px] lg:h-[155px] w-full object-cover #{!important}
+}
+
+.important-fix-2 {
+  @apply h-[235px] lg:h-[318px] w-full object-cover #{!important}
+}
