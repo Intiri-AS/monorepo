@@ -456,6 +456,7 @@
     "phone": "Invalid phone number!",
     "phone-req": "Phone is required!",
     "phone-format": "Invalid phone format!",
+    "email-format": "Invalid email format!",
     "image": "Image required!",
     "first-name": "First name is required!",
     "last-name": "Last name is required!",
