@@ -16,10 +16,10 @@ export class OpenFileModalComponent implements OnInit {
   canDelete;
   isRemoving = false;
 
-  constructor( 
-    private modalController: ModalController, 
-    private projectService: ProjectService, 
-    private notifier: NotifierService,  
+  constructor(
+    private modalController: ModalController,
+    private projectService: ProjectService,
+    private notifier: NotifierService,
     private spinner: NgxSpinnerService,
     private translate: TranslateService
     ) { }
@@ -27,7 +27,12 @@ export class OpenFileModalComponent implements OnInit {
   ngOnInit() {}
 
   downloadFile() {
-    const sourceSplit = this.file.url.split('/upload/');
+    let sourceSplit;
+    if (this.file.url) {
+      sourceSplit = this.file.url.split('/upload/');
+    } else if (this.file.imagePath) {
+      sourceSplit = this.file.imagePath.split('/upload/');
+    }
     const source = sourceSplit[0] + '/upload/fl_attachment/' + sourceSplit[1];
     const fileName = source.split('/').pop();
     const el = document.createElement('a');

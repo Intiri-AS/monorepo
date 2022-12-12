@@ -417,8 +417,8 @@ namespace Intiri.API.Controllers
 			}
 			catch (Exception ex)
 			{
-				string message = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-				return BadRequest($"Faild to delete user: {message}");
+				_logger.LogError(ex, "An error occurred during user deletion");
+				return BadRequest($"Faild to delete user.");
 			}
 
 			// delete all user cloudinary files

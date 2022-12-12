@@ -6,7 +6,7 @@
       <p class="main-title mb-[30px]">{{'DASHBOARD.clients' | translate}}</p>
       <app-sub-header [menu]="'clientList'" [activeTitle]="currentSlide" [slider]="true" (changeSlide)="changeSlide($event)"></app-sub-header>
       <ion-slides #slides [options]="options" (ionSlideDidChange)="onSlideChange()" class="swiper-no-swiping">
-        <ion-slide>
+        <ion-slide class="px-[20px]">
           <div class="w-full h-full mt-5">
             <ion-row class="gap-x-[1.45%]">
               <ion-col *ngFor="let user of clients" size="12" size-sm="5.75" size-xl="2.25" [hidden]="!user.phoneNumber">

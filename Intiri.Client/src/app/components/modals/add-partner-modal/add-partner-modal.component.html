@@ -21,11 +21,8 @@
               <div class="phone-input">
                 <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
                 <ion-select class="" interface="popover" [(ngModel)]="partner.countryCode" formControlName="code">
-                  <ion-select-option value="45">+45</ion-select-option>
-                  <ion-select-option value="46">+46</ion-select-option>
                   <ion-select-option value="47">+47</ion-select-option>
                   <ion-select-option value="381">+381</ion-select-option>
-                  <ion-select-option value="382">+382</ion-select-option>
                 </ion-select>
               </div>
               <div class="profile-input">
@@ -43,7 +40,7 @@
               <span class="text-sm text-black-2">{{'COMMON.email' | translate}}</span>
               <ion-input [(ngModel)]="partner.email" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="email"></ion-input>
               <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.required">{{'VALIDATION.field' | translate}}</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.pattern">{{'VALIDATION.phone-format' | translate}}</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && emailErrors?.pattern">{{'VALIDATION.email-format' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -123,14 +120,14 @@
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PARTNERS.contact-firstName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && contactFirstNameErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && contactFirstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
           <ion-col>
             <div class="profile-input">
               <span class="text-sm text-black-2">{{'PARTNERS.contact-lastName' | translate}}</span>
               <ion-input [(ngModel)]="partnerContact.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && contactLastNameErrors?.required">Field Required!</span>
+              <span class="ion-warning" *ngIf="isFormSubmited && contactLastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
           </ion-col>
         </ion-row>
@@ -140,18 +137,15 @@
               <div class="phone-input">
                 <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
                 <ion-select class="" interface="popover" [(ngModel)]="partnerContact.countryCode" formControlName="code">
-                  <ion-select-option value="45">+45</ion-select-option>
-                  <ion-select-option value="46">+46</ion-select-option>
                   <ion-select-option value="47">+47</ion-select-option>
                   <ion-select-option value="381">+381</ion-select-option>
-                  <ion-select-option value="382">+382</ion-select-option>
                 </ion-select>
               </div>
               <div class="profile-input">
                 <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
                 <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="partnerContact.phoneNumber" formControlName="phone"></ion-input>
-                <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.required">Field Required!</span>
-                <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.pattern">Invalid Phone Format!</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
+                <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.pattern">{{'VALIDATION.phone-format' | translate}}</span>
               </div>
             </section>
           </ion-col>

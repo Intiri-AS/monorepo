@@ -456,6 +456,7 @@
     "phone": "Ugyldig telefonnummer!",
     "phone-req": "Telefon er påkrevd!",
     "phone-format": "Ugyldig telefonformat!",
+    "email-format": "Ugyldig e-postformat!",
     "image": "Bilde kreves!",
     "first-name": "Fornavn er påkrevd!",
     "last-name": "Etternavn er påkrevd!",

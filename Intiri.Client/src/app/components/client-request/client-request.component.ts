@@ -14,12 +14,38 @@ export class ClientRequestComponent implements OnInit {
   @Input() includeClientDetails: boolean = false;
   screenWidth: any;
 
-  constructor(private modalController: ModalController, private router: Router) { }
+  budget: any = "";
+  shape: any = "";
+
+  constructor(
+    private modalController: ModalController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.screenWidth = window.innerWidth;
     if (this.client.clientInspirations) {
       this.client.clientInspirations = this.client.clientInspirations.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
+    }
+    if (this.client.moodboard) {
+      if (this.client.moodboard.roomDetails.budgetRate === 1) {
+        this.budget = "Low"
+      } else if (this.client.moodboard.roomDetails.budgetRate === 2) {
+        this.budget = "Medium"
+      } else if (this.client.moodboard.roomDetails.budgetRate === 3) {
+        this.budget = "High"
+      }
+      if (this.client.moodboard.roomDetails.shape) {
+        if (this.client.moodboard.roomDetails.shape === "square") {
+          this.shape = "../../../../assets/icon/square.png";
+        } else if (this.client.moodboard.roomDetails.shape === "rectangular") {
+          this.shape = "../../../../assets/icon/rectangle.png";
+        } else if (this.client.moodboard.roomDetails.shape === "l-shaped") {
+          this.shape = "../../../../assets/icon/l-shape.png";
+        }
+      } else {
+        this.shape = this.client.moodboard.roomDetails.sketchUrl;
+      }
     }
   }
 
