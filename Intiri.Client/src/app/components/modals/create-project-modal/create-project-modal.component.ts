@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
+import { CraftsmanService } from 'src/app/services/craftsman.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class CreateProjectModalComponent implements OnInit {
     private modalController: ModalController, 
     private projectService: ProjectService, 
     private router: Router, 
-    private nav: NavController
+    private nav: NavController,
+    private craftsmanService: CraftsmanService
     ) { }
 
   ngOnInit() {}
@@ -60,6 +62,13 @@ export class CreateProjectModalComponent implements OnInit {
   goToBookDesigner() {
     this.dismiss();
     this.nav.navigateRoot('/book-designer');
+  }
+
+  goToCraftsmanPage() {
+    const roomIndex =  this.project.projectMoodboards[this.project.projectMoodboards.length - 1].room.name.toLowerCase().replace(/ /g,'');
+    // solution to bypass popup blocker
+    let newWindow = window.open();
+    newWindow.location.href = this.craftsmanService.getCraftsmanUrl(roomIndex);
   }
 
 }
