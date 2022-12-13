@@ -14,7 +14,7 @@
                 <p class="text-3xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
               </div>
               <div class="flex justify-between items-center cursor-default sm:w-[48%] lg:w-[32%]" >
-                <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{projects[projects.length-1].name}}</p>
+                <p class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{projects[projects.length-1].name}}</p>
                 <ion-button fill="clear" class="primary-btn-responsive !bg-none !px-1" routerLink="/project-details/{{projects[projects.length-1].id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
               </div>
               <div>
@@ -59,7 +59,7 @@
                       </ion-row>
                       <ion-row>
                         <div class="flex items-center justify-between pt-2 cursor-default w-full mt-3 mac:mt-0">
-                          <p class="text-black-2 text-lg xl:text-2xl font-medium min-w-[45px]">{{project.name}}</p>
+                          <p class="text-black-2 text-lg xl:text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{project.name}}</p>
                           <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
                         </div>
                         <div class="w-full text-left">
@@ -90,7 +90,7 @@
                       </ion-row>
                       <ion-row>
                         <div class="flex items-center justify-between w-full pt-2 cursor-default mt-3 mac:mt-0">
-                          <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
+                          <p class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
                           <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/moodboard-details/{{moodboard.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
                         </div>
                         <div>
