@@ -11,11 +11,11 @@ ion-col {
 }
 
 .card {
-    @apply rounded-2xl h-[200px]
+    @apply rounded-2xl h-[180px]
 }
 
 .step-icon-wrapper {
-    @apply h-[93%] rounded-2xl bg-light pt-[50px] 
+    @apply h-full rounded-2xl bg-light pt-[50px]
 }
 
 .step-icon {

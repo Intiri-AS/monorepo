@@ -18,6 +18,9 @@ export class MoodboardsPage implements OnInit {
   styles$ = this.styleService.styles$;
   searchText: any;
 
+  private selectedStyleNames: any[] = [];
+  private selectedTypes: any[] = [];
+
   constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
@@ -42,10 +45,31 @@ export class MoodboardsPage implements OnInit {
   }
 
   onFilterChange(event){
-    const selectedStyleNames = event.detail.value;
+    this.selectedStyleNames = event.detail.value;
     this.moodboards$.pipe(take(1)).subscribe(moodboards => {
-      if(selectedStyleNames.length > 0) {
-        this.moodboards = moodboards.filter(moodboard => selectedStyleNames.includes(moodboard.style.name));  
+      if (this.selectedStyleNames.length > 0 && this.selectedTypes.length > 0) {
+        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+        if (this.selectedTypes.length == 2) {
+          this.moodboards = this.moodboards;
+        } else {
+          if (this.selectedTypes.includes('Template Moodboards')) {
+            this.moodboards = this.moodboards.filter(moodboard => moodboard.isTemplate);
+          } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
+            this.moodboards = this.moodboards.filter(moodboard => !moodboard.isTemplate);
+          }
+        }
+      } else if (this.selectedStyleNames.length > 0 && this.selectedTypes.length == 0) {
+        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+      } else if (this.selectedStyleNames.length == 0 && this.selectedTypes.length > 0) {
+        if (this.selectedTypes.length == 2) {
+          this.moodboards = moodboards;
+        } else {
+          if (this.selectedTypes.includes('Template Moodboards')) {
+            this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+          } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
+            this.moodboards = moodboards.filter(moodboard => !moodboard.isTemplate);
+          }
+        }
       } else {
         this.moodboards = moodboards;
       }
@@ -53,15 +77,30 @@ export class MoodboardsPage implements OnInit {
   }
 
   onTypeFilterChange(event){
-    const selectedTypes = event.detail.value;
+    this.selectedTypes = event.detail.value;
     this.moodboards$.pipe(take(1)).subscribe(moodboards => {
-      if(selectedTypes.length > 0) {
-        this.moodboards = []
-        if(selectedTypes.includes('Template Moodboards')) {
-          this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+      if (this.selectedStyleNames.length > 0 && this.selectedTypes.length > 0) {
+        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+        if (this.selectedTypes.length == 2) {
+          this.moodboards = this.moodboards;
+        } else {
+          if (this.selectedTypes.includes('Template Moodboards')) {
+            this.moodboards = this.moodboards.filter(moodboard => moodboard.isTemplate);
+          } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
+            this.moodboards = this.moodboards.filter(moodboard => !moodboard.isTemplate);
+          }
         }
-        if(selectedTypes.includes('Non-Template Moodboards')) {
-          this.moodboards = [...this.moodboards, ...moodboards.filter(moodboard => !moodboard.isTemplate)];
+      } else if (this.selectedStyleNames.length > 0 && this.selectedTypes.length == 0) {
+        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+      } else if (this.selectedStyleNames.length == 0 && this.selectedTypes.length > 0) {
+        if (this.selectedTypes.length == 2) {
+          this.moodboards = moodboards;
+        } else {
+          if (this.selectedTypes.includes('Template Moodboards')) {
+            this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+          } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
+            this.moodboards = moodboards.filter(moodboard => !moodboard.isTemplate);
+          }
         }
       } else {
         this.moodboards = moodboards;
