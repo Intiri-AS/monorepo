@@ -15,16 +15,16 @@
             <ion-grid class="border shadow-1 rounded-2xl">
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img src="{{project.projectMoodboards[0].style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{project.projectMoodboards[0].style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-cover" alt="moodboard-img"/>
+                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <img src="{{project.projectMoodboards[0].style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-cover" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
             <div class="flex items-center justify-between cursor-default mt-3 mac:mt-0" >
-              <p class="text-black-2 text-2xl font-medium min-w-[45px]">{{project.name}}</p>
+              <p class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{project.name}}</p>
               <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
               <!-- <ion-button fill="clear" class="text-black" (click)="goToMoodboardDetails(mb)">
                 <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
