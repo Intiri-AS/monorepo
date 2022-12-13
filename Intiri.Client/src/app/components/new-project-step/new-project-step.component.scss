@@ -12,7 +12,7 @@
 
 .moodboard-item-wrapper {
   @extend .step-item-wrapper;
-  @apply h-[230px] lg:h-[310px] border shadow-1;
+  @apply h-[230px] lg:h-[310px] border shadow-1 mb-12;
 }
 
 .selected-item {
@@ -32,7 +32,7 @@
 }
 
 .step-color-wrapper {
-  @apply h-[87%] rounded-2xl m-2 p-3 shadow-1;
+  @apply h-[87%] rounded-2xl m-1 p-3 shadow-1;
 }
 
 .step-icon {
