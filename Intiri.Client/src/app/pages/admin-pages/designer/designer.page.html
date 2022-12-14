@@ -33,7 +33,7 @@
             <ion-col *ngFor="let designer of designers | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
                 <div class="designer">
                     <div class="mt-6 mb-0 flex flex-1 justify-center">
-                        <img [src]="designer.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
+                        <img [src]="designer.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-2xl object-fill " alt="Profile Img"/>
                     </div>
                     <div class="absolute top-[12px] right-[12px]">
                         <button (click)="showSettings($event, designer)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">

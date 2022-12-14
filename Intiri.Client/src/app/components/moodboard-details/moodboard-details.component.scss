@@ -10,11 +10,11 @@
 }
 
 .step-image {
-  @apply object-cover h-full w-full rounded-2xl;
+  @apply object-fill h-full w-full rounded-2xl;
 }
 
 img {
-  @apply h-full w-full object-cover;
+  @apply h-full w-full object-fill;
 }
 
 p {

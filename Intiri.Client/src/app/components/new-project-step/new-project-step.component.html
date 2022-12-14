@@ -54,7 +54,7 @@
             <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
             <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
           </div>
-          <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-1 h-full w-full" alt="roomImg" />
+          <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="roomImg" />
         </div>
         <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
       </label>
@@ -82,11 +82,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{item.style.styleImages[2].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-full object-cover w-full" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[2].imagePath}}" class="h-full object-fill w-full" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -103,11 +103,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
-                  <img src="{{item.materials[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{item.products[1].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{item.materials[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                  <img src="{{item.products[1].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="6">
-                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-full w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{item.style.styleImages[1].imagePath}}" class="h-full w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>

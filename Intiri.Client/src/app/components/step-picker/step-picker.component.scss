@@ -3,7 +3,7 @@
 }
 
 .new-project-step {
-  @apply flex flex-col w-full min-h-[120px] h-full justify-center items-center cursor-pointer text-primary hover:opacity-70;
+  @apply flex flex-col w-full min-h-[120px] xl-ion:min-h-min h-full justify-center items-center cursor-pointer text-primary hover:opacity-70;
 }
 
 .disabled {

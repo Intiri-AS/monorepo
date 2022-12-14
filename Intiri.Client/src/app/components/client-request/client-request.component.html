@@ -3,7 +3,7 @@
 <ion-card *ngIf="includeClientDetails && screenWidth > 970" class="border shadow-1 rounded-2xl w-full h-auto mb-8 mx-0 p-4 bg-light request-card" >
   <ion-grid>
     <ion-row>
-      <ion-col size="2"><img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-full object-cover"></ion-col>
+      <ion-col size="2"><img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] rounded-full object-fill"></ion-col>
       <ion-col size="2">
         <p class="text-lg text-black-1 font-medium ">{{client?.firstName}} {{client?.lastName}}</p>
         <p class="text-base text-black-2 mt-[5px]">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
@@ -25,7 +25,7 @@
 </ion-card>
 <!-- Client request card (small screen) -->
 <ion-card *ngIf="includeClientDetails && screenWidth <= 970" class="border shadow-1 rounded-2xl w-full mb-8 mx-0 py-4 bg-light request-card text-center" >
-  <img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] text-center mx-auto rounded-full object-cover mb-4">
+  <img [src]="client?.photoPath || '../../../assets/images/profile-img.png'" class="w-[70px] h-[70px] text-center mx-auto rounded-full object-fill mb-4">
   <div>
     <p class="text-lg text-black-1 font-medium mb-4">{{client?.firstName}} {{client?.lastName}}</p>
     <p class="text-base text-black-2 mt-[5px] mb-4">+{{client?.countryCode}}{{client?.phoneNumber}}</p>
