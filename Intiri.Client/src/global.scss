@@ -210,7 +210,7 @@ ion-toolbar {
 }
 
 .header-profile-img {
-  @apply object-cover rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
+  @apply object-fill rounded-xl h-[45px] w-[45px] mr-4 hover:opacity-80;
 }
 
 .selected-border {

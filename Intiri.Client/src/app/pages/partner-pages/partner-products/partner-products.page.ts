@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { MenuPopoverComponent } from 'src/app/components/menu-popover/menu-popover.component';
 import { AddProductModalComponent } from 'src/app/components/modals/add-product-modal/add-product-modal.component';
@@ -14,13 +14,15 @@ import { PartnerService } from 'src/app/services/partner.service';
   styleUrls: ['./partner-products.page.scss'],
 })
 
-export class PartnerProductsPage implements OnInit {
+export class PartnerProductsPage implements OnInit, OnDestroy {
 
   products$: Observable<any> = this.partnerService.products$;
   material$: Observable<any> = this.materialService.materials$;
   products: any[];
   productTypes: any[];
   searchText: any;
+
+  private subscriptions: Subscription[] = [];
 
   constructor(public popoverController: PopoverController,
               private partnerService: PartnerService,
@@ -29,12 +31,20 @@ export class PartnerProductsPage implements OnInit {
 
   ngOnInit() {
     this.partnerService.getPartnerProducts();
-    this.partnerService.getProductsType().subscribe((res: any[]) => {
-      this.productTypes = res;
-    });
-    this.products$.subscribe( response => {
-      this.products = response;
-    });
+    this.subscriptions.push(
+      this.partnerService.getProductsType().subscribe((res: any[]) => {
+        this.productTypes = res;
+      })
+    );
+    this.subscriptions.push(
+      this.products$.subscribe( response => {
+        this.products = response;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
 

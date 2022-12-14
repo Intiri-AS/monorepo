@@ -26,9 +26,9 @@ ion-col {
 }
 
 .important-fix {
-  @apply h-[113px] lg:h-[155px] w-full object-cover #{!important}
+  @apply h-[113px] lg:h-[155px] w-full object-fill #{!important}
 }
 
 .important-fix-2 {
-  @apply h-[235px] lg:h-[318px] w-full object-cover #{!important}
+  @apply h-[235px] lg:h-[318px] w-full object-fill #{!important}
 }

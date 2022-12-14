@@ -143,7 +143,7 @@
               </div>
               <div class="profile-input">
                 <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-                <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="partnerContact.phoneNumber" formControlName="phone"></ion-input>
+                <ion-input type="text" class="border rounded-2xl h-14 border-black-2" maxlength="8" [(ngModel)]="partnerContact.phoneNumber" formControlName="phone"></ion-input>
                 <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
                 <span class="ion-warning" *ngIf="isFormSubmited && contactPhoneErrors?.pattern">{{'VALIDATION.phone-format' | translate}}</span>
               </div>

@@ -15,7 +15,7 @@
                 <p class="text-2xl text-black-2 font-medium mt-[15px]">{{designer.firstName}} {{designer.lastName}}</p>
                 <p class="text-lg text-black-3">{{designer.createdMoodboards.length}} {{'BOOK-DESIGNER-PROFILE.projects' | translate}}</p>
                 <p class="text-lg text-black-2 px-[30px] xl:px-[60px] mt-[30px]">
-                  {{(showMore) ? designerText : designerText | slice:0:200}} <span *ngIf="!showMore">...</span> 
+                  {{(showMore) ? designerText : designerText | slice:0:200}} <span *ngIf="!showMore">...</span>
                   <a href="javascript:;" *ngIf="!showMore" (click)="showMore=true">{{'COMMON.show-more' | translate}}</a>
                   <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui. Maecenas congue vel leo ac feugiat. -->
                   <br>
@@ -47,11 +47,11 @@
                     <ion-grid>
                       <ion-row>
                         <ion-col size="4.5" class="!p-3 !pr-2">
-                          <img [src]="getMoodboardImage(mb, 0) || '../../../../assets/images/landing-img.png'" class="h-[113px] lg:h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                          <img [src]="getMoodboardImage(mb, 1) || '../../../../assets/images/landing-img.png'" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
+                          <img [src]="getMoodboardImage(mb, 0) || '../../../../assets/images/landing-img.png'" class="h-[113px] lg:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                          <img [src]="getMoodboardImage(mb, 1) || '../../../../assets/images/landing-img.png'" class="h-[113px] lg:h-[155px] w-full object-fill" alt="moodboard-img"/>
                         </ion-col>
                         <ion-col size="7.5" class="!p-3 !pl-0">
-                          <img [src]="getMoodboardImage(mb, 2) || '../../../../assets/images/landing-img.png'" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                          <img [src]="getMoodboardImage(mb, 2) || '../../../../assets/images/landing-img.png'" class="h-[235px] lg:h-[318px] w-full object-fill" alt="moodboard-img"/>
                         </ion-col>
                       </ion-row>
                     </ion-grid>
