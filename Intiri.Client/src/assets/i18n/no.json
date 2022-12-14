@@ -15,7 +15,7 @@
   "SMS": {
     "create": "Opprett konto",
     "code": "6-sifret kode",
-    "sms-msg": "En sms med 6-sifret verifiseringskode er sent til din telefon .",
+    "sms-msg": "En sms med 6-sifret verifiseringskode er sendt til din telefon .",
     "proceed": "Fortsett til Intiri",
     "again": "Send igjen"
   },
@@ -46,7 +46,7 @@
     "news": "Intiri nyheter",
     "latest-project": "Siste prosjekt",
     "all-projects": "Alle prosjekter",
-    "inspirations": "Inspirasjon og Mitt hjem",
+    "inspirations": "Inspirasjon og mine bilder",
     "see-all": "Se alle",
     "offers": "Tilbud",
     "logout-text": "Er du sikker på at du vil logge ut fra Intiri?",
@@ -171,7 +171,9 @@
     "products": "Produkter",
     "edit-select-color": "Velg farger",
     "edit-select-materials": "Velg materialer",
+    "edit-select-materials-text": "Du må velge 4 materialer for ditt stilforslag.",
     "edit-select-products": "Velg produkter",
+    "edit-select-products-text": "Du må velge 2 produkter for ditt stilforslag.",
     "premium-content": "Premium innhold",
     "see-all-free": "Se alt gratis",
     "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem."
@@ -332,7 +334,7 @@
     "contact-added-text": "Kontakt lagt til suksessfullt.",
     "go-to": "Gå til Samarbeidspartnere",
     "product-added": "Producte lagt til!",
-    "product-added-text": "Producte lagt til suksessfullt.",
+    "product-added-text": "Producte lagt til med suksess.",
     "go-to-products": "Gå til produkter",
     "product": "Produkt"
   },
@@ -436,7 +438,7 @@
   "COMMON-MODAL": {
     "style": "stil",
     "designer": "designer",
-    "client": "klient",
+    "client": "kunde",
     "color": "farge",
     "partner": "partner",
     "product": "produkt",
@@ -446,9 +448,9 @@
     "current-picture": "Gjeldende bilde",
     "new-picture": "Nytt bilde",
     "partner-contact": "partnerkontakt",
-    "edit-title": "Redigere  {{name}}",
-    "remove-title": "Fjern  {{name}}",
-    "remove-text": "Er du sikker på at du vil fjerne denne {{name}}? Handlingen kan ikke omgjøres!"
+    "edit-title": "Redigere {{name}}",
+    "remove-title": "Slett {{name}}",
+    "remove-text": "Er du sikker på at du vil slette {{name}}? Handlingen kan ikke reverseres!"
   },
   "VALIDATION": {
     "field": "Felt kreves!",
@@ -520,7 +522,7 @@
     "moodboard-updated": "Moodboard oppdatert vellykket.",
     "moodboard-created": "Moodboard er blitt opprettet.",
     "moodboard-created-error": "Kan ikke redde Moodboard!",
-    "consultation-updated": "Konsultasjoner informasjon oppdatert vellykket.",
+    "consultation-updated": "Informasjon oppdatert med suksess.",
     "consultation-updated-error": "Kan ikke redde humørbrett!",
     "consultation-get-error": "Kan ikke få konsultasjonsinfo!",
     "template-added": "lagt til maler med hell",

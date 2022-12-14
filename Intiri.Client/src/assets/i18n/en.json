@@ -46,7 +46,7 @@
     "news": "Intiri news",
     "latest-project": "Latest project",
     "all-projects": "All projects",
-    "inspirations": "Inspirations and My home",
+    "inspirations": "Inspiration and my photos",
     "see-all": "See all",
     "offers": "Offers",
     "logout-text": "Are you sure you want to log out of Intiri?",
@@ -171,7 +171,9 @@
     "products": "Products",
     "edit-select-color": "Select colors",
     "edit-select-materials": "Select materials",
+    "edit-select-materials-text": "You have to keep 4 materials in your moodboard.",
     "edit-select-products": "Select products",
+    "edit-select-products-text": "You have to keep 2 products in your moodboard.",
     "premium-content": "Premium content",
     "see-all-free": "See all for free",
     "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member."
@@ -436,7 +438,7 @@
   "COMMON-MODAL": {
     "style": "style",
     "designer": "designer",
-    "client": "client",
+    "client": "customer",
     "color": "color",
     "partner": "partner",
     "product": "product",
@@ -447,8 +449,8 @@
     "new-picture": "New image",
     "partner-contact": "partner contact",
     "edit-title": "Edit {{name}}",
-    "remove-title": "Remove {{name}}",
-    "remove-text": "Are you sure that you want to remove this {{name}}? This action cannot be undone."
+    "remove-title": "Delete {{name}}",
+    "remove-text": "Are you sure that you want to delete this {{name}}? This action cannot be undone."
   },
   "VALIDATION": {
     "field": "Field required!",
