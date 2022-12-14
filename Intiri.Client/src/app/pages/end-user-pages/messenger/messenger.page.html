@@ -20,7 +20,7 @@
                 <li *ngFor="let user of contacts | filter:searchText">
                   <div [class.bg-light]="activeChatUser.id === user.id" class="py-3 mb-1 px-2 rounded-md hover:bg-light flex justify-between cursor-pointer" (click)="changeChat(user)">
                     <div class="flex" >
-                      <img [src]="user.photoPath ? user.photoPath : '../../../assets/images/profile-img.png'" class="w-[57px] h-[57px] rounded-lg object-cover" alt="Profile Img"/>
+                      <img [src]="user.photoPath ? user.photoPath : '../../../assets/images/profile-img.png'" class="w-[57px] h-[57px] rounded-lg object-fill" alt="Profile Img"/>
                       <div class="ml-3.5 w-[170px]">
                         <p class="text-black-1 leading-5 font-semibold">{{user.firstName}} {{user.lastName}}</p>
                         <p class="text-black-3 size-[15px] leading-5 text-clamp">{{user.lastMessageContent}}</p>
@@ -42,7 +42,7 @@
             <div [class]="ratePrompt ? 'blur pointer-events-none' : ''">
             <div class="bg-light xl-ion:h-[682px] rounded-lg text-center pb-8">
               <div class="flex py-[22px] pl-[18px] border-b border-secondary">
-                <img [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'" class="w-[45px] h-[45px] rounded-lg object-cover" alt="Profile Img"/>
+                <img [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'" class="w-[45px] h-[45px] rounded-lg object-fill" alt="Profile Img"/>
                 <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">{{activeChatUser.firstName}} {{activeChatUser.lastName}}</p>
               </div>
               <div class="chat" id="chatbox">

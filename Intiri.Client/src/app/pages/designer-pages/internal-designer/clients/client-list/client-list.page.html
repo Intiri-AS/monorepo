@@ -12,7 +12,7 @@
               <ion-col *ngFor="let user of clients" size="12" size-sm="5.75" size-xl="2.25" [hidden]="!user.phoneNumber">
                 <div *ngIf="user.phoneNumber" [class]="user.moodboardStyle && !user.moodboardOfferId ? 'client hover:opacity-80 cursor-pointer' : 'client'" [routerLink]="user.moodboardStyle && !user.moodboardOfferId ? ['/client-request/' + user.consultationId] : []" routerDirection="root">
                   <div class="flex flex-1 justify-center pt-3 mt-2">
-                    <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-cover " alt="Profile Img"/>
+                    <img [src]="user?.photoPath || '../../../assets/images/profile-img.png'" class="!w-[70px] !h-[70px] rounded-2xl object-fill " alt="Profile Img"/>
                   </div>
                   <div class="mt-2 mb-0 text-center px-2">
                       <p class="text-black-2 leading-8 font-semibold text-lg lg:text-xl xll:text-2xl text-clamp-2" title="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</p>
@@ -89,7 +89,7 @@
                           <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=4"></ion-icon>
                           <ion-icon name="star" class="h-8 w-8 text-light" [class.!text-secondary]="star>=5"></ion-icon>
                         </div>
-                        <p class="font-bold text-[65px] text-black mt-[10px]">{{rating}}</p>
+                        <p class="font-bold text-[65px] text-black mt-[10px]">{{rating.toFixed(2)}}</p>
                         <p class="text-black-3 text-lg" *ngIf="numberOfRatings !== 1">{{numberOfRatings}} {{'RATE.ratings' | translate}}</p>
                         <p class="text-black-3 text-lg" *ngIf="numberOfRatings === 1">{{numberOfRatings}} {{'RATE.rating' | translate}}</p>
                       </div>

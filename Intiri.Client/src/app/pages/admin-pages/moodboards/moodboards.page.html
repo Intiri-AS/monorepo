@@ -42,20 +42,20 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img src="{{moodboard.style.styleImages[0]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full mb-2 object-cover" alt="moodboard-img"/>
-                  <img src="{{moodboard.style.styleImages[1]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[0]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[1]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
                   <div *ngIf="moodboard.isTemplate" class="h-[30px] w-[70px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[22px] top-[20px] shadow-sm">
                     <p class="text-black-1 text-sm">{{'MOODBOARDS.template' | translate}}</p>
                   </div>
-                  <img src="{{moodboard.style.styleImages[2]?.imagePath}}" class="h-[235px] lg:h-[318px] w-full object-cover" alt="moodboard-img"/>
+                  <img src="{{moodboard.style.styleImages[2]?.imagePath}}" class="h-[235px] lg:h-[318px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </div>
           <div class="flex">
-            <img src="../../../assets/images/profile-img.png" class="w-[30ppx] h-[30px] rounded object-cover "
+            <img src="../../../assets/images/profile-img.png" class="w-[30ppx] h-[30px] rounded object-fill "
               alt="Profile Img" />
             <p class="text-black-2 font-semibold my-[3px] mx-2 text-xl text-clamp-1">{{moodboard.designer.firstName}} {{moodboard.designer.lastName}}</p>
             <div class="absolute right-[-5px]">

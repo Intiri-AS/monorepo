@@ -1,5 +1,5 @@
 .step-image {
-  @apply object-cover h-full w-full rounded-2xl shadow;
+  @apply object-fill h-full w-full rounded-2xl shadow;
 }
 
 @media (max-width: 768px) {

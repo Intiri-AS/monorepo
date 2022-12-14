@@ -17,6 +17,8 @@ using Intiri.API.Models.Room;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Intiri.API.Models.PolicyNames;
+using Intiri.API.Models.UserLanguage;
+using Microsoft.AspNetCore.Identity;
 
 namespace Intiri.API.Controllers
 {
@@ -224,6 +226,43 @@ namespace Intiri.API.Controllers
 			}
 
 			return BadRequest("Problem adding partner logo.");
+		}
+
+		[Authorize(Policy = PolicyNames.AdminPolicy)]
+		[HttpPatch("updatePartner/{partnerId}")]
+		public async Task<ActionResult<PartnerOutDTO>> UpdatePartner(int partnerId, [FromForm] PartnerInDTO partnerInDTO)
+		{
+			Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
+
+			if (partner == null)
+			{
+				return NotFound();
+			}
+
+			IFormFile logoFile = partnerInDTO.LogoFile;
+			if (logoFile != null && logoFile.Length > 0)
+			{
+				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+
+				if (uploadResult.Item1 != HttpStatusCode.OK)
+				{
+					return BadRequest(uploadResult.Item2);
+				}
+
+				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+				partner.LogoPublicId = uploadResult.Item3.PublicId;
+			}
+
+			_mapper.Map(partnerInDTO, partner);
+			_unitOfWork.PartnerRepository.Update(partner);
+
+			if (await _unitOfWork.SaveChanges())
+			{
+				return _mapper.Map<PartnerOutDTO>(partner);
+			}
+
+			return BadRequest("Failed to update partner.");
 		}
 	}
 }

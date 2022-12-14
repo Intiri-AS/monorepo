@@ -46,7 +46,7 @@
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
-                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="materialImg" />
+                <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="materialImg" />
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>
@@ -135,7 +135,7 @@
           <div class="mt-4 mx-2 px-0 w-fit">
             <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'COMMON-MODAL.current-picture' | translate}}</p>
             <div class="w-[200px] border-2 border-solid rounded-2xl h-[200px] border-primary">
-              <img [src]="item.imagePath" class="object-cover rounded-2xl p-1 h-full w-full" alt="oldImg">
+              <img [src]="item.imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="oldImg">
             </div>
           </div>
         </ion-col>
@@ -148,7 +148,7 @@
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
-                <img *ngIf="imagePath" [src]="imagePath" class="object-cover rounded-2xl p-2 h-full w-full" alt="styleImg" />
+                <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
             </label>

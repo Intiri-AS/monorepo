@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs/operators';
 import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { ShareModalComponent } from 'src/app/components/modals/share-rate-modals/share-modal/share-modal.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
@@ -62,7 +63,7 @@ export class MyIntiriPage {
   addInspiration() {
     this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
       this.projectService.getInspirations();
-      this.projectService.inspirations$.subscribe((res: any[]) => {
+      this.projectService.inspirations$.pipe(take(1)).subscribe((res: any[]) => {
         this.spinner.hide();
         this.inspirations = res;
         this.notifier.show({

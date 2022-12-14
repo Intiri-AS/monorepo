@@ -19,15 +19,17 @@ export class CustomizeMoodboardPage {
 
   steps: Array<object> = [
     {
-      title: 'Select colors',
+      title: 'NEW-PROJECT.edit-select-color',
       data: [],
     },
     {
-      title: 'Select materials',
+      title: 'NEW-PROJECT.edit-select-materials',
+      subtitle: 'NEW-PROJECT.edit-select-materials-text',
       data: [],
     },
     {
-      title: 'Select products',
+      title: 'NEW-PROJECT.edit-select-products',
+      subtitle: 'NEW-PROJECT.edit-select-products-text',
       data: [],
     }
   ];
