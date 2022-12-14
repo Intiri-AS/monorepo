@@ -39,7 +39,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.number" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
+            <ion-input [(ngModel)]="colorPallete.number" type="number" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && numberErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -168,7 +168,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.number" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
+            <ion-input [(ngModel)]="colorPallete.number" type="number" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editNumberErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>

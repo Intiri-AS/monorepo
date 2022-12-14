@@ -7,7 +7,7 @@
         <form [formGroup]="loginForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="login()" autocomplete="off">
           <div class="mt-2">
             <span class="text-sm text-black-2">{{'LOGIN.phone' | translate}}</span>
-            <div class="flex justify-center space-x-1">
+            <div class="flex justify-between w-full">
               <div>
                 <ion-select class="border rounded-2xl border-black-2 h-14 w-24" interface="popover"
                   (ionChange)="setActiveCode($event)" [value]="activeCode">
@@ -21,9 +21,9 @@
                   </ion-select-option>
                 </ion-select>
               </div>
-              <div>
+              <div class="w-full ml-2">
                 <ion-input #phoneNumber formControlName="phoneNumber" name="phoneNumber" maxlength="8"
-                  class="border rounded-2xl h-14 border-black-2 w-72"></ion-input>
+                  class="border rounded-2xl h-14 border-black-2 w-full"></ion-input>
                 <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.required">{{'VALIDATION.phone-req' | translate}}</span>
                 <span class="ion-warning" *ngIf="isFormSubmited && phoneNumberErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
               </div>
