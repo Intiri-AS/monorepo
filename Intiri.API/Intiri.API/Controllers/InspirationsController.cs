@@ -26,6 +26,7 @@ namespace Intiri.API.Controllers
 		private readonly ILogger<InspirationsController> _logger;
 		private readonly IAccountService _accountService;
 		private readonly IMapper _mapper;
+		private readonly int _inspirationLimit = 5;
 
 
 		#endregion Fields
@@ -58,10 +59,15 @@ namespace Intiri.API.Controllers
 		[HttpPost("add")]
 		public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
 		{
-			EndUser clientUser = await _accountService.GetUserByUsernameAsync<EndUser>(User.GetUsername());
-			if (clientUser == null) return Unauthorized("Invalid clent.");
+			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
 
-			if (inFile.Length > 0)
+			if (clientUser == null) 
+				return Unauthorized("Invalid clent.");
+
+			if (clientUser.Inspirations.Count >= _inspirationLimit) 
+				return BadRequest("Inspirations limit is reached.");
+
+			if (inFile != null && inFile.Length > 0)
 			{
 				ImageUploadResult uploadResult = null;
 				try
@@ -70,12 +76,12 @@ namespace Intiri.API.Controllers
 				}
 				catch (Exception ex)
 				{
-					return BadRequest($"Failed to upload user photo: {ex.Message}");
+					return BadRequest($"Failed to upload client inspiration: {ex.Message}");
 				}
 
 				if (uploadResult.Error != null)
 				{
-					return BadRequest($"Failed to upload user photo: {uploadResult.Error.Message}");
+					return BadRequest($"Failed to upload client inspiration: {uploadResult.Error.Message}");
 				}
 
 				Inspiration inspiration = new Inspiration()
@@ -92,7 +98,7 @@ namespace Intiri.API.Controllers
 				}
 			}
 
-			return BadRequest("Problem adding user inspiration.");
+			return BadRequest("Problem adding client inspiration.");
 		}
 
 		[Authorize(Policy = PolicyNames.ClientPolicy)]
