@@ -107,8 +107,8 @@ namespace Intiri.API.Controllers
 			ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
 			if (productType == null) return BadRequest("Product type doesn't exist");
 
-			Material material = await _unitOfWork.MaterialRepository.GetByID(productInDTO.MaterialId);
-			if (material == null) return BadRequest("Material doesn't exist");
+			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(productInDTO.MaterialId);
+			if (materialType == null) return BadRequest("Material type doesn't exist");
 
 
 			if (productType.Products.Any(p => p.Name == productInDTO.Name))
@@ -135,7 +135,7 @@ namespace Intiri.API.Controllers
 				product.ImagePublicId = uploadResult.Item3.PublicId;
 
 				product.ProductType = productType;
-				product.Material =material;
+				product.Material = materialType;
 				product.Partner = partner;
 
 				_unitOfWork.ProductRepository.Insert(product);
@@ -198,9 +198,9 @@ namespace Intiri.API.Controllers
 				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
 			if (productType == null) return BadRequest("Product type doesn't exist");
 
-			Material material = await _unitOfWork.MaterialRepository
+			MaterialType materialType = await _unitOfWork.MaterialTypeRepository
 				.GetByID(productInDTO.MaterialId);
-			if (material == null) return BadRequest("Material doesn't exist");
+			if (materialType == null) return BadRequest("Material type doesn't exist");
 
 			IFormFile imageFile = productInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)
@@ -218,7 +218,7 @@ namespace Intiri.API.Controllers
 			}
 
 			product.ProductType = productType;
-			product.Material = material;
+			product.Material = materialType;
 
 			_unitOfWork.ProductRepository.Update(product);
 

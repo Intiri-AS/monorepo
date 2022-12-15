@@ -179,6 +179,10 @@ namespace Intiri.API.DataAccess
 				.HasForeignKey(r => r.RoomId)
 				.OnDelete(DeleteBehavior.Restrict);
 
+			builder.Entity<Product>()
+				.HasOne(s => s.Partner)
+				.WithMany(p => p.Products)
+				.OnDelete(DeleteBehavior.ClientCascade);
 		}
 	}
 }
