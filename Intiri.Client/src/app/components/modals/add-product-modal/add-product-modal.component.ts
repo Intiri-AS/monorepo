@@ -39,6 +39,7 @@ export class AddProductModalComponent implements OnInit {
 
   colors$ = this.colorService.colors$;
   materials$ = this.materialService.materials$;
+  materialTypes: any = [];
   productsType: any = [];
   materials: any = [];
   colors: any = [];
@@ -92,6 +93,10 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
+    this.materialService.getMaterialTypes().subscribe(res => {
+      this.materialTypes = res;
+      console.log(this.materialTypes);
+    })
     this.partnerService.getProductsType().subscribe( response => {
       this.productsType = response;
     });
@@ -164,7 +169,6 @@ export class AddProductModalComponent implements OnInit {
         message: error.error,
         type: 'error',
       });
-      setTimeout(() => this.dismissModal(), 2000);
     });
   }
 
@@ -210,7 +214,7 @@ export class AddProductModalComponent implements OnInit {
         } else {
           this.partnerService.getProductsFromAllPartners();
         }
-        
+
         this.notifier.show({
           message: this.translate.instant('NOTIFY.product-saved'),
           type: 'success'
