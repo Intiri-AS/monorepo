@@ -29,8 +29,8 @@
         <ion-row class="gap-x-[1.65%]">
           <ion-col *ngFor="let product of products | filter:searchText" size="12" size-sm="5.75" size-xl="2.23">
             <div class="card">
-              <div class="h-full w-full ">
-                <img src="{{product.imagePath}}" class="object-fill rounded-2xl !h-full !w-full" alt="Profile Img" />
+              <div class="h-full w-full bg-white rounded-2xl">
+                <img src="{{product.imagePath}}" class="object-contain !h-full !w-full rounded-2xl" alt="Profile Img" />
               </div>
             </div>
             <div class="flex justify-between">
