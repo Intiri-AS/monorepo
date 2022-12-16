@@ -44,9 +44,9 @@ namespace Intiri.API.DataAccess.SeedData
 			//await SeedColors(unitOfWork);
 			//await SeedStylesImages(unitOfWork);
 			//await SeedRooms(unitOfWork);
-			await SeedMaterials(unitOfWork);
+			//await SeedMaterials(unitOfWork);
 			//await SeedProducts(unitOfWork);
-			await SeedColorPalettes(unitOfWork);
+			//await SeedColorPalettes(unitOfWork);
 			//await SeedMoodboards(unitOfWork);
 			//await SeedProjects(unitOfWork);
 			//await SeedRoomDetails(unitOfWork);
@@ -245,7 +245,7 @@ namespace Intiri.API.DataAccess.SeedData
 			{
 				Product product = products[i];
 				products[i].ProductType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(pt => pt.Id == product.ProductType.Id);
-				product.Material = await unitOfWork.MaterialRepository.GetByID(inDTO[i].MaterialId);
+				product.Material = await unitOfWork.MaterialTypeRepository.GetByID(inDTO[i].MaterialId);
 				product.Partner = partner;
 
 				unitOfWork.ProductRepository.Insert(product);

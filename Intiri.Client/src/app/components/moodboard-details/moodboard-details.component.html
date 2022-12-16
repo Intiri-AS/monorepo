@@ -1,32 +1,32 @@
 <ion-card class="border shadow-1 rounded-2xl w-full  h-[410px] mac:h-[610px] m-0 mt-7 p-4">
       <div class="result-grid">
-        <div class="item-sm" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
-        <div class="item-lg">
-          <img [src]="moodboard.products[0]?.imagePath" class="object-fill"/>
+        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
+        <div class="item-lg border border-light bg-white">
+          <img [src]="moodboard?.style.styleImages[0]?.imagePath" class="object-contain"/>
         </div>
-        <div class="item-lg">
-          <img [src]="moodboard.products[1]?.imagePath" class="object-fill"/>
+        <div class="item-lg border border-light bg-white">
+          <img [src]="moodboard.products[1]?.imagePath" class="object-contain"/>
         </div>
-        <div class="item-lg-tall">
-          <img [src]="moodboard?.style.styleImages[0].imagePath" class="object-fill"/>
+        <div class="item-lg-tall border border-light bg-white">
+          <img [src]="moodboard?.style.imagePath" class="object-contain"/>
         </div>
-        <div class="item-sm" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
-        <div class="item-sm" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
-        <div class="item-sm-tall" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
-        <div class="item-lg">
-          <img [src]="moodboard?.style.styleImages[1]?.imagePath" class="object-fill"/>
+        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
+        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
+        <div class="item-sm-tall border border-light" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
+        <div class="item-lg border border-light bg-white">
+          <img [src]="moodboard.products[0]?.imagePath" class="object-contain"/>
         </div>
-        <div class="item-md">
-          <img [src]="moodboard?.materials[0]?.imagePath" class="object-fill"/>
+        <div class="item-md border border-light">
+          <img [src]="moodboard?.materials[0]?.imagePath" class="object-cover"/>
         </div>
-        <div class="item-md">
-          <img [src]="moodboard?.materials[1]?.imagePath" class="object-fill"/>
+        <div class="item-md border border-light">
+          <img [src]="moodboard?.materials[1]?.imagePath" class="object-cover"/>
         </div>
-        <div class="item-md">
-          <img [src]="moodboard?.materials[2]?.imagePath" class="object-fill"/>
+        <div class="item-md border border-light">
+          <img [src]="moodboard?.materials[2]?.imagePath" class="object-cover"/>
         </div>
-        <div class="item-md">
-          <img [src]="moodboard?.materials[3]?.imagePath" class="object-fill"/>
+        <div class="item-md border border-light">
+          <img [src]="moodboard?.materials[3]?.imagePath" class="object-cover"/>
         </div>
       </div>
   </ion-card>
@@ -52,11 +52,13 @@
           <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
         </ion-col>
         <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image cursor-pointer" alt="style-img"/>
+          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="material-image cursor-pointer" alt="style-img"/>
           <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
         </ion-col>
         <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image cursor-pointer" alt="style-img"/>
+          <div class="w-full h-full bg-white rounded-2xl">
+            <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="product-image cursor-pointer" alt="style-img"/>
+          </div>
           <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
         </ion-col>
       </ion-row>

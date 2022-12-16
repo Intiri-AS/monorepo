@@ -18,19 +18,19 @@
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
             <ion-select interface="popover"  formControlName="productType" class="border rounded-2xl h-14 border-black-2  ">
-              <ion-select-option value="{{productType.id}}" *ngFor="let productType of productsType">{{productType.name}}</ion-select-option>
+              <ion-select-option value="{{productType.id}}" *ngFor="let productType of productsType">{{'PRODUCT-TYPE.' + productType.name | translate}}</ion-select-option>
             </ion-select>
             <div *ngIf="submitted && form.productType.errors" class="invalid-feedback">
               <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*{{'PARTNERS.product-type-required' | translate}}</span>
             </div>
           </div>
           <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">{{'PARTNERS.product-material' | translate}}</span>
+            <span class="text-sm text-black-2">{{'STYLE.material-type' | translate}}</span>
             <ion-select interface="popover"  formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
-            <ion-select-option value="{{material.id}}" *ngFor="let material of materials">{{material.name}}</ion-select-option>
+              <ion-select-option value="{{material.id}}" *ngFor="let material of materialTypes">{{material.name}}</ion-select-option>
             </ion-select>
-            <div *ngIf="submitted && form.productType.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
+            <div *ngIf="submitted && form.productMaterial.errors" class="invalid-feedback">
+              <span slot="error" style="color: red;" *ngIf="form.productMaterial.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
             </div>
 
           </div>
@@ -138,19 +138,19 @@
             <div class="profile-input fixed-width">
               <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
               <ion-select [(ngModel)]="product.productTypeId" interface="popover"  formControlName="productType" class="border rounded-2xl h-14 border-black-2  ">
-                <ion-select-option [value]="productType.id" *ngFor="let productType of productsType">{{productType.name}}</ion-select-option>
+                <ion-select-option [value]="productType.id" *ngFor="let productType of productsType">{{'PRODUCT-TYPE.' + productType.name | translate}}</ion-select-option>
               </ion-select>
               <div *ngIf="submitted && editForm.productType.errors" class="invalid-feedback">
                 <span slot="error" class="ion-warning" *ngIf="editForm.productType.errors.required">*{{'PARTNERS.product-type-required' | translate}}</span>
               </div>
             </div>
             <div class="profile-input fixed-width">
-              <span class="text-sm text-black-2">{{'PARTNERS.product-material' | translate}}</span>
+              <span class="text-sm text-black-2">{{'STYLE.material-type' | translate}}</span>
               <ion-select [(ngModel)]="product.materialId" interface="popover" formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
-              <ion-select-option [value]="material.id" *ngFor="let material of materials">{{material.name}}</ion-select-option>
+              <ion-select-option [value]="material.id" *ngFor="let material of materialTypes">{{material.name}}</ion-select-option>
               </ion-select>
               <div *ngIf="submitted && editForm.productType.errors" class="invalid-feedback">
-                <span slot="error" class="ion-warning" *ngIf="editForm.productType.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
+                <span slot="error" class="ion-warning" *ngIf="editForm.productMaterial.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
               </div>
 
             </div>

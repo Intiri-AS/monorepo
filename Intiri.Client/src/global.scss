@@ -320,30 +320,25 @@ code-input {
 
 .item {
   &-sm {
-    @apply bg-light;
     height: 53px;
   }
   &-sm-tall {
-    @apply bg-secondary;
     grid-row: auto / span 3;
     height: 184px;
   }
   &-md {
-    @apply bg-primary;
     background-size: cover !important;
     grid-column: auto / span 2;
     grid-row: auto / span 1.5;
     height: 86px;
   }
   &-lg {
-    @apply bg-landing-img;
     background-size: cover !important;
     grid-column: auto / span 4;
     grid-row: auto / span 3;
     height: 184px;
   }
   &-lg-tall {
-    @apply bg-img-01;
     background-size: cover !important;
     grid-column: auto / span 4;
     grid-row: auto / span 6;
@@ -354,30 +349,25 @@ code-input {
 @media (min-width: 1480px) {
   .item {
     &-sm {
-      @apply bg-light;
       height: 80px;
     }
     &-sm-tall {
-      @apply bg-secondary;
       grid-row: auto / span 3;
       height: 284px;
     }
     &-md {
-      @apply bg-primary;
       background-size: cover !important;
       grid-column: auto / span 2;
       grid-row: auto / span 1.5;
       height: 136px;
     }
     &-lg {
-      @apply bg-landing-img;
       background-size: cover !important;
       grid-column: auto / span 4;
       grid-row: auto / span 3;
       height: 284px;
     }
     &-lg-tall {
-      @apply bg-img-01;
       background-size: cover !important;
       grid-column: auto / span 4;
       grid-row: auto / span 6;

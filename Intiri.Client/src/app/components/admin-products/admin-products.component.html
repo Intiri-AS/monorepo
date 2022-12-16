@@ -10,7 +10,7 @@
     <ion-col offset-md="3" size="12" size-md="5" size-lg="6" class="relative bottom-[29px]">
       <div class="profile-input justify-end flex flex-1 gap-x-[1.65%] !mt-8 md:!mt-4">
         <div class="w-full">
-          <span class="text-sm text-black-2">Partners</span>
+          <span class="text-sm text-black-2">{{'DASHBOARD.partners' | translate}}</span>
           <ion-select (ionChange)="onPartnersFilterChange($event)" class="w-full" interface="popover" [multiple]="true">
             <ion-select-option [value]="partner.id" *ngFor="let partner of (partners$ | async)">{{partner.name}}</ion-select-option>
           </ion-select>
@@ -18,7 +18,7 @@
         <div class="w-full">
           <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
           <ion-select (ionChange)="onProductTypeFilterChange($event)" class="w-full" interface="popover" [multiple]="true">
-            <ion-select-option [value]="productType.id" *ngFor="let productType of productTypes">{{productType.name}}</ion-select-option>
+            <ion-select-option [value]="productType.id" *ngFor="let productType of productTypes">{{'PRODUCT-TYPE.' + productType.name | translate}}</ion-select-option>
           </ion-select>
         </div>
       </div>
@@ -27,8 +27,8 @@
   <ion-row class="gap-x-[1.65%]">
     <ion-col *ngFor="let product of products | filter:searchText" size="12" size-sm="5.75" size-xl="2.23">
       <div class="card">
-        <div class="h-full w-full ">
-          <img src="{{product.imagePath}}" class="object-fill rounded-2xl !h-full !w-full" alt="Profile Img" />
+        <div class="h-full w-full bg-white rounded-2xl">
+          <img src="{{product.imagePath}}" class="object-contain rounded-2xl !h-full !w-full" alt="Profile Img" />
         </div>
       </div>
       <div class="flex justify-between">

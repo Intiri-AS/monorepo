@@ -421,16 +421,6 @@
     "picture-added-text": "You successfully added new picture",
     "go-to-pictures": "Go to Pictures"
   },
-  "MATERIAL-TYPE": {
-    "wood": "Wood",
-    "steel": "Steel",
-    "glass": "Glass",
-    "ceramic": "Ceramic",
-    "plastic": "Plastic",
-    "textile": "Textile",
-    "wool": "Wool",
-    "stone": "Stone"
-  },
   "CARD-INFO": {
     "designs": "{{length}} designs",
     "language": "Language {{language}}"
@@ -528,5 +518,58 @@
     "template-added": "added to templates successfully",
     "template-removed": "removed from templates successfully",
     "error": "Something went wrong!"
+  },
+  "ROOM-TYPE": {
+    "Private house": "Private house",
+    "Mountain cabin": "Mountain cabin",
+    "Sea cabin": "Sea cabin",
+    "B2B Office": "B2B Office",
+    "B2B Retail": "B2B Retail",
+    "B2B Restaurant/Bar": "B2B Restaurant/Bar"
+  },
+  "MATERIAL-TYPE": {
+    "Wood": "Wood",
+    "Laminate": "Laminate",
+    "Steel": "Steel",
+    "Glass": "Glass",
+    "Ceramic": "Ceramic",
+    "Slate": "Slate",
+    "Stone": "Stone",
+    "Marble": "Marble",
+    "Plastic": "Plastic",
+    "Textile": "Textile",
+    "Other": "Other"
+  },
+  "PRODUCT-TYPE": {
+    "Sofa": "Sofa",
+    "Table": "Table",
+    "Lounge chair": "Lounge chair",
+    "Sidetable": "Sidetable",
+    "Cabinet": "Cabinet",
+    "Kitchen": "Kitchen",
+    "Stools": "Stools",
+    "Ottoman/pouf": "Ottoman/pouf",
+    "Dining table": "Dining table",
+    "Dining chair": "Dining chair",
+    "Taps": "Taps",
+    "Sink": "Sink",
+    "Handle": "Handle",
+    "Lighting": "Lighting",
+    "Shelf": "Shelf",
+    "Bathroom furniture": "Bathroom furniture",
+    "Dresser": "Dresser",
+    "Bed": "Bed",
+    "Warerobe": "Warerobe",
+    "Mirror": "Mirror",
+    "Nightstand": "Nightstand",
+    "Bench": "Bench",
+    "Consoll": "Consoll",
+    "Desk": "Desk",
+    "Office chair": "Office chair",
+    "Art": "Art",
+    "Carpets": "Carpets",
+    "Curtains": "Curtains",
+    "Pillows and Blankets": "Pillows and Blankets",
+    "Interior/Decoration": "Interior/Decoration"
   }
 }

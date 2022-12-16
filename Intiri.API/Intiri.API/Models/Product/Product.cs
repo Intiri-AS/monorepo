@@ -1,4 +1,6 @@
-﻿namespace Intiri.API.Models.Product
+﻿using Intiri.API.Models.Material;
+
+namespace Intiri.API.Models.Product
 {
     public class Product
 	{
@@ -17,7 +19,7 @@
 		public Partner Partner { get; set; }
 		public int? PartnerId { get; set; }
 
-		public Material.Material Material { get; set; }
+		public MaterialType Material { get; set; }
 		public ProductType ProductType { get; set; }
 		public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
 	}
