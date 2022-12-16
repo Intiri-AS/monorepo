@@ -13,6 +13,14 @@
   @apply object-fill h-full w-full rounded-2xl;
 }
 
+.material-image {
+  @apply object-cover h-full w-full rounded-2xl;
+}
+
+.product-image {
+  @apply object-contain h-full w-full rounded-2xl;
+}
+
 img {
   @apply h-full w-full;
 }

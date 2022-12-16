@@ -17,7 +17,7 @@ ion-col {
 }
 
 .designer {
-  @apply  border rounded-2xl h-[270px] lg:h-[350px] mb-[10px] overflow-hidden shadow-1;
+  @apply  border rounded-2xl h-[270px] lg:h-[356px] mb-[10px] overflow-hidden shadow-1;
 }
 
 .swiper-slide {
@@ -26,9 +26,9 @@ ion-col {
 }
 
 .important-fix {
-  @apply h-[113px] lg:h-[155px] w-full object-fill #{!important}
+  @apply h-[113px] lg:h-[155px] w-full object-contain #{!important}
 }
 
 .important-fix-2 {
-  @apply h-[235px] lg:h-[318px] w-full object-fill #{!important}
+  @apply h-[236px] lg:h-[320px] w-full object-contain #{!important}
 }

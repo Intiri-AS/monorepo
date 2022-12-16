@@ -12,7 +12,7 @@
 
 .moodboard-item-wrapper {
   @extend .step-item-wrapper;
-  @apply h-[230px] lg:h-[310px] border shadow-1 mb-12;
+  @apply h-[226px] lg:h-[306px] border-[3px] border-transparent shadow-1 mb-12;
 }
 
 .selected-item {
