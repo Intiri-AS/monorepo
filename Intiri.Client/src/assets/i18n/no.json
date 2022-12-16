@@ -421,16 +421,6 @@
     "picture-added-text": "Nytt bilde lagt til med suksess",
     "go-to-pictures": "Gå til bilder"
   },
-  "MATERIAL-TYPE": {
-    "wood": "Tre",
-    "steel": "Stål",
-    "glass": "Glass",
-    "ceramic": "Keramisk",
-    "plastic": "Plastikk",
-    "textile": "Tekstil",
-    "wool": "Ull",
-    "stone": "Stein"
-  },
   "CARD-INFO": {
     "designs": "{{length}} designs",
     "language": "Språk {{language}}"
@@ -528,5 +518,58 @@
     "template-added": "lagt til maler med hell",
     "template-removed": "fjernet fra maler vellykket",
     "error": "Noe gikk galt!"
+  },
+  "ROOM-TYPE": {
+    "Private house": "Privatbolig",
+    "Mountain cabin": "Fjellhytte",
+    "Sea cabin": "Sjøhytte",
+    "B2B Office": "B2B Kontor",
+    "B2B Retail": "B2B Butikk",
+    "B2B Restaurant/Bar": "B2B Restaurant/Bar"
+  },
+  "MATERIAL-TYPE": {
+    "Wood": "Tre",
+    "Laminate": "Laminat",
+    "Steel": "Stål",
+    "Glass": "Glass",
+    "Ceramic": "Keramikk",
+    "Slate": "Skifer",
+    "Stone": "Stein",
+    "Marble": "Marmor",
+    "Plastic": "Plastikk",
+    "Textile": "Tekstil",
+    "Other": "Annet"
+  },
+  "PRODUCT-TYPE": {
+    "Sofa": "Sofa",
+    "Table": "Bord",
+    "Lounge chair": "Lenestol",
+    "Sidetable": "Sidebord",
+    "Cabinet": "Skap/Skjenk",
+    "Kitchen": "Kjøkken",
+    "Stools": "Stol",
+    "Ottoman/pouf": "Puff",
+    "Dining table": "Spisebord",
+    "Dining chair": "Spisestol",
+    "Taps": "Blandebatteri",
+    "Sink": "Vask",
+    "Handle": "Håndtak",
+    "Lighting": "Belysning",
+    "Shelf": "Hylle",
+    "Bathroom furniture": "Baderomsmøbler",
+    "Dresser": "Kommode",
+    "Bed": "Seng",
+    "Warerobe": "Garderobeskap",
+    "Mirror": "Speil",
+    "Nightstand": "Nattbord",
+    "Bench": "Benker",
+    "Consoll": "Konsoll",
+    "Desk": "Pult",
+    "Office chair": "Kontorstol",
+    "Art": "Kunst",
+    "Carpets": "Tepper",
+    "Curtains": "Gardiner",
+    "Pillows and Blankets": "Puter og Tepper",
+    "Interior/Decoration": "Interiør/Dekor"
   }
 }

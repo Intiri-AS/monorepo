@@ -12,7 +12,9 @@
         <div class="text-left w-full md:w-[260px]">
           <span class="text-sm text-black-2">Type</span>
           <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true">
-            <ion-select-option *ngFor="let materialType of materialTypes" value="{{materialType.name}}">{{materialType.name}}</ion-select-option>
+            <ion-select-option *ngFor="let materialType of materialTypes" value="{{materialType.name}}">
+              {{'MATERIAL-TYPE.' + materialType.name | translate}}
+            </ion-select-option>
           </ion-select>
         </div>
         <ion-button (click)="addMaterials()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-material' | translate}}</ion-button>
