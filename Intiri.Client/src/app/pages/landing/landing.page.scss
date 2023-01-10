@@ -66,3 +66,8 @@
 .contact-btn {
   @apply hover:opacity-70 bg-transparent text-white normal-case rounded-xl border-white border px-4 mx-auto my-0 h-10
 }
+
+ion-slides {
+  --bullet-background: black;
+  padding-bottom: 30px;
+}
