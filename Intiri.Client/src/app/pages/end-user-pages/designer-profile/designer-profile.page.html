@@ -15,7 +15,7 @@
                 <p class="text-2xl text-black-2 font-medium mt-[15px]">{{designer.firstName}} {{designer.lastName}}</p>
                 <p class="text-lg text-black-3">{{designer.createdMoodboards.length}} {{'BOOK-DESIGNER-PROFILE.projects' | translate}}</p>
                 <ion-textarea class="text-lg text-black-2 px-[30px] xl:px-[60px] mt-[30px]">
-                  {{(showMore) ? designerText : designerText | slice:0:200}} <span *ngIf="!showMore">...</span>
+                  {{(showMore) ? designerText : designerText | slice:0:200}} <br><span *ngIf="!showMore">...</span>
                   <a href="javascript:;" *ngIf="!showMore" (click)="showMore=true">{{'COMMON.show-more' | translate}}</a>
                 </ion-textarea>
                 <div class="flex flex-col items-start w-full px-[30px] xl:px-[60px]">
