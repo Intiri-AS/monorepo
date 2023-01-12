@@ -14,14 +14,10 @@
                 </div>
                 <p class="text-2xl text-black-2 font-medium mt-[15px]">{{designer.firstName}} {{designer.lastName}}</p>
                 <p class="text-lg text-black-3">{{designer.createdMoodboards.length}} {{'BOOK-DESIGNER-PROFILE.projects' | translate}}</p>
-                <p class="text-lg text-black-2 px-[30px] xl:px-[60px] mt-[30px]">
+                <ion-textarea class="text-lg text-black-2 px-[30px] xl:px-[60px] mt-[30px]">
                   {{(showMore) ? designerText : designerText | slice:0:200}} <span *ngIf="!showMore">...</span>
                   <a href="javascript:;" *ngIf="!showMore" (click)="showMore=true">{{'COMMON.show-more' | translate}}</a>
-                  <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui. Maecenas congue vel leo ac feugiat. -->
-                  <br>
-                  <br>
-                  <!-- Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis sed dolor mauris. -->
-                </p>
+                </ion-textarea>
                 <div class="flex flex-col items-start w-full px-[30px] xl:px-[60px]">
                   <p class="text-primary text-lg mt-[20px]">{{'DESIGNER-PROFILE.languages' | translate}}</p>
                   <p class="text-black-2 text-lg">{{'COMMON.' + designer.language | translate}}</p>
