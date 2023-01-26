@@ -519,6 +519,13 @@
     "template-removed": "fjernet fra maler vellykket",
     "error": "Noe gikk galt!"
   },
+  "FOOTER": {
+    "p-1": "For at Intiri skal behandle henvendelsen din effektivt, ber vi deg sende en mail og vi vil besvare deg så fort vi kan.",
+    "p-2": "Er du kunde? På Min Intiri ser du din personlige informasjon og prosjekter. Om du ikke er fornøyd med ditt abonnement eller din betalte personlige designkonsultasjon, sorry. Send mail med utfyllende informasjon til",
+    "p-3": "Er du designer? I en prøveperiode kan du bli medlem gratis, være synlig hos oss som «designer» og tilby din betalte interiørsparring til en ny verden av kunder...send mail til",
+    "p-4": "Er du B2B samarbeidspartner/butikk? Ta kontakt for å diskutere om vi sammen kan skape magi, og vi kan tilby dine tjenester eller produkter… send mail til",
+    "p-5": "Org.nr: 829 098 652"
+  },
   "ROOM-TYPE": {
     "Private house": "Privatbolig",
     "Mountain cabin": "Fjellhytte",

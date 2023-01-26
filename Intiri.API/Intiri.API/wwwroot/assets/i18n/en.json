@@ -519,6 +519,13 @@
     "template-removed": "removed from templates successfully",
     "error": "Something went wrong!"
   },
+  "FOOTER": {
+    "p-1": "For Intiri to handle your request efficently, please send an e-mail and we contact you as soon as we can.",
+    "p-2": "Are you a customer? Under My Intiri you can see your projects and personal information. If you not are happy with the personal design consultation or subscription, we apologize. Send a mail with information to",
+    "p-3": "Are you a designer? For a limited period you can join as a member for free, be visible for our customers as “external designer” and can offer your paid design service to a new crowd out there.. Send a request to",
+    "p-4": "Are you a B2B partner or shop? Contact us to discuss if we together can create magic, and offer your products or services… Send mail to",
+    "p-5": "Org.no: 829 098 652"
+  },
   "ROOM-TYPE": {
     "Private house": "Private house",
     "Mountain cabin": "Mountain cabin",
