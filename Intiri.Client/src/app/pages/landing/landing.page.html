@@ -83,7 +83,7 @@
             <p class="landing-text">{{'LANDING.said-second' | translate}}</p>
           </ion-col>
           <ion-col size="12" size-xl="7.5" offset-xl="0.75" class="">
-            <ion-slides #slides [options]="getOptions()" class="h-[100%]">
+            <ion-slides #slides [options]="getOptions()" class="h-[100%]" [pager]="true">
               <ion-slide *ngFor="let comment of comments">
                 <ion-card class="border rounded-2xl border-black-1 bg-transparent p-8 text-left h-[97%]">
                   <div class="mb-2">
@@ -112,7 +112,7 @@
         <p class="pencraft-white">{{'LANDING.contact-us' | translate}}</p>
         <p class="landing-headline-white">{{'LANDING.hesitate' | translate}}</p>
         <ion-buttons>
-          <ion-button href="mailto:kontakt@intiri.no" class="contact-btn">office@intiri.com</ion-button>
+          <ion-button href="mailto:kontakt@intiri.no" class="contact-btn">kontakt@intiri.no</ion-button>
         </ion-buttons>
       </div>
 
