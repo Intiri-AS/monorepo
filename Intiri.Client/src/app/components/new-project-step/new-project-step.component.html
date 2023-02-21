@@ -97,7 +97,9 @@
               </ion-row>
             </ion-grid>
           <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
-            <span class="text-base font-normal text-primary">/ {{item.moodboardMatch}} {{'NEW-PROJECT.match' | translate}}</span>
+            <span *ngIf="item.moodboardMatch === 'High'" class="text-base font-normal text-primary">/ {{'NEW-PROJECT.high-match' | translate}}</span>
+            <span *ngIf="item.moodboardMatch === 'Medium'" class="text-base font-normal text-primary">/ {{'NEW-PROJECT.medium-match' | translate}}</span>
+            <span *ngIf="item.moodboardMatch === 'Low'" class="text-base font-normal text-primary">/ {{'NEW-PROJECT.low-match' | translate}}</span>
           </p>
         </ion-col>
       </ion-row>

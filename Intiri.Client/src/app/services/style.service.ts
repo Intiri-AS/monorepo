@@ -73,7 +73,7 @@ export class StyleService {
     Object.keys(styleObj).forEach(key => formData.append(key, styleObj[key]));
     if (styleObj.imageFile) {
       formData.delete('imageFile'); // removing it first so we can manually add a file name
-      formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.name.replace(/\s/g,'_')}.png`);
+      formData.append('imageFile', styleObj.imageFile, `styleImg${styleObj.imageFile.name.replace(/\s/g,'_')}.png`);
       return this.http.patch(this.apiUrl + 'styleImages/update/' + styleId, formData)
     } else {
       return this.http.patch(this.apiUrl + 'styleImages/update/' + styleId, formData)
