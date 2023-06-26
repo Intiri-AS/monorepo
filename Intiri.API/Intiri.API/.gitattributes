@@ -1,2 +1,1 @@
-appsettings.Production2.json filter=git-crypt diff=git-crypt
-.gitattributes !filter !diff`
+appsettings.Production.json filter=git-crypt diff=git-crypt
