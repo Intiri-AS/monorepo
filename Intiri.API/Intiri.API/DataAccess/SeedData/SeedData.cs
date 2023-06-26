@@ -35,21 +35,21 @@ namespace Intiri.API.DataAccess.SeedData
 				return;
 			}
 
-			//await SeedPartners(unitOfWork);
+			await SeedPartners(unitOfWork);
 			await SeedUsers(accountService, userManager, roleManager, unitOfWork);
-			//await SeedStyles(unitOfWork);
+			await SeedStyles(unitOfWork);
 			await SeedRoomTypes(unitOfWork);
 			await SeedMaterialTypes(unitOfWork);
 			await SeedProductTypes(unitOfWork);
-			//await SeedColors(unitOfWork);
-			//await SeedStylesImages(unitOfWork);
-			//await SeedRooms(unitOfWork);
-			//await SeedMaterials(unitOfWork);
-			//await SeedProducts(unitOfWork);
-			//await SeedColorPalettes(unitOfWork);
-			//await SeedMoodboards(unitOfWork);
-			//await SeedProjects(unitOfWork);
-			//await SeedRoomDetails(unitOfWork);
+			await SeedColors(unitOfWork);
+			await SeedStylesImages(unitOfWork);
+			await SeedRooms(unitOfWork);
+			await SeedMaterials(unitOfWork);
+			await SeedProducts(unitOfWork);
+			await SeedColorPalettes(unitOfWork);
+			await SeedMoodboards(unitOfWork);
+			await SeedProjects(unitOfWork);
+			await SeedRoomDetails(unitOfWork);
 		}
 
 		public static async Task SeedUsers(IAccountService accountService, UserManager<User> userManager, RoleManager<Role> roleManager, IUnitOfWork unitOfWork)
@@ -288,7 +288,8 @@ namespace Intiri.API.DataAccess.SeedData
 
 			foreach (RoomDetails roomDetail in roomDetails)
 			{
-				unitOfWork.RoomDetailsRepository.Insert(roomDetail);
+                roomDetail.Moodboard = await unitOfWork.MoodboardRepository.GetClientMoodboardById(1);
+                unitOfWork.RoomDetailsRepository.Insert(roomDetail);
 			}
 
 			await unitOfWork.SaveChanges();
