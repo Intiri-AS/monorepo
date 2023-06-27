@@ -28,7 +28,7 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   get imageFileErrors() {
-    return this.addPictureForm.controls.imageFile.errors;
+    return this.addPictureForm.controls.imageFiles.errors;
   }
 
   get editStyleErrors() {
@@ -48,7 +48,7 @@ export class AddPictureModalComponent implements OnInit {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
       roomType: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      imageFiles: ['', [Validators.required]]
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
@@ -65,10 +65,9 @@ export class AddPictureModalComponent implements OnInit {
 
   styleImage = {
     styleId: null,
-    imageFile: null
+    roomId: null,
+    imageFiles: []
   }
-
-  roomType: string = null;
 
   imagePath = null;
 
@@ -88,9 +87,9 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
-      this.styleImage.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFile));
+    if (event.target.files.length >= 1) {
+      this.styleImage.imageFiles = event.target.files;
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[0]));
     } else {
       this.imagePath = null;
     }
