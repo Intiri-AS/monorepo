@@ -70,6 +70,7 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   imagePath = null;
+  imagePaths:Array<any> = [];
 
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
@@ -87,11 +88,11 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if (event.target.files.length >= 1) {
+    if (event.target.files.length > 0) {
       this.styleImage.imageFiles = event.target.files;
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[0]));
-    } else {
-      this.imagePath = null;
+      this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
+        return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
+      });
     }
   }
 

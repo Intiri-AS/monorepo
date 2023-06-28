@@ -39,15 +39,18 @@
             <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.image' | translate}}</p>
             <label for="dropzone-file">
               <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
-                <div *ngIf="!imagePath" class="text-center mt-[65px]">
+                <div class="text-center mt-[65px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
-                <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full mb-3" alt="pictureImg" />
-                <span *ngIf="imagePath">+ {{styleImage.imageFiles.length -1 }} more</span>
               </div>
               <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFiles" multiple/>
             </label>
+            <div [ngClass]="{'image-preview-container' : imagePaths.length > 0}">
+              <div *ngFor="let imagePath of imagePaths; let i = index">
+                <img [src]="imagePath" alt="{{ 'PictureImage ' + i }}" class="preview-image"/>
+              </div>
+            </div>
             <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
