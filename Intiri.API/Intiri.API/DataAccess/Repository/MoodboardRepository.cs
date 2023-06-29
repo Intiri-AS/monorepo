@@ -73,6 +73,7 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(m => m.Designer)
 				.Include(m => m.Style)
 					.ThenInclude(s => s.StyleImages)
+				.OrderByDescending(x=>x.Id)
 				.ToListAsync();
 		}
 
