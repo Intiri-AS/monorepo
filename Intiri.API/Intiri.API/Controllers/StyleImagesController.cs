@@ -64,7 +64,7 @@ namespace Intiri.API.Controllers
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
-		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleImageInDTO styleImageInDTO)
+		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleMultipleImageInDTO styleImageInDTO)
 		{
 			Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
 			
@@ -73,33 +73,39 @@ namespace Intiri.API.Controllers
 				return BadRequest("Target style doesn't exist");
 			}
 
-			StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
-
-			IFormFile imageFile = styleImageInDTO.ImageFile;
-			if (imageFile != null && imageFile.Length > 0)
+			try
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleImages);
+                foreach (var image in styleImageInDTO.ImageFile)
+                {
+                    StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+                    IFormFile imageFile = image;
+                    if (imageFile != null && imageFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                            await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleImages);
 
-				styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				styleImage.PublicId = uploadResult.Item3.PublicId;
+                        if (uploadResult.Item1 != HttpStatusCode.OK)
+                        {
+                            return BadRequest(uploadResult.Item2);
+                        }
 
-				styleImage.Style = style;
+                        styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                        styleImage.PublicId = uploadResult.Item3.PublicId;
 
-				_unitOfWork.StyleImageRepository.Insert(styleImage);
+                        styleImage.Style = style;
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return Ok(_mapper.Map<StyleImageOutDTO>(styleImage));
-				}
-			}
+                        _unitOfWork.StyleImageRepository.Insert(styleImage);
+                        await _unitOfWork.SaveChanges();
+                    }
+                }
 
-			return BadRequest("Problem adding style image");
+                return Ok(styleImageInDTO);
+            }
+			catch
+			{
+                return BadRequest("Problem adding style image");
+            }
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
