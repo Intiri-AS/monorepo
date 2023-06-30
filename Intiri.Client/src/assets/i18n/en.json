@@ -136,8 +136,8 @@
     "session-expired": "Your chat session with {{name}} has expired."
   },
   "NEW-PROJECT": {
-    "create": "Let's create new project",
-    "project": "Name the project first",
+    "create": "Name your room",
+    "project": "Sample: Judy’s living room",
     "project-name": "Project name",
     "room": "Room",
     "select-room-title": "Select the room you want to improve",

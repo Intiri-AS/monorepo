@@ -136,8 +136,8 @@
     "session-expired": "Din chatt med {{name}} har utløp."
   },
   "NEW-PROJECT": {
-    "create": "La oss lage et nytt prosjekt",
-    "project": "Gi prosjektet navn",
+    "create": "Gi rommet et navn",
+    "project": "Eksempel: Judys stue",
     "project-name": "Prosjektets navn",
     "room": "Rom",
     "select-room-title": "Velg rommet du vil jobbe med",
