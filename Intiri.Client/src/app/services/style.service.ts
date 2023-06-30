@@ -61,10 +61,16 @@ export class StyleService {
 
   addStyleImage(styleImageObj) {
     const formData = new FormData();
-    const uniqueStr = Date.now().toString(36) + Math.random().toString(36);
-    Object.keys(styleImageObj).forEach(key => formData.append(key, styleImageObj[key]));
-    formData.delete('imageFile'); // removing it first so we can manually add a file name
-    formData.append('imageFile', styleImageObj.imageFile, `styleImg${uniqueStr}.png`)
+    formData.append('styleId', styleImageObj.styleId);
+    formData.append('roomId', styleImageObj.roomId);
+
+    Object.keys(styleImageObj.imageFiles).forEach((key, i) => {
+      let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
+      formData.append('imageFile', styleImageObj.imageFiles[key], `imageFiles${uniqueStr}.png`)
+    });
+    for (const value of formData.values()) {
+      console.log(value);
+    }
     return this.http.post(`${this.apiUrl}styleImages/add`, formData);
   }
 
