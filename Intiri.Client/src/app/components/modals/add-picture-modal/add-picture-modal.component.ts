@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
+import { RoomService } from 'src/app/services/room.service';
 import { StyleService } from 'src/app/services/style.service';
 
 @Component({
@@ -22,8 +23,12 @@ export class AddPictureModalComponent implements OnInit {
     return this.addPictureForm.controls.style.errors;
   }
 
+  get roomTypeErrors () {
+    return this.addPictureForm.controls.roomType.errors;
+  }
+
   get imageFileErrors() {
-    return this.addPictureForm.controls.imageFile.errors;
+    return this.addPictureForm.controls.imageFiles.errors;
   }
 
   get editStyleErrors() {
@@ -33,6 +38,7 @@ export class AddPictureModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private styleService: StyleService,
+    private roomService: RoomService,
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
@@ -41,7 +47,8 @@ export class AddPictureModalComponent implements OnInit {
   ) {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      roomType: ['', [Validators.required]],
+      imageFiles: ['', [Validators.required]]
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
@@ -58,15 +65,19 @@ export class AddPictureModalComponent implements OnInit {
 
   styleImage = {
     styleId: null,
-    imageFile: null
+    roomId: null,
+    imageFiles: []
   }
 
   imagePath = null;
+  imagePaths:Array<any> = [];
 
   styles$: Observable<any> = this.styleService.styles$;
+  rooms$: Observable<any> = this.roomService.rooms$;
 
   ngOnInit() {
     this.styleService.getStyles();
+    this.roomService.getRooms();
     if (this.edit) {
       this.styleImage.styleId = this.item.styleId;
     }
@@ -77,11 +88,11 @@ export class AddPictureModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
-      this.styleImage.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFile));
-    } else {
-      this.imagePath = null;
+    if (event.target.files.length > 0) {
+      this.styleImage.imageFiles = event.target.files;
+      this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
+        return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
+      });
     }
   }
 
