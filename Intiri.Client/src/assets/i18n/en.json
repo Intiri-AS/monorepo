@@ -136,6 +136,7 @@
     "session-expired": "Your chat session with {{name}} has expired."
   },
   "NEW-PROJECT": {
+    "upload": "Upload",
     "create": "Name your room",
     "project": "Sample: Judy’s living room",
     "project-name": "Project name",
@@ -146,7 +147,7 @@
     "select-style-title": "Select pictures that you like",
     "select-style-text": "Decisions are hard, pick as many as you want.",
     "room-details": "Room Details",
-    "room-details-title": "If you want, enter some info about your room",
+    "room-details-title": "Upload room sketch",
     "room-details-text": "Don't worry, you can improve rooms details later.",
     "color-pallete": "Color Pallete",
     "select-color-title": "If you want, select colors you like",
