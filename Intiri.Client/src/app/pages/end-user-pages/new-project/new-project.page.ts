@@ -324,11 +324,9 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   areProjectDetailsValid(): boolean {
-    return (
-      (this.project.roomDetails['shape'] || this.project.roomDetails['imageFile']) &&
-      this.project.roomDetails['size'] &&
-      !!this.project.roomDetails['budgetRate']
-    );
+    return this.project.roomDetails['roomSketchFile'] &&
+            this.project.roomDetails['roomSketchFile'].type &&
+            this.project.roomDetails['roomSketchFile'].type.includes('image');
   }
 
   toggleItem(item) {
