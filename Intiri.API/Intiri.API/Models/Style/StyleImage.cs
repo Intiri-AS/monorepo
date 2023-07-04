@@ -18,6 +18,7 @@ namespace Intiri.API.Models.Style
         public int StyleId { get; set; }
         public Room.Room Room { get; set; }
         public int? RoomId { get; set; }
+        public string Provider { get; set; }
         public ICollection<Project.Project> Projects { get; set; }
         public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
     }

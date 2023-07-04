@@ -35,9 +35,8 @@
 
    <!-- if room details -->
   <div *ngIf="currentStep.data.roomShapes">
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.room-details' | translate}}</p>
-    <p class="text-black-2">{{'NEW-PROJECT.room-shape' | translate}}</p>
-    <ion-grid class="step-items" style="min-height: 220px;">
+    <!-- <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.room-details' | translate}}</p> -->
+    <!-- <ion-grid class="step-items" style="min-height: 220px;">
       <ion-row class="step-items-row">
         <ion-col *ngFor="let item of currentStep.data.roomShapes" (click)="toggleRoomSketch(item)" size="5.8" size-sm="2.2" class="step-item-wrapper" [class.selected-item]="isItemSelected(item)"  [class.bigger-margin]="item.name">
           <div class="step-icon-wrapper" >
@@ -45,9 +44,9 @@
           </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
     <div class="w-[200px]">
-      <span class="text-black-2">{{'NEW-PROJECT.upload-sketch' | translate}}</span>
+      <!-- <span class="text-black-2">{{'NEW-PROJECT.upload-sketch' | translate}}</span> -->
       <label for="dropzone-file">
         <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
           <div *ngIf="!imagePath" class="text-center mt-[65px]">
@@ -59,11 +58,11 @@
         <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
       </label>
     </div>
-    <div class="input">
+    <!-- <div class="input">
       <span class="text-black-2">{{'NEW-PROJECT.room-area' | translate}}</span>
       <ion-input [(ngModel)]="project.roomDetails.size" type="number" min="1" class="border rounded-2xl h-14 border-black-2 !pr-4"></ion-input>
-    </div>
-    <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.budget' | translate}}</p>
+    </div> -->
+    <!-- <p class="text-black-2 font-bold text-xl leading-[29px] mt-[30px] mb-[10px]">{{'NEW-PROJECT.budget' | translate}}</p>
     <div class="input">
       <span class="text-black-2">{{'NEW-PROJECT.select-budget' | translate}}</span>
       <ion-select  [(ngModel)]="project.roomDetails.budgetRate" interface="popover">
@@ -71,7 +70,7 @@
         <ion-select-option value=2>{{'COMMON.medium' | translate}}</ion-select-option>
         <ion-select-option value=3>{{'COMMON.high' | translate}}</ion-select-option>
       </ion-select>
-    </div>
+    </div> -->
   </div>
 
   <!-- if moodboards -->

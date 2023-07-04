@@ -6,6 +6,11 @@ public class ContentTypesService : IContentTypesService
 {
     public const string JPG = "image/jpeg";
     public const string PNG = "image/png";
+    public const string WEBP = "image/webp";
+    public const string BMP = "image/bmp";
+    public const string ICO = "image/x-icon";
+    public const string TIFF = "image/tiff";
+    public const string GIF = "image/gif";
     public const string PDF = "application/pdf";
     public const string CSV = "text/csv";
     public const string DOC = "application/msword";
@@ -30,7 +35,12 @@ public class ContentTypesService : IContentTypesService
         XLS,
         XLSX,
         ZIP,
-        _7Z
+        _7Z,
+        WEBP,
+        BMP,
+        ICO,
+        TIFF,
+        GIF
     };
 
     public bool IsImage(string contentType)
