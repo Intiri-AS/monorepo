@@ -9,6 +9,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 
         [Required]
         public int RoomId { get; set; }
+        public string Provider { get; set; }
 
         public List<IFormFile> ImageFile { get; set; }
     }

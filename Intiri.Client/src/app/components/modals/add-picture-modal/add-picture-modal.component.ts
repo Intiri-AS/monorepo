@@ -27,6 +27,10 @@ export class AddPictureModalComponent implements OnInit {
     return this.addPictureForm.controls.roomType.errors;
   }
 
+  get providerErrors () {
+    return this.addPictureForm.controls.provider.errors;
+  }
+
   get imageFileErrors() {
     return this.addPictureForm.controls.imageFiles.errors;
   }
@@ -48,6 +52,7 @@ export class AddPictureModalComponent implements OnInit {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
       roomType: ['', [Validators.required]],
+      provider: ['', Validators.required],
       imageFiles: ['', [Validators.required]]
     });
     this.editPictureForm = this.formBuilder.group({
@@ -66,7 +71,8 @@ export class AddPictureModalComponent implements OnInit {
   styleImage = {
     styleId: null,
     roomId: null,
-    imageFiles: []
+    imageFiles: [],
+    provider: ''
   }
 
   imagePath = null;
@@ -74,6 +80,16 @@ export class AddPictureModalComponent implements OnInit {
 
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
+  providers$: Array<any> = [
+    'Flügger',
+    'Tarkett',
+    'Flotte gulv',
+    'Epoq',
+    'Rotpunkt',
+    'Lampemagasinet',
+    'Flisekompaniet',
+    'Ellos'
+  ];
 
   ngOnInit() {
     this.styleService.getStyles();
