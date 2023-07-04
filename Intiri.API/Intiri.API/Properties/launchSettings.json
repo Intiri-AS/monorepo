@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Intiri.API": {
+    "Intiri.API.Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
