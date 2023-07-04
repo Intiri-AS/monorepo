@@ -179,7 +179,8 @@
     "edit-select-products-text": "You have to keep 2 products in your moodboard.",
     "premium-content": "Premium content",
     "see-all-free": "See all for free",
-    "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member."
+    "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member.",
+    "select-4-materials": "Please select at least 4 materials"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",

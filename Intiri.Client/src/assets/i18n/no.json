@@ -179,7 +179,8 @@
     "edit-select-products-text": "Du må velge 2 produkter for ditt stilforslag.",
     "premium-content": "Premium innhold",
     "see-all-free": "Se alt gratis",
-    "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem."
+    "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem.",
+    "select-4-materials": "Velg minst 4 materialer"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
