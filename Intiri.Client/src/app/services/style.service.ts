@@ -63,14 +63,12 @@ export class StyleService {
     const formData = new FormData();
     formData.append('styleId', styleImageObj.styleId);
     formData.append('roomId', styleImageObj.roomId);
+    formData.append('provider', styleImageObj.provider);
 
     Object.keys(styleImageObj.imageFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
       formData.append('imageFile', styleImageObj.imageFiles[key], `imageFiles${uniqueStr}.png`)
     });
-    for (const value of formData.values()) {
-      console.log(value);
-    }
     return this.http.post(`${this.apiUrl}styleImages/add`, formData);
   }
 
