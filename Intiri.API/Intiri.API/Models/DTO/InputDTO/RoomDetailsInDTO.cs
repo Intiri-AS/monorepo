@@ -6,12 +6,12 @@ namespace Intiri.API.Models.DTO.InputDTO
 	{
 		public string Shape { get; set; }
 
-		[Required]
-		public double Size { get; set; }
+		//[Required]
+		public double Size { get; set; } = 0;
 
-		[Required]
-		public int BudgetRate { get; set; }
+		//[Required]
+		public int BudgetRate { get; set; } = 0;
 
-		public IFormFile RoomSketchFile { get; set; }
+        public IFormFile RoomSketchFile { get; set; }
 	}
 }
