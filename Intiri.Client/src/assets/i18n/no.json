@@ -390,9 +390,11 @@
     "set-template": "Angi som moodboard mal"
   },
   "STYLE": {
-    "styles": "2. Velg stilen",
+    "styles": "Stilen",
+    "select-style-moodboard": "2. Velg stilen",
     "materials": "Materialer",
-    "rooms": "1. Velg rommet",
+    "rooms": "Rommet",
+    "select-room-moodboard": "1. Velg rommet",
     "pictures": "Bilder",
     "add-style": "Legg til stil",
     "style-name": "Stilnavn",

@@ -390,9 +390,11 @@
     "set-template": "Set as moodboard template"
   },
   "STYLE": {
-    "styles": "2. Select the Style",
+    "styles": "Styles",
+    "select-style-moodboard": "2. Select the Style",
     "materials": "Materials",
-    "rooms": "1. Select the Room",
+    "rooms": "Rooms",
+    "select-room-moodboard": "1. Select the Room",
     "pictures": "Pictures",
     "add-style": "Add style",
     "style-name": "Style name",
