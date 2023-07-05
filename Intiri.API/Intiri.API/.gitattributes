@@ -1,0 +1,3 @@
+appsettings.Production.json filter=git-crypt diff=git-crypt
+appsettings.Development.json filter=git-crypt diff=git-crypt
+appsettings.json filter=git-crypt diff=git-crypt

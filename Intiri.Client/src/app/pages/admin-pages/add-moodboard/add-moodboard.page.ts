@@ -27,11 +27,11 @@ export class AddMoodboardPage implements OnInit {
       data: [],
     },
     {
-      title: 'NEW-PROJECT.materials',
+      title: 'NEW-PROJECT.select-materials',
       data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
     },
     {
-      title: 'MY-INTIRI.colors',
+      title: 'MY-INTIRI.select-colors',
       data: [],
     },
     {

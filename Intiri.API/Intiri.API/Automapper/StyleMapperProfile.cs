@@ -16,6 +16,7 @@ namespace Intiri.API.Automapper
 			CreateMap<Style, StyleWithImagesOutDTO>();
 
 			CreateMap<StyleImageInDTO, StyleImage>();
+			CreateMap<StyleMultipleImageInDTO, StyleImage>();
 			CreateMap<StyleImage, StyleImageOutDTO>()
 				.ForMember(si => si.StyleName, opt => opt.MapFrom(src => src.Style.Name));
 		}

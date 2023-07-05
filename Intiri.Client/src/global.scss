@@ -62,7 +62,7 @@
   }
 
   .final-project-step-modal-css::part(content) {
-    --width: 480px;
+    --width: 570px;
     border-radius: 16px;
     --height: 460px;
   }
@@ -245,7 +245,7 @@ ion-toolbar {
 // should be wrapped around every main content of the page (main section below header)
 .main-container {
   @extend .header-container;
-  @apply my-[50px] px-[30px] lg:px-[75px] pt-0;
+  @apply mt-[120px] mb-[50px] px-[30px] lg:px-[75px] pt-0;
 }
 
 .ion-card-container {
