@@ -7,12 +7,17 @@ export class TimeAgoPipe implements PipeTransform {
   constructor(private translate: TranslateService) {}
 
   transform(d: any): string {
-    let currentDate = new Date(new Date().toUTCString());
+    //Created date
     let date = new Date(d);
+
+    // Convert current date to UTC
+    let now = new Date();
+    let currentDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
     let year = currentDate.getFullYear() - date.getFullYear();
     let month = currentDate.getMonth() - date.getMonth();
     let day = currentDate.getDate() - date.getDate();
-    let hour = currentDate.getHours() - date.getHours() - 1; // TODO: remove -1, set timezone (now is pulling UTC from database)
+    let hour = currentDate.getHours() - date.getHours(); // TODO: remove -1, set timezone (now is pulling UTC from database)
     let minute = currentDate.getMinutes() - date.getMinutes();
     let second = currentDate.getSeconds() - date.getSeconds();
 
