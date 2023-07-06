@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -82,6 +82,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private nav: NavController,
   ) {}
 
   ngOnInit() {
@@ -226,6 +227,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
     );
   }
 
+  goToProject () {
+    this.nav.navigateRoot(`/project-details/${this.project.id}`);
+  }
+
   saveCurrentProject()
   {
     this.spinner.show();
@@ -235,7 +240,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
           this.spinner.hide();
           this.project.projectMoodboards.push(this.project.currentMoodboard);
           this.projectService.setCurrentProject(this.project);
-          this.openFinalModal(true);
+          // this.openFinalModal(true);
+          this.goToProject();
         },
         (error) => {
           this.spinner.hide();
@@ -255,7 +261,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
         this.project.projectMoodboards.push(this.project.currentMoodboard);
         this.project.id = res.id;
         this.projectService.setCurrentProject(this.project);
-        this.openFinalModal();
+        // this.openFinalModal();
+        this.goToProject();
       },
       (error) => {
         this.spinner.hide();
