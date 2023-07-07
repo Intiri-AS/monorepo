@@ -28,8 +28,8 @@ export class MoodboardsPage implements OnInit {
     this.moodboardService.getMoodboards();
     this.styleService.getStyles();
     this.moodboards$.subscribe(moodboards => {
-      this.spinner.hide();
       this.moodboards = moodboards;
+      this.spinner.hide();
     });
   }
 
