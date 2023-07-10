@@ -48,7 +48,7 @@ export class HeaderComponent {
   async showProfilePopover (e: Event) {
     const popover = await this.popoverController.create({
       component: ProfilePopoverComponent,
-      componentProps: { headerType: 'admin' },
+      componentProps: { headerType: 'user' },
       event: e,
       dismissOnSelect: false
     });

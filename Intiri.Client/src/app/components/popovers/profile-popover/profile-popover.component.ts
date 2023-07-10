@@ -21,7 +21,11 @@ export class ProfilePopoverComponent {
   }
 
   showProfilePage () {
-    this.nav.navigateRoot('/profile');
+    if (this.headerType === 'partner') {
+      this.nav.navigateRoot('/partner/profile');
+    } else {
+      this.nav.navigateRoot('/profile');
+    }
     this.popoverController.dismiss();
   }
 
