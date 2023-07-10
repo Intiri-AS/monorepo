@@ -13,9 +13,9 @@
         </section>
       </ion-buttons>
       <ion-buttons class="header-buttons justify-end">
-        <a routerLink="/profile" routerDirection="root" class="py-1">
+        <div class="cursor-pointer" (click)="showProfilePopover($event)">
           <img [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/profile-img.png'" class="header-profile-img" alt="Profile Img"/>
-        </a>
+        </div>
         <ion-icon class="header-icon" (click)="showSettings($event)" [class.selected-border]="isSettingsSelected" name="settings-sharp"></ion-icon>
       </ion-buttons>
       <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
