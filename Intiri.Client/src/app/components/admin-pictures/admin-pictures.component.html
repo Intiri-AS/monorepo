@@ -14,7 +14,6 @@
         </span>
         <ion-select (ionChange)="onRoomFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
           <ion-select-option *ngFor="let room of (rooms$ | async)" value={{room.id}}>
-            <!-- {{'MATERIAL-TYPE.' + room.name | translate}} -->
             {{ room.name }}
           </ion-select-option>
         </ion-select>
@@ -25,7 +24,6 @@
         </span>
         <ion-select (ionChange)="onStyleFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
           <ion-select-option *ngFor="let style of (styles$ | async)" value={{style.id}}>
-            <!-- {{'MATERIAL-TYPE.' + materialType.name | translate}} -->
             {{style.name}}
           </ion-select-option>
         </ion-select>
