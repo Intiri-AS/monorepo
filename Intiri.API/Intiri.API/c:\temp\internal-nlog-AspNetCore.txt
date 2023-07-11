@@ -1,0 +1,426 @@
+2023-06-12 11:10:04.2877 Info Message Template Auto Format enabled
+2023-06-12 11:10:04.3048 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-12 11:10:04.3331 Info Adding target FileTarget(Name=Intiri)
+2023-06-12 11:10:04.3336 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-12 11:10:04.3366 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-12 11:10:04.3810 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/Intiri-fork-history/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-12 11:10:04.4045 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230605.log
+2023-06-12 11:10:04.7856 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/Intiri-fork-history/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-12 11:10:20.1467 Info AppDomain Shutting down. LogFactory closing...
+2023-06-12 11:10:20.1547 Info LogFactory has been closed.
+2023-06-15 17:07:07.2600 Info Message Template Auto Format enabled
+2023-06-15 17:07:07.2714 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-15 17:07:07.2947 Info Adding target FileTarget(Name=Intiri)
+2023-06-15 17:07:07.2958 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-15 17:07:07.2981 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-15 17:07:07.3392 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:07:07.3597 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230612.log
+2023-06-15 17:07:07.6871 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:07:23.0193 Info AppDomain Shutting down. LogFactory closing...
+2023-06-15 17:07:23.0278 Info LogFactory has been closed.
+2023-06-15 17:09:44.8978 Info Message Template Auto Format enabled
+2023-06-15 17:09:44.9079 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-15 17:09:44.9296 Info Adding target FileTarget(Name=Intiri)
+2023-06-15 17:09:44.9299 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-15 17:09:44.9326 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-15 17:09:44.9738 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:09:45.3046 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:10:00.5963 Info AppDomain Shutting down. LogFactory closing...
+2023-06-15 17:10:00.6073 Info LogFactory has been closed.
+2023-06-15 17:10:45.9451 Info Message Template Auto Format enabled
+2023-06-15 17:10:45.9553 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-15 17:10:45.9769 Info Adding target FileTarget(Name=Intiri)
+2023-06-15 17:10:45.9779 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-15 17:10:45.9801 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-15 17:10:46.0188 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:10:46.3457 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:33:59.3771 Info AppDomain Shutting down. LogFactory closing...
+2023-06-15 17:33:59.3894 Info LogFactory has been closed.
+2023-06-15 17:34:03.4379 Info Message Template Auto Format enabled
+2023-06-15 17:34:03.4480 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-15 17:34:03.4697 Info Adding target FileTarget(Name=Intiri)
+2023-06-15 17:34:03.4701 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-15 17:34:03.4729 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-15 17:34:03.5155 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-15 17:34:03.8266 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-16 09:42:26.6340 Info Message Template Auto Format enabled
+2023-06-16 09:42:26.6450 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-16 09:42:26.6682 Info Adding target FileTarget(Name=Intiri)
+2023-06-16 09:42:26.6714 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-16 09:42:26.6742 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-16 09:42:26.6974 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-16 09:42:26.7179 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230615.log
+2023-06-16 09:42:27.0612 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-16 09:44:21.1010 Info AppDomain Shutting down. LogFactory closing...
+2023-06-16 09:44:21.1063 Info LogFactory has been closed.
+2023-06-16 09:44:59.5475 Info Message Template Auto Format enabled
+2023-06-16 09:44:59.5576 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-16 09:44:59.5791 Info Adding target FileTarget(Name=Intiri)
+2023-06-16 09:44:59.5800 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-16 09:44:59.5820 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-16 09:44:59.6103 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-16 09:44:59.9467 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:01:58.7182 Info Message Template Auto Format enabled
+2023-06-19 20:01:58.7290 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-19 20:01:58.7512 Info Adding target FileTarget(Name=Intiri)
+2023-06-19 20:01:58.7522 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-19 20:01:58.7544 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-19 20:01:58.7952 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:01:58.8154 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230616.log
+2023-06-19 20:01:59.1451 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:02:01.9116 Info AppDomain Shutting down. LogFactory closing...
+2023-06-19 20:02:01.9184 Info LogFactory has been closed.
+2023-06-19 20:03:31.4481 Info Message Template Auto Format enabled
+2023-06-19 20:03:31.4587 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-19 20:03:31.4801 Info Adding target FileTarget(Name=Intiri)
+2023-06-19 20:03:31.4810 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-19 20:03:31.4831 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-19 20:03:31.5204 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:03:31.8522 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:03:34.5046 Info AppDomain Shutting down. LogFactory closing...
+2023-06-19 20:03:34.5146 Info LogFactory has been closed.
+2023-06-19 20:04:17.0319 Info Message Template Auto Format enabled
+2023-06-19 20:04:17.0427 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-19 20:04:17.0645 Info Adding target FileTarget(Name=Intiri)
+2023-06-19 20:04:17.0655 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-19 20:04:17.0676 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-19 20:04:17.1106 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-19 20:04:17.4335 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:33:49.0819 Info Message Template Auto Format enabled
+2023-06-20 11:33:49.0931 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 11:33:49.1164 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 11:33:49.1168 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 11:33:49.1196 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 11:33:49.1497 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:33:49.1681 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230619.log
+2023-06-20 11:33:49.4982 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:36:47.7096 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 11:36:47.7190 Info LogFactory has been closed.
+2023-06-20 11:36:51.2423 Info Message Template Auto Format enabled
+2023-06-20 11:36:51.2520 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 11:36:51.2747 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 11:36:51.2751 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 11:36:51.2778 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 11:36:51.3045 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:36:51.5546 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:37:22.0348 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 11:37:22.0449 Info LogFactory has been closed.
+2023-06-20 11:37:31.7328 Info Message Template Auto Format enabled
+2023-06-20 11:37:31.7440 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 11:37:31.7658 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 11:37:31.7662 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 11:37:31.7689 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 11:37:31.7951 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:37:32.1077 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:39:23.1066 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 11:39:23.1188 Info LogFactory has been closed.
+2023-06-20 11:42:16.5139 Info Message Template Auto Format enabled
+2023-06-20 11:42:16.5243 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 11:42:16.5459 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 11:42:16.5468 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 11:42:16.5489 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 11:42:16.5728 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:42:16.9158 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 11:42:27.2511 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 11:42:27.2599 Info LogFactory has been closed.
+2023-06-20 16:43:27.8776 Info Message Template Auto Format enabled
+2023-06-20 16:43:27.8884 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 16:43:27.9105 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 16:43:27.9116 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 16:43:27.9140 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 16:43:27.9445 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 16:43:28.2805 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 17:27:30.7225 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 17:27:30.7332 Info LogFactory has been closed.
+2023-06-20 17:27:54.7235 Info Message Template Auto Format enabled
+2023-06-20 17:27:54.7345 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 17:27:54.7578 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 17:27:54.7589 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 17:27:54.7612 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 17:27:54.7958 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 17:27:55.1363 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 17:29:45.1006 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 17:29:45.1104 Info LogFactory has been closed.
+2023-06-20 17:31:14.2005 Info Message Template Auto Format enabled
+2023-06-20 17:31:14.2112 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-20 17:31:14.2335 Info Adding target FileTarget(Name=Intiri)
+2023-06-20 17:31:14.2340 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-20 17:31:14.2368 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-20 17:31:14.2712 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 17:31:14.6122 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-20 17:31:20.8616 Info AppDomain Shutting down. LogFactory closing...
+2023-06-20 17:31:20.8671 Info LogFactory has been closed.
+2023-06-21 09:28:57.8833 Info Message Template Auto Format enabled
+2023-06-21 09:28:57.8940 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-21 09:28:57.9161 Info Adding target FileTarget(Name=Intiri)
+2023-06-21 09:28:57.9171 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-21 09:28:57.9193 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-21 09:28:57.9520 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 09:28:57.9710 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230620.log
+2023-06-21 09:28:58.2904 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 09:29:00.8391 Info AppDomain Shutting down. LogFactory closing...
+2023-06-21 09:29:00.8454 Info LogFactory has been closed.
+2023-06-21 09:31:38.0577 Info Message Template Auto Format enabled
+2023-06-21 09:31:38.0677 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-21 09:31:38.0896 Info Adding target FileTarget(Name=Intiri)
+2023-06-21 09:31:38.0899 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-21 09:31:38.0926 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-21 09:31:38.1253 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 09:31:38.4521 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 09:31:44.0968 Info AppDomain Shutting down. LogFactory closing...
+2023-06-21 09:31:44.1023 Info LogFactory has been closed.
+2023-06-21 11:43:21.7037 Info Message Template Auto Format enabled
+2023-06-21 11:43:21.7145 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-21 11:43:21.7375 Info Adding target FileTarget(Name=Intiri)
+2023-06-21 11:43:21.7379 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-21 11:43:21.7415 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-21 11:43:21.7882 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 11:43:22.1517 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-21 11:43:28.2656 Info AppDomain Shutting down. LogFactory closing...
+2023-06-21 11:43:28.2712 Info LogFactory has been closed.
+2023-06-26 12:20:43.6956 Info Message Template Auto Format enabled
+2023-06-26 12:20:43.7054 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-26 12:20:43.7278 Info Adding target FileTarget(Name=Intiri)
+2023-06-26 12:20:43.7288 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-26 12:20:43.7310 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-26 12:20:43.7627 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-26 12:20:43.7815 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230621.log
+2023-06-26 12:20:44.0864 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-26 12:20:49.5433 Info AppDomain Shutting down. LogFactory closing...
+2023-06-26 12:20:49.5472 Info LogFactory has been closed.
+2023-06-26 12:22:49.5538 Info Message Template Auto Format enabled
+2023-06-26 12:22:49.5642 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-26 12:22:49.5874 Info Adding target FileTarget(Name=Intiri)
+2023-06-26 12:22:49.5885 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-26 12:22:49.5907 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-26 12:22:49.6249 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-26 12:22:49.9716 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-26 12:27:59.8528 Info AppDomain Shutting down. LogFactory closing...
+2023-06-26 12:27:59.8619 Info LogFactory has been closed.
+2023-06-26 12:28:24.4794 Info Message Template Auto Format enabled
+2023-06-26 12:28:24.4894 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-26 12:28:24.5107 Info Adding target FileTarget(Name=Intiri)
+2023-06-26 12:28:24.5116 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-26 12:28:24.5137 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-26 12:28:24.5461 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-26 12:28:24.8745 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:04:13.7993 Info Message Template Auto Format enabled
+2023-06-27 10:04:13.8090 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 10:04:13.8302 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 10:04:13.8305 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 10:04:13.8331 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 10:04:13.8549 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:04:13.8736 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230626.log
+2023-06-27 10:04:14.1564 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:04:21.8477 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 10:04:21.8536 Info LogFactory has been closed.
+2023-06-27 10:04:52.6933 Info Message Template Auto Format enabled
+2023-06-27 10:04:52.7033 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 10:04:52.7247 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 10:04:52.7257 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 10:04:52.7278 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 10:04:52.7527 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:04:53.0440 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:59:38.5784 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 10:59:38.5873 Info LogFactory has been closed.
+2023-06-27 10:59:45.0906 Info Message Template Auto Format enabled
+2023-06-27 10:59:45.1009 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 10:59:45.1237 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 10:59:45.1246 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 10:59:45.1269 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 10:59:45.1534 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:59:45.4769 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 10:59:59.1577 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 10:59:59.1670 Info LogFactory has been closed.
+2023-06-27 11:00:06.6934 Info Message Template Auto Format enabled
+2023-06-27 11:00:06.7025 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 11:00:06.7239 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 11:00:06.7248 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 11:00:06.7269 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 11:00:06.7532 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 11:00:06.9845 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 11:00:13.9051 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 11:00:13.9142 Info LogFactory has been closed.
+2023-06-27 11:01:34.2274 Info Message Template Auto Format enabled
+2023-06-27 11:01:34.2369 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 11:01:34.2587 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 11:01:34.2591 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 11:01:34.2618 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 11:01:34.2883 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 11:01:34.5819 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 12:48:08.5031 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 12:48:08.5148 Info LogFactory has been closed.
+2023-06-27 12:48:43.8683 Info Message Template Auto Format enabled
+2023-06-27 12:48:43.8777 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 12:48:43.8993 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 12:48:43.9002 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 12:48:43.9023 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 12:48:43.9319 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 12:48:44.2096 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 13:33:55.9444 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 13:33:55.9546 Info LogFactory has been closed.
+2023-06-27 13:45:20.9438 Info Message Template Auto Format enabled
+2023-06-27 13:45:20.9551 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 13:45:20.9769 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 13:45:20.9772 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 13:45:20.9799 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 13:45:21.0158 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 13:45:21.3362 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 17:08:02.4976 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 17:08:02.5054 Info LogFactory has been closed.
+2023-06-27 17:08:55.7469 Info Message Template Auto Format enabled
+2023-06-27 17:08:55.7566 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-27 17:08:55.7783 Info Adding target FileTarget(Name=Intiri)
+2023-06-27 17:08:55.7792 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-27 17:08:55.7813 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-27 17:08:55.8110 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 17:08:56.1243 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-27 19:52:42.2369 Info AppDomain Shutting down. LogFactory closing...
+2023-06-27 19:52:42.2479 Info LogFactory has been closed.
+2023-06-28 13:42:07.3497 Info Message Template Auto Format enabled
+2023-06-28 13:42:07.3606 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-28 13:42:07.3835 Info Adding target FileTarget(Name=Intiri)
+2023-06-28 13:42:07.3839 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-28 13:42:07.3867 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-28 13:42:07.4349 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-28 13:42:07.4548 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230627.log
+2023-06-28 13:42:07.7922 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-28 17:15:54.8089 Info AppDomain Shutting down. LogFactory closing...
+2023-06-28 17:15:54.8149 Info LogFactory has been closed.
+2023-06-29 09:41:53.3627 Info Message Template Auto Format enabled
+2023-06-29 09:41:53.3726 Info Loading assembly: NLog.Web.AspNetCore
+2023-06-29 09:41:53.3941 Info Adding target FileTarget(Name=Intiri)
+2023-06-29 09:41:53.3944 Info Adding target FileTarget(Name=IntiriAll)
+2023-06-29 09:41:53.3971 Info Adding target ColoredConsoleTarget(Name=console)
+2023-06-29 09:41:53.4255 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-29 09:41:53.4452 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230628.log
+2023-06-29 09:41:53.7615 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-06-29 13:22:52.3187 Info AppDomain Shutting down. LogFactory closing...
+2023-06-29 13:22:52.3270 Info LogFactory has been closed.
+2023-07-04 11:06:51.5649 Info Message Template Auto Format enabled
+2023-07-04 11:06:51.5750 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-04 11:06:51.5968 Info Adding target FileTarget(Name=Intiri)
+2023-07-04 11:06:51.5971 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-04 11:06:51.5998 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-04 11:06:51.6373 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-04 11:06:51.6574 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230630.log
+2023-07-04 11:06:51.9718 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-04 11:06:54.7881 Info AppDomain Shutting down. LogFactory closing...
+2023-07-04 11:06:54.7946 Info LogFactory has been closed.
+2023-07-05 16:28:52.9539 Info Message Template Auto Format enabled
+2023-07-05 16:28:52.9649 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-05 16:28:52.9899 Info Adding target FileTarget(Name=Intiri)
+2023-07-05 16:28:52.9903 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-05 16:28:52.9931 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-05 16:28:53.0275 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 16:28:53.0480 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230704.log
+2023-07-05 16:28:53.3904 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 16:49:00.3287 Info AppDomain Shutting down. LogFactory closing...
+2023-07-05 16:49:00.3369 Info LogFactory has been closed.
+2023-07-05 16:50:02.0792 Info Message Template Auto Format enabled
+2023-07-05 16:50:02.0928 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-05 16:50:02.1174 Info Adding target FileTarget(Name=Intiri)
+2023-07-05 16:50:02.1190 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-05 16:50:02.1236 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-05 16:50:02.1629 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 16:50:02.5454 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 16:59:34.2242 Info AppDomain Shutting down. LogFactory closing...
+2023-07-05 16:59:34.2342 Info LogFactory has been closed.
+2023-07-05 17:02:21.1350 Info Message Template Auto Format enabled
+2023-07-05 17:02:21.1454 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-05 17:02:21.1679 Info Adding target FileTarget(Name=Intiri)
+2023-07-05 17:02:21.1688 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-05 17:02:21.1709 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-05 17:02:21.2004 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 17:02:21.5419 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 17:25:22.2804 Info AppDomain Shutting down. LogFactory closing...
+2023-07-05 17:25:22.2878 Info LogFactory has been closed.
+2023-07-05 17:26:08.4435 Info Message Template Auto Format enabled
+2023-07-05 17:26:08.4594 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-05 17:26:08.4834 Info Adding target FileTarget(Name=Intiri)
+2023-07-05 17:26:08.4838 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-05 17:26:08.4866 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-05 17:26:08.5241 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-05 17:26:08.8690 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 11:06:43.1332 Info Message Template Auto Format enabled
+2023-07-06 11:06:43.1446 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 11:06:43.1680 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 11:06:43.1690 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 11:06:43.1713 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 11:06:43.2084 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 11:06:43.2290 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230705.log
+2023-07-06 11:06:43.5695 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 11:34:06.7564 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 11:34:06.7629 Info LogFactory has been closed.
+2023-07-06 12:34:19.9489 Info Message Template Auto Format enabled
+2023-07-06 12:34:19.9615 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 12:34:19.9852 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 12:34:19.9863 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 12:34:19.9886 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 12:34:20.0310 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:34:20.4761 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:42:29.3919 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 12:42:29.4011 Info LogFactory has been closed.
+2023-07-06 12:42:35.0471 Info Message Template Auto Format enabled
+2023-07-06 12:42:35.0581 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 12:42:35.0817 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 12:42:35.0827 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 12:42:35.0850 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 12:42:35.1149 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:42:35.4234 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:54:40.5475 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 12:54:40.5579 Info LogFactory has been closed.
+2023-07-06 12:55:06.6230 Info Message Template Auto Format enabled
+2023-07-06 12:55:06.6333 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 12:55:06.6557 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 12:55:06.6566 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 12:55:06.6588 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 12:55:06.6922 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:55:07.0174 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 12:57:46.5182 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 12:57:46.5306 Info LogFactory has been closed.
+2023-07-06 13:28:51.8841 Info Message Template Auto Format enabled
+2023-07-06 13:28:51.8948 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 13:28:51.9186 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 13:28:51.9196 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 13:28:51.9218 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 13:28:51.9743 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 13:28:52.3188 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 14:15:37.0653 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 14:15:37.0751 Info LogFactory has been closed.
+2023-07-06 16:43:54.4816 Info Message Template Auto Format enabled
+2023-07-06 16:43:54.4922 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 16:43:54.5154 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 16:43:54.5164 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 16:43:54.5187 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 16:43:54.5486 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 16:43:54.9400 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 16:58:28.0292 Info AppDomain Shutting down. LogFactory closing...
+2023-07-06 16:58:28.0389 Info LogFactory has been closed.
+2023-07-06 16:58:46.7606 Info Message Template Auto Format enabled
+2023-07-06 16:58:46.7717 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-06 16:58:46.7933 Info Adding target FileTarget(Name=Intiri)
+2023-07-06 16:58:46.7937 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-06 16:58:46.7964 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-06 16:58:46.8232 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-06 16:58:47.1800 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-07 11:23:45.3424 Info Message Template Auto Format enabled
+2023-07-07 11:23:45.3526 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-07 11:23:45.3743 Info Adding target FileTarget(Name=Intiri)
+2023-07-07 11:23:45.3752 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-07 11:23:45.3774 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-07 11:23:45.4064 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-07 11:23:45.4264 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230706.log
+2023-07-07 11:23:45.7794 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-07 17:13:55.0811 Info AppDomain Shutting down. LogFactory closing...
+2023-07-07 17:13:55.0950 Info LogFactory has been closed.
+2023-07-11 10:09:29.4782 Info Message Template Auto Format enabled
+2023-07-11 10:09:29.4886 Info Loading assembly: NLog.Web.AspNetCore
+2023-07-11 10:09:29.5107 Info Adding target FileTarget(Name=Intiri)
+2023-07-11 10:09:29.5117 Info Adding target FileTarget(Name=IntiriAll)
+2023-07-11 10:09:29.5138 Info Adding target ColoredConsoleTarget(Name=console)
+2023-07-11 10:09:29.5645 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-11 10:09:29.5846 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230707.log
+2023-07-11 10:09:29.8978 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-07-11 10:09:32.4647 Info AppDomain Shutting down. LogFactory closing...
+2023-07-11 10:09:32.4713 Info LogFactory has been closed.

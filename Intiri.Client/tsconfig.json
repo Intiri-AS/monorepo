@@ -1,8 +1,13 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,7 +17,7 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2018", "dom", "dom.iterable"]
+    "lib": ["es2018", "dom",]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
