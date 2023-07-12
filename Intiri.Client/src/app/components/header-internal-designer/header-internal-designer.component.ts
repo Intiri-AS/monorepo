@@ -4,6 +4,7 @@ import { PopoverController } from '@ionic/angular';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
+import { ProfilePopoverComponent } from '../popovers/profile-popover/profile-popover.component';
 
 @Component({
   selector: 'app-header-internal-designer',
@@ -72,5 +73,16 @@ export class HeaderInternalDesignerComponents {
   menuClosed() {
     const x = document.querySelector('#home');
     x['style'].height = 'auto'
+  }
+
+  async showProfilePopover (e: Event) {
+    const popover = await this.popoverController.create({
+      component: ProfilePopoverComponent,
+      componentProps: { headerType: 'designer' },
+      event: e,
+      dismissOnSelect: false
+    });
+
+    await popover.present();
   }
 }

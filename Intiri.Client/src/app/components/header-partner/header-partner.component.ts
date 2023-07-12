@@ -7,6 +7,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
+import { ProfilePopoverComponent } from '../popovers/profile-popover/profile-popover.component';
 
 @Component({
   selector: 'app-header-partner',
@@ -58,6 +59,16 @@ export class HeaderPartnerComponent implements OnInit {
     popover.onDidDismiss().then(() => {
       this.isSettingsSelected = false;
     })
+  }
+
+  async showProfilePopover (e: Event) {
+    const popover = await this.popoverController.create({
+      component: ProfilePopoverComponent,
+      componentProps: { headerType: 'partner' },
+      event: e,
+      dismissOnSelect: false
+    });
+    await popover.present();
   }
 
   menuOpened() {
