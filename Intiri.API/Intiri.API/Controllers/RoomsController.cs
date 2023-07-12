@@ -80,7 +80,12 @@ namespace Intiri.API.Controllers
 				return BadRequest("Room name with room type already exist");
 			}
 
-			Room room = _mapper.Map<Room>(roomInDTO);
+            if (roomType.Rooms.Any(r => r.NameNorwegian == roomInDTO.NameNorwegian))
+            {
+                return BadRequest("Room name norwegian with room type already exist");
+            }
+
+            Room room = _mapper.Map<Room>(roomInDTO);
 
 			IFormFile imageFile = roomInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)

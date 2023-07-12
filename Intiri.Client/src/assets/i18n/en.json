@@ -313,7 +313,8 @@
     "contacts": "Partner contacts",
     "contact-firstName": "Partner contact first name",
     "contact-lastName": "Partner contact last name",
-    "products": "5. Select the Products",
+    "products": "Products",
+    "select-products": "5. Select the Products",
     "product-name": "Product name",
     "product-name-required" : "Product name is required",
     "product-material": "Product material",
@@ -430,7 +431,9 @@
     "go-to-colors": "Go to Colors",
     "picture-added": "Picture added!",
     "picture-added-text": "You successfully added new picture",
-    "go-to-pictures": "Go to Pictures"
+    "go-to-pictures": "Go to Pictures",
+    "room": "Room",
+    "style": "Style"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",
