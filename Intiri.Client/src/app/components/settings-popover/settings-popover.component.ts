@@ -11,10 +11,11 @@ import { LanguagePopoverComponent } from '../popovers/language-popover/language-
 export class SettingsPopoverComponent implements OnInit {
 
   headerType;
+  onSettingsItemClick;
 
   constructor(
     private modalController: ModalController,
-    private popoverController: PopoverController,
+    public popoverController: PopoverController,
     private nav: NavController
   ) { }
 
@@ -28,9 +29,11 @@ export class SettingsPopoverComponent implements OnInit {
     });
 
     await modal.present();
+    this.onSettingsItemClick();
   }
 
   async openLanguagePopover(event) {
+    // this.onSettingsItemClick();
     const popover = await this.popoverController.create({
       component: LanguagePopoverComponent,
       event

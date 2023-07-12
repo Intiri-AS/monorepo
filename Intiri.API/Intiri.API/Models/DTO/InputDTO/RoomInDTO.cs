@@ -7,6 +7,7 @@ namespace Intiri.API.Models.DTO.InputDTO
 	{
 		[Required]
 		public string Name { get; set; }
+		public string NameNorwegian { get; set; }
 
 		[Required]
 		public int RoomTypeId { get; set; }
