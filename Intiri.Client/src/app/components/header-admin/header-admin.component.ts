@@ -5,6 +5,7 @@ import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { SettingsPopoverComponent } from '../settings-popover/settings-popover.component';
+import { ProfilePopoverComponent } from '../popovers/profile-popover/profile-popover.component';
 
 @Component({
   selector: 'app-header-admin',
@@ -64,6 +65,17 @@ export class HeaderAdminComponent implements OnInit {
   menuClosed() {
     const x = document.querySelector('#home');
     x['style'].height = 'auto'
+  }
+
+  async showProfilePopover (e: Event) {
+    const popover = await this.popoverController.create({
+      component: ProfilePopoverComponent,
+      componentProps: { headerType: 'admin' },
+      event: e,
+      dismissOnSelect: false
+    });
+
+    await popover.present();
   }
 
   async showSettings(e: Event) {
