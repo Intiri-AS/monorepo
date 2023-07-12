@@ -7,7 +7,7 @@
       <p class="main-title mb-[34px] pl-2">{{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}</p>
       <ion-row class="mb-20">
         <ion-col size="12" size-xl="2.3">
-          <div class="bg-light xl-ion:w-[240px]  rounded-lg text-center pb-1">
+          <div class="bg-light xl-ion:w-[240px] rounded-lg text-center pb-1 fixed">
             <p *ngIf="client" [class.!text-primary]="clientRequestStep" (click)="clientRequestStep = true; currentStepNo = -1" class="side-menu-item pt-[45px]">
               {{client?.moodboard ? ('DESIGNERS.client-request' | translate) : ('DESIGNERS.client-details' | translate) }}
             </p>
