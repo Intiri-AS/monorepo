@@ -430,7 +430,9 @@
     "go-to-colors": "Gå til Farger",
     "picture-added": "Bilde lagt til!",
     "picture-added-text": "Nytt bilde lagt til med suksess",
-    "go-to-pictures": "Gå til bilder"
+    "go-to-pictures": "Gå til bilder",
+    "room": "Rom",
+    "style": "Stil"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",
