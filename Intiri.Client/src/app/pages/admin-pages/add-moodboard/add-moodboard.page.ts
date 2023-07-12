@@ -19,19 +19,19 @@ export class AddMoodboardPage implements OnInit {
 
   steps: Array<object> = [
     {
-      title: 'STYLE.rooms',
+      title: 'STYLE.select-room-moodboard',
       data: [],
     },
     {
-      title: 'STYLE.styles',
+      title: 'STYLE.select-style-moodboard',
       data: [],
     },
     {
-      title: 'NEW-PROJECT.materials',
+      title: 'NEW-PROJECT.select-materials',
       data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
     },
     {
-      title: 'MY-INTIRI.colors',
+      title: 'MY-INTIRI.select-colors',
       data: [],
     },
     {

@@ -9,7 +9,7 @@
   </section>
   <section  [class.step-selected]="currentStepNo === 2" [class.disabled]="!canChangeStep(2)" (click)="goToStep(2)" class="new-project-step">
     <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room-details" [class.bg-room-details-white]="currentStepNo === 2"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 2">{{'NEW-PROJECT.room-details' | translate}}</p>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 2">{{'NEW-PROJECT.upload' | translate}}</p>
   </section>
   <section [class.step-selected]="currentStepNo === 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="new-project-step">
     <div class="project-step-icon bg-color-pallete" [class.bg-color-pallete-white]="currentStepNo === 3"></div>
