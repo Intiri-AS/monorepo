@@ -8,11 +8,31 @@
       </div>
     </ion-col>
     <ion-col size="12" size-sm="6" offset-lg="6" size-lg="3" class="flex items-end justify-center sm-ion:justify-end">
-      <ion-button (click)="addPicture()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-pictures' | translate}}</ion-button>
+      <ion-col>
+        <span class="text-sm text-black-2">
+          {{'STYLE.room' | translate}}
+        </span>
+        <ion-select (ionChange)="onRoomFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
+          <ion-select-option *ngFor="let room of (rooms$ | async)" value={{room.id}}>
+            {{ room.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col>
+        <span class="text-sm text-black-2">
+          {{'STYLE.style' | translate}}
+        </span>
+        <ion-select (ionChange)="onStyleFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
+          <ion-select-option *ngFor="let style of (styles$ | async)" value={{style.id}}>
+            {{style.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-button (click)="addPicture()" fill="clear" class="primary-btn mb-[1.5rem]">{{'STYLE.add-pictures' | translate}}</ion-button>
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
-    <ion-col *ngFor="let styleImage of (styleImages$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+    <ion-col *ngFor="let styleImage of styleImages | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
       <div class="card">
         <div class="h-full w-full">
           <img src="{{styleImage.imagePath}}" class="object-fill !h-full !w-full rounded-2xl" alt="Picture Img" />

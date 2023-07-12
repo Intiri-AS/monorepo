@@ -233,5 +233,41 @@ namespace Intiri.API.Controllers
 
 			return BadRequest("Failed to update designer.");
 		}
-	}
+
+        [AllowAnonymous]
+        [HttpGet("getDesigners")]
+        public async Task<ActionResult<IEnumerable<DesignerOutDTO>>> GetAllDesigners()
+        {
+            IEnumerable<Designer> dUsers = await _unitOfWork.UserRepository.GetDesignersWithRatingsAsync();
+
+            foreach (Designer designer in dUsers)
+            {
+                IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsWithImagesByIds(designer.CreatedMoodboards.Select(m => m.Id).ToArray());
+                designer.CreatedMoodboards = moodboards.ToArray();
+            }
+
+            IEnumerable<DesignerOutDTO> usersToReturn = _mapper.Map<IEnumerable<DesignerOutDTO>>(dUsers);
+
+            return Ok(usersToReturn);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("getDesignerPortfolio/id/{designerId}")]
+        public async Task<ActionResult<DesignerOutDTO>> GetDesignerPortfolio(int designerId)
+        {
+            Designer dUser = await _unitOfWork.UserRepository.GetDesignerByIdWithReviewsAsync(designerId);
+
+            if (dUser == null)
+            {
+                return BadRequest("Designer user not found.");
+            }
+
+            IEnumerable<Moodboard> moodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsByIdsList(dUser.CreatedMoodboards.Select(m => m.Id).ToArray());
+            dUser.CreatedMoodboards = moodboards.ToArray();
+
+            DesignerWithReviewsOutDTO userToReturn = _mapper.Map<DesignerWithReviewsOutDTO>(dUser);
+
+            return Ok(userToReturn);
+        }
+    }
 }

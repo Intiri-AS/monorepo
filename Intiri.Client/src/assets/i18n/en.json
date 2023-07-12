@@ -430,7 +430,9 @@
     "go-to-colors": "Go to Colors",
     "picture-added": "Picture added!",
     "picture-added-text": "You successfully added new picture",
-    "go-to-pictures": "Go to Pictures"
+    "go-to-pictures": "Go to Pictures",
+    "room": "Room",
+    "style": "Style"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",
