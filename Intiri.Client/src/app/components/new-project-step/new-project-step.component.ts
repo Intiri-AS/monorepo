@@ -31,7 +31,17 @@ export class NewProjectStepComponent implements OnInit {
     private projectService: ProjectService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.currentStepNo == 4) {
+      console.log("currentStep", this.currentStep)
+    }
+  }
+
+  ngOnChanges () {
+    if (this.currentStepNo == 4) {
+      console.log("currentStep", this.currentStep)
+    }
+  }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);

@@ -84,12 +84,13 @@
                   <div class="border border-light bg-white mb-2">
                     <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
                   </div>
-                  <div class="border border-light bg-white">
+                  <!-- Todo: Products is coming as empty array for some moodboards, need to investigate -->
+                  <div class="border border-light bg-white" *ngIf="item.products.length > 0 && item.product[0].imagePath">
                     <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
-                  <div class="border border-light bg-white">
+                  <div class="border border-light bg-white" *ngIf="item.style.imagePath != null">
                     <img src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] object-contain w-full" alt="moodboard-img"/>
                   </div>
                 </ion-col>
@@ -110,16 +111,16 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="6">
-                  <div class="border border-light bg-white mb-2">
-                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                  <div class="border border-light bg-white mb-2" *ngIf="item.style.styleImages.length > 0 && item.style.styleImages[0].imagePath != null">
+                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img1"/>
                   </div>
-                  <div class="border border-light bg-white">
-                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                  <div class="border border-light bg-white" *ngIf="item.products.length > 0">
+                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img2"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
-                  <div class="border border-light bg-white">
-                    <img src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] w-full object-contain" alt="moodboard-img"/>
+                  <div class="border border-light bg-white" *ngIf="item.style.imagePath">
+                    <img [src]="item.style.imagePath" class="h-[200px] lg:h-[280px] w-full object-contain" alt="moodboard-img3"/>
                   </div>
                 </ion-col>
               </ion-row>

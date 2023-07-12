@@ -35,7 +35,7 @@ export class AddMoodboardPage implements OnInit {
       data: [],
     },
     {
-      title: 'PARTNERS.products',
+      title: 'PARTNERS.select-products',
       data: [],
     },
     {

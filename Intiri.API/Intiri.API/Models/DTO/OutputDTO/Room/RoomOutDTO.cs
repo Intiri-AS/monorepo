@@ -7,6 +7,7 @@ namespace Intiri.API.Models.DTO.OutputDTO.Room
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public string NameNorwegian { get; set; }
 
         public string IconPath { get; set; }
 

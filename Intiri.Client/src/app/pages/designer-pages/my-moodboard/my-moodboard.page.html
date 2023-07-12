@@ -36,7 +36,7 @@
                         <div class="border border-light bg-white mb-2">
                           <img src="{{moodboard?.style?.styleImages[0]?.imagePath}}" class="important-fix" alt="moodboard-img"/>
                         </div>
-                        <div class="border border-light bg-white">
+                        <div class="border border-light bg-white" *ngIf="moodboard?.products?.length > 0">
                           <img src="{{moodboard?.products[0]?.imagePath}}" class="important-fix" alt="moodboard-img"/>
                         </div>
                       </ion-col>
