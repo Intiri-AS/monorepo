@@ -46,6 +46,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<DesignerRating> DesignerRatings { get; set; }
 		public DbSet<DesignerReview> DesignerReviews { get; set; }
 		public DbSet<ConsultationPayment> ConsultationPayment { get; set; }
+		public DbSet<ColorNCS> ColorNCS { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
