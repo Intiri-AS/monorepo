@@ -11,9 +11,9 @@ export class Moodboard {
   products: Array<any>;
   created: any;
   roomDetails?: {
-    shape: string;
-    size: number;
-    budgetRate: number;
+    // shape: string;
+    // size: number;
+    // budgetRate: number;
     roomSketchFile: string;
   };
 
@@ -31,9 +31,9 @@ export class Moodboard {
     this.products = [];
     this.created = null;
     this.roomDetails = {
-      shape: '',
-      size: null,
-      budgetRate: null,
+      // shape: '',
+      // size: null,
+      // budgetRate: null,
       roomSketchFile: ''
     };
   }

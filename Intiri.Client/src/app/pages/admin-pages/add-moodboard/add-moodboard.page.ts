@@ -19,11 +19,11 @@ export class AddMoodboardPage implements OnInit {
 
   steps: Array<object> = [
     {
-      title: 'STYLE.rooms',
+      title: 'STYLE.select-room-moodboard',
       data: [],
     },
     {
-      title: 'STYLE.styles',
+      title: 'STYLE.select-style-moodboard',
       data: [],
     },
     {
@@ -35,7 +35,7 @@ export class AddMoodboardPage implements OnInit {
       data: [],
     },
     {
-      title: 'PARTNERS.products',
+      title: 'PARTNERS.select-products',
       data: [],
     },
     {

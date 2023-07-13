@@ -84,7 +84,7 @@ export class ProjectService implements Resolve<Project> {
     const projectColorPaletteIds = project.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
 
     const formData = new FormData();
-    
+
     Object.keys(parsedFormData).forEach(key => formData.append(key, parsedFormData[key]));
     this.formDataAppendCollection("StyleImageIds", styleImageIds, formData);
     this.formDataAppendCollection("ProjectColorPaletteIds", projectColorPaletteIds, formData);
@@ -162,9 +162,9 @@ export class ProjectService implements Resolve<Project> {
 
   parseRoomDetailsFormData(project: any, formData: FormData) {
     const parsedRDFormData = {
-      shape: project.roomDetails['shape'].shape,
-      size: project.roomDetails['size'],
-      budgetRate: project.roomDetails['budgetRate'],
+      // shape: project.roomDetails['shape'].shape,
+      // size: project.roomDetails['size'],
+      // budgetRate: project.roomDetails['budgetRate'],
       roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
     };
 
@@ -190,7 +190,7 @@ export class ProjectService implements Resolve<Project> {
   }
 
   formDataAppendCollection(arrayName: string, arrayValues: any[], formData: FormData) {
-    for (const index in arrayValues) 
+    for (const index in arrayValues)
     {
       // iterate for each item and append it to form.
       formData.append(`${arrayName}[${index}]`,arrayValues[index]);
