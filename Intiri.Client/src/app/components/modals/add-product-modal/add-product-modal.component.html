@@ -7,6 +7,8 @@
         <div>
           <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">{{'PARTNERS.addProduct' | translate}}</h2>
         </div>
+
+        <!-- Product name -->
         <div class="profile-input">
           <span class="text-sm text-black-2">{{'PARTNERS.product-name' | translate}}</span>
           <ion-input formControlName="productName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -14,6 +16,14 @@
             <span slot="error" style="color: red;" *ngIf="form.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
           </div>
         </div>
+
+        <!-- Product link -->
+        <div class="profile-input">
+          <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
+          <ion-input formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+        </div>
+
+        <!-- Product type & Material type -->
         <section class="flex-row-product">
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
@@ -35,6 +45,8 @@
 
           </div>
         </section>
+
+        <!-- Select color & price -->
         <div class="flex-row-product">
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>

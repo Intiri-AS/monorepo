@@ -316,6 +316,7 @@
     "products": "Products",
     "select-products": "5. Select the Products",
     "product-name": "Product name",
+    "product-link": "Product link",
     "product-name-required" : "Product name is required",
     "product-material": "Product material",
     "product-material-required": "Material is required",

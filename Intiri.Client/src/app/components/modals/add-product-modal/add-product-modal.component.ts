@@ -39,6 +39,7 @@ export class AddProductModalComponent implements OnInit {
 
   colors$ = this.colorService.colors$;
   materials$ = this.materialService.materials$;
+  partners: any;
   materialTypes: any = [];
   productsType: any = [];
   materials: any = [];
@@ -49,6 +50,7 @@ export class AddProductModalComponent implements OnInit {
     productName: '',
     productType: '',
     productMaterial: '',
+    productLink: '',
     color: '',
     price: '',
     description: '',
@@ -93,6 +95,9 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
+    this.partnerService.getPartnerProfile().subscribe(res => {
+      this.partners = res;
+    });
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
       console.log(this.materialTypes);
@@ -113,9 +118,10 @@ export class AddProductModalComponent implements OnInit {
     this.userForm = this.fb.group({
         productName: ['' || undefined, Validators.required],
         productType: ['', Validators.required],
-        productMaterial: ['', Validators.required],
-        color: ['', Validators.required],
-        price: ['', Validators.required],
+        productMaterial: [''],
+        productLink: [''],
+        color: [''],
+        price: [''],
         imageUrl: ['', Validators.required],
         description: '',
     });
@@ -151,13 +157,17 @@ export class AddProductModalComponent implements OnInit {
   addProduct() {
     this.productData = {
       name: this.userForm.value.productName,
+      partnerName: this.partners.name,
       productTypeId: Number(this.userForm.value.productType),
       materialId: Number(this.userForm.value.productMaterial),
+      productLink: this.userForm.value.productLink,
       color: this.userForm.value.color,
       price: Number(this.userForm.value.price),
       description: this.userForm.value?.description || undefined,
       imageFile: this.productData.imageFile
     };
+    console.log("productData", this.productData)
+    // return;
     this.partnerService.addPartnerProduct(this.productData).subscribe( response => {
       this.spinner.hide();
       this.openSuccessModal();
