@@ -28,6 +28,7 @@ export class AddProductModalComponent implements OnInit {
   delete;
 
   imagePath = null;
+  addImagePaths = [];
   userForm: FormGroup;
   editProductForm: FormGroup;
 
@@ -54,7 +55,7 @@ export class AddProductModalComponent implements OnInit {
     color: '',
     price: '',
     description: '',
-    imageFile: ''
+    imageFiles: []
   };
 
   product: any = {
@@ -134,7 +135,16 @@ export class AddProductModalComponent implements OnInit {
 
   }
 
-  onFileChange(event) {
+  onFileChangeAddProduct (event) {
+    if (Object.keys(event.target.files).length > 0) {
+      this.productData.imageFiles = event.target.files;
+      this.addImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.productData.imageFiles[key])));
+    } else {
+      this.addImagePaths = []
+    }
+  }
+  onFileChangeEditProduct(event) {
     if(event.target.files[0]) {
       this.productData.imageFile = event.target.files[0];
       this.product.imageFile = event.target.files[0];
@@ -164,7 +174,7 @@ export class AddProductModalComponent implements OnInit {
       color: this.userForm.value.color,
       price: Number(this.userForm.value.price),
       description: this.userForm.value?.description || undefined,
-      imageFile: this.productData.imageFile
+      imageFiles: this.productData.imageFiles
     };
     console.log("productData", this.productData)
     // return;
