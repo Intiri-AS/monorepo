@@ -313,7 +313,8 @@
     "contacts": "Partner contacts",
     "contact-firstName": "Partner contact first name",
     "contact-lastName": "Partner contact last name",
-    "products": "5. Select the Products",
+    "products": "Products",
+    "select-products": "5. Select the Products",
     "product-name": "Product name",
     "product-name-required" : "Product name is required",
     "product-material": "Product material",
@@ -390,9 +391,11 @@
     "set-template": "Set as moodboard template"
   },
   "STYLE": {
-    "styles": "2. Select the Style",
+    "styles": "Styles",
+    "select-style-moodboard": "2. Select the Style",
     "materials": "Materials",
-    "rooms": "1. Select the Room",
+    "rooms": "Rooms",
+    "select-room-moodboard": "1. Select the Room",
     "pictures": "Pictures",
     "add-style": "Add style",
     "style-name": "Style name",
@@ -428,7 +431,9 @@
     "go-to-colors": "Go to Colors",
     "picture-added": "Picture added!",
     "picture-added-text": "You successfully added new picture",
-    "go-to-pictures": "Go to Pictures"
+    "go-to-pictures": "Go to Pictures",
+    "room": "Room",
+    "style": "Style"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",

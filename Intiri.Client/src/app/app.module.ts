@@ -129,6 +129,7 @@ import { CommonModule, DatePipe, LOCATION_INITIALIZED } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartComponent } from './components/chart/chart.component';
 import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
+import { ProfilePopoverComponent } from './components/popovers/profile-popover/profile-popover.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -150,7 +151,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent, BackComponent
+    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
