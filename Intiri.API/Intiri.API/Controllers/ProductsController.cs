@@ -95,7 +95,7 @@ namespace Intiri.API.Controllers
 
 		[Authorize(Policy = PolicyNames.PartnerPolicy)]
 		[HttpPost("add")]
-		public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct([FromForm] ProductInDTO productInDTO)
+		public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct([FromForm] MultipleProductInDTO productInDTO)
 		{
 			//PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
 			PartnerContact pUser = await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
@@ -108,8 +108,7 @@ namespace Intiri.API.Controllers
 			if (productType == null) return BadRequest("Product type doesn't exist");
 
 			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(productInDTO.MaterialId);
-			if (materialType == null) return BadRequest("Material type doesn't exist");
-
+			//if (materialType == null) return BadRequest("Material type doesn't exist");
 
 			if (productType.Products.Any(p => p.Name == productInDTO.Name))
 			{
@@ -118,35 +117,39 @@ namespace Intiri.API.Controllers
 					$" for product type: {productInDTO.ProductTypeId}");
 			}
 
-			Product product = _mapper.Map<Product>(productInDTO);
-
-			IFormFile imageFile = productInDTO.ImageFile;
-			if (imageFile != null && imageFile.Length > 0)
+			try
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+                foreach (var imageFile in productInDTO.ImageFile)
+                {
+                    Product product = _mapper.Map<Product>(productInDTO);
+                    if (imageFile != null && imageFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                            await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages);
 
-				product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				product.ImagePublicId = uploadResult.Item3.PublicId;
+                        if (uploadResult.Item1 != HttpStatusCode.OK)
+                        {
+                            return BadRequest(uploadResult.Item2);
+                        }
 
-				product.ProductType = productType;
-				product.Material = materialType;
-				product.Partner = partner;
+                        product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                        product.ImagePublicId = uploadResult.Item3.PublicId;
 
-				_unitOfWork.ProductRepository.Insert(product);
+                        product.ProductType = productType;
+                        product.Material = materialType;
+                        product.Partner = partner;
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return Ok(_mapper.Map<ProductOutDTO>(product));
-				}
-			}
+                        _unitOfWork.ProductRepository.Insert(product);
 
-			return BadRequest("Probem occured while adding product");
+                        await _unitOfWork.SaveChanges();
+                    }
+                }
+                return Ok(productInDTO);
+            }
+			catch
+			{
+                return BadRequest("Probem occured while adding product");
+            }
 		}
 
 		[Authorize(Policy = PolicyNames.ProductPolicy)]
