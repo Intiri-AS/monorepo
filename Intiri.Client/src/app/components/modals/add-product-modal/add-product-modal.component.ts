@@ -84,9 +84,9 @@ export class AddProductModalComponent implements OnInit {
                   productName: ['' || undefined, Validators.required],
                   productLink: [''],
                   productType: ['', Validators.required],
-                  productMaterial: ['', Validators.required],
-                  color: ['', Validators.required],
-                  price: ['', Validators.required],
+                  productMaterial: [''],
+                  color: [''],
+                  price: [''],
                   imageFile: [''],
                   description: [''],
                 });
