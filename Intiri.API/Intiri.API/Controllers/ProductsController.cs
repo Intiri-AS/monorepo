@@ -203,7 +203,7 @@ namespace Intiri.API.Controllers
 
 			MaterialType materialType = await _unitOfWork.MaterialTypeRepository
 				.GetByID(productInDTO.MaterialId);
-			if (materialType == null) return BadRequest("Material type doesn't exist");
+			//if (materialType == null) return BadRequest("Material type doesn't exist");
 
 			IFormFile imageFile = productInDTO.ImageFile;
 			if (imageFile != null && imageFile.Length > 0)
