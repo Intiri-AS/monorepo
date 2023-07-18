@@ -58,6 +58,7 @@ export class AddMaterialsModalComponent implements OnInit {
       name: ['', [Validators.required]],
       type: ['', [Validators.required]],
       provider: [''],
+      link: [''],
       description: ['', [Validators.required]],
       imageFiles: ['', [Validators.required]]
     });
@@ -80,6 +81,7 @@ export class AddMaterialsModalComponent implements OnInit {
     name: '',
     materialTypeId: null,
     provider: '',
+    link: '',
     imageFiles: [],
     description: ''
   }

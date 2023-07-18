@@ -31,9 +31,19 @@
       </ion-row>
 
       <!-- material provider -->
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] flex flex-col">
-        <span class="text-sm text-black-2 mb-[6px]">Provider</span>
-        <ion-input [(ngModel)]="material.provider" type="text" class="provider-input border rounded-2xl border-black-2" formControlName="provider"></ion-input>
+      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+        <ion-col>
+          <div class="pr-2">
+            <span class="text-sm text-black-2">{{ 'STYLE.provider' | translate}}</span>
+            <ion-input [(ngModel)]="material.provider" type="text" class="provider-input border rounded-2xl border-black-2 h-[3.4rem]" formControlName="provider"></ion-input>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="pl-2">
+            <span class="text-sm text-black-2">{{ 'STYLE.link-to-material' | translate}}</span>
+            <ion-input [(ngModel)]="material.link" type="text" class="provider-input border rounded-2xl border-black-2 h-[3.4rem]" formControlName="link"></ion-input>
+          </div>
+        </ion-col>
       </ion-row>
 
       <!-- Description -->
