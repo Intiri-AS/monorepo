@@ -65,6 +65,8 @@ export class AddMaterialsModalComponent implements OnInit {
     this.editMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       type: [''],
+      provider: [''],
+      link: [''],
       description: ['', [Validators.required]],
       imageFile: ['']
     });
@@ -98,6 +100,7 @@ export class AddMaterialsModalComponent implements OnInit {
     if (this.edit) {
       const {id, imagePath, ...others } = this.item;
       this.material = others;
+      console.log("material to edit", this.item)
     }
   }
 
