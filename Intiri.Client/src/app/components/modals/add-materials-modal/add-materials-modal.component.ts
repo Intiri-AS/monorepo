@@ -74,11 +74,12 @@ export class AddMaterialsModalComponent implements OnInit {
   material = {
     name: '',
     materialTypeId: null,
-    imageFile: null,
+    imageFiles: [],
     description: ''
   }
 
   imagePath = null;
+  addMaterialImagePaths = [];
 
   materialTypes: any[];
 
@@ -96,13 +97,23 @@ export class AddMaterialsModalComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  onFileChange(event) {
-    if(event.target.files[0]) {
-      this.material.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFile));
+  onFileChangeAddMaterial (event) {
+    if (Object.keys(event.target.files).length > 0) {
+      this.material.imageFiles = event.target.files;
+      this.addMaterialImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFiles[key])));
     } else {
-      this.imagePath = null;
+      this.addMaterialImagePaths = []
     }
+  }
+
+  onFileChange(event) {
+    // if(event.target.files[0]) {
+    //   this.material.imageFile = event.target.files[0];
+    //   this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFile));
+    // } else {
+    //   this.imagePath = null;
+    // }
   }
 
   addMaterial() {

@@ -393,6 +393,7 @@
   },
   "STYLE": {
     "styles": "Styles",
+    "type": "Type",
     "select-style-moodboard": "2. Select the Style",
     "materials": "Materials",
     "rooms": "Rooms",
