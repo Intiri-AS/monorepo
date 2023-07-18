@@ -393,6 +393,7 @@
   },
   "STYLE": {
     "styles": "Stilen",
+    "type": "Type",
     "select-style-moodboard": "2. Velg stilen",
     "materials": "Materialer",
     "rooms": "Rommet",

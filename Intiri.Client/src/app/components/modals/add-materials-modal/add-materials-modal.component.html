@@ -19,7 +19,7 @@
         </ion-col>
         <ion-col>
           <div class="pl-2">
-            <span class="text-sm text-black-2">Type</span>
+            <span class="text-sm text-black-2">{{ 'STYLE.type' | translate }}</span>
           <ion-select [(ngModel)]="material.materialTypeId" interface="popover" class=" h-[56px]" formControlName="type">
             <ion-select-option  *ngFor="let materialType of materialTypes" value="{{materialType.id}}">
               {{'MATERIAL-TYPE.' + materialType.name | translate}}
@@ -29,6 +29,14 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <!-- material provider -->
+      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] flex flex-col">
+        <span class="text-sm text-black-2 mb-[6px]">Provider</span>
+        <ion-input [(ngModel)]="material.provider" type="text" class="provider-input border rounded-2xl border-black-2" formControlName="provider"></ion-input>
+      </ion-row>
+
+      <!-- Description -->
       <ion-row>
         <ion-col>
           <div class="profile-input">
@@ -38,6 +46,8 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <!-- Images -->
       <ion-row>
         <ion-col>
           <div class="profile-input w-fit">
@@ -48,11 +58,23 @@
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
-                <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="materialImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+              <input
+                (change)="onFileChangeAddMaterial($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageFiles"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+                multiple
+              />
             </label>
-            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
+            <div [ngClass]="{'image-preview-container' : addMaterialImagePaths.length > 0}">
+              <div *ngFor="let imagePath of addMaterialImagePaths; let i = index">
+                <img [src]="imagePath" alt="{{ 'PictureImage ' + i }}" class="preview-image"/>
+              </div>
+            </div>
+            <span class="ion-warning" *ngIf="isFormSubmited && addImageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
