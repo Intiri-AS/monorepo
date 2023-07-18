@@ -394,6 +394,8 @@
   "STYLE": {
     "styles": "Styles",
     "type": "Type",
+    "provider": "Provider",
+    "link-to-material":  "Link to this material",
     "select-style-moodboard": "2. Select the Style",
     "materials": "Materials",
     "rooms": "Rooms",
