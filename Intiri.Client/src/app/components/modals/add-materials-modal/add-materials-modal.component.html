@@ -52,7 +52,6 @@
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="material.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
-            <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

@@ -59,7 +59,7 @@ export class AddMaterialsModalComponent implements OnInit {
       type: ['', [Validators.required]],
       provider: [''],
       link: [''],
-      description: ['', [Validators.required]],
+      description: [''],
       imageFiles: ['', [Validators.required]]
     });
     this.editMaterialForm = this.formBuilder.group({
