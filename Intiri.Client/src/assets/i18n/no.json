@@ -394,6 +394,7 @@
   "STYLE": {
     "styles": "Stilen",
     "type": "Type",
+    "link-to-material":  "Link til dette materialet",
     "select-style-moodboard": "2. Velg stilen",
     "materials": "Materialer",
     "rooms": "Rommet",
