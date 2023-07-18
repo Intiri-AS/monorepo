@@ -158,6 +158,11 @@
               <span slot="error" class="ion-warning" *ngIf="editForm.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
             </div>
           </div>
+
+          <div class="profile-input">
+            <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
+            <ion-input [(ngModel)]="product.productLink" formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+          </div>
           <section class="flex-row-product">
             <div class="profile-input fixed-width">
               <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
