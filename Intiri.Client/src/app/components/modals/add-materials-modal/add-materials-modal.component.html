@@ -141,14 +141,14 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.material-name' | translate}}</span>
-            <ion-input [(ngModel)]="material.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+            <ion-input [(ngModel)]="edit_material_payload.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">Type</span>
-          <ion-select [(ngModel)]="material.materialTypeId" interface="popover" class="h-[56px]" formControlName="type">
+          <ion-select [(ngModel)]="edit_material_payload.materialTypeId" interface="popover" class="h-[56px]" formControlName="type">
             <!-- <ion-select-option *ngFor="let materialType of materialTypes" [value]="materialType.id">{{materialType.name}}</ion-select-option> -->
             <ion-select-option *ngFor="let materialType of materialTypes" [value]="materialType.id">
               {{'MATERIAL-TYPE.' + materialType.name | translate}}
@@ -161,13 +161,13 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.provider' | translate}}</span>
-            <ion-input [(ngModel)]="material.provider" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="provider"></ion-input>
+            <ion-input [(ngModel)]="edit_material_payload.provider" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="provider"></ion-input>
           </div>
         </ion-col>
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.link-to-material' | translate}}</span>
-            <ion-input [(ngModel)]="material.link" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="link"></ion-input>
+            <ion-input [(ngModel)]="edit_material_payload.link" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="link"></ion-input>
           </div>
         </ion-col>
       </ion-row>
@@ -175,7 +175,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
-            <ion-textarea rows="5" [(ngModel)]="material.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
+            <ion-textarea rows="5" [(ngModel)]="edit_material_payload.description" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
             <span class="ion-warning" *ngIf="isFormSubmited && editDescriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -200,7 +200,14 @@
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+              <input
+                (change)="onFileChangeEditMaterial($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageFile"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+              />
             </label>
           </div>
         </ion-col>

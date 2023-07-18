@@ -88,6 +88,15 @@ export class AddMaterialsModalComponent implements OnInit {
     description: ''
   }
 
+  edit_material_payload = {
+    name: '',
+    materialTypeId: null,
+    provider: '',
+    link: '',
+    imageFile: null,
+    description: ''
+  }
+
   imagePath = null;
   addMaterialImagePaths = [];
 
@@ -99,8 +108,8 @@ export class AddMaterialsModalComponent implements OnInit {
     });
     if (this.edit) {
       const {id, imagePath, ...others } = this.item;
-      this.material = others;
-      console.log("material to edit", this.item)
+      this.edit_material_payload = others;
+      console.log("material to edit", this.edit_material_payload)
     }
   }
 
@@ -118,13 +127,13 @@ export class AddMaterialsModalComponent implements OnInit {
     }
   }
 
-  onFileChange(event) {
-    // if(event.target.files[0]) {
-    //   this.material.imageFile = event.target.files[0];
-    //   this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFile));
-    // } else {
-    //   this.imagePath = null;
-    // }
+  onFileChangeEditMaterial(event) {
+    if(event.target.files[0]) {
+      this.edit_material_payload.imageFile = event.target.files[0];
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.edit_material_payload.imageFile));
+    } else {
+      this.imagePath = null;
+    }
   }
 
   addMaterial() {
@@ -172,7 +181,7 @@ export class AddMaterialsModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.materialService.editMaterial(this.item.id, this.material).subscribe(res => {
+    this.materialService.editMaterial(this.item.id, this.edit_material_payload).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {
