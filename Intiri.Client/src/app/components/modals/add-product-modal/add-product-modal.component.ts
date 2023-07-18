@@ -60,6 +60,7 @@ export class AddProductModalComponent implements OnInit {
 
   product: any = {
     name: '',
+    productLink: '',
     materialId: null,
     productTypeId: null,
     price: null,
@@ -81,10 +82,11 @@ export class AddProductModalComponent implements OnInit {
               ) {
                 this.editProductForm = this.fb.group({
                   productName: ['' || undefined, Validators.required],
+                  productLink: [''],
                   productType: ['', Validators.required],
-                  productMaterial: ['', Validators.required],
-                  color: ['', Validators.required],
-                  price: ['', Validators.required],
+                  productMaterial: [''],
+                  color: [''],
+                  price: [''],
                   imageFile: [''],
                   description: [''],
                 });
@@ -101,7 +103,6 @@ export class AddProductModalComponent implements OnInit {
     });
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
-      console.log(this.materialTypes);
     })
     this.partnerService.getProductsType().subscribe( response => {
       this.productsType = response;
