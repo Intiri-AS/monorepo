@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://intiri-test.azurewebsites.net/api/'
+  apiUrl: 'http://52.170.151.131/api/'
 };
