@@ -33,6 +33,10 @@ export class AddMaterialsModalComponent implements OnInit {
     return this.addMaterialForm.controls.imageFile.errors;
   }
 
+  get addImageFileErrors () {
+    return this.addMaterialForm.controls.imageFiles.errors;
+  }
+
   get editNameErrors() {
     return this.editMaterialForm.controls.name.errors;
   }
@@ -53,8 +57,9 @@ export class AddMaterialsModalComponent implements OnInit {
     this.addMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       type: ['', [Validators.required]],
+      provider: [''],
       description: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      imageFiles: ['', [Validators.required]]
     });
     this.editMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -74,6 +79,7 @@ export class AddMaterialsModalComponent implements OnInit {
   material = {
     name: '',
     materialTypeId: null,
+    provider: '',
     imageFiles: [],
     description: ''
   }

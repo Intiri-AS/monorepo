@@ -30,6 +30,12 @@
         </ion-col>
       </ion-row>
 
+      <!-- material provider -->
+      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] flex flex-col">
+        <span class="text-sm text-black-2 mb-[6px]">Provider</span>
+        <ion-input [(ngModel)]="material.provider" type="text" class="provider-input border rounded-2xl border-black-2" formControlName="provider"></ion-input>
+      </ion-row>
+
       <!-- Description -->
       <ion-row>
         <ion-col>
@@ -58,7 +64,7 @@
                 id="dropzone-file"
                 type="file"
                 class="hidden"
-                formControlName="imageFile"
+                formControlName="imageFiles"
                 accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
                 multiple
               />
@@ -68,7 +74,7 @@
                 <img [src]="imagePath" alt="{{ 'PictureImage ' + i }}" class="preview-image"/>
               </div>
             </div>
-            <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
+            <span class="ion-warning" *ngIf="isFormSubmited && addImageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

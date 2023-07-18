@@ -10,6 +10,12 @@ ion-select {
     @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[60px] w-[60px]
 }
 
+.provider-input {
+  input {
+    height: 3.5rem !important;
+  }
+}
+
 .image-preview-container {
   display: flex;
   flex-wrap: wrap;
