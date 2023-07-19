@@ -277,7 +277,8 @@
     "pieces": "pieces",
     "file-selected": "file(s) selected",
     "view-details": "View details",
-    "messenger": "Messenger"
+    "messenger": "Messenger",
+    "none-selected": "None selected"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
