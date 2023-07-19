@@ -22,5 +22,10 @@ namespace Intiri.API.DataAccess.Repository
         {
             return await _context.ColorNCS.ToListAsync();
         }
+
+        public async Task<IEnumerable<ColorNCS>> GetAllColorsNCSAsNoTrackingAsync()
+        {
+            return await _context.ColorNCS.AsNoTracking().ToListAsync();
+        }
     }
 }
