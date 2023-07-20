@@ -1,5 +1,6 @@
 ﻿using CloudinaryDotNet.Actions;
 using Intiri.API.Models;
+using Intiri.API.Models.DTO.Import;
 using Intiri.API.Models.DTO.InputDTO;
 using Intiri.API.Models.DTO.InputDTO.Moodboard;
 using Intiri.API.Models.DTO.OutputDTO;
@@ -25,6 +26,7 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Net;
 using System.Text.Json;
+using System.Xml.Linq;
 
 namespace Intiri.API.DataAccess.SeedData
 {
@@ -428,6 +430,78 @@ namespace Intiri.API.DataAccess.SeedData
             }
 
             await unitOfWork.SaveChanges();
+        }
+
+        public static async Task SeedMaterialsImport(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
+        {
+            string materialsData = await File.ReadAllTextAsync("DataAccess/SeedData/MaterialsImportSeedData.json");
+            List<MaterialImport> materials = JsonSerializer.Deserialize<List<MaterialImport>>(materialsData);
+
+            foreach (var materialImport in materials)
+			{
+				var doesAnyExist = await unitOfWork.MaterialRepository.DoesAnyExist(x => x.Name == materialImport.Name);
+
+				if(!doesAnyExist)
+                {
+                    var filep = "wwwroot/assets/project-image/material/" + materialImport.Name + materialImport.Discription + ".jpg";
+                    string path = Path.GetFullPath(filep);
+
+                    if (!File.Exists(path))
+                    {
+						continue;
+                    }
+
+                    using (var stream = System.IO.File.OpenRead(path))
+                    {
+                        string fileName = Path.GetFileName(stream.Name);
+
+                        var provider = new FileExtensionContentTypeProvider();
+                        string contentType;
+
+                        if (!provider.TryGetContentType(fileName, out contentType))
+                        {
+                            contentType = "application/octet-stream";
+                        }
+
+                        var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                        {
+                            Headers = new HeaderDictionary(),
+                            ContentType = contentType
+                        };
+
+                        if (file != null && file.Length > 0)
+                        {
+                            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(stream.Name);
+
+                            Console.WriteLine(fileNameWithoutExtension);
+                            Console.WriteLine(materialImport);
+
+                            //Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.MaterialImages);
+
+                            //if (uploadResult.Item1 != HttpStatusCode.OK)
+                            //{
+                            //    Console.WriteLine(uploadResult.Item2);
+                            //}
+                            //else
+                            //{
+                            //    Material material = new Material();
+                            //    material.Name = materialImport.Name;
+                            //    material.Description = materialImport.Discription;
+
+                            //    material.ImagePath = uploadResult.Item3.PublicId;
+                            //    material.ImagePublicId = uploadResult.Item3.SecureUrl.AbsoluteUri;
+
+                            //    MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
+                            //    material.MaterialType = materialType;
+
+                            //    unitOfWork.MaterialRepository.Insert(material);
+                            //    await unitOfWork.SaveChanges();
+                            //}
+                        }
+                    }
+                    
+                }
+            }
         }
     }
 }

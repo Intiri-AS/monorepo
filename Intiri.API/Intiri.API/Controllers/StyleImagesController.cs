@@ -30,7 +30,7 @@ namespace Intiri.API.Controllers
 		#region Constructors
 
 		public StyleImagesController(
-			IUnitOfWork unitOfWork, 
+			IUnitOfWork unitOfWork,
 			IMapper mapper,
 			IFileUploudService fileUploadService) : base(unitOfWork)
 		{
@@ -67,7 +67,7 @@ namespace Intiri.API.Controllers
 		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleMultipleImageInDTO styleImageInDTO)
 		{
 			Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
-			
+
 			if (style == null)
 			{
 				return BadRequest("Target style doesn't exist");
@@ -75,37 +75,37 @@ namespace Intiri.API.Controllers
 
 			try
 			{
-                foreach (var image in styleImageInDTO.ImageFile)
-                {
-                    StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
+				foreach (var image in styleImageInDTO.ImageFile)
+				{
+					StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
-                    IFormFile imageFile = image;
-                    if (imageFile != null && imageFile.Length > 0)
-                    {
-                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-                            await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleImages);
+					IFormFile imageFile = image;
+					if (imageFile != null && imageFile.Length > 0)
+					{
+						Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+							await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleImages);
 
-                        if (uploadResult.Item1 != HttpStatusCode.OK)
-                        {
-                            return BadRequest(uploadResult.Item2);
-                        }
+						if (uploadResult.Item1 != HttpStatusCode.OK)
+						{
+							return BadRequest(uploadResult.Item2);
+						}
 
-                        styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-                        styleImage.PublicId = uploadResult.Item3.PublicId;
+						styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+						styleImage.PublicId = uploadResult.Item3.PublicId;
 
-                        styleImage.Style = style;
+						styleImage.Style = style;
 
-                        _unitOfWork.StyleImageRepository.Insert(styleImage);
-                        await _unitOfWork.SaveChanges();
-                    }
-                }
+						_unitOfWork.StyleImageRepository.Insert(styleImage);
+						await _unitOfWork.SaveChanges();
+					}
+				}
 
-                return Ok(styleImageInDTO);
-            }
+				return Ok(styleImageInDTO);
+			}
 			catch
 			{
-                return BadRequest("Problem adding style image");
-            }
+				return BadRequest("Problem adding style image");
+			}
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
@@ -178,13 +178,22 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-        //[HttpGet("SeedColorNCS")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult> SeedColorNCS()
-        //{
-        //    await Intiri.API.DataAccess.SeedData.SeedData.SeedColorNCS(_unitOfWork, _fileUploadService);
+		//[HttpGet("SeedColorNCS")]
+		//[AllowAnonymous]
+		//public async Task<ActionResult> SeedColorNCS()
+		//{
+		//    await Intiri.API.DataAccess.SeedData.SeedData.SeedColorNCS(_unitOfWork, _fileUploadService);
 
-        //    return Ok();
-        //}
-    }
+		//    return Ok();
+		//}
+
+		[HttpGet("SeedMaterialsImport")]
+		[AllowAnonymous]
+		public async Task<ActionResult> SeedMaterialsImport()
+		{
+			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport(_unitOfWork, _fileUploadService);
+
+			return Ok();
+		}
+	}
 }
