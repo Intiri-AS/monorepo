@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\project-image\material\**" />
+    <Content Remove="wwwroot\assets\project-image\material\**" />
+    <EmbeddedResource Remove="wwwroot\assets\project-image\material\**" />
+    <None Remove="wwwroot\assets\project-image\material\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
