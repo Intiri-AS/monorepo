@@ -103,10 +103,10 @@
     <!-- Products -->
     <div class="grid-item products-container">
       <div class="product">
-        <img [src]="moodboard.products[0]?.imagePath" class="object-contain"/>
+        <img [src]="moodboard.products[0]?.imagePath" class="object-cover h-[100%]"/>
       </div>
       <div class="product">
-        <img [src]="moodboard.products[1]?.imagePath" class="object-contain mt-[20%]"/>
+        <img [src]="moodboard.products[1]?.imagePath" class="object-cover h-[100%]"/>
       </div>
       <!-- <div class="product">
         <img [src]="moodboard.products[1]?.imagePath" class="object-contain"/>
@@ -117,8 +117,8 @@
     <div class="grid-item colors-container">
       <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
       <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
       <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
+      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
     </div>
   </div>
 </ion-card>
