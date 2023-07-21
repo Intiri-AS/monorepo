@@ -103,7 +103,6 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   dragStart (event, inputNo) {
-    console.log("Event", event)
     this.previousInputNo = inputNo;
   }
 
