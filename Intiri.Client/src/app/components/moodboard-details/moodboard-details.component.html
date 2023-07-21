@@ -10,7 +10,7 @@
             <img
               *ngIf="imagePaths[1]"
               [src]="imagePaths[1]"
-              class="object-fill h-full max-h-[16rem] w-[22rem]"
+              class="object-cover h-[100%] w-[100%] max-h-[17rem] max-w-[22rem]"
               alt="image-input-1"
               draggable="true"
               (dragstart)="dragStart($event, 1)"
@@ -26,7 +26,7 @@
               draggable="true"
               *ngIf="imagePaths[2]"
               [src]="imagePaths[2]"
-              class="object-fill p-1 h-full w-full"
+              class="object-cover h-full w-full"
               alt="image-input-2"
               (dragstart)="dragStart($event, 2)"
             />
@@ -44,7 +44,7 @@
             <img
               *ngIf="imagePaths[3]"
               [src]="imagePaths[3]"
-              class="object-fill p-1 h-[16rem] w-[24rem]"
+              class="object-cover h-[100%] w-[100%] max-h-[17rem] max-w-[24rem]"
               alt="image-input-3"
               draggable="true"
               (dragstart)="dragStart($event, 3)"
@@ -74,7 +74,7 @@
             <img
               *ngIf="imagePaths[5]"
               [src]="imagePaths[5]"
-              class="object-fill h-full max-h-[16rem] w-full"
+              class="object-cover h-[100%] max-h-[17rem] w-full"
               alt="image-input-5"
               draggable="true"
               (dragstart)="dragStart($event, 5)"
@@ -103,14 +103,14 @@
     <!-- Products -->
     <div class="grid-item products-container">
       <div class="product">
-        <img [src]="moodboard.products[0]?.imagePath" class="object-cover h-[100%]"/>
+        <img  *ngIf="moodboard.products[0]" [src]="moodboard.products[0]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
       </div>
       <div class="product">
-        <img [src]="moodboard.products[1]?.imagePath" class="object-cover h-[100%]"/>
+        <img  *ngIf="moodboard.products[1]" [src]="moodboard.products[1]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
       </div>
-      <!-- <div class="product">
-        <img [src]="moodboard.products[1]?.imagePath" class="object-contain"/>
-      </div> -->
+      <div class="product">
+        <img *ngIf="moodboard.products[2]" [src]="moodboard.products[2]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
+      </div>
     </div>
 
     <!-- Colors -->
