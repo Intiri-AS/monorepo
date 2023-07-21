@@ -102,14 +102,32 @@
 
     <!-- Products -->
     <div class="grid-item products-container">
-      <div class="product">
-        <img  *ngIf="moodboard.products[0]" [src]="moodboard.products[0]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
+        <img
+          *ngIf="imagePaths[7]"
+          [src]="imagePaths[7]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          draggable="true"
+          (dragstart)="dragStart($event, 7)"
+        />
       </div>
-      <div class="product">
-        <img  *ngIf="moodboard.products[1]" [src]="moodboard.products[1]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
+        <img
+        *ngIf="imagePaths[8]"
+        [src]="imagePaths[8]"
+        class="object-cover h-[100%] w-[100%] max-w-[100%]"
+        draggable="true"
+        (dragstart)="dragStart($event, 8)"
+      />
       </div>
-      <div class="product">
-        <img *ngIf="moodboard.products[2]" [src]="moodboard.products[2]?.imagePath" class="object-cover h-[100%] w-[100%] max-w-[100%]"/>
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 9)">
+        <img
+          *ngIf="imagePaths[9]"
+          [src]="imagePaths[9]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          draggable="true"
+          (dragstart)="dragStart($event, 9)"
+        />
       </div>
     </div>
 
