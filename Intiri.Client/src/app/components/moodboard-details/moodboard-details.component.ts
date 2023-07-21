@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -41,8 +42,18 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
+  imagePaths = {
+    1: null,
+    2: null,
+    3: null,
+    4: null,
+    5: null,
+    6: null
+  }
+
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {}
@@ -69,4 +80,14 @@ export class MoodboardDetailsComponent implements OnInit {
     await modal.present();
   }
 
+  onFileChange (event, inputNo) {
+    console.log(event, inputNo)
+
+    if (event.target.files[0]) {
+      let imageFile = event.target.files[0];
+      this.imagePaths[inputNo] = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(imageFile));
+    } else {
+      this.imagePaths[inputNo] = null
+    }
+  }
 }

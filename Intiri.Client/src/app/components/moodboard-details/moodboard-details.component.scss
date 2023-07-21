@@ -1,159 +1,94 @@
-.result-grid {
-  @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
-}
-.result-grid-1 {
-  // @apply grid grid-cols-15 gap-3 grid-flow-row-dense;
-  @apply grid gap-2 grid-flow-row-dense;
-  grid-template-columns: repeat(16, minmax(0, 1fr));
-}
-.step-items-row {
-  @apply gap-x-[2%];
-}
-
-.step-items {
-  @apply max-h-[750px] overflow-auto mb-3;
-}
-
-.step-image {
-  @apply object-fill h-full w-full rounded-2xl;
-}
-
-.material-image {
-  @apply object-cover h-full w-full rounded-2xl;
-}
-
-.product-image {
-  @apply object-contain h-full w-full rounded-2xl;
-}
-
-img {
-  @apply h-full w-full;
-}
-
-p {
-  @apply text-left;
-}
-
-.moodboard-grid {
- display: grid;
- grid-template-columns: 4fr 1fr 0.6fr;
- column-gap: 10px;
- height: 100%;
-
- .column-1 {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-
-  .materials {
-    img {
-      height: 68px !important;
-    }
-  }
- }
-
- .column-2 { /* Structure products grid */
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  row-gap: 1rem;
-  .product {
-    height: 150px !important;
-  }
- }
-
- .column-3 { /* Structure color grid */
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  row-gap: 1rem;
- }
-}
-
-.grid-container {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 1fr 0.5fr;
-  // grid-template-rows: 1fr 1fr 1fr 2fr 2fr;
-  row-gap: 5px;
-  column-gap: 15px;
-  // background-color: red;
-
-  .grid-item {
-    // background-color: aqua;
-  }
-
-  .grid-item-1 {
+.card {
+  background: #D9D9D9;
+  .grid-container {
+    height: 100%;
+    width: 100%;
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    row-gap: 5px;
+    grid-template-columns: 4fr 1fr 0.5fr;
+    // grid-template-rows: 1fr 1fr 1fr 2fr 2fr;
+    row-gap: 10px;
+    column-gap: 15px;
+    background: #D9D9D9;
 
-    .top-section {
-      background-color: #fc3;
+    .grid-item {
+      // background-color: aqua;
+    }
+
+    .grid-item-1 {
       display: grid;
-      grid-template-columns: 1fr 1fr 0.5fr;
-      grid-template-rows: repeat(3, 1fr);
-      column-gap: 5px;
+      grid-template-rows: repeat(2, 1fr);
+      row-gap: 10px;
+
+      .top-section {
+        // background-color: #fc3;
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.5fr;
+        grid-template-rows: repeat(3, 1fr);
+        column-gap: 15px;
+        row-gap: 10px;
+
+        .material {
+          background-size: cover !important;
+        }
+
+        .image-input-1 {
+          background-color: #fff;
+          grid-row: span 3;
+        }
+
+        .image-input-2 {
+          background-color: #fff;
+          grid-row: span 3;
+        }
+      }
+
+      .bottom-section {
+        // background-color: #fc3;
+        display: grid;
+        grid-template-columns: 3fr 1fr 3fr;
+        grid-template-rows: 1fr 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+
+        .image-input-3 {
+          background-color: #fff;
+          grid-row: span 2;
+        }
+        .image-input-4 {
+          background-color: #fff;
+        }
+        .image-input-5 {
+          background-color: #fff;
+          grid-row: span 2;
+        }
+        .image-input-6 {
+          background-color: #fff;
+        }
+      }
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-rows: repeat(2, 1fr);
       row-gap: 5px;
 
-      .material {
+      .product {
+        height: 100%;
+        width: 100%;
+        background: #fff
+      }
+    }
+
+    .colors-container {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      row-gap: 15px;
+
+      .color {
+        height: 100%;
+        width: 100%;
         background-size: cover !important;
       }
-
-      .image-input-1 {
-        background-color: rgb(210, 163, 21);
-        grid-row: span 3;
-      }
-
-      .image-input-2 {
-        background-color: rgb(210, 163, 21);
-        grid-row: span 3;
-      }
-    }
-
-    .bottom-section {
-      background-color: #fc3;
-      display: grid;
-      grid-template-columns: 3fr 1fr 3fr;
-      grid-template-rows: 1fr 1fr;
-      column-gap: 5px;
-      row-gap: 5px;
-
-      .image-input-3 {
-        background-color: rgb(210, 163, 21);
-        grid-row: span 2;
-      }
-      .image-input-4 {
-        background-color: rgb(210, 163, 21);
-      }
-      .image-input-5 {
-        background-color: rgb(210, 163, 21);
-        grid-row: span 2;
-      }
-      .image-input-6 {
-        background-color: rgb(210, 163, 21);
-      }
-    }
-  }
-
-  .products-container {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    row-gap: 5px;
-
-    .product {
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  .colors-container {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    row-gap: 5px;
-
-    .color {
-      height: 100%;
-      width: 100%;
-      background-size: cover !important;
     }
   }
 }
