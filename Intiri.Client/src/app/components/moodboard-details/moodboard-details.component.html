@@ -3,19 +3,33 @@
     <div class="grid-item grid-item-1">
       <div class="top-section">
         <div class="material" [ngStyle]="{'background-image':' url(' + moodboard?.materials[0]?.imagePath + ')'}"></div>
-        <div class="image-input-1">
+        <div class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <label for="dropzone-file">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[1]">
             </div>
-            <img *ngIf="imagePaths[1]" [src]="imagePaths[1]" class="object-fill h-full max-h-[16rem] w-[22rem]" alt="image-input-1" />
+            <img
+              *ngIf="imagePaths[1]"
+              [src]="imagePaths[1]"
+              class="object-fill h-full max-h-[16rem] w-[22rem]"
+              alt="image-input-1"
+              draggable="true"
+              (dragstart)="dragStart($event, 1)"
+            />
             <input (change)="onFileChange($event, 1)" id="dropzone-file" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
-        <div class="image-input-2">
+        <div class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <label for="dropzone-file-2">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[2]">
             </div>
-            <img *ngIf="imagePaths[2]" [src]="imagePaths[2]" class="object-fill p-1 h-full w-full" alt="image-input-2" />
+            <img
+              draggable="true"
+              *ngIf="imagePaths[2]"
+              [src]="imagePaths[2]"
+              class="object-fill p-1 h-full w-full"
+              alt="image-input-2"
+              (dragstart)="dragStart($event, 2)"
+            />
             <input (change)="onFileChange($event, 2)" id="dropzone-file-2" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
@@ -23,35 +37,63 @@
         <div class="material" [ngStyle]="{'background-image':' url(' + moodboard?.materials[2]?.imagePath + ')'}"></div>
       </div>
       <div class="bottom-section">
-        <div class="image-input-3">
+        <div class="image-input-3"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 3)">
           <label for="dropzone-file-3">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[3]">
             </div>
-            <img *ngIf="imagePaths[3]" [src]="imagePaths[3]" class="object-fill p-1 h-[16rem] w-[24rem]" alt="image-input-3" />
+            <img
+              *ngIf="imagePaths[3]"
+              [src]="imagePaths[3]"
+              class="object-fill p-1 h-[16rem] w-[24rem]"
+              alt="image-input-3"
+              draggable="true"
+              (dragstart)="dragStart($event, 3)"
+            />
             <input (change)="onFileChange($event, 3)" id="dropzone-file-3" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
-        <div class="image-input-4">
+        <div class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
           <label for="dropzone-file-4">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[4]">
             </div>
-            <img *ngIf="imagePaths[4]" [src]="imagePaths[4]" class="object-fill p-1 h-full max-h-[8rem] w-full" alt="image-input-4" />
+            <img
+              *ngIf="imagePaths[4]"
+              [src]="imagePaths[4]"
+              class="object-fill p-1 h-full max-h-[8rem] w-full"
+              alt="image-input-4"
+              draggable="true"
+              (dragstart)="dragStart($event, 4)"
+            />
             <input (change)="onFileChange($event, 4)" id="dropzone-file-4" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
-        <div class="image-input-5">
+        <div class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
           <label for="dropzone-file-5">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[5]">
             </div>
-            <img *ngIf="imagePaths[5]" [src]="imagePaths[5]" class="object-fill h-full max-h-[16rem] w-full" alt="image-input-5" />
+            <img
+              *ngIf="imagePaths[5]"
+              [src]="imagePaths[5]"
+              class="object-fill h-full max-h-[16rem] w-full"
+              alt="image-input-5"
+              draggable="true"
+              (dragstart)="dragStart($event, 5)"
+            />
             <input (change)="onFileChange($event, 5)" id="dropzone-file-5" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
-        <div class="image-input-6">
+        <div class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
           <label for="dropzone-file-6">
             <div class="h-[100%] w-[100%] rounded-2xl hover:opacity-70 cursor-pointer" *ngIf="!imagePaths[6]">
             </div>
-            <img *ngIf="imagePaths[6]" [src]="imagePaths[6]" class="object-fill h-full max-h-[7.2rem] w-full mt-[0.2rem]" alt="image-input-6" />
+            <img
+              *ngIf="imagePaths[6]"
+              [src]="imagePaths[6]"
+              class="object-fill h-full max-h-[7.2rem] w-full mt-[0.2rem]"
+              alt="image-input-6"
+              draggable="true"
+              (dragstart)="dragStart($event, 6)"
+            />
             <input (change)="onFileChange($event, 6)" id="dropzone-file-6" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>

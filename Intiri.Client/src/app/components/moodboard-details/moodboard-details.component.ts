@@ -51,6 +51,9 @@ export class MoodboardDetailsComponent implements OnInit {
     6: null
   }
 
+  previousInputNo = null;
+  currentInputNo = null;
+
   constructor(
     private modalController: ModalController,
     private sanitizer: DomSanitizer,
@@ -89,5 +92,19 @@ export class MoodboardDetailsComponent implements OnInit {
     } else {
       this.imagePaths[inputNo] = null
     }
+  }
+
+  dragStart (event, inputNo) {
+    console.log("Event", event)
+    this.previousInputNo = inputNo;
+  }
+
+  allowDrop (event) {
+    event.preventDefault();
+  }
+
+  onDrop (event, currentInputNo) {
+    this.imagePaths[currentInputNo] = this.imagePaths[this.previousInputNo];
+    this.imagePaths[this.previousInputNo] = null;
   }
 }
