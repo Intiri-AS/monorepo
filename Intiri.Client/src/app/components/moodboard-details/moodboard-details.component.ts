@@ -112,7 +112,9 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   onDrop (event, currentInputNo) {
+    // Swap images on drop
+    let temp = this.imagePaths[currentInputNo];
     this.imagePaths[currentInputNo] = this.imagePaths[this.previousInputNo];
-    this.imagePaths[this.previousInputNo] = null;
+    this.imagePaths[this.previousInputNo] = temp;
   }
 }
