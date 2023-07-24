@@ -33,7 +33,8 @@ export class NewProjectStepComponent implements OnInit {
   products: any = [];
   productTypes: any = [];
 
-  showFilterDropdown: boolean = false
+  showFilterDropdown: boolean = false;
+  filteredData: Array<any>;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -63,8 +64,9 @@ export class NewProjectStepComponent implements OnInit {
 
   ngOnChanges () {
     console.log(this.currentStep, this.currentStepNo)
-    if (this.currentStepNo == 4) {
-      console.log("currentStep", this.currentStep)
+
+    if (this.showFilterDropdown && (this.currentStepNo == 1 || this.currentStepNo == 2)) {
+      this.filteredData = this.currentStep.data;
     }
   }
 
@@ -143,6 +145,24 @@ export class NewProjectStepComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  onMaterialFilterChange (event) {
+    console.log(event.detail.value);
+    let filters = event.detail.value;
+
+    if (filters.length) {
+        this.filteredData = this.currentStep.data.filter(e => {
+          return filters.includes(e.materialTypeId.toString())
+        })
+    } else {
+      this.filteredData = this.currentStep.data;
+    }
+    console.log("filteredData", this.filteredData)
+  }
+
+  onProductFilterChange (event) {
+    console.log(event.detail.value)
   }
 
 }

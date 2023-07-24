@@ -1,14 +1,28 @@
 <div>
   <div class="flex justify-between">
     <h2 class="step-title">{{currentStep.title | translate}}</h2>
+
+    <!-- Filter dropdowns -->
     <div *ngIf="showFilterDropdown && (currentStepNo == 1 || currentStepNo == 2)" class="z-0">
-      <ion-select *ngIf="currentStepNo == 1" interface="popover" [multiple]="true" placeholder="{{'NEW-PROJECT.select-material-type' | translate}}">
+      <ion-select
+        *ngIf="currentStepNo == 1"
+        (ionChange) = "onMaterialFilterChange($event)"
+        interface="popover"
+        [multiple]="true"
+        placeholder="{{'NEW-PROJECT.select-material-type' | translate}}"
+      >
         <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>
           {{ materialType.name }}
         </ion-select-option>
       </ion-select>
 
-      <ion-select *ngIf="currentStepNo == 2" interface="popover" [multiple]="true" placeholder="{{'NEW-PROJECT.select-product-type' | translate}}">
+      <ion-select
+        *ngIf="currentStepNo == 2"
+        (ionChange) = "onProductFilterChange($event)"
+        interface="popover"
+        [multiple]="true"
+        placeholder="{{'NEW-PROJECT.select-product-type' | translate}}"
+      >
         <ion-select-option *ngFor="let productType of productTypes" value={{productType.id}}>
           {{ productType.name }}
         </ion-select-option>
@@ -16,6 +30,7 @@
     </div>
   </div>
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
+
   <div [ngClass]="{'text-clamp-3' : !expandText}">
     <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea>
   </div>
@@ -25,7 +40,10 @@
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
         <!-- if image (style|material|product) -->
-        <span *ngIf="item.imagePath">
+        <span
+          *ngIf="
+            item.imagePath
+            ">
           <img src="{{item.imagePath}}" class="step-image" alt="style-img"/>
           <ion-icon class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl" (click)="openImageInModal(item, {url: item.imagePath})" name="expand-outline"></ion-icon>
         </span>
