@@ -84,7 +84,6 @@ export class NewProjectStepComponent implements OnInit {
 
 
   ngOnChanges () {
-
     if (this.showFilterDropdown && (this.currentStepNo == 1 || this.currentStepNo == 2)) {
       this.filteredData = this.currentStep.data;
     }
@@ -94,11 +93,11 @@ export class NewProjectStepComponent implements OnInit {
 
     assignAllItemsData () {
       if (this.currentStepNo == 0) {
-        this.currentStep.allItems = this.colorPalettes;
+        this.currentStep.allItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
       } else if (this.currentStepNo == 1) {
-        this.currentStep.allItems = this.materials;
+        this.currentStep.allItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
       } else { // currentStepNo = 2
-        this.currentStep.allItems = this.products;
+        this.currentStep.allItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
       }
     }
 
