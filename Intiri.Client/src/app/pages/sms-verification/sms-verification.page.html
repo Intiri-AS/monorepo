@@ -16,7 +16,7 @@
           </div>
           <div class="flex flex-col justify-center items-center mt-[30px]">
             <ion-button fill="clear" class="primary-btn-responsive">{{'SMS.proceed' | translate}}</ion-button>
-            <ion-button fill="clear" class="send-btn">{{'SMS.again' | translate}}</ion-button>
+            <ion-button fill="clear" class="send-btn" (click)="resendVerificationCode()">{{'SMS.again' | translate}}</ion-button>
             <div class="mt-3">
               <ion-button fill="clear" class="secondary-btn-responsive" routerLink="/landing" routerDirection="root">{{'COMMON.back' | translate}}</ion-button>
             </div>
