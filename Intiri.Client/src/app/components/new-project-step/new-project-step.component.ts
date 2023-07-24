@@ -44,6 +44,7 @@ export class NewProjectStepComponent implements OnInit {
 
   showFilterDropdown: boolean = false;
   filteredData: Array<any>;
+  allItems:any = []
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -76,16 +77,30 @@ export class NewProjectStepComponent implements OnInit {
       this.partnerService.getProductsType().subscribe(res => {
         this.productTypes = res;
       })
+
+      this.assignAllItemsData()
     }
   }
 
+
   ngOnChanges () {
-    console.log(this.currentStep, this.currentStepNo)
 
     if (this.showFilterDropdown && (this.currentStepNo == 1 || this.currentStepNo == 2)) {
       this.filteredData = this.currentStep.data;
     }
+    this.assignAllItemsData();
+    console.log(this.currentStep, this.currentStepNo)
   }
+
+    assignAllItemsData () {
+      if (this.currentStepNo == 0) {
+        this.currentStep.allItems = this.colorPalettes;
+      } else if (this.currentStepNo == 1) {
+        this.currentStep.allItems = this.materials;
+      } else { // currentStepNo = 2
+        this.currentStep.allItems = this.products;
+      }
+    }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);
