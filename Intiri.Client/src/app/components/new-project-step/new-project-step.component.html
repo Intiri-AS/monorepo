@@ -1,5 +1,20 @@
 <div>
-  <h2 class="step-title">{{currentStep.title | translate}}</h2>
+  <div class="flex justify-between">
+    <h2 class="step-title">{{currentStep.title | translate}}</h2>
+    <div *ngIf="currentStepNo == 1 || currentStepNo == 2" class="z-0">
+      <ion-select *ngIf="currentStepNo == 1" interface="popover" [multiple]="true" placeholder="{{'NEW-PROJECT.select-material-type' | translate}}">
+        <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>
+          {{ materialType.name }}
+        </ion-select-option>
+      </ion-select>
+
+      <ion-select *ngIf="currentStepNo == 2" interface="popover" [multiple]="true" placeholder="{{'NEW-PROJECT.select-product-type' | translate}}">
+        <ion-select-option *ngFor="let productType of productTypes" value={{productType.id}}>
+          {{ productType.name }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+  </div>
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
   <div [ngClass]="{'text-clamp-3' : !expandText}">
     <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea>
@@ -18,7 +33,7 @@
         <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
           <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
         </div>
-        <!-- if color pallete -->
+        <!-- if color palette -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
           <div class="w-[47.5%] h-full inline-block color-container float-right">

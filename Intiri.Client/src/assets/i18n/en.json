@@ -183,7 +183,9 @@
     "premium-content": "Premium content",
     "see-all-free": "See all for free",
     "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member.",
-    "select-4-materials": "Please select at least 4 materials"
+    "select-4-materials": "Please select at least 4 materials",
+    "select-material-type": "Select material type",
+    "select-product-type": "Select product type"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",

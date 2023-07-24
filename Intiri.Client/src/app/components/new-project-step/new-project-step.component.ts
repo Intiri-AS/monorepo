@@ -4,6 +4,9 @@ import { ModalController } from '@ionic/angular';
 import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { MaterialService } from 'src/app/services/material.service';
+import { PartnerService } from 'src/app/services/partner.service'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-project-step',
@@ -24,20 +27,34 @@ export class NewProjectStepComponent implements OnInit {
   mbsExpanded: boolean = false;
 
   expandText: boolean = false;
+  materials$: Observable<any> = this.materialService.materials$;
+  materialTypes: any = [];
+  products: any = [];
+  productTypes: any = [];
 
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private materialService: MaterialService,
+    private partnerService: PartnerService
   ) { }
 
   ngOnInit() {
-    if (this.currentStepNo == 4) {
-      console.log("currentStep", this.currentStep)
-    }
+    // Fetch materials
+    this.materialService.getMaterials()
+    this.materialService.getMaterialTypes().subscribe(res => {
+      this.materialTypes = res;
+    })
+
+    // Fetch products
+    this.partnerService.getProductsType().subscribe(res => {
+      this.productTypes = res;
+    })
   }
 
   ngOnChanges () {
+    console.log(this.currentStep, this.currentStepNo)
     if (this.currentStepNo == 4) {
       console.log("currentStep", this.currentStep)
     }
