@@ -8,6 +8,8 @@ import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service'
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ColorService } from 'src/app/services/color.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-new-project-step',
@@ -28,10 +30,17 @@ export class NewProjectStepComponent implements OnInit {
   mbsExpanded: boolean = false;
 
   expandText: boolean = false;
+
+  colorPalettes$: Observable<any> = this.colorService.colorPalettes$
+  colorPalettes: any = [];
+
   materials$: Observable<any> = this.materialService.materials$;
+  materials: any = []
   materialTypes: any = [];
+
   products: any = [];
   productTypes: any = [];
+
 
   showFilterDropdown: boolean = false;
   filteredData: Array<any>;
@@ -42,20 +51,28 @@ export class NewProjectStepComponent implements OnInit {
     private projectService: ProjectService,
     private materialService: MaterialService,
     private partnerService: PartnerService,
+    private colorService: ColorService,
+    private productService: ProductService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    if (this.router.url.includes('edit-moodboard')) {
+    if (this.router.url.includes('edit-moodboard')) { //For Client-side moodboard edit
       this.showFilterDropdown = true;
 
+      // Fetch color pallets
+      this.colorService.getColorPalettes();
+      this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
+
       // Fetch materials
-      this.materialService.getMaterials()
+      this.materialService.getMaterials();
+      this.materials$.subscribe(res => { this.materials = res });
       this.materialService.getMaterialTypes().subscribe(res => {
         this.materialTypes = res;
       })
 
       // Fetch products
+      this.productService.getProducts().subscribe(res => { this.products = res })
       this.partnerService.getProductsType().subscribe(res => {
         this.productTypes = res;
       })
