@@ -37,7 +37,7 @@ export class SmsVerificationModalComponent {
     }
 
     resendVerificationCode() {
-        this.accountService.resendVerificationCode(this.phoneModel).subscribe(
+        this.accountService.resendVerificationCode(this.phoneModel.countryCode, this.phoneModel.phoneNumber).subscribe(
             response => {
                 // nothing to do here
             }, error => {
