@@ -1,7 +1,7 @@
 <div>
   <div class="flex justify-between">
     <h2 class="step-title">{{currentStep.title | translate}}</h2>
-    <div *ngIf="currentStepNo == 1 || currentStepNo == 2" class="z-0">
+    <div *ngIf="showFilterDropdown && (currentStepNo == 1 || currentStepNo == 2)" class="z-0">
       <ion-select *ngIf="currentStepNo == 1" interface="popover" [multiple]="true" placeholder="{{'NEW-PROJECT.select-material-type' | translate}}">
         <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>
           {{ materialType.name }}

@@ -7,6 +7,7 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service'
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-project-step',
@@ -32,25 +33,32 @@ export class NewProjectStepComponent implements OnInit {
   products: any = [];
   productTypes: any = [];
 
+  showFilterDropdown: boolean = false
+
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
     private projectService: ProjectService,
     private materialService: MaterialService,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // Fetch materials
-    this.materialService.getMaterials()
-    this.materialService.getMaterialTypes().subscribe(res => {
-      this.materialTypes = res;
-    })
+    if (this.router.url.includes('edit-moodboard')) {
+      this.showFilterDropdown = true;
 
-    // Fetch products
-    this.partnerService.getProductsType().subscribe(res => {
-      this.productTypes = res;
-    })
+      // Fetch materials
+      this.materialService.getMaterials()
+      this.materialService.getMaterialTypes().subscribe(res => {
+        this.materialTypes = res;
+      })
+
+      // Fetch products
+      this.partnerService.getProductsType().subscribe(res => {
+        this.productTypes = res;
+      })
+    }
   }
 
   ngOnChanges () {
