@@ -15,7 +15,6 @@
               draggable="true"
               (dragstart)="dragStart($event, 1)"
             />
-            <input (change)="onFileChange($event, 1)" id="dropzone-file" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
         <div class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
@@ -30,7 +29,6 @@
               alt="image-input-2"
               (dragstart)="dragStart($event, 2)"
             />
-            <input (change)="onFileChange($event, 2)" id="dropzone-file-2" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
         <div class="material" [ngStyle]="{'background-image':' url(' + moodboard?.materials[1]?.imagePath + ')'}"></div>
@@ -49,7 +47,6 @@
               draggable="true"
               (dragstart)="dragStart($event, 3)"
             />
-            <input (change)="onFileChange($event, 3)" id="dropzone-file-3" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
         <div class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
@@ -64,7 +61,6 @@
               draggable="true"
               (dragstart)="dragStart($event, 4)"
             />
-            <input (change)="onFileChange($event, 4)" id="dropzone-file-4" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
         <div class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
@@ -79,7 +75,6 @@
               draggable="true"
               (dragstart)="dragStart($event, 5)"
             />
-            <input (change)="onFileChange($event, 5)" id="dropzone-file-5" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
         <div class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
@@ -94,7 +89,6 @@
               draggable="true"
               (dragstart)="dragStart($event, 6)"
             />
-            <input (change)="onFileChange($event, 6)" id="dropzone-file-6" type="file" class="hidden" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
           </label>
         </div>
       </div>

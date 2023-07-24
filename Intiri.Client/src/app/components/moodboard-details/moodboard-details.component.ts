@@ -91,17 +91,6 @@ export class MoodboardDetailsComponent implements OnInit {
     await modal.present();
   }
 
-  onFileChange (event, inputNo) {
-    console.log(event, inputNo)
-
-    if (event.target.files[0]) {
-      let imageFile = event.target.files[0];
-      this.imagePaths[inputNo] = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(imageFile));
-    } else {
-      this.imagePaths[inputNo] = null
-    }
-  }
-
   dragStart (event, inputNo) {
     this.previousInputNo = inputNo;
   }
@@ -115,5 +104,7 @@ export class MoodboardDetailsComponent implements OnInit {
     let temp = this.imagePaths[currentInputNo];
     this.imagePaths[currentInputNo] = this.imagePaths[this.previousInputNo];
     this.imagePaths[this.previousInputNo] = temp;
+
+    // CallAPI and save the current layout
   }
 }
