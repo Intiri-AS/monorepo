@@ -49,6 +49,10 @@ export class AddRoomModalComponent implements OnInit {
     return this.editRoomForm.controls.description.errors;
   }
 
+  get editNameNorwegianErrors () {
+    return this.editRoomForm.controls.nameNorwegian.errors;
+  }
+
   constructor(
     private modalController: ModalController,
     private roomService: RoomService,
@@ -67,6 +71,7 @@ export class AddRoomModalComponent implements OnInit {
     });
     this.editRoomForm = this.formBuilder.group({
       name: ['', [Validators.required]],
+      nameNorwegian: ['', [Validators.required]],
       type: ['', [Validators.required]],
       description: ['', [Validators.required]],
       imageFile: ['']
@@ -98,6 +103,7 @@ export class AddRoomModalComponent implements OnInit {
     })
     if (this.edit) {
       this.room.name = this.item.name;
+      this.room.nameNorwegian = this.item.nameNorwegian;
       this.room.roomTypeId = this.item.roomTypeId;
       this.room.description = this.item.description;
     }
