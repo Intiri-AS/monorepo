@@ -88,6 +88,9 @@ export class NewProjectStepComponent implements OnInit {
   ngOnChanges () {
     this.showFilterDropdown && this.assignAllItemsData();
 
+    this.typeFilters = [];
+    this.providerFilters = [];
+
     // list providers for materials
     this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
 
