@@ -1,4 +1,6 @@
-﻿namespace Intiri.API.Models.DTO.OutputDTO
+﻿using Intiri.API.Models.IntiriColor;
+
+namespace Intiri.API.Models.DTO.OutputDTO
 {
 	public class ColorPaletteOutDTO
 	{
@@ -9,5 +11,9 @@
 		public string ShadeColorLight { get; set; }
 		public string ShadeColorMedium { get; set; }
 		public string ShadeColorDark { get; set; }
-	}
+        public ColorNCS MainColorData { get; set; }
+        public ColorNCS ShadeColorLightData { get; set; }
+        public ColorNCS ShadeColorMediumData { get; set; }
+        public ColorNCS ShadeColorDarkData { get; set; }
+    }
 }

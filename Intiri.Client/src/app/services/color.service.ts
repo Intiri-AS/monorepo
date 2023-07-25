@@ -13,8 +13,10 @@ export class ColorService {
   apiUrl = environment.apiUrl;
   private colorPalettesSource = new ReplaySubject<any>(1);
   colorPalettes$ = this.colorPalettesSource.asObservable();
-  private colorsSource = new ReplaySubject<any>(1)
-  colors$ = this.colorsSource.asObservable()
+  private colorsSource = new ReplaySubject<any>(1);
+  colors$ = this.colorsSource.asObservable();
+  private colorsNCSSource = new ReplaySubject<any>(1);
+  colorNCS$ = this.colorsNCSSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +50,14 @@ export class ColorService {
 
   deleteColorPalette(colorId) {
     return this.http.delete(this.apiUrl + 'colorPalettes/delete/' + colorId);
+  }
+
+  getNCSColors() {
+    return this.http.get(this.apiUrl + 'ColorNCS').pipe(map((colors) => {
+      if(colors) {
+        this.colorsNCSSource.next(colors);
+      }
+    })).toPromise();
   }
 
 }
