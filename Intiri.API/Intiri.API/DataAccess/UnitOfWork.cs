@@ -31,6 +31,7 @@ namespace Intiri.API.DataAccess
 		private readonly IDesignerReviewRepository _designerReviewRepository;
 		private readonly IInspirationRepository _inspirationRepository;
 		private readonly IConsulatationRepository _consulatationRepository;
+		private readonly IColorNCSRepository _colorNCSRepository;
 
 		#endregion Fields
 
@@ -60,6 +61,7 @@ namespace Intiri.API.DataAccess
 			_designerReviewRepository = new DesignerReviewRepository(dataContext);
 			_inspirationRepository = new InspirationRepository(dataContext);
 			_consulatationRepository = new ConsulatationRepository(dataContext);
+            _colorNCSRepository = new ColorNCSRepository(dataContext);
 
 			_dataContext = dataContext;
 		}
@@ -93,6 +95,7 @@ namespace Intiri.API.DataAccess
 
 		public IInspirationRepository InspirationRepository => _inspirationRepository;
 		public IConsulatationRepository ConsulatationRepository => _consulatationRepository;
+		public IColorNCSRepository ColorNCSRepository => _colorNCSRepository;
 
 		#endregion Properties
 
