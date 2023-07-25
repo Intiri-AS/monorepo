@@ -33,6 +33,15 @@
       </ion-row>
       <ion-row>
         <ion-col>
+          <div class="profile-input mt-0">
+            <span class="text-sm text-black-2">{{'STYLE.norwegian-translation'| translate}}</span>
+            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && nameNorwegianErrors?.required">{{'VALIDATION.field' | translate}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description'| translate}}</span>
             <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description"></ion-textarea>
@@ -127,6 +136,15 @@
             </ion-select>
             <span class="ion-warning" *ngIf="isFormSubmited && editTypeErrors?.required">{{'VALIDATION.field' | translate}}</span>
             </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="profile-input mt-0">
+            <span class="text-sm text-black-2">{{'STYLE.norwegian-translation'| translate}}</span>
+            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian"></ion-input>
+            <span class="ion-warning" *ngIf="isFormSubmited && editNameNorwegianErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

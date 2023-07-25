@@ -52,6 +52,13 @@ export class MoodboardDetailsComponent implements OnInit {
     7: null, // This is initially mapped to product 1
     8: null, // This is initially mapped to product 2
     9: null, // This is initially mapped to product 3
+    10: null, // This is initially mapped to material 1
+    11: null, // This is initially mapped to material 2
+    12: null,// This is initially mapped to material 3
+    13: null,
+    14: null,
+    15: null,
+    16: null
   }
 
   previousInputNo = null;
@@ -67,6 +74,11 @@ export class MoodboardDetailsComponent implements OnInit {
     this.imagePaths[7] = this.moodboard.products[0]?.imagePath;
     this.imagePaths[8] = this.moodboard.products[1]?.imagePath;
     this.imagePaths[9] = this.moodboard.products[2]?.imagePath;
+
+    //Assign materials to assigned imagePaths
+    this.imagePaths[10] = this.moodboard?.materials[0]?.imagePath;
+    this.imagePaths[11] = this.moodboard?.materials[1]?.imagePath;
+    this.imagePaths[12] = this.moodboard?.materials[2]?.imagePath;
   }
 
   normalizeSlashes(string): string {
@@ -91,17 +103,6 @@ export class MoodboardDetailsComponent implements OnInit {
     await modal.present();
   }
 
-  onFileChange (event, inputNo) {
-    console.log(event, inputNo)
-
-    if (event.target.files[0]) {
-      let imageFile = event.target.files[0];
-      this.imagePaths[inputNo] = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(imageFile));
-    } else {
-      this.imagePaths[inputNo] = null
-    }
-  }
-
   dragStart (event, inputNo) {
     this.previousInputNo = inputNo;
   }
@@ -112,8 +113,11 @@ export class MoodboardDetailsComponent implements OnInit {
 
   onDrop (event, currentInputNo) {
     // Swap images on drop
+    console.log("here?")
     let temp = this.imagePaths[currentInputNo];
     this.imagePaths[currentInputNo] = this.imagePaths[this.previousInputNo];
     this.imagePaths[this.previousInputNo] = temp;
+
+    // CallAPI and save the current layout
   }
 }

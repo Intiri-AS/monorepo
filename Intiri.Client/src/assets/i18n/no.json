@@ -183,7 +183,11 @@
     "premium-content": "Premium innhold",
     "see-all-free": "Se alt gratis",
     "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem.",
-    "select-4-materials": "Velg minst 4 materialer"
+    "select-4-materials": "Velg minst 4 materialer",
+    "select-material-type": "Velg materialtype",
+    "select-material-provider": "Velg materialleverandør",
+    "select-product-type": "Velg produkttype",
+    "select-product-provider": "Velg produktleverandør"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
@@ -278,7 +282,8 @@
     "file-selected": "fil(er) valgt",
     "view-details": "Se detaljer",
     "messenger": "Budbringer",
-    "none-selected": "Ingen valgt"
+    "none-selected": "Ingen valgt",
+    "no-available-data": "Ingen data tilgjengelig å vise"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -437,7 +442,8 @@
     "picture-added-text": "Nytt bilde lagt til med suksess",
     "go-to-pictures": "Gå til bilder",
     "room": "Rom",
-    "style": "Stil"
+    "style": "Stil",
+    "norwegian-translation": "Norsk oversettelse for romnavn"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",
