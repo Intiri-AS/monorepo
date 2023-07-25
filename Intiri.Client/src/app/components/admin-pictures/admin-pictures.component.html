@@ -32,6 +32,9 @@
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
+    <ion-col *ngIf="!styleImages.length">
+      {{'COMMON.no-available-data' | translate}}
+    </ion-col>
     <ion-col *ngFor="let styleImage of styleImages | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
       <div class="card">
         <div class="h-full w-full">

@@ -282,7 +282,8 @@
     "file-selected": "file(s) selected",
     "view-details": "View details",
     "messenger": "Messenger",
-    "none-selected": "None selected"
+    "none-selected": "None selected",
+    "no-available-data": "No data available to show"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",

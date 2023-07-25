@@ -282,7 +282,8 @@
     "file-selected": "fil(er) valgt",
     "view-details": "Se detaljer",
     "messenger": "Budbringer",
-    "none-selected": "Ingen valgt"
+    "none-selected": "Ingen valgt",
+    "no-available-data": "Ingen data tilgjengelig å vise"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
