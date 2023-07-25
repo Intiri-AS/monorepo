@@ -177,23 +177,5 @@ namespace Intiri.API.Controllers
 
 			return Ok();
 		}
-
-		//[HttpGet("SeedColorNCS")]
-		//[AllowAnonymous]
-		//public async Task<ActionResult> SeedColorNCS()
-		//{
-		//    await Intiri.API.DataAccess.SeedData.SeedData.SeedColorNCS(_unitOfWork, _fileUploadService);
-
-		//    return Ok();
-		//}
-
-		[HttpGet("SeedMaterialsImport")]
-		[AllowAnonymous]
-		public async Task<ActionResult> SeedMaterialsImport()
-		{
-			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport(_unitOfWork, _fileUploadService);
-
-			return Ok();
-		}
 	}
 }
