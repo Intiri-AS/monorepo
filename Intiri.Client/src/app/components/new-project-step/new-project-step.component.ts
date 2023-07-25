@@ -44,7 +44,6 @@ export class NewProjectStepComponent implements OnInit {
 
   showFilterDropdown: boolean = false;
   filteredData: Array<any>;
-  allItems:any = []
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -87,18 +86,22 @@ export class NewProjectStepComponent implements OnInit {
     if (this.showFilterDropdown && (this.currentStepNo == 1 || this.currentStepNo == 2)) {
       this.filteredData = this.currentStep.data;
     }
-    this.assignAllItemsData();
+    this.showFilterDropdown && this.assignAllItemsData();
     console.log(this.currentStep, this.currentStepNo)
   }
 
     assignAllItemsData () {
       if (this.currentStepNo == 0) {
-        this.currentStep.allItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
+        this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
       } else if (this.currentStepNo == 1) {
-        this.currentStep.allItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
+        this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
       } else { // currentStepNo = 2
-        this.currentStep.allItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
+        this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
       }
+      this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
+
+      // Show items based on filters
+      this.currentStep.filteredResult = this.currentStep.data;
     }
 
   toggleItem(item) {
@@ -179,21 +182,23 @@ export class NewProjectStepComponent implements OnInit {
   }
 
   onMaterialFilterChange (event) {
-    console.log(event.detail.value);
-    let filters = event.detail.value;
+    let filters: Array<string> = event.detail.value;
 
     if (filters.length) {
-        this.filteredData = this.currentStep.data.filter(e => {
-          return filters.includes(e.materialTypeId.toString())
-        })
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => filters.includes(data.materialTypeId.toString()))
     } else {
-      this.filteredData = this.currentStep.data;
+      this.currentStep.filteredResult = this.currentStep.data;
     }
-    console.log("filteredData", this.filteredData)
   }
 
   onProductFilterChange (event) {
-    console.log(event.detail.value)
+    let filters: Array<string> = event.detail.value;
+
+    if (filters.length) {
+      this.currentStep.filteredResult = this.currentStep.data.filter(data => filters.includes(data.productTypeId.toString()))
+    } else {
+      this.currentStep.filteredResult = this.currentStep.data
+    }
   }
 
 }
