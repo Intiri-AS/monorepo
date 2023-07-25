@@ -37,13 +37,16 @@ export class NewProjectStepComponent implements OnInit {
   materials$: Observable<any> = this.materialService.materials$;
   materials: any = []
   materialTypes: any = [];
+  materialProviders: Array<any> = [];
 
   products: any = [];
   productTypes: any = [];
+  productProviders: Array<any> = [];
 
 
   showFilterDropdown: boolean = false;
-  filteredData: Array<any>;
+  typeFilters: Array<string> = [];
+  providerFilters: Array<string> = [];
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -83,35 +86,33 @@ export class NewProjectStepComponent implements OnInit {
 
 
   ngOnChanges () {
-    if (this.showFilterDropdown && (this.currentStepNo == 1 || this.currentStepNo == 2)) {
-      this.filteredData = this.currentStep.data;
-    }
     this.showFilterDropdown && this.assignAllItemsData();
-    console.log(this.currentStep, this.currentStepNo)
+
+    // list providers for materials
+    this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
+
+    // list providers for products
+    this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
+
+    console.log(this.currentStep, this.currentStepNo);
   }
 
-    assignAllItemsData () {
-      if (this.currentStepNo == 0) {
-        this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
-      } else if (this.currentStepNo == 1) {
-        this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
-      } else { // currentStepNo = 2
-        this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
-      }
-      this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
-
-      // Show items based on filters
-      this.currentStep.filteredResult = this.currentStep.data;
+  assignAllItemsData () {
+    if (this.currentStepNo == 0) {
+      this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
+    } else if (this.currentStepNo == 1) {
+      this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
+    } else { // currentStepNo = 2
+      this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
     }
+    this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
+
+    // Show items based on filters
+    this.currentStep.filteredResult = this.currentStep.data;
+  }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);
-  }
-
-  toggleRoomSketch(item) {
-    this.toggleSelection.emit(item);
-    this.imagePath = null;
-    this.project.roomDetails.imageFile = null;
   }
 
   seeMoreLess(state) {
@@ -134,6 +135,11 @@ export class NewProjectStepComponent implements OnInit {
   isArray(item) {
     return Array.isArray(item);
   }
+
+  getUniqueElementsFromArray(arr) {
+    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null)));
+    return uniqueValues;
+}
 
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
@@ -181,23 +187,44 @@ export class NewProjectStepComponent implements OnInit {
     await modal.present();
   }
 
-  onMaterialFilterChange (event) {
-    let filters: Array<string> = event.detail.value;
-
-    if (filters.length) {
-        this.currentStep.filteredResult = this.currentStep.data.filter(data => filters.includes(data.materialTypeId.toString()))
-    } else {
-      this.currentStep.filteredResult = this.currentStep.data;
-    }
+  onMaterialTypeFilterChange (event) {
+    this.typeFilters = event.detail.value;
+    this.filterItems();
   }
 
-  onProductFilterChange (event) {
+  onMaterialProviderFilterChange (event) {
+    this.providerFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onProductTypeFilterChange (event) {
     let filters: Array<string> = event.detail.value;
 
     if (filters.length) {
       this.currentStep.filteredResult = this.currentStep.data.filter(data => filters.includes(data.productTypeId.toString()))
     } else {
       this.currentStep.filteredResult = this.currentStep.data
+    }
+  }
+
+  onProductProviderFilterChange (event) {
+
+  }
+
+  filterItems () {
+    if (this.currentStepNo == 1) {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeId.toString()));
+        this.currentStep.filteredResult = this.currentStep.filteredResult.filter(data => this.providerFilters.includes(data.provider));
+      } else if (this.typeFilters.length  && !this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
+      } else {
+        this.currentStep.filteredResult = this.currentStep.data;
+      }
+    } else if (this.currentStepNo == 2) {
+
     }
   }
 

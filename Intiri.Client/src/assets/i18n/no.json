@@ -185,7 +185,9 @@
     "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem.",
     "select-4-materials": "Velg minst 4 materialer",
     "select-material-type": "Velg materialtype",
-    "select-product-type": "Velg produkttype"
+    "select-material-provider": "Velg materialleverandør",
+    "select-product-type": "Velg produkttype",
+    "select-product-provider": "Velg produktleverandør"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",

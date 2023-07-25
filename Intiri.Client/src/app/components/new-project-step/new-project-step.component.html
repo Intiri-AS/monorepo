@@ -3,25 +3,49 @@
     <h2 class="step-title">{{currentStep.title | translate}}</h2>
 
     <!-- Filter dropdowns -->
-    <div *ngIf="showFilterDropdown && (currentStepNo == 1 || currentStepNo == 2)" class="z-0">
+    <div *ngIf="showFilterDropdown && (currentStepNo == 1 || currentStepNo == 2)" class="z-0 flex">
       <ion-select
         *ngIf="currentStepNo == 1"
-        (ionChange) = "onMaterialFilterChange($event)"
+        (ionChange) = "onMaterialTypeFilterChange($event)"
         interface="popover"
         [multiple]="true"
         placeholder="{{'NEW-PROJECT.select-material-type' | translate}}"
+        class="mr-[1rem]"
       >
         <ion-select-option *ngFor="let materialType of materialTypes" value={{materialType.id}}>
           {{ materialType.name }}
         </ion-select-option>
       </ion-select>
+      <ion-select
+        *ngIf="currentStepNo == 1"
+        (ionChange) = "onMaterialProviderFilterChange($event)"
+        interface="popover"
+        [multiple]="true"
+        placeholder="{{'NEW-PROJECT.select-material-provider' | translate}}"
+      >
+        <ion-select-option *ngFor="let provider of materialProviders" value={{provider}}>
+          {{ provider }}
+        </ion-select-option>
+      </ion-select>
 
       <ion-select
         *ngIf="currentStepNo == 2"
-        (ionChange) = "onProductFilterChange($event)"
+        (ionChange) = "onProductTypeFilterChange($event)"
         interface="popover"
         [multiple]="true"
         placeholder="{{'NEW-PROJECT.select-product-type' | translate}}"
+        class="mr-[1rem]"
+      >
+        <ion-select-option *ngFor="let productType of productTypes" value={{productType.id}}>
+          {{ productType.name }}
+        </ion-select-option>
+      </ion-select>
+      <ion-select
+        *ngIf="currentStepNo == 2"
+        (ionChange) = "onProductProviderFilterChange($event)"
+        interface="popover"
+        [multiple]="true"
+        placeholder="{{'NEW-PROJECT.select-product-provider' | translate}}"
       >
         <ion-select-option *ngFor="let productType of productTypes" value={{productType.id}}>
           {{ productType.name }}
