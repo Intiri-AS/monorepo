@@ -64,8 +64,8 @@ export class NewProjectStepComponent implements OnInit {
       this.showFilterDropdown = true;
 
       // Fetch color pallets
-      this.colorService.getColorPalettes();
-      this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
+      // this.colorService.getColorPalettes();
+      // this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
 
       // Fetch materials
       this.materialService.getMaterials();
@@ -101,14 +101,14 @@ export class NewProjectStepComponent implements OnInit {
   }
 
   assignAllItemsData () {
-    if (this.currentStepNo == 0) {
-      this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
-    } else if (this.currentStepNo == 1) {
-      this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
-    } else { // currentStepNo = 2
-      this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
-    }
-    this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
+    // if (this.currentStepNo == 0) {
+    //   this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
+    // } else if (this.currentStepNo == 1) {
+    //   this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
+    // } else { // currentStepNo = 2
+    //   this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
+    // }
+    // this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
 
     // Show items based on filters
     this.currentStep.filteredResult = this.currentStep.data;
