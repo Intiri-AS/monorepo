@@ -8,9 +8,4 @@ export class Set implements Action {
   constructor (public payload: string) {}
 }
 
-export class Get implements Action {
-  readonly type: string = GET;
-  constructor (public payload?: any) {}
-}
-
-export type All = Set | Get;
+export type All = Set;

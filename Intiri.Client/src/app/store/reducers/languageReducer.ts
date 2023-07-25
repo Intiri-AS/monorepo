@@ -1,4 +1,4 @@
-import * as LanguageActions from 'src/app/store/actions/language.actions'
+import * as LanguageActions from 'src/app/store/actions/language.actions';
 
 const defaultState = {
   currentLang: 'en',
@@ -13,8 +13,6 @@ export type Action = LanguageActions.All;
 
 export function languageReducer (state = defaultState, action: Action) {
   switch (action.type) {
-    case LanguageActions.GET:
-      return state;
     case LanguageActions.SET:
       return newState(state, { currentLang: action.payload });
     default:
