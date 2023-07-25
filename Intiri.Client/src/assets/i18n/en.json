@@ -443,7 +443,8 @@
     "picture-added-text": "You successfully added new picture",
     "go-to-pictures": "Go to Pictures",
     "room": "Room",
-    "style": "Style"
+    "style": "Style",
+    "norwegian-translation": "Norwegian translation for room name"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",

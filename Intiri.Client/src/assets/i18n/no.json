@@ -442,7 +442,8 @@
     "picture-added-text": "Nytt bilde lagt til med suksess",
     "go-to-pictures": "Gå til bilder",
     "room": "Rom",
-    "style": "Stil"
+    "style": "Stil",
+    "norwegian-translation": "Norsk oversettelse for romnavn"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",

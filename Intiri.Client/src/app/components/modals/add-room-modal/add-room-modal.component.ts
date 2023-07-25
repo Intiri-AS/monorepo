@@ -25,6 +25,10 @@ export class AddRoomModalComponent implements OnInit {
     return this.addRoomForm.controls.type.errors;
   }
 
+  get nameNorwegianErrors () {
+    return this.addRoomForm.controls.nameNorwegian.errors;
+  }
+
   get descriptionErrors() {
     return this.addRoomForm.controls.description.errors;
   }
@@ -56,6 +60,7 @@ export class AddRoomModalComponent implements OnInit {
   ) {
     this.addRoomForm = this.formBuilder.group({
       name: ['', [Validators.required]],
+      nameNorwegian: ['', [Validators.required]],
       type: ['', [Validators.required]],
       description: ['', [Validators.required]],
       imageFile: ['', [Validators.required]]
@@ -77,6 +82,7 @@ export class AddRoomModalComponent implements OnInit {
 
   room = {
     name: '',
+    nameNorwegian: '',
     roomTypeId: null,
     imageFile: null,
     description: ''
