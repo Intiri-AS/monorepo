@@ -198,17 +198,13 @@ export class NewProjectStepComponent implements OnInit {
   }
 
   onProductTypeFilterChange (event) {
-    let filters: Array<string> = event.detail.value;
-
-    if (filters.length) {
-      this.currentStep.filteredResult = this.currentStep.data.filter(data => filters.includes(data.productTypeId.toString()))
-    } else {
-      this.currentStep.filteredResult = this.currentStep.data
-    }
+    this.typeFilters = event.detail.value;
+    this.filterItems();
   }
 
   onProductProviderFilterChange (event) {
-
+    this.providerFilters = event.detail.value;
+    this.filterItems();
   }
 
   filterItems () {
@@ -224,7 +220,16 @@ export class NewProjectStepComponent implements OnInit {
         this.currentStep.filteredResult = this.currentStep.data;
       }
     } else if (this.currentStepNo == 2) {
-
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+        this.currentStep.filteredResult = this.currentStep.filteredResult.filter(data => this.providerFilters.includes(data.partnerName));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.providerFilters.includes(data.partnerName));
+      } else {
+        this.currentStep.filteredResult = this.currentStep.data;
+      }
     }
   }
 

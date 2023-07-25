@@ -47,8 +47,8 @@
         [multiple]="true"
         placeholder="{{'NEW-PROJECT.select-product-provider' | translate}}"
       >
-        <ion-select-option *ngFor="let productType of productTypes" value={{productType.id}}>
-          {{ productType.name }}
+        <ion-select-option *ngFor="let provider of productProviders" value={{provider}}>
+          {{ provider }}
         </ion-select-option>
       </ion-select>
     </div>
