@@ -39,7 +39,7 @@
     "privacy": "Personvernerklæring"
   },
   "MY-INTIRI": {
-    "intiri": "Min Intiri",
+    "intiri": "Dashbord",
     "book": "Book en designer",
     "book-title": "Book din designer",
     "create": "Lag et nytt prosjekt",
@@ -277,7 +277,8 @@
     "pieces": "stykker",
     "file-selected": "fil(er) valgt",
     "view-details": "Se detaljer",
-    "messenger": "Budbringer"
+    "messenger": "Budbringer",
+    "none-selected": "Ingen valgt"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -316,6 +317,7 @@
     "products": "Produktene",
     "select-products": "5. Velg produktene",
     "product-name": "Produktnavn",
+    "product-link": "Produktlenke",
     "add": "Legg til samarbeidspartner",
     "addProduct": "Legg til produkt",
     "type": "Produkttype",
@@ -392,6 +394,8 @@
   },
   "STYLE": {
     "styles": "Stilen",
+    "type": "Type",
+    "link-to-material":  "Link til dette materialet",
     "select-style-moodboard": "2. Velg stilen",
     "materials": "Materialer",
     "rooms": "Rommet",

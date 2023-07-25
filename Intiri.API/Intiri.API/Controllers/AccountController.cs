@@ -159,7 +159,7 @@ namespace Intiri.API.Controllers
 
 			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
 
-			return Ok("SMS verification code sent.");
+			return Ok();
 		}
 
 		[HttpPost("vipps-auth-url")]

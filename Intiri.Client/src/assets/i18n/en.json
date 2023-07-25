@@ -39,7 +39,7 @@
     "privacy": "Privacy Policy"
   },
   "MY-INTIRI": {
-    "intiri": "My Intiri",
+    "intiri": "Dashboard",
     "book": "Book a designer",
     "book-title": "Book your designer",
     "create": "Create new project",
@@ -277,7 +277,8 @@
     "pieces": "pieces",
     "file-selected": "file(s) selected",
     "view-details": "View details",
-    "messenger": "Messenger"
+    "messenger": "Messenger",
+    "none-selected": "None selected"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
@@ -316,6 +317,7 @@
     "products": "Products",
     "select-products": "5. Select the Products",
     "product-name": "Product name",
+    "product-link": "Product link",
     "product-name-required" : "Product name is required",
     "product-material": "Product material",
     "product-material-required": "Material is required",
@@ -392,6 +394,9 @@
   },
   "STYLE": {
     "styles": "Styles",
+    "type": "Type",
+    "provider": "Provider",
+    "link-to-material":  "Link to this material",
     "select-style-moodboard": "2. Select the Style",
     "materials": "Materials",
     "rooms": "Rooms",

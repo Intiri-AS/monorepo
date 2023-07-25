@@ -10,17 +10,16 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required] 
 		public int ProductTypeId { get; set; }
 
-		[Required]
 		public int MaterialId { get; set; }
 		
-		[Required]
 		public string Color { get; set; }
 
-		[Required]
 		public double Price { get; set; }
 
 		public IFormFile ImageFile { get; set; }
 
 		public string Description { get; set; }
-	}
+
+        public string ProductLink { get; set; }
+    }
 }

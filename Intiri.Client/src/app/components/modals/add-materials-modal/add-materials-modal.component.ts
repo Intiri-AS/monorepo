@@ -33,6 +33,10 @@ export class AddMaterialsModalComponent implements OnInit {
     return this.addMaterialForm.controls.imageFile.errors;
   }
 
+  get addImageFileErrors () {
+    return this.addMaterialForm.controls.imageFiles.errors;
+  }
+
   get editNameErrors() {
     return this.editMaterialForm.controls.name.errors;
   }
@@ -53,12 +57,16 @@ export class AddMaterialsModalComponent implements OnInit {
     this.addMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       type: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      provider: [''],
+      link: [''],
+      description: [''],
+      imageFiles: ['', [Validators.required]]
     });
     this.editMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       type: [''],
+      provider: [''],
+      link: [''],
       description: ['', [Validators.required]],
       imageFile: ['']
     });
@@ -74,11 +82,23 @@ export class AddMaterialsModalComponent implements OnInit {
   material = {
     name: '',
     materialTypeId: null,
+    provider: '',
+    link: '',
+    imageFiles: [],
+    description: ''
+  }
+
+  edit_material_payload = {
+    name: '',
+    materialTypeId: null,
+    provider: '',
+    link: '',
     imageFile: null,
     description: ''
   }
 
   imagePath = null;
+  addMaterialImagePaths = [];
 
   materialTypes: any[];
 
@@ -88,7 +108,8 @@ export class AddMaterialsModalComponent implements OnInit {
     });
     if (this.edit) {
       const {id, imagePath, ...others } = this.item;
-      this.material = others;
+      this.edit_material_payload = others;
+      console.log("material to edit", this.edit_material_payload)
     }
   }
 
@@ -96,10 +117,20 @@ export class AddMaterialsModalComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  onFileChange(event) {
+  onFileChangeAddMaterial (event) {
+    if (Object.keys(event.target.files).length > 0) {
+      this.material.imageFiles = event.target.files;
+      this.addMaterialImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFiles[key])));
+    } else {
+      this.addMaterialImagePaths = []
+    }
+  }
+
+  onFileChangeEditMaterial(event) {
     if(event.target.files[0]) {
-      this.material.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFile));
+      this.edit_material_payload.imageFile = event.target.files[0];
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.edit_material_payload.imageFile));
     } else {
       this.imagePath = null;
     }
@@ -150,7 +181,7 @@ export class AddMaterialsModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.materialService.editMaterial(this.item.id, this.material).subscribe(res => {
+    this.materialService.editMaterial(this.item.id, this.edit_material_payload).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {

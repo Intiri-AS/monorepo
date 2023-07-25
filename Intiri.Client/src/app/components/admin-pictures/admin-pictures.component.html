@@ -12,7 +12,7 @@
         <span class="text-sm text-black-2">
           {{'STYLE.room' | translate}}
         </span>
-        <ion-select (ionChange)="onRoomFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
+        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onRoomFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
           <ion-select-option *ngFor="let room of (rooms$ | async)" value={{room.id}}>
             {{ room.name }}
           </ion-select-option>
@@ -22,7 +22,7 @@
         <span class="text-sm text-black-2">
           {{'STYLE.style' | translate}}
         </span>
-        <ion-select (ionChange)="onStyleFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
+        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onStyleFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
           <ion-select-option *ngFor="let style of (styles$ | async)" value={{style.id}}>
             {{style.name}}
           </ion-select-option>

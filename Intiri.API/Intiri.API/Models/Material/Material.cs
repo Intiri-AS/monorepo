@@ -16,8 +16,10 @@ namespace Intiri.API.Models.Material
 		public string ImagePath { get; set; }
 		public string ImagePublicId { get; set; }
 		public string Description { get; set; }
+        public string Provider { get; set; }
+        public string Link { get; set; }
 
-		public int MaterialTypeId { get; set; }
+        public int MaterialTypeId { get; set; }
 		public MaterialType	MaterialType { get; set; }
 		public ICollection<Moodboard.Moodboard> Moodboards { get; set; }
 	}
