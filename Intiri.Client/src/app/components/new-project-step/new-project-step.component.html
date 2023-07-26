@@ -61,8 +61,42 @@
   <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
   <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
 
+  <!-- For project create /Client side -->
+  <ion-grid *ngIf="isCreateProjectPage && isArray(currentStep.data)" class="step-items">
+    <ion-row class="step-items-row">
+      <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
+        <!-- if image (style|material|product) -->
+        <span *ngIf="item.imagePath">
+          <img src="{{item.imagePath}}" class="step-image" alt="style-img"/>
+          <ion-icon class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl" (click)="openImageInModal(item, {url: item.imagePath})" name="expand-outline"></ion-icon>
+        </span>
+         <!-- if icon (room) -->
+        <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
+          <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
+        </div>
+        <!-- if color pallete -->
+        <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
+          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-[47.5%] h-full inline-block color-container float-right">
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
+            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+          </div>
+        </div>
+        <p *ngIf="!item.number && item.name && currentStepNo == 0" class="font-bold mt-4 text-black-2 text-clamp-2 pr-1">
+          {{ currentLanguage == 'en' ? item.name : item.nameNorwegian}}
+        </p>
+        <div *ngIf="currentStepNo != 0">
+          <p *ngIf="!item.number && item.name" class="font-bold mt-4 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+          <p *ngIf="item.number && item.name" class="font-bold mt-4 ml-1 text-black-2 text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- For moodboard edit /Client side -->
   <ion-grid
-    *ngIf="isArray(currentStep.filteredResult)"
+    *ngIf="showFilterDropdown && isArray(currentStep.filteredResult)"
     class="step-items"
   >
     <ion-row class="step-items-row">
