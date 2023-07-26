@@ -45,6 +45,7 @@ export class NewProjectStepComponent implements OnInit {
 
 
   showFilterDropdown: boolean = false;
+  isCreateProjectPage: boolean = false;
   typeFilters: Array<string> = [];
   providerFilters: Array<string> = [];
 
@@ -81,6 +82,8 @@ export class NewProjectStepComponent implements OnInit {
       })
 
       this.assignAllItemsData()
+    } else {
+      this.isCreateProjectPage = true;
     }
   }
 
