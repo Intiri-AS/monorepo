@@ -443,12 +443,14 @@ namespace Intiri.API.DataAccess.SeedData
 
 				if(!doesAnyExist)
                 {
-                    var filep = "wwwroot/assets/project-image/material/" + materialImport.Name + materialImport.Discription + ".jpg";
+                    var filep = "wwwroot/assets/project-image/material/" + materialImport.PreImageName + materialImport.articlenumber + ".jpg";
                     string path = Path.GetFullPath(filep);
 
                     if (!File.Exists(path))
                     {
-						continue;
+                        Console.WriteLine("File null");
+                        Console.WriteLine(materialImport);
+                        continue;
                     }
 
                     using (var stream = System.IO.File.OpenRead(path))
@@ -476,28 +478,28 @@ namespace Intiri.API.DataAccess.SeedData
                             Console.WriteLine(fileNameWithoutExtension);
                             Console.WriteLine(materialImport);
 
-                            //Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.MaterialImages);
+							Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.MaterialImages);
 
-                            //if (uploadResult.Item1 != HttpStatusCode.OK)
-                            //{
-                            //    Console.WriteLine(uploadResult.Item2);
-                            //}
-                            //else
-                            //{
-                            //    Material material = new Material();
-                            //    material.Name = materialImport.Name;
-                            //    material.Description = materialImport.Discription;
+							if (uploadResult.Item1 != HttpStatusCode.OK)
+							{
+								Console.WriteLine(uploadResult.Item2);
+							}
+							else
+							{
+								Material material = new Material();
+								material.Name = materialImport.Name;
+								material.Description = materialImport.Discription.ToString();								
 
-                            //    material.ImagePath = uploadResult.Item3.PublicId;
-                            //    material.ImagePublicId = uploadResult.Item3.SecureUrl.AbsoluteUri;
+								material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+								material.ImagePublicId = uploadResult.Item3.PublicId;
 
-                            //    MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
-                            //    material.MaterialType = materialType;
+								MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
+								material.MaterialType = materialType;
 
-                            //    unitOfWork.MaterialRepository.Insert(material);
-                            //    await unitOfWork.SaveChanges();
-                            //}
-                        }
+								unitOfWork.MaterialRepository.Insert(material);
+								await unitOfWork.SaveChanges();
+							}
+						}
                     }
                     
                 }
