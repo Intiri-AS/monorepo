@@ -48,7 +48,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>  
-            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain($event)">
+            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain()">
               <ion-searchbar></ion-searchbar>
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
@@ -62,7 +62,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
@@ -77,7 +77,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
@@ -90,7 +90,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
@@ -190,7 +190,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain($event)">
+            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor + '!important'"
@@ -203,7 +203,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
@@ -218,7 +218,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
@@ -231,7 +231,7 @@
         <ion-col>
           <div class="pl-2">
             <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark($event)">
+            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark()">
               <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
             </ion-select>
             <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
