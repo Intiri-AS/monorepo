@@ -187,7 +187,7 @@ export class AddMaterialsModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.materialService.getMaterials();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.saved-deleted'),
+          message: this.translate.instant('NOTIFY.material-saved'),
           type: 'success'
         });
       }
