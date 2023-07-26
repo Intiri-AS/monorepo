@@ -130,8 +130,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartComponent } from './components/chart/chart.component';
 import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
 import { ProfilePopoverComponent } from './components/popovers/profile-popover/profile-popover.component';
-import { StoreModule } from '@ngrx/store';
-import { languageReducer } from './store/reducers/languageReducer';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -190,9 +188,6 @@ export function createTranslateLoader(http: HttpClient) {
           distance: 30
         }
       }
-    }),
-    StoreModule.forRoot({
-      language: languageReducer
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

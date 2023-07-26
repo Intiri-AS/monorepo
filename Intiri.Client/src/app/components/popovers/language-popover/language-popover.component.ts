@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { LanguageService } from 'src/app/services/language.service';
-import * as LanguageActions from 'src/app/store/actions/language.actions'
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 interface AppState {
@@ -24,10 +22,7 @@ export class LanguagePopoverComponent implements OnInit {
   constructor(
     private popoverController: PopoverController,
     private languageService: LanguageService,
-    private store: Store<AppState>
-  ) {
-    this.language$ = store.select('language');
-  }
+  ) {}
 
   ngOnInit() {
       this.languages = this.languageService.getLanguages();
@@ -35,7 +30,6 @@ export class LanguagePopoverComponent implements OnInit {
   }
 
   selectLanguage(lng) {
-    this.store.dispatch(new LanguageActions.Set(lng));
     this.languageService.setLanguage(lng);
     this.popoverController.dismiss();
   }
