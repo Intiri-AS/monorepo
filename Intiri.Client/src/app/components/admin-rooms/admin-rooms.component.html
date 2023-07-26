@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="flex justify-between">
-        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{room.name}}</p>
+        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{language == 'en' ? room.name: room.nameNorwegian}}</p>
         <div class="float-right">
           <button (click)="showSettings($event, room)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg" type="button">
               <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>

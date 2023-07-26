@@ -13,5 +13,7 @@
 		public int MaterialTypeId { get; set; }
 
 		public string MaterialTypeName { get; set; }
-	}
+        public string Provider { get; set; }
+        public string Link { get; set; }
+    }
 }

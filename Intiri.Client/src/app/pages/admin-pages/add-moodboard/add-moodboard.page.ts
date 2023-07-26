@@ -27,6 +27,10 @@ export class AddMoodboardPage implements OnInit {
       data: [],
     },
     {
+      title: 'STYLE.select-inspirational-photos',
+      data: [],
+    },
+    {
       title: 'NEW-PROJECT.select-materials',
       data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
     },
@@ -47,10 +51,11 @@ export class AddMoodboardPage implements OnInit {
   stepsOrder: object = {
     0: 'room',
     1: 'style',
-    2: 'materials',
-    3: 'colorPalettes',
-    4: 'products',
-    5: 'final'
+    2: 'inspirationalPhotos',
+    3: 'materials',
+    4: 'colorPalettes',
+    5: 'products',
+    6: 'final'
   };
 
   moodboard = new Moodboard();
@@ -104,13 +109,13 @@ export class AddMoodboardPage implements OnInit {
       this.steps[1]['data'] = res.map(e => {e.imagePath = (!e.imagePath || e.imagePath === 'path') ?  e.styleImages[0].imagePath : e.imagePath; return e;});
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
-      this.steps[2]['data'] = res;
-    });
-    this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
-    this.projectService.getProducts().subscribe((res: Array<any>) => {
+    this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[4]['data'] = res;
+    });
+    this.projectService.getProducts().subscribe((res: Array<any>) => {
+      this.steps[5]['data'] = res;
     });
   }
 
@@ -154,7 +159,6 @@ export class AddMoodboardPage implements OnInit {
       }
       case 3: {
         return (
-          this.moodboard.materials.length > 3 &&
           !this.isEmpty(this.moodboard.room) &&
           !this.isEmpty(this.moodboard.style)
         );
@@ -163,11 +167,18 @@ export class AddMoodboardPage implements OnInit {
         return (
           this.moodboard.materials.length > 3 &&
           !this.isEmpty(this.moodboard.room) &&
+          !this.isEmpty(this.moodboard.style)
+        );
+      }
+      case 5: {
+        return (
+          this.moodboard.materials.length > 3 &&
+          !this.isEmpty(this.moodboard.room) &&
           !this.isEmpty(this.moodboard.style) &&
           this.moodboard.colorPalettes.length > 0
         );
       }
-      case 5: {
+      case 6: {
         return (
           this.moodboard.materials.length > 3 &&
           this.moodboard.products.length > 1 &&

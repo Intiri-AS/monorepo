@@ -4,6 +4,13 @@ import { ModalController } from '@ionic/angular';
 import { ProjectService } from 'src/app/services/project.service';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { MaterialService } from 'src/app/services/material.service';
+import { PartnerService } from 'src/app/services/partner.service'
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ColorService } from 'src/app/services/color.service';
+import { ProductService } from 'src/app/services/product.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-new-project-step',
@@ -25,32 +32,100 @@ export class NewProjectStepComponent implements OnInit {
 
   expandText: boolean = false;
 
+  colorPalettes$: Observable<any> = this.colorService.colorPalettes$
+  colorPalettes: any = [];
+
+  materials$: Observable<any> = this.materialService.materials$;
+  materials: any = []
+  materialTypes: any = [];
+  materialProviders: Array<any> = [];
+
+  products: any = [];
+  productTypes: any = [];
+  productProviders: Array<any> = [];
+
+
+  showFilterDropdown: boolean = false;
+  isCreateProjectPage: boolean = false;
+  typeFilters: Array<string> = [];
+  providerFilters: Array<string> = [];
+
+  currentLanguage: string = '';
+
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private materialService: MaterialService,
+    private partnerService: PartnerService,
+    private colorService: ColorService,
+    private productService: ProductService,
+    private languageService: LanguageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    if (this.currentStepNo == 4) {
-      console.log("currentStep", this.currentStep)
+    if (this.router.url.includes('edit-moodboard')) { //For Client-side moodboard edit
+      this.showFilterDropdown = true;
+
+      // Fetch color pallets
+      // this.colorService.getColorPalettes();
+      // this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
+
+      // Fetch materials
+      this.materialService.getMaterials();
+      this.materials$.subscribe(res => { this.materials = res });
+      this.materialService.getMaterialTypes().subscribe(res => {
+        this.materialTypes = res;
+      })
+
+      // Fetch products
+      this.productService.getProducts().subscribe(res => { this.products = res })
+      this.partnerService.getProductsType().subscribe(res => {
+        this.productTypes = res;
+      })
+
+      this.assignAllItemsData()
+    } else {
+      this.isCreateProjectPage = true;
     }
+    this.languageService.languageChange$.subscribe(res => {
+      this.currentLanguage = res;
+    })
   }
 
+
   ngOnChanges () {
-    if (this.currentStepNo == 4) {
-      console.log("currentStep", this.currentStep)
-    }
+    this.showFilterDropdown && this.assignAllItemsData();
+
+    this.typeFilters = [];
+    this.providerFilters = [];
+
+    // list providers for materials
+    this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
+
+    // list providers for products
+    this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
+
+    console.log(this.currentStep, this.currentStepNo);
+  }
+
+  assignAllItemsData () {
+    // if (this.currentStepNo == 0) {
+    //   this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
+    // } else if (this.currentStepNo == 1) {
+    //   this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
+    // } else { // currentStepNo = 2
+    //   this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
+    // }
+    // this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
+
+    // Show items based on filters
+    this.currentStep.filteredResult = this.currentStep.data;
   }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);
-  }
-
-  toggleRoomSketch(item) {
-    this.toggleSelection.emit(item);
-    this.imagePath = null;
-    this.project.roomDetails.imageFile = null;
   }
 
   seeMoreLess(state) {
@@ -73,6 +148,11 @@ export class NewProjectStepComponent implements OnInit {
   isArray(item) {
     return Array.isArray(item);
   }
+
+  getUniqueElementsFromArray(arr) {
+    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null)));
+    return uniqueValues;
+}
 
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
@@ -118,6 +198,52 @@ export class NewProjectStepComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  onMaterialTypeFilterChange (event) {
+    this.typeFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onMaterialProviderFilterChange (event) {
+    this.providerFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onProductTypeFilterChange (event) {
+    this.typeFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onProductProviderFilterChange (event) {
+    this.providerFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  filterItems () {
+    if (this.currentStepNo == 1) {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeId.toString()));
+        this.currentStep.filteredResult = this.currentStep.filteredResult.filter(data => this.providerFilters.includes(data.provider));
+      } else if (this.typeFilters.length  && !this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
+      } else {
+        this.currentStep.filteredResult = this.currentStep.data;
+      }
+    } else if (this.currentStepNo == 2) {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+        this.currentStep.filteredResult = this.currentStep.filteredResult.filter(data => this.providerFilters.includes(data.partnerName));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.currentStep.filteredResult = this.currentStep.data.filter(data => this.providerFilters.includes(data.partnerName));
+      } else {
+        this.currentStep.filteredResult = this.currentStep.data;
+      }
+    }
   }
 
 }

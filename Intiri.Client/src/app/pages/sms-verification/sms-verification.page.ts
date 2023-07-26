@@ -86,8 +86,11 @@ export class SmsVerificationPage implements OnInit {
   }
 
   resendVerificationCode() {
-    const phoneNumberFull = this.getQueryParamFromSnapshot('phoneNumberFull');
-    this.accountService.resendVerificationCode(phoneNumberFull).subscribe(
+    
+    const countryCode = this.getQueryParamFromSnapshot('countryCode');
+    const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
+
+    this.accountService.resendVerificationCode(countryCode,phoneNumber).subscribe(
       response => {
         // nothing to do here
       }, error => {

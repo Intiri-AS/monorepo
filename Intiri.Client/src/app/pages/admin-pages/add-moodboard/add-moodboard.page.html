@@ -13,10 +13,11 @@
             </p>
             <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item" [class]="client ? '' : 'pt-[45px]'">{{'NEW-PROJECT.room' | translate}}</p>
             <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">{{'NEW-PROJECT.style' | translate}}</p>
-            <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">{{'NEW-PROJECT.materials' | translate}}</p>
-            <p [class.!text-primary]="currentStepNo == 3" (click)="goToStep(3)" [class.disabled]="!canChangeToStep(3)" class="side-menu-item">{{'MY-INTIRI.colors' | translate}}</p>
-            <p [class.!text-primary]="currentStepNo == 4" (click)="goToStep(4)" [class.disabled]="!canChangeToStep(4)" class="side-menu-item">{{'NEW-PROJECT.products' | translate}}</p>
-            <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">{{'MOODBOARDS.moodboard-preview' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">Inspirational photos</p>
+            <p [class.!text-primary]="currentStepNo == 3" (click)="goToStep(3)" [class.disabled]="!canChangeToStep(3)" class="side-menu-item">{{'NEW-PROJECT.materials' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 4" (click)="goToStep(4)" [class.disabled]="!canChangeToStep(4)" class="side-menu-item">{{'MY-INTIRI.colors' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">{{'NEW-PROJECT.products' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 6" (click)="goToStep(6)" [class.disabled]="!canChangeToStep(6)" class="side-menu-item">{{'MOODBOARDS.moodboard-preview' | translate}}</p>
           </div>
         </ion-col>
         <ion-col *ngIf="clientRequestStep" size="12" offset-xl="0.5" size-xl="9">

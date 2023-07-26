@@ -70,7 +70,7 @@ namespace Intiri.API.Controllers
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]
 		[HttpPost("add")]
-		public async Task<ActionResult<MaterialOutDTO>> AddMaterial([FromForm] MaterialInDTO materialInDTO)
+		public async Task<ActionResult<MaterialOutDTO>> AddMaterial([FromForm] MultipleMaterialInDTO materialInDTO)
 		{
 			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(materialInDTO.MaterialTypeId);
 
@@ -81,33 +81,39 @@ namespace Intiri.API.Controllers
 				return BadRequest("Material name with material type already exist");
 			}
 
-			Material material = _mapper.Map<Material>(materialInDTO);
-
-			IFormFile imageFile = materialInDTO.ImageFile;
-			if (imageFile != null && imageFile.Length > 0)
+			try
 			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.MaterialImages);
+                foreach (var imageFile in materialInDTO.ImageFile)
+                {
+                    Material material = _mapper.Map<Material>(materialInDTO);
 
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+                    if (imageFile != null && imageFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                            await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.MaterialImages);
 
-				material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				material.ImagePublicId = uploadResult.Item3.PublicId;
+                        if (uploadResult.Item1 != HttpStatusCode.OK)
+                        {
+                            return BadRequest(uploadResult.Item2);
+                        }
 
-				material.MaterialType = materialType;
+                        material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                        material.ImagePublicId = uploadResult.Item3.PublicId;
 
-				_unitOfWork.MaterialRepository.Insert(material);
+                        material.MaterialType = materialType;
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return _mapper.Map<MaterialOutDTO>(material);
-				}
-			}
+                        _unitOfWork.MaterialRepository.Insert(material);
 
-			return BadRequest("Problem adding material.");
+                        await _unitOfWork.SaveChanges();
+                    }
+                }
+
+                return Ok(materialInDTO);
+            }
+			catch
+			{
+                return BadRequest("Problem adding material.");
+            }
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]

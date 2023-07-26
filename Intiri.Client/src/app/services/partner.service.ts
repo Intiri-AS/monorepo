@@ -113,12 +113,13 @@ export class PartnerService {
     Object.keys(productData).forEach((key) =>
       formData.append(key, productData[key])
     );
-    formData.delete('imageFile'); // removing it first so we can manually add a file name
-    formData.append(
-      'imageFile',
-      productData.imageFile,
-      `productImg${productData.name.replace(/\s/g, '_')}.png`
-    );
+    formData.delete('imageFiles'); // removing it first so we can manually add a file name
+
+    Object.keys(productData.imageFiles).forEach((key, i) => {
+      let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
+      formData.append('imageFile', productData.imageFiles[key], `imageFiles${uniqueStr}.png`)
+    });
+
     return this.http.post(`${this.apiUrl}products/add`, formData);
   }
 

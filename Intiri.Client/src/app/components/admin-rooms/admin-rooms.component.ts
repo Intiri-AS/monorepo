@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RoomService } from 'src/app/services/room.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.component';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-admin-rooms',
@@ -15,13 +16,25 @@ export class AdminRoomsComponent implements OnInit {
   rooms$: Observable<any> = this.roomService.rooms$;
   roomTypes: [];
   searchText: any;
-  
-  constructor(public popoverController: PopoverController, private modalController: ModalController, private roomService: RoomService) { }
+  language$: Observable<any>;
+  language: any
+
+  constructor(
+    public popoverController: PopoverController,
+    private modalController: ModalController,
+    private roomService: RoomService,
+    private languageService: LanguageService
+  ) {
+  }
 
   ngOnInit() {
     this.roomService.getRooms()
     this.roomService.getRoomTypes().subscribe((res: []) => {
       this.roomTypes = res;
+    })
+
+    this.languageService.languageChange$.subscribe(res => {
+      this.language = res;
     })
   }
 

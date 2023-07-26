@@ -9,5 +9,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<ColorPalette> GetColorPaletteById(int id);
 		Task<IEnumerable<ColorPalette>> GetColorPalettesByIdsListAsync(ICollection<int> cpIds);
         Task<IEnumerable<ColorPaletteOutDTO>> GetColorPalettesWithNCSAsync();
+        Task<ICollection<ColorPaletteOutDTO>> UpdateColorPalettesWithNCSAsync(ICollection<ColorPaletteOutDTO> colorPaletteOutDTOs);
     }
 }

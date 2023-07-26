@@ -27,8 +27,10 @@ export class MaterialService {
   addMaterial(materialObj) {
     const formData = new FormData();
     Object.keys(materialObj).forEach(key => formData.append(key, materialObj[key]));
-    formData.delete('imageFile'); // removing it first so we can manually add a file name
-    formData.append('imageFile', materialObj.imageFile, `materialImg${materialObj.name.replace(/\s/g,'_')}.png`)
+    formData.delete('imageFiles'); // removing it first so we can manually add a file name
+    Object.keys(materialObj.imageFiles).forEach((key, i) => {
+      formData.append('imageFile', materialObj.imageFiles[key], `materialImg${materialObj.name.replace(/\s/g,'_')}.png`)
+    });
     return this.http.post(`${this.apiUrl}materials/add`, formData);
   }
 
