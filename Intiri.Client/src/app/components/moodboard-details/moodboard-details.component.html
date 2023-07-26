@@ -127,10 +127,18 @@
 
     <!-- Colors -->
     <div class="grid-item colors-container">
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
+      <div class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}" alt="shadeColorLightData" class="h-full">
+      </div>
+      <div class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}" alt="shadeColorMediumData" class="h-full">
+      </div>
+      <div class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+      </div>
+      <div class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}" alt="shadeColorDarkData" class="h-full">
+      </div>
     </div>
   </div>
 </ion-card>

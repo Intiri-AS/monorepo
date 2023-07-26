@@ -21,17 +21,17 @@
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}">
-            <img src={{item.mainColorData.imagePath}} alt="" srcset="" class="h-full">
+            <img src={{item.mainColorData.imagePath}} alt="mainColorData" srcset="" class="h-full">
           </div>
           <div class="w-[47.5%] h-full max-h-[84%] inline-block color-container float-right">
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}">
-              <img src={{item.shadeColorLightData.imagePath}} alt="" srcset="">
+              <img src={{item.shadeColorLightData.imagePath}} alt="shadeColorLightData" srcset="">
             </div>
             <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}">
-              <img src={{item.shadeColorMediumData.imagePath}} alt="" srcset="">
+              <img src={{item.shadeColorMediumData.imagePath}} alt="shadeColorMediumData" srcset="">
             </div>
             <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}">
-              <img src={{item.shadeColorDarkData.imagePath}} alt="" srcset="">
+              <img src={{item.shadeColorDarkData.imagePath}} alt="shadeColorDarkData" srcset="">
             </div>
           </div>
         </div>
