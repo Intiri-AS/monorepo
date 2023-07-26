@@ -362,3 +362,4 @@ FodyWeavers.xsd
 # Guidelines
 .editorconfig
 /Intiri.API/Intiri.API/wwwroot/assets/project-image/material
+/Intiri.API/Intiri.API/c:\temp\internal-nlog-AspNetCore.txt
