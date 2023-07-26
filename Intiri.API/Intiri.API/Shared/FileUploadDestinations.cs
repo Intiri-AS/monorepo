@@ -11,5 +11,6 @@
 		public static readonly string UserProfilePhotos = "UserProfilePhotosIntiri";
 		public static readonly string ClientInspirations = "ClientInspirationsIntiri";
 		public static readonly string MoodboardRoomSketches = "MoodboardRoomSketchesIntiri";
+		public static readonly string ColorNCS = "ColorNCS";
 	}
 }

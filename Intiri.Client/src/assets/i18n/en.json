@@ -39,7 +39,7 @@
     "privacy": "Privacy Policy"
   },
   "MY-INTIRI": {
-    "intiri": "My Intiri",
+    "intiri": "Dashboard",
     "book": "Book a designer",
     "book-title": "Book your designer",
     "create": "Create new project",
@@ -142,9 +142,10 @@
     "project": "Sample: Judy’s living room",
     "project-name": "Project name",
     "room": "Room",
+    "style": "Style",
+    "inspirational-photos": "Inspirational photos",
     "select-room-title": "Select the room you want to improve",
     "select-room-text": "Don't worry, you can improve more rooms later.",
-    "style": "Style",
     "select-style-title": "Select pictures that you like",
     "select-style-text": "Decisions are hard, pick as many as you want.",
     "room-details": "Room Details",
@@ -183,7 +184,11 @@
     "premium-content": "Premium content",
     "see-all-free": "See all for free",
     "trial-period-txt": "For trial period, you will be able to see all moodboards. Afterwards, you will have to become a premium member.",
-    "select-4-materials": "Please select at least 4 materials"
+    "select-4-materials": "Please select at least 4 materials",
+    "select-material-type": "Select material type",
+    "select-material-provider": "Select material provider",
+    "select-product-type": "Select product type",
+    "select-product-provider": "Select product provider"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
@@ -277,7 +282,9 @@
     "pieces": "pieces",
     "file-selected": "file(s) selected",
     "view-details": "View details",
-    "messenger": "Messenger"
+    "messenger": "Messenger",
+    "none-selected": "None selected",
+    "no-available-data": "No data available to show"
   },
   "DASHBOARD": {
     "dashboard": "Dashboard",
@@ -316,6 +323,7 @@
     "products": "Products",
     "select-products": "5. Select the Products",
     "product-name": "Product name",
+    "product-link": "Product link",
     "product-name-required" : "Product name is required",
     "product-material": "Product material",
     "product-material-required": "Material is required",
@@ -392,10 +400,14 @@
   },
   "STYLE": {
     "styles": "Styles",
+    "type": "Type",
+    "provider": "Provider",
+    "link-to-material":  "Link to this material",
+    "select-room-moodboard": "1. Select the Room",
     "select-style-moodboard": "2. Select the Style",
+    "select-inspirational-photos": "3. Select inspirational photos",
     "materials": "Materials",
     "rooms": "Rooms",
-    "select-room-moodboard": "1. Select the Room",
     "pictures": "Pictures",
     "add-style": "Add style",
     "style-name": "Style name",
@@ -433,7 +445,8 @@
     "picture-added-text": "You successfully added new picture",
     "go-to-pictures": "Go to Pictures",
     "room": "Room",
-    "style": "Style"
+    "style": "Style",
+    "norwegian-translation": "Norwegian translation for room name"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",

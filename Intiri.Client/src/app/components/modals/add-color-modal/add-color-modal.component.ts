@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ColorService } from 'src/app/services/color.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-color-modal',
@@ -15,6 +16,13 @@ export class AddColorModalComponent implements OnInit {
   public addColorForm: FormGroup;
   public editColorForm: FormGroup;
   public isFormSubmited = false;
+  colorNCS$: Observable<any> = this.colorService.colorNCS$;
+
+  mainColorSrc;
+  shadeColorLightSrc;
+  shadeColorMediumSrc;
+  shadeColorDarkSrc;
+  colorNCSArr = [];
 
   get nameErrors() {
     return this.addColorForm.controls.name.errors;
@@ -107,9 +115,15 @@ export class AddColorModalComponent implements OnInit {
   item: any
 
   ngOnInit() {
+    this.colorService.getNCSColors();
+    this.colorService.colorNCS$.subscribe(countries => this.colorNCSArr = countries);
+
     if (this.edit) {
       const {id, ...others } = this.item;
-      this.colorPallete = others;
+      setTimeout(() => {
+        this.colorPallete = others;
+        this.refreshColorPalletes();
+      }, 1000);  //5s
     }
   }
 
@@ -191,4 +205,60 @@ export class AddColorModalComponent implements OnInit {
 
     await modal.present();
   }
+
+  refreshColorPalletes(){
+    this.updateColorPalleteMain();
+    this.updateColorPalleteLight();
+    this.updateColorPalleteMedium();
+    this.updateColorPalleteDark();
+  }
+
+  updateColorPalleteMain() {
+    let colorId = this.colorPallete.mainColor;
+    if (colorId) {
+      var obj = this.colorNCSArr.filter(function (node) {
+        return node.id == colorId;
+      });
+      if (obj && obj.length > 0) {
+        this.mainColorSrc = obj[0]['imagePath'];
+      }
+    }
+  }
+
+  updateColorPalleteLight() {
+    let colorId = this.colorPallete.shadeColorLight;
+    if (colorId) {
+      var obj = this.colorNCSArr.filter(function (node) {
+        return node.id == colorId;
+      });
+      if (obj && obj.length > 0) {
+        this.shadeColorLightSrc = obj[0]['imagePath'];
+      }
+    }
+  }
+
+  updateColorPalleteMedium() {
+    let colorId = this.colorPallete.shadeColorMedium;
+    if (colorId) {
+      var obj = this.colorNCSArr.filter(function (node) {
+        return node.id == colorId;
+      });
+      if (obj && obj.length > 0) {
+        this.shadeColorMediumSrc = obj[0]['imagePath'];
+      }
+    }
+  }
+
+  updateColorPalleteDark() {
+    let colorId = this.colorPallete.shadeColorDark;
+    if (colorId) {
+      var obj = this.colorNCSArr.filter(function (node) {
+        return node.id == colorId;
+      });
+      if (obj && obj.length > 0) {
+        this.shadeColorDarkSrc = obj[0]['imagePath'];
+      }
+    }
+  }
+
 }

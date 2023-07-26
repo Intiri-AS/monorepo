@@ -34,10 +34,8 @@ namespace Intiri.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<ColorPaletteOutDTO>>> GetColorPalettes()
 		{
-			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesAsync();
-			IEnumerable<ColorPaletteOutDTO> colorPalettesOut = _mapper.Map<IEnumerable<ColorPaletteOutDTO>>(colorPalettes);
-
-			return Ok(colorPalettesOut);
+            IEnumerable<ColorPaletteOutDTO> colorPalettesOut = await _unitOfWork.ColorPaletteRepository.GetColorPalettesWithNCSAsync();
+            return Ok(colorPalettesOut);
 		}
 
 		[Authorize(Policy = PolicyNames.AdminPolicy)]

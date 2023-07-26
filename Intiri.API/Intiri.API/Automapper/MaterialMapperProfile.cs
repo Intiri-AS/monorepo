@@ -10,6 +10,7 @@ namespace Intiri.API.Automapper
 		public MaterialMapperProfile()
 		{
 			CreateMap<MaterialInDTO, Material>();
+			CreateMap<MultipleMaterialInDTO, Material>();
 			CreateMap<Material, MaterialOutDTO>()
 				.ForMember(mt => mt.MaterialTypeName, opt => opt.MapFrom(src => src.MaterialType.Name));
 

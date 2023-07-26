@@ -75,8 +75,9 @@ export class AccountService {
       );
   }
 
-  resendVerificationCode(phoneNumberFull) {
-    return this.http.post(this.apiUrl + 'account/resend-sms-verification', {phoneNumberFull});
+  resendVerificationCode(countryCode: string, phoneNumber: string,) {
+    const verificationDTO = new SmsVerificationDTO(countryCode, phoneNumber, "");
+    return this.http.post(this.apiUrl + 'account/resend-sms-verification', verificationDTO);
   }
 
   setCurrentUser(user: User) {

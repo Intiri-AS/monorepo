@@ -7,6 +7,8 @@
         <div>
           <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">{{'PARTNERS.addProduct' | translate}}</h2>
         </div>
+
+        <!-- Product name -->
         <div class="profile-input">
           <span class="text-sm text-black-2">{{'PARTNERS.product-name' | translate}}</span>
           <ion-input formControlName="productName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
@@ -14,6 +16,14 @@
             <span slot="error" style="color: red;" *ngIf="form.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
           </div>
         </div>
+
+        <!-- Product link -->
+        <div class="profile-input">
+          <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
+          <ion-input formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+        </div>
+
+        <!-- Product type & Material type -->
         <section class="flex-row-product">
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
@@ -35,6 +45,8 @@
 
           </div>
         </section>
+
+        <!-- Select color & price -->
         <div class="flex-row-product">
           <div class="profile-input fixed-width">
             <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
@@ -64,15 +76,27 @@
           <div class="profile-input w-fit">
             <label for="dropzone-file">
               <div class="w-[150px] border-2 border-dashed rounded-2xl h-[150px] border-black-3 hover:opacity-70 cursor-pointer">
-                <div class="text-center mt-[50px]" *ngIf="!imagePath">
+                <div class="text-center mt-[50px]">
                   <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
 
                 </div>
-                <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="roomImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageUrl" />
+              <input
+                (change)="onFileChangeAddProduct($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageUrl"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+                multiple
+              />
             </label>
+            <div [ngClass]="{'image-preview-container' : addImagePaths.length > 0}">
+              <div *ngFor="let imagePath of addImagePaths; let i = index">
+                <img [src]="imagePath" alt="{{ 'PictureImage ' + i }}" class="preview-image"/>
+              </div>
+            </div>
             <div *ngIf="submitted && form.imageUrl.errors" class="invalid-feedback">
               <span slot="error" style="color: red;" *ngIf="form.imageUrl.errors.required">*{{'PARTNERS.product-image-required' | translate}}</span>
             </div>
@@ -133,6 +157,11 @@
             <div *ngIf="submitted && editForm.productName.errors" class="invalid-feedback">
               <span slot="error" class="ion-warning" *ngIf="editForm.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
             </div>
+          </div>
+
+          <div class="profile-input">
+            <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
+            <ion-input [(ngModel)]="product.productLink" formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
           </div>
           <section class="flex-row-product">
             <div class="profile-input fixed-width">
@@ -201,7 +230,7 @@
                       </div>
                       <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
                     </div>
-                    <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+                    <input (change)="onFileChangeEditProduct($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
                   </label>
                 </div>
               </ion-col>

@@ -39,7 +39,7 @@
     "privacy": "Personvernerklæring"
   },
   "MY-INTIRI": {
-    "intiri": "Min Intiri",
+    "intiri": "Dashbord",
     "book": "Book en designer",
     "book-title": "Book din designer",
     "create": "Lag et nytt prosjekt",
@@ -142,9 +142,10 @@
     "project": "Eksempel: Judys stue",
     "project-name": "Prosjektets navn",
     "room": "Rom",
+    "style": "Stil",
+    "inspirational-photos": "Inspirerende bilder",
     "select-room-title": "Velg rommet du vil jobbe med",
     "select-room-text": "Ikke stress, du kan velge flere rom senere.",
-    "style": "Stil",
     "select-style-title": "Velg bildene du liker",
     "select-style-text": "Valg er vanskelig, velg så mange du vil.",
     "room-details": "Romdetaljer",
@@ -183,7 +184,11 @@
     "premium-content": "Premium innhold",
     "see-all-free": "Se alt gratis",
     "trial-period-txt": "I løpet av prøveperioden vil du kunne se alle moodboards. Etterpå må du bli premium-medlem.",
-    "select-4-materials": "Velg minst 4 materialer"
+    "select-4-materials": "Velg minst 4 materialer",
+    "select-material-type": "Velg materialtype",
+    "select-material-provider": "Velg materialleverandør",
+    "select-product-type": "Velg produkttype",
+    "select-product-provider": "Velg produktleverandør"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
@@ -277,7 +282,9 @@
     "pieces": "stykker",
     "file-selected": "fil(er) valgt",
     "view-details": "Se detaljer",
-    "messenger": "Budbringer"
+    "messenger": "Budbringer",
+    "none-selected": "Ingen valgt",
+    "no-available-data": "Ingen data tilgjengelig å vise"
   },
   "DASHBOARD": {
     "dashboard": "Dashbord",
@@ -316,6 +323,7 @@
     "products": "Produktene",
     "select-products": "5. Velg produktene",
     "product-name": "Produktnavn",
+    "product-link": "Produktlenke",
     "add": "Legg til samarbeidspartner",
     "addProduct": "Legg til produkt",
     "type": "Produkttype",
@@ -392,10 +400,13 @@
   },
   "STYLE": {
     "styles": "Stilen",
+    "type": "Type",
+    "link-to-material":  "Link til dette materialet",
+    "select-room-moodboard": "1. Velg rommet",
     "select-style-moodboard": "2. Velg stilen",
+    "select-inspirational-photos": "3. Velg inspirerende bilder",
     "materials": "Materialer",
     "rooms": "Rommet",
-    "select-room-moodboard": "1. Velg rommet",
     "pictures": "Bilder",
     "add-style": "Legg til stil",
     "style-name": "Stilnavn",
@@ -433,7 +444,8 @@
     "picture-added-text": "Nytt bilde lagt til med suksess",
     "go-to-pictures": "Gå til bilder",
     "room": "Rom",
-    "style": "Stil"
+    "style": "Stil",
+    "norwegian-translation": "Norsk oversettelse for romnavn"
   },
   "CARD-INFO": {
     "designs": "{{length}} designs",

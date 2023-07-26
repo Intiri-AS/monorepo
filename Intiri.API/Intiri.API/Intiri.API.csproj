@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\project-image\material\**" />
+    <Content Remove="wwwroot\assets\project-image\material\**" />
+    <EmbeddedResource Remove="wwwroot\assets\project-image\material\**" />
+    <None Remove="wwwroot\assets\project-image\material\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
@@ -39,7 +46,7 @@
     <Folder Include="Resources\RoomImages\" />
     <Folder Include="Resources\StyleCoverImages\" />
     <Folder Include="Resources\StyleImages\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\assets\project-image\color-palettes\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties dataaccess_4seeddata_4userseeddata_1json__JsonSchema="https://carafe.fm/schema/draft-02/bundle.schema.json" /></VisualStudio></ProjectExtensions>
