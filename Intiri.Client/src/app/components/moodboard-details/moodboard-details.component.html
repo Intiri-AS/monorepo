@@ -1,83 +1,189 @@
-<ion-card class="border shadow-1 rounded-2xl w-full  h-[410px] mac:h-[610px] m-0 mt-7 p-4">
-      <div class="result-grid">
-        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
-        <div class="item-lg border border-light bg-white">
-          <img [src]="moodboard?.style.styleImages[0]?.imagePath" class="object-contain"/>
+<ion-card class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 mt-7 p-4">
+  <div class="grid-container">
+    <div class="grid-item grid-item-1">
+      <div class="top-section">
+        <div class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
+          <img
+            *ngIf="imagePaths[10]"
+            [src]="imagePaths[10]"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            draggable="true"
+            (dragstart)="dragStart($event, 10)"
+          >
         </div>
-        <div class="item-lg border border-light bg-white">
-          <img [src]="moodboard.products[1]?.imagePath" class="object-contain"/>
+        <div class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
+            <img
+              *ngIf="imagePaths[1]"
+              [src]="imagePaths[1]"
+              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              alt="image-input-1"
+              draggable="true"
+              (dragstart)="dragStart($event, 1)"
+            />
         </div>
-        <div class="item-lg-tall border border-light bg-white">
-          <img [src]="moodboard?.style.imagePath" class="object-contain"/>
+        <div class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
+            <img
+              draggable="true"
+              *ngIf="imagePaths[2]"
+              [src]="imagePaths[2]"
+              class="object-cover h-full w-full"
+              alt="image-input-2"
+              (dragstart)="dragStart($event, 2)"
+            />
         </div>
-        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
-        <div class="item-sm border border-light" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
-        <div class="item-sm-tall border border-light" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
-        <div class="item-lg border border-light bg-white">
-          <img [src]="moodboard.products[0]?.imagePath" class="object-contain"/>
+        <div class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
+          <img
+            *ngIf="imagePaths[11]"
+            [src]="imagePaths[11]"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            draggable="true"
+            (dragstart)="dragStart($event, 11)"
+          >
         </div>
-        <div class="item-md border border-light">
-          <img [src]="moodboard?.materials[0]?.imagePath" class="object-cover"/>
-        </div>
-        <div class="item-md border border-light">
-          <img [src]="moodboard?.materials[1]?.imagePath" class="object-cover"/>
-        </div>
-        <div class="item-md border border-light">
-          <img [src]="moodboard?.materials[2]?.imagePath" class="object-cover"/>
-        </div>
-        <div class="item-md border border-light">
-          <img [src]="moodboard?.materials[3]?.imagePath" class="object-cover"/>
+        <div class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 12)">
+          <img
+            *ngIf="imagePaths[12]"
+            [src]="imagePaths[12]"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            draggable="true"
+            (dragstart)="dragStart($event, 12)"
+          >
         </div>
       </div>
-  </ion-card>
-  <div *ngIf="!bigCardOnly" class="mt-16 xl:text-left">
-    <div class="flex justify-between items-center mb-6">
-      <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
-      <div *ngIf="withSlides && slides && slides['el']['swiper']?.currentBreakpoint && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
-        <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
-          <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" class="text-black hover:opacity-50" (click)="next()">
-          <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-        </ion-button>
+      <div class="bottom-section">
+        <div class="image-input-3"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 3)">
+            <img
+              *ngIf="imagePaths[3]"
+              [src]="imagePaths[3]"
+              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              alt="image-input-3"
+              draggable="true"
+              (dragstart)="dragStart($event, 3)"
+            />
+        </div>
+        <div class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
+            <img
+              *ngIf="imagePaths[4]"
+              [src]="imagePaths[4]"
+              class="object-cover h-full max-h-[8.3rem] w-full"
+              alt="image-input-4"
+              draggable="true"
+              (dragstart)="dragStart($event, 4)"
+            />
+        </div>
+        <div class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
+            <img
+              *ngIf="imagePaths[5]"
+              [src]="imagePaths[5]"
+              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              alt="image-input-5"
+              draggable="true"
+              (dragstart)="dragStart($event, 5)"
+            />
+        </div>
+        <div class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
+            <img
+              *ngIf="imagePaths[6]"
+              [src]="imagePaths[6]"
+              class="object-cover h-full max-h-[8.3rem] w-full"
+              alt="image-input-6"
+              draggable="true"
+              (dragstart)="dragStart($event, 6)"
+            />
+        </div>
       </div>
     </div>
-    <ion-grid *ngIf="!withSlides" class="step-items">
-      <ion-row class="step-items-row">
-        <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-            <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
-          </div>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-          <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-        </ion-col>
-        <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="material-image cursor-pointer" alt="style-img"/>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-        </ion-col>
-        <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <div class="w-full h-full bg-white rounded-2xl">
-            <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="product-image cursor-pointer" alt="style-img"/>
-          </div>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-slides *ngIf="withSlides" #slides [options]="options" class="py-4 pr-4 w-full">
-        <ion-slide *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-            <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
-          </div>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-          <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-        </ion-slide>
-        <ion-slide *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-        </ion-slide>
-        <ion-slide *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
-          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-        </ion-slide>
-    </ion-slides>
+
+    <!-- Products -->
+    <div class="grid-item products-container">
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
+        <img
+          *ngIf="imagePaths[7]"
+          [src]="imagePaths[7]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          draggable="true"
+          (dragstart)="dragStart($event, 7)"
+        />
+      </div>
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
+        <img
+        *ngIf="imagePaths[8]"
+        [src]="imagePaths[8]"
+        class="object-cover h-[100%] w-[100%] max-w-[100%]"
+        draggable="true"
+        (dragstart)="dragStart($event, 8)"
+      />
+      </div>
+      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 9)">
+        <img
+          *ngIf="imagePaths[9]"
+          [src]="imagePaths[9]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          draggable="true"
+          (dragstart)="dragStart($event, 9)"
+        />
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="grid-item colors-container">
+      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
+      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
+      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
+      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
+    </div>
   </div>
+</ion-card>
+
+<!-- List included items -->
+<div *ngIf="!bigCardOnly" class="mt-16 xl:text-left">
+  <div class="flex justify-between items-center mb-6">
+    <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
+    <div *ngIf="withSlides && slides && slides['el']['swiper']?.currentBreakpoint && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
+      <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
+        <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="text-black hover:opacity-50" (click)="next()">
+        <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <ion-grid *ngIf="!withSlides" class="step-items">
+    <ion-row class="step-items-row">
+      <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
+          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+      </ion-col>
+      <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="material-image cursor-pointer" alt="style-img"/>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div class="w-full h-full bg-white rounded-2xl">
+          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="product-image cursor-pointer" alt="style-img"/>
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-slides *ngIf="withSlides" #slides [options]="options" class="py-4 pr-4 w-full">
+      <ion-slide *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
+          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+      </ion-slide>
+      <ion-slide *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-slide>
+      <ion-slide *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-slide>
+  </ion-slides>
+</div>

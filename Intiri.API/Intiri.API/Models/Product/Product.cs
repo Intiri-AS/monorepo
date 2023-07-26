@@ -18,6 +18,8 @@ namespace Intiri.API.Models.Product
 		public string ImagePublicId { get; set; }
 		public Partner Partner { get; set; }
 		public int? PartnerId { get; set; }
+        public string ProductLink { get; set; }
+        public string PartnerName { get; set; }
 
 		public MaterialType Material { get; set; }
 		public ProductType ProductType { get; set; }

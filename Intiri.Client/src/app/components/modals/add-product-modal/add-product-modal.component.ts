@@ -28,6 +28,7 @@ export class AddProductModalComponent implements OnInit {
   delete;
 
   imagePath = null;
+  addImagePaths = [];
   userForm: FormGroup;
   editProductForm: FormGroup;
 
@@ -39,6 +40,7 @@ export class AddProductModalComponent implements OnInit {
 
   colors$ = this.colorService.colors$;
   materials$ = this.materialService.materials$;
+  partners: any;
   materialTypes: any = [];
   productsType: any = [];
   materials: any = [];
@@ -49,14 +51,16 @@ export class AddProductModalComponent implements OnInit {
     productName: '',
     productType: '',
     productMaterial: '',
+    productLink: '',
     color: '',
     price: '',
     description: '',
-    imageFile: ''
+    imageFiles: []
   };
 
   product: any = {
     name: '',
+    productLink: '',
     materialId: null,
     productTypeId: null,
     price: null,
@@ -78,10 +82,11 @@ export class AddProductModalComponent implements OnInit {
               ) {
                 this.editProductForm = this.fb.group({
                   productName: ['' || undefined, Validators.required],
+                  productLink: [''],
                   productType: ['', Validators.required],
-                  productMaterial: ['', Validators.required],
-                  color: ['', Validators.required],
-                  price: ['', Validators.required],
+                  productMaterial: [''],
+                  color: [''],
+                  price: [''],
                   imageFile: [''],
                   description: [''],
                 });
@@ -93,9 +98,11 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
+    this.partnerService.getPartnerProfile().subscribe(res => {
+      this.partners = res;
+    });
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
-      console.log(this.materialTypes);
     })
     this.partnerService.getProductsType().subscribe( response => {
       this.productsType = response;
@@ -113,9 +120,10 @@ export class AddProductModalComponent implements OnInit {
     this.userForm = this.fb.group({
         productName: ['' || undefined, Validators.required],
         productType: ['', Validators.required],
-        productMaterial: ['', Validators.required],
-        color: ['', Validators.required],
-        price: ['', Validators.required],
+        productMaterial: [''],
+        productLink: [''],
+        color: [''],
+        price: [''],
         imageUrl: ['', Validators.required],
         description: '',
     });
@@ -128,7 +136,16 @@ export class AddProductModalComponent implements OnInit {
 
   }
 
-  onFileChange(event) {
+  onFileChangeAddProduct (event) {
+    if (Object.keys(event.target.files).length > 0) {
+      this.productData.imageFiles = event.target.files;
+      this.addImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.productData.imageFiles[key])));
+    } else {
+      this.addImagePaths = []
+    }
+  }
+  onFileChangeEditProduct(event) {
     if(event.target.files[0]) {
       this.productData.imageFile = event.target.files[0];
       this.product.imageFile = event.target.files[0];
@@ -151,13 +168,17 @@ export class AddProductModalComponent implements OnInit {
   addProduct() {
     this.productData = {
       name: this.userForm.value.productName,
+      partnerName: this.partners.name,
       productTypeId: Number(this.userForm.value.productType),
       materialId: Number(this.userForm.value.productMaterial),
+      productLink: this.userForm.value.productLink,
       color: this.userForm.value.color,
       price: Number(this.userForm.value.price),
       description: this.userForm.value?.description || undefined,
-      imageFile: this.productData.imageFile
+      imageFiles: this.productData.imageFiles
     };
+    console.log("productData", this.productData)
+    // return;
     this.partnerService.addPartnerProduct(this.productData).subscribe( response => {
       this.spinner.hide();
       this.openSuccessModal();
