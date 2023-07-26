@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -18,9 +19,17 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private languageService: LanguageService) { }
 
-  ngOnInit() {}
+  currentLang: string = ''
+
+  ngOnInit() {
+    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+  }
+
+  ngOnChanges () {
+    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+  }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);

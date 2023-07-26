@@ -27,8 +27,14 @@
             <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
           </div>
         </div>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1 ml-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+
+        <p *ngIf="currentStepNo == 0 && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">
+          {{ currentLang == 'no' ? item.nameNorwegian : item.name }}
+        </p>
+        <div *ngIf="currentStepNo > 0">
+          <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+          <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1 ml-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
