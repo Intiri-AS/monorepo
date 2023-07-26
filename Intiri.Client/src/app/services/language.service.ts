@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage-angular';
 import { forkJoin, from, Subject } from 'rxjs';
 
-const LNG_KEY = 'SELECTED_LANGUAGE';
+export const LNG_KEY = 'SELECTED_LANGUAGE';
 
 @Injectable({
   providedIn: 'root'

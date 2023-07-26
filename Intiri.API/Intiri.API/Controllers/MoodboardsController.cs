@@ -64,7 +64,9 @@ namespace Intiri.API.Controllers
 
 			MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
 
-			return Ok(moodboardOut);
+			moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
+
+            return Ok(moodboardOut);
 		}
 
 		[Authorize(Policy = PolicyNames.ClientPolicy)]
