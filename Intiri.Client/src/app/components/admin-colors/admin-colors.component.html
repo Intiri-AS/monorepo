@@ -13,14 +13,14 @@
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
     <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
-      <div class="card">
+      <!-- <div class="card">
         <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + colorPalette.mainColorData.imagePath + ')'}"></div>
         <div class="w-[47.5%] h-full inline-block color-container float-right">
           <div class="h-[31%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorLightData.imagePath + ')'}"></div>
           <div class="h-[31%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorMediumData.imagePath + ')'}"></div>
           <div class="h-[32%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorDarkData.imagePath + ')'}"></div>
         </div>
-      </div>
+      </div> -->
       <div class="flex justify-between">
         <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{colorPalette.number}} <span class="font-normal">/ {{colorPalette.name}}</span></p>
         <div class="float-right">
