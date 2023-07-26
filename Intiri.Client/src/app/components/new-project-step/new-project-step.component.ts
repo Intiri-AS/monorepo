@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-new-project-step',
@@ -49,6 +50,8 @@ export class NewProjectStepComponent implements OnInit {
   typeFilters: Array<string> = [];
   providerFilters: Array<string> = [];
 
+  currentLanguage: string = '';
+
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
@@ -57,6 +60,7 @@ export class NewProjectStepComponent implements OnInit {
     private partnerService: PartnerService,
     private colorService: ColorService,
     private productService: ProductService,
+    private languageService: LanguageService,
     private router: Router
   ) { }
 
@@ -85,6 +89,9 @@ export class NewProjectStepComponent implements OnInit {
     } else {
       this.isCreateProjectPage = true;
     }
+    this.languageService.languageChange$.subscribe(res => {
+      this.currentLanguage = res;
+    })
   }
 
 
