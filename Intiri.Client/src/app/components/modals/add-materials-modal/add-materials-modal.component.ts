@@ -64,10 +64,10 @@ export class AddMaterialsModalComponent implements OnInit {
     });
     this.editMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      type: [''],
+      type: ['', [Validators.required]],
       provider: [''],
       link: [''],
-      description: ['', [Validators.required]],
+      description: [''],
       imageFile: ['']
     });
   }
@@ -107,8 +107,16 @@ export class AddMaterialsModalComponent implements OnInit {
       this.materialTypes = res;
     });
     if (this.edit) {
-      const {id, imagePath, ...others } = this.item;
-      this.edit_material_payload = others;
+      // const {id, imagePath, ...others } = this.item;
+      console.log("item", this.item);
+      this.edit_material_payload = {
+        name: this.item.name,
+        description: (this.item.description == "null" || !this.item.description) ? null : this.item.description,
+        materialTypeId: this.item.materialTypeId,
+        provider: (this.item.provider == "null" || !this.item.provider) ? null : this.item.provider,
+        link: (this.item.link == "null" || !this.item.link) ? null : this.item.link,
+        imageFile: null,
+    };
       console.log("material to edit", this.edit_material_payload)
     }
   }
@@ -187,7 +195,7 @@ export class AddMaterialsModalComponent implements OnInit {
       if (typeof (res) === 'object') {
         this.materialService.getMaterials();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.saved-deleted'),
+          message: this.translate.instant('NOTIFY.material-saved'),
           type: 'success'
         });
       }
