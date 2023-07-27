@@ -4,12 +4,12 @@
     <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
     <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
-    <div class="main-container">
+    <div class="moodboard-details-container">
       <!-- <ion-button fill="clear" class="back-btn" (click)="backToProjectDetails()">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>{{projectId ? 'Project details' : 'Back'}}</p>
       </ion-button> -->
-      <p class="main-title">{{moodboard.style.name}}</p>
+      <p class="main-title mb-[2rem]">{{moodboard.style.name}}</p>
       <div class="p-2 xl:p-0 mb-[160px] lg:mb-[90px]">
         <app-moodboard-details [moodboard]="moodboard"></app-moodboard-details>
         <div class="fixed-bottom">
