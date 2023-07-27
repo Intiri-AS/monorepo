@@ -488,7 +488,9 @@ namespace Intiri.API.DataAccess.SeedData
 							{
 								Material material = new Material();
 								material.Name = materialImport.Name;
-								material.Description = materialImport.Discription.ToString();								
+								material.Description = materialImport.Discription.ToString();
+								material.Link = materialImport.Link_Supplier;
+								material.Provider = "Tarkett";
 
 								material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
 								material.ImagePublicId = uploadResult.Item3.PublicId;
