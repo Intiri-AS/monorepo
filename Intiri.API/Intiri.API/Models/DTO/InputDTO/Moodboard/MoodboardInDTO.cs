@@ -10,6 +10,7 @@
         public int StyleId { get; set; }
         public int RoomId { get; set; }
         public bool IsTemplate { get; set; }
+        public string SlotInfo { get; set; }
 
         public ICollection<int> MaterialIds { get; set; }
         public ICollection<int> ColorPaletteIds { get; set; }
