@@ -572,7 +572,8 @@
     "Marble": "Marble",
     "Plastic": "Plastic",
     "Textile": "Textile",
-    "Other": "Other"
+    "Other": "Other",
+    "Vinyl": "Vinyl"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",

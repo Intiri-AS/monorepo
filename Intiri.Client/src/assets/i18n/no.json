@@ -571,7 +571,8 @@
     "Marble": "Marmor",
     "Plastic": "Plastikk",
     "Textile": "Tekstil",
-    "Other": "Annet"
+    "Other": "Annet",
+    "Vinyl": "Vinyl"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
