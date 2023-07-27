@@ -5,3 +5,13 @@
 .disabled {
   @apply pointer-events-none opacity-60;
 }
+
+.main-title-custom {
+  position: fixed;
+  top: 6.6rem;
+}
+
+.admin-designer-side-nav {
+  position: fixed;
+  top: 10.5rem;
+}
