@@ -1,14 +1,12 @@
 <div>
   <h2
-    class="step-title"
-    [ngClass]="(loggedUser.roles[0] == 'Admin' || loggedUser.roles[0] == 'InternalDesigner') ? 'admin-designer-step-title' : ''"
+    class="step-title admin-designer-step-title"
   >
     {{currentStep.title | translate}}
   </h2>
   <p
     *ngIf="currentStep.title === 'NEW-PROJECT.select-materials'"
-    class="step-subtitle"
-    [ngClass]="(loggedUser.roles[0] == 'Admin' || loggedUser.roles[0] == 'InternalDesigner') ? 'admin-designer-step-subtitle' : ''"
+    class="step-subtitle admin-designer-step-subtitle"
   >
     {{ 'NEW-PROJECT.select-4-materials' | translate }}
   </p>
@@ -16,9 +14,8 @@
     *ngIf="isArray(currentStep.data)"
     class="step-items"
     [ngClass]="
-      (loggedUser.roles[0] == 'Admin' || loggedUser.roles[0] == 'InternalDesigner' ) && currentStepNo == 3 ? 'mt-[6rem] admin-designer-step-items'
-    : (loggedUser.roles[0] == 'Admin' || loggedUser.roles[0] == 'InternalDesigner') ? 'admin-designer-step-items mt-[4rem]'
-    : ''
+      currentStepNo == 3 ? 'mt-[6rem] admin-designer-step-items'
+    : 'admin-designer-step-items mt-[4rem]'
   "
   >
     <ion-row class="step-items-row">
