@@ -110,3 +110,21 @@ ion-select {
   pointer-events: none;
   opacity: 0.6;
 }
+
+.admin-designer-step-title {
+  position: fixed;
+  top: 8rem;
+}
+
+.admin-designer-step-subtitle {
+  position: fixed;
+  top: 11.5rem;
+}
+
+.admin-designer-step-items {
+  position: fixed;
+  top: 7rem;
+  right: 7rem;
+  left: 23rem;
+  bottom: 4rem;
+}

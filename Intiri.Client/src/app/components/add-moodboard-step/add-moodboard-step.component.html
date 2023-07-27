@@ -1,12 +1,23 @@
 <div>
-  <h2 class="step-title">{{currentStep.title | translate}}</h2>
+  <h2
+    class="step-title admin-designer-step-title"
+  >
+    {{currentStep.title | translate}}
+  </h2>
   <p
     *ngIf="currentStep.title === 'NEW-PROJECT.select-materials'"
-    class="step-subtitle"
+    class="step-subtitle admin-designer-step-subtitle"
   >
     {{ 'NEW-PROJECT.select-4-materials' | translate }}
   </p>
-  <ion-grid *ngIf="isArray(currentStep.data)" class="step-items">
+  <ion-grid
+    *ngIf="isArray(currentStep.data)"
+    class="step-items"
+    [ngClass]="
+      currentStepNo == 3 ? 'mt-[6rem] admin-designer-step-items'
+    : 'admin-designer-step-items mt-[4rem]'
+  "
+  >
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.disabled]="disabledSteps.includes(currentStepNo)" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
         <!-- if image (style|material|product) -->

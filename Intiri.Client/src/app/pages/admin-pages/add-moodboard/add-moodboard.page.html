@@ -4,10 +4,18 @@
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
     <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
     <ion-grid class="main-container">
-      <p class="main-title mb-[34px] pl-2">{{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}</p>
+      <p
+        class="main-title mb-[34px] pl-2"
+        [ngClass]="((loggedUser$ | async)?.roles[0] === 'Admin' || (loggedUser$ | async)?.roles[0] == 'InternalDesigner') ? 'main-title-custom' : ''"
+      >
+        {{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}
+      </p>
       <ion-row class="mb-20">
         <ion-col size="12" size-xl="2.3">
-          <div class="bg-light xl-ion:w-[240px] rounded-lg text-center pb-1 fixed">
+          <div
+            class="bg-light xl-ion:w-[228px] rounded-lg text-center pb-1"
+            [ngClass]="((loggedUser$ | async)?.roles[0] == 'Admin' || (loggedUser$ | async)?.roles[0] == 'InternalDesigner') ? 'admin-designer-side-nav' : ''"
+          >
             <p *ngIf="client" [class.!text-primary]="clientRequestStep" (click)="clientRequestStep = true; currentStepNo = -1" class="side-menu-item pt-[45px]">
               {{client?.moodboard ? ('DESIGNERS.client-request' | translate) : ('DESIGNERS.client-details' | translate) }}
             </p>
@@ -31,37 +39,40 @@
           [moodboard]="moodboard"
           [disabledSteps]="client?.moodboard || client?.moodboardOfferId ? [0, 1] : []"
           [currentStepNo]="currentStepNo"
-          [currentStep]="steps[currentStepNo]"></app-add-moodboard-step>
+          [currentStep]="steps[currentStepNo]"
+          [loggedUser]="(loggedUser$ | async)"
+        >
+        </app-add-moodboard-step>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="!clientRequestStep">
-        <ion-col class="fixed-bottom">
+        <ion-col class="fixed-bottom max-h-[50px]">
           <ion-buttons class="flex justify-center items-center h-full">
-            <ion-button
+            <button
               *ngIf="steps[currentStepNo]['data'] !== 'final'"
               class="secondary-btn"
               (click)="backStep()"
               [class.disabled]="!canChangeToStep(currentStepNo-1)"
-              >{{'COMMON.back' | translate}}</ion-button
+              >{{'COMMON.back' | translate}}</button
             >
-            <ion-button
+            <button
               *ngIf="steps[currentStepNo]['data'] !== 'final'"
-              class="primary-btn"
+              class="secondary-btn"
               (click)="nextStep()"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
-              >{{'COMMON.next' | translate}}</ion-button
+              >{{'COMMON.next' | translate}}</button
             >
-            <ion-button
+            <button
               *ngIf="steps[currentStepNo]['data'] === 'final'"
               class="secondary-btn"
               (click)="cancel()"
-              >{{'COMMON.cancel' | translate}}</ion-button
+              >{{'COMMON.cancel' | translate}}</button
             >
-            <ion-button
+            <button
               *ngIf="steps[currentStepNo]['data'] === 'final' && !client"
-              class="primary-btn"
+              class="secondary-btn"
               (click)="saveMoodboard()"
-              >{{'MOODBOARDS.save' | translate}}</ion-button
+              >{{'MOODBOARDS.save' | translate}}</button
             >
             <ion-button
               *ngIf="steps[currentStepNo]['data'] === 'final' && !!client"

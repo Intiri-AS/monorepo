@@ -196,6 +196,15 @@ ion-toolbar {
   font-size: 1.125rem !important;
 }
 
+.secondary-btn-borderless {
+  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] px-4 tracking-normal;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  height: 46px !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+}
+
 .secondary-btn-responsive {
   @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
   margin-right: 0.5rem !important;
