@@ -1,6 +1,7 @@
 ﻿using Intiri.API.Models.DTO.OutputDTO.Material;
 using Intiri.API.Models.DTO.OutputDTO.Room;
 using Intiri.API.Models.DTO.OutputDTO.Style;
+using Intiri.API.Models.Style;
 
 namespace Intiri.API.Models.DTO.OutputDTO
 {
@@ -20,5 +21,6 @@ namespace Intiri.API.Models.DTO.OutputDTO
         public ICollection<MaterialOutDTO> Materials { get; set; }
 		public ICollection<ColorPaletteOutDTO> ColorPalettes { get; set; }
 		public ICollection<ProductOutDTO> Products { get; set; }
+		public ICollection<StyleImageOutDTO> StyleImages { get; set; }
 	}
 }
