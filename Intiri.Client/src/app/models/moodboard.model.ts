@@ -4,8 +4,9 @@ export class Moodboard {
   name: string;
   description: string;
   designer: any;
-  style: any;
   room: object;
+  style: any;
+  inspirationalPhotos: Array<any>;
   colorPalettes: Array<any>;
   materials: Array<any>;
   products: Array<any>;
@@ -24,8 +25,9 @@ export class Moodboard {
     this.name = '';
     this.description = '';
     this.designer = null;
-    this.style = null;
     this.room = null;
+    this.style = null;
+    this.inspirationalPhotos = [];
     this.colorPalettes = [];
     this.materials = [];
     this.products = [];
