@@ -5,6 +5,8 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { Storage } from '@ionic/storage-angular';
+import { AccountService } from 'src/app/services/account.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -42,7 +44,10 @@ export class MoodboardDetailsComponent implements OnInit {
         spaceBetween: 20
       }
     }
-  }
+  };
+
+  loggedUser$ = this.accountService.currentUser$;
+  userData: User
 
   previousSlotId: any = null;
   currentSlotId: any = null;
@@ -52,26 +57,35 @@ export class MoodboardDetailsComponent implements OnInit {
     private modalController: ModalController,
     private translate: TranslateService,
     private notifier: NotifierService,
-    private storage: Storage
+    private storage: Storage,
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
-    // check if slot-data are already Moodboard state
-    let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
-      return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
-    })
-    console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
+    console.log('moodboard', this.moodboard)
+    this.loggedUser$.subscribe(res => {
+      this.userData = res
+      console.log('userData', this.userData);
+    });
+    if (this.userData.roles[0] == 'Admin') {
+      // check if slot-data are already Moodboard state
+      let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
+        return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
+      })
+      console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
+      if (!areMoodBoardSlotsSet) {
+        // Assign materials to assigned moodboardSlots
+        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
+        this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
+        this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
+        this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
 
-    if (!areMoodBoardSlotsSet) {
-      // Assign materials to assigned moodboardSlots
-      this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
-      this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
-      this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
-      this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
+        // Assign products to assigned moodboardSlots
+        this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
+        this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+      }
+    } else if (this.userData.roles[0] == 'FreeEndUser') {
 
-      // Assign products to assigned moodboardSlots
-      this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
-      this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
     }
   }
 
