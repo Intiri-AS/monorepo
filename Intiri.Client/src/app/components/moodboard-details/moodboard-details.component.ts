@@ -44,28 +44,6 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
-  STORAGE_MOODBOARD_KEY: string = 'MOODBOARD_SLOT_DETAILS';
-
-  // Moodboard creator must choose at least 4 materials & 2 products
-  moodboardSlotDetails = {
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null, // This is initially mapped to product 1
-    8: null, // This is initially mapped to product 2
-    9: null,
-    10: null, // This is initially mapped to material 1
-    11: null, // This is initially mapped to material 2
-    12: null, // This is initially mapped to material 3
-    13: null, // This is initially mapped to material 4
-    14: null,
-    15: null,
-  }
-
   previousSlotId: any = null;
   currentSlotId: any = null;
   draggedShoppingListItem: any = null;
@@ -75,52 +53,42 @@ export class MoodboardDetailsComponent implements OnInit {
     private translate: TranslateService,
     private notifier: NotifierService,
     private storage: Storage
-  ) {
-      // Initialize "moodboardSlotDetails" with required fields
-      Object.keys(this.moodboardSlotDetails).forEach(ele => {
-        this.moodboardSlotDetails[ele] = {
-         entity: '',
-         entityId: '',
-         entityName: '',
-         entityImagePath: ''
-       }
-     });
-     }
+  ) {}
 
   ngOnInit() {
-    // check if slot-data are already available
-    this.storage.get(this.STORAGE_MOODBOARD_KEY).then(data => {
-      if (data) {
-        console.log("data", data);
-        Object.keys(this.moodboardSlotDetails).forEach(slotKey => {
-          this.moodboardSlotDetails[slotKey] = data[slotKey];
-        })
-      } else {
-        // Assign materials to assigned moodboardSlots
-        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
-        this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
-        this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
-        this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
-
-        // Assign products to assigned moodboardSlots
-        this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
-        this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
-      }
+    // check if slot-data are already Moodboard state
+    let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
+      return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
     })
+    console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
 
+    if (!areMoodBoardSlotsSet) {
+      // Assign materials to assigned moodboardSlots
+      this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
+      this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
+      this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
+      this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
+
+      // Assign products to assigned moodboardSlots
+      this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
+      this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+    }
   }
 
+  isSlotEmpty (slotInfo) {
+    return !slotInfo.entity && !slotInfo.entityId && !slotInfo.entityName && !slotInfo.entityImagePath;
+  }
+
+
   assignItemToMoodboardSlot (slotId, entity, entityId, entityName, entityImagePath) {
-    if (entityId) {
-      this.moodboardSlotDetails[slotId] = {
-        entity,
-        entityId,
-        entityName,
-        entityImagePath
-      }
-    } else {
-      console.error('Can not assign null to a Moodboard Slot');
-    }
+    let currentSlotDetails = {
+      entity,
+      entityId,
+      entityName,
+      entityImagePath
+    };
+    this.moodboard.slotInfo[slotId] = currentSlotDetails;
+    console.log("moodboard after re-assigning slots", this.moodboard);
   }
 
   normalizeSlashes(string): string {
@@ -146,7 +114,7 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   dragStart (event, inputNo) {
-    if (typeof inputNo == 'string') { // Admin drags anything from shopping list
+    if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = inputNo;
     } else {
       this.previousSlotId = inputNo;
@@ -158,10 +126,10 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   isItemAlreadyOnMoodboard (item) {
-    return Object.keys(this.moodboardSlotDetails).some(slotKey => {
+    return Object.keys(this.moodboard.slotInfo).some(slotKey => {
       return (
-        this.moodboardSlotDetails[slotKey].entity == item.entity &&
-        this.moodboardSlotDetails[slotKey].entityId == item.entityId
+        this.moodboard.slotInfo[slotKey].entity == item.entity &&
+        this.moodboard.slotInfo[slotKey].entityId == item.entityId
       )
     });
   }
@@ -195,15 +163,24 @@ export class MoodboardDetailsComponent implements OnInit {
       this.draggedShoppingListItem = null;
     } else {
       // Swap images on drop
-      let temp = this.moodboardSlotDetails[currentSlotId];
-      this.moodboardSlotDetails[currentSlotId] = this.moodboardSlotDetails[this.previousSlotId];
-      this.moodboardSlotDetails[this.previousSlotId] = temp;
+      let temp = this.moodboard.slotInfo[currentSlotId];
+      this.assignItemToMoodboardSlot(
+        currentSlotId,
+        this.moodboard.slotInfo[this.previousSlotId].entity,
+        this.moodboard.slotInfo[this.previousSlotId].entityId,
+        this.moodboard.slotInfo[this.previousSlotId].entityName,
+        this.moodboard.slotInfo[this.previousSlotId].entityImagePath,
+      );
+      this.assignItemToMoodboardSlot(
+        this.previousSlotId,
+        temp.entity,
+        temp.entityId,
+        temp.entityName,
+        temp.entityImagePath,
+      );
 
       // reset "previousSlotId" after drop is done
       this.previousSlotId = null;
     }
-
-    // Store moodboard state temporarily (until moodboard is saved)
-    this.storage.set(this.STORAGE_MOODBOARD_KEY, this.moodboardSlotDetails);
   }
 }

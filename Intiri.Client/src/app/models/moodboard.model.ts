@@ -14,6 +14,7 @@ export class Moodboard {
   roomDetails?: {
     roomSketchFile: string;
   };
+  SLOT_COUNT: number = 16;
   slotInfo: {}
 
   constructor()
@@ -33,23 +34,15 @@ export class Moodboard {
     this.roomDetails = {
       roomSketchFile: ''
     };
-    this.slotInfo = {
-      0: null,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null,
-      6: null,
-      7: null, // This is initially mapped to product 1
-      8: null, // This is initially mapped to product 2
-      9: null,
-      10: null, // This is initially mapped to material 1
-      11: null, // This is initially mapped to material 2
-      12: null, // This is initially mapped to material 3
-      13: null, // This is initially mapped to material 4
-      14: null,
-      15: null,
+
+    this.slotInfo = {};
+    for (let i = 0; i < this.SLOT_COUNT; i++) {
+      this.slotInfo[i] = {
+        entity: null,
+        entityId: null,
+        entityName: null,
+        entityImagePath: null
+      }
     }
   }
 }

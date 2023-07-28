@@ -4,8 +4,8 @@
       <div class="top-section">
         <div id="slot-0" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 0)">
           <img
-            *ngIf="moodboardSlotDetails[0].entityImagePath"
-            [src]="moodboardSlotDetails[0].entityImagePath"
+            *ngIf="moodboard.slotInfo[0].entityImagePath"
+            [src]="moodboard.slotInfo[0].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
             draggable="true"
             (dragstart)="dragStart($event, 0)"
@@ -13,8 +13,8 @@
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
             <img
-              *ngIf="moodboardSlotDetails[4].entityImagePath"
-              [src]="moodboardSlotDetails[4].entityImagePath"
+              *ngIf="moodboard.slotInfo[4].entityImagePath"
+              [src]="moodboard.slotInfo[4].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
               alt="image-input-1"
               draggable="true"
@@ -24,8 +24,8 @@
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
             <img
               draggable="true"
-              *ngIf="moodboardSlotDetails[7].entityImagePath"
-              [src]="moodboardSlotDetails[7].entityImagePath"
+              *ngIf="moodboard.slotInfo[7].entityImagePath"
+              [src]="moodboard.slotInfo[7].entityImagePath"
               class="object-cover h-full w-full"
               alt="image-input-2"
               (dragstart)="dragStart($event, 7)"
@@ -33,8 +33,8 @@
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <img
-            *ngIf="moodboardSlotDetails[1].entityImagePath"
-            [src]="moodboardSlotDetails[1].entityImagePath"
+            *ngIf="moodboard.slotInfo[1].entityImagePath"
+            [src]="moodboard.slotInfo[1].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
             draggable="true"
             (dragstart)="dragStart($event, 1)"
@@ -42,8 +42,8 @@
         </div>
         <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <img
-            *ngIf="moodboardSlotDetails[2].entityImagePath"
-            [src]="moodboardSlotDetails[2].entityImagePath"
+            *ngIf="moodboard.slotInfo[2].entityImagePath"
+            [src]="moodboard.slotInfo[2].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
             draggable="true"
             (dragstart)="dragStart($event, 2)"
@@ -53,8 +53,8 @@
       <div class="bottom-section">
         <div id="slot-3" class="image-input-3"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 3)">
             <img
-              *ngIf="moodboardSlotDetails[3].entityImagePath"
-              [src]="moodboardSlotDetails[3].entityImagePath"
+              *ngIf="moodboard.slotInfo[3].entityImagePath"
+              [src]="moodboard.slotInfo[3].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
               alt="image-input-3"
               draggable="true"
@@ -63,8 +63,8 @@
         </div>
         <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
             <img
-              *ngIf="moodboardSlotDetails[5].entityImagePath"
-              [src]="moodboardSlotDetails[5].entityImagePath"
+              *ngIf="moodboard.slotInfo[5].entityImagePath"
+              [src]="moodboard.slotInfo[5].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-4"
               draggable="true"
@@ -73,8 +73,8 @@
         </div>
         <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
             <img
-              *ngIf="moodboardSlotDetails[8].entityImagePath"
-              [src]="moodboardSlotDetails[8].entityImagePath"
+              *ngIf="moodboard.slotInfo[8].entityImagePath"
+              [src]="moodboard.slotInfo[8].entityImagePath"
               class="object-cover h-[100%] max-h-[17.2rem] w-full"
               alt="image-input-5"
               draggable="true"
@@ -83,8 +83,8 @@
         </div>
         <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
             <img
-              *ngIf="moodboardSlotDetails[6].entityImagePath"
-              [src]="moodboardSlotDetails[6].entityImagePath"
+              *ngIf="moodboard.slotInfo[6].entityImagePath"
+              [src]="moodboard.slotInfo[6].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-6"
               draggable="true"
@@ -98,8 +98,8 @@
     <div class="grid-item products-container">
       <div id="slot-9" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 9)">
         <img
-          *ngIf="moodboardSlotDetails[9].entityImagePath"
-          [src]="moodboardSlotDetails[9].entityImagePath"
+          *ngIf="moodboard.slotInfo[9].entityImagePath"
+          [src]="moodboard.slotInfo[9].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
           draggable="true"
           (dragstart)="dragStart($event, 9)"
@@ -107,8 +107,8 @@
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
         <img
-        *ngIf="moodboardSlotDetails[10].entityImagePath"
-        [src]="moodboardSlotDetails[10].entityImagePath"
+        *ngIf="moodboard.slotInfo[10].entityImagePath"
+        [src]="moodboard.slotInfo[10].entityImagePath"
         class="object-cover h-[100%] w-[100%] max-w-[100%]"
         draggable="true"
         (dragstart)="dragStart($event, 10)"
@@ -116,8 +116,8 @@
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
         <img
-          *ngIf="moodboardSlotDetails[11].entityImagePath"
-          [src]="moodboardSlotDetails[11].entityImagePath"
+          *ngIf="moodboard.slotInfo[11].entityImagePath"
+          [src]="moodboard.slotInfo[11].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
           draggable="true"
           (dragstart)="dragStart($event, 11)"

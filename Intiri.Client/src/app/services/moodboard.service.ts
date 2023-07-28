@@ -68,10 +68,13 @@ export class MoodboardService {
   parseMoodboard(moodboard: Moodboard) {
     let parsedProj = {
       styleId: moodboard.style['id'],
-      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
       roomId: moodboard.room['id'],
+      slotInfo: JSON.stringify(moodboard.slotInfo),
       materialIds: moodboard.materials.map(e=> e['id']),
-      productIds: moodboard.products.map(e=> e['id'])}
+      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
+      productIds: moodboard.products.map(e=> e['id']),
+      styleImageIds: moodboard.inspirationalPhotos.map(e => e['id']),
+    }
     return parsedProj;
   };
 
