@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\assets\project-image\material\**" />
+    <Compile Remove="wwwroot\assets\project-image\productsimage\**" />
     <Content Remove="wwwroot\assets\project-image\material\**" />
+    <Content Remove="wwwroot\assets\project-image\productsimage\**" />
     <EmbeddedResource Remove="wwwroot\assets\project-image\material\**" />
+    <EmbeddedResource Remove="wwwroot\assets\project-image\productsimage\**" />
     <None Remove="wwwroot\assets\project-image\material\**" />
+    <None Remove="wwwroot\assets\project-image\productsimage\**" />
   </ItemGroup>
 
   <ItemGroup>

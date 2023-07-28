@@ -178,24 +178,32 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-        [HttpGet("SeedMaterialsImport")]
+		[HttpGet("getStyleImagesByRoomAndStyle/{roomId}/{styleId}")]
+		public async Task<ActionResult<StyleImageOutDTO>> GetStyleImagesByRoomAndStyle(int roomId, int styleId)
+		{
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAndStyleAsync(roomId, styleId);
+			IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+
+			return Ok(styleImagesToReturn);
+		}
+
+		[HttpGet("SeedMaterialsImport")]
+		[AllowAnonymous]
+		public async Task<ActionResult> SeedMaterialsImport()
+		{
+			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport(_unitOfWork, _fileUploadService);
+
+			return Ok();
+		}
+
+        [HttpGet("SeedProductsImport")]
         [AllowAnonymous]
-        public async Task<ActionResult> SeedMaterialsImport()
+        public async Task<ActionResult> SeedProductsImport()
         {
-            await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport(_unitOfWork, _fileUploadService);
+            await Intiri.API.DataAccess.SeedData.SeedData.SeedProductsImport(_unitOfWork, _fileUploadService);
 
             return Ok();
         }
-
-        [HttpGet("getStyleImagesByRoomAndStyle/{roomId}/{styleId}")]
-        public async Task<ActionResult<StyleImageOutDTO>> GetStyleImagesByRoomAndStyle(int roomId, int styleId)
-        {
-            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAndStyleAsync(roomId, styleId);
-            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
-
-            return Ok(styleImagesToReturn);
-        }
-
 
     }
 }
