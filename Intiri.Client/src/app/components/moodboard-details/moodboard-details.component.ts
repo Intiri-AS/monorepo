@@ -63,10 +63,7 @@ export class MoodboardDetailsComponent implements OnInit {
 
   ngOnInit() {
     console.log('moodboard', this.moodboard)
-    this.loggedUser$.subscribe(res => {
-      this.userData = res
-      console.log('userData', this.userData);
-    });
+    this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
       // check if slot-data are already Moodboard state
       let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
@@ -74,18 +71,33 @@ export class MoodboardDetailsComponent implements OnInit {
       })
       console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
       if (!areMoodBoardSlotsSet) {
-        // Assign materials to assigned moodboardSlots
-        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
-        this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
-        this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
-        this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
-
-        // Assign products to assigned moodboardSlots
-        this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
-        this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+        this.assignDefaultSlots();
       }
     } else if (this.userData.roles[0] == 'FreeEndUser') {
+      this.assignDefaultSlots();
+    }
+  }
 
+  assignDefaultSlots () {
+     // Assign materials to assigned moodboardSlots
+     this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
+     this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
+     this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
+     this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
+
+     // Assign products to assigned moodboardSlots
+     this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
+     this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+  }
+
+  initializeSlotInfo () {
+    for (let i = 0; i < this.moodboard.SLOT_COUNT; i++) {
+      this.moodboard.slotInfo[i] = {
+        entity: null,
+        entityId: null,
+        entityName: null,
+        entityImagePath: null
+      }
     }
   }
 
@@ -101,6 +113,10 @@ export class MoodboardDetailsComponent implements OnInit {
       entityName,
       entityImagePath
     };
+    if (!this.moodboard.slotInfo) {
+      this.moodboard.slotInfo = {};
+      this.initializeSlotInfo();
+    }
     this.moodboard.slotInfo[slotId] = currentSlotDetails;
     console.log("moodboard after re-assigning slots", this.moodboard);
   }

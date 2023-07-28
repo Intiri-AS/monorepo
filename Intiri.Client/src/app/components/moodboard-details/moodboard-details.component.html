@@ -154,75 +154,75 @@
     <div class="grid-item grid-item-1">
       <div class="top-section">
         <div id="slot-0" class="material">
-          <!-- <img
-            *ngIf="moodboard.slotInfo[0]?.entityImagePath || moodboard.materials[0].imagePath"
-            [src]="moodboard.slotInfo[0]?.entityImagePath || moodboard.materials[0].imagePath"
+          <img
+            *ngIf="moodboard.slotInfo[0]?.entityImagePath"
+            [src]="moodboard.slotInfo[0]?.entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-          > -->
+          >
         </div>
         <div id="slot-4" class="image-input-1">
-            <!-- <img
+            <img
               *ngIf="moodboard.slotInfo[4]?.entityImagePath"
               [src]="moodboard.slotInfo[4]?.entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
               alt="image-input-1"
-            /> -->
+            />
         </div>
         <div id="slot-7" class="image-input-2">
-            <!-- <img
+            <img
               *ngIf="moodboard.slotInfo[7]?.entityImagePath"
               [src]="moodboard.slotInfo[7]?.entityImagePath"
               class="object-cover h-full w-full"
               alt="image-input-2"
-            /> -->
+            />
         </div>
         <div id="slot-1" class="material">
-          <!-- <img
-            *ngIf="moodboard.slotInfo[1]?.entityImagePath || moodboard.materials[1].imagePath"
-            [src]="moodboard.slotInfo[1]?.entityImagePath || moodboard.materials[1].imagePath"
+          <img
+            *ngIf="moodboard.slotInfo[1]?.entityImagePath"
+            [src]="moodboard.slotInfo[1]?.entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-          > -->
+          >
         </div>
         <div id="slot-2" class="material">
-          <!-- <img
-            *ngIf="moodboard.slotInfo[2]?.entityImagePath || moodboard.materials[2].imagePath"
-            [src]="moodboard.slotInfo[2]?.entityImagePath || moodboard.materials[2].imagePath"
+          <img
+            *ngIf="moodboard.slotInfo[2]?.entityImagePath"
+            [src]="moodboard.slotInfo[2]?.entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-          > -->
+          >
         </div>
       </div>
       <div class="bottom-section">
         <div id="slot-3" class="image-input-3">
-            <!-- <img
-              *ngIf="moodboard.slotInfo[3]?.entityImagePath || moodboard.materials[3].imagePath"
-              [src]="moodboard.slotInfo[3]?.entityImagePath || moodboard.materials[0].imagePath"
+            <img
+              *ngIf="moodboard.slotInfo[3]?.entityImagePath"
+              [src]="moodboard.slotInfo[3]?.entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
-              alt="image-input-3"
-            /> -->
+              alt="slot-3"
+            />
         </div>
         <div id="slot-5" class="image-input-4">
-            <!-- <img
+            <img
               *ngIf="moodboard.slotInfo[5]?.entityImagePath"
               [src]="moodboard.slotInfo[5]?.entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-4"
-            /> -->
+            />
         </div>
         <div id="slot-8" class="image-input-5">
-            <!-- <img
+            <img
               *ngIf="moodboard.slotInfo[8]?.entityImagePath"
               [src]="moodboard.slotInfo[8]?.entityImagePath"
               class="object-cover h-[100%] max-h-[17.2rem] w-full"
               alt="image-input-5"
-            /> -->
+            />
         </div>
         <div id="slot-6" class="image-input-6">
-            <!-- <img
+            <img
               *ngIf="moodboard.slotInfo[6]?.entityImagePath"
               [src]="moodboard.slotInfo[6]?.entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-6"
-            /> -->
+            />
         </div>
       </div>
     </div>
@@ -230,41 +230,57 @@
     <!-- Products -->
     <div class="grid-item products-container">
       <div id="slot-9" class="product">
-        <!-- <img
-          *ngIf="moodboard.slotInfo[9]?.entityImagePath || moodboard.products[0]?.imagePath"
-          [src]="moodboard.slotInfo[9]?.entityImagePath || moodboard.products[0]?.imagePath"
+        <img
+          *ngIf="moodboard.slotInfo[9]?.entityImagePath"
+          [src]="moodboard.slotInfo[9]?.entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-        /> -->
+        />
       </div>
       <div id="slot-10" class="product">
-        <!-- <img
-        *ngIf="moodboard.slotInfo[10]?.entityImagePath || moodboard.products[1]?.imagePath"
-        [src]="moodboard.slotInfo[10]?.entityImagePath || moodboard.products[1]?.imagePath"
+        <img
+        *ngIf="moodboard.slotInfo[10]?.entityImagePath"
+        [src]="moodboard.slotInfo[10]?.entityImagePath"
         class="object-cover h-[100%] w-[100%] max-w-[100%]"
-      /> -->
+      />
       </div>
       <div id="slot-11" class="product">
-        <!-- <img
+        <img
           *ngIf="moodboard.slotInfo[11]?.entityImagePath"
           [src]="moodboard.slotInfo[11]?.entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-        /> -->
+        />
       </div>
     </div>
 
     <!-- Colors -->
     <div class="grid-item colors-container">
       <div id="slot-12" class="color">
-        <!-- <img src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}" alt="shadeColorLightData" class="h-full"> -->
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          alt="shadeColorLightData"
+          class="h-full">
       </div>
       <div id="slot-13" class="color">
-        <!-- <img src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}" alt="shadeColorMediumData" class="h-full"> -->
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          alt="shadeColorMediumData"
+          class="h-full">
       </div>
       <div id="slot-14" class="color">
-        <!-- <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full"> -->
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          alt="mainColorData"
+          class="h-full">
       </div>
       <div id="slot-15" class="color">
-        <!-- <img src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}" alt="shadeColorDarkData" class="h-full"> -->
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          alt="shadeColorDarkData"
+          class="h-full">
       </div>
     </div>
   </div>
