@@ -4,9 +4,9 @@ import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
-import { Storage } from '@ionic/storage-angular';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
+import { Router,NavigationEnd  } from '@angular/router';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -48,6 +48,7 @@ export class MoodboardDetailsComponent implements OnInit {
 
   loggedUser$ = this.accountService.currentUser$;
   userData: User
+  currentRoute: string = '';
 
   previousSlotId: any = null;
   currentSlotId: any = null;
@@ -57,21 +58,29 @@ export class MoodboardDetailsComponent implements OnInit {
     private modalController: ModalController,
     private translate: TranslateService,
     private notifier: NotifierService,
-    private storage: Storage,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private router: Router
+  ) {
+    console.log('url', router.url);
+  }
 
   ngOnInit() {
     console.log('moodboard', this.moodboard)
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
-      // check if slot-data are already Moodboard state
-      let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
-        return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
-      })
-      console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
-      if (!areMoodBoardSlotsSet) {
-        this.assignDefaultSlots();
+      if (this.router.url.includes('/moodboard-details/')) { //Admin is viewing existing moodboard
+        if (this.moodboard.slotInfo) {
+          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
+        }
+      } else { //Admin is creating new moodboard
+        // check if slot-data are already available in Moodboard state
+        let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
+          return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
+        })
+        console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
+        if (!areMoodBoardSlotsSet) {
+          this.assignDefaultSlots();
+        }
       }
     } else if (this.userData.roles[0] == 'FreeEndUser') {
       this.assignDefaultSlots();
@@ -103,6 +112,15 @@ export class MoodboardDetailsComponent implements OnInit {
 
   isSlotEmpty (slotInfo) {
     return !slotInfo.entity && !slotInfo.entityId && !slotInfo.entityName && !slotInfo.entityImagePath;
+  }
+
+  isItemDragAndDroppable () {
+    if (this.userData.roles[0] == 'FreeEndUser') {
+      return false;
+    } else if (this.userData.roles[0] == 'Admin' && this.router.url.includes('/moodboard-details/')) { //Admin is viewing moodboard, hence can't edit
+      return false;
+    }
+    return true;
   }
 
 
@@ -165,6 +183,9 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   onDrop (event, currentSlotId) {
+    if (!this.isItemDragAndDroppable()) {
+      return;
+    }
     if (!this.previousSlotId && !this.draggedShoppingListItem) {
       this.notifier.show({
         message: this.translate.instant("MOODBOARD-DETAILS.item-not-draggable"),

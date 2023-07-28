@@ -15,7 +15,7 @@ export class Moodboard {
     roomSketchFile: string;
   };
   SLOT_COUNT: number = 16;
-  slotInfo: {}
+  slotInfo: any = null
 
   constructor()
   {

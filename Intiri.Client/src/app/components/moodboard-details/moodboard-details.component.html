@@ -10,7 +10,7 @@
             *ngIf="moodboard.slotInfo[0].entityImagePath"
             [src]="moodboard.slotInfo[0].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
+            (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
           >
         </div>
@@ -20,17 +20,17 @@
               [src]="moodboard.slotInfo[4].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
               alt="image-input-1"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
             <img
-              draggable="true"
               *ngIf="moodboard.slotInfo[7].entityImagePath"
               [src]="moodboard.slotInfo[7].entityImagePath"
               class="object-cover h-full w-full"
               alt="image-input-2"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
             />
         </div>
@@ -39,7 +39,7 @@
             *ngIf="moodboard.slotInfo[1].entityImagePath"
             [src]="moodboard.slotInfo[1].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
+            (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
           >
         </div>
@@ -48,7 +48,7 @@
             *ngIf="moodboard.slotInfo[2].entityImagePath"
             [src]="moodboard.slotInfo[2].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
+            (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
           >
         </div>
@@ -60,7 +60,7 @@
               [src]="moodboard.slotInfo[3].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
               alt="image-input-3"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
             />
         </div>
@@ -70,7 +70,7 @@
               [src]="moodboard.slotInfo[5].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-4"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
             />
         </div>
@@ -80,7 +80,7 @@
               [src]="moodboard.slotInfo[8].entityImagePath"
               class="object-cover h-[100%] max-h-[17.2rem] w-full"
               alt="image-input-5"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
             />
         </div>
@@ -90,7 +90,7 @@
               [src]="moodboard.slotInfo[6].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-6"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
             />
         </div>
@@ -104,7 +104,7 @@
           *ngIf="moodboard.slotInfo[9].entityImagePath"
           [src]="moodboard.slotInfo[9].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-          draggable="true"
+          (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
         />
       </div>
@@ -113,7 +113,7 @@
         *ngIf="moodboard.slotInfo[10].entityImagePath"
         [src]="moodboard.slotInfo[10].entityImagePath"
         class="object-cover h-[100%] w-[100%] max-w-[100%]"
-        draggable="true"
+        (draggable)="isItemDragAndDroppable()"
         (dragstart)="dragStart($event, 10)"
       />
       </div>
@@ -122,7 +122,7 @@
           *ngIf="moodboard.slotInfo[11].entityImagePath"
           [src]="moodboard.slotInfo[11].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-          draggable="true"
+          (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
         />
       </div>
@@ -318,7 +318,7 @@
           (click)="openImageInModal(item)"
           class="material-image cursor-pointer"
           alt="material-image"
-          draggable="true"
+          (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
         />
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
@@ -331,7 +331,7 @@
             (click)="openImageInModal(item)"
             class="product-image cursor-pointer"
             alt="product-image"
-            draggable="true"
+            (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
           />
         </div>
@@ -345,7 +345,7 @@
             (click)="openImageInModal(item)"
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
-            draggable="true"
+            (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 'inspirationalPhotos__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
           />
         </div>
