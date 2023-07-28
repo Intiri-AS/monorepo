@@ -4,6 +4,7 @@ import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -43,6 +44,8 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
+  STORAGE_MOODBOARD_KEY: string = 'MOODBOARD_SLOT_DETAILS';
+
   // Moodboard creator must choose at least 4 materials & 2 products
   moodboardSlotDetails = {
     0: null,
@@ -71,6 +74,7 @@ export class MoodboardDetailsComponent implements OnInit {
     private modalController: ModalController,
     private translate: TranslateService,
     private notifier: NotifierService,
+    private storage: Storage
   ) {
       // Initialize "moodboardSlotDetails" with required fields
       Object.keys(this.moodboardSlotDetails).forEach(ele => {
@@ -84,15 +88,26 @@ export class MoodboardDetailsComponent implements OnInit {
      }
 
   ngOnInit() {
-    // Assign materials to assigned moodboardSlots
-    this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
-    this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
-    this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
-    this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
+    // check if slot-data are already available
+    this.storage.get(this.STORAGE_MOODBOARD_KEY).then(data => {
+      if (data) {
+        console.log("data", data);
+        Object.keys(this.moodboardSlotDetails).forEach(slotKey => {
+          this.moodboardSlotDetails[slotKey] = data[slotKey];
+        })
+      } else {
+        // Assign materials to assigned moodboardSlots
+        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
+        this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
+        this.assignItemToMoodboardSlot(2, 'material', this.moodboard.materials[2].id, this.moodboard.materials[2].name, this.moodboard.materials[2].imagePath);
+        this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
 
-    // Assign products to assigned moodboardSlots
-    this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
-    this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+        // Assign products to assigned moodboardSlots
+        this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
+        this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+      }
+    })
+
   }
 
   assignItemToMoodboardSlot (slotId, entity, entityId, entityName, entityImagePath) {
@@ -174,8 +189,7 @@ export class MoodboardDetailsComponent implements OnInit {
         });
         return;
       }
-
-      this.moodboardSlotDetails[currentSlotId] = this.draggedShoppingListItem;
+      this.assignItemToMoodboardSlot(currentSlotId, entity, entityId, entityName, entityImagePath);
 
       // reset "draggedShoppingListItem" after drop is done
       this.draggedShoppingListItem = null;
@@ -188,5 +202,8 @@ export class MoodboardDetailsComponent implements OnInit {
       // reset "previousSlotId" after drop is done
       this.previousSlotId = null;
     }
+
+    // Store moodboard state temporarily (until moodboard is saved)
+    this.storage.set(this.STORAGE_MOODBOARD_KEY, this.moodboardSlotDetails);
   }
 }
