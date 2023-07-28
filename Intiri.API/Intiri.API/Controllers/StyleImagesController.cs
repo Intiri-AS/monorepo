@@ -186,7 +186,6 @@ namespace Intiri.API.Controllers
 
             return Ok();
         }
-    }
 
         [HttpGet("getStyleImagesByRoomAndStyle/{roomId}/{styleId}")]
         public async Task<ActionResult<StyleImageOutDTO>> GetStyleImagesByRoomAndStyle(int roomId, int styleId)
@@ -196,5 +195,7 @@ namespace Intiri.API.Controllers
 
             return Ok(styleImagesToReturn);
         }
+
+
     }
 }
