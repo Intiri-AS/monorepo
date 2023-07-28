@@ -4,23 +4,23 @@
     <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
     <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
     <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
-    <div class="main-container">
+    <div class="moodboard-details-container">
       <!-- <ion-button fill="clear" class="back-btn" (click)="backToProjectDetails()">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
         <p>{{projectId ? 'Project details' : 'Back'}}</p>
       </ion-button> -->
-      <p class="main-title">{{moodboard.style.name}}</p>
+      <p class="main-title mb-[2rem]">{{moodboard.style.name}}</p>
       <div class="p-2 xl:p-0 mb-[160px] lg:mb-[90px]">
         <app-moodboard-details [moodboard]="moodboard"></app-moodboard-details>
-        <div class="fixed-bottom">
+        <div class="fixed-bottom max-h-[50px]">
           <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row lg:mx-[200px]">
             <div class="flex justify-evenly lg:justify-around w-full">
-              <ion-button fill="clear" class="primary-btn-responsive" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
-              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-responsive" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
+              <ion-button fill="clear" class="secondary-btn-borderless" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
+              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
             </div>
             <div *ngIf="projectId" class="mt-2 lg:mt-0 flex justify-evenly lg:justify-around w-full">
-              <ion-button *ngIf="projectId" fill="clear" class="primary-btn-responsive" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
-              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-responsive" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
+              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
+              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
             </div>
           </ion-buttons>
         </div>

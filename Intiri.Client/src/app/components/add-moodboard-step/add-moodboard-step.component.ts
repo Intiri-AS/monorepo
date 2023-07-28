@@ -16,11 +16,14 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() moodboard: any;
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
+  @Input() loggedUser: any;
   @Output() toggleSelection = new EventEmitter<object>();
 
   constructor(private modalController: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('user', this.loggedUser)
+  }
 
   toggleItem(item) {
     this.toggleSelection.emit(item);
