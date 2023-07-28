@@ -18,17 +18,20 @@
     : 'admin-designer-step-items mt-[4rem]'
   "
   >
+    <ion-row *ngIf="currentStepNo == 2 && !currentStep.data.length">
+      {{'MOODBOARD-DETAILS.no-inspirational-photos-found' | translate}}
+    </ion-row>
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of currentStep.data" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.disabled]="disabledSteps.includes(currentStepNo)" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
+        <!-- if icon (room) -->
+       <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
+         <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
+       </div>
         <!-- if image (style|material|product) -->
         <span *ngIf="item.imagePath">
           <img src="{{item.imagePath}}" class="step-image" alt="style-img"/>
           <ion-icon class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl" (click)="openImageInModal(item, {url: item.imagePath})" name="expand-outline"></ion-icon>
         </span>
-         <!-- if icon (room) -->
-        <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
-          <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
-        </div>
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
           <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}">

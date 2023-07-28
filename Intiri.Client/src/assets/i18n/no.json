@@ -71,7 +71,8 @@
     "included": "Hva er inkludert i stilkonseptet",
     "edit": "Endre stilkonseptet",
     "contact-designer": "Kontakt designer",
-    "contact-craftsman": "Kontakt håndverker"
+    "contact-craftsman": "Kontakt håndverker",
+    "no-inspirational-photos-found": "Fant ingen inspirerende bilder for utvalgte rom og stiler"
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",

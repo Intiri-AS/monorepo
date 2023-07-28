@@ -71,7 +71,8 @@
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
     "contact-designer": "Contact designer",
-    "contact-craftsman": "Contact craftsman"
+    "contact-craftsman": "Contact craftsman",
+    "no-inspirational-photos-found": "No Inspirational photos found for selected Room and Style"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
