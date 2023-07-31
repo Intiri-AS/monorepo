@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { LanguageService } from 'src/app/services/language.service';
+import { StyleService } from 'src/app/services/style.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -19,10 +22,28 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() loggedUser: any;
   @Output() toggleSelection = new EventEmitter<object>();
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private languageService: LanguageService,
+    private styleService: StyleService
+  ) { }
+
+  currentLang: string = '';
+  filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
 
   ngOnInit() {
-    console.log('user', this.loggedUser)
+    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+  }
+
+  ngOnChanges () {
+    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+    if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) { //Get inspirational photos for selected room & style
+      this.styleService.getStyleImagesForRoomAndStyle(this.moodboard.room.id, this.moodboard.style.id);
+      this.filteredStyleImages$.subscribe((res: Array<any>) => {
+        console.log('res', res)
+        this.currentStep.data = res;
+      })
+    }
   }
 
   toggleItem(item) {
