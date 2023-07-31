@@ -24,18 +24,18 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col class="fixed-bottom" offset-xl="0">
+        <ion-col class="fixed-bottom max-h-[50px]" offset-xl="0">
           <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row">
             <div>
               <ion-button
-                class="secondary-btn"
+                class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
                 (click)="backStep()"
                 >{{'COMMON.back' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] !== 'final'"
-                class="primary-btn"
+                class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo+1)"
                 (click)="nextStep()"
                 >{{'COMMON.next' | translate}}</ion-button
@@ -44,12 +44,12 @@
             <div class="mt-2 lg:mt-0">
               <ion-button
               *ngIf="currentStepNo === 3"
-              class="secondary-btn skip-btn"
+              class="secondary-btn-borderless skip-btn"
               (click)="skipPage()"
               >{{'COMMON.skip-page' | translate}}</ion-button>
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] === 'final'"
-                class="secondary-btn"
+                class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
                 routerLink="/customize-moodboard"
                 routerDirection="root"
@@ -57,7 +57,7 @@
               >
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] === 'final'"
-                class="primary-btn"
+                class="secondary-btn-borderless"
                 (click)="saveCurrentProject()"
                 >{{'NEW-PROJECT.finish' | translate}}</ion-button
               >

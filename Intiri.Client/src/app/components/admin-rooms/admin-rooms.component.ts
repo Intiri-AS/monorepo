@@ -43,7 +43,7 @@ export class AdminRoomsComponent implements OnInit {
       component: MenuPopoverComponent,
       event: e,
       componentProps: {room: true, item: room},
-      dismissOnSelect: true
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -53,7 +53,7 @@ export class AdminRoomsComponent implements OnInit {
     const modal = await this.modalController.create({
       component: AddRoomModalComponent,
       componentProps: {add: true},
-      cssClass: 'add-designer-modal-css'
+      cssClass: 'add-room-modal-css'
     });
 
     await modal.present();

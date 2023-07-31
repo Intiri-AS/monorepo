@@ -113,6 +113,9 @@ namespace Intiri.API.Controllers
 			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 			moodboard.Products = products.ToArray();
 
+            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+            moodboard.StyleImages = styleImages.ToArray();
+
 			_unitOfWork.MoodboardRepository.Insert(moodboard);
 
 			if (await _unitOfWork.SaveChanges())

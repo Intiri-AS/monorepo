@@ -1,5 +1,5 @@
 .step-title {
-  @apply text-black-1 text-4xl mt-1;
+  @apply text-black-1 mt-1;
 }
 
 .step-subtitle {
@@ -109,4 +109,22 @@ ion-select {
 .disabled {
   pointer-events: none;
   opacity: 0.6;
+}
+
+.admin-designer-step-title {
+  position: fixed;
+  top: 10rem;
+}
+
+.admin-designer-step-subtitle {
+  position: fixed;
+  top: 13rem;
+}
+
+.admin-designer-step-items {
+  position: fixed;
+  top: 9rem;
+  right: 7rem;
+  left: 23rem;
+  bottom: 4rem;
 }
