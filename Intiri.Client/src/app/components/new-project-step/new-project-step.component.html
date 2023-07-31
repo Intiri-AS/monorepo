@@ -76,11 +76,19 @@
         </div>
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
-          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}">
+            <img [src]="item.mainColorData.imagePath" alt="" srcset="" class="h-full">
+          </div>
           <div class="w-[47.5%] h-full inline-block color-container float-right">
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}">
+              <img [src]="item.shadeColorLightData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}">
+              <img [src]="item.shadeColorMediumData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
+            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}">
+              <img [src]="item.shadeColorDarkData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
           </div>
         </div>
         <p *ngIf="!item.number && item.name && currentStepNo == 0" class="font-bold mt-4 text-black-2 text-clamp-2 pr-1">

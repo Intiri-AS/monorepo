@@ -72,8 +72,9 @@ namespace Intiri.API.DataAccess.Repository
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Designer)
 				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.OrderByDescending(x=>x.Id)
+					//.ThenInclude(s => s.StyleImages)
+                .Include(m => m.StyleImages)
+                .OrderByDescending(x=>x.Id)
 				.ToListAsync();
 		}
 
@@ -139,8 +140,9 @@ namespace Intiri.API.DataAccess.Repository
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.Where(m => moodboardId == m.Id)
+					//.ThenInclude(s => s.StyleImages)
+                .Include(m => m.StyleImages)
+                .Where(m => moodboardId == m.Id)
 				.FirstOrDefaultAsync();
 		}
 

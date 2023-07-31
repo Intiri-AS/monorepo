@@ -107,7 +107,9 @@ export class NewProjectStepComponent implements OnInit {
     // list providers for products
     this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
 
-    console.log(this.currentStep, this.currentStepNo);
+    this.languageService.languageChange$.subscribe(res => {
+      this.currentLanguage = res;
+    })
   }
 
   assignAllItemsData () {

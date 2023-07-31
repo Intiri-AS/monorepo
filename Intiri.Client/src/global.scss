@@ -67,6 +67,13 @@
     --height: 460px;
   }
 
+  .add-room-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 690px;
+    overflow: scroll;
+  }
+
   .add-designer-modal-css::part(content) {
     --width: 826px;
     border-radius: 15px;
@@ -189,6 +196,15 @@ ion-toolbar {
 .secondary-btn {
   //this one don't resize on smaller screens (don't have media queries)
   @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  height: 46px !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+}
+
+.secondary-btn-borderless {
+  @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] px-4 tracking-normal;
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
   height: 46px !important;
