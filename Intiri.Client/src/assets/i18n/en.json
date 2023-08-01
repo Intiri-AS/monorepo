@@ -53,7 +53,7 @@
     "invite": "Invite a friend",
     "invite-text": "Enter your friends phone number and invite them to Intiri journey.",
     "colors": "Colors",
-    "select-colors": "4. Select the Colors",
+    "select-colors": "5. Select the Colors",
     "material": "Material",
     "furniture": "Furniture",
     "add-first-inspiration": "Add first inspiration",
@@ -71,7 +71,11 @@
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
     "contact-designer": "Contact designer",
-    "contact-craftsman": "Contact craftsman"
+    "contact-craftsman": "Contact craftsman",
+    "no-inspirational-photos-found": "No Inspirational photos found for selected Room and Style",
+    "item-not-draggable": "Selected item is not draggable",
+    "item-already-in-moodboard": "Selected item is already present in moodboard",
+    "can-not-assign-null": "Can not assign null to a moodboard slot"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
@@ -173,7 +177,7 @@
     "your-style": "This is your style",
     "customize": "Customize moodboard",
     "finish": "Finish",
-    "select-materials": "3. Select the Materials",
+    "select-materials": "4. Select the Materials",
     "materials": "Materials",
     "products": "Products",
     "edit-select-color": "Select colors",
@@ -321,7 +325,7 @@
     "contact-firstName": "Partner contact first name",
     "contact-lastName": "Partner contact last name",
     "products": "Products",
-    "select-products": "5. Select the Products",
+    "select-products": "6. Select the Products",
     "product-name": "Product name",
     "product-link": "Product link",
     "product-name-required" : "Product name is required",
@@ -544,7 +548,8 @@
     "consultation-get-error": "Cannot get consultations info!",
     "template-added": "added to templates successfully",
     "template-removed": "removed from templates successfully",
-    "error": "Something went wrong!"
+    "error": "Something went wrong!",
+    "empty-values-not-accepted": "Empty values are not accepted for required fields"
   },
   "FOOTER": {
     "p-1": "For Intiri to handle your request efficently, please send an e-mail and we contact you as soon as we can.",

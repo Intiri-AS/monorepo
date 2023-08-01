@@ -1,5 +1,5 @@
 .step-title {
-  @apply text-black-1 text-4xl mt-1;
+  @apply text-black-1 mt-1;
 }
 
 .step-subtitle {
@@ -98,7 +98,10 @@
 
 .step-items-row {
   @apply gap-x-[2%];
+  max-height: 50vh;
+  overflow: scroll;
 }
+
 ion-input {
   @apply h-12;
 }
@@ -113,17 +116,17 @@ ion-select {
 
 .admin-designer-step-title {
   position: fixed;
-  top: 8rem;
+  top: 10rem;
 }
 
 .admin-designer-step-subtitle {
   position: fixed;
-  top: 11.5rem;
+  top: 13rem;
 }
 
 .admin-designer-step-items {
   position: fixed;
-  top: 7rem;
+  top: 9rem;
   right: 7rem;
   left: 23rem;
   bottom: 4rem;

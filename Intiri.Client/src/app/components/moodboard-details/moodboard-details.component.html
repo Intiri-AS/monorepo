@@ -1,93 +1,96 @@
-<ion-card class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4">
+<ion-card
+  *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
+  class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
+>
   <div class="grid-container">
     <div class="grid-item grid-item-1">
       <div class="top-section">
-        <div class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
+        <div id="slot-0" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 0)">
           <img
-            *ngIf="imagePaths[10]"
-            [src]="imagePaths[10]"
+            *ngIf="moodboard.slotInfo[0].entityImagePath"
+            [src]="moodboard.slotInfo[0].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
-            (dragstart)="dragStart($event, 10)"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 0)"
           >
         </div>
-        <div class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
+        <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
             <img
-              *ngIf="imagePaths[1]"
-              [src]="imagePaths[1]"
+              *ngIf="moodboard.slotInfo[4].entityImagePath"
+              [src]="moodboard.slotInfo[4].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
               alt="image-input-1"
-              draggable="true"
-              (dragstart)="dragStart($event, 1)"
+              (draggable)="isItemDragAndDroppable()"
+              (dragstart)="dragStart($event, 4)"
             />
         </div>
-        <div class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
+        <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
             <img
-              draggable="true"
-              *ngIf="imagePaths[2]"
-              [src]="imagePaths[2]"
+              *ngIf="moodboard.slotInfo[7].entityImagePath"
+              [src]="moodboard.slotInfo[7].entityImagePath"
               class="object-cover h-full w-full"
               alt="image-input-2"
-              (dragstart)="dragStart($event, 2)"
+              (draggable)="isItemDragAndDroppable()"
+              (dragstart)="dragStart($event, 7)"
             />
         </div>
-        <div class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
+        <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <img
-            *ngIf="imagePaths[11]"
-            [src]="imagePaths[11]"
+            *ngIf="moodboard.slotInfo[1].entityImagePath"
+            [src]="moodboard.slotInfo[1].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
-            (dragstart)="dragStart($event, 11)"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 1)"
           >
         </div>
-        <div class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 12)">
+        <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <img
-            *ngIf="imagePaths[12]"
-            [src]="imagePaths[12]"
+            *ngIf="moodboard.slotInfo[2].entityImagePath"
+            [src]="moodboard.slotInfo[2].entityImagePath"
             class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
-            draggable="true"
-            (dragstart)="dragStart($event, 12)"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 2)"
           >
         </div>
       </div>
       <div class="bottom-section">
-        <div class="image-input-3"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 3)">
+        <div id="slot-3" class="image-input-3"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 3)">
             <img
-              *ngIf="imagePaths[3]"
-              [src]="imagePaths[3]"
+              *ngIf="moodboard.slotInfo[3].entityImagePath"
+              [src]="moodboard.slotInfo[3].entityImagePath"
               class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
               alt="image-input-3"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
             />
         </div>
-        <div class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
+        <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
             <img
-              *ngIf="imagePaths[4]"
-              [src]="imagePaths[4]"
+              *ngIf="moodboard.slotInfo[5].entityImagePath"
+              [src]="moodboard.slotInfo[5].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-4"
-              draggable="true"
-              (dragstart)="dragStart($event, 4)"
-            />
-        </div>
-        <div class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
-            <img
-              *ngIf="imagePaths[5]"
-              [src]="imagePaths[5]"
-              class="object-cover h-[100%] max-h-[17.2rem] w-full"
-              alt="image-input-5"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
             />
         </div>
-        <div class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
+        <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
             <img
-              *ngIf="imagePaths[6]"
-              [src]="imagePaths[6]"
+              *ngIf="moodboard.slotInfo[8].entityImagePath"
+              [src]="moodboard.slotInfo[8].entityImagePath"
+              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              alt="image-input-5"
+              (draggable)="isItemDragAndDroppable()"
+              (dragstart)="dragStart($event, 8)"
+            />
+        </div>
+        <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
+            <img
+              *ngIf="moodboard.slotInfo[6].entityImagePath"
+              [src]="moodboard.slotInfo[6].entityImagePath"
               class="object-cover h-full max-h-[8.3rem] w-full"
               alt="image-input-6"
-              draggable="true"
+              (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
             />
         </div>
@@ -96,47 +99,196 @@
 
     <!-- Products -->
     <div class="grid-item products-container">
-      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
+      <div id="slot-9" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 9)">
         <img
-          *ngIf="imagePaths[7]"
-          [src]="imagePaths[7]"
+          *ngIf="moodboard.slotInfo[9].entityImagePath"
+          [src]="moodboard.slotInfo[9].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-          draggable="true"
-          (dragstart)="dragStart($event, 7)"
+          (draggable)="isItemDragAndDroppable()"
+          (dragstart)="dragStart($event, 9)"
         />
       </div>
-      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
+      <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
         <img
-        *ngIf="imagePaths[8]"
-        [src]="imagePaths[8]"
+        *ngIf="moodboard.slotInfo[10].entityImagePath"
+        [src]="moodboard.slotInfo[10].entityImagePath"
         class="object-cover h-[100%] w-[100%] max-w-[100%]"
-        draggable="true"
-        (dragstart)="dragStart($event, 8)"
+        (draggable)="isItemDragAndDroppable()"
+        (dragstart)="dragStart($event, 10)"
       />
       </div>
-      <div class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 9)">
+      <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
         <img
-          *ngIf="imagePaths[9]"
-          [src]="imagePaths[9]"
+          *ngIf="moodboard.slotInfo[11].entityImagePath"
+          [src]="moodboard.slotInfo[11].entityImagePath"
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
-          draggable="true"
-          (dragstart)="dragStart($event, 9)"
+          (draggable)="isItemDragAndDroppable()"
+          (dragstart)="dragStart($event, 11)"
         />
       </div>
     </div>
 
     <!-- Colors -->
     <div class="grid-item colors-container">
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorLight}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorMedium}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[moodboard?.colorPalettes.length-1]?.mainColor}"></div>
-      <div class="color" [ngStyle]="{background: moodboard?.colorPalettes[0]?.shadeColorDark}"></div>
+      <div id="slot-12" class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}" alt="shadeColorLightData" class="h-full">
+      </div>
+      <div id="slot-13" class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}" alt="shadeColorMediumData" class="h-full">
+      </div>
+      <div id="slot-14" class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+      </div>
+      <div id="slot-15" class="color">
+        <img src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}" alt="shadeColorDarkData" class="h-full">
+      </div>
+    </div>
+  </div>
+</ion-card>
+
+<ion-card
+  *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
+  class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
+>
+  <div class="grid-container">
+    <div class="grid-item grid-item-1">
+      <div class="top-section">
+        <div id="slot-0" class="material">
+          <img
+            *ngIf="moodboard.slotInfo[0]?.entityImagePath"
+            [src]="moodboard.slotInfo[0]?.entityImagePath"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+          >
+        </div>
+        <div id="slot-4" class="image-input-1">
+            <img
+              *ngIf="moodboard.slotInfo[4]?.entityImagePath"
+              [src]="moodboard.slotInfo[4]?.entityImagePath"
+              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              alt="image-input-1"
+            />
+        </div>
+        <div id="slot-7" class="image-input-2">
+            <img
+              *ngIf="moodboard.slotInfo[7]?.entityImagePath"
+              [src]="moodboard.slotInfo[7]?.entityImagePath"
+              class="object-cover h-full w-full"
+              alt="image-input-2"
+            />
+        </div>
+        <div id="slot-1" class="material">
+          <img
+            *ngIf="moodboard.slotInfo[1]?.entityImagePath"
+            [src]="moodboard.slotInfo[1]?.entityImagePath"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+          >
+        </div>
+        <div id="slot-2" class="material">
+          <img
+            *ngIf="moodboard.slotInfo[2]?.entityImagePath"
+            [src]="moodboard.slotInfo[2]?.entityImagePath"
+            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+          >
+        </div>
+      </div>
+      <div class="bottom-section">
+        <div id="slot-3" class="image-input-3">
+            <img
+              *ngIf="moodboard.slotInfo[3]?.entityImagePath"
+              [src]="moodboard.slotInfo[3]?.entityImagePath"
+              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              alt="slot-3"
+            />
+        </div>
+        <div id="slot-5" class="image-input-4">
+            <img
+              *ngIf="moodboard.slotInfo[5]?.entityImagePath"
+              [src]="moodboard.slotInfo[5]?.entityImagePath"
+              class="object-cover h-full max-h-[8.3rem] w-full"
+              alt="image-input-4"
+            />
+        </div>
+        <div id="slot-8" class="image-input-5">
+            <img
+              *ngIf="moodboard.slotInfo[8]?.entityImagePath"
+              [src]="moodboard.slotInfo[8]?.entityImagePath"
+              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              alt="image-input-5"
+            />
+        </div>
+        <div id="slot-6" class="image-input-6">
+            <img
+              *ngIf="moodboard.slotInfo[6]?.entityImagePath"
+              [src]="moodboard.slotInfo[6]?.entityImagePath"
+              class="object-cover h-full max-h-[8.3rem] w-full"
+              alt="image-input-6"
+            />
+        </div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="grid-item products-container">
+      <div id="slot-9" class="product">
+        <img
+          *ngIf="moodboard.slotInfo[9]?.entityImagePath"
+          [src]="moodboard.slotInfo[9]?.entityImagePath"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+        />
+      </div>
+      <div id="slot-10" class="product">
+        <img
+        *ngIf="moodboard.slotInfo[10]?.entityImagePath"
+        [src]="moodboard.slotInfo[10]?.entityImagePath"
+        class="object-cover h-[100%] w-[100%] max-w-[100%]"
+      />
+      </div>
+      <div id="slot-11" class="product">
+        <img
+          *ngIf="moodboard.slotInfo[11]?.entityImagePath"
+          [src]="moodboard.slotInfo[11]?.entityImagePath"
+          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+        />
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="grid-item colors-container">
+      <div id="slot-12" class="color">
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          alt="shadeColorLightData"
+          class="h-full">
+      </div>
+      <div id="slot-13" class="color">
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          alt="shadeColorMediumData"
+          class="h-full">
+      </div>
+      <div id="slot-14" class="color">
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          alt="mainColorData"
+          class="h-full">
+      </div>
+      <div id="slot-15" class="color">
+        <img
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
+          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          alt="shadeColorDarkData"
+          class="h-full">
+      </div>
     </div>
   </div>
 </ion-card>
 
 <!-- List included items -->
 <div *ngIf="!bigCardOnly" class="mt-16 xl:text-left">
+  <!-- No items in this div -->
   <div class="flex justify-between items-center mb-6">
     <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
     <div *ngIf="withSlides && slides && slides['el']['swiper']?.currentBreakpoint && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
@@ -152,27 +304,61 @@
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-full h-full inline-block rounded-xl">
+            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+          </div>
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
         <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
       </ion-col>
       <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="material-image cursor-pointer" alt="style-img"/>
+        <img
+          *ngIf="item.imagePath"
+          src="{{item.imagePath}}"
+          (click)="openImageInModal(item)"
+          class="material-image cursor-pointer"
+          alt="material-image"
+          (draggable)="isItemDragAndDroppable()"
+          (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
+        />
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
       </ion-col>
       <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div class="w-full h-full bg-white rounded-2xl">
-          <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="product-image cursor-pointer" alt="style-img"/>
+          <img
+            *ngIf="item.imagePath"
+            src="{{item.imagePath}}"
+            (click)="openImageInModal(item)"
+            class="product-image cursor-pointer"
+            alt="product-image"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          />
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of moodboard?.inspirationalPhotos" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div class="w-full h-full bg-white rounded-2xl">
+          <img
+            *ngIf="item.imagePath"
+            src="{{item.imagePath}}"
+            (click)="openImageInModal(item)"
+            class="product-image cursor-pointer"
+            alt="inspirationalPhotos-image"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 'inspirationalPhotos__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+          />
+        </div>
+        <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-slides *ngIf="withSlides" #slides [options]="options" class="py-4 pr-4 w-full">
       <ion-slide *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}">
+            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData">
+          </div>
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
         <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>

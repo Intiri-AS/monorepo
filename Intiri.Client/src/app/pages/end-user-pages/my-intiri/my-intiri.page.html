@@ -14,27 +14,29 @@
                 <p class="text-3xl font-medium mb-4">{{'MY-INTIRI.latest-project' | translate}}</p>
               </div>
               <div class="flex flex-wrap">
-                <div class="py-2 pr-4 w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid gap-8">
-                  <div *ngFor="let moodboard of projects[projects.length-1].projectMoodboards" class="rounded-2xl border shadow-1 h-[286px] mac:h-[356px] min-w-[300px]">
-                    <ion-grid>
-                      <ion-row>
-                        <ion-col size="4.5" class="!p-3 !pr-2">
-                          <div class="border border-light bg-white mb-2">
-                            <img src="{{moodboard?.style?.styleImages[0]?.imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-contain" alt="moodboard-img"/>
-                          </div>
-                          <div class="border border-light bg-white" *ngIf="moodboard?.products.length > 0 && moodboard.products[0].imagePath">
-                            <img src="{{moodboard?.products[0]?.imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-contain" alt="moodboard-img"/>
-                          </div>
-                        </ion-col>
-                        <ion-col size="7.5" class="!p-3 !pl-0">
-                          <div class="border border-light bg-white">
-                            <img src="{{moodboard?.style?.imagePath}}" class="!h-[251px] mac:!h-[320px] !w-full object-contain" alt="moodboard-img"/>
-                          </div>
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
+                <ion-card class="project-preview-card">
+                  <div class="project-preview-grid-container">
+                    <div
+                      *ngFor="let moodboard of projects[projects.length-1].projectMoodboards; let i = index"
+                      class="moodboard-preview-container"
+                    >
+                      <div class="col-1">
+                        <div class="border border-light bg-white bg-cover">
+                          <img src="{{moodboard.style?.styleImages[0]?.imagePath}}" class="!h-[120.5px] !w-full object-contain max-h-[3.5rem]" alt="moodboard-img"/>
+                        </div>
+                        <div class="border border-light bg-white bg-cover">
+                          <img src="{{moodboard.products[0]?.imagePath}}" class="!h-[120.5px] !w-full object-contain max-h-[3.5rem]" alt="moodboard-img"/>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="border border-light bg-white bg-cover">
+                          <img src="{{moodboard?.style?.imagePath}}" class="!h-[114px] !w-full object-contain" alt="moodboard-img"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="moodboard-preview-container" *ngFor="let i of [].constructor(getNumberOfBlankSlot(projects[projects.length - 1]))"></div>
                   </div>
-                </div>
+                </ion-card>
               </div>
               <div class="flex justify-between items-center cursor-default sm:w-[48%] lg:w-[32%]" >
                 <p class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{projects[projects.length-1].name}}</p>

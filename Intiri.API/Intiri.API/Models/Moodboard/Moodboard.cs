@@ -48,7 +48,7 @@ namespace Intiri.API.Models.Moodboard
         public Room.Room Room { get; set; }
         public int? SourceMoodboardId { get; set; }
         public bool IsTemplate { get; set; }
-
+        public string SlotInfo { get; set; }
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }
