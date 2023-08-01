@@ -98,7 +98,10 @@
 
 .step-items-row {
   @apply gap-x-[2%];
+  max-height: 50vh;
+  overflow: scroll;
 }
+
 ion-input {
   @apply h-12;
 }

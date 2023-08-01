@@ -122,10 +122,25 @@ export class AddRoomModalComponent implements OnInit {
     }
   }
 
+  checkSpecialCharInputs () {
+    if (
+      !this.room.name.trim()
+      || !this.room.nameNorwegian.trim()
+      || !this.room.description.trim()
+    ) {
+      this.notifier.show({
+        message: this.translate.instant('NOTIFY.empty-values-not-accepted'),
+        type: 'success'
+      })
+      return true;
+    }
+    return false;
+  }
+
   addRoom() {
     this.spinner.show();
     this.isFormSubmited = true;
-    if (!this.addRoomForm.valid) {
+    if (!this.addRoomForm.valid || this.checkSpecialCharInputs()) {
       this.spinner.hide();
       return;
     }
@@ -163,7 +178,7 @@ export class AddRoomModalComponent implements OnInit {
   editRoom() {
     this.spinner.show();
     this.isFormSubmited = true;
-    if (!this.editRoomForm.valid) {
+    if (!this.editRoomForm.valid || this.checkSpecialCharInputs()) {
       this.spinner.hide();
       return;
     }
