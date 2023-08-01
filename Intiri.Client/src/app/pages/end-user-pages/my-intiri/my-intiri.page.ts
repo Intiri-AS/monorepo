@@ -60,6 +60,11 @@ export class MyIntiriPage {
     })
   }
 
+  getNumberOfBlankSlot (project) {
+    let n = 4 - project.projectMoodboards.length;
+    return n < 0 ? 0 : n;
+  }
+
   addInspiration() {
     this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
       this.projectService.getInspirations();

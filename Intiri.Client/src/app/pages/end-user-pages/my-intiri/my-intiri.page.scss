@@ -13,3 +13,27 @@
     display: inline-block;
   }
 }
+
+.project-preview-card {
+  height: 16rem;
+  width: 27rem;
+  padding: 7px;
+
+  .project-preview-grid-container {
+    display: grid;
+    background: #fff;
+    height: 15rem;
+    width: 26rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+
+    .moodboard-preview-container {
+      display: grid;
+      gap: 1px;
+      grid-template-columns: repeat(2, 1fr);
+      height: 7.3rem;
+      border: 0.5px solid;
+    }
+  }
+}
