@@ -1,4 +1,6 @@
-﻿using Intiri.API.Configuration;
+﻿using DinkToPdf.Contracts;
+using DinkToPdf;
+using Intiri.API.Configuration;
 using Intiri.API.DataAccess;
 using Intiri.API.Models;
 using Intiri.API.Models.DTO;
@@ -52,8 +54,9 @@ namespace Intiri.API.Extension
 			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
 			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
 			services.AddScoped<IUserService, UserService>();
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
-			return services;
+            return services;
 		}
 
 		public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
@@ -19,6 +21,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Net;
+using System.Text;
 
 namespace Intiri.API.Controllers
 {
@@ -28,14 +31,16 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
+        private IConverter _converter;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork)
+        public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper, IConverter converter) : base(unitOfWork)
 		{
 			_mapper = mapper;
+			_converter = converter;
 		}
 
 		#endregion Constructors
@@ -66,7 +71,7 @@ namespace Intiri.API.Controllers
 
 			moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
 
-            return Ok(moodboardOut);
+			return Ok(moodboardOut);
 		}
 
 		[Authorize(Policy = PolicyNames.ClientPolicy)]
@@ -113,8 +118,8 @@ namespace Intiri.API.Controllers
 			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 			moodboard.Products = products.ToArray();
 
-            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
-            moodboard.StyleImages = styleImages.ToArray();
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+			moodboard.StyleImages = styleImages.ToArray();
 
 			_unitOfWork.MoodboardRepository.Insert(moodboard);
 
@@ -282,6 +287,69 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		#endregion Public methods
-	}
+		[AllowAnonymous]
+        [HttpGet("CreatePDF")]
+        public IActionResult CreatePDF()
+		{
+			var globalSettings = new GlobalSettings
+			{
+				ColorMode = ColorMode.Color,
+				Orientation = Orientation.Portrait,
+				PaperSize = PaperKind.A4,
+				Margins = new MarginSettings { Top = 10 },
+				DocumentTitle = "PDF Report"
+			};
+
+			var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDFStyle.css");
+
+            var objectSettings = new ObjectSettings
+			{
+				PagesCount = true,
+				HtmlContent = GetHTMLString(),
+				WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = cssPath },
+				HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+				FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+			};
+
+			var pdf = new HtmlToPdfDocument()
+			{
+				GlobalSettings = globalSettings,
+				Objects = { objectSettings }
+			};
+
+			var file = _converter.Convert(pdf);
+			return File(file, "application/pdf");
+			//return File(file, "application/pdf", "EmployeeReport.pdf");
+		}
+
+        public static string GetHTMLString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(@"
+                        <html>
+                            <head>
+                            </head>
+                            <body>
+                                <div class=""card"">
+	
+  
+<p><a href=""https://www.Youtube.com/""><img src=""https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"" ></a></p>
+
+  <div class=""container"">
+    <h4><b>John Doe</b></h4>
+    <p>Architect & Engineer</p>
+	<a href=""https://www.google.com/"" target=""_blank""> google link</a>
+  </div>
+</div>
+
+							");
+            
+            sb.Append(@"
+                            </body>
+                        </html>");
+            return sb.ToString();
+        }
+
+        #endregion Public methods
+    }
 }
