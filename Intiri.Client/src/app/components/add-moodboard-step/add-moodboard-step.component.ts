@@ -35,7 +35,7 @@ export class AddMoodboardStepComponent implements OnInit {
     private modalController: ModalController,
     private languageService: LanguageService,
     private styleService: StyleService,
-    private commonUtilsService: CommonUtilsService
+    private commonUtilsService: CommonUtilsService,
   ) { }
 
   currentLang: string = '';
@@ -63,8 +63,9 @@ export class AddMoodboardStepComponent implements OnInit {
     if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
       this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.materialTypeName));
       this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.provider));
-    } else if (this.currentStep.title === 'NEW-PROJECT.select-products') {
-
+    } else if (this.currentStep.title === 'PARTNERS.select-products') {
+      this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.productTypeId));;
+      this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.partnerName));
     } else {
       this.types = [];
       this.providers = []
@@ -125,15 +126,28 @@ export class AddMoodboardStepComponent implements OnInit {
   }
 
   filterItems () {
-    if (this.typeFilters.length && this.providerFilters.length) {
-      this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
-      this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.provider));
-    } else if (this.typeFilters.length && !this.providerFilters.length) {
-      this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
-    } else if (!this.typeFilters.length && this.providerFilters.length) {
-      this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
-    } else {
-      this.filteredItems = this.currentStep.data;
+    if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+        this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.provider));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
+      } else {
+        this.filteredItems = this.currentStep.data;
+      }
+    } else if (this.currentStep.title === 'PARTNERS.select-products') {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+        this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.partnerName));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.partnerName));
+      } else {
+        this.filteredItems = this.currentStep.data;
+      }
     }
   }
 }
