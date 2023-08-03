@@ -5,6 +5,7 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { LanguageService } from 'src/app/services/language.service';
 import { StyleService } from 'src/app/services/style.service';
 import { Observable } from 'rxjs';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -22,26 +23,45 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() loggedUser: any;
   @Output() toggleSelection = new EventEmitter<object>();
 
+  types: Array<any> = [];
+  providers: Array<any> = [];
+
   constructor(
     private modalController: ModalController,
     private languageService: LanguageService,
-    private styleService: StyleService
+    private styleService: StyleService,
+    private commonUtilsService: CommonUtilsService
   ) { }
 
   currentLang: string = '';
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
 
   ngOnInit() {
+    console.log('ngOnInit')
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnChanges () {
+    console.log('ngOnChanges')
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
-    if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) { //Get inspirational photos for selected room & style
+
+    //Get inspirational photos for selected room & style
+    if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) {
       this.styleService.getStyleImagesForRoomAndStyle(this.moodboard.room.id, this.moodboard.style.id);
       this.filteredStyleImages$.subscribe((res: Array<any>) => {
         this.currentStep.data = res;
       })
+    }
+
+    // Filters for materials & products
+    if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
+      this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.materialTypeName));
+      this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.provider));
+    } else if (this.currentStep.title === 'NEW-PROJECT.select-products') {
+
+    } else {
+      this.types = [];
+      this.providers = []
     }
   }
 
@@ -89,7 +109,7 @@ export class AddMoodboardStepComponent implements OnInit {
   }
 
   onFilterChange (event) {
-    console.log('data', this.currentStep.data)
+    console.log('data', this.currentStep)
     console.log('no', this.currentStepNo)
   }
 }
