@@ -615,5 +615,10 @@
     "headline-1": "Hei!\nHar du akkurat blitt boligeier? Skal du kanskje selge boligen din? Eller skal du bare pusse opp litt?\nIntiri er en interiørdesigntjeneste som tilbyr deg rådgivning til en brøkdel av prisen.Vår designprosess gjør det enkelt for deg å få et hjem med en gjennomtenkt stil.\nBruk fem minutter til å svare på noen enkle spørsmål, så får du din stil, med innhold som farger, materialer, produkter, belysning med mere.\nBli med på en enklere interiørreise med Intiri!",
     "headline-2": "Vi gjør det enkelt for deg! Vi forventer ikke at du er teknisk ekspert eller vet mye om interiørdesign. Du kan enten jobbe med din stil og innhold alene, eller kontakte en interiørdesigner online.\nDet første rommet er gratis, og så vil neste rom koste 299,- kr pr. rom.\nNår du har registrert en bruker hos oss, ser du dine prosjekter under Min Intiri.  Der kan du enkelt legge til inspirasjonsbilder, planløsninger og dele disse med venner og familie. Ha det gøy!",
     "headline-3": "Vi har akkurat lansert vår tjeneste og er stolte av å jobbe med solide firmaer som hjelper deg med både farger, fliser, stein og gulv, samt innredning av ulike rom.\nLen deg tilbake og velg det som passer for deg. Våre partnere er tilstede med produkter og løsninger i våre stilkonsepter.\nBesøk våre partneres websider og benytt Intiri som kampanjekode.\nIntiri har akkurat lansert i Norge som en pilot i første omgang. Men vi tilbyr selvfølgelig også deg som befinner deg utenfor Norge å svare på spørsmålene i stilgeneratoren, eller booke rådgivning med en designer."
+  },
+  "TOOLTIP-TEXT": {
+    "no-providers-found": "Finner ingen leverandører",
+    "no-providers-found-for-this-inspirational-photo": "Fant ingen leverandører for dette inspirerende bildet",
+    "provider": "Forsørger"
   }
 }

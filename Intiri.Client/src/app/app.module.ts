@@ -120,6 +120,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -189,6 +191,7 @@ export function createTranslateLoader(http: HttpClient) {
         }
       }
     }),
+    MatSlideToggleModule, MatTooltipModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

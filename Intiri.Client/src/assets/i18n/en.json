@@ -616,5 +616,10 @@
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",
     "headline-2": "We don’t expect you to either be a technical expert or knowing much about interior design. Therefore we made it quite easy for you. You can either work on your style and content by yourself or contact an interior designer online.\nWhen you have found your unique home style for a room, you can make your next room quickly in the same style.\nThe first room is free, then the next room is 299,- NOK.\nWhen you have created an account at Intiri, all your design projects are stored under My Intiri. There you can add inspirational photos, room sketches and share this with family & friends. Enjoy!",
     "headline-3": "We have recently launched our service and are proud to work with large companies who can help you refurbish your rooms.\nOur partners are present with their products in our different home styles, so you can just lean back and select what you like.\nVisit our partners' webpages and use Intiri as campaign code.\nWe have launched in Norway, and our suppliers are based in Norway. But we offer you to take the style quiz or collaborate with our designers no matter where you are based in the world."
+  },
+  "TOOLTIP-TEXT": {
+    "no-providers-found": "No providers found",
+    "no-providers-found-for-this-inspirational-photo": "No providers found for this inspirational photo",
+    "provider": "Provider"
   }
 }
