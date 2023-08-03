@@ -27,7 +27,7 @@ export class HeaderInternalDesignerComponents {
 
   menuItems = [
     {title: 'COMMON.client', url: '/client-list'},
-    {title: 'COMMON.moodboard', url: '/my-moodboard'},
+    // {title: 'COMMON.moodboard', url: '/my-moodboard'},
   ]
 
   ngOnInit() {
