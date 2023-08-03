@@ -26,6 +26,11 @@ export class AddMoodboardStepComponent implements OnInit {
   types: Array<any> = [];
   providers: Array<any> = [];
 
+  typeFilters: Array<any> = [];
+  providerFilters: Array<any> = [];
+
+  filteredItems: Array<any> = [];
+
   constructor(
     private modalController: ModalController,
     private languageService: LanguageService,
@@ -37,19 +42,20 @@ export class AddMoodboardStepComponent implements OnInit {
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
 
   ngOnInit() {
-    console.log('ngOnInit')
+    this.filteredItems = this.filteredItems;
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnChanges () {
-    console.log('ngOnChanges')
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+    this.filteredItems = this.currentStep.data;
 
     //Get inspirational photos for selected room & style
     if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) {
       this.styleService.getStyleImagesForRoomAndStyle(this.moodboard.room.id, this.moodboard.style.id);
       this.filteredStyleImages$.subscribe((res: Array<any>) => {
         this.currentStep.data = res;
+        this.filteredItems = res;
       })
     }
 
@@ -108,8 +114,26 @@ export class AddMoodboardStepComponent implements OnInit {
     await modal.present();
   }
 
-  onFilterChange (event) {
-    console.log('data', this.currentStep)
-    console.log('no', this.currentStepNo)
+  onTypeFilterChange (event) {
+    this.typeFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onProviderFilterChange (event) {
+    this.providerFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  filterItems () {
+    if (this.typeFilters.length && this.providerFilters.length) {
+      this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+      this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.provider));
+    } else if (this.typeFilters.length && !this.providerFilters.length) {
+      this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+    } else if (!this.typeFilters.length && this.providerFilters.length) {
+      this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
+    } else {
+      this.filteredItems = this.currentStep.data;
+    }
   }
 }
