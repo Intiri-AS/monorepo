@@ -1,9 +1,26 @@
 <div>
-  <h2
-    class="step-title admin-designer-step-title"
-  >
-    {{currentStep.title | translate}}
-  </h2>
+  <div class="flex-header">
+    <h2
+      class="step-title"
+    >
+      {{currentStep.title | translate}}
+    </h2>
+    <div *ngIf="currentStepNo == 3 || currentStepNo == 5" class="flex">
+      <!-- Type filter -->
+      <ion-select class="mr-[20px]" (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true" [placeholder]="'COMMON.none-selected' | translate">
+        <ion-select-option *ngFor="let materialType of [1, 2]" value="{{materialType}}">
+          {{materialType}}
+        </ion-select-option>
+      </ion-select>
+
+      <!-- Partner/Provider filter-->
+      <ion-select (ionChange)="onFilterChange($event)" interface="popover" [multiple]="true" [placeholder]="'COMMON.none-selected' | translate">
+        <ion-select-option *ngFor="let materialType of [1, 2]" value="{{materialType}}">
+          {{materialType}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+  </div>
   <p
     *ngIf="currentStep.title === 'NEW-PROJECT.select-materials'"
     class="step-subtitle admin-designer-step-subtitle"

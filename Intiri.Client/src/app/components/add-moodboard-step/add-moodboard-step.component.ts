@@ -40,7 +40,6 @@ export class AddMoodboardStepComponent implements OnInit {
     if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) { //Get inspirational photos for selected room & style
       this.styleService.getStyleImagesForRoomAndStyle(this.moodboard.room.id, this.moodboard.style.id);
       this.filteredStyleImages$.subscribe((res: Array<any>) => {
-        console.log('res', res)
         this.currentStep.data = res;
       })
     }
@@ -89,4 +88,8 @@ export class AddMoodboardStepComponent implements OnInit {
     await modal.present();
   }
 
+  onFilterChange (event) {
+    console.log('data', this.currentStep.data)
+    console.log('no', this.currentStepNo)
+  }
 }

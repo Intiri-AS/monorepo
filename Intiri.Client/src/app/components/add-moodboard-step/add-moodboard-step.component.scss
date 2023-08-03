@@ -114,11 +114,6 @@ ion-select {
   opacity: 0.6;
 }
 
-.admin-designer-step-title {
-  position: fixed;
-  top: 10rem;
-}
-
 .admin-designer-step-subtitle {
   position: fixed;
   top: 13rem;
@@ -130,4 +125,11 @@ ion-select {
   right: 7rem;
   left: 23rem;
   bottom: 4rem;
+}
+
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.2rem;
 }
