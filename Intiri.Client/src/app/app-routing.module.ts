@@ -47,6 +47,7 @@ import { AdminInternalDesignerGuard } from './guards/admin-internal-designer.gua
 import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
+import { BlockDesignerMoodboardGuard } from './guards/ blockDesignerMoodboard.guard';
 
 
 const routes: Routes = [
@@ -238,8 +239,9 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
-    path: 'my-moodboard', //TODO Set up page guard (designer guard)
-    component: MyMoodboardPage
+    path: 'my-moodboard',
+    component: MyMoodboardPage,
+    canActivate: [BlockDesignerMoodboardGuard]
   },
   {
     path: 'client-list', //TODO Set up page guard (internal designer guard)
