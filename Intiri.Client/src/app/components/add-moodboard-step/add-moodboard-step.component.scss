@@ -7,7 +7,7 @@
 }
 
 .step-item-wrapper {
-  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-4 p-0;
+  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-[2.2rem] p-0;
 }
 
 .moodboard-item-wrapper {
@@ -98,7 +98,7 @@
 
 .step-items-row {
   @apply gap-x-[2%];
-  max-height: 50vh;
+  height: 50vh;
   overflow: scroll;
 }
 

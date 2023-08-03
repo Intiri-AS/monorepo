@@ -6,6 +6,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { StyleService } from 'src/app/services/style.service';
 import { Observable } from 'rxjs';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
+import { PartnerService } from 'src/app/services/partner.service';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -36,6 +37,7 @@ export class AddMoodboardStepComponent implements OnInit {
     private languageService: LanguageService,
     private styleService: StyleService,
     private commonUtilsService: CommonUtilsService,
+    private partnerService: PartnerService,
   ) { }
 
   currentLang: string = '';
@@ -64,7 +66,9 @@ export class AddMoodboardStepComponent implements OnInit {
       this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.materialTypeName));
       this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.provider));
     } else if (this.currentStep.title === 'PARTNERS.select-products') {
-      this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.productTypeId));;
+      this.partnerService.getProductsType().subscribe((res: Array<any>) => {
+        this.types = res;
+      })
       this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.partnerName));
     } else {
       this.types = [];
