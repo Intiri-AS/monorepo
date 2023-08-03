@@ -7,7 +7,7 @@
 }
 
 .step-item-wrapper {
-  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-4 p-0;
+  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-[2.2rem] p-0;
 }
 
 .moodboard-item-wrapper {
@@ -98,7 +98,7 @@
 
 .step-items-row {
   @apply gap-x-[2%];
-  max-height: 50vh;
+  height: 50vh;
   overflow: scroll;
 }
 
@@ -114,11 +114,6 @@ ion-select {
   opacity: 0.6;
 }
 
-.admin-designer-step-title {
-  position: fixed;
-  top: 10rem;
-}
-
 .admin-designer-step-subtitle {
   position: fixed;
   top: 13rem;
@@ -130,4 +125,11 @@ ion-select {
   right: 7rem;
   left: 23rem;
   bottom: 4rem;
+}
+
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.2rem;
 }

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 
 @Component({
   selector: 'app-new-project-step',
@@ -61,7 +62,8 @@ export class NewProjectStepComponent implements OnInit {
     private colorService: ColorService,
     private productService: ProductService,
     private languageService: LanguageService,
-    private router: Router
+    private router: Router,
+    private commonUtilsService: CommonUtilsService,
   ) { }
 
   ngOnInit() {
@@ -102,10 +104,10 @@ export class NewProjectStepComponent implements OnInit {
     this.providerFilters = [];
 
     // list providers for materials
-    this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
+    this.materialProviders = this.commonUtilsService.getUniqueElementsFromArray(this.materials.map(e => e.provider));
 
     // list providers for products
-    this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
+    this.productProviders = this.commonUtilsService.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
 
     this.languageService.languageChange$.subscribe(res => {
       this.currentLanguage = res;
@@ -150,11 +152,6 @@ export class NewProjectStepComponent implements OnInit {
   isArray(item) {
     return Array.isArray(item);
   }
-
-  getUniqueElementsFromArray(arr) {
-    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null)));
-    return uniqueValues;
-}
 
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
