@@ -82,14 +82,15 @@ namespace Intiri.API.Services
 			for (int i = 0; i < moodboardTopMatch.Count; i++)
 			{
 				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardTopMatch[i].Key.Id);
-
-				MoodboardMatchDTO moodboardMatch = new()
+                
+                MoodboardMatchDTO moodboardMatch = new()
 				{
 					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
 					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
 				};
 
-				moodboardsMatch.Add(moodboardMatch);
+                moodboardMatch.Moodboard.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardMatch.Moodboard.ColorPalettes);
+                moodboardsMatch.Add(moodboardMatch);
 			}
 
 			return moodboardsMatch;
