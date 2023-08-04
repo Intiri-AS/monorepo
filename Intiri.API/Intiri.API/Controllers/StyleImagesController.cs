@@ -191,7 +191,7 @@ namespace Intiri.API.Controllers
 		[AllowAnonymous]
 		public async Task<ActionResult> SeedMaterialsImport()
 		{
-			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport(_unitOfWork, _fileUploadService);
+			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport2(_unitOfWork, _fileUploadService);
 
 			return Ok();
 		}
