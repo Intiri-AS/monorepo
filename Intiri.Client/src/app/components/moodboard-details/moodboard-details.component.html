@@ -1,3 +1,4 @@
+<!-- Admin view -->
 <ion-card
   *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
   class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
@@ -9,19 +10,21 @@
           <img
             *ngIf="moodboard.slotInfo[0].entityImagePath"
             [src]="moodboard.slotInfo[0].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
+            [matTooltip]="getToolTipMoodboardItem(0)"
           >
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
             <img
               *ngIf="moodboard.slotInfo[4].entityImagePath"
               [src]="moodboard.slotInfo[4].entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              class="object-cover h-full w-full"
               alt="image-input-1"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
+              [matTooltip]="getToolTipMoodboardItem(4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
@@ -32,24 +35,27 @@
               alt="image-input-2"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
+              [matTooltip]="getToolTipMoodboardItem(7)"
             />
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <img
             *ngIf="moodboard.slotInfo[1].entityImagePath"
             [src]="moodboard.slotInfo[1].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
+            [matTooltip]="getToolTipMoodboardItem(1)"
           >
         </div>
         <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <img
             *ngIf="moodboard.slotInfo[2].entityImagePath"
             [src]="moodboard.slotInfo[2].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
+            [matTooltip]="getToolTipMoodboardItem(2)"
           >
         </div>
       </div>
@@ -58,10 +64,11 @@
             <img
               *ngIf="moodboard.slotInfo[3].entityImagePath"
               [src]="moodboard.slotInfo[3].entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              class="object-cover h-[100%] w-[100%]"
               alt="image-input-3"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
+              [matTooltip]="getToolTipMoodboardItem(3)"
             />
         </div>
         <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
@@ -72,26 +79,29 @@
               alt="image-input-4"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
+              [matTooltip]="getToolTipMoodboardItem(5)"
             />
         </div>
         <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
             <img
               *ngIf="moodboard.slotInfo[8].entityImagePath"
               [src]="moodboard.slotInfo[8].entityImagePath"
-              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-5"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
+              [matTooltip]="getToolTipMoodboardItem(8)"
             />
         </div>
         <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
             <img
               *ngIf="moodboard.slotInfo[6].entityImagePath"
               [src]="moodboard.slotInfo[6].entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-6"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
+              [matTooltip]="getToolTipMoodboardItem(6)"
             />
         </div>
       </div>
@@ -106,6 +116,7 @@
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
+          [matTooltip]="getToolTipMoodboardItem(9)"
         />
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
@@ -115,6 +126,7 @@
         class="object-cover h-[100%] w-[100%] max-w-[100%]"
         (draggable)="isItemDragAndDroppable()"
         (dragstart)="dragStart($event, 10)"
+        [matTooltip]="getToolTipMoodboardItem(10)"
       />
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
@@ -124,6 +136,7 @@
           class="object-cover h-[100%] w-[100%] max-w-[100%]"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
+          [matTooltip]="getToolTipMoodboardItem(11)"
         />
       </div>
     </div>
@@ -131,21 +144,42 @@
     <!-- Colors -->
     <div class="grid-item colors-container">
       <div id="slot-12" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}" alt="shadeColorLightData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          alt="shadeColorLightData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-13" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}" alt="shadeColorMediumData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          alt="shadeColorMediumData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-14" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          alt="mainColorData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-15" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}" alt="shadeColorDarkData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          alt="shadeColorDarkData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
     </div>
   </div>
 </ion-card>
 
+<!-- Client view -->
 <ion-card
   *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
   class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
@@ -157,14 +191,14 @@
           <img
             *ngIf="moodboard.slotInfo[0]?.entityImagePath"
             [src]="moodboard.slotInfo[0]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
         <div id="slot-4" class="image-input-1">
             <img
               *ngIf="moodboard.slotInfo[4]?.entityImagePath"
               [src]="moodboard.slotInfo[4]?.entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              class="object-cover h-full w-full"
               alt="image-input-1"
             />
         </div>
@@ -180,14 +214,14 @@
           <img
             *ngIf="moodboard.slotInfo[1]?.entityImagePath"
             [src]="moodboard.slotInfo[1]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
         <div id="slot-2" class="material">
           <img
             *ngIf="moodboard.slotInfo[2]?.entityImagePath"
             [src]="moodboard.slotInfo[2]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
       </div>
@@ -196,7 +230,7 @@
             <img
               *ngIf="moodboard.slotInfo[3]?.entityImagePath"
               [src]="moodboard.slotInfo[3]?.entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              class="object-cover h-[100%] w-[100%]"
               alt="slot-3"
             />
         </div>
@@ -212,7 +246,7 @@
             <img
               *ngIf="moodboard.slotInfo[8]?.entityImagePath"
               [src]="moodboard.slotInfo[8]?.entityImagePath"
-              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-5"
             />
         </div>
@@ -220,7 +254,7 @@
             <img
               *ngIf="moodboard.slotInfo[6]?.entityImagePath"
               [src]="moodboard.slotInfo[6]?.entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-6"
             />
         </div>
@@ -259,28 +293,36 @@
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
           alt="shadeColorLightData"
-          class="h-full">
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-13" class="color">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
           alt="shadeColorMediumData"
-          class="h-full">
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-14" class="color">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
           alt="mainColorData"
-          class="h-full">
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-15" class="color">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
           alt="shadeColorDarkData"
-          class="h-full">
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
     </div>
   </div>
@@ -305,7 +347,7 @@
       <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
           <div class="w-full h-full inline-block rounded-xl">
-            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full" [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate" (click)="redirectToColorsPartner()">
           </div>
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
@@ -337,16 +379,17 @@
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
       </ion-col>
-      <ion-col *ngFor="let item of moodboard?.inspirationalPhotos" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+      <ion-col *ngFor="let item of moodboard?.styleImages" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div class="w-full h-full bg-white rounded-2xl">
           <img
             *ngIf="item.imagePath"
             src="{{item.imagePath}}"
             (click)="openImageInModal(item)"
+            [matTooltip]="getInspirationalPhotosToolTipShoppingList(item)"
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
             (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'inspirationalPhotos__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+            (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
           />
         </div>
         <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>

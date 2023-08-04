@@ -59,7 +59,7 @@ export class MoodboardDetailsComponent implements OnInit {
     private translate: TranslateService,
     private notifier: NotifierService,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
   ) {
     console.log('url', router.url);
   }
@@ -233,5 +233,26 @@ export class MoodboardDetailsComponent implements OnInit {
       // reset "previousSlotId" after drop is done
       this.previousSlotId = null;
     }
+  }
+
+  getInspirationalPhotosToolTipShoppingList (item) {
+    return item.provider
+      ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
+      : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+  }
+
+  getToolTipMoodboardItem (slotId) {
+    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
+      let provider = this.moodboard.styleImages.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
+      return provider
+        ? this.translate.instant('TOOLTIP-TEXT.provider') + ': ' + provider
+        : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+    } else {
+      return ''
+    }
+  }
+
+  redirectToColorsPartner () {
+    window.open('https://www.flugger.com/', '_blank');
   }
 }

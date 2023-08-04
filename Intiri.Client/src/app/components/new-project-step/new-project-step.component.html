@@ -56,7 +56,7 @@
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
 
   <div [ngClass]="{'text-clamp-3' : !expandText}">
-    <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea>
+    <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->
   </div>
   <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
   <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
@@ -143,7 +143,7 @@
 
    <!-- if room details -->
   <div *ngIf="currentStep.data.roomShapes">
-    <div class="w-[200px]">
+    <div class="room-details-section-container">
       <!-- <span class="text-black-2">{{'NEW-PROJECT.upload-sketch' | translate}}</span> -->
       <label for="dropzone-file">
         <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
@@ -153,8 +153,22 @@
           </div>
           <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="roomImg" />
         </div>
-        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
+        <input
+          (change)="onFileChange($event)"
+          id="dropzone-file"
+          type="file"
+          class="hidden"
+          accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+          multiple/>
       </label>
+      <div class="image-preview-container" *ngIf="roomSketchImagePaths.length > 0">
+        <h3 class="mt-0">{{"NEW-PROJECT.images-preview" | translate}}</h3>
+        <div class="image-preview">
+          <div *ngFor="let imagePath of roomSketchImagePaths; let i = index">
+            <img [src]="imagePath" alt="{{ 'roomSketchImage ' + i }}" class="preview-image"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -167,15 +181,15 @@
               <ion-row>
                 <ion-col size="6">
                   <div class="border border-light bg-white mb-2">
-                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                    <img *ngIf="item.style.styleImages?.[0]?.imagePath" src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
                   </div>
                   <div class="border border-light bg-white">
-                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                    <img *ngIf="item.products[0].imagePath" src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] object-contain w-full" alt="moodboard-img"/>
+                    <img *ngIf="item.style.imagePath" src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] object-contain w-full" alt="moodboard-img"/>
                   </div>
                 </ion-col>
               </ion-row>
@@ -196,15 +210,15 @@
               <ion-row>
                 <ion-col size="6">
                   <div class="border border-light bg-white mb-2">
-                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img1"/>
+                    <img *ngIf="item.style.styleImages?.[0]?.imagePath" src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img1"/>
                   </div>
                   <div class="border border-light bg-white">
-                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img2"/>
+                    <img *ngIf="item.products?.[0]?.imagePath" src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img2"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img [src]="item.style.imagePath" class="h-[200px] lg:h-[280px] w-full object-contain" alt="moodboard-img3"/>
+                    <img *ngIf="item.style?.imagePath" [src]="item.style.imagePath" class="h-[200px] lg:h-[280px] w-full object-contain" alt="moodboard-img3"/>
                   </div>
                 </ion-col>
               </ion-row>
