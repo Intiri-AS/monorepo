@@ -159,6 +159,7 @@ export class NewProjectStepComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length) {
       this.project.roomDetails.imageFiles = event.target.files;
+      this.project.roomDetails.roomSketchFiles = event.target.files;
       this.roomSketchImagePaths = Object.keys(event.target.files).map((key, i) =>
         this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[key])));
     } else {
