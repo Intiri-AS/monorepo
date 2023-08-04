@@ -98,9 +98,11 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
-    this.partnerService.getPartnerProfile().subscribe(res => {
-      this.partners = res;
-    });
+    if (this.userRole == 'Partner') {
+      this.partnerService.getPartnerProfile().subscribe(res => {
+        this.partners = res;
+      });
+    }
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
     })
