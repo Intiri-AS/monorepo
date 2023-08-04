@@ -1,15 +1,226 @@
-﻿.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+﻿.container {
+    display: grid;
+    margin: 32px !important;
+    padding: 16px;
+    background: grey;
+    height: 264px !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 32px 32px 32px 62px 62px;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "first fifth fifth eighth tenth thirteen"
+        "second fifth fifth eighth tenth fourteen"
+        "third fifth fifth eighth eleventh fourteen"
+        "fourth sixth ninth ninth eleventh fifteen"
+        "fourth seventh ninth ninth twelth sixteen";
 }
 
-    /* On mouse-over, add a deeper shadow */
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.image-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .image-container a {
+        text-decoration: none;
+        display: block;
     }
 
-/* Add some padding inside the card container */
+    .image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+.image-container-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .image-container-box a {
+        text-decoration: none;
+        display: block;
+    }
+
+    .image-container-box img {
+        /* max-width: 100%; */
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+.first {
+    grid-area: first;
+    background: white;
+}
+
+.second {
+    grid-area: second;
+    background: white;
+}
+
+.third {
+    grid-area: third;
+    background: white;
+}
+
+.fourth {
+    grid-area: fourth;
+    background: white;
+}
+
+.fifth {
+    grid-area: fifth;
+    background: white;
+}
+
+.sixth {
+    grid-area: sixth;
+    background: white;
+}
+
+.seventh {
+    grid-area: seventh;
+    background: white;
+}
+
+.eighth {
+    grid-area: eighth;
+    background: white;
+}
+
+.ninth {
+    grid-area: ninth;
+    background: white;
+}
+
+.tenth {
+    display: grid;
+    background: white;
+    height: 75px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: tenth;
+}
+
+.eleventh {
+    display: grid;
+    background: white;
+    margin-top: 8px;
+    height: 75px;
+    grid-template-columns: 1fr 1fr 1f;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: eleventh;
+}
+
+.twelth {
+    display: grid;
+    background: white;
+    margin-top: -15px;
+    height: 75px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: twelth;
+}
+
+.thirteen {
+    display: grid;
+    background: white;
+    height: 53px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: thirteen;
+}
+
+.fourteen {
+    display: grid;
+    background: white;
+    margin-top: 24px;
+    height: 53px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: fourteen;
+}
+
+.fifteen {
+    display: grid;
+    background: white;
+    margin-top: 8px;
+    height: 53px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: fifteen;
+}
+
+.sixteen {
+    display: grid;
+    background: white;
+    margin-top: 6px;
+    height: 53px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-area: sixteen;
+}
+
+html,
+body,
 .container {
-    padding: 2px 16px;
+    height: 100%;
+    margin: 0;
+}
+    /* For presentation only, no need to copy the code below */
+    .container * {
+        border: 1px solid grey;
+        position: relative;
+    }
+
+        .container *:after {
+            /* content: attr(class); */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+
+.box-text {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box-one {
+    text-align: center;
+    background: grey;
+    height: 133px;
+    width: 133px;
+    margin: 32px;
+    text-align: center;
+}
+
+.text-box {
+    text-align: center;
 }

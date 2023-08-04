@@ -318,35 +318,17 @@ namespace Intiri.API.Controllers
 			};
 
 			var file = _converter.Convert(pdf);
-			return File(file, "application/pdf");
-			//return File(file, "application/pdf", "EmployeeReport.pdf");
+			//return File(file, "application/pdf");
+			return File(file, "application/pdf", "MoodBoard.pdf");
 		}
 
         public static string GetHTMLString()
         {
+            var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
+            string contents = System.IO.File.ReadAllText(htmlPath);
+
             var sb = new StringBuilder();
-            sb.Append(@"
-                        <html>
-                            <head>
-                            </head>
-                            <body>
-                                <div class=""card"">
-	
-  
-<p><a href=""https://www.Youtube.com/""><img src=""https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"" ></a></p>
-
-  <div class=""container"">
-    <h4><b>John Doe</b></h4>
-    <p>Architect & Engineer</p>
-	<a href=""https://www.google.com/"" target=""_blank""> google link</a>
-  </div>
-</div>
-
-							");
-            
-            sb.Append(@"
-                            </body>
-                        </html>");
+            sb.Append(contents);
             return sb.ToString();
         }
 
