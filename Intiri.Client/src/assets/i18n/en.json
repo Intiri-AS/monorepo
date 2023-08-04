@@ -620,6 +620,7 @@
   "TOOLTIP-TEXT": {
     "no-providers-found": "No providers found",
     "no-providers-found-for-this-inspirational-photo": "No providers found for this inspirational photo",
-    "provider": "Provider"
+    "provider": "Provider",
+    "provided-by-Flügger": "Provided by Flügger"
   }
 }

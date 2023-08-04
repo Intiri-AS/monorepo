@@ -619,6 +619,7 @@
   "TOOLTIP-TEXT": {
     "no-providers-found": "Finner ingen leverandører",
     "no-providers-found-for-this-inspirational-photo": "Fant ingen leverandører for dette inspirerende bildet",
-    "provider": "Forsørger"
+    "provider": "Forsørger",
+    "provided-by-Flügger": "Levert av Flügger"
   }
 }

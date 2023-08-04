@@ -251,4 +251,8 @@ export class MoodboardDetailsComponent implements OnInit {
       return ''
     }
   }
+
+  redirectToColorsPartner () {
+    window.open('https://www.flugger.com/', '_blank');
+  }
 }
