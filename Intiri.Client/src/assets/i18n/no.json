@@ -192,7 +192,8 @@
     "select-material-type": "Velg materialtype",
     "select-material-provider": "Velg materialleverandør",
     "select-product-type": "Velg produkttype",
-    "select-product-provider": "Velg produktleverandør"
+    "select-product-provider": "Velg produktleverandør",
+    "images-preview": "Forhåndsvisning av bilder"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",

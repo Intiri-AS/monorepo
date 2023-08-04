@@ -192,7 +192,8 @@
     "select-material-type": "Select material type",
     "select-material-provider": "Select material provider",
     "select-product-type": "Select product type",
-    "select-product-provider": "Select product provider"
+    "select-product-provider": "Select product provider",
+    "images-preview": "Images Preview"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
