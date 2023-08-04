@@ -10,7 +10,7 @@
           <img
             *ngIf="moodboard.slotInfo[0].entityImagePath"
             [src]="moodboard.slotInfo[0].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
@@ -20,7 +20,7 @@
             <img
               *ngIf="moodboard.slotInfo[4].entityImagePath"
               [src]="moodboard.slotInfo[4].entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              class="object-cover h-full w-full"
               alt="image-input-1"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
@@ -42,7 +42,7 @@
           <img
             *ngIf="moodboard.slotInfo[1].entityImagePath"
             [src]="moodboard.slotInfo[1].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
@@ -52,7 +52,7 @@
           <img
             *ngIf="moodboard.slotInfo[2].entityImagePath"
             [src]="moodboard.slotInfo[2].entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
@@ -64,7 +64,7 @@
             <img
               *ngIf="moodboard.slotInfo[3].entityImagePath"
               [src]="moodboard.slotInfo[3].entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              class="object-cover h-[100%] w-[100%]"
               alt="image-input-3"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
@@ -86,7 +86,7 @@
             <img
               *ngIf="moodboard.slotInfo[8].entityImagePath"
               [src]="moodboard.slotInfo[8].entityImagePath"
-              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-5"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
@@ -97,7 +97,7 @@
             <img
               *ngIf="moodboard.slotInfo[6].entityImagePath"
               [src]="moodboard.slotInfo[6].entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-6"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
@@ -191,14 +191,14 @@
           <img
             *ngIf="moodboard.slotInfo[0]?.entityImagePath"
             [src]="moodboard.slotInfo[0]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
         <div id="slot-4" class="image-input-1">
             <img
               *ngIf="moodboard.slotInfo[4]?.entityImagePath"
               [src]="moodboard.slotInfo[4]?.entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[22rem]"
+              class="object-cover h-full w-full"
               alt="image-input-1"
             />
         </div>
@@ -214,14 +214,14 @@
           <img
             *ngIf="moodboard.slotInfo[1]?.entityImagePath"
             [src]="moodboard.slotInfo[1]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
         <div id="slot-2" class="material">
           <img
             *ngIf="moodboard.slotInfo[2]?.entityImagePath"
             [src]="moodboard.slotInfo[2]?.entityImagePath"
-            class="object-cover h-[100%] w-[100%] max-h-[5.3rem]"
+            class="object-cover h-full w-full"
           >
         </div>
       </div>
@@ -230,7 +230,7 @@
             <img
               *ngIf="moodboard.slotInfo[3]?.entityImagePath"
               [src]="moodboard.slotInfo[3]?.entityImagePath"
-              class="object-cover h-[100%] w-[100%] max-h-[17.2rem] max-w-[24rem]"
+              class="object-cover h-[100%] w-[100%]"
               alt="slot-3"
             />
         </div>
@@ -246,7 +246,7 @@
             <img
               *ngIf="moodboard.slotInfo[8]?.entityImagePath"
               [src]="moodboard.slotInfo[8]?.entityImagePath"
-              class="object-cover h-[100%] max-h-[17.2rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-5"
             />
         </div>
@@ -254,7 +254,7 @@
             <img
               *ngIf="moodboard.slotInfo[6]?.entityImagePath"
               [src]="moodboard.slotInfo[6]?.entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full w-full"
               alt="image-input-6"
             />
         </div>
