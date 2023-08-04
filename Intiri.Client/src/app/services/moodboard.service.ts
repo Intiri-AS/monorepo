@@ -73,7 +73,7 @@ export class MoodboardService {
       materialIds: moodboard.materials.map(e=> e['id']),
       colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
       productIds: moodboard.products.map(e=> e['id']),
-      styleImageIds: moodboard.inspirationalPhotos.map(e => e['id']),
+      styleImageIds: moodboard.styleImages.map(e => e['id']),
     }
     return parsedProj;
   };

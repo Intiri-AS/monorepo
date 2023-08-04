@@ -144,16 +144,36 @@
     <!-- Colors -->
     <div class="grid-item colors-container">
       <div id="slot-12" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}" alt="shadeColorLightData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          alt="shadeColorLightData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-13" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}" alt="shadeColorMediumData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          alt="shadeColorMediumData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-14" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          alt="mainColorData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-15" class="color">
-        <img src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}" alt="shadeColorDarkData" class="h-full">
+        <img
+          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          alt="shadeColorDarkData"
+          class="h-full"
+          [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
+          (click)="redirectToColorsPartner()">
       </div>
     </div>
   </div>
@@ -359,7 +379,7 @@
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
       </ion-col>
-      <ion-col *ngFor="let item of moodboard?.inspirationalPhotos" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+      <ion-col *ngFor="let item of moodboard?.styleImages" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div class="w-full h-full bg-white rounded-2xl">
           <img
             *ngIf="item.imagePath"
@@ -369,7 +389,7 @@
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
             (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'inspirationalPhotos__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+            (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
           />
         </div>
         <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>

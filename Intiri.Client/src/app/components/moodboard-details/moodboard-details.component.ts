@@ -242,8 +242,8 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   getToolTipMoodboardItem (slotId) {
-    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos') {
-      let provider = this.moodboard.inspirationalPhotos.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
+    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
+      let provider = this.moodboard.styleImages.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
       return provider
         ? this.translate.instant('TOOLTIP-TEXT.provider') + ': ' + provider
         : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
