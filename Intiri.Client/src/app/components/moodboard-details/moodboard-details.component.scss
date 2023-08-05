@@ -128,3 +128,31 @@ p {
     }
   }
 }
+
+.palette-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  height: 100%;
+
+  // .grid-item {
+
+  // }
+
+  .mainColor {
+    grid-row: span 3;
+  }
+
+  .shadeColorLight {
+    grid-column: span 1;
+  }
+
+  .shadeColorMedium {
+    grid-column: span 1;
+  }
+
+  .shadeColorDark {
+    grid-column: span 1;
+  }
+}

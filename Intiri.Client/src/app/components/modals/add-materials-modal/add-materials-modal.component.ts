@@ -219,4 +219,9 @@ export class AddMaterialsModalComponent implements OnInit {
     await modal.present();
   }
 
+  getMaterialTypeNameByTypeId (typeId) {
+    let res = this.materialTypes.filter(mType => mType.id == typeId);
+    return res.length ? res[0].name : null;
+  }
+
 }

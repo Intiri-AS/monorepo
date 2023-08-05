@@ -102,7 +102,13 @@ namespace Intiri.API.Services
 			IEnumerable<Moodboard> moodboardFamily = await _unitOfWork.MoodboardRepository
 				.GetMoodboardStyleFamilyAsync(styleId, roomId);
 
-			return _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
+			var moodboardFamilyOut = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
+			foreach (var item in moodboardFamilyOut)
+			{
+                item.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(item.ColorPalettes);
+            }
+
+            return moodboardFamilyOut;
 		}
 
 		public async Task<ClientMoodboard> CreateClientMoodboardAsync(RoomDetails roomDetails,  MoodboardInDTO moodboardIn, EndUser endUser)
