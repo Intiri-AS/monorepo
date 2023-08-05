@@ -136,7 +136,7 @@
           <div class="pl-2">
             <div class="pl-2">
               <span class="text-sm text-black-2">Type</span>
-            <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class=" h-[56px]" formControlName="type" [value]="getRoomTypeNameByTypeId(room.roomTypeId)">
+            <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class="h-[56px]" formControlName="type" [value]="getRoomTypeNameByTypeId(room.roomTypeId)">
               <ion-select-option  *ngFor="let roomType of roomTypes" [value]="roomType.id">
                 {{'ROOM-TYPE.' + roomType.name | translate}}
               </ion-select-option>
