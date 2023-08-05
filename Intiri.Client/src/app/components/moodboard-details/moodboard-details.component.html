@@ -373,15 +373,6 @@
         </div>
         <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>
       </ion-col>
-      <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-          <div class="w-full h-full inline-block rounded-xl">
-            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full" [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate" (click)="redirectToColorsPartner()">
-          </div>
-        </div>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-      </ion-col>
       <ion-col *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <img
           *ngIf="item.imagePath"
@@ -393,6 +384,15 @@
           (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
         />
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
+          <div class="w-full h-full inline-block rounded-xl">
+            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData" class="h-full" [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate" (click)="redirectToColorsPartner()">
+          </div>
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
       </ion-col>
     </ion-row>
   </ion-grid>
