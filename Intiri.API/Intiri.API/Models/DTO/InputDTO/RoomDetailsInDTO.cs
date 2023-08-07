@@ -12,6 +12,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 		//[Required]
 		public int BudgetRate { get; set; } = 0;
 
-        public IFormFile RoomSketchFile { get; set; }
+        public List<IFormFile> RoomSketchFile { get; set; }
 	}
 }

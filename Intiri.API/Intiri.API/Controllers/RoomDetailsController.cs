@@ -60,7 +60,7 @@ namespace Intiri.API.Controllers
 		{
 			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
 
-			IFormFile roomSketchFile = roomDetailsIn.RoomSketchFile;
+			IFormFile roomSketchFile = roomDetailsIn.RoomSketchFile.FirstOrDefault();
 			if (roomSketchFile != null && roomSketchFile.Length > 0)
 			{
 				ImageUploadResult uploadResult = null;
