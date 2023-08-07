@@ -26,13 +26,15 @@
 }
 
     .image-container a {
+        width: 100%;
+        height: 100%;
         text-decoration: none;
         display: block;
     }
 
     .image-container img {
-        max-width: 100%;
-        max-height: 100%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 
@@ -55,52 +57,62 @@
     }
 
 .first {
+    /* display: table-cell; */
     grid-area: first;
     background: white;
 }
 
 .second {
+    /* display: table-cell; */
     grid-area: second;
     background: white;
 }
 
 .third {
+    /* display: table-cell; */
     grid-area: third;
     background: white;
 }
 
 .fourth {
+    /* display: table-cell; */
     grid-area: fourth;
     background: white;
 }
 
 .fifth {
+    /* display: table-cell; */
     grid-area: fifth;
     background: white;
 }
 
 .sixth {
+    /* display: table-cell; */
     grid-area: sixth;
     background: white;
 }
 
 .seventh {
+    /* display: table-cell; */
     grid-area: seventh;
     background: white;
 }
 
 .eighth {
+    /* display: table-cell; */
     grid-area: eighth;
     background: white;
 }
 
 .ninth {
+    /* display: table-cell; */
     grid-area: ninth;
     background: white;
 }
 
 .tenth {
-    display: grid;
+    /* display: table-cell; */
+    /* display: grid; */
     background: white;
     height: 75px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -111,7 +123,8 @@
 }
 
 .eleventh {
-    display: grid;
+    /* display: table-cell; */
+    /* display: grid; */
     background: white;
     margin-top: 8px;
     height: 75px;
@@ -123,7 +136,8 @@
 }
 
 .twelth {
-    display: grid;
+    display: table-cell;
+    /* display: table; */
     background: white;
     margin-top: -15px;
     height: 75px;
@@ -135,7 +149,8 @@
 }
 
 .thirteen {
-    display: grid;
+    display: table-cell;
+    /* display: table; */
     background: white;
     height: 53px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -146,7 +161,8 @@
 }
 
 .fourteen {
-    display: grid;
+    display: table-cell;
+    /* display: grid; */
     background: white;
     margin-top: 24px;
     height: 53px;
@@ -158,7 +174,8 @@
 }
 
 .fifteen {
-    display: grid;
+    display: table-cell;
+    /* display: grid; */
     background: white;
     margin-top: 8px;
     height: 53px;
@@ -170,7 +187,8 @@
 }
 
 .sixteen {
-    display: grid;
+    display: table-cell;
+    /* display: grid; */
     background: white;
     margin-top: 6px;
     height: 53px;
