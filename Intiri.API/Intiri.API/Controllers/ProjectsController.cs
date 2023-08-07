@@ -132,9 +132,11 @@ namespace Intiri.API.Controllers
 			}
 
 			List<RoomDetails> roomDetails = new List<RoomDetails>();
-			foreach (IFormFile roomSketchFile in moodboardProjectIn.RoomDetails.RoomSketchFile)
+			foreach (IFormFile roomSketchFile in moodboardProjectIn.RoomSketchFile)
 			{
-                RoomDetails roomDetails1 = _mapper.Map<RoomDetails>(moodboardProjectIn.RoomDetails);
+                RoomDetails roomDetails1 = new RoomDetails();
+                roomDetails1.Size = 0;
+                roomDetails1.BudgetRate = 0;
                 if (roomSketchFile != null && roomSketchFile.Length > 0)
                 {
                     Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails1, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
@@ -165,9 +167,11 @@ namespace Intiri.API.Controllers
 			project.EndUser = user;
 
             List<RoomDetails> roomDetails = new List<RoomDetails>();
-            foreach (IFormFile roomSketchFile in projectIn.RoomDetails.RoomSketchFile)
+            foreach (IFormFile roomSketchFile in projectIn.RoomSketchFile)
             {
-                RoomDetails roomDetails1 = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
+                RoomDetails roomDetails1 = new RoomDetails();
+				roomDetails1.Size = 0;
+				roomDetails1.BudgetRate = 0;
                 if (roomSketchFile != null && roomSketchFile.Length > 0)
                 {
                     Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails1, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
