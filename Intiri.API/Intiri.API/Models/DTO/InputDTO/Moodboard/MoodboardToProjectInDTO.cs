@@ -18,7 +18,7 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
 
         //[Required]
         //public RoomDetailsInDTO RoomDetails { get; set; }
-        public List<IFormFile> RoomSketchFile { get; set; }
+        public ICollection<IFormFile> roomSketchFile { get; set; }
 
         #endregion RoomDetails
     }

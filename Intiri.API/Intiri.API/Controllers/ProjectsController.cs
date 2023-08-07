@@ -132,7 +132,7 @@ namespace Intiri.API.Controllers
 			}
 
 			List<RoomDetails> roomDetails = new List<RoomDetails>();
-			foreach (IFormFile roomSketchFile in moodboardProjectIn.RoomSketchFile)
+			foreach (IFormFile roomSketchFile in moodboardProjectIn.roomSketchFile)
 			{
                 RoomDetails roomDetails1 = new RoomDetails();
                 roomDetails1.Size = 0;
@@ -167,7 +167,7 @@ namespace Intiri.API.Controllers
 			project.EndUser = user;
 
             List<RoomDetails> roomDetails = new List<RoomDetails>();
-            foreach (IFormFile roomSketchFile in projectIn.RoomSketchFile)
+            foreach (var roomSketchFile in projectIn.roomSketchFile)
             {
                 RoomDetails roomDetails1 = new RoomDetails();
 				roomDetails1.Size = 0;

@@ -170,7 +170,7 @@ export class ProjectService implements Resolve<Project> {
 
     Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
-      formData.append(`roomSketchFile[${i}]`, parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
+      formData.append(`roomSketchFile`, parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
     })
 
     return parsedRDFormData;
