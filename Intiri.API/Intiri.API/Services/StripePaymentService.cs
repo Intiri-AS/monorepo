@@ -44,7 +44,8 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         //attach payer user to dto. Important later when handling events, because API is called from outside platform (from stripe)
         paymentDTO.PayerId = userId;
 
-        string domain = $"https://{host}/";
+        //string domain = $"https://{host}/";
+        string domain = $"{host}/";
 
         Dictionary<string, string> metadata = new Dictionary<string, string>();
         metadata.Add(PaymentDetails, JsonConvert.SerializeObject(paymentDTO));
