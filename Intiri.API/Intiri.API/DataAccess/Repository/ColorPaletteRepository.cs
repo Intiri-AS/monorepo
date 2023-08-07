@@ -6,39 +6,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ColorPaletteRepository : RepositoryBase<ColorPalette>, IColorPaletteRepository
-	{
-		#region Fields
+    public class ColorPaletteRepository : RepositoryBase<ColorPalette>, IColorPaletteRepository
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constrouctors
+        #region Constrouctors
 
-		public ColorPaletteRepository(DataContext context, IMapper mapper) : base(context)
-		{
-			_mapper = mapper;
-		}
+        public ColorPaletteRepository(DataContext context, IMapper mapper) : base(context)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Public methods
+        #region Public methods
 
-		public async Task<IEnumerable<ColorPalette>> GetColorPalettesAsync()
-		{
-			return await _context.ColorPalettes.ToListAsync();
-		}
+        public async Task<IEnumerable<ColorPalette>> GetColorPalettesAsync()
+        {
+            return await _context.ColorPalettes.ToListAsync();
+        }
 
-		public async Task<ColorPalette> GetColorPaletteById(int id)
-		{
-			return await GetByID(id);
-		}
+        public async Task<ColorPalette> GetColorPaletteById(int id)
+        {
+            return await GetByID(id);
+        }
 
-		public async Task<IEnumerable<ColorPalette>> GetColorPalettesByIdsListAsync(ICollection<int> cpIds)
-		{
-			return await _context.ColorPalettes.Where(cp => cpIds.Contains(cp.Id)).ToListAsync();
-		}
+        public async Task<IEnumerable<ColorPalette>> GetColorPalettesByIdsListAsync(ICollection<int> cpIds)
+        {
+            return await _context.ColorPalettes.Where(cp => cpIds.Contains(cp.Id)).ToListAsync();
+        }
 
         public async Task<IEnumerable<ColorPaletteOutDTO>> GetColorPalettesWithNCSAsync()
         {
@@ -66,29 +66,29 @@ namespace Intiri.API.DataAccess.Repository
 
         public async Task<ICollection<ColorPaletteOutDTO>> UpdateColorPalettesWithNCSAsync(ICollection<ColorPaletteOutDTO> colorPaletteOutDTOs)
         {
-			var ids = colorPaletteOutDTOs.Select(x=>x.MainColor).ToList().Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorLight).ToList()).Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorMedium).ToList()).Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorDark).ToList());
+            var ids = colorPaletteOutDTOs.Select(x => x.MainColor).ToList().Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorLight).ToList()).Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorMedium).ToList()).Concat(colorPaletteOutDTOs.Select(x => x.ShadeColorDark).ToList());
 
-			var colorNCS = await _context.ColorNCS.AsNoTracking().Where(x => ids.Any(q => q == x.Id.ToString())).ToListAsync();
+            var colorNCS = await _context.ColorNCS.AsNoTracking().Where(x => ids.Any(q => q == x.Id.ToString())).ToListAsync();
 
             return (from colorPalettes in colorPaletteOutDTOs
-                          join colorNCS_Main in colorNCS on colorPalettes.MainColor equals colorNCS_Main.Id.ToString()
-                          join colorNCS_Light in colorNCS on colorPalettes.ShadeColorLight equals colorNCS_Light.Id.ToString()
-                          join colorNCS_Medium in colorNCS on colorPalettes.ShadeColorMedium equals colorNCS_Medium.Id.ToString()
-                          join colorNCS_Dark in colorNCS on colorPalettes.ShadeColorDark equals colorNCS_Dark.Id.ToString()
-                          select new ColorPaletteOutDTO
-                          {
-                              Id = colorPalettes.Id,
-                              Name = colorPalettes.Name,
-                              Number = colorPalettes.Number,
-                              MainColor = colorPalettes.MainColor,
-                              ShadeColorLight = colorPalettes.ShadeColorLight,
-                              ShadeColorMedium = colorPalettes.ShadeColorMedium,
-                              ShadeColorDark = colorPalettes.ShadeColorDark,
-                              MainColorData = colorNCS_Main,
-                              ShadeColorLightData = colorNCS_Light,
-                              ShadeColorMediumData = colorNCS_Medium,
-                              ShadeColorDarkData = colorNCS_Dark,
-                          }).ToList();
+                    join colorNCS_Main in colorNCS on colorPalettes.MainColor equals colorNCS_Main.Id.ToString()
+                    join colorNCS_Light in colorNCS on colorPalettes.ShadeColorLight equals colorNCS_Light.Id.ToString()
+                    join colorNCS_Medium in colorNCS on colorPalettes.ShadeColorMedium equals colorNCS_Medium.Id.ToString()
+                    join colorNCS_Dark in colorNCS on colorPalettes.ShadeColorDark equals colorNCS_Dark.Id.ToString()
+                    select new ColorPaletteOutDTO
+                    {
+                        Id = colorPalettes.Id,
+                        Name = colorPalettes.Name,
+                        Number = colorPalettes.Number,
+                        MainColor = colorPalettes.MainColor,
+                        ShadeColorLight = colorPalettes.ShadeColorLight,
+                        ShadeColorMedium = colorPalettes.ShadeColorMedium,
+                        ShadeColorDark = colorPalettes.ShadeColorDark,
+                        MainColorData = colorNCS_Main,
+                        ShadeColorLightData = colorNCS_Light,
+                        ShadeColorMediumData = colorNCS_Medium,
+                        ShadeColorDarkData = colorNCS_Dark,
+                    }).ToList();
 
         }
 

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
+import { Project } from 'src/app/models/project.model';
 
 @Component({
   selector: 'app-new-project-step',
@@ -21,12 +23,14 @@ export class NewProjectStepComponent implements OnInit {
 
   apiUrl = environment.apiUrl;
   @Input() currentStep: any;
-  @Input() project: any;
+  @Input() project: Project;
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
 
   imagePath = null;
+  roomSketchImagePaths = [];
+
   mbFamilyAll: any[];
   mbsExpanded: boolean = false;
 
@@ -61,16 +65,13 @@ export class NewProjectStepComponent implements OnInit {
     private colorService: ColorService,
     private productService: ProductService,
     private languageService: LanguageService,
-    private router: Router
+    private router: Router,
+    private commonUtilsService: CommonUtilsService,
   ) { }
 
   ngOnInit() {
     if (this.router.url.includes('edit-moodboard')) { //For Client-side moodboard edit
       this.showFilterDropdown = true;
-
-      // Fetch color pallets
-      // this.colorService.getColorPalettes();
-      // this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
 
       // Fetch materials
       this.materialService.getMaterials();
@@ -102,10 +103,10 @@ export class NewProjectStepComponent implements OnInit {
     this.providerFilters = [];
 
     // list providers for materials
-    this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
+    this.materialProviders = this.commonUtilsService.getUniqueElementsFromArray(this.materials.map(e => e.provider));
 
     // list providers for products
-    this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
+    this.productProviders = this.commonUtilsService.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
 
     this.languageService.languageChange$.subscribe(res => {
       this.currentLanguage = res;
@@ -151,24 +152,19 @@ export class NewProjectStepComponent implements OnInit {
     return Array.isArray(item);
   }
 
-  getUniqueElementsFromArray(arr) {
-    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null)));
-    return uniqueValues;
-}
-
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
-      this.project.roomDetails.imageFile = event.target.files[0];
-      this.project.roomDetails.shape = {shape: "", imagePath: ""};
-      this.project.roomDetails.roomSketchFile = event.target.files[0];
-      event.srcElement.value = "";
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.project.roomDetails.imageFile));
+    if (event.target.files.length > 0) {
+      this.project.roomDetails.imageFiles = event.target.files;
+      this.project.roomDetails.roomSketchFiles = event.target.files;
+      this.roomSketchImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[key])));
     } else {
-      this.imagePath = null;
+      this.project.roomDetails.roomSketchFiles = {};
+      this.roomSketchImagePaths = [];
     }
   }
 

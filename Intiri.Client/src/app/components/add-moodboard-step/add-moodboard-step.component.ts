@@ -5,6 +5,8 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { LanguageService } from 'src/app/services/language.service';
 import { StyleService } from 'src/app/services/style.service';
 import { Observable } from 'rxjs';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
+import { PartnerService } from 'src/app/services/partner.service';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -22,27 +24,55 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() loggedUser: any;
   @Output() toggleSelection = new EventEmitter<object>();
 
+  types: Array<any> = [];
+  providers: Array<any> = [];
+
+  typeFilters: Array<any> = [];
+  providerFilters: Array<any> = [];
+
+  filteredItems: Array<any> = [];
+
   constructor(
     private modalController: ModalController,
     private languageService: LanguageService,
-    private styleService: StyleService
+    private styleService: StyleService,
+    private commonUtilsService: CommonUtilsService,
+    private partnerService: PartnerService,
   ) { }
 
   currentLang: string = '';
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
 
   ngOnInit() {
+    this.filteredItems = this.filteredItems;
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnChanges () {
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
-    if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) { //Get inspirational photos for selected room & style
+    this.filteredItems = this.currentStep.data;
+
+    //Get inspirational photos for selected room & style
+    if (this.currentStepNo == 2 && this.moodboard?.room?.id && this.moodboard?.style?.id) {
       this.styleService.getStyleImagesForRoomAndStyle(this.moodboard.room.id, this.moodboard.style.id);
       this.filteredStyleImages$.subscribe((res: Array<any>) => {
-        console.log('res', res)
         this.currentStep.data = res;
+        this.filteredItems = res;
       })
+    }
+
+    // Filters for materials & products
+    if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
+      this.types = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.materialTypeName));
+      this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.provider));
+    } else if (this.currentStep.title === 'PARTNERS.select-products') {
+      this.partnerService.getProductsType().subscribe((res: Array<any>) => {
+        this.types = res;
+      })
+      this.providers = this.commonUtilsService.getUniqueElementsFromArray(this.currentStep.data.map(data => data.partnerName));
+    } else {
+      this.types = [];
+      this.providers = []
     }
   }
 
@@ -89,4 +119,39 @@ export class AddMoodboardStepComponent implements OnInit {
     await modal.present();
   }
 
+  onTypeFilterChange (event) {
+    this.typeFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  onProviderFilterChange (event) {
+    this.providerFilters = event.detail.value;
+    this.filterItems();
+  }
+
+  filterItems () {
+    if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+        this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.provider));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.provider));
+      } else {
+        this.filteredItems = this.currentStep.data;
+      }
+    } else if (this.currentStep.title === 'PARTNERS.select-products') {
+      if (this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+        this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.partnerName));
+      } else if (this.typeFilters.length && !this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.productTypeId.toString()));
+      } else if (!this.typeFilters.length && this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => this.providerFilters.includes(data.partnerName));
+      } else {
+        this.filteredItems = this.currentStep.data;
+      }
+    }
+  }
 }

@@ -109,6 +109,12 @@ export class AddRoomModalComponent implements OnInit {
     }
   }
 
+  handleSpaces (e, field) {
+    if (!this.room[field].trim()) {
+      e.preventDefault();
+    }
+  }
+
   dismissModal() {
     this.modalController.dismiss();
   }
@@ -122,25 +128,10 @@ export class AddRoomModalComponent implements OnInit {
     }
   }
 
-  checkSpecialCharInputs () {
-    if (
-      !this.room.name.trim()
-      || !this.room.nameNorwegian.trim()
-      || !this.room.description.trim()
-    ) {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.empty-values-not-accepted'),
-        type: 'success'
-      })
-      return true;
-    }
-    return false;
-  }
-
   addRoom() {
     this.spinner.show();
     this.isFormSubmited = true;
-    if (!this.addRoomForm.valid || this.checkSpecialCharInputs()) {
+    if (!this.addRoomForm.valid) {
       this.spinner.hide();
       return;
     }
@@ -178,7 +169,7 @@ export class AddRoomModalComponent implements OnInit {
   editRoom() {
     this.spinner.show();
     this.isFormSubmited = true;
-    if (!this.editRoomForm.valid || this.checkSpecialCharInputs()) {
+    if (!this.editRoomForm.valid) {
       this.spinner.hide();
       return;
     }
@@ -210,6 +201,11 @@ export class AddRoomModalComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  getRoomTypeNameByTypeId (typeId) {
+    let res = this.roomTypes.filter(rType => rType.id == typeId);
+    return res.length ? res[0].name : null;
   }
 
 }
