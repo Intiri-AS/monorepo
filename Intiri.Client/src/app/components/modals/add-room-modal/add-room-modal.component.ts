@@ -203,4 +203,9 @@ export class AddRoomModalComponent implements OnInit {
     await modal.present();
   }
 
+  getRoomTypeNameByTypeId (typeId) {
+    let res = this.roomTypes.filter(rType => rType.id == typeId);
+    return res.length ? res[0].name : null;
+  }
+
 }

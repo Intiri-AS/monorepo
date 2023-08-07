@@ -105,8 +105,8 @@ export class CustomizeMoodboardPage {
     }
     switch(step) {
       case 0: { return true; }
-      case 1: { return this.moodboard.colorPalettes.length > 0; }
-      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0}
+      case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4; }
+      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4}
     }
     return true;
   }

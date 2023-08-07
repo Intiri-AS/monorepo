@@ -83,7 +83,13 @@ export class MoodboardDetailsComponent implements OnInit {
         }
       }
     } else if (this.userData.roles[0] == 'FreeEndUser') {
-      this.assignDefaultSlots();
+      if (this.router.url.includes('/new-project')) {
+        if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo == 'string') {
+          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
+        }
+      } else {
+        this.assignDefaultSlots();
+      }
     }
   }
 

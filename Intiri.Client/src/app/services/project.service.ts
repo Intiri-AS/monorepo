@@ -165,10 +165,13 @@ export class ProjectService implements Resolve<Project> {
       // shape: project.roomDetails['shape'].shape,
       // size: project.roomDetails['size'],
       // budgetRate: project.roomDetails['budgetRate'],
-      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
+      roomSketchFiles: project.roomDetails['roomSketchFiles'] || undefined,
     };
 
-    Object.keys(parsedRDFormData).forEach(key => formData.append("RoomDetails." + key, parsedRDFormData[key]));
+    Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
+      let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
+      formData.append('RoomDetails.roomSketchFile[' + i + ']', parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
+    })
 
     return parsedRDFormData;
   };
