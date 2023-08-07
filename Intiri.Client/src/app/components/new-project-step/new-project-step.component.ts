@@ -23,7 +23,7 @@ export class NewProjectStepComponent implements OnInit {
 
   apiUrl = environment.apiUrl;
   @Input() currentStep: any;
-  @Input() project: Project;
+  @Input() project: any;
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
