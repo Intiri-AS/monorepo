@@ -164,6 +164,7 @@ export class NewProjectStepComponent implements OnInit {
         this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[key])));
     } else {
       this.project.roomDetails.roomSketchFiles = {};
+      this.project.roomDetails.imageFiles = {};
       this.roomSketchImagePaths = [];
     }
   }
