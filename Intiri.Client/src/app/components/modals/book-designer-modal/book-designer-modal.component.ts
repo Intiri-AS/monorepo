@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -114,7 +115,8 @@ export class BookDesignerModalComponent {
         cancelUrlPath: '',//optional, if not specified path is ''
         moodboardId: this.moodboard?.id, //optional
         consultationDetails,
-        numberOfConsultations: this.numberOfConsultations //required
+        numberOfConsultations: this.numberOfConsultations, //required
+        Domain: environment.apiUrl.split('/api')[0]
       }).subscribe(async (res: any) => {
       let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
       stripe?.redirectToCheckout({
