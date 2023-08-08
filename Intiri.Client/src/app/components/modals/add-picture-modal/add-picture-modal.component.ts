@@ -57,6 +57,8 @@ export class AddPictureModalComponent implements OnInit {
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
+      roomType: ['', [Validators.required]],
+      provider: ['', [Validators.required]],
       imageFile: ['']
     });
   }
@@ -98,7 +100,10 @@ export class AddPictureModalComponent implements OnInit {
     this.styleService.getStyles();
     this.roomService.getRooms();
     if (this.edit) {
+      console.log('edit', this.item);
       this.styleImage.styleId = this.item.styleId;
+      this.styleImage.roomId = this.item.roomId;
+      this.styleImage.provider = this.item.provider;
     }
   }
 
