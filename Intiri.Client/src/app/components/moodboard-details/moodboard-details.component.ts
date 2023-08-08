@@ -127,7 +127,7 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   isItemDragAndDroppable () {
-    if (this.userData.roles[0] == 'FreeEndUser') {
+    if (this.userData.roles[0] == 'FreeEndUser' && !this.router.url.includes('new-project')) { //User is only viewing a moodboard
       return false;
     } else if (this.userData.roles[0] == 'Admin' && this.router.url.includes('/moodboard-details/')) { //Admin is viewing moodboard, hence can't edit
       return false;
@@ -198,7 +198,7 @@ export class MoodboardDetailsComponent implements OnInit {
     if (!this.isItemDragAndDroppable()) {
       return;
     }
-    if (!this.previousSlotId && !this.draggedShoppingListItem) {
+    if (this.previousSlotId == null && !this.draggedShoppingListItem) {
       this.notifier.show({
         message: this.translate.instant("MOODBOARD-DETAILS.item-not-draggable"),
         type: "success"
