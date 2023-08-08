@@ -111,7 +111,7 @@ namespace Intiri.API.Services
             return moodboardFamilyOut;
 		}
 
-		public async Task<ClientMoodboard> CreateClientMoodboardAsync(RoomDetails roomDetails,  MoodboardInDTO moodboardIn, EndUser endUser)
+		public async Task<ClientMoodboard> CreateClientMoodboardAsync(List<RoomDetails> roomDetails,  MoodboardInDTO moodboardIn, EndUser endUser)
 		{
 			Moodboard moodboard;
 			ClientMoodboard newMoodboard;
@@ -129,7 +129,10 @@ namespace Intiri.API.Services
 				newMoodboard.IsTemplate = false;
 				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				roomDetails.Moodboard = newMoodboard;
+				foreach (var item in roomDetails)
+				{
+                    item.Moodboard = newMoodboard;
+                }
 				newMoodboard.Designer = endUser;
 
 				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardIn.RoomId);
@@ -150,16 +153,19 @@ namespace Intiri.API.Services
 			return newMoodboard;
 		}
 
-		public async Task<ClientMoodboard> CloneMoodboardAsync(int moodboardId, RoomDetails roomDetails)
+		public async Task<ClientMoodboard> CloneMoodboardAsync(int moodboardId, List<RoomDetails> roomDetails)
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 			ClientMoodboard clonedMoodboard = new(moodboard);
 
 			_unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
-			roomDetails.Moodboard = clonedMoodboard;
+            foreach (var item in roomDetails)
+            {
+                item.Moodboard = clonedMoodboard;
+            }
 
-			return clonedMoodboard;
+            return clonedMoodboard;
 		}
 	}
 }

@@ -68,11 +68,7 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf="currentStepNo > 0" class="step-items-row">
-      <ion-col *ngFor="let item of filteredItems" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.disabled]="disabledSteps.includes(currentStepNo)" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
-        <!-- if icon (room) -->
-       <div *ngIf="item.iconPath" class="step-icon-wrapper"  [class.selected-item]="isItemSelected(item)">
-         <img src="{{item.iconPath}}" class="step-icon" alt="room-icon"/>
-       </div>
+      <ion-col *ngFor="let item of filteredItems" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.disabled]="disabledSteps.includes(currentStepNo)" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="true">
         <!-- if image (style|material|product) -->
         <span *ngIf="item.imagePath">
           <img src="{{item.imagePath}}" class="step-image" alt="style-img"/>

@@ -17,16 +17,16 @@ namespace Intiri.API.Models.DTO.InputDTO
 		[Required]
 		public ICollection<int> ProjectColorPaletteIds { get; set; }
 
-		#region RoomDetails
+        #region RoomDetails
+        //public RoomDetailsInDTO RoomDetails { get; set; }
+        [Required]
+        public ICollection<IFormFile> roomSketchFile { get; set; }
 
-		[Required]
-		public RoomDetailsInDTO RoomDetails { get; set; }
+        #endregion RoomDetails
 
-		#endregion RoomDetails
+        #region Moodboard
 
-		#region Moodboard
-
-		[Required]
+        [Required]
 		public MoodboardInDTO Moodboard { get; set; }
 
 		#endregion Moodboard
