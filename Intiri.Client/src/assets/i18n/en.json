@@ -485,7 +485,8 @@
     "first-name": "First name is required!",
     "last-name": "Last name is required!",
     "project-name": "Project name already exists!",
-    "wrong-format": "Wrong format!"
+    "wrong-format": "Wrong format!",
+    "file-size-limit-exceeded": "Each file must be less than 5MB in size"
   },
   "TIME": {
     "second": " second ago",
