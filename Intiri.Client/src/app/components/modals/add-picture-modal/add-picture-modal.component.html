@@ -56,7 +56,14 @@
                   <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
                 </div>
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFiles" multiple/>
+              <input
+                (change)="onFileChange($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageFiles"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+                multiple/>
             </label>
             <div [ngClass]="{'image-preview-container' : imagePaths.length > 0}">
               <div *ngFor="let imagePath of imagePaths; let i = index">
@@ -64,6 +71,7 @@
               </div>
             </div>
             <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
+            <span class="ion-warning" *ngIf="imageFileSizeExceededMaxLimit">{{'VALIDATION.file-size-limit-exceeded' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>

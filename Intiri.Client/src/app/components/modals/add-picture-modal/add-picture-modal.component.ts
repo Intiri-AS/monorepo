@@ -78,6 +78,9 @@ export class AddPictureModalComponent implements OnInit {
   imagePath = null;
   imagePaths:Array<any> = [];
 
+  MAX_FILE_SIZE_LIMIT = 5000000;
+  imageFileSizeExceededMaxLimit: boolean = false;
+
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
   providers$: Array<any> = [
@@ -106,10 +109,25 @@ export class AddPictureModalComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       this.styleImage.imageFiles = event.target.files;
-      this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
-        return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
-      });
+
+      let fileSizeExceedslimit= Object.keys(this.styleImage.imageFiles).some((key, i) => this.checkIfFileSizeExceedMaxLimit(this.styleImage.imageFiles[key]))
+
+      if (fileSizeExceedslimit) {
+        this.imageFileSizeExceededMaxLimit = true;
+        this.styleImage.imageFiles = [];
+        this.imagePaths = [];
+        return;
+      } else {
+        this.imageFileSizeExceededMaxLimit = false;
+        this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
+          return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
+        });
+      }
     }
+  }
+
+  checkIfFileSizeExceedMaxLimit (file) {
+    return file.size > this.MAX_FILE_SIZE_LIMIT;
   }
 
   addStyleImage() {

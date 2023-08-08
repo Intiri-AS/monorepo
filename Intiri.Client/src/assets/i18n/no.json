@@ -484,7 +484,8 @@
     "first-name": "Fornavn er påkrevd!",
     "last-name": "Etternavn er påkrevd!",
     "project-name": "Prosjektnavnet finnes allerede!",
-    "wrong-format": "Feil format!"
+    "wrong-format": "Feil format!",
+    "file-size-limit-exceeded": "Hver fil må være mindre enn 5 MB stor"
   },
   "TIME": {
     "second": " sekund siden",
