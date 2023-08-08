@@ -39,6 +39,14 @@ export class AddPictureModalComponent implements OnInit {
     return this.editPictureForm.controls.style.errors;
   }
 
+  get editRoomTypeErrors() {
+    return this.editPictureForm.controls.roomType.errors;
+  }
+
+  get editProviderErrors() {
+    return this.editPictureForm.controls.provider.errors;
+  }
+
   constructor(
     private modalController: ModalController,
     private styleService: StyleService,
@@ -57,8 +65,8 @@ export class AddPictureModalComponent implements OnInit {
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
-      roomType: ['', [Validators.required]],
-      provider: ['', [Validators.required]],
+      roomType: [''],
+      provider: [''],
       imageFile: ['']
     });
   }
@@ -180,6 +188,8 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
+    console.log('editStyleImage', this.styleImage);
+    // return;
     this.styleService.editStyleImage(this.item.id, this.styleImage).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
