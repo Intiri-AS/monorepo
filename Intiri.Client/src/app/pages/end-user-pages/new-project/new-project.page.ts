@@ -290,16 +290,13 @@ export class NewProjectPage implements OnInit, OnDestroy {
       }
       case 3: {
         return (
-          this.project.styleImages.length > 0 &&
-          !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid()
+          true
         );
       }
       case 4: {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0
         );
       }
@@ -307,7 +304,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0 &&
           !this.isMoodboardEmpty(this.project.currentMoodboard)
         );
