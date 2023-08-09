@@ -579,7 +579,8 @@
     "Plastic": "Plastikk",
     "Textile": "Tekstil",
     "Other": "Annet",
-    "Vinyl": "Vinyl"
+    "Vinyl": "Vinyl",
+    "Wallpaper":"Wallpaper"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
