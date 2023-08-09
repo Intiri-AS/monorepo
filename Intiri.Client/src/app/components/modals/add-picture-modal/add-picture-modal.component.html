@@ -129,7 +129,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.select-style' | translate}}</span>
-            <ion-select [(ngModel)]="styleImage.styleId" interface="popover" formControlName="style">
+            <ion-select [(ngModel)]="edit_styleImage_payload.styleId" interface="popover" formControlName="style">
               <ion-select-option *ngFor="let style of (styles$ | async)" [value]="style.id">{{style.name}}</ion-select-option>
             </ion-select>
             <span class="ion-warning" *ngIf="isFormSubmited && editStyleErrors?.required">{{'VALIDATION.field' | translate}}</span>
@@ -141,7 +141,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.select-room-type' | translate}}</span>
-            <ion-select [(ngModel)]="styleImage.roomId" interface="popover" formControlName="roomType">
+            <ion-select [(ngModel)]="edit_styleImage_payload.roomId" interface="popover" formControlName="roomType">
               <ion-select-option *ngFor="let room of (rooms$ | async)" [value]="room.id">{{room.name}}</ion-select-option>
             </ion-select>
             <span class="ion-warning" *ngIf="isFormSubmited && editRoomTypeErrors?.required">{{'VALIDATION.field' | translate}}</span>
@@ -153,7 +153,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.select-providers-name' | translate}}</span>
-            <ion-select [(ngModel)]="styleImage.provider" interface="popover" formControlName="provider">
+            <ion-select [(ngModel)]="edit_styleImage_payload.provider" interface="popover" formControlName="provider">
               <ion-select-option *ngFor="let provider of providers$" value="{{provider}}">{{provider}}</ion-select-option>
             </ion-select>
             <span class="ion-warning" *ngIf="isFormSubmited && editProviderErrors?.required">{{'VALIDATION.field' | translate}}</span>
@@ -181,7 +181,7 @@
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+              <input (change)="onFileChangeOnEdit($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
             </label>
           </div>
         </ion-col>
