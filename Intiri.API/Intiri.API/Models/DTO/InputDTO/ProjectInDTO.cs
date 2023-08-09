@@ -19,7 +19,6 @@ namespace Intiri.API.Models.DTO.InputDTO
 
         #region RoomDetails
         //public RoomDetailsInDTO RoomDetails { get; set; }
-        [Required]
         public ICollection<IFormFile> roomSketchFile { get; set; }
 
         #endregion RoomDetails

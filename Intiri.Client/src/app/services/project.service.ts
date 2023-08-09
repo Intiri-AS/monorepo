@@ -162,12 +162,11 @@ export class ProjectService implements Resolve<Project> {
 
   parseRoomDetailsFormData(project: any, formData: FormData) {
     const parsedRDFormData = {
-      // shape: project.roomDetails['shape'].shape,
-      // size: project.roomDetails['size'],
-      // budgetRate: project.roomDetails['budgetRate'],
       roomSketchFiles: project.roomDetails['roomSketchFiles'] || undefined,
     };
 
+    parsedRDFormData.roomSketchFiles &&
+    Object.keys(parsedRDFormData.roomSketchFiles).length &&
     Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
       formData.append(`roomSketchFile`, parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
