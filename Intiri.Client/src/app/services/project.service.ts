@@ -165,6 +165,7 @@ export class ProjectService implements Resolve<Project> {
       roomSketchFiles: project.roomDetails['roomSketchFiles'] || undefined,
     };
 
+    parsedRDFormData.roomSketchFiles &&
     Object.keys(parsedRDFormData.roomSketchFiles).length &&
     Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
