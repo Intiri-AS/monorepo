@@ -83,7 +83,9 @@ export class MoodboardDetailsComponent implements OnInit {
         }
       }
     } else if (this.userData.roles[0] == 'FreeEndUser') {
-      if (this.router.url.includes('/new-project')) { //If User is creating new Project
+      if (this.router.url.includes('/new-project') //If Client is creating new Project
+        || this.router.url.includes('/project-details') //If Client is viewing existing project moodboard
+      ) {
         if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo == 'string') {
           this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
         } else {

@@ -98,6 +98,7 @@
 
 .step-items-row {
   @apply gap-x-[2%];
+  row-gap: 2rem;
 }
 ion-input {
   @apply h-12;
