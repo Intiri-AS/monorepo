@@ -142,6 +142,7 @@
   },
   "NEW-PROJECT": {
     "upload": "Last opp",
+    "upload-your-photos": "Last opp egne bilder",
     "create": "Gi rommet et navn",
     "project": "Eksempel: Judys stue",
     "project-name": "Prosjektets navn",
@@ -154,7 +155,7 @@
     "select-style-text": "Valg er vanskelig, velg så mange du vil.",
     "room-details": "Romdetaljer",
     "room-details-title": "Last opp romskisse",
-    "room-details-text": "Ikke stress, du kan velge flere romdetaljer senere.",
+    "room-details-text": "Ikke stress, du kan laste opp bilder senere til din profil",
     "color-pallete": "Fargepalett",
     "select-color-title": "Hvis du vil, velg farger du liker",
     "select-color-text": "Ikke stress, du kan endre farger senere.",
@@ -484,7 +485,8 @@
     "first-name": "Fornavn er påkrevd!",
     "last-name": "Etternavn er påkrevd!",
     "project-name": "Prosjektnavnet finnes allerede!",
-    "wrong-format": "Feil format!"
+    "wrong-format": "Feil format!",
+    "file-size-limit-exceeded": "Hver fil må være mindre enn 5 MB stor"
   },
   "TIME": {
     "second": " sekund siden",

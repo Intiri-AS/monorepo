@@ -133,7 +133,9 @@ namespace Intiri.API.Controllers
 				styleImage.PublicId = uploadResult.Item3.PublicId;
 			}
 
-			styleImage.Style = style;
+            styleImage.RoomId = styleImageInDTO.RoomId;
+            styleImage.Provider = styleImageInDTO.Provider;
+            styleImage.Style = style;
 
 			_unitOfWork.StyleImageRepository.Update(styleImage);
 

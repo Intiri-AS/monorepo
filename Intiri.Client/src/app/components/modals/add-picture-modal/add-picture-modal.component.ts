@@ -39,6 +39,14 @@ export class AddPictureModalComponent implements OnInit {
     return this.editPictureForm.controls.style.errors;
   }
 
+  get editRoomTypeErrors() {
+    return this.editPictureForm.controls.roomType.errors;
+  }
+
+  get editProviderErrors() {
+    return this.editPictureForm.controls.provider.errors;
+  }
+
   constructor(
     private modalController: ModalController,
     private styleService: StyleService,
@@ -57,6 +65,8 @@ export class AddPictureModalComponent implements OnInit {
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
+      roomType: [''],
+      provider: [''],
       imageFile: ['']
     });
   }
@@ -75,8 +85,18 @@ export class AddPictureModalComponent implements OnInit {
     provider: ''
   }
 
+  edit_styleImage_payload = {
+    styleId: null,
+    roomId: null,
+    provider: null,
+    imageFile: null,
+  };
+
   imagePath = null;
   imagePaths:Array<any> = [];
+
+  MAX_FILE_SIZE_LIMIT = 5000000;
+  imageFileSizeExceededMaxLimit: boolean = false;
 
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
@@ -95,7 +115,9 @@ export class AddPictureModalComponent implements OnInit {
     this.styleService.getStyles();
     this.roomService.getRooms();
     if (this.edit) {
-      this.styleImage.styleId = this.item.styleId;
+      this.edit_styleImage_payload.styleId = this.item.styleId;
+      this.edit_styleImage_payload.roomId = this.item.roomId;
+      this.edit_styleImage_payload.provider = this.item.provider;
     }
   }
 
@@ -106,10 +128,39 @@ export class AddPictureModalComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       this.styleImage.imageFiles = event.target.files;
-      this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
-        return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
-      });
+
+      let fileSizeExceedslimit= Object.keys(this.styleImage.imageFiles).some((key, i) => this.checkIfFileSizeExceedMaxLimit(this.styleImage.imageFiles[key]))
+
+      if (fileSizeExceedslimit) {
+        this.imageFileSizeExceededMaxLimit = true;
+        this.styleImage.imageFiles = [];
+        this.imagePaths = [];
+        return;
+      } else {
+        this.imageFileSizeExceededMaxLimit = false;
+        this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
+          return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
+        });
+      }
     }
+  }
+
+  onFileChangeOnEdit (event) {
+    if (event.target.files[0]) {
+      this.edit_styleImage_payload.imageFile = event.target.files[0];
+      if (this.checkIfFileSizeExceedMaxLimit(this.edit_styleImage_payload.imageFile)) {
+        this.imageFileSizeExceededMaxLimit = true;
+        return;
+      }
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[0]));
+    } else {
+      this.edit_styleImage_payload.imageFile = null;
+      this.imagePath = null;
+    }
+  }
+
+  checkIfFileSizeExceedMaxLimit (file) {
+    return file.size > this.MAX_FILE_SIZE_LIMIT;
   }
 
   addStyleImage() {
@@ -157,7 +208,7 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.styleService.editStyleImage(this.item.id, this.styleImage).subscribe(res => {
+    this.styleService.editStyleImage(this.item.id, this.edit_styleImage_payload).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {
