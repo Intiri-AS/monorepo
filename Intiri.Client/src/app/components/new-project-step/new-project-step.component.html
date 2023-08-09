@@ -58,8 +58,8 @@
   <div [ngClass]="{'text-clamp-3' : !expandText}">
     <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->
   </div>
-  <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
-  <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
+  <!-- <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
+  <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button> -->
 
   <!-- For project create /Client side -->
   <ion-grid *ngIf="isCreateProjectPage && isArray(currentStep.data)" class="step-items">
