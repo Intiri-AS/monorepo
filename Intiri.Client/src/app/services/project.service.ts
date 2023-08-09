@@ -144,7 +144,8 @@ export class ProjectService implements Resolve<Project> {
       name: moodboard.name, // remove later
       sourceMoodboardId: moodboard.sourceMoodboardId ? moodboard.sourceMoodboardId : 0,
       isTemplate: moodboard.isTemplate,
-      description: moodboard.description
+      description: moodboard.description,
+      SlotInfo: JSON.stringify(moodboard.slotInfo),
     };
 
     const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
