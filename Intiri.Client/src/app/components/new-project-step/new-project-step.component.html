@@ -141,7 +141,7 @@
         <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
           <div *ngIf="!imagePath" class="text-center mt-[65px]">
             <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
+            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'NEW-PROJECT.upload-your-photos'| translate}}</p>
           </div>
           <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="roomImg" />
         </div>
