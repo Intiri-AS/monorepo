@@ -148,6 +148,10 @@ export class AddPictureModalComponent implements OnInit {
   onFileChangeOnEdit (event) {
     if (event.target.files[0]) {
       this.edit_styleImage_payload.imageFile = event.target.files[0];
+      if (this.checkIfFileSizeExceedMaxLimit(this.edit_styleImage_payload.imageFile)) {
+        this.imageFileSizeExceededMaxLimit = true;
+        return;
+      }
       this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[0]));
     } else {
       this.edit_styleImage_payload.imageFile = null;

@@ -183,6 +183,7 @@
               </div>
               <input (change)="onFileChangeOnEdit($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"/>
             </label>
+            <span class="ion-warning" *ngIf="imageFileSizeExceededMaxLimit">{{'VALIDATION.file-size-limit-exceeded' | translate}}</span>
           </div>
         </ion-col>
       </ion-row>
