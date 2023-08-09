@@ -118,7 +118,7 @@ namespace Intiri.API.Services
 
 			if (moodboardIn.Id > 0)
 			{
-				newMoodboard = await CloneMoodboardAsync(moodboardIn.Id, roomDetails);
+				newMoodboard = await CloneMoodboardAsync(moodboardIn.Id, roomDetails, moodboardIn);
 				newMoodboard.Designer = endUser;
 			}
 			else
@@ -153,12 +153,13 @@ namespace Intiri.API.Services
 			return newMoodboard;
 		}
 
-		public async Task<ClientMoodboard> CloneMoodboardAsync(int moodboardId, List<RoomDetails> roomDetails)
+		public async Task<ClientMoodboard> CloneMoodboardAsync(int moodboardId, List<RoomDetails> roomDetails, MoodboardInDTO moodboardIn)
 		{
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 			ClientMoodboard clonedMoodboard = new(moodboard);
+            clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
 
-			_unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
+            _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
             foreach (var item in roomDetails)
             {
