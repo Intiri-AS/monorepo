@@ -8,6 +8,7 @@ import { CreateProjectModalComponent } from 'src/app/components/modals/create-pr
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -83,6 +84,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private router: Router,
     private spinner: NgxSpinnerService,
     private nav: NavController,
+    private commonUtilsService: CommonUtilsService,
   ) {}
 
   ngOnInit() {
@@ -122,8 +124,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
       this.steps[0]['data'] = res;
     });
 
-    this.projectService.getStyleImages().subscribe((res) => {
-      this.steps[1]['data'] = res;
+    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
+      this.steps[1]['data'] = this.commonUtilsService.shuffleArrayElements(res);
     });
 
     this.projectService.getColorPalettes().subscribe((res) => {

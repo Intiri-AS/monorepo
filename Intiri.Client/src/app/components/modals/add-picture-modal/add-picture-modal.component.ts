@@ -85,6 +85,13 @@ export class AddPictureModalComponent implements OnInit {
     provider: ''
   }
 
+  edit_styleImage_payload = {
+    styleId: null,
+    roomId: null,
+    provider: null,
+    imageFile: null,
+  };
+
   imagePath = null;
   imagePaths:Array<any> = [];
 
@@ -108,10 +115,9 @@ export class AddPictureModalComponent implements OnInit {
     this.styleService.getStyles();
     this.roomService.getRooms();
     if (this.edit) {
-      console.log('edit', this.item);
-      this.styleImage.styleId = this.item.styleId;
-      this.styleImage.roomId = this.item.roomId;
-      this.styleImage.provider = this.item.provider;
+      this.edit_styleImage_payload.styleId = this.item.styleId;
+      this.edit_styleImage_payload.roomId = this.item.roomId;
+      this.edit_styleImage_payload.provider = this.item.provider;
     }
   }
 
@@ -136,6 +142,20 @@ export class AddPictureModalComponent implements OnInit {
           return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
         });
       }
+    }
+  }
+
+  onFileChangeOnEdit (event) {
+    if (event.target.files[0]) {
+      this.edit_styleImage_payload.imageFile = event.target.files[0];
+      if (this.checkIfFileSizeExceedMaxLimit(this.edit_styleImage_payload.imageFile)) {
+        this.imageFileSizeExceededMaxLimit = true;
+        return;
+      }
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[0]));
+    } else {
+      this.edit_styleImage_payload.imageFile = null;
+      this.imagePath = null;
     }
   }
 
@@ -188,9 +208,7 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    console.log('editStyleImage', this.styleImage);
-    // return;
-    this.styleService.editStyleImage(this.item.id, this.styleImage).subscribe(res => {
+    this.styleService.editStyleImage(this.item.id, this.edit_styleImage_payload).subscribe(res => {
       this.spinner.hide();
       this.modalController.dismiss();
       if (typeof (res) === 'object') {

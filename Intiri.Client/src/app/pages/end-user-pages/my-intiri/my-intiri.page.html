@@ -22,15 +22,15 @@
                     >
                       <div class="col-1">
                         <div class="border border-light bg-white bg-cover">
-                          <img *ngIf="moodboard.style?.styleImages[0]?.imagePath" src="{{moodboard.style?.styleImages[0]?.imagePath}}" class="!h-[120.5px] !w-full object-contain max-h-[3.5rem]" alt="moodboard-img"/>
+                          <img *ngIf="moodboard.style?.styleImages[0]?.imagePath" src="{{moodboard.style?.styleImages[0]?.imagePath}}" class="!h-[120.5px] !w-full object-cover max-h-[3.5rem]" alt="moodboard-img"/>
                         </div>
                         <div class="border border-light bg-white bg-cover">
-                          <img *ngIf="moodboard.products[0]?.imagePath" src="{{moodboard.products[0]?.imagePath}}" class="!h-[120.5px] !w-full object-contain max-h-[3.5rem]" alt="moodboard-img"/>
+                          <img *ngIf="moodboard.products[0]?.imagePath" src="{{moodboard.products[0]?.imagePath}}" class="!h-[120.5px] !w-full object-cover max-h-[3.5rem]" alt="moodboard-img"/>
                         </div>
                       </div>
                       <div class="col-2">
                         <div class="border border-light bg-white bg-cover">
-                          <img *ngIf="moodboard?.style?.imagePath" src="{{moodboard?.style?.imagePath}}" class="!h-[114px] !w-full object-contain" alt="moodboard-img"/>
+                          <img *ngIf="moodboard?.style?.imagePath" src="{{moodboard?.style?.imagePath}}" class="!h-[114px] !w-full object-cover" alt="moodboard-img"/>
                         </div>
                       </div>
                     </div>
@@ -62,14 +62,14 @@
                             <img
                               *ngIf="project.projectMoodboards[0]?.style?.styleImages[0]?.imagePath"
                               src="{{project.projectMoodboards[0]?.style?.styleImages[0]?.imagePath}}"
-                              class="!h-[120.5px] mac:!h-[155px] !w-full object-contain"
+                              class="!h-[120.5px] mac:!h-[155px] !w-full object-cover"
                               alt="moodboard-img"/>
                           </div>
                           <div class="border border-light bg-white" *ngIf="project.projectMoodboards[0]?.products.length > 0 && project.projectMoodboards[0]?.products[0]?.imagePath">
                             <img
                               *ngIf="project.projectMoodboards[0]?.products[0]?.imagePath"
                               src="{{project.projectMoodboards[0]?.products[0]?.imagePath}}"
-                              class="!h-[120.5px] mac:!h-[155px] !w-full object-contain"
+                              class="!h-[120.5px] mac:!h-[155px] !w-full object-cover"
                               alt="moodboard-img"/>
                           </div>
                         </ion-col>
@@ -78,7 +78,7 @@
                             <img
                               *ngIf="project.projectMoodboards[0]?.style?.imagePath"
                               src="{{project.projectMoodboards[0]?.style?.imagePath}}"
-                              class="!h-[251px] mac:!h-[320px] !w-full object-contain"
+                              class="!h-[251px] mac:!h-[320px] !w-full object-cover"
                               alt="moodboard-img"/>
                           </div>
                         </ion-col>

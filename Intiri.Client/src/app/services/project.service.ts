@@ -144,7 +144,8 @@ export class ProjectService implements Resolve<Project> {
       name: moodboard.name, // remove later
       sourceMoodboardId: moodboard.sourceMoodboardId ? moodboard.sourceMoodboardId : 0,
       isTemplate: moodboard.isTemplate,
-      description: moodboard.description
+      description: moodboard.description,
+      SlotInfo: JSON.stringify(moodboard.slotInfo),
     };
 
     const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
@@ -165,6 +166,7 @@ export class ProjectService implements Resolve<Project> {
       roomSketchFiles: project.roomDetails['roomSketchFiles'] || undefined,
     };
 
+    parsedRDFormData.roomSketchFiles &&
     Object.keys(parsedRDFormData.roomSketchFiles).length &&
     Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
