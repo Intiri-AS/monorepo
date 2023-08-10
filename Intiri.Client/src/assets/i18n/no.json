@@ -580,7 +580,8 @@
     "Plastic": "Plastikk",
     "Textile": "Tekstil",
     "Other": "Annet",
-    "Vinyl": "Vinyl"
+    "Vinyl": "Vinyl",
+    "Wallpaper":"Wallpaper"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
@@ -612,7 +613,8 @@
     "Carpets": "Tepper",
     "Curtains": "Gardiner",
     "Pillows and Blankets": "Puter og Tepper",
-    "Interior/Decoration": "Interiør/Dekor"
+    "Interior/Decoration": "Interiør/Dekor",
+    "Sofatable":"Sofabord"
   },
   "LANDING-TEXT": {
     "headline-1": "Hei!\nHar du akkurat blitt boligeier? Skal du kanskje selge boligen din? Eller skal du bare pusse opp litt?\nIntiri er en interiørdesigntjeneste som tilbyr deg rådgivning til en brøkdel av prisen.Vår designprosess gjør det enkelt for deg å få et hjem med en gjennomtenkt stil.\nBruk fem minutter til å svare på noen enkle spørsmål, så får du din stil, med innhold som farger, materialer, produkter, belysning med mere.\nBli med på en enklere interiørreise med Intiri!",
