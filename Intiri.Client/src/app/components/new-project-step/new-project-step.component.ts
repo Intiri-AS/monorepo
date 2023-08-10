@@ -13,6 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { Project } from 'src/app/models/project.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-project-step',
@@ -67,6 +68,7 @@ export class NewProjectStepComponent implements OnInit {
     private languageService: LanguageService,
     private router: Router,
     private commonUtilsService: CommonUtilsService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -90,9 +92,8 @@ export class NewProjectStepComponent implements OnInit {
     } else {
       this.isCreateProjectPage = true;
     }
-    this.languageService.languageChange$.subscribe(res => {
-      this.currentLanguage = res;
-    })
+
+    this.currentLanguage = this.translate.currentLang;
   }
 
 
