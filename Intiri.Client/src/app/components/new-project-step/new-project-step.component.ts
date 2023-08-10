@@ -70,7 +70,7 @@ export class NewProjectStepComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.router.url.includes('edit-moodboard')) { //For Client-side moodboard edit
+    if (this.router.url.includes('edit-moodboard') || this.router.url.includes('customize-moodboard')) { //For Client-side moodboard edit
       this.showFilterDropdown = true;
 
       // Fetch materials
