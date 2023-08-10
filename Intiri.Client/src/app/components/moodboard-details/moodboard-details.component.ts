@@ -264,10 +264,21 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
-  getInspirationalPhotosToolTipShoppingList (item) {
-    return item.provider
-      ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
-      : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+  getToolTipShoppingList (type, item) {
+    if (type === 'product') {
+      return !item.productLink || item.productLink == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        : item.productLink;
+    } else if (type == 'material') {
+      return !item.link || item.link == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material')
+        : item.link;
+    } else if (type == 'inspirationalPhoto') {
+      return item.provider
+        ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
+        : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+    }
+    return ''
   }
 
   getToolTipMoodboardItem (slotId) {
@@ -276,8 +287,32 @@ export class MoodboardDetailsComponent implements OnInit {
       return provider
         ? this.translate.instant('TOOLTIP-TEXT.provider') + ': ' + provider
         : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
-    } else {
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      return material.link == 'null' || !material.link
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material')
+        : material.link;
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      return product.ProductLink == 'null' || !product.ProductLink
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        : product.productLink;
+    }else {
       return ''
+    }
+  }
+
+  redirectToEntityPartnerLink (slotId) {
+    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
+      //
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      material.link && material.link != 'null' && window.open(material.link, '_blank');
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      product.productLink && product.productLink != 'null' && window.open(product.productLink, '_blank');
+    }else {
+      return;
     }
   }
 

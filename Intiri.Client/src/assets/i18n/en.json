@@ -626,6 +626,8 @@
     "no-providers-found": "No providers found",
     "no-providers-found-for-this-inspirational-photo": "No providers found for this inspirational photo",
     "provider": "Provider",
-    "provided-by-Flügger": "Provided by Flügger"
+    "provided-by-Flügger": "Provided by Flügger",
+    "no-link-found-for-this-material": "No link found for this material",
+    "no-link-found-for-this-product": "No link found for this product"
   }
 }

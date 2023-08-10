@@ -625,6 +625,8 @@
     "no-providers-found": "Finner ingen leverandører",
     "no-providers-found-for-this-inspirational-photo": "Fant ingen leverandører for dette inspirerende bildet",
     "provider": "Forsørger",
-    "provided-by-Flügger": "Levert av Flügger"
+    "provided-by-Flügger": "Levert av Flügger",
+    "no-link-found-for-this-material": "Fant ingen lenke for dette materialet",
+    "no-link-found-for-this-product": "Ingen lenke funnet for dette produktet"
   }
 }

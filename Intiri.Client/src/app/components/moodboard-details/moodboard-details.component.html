@@ -14,6 +14,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
+            (click)="redirectToEntityPartnerLink(0)"
           >
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
@@ -25,6 +26,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
               [matTooltip]="getToolTipMoodboardItem(4)"
+              (click)="redirectToEntityPartnerLink(4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
@@ -36,6 +38,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
               [matTooltip]="getToolTipMoodboardItem(7)"
+              (click)="redirectToEntityPartnerLink(7)"
             />
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
@@ -46,6 +49,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
+            (click)="redirectToEntityPartnerLink(1)"
           >
         </div>
         <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
@@ -56,6 +60,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
+            (click)="redirectToEntityPartnerLink(2)"
           >
         </div>
       </div>
@@ -69,6 +74,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
               [matTooltip]="getToolTipMoodboardItem(3)"
+              (click)="redirectToEntityPartnerLink(3)"
             />
         </div>
         <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
@@ -80,6 +86,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
               [matTooltip]="getToolTipMoodboardItem(5)"
+              (click)="redirectToEntityPartnerLink(5)"
             />
         </div>
         <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
@@ -91,6 +98,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
               [matTooltip]="getToolTipMoodboardItem(8)"
+              (click)="redirectToEntityPartnerLink(8)"
             />
         </div>
         <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
@@ -102,6 +110,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
               [matTooltip]="getToolTipMoodboardItem(6)"
+              (click)="redirectToEntityPartnerLink(6)"
             />
         </div>
       </div>
@@ -117,6 +126,7 @@
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
           [matTooltip]="getToolTipMoodboardItem(9)"
+          (click)="redirectToEntityPartnerLink(9)"
         />
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
@@ -127,6 +137,7 @@
         (draggable)="isItemDragAndDroppable()"
         (dragstart)="dragStart($event, 10)"
         [matTooltip]="getToolTipMoodboardItem(10)"
+        (click)="redirectToEntityPartnerLink(10)"
       />
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
@@ -137,6 +148,7 @@
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
           [matTooltip]="getToolTipMoodboardItem(11)"
+          (click)="redirectToEntityPartnerLink(11)"
         />
       </div>
     </div>
@@ -195,6 +207,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
+            (click)="redirectToEntityPartnerLink(0)"
           >
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
@@ -206,6 +219,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
               [matTooltip]="getToolTipMoodboardItem(4)"
+              (click)="redirectToEntityPartnerLink(4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
@@ -217,6 +231,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
               [matTooltip]="getToolTipMoodboardItem(7)"
+              (click)="redirectToEntityPartnerLink(7)"
             />
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
@@ -227,6 +242,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
+            (click)="redirectToEntityPartnerLink(1)"
           >
         </div>
         <div id="slot-2" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
@@ -237,6 +253,7 @@
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
+            (click)="redirectToEntityPartnerLink(2)"
           >
         </div>
       </div>
@@ -250,6 +267,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
               [matTooltip]="getToolTipMoodboardItem(3)"
+              (click)="redirectToEntityPartnerLink(3)"
             />
         </div>
         <div id="slot-5" class="image-input-4" (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
@@ -261,6 +279,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
               [matTooltip]="getToolTipMoodboardItem(5)"
+              (click)="redirectToEntityPartnerLink(5)"
             />
         </div>
         <div id="slot-8" class="image-input-5" (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
@@ -272,6 +291,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
               [matTooltip]="getToolTipMoodboardItem(8)"
+              (click)="redirectToEntityPartnerLink(8)"
             />
         </div>
         <div id="slot-6" class="image-input-6" (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
@@ -283,6 +303,7 @@
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
               [matTooltip]="getToolTipMoodboardItem(6)"
+              (click)="redirectToEntityPartnerLink(6)"
             />
         </div>
       </div>
@@ -298,6 +319,7 @@
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
           [matTooltip]="getToolTipMoodboardItem(9)"
+          (click)="redirectToEntityPartnerLink(9)"
         />
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
@@ -308,6 +330,7 @@
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 10)"
           [matTooltip]="getToolTipMoodboardItem(10)"
+          (click)="redirectToEntityPartnerLink(10)"
         />
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
@@ -318,6 +341,7 @@
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
           [matTooltip]="getToolTipMoodboardItem(11)"
+          (click)="redirectToEntityPartnerLink(11)"
         />
       </div>
     </div>
@@ -390,6 +414,7 @@
             alt="product-image"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+            [matTooltip]="getToolTipShoppingList('product', item)"
           />
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
@@ -400,7 +425,7 @@
             *ngIf="item.imagePath"
             src="{{item.imagePath}}"
             (click)="openImageInModal(item)"
-            [matTooltip]="getInspirationalPhotosToolTipShoppingList(item)"
+            [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
             (draggable)="isItemDragAndDroppable()"
@@ -418,6 +443,7 @@
           alt="material-image"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          [matTooltip]="getToolTipShoppingList('material', item)"
         />
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
       </ion-col>
