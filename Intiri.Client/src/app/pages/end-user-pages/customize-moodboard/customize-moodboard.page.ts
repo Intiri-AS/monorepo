@@ -31,6 +31,11 @@ export class CustomizeMoodboardPage {
       title: 'NEW-PROJECT.edit-select-products',
       subtitle: 'NEW-PROJECT.edit-select-products-text',
       data: [],
+    },
+    {
+      title: 'NEW-PROJECT.customize',
+      subtitle: 'NEW-PROJECT.customize-moodboard-subtitle',
+      data: {},
     }
   ];
 
@@ -42,6 +47,7 @@ export class CustomizeMoodboardPage {
     0: 'colorPalettes',
     1: 'materials',
     2: 'products',
+    3: 'moodboard'
   }
 
   currentStepNo: number = 0;
@@ -73,6 +79,9 @@ export class CustomizeMoodboardPage {
       this.steps[0]['data'] = [...this.moodboard.colorPalettes];
       this.steps[1]['data'] = [...this.moodboard.materials];
       this.steps[2]['data'] = [...this.moodboard.products];
+      this.steps[3]['data'] = {
+        moodboard: this.moodboard
+      };
 
     })
   }
@@ -105,8 +114,9 @@ export class CustomizeMoodboardPage {
     }
     switch(step) {
       case 0: { return true; }
-      case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4; }
+      case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4 }
       case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4}
+      case 3: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4;}
     }
     return true;
   }
