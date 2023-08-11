@@ -79,6 +79,9 @@ export class AddMoodboardStepComponent implements OnInit {
       this.types = [];
       this.providers = []
     }
+
+    this.typeFilters = [];
+    this.providerFilters = [];
   }
 
   toggleItem(item) {
