@@ -10,52 +10,57 @@
           <img
             *ngIf="moodboard.slotInfo[0].entityImagePath"
             [src]="moodboard.slotInfo[0].entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
+            (click)="redirectToEntityPartnerLink(0)"
           >
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
             <img
               *ngIf="moodboard.slotInfo[4].entityImagePath"
               [src]="moodboard.slotInfo[4].entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-1"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
               [matTooltip]="getToolTipMoodboardItem(4)"
+              (click)="redirectToEntityPartnerLink(4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
             <img
               *ngIf="moodboard.slotInfo[7].entityImagePath"
               [src]="moodboard.slotInfo[7].entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-2"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
               [matTooltip]="getToolTipMoodboardItem(7)"
+              (click)="redirectToEntityPartnerLink(7)"
             />
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <img
             *ngIf="moodboard.slotInfo[1].entityImagePath"
             [src]="moodboard.slotInfo[1].entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
+            (click)="redirectToEntityPartnerLink(1)"
           >
         </div>
         <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <img
             *ngIf="moodboard.slotInfo[2].entityImagePath"
             [src]="moodboard.slotInfo[2].entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
+            (click)="redirectToEntityPartnerLink(2)"
           >
         </div>
       </div>
@@ -64,44 +69,48 @@
             <img
               *ngIf="moodboard.slotInfo[3].entityImagePath"
               [src]="moodboard.slotInfo[3].entityImagePath"
-              class="object-cover h-[100%] w-[100%]"
+              class="object-cover h-[100%] w-[100%] cursor-pointer"
               alt="image-input-3"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
               [matTooltip]="getToolTipMoodboardItem(3)"
+              (click)="redirectToEntityPartnerLink(3)"
             />
         </div>
         <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
             <img
               *ngIf="moodboard.slotInfo[5].entityImagePath"
               [src]="moodboard.slotInfo[5].entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full max-h-[8.3rem] w-full cursor-pointer"
               alt="image-input-4"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
               [matTooltip]="getToolTipMoodboardItem(5)"
+              (click)="redirectToEntityPartnerLink(5)"
             />
         </div>
         <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
             <img
               *ngIf="moodboard.slotInfo[8].entityImagePath"
               [src]="moodboard.slotInfo[8].entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-5"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
               [matTooltip]="getToolTipMoodboardItem(8)"
+              (click)="redirectToEntityPartnerLink(8)"
             />
         </div>
         <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
             <img
               *ngIf="moodboard.slotInfo[6].entityImagePath"
               [src]="moodboard.slotInfo[6].entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-6"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
               [matTooltip]="getToolTipMoodboardItem(6)"
+              (click)="redirectToEntityPartnerLink(6)"
             />
         </div>
       </div>
@@ -113,30 +122,33 @@
         <img
           *ngIf="moodboard.slotInfo[9].entityImagePath"
           [src]="moodboard.slotInfo[9].entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
           [matTooltip]="getToolTipMoodboardItem(9)"
+          (click)="redirectToEntityPartnerLink(9)"
         />
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
         <img
         *ngIf="moodboard.slotInfo[10].entityImagePath"
         [src]="moodboard.slotInfo[10].entityImagePath"
-        class="object-cover h-[100%] w-[100%] max-w-[100%]"
+        class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
         (draggable)="isItemDragAndDroppable()"
         (dragstart)="dragStart($event, 10)"
         [matTooltip]="getToolTipMoodboardItem(10)"
+        (click)="redirectToEntityPartnerLink(10)"
       />
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
         <img
           *ngIf="moodboard.slotInfo[11].entityImagePath"
           [src]="moodboard.slotInfo[11].entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
           [matTooltip]="getToolTipMoodboardItem(11)"
+          (click)="redirectToEntityPartnerLink(11)"
         />
       </div>
     </div>
@@ -191,52 +203,57 @@
           <img
             *ngIf="moodboard.slotInfo[0]?.entityImagePath"
             [src]="moodboard.slotInfo[0]?.entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
+            (click)="redirectToEntityPartnerLink(0)"
           >
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)">
             <img
               *ngIf="moodboard.slotInfo[4]?.entityImagePath"
               [src]="moodboard.slotInfo[4]?.entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-1"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
               [matTooltip]="getToolTipMoodboardItem(4)"
+              (click)="redirectToEntityPartnerLink(4)"
             />
         </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)">
             <img
               *ngIf="moodboard.slotInfo[7]?.entityImagePath"
               [src]="moodboard.slotInfo[7]?.entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-2"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
               [matTooltip]="getToolTipMoodboardItem(7)"
+              (click)="redirectToEntityPartnerLink(7)"
             />
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)">
           <img
             *ngIf="moodboard.slotInfo[1]?.entityImagePath"
             [src]="moodboard.slotInfo[1]?.entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
+            (click)="redirectToEntityPartnerLink(1)"
           >
         </div>
         <div id="slot-2" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)">
           <img
             *ngIf="moodboard.slotInfo[2]?.entityImagePath"
             [src]="moodboard.slotInfo[2]?.entityImagePath"
-            class="object-cover h-full w-full"
+            class="object-cover h-full w-full cursor-pointer"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
+            (click)="redirectToEntityPartnerLink(2)"
           >
         </div>
       </div>
@@ -245,44 +262,48 @@
             <img
               *ngIf="moodboard.slotInfo[3]?.entityImagePath"
               [src]="moodboard.slotInfo[3]?.entityImagePath"
-              class="object-cover h-[100%] w-[100%]"
+              class="object-cover h-full w-full cursor-pointer"
               alt="slot-3"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
               [matTooltip]="getToolTipMoodboardItem(3)"
+              (click)="redirectToEntityPartnerLink(3)"
             />
         </div>
         <div id="slot-5" class="image-input-4" (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)">
             <img
               *ngIf="moodboard.slotInfo[5]?.entityImagePath"
               [src]="moodboard.slotInfo[5]?.entityImagePath"
-              class="object-cover h-full max-h-[8.3rem] w-full"
+              class="object-cover h-full max-h-[8.3rem] w-full cursor-pointer"
               alt="image-input-4"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
               [matTooltip]="getToolTipMoodboardItem(5)"
+              (click)="redirectToEntityPartnerLink(5)"
             />
         </div>
         <div id="slot-8" class="image-input-5" (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)">
             <img
               *ngIf="moodboard.slotInfo[8]?.entityImagePath"
               [src]="moodboard.slotInfo[8]?.entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-5"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
               [matTooltip]="getToolTipMoodboardItem(8)"
+              (click)="redirectToEntityPartnerLink(8)"
             />
         </div>
         <div id="slot-6" class="image-input-6" (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)">
             <img
               *ngIf="moodboard.slotInfo[6]?.entityImagePath"
               [src]="moodboard.slotInfo[6]?.entityImagePath"
-              class="object-cover h-full w-full"
+              class="object-cover h-full w-full cursor-pointer"
               alt="image-input-6"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
               [matTooltip]="getToolTipMoodboardItem(6)"
+              (click)="redirectToEntityPartnerLink(6)"
             />
         </div>
       </div>
@@ -294,37 +315,40 @@
         <img
           *ngIf="moodboard.slotInfo[9]?.entityImagePath"
           [src]="moodboard.slotInfo[9]?.entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          class="object-cover h-full w-full cursor-pointer"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
           [matTooltip]="getToolTipMoodboardItem(9)"
+          (click)="redirectToEntityPartnerLink(9)"
         />
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)">
         <img
           *ngIf="moodboard.slotInfo[10]?.entityImagePath"
           [src]="moodboard.slotInfo[10]?.entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          class="object-cover h-full w-full cursor-pointer"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 10)"
           [matTooltip]="getToolTipMoodboardItem(10)"
+          (click)="redirectToEntityPartnerLink(10)"
         />
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)">
         <img
           *ngIf="moodboard.slotInfo[11]?.entityImagePath"
           [src]="moodboard.slotInfo[11]?.entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%]"
+          class="object-cover h-full w-full cursor-pointer"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
           [matTooltip]="getToolTipMoodboardItem(11)"
+          (click)="redirectToEntityPartnerLink(11)"
         />
       </div>
     </div>
 
     <!-- Colors -->
     <div class="grid-item colors-container">
-      <div id="slot-12" class="color">
+      <div id="slot-12" class="color color-1">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
@@ -333,7 +357,7 @@
           [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
           (click)="redirectToColorsPartner()">
       </div>
-      <div id="slot-13" class="color">
+      <div id="slot-13" class="color color-2">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
@@ -342,7 +366,7 @@
           [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
           (click)="redirectToColorsPartner()">
       </div>
-      <div id="slot-14" class="color">
+      <div id="slot-14" class="color color-3">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
@@ -351,7 +375,7 @@
           [matTooltip]="'TOOLTIP-TEXT.provided-by-Flügger' | translate"
           (click)="redirectToColorsPartner()">
       </div>
-      <div id="slot-15" class="color">
+      <div id="slot-15" class="color color-4">
         <img
           *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
           src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
@@ -390,6 +414,7 @@
             alt="product-image"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+            [matTooltip]="getToolTipShoppingList('product', item)"
           />
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
@@ -400,7 +425,7 @@
             *ngIf="item.imagePath"
             src="{{item.imagePath}}"
             (click)="openImageInModal(item)"
-            [matTooltip]="getInspirationalPhotosToolTipShoppingList(item)"
+            [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
             (draggable)="isItemDragAndDroppable()"
@@ -418,6 +443,7 @@
           alt="material-image"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          [matTooltip]="getToolTipShoppingList('material', item)"
         />
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
       </ion-col>

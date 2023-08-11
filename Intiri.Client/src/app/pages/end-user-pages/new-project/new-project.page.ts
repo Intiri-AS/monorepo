@@ -181,6 +181,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
   skipPage() {
     const colorPalettes
     = [{"id":1,"name":"Space Gray","number":3043,"mainColor":"#696868","shadeColorLight":"#B4B3B3","shadeColorMedium":"#808080","shadeColorDark":"#3A3A3A"}];
+    if (this.currentStepNo === 2) {
+      this.currentStepNo++;
+      return;
+    }
     if (this.currentStepNo === 3) {
       this.currentStepNo++;
       this.changeQueryParam(this.currentStepNo);
@@ -292,7 +296,9 @@ export class NewProjectPage implements OnInit, OnDestroy {
       }
       case 3: {
         return (
-          true
+          this.project.styleImages.length > 0 &&
+          this.project.roomDetails.roomSketchFiles &&
+          Object.keys(this.project.roomDetails.roomSketchFiles).length > 0
         );
       }
       case 4: {

@@ -66,4 +66,12 @@ export class OpenFileModalComponent implements OnInit {
     })
   }
 
+  redirectToProviderLink () {
+    if (this.file.link) {
+      window.open(this.file.link, '_blank')
+    } else if (this.file.productLink) {
+      window.open(this.file.productLink, '_blank')
+    }
+  }
+
 }
