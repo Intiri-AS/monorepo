@@ -43,7 +43,7 @@
             </div>
             <div class="mt-2 lg:mt-0">
               <ion-button
-              *ngIf="currentStepNo === 3"
+              *ngIf="currentStepNo === 2 || currentStepNo === 3"
               class="secondary-btn-borderless skip-btn"
               (click)="skipPage()"
               >{{'COMMON.skip-page' | translate}}</ion-button>

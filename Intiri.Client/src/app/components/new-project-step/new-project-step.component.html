@@ -164,7 +164,12 @@
     </div>
   </div>
 
-  <!-- if moodboards -->
+  <!-- if moodboards (Customize moodboard page)-->
+  <div *ngIf="currentStep.data.moodboard">
+    <app-moodboard-details [moodboard]="currentStep.data.moodboard"></app-moodboard-details>
+  </div>
+
+   <!-- if moodboards (Project create page)-->
   <div *ngIf="currentStep.data.moodboards">
     <ion-grid class="step-items" style="min-height: 400px;">
       <ion-row class="step-items-row">

@@ -60,12 +60,9 @@ export class MoodboardDetailsComponent implements OnInit {
     private notifier: NotifierService,
     private accountService: AccountService,
     private router: Router,
-  ) {
-    console.log('url', router.url);
-  }
+  ) {}
 
   ngOnInit() {
-    console.log('moodboard', this.moodboard);
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
       if (this.router.url.includes('/moodboard-details/')) { //Admin is viewing existing moodboard
@@ -84,16 +81,39 @@ export class MoodboardDetailsComponent implements OnInit {
     } else if (this.userData.roles[0] == 'FreeEndUser') {
       if (this.router.url.includes('/new-project') //If Client is creating new Project
         || this.router.url.includes('/project-details') //If Client is viewing existing project moodboard
+        || this.router.url.includes('/edit-moodboard') // If Client is editing a moodboard
       ) {
         if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo == 'string') {
-          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
+          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
         } else {
-          this.assignDefaultSlots();
+          // this.assignDefaultSlots();
         }
       } else { //If User viewing existing moodboard in a Project
         this.assignDefaultSlots();
       }
     }
+  }
+
+  ngOnChanges () {
+    if (this.router.url.includes('/edit-moodboard')) {
+      this.refineMoodboardSlots();
+    }
+  }
+
+  refineMoodboardSlots () {
+    Object.keys(this.moodboard.slotInfo).map(key => {
+      if (this.moodboard.slotInfo[key].entity === 'product') {
+        let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[key].entityId);
+        if (!product.length) {
+          this.resetMoodboardSlot(key);
+        }
+      } else if (this.moodboard.slotInfo[key].entity === 'material') {
+        let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[key].entityId);
+        if (!material.length) {
+          this.resetMoodboardSlot(key);
+        }
+      }
+    })
   }
 
   assignDefaultSlots () {
@@ -123,13 +143,24 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
+  resetMoodboardSlot (key) {
+    this.moodboard.slotInfo[key] = {
+      entity: null,
+      entityId: null,
+      entityName: null,
+      entityImagePath: null
+    }
+  }
+
   isSlotEmpty (slotInfo) {
     return !slotInfo.entity && !slotInfo.entityId && !slotInfo.entityName && !slotInfo.entityImagePath;
   }
 
   isItemDragAndDroppable () {
-    if (this.userData.roles[0] == 'FreeEndUser' && !this.router.url.includes('new-project')) { //User is only viewing a moodboard
-      return false;
+    if (this.userData.roles[0] == 'FreeEndUser') {
+      if (!(this.router.url.includes('new-project') || this.router.url.includes('edit-moodboard'))) {
+        return false;
+      }
     } else if (this.userData.roles[0] == 'Admin' && this.router.url.includes('/moodboard-details/')) { //Admin is viewing moodboard, hence can't edit
       return false;
     }
@@ -148,7 +179,6 @@ export class MoodboardDetailsComponent implements OnInit {
       this.initializeSlotInfo();
     }
     this.moodboard.slotInfo[slotId] = currentSlotDetails;
-    console.log("moodboard after re-assigning slots", this.moodboard);
   }
 
   normalizeSlashes(string): string {
@@ -264,10 +294,21 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
-  getInspirationalPhotosToolTipShoppingList (item) {
-    return item.provider
-      ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
-      : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+  getToolTipShoppingList (type, item) {
+    if (type === 'product') {
+      return !item.productLink || item.productLink == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        : item.productLink;
+    } else if (type == 'material') {
+      return !item.link || item.link == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material')
+        : item.link;
+    } else if (type == 'inspirationalPhoto') {
+      return item.provider
+        ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
+        : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+    }
+    return ''
   }
 
   getToolTipMoodboardItem (slotId) {
@@ -276,8 +317,44 @@ export class MoodboardDetailsComponent implements OnInit {
       return provider
         ? this.translate.instant('TOOLTIP-TEXT.provider') + ': ' + provider
         : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
-    } else {
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      if (material) {
+        if (material.link == 'null' || !material.link) {
+          return this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material');
+        } else {
+          return material.link;
+        }
+      } else {
+        return '';
+      }
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      if (product) {
+        if (product.productLink == 'null' || !product.productLink) {
+          return this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        } else {
+          return product.productLink
+        }
+      } else {
+        return ''
+      }
+    }else {
       return ''
+    }
+  }
+
+  redirectToEntityPartnerLink (slotId) {
+    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
+      //
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      material.link && material.link != 'null' && window.open(material.link, '_blank');
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      product.productLink && product.productLink != 'null' && window.open(product.productLink, '_blank');
+    }else {
+      return;
     }
   }
 
