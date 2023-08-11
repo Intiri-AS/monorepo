@@ -7,6 +7,7 @@ import { StyleService } from 'src/app/services/style.service';
 import { Observable } from 'rxjs';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { PartnerService } from 'src/app/services/partner.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-moodboard-step',
@@ -38,18 +39,20 @@ export class AddMoodboardStepComponent implements OnInit {
     private styleService: StyleService,
     private commonUtilsService: CommonUtilsService,
     private partnerService: PartnerService,
+    private translate: TranslateService,
   ) { }
 
   currentLang: string = '';
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
 
   ngOnInit() {
+    this.currentLang = this.translate.currentLang;
     this.filteredItems = this.filteredItems;
-    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnChanges () {
     this.languageService.languageChange$.subscribe(res => this.currentLang = res);
+
     this.filteredItems = this.currentStep.data;
 
     //Get inspirational photos for selected room & style

@@ -5,6 +5,7 @@ import { RoomService } from 'src/app/services/room.service';
 import { MenuPopoverComponent } from '../menu-popover/menu-popover.component';
 import { AddRoomModalComponent } from '../modals/add-room-modal/add-room-modal.component';
 import { LanguageService } from 'src/app/services/language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-rooms',
@@ -23,7 +24,8 @@ export class AdminRoomsComponent implements OnInit {
     public popoverController: PopoverController,
     private modalController: ModalController,
     private roomService: RoomService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private translate: TranslateService,
   ) {
   }
 
@@ -33,9 +35,11 @@ export class AdminRoomsComponent implements OnInit {
       this.roomTypes = res;
     })
 
-    this.languageService.languageChange$.subscribe(res => {
-      this.language = res;
-    })
+    this.languageService.languageChange$.subscribe(res => this.language = res);
+  }
+
+  ngAfterViewInit () {
+    this.language = this.translate.currentLang;
   }
 
   async showSettings(e: Event, room) {

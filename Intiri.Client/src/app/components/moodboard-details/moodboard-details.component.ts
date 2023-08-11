@@ -65,7 +65,6 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('moodboard', this.moodboard)
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
       if (this.router.url.includes('/moodboard-details/')) { //Admin is viewing existing moodboard
@@ -76,8 +75,7 @@ export class MoodboardDetailsComponent implements OnInit {
         // check if slot-data are already available in Moodboard state
         let areMoodBoardSlotsSet: boolean = !Object.keys(this.moodboard.slotInfo).every(slotKey => {
           return this.isSlotEmpty(this.moodboard.slotInfo[slotKey])
-        })
-        console.log('areMoodBoardSlotsSet', areMoodBoardSlotsSet);
+        });
         if (!areMoodBoardSlotsSet) {
           this.assignDefaultSlots();
         }
@@ -136,7 +134,6 @@ export class MoodboardDetailsComponent implements OnInit {
     }
     return true;
   }
-
 
   assignItemToMoodboardSlot (slotId, entity, entityId, entityName, entityImagePath) {
     let currentSlotDetails = {
@@ -197,62 +194,90 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   onDrop (event, currentSlotId) {
-    if (!this.isItemDragAndDroppable()) {
-      return;
-    }
-    if (this.previousSlotId == null && !this.draggedShoppingListItem) {
-      this.notifier.show({
-        message: this.translate.instant("MOODBOARD-DETAILS.item-not-draggable"),
-        type: "success"
-      });
-      return;
-    }
-    if (this.draggedShoppingListItem) {
-      let [entity, entityName, entityId, entityImagePath] = this.draggedShoppingListItem.split('__');
-       this.draggedShoppingListItem = {
-        entity,
-        entityName,
-        entityId,
-        entityImagePath
-      };
-      if (this.isItemAlreadyOnMoodboard(this.draggedShoppingListItem)) {
-        this.notifier.show({
-          message: this.translate.instant("MOODBOARD-DETAILS.item-already-in-moodboard"),
-          type: "success"
-        });
+    try {
+      if (!this.isItemDragAndDroppable()) {
         return;
       }
-      this.assignItemToMoodboardSlot(currentSlotId, entity, entityId, entityName, entityImagePath);
+      if (this.previousSlotId == null && !this.draggedShoppingListItem) {
+        this.notifier.show({
+          message: this.translate.instant("MOODBOARD-DETAILS.item-not-draggable"),
+          type: "success"
+        });
+        this.previousSlotId = null;
+        this.draggedShoppingListItem = null;
+        return;
+      }
 
-      // reset "draggedShoppingListItem" after drop is done
-      this.draggedShoppingListItem = null;
-    } else {
-      // Swap images on drop
-      let temp = this.moodboard.slotInfo[currentSlotId];
-      this.assignItemToMoodboardSlot(
-        currentSlotId,
-        this.moodboard.slotInfo[this.previousSlotId].entity,
-        this.moodboard.slotInfo[this.previousSlotId].entityId,
-        this.moodboard.slotInfo[this.previousSlotId].entityName,
-        this.moodboard.slotInfo[this.previousSlotId].entityImagePath,
-      );
-      this.assignItemToMoodboardSlot(
-        this.previousSlotId,
-        temp.entity,
-        temp.entityId,
-        temp.entityName,
-        temp.entityImagePath,
-      );
+      if (this.draggedShoppingListItem) {
+        let [entity, entityName, entityId, entityImagePath] = this.draggedShoppingListItem.split('__');
+        this.draggedShoppingListItem = {
+          entity,
+          entityName,
+          entityId,
+          entityImagePath
+        };
+        if (this.isItemAlreadyOnMoodboard(this.draggedShoppingListItem)) {
+          this.notifier.show({
+            message: this.translate.instant("MOODBOARD-DETAILS.item-already-in-moodboard"),
+            type: "success"
+          });
+          return;
+        }
+        this.assignItemToMoodboardSlot(currentSlotId, entity, entityId, entityName, entityImagePath);
 
-      // reset "previousSlotId" after drop is done
+        // reset "draggedShoppingListItem" after drop is done
+        this.draggedShoppingListItem = null;
+      } else {
+        if (!this.moodboard.slotInfo[currentSlotId]) { //Handling edge-case error
+          this.moodboard.slotInfo[currentSlotId] = {
+            entity: null,
+            entityId: null,
+            entityName: null,
+            entityImagePath: null
+          }
+        }
+
+        // Swap images on drop
+        let temp = this.moodboard.slotInfo[currentSlotId];
+        this.assignItemToMoodboardSlot(
+          currentSlotId,
+          this.moodboard.slotInfo[this.previousSlotId].entity,
+          this.moodboard.slotInfo[this.previousSlotId].entityId,
+          this.moodboard.slotInfo[this.previousSlotId].entityName,
+          this.moodboard.slotInfo[this.previousSlotId].entityImagePath,
+        );
+        this.assignItemToMoodboardSlot(
+          this.previousSlotId,
+          temp.entity,
+          temp.entityId,
+          temp.entityName,
+          temp.entityImagePath,
+        );
+
+        // reset "previousSlotId" after drop is done
+        this.previousSlotId = null;
+      }
+    } catch (e) {
       this.previousSlotId = null;
+      this.draggedShoppingListItem = null;
     }
   }
 
-  getInspirationalPhotosToolTipShoppingList (item) {
-    return item.provider
-      ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
-      : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+  getToolTipShoppingList (type, item) {
+    if (type === 'product') {
+      return !item.productLink || item.productLink == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        : item.productLink;
+    } else if (type == 'material') {
+      return !item.link || item.link == 'null'
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material')
+        : item.link;
+    } else if (type == 'inspirationalPhoto') {
+      return item.provider
+        ? this.translate.instant('TOOLTIP-TEXT.provider') +  ': ' + item.provider
+        : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
+    }
+    return ''
   }
 
   getToolTipMoodboardItem (slotId) {
@@ -261,8 +286,32 @@ export class MoodboardDetailsComponent implements OnInit {
       return provider
         ? this.translate.instant('TOOLTIP-TEXT.provider') + ': ' + provider
         : this.translate.instant('TOOLTIP-TEXT.no-providers-found-for-this-inspirational-photo');
-    } else {
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      return material.link == 'null' || !material.link
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-material')
+        : material.link;
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      return product.ProductLink == 'null' || !product.ProductLink
+        ? this.translate.instant('TOOLTIP-TEXT.no-link-found-for-this-product')
+        : product.productLink;
+    }else {
       return ''
+    }
+  }
+
+  redirectToEntityPartnerLink (slotId) {
+    if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
+      //
+    } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
+      let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      material.link && material.link != 'null' && window.open(material.link, '_blank');
+    } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
+      let product = this.moodboard.products.filter(p => p.id == this.moodboard.slotInfo[slotId].entityId)[0];
+      product.productLink && product.productLink != 'null' && window.open(product.productLink, '_blank');
+    }else {
+      return;
     }
   }
 

@@ -6,7 +6,7 @@
   <ion-icon name="close" class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]" (click)="dismissModal()"></ion-icon>
 </div>
 <div *ngIf="!isRemoving && file.imagePath">
-  <img [src]="file.imagePath" class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh]" alt="Inspiration Img" />
+  <img [src]="file.imagePath" class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh] cursor-pointer" alt="Inspiration Img" (click)="redirectToProviderLink()"/>
   <ion-icon *ngIf="canDelete" name="trash" class="absolute right-[96px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="isRemoving=true"></ion-icon>
   <ion-icon name="cloud-download" class="absolute right-[56px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="downloadFile()"></ion-icon>
   <ion-icon name="close" class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]" (click)="dismissModal()"></ion-icon>

@@ -154,7 +154,7 @@
     "select-style-title": "Select pictures that you like",
     "select-style-text": "Decisions are hard, pick as many as you want.",
     "room-details": "Room Details",
-    "room-details-title": "Upload room sketch",
+    "room-details-title": "Upload your photos",
     "room-details-text": "Don't stress, you can upload photos later to your profile",
     "color-pallete": "Color Pallete",
     "select-color-title": "If you want, select colors you like",
@@ -581,7 +581,8 @@
     "Plastic": "Plastic",
     "Textile": "Textile",
     "Other": "Other",
-    "Vinyl": "Vinyl"
+    "Vinyl": "Vinyl",
+    "Wallpaper":"Wallpaper"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
@@ -613,7 +614,11 @@
     "Carpets": "Carpets",
     "Curtains": "Curtains",
     "Pillows and Blankets": "Pillows and Blankets",
-    "Interior/Decoration": "Interior/Decoration"
+    "Interior/Decoration": "Interior/Decoration",
+    "Sofatable":"Sofatable",
+    "Set tables":"Set tables",
+    "Lamps":"Lamps",
+    "Lamp base":"Lamp base"
   },
   "LANDING-TEXT": {
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",
@@ -624,6 +629,8 @@
     "no-providers-found": "No providers found",
     "no-providers-found-for-this-inspirational-photo": "No providers found for this inspirational photo",
     "provider": "Provider",
-    "provided-by-Flügger": "Provided by Flügger"
+    "provided-by-Flügger": "Provided by Flügger",
+    "no-link-found-for-this-material": "No link found for this material",
+    "no-link-found-for-this-product": "No link found for this product"
   }
 }
