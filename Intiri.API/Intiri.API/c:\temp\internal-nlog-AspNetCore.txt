@@ -1,0 +1,8 @@
+2023-08-11 12:44:50.4515 Info Message Template Auto Format enabled
+2023-08-11 12:44:50.4649 Info Loading assembly: NLog.Web.AspNetCore
+2023-08-11 12:44:50.4955 Info Adding target FileTarget(Name=Intiri)
+2023-08-11 12:44:50.4968 Info Adding target FileTarget(Name=IntiriAll)
+2023-08-11 12:44:50.4998 Info Adding target ColoredConsoleTarget(Name=console)
+2023-08-11 12:44:50.5383 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/dev-2/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
+2023-08-11 12:44:50.5663 Info FileTarget(Name=IntiriAll): Archiving /Users/ak/.config/Intiri/IntiriAll.log to /Users/ak/.config/Intiri/IntiriAll.20230809.log
+2023-08-11 12:44:50.9358 Info Validating config: TargetNames=IntiriAll, Intiri, console, ConfigItems=56, FilePath=/Users/Raj/Codebase/ymir/Intiri/dev-2/intiri_backend/Intiri.API/Intiri.API/bin/Debug/net6.0/NLog.config
