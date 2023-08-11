@@ -7,7 +7,7 @@
     </h2>
     <div *ngIf="currentStep.title === 'STYLE.select-inspirational-photos'">
       <ion-select class="mr-[20px]" (ionChange)="onProviderFilterChange($event)" interface="popover" [multiple]="true" [placeholder]="'STYLE.provider' | translate">
-        <ion-select-option *ngFor="let provider of inspirationalPhotosProvider" value="{{provider}}">
+        <ion-select-option *ngFor="let provider of inspirationalPhotosProviders" value="{{provider}}">
           {{provider}}
         </ion-select-option>
       </ion-select>

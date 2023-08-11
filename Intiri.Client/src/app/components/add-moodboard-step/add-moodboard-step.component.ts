@@ -45,7 +45,7 @@ export class AddMoodboardStepComponent implements OnInit {
 
   currentLang: string = '';
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
-  inspirationalPhotosProvider: Array<any> = this.commonUtils.inspirationalPhotosProvider;
+  inspirationalPhotosProviders: Array<any> = this.commonUtils.inspirationalPhotosProviders;
 
   ngOnInit() {
     this.currentLang = this.translate.currentLang;

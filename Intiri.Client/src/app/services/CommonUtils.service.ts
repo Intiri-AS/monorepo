@@ -8,7 +8,7 @@ export class CommonUtilsService {
 
   constructor() { }
 
-  inspirationalPhotosProvider: Array<any> = [
+  inspirationalPhotosProviders: Array<any> = [
     'Flügger',
     'Tarkett',
     'Flotte gulv',
