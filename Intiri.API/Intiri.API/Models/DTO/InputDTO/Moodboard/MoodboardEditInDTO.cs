@@ -12,5 +12,7 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
 		public ICollection<int> ColorPaletteIds { get; set; }
 		[Required]
 		public ICollection<int> ProductIds { get; set; }
+        [Required]
+        public string SlotInfo { get; set; }
     }
 }
