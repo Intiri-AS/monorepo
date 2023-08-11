@@ -8,6 +8,19 @@ export class CommonUtilsService {
 
   constructor() { }
 
+  inspirationalPhotosProvider: Array<any> = [
+    'Flügger',
+    'Tarkett',
+    'Flotte gulv',
+    'Epoq',
+    'Rotpunkt',
+    'Lampemagasinet',
+    'Flisekompaniet',
+    'Ellos',
+    'Between the walls',
+    'Others'
+  ];
+
   getUniqueElementsFromArray(arr) {
     const uniqueValues = Array.from(new Set(arr.filter(value => value !== null && value != 'null')));
     return uniqueValues;
