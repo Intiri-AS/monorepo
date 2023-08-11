@@ -108,7 +108,9 @@ export class AddPictureModalComponent implements OnInit {
     'Rotpunkt',
     'Lampemagasinet',
     'Flisekompaniet',
-    'Ellos'
+    'Ellos',
+    'Between the walls',
+    'Others'
   ];
 
   ngOnInit() {
