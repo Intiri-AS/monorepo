@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
@@ -59,7 +60,8 @@ export class CustomizeMoodboardPage {
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private location: Location,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit() {
@@ -149,7 +151,9 @@ export class CustomizeMoodboardPage {
   }
 
   finishEditing() {
+    this.spinner.show();
     this.moodboardService.editMoodboard(this.moodboard).subscribe(res => {
+      this.spinner.hide();
       this.notifier.show({
         message: this.translate.instant('NOTIFY.moodboard-updated'),
         type: 'success',
