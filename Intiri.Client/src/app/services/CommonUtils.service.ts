@@ -18,6 +18,7 @@ export class CommonUtilsService {
     'Flisekompaniet',
     'Ellos',
     'Between the walls',
+    'Beyond Design',
     'Others'
   ];
 
