@@ -42,8 +42,8 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <div class="border border-light bg-white mb-2" *ngIf="moodboard?.style?.styleImages[0]?.imagePath">
-                    <img src="{{moodboard?.style?.styleImages[0]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
+                  <div class="border border-light bg-white mb-2" *ngIf="moodboard?.styleImages[0]?.imagePath">
+                    <img src="{{moodboard?.styleImages[0]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
                   </div>
                   <div class="border border-light bg-white" *ngIf="moodboard.products.length > 0">
                     <img src="{{moodboard?.products[0]?.imagePath}}" class="h-[113px] lg:h-[155px] w-full object-cover" alt="moodboard-img"/>
