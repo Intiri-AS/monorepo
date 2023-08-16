@@ -28,6 +28,16 @@
           </ion-select-option>
         </ion-select>
       </ion-col>
+      <ion-col>
+        <span class="text-sm text-black-2">
+          {{'STYLE.provider' | translate}}
+        </span>
+        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onPartnerFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
+          <ion-select-option *ngFor="let partnerName of inspirationalPhotosProviders" value={{partnerName}}>
+            {{partnerName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-col>
       <ion-button (click)="addPicture()" fill="clear" class="primary-btn mb-[1.5rem]">{{'STYLE.add-pictures' | translate}}</ion-button>
     </ion-col>
   </ion-row>
