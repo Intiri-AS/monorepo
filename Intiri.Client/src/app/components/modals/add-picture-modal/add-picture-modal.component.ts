@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { RoomService } from 'src/app/services/room.service';
 import { StyleService } from 'src/app/services/style.service';
 
@@ -55,7 +56,8 @@ export class AddPictureModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private commonUtils: CommonUtilsService,
   ) {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
@@ -100,16 +102,7 @@ export class AddPictureModalComponent implements OnInit {
 
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
-  providers$: Array<any> = [
-    'Flügger',
-    'Tarkett',
-    'Flotte gulv',
-    'Epoq',
-    'Rotpunkt',
-    'Lampemagasinet',
-    'Flisekompaniet',
-    'Ellos'
-  ];
+  providers$: Array<any> = this.commonUtils.inspirationalPhotosProviders;
 
   ngOnInit() {
     this.styleService.getStyles();
