@@ -40,10 +40,12 @@ export class AddMoodboardStepComponent implements OnInit {
     private commonUtilsService: CommonUtilsService,
     private partnerService: PartnerService,
     private translate: TranslateService,
+    private commonUtils: CommonUtilsService,
   ) { }
 
   currentLang: string = '';
   filteredStyleImages$: Observable<any> = this.styleService.filteredStyleImages$;
+  inspirationalPhotosProviders: Array<any> = this.commonUtils.inspirationalPhotosProviders;
 
   ngOnInit() {
     this.currentLang = this.translate.currentLang;
@@ -77,6 +79,9 @@ export class AddMoodboardStepComponent implements OnInit {
       this.types = [];
       this.providers = []
     }
+
+    this.typeFilters = [];
+    this.providerFilters = [];
   }
 
   toggleItem(item) {
@@ -133,7 +138,13 @@ export class AddMoodboardStepComponent implements OnInit {
   }
 
   filterItems () {
-    if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
+    if (this.currentStep.title === 'STYLE.select-inspirational-photos') {
+      if (this.providerFilters.length) {
+        this.filteredItems = this.currentStep.data.filter(data => data.provider && data.provider != 'null' && this.providerFilters.includes(data.provider))
+      } else {
+        this.filteredItems = this.currentStep.data;
+      }
+    } else if (this.currentStep.title === 'NEW-PROJECT.select-materials') {
       if (this.typeFilters.length && this.providerFilters.length) {
         this.filteredItems = this.currentStep.data.filter(data => this.typeFilters.includes(data.materialTypeName.toString()));
         this.filteredItems = this.filteredItems.filter(data => this.providerFilters.includes(data.provider));

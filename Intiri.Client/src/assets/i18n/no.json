@@ -408,6 +408,7 @@
   "STYLE": {
     "styles": "Stilen",
     "type": "Type",
+    "provider": "Forsørger",
     "link-to-material":  "Link til dette materialet",
     "select-room-moodboard": "1. Velg rommet",
     "select-style-moodboard": "2. Velg stilen",
