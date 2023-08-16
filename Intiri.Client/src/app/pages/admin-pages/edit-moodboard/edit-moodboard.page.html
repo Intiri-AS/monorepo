@@ -33,7 +33,7 @@
             <app-back backPath="/client-list"></app-back>
         </ion-col>
         <ion-col *ngIf="!clientRequestStep" size="12" offset-xl="0.5" size-xl="9">
-          <app-add-moodboard-step
+          <app-edit-moodboard-step
           (toggleSelection)="toggleItem($event)"
           [stepsOrder]="stepsOrder"
           [moodboard]="moodboard"
@@ -42,7 +42,7 @@
           [currentStep]="steps[currentStepNo]"
           [loggedUser]="(loggedUser$ | async)"
         >
-        </app-add-moodboard-step>
+        </app-edit-moodboard-step>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="!clientRequestStep">

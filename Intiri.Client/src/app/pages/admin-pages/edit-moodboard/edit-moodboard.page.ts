@@ -70,6 +70,8 @@ export class AdminEditMoodboardPage implements OnInit {
 
   currentStepNo: number = 0;
 
+  moodboardId: any;
+
   constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService,
     private router: Router, private route: ActivatedRoute, private designerService: DesignerService,
     private accountService: AccountService, private notifier: NotifierService, private spinner: NgxSpinnerService,
@@ -77,28 +79,15 @@ export class AdminEditMoodboardPage implements OnInit {
 
   ngOnInit() {
 
-    this.consultationPaymentId = this.route.snapshot.params.paymentId;
-      if(this.consultationPaymentId) {
-        this.designerService.getDesignerClient(this.consultationPaymentId).subscribe((client: any) => {
-          this.client = client;
-          this.clientRequestStep = true;
-          this.currentStepNo = -1;
-          if(client.moodboard) {
-            this.moodboard = {...client.moodboard};
-            this.clientMoodboard = {...client.moodboard};
-          }
-          if(client.moodboardOfferId) {
-            this.moodboardSrv.getMoodboard(client.moodboardOfferId).subscribe(mb => {
-              this.moodboard = {...mb};
-            })
-          }
-        }, () => {
-          // TODO: redirect to 404
-          alert('404')
-        })
-      } else {
-        //this.addType = 'add';
-      }
+    // this.consultationPaymentId = this.route.snapshot.params.paymentId;
+    this.moodboardId = this.route.snapshot.params.id;
+    console.log('moodboardId', this.moodboardId);
+    this.spinner.show();
+    this.moodboardSrv.getMoodboard(this.moodboardId).subscribe(moodboard => {
+      console.log('moodboard', moodboard);
+      this.moodboard = moodboard;
+      this.spinner.hide();
+    })
 
 
     this.projectService.getRooms().subscribe((res) => {
@@ -258,11 +247,11 @@ export class AdminEditMoodboardPage implements OnInit {
 
   saveMoodboard() {
     this.spinner.show();
-    this.moodboardSrv.addMoodboard(this.moodboard).subscribe(
+    this.moodboardSrv.editMoodboard(this.moodboard).subscribe(
       (res) => {
         this.spinner.hide();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.moodboard-created'),
+          message: this.translate.instant('NOTIFY.moodboard-updated'),
           type: 'success',
         });
         this.moodboard = new Moodboard();

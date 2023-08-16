@@ -65,7 +65,7 @@ export class MoodboardDetailsComponent implements OnInit {
   ngOnInit() {
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
-      if (this.router.url.includes('/moodboard-details/')) { //Admin is viewing existing moodboard
+      if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing existing moodboard
         if (this.moodboard.slotInfo) {
           this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
         }
