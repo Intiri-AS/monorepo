@@ -177,6 +177,7 @@
     "upgrade-text": "For å se alle rom i denne stilen, skaff deg Premium.",
     "your-style": "Dette er din stil",
     "customize": "Tilpass stilforslaget",
+    "customize-moodboard-subtitle": "Tilpass moodboardet ditt om nødvendig",
     "finish": "Ferdig",
     "materials": "Materialer",
     "select-materials": "4. Velg Materialer",
@@ -407,6 +408,7 @@
   "STYLE": {
     "styles": "Stilen",
     "type": "Type",
+    "provider": "Forsørger",
     "link-to-material":  "Link til dette materialet",
     "select-room-moodboard": "1. Velg rommet",
     "select-style-moodboard": "2. Velg stilen",

@@ -5,6 +5,13 @@
     >
       {{currentStep.title | translate}}
     </h2>
+    <div *ngIf="currentStep.title === 'STYLE.select-inspirational-photos'">
+      <ion-select class="mr-[20px]" (ionChange)="onProviderFilterChange($event)" interface="popover" [multiple]="true" [placeholder]="'STYLE.provider' | translate">
+        <ion-select-option *ngFor="let provider of inspirationalPhotosProviders" value="{{provider}}">
+          {{provider}}
+        </ion-select-option>
+      </ion-select>
+    </div>
     <div *ngIf="currentStep.title === 'NEW-PROJECT.select-materials'" class="flex">
       <!-- Type filter -->
       <ion-select class="mr-[20px]" (ionChange)="onTypeFilterChange($event)" interface="popover" [multiple]="true" [placeholder]="'STYLE.type' | translate">

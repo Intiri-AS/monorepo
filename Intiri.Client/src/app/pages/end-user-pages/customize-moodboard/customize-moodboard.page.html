@@ -1,5 +1,6 @@
 <ion-content>
     <div id="home">
+      <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
       <app-header></app-header>
       <ion-grid class="main-container">
         <ion-row>
@@ -40,14 +41,14 @@
                 >{{'COMMON.back' | translate}}</ion-button
               >
               <ion-button
-                *ngIf="currentStepNo !== 2"
+                *ngIf="currentStepNo !== 3"
                 class="primary-btn"
                 [class.disabled]="!canChangeToStep(currentStepNo+1)"
                 (click)="nextStep()"
                 >{{'COMMON.next' | translate}}</ion-button
               >
               <ion-button
-                *ngIf="currentStepNo === 2"
+                *ngIf="currentStepNo === 3"
                 class="primary-btn"
                 [class.disabled]="!validateData()"
                 (click)="finish()"
