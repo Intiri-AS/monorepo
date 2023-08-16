@@ -403,7 +403,8 @@
     "update-offer": "Oppdater tilbud",
     "send-offer": "Send tilbud",
     "unset-template": "Opphevet som moodboard mal",
-    "set-template": "Angi som moodboard mal"
+    "set-template": "Angi som moodboard mal",
+    "edit-moodboard": "Redigere moodboard"
   },
   "STYLE": {
     "styles": "Stilen",

@@ -403,7 +403,8 @@
     "update-offer": "Update offer",
     "send-offer": "Send Offer",
     "unset-template": "Unset as moodboard template",
-    "set-template": "Set as moodboard template"
+    "set-template": "Set as moodboard template",
+    "edit-moodboard": "Edit moodboard"
   },
   "STYLE": {
     "styles": "Styles",

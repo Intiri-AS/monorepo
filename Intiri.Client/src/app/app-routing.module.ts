@@ -48,6 +48,7 @@ import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
 import { BlockDesignerMoodboardGuard } from './guards/ blockDesignerMoodboard.guard';
+import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
 
 
 const routes: Routes = [
@@ -171,6 +172,11 @@ const routes: Routes = [
     component: CustomizeMoodboardPage,
     resolve: {moodboard: MoodboardService},
     canActivate: [EnduserGuard]
+  },
+  {
+    path: 'edit-moodboard/:id',
+    component: AdminEditMoodboardPage,
+    canActivate: [AdminGuard]
   },
   {
     path: 'project-details/:id',
