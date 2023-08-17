@@ -1,5 +1,7 @@
 <!-- Admin view -->
 <ion-card
+  #AdminCard
+  id="AdminCard"
   *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
   class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
 >
@@ -193,6 +195,8 @@
 
 <!-- Client view -->
 <ion-card
+  #ClientCard
+  id="ClientCard"
   *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
   class="card border shadow-1 rounded-2xl w-full  h-[593px] mac:h-[610px] m-0 p-4"
 >

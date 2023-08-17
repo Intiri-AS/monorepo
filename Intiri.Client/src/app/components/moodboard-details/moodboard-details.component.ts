@@ -16,6 +16,7 @@ import { Router,NavigationEnd  } from '@angular/router';
 export class MoodboardDetailsComponent implements OnInit {
 
   @ViewChild('slides') slides: IonSlides;
+
   @Input() moodboard: Moodboard;
   @Input() bigCardOnly: boolean | null;
   @Input() withSlides: boolean | null;
@@ -211,6 +212,12 @@ export class MoodboardDetailsComponent implements OnInit {
   dragStart (event, inputNo) {
     if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = inputNo;
+
+      let id = this.userData.roles[0] == 'Admin' ? '#AdminCard' : 'ClientCard';
+      let cardElement = document.querySelector(id);
+      if (cardElement){
+        cardElement.scrollIntoView({behavior: 'smooth'});
+      }
     } else {
       this.previousSlotId = inputNo;
     }
