@@ -213,7 +213,7 @@ export class MoodboardDetailsComponent implements OnInit {
     if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = inputNo;
 
-      let id = this.userData.roles[0] == 'Admin' ? '#AdminCard' : 'ClientCard';
+      let id = this.userData.roles[0] == 'Admin' ? '#AdminCard' : '#ClientCard';
       let cardElement = document.querySelector(id);
       if (cardElement){
         cardElement.scrollIntoView({behavior: 'smooth'});
