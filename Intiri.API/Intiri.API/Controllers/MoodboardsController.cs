@@ -206,6 +206,20 @@ namespace Intiri.API.Controllers
 				moodboard.Products = products.ToList();
 			}
 
+            if (modifyDTO.StyleImageIds != null)
+            {
+                IEnumerable<StyleImage> styleImages =
+                    await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(modifyDTO.StyleImageIds);
+
+                moodboard.StyleImages = styleImages.ToList();
+            }
+
+            Style style = await _unitOfWork.StyleRepository.GetByID(modifyDTO.StyleId);
+            moodboard.Style = style;
+
+            Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(modifyDTO.RoomId);
+            moodboard.Room = room;
+
             if (modifyDTO.SlotInfo != null)
             {
                 moodboard.SlotInfo = modifyDTO.SlotInfo;
