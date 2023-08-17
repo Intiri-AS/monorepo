@@ -6,6 +6,253 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pdf-sampler.css" />
     <title>Simple Tabs</title>
+    <style>
+        .container {
+            display: grid;
+            margin: 32px !important;
+            padding: 16px;
+            background: grey;
+            height: 264px !important;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 32px 32px 32px 62px 62px;
+            grid-auto-columns: 1fr;
+            grid-auto-rows: 1fr;
+            gap: 10px 10px;
+            grid-auto-flow: row;
+            grid-template-areas:
+                "first fifth fifth eighth tenth thirteen"
+                "second fifth fifth eighth tenth fourteen"
+                "third fifth fifth eighth eleventh fourteen"
+                "fourth sixth ninth ninth eleventh fifteen"
+                "fourth seventh ninth ninth twelth sixteen";
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .image-container a {
+                width: 100%;
+                height: 100%;
+                text-decoration: none;
+                display: block;
+            }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .image-container-box {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+            .image-container-box a {
+                text-decoration: none;
+                display: block;
+            }
+
+            .image-container-box img {
+                /* max-width: 100%; */
+                max-height: 100%;
+                object-fit: cover;
+            }
+
+        .first {
+            /* display: table-cell; */
+            grid-area: first;
+            background: white;
+        }
+
+        .second {
+            /* display: table-cell; */
+            grid-area: second;
+            background: white;
+        }
+
+        .third {
+            /* display: table-cell; */
+            grid-area: third;
+            background: white;
+        }
+
+        .fourth {
+            /* display: table-cell; */
+            grid-area: fourth;
+            background: white;
+        }
+
+        .fifth {
+            /* display: table-cell; */
+            grid-area: fifth;
+            background: white;
+        }
+
+        .sixth {
+            /* display: table-cell; */
+            grid-area: sixth;
+            background: white;
+        }
+
+        .seventh {
+            /* display: table-cell; */
+            grid-area: seventh;
+            background: white;
+        }
+
+        .eighth {
+            /* display: table-cell; */
+            grid-area: eighth;
+            background: white;
+        }
+
+        .ninth {
+            /* display: table-cell; */
+            grid-area: ninth;
+            background: white;
+        }
+
+        .tenth {
+            /* display: table-cell; */
+            /* display: grid; */
+            background: white;
+            height: 75px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: tenth;
+        }
+
+        .eleventh {
+            /* display: table-cell; */
+            /* display: grid; */
+            background: white;
+            margin-top: 8px;
+            height: 75px;
+            grid-template-columns: 1fr 1fr 1f;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: eleventh;
+        }
+
+        .twelth {
+            display: table-cell;
+            /* display: table; */
+            background: white;
+            margin-top: -15px;
+            height: 75px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: twelth;
+        }
+
+        .thirteen {
+            display: table-cell;
+            /* display: table; */
+            background: white;
+            height: 53px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: thirteen;
+        }
+
+        .fourteen {
+            display: table-cell;
+            /* display: grid; */
+            background: white;
+            margin-top: 24px;
+            height: 53px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: fourteen;
+        }
+
+        .fifteen {
+            display: table-cell;
+            /* display: grid; */
+            background: white;
+            margin-top: 8px;
+            height: 53px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: fifteen;
+        }
+
+        .sixteen {
+            display: table-cell;
+            /* display: grid; */
+            background: white;
+            margin-top: 6px;
+            height: 53px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-area: sixteen;
+        }
+
+        html,
+        body,
+        .container {
+            height: 100%;
+            margin: 0;
+        }
+            /* For presentation only, no need to copy the code below */
+            .container * {
+                border: 1px solid grey;
+                position: relative;
+            }
+
+                .container *:after {
+                    /* content: attr(class); */
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: grid;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+        .box-text {
+            margin-top: 64px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .box-one {
+            text-align: center;
+            background: grey;
+            height: 133px;
+            width: 133px;
+            margin: 32px;
+            text-align: center;
+        }
+
+        .text-box {
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">

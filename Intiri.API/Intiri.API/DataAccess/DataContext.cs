@@ -34,7 +34,7 @@ namespace Intiri.API.DataAccess
 		public DbSet<RoomType> RoomTypes { get; set; }
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<MaterialType> MaterialTypes { get; set; }
-		public DbSet<Color> Colors { get; set; }
+		public DbSet<Models.IntiriColor.Color> Colors { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductType> ProductTypes { get; set; }
 		public DbSet<ColorPalette> ColorPalettes { get; set; }

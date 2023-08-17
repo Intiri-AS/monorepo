@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Net;
 using System.Text;
+using IronPdf;
 
 namespace Intiri.API.Controllers
 {
@@ -321,6 +322,31 @@ namespace Intiri.API.Controllers
 			//return File(file, "application/pdf");
 			return File(file, "application/pdf", "MoodBoard.pdf");
 		}
+
+        [AllowAnonymous]
+        [HttpGet("CreatePDFIron")]
+        public string CreatePDFIron()
+        {
+            // Instantiate Renderer
+            var renderer = new ChromePdfRenderer();
+
+            var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
+            string contents = System.IO.File.ReadAllText(htmlPath);
+
+            // Create a PDF from a HTML string using C#
+            var pdf = renderer.RenderHtmlAsPdf(contents);
+
+            // Export to a file or Stream
+            pdf.SaveAs("output.pdf");
+
+			//// Advanced Example with HTML Assets
+			//// Load external html assets: Images, CSS and JavaScript.
+			//// An optional BasePath 'C:\site\assets\' is set as the file location to load assets from
+			//var myAdvancedPdf = renderer.RenderHtmlAsPdf("<img src='icons/iron.png'>", @"C:\site\assets\");
+			//myAdvancedPdf.SaveAs("html-with-assets.pdf");
+
+			return "success";
+        }
 
         public static string GetHTMLString()
         {
