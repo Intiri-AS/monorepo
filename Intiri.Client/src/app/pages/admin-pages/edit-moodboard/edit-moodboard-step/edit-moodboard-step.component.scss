@@ -1,0 +1,135 @@
+.step-title {
+  @apply text-black-1 mt-1;
+}
+
+.step-subtitle {
+  @apply text-black-3 text-base;
+}
+
+.step-item-wrapper {
+  @apply rounded-2xl hover:opacity-80 cursor-pointer w-full h-[130px] lg:h-[180px] mt-[2.2rem] p-0;
+}
+
+.moodboard-item-wrapper {
+  @extend .step-item-wrapper;
+  @apply h-[230px] lg:h-[310px];
+}
+
+.selected-item {
+  @apply border-[3px] border-primary;
+}
+
+.bigger-margin {
+  @apply mb-10;
+}
+
+.step-image {
+  @apply object-fill h-full w-full rounded-[13px];
+}
+
+.step-icon-wrapper {
+  @apply h-[87%] rounded-2xl bg-light pt-[30px] lg:pt-[50px];
+}
+
+.step-color-wrapper {
+  @apply h-[87%] rounded-2xl m-1 p-3 shadow-1;
+}
+
+.step-icon {
+  @apply h-[50px] w-[50px] mx-auto;
+}
+
+.step-items {
+  @apply min-h-[490px] max-h-[640px] overflow-auto mb-3;
+}
+
+.step-items::-webkit-scrollbar {
+  @apply opacity-0 w-[5px] bg-transparent;
+}
+
+.step-items:hover::-webkit-scrollbar-thumb {
+  @apply bg-[#cfcfcf];
+}
+
+.step-items::-webkit-scrollbar-thumb {
+  @apply bg-[#dfdfdf] duration-1000;
+}
+
+.input {
+  @apply mt-4 flex-1 w-[300px];
+}
+
+.result-grid {
+  @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
+}
+
+.item {
+  &-sm {
+    @apply bg-light;
+    height: 53px;
+  }
+  &-sm-tall {
+    @apply bg-secondary;
+    grid-row: auto / span 3;
+    height: 184px;
+  }
+  &-md {
+    @apply bg-primary;
+    background-size: cover !important;
+    grid-column: auto / span 2;
+    grid-row: auto / span 1.5;
+    height: 86px;
+  }
+  &-lg {
+    @apply bg-landing-img;
+    background-size: cover !important;
+    grid-column: auto / span 4;
+    grid-row: auto / span 3;
+    height: 184px;
+  }
+  &-lg-tall {
+    @apply bg-img-01;
+    background-size: cover !important;
+    grid-column: auto / span 4;
+    grid-row: auto / span 6;
+    height: 381px;
+  }
+}
+
+.step-items-row {
+  @apply gap-x-[2%];
+  height: 50vh;
+  overflow: scroll;
+}
+
+ion-input {
+  @apply h-12;
+}
+ion-select {
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.admin-designer-step-subtitle {
+  position: fixed;
+  top: 13rem;
+}
+
+.admin-designer-step-items {
+  position: fixed;
+  top: 9rem;
+  right: 7rem;
+  left: 23rem;
+  bottom: 4rem;
+}
+
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.2rem;
+}
