@@ -9,7 +9,7 @@
     <style>
         .container {
             display: grid;
-            margin: 32px !important;
+            /*margin: 32px !important;*/
             padding: 16px;
             background: grey;
             height: 264px !important;
@@ -55,13 +55,15 @@
         }
 
             .image-container-box a {
+                width: 100%;
+                height: 100%;
                 text-decoration: none;
                 display: block;
             }
 
             .image-container-box img {
-                /* max-width: 100%; */
-                max-height: 100%;
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
             }
 
@@ -215,13 +217,13 @@
             margin: 0;
         }
             /* For presentation only, no need to copy the code below */
-            .container * {
+            /*.container * {
                 border: 1px solid grey;
                 position: relative;
-            }
+            }*/
 
-                .container *:after {
-                    /* content: attr(class); */
+                /*.container *:after {
+                     content: attr(class); 
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -230,7 +232,7 @@
                     display: grid;
                     align-items: center;
                     justify-content: center;
-                }
+                }*/
 
         .box-text {
             margin-top: 64px;
@@ -252,141 +254,93 @@
             text-align: center;
         }
 
+        .palette-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+            height: 100%;
+            cursor: pointer;
+            background-color: white;
+        }
+
+            .palette-container .mainColor {
+                grid-row: span 3;
+            }
+
+            .palette-container .shadeColorLight {
+                grid-column: span 1;
+            }
+
+            .palette-container .shadeColorMedium {
+                grid-column: span 1;
+            }
+
+            .palette-container .shadeColorDark {
+                grid-column: span 1;
+            }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="first">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot0#
+                    <!--<a href="https://www.google.com">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" />
+            </a>-->
         </div>
         <div class="second">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot1#
+            <!--<a href="https://www.google.com"><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" /></a>-->
         </div>
         <div class="third">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot2#
         </div>
         <div class="fourth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot3#
         </div>
         <div class="fifth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot4#
         </div>
         <div class="sixth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot5#
         </div>
         <div class="seventh">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot6#
         </div>
         <div class="eighth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot7#
         </div>
         <div class="ninth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot8#
         </div>
         <div class="tenth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot9#
         </div>
         <div class="eleventh">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot10#
         </div>
         <div class="twelth">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot11#
         </div>
         <div class="thirteen">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot12#
         </div>
         <div class="fourteen">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot13#
         </div>
         <div class="fifteen">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot14#
         </div>
         <div class="sixteen">
-            <div class="image-container">
-                <a href="https://www.google.com">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                         alt="Image Description" />
-                </a>
-            </div>
+            #slot15#
         </div>
     </div>
     <div class="box-text">
-        <div class="box-css">
+        #ShoppingItems#
+
+        <!--<div class="box-css">
             <div class="box-one">
                 <div class="image-container-box">
                     <a href="https://www.google.com">
@@ -420,7 +374,7 @@
         <div class="box-css">
             <div class="box-one"></div>
             <div class="text-box">Some-text</div>
-        </div>
+        </div>-->
     </div>
     <script src="script.js"></script>
 </body>
