@@ -1,0 +1,88 @@
+<ion-content>
+  <div id="home">
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
+    <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
+    <ion-grid class="main-container">
+      <p
+        class="main-title mb-[34px] pl-2"
+        [ngClass]="((loggedUser$ | async)?.roles[0] === 'Admin' || (loggedUser$ | async)?.roles[0] == 'InternalDesigner') ? 'main-title-custom' : ''"
+      >
+        {{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}
+      </p>
+      <ion-row class="mb-20">
+        <ion-col size="12" size-xl="2.3">
+          <div
+            class="bg-light xl-ion:w-[228px] rounded-lg text-center pb-1"
+            [ngClass]="((loggedUser$ | async)?.roles[0] == 'Admin' || (loggedUser$ | async)?.roles[0] == 'InternalDesigner') ? 'admin-designer-side-nav' : ''"
+          >
+            <p *ngIf="client" [class.!text-primary]="clientRequestStep" (click)="clientRequestStep = true; currentStepNo = -1" class="side-menu-item pt-[45px]">
+              {{client?.moodboard ? ('DESIGNERS.client-request' | translate) : ('DESIGNERS.client-details' | translate) }}
+            </p>
+            <p [class.!text-primary]="currentStepNo == 0" (click)="goToStep(0)" [class.disabled]="!canChangeToStep(0)" class="side-menu-item" [class]="client ? '' : 'pt-[25px]'">{{'NEW-PROJECT.room' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 1" (click)="goToStep(1)" [class.disabled]="!canChangeToStep(1)" class="side-menu-item">{{'NEW-PROJECT.style' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 2" (click)="goToStep(2)" [class.disabled]="!canChangeToStep(2)" class="side-menu-item">Inspirational photos</p>
+            <p [class.!text-primary]="currentStepNo == 3" (click)="goToStep(3)" [class.disabled]="!canChangeToStep(3)" class="side-menu-item">{{'NEW-PROJECT.materials' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 4" (click)="goToStep(4)" [class.disabled]="!canChangeToStep(4)" class="side-menu-item">{{'MY-INTIRI.colors' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 5" (click)="goToStep(5)" [class.disabled]="!canChangeToStep(5)" class="side-menu-item">{{'NEW-PROJECT.products' | translate}}</p>
+            <p [class.!text-primary]="currentStepNo == 6" (click)="goToStep(6)" [class.disabled]="!canChangeToStep(6)" class="side-menu-item">{{'MOODBOARDS.moodboard-preview' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="clientRequestStep" size="12" offset-xl="0.5" size-xl="9">
+            <app-client-request [client]="client" [includeClientDetails]="true"></app-client-request>
+            <app-back backPath="/client-list"></app-back>
+        </ion-col>
+        <ion-col *ngIf="!clientRequestStep" size="12" offset-xl="0.5" size-xl="9">
+          <app-edit-moodboard-step
+          (toggleSelection)="toggleItem($event)"
+          [stepsOrder]="stepsOrder"
+          [moodboard]="moodboard"
+          [disabledSteps]="client?.moodboard || client?.moodboardOfferId ? [0, 1] : []"
+          [currentStepNo]="currentStepNo"
+          [currentStep]="steps[currentStepNo]"
+          [loggedUser]="(loggedUser$ | async)"
+        >
+        </app-edit-moodboard-step>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!clientRequestStep">
+        <ion-col class="fixed-bottom max-h-[50px]">
+          <ion-buttons class="flex justify-center items-center h-full">
+            <button
+              *ngIf="steps[currentStepNo]['data'] !== 'final'"
+              class="secondary-btn"
+              (click)="backStep()"
+              [class.disabled]="!canChangeToStep(currentStepNo-1)"
+              >{{'COMMON.back' | translate}}</button
+            >
+            <button
+              *ngIf="steps[currentStepNo]['data'] !== 'final'"
+              class="secondary-btn"
+              (click)="nextStep()"
+              [class.disabled]="!canChangeToStep(currentStepNo+1)"
+              >{{'COMMON.next' | translate}}</button
+            >
+            <button
+              *ngIf="steps[currentStepNo]['data'] === 'final'"
+              class="secondary-btn"
+              (click)="cancel()"
+              >{{'COMMON.cancel' | translate}}</button
+            >
+            <button
+              *ngIf="steps[currentStepNo]['data'] === 'final' && !client"
+              class="secondary-btn"
+              (click)="saveMoodboard()"
+              >{{'MOODBOARDS.save' | translate}}</button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] === 'final' && !!client"
+              class="primary-btn"
+              (click)="sendOffer()"
+              >{{client.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.send-offer' | translate) }}</ion-button
+            >
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

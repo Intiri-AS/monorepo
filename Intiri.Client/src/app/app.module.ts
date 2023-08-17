@@ -132,6 +132,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartComponent } from './components/chart/chart.component';
 import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
 import { ProfilePopoverComponent } from './components/popovers/profile-popover/profile-popover.component';
+import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
+import { EditMoodboardStepComponent } from './pages/admin-pages/edit-moodboard/edit-moodboard-step/edit-moodboard-step.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -153,7 +155,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent
+    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent, AdminEditMoodboardPage, EditMoodboardStepComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
