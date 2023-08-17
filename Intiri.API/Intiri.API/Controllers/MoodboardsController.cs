@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using Intiri.API.Controllers.Base;
 using Intiri.API.DataAccess;
 using Intiri.API.Extension;
@@ -32,16 +30,14 @@ namespace Intiri.API.Controllers
 		#region Fields
 
 		private readonly IMapper _mapper;
-        private IConverter _converter;
 
         #endregion Fields
 
         #region Constructors
 
-        public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper, IConverter converter) : base(unitOfWork)
+        public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
 		{
 			_mapper = mapper;
-			_converter = converter;
 		}
 
 		#endregion Constructors
@@ -288,74 +284,56 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
+		//[AllowAnonymous]
+		//[HttpGet("CreatePDF")]
+		//public IActionResult CreatePDF()
+		//{
+		//	var globalSettings = new GlobalSettings
+		//	{
+		//		ColorMode = ColorMode.Color,
+		//		Orientation = Orientation.Portrait,
+		//		PaperSize = PaperKind.A4,
+		//		Margins = new MarginSettings { Top = 10 },
+		//		DocumentTitle = "PDF Report"
+		//	};
+
+		//	var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDFStyle.css");
+
+		//	var objectSettings = new ObjectSettings
+		//	{
+		//		PagesCount = true,
+		//		HtmlContent = GetHTMLString(),
+		//		WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = cssPath },
+		//		HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+		//		FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+		//	};
+
+		//	var pdf = new HtmlToPdfDocument()
+		//	{
+		//		GlobalSettings = globalSettings,
+		//		Objects = { objectSettings }
+		//	};
+
+		//	var file = _converter.Convert(pdf);
+		//	//return File(file, "application/pdf");
+		//	return File(file, "application/pdf", "MoodBoard.pdf");
+		//}
+
 		[AllowAnonymous]
-        [HttpGet("CreatePDF")]
-        public IActionResult CreatePDF()
-		{
-			var globalSettings = new GlobalSettings
-			{
-				ColorMode = ColorMode.Color,
-				Orientation = Orientation.Portrait,
-				PaperSize = PaperKind.A4,
-				Margins = new MarginSettings { Top = 10 },
-				DocumentTitle = "PDF Report"
-			};
-
-			var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDFStyle.css");
-
-            var objectSettings = new ObjectSettings
-			{
-				PagesCount = true,
-				HtmlContent = GetHTMLString(),
-				WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = cssPath },
-				HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-				FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
-			};
-
-			var pdf = new HtmlToPdfDocument()
-			{
-				GlobalSettings = globalSettings,
-				Objects = { objectSettings }
-			};
-
-			var file = _converter.Convert(pdf);
-			//return File(file, "application/pdf");
-			return File(file, "application/pdf", "MoodBoard.pdf");
-		}
-
-        [AllowAnonymous]
         [HttpGet("CreatePDFIron")]
-        public string CreatePDFIron()
+        public IActionResult CreatePDFIron()
         {
-            // Instantiate Renderer
             var renderer = new ChromePdfRenderer();
-
-            var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
-            string contents = System.IO.File.ReadAllText(htmlPath);
-
-            // Create a PDF from a HTML string using C#
+            string contents = GetHTMLString();
             var pdf = renderer.RenderHtmlAsPdf(contents);
-
-            // Export to a file or Stream
-            pdf.SaveAs("output.pdf");
-
-			//// Advanced Example with HTML Assets
-			//// Load external html assets: Images, CSS and JavaScript.
-			//// An optional BasePath 'C:\site\assets\' is set as the file location to load assets from
-			//var myAdvancedPdf = renderer.RenderHtmlAsPdf("<img src='icons/iron.png'>", @"C:\site\assets\");
-			//myAdvancedPdf.SaveAs("html-with-assets.pdf");
-
-			return "success";
+            return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
         }
 
         public static string GetHTMLString()
         {
             var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
             string contents = System.IO.File.ReadAllText(htmlPath);
-
-            var sb = new StringBuilder();
-            sb.Append(contents);
-            return sb.ToString();
+            return contents;
         }
 
         #endregion Public methods
