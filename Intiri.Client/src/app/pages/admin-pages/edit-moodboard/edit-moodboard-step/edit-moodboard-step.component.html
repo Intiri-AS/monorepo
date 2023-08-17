@@ -81,21 +81,13 @@
           <img src="{{item.imagePath}}" class="step-image" alt="style-img"/>
           <ion-icon class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl" (click)="openImageInModal(item, {url: item.imagePath})" name="expand-outline"></ion-icon>
         </span>
-        <!-- if color pallete -->
+        <!-- if color palette -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
-          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}">
-            <img src={{item.mainColorData.imagePath}} alt="mainColorData" srcset="" class="h-full">
-          </div>
-          <div class="w-[47.5%] h-full max-h-[84%] inline-block color-container float-right">
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}">
-              <img src={{item.shadeColorLightData.imagePath}} alt="shadeColorLightData" srcset="">
-            </div>
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}">
-              <img src={{item.shadeColorMediumData.imagePath}} alt="shadeColorMediumData" srcset="">
-            </div>
-            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}">
-              <img src={{item.shadeColorDarkData.imagePath}} alt="shadeColorDarkData" srcset="">
-            </div>
+          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + item.mainColorData.imagePath + ')'}"></div>
+          <div class="w-[47.5%] h-full inline-block color-container float-right">
+            <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData.imagePath + ')'}"></div>
+            <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData.imagePath + ')'}"></div>
+            <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData.imagePath + ')'}"></div>
           </div>
         </div>
 
