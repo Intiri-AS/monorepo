@@ -65,16 +65,15 @@ namespace Intiri.API.DataAccess.Repository
 			return await _context.Moodboards
 				.Where(s => !(s is ClientMoodboard))
 				.Include(m => m.Room)
-				.Include(m => m.Materials)
-					.ThenInclude(mat => mat.MaterialType)
-				.Include(m => m.Products)
-					.ThenInclude(p => p.ProductType)
-				.Include(m => m.ColorPalettes)
+				.Include(m => m.Materials.Take(2))
+                    //.ThenInclude(mat => mat.MaterialType)
+                .Include(m => m.Products.Take(2))
+                    //.ThenInclude(p => p.ProductType)
+                //.Include(m => m.ColorPalettes)
 				.Include(m => m.Designer)
 				.Include(m => m.Style)
-					//.ThenInclude(s => s.StyleImages)
-                .Include(m => m.StyleImages)
-                .OrderByDescending(x=>x.Id)
+                .Include(m => m.StyleImages.Take(2))
+                .OrderByDescending(x=>x.Id).AsNoTracking()
 				.ToListAsync();
 		}
 

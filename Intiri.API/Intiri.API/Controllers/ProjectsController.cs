@@ -131,19 +131,22 @@ namespace Intiri.API.Controllers
 				return BadRequest($"Project with id '{moodboardProjectIn.ProjectId}' doesn't exists");
 			}
 
-			RoomDetails roomDetails = _mapper.Map<RoomDetails>(moodboardProjectIn.RoomDetails);
-			IFormFile roomSketchFile = moodboardProjectIn.RoomDetails.RoomSketchFile;
-
-			if (roomSketchFile != null && roomSketchFile.Length > 0)
+			List<RoomDetails> roomDetails = new List<RoomDetails>();
+			if(moodboardProjectIn.roomSketchFile != null && moodboardProjectIn.roomSketchFile.Count() > 0)
 			{
-				Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
-			}
-
-			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
+                foreach (IFormFile roomSketchFile in moodboardProjectIn.roomSketchFile)
+                {
+                    RoomDetails roomDetails1 = new RoomDetails();
+                    roomDetails1.Size = 0;
+                    roomDetails1.BudgetRate = 0;
+                    if (roomSketchFile != null && roomSketchFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails1, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+                    }
+                    _unitOfWork.RoomDetailsRepository.Insert(roomDetails1);
+                    roomDetails.Add(roomDetails1);
+                }
+            }
 
 			ClientMoodboard newMoodboard = await _moodboardSevice.CreateClientMoodboardAsync(roomDetails, moodboardProjectIn.Moodboard, endUser);
 
@@ -166,21 +169,24 @@ namespace Intiri.API.Controllers
 			Project project = _mapper.Map<Project>(projectIn);
 			project.EndUser = user;
 
-			RoomDetails roomDetails = _mapper.Map<RoomDetails>(projectIn.RoomDetails);
-			IFormFile roomSketchFile = projectIn.RoomDetails.RoomSketchFile;
-
-			if (roomSketchFile != null && roomSketchFile.Length > 0)
+            List<RoomDetails> roomDetails = new List<RoomDetails>();
+			if(projectIn.roomSketchFile != null && projectIn.roomSketchFile.Count() > 0)
 			{
-				Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
-			}
+                foreach (var roomSketchFile in projectIn.roomSketchFile)
+                {
+                    RoomDetails roomDetails1 = new RoomDetails();
+                    roomDetails1.Size = 0;
+                    roomDetails1.BudgetRate = 0;
+                    if (roomSketchFile != null && roomSketchFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string> uploadResult = await _fileUploadService.TryAddSketchFileAsync(roomDetails1, roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
+                    }
+                    _unitOfWork.RoomDetailsRepository.Insert(roomDetails1);
+                    roomDetails.Add(roomDetails1);
+                }
+            }
 
-			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
-
-			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
+            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(projectIn.StyleImageIds);
 			project.StyleImages = styleImages.ToArray();
 
 			IEnumerable<ColorPalette> colorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(projectIn.ProjectColorPaletteIds);

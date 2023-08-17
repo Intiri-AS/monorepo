@@ -120,6 +120,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -130,6 +132,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartComponent } from './components/chart/chart.component';
 import { DonutChartComponent } from './components/donut-chart/donut-chart.component';
 import { ProfilePopoverComponent } from './components/popovers/profile-popover/profile-popover.component';
+import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
+import { EditMoodboardStepComponent } from './pages/admin-pages/edit-moodboard/edit-moodboard-step/edit-moodboard-step.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -151,7 +155,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent
+    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent, AdminEditMoodboardPage, EditMoodboardStepComponent
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
@@ -189,6 +193,7 @@ export function createTranslateLoader(http: HttpClient) {
         }
       }
     }),
+    MatSlideToggleModule, MatTooltipModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

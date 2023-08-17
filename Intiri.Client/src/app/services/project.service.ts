@@ -144,7 +144,8 @@ export class ProjectService implements Resolve<Project> {
       name: moodboard.name, // remove later
       sourceMoodboardId: moodboard.sourceMoodboardId ? moodboard.sourceMoodboardId : 0,
       isTemplate: moodboard.isTemplate,
-      description: moodboard.description
+      description: moodboard.description,
+      SlotInfo: JSON.stringify(moodboard.slotInfo),
     };
 
     const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
@@ -162,13 +163,15 @@ export class ProjectService implements Resolve<Project> {
 
   parseRoomDetailsFormData(project: any, formData: FormData) {
     const parsedRDFormData = {
-      // shape: project.roomDetails['shape'].shape,
-      // size: project.roomDetails['size'],
-      // budgetRate: project.roomDetails['budgetRate'],
-      roomSketchFile: project.roomDetails['roomSketchFile'] || undefined,
+      roomSketchFiles: project.roomDetails['roomSketchFiles'] || undefined,
     };
 
-    Object.keys(parsedRDFormData).forEach(key => formData.append("RoomDetails." + key, parsedRDFormData[key]));
+    parsedRDFormData.roomSketchFiles &&
+    Object.keys(parsedRDFormData.roomSketchFiles).length &&
+    Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
+      let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
+      formData.append(`roomSketchFile`, parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
+    })
 
     return parsedRDFormData;
   };

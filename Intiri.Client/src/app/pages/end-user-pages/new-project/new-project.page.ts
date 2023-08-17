@@ -8,6 +8,7 @@ import { CreateProjectModalComponent } from 'src/app/components/modals/create-pr
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { AccountService } from 'src/app/services/account.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -83,6 +84,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private router: Router,
     private spinner: NgxSpinnerService,
     private nav: NavController,
+    private commonUtilsService: CommonUtilsService,
   ) {}
 
   ngOnInit() {
@@ -122,8 +124,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
       this.steps[0]['data'] = res;
     });
 
-    this.projectService.getStyleImages().subscribe((res) => {
-      this.steps[1]['data'] = res;
+    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
+      this.steps[1]['data'] = this.commonUtilsService.shuffleArrayElements(res);
     });
 
     this.projectService.getColorPalettes().subscribe((res) => {
@@ -179,6 +181,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
   skipPage() {
     const colorPalettes
     = [{"id":1,"name":"Space Gray","number":3043,"mainColor":"#696868","shadeColorLight":"#B4B3B3","shadeColorMedium":"#808080","shadeColorDark":"#3A3A3A"}];
+    if (this.currentStepNo === 2) {
+      this.currentStepNo++;
+      return;
+    }
     if (this.currentStepNo === 3) {
       this.currentStepNo++;
       this.changeQueryParam(this.currentStepNo);
@@ -291,15 +297,14 @@ export class NewProjectPage implements OnInit, OnDestroy {
       case 3: {
         return (
           this.project.styleImages.length > 0 &&
-          !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid()
+          this.project.roomDetails.roomSketchFiles &&
+          Object.keys(this.project.roomDetails.roomSketchFiles).length > 0
         );
       }
       case 4: {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0
         );
       }
@@ -307,7 +312,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0 &&
           !this.isMoodboardEmpty(this.project.currentMoodboard)
         );
@@ -331,9 +335,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['roomSketchFile'] &&
-            this.project.roomDetails['roomSketchFile'].type &&
-            this.project.roomDetails['roomSketchFile'].type.includes('image');
+    return this.project.roomDetails['roomSketchFiles'] &&
+            Object.keys(this.project.roomDetails['roomSketchFiles']).length > 0;
   }
 
   toggleItem(item) {

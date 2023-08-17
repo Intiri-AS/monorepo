@@ -142,6 +142,7 @@
   },
   "NEW-PROJECT": {
     "upload": "Last opp",
+    "upload-your-photos": "Last opp egne bilder",
     "create": "Gi rommet et navn",
     "project": "Eksempel: Judys stue",
     "project-name": "Prosjektets navn",
@@ -153,8 +154,8 @@
     "select-style-title": "Velg bildene du liker",
     "select-style-text": "Valg er vanskelig, velg så mange du vil.",
     "room-details": "Romdetaljer",
-    "room-details-title": "Last opp romskisse",
-    "room-details-text": "Ikke stress, du kan velge flere romdetaljer senere.",
+    "room-details-title": "Last opp egne bilder",
+    "room-details-text": "Ikke stress, du kan laste opp bilder senere til din profil",
     "color-pallete": "Fargepalett",
     "select-color-title": "Hvis du vil, velg farger du liker",
     "select-color-text": "Ikke stress, du kan endre farger senere.",
@@ -176,6 +177,7 @@
     "upgrade-text": "For å se alle rom i denne stilen, skaff deg Premium.",
     "your-style": "Dette er din stil",
     "customize": "Tilpass stilforslaget",
+    "customize-moodboard-subtitle": "Tilpass moodboardet ditt om nødvendig",
     "finish": "Ferdig",
     "materials": "Materialer",
     "select-materials": "4. Velg Materialer",
@@ -192,7 +194,8 @@
     "select-material-type": "Velg materialtype",
     "select-material-provider": "Velg materialleverandør",
     "select-product-type": "Velg produkttype",
-    "select-product-provider": "Velg produktleverandør"
+    "select-product-provider": "Velg produktleverandør",
+    "images-preview": "Forhåndsvisning av bilder"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Lagret!",
@@ -400,11 +403,13 @@
     "update-offer": "Oppdater tilbud",
     "send-offer": "Send tilbud",
     "unset-template": "Opphevet som moodboard mal",
-    "set-template": "Angi som moodboard mal"
+    "set-template": "Angi som moodboard mal",
+    "edit-moodboard": "Redigere moodboard"
   },
   "STYLE": {
     "styles": "Stilen",
     "type": "Type",
+    "provider": "Forsørger",
     "link-to-material":  "Link til dette materialet",
     "select-room-moodboard": "1. Velg rommet",
     "select-style-moodboard": "2. Velg stilen",
@@ -483,7 +488,8 @@
     "first-name": "Fornavn er påkrevd!",
     "last-name": "Etternavn er påkrevd!",
     "project-name": "Prosjektnavnet finnes allerede!",
-    "wrong-format": "Feil format!"
+    "wrong-format": "Feil format!",
+    "file-size-limit-exceeded": "Hver fil må være mindre enn 5 MB stor"
   },
   "TIME": {
     "second": " sekund siden",
@@ -577,7 +583,8 @@
     "Plastic": "Plastikk",
     "Textile": "Tekstil",
     "Other": "Annet",
-    "Vinyl": "Vinyl"
+    "Vinyl": "Vinyl",
+    "Wallpaper":"Tapet"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
@@ -609,11 +616,23 @@
     "Carpets": "Tepper",
     "Curtains": "Gardiner",
     "Pillows and Blankets": "Puter og Tepper",
-    "Interior/Decoration": "Interiør/Dekor"
+    "Interior/Decoration": "Interiør/Dekor",
+    "Sofatable":"Sofabord",
+    "Set tables":"Settbord",
+    "Lamps":"Lamper",
+    "Lamp base":"Lampefot"
   },
   "LANDING-TEXT": {
     "headline-1": "Hei!\nHar du akkurat blitt boligeier? Skal du kanskje selge boligen din? Eller skal du bare pusse opp litt?\nIntiri er en interiørdesigntjeneste som tilbyr deg rådgivning til en brøkdel av prisen.Vår designprosess gjør det enkelt for deg å få et hjem med en gjennomtenkt stil.\nBruk fem minutter til å svare på noen enkle spørsmål, så får du din stil, med innhold som farger, materialer, produkter, belysning med mere.\nBli med på en enklere interiørreise med Intiri!",
     "headline-2": "Vi gjør det enkelt for deg! Vi forventer ikke at du er teknisk ekspert eller vet mye om interiørdesign. Du kan enten jobbe med din stil og innhold alene, eller kontakte en interiørdesigner online.\nDet første rommet er gratis, og så vil neste rom koste 299,- kr pr. rom.\nNår du har registrert en bruker hos oss, ser du dine prosjekter under Min Intiri.  Der kan du enkelt legge til inspirasjonsbilder, planløsninger og dele disse med venner og familie. Ha det gøy!",
     "headline-3": "Vi har akkurat lansert vår tjeneste og er stolte av å jobbe med solide firmaer som hjelper deg med både farger, fliser, stein og gulv, samt innredning av ulike rom.\nLen deg tilbake og velg det som passer for deg. Våre partnere er tilstede med produkter og løsninger i våre stilkonsepter.\nBesøk våre partneres websider og benytt Intiri som kampanjekode.\nIntiri har akkurat lansert i Norge som en pilot i første omgang. Men vi tilbyr selvfølgelig også deg som befinner deg utenfor Norge å svare på spørsmålene i stilgeneratoren, eller booke rådgivning med en designer."
+  },
+  "TOOLTIP-TEXT": {
+    "no-providers-found": "Finner ingen leverandører",
+    "no-providers-found-for-this-inspirational-photo": "Fant ingen leverandører for dette inspirerende bildet",
+    "provider": "Forsørger",
+    "provided-by-Flügger": "Levert av Flügger",
+    "no-link-found-for-this-material": "Fant ingen lenke for dette materialet",
+    "no-link-found-for-this-product": "Ingen lenke funnet for dette produktet"
   }
 }

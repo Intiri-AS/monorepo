@@ -6,7 +6,7 @@ export class Moodboard {
   designer: any;
   room: object;
   style: any;
-  inspirationalPhotos: Array<any>;
+  styleImages: Array<any>;
   colorPalettes: Array<any>;
   materials: Array<any>;
   products: Array<any>;
@@ -26,7 +26,7 @@ export class Moodboard {
     this.designer = null;
     this.room = null;
     this.style = null;
-    this.inspirationalPhotos = [];
+    this.styleImages = [];
     this.colorPalettes = [];
     this.materials = [];
     this.products = [];

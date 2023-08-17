@@ -12,6 +12,6 @@ namespace Intiri.API.Services.Interfaces
 	{
 		Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(MoodboardMatchInDTO matchInDTO);
 		Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId);
-		Task<ClientMoodboard> CreateClientMoodboardAsync(RoomDetails roomDetails, MoodboardInDTO moodboardIn, EndUser endUser);
+		Task<ClientMoodboard> CreateClientMoodboardAsync(List<RoomDetails> roomDetails, MoodboardInDTO moodboardIn, EndUser endUser);
 	}
 }

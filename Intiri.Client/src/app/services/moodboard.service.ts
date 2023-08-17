@@ -48,12 +48,14 @@ export class MoodboardService {
     return this.http.post(this.apiUrl + 'moodboards/addMoodboardOffer', req_data);
   }
 
-  editMoodboard(moodboard) {
+  editMoodboard(moodboard: Moodboard) {
     const editMb = {
       moodboardId: moodboard.id,
       materialIds:  moodboard.materials.map(e=> e['id']),
       colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
-      productIds: moodboard.products.map(e=> e['id']) };
+      productIds: moodboard.products.map(e=> e['id']) ,
+      slotInfo: JSON.stringify(moodboard.slotInfo)
+    };
     return this.http.put(this.apiUrl + 'moodboards/edit', editMb);
   }
 
@@ -73,7 +75,7 @@ export class MoodboardService {
       materialIds: moodboard.materials.map(e=> e['id']),
       colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
       productIds: moodboard.products.map(e=> e['id']),
-      styleImageIds: moodboard.inspirationalPhotos.map(e => e['id']),
+      styleImageIds: moodboard.styleImages.map(e => e['id']),
     }
     return parsedProj;
   };

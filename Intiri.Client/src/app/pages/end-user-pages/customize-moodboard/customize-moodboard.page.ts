@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
@@ -31,6 +32,11 @@ export class CustomizeMoodboardPage {
       title: 'NEW-PROJECT.edit-select-products',
       subtitle: 'NEW-PROJECT.edit-select-products-text',
       data: [],
+    },
+    {
+      title: 'NEW-PROJECT.customize',
+      subtitle: 'NEW-PROJECT.customize-moodboard-subtitle',
+      data: {},
     }
   ];
 
@@ -42,6 +48,7 @@ export class CustomizeMoodboardPage {
     0: 'colorPalettes',
     1: 'materials',
     2: 'products',
+    3: 'moodboard'
   }
 
   currentStepNo: number = 0;
@@ -53,7 +60,8 @@ export class CustomizeMoodboardPage {
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private location: Location,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit() {
@@ -73,6 +81,9 @@ export class CustomizeMoodboardPage {
       this.steps[0]['data'] = [...this.moodboard.colorPalettes];
       this.steps[1]['data'] = [...this.moodboard.materials];
       this.steps[2]['data'] = [...this.moodboard.products];
+      this.steps[3]['data'] = {
+        moodboard: this.moodboard
+      };
 
     })
   }
@@ -105,8 +116,9 @@ export class CustomizeMoodboardPage {
     }
     switch(step) {
       case 0: { return true; }
-      case 1: { return this.moodboard.colorPalettes.length > 0; }
-      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 0}
+      case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4 }
+      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4}
+      case 3: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4;}
     }
     return true;
   }
@@ -139,7 +151,9 @@ export class CustomizeMoodboardPage {
   }
 
   finishEditing() {
+    this.spinner.show();
     this.moodboardService.editMoodboard(this.moodboard).subscribe(res => {
+      this.spinner.hide();
       this.notifier.show({
         message: this.translate.instant('NOTIFY.moodboard-updated'),
         type: 'success',

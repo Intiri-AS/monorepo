@@ -208,7 +208,12 @@ namespace Intiri.API.Controllers
 				moodboard.Products = products.ToList();
 			}
 
-			moodboard.Updated = DateTime.UtcNow;
+            if (modifyDTO.SlotInfo != null)
+            {
+                moodboard.SlotInfo = modifyDTO.SlotInfo;
+            }
+
+            moodboard.Updated = DateTime.UtcNow;
 
 			_unitOfWork.MoodboardRepository.Update(moodboard);
 

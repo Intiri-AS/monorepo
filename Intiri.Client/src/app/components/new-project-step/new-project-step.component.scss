@@ -98,6 +98,7 @@
 
 .step-items-row {
   @apply gap-x-[2%];
+  row-gap: 2rem;
 }
 ion-input {
   @apply h-12;
@@ -111,3 +112,32 @@ ion-select {
   --padding-start: 0;
   --padding-end: 0;
 }
+
+.room-details-section-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.image-preview-container {
+  margin-left: 5rem;
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 370px;
+    overflow-y: scroll;
+    border: solid 0.5px;
+    margin-top: 20px;
+    border-radius: 16px;
+    max-width: 47rem;
+
+    div {
+      margin: 12px 9px;
+
+      .preview-image {
+        height: 10rem;
+        width: 10rem;
+      }
+    }
+  }
+}
+

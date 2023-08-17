@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
+import { OpenFileModalComponent } from 'src/app/components/modals/open-file-modal/open-file-modal.component';
 import { LanguageService } from 'src/app/services/language.service';
 import { StyleService } from 'src/app/services/style.service';
 import { Observable } from 'rxjs';
@@ -10,11 +10,11 @@ import { PartnerService } from 'src/app/services/partner.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-add-moodboard-step',
-  templateUrl: './add-moodboard-step.component.html',
-  styleUrls: ['./add-moodboard-step.component.scss'],
+  selector: 'app-edit-moodboard-step',
+  templateUrl: './edit-moodboard-step.component.html',
+  styleUrls: ['./edit-moodboard-step.component.scss'],
 })
-export class AddMoodboardStepComponent implements OnInit {
+export class EditMoodboardStepComponent implements OnInit {
 
   apiUrl = environment.apiUrl;
   @Input() disabledSteps: any;
