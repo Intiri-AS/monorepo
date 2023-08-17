@@ -65,9 +65,9 @@ export class MoodboardDetailsComponent implements OnInit {
   ngOnInit() {
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
-      if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing existing moodboard
-        if (this.moodboard.slotInfo) {
-          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo)
+      if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing/editing existing moodboard
+        if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo === 'string') {
+          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
         }
       } else { //Admin is creating new moodboard
         // check if slot-data are already available in Moodboard state
@@ -110,6 +110,11 @@ export class MoodboardDetailsComponent implements OnInit {
       } else if (this.moodboard.slotInfo[key].entity === 'material') {
         let material = this.moodboard.materials.filter(m => m.id == this.moodboard.slotInfo[key].entityId);
         if (!material.length) {
+          this.resetMoodboardSlot(key);
+        }
+      } else if (this.moodboard.slotInfo[key].entity === 'styleImages') {
+        let styleImage = this.moodboard.styleImages.filter(s => s.id == this.moodboard.slotInfo[key].entityId);
+        if (!styleImage.length) {
           this.resetMoodboardSlot(key);
         }
       }
