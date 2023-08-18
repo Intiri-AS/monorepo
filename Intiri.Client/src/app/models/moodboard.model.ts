@@ -4,7 +4,7 @@ export class Moodboard {
   name: string;
   description: string;
   designer: any;
-  room: object;
+  room: any;
   style: any;
   styleImages: Array<any>;
   colorPalettes: Array<any>;
