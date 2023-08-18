@@ -98,11 +98,6 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
-    if (this.userRole == 'Partner') {
-      this.partnerService.getPartnerProfile().subscribe(res => {
-        this.partners = res;
-      });
-    }
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
     })
@@ -133,6 +128,11 @@ export class AddProductModalComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
       if (loggedUser) {
         this.userRole = loggedUser.roles[0];
+        if (this.userRole == 'Partner') {
+          this.partnerService.getPartnerProfile().subscribe(res => {
+            this.partners = res;
+          });
+        }
       }
     });
 
