@@ -53,7 +53,7 @@ namespace Intiri.API.Extension
 			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
 			services.AddScoped<IUserService, UserService>();
 
-			return services;
+            return services;
 		}
 
 		public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
