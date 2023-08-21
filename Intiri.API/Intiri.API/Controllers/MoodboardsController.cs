@@ -294,12 +294,13 @@ namespace Intiri.API.Controllers
 		}
 
         [HttpGet("CreateMoodboardPDF")]
+		[AllowAnonymous]
         public async Task<IActionResult> CreateMoodboardPDF(int moodboardId)
         {
             var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
             string contents = System.IO.File.ReadAllText(htmlPath);
 
-            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardByIdOptimized(moodboardId);
 
             if (moodboard == null)
             {
@@ -323,7 +324,7 @@ namespace Intiri.API.Controllers
 
 				if(!string.IsNullOrEmpty(item.entityImagePath))
 				{
-                    slotHtml = "<div class=\"image-container\"><a href=\"#Link#\"><img src=\"#ImgSrc#\" alt=\"Image Description\" /></a></div>";
+                    slotHtml = "<div class=\"image-container\"><a href=\"#Link#\" target=\"_blank\"><img src=\"#ImgSrc#\" alt=\"Image Description\" /></a></div>";
                     slotHtml = slotHtml.Replace("#ImgSrc#", item.entityImagePath);
 
 					string link = getProviderLinkFromSlot(item, moodboardOut);
@@ -462,7 +463,12 @@ namespace Intiri.API.Controllers
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
 
             var renderer = new ChromePdfRenderer();
+            renderer.RenderingOptions.MarginTop = 0;
+            renderer.RenderingOptions.MarginLeft = 0;
+            renderer.RenderingOptions.MarginRight = 0;
+            renderer.RenderingOptions.MarginBottom = 0;
             var pdf = renderer.RenderHtmlAsPdf(contents);
+            pdf.CompressImages(99);
             return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
 		}
 
