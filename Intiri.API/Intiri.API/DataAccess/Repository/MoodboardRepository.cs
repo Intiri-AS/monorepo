@@ -139,11 +139,24 @@ namespace Intiri.API.DataAccess.Repository
 					.ThenInclude(p => p.ProductType)
 				.Include(m => m.ColorPalettes)
 				.Include(m => m.Style)
-					//.ThenInclude(s => s.StyleImages)
-                .Include(m => m.StyleImages)
-                .Where(m => moodboardId == m.Id)
+				//.ThenInclude(s => s.StyleImages)
+				.Include(m => m.StyleImages)
+				.Where(m => moodboardId == m.Id)
 				.FirstOrDefaultAsync();
 		}
+
+        public async Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId)
+        {
+            return await _context.Moodboards.AsNoTracking()
+                .Include(m => m.Materials)
+                .Include(m => m.Products)
+                .Include(m => m.ColorPalettes)
+                .Include(m => m.Style)
+                .Include(m => m.StyleImages)
+                .Where(m => moodboardId == m.Id)
+				.AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
 
 		public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
 		{

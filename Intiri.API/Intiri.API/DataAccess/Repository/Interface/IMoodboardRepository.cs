@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-    public interface IMoodboardRepository: IRepositoryBase<Moodboard>
+	public interface IMoodboardRepository : IRepositoryBase<Moodboard>
 	{
 		Task<IEnumerable<Moodboard>> GetMoodboards();
 		Task<Moodboard> GetFullMoodboardById(int moodboardId);
@@ -23,5 +23,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<ClientMoodboard> GetClientMoodboardById(int moodboardId);
 		Task<Dictionary<int, int>> GetMoodboardStylesCountAsync();
 		Task<Dictionary<int, int>> GetClientMoodboardStylesCountAsync();
-	}
+
+        Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId);
+    }
 }

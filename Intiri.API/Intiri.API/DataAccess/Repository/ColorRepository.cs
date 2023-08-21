@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ColorRepository : RepositoryBase<Color>, IColorRepository
+	public class ColorRepository : RepositoryBase<Models.IntiriColor.Color>, IColorRepository
 	{
 		#region Fields
 
@@ -18,7 +18,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		#endregion Constructors
 
-		public async Task<IEnumerable<Color>> GetAllColorsAsync()
+		public async Task<IEnumerable<Models.IntiriColor.Color>> GetAllColorsAsync()
 		{
 			return await _context.Colors.ToListAsync();
 		}
@@ -28,7 +28,7 @@ namespace Intiri.API.DataAccess.Repository
 			return await DoesAnyExist(color => color.HexValue == hexValue);
 		}
 
-		public async Task<Color> GetColorByHexValueAsync(string hexValue)
+		public async Task<Models.IntiriColor.Color> GetColorByHexValueAsync(string hexValue)
 		{
 			return await SingleOrDefaultAsync(color => color.HexValue == hexValue);
 		}
