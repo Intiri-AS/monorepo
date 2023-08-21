@@ -118,7 +118,7 @@ export class BookDesignerModalComponent {
         numberOfConsultations: this.numberOfConsultations, //required
         Domain: environment.apiUrl.split('/api')[0]
       }).subscribe(async (res: any) => {
-      let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
+      let stripe = await loadStripe(environment.stripe_key);
       stripe?.redirectToCheckout({
         sessionId: res.id
       })
