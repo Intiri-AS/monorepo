@@ -76,7 +76,8 @@
     "no-inspirational-photos-found": "No Inspirational photos found for selected Room and Style",
     "item-not-draggable": "Selected item is not draggable",
     "item-already-in-moodboard": "Selected item is already present in moodboard",
-    "can-not-assign-null": "Can not assign null to a moodboard slot"
+    "can-not-assign-null": "Can not assign null to a moodboard slot",
+    "download-moodboard-pdf": "Download Moodboard PDF"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",

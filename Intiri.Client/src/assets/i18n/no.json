@@ -76,7 +76,8 @@
     "no-inspirational-photos-found": "Fant ingen inspirerende bilder for utvalgte rom og stiler",
     "item-not-draggable": "Det valgte elementet kan ikke dras",
     "item-already-in-moodboard": "Det valgte elementet finnes allerede i moodboard",
-    "can-not-assign-null": "Kan ikke tilordne null til et moodboard-spor"
+    "can-not-assign-null": "Kan ikke tilordne null til et moodboard-spor",
+    "download-moodboard-pdf": "Last ned Moodboard PDF"
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
