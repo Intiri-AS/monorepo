@@ -78,11 +78,9 @@ export class AdminEditMoodboardPage implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit() {
-
-    // this.consultationPaymentId = this.route.snapshot.params.paymentId;
+    this.spinner.show();
     this.moodboardId = this.route.snapshot.params.id;
     console.log('moodboardId', this.moodboardId);
-    this.spinner.show();
     this.moodboardSrv.getMoodboard(this.moodboardId).subscribe(moodboard => {
       console.log('moodboard', moodboard);
       this.moodboard = moodboard;

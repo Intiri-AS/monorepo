@@ -51,9 +51,12 @@ export class MoodboardService {
   editMoodboard(moodboard: Moodboard) {
     const editMb = {
       moodboardId: moodboard.id,
-      materialIds:  moodboard.materials.map(e=> e['id']),
-      colorPaletteIds: moodboard.colorPalettes.map(e=> e['id']),
-      productIds: moodboard.products.map(e=> e['id']) ,
+      styleId: moodboard.style.id,
+      roomId: moodboard.room.id,
+      materialIds:  moodboard.materials.map(e => e['id']),
+      colorPaletteIds: moodboard.colorPalettes.map(e => e['id']),
+      productIds: moodboard.products.map(e => e['id']),
+      styleImageIds: moodboard.styleImages.map(e => e['id']),
       slotInfo: JSON.stringify(moodboard.slotInfo)
     };
     return this.http.put(this.apiUrl + 'moodboards/edit', editMb);

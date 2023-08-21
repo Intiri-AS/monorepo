@@ -62,7 +62,8 @@
     "remove-inspiration": "Remove inspiration",
     "remove-inspiration-text": "Are you sure that you want to remove this inspiration? This action cannot be undone.",
     "remove-inspiration-message": "Inspiration file removed successfully.",
-    "remove-inspiration-message-error": "Cannot remove inspiration file!"
+    "remove-inspiration-message-error": "Cannot remove inspiration file!",
+    "book-craftsman": "Book Craftsman"
   },
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"

@@ -62,7 +62,8 @@
     "remove-inspiration": "Slett bilde/fil",
     "remove-inspiration-text": " Er du sikker på at du vil slette filen? Handlingen kan ikke angres",
     "remove-inspiration-message": "Inspirasjonsfilmen ble fjernet.",
-    "remove-inspiration-message-error": "Kan ikke fjerne inspirasjonsfilmen!"
+    "remove-inspiration-message-error": "Kan ikke fjerne inspirasjonsfilmen!",
+    "book-craftsman": "Bokhåndverker"
   },
   "PROJECT-DETAILS": {
     "new": "Legg til nytt stilkonsept"
