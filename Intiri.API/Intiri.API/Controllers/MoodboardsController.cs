@@ -25,6 +25,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Intiri.API.Models.DTO;
 using Twilio.TwiML.Messaging;
+using System.Drawing.Printing;
 
 namespace Intiri.API.Controllers
 {
@@ -446,13 +447,14 @@ namespace Intiri.API.Controllers
 				shoppingItems = shoppingItems + sItem;
 			}
 
-            string shoppingItemColorPalette = @"<div class=""box-css"">
+            string shoppingItemColorPalette = @"
+				<div class=""box-css"">
 					<div class=""box-one"">
 						<div class=""palette-container"">
-							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""></div>
-							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""></div>
-							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""></div>
-							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""></div>
+							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><label>#mainColor_ColorName#</label></div>
+							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><label>#shadeColorLight_ColorName#</label></div>
+							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""><label>#shadeColorMedium_ColorName#</label></div>
+							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""><label>#shadeColorDark_ColorName#</label></div>
 						</div>
 					</div>
 					<div class=""text-box"">
@@ -469,7 +471,11 @@ namespace Intiri.API.Controllers
                 sItem = sItem.Replace("#mainColor_Link#", item.MainColorData.ImagePath);
                 sItem = sItem.Replace("#shadeColorLight_Link#", item.ShadeColorLightData.ImagePath);
                 sItem = sItem.Replace("#shadeColorMedium_Link#", item.ShadeColorMediumData.ImagePath);
-                sItem = sItem.Replace("#shadeColorDark_Link#", item.ShadeColorDarkData.ImagePath);
+				sItem = sItem.Replace("#shadeColorDark_Link#", item.ShadeColorDarkData.ImagePath);
+                sItem = sItem.Replace("#mainColor_ColorName#", item.MainColorData.Name);
+                sItem = sItem.Replace("#shadeColorLight_ColorName#", item.ShadeColorLightData.Name);
+                sItem = sItem.Replace("#shadeColorMedium_ColorName#", item.ShadeColorMediumData.Name);
+                sItem = sItem.Replace("#shadeColorDark_ColorName#", item.ShadeColorDarkData.Name);
 
                 shoppingItems = shoppingItems + sItem;
             }
@@ -481,6 +487,8 @@ namespace Intiri.API.Controllers
             renderer.RenderingOptions.MarginLeft = 0;
             renderer.RenderingOptions.MarginRight = 0;
             renderer.RenderingOptions.MarginBottom = 0;
+            renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
+            renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
             var pdf = renderer.RenderHtmlAsPdf(contents);
             pdf.CompressImages(99);
             return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");

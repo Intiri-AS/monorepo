@@ -7,24 +7,54 @@
     <link rel="stylesheet" href="pdf-sampler.css" />
     <title>Simple Tabs</title>
     <style>
+        body {
+            font-family: IBM Plex Sans;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+
         .container {
+            position: relative;
+            margin: 20px 40px;
+        }
+
+        nav {
+            margin: 20px 0px;
+        }
+
+        .template-container {
+            position: relative;
+            margin: 16px 0px 32px;
+            height: 600px;
             display: grid;
-            /*margin: 32px !important;*/
-            padding: 16px;
-            background: grey;
-            height: 264px !important;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-            grid-template-rows: 32px 32px 32px 62px 62px;
-            grid-auto-columns: 1fr;
-            grid-auto-rows: 1fr;
-            gap: 10px 10px;
-            grid-auto-flow: row;
+            grid-template-columns: 20% 5% 20% 5% 20% 15% 11%;
+            grid-template-rows: 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5%;
+            gap: 8px;
             grid-template-areas:
-                "first fifth fifth eighth tenth thirteen"
-                "second fifth fifth eighth tenth fourteen"
-                "third fifth fifth eighth eleventh fourteen"
-                "fourth sixth ninth ninth eleventh fifteen"
-                "fourth seventh ninth ninth twelth sixteen";
+                "first fifth fifth fifth eighth tenth thirteen"
+                "first fifth fifth fifth eighth tenth thirteen"
+                "second fifth fifth fifth eighth tenth thirteen"
+                "second fifth fifth fifth eighth tenth fourteen"
+                "third fifth fifth fifth eighth eleventh fourteen"
+                "third fifth fifth fifth eighth eleventh fourteen"
+                "fourth fourth sixth ninth ninth eleventh fifteen"
+                "fourth fourth sixth ninth ninth eleventh fifteen"
+                "fourth fourth sixth ninth ninth twelth fifteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+        }
+
+        .title {
+            font-size: 32px;
+            margin: 32px 0px 0px;
+        }
+
+        .sub-title {
+            font-size: 24px;
+            margin: 64px 0px 32px;
+            color: #9B7E60;
         }
 
         .image-container {
@@ -52,6 +82,7 @@
             height: 100%;
             text-align: center;
             overflow: hidden;
+            border-radius: 16px;
         }
 
             .image-container-box a {
@@ -68,189 +99,90 @@
             }
 
         .first {
-            /* display: table-cell; */
             grid-area: first;
-            background: white;
         }
 
         .second {
-            /* display: table-cell; */
             grid-area: second;
-            background: white;
         }
 
         .third {
-            /* display: table-cell; */
             grid-area: third;
-            background: white;
         }
 
         .fourth {
-            /* display: table-cell; */
             grid-area: fourth;
-            background: white;
         }
 
         .fifth {
-            /* display: table-cell; */
             grid-area: fifth;
-            background: white;
         }
 
         .sixth {
-            /* display: table-cell; */
             grid-area: sixth;
-            background: white;
         }
 
         .seventh {
-            /* display: table-cell; */
             grid-area: seventh;
-            background: white;
         }
 
         .eighth {
-            /* display: table-cell; */
             grid-area: eighth;
-            background: white;
         }
 
         .ninth {
-            /* display: table-cell; */
             grid-area: ninth;
-            background: white;
         }
 
         .tenth {
-            /* display: table-cell; */
-            /* display: grid; */
-            background: white;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: tenth;
         }
 
         .eleventh {
-            /* display: table-cell; */
-            /* display: grid; */
-            background: white;
-            margin-top: 8px;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1f;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: eleventh;
         }
 
         .twelth {
-            display: table-cell;
-            /* display: table; */
-            background: white;
-            margin-top: -15px;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: twelth;
         }
 
         .thirteen {
-            display: table-cell;
-            /* display: table; */
-            background: white;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: thirteen;
         }
 
         .fourteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 24px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: fourteen;
         }
 
         .fifteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 8px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: fifteen;
         }
 
         .sixteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 6px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
             grid-area: sixteen;
         }
 
-        html,
-        body,
-        .container {
-            height: 100%;
-            margin: 0;
-        }
-            /* For presentation only, no need to copy the code below */
-            /*.container * {
-                border: 1px solid grey;
-                position: relative;
-            }*/
-
-                /*.container *:after {
-                     content: attr(class); 
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    display: grid;
-                    align-items: center;
-                    justify-content: center;
-                }*/
-
         .box-text {
-            margin-top: 64px;
+            list-style-type: none;
             display: flex;
-            justify-content: center;
+            flex-direction: row;
             flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 45px;
         }
 
         .box-one {
             text-align: center;
             background: grey;
-            height: 133px;
-            width: 133px;
-            margin: 32px;
+            height: 300px;
+            width: 300px;
             text-align: center;
+            border-radius: 16px;
         }
 
         .text-box {
+            max-width: 300px;
+            margin-top: 16px;
             text-align: center;
         }
 
@@ -258,7 +190,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 2px;
+            gap: 8px;
             height: 100%;
             cursor: pointer;
             background-color: white;
@@ -266,116 +198,138 @@
 
             .palette-container .mainColor {
                 grid-row: span 3;
+                position: relative;
+                border-radius: 16px;
             }
+
+                .palette-container .mainColor label {
+                    position: absolute;
+                    left: 8px;
+                    bottom: 8px;
+                    word-wrap: break-word;
+                    color: black;
+                }
 
             .palette-container .shadeColorLight {
                 grid-column: span 1;
+                border-radius: 16px;
+                position: relative;
             }
+
+                .palette-container .shadeColorLight label {
+                    position: absolute;
+                    left: 8px;
+                    bottom: 8px;
+                    word-wrap: break-word;
+                    color: black;
+                }
 
             .palette-container .shadeColorMedium {
                 grid-column: span 1;
+                border-radius: 16px;
+                position: relative;
             }
+
+                .palette-container .shadeColorMedium label {
+                    position: absolute;
+                    left: 8px;
+                    bottom: 8px;
+                    word-wrap: break-word;
+                    color: black;
+                }
 
             .palette-container .shadeColorDark {
                 grid-column: span 1;
+                border-radius: 16px;
+                position: relative;
             }
+
+                .palette-container .shadeColorDark label {
+                    position: absolute;
+                    left: 8px;
+                    bottom: 8px;
+                    word-wrap: break-word;
+                    color: black;
+                }
 
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="first">
-            #slot0#
-            <!--<a href="https://www.google.com">
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" />
-            </a>-->
-        </div>
-        <div class="second">
-            #slot1#
-            <!--<a href="https://www.google.com"><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" /></a>-->
-        </div>
-        <div class="third">
-            #slot2#
-        </div>
-        <div class="fourth">
-            #slot3#
-        </div>
-        <div class="fifth">
-            #slot4#
-        </div>
-        <div class="sixth">
-            #slot5#
-        </div>
-        <div class="seventh">
-            #slot6#
-        </div>
-        <div class="eighth">
-            #slot7#
-        </div>
-        <div class="ninth">
-            #slot8#
-        </div>
-        <div class="tenth">
-            #slot9#
-        </div>
-        <div class="eleventh">
-            #slot10#
-        </div>
-        <div class="twelth">
-            #slot11#
-        </div>
-        <div class="thirteen">
-            #slot12#
-        </div>
-        <div class="fourteen">
-            #slot13#
-        </div>
-        <div class="fifteen">
-            #slot14#
-        </div>
-        <div class="sixteen">
-            #slot15#
-        </div>
-    </div>
-    <div class="box-text">
-        #ShoppingItems#
 
-        <!--<div class="box-css">
-            <div class="box-one">
-                <div class="image-container-box">
-                    <a href="https://www.google.com">
-                        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                             alt="Image Description" />
-                    </a>
-                </div>
+    <section class="container">
+        <nav>
+            <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg">
+        </nav>
+        <div class="title">Project Title</div>
+        <div class="template-container">
+            <div class="first">
+                #slot0#
+                <!--<a href="https://www.google.com">
+            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" />
+        </a>-->
             </div>
-            <div class="text-box">Some-text</div>
+            <div class="second">
+                #slot1#
+                <!--<a href="https://www.google.com"><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" /></a>-->
+            </div>
+            <div class="third">
+                #slot2#
+            </div>
+            <div class="fourth">
+                #slot3#
+            </div>
+            <div class="fifth">
+                #slot4#
+            </div>
+            <div class="sixth">
+                #slot5#
+            </div>
+            <div class="seventh">
+                #slot6#
+            </div>
+            <div class="eighth">
+                #slot7#
+            </div>
+            <div class="ninth">
+                #slot8#
+            </div>
+            <div class="tenth">
+                #slot9#
+            </div>
+            <div class="eleventh">
+                #slot10#
+            </div>
+            <div class="twelth">
+                #slot11#
+            </div>
+            <div class="thirteen">
+                #slot12#
+            </div>
+            <div class="fourteen">
+                #slot13#
+            </div>
+            <div class="fifteen">
+                #slot14#
+            </div>
+            <div class="sixteen">
+                #slot15#
+            </div>
         </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
+        <div class="sub-title">
+            Congratulations on your new mood board Nordic Light - Living Room!
+            <br /> Now we hope you will finish the project faster and that you will be happy with your new room!
         </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
+        <div class="sub-title">
+            Shopping List:
         </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
+
+        <div class="box-text">
+
+            #ShoppingItems#
+
         </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>-->
-    </div>
+    </section>
+
 
     <!--<div class="hover-text">
         hover me
