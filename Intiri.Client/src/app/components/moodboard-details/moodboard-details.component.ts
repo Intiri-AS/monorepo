@@ -57,6 +57,7 @@ export class MoodboardDetailsComponent implements OnInit {
 
   MOODBOARD_SLOT_COUNT: number = 16;
   cropFeatureMap = {};
+  isImageCropping: boolean = false;
 
   constructor(
     private modalController: ModalController,
@@ -106,6 +107,7 @@ export class MoodboardDetailsComponent implements OnInit {
     for (let i = 0; i < this.MOODBOARD_SLOT_COUNT; i++) {
       this.cropFeatureMap[i] = {
         showCropButton: false,
+        isImageCroppingState: false,
       }
     }
   }
@@ -226,6 +228,10 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   dragStart (event, inputNo) {
+    if (this.isImageCropping) {
+      event.preventDefault();
+      return;
+    }
     if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = inputNo;
 
@@ -391,10 +397,24 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   toggleCropButtonVisibility (slotId) {
+    if (this.isImageCropping) return;
     if (this.userData.roles[0] == 'Admin') {
       if (this.router.url.includes('edit-moodboard')) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
     }
+  }
+
+  onCropButtonClick (slotId) {
+    console.log('Now show crop modal');
+    this.isImageCropping = true;
+
+    this.cropFeatureMap[slotId].showCropButton = false;
+    this.cropFeatureMap[slotId].isImageCroppingState = true;
+  }
+
+  onCroppingDone (slotId) {
+    this.isImageCropping = false;
+    this.cropFeatureMap[slotId].isImageCroppingState = false;
   }
 }

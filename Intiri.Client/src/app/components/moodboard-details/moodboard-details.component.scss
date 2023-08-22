@@ -76,11 +76,6 @@ p {
           grid-row: span 3;
           position: relative;
           text-align: center;
-          .crop-btn-7 {
-            position: absolute;
-            top: 0;
-            left: 0;
-          }
         }
       }
 
@@ -155,28 +150,15 @@ p {
   }
 }
 
-.crop-btn-material {
+.crop-btn {
   position: absolute;
   top: 0;
   left: 0;
 }
-
-.crop-btn-product {
+.done-btn {
   position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.crop-btn-large-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.crop-btn-small-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .primary-btn-custom {

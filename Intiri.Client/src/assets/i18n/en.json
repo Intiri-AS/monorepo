@@ -78,7 +78,8 @@
     "item-already-in-moodboard": "Selected item is already present in moodboard",
     "can-not-assign-null": "Can not assign null to a moodboard slot",
     "download-moodboard-pdf": "Download Moodboard PDF",
-    "crop": "Crop"
+    "crop": "Crop",
+    "done": "Done"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
