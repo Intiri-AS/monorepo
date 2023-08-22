@@ -391,7 +391,11 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   toggleCropButtonVisibility (slotId) {
-    this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+    if (this.userData.roles[0] == 'Admin') {
+      if (this.router.url.includes('edit-moodboard')) {
+        this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+      }
+    }
   }
 
   onCropButtonClick (slotId) {
