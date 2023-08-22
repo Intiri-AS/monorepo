@@ -78,7 +78,7 @@ p {
           text-align: center;
           .crop-btn-7 {
             position: absolute;
-            top: 7rem;
+            top: 0;
             left: 0;
           }
         }
@@ -157,27 +157,36 @@ p {
 
 .crop-btn-material {
   position: absolute;
-  top: 1rem;
-  left: 4rem;
+  top: 0;
+  left: 0;
 }
 
 .crop-btn-product {
   position: absolute;
-  top: 4rem;
-  left: 1rem;
+  top: 0;
+  left: 0;
 }
 
 .crop-btn-large-bg {
   position: absolute;
-  top: 7rem;
-  left: 4rem;
+  top: 0;
+  left: 0;
 }
 
 .crop-btn-small-bg {
   position: absolute;
-  top: 2.5rem;
-  left: 0rem;
-  width: 5rem;
+  top: 0;
+  left: 0;
+}
+
+.primary-btn-custom {
+  @apply hover:opacity-80 bg-primary text-white normal-case px-4 tracking-normal;
+  height: 22px;
+  font-weight: 100;
+  font-size: 12px;
+  width: 56px;
+  margin-left: 5px;
+  border-radius: 8px;
 }
 
 
