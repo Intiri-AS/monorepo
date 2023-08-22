@@ -397,8 +397,4 @@ export class MoodboardDetailsComponent implements OnInit {
       }
     }
   }
-
-  onCropButtonClick (slotId) {
-    console.log('Now show crop modal');
-  }
 }
