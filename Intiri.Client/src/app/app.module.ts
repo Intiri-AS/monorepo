@@ -121,7 +121,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -175,6 +176,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgxSpinnerModule,
     BrowserAnimationsModule,
     NgApexchartsModule,
+    ImageCropperModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
