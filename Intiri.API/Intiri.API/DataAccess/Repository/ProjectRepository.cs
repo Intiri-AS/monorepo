@@ -67,11 +67,13 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Projects
 				.Where(p => p.EndUserId == userId)
-				.Include(p => p.Room)
-				.Include(p => p.StyleImages)
-				.Include(p => p.ColorPalettes)
-				.Include(p => p.ProjectMoodboards)
-				.ToListAsync();
+				//.Include(p => p.Room)
+				//.Include(p => p.StyleImages)
+				//.Include(p => p.ColorPalettes)
+				.Include(p => p.ProjectMoodboards).ThenInclude(p => p.Products.Take(1))
+                .Include(p => p.ProjectMoodboards).ThenInclude(p => p.Style)
+                .Include(p => p.ProjectMoodboards).ThenInclude(p => p.StyleImages.Take(1))
+                .ToListAsync();
 		}
 
 		public async Task<Project> GetLastProjectForUser(int userId)

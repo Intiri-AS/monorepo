@@ -62,11 +62,11 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(User.GetUserId());
 
-			foreach (Project project in projects)
-			{
-				IEnumerable<ClientMoodboard> moodboards = await _unitOfWork.MoodboardRepository.GetClientMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
-				project.ProjectMoodboards = moodboards.ToArray();
-			}
+			//foreach (Project project in projects)
+			//{
+			//	IEnumerable<ClientMoodboard> moodboards = await _unitOfWork.MoodboardRepository.GetClientMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
+			//	project.ProjectMoodboards = moodboards.ToArray();
+			//}
 
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
