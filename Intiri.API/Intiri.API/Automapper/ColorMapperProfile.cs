@@ -8,8 +8,8 @@ namespace Intiri.API.Automapper
 	{
 		public ColorMapperProfile()
 		{
-			CreateMap<ColorDTO, Color>();
-			CreateMap<Color, ColorDTO>();
+			CreateMap<ColorDTO, Models.IntiriColor.Color>();
+			CreateMap<Models.IntiriColor.Color, ColorDTO>();
 		}
 	}
 }

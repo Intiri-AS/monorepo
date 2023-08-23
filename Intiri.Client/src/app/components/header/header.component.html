@@ -8,6 +8,7 @@
         </ion-button>
         <section class="header-buttons">
           <ion-button *ngFor="let item of menuItems"  routerLink="{{item.url}}" routerDirection="root" fill="clear" class="btn" [class.!text-primary]="isActiveRoute(item.url)">{{item.title | translate}}</ion-button>
+          <ion-button href="https://prosjekt.luado.no/" target="_blank" fill="clear" class="btn">{{'MY-INTIRI.book-craftsman'| translate}}</ion-button>
         </section>
       </ion-buttons>
       <ion-buttons class="header-buttons justify-end cursor-pointer">

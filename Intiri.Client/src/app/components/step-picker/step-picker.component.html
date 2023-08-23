@@ -38,7 +38,7 @@
     <div class="project-step-icon bg-sofa" [class.bg-sofa-white]="currentStepNo === 2"></div>
     <p class="project-step-text" [class.text-white]="currentStepNo === 2">{{'NEW-PROJECT.products' | translate}}</p>
   </section>
-  <section [class.last-step-selected]="currentStepNo === 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="new-project-step no-border">
+  <section *ngIf="isEditMoodboardPage" [class.last-step-selected]="currentStepNo === 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="new-project-step no-border">
     <div class="project-step-icon bg-moodboard" [class.bg-moodboard-white]="currentStepNo === 3"></div>
     <p class="project-step-text" [class.text-white]="currentStepNo === 3">{{'COMMON.moodboard' | translate}}</p>
   </section>

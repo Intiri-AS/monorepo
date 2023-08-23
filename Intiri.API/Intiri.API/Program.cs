@@ -13,6 +13,7 @@ using NLog.Web;
 using System.Text.Json.Serialization;
 using Stripe;
 using Intiri.API.Models.CommonNames;
+using Twilio.Rest.Api.V2010.Account.Usage.Record;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Info("Init Main");
@@ -101,7 +102,7 @@ try
 	app.UseStaticFiles();
 
 	//TODO-SECURITY: Move this to configuration
-    StripeConfiguration.ApiKey = "sk_test_51LrTfeKX8zAv4zjwEPlN604oFYBaKnJOBeZhoR2kdPyIhTnpaRjsGqTyg1VLx6Ao1TNUSh1VmsBY6SKFTF5YT3Hp00w2JYZGG8";
+    StripeConfiguration.ApiKey = configuration.GetValue<string>("StripeApiKey");
 
     app.UseEndpoints(endpoints =>
 	{

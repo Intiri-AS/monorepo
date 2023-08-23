@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://intiri-test.azurewebsites.net/api/'
-  // apiUrl: 'https://localhost:7004/api/'
-  //apiUrl: 'http://40.114.78.222/api/'
-  apiUrl: 'https://qa.app.intiri.no/api/'
+  // apiUrl: 'https://intiri-test.azurewebsites.net/api/',
+  // apiUrl: 'https://localhost:7004/api/',
+  //apiUrl: 'http://40.114.78.222/api/',
+  apiUrl: 'https://qa.app.intiri.no/api/',
+  stripe_key: 'pk_test_51NY6Q5FTILFGL9YzGpeXexnUTjCU4yK3CZi1SeUrRxXSpmDrVs6tWnf4xGSiZk9Qw0hEWHczxBAEiAon1FS0bkaX00Usbmrd05'
 };
 
 /*

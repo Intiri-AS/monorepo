@@ -32,11 +32,6 @@ export class CustomizeMoodboardPage {
       title: 'NEW-PROJECT.edit-select-products',
       subtitle: 'NEW-PROJECT.edit-select-products-text',
       data: [],
-    },
-    {
-      title: 'NEW-PROJECT.customize',
-      subtitle: 'NEW-PROJECT.customize-moodboard-subtitle',
-      data: {},
     }
   ];
 
@@ -47,11 +42,12 @@ export class CustomizeMoodboardPage {
   stepsOrder: object = {
     0: 'colorPalettes',
     1: 'materials',
-    2: 'products',
-    3: 'moodboard'
+    2: 'products'
   }
 
   currentStepNo: number = 0;
+  isEditMoodboardPage: boolean = false;
+  isCustomizeMoodboardPage: boolean = false;
 
   constructor (
     public projectService: ProjectService,
@@ -65,6 +61,20 @@ export class CustomizeMoodboardPage {
   ) {}
 
   ngOnInit() {
+    if (this.router.url.includes('customize-moodboard')) {
+      this.isCustomizeMoodboardPage = true;
+    } else if (this.router.url.includes('edit-moodboard')) {
+      this.isEditMoodboardPage = true;
+    }
+
+    if (this.isEditMoodboardPage) {
+      this.steps.push({
+        title: 'NEW-PROJECT.customize',
+        subtitle: 'NEW-PROJECT.customize-moodboard-subtitle',
+        data: {},
+      });
+      this.stepsOrder[3] = 'moodboard'
+    }
 
     this.route.data.subscribe(data => {
       // if edit
@@ -81,9 +91,12 @@ export class CustomizeMoodboardPage {
       this.steps[0]['data'] = [...this.moodboard.colorPalettes];
       this.steps[1]['data'] = [...this.moodboard.materials];
       this.steps[2]['data'] = [...this.moodboard.products];
-      this.steps[3]['data'] = {
-        moodboard: this.moodboard
-      };
+
+      if (this.isEditMoodboardPage) {
+        this.steps[3]['data'] = {
+          moodboard: this.moodboard
+        };
+      }
 
     })
   }
@@ -118,7 +131,9 @@ export class CustomizeMoodboardPage {
       case 0: { return true; }
       case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4 }
       case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4}
-      case 3: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4;}
+      case 3: {
+        return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4;
+      }
     }
     return true;
   }

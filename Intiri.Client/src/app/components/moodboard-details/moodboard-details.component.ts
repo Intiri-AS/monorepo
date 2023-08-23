@@ -55,6 +55,9 @@ export class MoodboardDetailsComponent implements OnInit {
   currentSlotId: any = null;
   draggedShoppingListItem: any = null;
 
+  MOODBOARD_SLOT_COUNT: number = 16;
+  cropFeatureMap = {};
+
   constructor(
     private modalController: ModalController,
     private translate: TranslateService,
@@ -64,6 +67,10 @@ export class MoodboardDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('moodboard-details', this.moodboard);
+
+    this.initializeCropFeatureMap();
+
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
       if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing/editing existing moodboard
@@ -95,8 +102,17 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
+  initializeCropFeatureMap () {
+    for (let i = 0; i < this.MOODBOARD_SLOT_COUNT; i++) {
+      this.cropFeatureMap[i] = {
+        showCropButton: false,
+      }
+    }
+  }
+
   ngOnChanges () {
-    if (this.router.url.includes('/edit-moodboard')) {
+    if (this.router.url.includes('edit-moodboard') ||
+      this.router.url.includes('new-project')) {
       this.refineMoodboardSlots();
     }
   }
@@ -372,5 +388,13 @@ export class MoodboardDetailsComponent implements OnInit {
 
   redirectToColorsPartner () {
     window.open('https://www.flugger.com/', '_blank');
+  }
+
+  toggleCropButtonVisibility (slotId) {
+    if (this.userData.roles[0] == 'Admin') {
+      if (this.router.url.includes('edit-moodboard')) {
+        this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+      }
+    }
   }
 }

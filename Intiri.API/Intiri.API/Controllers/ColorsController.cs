@@ -29,7 +29,7 @@ namespace Intiri.API.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<ColorDTO>>> GetColors()
 		{
-			IEnumerable<Color> colors = await _unitOfWork.ColorRepository.GetAllColorsAsync();
+			IEnumerable<Models.IntiriColor.Color> colors = await _unitOfWork.ColorRepository.GetAllColorsAsync();
 			IEnumerable<ColorDTO> roomsToReturn = _mapper.Map<IEnumerable<ColorDTO>>(colors);
 
 			return Ok(roomsToReturn);
@@ -38,7 +38,7 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{hexValue}")]
 		public async Task<ActionResult<ColorDTO>> GetColorById(string hexValue)
 		{
-			Color color = await _unitOfWork.ColorRepository.GetColorByHexValueAsync(hexValue);
+            Models.IntiriColor.Color color = await _unitOfWork.ColorRepository.GetColorByHexValueAsync(hexValue);
 
 			if (color == null)
 			{
@@ -56,7 +56,7 @@ namespace Intiri.API.Controllers
 				return BadRequest("Color hex value already exist.");
 			}
 
-			Color color = _mapper.Map<Color>(colorDTO);
+            Models.IntiriColor.Color color = _mapper.Map<Models.IntiriColor.Color>(colorDTO);
 			_unitOfWork.ColorRepository.Insert(color);
 
 			if (!await _unitOfWork.SaveChanges())
@@ -70,7 +70,7 @@ namespace Intiri.API.Controllers
 		[HttpDelete("delete/{hexValue}")]
 		public async Task<ActionResult>DeleteColorByHexValue(string hexValue)
 		{
-			Color color = await _unitOfWork.ColorRepository.GetColorByHexValueAsync(hexValue);
+            Models.IntiriColor.Color color = await _unitOfWork.ColorRepository.GetColorByHexValueAsync(hexValue);
 
 			if (color == null)
 			{

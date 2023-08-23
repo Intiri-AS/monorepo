@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { CraftsmanService } from 'src/app/services/craftsman.service';
 import { MoodboardService } from 'src/app/services/moodboard.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-moodboard-details-page',
@@ -17,9 +18,9 @@ export class MoodboardDetailsPage implements OnInit {
   loggedUser$ = this.accountService.currentUser$;
 
   constructor(
-    public moodboardService: MoodboardService, 
-    private route: ActivatedRoute, 
-    private router: Router, 
+    public moodboardService: MoodboardService,
+    private route: ActivatedRoute,
+    private router: Router,
     private accountService: AccountService,
     private craftsmanService: CraftsmanService
     ){}
@@ -30,7 +31,7 @@ export class MoodboardDetailsPage implements OnInit {
     })
     this.projectId = this.route.snapshot.paramMap.get('projectId');
   }
-  
+
   backToProjectDetails() {
     if(this.projectId) {
       this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
@@ -42,6 +43,11 @@ export class MoodboardDetailsPage implements OnInit {
   getCraftsmanPage() {
     const roomIndex = this.moodboard.room.name.toLowerCase().replace(/ /g,'');
     return this.craftsmanService.getCraftsmanUrl(roomIndex);
+  }
+
+  downloadMoodboardPDF () {
+    let getMoodboardPDFUrl = environment.apiUrl + 'Moodboards/CreateMoodboardPDF?moodboardId=' + this.moodboard.id;
+    window.open(getMoodboardPDFUrl, '_blank')
   }
 
 }
