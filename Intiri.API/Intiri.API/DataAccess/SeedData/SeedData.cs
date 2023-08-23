@@ -588,7 +588,7 @@ namespace Intiri.API.DataAccess.SeedData
 
         public static async Task SeedProductsImport(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
 		{
-			int partnerId = 5;
+			int partnerId = 6;
             Partner partner = await unitOfWork.PartnerRepository.GetByID(partnerId);
 
             string materialsData = await File.ReadAllTextAsync("DataAccess/SeedData/ProductsImportSeedData.json");
@@ -621,70 +621,101 @@ namespace Intiri.API.DataAccess.SeedData
 
                 if (!doesAnyExist)
                 {
-                    var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Name.Trim().Replace(" ","_") + ".webp";
+                    //var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Name.Trim().Replace(" ","_") + ".webp";
+                    var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Link_image;
                     string path = Path.GetFullPath(filep);
 
                     if (!File.Exists(path))
                     {
                         Console.WriteLine("File null | " + prodImport.Name);
-                        continue;
-                    }
+						//continue;
 
-                    using (var stream = System.IO.File.OpenRead(path))
-                    {
-                        string fileName = Path.GetFileName(stream.Name);
-
-                        var provider = new FileExtensionContentTypeProvider();
-                        string contentType;
-
-                        if (!provider.TryGetContentType(fileName, out contentType))
+						ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(mt => mt.Name == prodImport.Category);
+                        if (productType == null)
                         {
-                            contentType = "application/octet-stream";
+                            productType = new ProductType();
+                            productType.Name = prodImport.Category;
+
+                            unitOfWork.ProductTypeRepository.Insert(productType);
+                            await unitOfWork.SaveChanges();
                         }
 
-                        var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                        Product obj = new Product();
+                        obj.Name = prodImport.Name;
+                        obj.Description = prodImport.Description;
+                        obj.ImagePath = "";
+                        obj.ImagePublicId = "";
+                        obj.Partner = partner;
+                        obj.ProductType = productType;
+                        obj.ProductLink = prodImport.Link_Supplier;
+                        obj.PartnerName = partner.Name;
+
+                        unitOfWork.ProductRepository.Insert(obj);
+                        await unitOfWork.SaveChanges();
+
+                        Console.WriteLine("Success | " + prodImport.Name);
+                    }
+					else
+					{
+                        //continue;
+                        using (var stream = System.IO.File.OpenRead(path))
                         {
-                            Headers = new HeaderDictionary(),
-                            ContentType = contentType
-                        };
+                            string fileName = Path.GetFileName(stream.Name);
 
-                        if (file != null && file.Length > 0)
-                        {
-							Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.ProductImages);
+                            var provider = new FileExtensionContentTypeProvider();
+                            string contentType;
 
-							if (uploadResult.Item1 != HttpStatusCode.OK)
-							{
-								Console.WriteLine(uploadResult.Item2);
-							}
-							else
-							{
-								ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(mt => mt.Name == prodImport.Category);
-								if (productType == null)
-								{
-									productType = new ProductType();
-									productType.Name = prodImport.Category;
+                            if (!provider.TryGetContentType(fileName, out contentType))
+                            {
+                                contentType = "application/octet-stream";
+                            }
 
-									unitOfWork.ProductTypeRepository.Insert(productType);
-									await unitOfWork.SaveChanges();
-								}
+                            var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                            {
+                                Headers = new HeaderDictionary(),
+                                ContentType = contentType
+                            };
 
-								Product obj = new Product();
-								obj.Name = prodImport.Name;
-								obj.Description = prodImport.Description;
-								obj.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-								obj.ImagePublicId = uploadResult.Item3.PublicId;
-								obj.Partner = partner;
-								obj.ProductType = productType;
-								obj.ProductLink = prodImport.Link_Supplier;
-								obj.PartnerName = partner.Name;
+                            if (file != null && file.Length > 0)
+                            {
+                                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.ProductImages);
 
-								unitOfWork.ProductRepository.Insert(obj);
-								await unitOfWork.SaveChanges();
+                                if (uploadResult.Item1 != HttpStatusCode.OK)
+                                {
+                                    Console.WriteLine(uploadResult.Item2);
+                                }
+                                else
+                                {
+                                    ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(mt => mt.Name == prodImport.Category);
+                                    if (productType == null)
+                                    {
+                                        productType = new ProductType();
+                                        productType.Name = prodImport.Category;
 
-								Console.WriteLine("Success | " + prodImport.Name);
-							}
-						}
-					}
+                                        unitOfWork.ProductTypeRepository.Insert(productType);
+                                        await unitOfWork.SaveChanges();
+                                    }
+
+                                    Product obj = new Product();
+                                    obj.Name = prodImport.Name;
+                                    obj.Description = prodImport.Description;
+                                    obj.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                                    obj.ImagePublicId = uploadResult.Item3.PublicId;
+                                    obj.Partner = partner;
+                                    obj.ProductType = productType;
+                                    obj.ProductLink = prodImport.Link_Supplier;
+                                    obj.PartnerName = partner.Name;
+
+                                    unitOfWork.ProductRepository.Insert(obj);
+                                    await unitOfWork.SaveChanges();
+
+                                    Console.WriteLine("Success | " + prodImport.Name);
+                                }
+                            }
+                        }
+                    }
+
+                    
 
                 }
             }

@@ -1,300 +1,471 @@
 [
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Marianne",
-    "Description": "Armstol Marianne 2-pk - Beige. To armstoler med ben i pulverlakkert metall. Trekk i fløyel med sydd rutemønster.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1725669-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Farmstol-marianne-2-pk%2F1725669-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Affe Bordlampe",
+    "Description": "Sjiraffen er kledd i børstet gull og har pæresokkel mellom halsen og hodet, bak en sort tekstilskjerm.",
+    "Link_image": "Affe_bordlampe_high.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/affe-bordlampe-giraff-gull-svart"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Nikki",
-    "Description": "Stol Nikki 1 stk - Brun. Stol produsert av gummitre. Stoppet sete og rygg med trekk i polyesterstoff. Skumfyll.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1724968-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-nikki-1-stk%2F1724968-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Akrobat Pendel",
+    "Description": "Lampen har lysarmer i sort metall, detaljer i matt messing og 5stk glasskupler i opal.",
+    "Link_image": "akrobat_pendel_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7041661265288-akrobat-pendel-5x25w-g9-svartmessingopal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Rosali",
-    "Description": "Spisestol Rosali, 2-pk - Svart. Spisestol Rosali i retrostil. Selges i 2-pakning. Metallben, kledd sete og rottingdetaljer.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1733893-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fkare-design%2Fspisestol-rosali-2-pk%2F1733893-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Arenales Pendel 2",
+    "Description": "Søt og trendy takpendel i børstet messing og opal glass, diameter 18cm.",
+    "Link_image": "arenales_pendel_2.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/eglo-arenales-taklampe-pendel-messing-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Sili",
-    "Description": "Stol Sili 2-pk - Svart. 2 stoler i pulverlakkert bøk med sete og rygg i rotting. Setet er forsterket. Forkrommet metallstamme.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1680619-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-sili-2-pk%2F1680619-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Arenales Pendel",
+    "Description": "Søt og trendy takpendel i børstet messing og opal glass, diameter 18cm.",
+    "Link_image": "arenales_pendel_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/eglo-arenales-taklampe-pendel-messing-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Alice",
-    "Description": "Stol Alice 2-pk - Svart. To stoler med stamme i massiv ask. Sete og ryggstø i finert kryssfiner. Leveres monterte.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1682053-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-alice-2-pk%2F1682053-01-2&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Asker Bordlampe Opal 1",
+    "Description": "Asker bordlampe er laget i sort metall og med buet glasskjerm. Skjermen er laget av matt, hvitt glass.",
+    "Link_image": "Asker_bordlampe_opal_miljo1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/asker-bordlampe-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Alor",
-    "Description": "Stol Alor 2-pk - Natur. To stoler av eik med sete av flettet, vokset papirtau. Mål: Høyde 74 cm, bredde 48 cm, dybde 51 cm.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1536285-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-alor-2-pk%2F1536285-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Asker Bordlampe Opal",
+    "Description": "Asker bordlampe er laget i sort metall og med buet glasskjerm. Skjermen er laget av matt, hvitt glass.",
+    "Link_image": "Asker_bordlampe_opal.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/asker-bordlampe-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Anderlina"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Aura Bordlampe Opal",
+    "Description": "Aura er en bordlampe i moderne design med fot i treverk og rillet skjerm i opalt glass.",
+    "Link_image": "Aura_bordlampe_opal_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-aura-bordlampe-brun-tre-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Astrid Bjørk",
-    "Description": "Stol Astrid - Natur. Svenskprodusert stol med behagelig helling i ryggen. Stamme i massiv bjørk.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1649440-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-astrid%2F1649440-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Bellatrix Bordlampe",
+    "Description": "Lampen er laget i sort metall og har tre opalfargede glasskupler med G9 sokkel. Lyset blir mykt og stemningfullt.",
+    "Link_image": "Bellatrix bordlampe .jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/bellatrix-3-lys-bordlampe-sort-opal-glass"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Banita",
-    "Description": "Stol Banita 2-pk - Svart. To spisestoler med sete og rygg av rotting og poppel. Ben og stamme i metall. Leveres monterte.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1659711-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-banita-2-pk%2F1659711-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Bryne Takpendel",
+    "Description": "Klassisk takpendel i sort metall, med fire lyspunkter bak klare glassvegger.",
+    "Link_image": "Bryne_takpendel.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/bryne-4-lys-taklampe-pendel-e27-sort-klart-glass"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Bell Natur",
-    "Description": "Stol Bell 2-pk - Natur. To stoler av massiv alm med sete av vattert rotting. Stolene kan stables.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1069000-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-bell-2-pk%2F1069000-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Buddy Bordlampe Sand 1",
+    "Description": "Lampen har sandfarge og struktur, og opalglass som sprer et mykt og behagelig lys.",
+    "Link_image": "buddy_bordlampe_sand_miljo_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-buddy-bordlampe-sand-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Boston",
-    "Description": "Spisestol Boston - Svart. Umontert spisestol i fløyel med ben av stål. 62,5x52x82.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1689786-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fhouse-nordic%2Fspisestol-boston%2F1689786-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Buddy Bordlampe Sand",
+    "Description": "Lampen har sandfarge og struktur, og opalglass som sprer et mykt og behagelig lys.",
+    "Link_image": "buddy_bordlampe_sand_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-buddy-bordlampe-sand-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Canetti",
-    "Description": "Armstol Canetti - Brun. Armstol i alm med sete og rygg i rotting med dobbeltsidig fletting. Mål: Bredde 58 cm, høyde 77 cm, dybde 60 cm.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1576976-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Farmstol-canetti%2F1576976-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Buddy Bordlampe Sort",
+    "Description": "Lampen har sort farge og opal glass, som sprer et mykt og behagelig lys.",
+    "Link_image": "buddy_bordlampe_sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-buddy-bordlampe-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Classic 2",
-    "Description": "Spisestol Classic - Svart. Stol Classic med stamme av valnøtt og med en vattert sete kledd i kunstlær.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1640147-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fvtwonen%2Fspisestol-classic%2F1640147-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Buddy Sort",
+    "Description": "Lampen er moderne og passer inn i det interiøret du måtte ønske. Denne har sort farge og opalglass.",
+    "Link_image": "buddy_sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-buddy-taklampe-pendel-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Classic",
-    "Description": "Spisestol Classic - Svart. Stol Classic med stamme av valnøtt og med en vattert sete kledd i kunstlær.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1640147-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fvtwonen%2Fspisestol-classic%2F1640147-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Cava Bord Messing",
+    "Description": "En sober, stilsikker bordlampe i børstet messing og rillet skjerm i opalt glass.",
+    "Link_image": "cava_bord_messing_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-cava-bordlampe-e14-borstet-messing-opal-glass"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Cleo",
-    "Description": "Armstol Cleo - Svart. Elegant, høy armstol i klassisk modell med myke former. Av bøk med sete og rygg i rotting.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1576720-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Farmstol-cleo%2F1576720-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Cosmos 12l Sort Sotet",
+    "Description": "Unikt og dekorativt design i eksklusiv utførelse. Den er laget i sort metall med 12 sotede glasskupler.",
+    "Link_image": "cosmos_12l_sort-sotet_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7041661267671-cosmos-12-lys-pendel-g9-sort-sotet"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Croft Beige",
-    "Description": "Spisestol Croft, 2-pk - Beige. En stol som er like komfortabel som en lenestol? Det er mulig. Stolen Croft med armlene.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1715106-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fkave-home%2Fspisestol-croft-2-pk%2F1715106-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Cosmos 12l Sort Sotet Miljø",
+    "Description": "Unikt og dekorativt design i eksklusiv utførelse. Den er laget i sort metall med 12 sotede glasskupler.",
+    "Link_image": "cosmos_12l_sort-sotet_miljo_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7041661267671-cosmos-12-lys-pendel-g9-sort-sotet"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Dagny Svart",
-    "Description": "Stol Dagny 2-pk - Svart. To stoler av bjørk i skandinavisk stil med sete av flettet, vokset papirtau.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1536282-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-dagny-2-pk%2F1536282-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet DaVinci Bordlampe Hvit",
+    "Description": "DaVinci er en uttrykksfull bordlampe, produsert i matt hvit metall med vakre detaljer.",
+    "Link_image": "DaVinci_bordlampe_hvit_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-davinci-bordlampe-30cm-matt-hvit"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Dining Brun",
-    "Description": "Spisestol Dining - Brun. Behagelig spisestol med enkel design Metallstamme med svart finish Kledd med mykt teddystoff.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1690128-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fvtwonen%2Fspisestol-dining%2F1690128-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet DaVinci Gulvlampe Sort",
+    "Description": "DaVinci er en uttrykksfull gulvlampe, produsert i matt svart metall med vakre detaljer.",
+    "Link_image": "DaVinci_gulvlampe_sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-davinci-gulvlampe-139cm-matt-svart"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Galb",
-    "Description": "Armstol, Galb - Brun. Armstol av massiv valnøtt. Elegant, svært behagelig armstol i stilren design med innsvingte former.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1659662-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fam-pm%2Farmstol-galb%2F1659662-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dembleby Pendel Sort",
+    "Description": "Dembleby pendel blander seg sømløst med trender som naturlig, bohemsk og hygge med en sort flettet lampeskjerm i tre. Lampeskjermens vevde mønster fremmer et fascinerende lysspill og skygge.",
+    "Link_image": "dembleby_pendel_sort_miljo_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/9002759432652-dembleby-pendel-40w-e27-sort-tre-o32"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Helle Svart 2",
-    "Description": "Stol Helle 2-pk - Svart. Stoler i 2-pk. Av bøk med sete og rygg i rotting. Bredde 45 cm, høyde 90 cm, dybde 50 cm.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1599776-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-helle-2-pk%2F1599776-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Diablo Bordlampe Hvit-Mess",
+    "Description": "Diablo er en eksklusiv serie lamper i klassisk design. Skjermen på bordlampen rammer inn lyset på en myk og vakker måte.",
+    "Link_image": "Diablo_bordlampe_hvit-mess_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/belid-diablo-bordlampe-30cm-hvit-messing"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Helle Svart",
-    "Description": "Stol Helle 2-pk - Svart. Stoler i 2-pk. Av bøk med sete og rygg i rotting. Bredde 45 cm, høyde 90 cm, dybde 50 cm.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1599776-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-helle-2-pk%2F1599776-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dione 1l Opal",
+    "Description": "Klassisk kulependel i moderne utførelse. Kulen er i hvitt, blankt glass.",
+    "Link_image": "dione_1l_opal_.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-dione-pendel-25cm-e14-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Ines Naturlig eik",
-    "Description": "Ines stol - Brun. Klassisk uttrykk, stilren design og bærekraftige materialer gjør Ines til en vinner.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1717293-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fpastill%2Fines-stol%2F1717293-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dione 1l Opal Miljø",
+    "Description": "Klassisk kulependel i moderne utførelse. Kulen er i hvitt, blankt glass.",
+    "Link_image": "dione_1l_opal_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-dione-pendel-25cm-e14-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Jessi",
-    "Description": "Stol Jessi 2-pk - Svart. To stoler i solid, stilrent og klassisk design med høy kvalitet.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1572547-03-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-jessi-2-pk%2F1572547-03-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dione 3l Opal",
+    "Description": "Takpendel med tre lamper på rekke. Lampen er i sort metall og har hvite, blanke glasskupler.",
+    "Link_image": "dione_3l_opal_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-dione-3lys-pendel-rett-e14-sort-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Jet",
-    "Description": "Stol Jet - Natur. Praktisk stol i klassisk design med ryggstø i askefiner og stoppet sete med slitesterkt stoff.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1605332-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-jet%2F1605332-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dome Sort Miljø Vendt",
+    "Description": "Klassisk utformet bordlampe i sort metall med hvit innside av skjermen.",
+    "Link_image": "dome_sort_miljo_vendt.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-dome-bordlampe-30cm-e14-sort"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos jolina",
-    "Description": "Stol med armelener Jolina 2-pk - Natur. Stol med armlener av massivt gummitre.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1054872-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-med-armelener-jolina-2-pk%2F1054872-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Dreams Takpendel Rosa",
+    "Description": "Søt, feminin takpendel i rosa glass med riller. Detaljglass i klar og amber. Sokkelen og takfestet er i messing",
+    "Link_image": "dreams_takpendel_rosa_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/dreams-taklampe-pendel-e27-rosa-klar-amber-glass"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Kaki White washed",
-    "Description": "Kjøkkenstol Kaki, 1 stk - Natur. Kjøkkenstol i hvitlasert massiv alm med uregelmessig forkant.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1689482-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fkjokkenstol-kaki-1-stk%2F1689482-01-2&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Elektra Miljø 2",
+    "Description": "Elektra er en moderne utgave av en lysekrone. Kronen er laget i matt sort metall i et stilrent design.",
+    "Link_image": "Elektra_miljo_2.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/elektra-pendel-lysekrone-matt-sort-12xe14"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Kogge Brun",
-    "Description": "Stol Kogge 2-pk - Brun. To stoler med stamme i pulverlakkert metall. Rygg og sete er vattert med skumfyll.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1573240-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-kogge-2-pk%2F1573240-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Elektra Miljø",
+    "Description": "Elektra er en moderne utgave av en lysekrone. Kronen er laget i matt sort metall i et stilrent design.",
+    "Link_image": "Elektra_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/elektra-pendel-lysekrone-matt-sort-12xe14"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Lydia",
-    "Description": "Lydia spisestol 2-pk - Grå. 2-pk moderne spisestoler med lett uttrykk. Minimalistisk, tynt metall understell.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1563040-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fnordform%2Flydia-spisestol-2-pk%2F1563040-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Elin Vinduspendel Stal-Opal",
+    "Description": "Stilig vinduspendel med sokkel i matt sort metall og kuppel i sotet glass med dekorative riller.",
+    "Link_image": "Elin_vinduspendel_stal-opal.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/elin-vinduspendel-g9-stal-opal-1"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Mint Svart",
-    "Description": "Stol Mint 2-pk - Svart. To stoler med ben av pulverlakkert metall. Sete og rygg i PU.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1725680-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-mint-2-pk%2F1725680-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Emrik 6-lys Pendel Miljø",
+    "Description": "Emrik er en stilig pendel i avlangt design med sort utførelse og med seks hvite glasskupler. Glasskuplene gir et jevnt lys og et vakkert design.",
+    "Link_image": "emrik_6-lys_pendel_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7070952122283-nordesign-emrik-6-lys-pendel-100-sortopal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Monti Svart",
-    "Description": "Armstol Monti 2-pk - Svart. To armstoler i PP-plast med avrundet form.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1659708-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Farmstol-monti-2-pk%2F1659708-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Emrik 6-lys Pendel",
+    "Description": "Emrik er en stilig pendel i avlangt design med sort utførelse og med seks hvite glasskupler. Glasskuplene gir et jevnt lys og et vakkert design.",
+    "Link_image": "emrik_6-lys_pendel.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7070952122283-nordesign-emrik-6-lys-pendel-100-sortopal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Mood antrasitt",
-    "Description": "Spisestol Mood, 2-pk - Grå. Stoffkledd spisestol i myk fløyel (100% polyester) med en vakker farge.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1609702-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fvtwonen%2Fspisestol-mood-2-pk%2F1609702-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Flame Lantern Lykt 19cm",
+    "Description": "Bærbar lykt med flamme LED-lys for stilig effekt.",
+    "Link_image": "flame_lantern_lykt_19cm_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/flame-lantern-lykt-ip20-moving-flame-batteri"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Morning",
-    "Description": "Spisestol Morning 2-pk - Brun. Denne lekre spisestolen fra serien Morning i gjennomtenkt utførelse er like behagelig som stilren!",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1734381-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fventure-home%2Fspisestol-morning-2-pk%2F1734381-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Flyt Horisontal Pendel",
+    "Description": "Moderne og horisontalt hengende taklampe i sort metall med syv sotede glasskupler. Lampen har lekre messingdetaljer på baksiden av kuplene.",
+    "Link_image": "flyt_horisontal_pendel_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/flyt-7lys-takpendel-horisontal-g9-sort-sotet-glass"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Net",
-    "Description": "Stol Net med pute, 2-pk - Svart.2 stk. stoler av pulverlakkert metall. Avtagbare, lett vatterte puter med ytterstoff i polyester, Martindale",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1680662-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-net-med-pute-2-pk%2F1680662-01-2&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Ina Pendel Opal",
+    "Description": "Pendelen er perfekt der du ønsker behagelig stemningslys. Den har en hengende, lekker kuppel i rillet opal glass.",
+    "Link_image": "ina_pendel_opal_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7024080000661-ina-pendel-40w-e27-o15cm-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Nordmalm 2",
-    "Description": "Stol Nordmalm - Svart. Stol i elegant design med avrundede former. Stoppet sete.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1541680-02-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-nordmalm%2F1541680-02-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Ina Pendel Sotet",
+    "Description": "Pendelen er perfekt der du ønsker behagelig stemningslys. Den har en hengende, lekker kuppel i rillet opal glass.",
+    "Link_image": "ina_pendel_sotet_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7024080000654-ina-pendel-40w-e27-o15cm-smoke"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Palle",
-    "Description": "Stol Palle 2-pk - Hvit. To stoler med ben og stamme i pulverlakkert metall. Trekk i teddystoff med tett, kort lugg.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1725665-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-palle-2-pk%2F1725665-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Mamsell Pendel 55cm",
+    "Description": "Mamsell pendel er laget i metall trukket i fint plissert stretch stoff. Lampen gir et behagelig og dempet lys.",
+    "Link_image": "Mamsell_pendel_55cm_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-mamsell-takpendel-55cm-e27-hvit-tekstil"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Raster 2",
-    "Description": "Stol Raster 2-pk - Grå. 2 stk. stoler i pulverlakkert, rustbehandlet metall.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1680620-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-raster-2-pk%2F1680620-01-2&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Mamsell Pendel",
+    "Description": "Mamsell pendel er laget i metall trukket i fint plissert stretch stoff. Lampen gir et behagelig og dempet lys.",
+    "Link_image": "mamsell_pendel.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-mamsell-takpendel-55cm-e27-hvit-tekstil"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Ritha",
-    "Description": "Stol Ritha 2-pk - Hvit. To stoler med trekk i boucléstoff. Ben av pulverlakkert metall.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1725679-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-ritha-2-pk%2F1725679-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Mamsell Takpendel",
+    "Description": "Mamsell pendel er laget i metall trukket i fint plissert stretch stoff. Lampen gir et behagelig og dempet lys.",
+    "Link_image": "Mamsell_takpendel_miljo2.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-mamsell-takpendel-55cm-e27-hvit-tekstil"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Rodd Grønn",
-    "Description": "Stol Rodd 2-pk - Grønn. Stol med sete og rygg av PU. Ben i pulverlakkert metall med knotter i hardplast.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1708062-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-rodd-2-pk%2F1708062-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Molekyl 11l Mess Opal Miljø",
+    "Description": "Molekyl 11-lys pendel er en art deco inspirert lampe med et iøynefallende design. Lengde: 85cm. Lampen er laget i matt messing og har 11 kupler i opalglass.",
+    "Link_image": "Molekyl_11l_mess-opal_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-molekyl-11lys-taklampe-pendel-messing-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Scroll",
-    "Description": "Spisestol Scroll - Grå. Stiligspisestol Trestamme med svart finish Kledd med vevd stoff i varm",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1690129-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fvtwonen%2Fspisestol-scroll%2F1690129-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Molekyl 11l Mess Opal",
+    "Description": "Molekyl 11-lys pendel er en art deco inspirert lampe med et iøynefallende design. Lengde: 85cm. Lampen er laget i matt messing og har 11 kupler i opalglass.",
+    "Link_image": "Molekyl_11l_mess-opal.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-molekyl-11lys-taklampe-pendel-messing-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Selia",
-    "Description": "Stol Selia, 2-pk - Grå. Stol Selia med valnøttfinért gummitre og stoppet og kledd sete.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1599023-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fkave-home%2Fstol-selia-2-pk%2F1599023-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Molekyl 11l Tinn Opal Miljø 3",
+    "Description": "Molekyl 11-lys pendel er en art deco inspirert lampe med et iøynefallende design. Lengde: 85cm. Lampen er laget i matt tinn og har 11 kupler i opalglass.",
+    "Link_image": "Molekyl_11l_tinn-opal_miljo3.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-molekyl-11lys-taklampe-pendel-tinn-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Sia 2",
-    "Description": "Spisestol Sia 2-pk - Hvit. Den perfekte kombinasjonen av robust design og myke former!",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1734374-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fventure-home%2Fspisestol-sia-2-pk%2F1734374-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Molekyl 11l Tinn Opal",
+    "Description": "Molekyl 11-lys pendel er en art deco inspirert lampe med et iøynefallende design. Lengde: 85cm. Lampen er laget i matt tinn og har 11 kupler i opalglass.",
+    "Link_image": "Molekyl_11l_tinn-opal.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-molekyl-11lys-taklampe-pendel-tinn-opal"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Sili Natur",
-    "Description": "Stol Sili 2-pk - Svart. 2 stoler i pulverlakkert bøk med sete og rygg i rotting.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1680619-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-sili-2-pk%2F1680619-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Oz K4 Pendel Rund Sort",
+    "Description": "Utrolig lekker 4-lys pendel med et minimalistisk design. Lampen er laget i sort aluminium og kommer med gullfargede cuffs/innside.",
+    "Link_image": "oz_k4_pendel_rund_sort.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7070952129916-nordesign-oz-k4-pendel-circular-600-sort-mgolden-cuff"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Sili Svart Natur",
-    "Description": "Stol Sili 2-pk - Svart. 2 stoler i pulverlakkert bøk med sete og rygg i rotting.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1680619-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-sili-2-pk%2F1680619-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Picasso 50cm Hvit",
+    "Description": "Picasso matt hvit pendel er laget for å passe inn i interiøret i alle år.",
+    "Link_image": "Picasso_50cm_hvit_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7391534005566-picasso-pendel-o50cm-matt-hvit"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Sonja 2",
-    "Description": "Stol Sonja 2-pk - Natur. To stoler produsert i et komposittmateriale av gjenvunnet plast og fornybar trespon.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1659709-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-sonja-2-pk%2F1659709-01-2&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Picasso Bordlampe Hvit",
+    "Description": "Picasso matt hvit bordlampe har et enkelt og elegant design for å passe inn i interiøret i mange år.",
+    "Link_image": "Picasso_bordlampe_hvit_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7391534004859-picasso-bordlampe-h46-matt-hvit"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Surpik Beige",
-    "Description": "Stol Surpik, 4-pk - Beige. Stol Surpik av metall og plastbånd er en lett stol som også er svært komfortabel.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1599152-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fkave-home%2Fstol-surpik-4-pk%2F1599152-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Proud Bordlampe Sølv-Sort",
+    "Description": "Stor og stilig bordlampe med fot i sølvfarget glass og sort tekstilskjerm.",
+    "Link_image": "proud_bordlampe_solv-sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7330024579545-proud-bordlampe-solvsvart-mskjerm"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Tibby Brun",
-    "Description": "Armstol skinnimitasjon, Tibby - Brun. Tibby armstol er en komfortabel armstol i enkelt og stilrent design med sete kledd med skinnimitasjon",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1621830-01-2&u=https%3A%2F%2Fwww.ellos.no%2Fam-pm%2Farmstol-skinnimitasjon-tibby%2F1621830-01-2&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Remo Grønn",
+    "Description": "Stilren bordlampe i grønn metall med et design som passer hos de aller fleste.",
+    "Link_image": "Remo_gronn.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7024082999130-remo-bord-h41cm-e27-gronn"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Tirri Kremhvit 2",
-    "Description": "Stol Tirri 2-pk - Hvit. 2 stoler i skandinavisk, stilren design med buet ryggstø.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1725666-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-tirri-2-pk%2F1725666-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Ruben Pendel Mess",
+    "Description": "Ruben vinduspendel gir en overlegen look der den henger. Det lange sylinderet i messing er 40cm langt og diameteren er 7cm.",
+    "Link_image": "ruben_pendel_mess_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-ruben-pendel-vindu-1l-borstet-messing"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Today Brun",
-    "Description": "Stol Today 2-pk - Brun. To stoler av bjørk med rygg og forsterket sete av rotting.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1626019-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fellos-home%2Fstol-today-2-pk%2F1626019-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Salvezinas Bordlampe",
+    "Description": "Svært sofistikert og lekker bordlampe i sort metall og med en hvilende kule i opalt glass.",
+    "Link_image": "salvezinas_bordlampe.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/9002759395933-salvezinas-bord-25w-e14-sorthvit-kuppel"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Tolix Rose Poudre",
-    "Description": "Stol A Chair Painted - Rosa. Stol av stål med farget finish. Et ikon for industriell design.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1365389/13371?prodsku=1700989-01-0&u=https%3A%2F%2Fwww.ellos.no%2Ftolix%2Fstol-a-chair-painted%2F1700989-01-0&intsrc=PUI2_10174"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet San Antonio Pendel Miljø",
+    "Description": "San Antonio er en stor statement lampe i klassisk og stilrent design. Den har tre hengende glasskupler i opalt hvitt glass á Ø30cm",
+    "Link_image": "san-antonio_pendel_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/253012221318-san-antonio-3-lys-pendel"
   },
   {
-    "Category": "Spisestoler",
-    "Name": "Ellos Vitus",
-    "Description": "Spisestol Vitus - Brun. Spisestol av massivt sedertre. Med flettet sete av skinn.",
-    "Link_Supplier": "https://ellosno.sjv.io/c/4354337/1141831/13371?prodsku=1606885-01-0&u=https%3A%2F%2Fwww.ellos.no%2Fbloomingville%2Fspisestol-vitus%2F1606885-01-0&intsrc=PUI2_8877"
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Sencillo 1l Mes Miljø Vendt",
+    "Description": "Enkel pendel til vindu eller tak. Lampen har lampeholde i messing med høyde på 35cm og diameter 5cm.",
+    "Link_image": "sencillo_1l_mes_miljo_vendt.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7330024601796-sencillo-1-lys-pendel-e27-messing"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Sencillo 1l Sort",
+    "Description": "Lampen har lampeholder i sort metall med høyde på 35cm og diameter 5cm.",
+    "Link_image": "sencillo_1l_sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7330024601802-sencillo-1-lys-pendel-e27-svart"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Silence Takpendel Miljø 3",
+    "Description": "Silence takpendel i valnøtt er en takpendel i skandinavisk stil.",
+    "Link_image": "silence_takpendel_miljo3.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/253012106325-silence-pendel-45cm-valnott-e27-max-60w-230v"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Silence Takpendel Valnøtt 1",
+    "Description": "Silence takpendel i valnøtt er en takpendel i skandinavisk stil.",
+    "Link_image": "silence_takpendel_valnott_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/253012106325-silence-pendel-45cm-valnott-e27-max-60w-230v"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Silence Takpendel Valnøtt",
+    "Description": "Silence takpendel i valnøtt er en takpendel i skandinavisk stil.",
+    "Link_image": "silence_takpendel_valnott.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/253012106325-silence-pendel-45cm-valnott-e27-max-60w-230v"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Skotbu Pendel Opal Miljø",
+    "Description": "Klassisk, stilig kuleformet takpendel i opalt glass Ø35cm. Lyset spres mykt gjennom det opale glasset",
+    "Link_image": "Skotbu_pendel_opal_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/253012465019-skotbu-pendel-opal-e27-40w-230v"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Soft Pendel Grå",
+    "Description": "oft er en moderne pendel Ø57cm, som skaper en lun stemning. Den er laget med ullstoff fra Pagunette, som har flammebeskyttende og lydabsorberende egenskaper.",
+    "Link_image": "Soft-pendel_gra_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7391534003449-soft-pendel-o57cm-gra-ull"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Stemning Bord Hvit",
+    "Description": "Kul, liten bordlampe med integrert LED-lyskilde",
+    "Link_image": "stemning_bord_hvit_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/stemning-bordlampe-ute-ip44-oppladbar-hvit"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Tray Pendel Sort",
+    "Description": "En dekorativ taklampe som fungerer både som et interiørelement og som Lighting.",
+    "Link_image": "tray_pendel_sort_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/markslojd-tray-pendel-led-3w-sort"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Vali High Bordlampe Sort 1",
+    "Description": "Vali er en bordlampe som puster skandinavisk design og kvalitet.",
+    "Link_image": "vali-high_bordlampe_sort_1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7391534098575-vali-high-bordlampe-svart-2xg9"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Vali High Bordlampe Sort",
+    "Description": "Vali er en bordlampe som puster skandinavisk design og kvalitet.",
+    "Link_image": "vali-high_bordlampe_sort.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7391534098575-vali-high-bordlampe-svart-2xg9"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Venezia 4-lys Takpendel",
+    "Description": "Stilig takpendel i klassisk stil og med fire lyspunkter. Den har en firkantet ramme i sort metall og har vegger i klart glass.",
+    "Link_image": "Venezia_4-lys_takpendel.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7058960011461-venezia-tak-sortglass-4x40w-e14e27"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Venezia 4l Miljø",
+    "Description": "Stilig takpendel i klassisk stil og med fire lyspunkter. Den har en firkantet ramme i sort metall og har vegger i klart glass.",
+    "Link_image": "venezia_4l_miljo_2.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7058960011461-venezia-tak-sortglass-4x40w-e14e27"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Vinda Stor Tre 2",
+    "Description": "Vinda bordlampe har naturlig trefot og kuppel i rillet, matt opalglass. Kuppelen hviler på stativet og lampen har et moderne uttrykk",
+    "Link_image": "Vinda_stor_tre_2.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7392986772839-vinda-bordlampe-stor-e27-treverk-opal"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagesinet Vinda Stor Tre Miljø 1",
+    "Description": "Vinda bordlampe har naturlig trefot og kuppel i rillet, matt opalglass. Kuppelen hviler på stativet og lampen har et moderne uttrykk",
+    "Link_image": "Vinda_stor_tre_miljo1.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/7392986772839-vinda-bordlampe-stor-e27-treverk-opal"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Pandella bad Sort 40 cm",
+    "Description": "Pandella LED vegglampe IP44 40cm sort",
+    "Link_image": "Pandella-vegg-bad-40cm_miljo_1sort.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/9002759989071-pandella-vegg-bad-led-sort-40cm"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Nicosia",
+    "Description": "Nicosia vegglampe IP44 sort/opal",
+    "Link_image": "Nicosia_vegglampe_bad_miljo.jpg",
+    "Link_Supplier": "https://lampemagasinet.no/products/aneta-nicosia-vegglampe-bad-ip44-g9-sort-opal"
+  },
+  {
+    "Category": "Lighting",
+    "Name": "Lampemagasinet Pandella bad Sort 60 cm",
+    "Description": "Pandella vegglampe bad sort 60 cm",
+    "Link_image": "Pandella-vegg-bad-60cm_miljo.webp",
+    "Link_Supplier": "https://lampemagasinet.no/products/9002759989088-pandella-vegg-bad-led-sort-60cm"
   }
 ]
