@@ -161,7 +161,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   nextStep() {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
-    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+    if (this.currentStepNo + 1 === 5 && !isUserLoggedIn) {
       this.projectService.setCurrentProject(this.project);
       this.openLoginModal();
     } else {
@@ -198,7 +198,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   goToStep(stepNo) {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
-    if (stepNo === 4 && !isUserLoggedIn) {
+    if (stepNo === 5 && !isUserLoggedIn) {
       this.openLoginModal();
     } else {
       if (this.canChangeToStep(stepNo)) {
