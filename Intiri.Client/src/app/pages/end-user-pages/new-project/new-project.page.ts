@@ -92,13 +92,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
 
-    this.route.queryParams.subscribe((stepParam: any) => {
-      if (+stepParam.step === 4 && this.checkIfUserLoggedIn() && this.canChangeToStep(+stepParam.step)) {
-        this.currentStepNo = +stepParam.step;
-        this.goToStep(4);
-      }
-    })
-
     const checkForProject = JSON.parse(sessionStorage.getItem('project'));
     if (checkForProject.name.length) {
       this.project = checkForProject;
