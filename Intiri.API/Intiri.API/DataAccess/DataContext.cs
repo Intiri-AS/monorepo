@@ -23,7 +23,7 @@ namespace Intiri.API.DataAccess
 
 		public DataContext(DbContextOptions options) : base(options)
 		{
-
+			this.Database.SetCommandTimeout(TimeSpan.FromSeconds(120));
 		}
 
 		#endregion ctors
