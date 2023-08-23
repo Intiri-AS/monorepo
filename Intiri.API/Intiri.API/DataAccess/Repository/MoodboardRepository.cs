@@ -106,29 +106,29 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(cm => cm.Id == moodboardId);
 		}
 
-		public async Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids)
-		{
-			return await _context.Moodboards.OfType<ClientMoodboard>()
-				.Where(m => ids.Contains(m.Id))
-				.Include(m => m.Materials)
-				.Include(m => m.Products)
-				.Include(m => m.ColorPalettes)
-				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.ToListAsync();
-		}
+        public async Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids)
+        {
+            return await _context.Moodboards.OfType<ClientMoodboard>()
+                .Where(m => ids.Contains(m.Id))
+                .Include(m => m.Materials)
+                .Include(m => m.Products)
+                .Include(m => m.ColorPalettes)
+                .Include(m => m.Style)
+                    .ThenInclude(s => s.StyleImages)
+                .ToListAsync();
+        }
 
-		//    public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
-		//    {
-		//        return await _context.Moodboards.AsNoTracking()
-		//            .Where(m => roomId == m.Room.Id && m.IsTemplate == true)
-		//            .Include(cp => cp.ColorPalettes)
-		//.Include(m => m.Style)
-		//	.ThenInclude(s => s.StyleImages)
-		//.ToListAsync();
-		//    }
+        //    public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
+        //    {
+        //        return await _context.Moodboards.AsNoTracking()
+        //            .Where(m => roomId == m.Room.Id && m.IsTemplate == true)
+        //            .Include(cp => cp.ColorPalettes)
+        //.Include(m => m.Style)
+        //	.ThenInclude(s => s.StyleImages)
+        //.ToListAsync();
+        //    }
 
-		public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
+        public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
 		{
 			return await _context.Moodboards.AsNoTracking()
 				.Where(m => roomId == m.Room.Id && m.IsTemplate == true)
