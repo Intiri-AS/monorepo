@@ -229,6 +229,82 @@ export class MoodboardDetailsComponent implements OnInit {
 
   dragStart (event, inputNo) {
     if (this.isImageCropping) {
+  onMouseDown (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
+
+    // let slot = document.getElementById(`slot-${slotId}`);
+    // let rect = slot.getBoundingClientRect();
+    // let parent_pos_in_document = {
+      //   top: rect.top + window.scrollY,
+      //   left: rect.left + window.scrollX,
+      // };
+    let _DIV_OFFSET = $(`#slot-${slotId}`).offset();
+    console.log("mouseDown _DIV_OFFSET", _DIV_OFFSET);
+
+    this.isImageDraggingState = true;
+    // this.lastMousePosition = {x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top};
+    this.lastMousePosition = {x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top};
+  }
+
+  onMouseUp (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
+
+    console.log('onMouseUp', event, slotId);
+    this.isImageDraggingState = false;
+  }
+
+
+
+  onMouseMove (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) {
+      return;
+    }
+    if (this.isImageCroppingState && this.isImageDraggingState) {
+      console.log('onMouseMove', slotId);
+
+      let slot = document.getElementById(`slot-${slotId}`);
+      let rect = slot.getBoundingClientRect();
+
+      let parent_pos_in_document = {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+      };
+
+      let slotImage = document.getElementById(`slot-${slotId}-img`);
+
+      let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
+      let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
+      console.log('_CONTAINER_WIDTH', _CONTAINER_WIDTH);
+      console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
+
+      let _IMAGE_HEIGHT = $(`#slot-${slotId}-img`).height();
+      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).width();
+      console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
+      console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
+
+      let currentMousePosition = { x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top };
+      console.log('currentMousePosition', currentMousePosition);
+      console.log('lastMousePosition', this.lastMousePosition);
+      let change_x = currentMousePosition.x - this.lastMousePosition.x;
+      let change_y = currentMousePosition.y - this.lastMousePosition.y;
+
+      this.lastMousePosition = currentMousePosition;
+
+      var img_top = parseInt($(`#slot-${slotId}-img`).css('top'), 10);
+      var img_left = parseInt($(`#slot-${slotId}-img`).css('left'), 10);
+      console.log('img_top', img_top, 'img_left', img_left);
+
+      let img_top_new = (img_top + change_y);
+      let img_left_new = (img_left + change_x);
+      console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+      console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+      slotImage.style.top = img_top_new + 'px';
+      slotImage.style.left = img_left_new + 'px';
+      return;
+    }
+  }
       event.preventDefault();
       return;
     }
