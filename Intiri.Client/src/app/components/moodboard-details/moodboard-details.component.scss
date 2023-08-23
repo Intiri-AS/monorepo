@@ -21,10 +21,6 @@
   @apply object-cover h-full w-full rounded-2xl;
 }
 
-// img {
-//   @apply h-full w-full;
-// }
-
 p {
   @apply text-left;
 }
@@ -37,7 +33,6 @@ p {
     width: 100%;
     display: grid;
     grid-template-columns: 4fr 1fr 0.5fr;
-    // grid-template-rows: 1fr 1fr 1fr 2fr 2fr;
     row-gap: 10px;
     column-gap: 15px;
     background: #D9D9D9;
@@ -48,7 +43,6 @@ p {
       row-gap: 10px;
 
       .top-section {
-        // background-color: #fc3;
         display: grid;
         grid-template-columns: 1fr 1fr 0.5fr;
         grid-template-rows: repeat(3, 1fr);
@@ -56,11 +50,12 @@ p {
         row-gap: 10px;
 
         .material {
-          background-size: cover !important;
           background-color: #fff;
           height: 5.3rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .image-input-1 {
@@ -69,13 +64,18 @@ p {
           height: 17.2rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .image-input-2 {
           background-color: #fff;
           grid-row: span 3;
+          height: 17.2rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
       }
 
@@ -93,12 +93,16 @@ p {
           height: 17.2rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-4 {
           background-color: #fff;
           height: 8.3rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-5 {
           background-color: #fff;
@@ -106,12 +110,16 @@ p {
           height: 17.2rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-6 {
           background-color: #fff;
           height: 8rem;
           position: relative;
           text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
       }
     }
@@ -128,6 +136,8 @@ p {
         max-height: 11rem;
         position: relative;
         text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
       }
     }
 
@@ -155,10 +165,20 @@ p {
   top: 0;
   left: 0;
 }
+
 .done-btn {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.slot-image-style {
+  @apply object-cover cursor-pointer;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .primary-btn-custom {

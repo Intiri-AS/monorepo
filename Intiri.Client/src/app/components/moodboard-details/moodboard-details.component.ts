@@ -1,12 +1,13 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
-import { Router,NavigationEnd  } from '@angular/router';
+import { Router  } from '@angular/router';
+import * as $ from 'jquery'
 
 @Component({
   selector: 'app-moodboard-details',
@@ -14,8 +15,7 @@ import { Router,NavigationEnd  } from '@angular/router';
   styleUrls: ['./moodboard-details.component.scss'],
 })
 export class MoodboardDetailsComponent implements OnInit {
-
-  @ViewChild('slides') slides: IonSlides;
+  // @ViewChild('slides') slides: IonSlides;
 
   @Input() moodboard: Moodboard;
   @Input() bigCardOnly: boolean | null;
@@ -57,7 +57,9 @@ export class MoodboardDetailsComponent implements OnInit {
 
   MOODBOARD_SLOT_COUNT: number = 16;
   cropFeatureMap = {};
-  isImageCropping: boolean = false;
+  isImageCroppingState: boolean = false;
+  isImageDraggingState: boolean = false;
+  lastMousePosition: any = null;
 
   constructor(
     private modalController: ModalController,
@@ -101,6 +103,15 @@ export class MoodboardDetailsComponent implements OnInit {
         this.assignDefaultSlots();
       }
     }
+  }
+
+  setNaturalImageDimensions (slotId) {
+    // Get the image element
+    var image = document.getElementById(`slot-${slotId}-img`) as HTMLImageElement;
+
+    // Set the height and width to the actual size
+    image.style.height = image.naturalHeight + 'px';
+    image.style.width = image.naturalWidth + 'px';
   }
 
   initializeCropFeatureMap () {
@@ -210,11 +221,11 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   next() {
-    this.slides.slideNext();
+    // this.slides.slideNext();
   }
 
   prev() {
-    this.slides.slidePrev();
+    // this.slides.slidePrev();
   }
 
   async openImageInModal(image) {
@@ -227,8 +238,6 @@ export class MoodboardDetailsComponent implements OnInit {
     await modal.present();
   }
 
-  dragStart (event, inputNo) {
-    if (this.isImageCropping) {
   onMouseDown (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
 
@@ -305,11 +314,32 @@ export class MoodboardDetailsComponent implements OnInit {
       return;
     }
   }
+
+  getOuterHeight(element) {
+    var style = getComputedStyle(element);
+    var height = element.offsetHeight;
+    var marginTop = parseFloat(style.marginTop);
+    var marginBottom = parseFloat(style.marginBottom);
+    return height + marginTop + marginBottom;
+  }
+
+
+  getOuterWidth(element) {
+    var style = getComputedStyle(element);
+    var width = element.offsetWidth;
+    var marginLeft = parseFloat(style.marginLeft);
+    var marginRight = parseFloat(style.marginRight);
+
+    return width + marginLeft + marginRight;
+  }
+
+  dragStart (event, slotId) {
+    if (this.isImageCroppingState) {
       event.preventDefault();
       return;
     }
-    if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
-      this.draggedShoppingListItem = inputNo;
+    if (typeof slotId == 'string') { // Admin can drag & drop anything from shopping list
+      this.draggedShoppingListItem = slotId;
 
       let id = this.userData.roles[0] == 'Admin' ? '#AdminCard' : '#ClientCard';
       let cardElement = document.querySelector(id);
@@ -317,7 +347,7 @@ export class MoodboardDetailsComponent implements OnInit {
         cardElement.scrollIntoView({behavior: 'smooth'});
       }
     } else {
-      this.previousSlotId = inputNo;
+      this.previousSlotId = slotId;
     }
   }
 
@@ -422,6 +452,10 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   getToolTipMoodboardItem (slotId) {
+    if (this.isImageCroppingState) {
+      return;
+    }
+
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
       let provider = this.moodboard.styleImages.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
       return provider
@@ -455,6 +489,9 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   redirectToEntityPartnerLink (slotId) {
+    if (this.isImageCroppingState) {
+      return;
+    }
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
       //
     } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
@@ -473,7 +510,7 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   toggleCropButtonVisibility (slotId) {
-    if (this.isImageCropping) return;
+    if (this.isImageCroppingState) return;
     if (this.userData.roles[0] == 'Admin') {
       if (this.router.url.includes('edit-moodboard')) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
@@ -482,15 +519,16 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   onCropButtonClick (slotId) {
-    console.log('Now show crop modal');
-    this.isImageCropping = true;
+    this.isImageCroppingState = true;
 
     this.cropFeatureMap[slotId].showCropButton = false;
     this.cropFeatureMap[slotId].isImageCroppingState = true;
+
+    // this.setNaturalImageDimensions(slotId);
   }
 
   onCroppingDone (slotId) {
-    this.isImageCropping = false;
+    this.isImageCroppingState = false;
     this.cropFeatureMap[slotId].isImageCroppingState = false;
   }
 }
