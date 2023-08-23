@@ -59,17 +59,28 @@ p {
           background-size: cover !important;
           background-color: #fff;
           height: 5.3rem;
+          position: relative;
+          text-align: center;
         }
 
         .image-input-1 {
           background-color: #fff;
           grid-row: span 3;
           height: 17.2rem;
+          position: relative;
+          text-align: center;
         }
 
         .image-input-2 {
           background-color: #fff;
           grid-row: span 3;
+          position: relative;
+          text-align: center;
+          .crop-btn-7 {
+            position: absolute;
+            top: 7rem;
+            left: 0;
+          }
         }
       }
 
@@ -85,19 +96,27 @@ p {
           background-color: #fff;
           grid-row: span 2;
           height: 17.2rem;
+          position: relative;
+          text-align: center;
         }
         .image-input-4 {
           background-color: #fff;
           height: 8.3rem;
+          position: relative;
+          text-align: center;
         }
         .image-input-5 {
           background-color: #fff;
           grid-row: span 2;
           height: 17.2rem;
+          position: relative;
+          text-align: center;
         }
         .image-input-6 {
           background-color: #fff;
           height: 8rem;
+          position: relative;
+          text-align: center;
         }
       }
     }
@@ -112,6 +131,8 @@ p {
         width: 100%;
         background: #fff;
         max-height: 11rem;
+        position: relative;
+        text-align: center;
       }
     }
 
@@ -133,6 +154,32 @@ p {
     }
   }
 }
+
+.crop-btn-material {
+  position: absolute;
+  top: 1rem;
+  left: 4rem;
+}
+
+.crop-btn-product {
+  position: absolute;
+  top: 4rem;
+  left: 1rem;
+}
+
+.crop-btn-large-bg {
+  position: absolute;
+  top: 7rem;
+  left: 4rem;
+}
+
+.crop-btn-small-bg {
+  position: absolute;
+  top: 2.5rem;
+  left: 0rem;
+  width: 5rem;
+}
+
 
 .palette-container {
   display: grid;
