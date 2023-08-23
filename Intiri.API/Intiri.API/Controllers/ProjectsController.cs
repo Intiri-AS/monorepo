@@ -282,10 +282,6 @@ namespace Intiri.API.Controllers
                 return NotFound();
             }
 
-            MoodboardOutDTO highMatch = suggestions.Moodboards.First().Moodboard;
-
-            suggestions.MoodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(highMatch.StyleImages.FirstOrDefault().StyleId, projectIn.RoomId);
-
             return Ok(suggestions);
         }
 
