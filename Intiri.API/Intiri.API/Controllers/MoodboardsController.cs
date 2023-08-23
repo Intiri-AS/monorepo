@@ -385,17 +385,25 @@ namespace Intiri.API.Controllers
             }
 
 			string shoppingItems = "";
-			string shoppingItem = @"<div class=""box-css"">
-										<div class=""box-one"">
-											<div class=""image-container-box"">
-												<a href=""#Link#"">
-													<img src=""#ImageLink#""
-														 alt=""Image Description"" />
-												</a>
-											</div>
-										</div>
-										<div class=""text-box"">#Name#</div>
-									</div>";
+         //   string shoppingItem = @"<div class=""box-css"">
+									//	<div class=""box-one"">
+									//		<div class=""image-container-box"">
+									//			<a href=""#Link#"">
+									//				<img src=""#ImageLink#""
+									//					 alt=""Image Description"" />
+									//			</a>
+									//		</div>
+									//	</div>
+									//	<div class=""text-box"">#Name#</div>
+									//</div>";
+
+            string shoppingItem = @"
+				<div class=""product-box"">
+                    <div class=""product-image-box"">
+                        <img src=""#ImageLink#"" alt=""Image Description"" />
+                    </div>
+                    <div class=""text-box"">#Name#</div>
+                </div>";
 
             //Products
             foreach (var item in moodboardOut.Products)
@@ -448,8 +456,8 @@ namespace Intiri.API.Controllers
 			}
 
             string shoppingItemColorPalette = @"
-				<div class=""box-css"">
-					<div class=""box-one"">
+				<div class=""product-box"">
+					<div class=""product-image-box"">
 						<div class=""palette-container"">
 							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><label>#mainColor_ColorName#</label></div>
 							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><label>#shadeColorLight_ColorName#</label></div>
