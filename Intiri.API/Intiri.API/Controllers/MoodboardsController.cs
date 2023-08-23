@@ -489,6 +489,7 @@ namespace Intiri.API.Controllers
             }
 
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
+            string header = "<div class=\"header\">\r\n            <img src=\"https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg\">\r\n        </div>";
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions.MarginTop = 0;
@@ -497,6 +498,10 @@ namespace Intiri.API.Controllers
             renderer.RenderingOptions.MarginBottom = 0;
             renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
             renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
+            renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
+            {
+                HtmlFragment = header,
+            };
             var pdf = renderer.RenderHtmlAsPdf(contents);
             pdf.CompressImages(99);
             return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");

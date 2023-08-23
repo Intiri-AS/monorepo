@@ -4,32 +4,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
-    <style>
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin: 15mm 0mm 0mm;
+        }
+
         body {
             font-family: 'IBM Plex Sans';
             margin: 0px;
             padding: 0px;
             overflow-x: hidden;
             text-decoration: none;
-            position: relative;
         }
-
-        @page {
-            size: landscape;
-            margin: 10mm 0mm 0mm 0mm;
-
-            @top-left {
-                content: element(header);
-            }
-        }
-
-        .header {
-            position: running(header);
-        }
-
-            .header img {
-                height: 20px;
-            }
 
         .container {
             position: relative;
@@ -178,6 +165,10 @@
             display: grid;
             grid-template-columns: repeat(4, minmax(100px, 25%));
             gap: 40px;
+        }
+
+        .product-box {
+            page-break-inside: avoid;
         }
 
         .product-image-box {
@@ -338,9 +329,10 @@
 
         footer {
             width: 100%;
-            position: absolute;
-            bottom: -100;
+            position: running(footer);
             page-break-inside: avoid;
+            left: 0;
+            bottom: -100;
         }
 
         .footer-text {
@@ -412,10 +404,10 @@
 </head>
 <body>
 
-    <section class="container">
-        <div class="header">
+    <main class="container">
+        <!--<div class="header">
             <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg">
-        </div>
+        </div>-->
         <div class="title">Project Title</div>
         <div class="template-container">
             <div class="first">
@@ -503,7 +495,7 @@
                 <div class="promo-code">Intiri10</div>
             </div>
         </div>
-    </section>
+    </main>
 
     <footer>
         <div class="partner-container">
