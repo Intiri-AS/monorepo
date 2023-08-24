@@ -310,28 +310,61 @@ namespace Intiri.API.Controllers
 
         [HttpGet("CreateMoodboardPDF")]
 		[AllowAnonymous]
-        public async Task<IActionResult> CreateMoodboardPDF(int moodboardId)
+        public async Task<IActionResult> CreateMoodboardPDF(int moodboardId,string lng = "")
         {
+			#region text
+			string SubTitle1 = "Congratulations on your new mood board";
+			string SubTitle2 = "Exciting News: Unlock discounts using Intiri’s promo codes at different stores – simply scroll down for the codes!";
+			string ProductList = "Product List";
+			string PromoCodes = "Promo Codes";
+			string DiscountCode = "Discount code";
+			string Trustedby = "Trusted by top brands";
+
+            if (lng == "no")
+            {
+                SubTitle1 = "Gratulerer med ditt nye stemningskart";
+                SubTitle2 = "Spennende nyheter: Lås opp rabatter ved å bruke Intiris kampanjekoder i ulike butikker – rull bare nedover for kodene!";
+                ProductList = "Produktliste";
+                PromoCodes = "Rabattkode";
+                DiscountCode = "Rabattkode";
+                Trustedby = "Våre samarbeidspartnere";
+            }
+            #endregion
+
             var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
             string contents = System.IO.File.ReadAllText(htmlPath);
 
-            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardByIdOptimized(moodboardId);
-
+            ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardOptimizedById(moodboardId);
+            
             if (moodboard == null)
             {
                 return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
             }
 
+			contents = contents.Replace("#ProjectName#", moodboard.Project.Name);
+			contents = contents.Replace("#SubTitle1#", SubTitle1);
+			contents = contents.Replace("#StyleName#", moodboard.Style?.Name);
+			contents = contents.Replace("#RoomName#", moodboard.Room?.Name);
+			contents = contents.Replace("#SubTitle2#", SubTitle2);
+			contents = contents.Replace("#ProductList#", ProductList);
+			contents = contents.Replace("#PromoCodes#", PromoCodes);
+			contents = contents.Replace("#DiscountCode#", DiscountCode);
+			contents = contents.Replace("#Trustedby#", Trustedby);
+
             MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
             moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
 			List<SlotInfo> allSlots = new List<SlotInfo>();
-            JObject slotInfo = JObject.Parse(moodboardOut.SlotInfo);
-            foreach (var pair in slotInfo)
-            {
-				var slot = System.Text.Json.JsonSerializer.Deserialize<SlotInfo>(pair.Value.ToString());
-				slot.slotId = pair.Key;
-                allSlots.Add(slot);
+			try
+			{
+                JObject slotInfo = JObject.Parse(moodboardOut.SlotInfo);
+                foreach (var pair in slotInfo)
+                {
+                    var slot = System.Text.Json.JsonSerializer.Deserialize<SlotInfo>(pair.Value.ToString());
+                    slot.slotId = pair.Key;
+                    allSlots.Add(slot);
+                }
             }
+			catch { }
 
 			foreach (var item in allSlots)
 			{
