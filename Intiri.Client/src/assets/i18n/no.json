@@ -68,6 +68,9 @@
   "PROJECT-DETAILS": {
     "new": "Legg til nytt stilkonsept"
   },
+  "ALL-PROJECTS": {
+    "all-projects": "Alle prosjekter"
+  },
   "MOODBOARD-DETAILS": {
     "included": "Hva er inkludert i stilkonseptet",
     "edit": "Endre stilkonseptet",

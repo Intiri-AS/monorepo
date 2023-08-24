@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Project } from 'src/app/models/project.model';
 import { AccountService } from 'src/app/services/account.service';
@@ -12,7 +12,7 @@ import { ProfilePopoverComponent } from '../popovers/profile-popover/profile-pop
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   menuItems = [
     {title: 'MY-INTIRI.intiri', url: '/my-intiri'},
@@ -22,8 +22,21 @@ export class HeaderComponent {
   loggedUser$ = this.accountService.currentUser$;
 
   isSettingsSelected: boolean;
+  isCreateNewProjectPage: boolean = false;
 
-  constructor(private projectService: ProjectService, private accountService: AccountService,  private router: Router, public popoverController: PopoverController) {}
+  constructor(
+    private projectService: ProjectService,
+    private accountService: AccountService,
+    private router: Router,
+    private activateRoute: ActivatedRoute,
+    public popoverController: PopoverController
+  ) {}
+
+    ngOnInit(): void {
+       if(this.activateRoute.snapshot.routeConfig.path === 'new-project')  {
+        this.isCreateNewProjectPage = true;
+       }
+    }
 
   isActiveRoute(route): boolean {
     return this.router.url === route;

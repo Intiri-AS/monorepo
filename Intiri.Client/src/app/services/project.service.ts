@@ -151,12 +151,14 @@ export class ProjectService implements Resolve<Project> {
     const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
     const colorPaletteIds = moodboard.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
     const productIds = moodboard?.products.map((e: { [x: string]: any; })=> e['id']);
+    const styleImageIds = moodboard?.styleImages?.map((e: { [x: string]: any; })=> e['id']);
 
     Object.keys(parsedMdb).forEach(key => formData.append("Moodboard." + key, parsedMdb[key]));
 
     this.formDataAppendCollection("Moodboard.MaterialIds", materialIds, formData);
     this.formDataAppendCollection("Moodboard.ColorPaletteIds", colorPaletteIds, formData);
     this.formDataAppendCollection("Moodboard.ProductIds", productIds, formData);
+    this.formDataAppendCollection("Moodboard.StyleImageIds", styleImageIds, formData);
 
     return parsedMdb;
   };
