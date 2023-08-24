@@ -32,8 +32,19 @@ namespace Intiri.API.Services
 			_logger = logger;
 		}
 
-		public async Task<OperationResult<bool>> SendSmsVerificationCode(string countryCode, string phoneNumber)
+		public async Task<OperationResult<bool>> SendSmsVerificationCode(string countryCode, string phoneNumber,bool isException)
 		{
+			if(isException)
+			{
+                OperationResult<bool> responce = new()
+                {
+                    Result = true,
+                    IsSuccess = true,
+                    ErrorMessage = ""
+                };
+                return responce;
+            }
+
 			Random generator = new();
 
 			string verificationCode = 

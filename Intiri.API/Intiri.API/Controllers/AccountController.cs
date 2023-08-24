@@ -71,7 +71,7 @@ namespace Intiri.API.Controllers
 			}
 
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber);
+				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber,false);
 
 			if (!sendOperation.Result) return BadRequest(sendOperation.ErrorMessage);
 
@@ -96,7 +96,7 @@ namespace Intiri.API.Controllers
 			if (user == null) return BadRequest("Invalid user phone number");
 
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber);
+				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber,user.PhoneNumberConfirmed);
 
 			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
 
@@ -171,7 +171,7 @@ namespace Intiri.API.Controllers
 			SmsVerificationResendInDTO inDTO)
 		{
 			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber);
+				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber,false);
 
 			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
 
