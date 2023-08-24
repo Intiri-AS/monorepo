@@ -10,6 +10,7 @@ import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { AccountService } from 'src/app/services/account.service';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -85,19 +86,13 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private nav: NavController,
     private commonUtilsService: CommonUtilsService,
+    private moodboardService: MoodboardService,
   ) {}
 
   ngOnInit() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
-
-    this.route.queryParams.subscribe((stepParam: any) => {
-      if (+stepParam.step === 4 && this.checkIfUserLoggedIn() && this.canChangeToStep(+stepParam.step)) {
-        this.currentStepNo = +stepParam.step;
-        this.goToStep(4);
-      }
-    })
 
     const checkForProject = JSON.parse(sessionStorage.getItem('project'));
     if (checkForProject.name.length) {
@@ -164,16 +159,32 @@ export class NewProjectPage implements OnInit, OnDestroy {
     if (this.currentStepNo + 1 === 5 && !isUserLoggedIn) {
       this.projectService.setCurrentProject(this.project);
       this.openLoginModal();
-    } else {
-      if (this.canChangeToStep(this.currentStepNo + 1)) {
+      return;
+    }
+    if (this.currentStepNo + 1 === 5) { //load moodboard before changing to final step
+      this.spinner.show();
+      let currentMoodboard = this.project.currentMoodboard;
+      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
+        this.project.currentMoodboard = res;
+        this.spinner.hide();
+
+        //Change step
         this.currentStepNo++;
         this.changeQueryParam(this.currentStepNo);
         this.projectService.setCurrentProject(this.project);
-      }
-      if (this.currentStepNo === 4) {
-        this.getMoodboardMatches();
-      }
+      })
+      return;
     }
+
+    if (this.canChangeToStep(this.currentStepNo + 1)) {
+      this.currentStepNo++;
+      this.changeQueryParam(this.currentStepNo);
+      this.projectService.setCurrentProject(this.project);
+    }
+    if (this.currentStepNo === 4) {
+      this.getMoodboardMatches();
+    }
+
   }
 
 
@@ -200,15 +211,33 @@ export class NewProjectPage implements OnInit, OnDestroy {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
     if (stepNo === 5 && !isUserLoggedIn) {
       this.openLoginModal();
-    } else {
-      if (this.canChangeToStep(stepNo)) {
-        this.currentStepNo = stepNo;
-        this.changeQueryParam(stepNo);
-        this.projectService.setCurrentProject(this.project);
-      }
-      if (stepNo === 4) {
-        this.getMoodboardMatches();
-      }
+      return;
+    }
+    if (stepNo === 5) {
+      this.spinner.show();
+      let currentMoodboard = this.project.currentMoodboard;
+      console.log('here?', currentMoodboard)
+      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
+        console.log('api has been fetched', res);
+        this.project.currentMoodboard = res;
+        this.spinner.hide();
+
+        // Change route after moodboard load
+        if (res) {
+          this.currentStepNo = stepNo;
+          this.changeQueryParam(stepNo);
+          this.projectService.setCurrentProject(this.project);
+        }
+      })
+      return;
+    }
+    if (this.canChangeToStep(stepNo)) {
+      this.currentStepNo = stepNo;
+      this.changeQueryParam(stepNo);
+      this.projectService.setCurrentProject(this.project);
+    }
+    if (stepNo === 4) {
+      this.getMoodboardMatches();
     }
   }
 
