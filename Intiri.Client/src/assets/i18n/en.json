@@ -68,6 +68,9 @@
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
   },
+  "ALL-PROJECTS": {
+    "all-projects": "All projects"
+  },
   "MOODBOARD-DETAILS": {
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
