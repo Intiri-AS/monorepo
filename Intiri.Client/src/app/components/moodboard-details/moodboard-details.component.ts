@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
-import { Router  } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router';
 import * as $ from 'jquery'
 import { Project } from 'src/app/models/project.model';
 
@@ -18,7 +18,7 @@ import { Project } from 'src/app/models/project.model';
 export class MoodboardDetailsComponent implements OnInit {
   // @ViewChild('slides') slides: IonSlides;
 
-  @Input() project: Project;
+  @Input() project?: Project;
   @Input() moodboard: Moodboard;
   @Input() bigCardOnly: boolean | null;
   @Input() withSlides: boolean | null;
@@ -69,13 +69,12 @@ export class MoodboardDetailsComponent implements OnInit {
     private notifier: NotifierService,
     private accountService: AccountService,
     private router: Router,
+    private activateRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
     console.log('Project in moodboard-details', this.project)
     console.log('moodboard-details', this.moodboard);
-
-    this.initializeCropFeatureMap();
 
     this.loggedUser$.subscribe(res => this.userData = res );
     if (this.userData.roles[0] == 'Admin') {
@@ -106,6 +105,9 @@ export class MoodboardDetailsComponent implements OnInit {
         this.assignDefaultSlots();
       }
     }
+
+    // configure crop feature on Initial load
+    this.initializeCropFeatureMap();
   }
 
   setNaturalImageDimensions (slotId) {
@@ -309,6 +311,17 @@ export class MoodboardDetailsComponent implements OnInit {
       let img_top_new = (img_top + change_y);
       let img_left_new = (img_left + change_x);
       console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+      if(img_top_new > 0)
+			img_top_new = 0;
+      if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
+        img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
+
+      if(img_left_new > 0)
+        img_left_new = 0;
+      if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))
+        img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
+
 
       console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
 
@@ -514,8 +527,14 @@ export class MoodboardDetailsComponent implements OnInit {
 
   toggleCropButtonVisibility (slotId) {
     if (this.isImageCroppingState) return;
+
+    if (!this.moodboard.slotInfo[slotId].entityImagePath) return;
+
     if (this.userData.roles[0] == 'Admin') {
-      if (this.router.url.includes('edit-moodboard')) {
+      if (
+        this.activateRoute.snapshot.routeConfig.path === 'add-moodboard' ||
+        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard'
+      ) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
     }
