@@ -19,7 +19,7 @@
     <div class="project-step-icon bg-moodboard" [class.bg-moodboard-white]="currentStepNo === 4"></div>
     <p class="project-step-text" [class.text-white]="currentStepNo === 4">{{'COMMON.moodboard' | translate}}</p>
   </section>
-  <section [class.last-step-selected]="currentStepNo === 5" [class.disabled]="true" (click)="goToStep(5)" class="new-project-step no-border">
+  <section [class.last-step-selected]="currentStepNo === 5" [class.disabled]="!canChangeStep(5)" (click)="goToStep(5)" class="new-project-step no-border">
     <div class="project-step-icon bg-final-result" [class.bg-final-result-white]="currentStepNo === 5"></div>
     <p class="project-step-text" [class.text-white]="currentStepNo === 5">{{'NEW-PROJECT.final' | translate}}</p>
   </section>
