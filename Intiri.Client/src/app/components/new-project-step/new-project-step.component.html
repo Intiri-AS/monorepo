@@ -245,6 +245,6 @@
 
     <!-- if final step -->
     <div *ngIf="currentStep.data === 'final'">
-      <app-moodboard-details [moodboard]="project.currentMoodboard"></app-moodboard-details>
+      <app-moodboard-details [project]="project" [moodboard]="project.currentMoodboard"></app-moodboard-details>
     </div>
 </div>
