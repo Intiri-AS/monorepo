@@ -187,7 +187,7 @@ export class CustomizeMoodboardPage {
       const customizedProject = project;
       customizedProject.currentMoodboard = this.moodboard;
       this.projectService.setCurrentProject(customizedProject);
-      location.replace('/new-project?step=5'); // in future figure out how to do this with router.navigate
+      this.router.navigateByUrl('/new-project?step=5');
     });
   }
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Intiri.API.DataAccess.Repository
 {
-    public class MoodboardRepository: RepositoryBase<Moodboard>, IMoodboardRepository
+	public class MoodboardRepository : RepositoryBase<Moodboard>, IMoodboardRepository
 	{
 		#region Fields
 
@@ -20,7 +20,7 @@ namespace Intiri.API.DataAccess.Repository
 
 		#region Constructors
 
-		public MoodboardRepository(DataContext dataContext, IMapper mapper): base(dataContext)
+		public MoodboardRepository(DataContext dataContext, IMapper mapper) : base(dataContext)
 		{
 			_mapper = mapper;
 		}
@@ -66,14 +66,14 @@ namespace Intiri.API.DataAccess.Repository
 				.Where(s => !(s is ClientMoodboard))
 				.Include(m => m.Room)
 				.Include(m => m.Materials.Take(2))
-                    //.ThenInclude(mat => mat.MaterialType)
-                .Include(m => m.Products.Take(2))
-                    //.ThenInclude(p => p.ProductType)
-                //.Include(m => m.ColorPalettes)
+				//.ThenInclude(mat => mat.MaterialType)
+				.Include(m => m.Products.Take(2))
+				//.ThenInclude(p => p.ProductType)
+				//.Include(m => m.ColorPalettes)
 				.Include(m => m.Designer)
 				.Include(m => m.Style)
-                .Include(m => m.StyleImages.Take(2))
-                .OrderByDescending(x=>x.Id).AsNoTracking()
+				.Include(m => m.StyleImages.Take(2))
+				.OrderByDescending(x => x.Id).AsNoTracking()
 				.ToListAsync();
 		}
 
@@ -106,26 +106,36 @@ namespace Intiri.API.DataAccess.Repository
 				.SingleOrDefaultAsync(cm => cm.Id == moodboardId);
 		}
 
-		public async Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids)
-		{
-			return await _context.Moodboards.OfType<ClientMoodboard>()
-				.Where(m => ids.Contains(m.Id))
-				.Include(m => m.Materials)
-				.Include(m => m.Products)
-				.Include(m => m.ColorPalettes)
-				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.ToListAsync();
-		}
+        public async Task<IEnumerable<ClientMoodboard>> GetClientMoodboardsByIdsList(ICollection<int> ids)
+        {
+            return await _context.Moodboards.OfType<ClientMoodboard>()
+                .Where(m => ids.Contains(m.Id))
+                .Include(m => m.Materials)
+                .Include(m => m.Products)
+                .Include(m => m.ColorPalettes)
+                .Include(m => m.Style)
+                    .ThenInclude(s => s.StyleImages)
+                .ToListAsync();
+        }
 
+        //    public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
+        //    {
+        //        return await _context.Moodboards.AsNoTracking()
+        //            .Where(m => roomId == m.Room.Id && m.IsTemplate == true)
+        //            .Include(cp => cp.ColorPalettes)
+        //.Include(m => m.Style)
+        //	.ThenInclude(s => s.StyleImages)
+        //.ToListAsync();
+        //    }
 
-		public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
+        public async Task<IEnumerable<Moodboard>> GetMoodboardsByRoomId(int roomId)
 		{
-			return await _context.Moodboards
+			return await _context.Moodboards.AsNoTracking()
 				.Where(m => roomId == m.Room.Id && m.IsTemplate == true)
-				.Include(cp => cp.ColorPalettes)
-				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
+                .Include(m => m.Style)
+                .Include(cp => cp.ColorPalettes)
+				.Include(m => m.StyleImages)
+				.Include(m => m.Products.Take(1)).AsNoTracking()
 				.ToListAsync();
 		}
 
@@ -145,18 +155,18 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
-        public async Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId)
-        {
-            return await _context.Moodboards.AsNoTracking()
-                .Include(m => m.Materials)
-                .Include(m => m.Products)
-                .Include(m => m.ColorPalettes)
-                .Include(m => m.Style)
-                .Include(m => m.StyleImages)
-                .Where(m => moodboardId == m.Id)
+		public async Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId)
+		{
+			return await _context.Moodboards.AsNoTracking()
+				.Include(m => m.Materials)
+				.Include(m => m.Products)
+				.Include(m => m.ColorPalettes)
+				.Include(m => m.Style)
+				.Include(m => m.StyleImages)
+				.Where(m => moodboardId == m.Id)
 				.AsNoTracking()
-                .FirstOrDefaultAsync();
-        }
+				.FirstOrDefaultAsync();
+		}
 
 		public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
 		{
@@ -173,21 +183,31 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
-		public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
-		{
-			return await _context.Moodboards
-				.Include(m => m.Room)
-				.Include(m => m.Materials)
-					.ThenInclude(mat => mat.MaterialType)
-				.Include(m => m.Products)
-					.ThenInclude(p => p.ProductType)
-				.Include(m => m.ColorPalettes)
-				.Include(m => m.Style)
-					.ThenInclude(s => s.StyleImages)
-				.Where(m => m.Style.Id == styleId && m.Room.Id != roomId)
-				.ToListAsync();
-		}
+		//public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
+		//{
+		//	return await _context.Moodboards
+		//		.Include(m => m.Room)
+		//		.Include(m => m.Materials)
+		//			.ThenInclude(mat => mat.MaterialType)
+		//		.Include(m => m.Products)
+		//			.ThenInclude(p => p.ProductType)
+		//		.Include(m => m.ColorPalettes)
+		//		.Include(m => m.Style)
+		//			.ThenInclude(s => s.StyleImages)
+		//		.Where(m => m.Style.Id == styleId && m.Room.Id != roomId)
+		//		.ToListAsync();
+		//}
 
-		#endregion Public methods
-	}
+        public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
+        {
+            return await _context.Moodboards.AsNoTracking()
+                .Include(m => m.Style)
+                .Include(m => m.Products.Take(1))
+                .Include(m => m.StyleImages.Take(1))
+                .Where(m => m.Style.Id == styleId && m.Room.Id != roomId).AsNoTracking()
+                .ToListAsync();
+        }
+
+        #endregion Public methods
+    }
 }
