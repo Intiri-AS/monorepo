@@ -62,11 +62,11 @@ namespace Intiri.API.Controllers
 		{
 			IEnumerable<Project> projects = await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(User.GetUserId());
 
-			foreach (Project project in projects)
-			{
-				IEnumerable<ClientMoodboard> moodboards = await _unitOfWork.MoodboardRepository.GetClientMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
-				project.ProjectMoodboards = moodboards.ToArray();
-			}
+			//foreach (Project project in projects)
+			//{
+			//	IEnumerable<ClientMoodboard> moodboards = await _unitOfWork.MoodboardRepository.GetClientMoodboardsByIdsList(project.ProjectMoodboards.Select(m => m.Id).ToArray());
+			//	project.ProjectMoodboards = moodboards.ToArray();
+			//}
 
 			IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(projects);
 
@@ -238,33 +238,56 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		[HttpPost("moodboardMatch")]
-		public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
-		{
-			if (projectIn == null) return BadRequest();
+		//[HttpPost("moodboardMatch")]
+		//public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
+		//{
+		//	if (projectIn == null) return BadRequest();
 
-			MoodboardSuggestionDTO suggestions = new()
-			{
-				Moodboards = new List<MoodboardMatchDTO>(),
-				MoodboardFamily = new List<MoodboardOutDTO>()
-			};
+		//	MoodboardSuggestionDTO suggestions = new()
+		//	{
+		//		Moodboards = new List<MoodboardMatchDTO>(),
+		//		MoodboardFamily = new List<MoodboardOutDTO>()
+		//	};
 
-			suggestions.Moodboards = await _moodboardSevice.FindMoodboardMatchesAsync(projectIn);
+		//	suggestions.Moodboards = await _moodboardSevice.FindMoodboardMatchesAsync(projectIn);
 
-			if (suggestions.Moodboards == null )
-			{
-				return NotFound();
-			}
+		//	if (suggestions.Moodboards == null)
+		//	{
+		//		return NotFound();
+		//	}
 
-			MoodboardOutDTO highMatch = suggestions.Moodboards.First().Moodboard;
+		//	MoodboardOutDTO highMatch = suggestions.Moodboards.First().Moodboard;
 
-			suggestions.MoodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(highMatch.Style.Id, highMatch.Room.Id);
+		//	suggestions.MoodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(highMatch.Style.Id, highMatch.Room.Id);
 
-			return Ok(suggestions);
-		}
+		//	return Ok(suggestions);
+		//}
 
-		// Get moodboards with target style ID and with all rooms other than the target room ID
-		[HttpGet("moodboardStyleFamily/{styleId}/{roomId}")]
+		[AllowAnonymous]
+        [HttpPost("moodboardMatch")]
+        public async Task<ActionResult<MoodboardSuggestionDTO>> FindMoodboardMatches([FromBody] MoodboardMatchInDTO projectIn)
+        {
+            if (projectIn == null) return BadRequest();
+
+            MoodboardSuggestionDTO suggestions = new()
+            {
+                Moodboards = new List<MoodboardMatchDTO>(),
+                MoodboardFamily = new List<MoodboardOutDTO>()
+            };
+
+            suggestions.Moodboards = await _moodboardSevice.FindMoodboardMatchesAsync(projectIn);
+
+            if (suggestions.Moodboards == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(suggestions);
+        }
+
+        // Get moodboards with target style ID and with all rooms other than the target room ID
+        [AllowAnonymous]
+        [HttpGet("moodboardStyleFamily/{styleId}/{roomId}")]
 		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardStyleFamily(int styleId, int roomId)
 		{
 			if (!await _unitOfWork.StyleRepository.DoesAnyExist(st => st.Id == styleId))

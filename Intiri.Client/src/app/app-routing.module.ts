@@ -54,7 +54,7 @@ import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'landing',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {

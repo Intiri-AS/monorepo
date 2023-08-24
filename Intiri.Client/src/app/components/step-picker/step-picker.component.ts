@@ -20,6 +20,7 @@ export class StepPickerComponent implements OnInit {
   // inputs used only for canChangeStep() function, since it needs to pass context to "this".
   @Input() project: Project; // used only for create-project-page
   @Input() moodboard: object; // used only for customize-moodboard-page
+  @Input() isEditMoodboardPage: boolean;
 
   constructor() { }
 

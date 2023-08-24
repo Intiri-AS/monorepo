@@ -5,7 +5,7 @@ namespace Intiri.API.Services;
 
 public class TestSmsVerificationService : ISmsVerificationService
 {
-    public Task<OperationResult<bool>> SendSmsVerificationCode(string countryCode, string phoneNumber)
+    public Task<OperationResult<bool>> SendSmsVerificationCode(string countryCode, string phoneNumber,bool isException)
     {
         return Task.FromResult(new OperationResult<bool>
         {

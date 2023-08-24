@@ -68,6 +68,9 @@
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
   },
+  "ALL-PROJECTS": {
+    "all-projects": "All projects"
+  },
   "MOODBOARD-DETAILS": {
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
@@ -76,7 +79,9 @@
     "no-inspirational-photos-found": "No Inspirational photos found for selected Room and Style",
     "item-not-draggable": "Selected item is not draggable",
     "item-already-in-moodboard": "Selected item is already present in moodboard",
-    "can-not-assign-null": "Can not assign null to a moodboard slot"
+    "can-not-assign-null": "Can not assign null to a moodboard slot",
+    "download-moodboard-pdf": "Download Moodboard PDF",
+    "crop": "Crop"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
@@ -621,7 +626,8 @@
     "Sofatable":"Sofatable",
     "Set tables":"Set tables",
     "Lamps":"Lamps",
-    "Lamp base":"Lamp base"
+    "Lamp base":"Lamp base",
+    "Outdoor":"Outdoor"
   },
   "LANDING-TEXT": {
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",
