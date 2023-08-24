@@ -22,9 +22,11 @@ try
 {
 	var builder = WebApplication.CreateBuilder(args);
 	ConfigurationManager configuration = builder.Configuration;
+	string env = configuration.GetValue<string>("ActiveEnvironment");
+    logger.Info("Environment: " + env);
 
-	// NLog: Setup NLog for Dependency injection
-	builder.Logging.ClearProviders();
+    // NLog: Setup NLog for Dependency injection
+    builder.Logging.ClearProviders();
 	builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 	builder.Host.UseNLog();
 

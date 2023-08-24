@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
 import { Router  } from '@angular/router';
 import * as $ from 'jquery'
+import { Project } from 'src/app/models/project.model';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -17,6 +18,7 @@ import * as $ from 'jquery'
 export class MoodboardDetailsComponent implements OnInit {
   // @ViewChild('slides') slides: IonSlides;
 
+  @Input() project: Project;
   @Input() moodboard: Moodboard;
   @Input() bigCardOnly: boolean | null;
   @Input() withSlides: boolean | null;
@@ -70,6 +72,7 @@ export class MoodboardDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('Project in moodboard-details', this.project)
     console.log('moodboard-details', this.moodboard);
 
     this.initializeCropFeatureMap();

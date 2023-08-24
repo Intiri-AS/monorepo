@@ -137,8 +137,9 @@ export class NewProjectStepComponent implements OnInit {
   }
 
   getMbFamily(mb) {
+    console.log('mb in getMbFamily', mb);
     this.mbsExpanded = false;
-    this.projectService.getMbFamily(mb.style.id, mb.room.id).subscribe((res: any[]) => {
+    this.projectService.getMbFamily(mb.style.id, this.project.room.id).subscribe((res: any[]) => {
       this.mbFamilyAll = res;
       this.currentStep.data.moodboardFamily = res.slice(-3);
     })

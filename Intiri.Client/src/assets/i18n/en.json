@@ -68,6 +68,9 @@
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
   },
+  "ALL-PROJECTS": {
+    "all-projects": "All projects"
+  },
   "MOODBOARD-DETAILS": {
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
@@ -624,7 +627,8 @@
     "Sofatable":"Sofatable",
     "Set tables":"Set tables",
     "Lamps":"Lamps",
-    "Lamp base":"Lamp base"
+    "Lamp base":"Lamp base",
+    "Outdoor":"Outdoor"
   },
   "LANDING-TEXT": {
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",
