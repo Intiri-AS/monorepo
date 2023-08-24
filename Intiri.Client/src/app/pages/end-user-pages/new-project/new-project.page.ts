@@ -217,6 +217,9 @@ export class NewProjectPage implements OnInit, OnDestroy {
       if (this.project.currentMoodboard.id) {
         return;
       }
+      if (this.project.currentMoodboard.id === 0) {
+        return;
+      }
       this.spinner.show();
       let currentMoodboard = this.project.currentMoodboard;
       console.log('here?', currentMoodboard)
