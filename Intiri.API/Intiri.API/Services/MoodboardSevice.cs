@@ -46,7 +46,7 @@ namespace Intiri.API.Services
 			Dictionary<Moodboard, int> moodboardToMatchDictionary = new();
 			foreach (Moodboard moodboard in roomMoodboards)
 			{
-				int styleImageMatches = moodboard.Style.StyleImages
+				int styleImageMatches = moodboard.StyleImages
 				.Select(si => si.Id).ToList()
 				.Intersect(matchInDTO.StyleImageIds).Count();
 
@@ -70,7 +70,7 @@ namespace Intiri.API.Services
 
 			// take first two with high match
 			List<KeyValuePair<Moodboard, int>> moodboardTopMatch = moodboardTopMatchOrder.Take(2).ToList();
-			
+
 			// take last with the lowest match
 			if (moodboardTopMatchOrder.Count > 2)
 			{
@@ -81,32 +81,27 @@ namespace Intiri.API.Services
 
 			for (int i = 0; i < moodboardTopMatch.Count; i++)
 			{
-				Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardTopMatch[i].Key.Id);
-                
-                MoodboardMatchDTO moodboardMatch = new()
+				//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardTopMatch[i].Key.Id);
+				Moodboard moodboard = moodboardTopMatch[i].Key;
+
+				MoodboardMatchDTO moodboardMatch = new()
 				{
 					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
 					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
 				};
-
-                moodboardMatch.Moodboard.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardMatch.Moodboard.ColorPalettes);
-                moodboardsMatch.Add(moodboardMatch);
+				moodboardsMatch.Add(moodboardMatch);
 			}
 
 			return moodboardsMatch;
 		}
 
-		// Get moodboards with target style ID and with all rooms other than the target room ID
-		public async Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
+        // Get moodboards with target style ID and with all rooms other than the target room ID
+        public async Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
 		{
 			IEnumerable<Moodboard> moodboardFamily = await _unitOfWork.MoodboardRepository
 				.GetMoodboardStyleFamilyAsync(styleId, roomId);
 
 			var moodboardFamilyOut = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
-			foreach (var item in moodboardFamilyOut)
-			{
-                item.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(item.ColorPalettes);
-            }
 
             return moodboardFamilyOut;
 		}
@@ -148,7 +143,10 @@ namespace Intiri.API.Services
 
 				IEnumerable<Product> mProducts = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 				newMoodboard.Products = mProducts.ToArray();
-			}
+
+                IEnumerable<StyleImage> mstyleimage = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+                newMoodboard.StyleImages = mstyleimage.ToArray();
+            }
 
 			return newMoodboard;
 		}
@@ -158,6 +156,7 @@ namespace Intiri.API.Services
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 			ClientMoodboard clonedMoodboard = new(moodboard);
             clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
+            clonedMoodboard.StyleImages = moodboard.StyleImages;
 
             _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
