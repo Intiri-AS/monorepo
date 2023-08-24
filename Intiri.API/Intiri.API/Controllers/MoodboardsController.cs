@@ -433,7 +433,9 @@ namespace Intiri.API.Controllers
             string shoppingItem = @"
 				<div class=""product-box"">
                     <div class=""product-image-box"">
-                        <img src=""#ImageLink#"" alt=""Image Description"" />
+						<a href=""#Link#"">
+							<img src=""#ImageLink#"" alt=""Image Description"" />
+						</a>
                     </div>
                     <div class=""text-box"">#Name#</div>
                 </div>";
@@ -492,10 +494,10 @@ namespace Intiri.API.Controllers
 				<div class=""product-box"">
 					<div class=""product-image-box"">
 						<div class=""palette-container"">
-							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><label>#mainColor_ColorName#</label></div>
-							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><label>#shadeColorLight_ColorName#</label></div>
-							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""><label>#shadeColorMedium_ColorName#</label></div>
-							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""><label>#shadeColorDark_ColorName#</label></div>
+							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><a href=""#Link#""><label>#mainColor_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><a href=""#Link#""><label>#shadeColorLight_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""><a href=""#Link#""><label>#shadeColorMedium_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""><a href=""#Link#""><label>#shadeColorDark_ColorName#</label></a></div>
 						</div>
 					</div>
 					<div class=""text-box"">
@@ -509,6 +511,7 @@ namespace Intiri.API.Controllers
                 string sItem = shoppingItemColorPalette;
                 sItem = sItem.Replace("#Number#", item.Number.ToString());
                 sItem = sItem.Replace("#Name#", item.Name);
+                sItem = sItem.Replace("#Link#", "https://www.flugger.com");
                 sItem = sItem.Replace("#mainColor_Link#", item.MainColorData.ImagePath);
                 sItem = sItem.Replace("#shadeColorLight_Link#", item.ShadeColorLightData.ImagePath);
                 sItem = sItem.Replace("#shadeColorMedium_Link#", item.ShadeColorMediumData.ImagePath);
@@ -522,7 +525,12 @@ namespace Intiri.API.Controllers
             }
 
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
-            string header = "<div class=\"header\" style=\"padding: 20px;\">\r\n    <a href=\"https://www.intiri.no/\" target=\"_blank\">        <img src=\"https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg\" style=\"height: 20px;\" />\r\n    </a>    </div>";
+            string header = @" <!DOCTYPE html>
+						<div class=""header"" style=""padding: 20px;"">
+							<a href=""https://www.intiri.no"" target=""_blank"">
+								<img src=""https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg"" style=""height:20px;"" />
+							</a>
+						</div>";
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions.MarginTop = 0;
@@ -534,6 +542,7 @@ namespace Intiri.API.Controllers
             renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
             {
                 HtmlFragment = header,
+				LoadStylesAndCSSFromMainHtmlDocument = true
             };
             var pdf = renderer.RenderHtmlAsPdf(contents);
             pdf.CompressImages(99);
