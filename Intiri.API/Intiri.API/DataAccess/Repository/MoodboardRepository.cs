@@ -208,6 +208,11 @@ namespace Intiri.API.DataAccess.Repository
                 .ToListAsync();
         }
 
+        public async Task<string> GetMoodboardSlotInfo(int moodboardId)
+        {
+            return await _context.Moodboards.AsNoTracking().Where(m => moodboardId == m.Id).Select(m => m.SlotInfo).FirstOrDefaultAsync();
+        }
+
         #endregion Public methods
     }
 }
