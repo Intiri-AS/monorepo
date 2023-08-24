@@ -489,7 +489,7 @@ namespace Intiri.API.Controllers
             }
 
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
-            string header = "<div class=\"header\">\r\n            <img src=\"https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg\">\r\n        </div>";
+            string header = "<div class=\"header\" style=\"padding: 20px;\">\r\n            <img src=\"https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg\" style=\"height: 20px;\">\r\n        </div>";
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions.MarginTop = 0;
