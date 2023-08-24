@@ -143,7 +143,10 @@ namespace Intiri.API.Services
 
 				IEnumerable<Product> mProducts = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 				newMoodboard.Products = mProducts.ToArray();
-			}
+
+                IEnumerable<StyleImage> mstyleimage = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+                newMoodboard.StyleImages = mstyleimage.ToArray();
+            }
 
 			return newMoodboard;
 		}
@@ -153,6 +156,7 @@ namespace Intiri.API.Services
 			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 			ClientMoodboard clonedMoodboard = new(moodboard);
             clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
+            clonedMoodboard.StyleImages = moodboard.StyleImages;
 
             _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
