@@ -10,6 +10,7 @@ import { Router,NavigationEnd  } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -74,6 +75,7 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router,
     private moodboardService: MoodboardService,
+    private projectService: ProjectService,
   ) {
     this.itemsInMoodboard$ = new BehaviorSubject(null);
   }
@@ -126,6 +128,14 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
     if (this.userData.roles[0] == 'FreeEndUser') {
       this.getMoodboardSubscription = this.moodboardService.getMoodboard(this.moodboard.id).subscribe((res: Moodboard) => {
         this.itemsInMoodboard$.next(res);
+
+        Object.keys(res).map(key => { // Set project-data except moodboard slotInfo
+          if (key !== 'slotInfo') {
+            this.project.currentMoodboard[key] = res[key]
+          }
+        })
+
+        this.projectService.setCurrentProject(this.project);
       })
     }
   }
