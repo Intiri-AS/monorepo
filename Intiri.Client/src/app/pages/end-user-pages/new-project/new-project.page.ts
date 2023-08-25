@@ -161,20 +161,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
       this.openLoginModal();
       return;
     }
-    if (this.currentStepNo + 1 === 5) { //load moodboard before changing to final step
-      this.spinner.show();
-      let currentMoodboard = this.project.currentMoodboard;
-      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
-        this.project.currentMoodboard = res;
-        this.spinner.hide();
-
-        //Change step
-        this.currentStepNo++;
-        this.changeQueryParam(this.currentStepNo);
-        this.projectService.setCurrentProject(this.project);
-      })
-      return;
-    }
 
     if (this.canChangeToStep(this.currentStepNo + 1)) {
       this.currentStepNo++;
