@@ -344,7 +344,7 @@ namespace Intiri.API.Controllers
 			contents = contents.Replace("#ProjectName#", moodboard.Project.Name);
 			contents = contents.Replace("#SubTitle1#", SubTitle1);
 			contents = contents.Replace("#StyleName#", moodboard.Style?.Name);
-			contents = contents.Replace("#RoomName#", moodboard.Room?.Name);
+			contents = contents.Replace("#RoomName#", lng == "no" ? moodboard.Room?.NameNorwegian : moodboard.Room?.Name);
 			contents = contents.Replace("#SubTitle2#", SubTitle2);
 			contents = contents.Replace("#ProductList#", ProductList);
 			contents = contents.Replace("#PromoCodes#", PromoCodes);
