@@ -127,6 +127,10 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
 
   ngAfterContentInit (): void {
     if (this.userData.roles[0] == 'FreeEndUser') {
+      if (!this.project) {
+        this.itemsInMoodboard$.next(this.moodboard);
+        return
+      };
       this.itemsInMoodboard$.next(this.project.currentMoodboard);
 
       if (!this.shouldLoadMoodboardItems()) return;
