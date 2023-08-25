@@ -142,7 +142,7 @@ export class MoodboardDetailsComponent implements OnInit {
   }
 
   assignDefaultSlots () {
-     // Assign materials to assigned moodboardSlots
+     // Assign Materials to assigned moodboardSlots
      if (this.moodboard.materials.length >= 4) {
        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
        this.assignItemToMoodboardSlot(1, 'material', this.moodboard.materials[1].id, this.moodboard.materials[1].name, this.moodboard.materials[1].imagePath);
@@ -150,10 +150,18 @@ export class MoodboardDetailsComponent implements OnInit {
        this.assignItemToMoodboardSlot(3, 'material', this.moodboard.materials[3].id, this.moodboard.materials[3].name, this.moodboard.materials[3].imagePath);
      }
 
-     // Assign products to assigned moodboardSlots
+     // Assign Products to assigned moodboardSlots
      if (this.moodboard.products.length >= 2) {
        this.assignItemToMoodboardSlot(9, 'product', this.moodboard.products[0].id, this.moodboard.products[0].name, this.moodboard.products[0].imagePath);
        this.assignItemToMoodboardSlot(10, 'product', this.moodboard.products[1].id, this.moodboard.products[1].name, this.moodboard.products[1].imagePath);
+     }
+
+     // Assign Colors to assigned moodboardSlots
+     if (this.moodboard.colorPalettes.length > 0) {
+       this.assignItemToMoodboardSlot(12, 'color', this.moodboard.colorPalettes[0].shadeColorLightData.id, this.moodboard.colorPalettes[0].shadeColorLightData.name, this.moodboard.colorPalettes[0].shadeColorLightData.imagePath);
+       this.assignItemToMoodboardSlot(13, 'color', this.moodboard.colorPalettes[0].shadeColorMediumData.id, this.moodboard.colorPalettes[0].shadeColorMediumData.name, this.moodboard.colorPalettes[0].shadeColorMediumData.imagePath);
+       this.assignItemToMoodboardSlot(14, 'color', this.moodboard.colorPalettes[0].mainColorData.id, this.moodboard.colorPalettes[0].mainColorData.name, this.moodboard.colorPalettes[0].mainColorData.imagePath);
+       this.assignItemToMoodboardSlot(15, 'color', this.moodboard.colorPalettes[0].shadeColorDarkData.id, this.moodboard.colorPalettes[0].shadeColorDarkData.name, this.moodboard.colorPalettes[0].shadeColorDarkData.imagePath);
      }
   }
 

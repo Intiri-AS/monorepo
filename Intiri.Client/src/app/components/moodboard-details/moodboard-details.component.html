@@ -159,7 +159,8 @@
     <div class="grid-item colors-container">
       <div id="slot-12" class="color color-1">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          *ngIf="moodboard.slotInfo[12].entityImagePath"
+          src="{{moodboard.slotInfo[12].entityImagePath}}"
           alt="shadeColorLightData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorLightData.name"
@@ -167,7 +168,8 @@
       </div>
       <div id="slot-13" class="color color-2">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          *ngIf="moodboard.slotInfo[13].entityImagePath"
+          src="{{moodboard.slotInfo[13].entityImagePath}}"
           alt="shadeColorMediumData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorMediumData.name"
@@ -175,7 +177,8 @@
       </div>
       <div id="slot-14" class="color color-3">
         <img
-          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          *ngIf="moodboard.slotInfo[14].entityImagePath"
+          src="{{moodboard.slotInfo[14].entityImagePath}}"
           alt="mainColorData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].mainColorData.name"
@@ -183,7 +186,8 @@
       </div>
       <div id="slot-15" class="color color-4">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          *ngIf="moodboard.slotInfo[15].entityImagePath"
+          src="{{moodboard.slotInfo[15].entityImagePath}}"
           alt="shadeColorDarkData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorDarkData.name"
@@ -354,7 +358,7 @@
     <div class="grid-item colors-container">
       <div id="slot-12" class="color color-1">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData"
           src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
           alt="shadeColorLightData"
           class="h-full cursor-pointer"
@@ -363,7 +367,7 @@
       </div>
       <div id="slot-13" class="color color-2">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData"
           src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
           alt="shadeColorMediumData"
           class="h-full cursor-pointer"
@@ -372,7 +376,7 @@
       </div>
       <div id="slot-14" class="color color-3">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
+          *ngIf="moodboard?.colorPalettes[0]?.mainColorData"
           src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
           alt="mainColorData"
           class="h-full cursor-pointer"
@@ -381,7 +385,7 @@
       </div>
       <div id="slot-15" class="color color-4">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
+          *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData"
           src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
           alt="shadeColorDarkData"
           class="h-full cursor-pointer"
