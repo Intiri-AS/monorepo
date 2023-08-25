@@ -233,5 +233,21 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Users.AnyAsync(us => us.Id == userId);
 		}
-	}
+
+        public async Task<IEnumerable<Designer>> GetAllDesigners()
+        {
+            return await _context.Users.OfType<Designer>()
+                .Include(x => x.DesignerInfo)
+                .Include(y => y.DesignerPortfolio)
+                .AsNoTracking().ToListAsync();
+        }
+
+        public async Task<Designer> GetDesignerProfile(int id)
+        {
+            return await _context.Users.OfType<Designer>()
+                .Include(x => x.DesignerInfo)
+                .Include(y => y.DesignerPortfolio)
+                .AsNoTracking().SingleOrDefaultAsync(d => d.Id == id);
+        }
+    }
 }
