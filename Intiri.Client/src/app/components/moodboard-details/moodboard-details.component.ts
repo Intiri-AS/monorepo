@@ -64,9 +64,10 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
   cropFeatureMap = {};
 
   itemsInMoodboard$: BehaviorSubject<any>;
+  showLoader: boolean = false;
 
   // Component subscriptions
-  getMoodboardSubscription: Subscription
+  getMoodboardSubscription: Subscription = null;
 
   constructor(
     private modalController: ModalController,
@@ -126,8 +127,15 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
 
   ngAfterContentInit (): void {
     if (this.userData.roles[0] == 'FreeEndUser') {
+      this.itemsInMoodboard$.next(this.project.currentMoodboard);
+
+      if (!this.shouldLoadMoodboardItems()) return;
+      if (!this.moodboard.id) return;
+
+      this.showLoader = true;
       this.getMoodboardSubscription = this.moodboardService.getMoodboard(this.moodboard.id).subscribe((res: Moodboard) => {
         this.itemsInMoodboard$.next(res);
+        this.showLoader = false;
 
         Object.keys(res).map(key => { // Set project-data except moodboard slotInfo
           if (key !== 'slotInfo') {
@@ -141,7 +149,12 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.getMoodboardSubscription.unsubscribe();
+      this.getMoodboardSubscription && this.getMoodboardSubscription.unsubscribe();
+  }
+
+  shouldLoadMoodboardItems (): boolean {
+    let resBool = this.project.currentMoodboard.room == null;
+    return resBool
   }
 
   initializeCropFeatureMap () {
