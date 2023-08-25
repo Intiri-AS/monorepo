@@ -243,6 +243,26 @@ export class MoodboardDetailsComponent implements OnInit {
     await modal.present();
   }
 
+  onMouseWheel (event, slotId) {
+    // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_wheel_deltay2
+    if (this.isImageCroppingState) {
+      // console.log('onMouseWheel', slotId);
+      event.preventDefault();
+      console.log('deltaY', event.deltaY);
+      const mouseDisplacement = event.deltaY;
+      const slotImage = <HTMLImageElement>document.getElementById(`slot-${slotId}-img`);
+      let imageHeight = slotImage.style.height;
+      console.log('imageHeight',slotImage, imageHeight)
+      if (mouseDisplacement > 0) {
+        // imageHeight = imageHeight + 10;
+        event.target.style.height = 140 + mouseDisplacement + '%'
+      } else {
+        // imageHeight = parseInt(imageHeight) - 10;
+        event.target.style.height = 140 - mouseDisplacement + '%';
+      }
+    }
+  }
+
   onMouseDown (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
 
@@ -313,10 +333,9 @@ export class MoodboardDetailsComponent implements OnInit {
       console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
 
       if(img_top_new > 0)
-			img_top_new = 0;
+			  img_top_new = 0;
       if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
         img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
-
       if(img_left_new > 0)
         img_left_new = 0;
       if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))

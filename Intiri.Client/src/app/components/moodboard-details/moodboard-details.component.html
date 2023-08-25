@@ -21,6 +21,7 @@
             (mousedown)="onMouseDown($event, 0)"
             (mouseup)="onMouseUp($event, 0)"
             (mousemove)="onMouseMove($event, 0)"
+            (wheel)="onMouseWheel($event, 0)"
           >
           <ion-button id="ok" *ngIf="cropFeatureMap[0].showCropButton" (click)="onCropButtonClick(0)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
           <ion-button *ngIf="cropFeatureMap[0].isImageCroppingState" (click)="onCroppingDone(0)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -39,6 +40,7 @@
               (mousedown)="onMouseDown($event, 4)"
               (mouseup)="onMouseUp($event, 4)"
               (mousemove)="onMouseMove($event, 4)"
+              (wheel)="onMouseWheel($event, 4)"
             />
             <ion-button *ngIf="cropFeatureMap[4].showCropButton" (click)="onCropButtonClick(4)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[4].isImageCroppingState" (click)="onCroppingDone(4)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -57,6 +59,7 @@
               (mousedown)="onMouseDown($event, 7)"
               (mouseup)="onMouseUp($event, 7)"
               (mousemove)="onMouseMove($event, 7)"
+              (wheel)="onMouseWheel($event, 7)"
             />
             <ion-button *ngIf="cropFeatureMap[7].showCropButton" (click)="onCropButtonClick(7)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[7].isImageCroppingState" (click)="onCroppingDone(7)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -74,6 +77,7 @@
             (mousedown)="onMouseDown($event, 1)"
             (mouseup)="onMouseUp($event, 1)"
             (mousemove)="onMouseMove($event, 1)"
+            (wheel)="onMouseWheel($event, 1)"
           >
           <ion-button *ngIf="cropFeatureMap[1].showCropButton" (click)="onCropButtonClick(1)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
           <ion-button *ngIf="cropFeatureMap[1].isImageCroppingState" (click)="onCroppingDone(1)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -91,6 +95,7 @@
             (mousedown)="onMouseDown($event, 2)"
             (mouseup)="onMouseUp($event, 2)"
             (mousemove)="onMouseMove($event, 2)"
+            (wheel)="onMouseWheel($event, 2)"
           >
           <ion-button *ngIf="cropFeatureMap[2].showCropButton" (click)="onCropButtonClick(2)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
           <ion-button *ngIf="cropFeatureMap[2].isImageCroppingState" (click)="onCroppingDone(2)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -111,6 +116,7 @@
               (mousedown)="onMouseDown($event, 3)"
               (mouseup)="onMouseUp($event, 3)"
               (mousemove)="onMouseMove($event, 3)"
+              (wheel)="onMouseWheel($event, 3)"
             />
             <ion-button *ngIf="cropFeatureMap[3].showCropButton" (click)="onCropButtonClick(3)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[3].isImageCroppingState" (click)="onCroppingDone(3)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -129,6 +135,7 @@
               (mousedown)="onMouseDown($event, 5)"
               (mouseup)="onMouseUp($event, 5)"
               (mousemove)="onMouseMove($event, 5)"
+              (wheel)="onMouseWheel($event, 5)"
             />
             <ion-button *ngIf="cropFeatureMap[5].showCropButton" (click)="onCropButtonClick(5)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[5].isImageCroppingState" (click)="onCroppingDone(5)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -147,6 +154,7 @@
               (mousedown)="onMouseDown($event, 8)"
               (mouseup)="onMouseUp($event, 8)"
               (mousemove)="onMouseMove($event, 8)"
+              (wheel)="onMouseWheel($event, 8)"
             />
             <ion-button *ngIf="cropFeatureMap[8].showCropButton" (click)="onCropButtonClick(8)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[8].isImageCroppingState" (click)="onCroppingDone(8)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -165,6 +173,7 @@
               (mousedown)="onMouseDown($event, 6)"
               (mouseup)="onMouseUp($event, 6)"
               (mousemove)="onMouseMove($event, 6)"
+              (wheel)="onMouseWheel($event, 6)"
             />
             <ion-button *ngIf="cropFeatureMap[6].showCropButton" (click)="onCropButtonClick(6)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
             <ion-button *ngIf="cropFeatureMap[6].isImageCroppingState" (click)="onCroppingDone(6)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -187,6 +196,7 @@
           (mousedown)="onMouseDown($event, 9)"
           (mouseup)="onMouseUp($event, 9)"
           (mousemove)="onMouseMove($event, 9)"
+          (wheel)="onMouseWheel($event, 9)"
         />
         <ion-button *ngIf="cropFeatureMap[9].showCropButton" (click)="onCropButtonClick(9)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
         <ion-button *ngIf="cropFeatureMap[9].isImageCroppingState" (click)="onCroppingDone(9)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -204,6 +214,7 @@
           (mousedown)="onMouseDown($event, 10)"
           (mouseup)="onMouseUp($event, 10)"
           (mousemove)="onMouseMove($event, 10)"
+          (wheel)="onMouseWheel($event, 10)"
         />
         <ion-button *ngIf="cropFeatureMap[10].showCropButton" (click)="onCropButtonClick(10)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
         <ion-button *ngIf="cropFeatureMap[10].isImageCroppingState" (click)="onCroppingDone(10)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
@@ -221,6 +232,7 @@
           (mousedown)="onMouseDown($event, 11)"
           (mouseup)="onMouseUp($event, 11)"
           (mousemove)="onMouseMove($event, 11)"
+          (wheel)="onMouseWheel($event, 11)"
         />
         <ion-button *ngIf="cropFeatureMap[11].showCropButton" (click)="onCropButtonClick(11)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
         <ion-button *ngIf="cropFeatureMap[11].isImageCroppingState" (click)="onCroppingDone(11)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
