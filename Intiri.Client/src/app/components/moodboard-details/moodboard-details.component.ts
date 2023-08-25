@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
@@ -8,13 +8,15 @@ import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
 import { Router,NavigationEnd  } from '@angular/router';
 import { Project } from 'src/app/models/project.model';
+import { MoodboardService } from 'src/app/services/moodboard.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-moodboard-details',
   templateUrl: './moodboard-details.component.html',
   styleUrls: ['./moodboard-details.component.scss'],
 })
-export class MoodboardDetailsComponent implements OnInit {
+export class MoodboardDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -60,15 +62,23 @@ export class MoodboardDetailsComponent implements OnInit {
   MOODBOARD_SLOT_COUNT: number = 16;
   cropFeatureMap = {};
 
+  itemsInMoodboard$: BehaviorSubject<any>;
+
+  // Component subscriptions
+  getMoodboardSubscription: Subscription
+
   constructor(
     private modalController: ModalController,
     private translate: TranslateService,
     private notifier: NotifierService,
     private accountService: AccountService,
     private router: Router,
-  ) {}
+    private moodboardService: MoodboardService,
+  ) {
+    this.itemsInMoodboard$ = new BehaviorSubject(null);
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Project in moodboard-details', this.project)
     console.log('moodboard-details', this.moodboard);
 
@@ -105,11 +115,23 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
-  ngOnChanges () {
+  ngOnChanges (): void {
     if (this.router.url.includes('edit-moodboard') ||
       this.router.url.includes('new-project')) {
       this.refineMoodboardSlots();
     }
+  }
+
+  ngAfterContentInit (): void {
+    if (this.userData.roles[0] == 'FreeEndUser') {
+      this.getMoodboardSubscription = this.moodboardService.getMoodboard(this.moodboard.id).subscribe((res: Moodboard) => {
+        this.itemsInMoodboard$.next(res);
+      })
+    }
+  }
+
+  ngOnDestroy(): void {
+      this.getMoodboardSubscription.unsubscribe();
   }
 
   initializeCropFeatureMap () {

@@ -122,6 +122,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 // search module
@@ -195,7 +196,7 @@ export function createTranslateLoader(http: HttpClient) {
         }
       }
     }),
-    MatSlideToggleModule, MatTooltipModule
+    MatSlideToggleModule, MatTooltipModule, MatProgressSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
