@@ -105,18 +105,18 @@ export class MoodboardDetailsComponent implements OnInit {
     }
   }
 
+  ngOnChanges () {
+    if (this.router.url.includes('edit-moodboard') ||
+      this.router.url.includes('new-project')) {
+      this.refineMoodboardSlots();
+    }
+  }
+
   initializeCropFeatureMap () {
     for (let i = 0; i < this.MOODBOARD_SLOT_COUNT; i++) {
       this.cropFeatureMap[i] = {
         showCropButton: false,
       }
-    }
-  }
-
-  ngOnChanges () {
-    if (this.router.url.includes('edit-moodboard') ||
-      this.router.url.includes('new-project')) {
-      this.refineMoodboardSlots();
     }
   }
 
