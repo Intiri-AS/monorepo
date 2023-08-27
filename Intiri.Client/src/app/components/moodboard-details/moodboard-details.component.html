@@ -396,7 +396,7 @@
   </div>
 </ion-card>
 
-<!-- List included items -->
+<!--Admin / List included items -->
 <div *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'" class="mt-16 xl:text-left">
   <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
   <ion-grid class="step-items">
@@ -458,9 +458,9 @@
   </ion-grid>
 </div>
 
-
+<!--Client / List included items -->
 <div *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'" class="mt-16 xl:text-left">
-  <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
+  <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}} {{showLoader ? '(' + ('MOODBOARD-DETAILS.shopping-list-loading' | translate) + ')': null}}</p>
   <mat-spinner class="spinner" *ngIf="showLoader"></mat-spinner>
   <ion-grid class="step-items" *ngIf="!showLoader">
     <ion-row class="step-items-row">
