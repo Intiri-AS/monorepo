@@ -6,7 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/models/user.model';
-import { Router,NavigationEnd  } from '@angular/router';
+import { ActivatedRoute, Router  } from '@angular/router';
+import * as $ from 'jquery'
 import { Project } from 'src/app/models/project.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -19,9 +20,7 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
-  @ViewChild('slides') slides: IonSlides;
-
-  @Input() project: Project;
+  @Input() project?: Project;
   @Input() moodboard: Moodboard;
   @Input() bigCardOnly: boolean | null;
   @Input() withSlides: boolean | null;
@@ -62,6 +61,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
   MOODBOARD_SLOT_COUNT: number = 16;
   cropFeatureMap = {};
+  isImageCroppingState: boolean = false;
+  isImageDraggingState: boolean = false;
+  lastMousePosition: any = null;
 
   itemsInMoodboard$: BehaviorSubject<any>;
   showLoader: boolean = false;
@@ -77,6 +79,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private moodboardService: MoodboardService,
     private projectService: ProjectService,
+    private activateRoute: ActivatedRoute,
   ) {
     this.itemsInMoodboard$ = new BehaviorSubject(null);
   }
@@ -84,8 +87,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     console.log('Project in moodboard-details', this.project)
     console.log('moodboard-details', this.moodboard);
-
-    this.initializeCropFeatureMap();
 
     this.loggedUser$.subscribe(res => this.userData = res );
 
@@ -120,6 +121,18 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         this.assignDefaultSlots();
       }
     }
+
+    // configure crop feature on Initial load
+    this.initializeCropFeatureMap();
+  }
+
+  setNaturalImageDimensions (slotId) {
+    // Get the image element
+    var image = document.getElementById(`slot-${slotId}-img`) as HTMLImageElement;
+
+    // Set the height and width to the actual size
+    image.style.height = image.naturalHeight + 'px';
+    image.style.width = image.naturalWidth + 'px';
   }
 
   ngOnChanges (): void {
@@ -184,6 +197,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     for (let i = 0; i < this.MOODBOARD_SLOT_COUNT; i++) {
       this.cropFeatureMap[i] = {
         showCropButton: false,
+        isImageCroppingState: false,
       }
     }
   }
@@ -300,11 +314,11 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   next() {
-    this.slides.slideNext();
+    // this.slides.slideNext();
   }
 
   prev() {
-    this.slides.slidePrev();
+    // this.slides.slidePrev();
   }
 
   async openImageInModal(image) {
@@ -317,9 +331,138 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     await modal.present();
   }
 
-  dragStart (event, inputNo) {
-    if (typeof inputNo == 'string') { // Admin can drag & drop anything from shopping list
-      this.draggedShoppingListItem = inputNo;
+  onMouseWheel (event, slotId) {
+    // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_wheel_deltay2
+    if (this.isImageCroppingState) {
+      // console.log('onMouseWheel', slotId);
+      event.preventDefault();
+      console.log('deltaY', event.deltaY);
+      const mouseDisplacement = event.deltaY;
+      const slotImage = <HTMLImageElement>document.getElementById(`slot-${slotId}-img`);
+      let imageHeight = slotImage.style.height;
+      console.log('imageHeight',slotImage, imageHeight)
+      if (mouseDisplacement > 0) {
+        // imageHeight = imageHeight + 10;
+        event.target.style.height = 140 + mouseDisplacement + '%'
+      } else {
+        // imageHeight = parseInt(imageHeight) - 10;
+        event.target.style.height = 140 - mouseDisplacement + '%';
+      }
+    }
+  }
+
+  onMouseDown (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
+
+    // let slot = document.getElementById(`slot-${slotId}`);
+    // let rect = slot.getBoundingClientRect();
+    // let parent_pos_in_document = {
+      //   top: rect.top + window.scrollY,
+      //   left: rect.left + window.scrollX,
+      // };
+    let _DIV_OFFSET = $(`#slot-${slotId}`).offset();
+    console.log("mouseDown _DIV_OFFSET", _DIV_OFFSET);
+
+    this.isImageDraggingState = true;
+    // this.lastMousePosition = {x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top};
+    this.lastMousePosition = {x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top};
+  }
+
+  onMouseUp (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
+
+    console.log('onMouseUp', event, slotId);
+    this.isImageDraggingState = false;
+  }
+
+
+
+  onMouseMove (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) {
+      return;
+    }
+    if (this.isImageCroppingState && this.isImageDraggingState) {
+      console.log('onMouseMove', slotId);
+
+      let slot = document.getElementById(`slot-${slotId}`);
+      let rect = slot.getBoundingClientRect();
+
+      let parent_pos_in_document = {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+      };
+
+      let slotImage = document.getElementById(`slot-${slotId}-img`);
+
+      let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
+      let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
+      console.log('_CONTAINER_WIDTH', _CONTAINER_WIDTH);
+      console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
+
+      let _IMAGE_HEIGHT = $(`#slot-${slotId}-img`).height();
+      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).width();
+      console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
+      console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
+
+      let currentMousePosition = { x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top };
+      console.log('currentMousePosition', currentMousePosition);
+      console.log('lastMousePosition', this.lastMousePosition);
+      let change_x = currentMousePosition.x - this.lastMousePosition.x;
+      let change_y = currentMousePosition.y - this.lastMousePosition.y;
+
+      this.lastMousePosition = currentMousePosition;
+
+      var img_top = parseInt($(`#slot-${slotId}-img`).css('top'), 10);
+      var img_left = parseInt($(`#slot-${slotId}-img`).css('left'), 10);
+      console.log('img_top', img_top, 'img_left', img_left);
+
+      let img_top_new = (img_top + change_y);
+      let img_left_new = (img_left + change_x);
+      console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+      if(img_top_new > 0)
+			  img_top_new = 0;
+      if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
+        img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
+      if(img_left_new > 0)
+        img_left_new = 0;
+      if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))
+        img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
+
+
+      console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+      slotImage.style.top = img_top_new + 'px';
+      slotImage.style.left = img_left_new + 'px';
+      return;
+    }
+  }
+
+  getOuterHeight(element) {
+    var style = getComputedStyle(element);
+    var height = element.offsetHeight;
+    var marginTop = parseFloat(style.marginTop);
+    var marginBottom = parseFloat(style.marginBottom);
+    return height + marginTop + marginBottom;
+  }
+
+
+  getOuterWidth(element) {
+    var style = getComputedStyle(element);
+    var width = element.offsetWidth;
+    var marginLeft = parseFloat(style.marginLeft);
+    var marginRight = parseFloat(style.marginRight);
+
+    return width + marginLeft + marginRight;
+  }
+
+  dragStart (event, slotId) {
+    if (this.isImageCroppingState) {
+      event.preventDefault();
+      return;
+    }
+    if (typeof slotId == 'string') { // Admin can drag & drop anything from shopping list
+      this.draggedShoppingListItem = slotId;
 
       let id = this.userData.roles[0] == 'Admin' ? '#AdminCard' : '#ClientCard';
       let cardElement = document.querySelector(id);
@@ -327,7 +470,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         cardElement.scrollIntoView({behavior: 'smooth'});
       }
     } else {
-      this.previousSlotId = inputNo;
+      this.previousSlotId = slotId;
     }
   }
 
@@ -432,6 +575,10 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getToolTipMoodboardItem (slotId) {
+    if (this.isImageCroppingState) {
+      return;
+    }
+
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
       let provider = this.moodboard.styleImages.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
       return provider
@@ -465,6 +612,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   redirectToEntityPartnerLink (slotId) {
+    if (this.isImageCroppingState) {
+      return;
+    }
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
       //
     } else if (this.moodboard.slotInfo[slotId].entity === 'material') {
@@ -483,10 +633,31 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   toggleCropButtonVisibility (slotId) {
+    if (this.isImageCroppingState) return;
+
+    if (!this.moodboard.slotInfo[slotId].entityImagePath) return;
+
     if (this.userData.roles[0] == 'Admin') {
-      if (this.router.url.includes('edit-moodboard')) {
+      if (
+        this.activateRoute.snapshot.routeConfig.path === 'add-moodboard' ||
+        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard'
+      ) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
     }
+  }
+
+  onCropButtonClick (slotId) {
+    this.isImageCroppingState = true;
+
+    this.cropFeatureMap[slotId].showCropButton = false;
+    this.cropFeatureMap[slotId].isImageCroppingState = true;
+
+    // this.setNaturalImageDimensions(slotId);
+  }
+
+  onCroppingDone (slotId) {
+    this.isImageCroppingState = false;
+    this.cropFeatureMap[slotId].isImageCroppingState = false;
   }
 }

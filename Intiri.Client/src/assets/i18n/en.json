@@ -82,7 +82,8 @@
     "can-not-assign-null": "Can not assign null to a moodboard slot",
     "download-moodboard-pdf": "Download Moodboard PDF",
     "crop": "Crop",
-    "shopping-list-loading": "Please wait while your shopping list loads"
+    "shopping-list-loading": "Please wait while your shopping list loads",
+    "done": "Done"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",

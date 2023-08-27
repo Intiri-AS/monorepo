@@ -4,6 +4,7 @@ using Intiri.API.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Intiri.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230825150139_DesignerUpdate")]
+    partial class DesignerUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,12 +171,6 @@ namespace Intiri.API.Migrations
 
                     b.Property<bool>("OpenToHomeVist")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Style")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TravelDistance")
                         .HasColumnType("nvarchar(max)");
@@ -1257,11 +1253,13 @@ namespace Intiri.API.Migrations
 
             modelBuilder.Entity("Intiri.API.Models.DesignerInfo", b =>
                 {
-                    b.HasOne("Intiri.API.Models.Designer", null)
+                    b.HasOne("Intiri.API.Models.Designer", "Designer")
                         .WithOne("DesignerInfo")
                         .HasForeignKey("Intiri.API.Models.DesignerInfo", "DesignerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Designer");
                 });
 
             modelBuilder.Entity("Intiri.API.Models.DesignerPortfolio", b =>
