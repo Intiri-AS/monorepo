@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
@@ -17,7 +17,7 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './moodboard-details.component.html',
   styleUrls: ['./moodboard-details.component.scss'],
 })
-export class MoodboardDetailsComponent implements OnInit, OnDestroy {
+export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('slides') slides: IonSlides;
 
