@@ -88,7 +88,11 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
     this.initializeCropFeatureMap();
 
     this.loggedUser$.subscribe(res => this.userData = res );
+
     if (this.userData.roles[0] == 'Admin') {
+      if (this.areMoodboardColorPaletteSlotsEmpty()) {
+        this.assignToColorPaletteSlots();
+      }
       if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing/editing existing moodboard
         if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo === 'string') {
           this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
@@ -156,12 +160,27 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
       this.getMoodboardSubscription && this.getMoodboardSubscription.unsubscribe();
   }
 
+  areMoodboardColorPaletteSlotsEmpty (): boolean {
+    if (this.moodboard) {
+      if (typeof this.moodboard.slotInfo === 'string') {
+        this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+      }
+
+      let colorPaletteSlotIds = [12, 13, 14, 15];
+      console.log('areMoodboardColorPaletteSlotsEmpty: moodboard', this.moodboard)
+      let res = colorPaletteSlotIds.every(id => !this.moodboard.slotInfo[id].entityImagePath);
+      console.log('areMoodboardColorPaletteSlotsEmpty', res);
+      return res;
+    }
+    return true;
+  }
+
   shouldLoadMoodboardItems (): boolean {
     let resBool = this.project.currentMoodboard.room == null;
     return resBool
   }
 
-  initializeCropFeatureMap () {
+  initializeCropFeatureMap (): void {
     for (let i = 0; i < this.MOODBOARD_SLOT_COUNT; i++) {
       this.cropFeatureMap[i] = {
         showCropButton: false,
@@ -190,7 +209,7 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
-  assignDefaultSlots () {
+  assignDefaultSlots (): void {
      // Assign Materials to assigned moodboardSlots
      if (this.moodboard.materials.length >= 4) {
        this.assignItemToMoodboardSlot(0, 'material', this.moodboard.materials[0].id, this.moodboard.materials[0].name, this.moodboard.materials[0].imagePath);
@@ -212,6 +231,19 @@ export class MoodboardDetailsComponent implements OnInit, OnDestroy {
        this.assignItemToMoodboardSlot(14, 'color', this.moodboard.colorPalettes[0].mainColorData.id, this.moodboard.colorPalettes[0].mainColorData.name, this.moodboard.colorPalettes[0].mainColorData.imagePath);
        this.assignItemToMoodboardSlot(15, 'color', this.moodboard.colorPalettes[0].shadeColorDarkData.id, this.moodboard.colorPalettes[0].shadeColorDarkData.name, this.moodboard.colorPalettes[0].shadeColorDarkData.imagePath);
      }
+  }
+
+  assignToColorPaletteSlots (): void {
+    if (typeof this.moodboard.slotInfo === 'string') {
+      this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+    }
+
+    if (this.moodboard.colorPalettes.length > 0) {
+      this.assignItemToMoodboardSlot(12, 'color', this.moodboard.colorPalettes[0].shadeColorLightData.id, this.moodboard.colorPalettes[0].shadeColorLightData.name, this.moodboard.colorPalettes[0].shadeColorLightData.imagePath);
+      this.assignItemToMoodboardSlot(13, 'color', this.moodboard.colorPalettes[0].shadeColorMediumData.id, this.moodboard.colorPalettes[0].shadeColorMediumData.name, this.moodboard.colorPalettes[0].shadeColorMediumData.imagePath);
+      this.assignItemToMoodboardSlot(14, 'color', this.moodboard.colorPalettes[0].mainColorData.id, this.moodboard.colorPalettes[0].mainColorData.name, this.moodboard.colorPalettes[0].mainColorData.imagePath);
+      this.assignItemToMoodboardSlot(15, 'color', this.moodboard.colorPalettes[0].shadeColorDarkData.id, this.moodboard.colorPalettes[0].shadeColorDarkData.name, this.moodboard.colorPalettes[0].shadeColorDarkData.imagePath);
+    }
   }
 
   initializeSlotInfo () {
