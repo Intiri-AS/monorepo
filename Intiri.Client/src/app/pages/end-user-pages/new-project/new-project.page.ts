@@ -123,10 +123,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
       this.steps[0]['data'] = res;
     });
 
-    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = this.commonUtilsService.shuffleArrayElements(res);
-    });
-
     this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });

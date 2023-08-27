@@ -126,15 +126,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     this.initializeCropFeatureMap();
   }
 
-  setNaturalImageDimensions (slotId) {
-    // Get the image element
-    var image = document.getElementById(`slot-${slotId}-img`) as HTMLImageElement;
-
-    // Set the height and width to the actual size
-    image.style.height = image.naturalHeight + 'px';
-    image.style.width = image.naturalWidth + 'px';
-  }
-
   ngOnChanges (): void {
     if (this.router.url.includes('edit-moodboard') ||
       this.router.url.includes('new-project')) {
@@ -173,6 +164,15 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       this.getMoodboardSubscription && this.getMoodboardSubscription.unsubscribe();
   }
 
+  setNaturalImageDimensions (slotId) {
+    // Get the image element
+    var image = document.getElementById(`slot-${slotId}-img`) as HTMLImageElement;
+
+    // Set the height and width to the actual size
+    image.style.height = image.naturalHeight + 'px';
+    image.style.width = image.naturalWidth + 'px';
+  }
+
   areMoodboardColorPaletteSlotsEmpty (): boolean {
     if (this.moodboard) {
       if (typeof this.moodboard.slotInfo === 'string') {
@@ -180,9 +180,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       }
 
       let colorPaletteSlotIds = [12, 13, 14, 15];
-      console.log('areMoodboardColorPaletteSlotsEmpty: moodboard', this.moodboard)
       let res = colorPaletteSlotIds.every(id => !this.moodboard.slotInfo[id].entityImagePath);
-      console.log('areMoodboardColorPaletteSlotsEmpty', res);
       return res;
     }
     return true;
