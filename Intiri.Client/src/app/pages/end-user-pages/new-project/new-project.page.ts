@@ -262,8 +262,18 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.nav.navigateRoot(`/project-details/${this.project.id}`);
   }
 
+  onCustomizeMoodboardButtonClick () {
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
+    this.nav.navigateRoot('/customize-moodboard');
+  }
+
   saveCurrentProject(): void {
-    console.log('project', this.project);
     if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
       this.notifier.show({
         message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
@@ -373,7 +383,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   toggleItem(item) {
     // if you change any selection, selected moodboard will reset
-    if(this.currentStepNo < 4) {
+    if(this.currentStepNo <= 4) {
       this.project.currentMoodboard = new Moodboard();
     }
     const stepName = this.stepsOrder[this.currentStepNo];
