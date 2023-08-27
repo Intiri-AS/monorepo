@@ -187,7 +187,7 @@
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img *ngIf="item.style.imagePath" src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] object-cover w-full" alt="moodboard-img"/>
+                    <img *ngIf="item.styleImages?.[1]?.imagePath" src="{{item.styleImages[1].imagePath}}" class="h-[200px] lg:h-[280px] object-cover w-full" alt="moodboard-img"/>
                   </div>
                 </ion-col>
               </ion-row>
@@ -216,7 +216,7 @@
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img *ngIf="item.style?.imagePath" [src]="item.style.imagePath" class="h-[200px] lg:h-[280px] w-full object-cover" alt="moodboard-img3"/>
+                    <img *ngIf="item.styleImages?.[1].imagePath" [src]="item.styleImages[1].imagePath" class="h-[200px] lg:h-[280px] w-full object-cover" alt="moodboard-img3"/>
                   </div>
                 </ion-col>
               </ion-row>
