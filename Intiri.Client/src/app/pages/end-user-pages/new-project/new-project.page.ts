@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -87,6 +89,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private nav: NavController,
     private commonUtilsService: CommonUtilsService,
     private moodboardService: MoodboardService,
+    private notifier: NotifierService,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -258,8 +262,15 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.nav.navigateRoot(`/project-details/${this.project.id}`);
   }
 
-  saveCurrentProject()
-  {
+  saveCurrentProject(): void {
+    console.log('project', this.project);
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
     this.spinner.show();
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
