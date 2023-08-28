@@ -337,11 +337,19 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       const slotImage = <HTMLImageElement>document.getElementById(`slot-${slotId}-img`);
       var style = getComputedStyle(slotImage);
       let imageHeight = parseInt(style.height.split('px')[0]);
+      let imageWidth = parseInt(style.width.split('px')[0]);
       if (mouseDisplacement > 0) {
         imageHeight += 10;
       } else {
         imageHeight -= 10;
       }
+
+      let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
+      let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
+      if (_CONTAINER_HEIGHT > imageHeight && _CONTAINER_WIDTH > imageWidth) {
+        return;
+      }
+
       event.target.style.width = imageHeight + "px";
       event.target.style.height = imageHeight + "px";
     }
@@ -362,6 +370,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     this.isImageDraggingState = true;
     // this.lastMousePosition = {x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top};
     this.lastMousePosition = {x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top};
+    console.log('lastMousePosition', this.lastMousePosition);
   }
 
   onMouseUp (event, slotId) {
@@ -371,6 +380,69 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     this.isImageDraggingState = false;
   }
 
+  // onMouseMove (event, slotId) {
+  //   if (!this.cropFeatureMap[slotId].isImageCroppingState) {
+  //     return;
+  //   }
+  //   if (this.isImageCroppingState && this.isImageDraggingState) {
+  //     console.log('onMouseMove', slotId);
+
+  //     let slot = document.getElementById(`slot-${slotId}`);
+  //     let rect = slot.getBoundingClientRect();
+
+  //     let parent_pos_in_document = {
+  //       top: rect.top + window.scrollY,
+  //       left: rect.left + window.scrollX,
+  //     };
+
+  //     let slotImage = document.getElementById(`slot-${slotId}-img`);
+
+  //     let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
+  //     let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
+  //     // console.log('_CONTAINER_WIDTH', _CONTAINER_WIDTH);
+  //     // console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
+
+  //     let _IMAGE_HEIGHT = $(`#slot-${slotId}-img`).height();
+  //     let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).height();
+  //     // console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
+  //     // console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
+
+  //     let currentMousePosition = { x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top };
+  //     // console.log('currentMousePosition', currentMousePosition);
+  //     // console.log('lastMousePosition', this.lastMousePosition);
+  //     let change_x = currentMousePosition.x - this.lastMousePosition.x;
+  //     let change_y = currentMousePosition.y - this.lastMousePosition.y;
+  //     // console.log('change_x', change_x);
+  //     // console.log('change_y', change_y)
+
+  //     this.lastMousePosition = currentMousePosition;
+
+  //     var img_top = parseInt($(`#slot-${slotId}-img`).css('top'), 10);
+  //     var img_left = parseInt($(`#slot-${slotId}-img`).css('left'), 10);
+  //     // console.log('img_top', img_top, 'img_left', img_left);
+
+  //     let img_top_new = (img_top + change_y);
+  //     let img_left_new = (img_left + change_x);
+  //     // console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+  //     if(img_top_new > 0)
+	// 		  img_top_new = 0;
+  //     if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
+  //       img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
+  //     if(img_left_new > 0)
+  //       img_left_new = 0;
+  //     if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))
+  //       img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
+
+
+  //     // console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
+
+  //     slotImage.style.top = img_top_new + 'px';
+  //     slotImage.style.left = img_left_new + 'px';
+  //     return;
+  //   }
+  // }
+
   onMouseMove (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) {
       return;
@@ -378,41 +450,37 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isImageCroppingState && this.isImageDraggingState) {
       console.log('onMouseMove', slotId);
 
-      let slot = document.getElementById(`slot-${slotId}`);
-      let rect = slot.getBoundingClientRect();
-
-      let parent_pos_in_document = {
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX,
-      };
+      let _DIV_OFFSET = $(`#slot-${slotId}`).offset()
 
       let slotImage = document.getElementById(`slot-${slotId}-img`);
 
       let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
       let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
-      console.log('_CONTAINER_WIDTH', _CONTAINER_WIDTH);
-      console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
+      // console.log('_CONTAINER_WIDTH', _CONTAINER_WIDTH);
+      // console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
 
       let _IMAGE_HEIGHT = $(`#slot-${slotId}-img`).height();
-      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).width();
-      console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
-      console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
+      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).height();
+      // console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
+      // console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
 
-      let currentMousePosition = { x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top };
-      console.log('currentMousePosition', currentMousePosition);
-      console.log('lastMousePosition', this.lastMousePosition);
+      let currentMousePosition = { x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top };
+      // console.log('currentMousePosition', currentMousePosition);
+      // console.log('lastMousePosition', this.lastMousePosition);
       let change_x = currentMousePosition.x - this.lastMousePosition.x;
       let change_y = currentMousePosition.y - this.lastMousePosition.y;
+      // console.log('change_x', change_x);
+      // console.log('change_y', change_y)
 
       this.lastMousePosition = currentMousePosition;
 
       var img_top = parseInt($(`#slot-${slotId}-img`).css('top'), 10);
       var img_left = parseInt($(`#slot-${slotId}-img`).css('left'), 10);
-      console.log('img_top', img_top, 'img_left', img_left);
+      // console.log('img_top', img_top, 'img_left', img_left);
 
       let img_top_new = (img_top + change_y);
       let img_left_new = (img_left + change_x);
-      console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
+      // console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
 
       if(img_top_new > 0)
 			  img_top_new = 0;
@@ -424,7 +492,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
 
 
-      console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
+      // console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
 
       slotImage.style.top = img_top_new + 'px';
       slotImage.style.left = img_left_new + 'px';
