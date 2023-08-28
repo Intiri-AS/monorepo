@@ -330,22 +330,20 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onMouseWheel (event, slotId) {
-    // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_wheel_deltay2
     if (this.isImageCroppingState) {
-      // console.log('onMouseWheel', slotId);
       event.preventDefault();
-      console.log('deltaY', event.deltaY);
+
       const mouseDisplacement = event.deltaY;
       const slotImage = <HTMLImageElement>document.getElementById(`slot-${slotId}-img`);
-      let imageHeight = slotImage.style.height;
-      console.log('imageHeight',slotImage, imageHeight)
+      var style = getComputedStyle(slotImage);
+      let imageHeight = parseInt(style.height.split('px')[0]);
       if (mouseDisplacement > 0) {
-        // imageHeight = imageHeight + 10;
-        event.target.style.height = 140 + mouseDisplacement + '%'
+        imageHeight += 10;
       } else {
-        // imageHeight = parseInt(imageHeight) - 10;
-        event.target.style.height = 140 - mouseDisplacement + '%';
+        imageHeight -= 10;
       }
+      event.target.style.width = imageHeight + "px";
+      event.target.style.height = imageHeight + "px";
     }
   }
 
@@ -372,8 +370,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     console.log('onMouseUp', event, slotId);
     this.isImageDraggingState = false;
   }
-
-
 
   onMouseMove (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) {
@@ -646,7 +642,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         this.activateRoute.snapshot.routeConfig.path === 'add-moodboard' ||
         this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard/:id'
       ) {
-        // this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+        this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
     }
   }
