@@ -208,6 +208,19 @@ namespace Intiri.API.DataAccess.Repository
                 .ToListAsync();
         }
 
+        public async Task<ClientMoodboard> GetClientMoodboardOptimizedById(int moodboardId)
+        {
+            return await _context.Moodboards.OfType<ClientMoodboard>().AsNoTracking()
+                .Include(m => m.Room)
+                .Include(m => m.Materials)
+                .Include(m => m.Products)
+                .Include(m => m.ColorPalettes)
+                .Include(m => m.Style)
+                .Include(m => m.StyleImages)
+                .Include(m => m.Project)
+                .SingleOrDefaultAsync(cm => cm.Id == moodboardId);
+        }
+
         public async Task<string> GetMoodboardSlotInfo(int moodboardId)
         {
             return await _context.Moodboards.AsNoTracking().Where(m => moodboardId == m.Id).Select(m => m.SlotInfo).FirstOrDefaultAsync();

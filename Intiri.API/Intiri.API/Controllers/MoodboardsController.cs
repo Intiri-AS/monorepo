@@ -25,6 +25,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Intiri.API.Models.DTO;
 using Twilio.TwiML.Messaging;
+using System.Drawing.Printing;
 
 namespace Intiri.API.Controllers
 {
@@ -309,28 +310,61 @@ namespace Intiri.API.Controllers
 
         [HttpGet("CreateMoodboardPDF")]
 		[AllowAnonymous]
-        public async Task<IActionResult> CreateMoodboardPDF(int moodboardId)
+        public async Task<IActionResult> CreateMoodboardPDF(int moodboardId,string lng = "")
         {
+			#region text
+			string SubTitle1 = "Congratulations on your new mood board";
+			string SubTitle2 = "Exciting News: Unlock discounts using Intiri’s promo codes at different stores – simply scroll down for the codes!";
+			string ProductList = "Product List";
+			string PromoCodes = "Promo Codes";
+			string DiscountCode = "Discount code";
+			string Trustedby = "Trusted by top brands";
+
+            if (lng == "no")
+            {
+                SubTitle1 = "Gratulerer med ditt nye stemningskart";
+                SubTitle2 = "Spennende nyheter: Lås opp rabatter ved å bruke Intiris kampanjekoder i ulike butikker – rull bare nedover for kodene!";
+                ProductList = "Produktliste";
+                PromoCodes = "Rabattkode";
+                DiscountCode = "Rabattkode";
+                Trustedby = "Våre samarbeidspartnere";
+            }
+            #endregion
+
             var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
             string contents = System.IO.File.ReadAllText(htmlPath);
 
-            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardByIdOptimized(moodboardId);
-
+            ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardOptimizedById(moodboardId);
+            
             if (moodboard == null)
             {
                 return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
             }
 
+			contents = contents.Replace("#ProjectName#", moodboard.Project.Name);
+			contents = contents.Replace("#SubTitle1#", SubTitle1);
+			contents = contents.Replace("#StyleName#", moodboard.Style?.Name);
+			contents = contents.Replace("#RoomName#", lng == "no" ? moodboard.Room?.NameNorwegian : moodboard.Room?.Name);
+			contents = contents.Replace("#SubTitle2#", SubTitle2);
+			contents = contents.Replace("#ProductList#", ProductList);
+			contents = contents.Replace("#PromoCodes#", PromoCodes);
+			contents = contents.Replace("#DiscountCode#", DiscountCode);
+			contents = contents.Replace("#Trustedby#", Trustedby);
+
             MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
             moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
 			List<SlotInfo> allSlots = new List<SlotInfo>();
-            JObject slotInfo = JObject.Parse(moodboardOut.SlotInfo);
-            foreach (var pair in slotInfo)
-            {
-				var slot = System.Text.Json.JsonSerializer.Deserialize<SlotInfo>(pair.Value.ToString());
-				slot.slotId = pair.Key;
-                allSlots.Add(slot);
+			try
+			{
+                JObject slotInfo = JObject.Parse(moodboardOut.SlotInfo);
+                foreach (var pair in slotInfo)
+                {
+                    var slot = System.Text.Json.JsonSerializer.Deserialize<SlotInfo>(pair.Value.ToString());
+                    slot.slotId = pair.Key;
+                    allSlots.Add(slot);
+                }
             }
+			catch { }
 
 			foreach (var item in allSlots)
 			{
@@ -384,17 +418,27 @@ namespace Intiri.API.Controllers
             }
 
 			string shoppingItems = "";
-			string shoppingItem = @"<div class=""box-css"">
-										<div class=""box-one"">
-											<div class=""image-container-box"">
-												<a href=""#Link#"">
-													<img src=""#ImageLink#""
-														 alt=""Image Description"" />
-												</a>
-											</div>
-										</div>
-										<div class=""text-box"">#Name#</div>
-									</div>";
+         //   string shoppingItem = @"<div class=""box-css"">
+									//	<div class=""box-one"">
+									//		<div class=""image-container-box"">
+									//			<a href=""#Link#"">
+									//				<img src=""#ImageLink#""
+									//					 alt=""Image Description"" />
+									//			</a>
+									//		</div>
+									//	</div>
+									//	<div class=""text-box"">#Name#</div>
+									//</div>";
+
+            string shoppingItem = @"
+				<div class=""product-box"">
+                    <div class=""product-image-box"">
+						<a href=""#Link#"">
+							<img src=""#ImageLink#"" alt=""Image Description"" />
+						</a>
+                    </div>
+                    <div class=""text-box"">#Name#</div>
+                </div>";
 
             //Products
             foreach (var item in moodboardOut.Products)
@@ -446,13 +490,14 @@ namespace Intiri.API.Controllers
 				shoppingItems = shoppingItems + sItem;
 			}
 
-            string shoppingItemColorPalette = @"<div class=""box-css"">
-					<div class=""box-one"">
+            string shoppingItemColorPalette = @"
+				<div class=""product-box"">
+					<div class=""product-image-box"">
 						<div class=""palette-container"">
-							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""></div>
-							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""></div>
-							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""></div>
-							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""></div>
+							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><a href=""#Link#""><label>#mainColor_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><a href=""#Link#""><label>#shadeColorLight_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""><a href=""#Link#""><label>#shadeColorMedium_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""><a href=""#Link#""><label>#shadeColorDark_ColorName#</label></a></div>
 						</div>
 					</div>
 					<div class=""text-box"">
@@ -466,21 +511,39 @@ namespace Intiri.API.Controllers
                 string sItem = shoppingItemColorPalette;
                 sItem = sItem.Replace("#Number#", item.Number.ToString());
                 sItem = sItem.Replace("#Name#", item.Name);
+                sItem = sItem.Replace("#Link#", "https://www.flugger.com");
                 sItem = sItem.Replace("#mainColor_Link#", item.MainColorData.ImagePath);
                 sItem = sItem.Replace("#shadeColorLight_Link#", item.ShadeColorLightData.ImagePath);
                 sItem = sItem.Replace("#shadeColorMedium_Link#", item.ShadeColorMediumData.ImagePath);
-                sItem = sItem.Replace("#shadeColorDark_Link#", item.ShadeColorDarkData.ImagePath);
+				sItem = sItem.Replace("#shadeColorDark_Link#", item.ShadeColorDarkData.ImagePath);
+                sItem = sItem.Replace("#mainColor_ColorName#", item.MainColorData.Name);
+                sItem = sItem.Replace("#shadeColorLight_ColorName#", item.ShadeColorLightData.Name);
+                sItem = sItem.Replace("#shadeColorMedium_ColorName#", item.ShadeColorMediumData.Name);
+                sItem = sItem.Replace("#shadeColorDark_ColorName#", item.ShadeColorDarkData.Name);
 
                 shoppingItems = shoppingItems + sItem;
             }
 
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
+            string header = @" <!DOCTYPE html>
+						<div class=""header"" style=""padding: 20px;"">
+							<a href=""https://www.intiri.no"" target=""_blank"">
+								<img src=""https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg"" style=""height:20px;"" />
+							</a>
+						</div>";
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions.MarginTop = 0;
             renderer.RenderingOptions.MarginLeft = 0;
             renderer.RenderingOptions.MarginRight = 0;
             renderer.RenderingOptions.MarginBottom = 0;
+            renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
+            renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
+            renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
+            {
+                HtmlFragment = header,
+				LoadStylesAndCSSFromMainHtmlDocument = true
+            };
             var pdf = renderer.RenderHtmlAsPdf(contents);
             pdf.CompressImages(99);
             return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
