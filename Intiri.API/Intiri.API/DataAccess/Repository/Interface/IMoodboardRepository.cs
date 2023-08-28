@@ -26,5 +26,6 @@ namespace Intiri.API.DataAccess.Repository.Interface
 
         Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId);
 		Task<ClientMoodboard> GetClientMoodboardOptimizedById(int moodboardId);
+		Task<string> GetMoodboardSlotInfo(int moodboardId);
     }
 }

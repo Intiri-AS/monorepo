@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -87,6 +89,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private nav: NavController,
     private commonUtilsService: CommonUtilsService,
     private moodboardService: MoodboardService,
+    private notifier: NotifierService,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -117,10 +121,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
-    });
-
-    this.projectService.getStyleImages().subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = this.commonUtilsService.shuffleArrayElements(res);
     });
 
     this.projectService.getColorPalettes().subscribe((res) => {
@@ -159,20 +159,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
     if (this.currentStepNo + 1 === 5 && !isUserLoggedIn) {
       this.projectService.setCurrentProject(this.project);
       this.openLoginModal();
-      return;
-    }
-    if (this.currentStepNo + 1 === 5) { //load moodboard before changing to final step
-      this.spinner.show();
-      let currentMoodboard = this.project.currentMoodboard;
-      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
-        this.project.currentMoodboard = res;
-        this.spinner.hide();
-
-        //Change step
-        this.currentStepNo++;
-        this.changeQueryParam(this.currentStepNo);
-        this.projectService.setCurrentProject(this.project);
-      })
       return;
     }
 
@@ -272,8 +258,25 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.nav.navigateRoot(`/project-details/${this.project.id}`);
   }
 
-  saveCurrentProject()
-  {
+  onCustomizeMoodboardButtonClick () {
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
+    this.nav.navigateRoot('/customize-moodboard');
+  }
+
+  saveCurrentProject(): void {
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
     this.spinner.show();
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
@@ -376,7 +379,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   toggleItem(item) {
     // if you change any selection, selected moodboard will reset
-    if(this.currentStepNo < 4) {
+    if(this.currentStepNo <= 4) {
       this.project.currentMoodboard = new Moodboard();
     }
     const stepName = this.stepsOrder[this.currentStepNo];

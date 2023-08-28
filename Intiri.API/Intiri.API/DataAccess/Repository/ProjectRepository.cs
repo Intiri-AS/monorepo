@@ -70,8 +70,8 @@ namespace Intiri.API.DataAccess.Repository
 				//.Include(p => p.StyleImages)
 				//.Include(p => p.ColorPalettes)
 				.Include(p => p.ProjectMoodboards).ThenInclude(p => p.Products.Take(1))
-                .Include(p => p.ProjectMoodboards).ThenInclude(p => p.Style)
-                .Include(p => p.ProjectMoodboards).ThenInclude(p => p.StyleImages.Take(1))
+                //.Include(p => p.ProjectMoodboards).ThenInclude(p => p.Style)
+                .Include(p => p.ProjectMoodboards).ThenInclude(p => p.StyleImages.Take(2))
                 .ToListAsync();
 		}
 

@@ -30,7 +30,7 @@
                       </div>
                       <div class="col-2">
                         <div class="border border-light bg-white bg-cover">
-                          <img *ngIf="moodboard?.style?.imagePath" src="{{moodboard?.style?.imagePath}}" class="!h-[114px] !w-full object-cover" alt="moodboard-img"/>
+                          <img *ngIf="moodboard?.styleImages[1]?.imagePath" src="{{moodboard?.styleImages[1]?.imagePath}}" class="!h-[114px] !w-full object-cover" alt="moodboard-img"/>
                         </div>
                       </div>
                     </div>
@@ -76,8 +76,8 @@
                         <ion-col size="7.5" class="!p-3 !pl-0">
                           <div class="border border-light bg-white">
                             <img
-                              *ngIf="project.projectMoodboards[0]?.style?.imagePath"
-                              src="{{project.projectMoodboards[0]?.style?.imagePath}}"
+                              *ngIf="project.projectMoodboards[0]?.styleImages[1]?.imagePath"
+                              src="{{project.projectMoodboards[0]?.styleImages[1]?.imagePath}}"
                               class="!h-[251px] mac:!h-[320px] !w-full object-cover"
                               alt="moodboard-img"/>
                           </div>

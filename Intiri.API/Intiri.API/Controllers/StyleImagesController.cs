@@ -188,5 +188,14 @@ namespace Intiri.API.Controllers
 
             return Ok(styleImagesToReturn);
         }
+
+        [HttpGet("getStyleImagesByRoom/{roomId}")]
+        public async Task<ActionResult<StyleImageOutDTO>> getStyleImagesByRoom(int roomId)
+        {
+            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAsync(roomId);
+            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+
+            return Ok(styleImagesToReturn);
+        }
     }
 }

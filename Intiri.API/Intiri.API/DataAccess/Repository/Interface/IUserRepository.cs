@@ -37,5 +37,8 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<bool> DoesAnyUserExistWithId(int userId);
 
 		void UpdateUser(User user);
-	}
+		Task<IEnumerable<Designer>> GetAllDesigners();
+        Task<Designer> GetDesignerProfile(int id);
+
+    }
 }

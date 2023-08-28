@@ -132,8 +132,8 @@ namespace Intiri.API.DataAccess.Repository
 		{
 			return await _context.Moodboards.AsNoTracking()
 				.Where(m => roomId == m.Room.Id && m.IsTemplate == true)
-                .Include(m => m.Style)
-                .Include(cp => cp.ColorPalettes)
+				.Include(m => m.Style)
+				.Include(cp => cp.ColorPalettes)
 				.Include(m => m.StyleImages)
 				.Include(m => m.Products.Take(1)).AsNoTracking()
 				.ToListAsync();
@@ -201,9 +201,9 @@ namespace Intiri.API.DataAccess.Repository
         public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
         {
             return await _context.Moodboards.AsNoTracking()
-                .Include(m => m.Style)
+                //.Include(m => m.Style)
                 .Include(m => m.Products.Take(1))
-                .Include(m => m.StyleImages.Take(1))
+                .Include(m => m.StyleImages.Take(2))
                 .Where(m => m.Style.Id == styleId && m.Room.Id != roomId).AsNoTracking()
                 .ToListAsync();
         }
@@ -219,6 +219,11 @@ namespace Intiri.API.DataAccess.Repository
                 .Include(m => m.StyleImages)
                 .Include(m => m.Project)
                 .SingleOrDefaultAsync(cm => cm.Id == moodboardId);
+        }
+
+        public async Task<string> GetMoodboardSlotInfo(int moodboardId)
+        {
+            return await _context.Moodboards.AsNoTracking().Where(m => moodboardId == m.Id).Select(m => m.SlotInfo).FirstOrDefaultAsync();
         }
 
         #endregion Public methods
