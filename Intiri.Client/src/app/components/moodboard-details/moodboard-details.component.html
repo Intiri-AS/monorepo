@@ -442,38 +442,38 @@
     <div class="grid-item colors-container">
       <div id="slot-12" class="color color-1">
         <img
-          *ngIf="moodboard?.slotInfo[12].entityImagePath"
-          src="{{moodboard?.slotInfo[12].entityImagePath}}"
+          *ngIf="moodboard?.slotInfo[12]?.entityImagePath"
+          src="{{moodboard.slotInfo[12].entityImagePath}}"
           alt="shadeColorLightData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorLightData?.name"
+          [matTooltip]="moodboard.slotInfo[12].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-13" class="color color-2">
         <img
-          *ngIf="moodboard?.slotInfo[13].entityImagePath"
-          src="{{moodboard?.slotInfo[13].entityImagePath}}"
+          *ngIf="moodboard?.slotInfo[13]?.entityImagePath"
+          src="{{moodboard.slotInfo[13].entityImagePath}}"
           alt="shadeColorMediumData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorMediumData?.name"
+          [matTooltip]="moodboard.slotInfo[13].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-14" class="color color-3">
         <img
-          *ngIf="moodboard?.slotInfo[14].entityImagePath"
-          src="{{moodboard?.slotInfo[14].entityImagePath}}"
+          *ngIf="moodboard?.slotInfo[14]?.entityImagePath"
+          src="{{moodboard.slotInfo[14].entityImagePath}}"
           alt="mainColorData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].mainColorData?.name"
+          [matTooltip]="moodboard.slotInfo[14].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-15" class="color color-4">
         <img
-          *ngIf="moodboard?.slotInfo[15].entityImagePath"
-          src="{{moodboard?.slotInfo[15].entityImagePath}}"
+          *ngIf="moodboard?.slotInfo[15]?.entityImagePath"
+          src="{{moodboard.slotInfo[15].entityImagePath}}"
           alt="shadeColorDarkData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorDarkData?.name"
+          [matTooltip]="moodboard.slotInfo[15].entityName"
           (click)="redirectToColorsPartner()">
       </div>
     </div>

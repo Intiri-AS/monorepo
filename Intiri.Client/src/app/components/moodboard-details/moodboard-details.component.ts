@@ -576,6 +576,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isImageCroppingState) {
       return;
     }
+    if (this.showLoader) {
+      return;
+    }
 
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
       let provider = this.moodboard.styleImages.filter(ip => ip.id == this.moodboard.slotInfo[slotId].entityId)[0].provider;
@@ -611,6 +614,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
   redirectToEntityPartnerLink (slotId) {
     if (this.isImageCroppingState) {
+      return;
+    }
+    if (this.showLoader) {
       return;
     }
     if (this.moodboard.slotInfo[slotId].entity == 'inspirationalPhotos' && this.moodboard.styleImages) {
