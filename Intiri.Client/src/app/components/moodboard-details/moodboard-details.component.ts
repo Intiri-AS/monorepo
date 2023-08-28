@@ -330,6 +330,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onMouseWheel (event, slotId) {
+    if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
     if (this.isImageCroppingState) {
       event.preventDefault();
 
