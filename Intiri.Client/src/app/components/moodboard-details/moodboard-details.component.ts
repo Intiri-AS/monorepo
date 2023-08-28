@@ -638,9 +638,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.userData.roles[0] == 'Admin') {
       if (
         this.activateRoute.snapshot.routeConfig.path === 'add-moodboard' ||
-        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard'
+        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard/:id'
       ) {
-        this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+        // this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
     }
   }
