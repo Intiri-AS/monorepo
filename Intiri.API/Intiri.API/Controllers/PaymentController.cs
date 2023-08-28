@@ -26,6 +26,7 @@ public class PaymentController : BaseApiController
 
     [Authorize]
     [HttpPost]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public async Task<ActionResult<Session>> Payment(StripePaymentDTO paymentDTO)
     {
         //string host = _hostConfig.Value.Host != null ? _hostConfig.Value.Host : Request.Host.ToString();

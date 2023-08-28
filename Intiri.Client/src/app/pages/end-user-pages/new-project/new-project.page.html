@@ -51,8 +51,7 @@
                 *ngIf="steps[currentStepNo]['data'] === 'final'"
                 class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
-                routerLink="/customize-moodboard"
-                routerDirection="root"
+                (click)="onCustomizeMoodboardButtonClick()"
                 >{{'NEW-PROJECT.customize' | translate}}</ion-button
               >
               <ion-button

@@ -34,6 +34,10 @@ export class MoodboardService {
     return this.http.get<Moodboard[]>(this.apiUrl + 'moodboards/client/moodboardOffers');
   }
 
+  getMoodboardSlotInfo(id: number) {
+    return this.http.get(this.apiUrl + 'Moodboards/slotinfo/' + id);
+  }
+
   updateMoodboard(moodboard: Moodboard){
     return this.http.post<Moodboard>(this.apiUrl + 'moodboards/addMoodboard', moodboard);
   }

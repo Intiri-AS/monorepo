@@ -510,6 +510,19 @@ namespace Intiri.API.Controllers
             return link;
 		}
 
-		#endregion Public methods
-	}
+        [HttpGet("slotinfo/{moodboardId}")]
+        public async Task<ActionResult<MoodboardOutDTO>> GetMoodboardSlotInfo(int moodboardId)
+        {
+            string slotinfo = await _unitOfWork.MoodboardRepository.GetMoodboardSlotInfo(moodboardId);
+
+            if (slotinfo == null)
+            {
+                return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
+            }
+
+            return Ok(slotinfo);
+        }
+
+        #endregion Public methods
+    }
 }
