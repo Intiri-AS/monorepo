@@ -39,7 +39,8 @@
               "node_modules/ngx-spinner/animations/ball-spin-clockwise.css"
             ],
             "scripts": [
-              "node_modules/apexcharts/dist/apexcharts.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "./node_modules/jquery/dist/jquery.min.js"
             ],
             "aot": false,
             "vendorChunk": true,

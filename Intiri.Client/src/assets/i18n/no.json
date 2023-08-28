@@ -81,7 +81,9 @@
     "item-already-in-moodboard": "Det valgte elementet finnes allerede i moodboard",
     "can-not-assign-null": "Kan ikke tilordne null til et moodboard-spor",
     "download-moodboard-pdf": "Last ned Moodboard PDF",
-    "crop": "Avling"
+    "crop": "Avling",
+    "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
+    "done": "Ferdig"
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",

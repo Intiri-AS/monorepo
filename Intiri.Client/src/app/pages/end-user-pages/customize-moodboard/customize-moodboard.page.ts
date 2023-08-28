@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -53,6 +54,7 @@ export class CustomizeMoodboardPage {
     public projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
+    private nav: NavController,
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private location: Location,
@@ -179,15 +181,15 @@ export class CustomizeMoodboardPage {
   }
 
   finishCustomizing() {
-    if(JSON.stringify(this.moodboard) !== JSON.stringify(this.initialMoodboard)) {
-      this.moodboard.sourceMoodboardId = this.moodboard.id;
-      this.moodboard.id = 0;
-    }
+    // if(JSON.stringify(this.moodboard) !== JSON.stringify(this.initialMoodboard)) {
+    //   this.moodboard.sourceMoodboardId = this.moodboard.id;
+    //   this.moodboard.id = 0;
+    // }
     this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
       const customizedProject = project;
       customizedProject.currentMoodboard = this.moodboard;
       this.projectService.setCurrentProject(customizedProject);
-      this.router.navigateByUrl('/new-project?step=5');
+      this.nav.navigateRoot('/new-project?step=5');
     });
   }
 

@@ -8,7 +8,7 @@
         class="main-title mb-[34px] pl-2"
         [ngClass]="((loggedUser$ | async)?.roles[0] === 'Admin' || (loggedUser$ | async)?.roles[0] == 'InternalDesigner') ? 'main-title-custom' : ''"
       >
-        {{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.add' | translate) }}
+        {{client && !client?.moodboardOfferId ? ('MOODBOARDS.create-offer' | translate) : client && client?.moodboardOfferId ? ('MOODBOARDS.update-offer' | translate) : ('MOODBOARDS.edit-moodboard' | translate) }}
       </p>
       <ion-row class="mb-20">
         <ion-col size="12" size-xl="2.3">
