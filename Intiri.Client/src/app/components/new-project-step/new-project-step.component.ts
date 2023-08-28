@@ -7,7 +7,7 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service'
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
@@ -70,6 +70,7 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     private productService: ProductService,
     private languageService: LanguageService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private commonUtilsService: CommonUtilsService,
     private translate: TranslateService,
     private spinner: NgxSpinnerService,
@@ -102,7 +103,7 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
 
 
   ngOnChanges () {
-    if (this.currentStepNo === 1) {
+    if (this.activatedRoute.snapshot.routeConfig.path === 'new-project' && this.currentStepNo === 1) {
       this.spinner.show();
       this.styleService.getStyleImagesByRoom(this.project.room.id).subscribe((styleImages: Array<any>) => {
         console.log('styleImages', styleImages);
