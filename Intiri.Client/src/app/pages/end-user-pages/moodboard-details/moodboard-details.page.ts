@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from 'src/app/services/account.service';
 import { CraftsmanService } from 'src/app/services/craftsman.service';
 import { MoodboardService } from 'src/app/services/moodboard.service';
@@ -22,7 +23,8 @@ export class MoodboardDetailsPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private craftsmanService: CraftsmanService
+    private craftsmanService: CraftsmanService,
+    private translate: TranslateService,
     ){}
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class MoodboardDetailsPage implements OnInit {
   }
 
   downloadMoodboardPDF () {
-    let getMoodboardPDFUrl = environment.apiUrl + 'Moodboards/CreateMoodboardPDF?moodboardId=' + this.moodboard.id;
+    const getMoodboardPDFUrl: string = environment.apiUrl + 'Moodboards/CreateMoodboardPDF?moodboardId=' + this.moodboard.id + '&lng=' + this.translate.currentLang;
     window.open(getMoodboardPDFUrl, '_blank')
   }
 
