@@ -164,15 +164,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       this.getMoodboardSubscription && this.getMoodboardSubscription.unsubscribe();
   }
 
-  setNaturalImageDimensions (slotId) {
-    // Get the image element
-    var image = document.getElementById(`slot-${slotId}-img`) as HTMLImageElement;
-
-    // Set the height and width to the actual size
-    image.style.height = image.naturalHeight + 'px';
-    image.style.width = image.naturalWidth + 'px';
-  }
-
   areMoodboardColorPaletteSlotsEmpty (): boolean {
     if (this.moodboard) {
       if (typeof this.moodboard.slotInfo === 'string') {
@@ -264,7 +255,13 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         entity: null,
         entityId: null,
         entityName: null,
-        entityImagePath: null
+        entityImagePath: null,
+        entityImageStyles: {
+          height: null,
+          width: null,
+          top: null,
+          left: null
+        },
       }
     }
   }
@@ -461,7 +458,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       // console.log('_CONTAINER_HEIGHT', _CONTAINER_HEIGHT);
 
       let _IMAGE_HEIGHT = $(`#slot-${slotId}-img`).height();
-      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).height();
+      let _IMAGE_WIDTH = $(`#slot-${slotId}-img`).width();
       // console.log('_IMAGE_WIDTH', _IMAGE_WIDTH);
       // console.log('_IMAGE_HEIGHT', _IMAGE_HEIGHT);
 
@@ -721,12 +718,21 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
     this.cropFeatureMap[slotId].showCropButton = false;
     this.cropFeatureMap[slotId].isImageCroppingState = true;
-
-    // this.setNaturalImageDimensions(slotId);
   }
 
   onCroppingDone (slotId) {
     this.isImageCroppingState = false;
     this.cropFeatureMap[slotId].isImageCroppingState = false;
+
+    let slotImage = document.getElementById(`slot-${slotId}-img`);
+    let updatedStyles = {
+      height: slotImage.style.height,
+      width: slotImage.style.width,
+      top: slotImage.style.top,
+      left: slotImage.style.left,
+    };
+
+    this.moodboard.slotInfo[slotId].entityImageStyles = updatedStyles;
+    console.log('moodboard after updating', this.moodboard.slotInfo);
   }
 }

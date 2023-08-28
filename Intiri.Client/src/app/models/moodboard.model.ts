@@ -41,7 +41,13 @@ export class Moodboard {
         entity: null,
         entityId: null,
         entityName: null,
-        entityImagePath: null
+        entityImagePath: null,
+        entityImageStyles: {
+          height: null,
+          width: null,
+          top: null,
+          left: null
+        },
       }
     }
   }
