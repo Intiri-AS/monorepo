@@ -105,19 +105,19 @@ export class BookDesignerModalComponent {
 
   checkout(): void {
     const consultationDetails = this.getConsultationDetails();
-    this.paymentService.sendPayment(
-      {
-        name: 'Consulatations', //required
-        amount: this.totalPrice * 100,//required
-        receiverId: this.designer.id, //required
-        locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
-        successUrlPath: `messenger?contact=${this.designer.id}`,//required
-        cancelUrlPath: '',//optional, if not specified path is ''
-        moodboardId: this.moodboard?.id, //optional
-        consultationDetails,
-        numberOfConsultations: this.numberOfConsultations, //required
-        Domain: environment.apiUrl.split('/api')[0]
-      }).subscribe(async (res: any) => {
+    let sendPaymentObject = {
+      name: 'Consultations', //required
+      amount: this.totalPrice * 100,//required
+      receiverId: this.designer.id, //required
+      locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
+      successUrlPath: `messenger?contact=${this.designer.id}`,//required
+      cancelUrlPath: '',//optional, if not specified path is ''
+      moodboardId: this.moodboard?.id, //optional
+      consultationDetails,
+      numberOfConsultations: this.numberOfConsultations, //required
+      Domain: environment.apiUrl.split('/api')[0]
+    }
+    this.paymentService.sendPayment(sendPaymentObject).subscribe(async (res: any) => {
       let stripe = await loadStripe(environment.stripe_key);
       stripe?.redirectToCheckout({
         sessionId: res.id

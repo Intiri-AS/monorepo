@@ -87,7 +87,9 @@
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
-    "completed": "Antall utførte designkonsultasjoner"
+    "completed": "Antall utførte designkonsultasjoner",
+    "charges": "Laster",
+    "portfolio": "Portefølje"
   },
   "BOOK-MODAL": {
     "book": "Book din designkonsultasjon",

@@ -76,7 +76,7 @@ export class DesignerService {
   }
 
   getDesignerPortfolio(id) {
-    return this.http.get(this.apiUrl + 'Designers/getDesignerPortfolio/id/' + id);
+    return this.http.get(this.apiUrl + 'Designers/getDesignerProfile/id/' + id);
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
