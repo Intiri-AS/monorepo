@@ -520,67 +520,96 @@ namespace Intiri.API.DataAccess.SeedData
 
                 if (!doesAnyExist)
                 {
-                    var filep = "wwwroot/assets/project-image/material2/" + materialImport.Name.Trim().Replace(" ", "_") + ".webp";
+                    var filep = "wwwroot/assets/project-image/material2/" + materialImport.Name.Trim().Replace(" ", "_") + ".jpg";
                     string path = Path.GetFullPath(filep);
 
-                    if (!File.Exists(path))
-                    {
-                        Console.WriteLine("File null | " + materialImport.Name);
-                        continue;
+					if(!File.Exists(path))
+					{
+                        filep = "wwwroot/assets/project-image/material2/" + materialImport.PreImageName;
+                        path = Path.GetFullPath(filep);
+					}
+
+					if (!File.Exists(path))
+					{
+						Console.WriteLine("File null | " + materialImport.Name);
+						//continue;
+
+						Material material = new Material();
+                        material.Name = materialImport.Name;
+                        material.Description = materialImport.Discription;
+                        material.Link = materialImport.Link_Supplier;
+                        material.Provider = "Flisekompaniet";
+
+                        material.ImagePath = "";
+                        material.ImagePublicId = "";
+
+                        MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
+                        material.MaterialType = materialType;
+
+                        unitOfWork.MaterialRepository.Insert(material);
+                        await unitOfWork.SaveChanges();
+
+                        Console.WriteLine("Success | " + materialImport.Name);
+
                     }
-
-                    using (var stream = System.IO.File.OpenRead(path))
-                    {
-                        string fileName = Path.GetFileName(stream.Name);
-
-                        var provider = new FileExtensionContentTypeProvider();
-                        string contentType;
-
-                        if (!provider.TryGetContentType(fileName, out contentType))
+					else
+					{
+                        //continue;
+                        using (var stream = System.IO.File.OpenRead(path))
                         {
-                            contentType = "application/octet-stream";
-                        }
+                            string fileName = Path.GetFileName(stream.Name);
 
-                        var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
-                        {
-                            Headers = new HeaderDictionary(),
-                            ContentType = contentType
-                        };
+                            var provider = new FileExtensionContentTypeProvider();
+                            string contentType;
 
-                        if (file != null && file.Length > 0)
-                        {
-                            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(stream.Name);
-
-							//Console.WriteLine(fileNameWithoutExtension);
-							//Console.WriteLine(materialImport);
-
-							Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.MaterialImages);
-
-							if (uploadResult.Item1 != HttpStatusCode.OK)
-							{
-								Console.WriteLine(uploadResult.Item2);
-							}
-							else
-							{
-								Material material = new Material();
-								material.Name = materialImport.Name;
-								material.Description = materialImport.Discription;
-								material.Link = materialImport.Link_Supplier;
-								material.Provider = "Ellos";
-
-								material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-								material.ImagePublicId = uploadResult.Item3.PublicId;
-
-								MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
-								material.MaterialType = materialType;
-
-								unitOfWork.MaterialRepository.Insert(material);
-								await unitOfWork.SaveChanges();
-
-                                Console.WriteLine("Success | " + materialImport.Name);
+                            if (!provider.TryGetContentType(fileName, out contentType))
+                            {
+                                contentType = "application/octet-stream";
                             }
-						}
+
+                            var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                            {
+                                Headers = new HeaderDictionary(),
+                                ContentType = contentType
+                            };
+
+                            if (file != null && file.Length > 0)
+                            {
+                                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(stream.Name);
+
+                                //Console.WriteLine(fileNameWithoutExtension);
+                                //Console.WriteLine(materialImport);
+
+                                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.MaterialImages);
+
+                                if (uploadResult.Item1 != HttpStatusCode.OK)
+                                {
+                                    Console.WriteLine(uploadResult.Item2);
+                                }
+                                else
+                                {
+                                    Material material = new Material();
+                                    material.Name = materialImport.Name;
+                                    material.Description = materialImport.Discription;
+                                    material.Link = materialImport.Link_Supplier;
+                                    material.Provider = "Flisekompaniet";
+
+                                    material.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                                    material.ImagePublicId = uploadResult.Item3.PublicId;
+
+                                    MaterialType materialType = await unitOfWork.MaterialTypeRepository.SingleOrDefaultAsync(mt => mt.Name == materialImport.Type);
+                                    material.MaterialType = materialType;
+
+                                    unitOfWork.MaterialRepository.Insert(material);
+                                    await unitOfWork.SaveChanges();
+
+                                    Console.WriteLine("Success | " + materialImport.Name);
+                                }
+                            }
+                        }
                     }
+
+					
 
                 }
             }
@@ -588,7 +617,7 @@ namespace Intiri.API.DataAccess.SeedData
 
         public static async Task SeedProductsImport(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
 		{
-			int partnerId = 6;
+			int partnerId = 5;
             Partner partner = await unitOfWork.PartnerRepository.GetByID(partnerId);
 
             string materialsData = await File.ReadAllTextAsync("DataAccess/SeedData/ProductsImportSeedData.json");
@@ -621,9 +650,9 @@ namespace Intiri.API.DataAccess.SeedData
 
                 if (!doesAnyExist)
                 {
-                    //var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Name.Trim().Replace(" ","_") + ".webp";
-                    var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Link_image;
-                    string path = Path.GetFullPath(filep);
+					var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Name.Trim().Replace(" ", "_") + ".webp";
+					//var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Link_image;
+					string path = Path.GetFullPath(filep);
 
                     if (!File.Exists(path))
                     {
@@ -657,8 +686,8 @@ namespace Intiri.API.DataAccess.SeedData
                     }
 					else
 					{
-                        //continue;
-                        using (var stream = System.IO.File.OpenRead(path))
+						//continue;
+						using (var stream = System.IO.File.OpenRead(path))
                         {
                             string fileName = Path.GetFileName(stream.Name);
 

@@ -1,415 +1,620 @@
 [
   {
-    "Type": "Tapet",
-    "Name": "Ellos Amaranthine Turmalin",
-    "Discription": "Navnet AMARANTHINE kommer fra det greske ordet amarantos, som betyr \"evig\". Det antyder at dette er et evig elegant damaskmønster",
-    "Link_Supplier": "https://www.ellos.no/house-of-hackney/tapet-amaranthine/1670304-02"
+    "Name": "Tile Aleluia chroma blush",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/170e098walZM5mfZadPThRJ0CHVXEmX9_/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Arch 8823",
-    "Discription": "Det eksklusive tapetet Arch har et mykt, bølgende mønster av skimrende buer mot en matt bakgrunn.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-arch/1727450-02"
+    "Name": "Aleluia chroma blush 2",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Z9hD2AzmMvDo8aJ58-Qo8QjyRIrTOwI0/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Arch 8824",
-    "Discription": "Det eksklusive tapetet Arch har et mykt, bølgende mønster av skimrende buer mot en matt bakgrunn.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-arch/1727450-03"
+    "Name": "AtlasConcorde Marvel Pro Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1jKVBqfHyNsm8mlITFnn4jh5nlkI0osYC/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Artemis Bronse",
-    "Discription": "Dronningen av nytolkning, vårt elskede mønster ARTEMIS, er omarbeidet enda en gang. Inspirert av vår helt, den hyllede 1800-tallsdesigneren William Morris",
-    "Link_Supplier": "https://www.ellos.no/house-of-hackney/tapet-artemis/1670298-03"
+    "Name": "AtlasConcorde Marvel Cremo Delicato",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1qMLsVyOAxBCfuYsGXPp6l-Qo8sMeMeg9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Artemis Safir",
-    "Discription": "Dronningen av nytolkning, vårt elskede mønster ARTEMIS, er omarbeidet enda en gang. Inspirert av vår helt, den hyllede 1800-tallsdesigneren William Morris",
-    "Link_Supplier": "https://www.ellos.no/house-of-hackney/tapet-artemis/1670298-05"
+    "Name": "AtlasConcorde Marvel Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1FHeSCWPzRReeiNu68q4BkSE-K8EiOiBi/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Artemis Topas",
-    "Discription": "Dronningen av nytolkning, vårt elskede mønster ARTEMIS, er omarbeidet enda en gang. Inspirert av vår helt, den hyllede 1800-tallsdesigneren William Morris",
-    "Link_Supplier": "https://www.ellos.no/house-of-hackney/tapet-artemis/1670298-07"
+    "Name": "AtlasConcorde Marvel Statuario Select",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1-mq4Eub1_ixqI86vEzP7aQxBt2-o2_P5/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Aspo Stripe Hvit 8872",
-    "Discription": "Aspö Stripe er et klassisk stripete tapet, inspirert både av det maritime temaet og den sommerlige skjortestripen.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-aspo-stripe/1727480-04"
+    "Name": "AtlasConcorde Marvel Statuario Select 30x60 rigato",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/18nCYK0k6FXFGN_SOKEpMAUAMo098GHf9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Bredrand Gra",
-    "Discription": "Tapet Bredrand grå bestiller du på artikkelnummer 1042720-01-0. Tapetet leveres i rull med lengde 10,05 m og bredde 53 cm.",
-    "Link_Supplier": "https://www.ellos.no/duro/tapetprove-bredrand-gra/1698451-01"
+    "Name": "AtlasConcorde MarvelPro Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/15y_68x1zdSpvAS_rSWbFtJnANUOGzli9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Bredrand Svart",
-    "Discription": "Tapetprøve til tapet Bredrand, farge svart.Målet på denne prøven er ca. 210 x 297 mm (tilsvarer et A4-ark).",
-    "Link_Supplier": "https://www.ellos.no/duro/tapetprove-bredrand-svart/1698452-01"
+    "Name": "AtlasConcorde MarvelPro Noir StLaurent",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mgUYlvIaJEl00Do75wwdfNOeSeCIj7xA/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Confetti",
-    "Discription": "Tapetprøve til tapet Confetti, farge Svart/hvit.",
-    "Link_Supplier": "https://www.ellos.no/majvillan/tapetprove-confetti-svart-hvit/1689229-01"
+    "Name": "chroma cotton white 2",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1zKvlaRY96pZPVor6-isUIL6E_wUIymxi/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Copacabana 3060",
-    "Discription": "Tapet Copacabana prydes av elegante palmeblader mot et diskre rutemønster av bambus.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-copacabana/1727513-02"
+    "Name": "chroma cotton white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Vk1Zf2BHbiTjRta0EjkLeej4qfWT4t8p/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Copacabana 3061",
-    "Discription": "Tapet Copacabana prydes av elegante palmeblader mot et diskre rutemønster av bambus.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-copacabana/1727513-03"
+    "Name": "Dandy Terrazzo White mosaic",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1_uU01B9Zo-UJtvaCoBZk85GQ_4pT1lCz/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Copacabana 3062",
-    "Discription": "Tapet Copacabana prydes av elegante palmeblader mot et diskre rutemønster av bambus.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-copacabana/1727513-04"
+    "Name": "Dandy Terrazzo White",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ShJfJISVIAIjpv6CEKm08RVzwOLGXET7/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Copacabana 3063",
-    "Discription": "Tapet Copacabana prydes av elegante palmeblader mot et diskre rutemønster av bambus.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-copacabana/1727513-01"
+    "Name": "dandy white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1TTRyfk8ox3YAMD1cOwRR-AeblIlgT2i7/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Folklore 3261",
-    "Discription": "Folklore er et blomstrete tapet med håndmalt botanisk mønster.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-folklore/1727553-01"
+    "Name": "Emilceramica Be-Square ivory",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1D1pTV9OGLwluWV8Oz7Ov4ja6CebPsUM4/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Fredrik 3280",
-    "Discription": "Fredrik er et nytegnet espaliertapet som føles både klassisk og moderne i uttrykket.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-fredrik/1727558-01"
+    "Name": "Ergon architect resin berlin grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Xm8eFlFAyuBJ9qiNLrsqSplkx4Nx_1-N/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Fredrik 3281",
-    "Discription": "Fredrik er et nytegnet espaliertapet som føles både klassisk og moderne i uttrykket.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-fredrik/1727558-02"
+    "Name": "Ergon Architect Resin Copenhagen ivory",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1SSXsuNb3oINnpBM5oUy7o5C-oQYQsnh3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Garbo 2013",
-    "Discription": "Det grafiske tapetet Garbo fra Boråstapeter går i klassisk art déco-stil, og mønsteret ble skapt allerede på 1920-tallet.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-garbo/1727509-04"
+    "Name": "Ergon Architect Resin new york sand",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1PhI0VUDheVF9ocFUxSCM_j0YT4NQVXlN/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Garbo 2014",
-    "Discription": "Det grafiske tapetet Garbo fra Boråstapeter går i klassisk art déco-stil, og mønsteret ble skapt allerede på 1920-tallet.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-garbo/1727509-02"
+    "Name": "Ergon Architect Resin Tokyo white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/11NqDvBLvJ48C7m-ekpuSu5TEgIx-7r41/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Garbo 2015",
-    "Discription": "Det grafiske tapetet Garbo fra Boråstapeter går i klassisk art déco-stil, og mønsteret ble skapt allerede på 1920-tallet.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-garbo/1727509-01"
+    "Name": "Ergon Grainstone Fine Grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1zCsnbbw4elwl4iOlhBzKIDdA8FdLPhUV/view?usp=drive_link@",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Graang 2003",
-    "Discription": "Gråäng fra Boråstapeter er skapt ut fra et håndmalt mønster fra 1955.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-graang/1727502-04"
+    "Name": "Ergon Grainstone Rough Dark",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ZPzJKjSyatFix06trYIPTvhygVAVKzcE/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Hamnskar Stripe Gra 8876",
-    "Discription": "Det stripete tapetet Hamnskär Stripe fra Boråstapeter er inspirert av tradisjonelt vevd sengetøy.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-hamnskar-stripe/1727483-04"
+    "Name": "ergon lombarda bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1VFQuian3KS0UlvwDfvc3jiBU-9Tz4-44/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Herringbone Greige blue",
-    "Discription": "Tapetprøve til tapet Herringbone, farge Greige blue.",
-    "Link_Supplier": "https://www.ellos.no/majvillan/tapetprove-herringbone-greige-blue/1689172-01"
+    "Name": "ergon lombarda sabbia",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/12V5p3lSYbzTpswu17Cak_H6sci2P7Muo/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Ink Bamboo Gra 3113",
-    "Discription": "Ink Bamboo er et moderne tapet med tydelige asiatiske referanser.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-ink-bamboo/1727542-03"
+    "Name": "ergon lombarda sabbia org",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1eoYVDIMeP98r3Lkvm-naXIhAJMMOQrQ_/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Johan 4512",
-    "Discription": "Tapetet Johan er et klassisk flekketapet slik de så ut på 1800-tallet. Enkelt i utførelsen, men veldig effektfullt på veggen.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-johan/1727566-02"
+    "Name": "Ergon Medley minimal green",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/11nCoRykvD1XWh7xJQQyDtd0QCDYe4-9h/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Johan 4513",
-    "Discription": "Tapetet Johan er et klassisk flekketapet slik de så ut på 1800-tallet. Enkelt i utførelsen, men veldig effektfullt på veggen.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-johan/1727566-01"
+    "Name": "Ergon Medley Minimal pink",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1JT0144beu2FuIFLyHZBrx0hwgn2_a0Ki/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Kyoto 3137",
-    "Discription": "Kyoto Crepe er et ensfarget tapet med diskre mønster og en taktil tekstur, trykt med relieffarge.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-kyoto-crepe/1727540-01"
+    "Name": "Ergon Medley pop black",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1rXkyCIWugLf363d-x6QcX44bqwvVEmL-/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4302",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-22"
+    "Name": "Ergon Medley pop black",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1GYo-ZB8SnpwMzgQ9CcRcdt7MxEz1F8nh/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4303",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-28"
+    "Name": "Ergon Medley pop green",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1d6fcGYG1XO1zmOFKb-bo4G5JVDtDqkMr/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4304",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-21"
+    "Name": "Ergon Medley Pop Grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1d6fcGYG1XO1zmOFKb-bo4G5JVDtDqkMr/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4306",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-15"
+    "Name": "Ergon Medley Pop white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1WTS2jjw-wHVoAFyI_0Q2RV1kI36wBZe4/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4308",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-03"
+    "Name": "Italg terre bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1VLAfRGgUaQ6PVUpa9drZieMYalCXsWTI/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4309",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-03"
+    "Name": "Italg Nuance bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mn5normxxKwkJRD2Zs1e22vXszI2h0c4/view?usp=sharing",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4310",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-04"
+    "Name": "Italgraniti Lux Pietra grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/12GH3rNfMSdClnkRo8A4UHtbtgSwJ_sDX/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4312",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-36"
+    "Name": "Italgraniti Nordic stone Islanda",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1FyRPWK3elQrZkqJRQjr7AbVTopSIMdiI/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4313",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-17"
+    "Name": "Italgraniti Terre cotto",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1McZirIslgH6WjT_wWFogKiYtwQhGYoX9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4315",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-27"
+    "Name": "italgranitit Lux Panda white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mDcZtMBoh6b6fTyAm-4YbxGScP6ZGZPM/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4316",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-09"
+    "Name": "living allure light grey wiggle",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1fDvy3fLCaceC2aoiUCUXtQBtDPA9CYUL/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4318",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-32"
+    "Name": "living allure light grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ciCUD3R0kZfdp3OzULCwlLkk-tc6EwL3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4319",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-30"
+    "Name": "Provenza Eureka Intarsio grigio",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/15-hxaQq8zW_5ZaDktKsAjRSowecJCsfZ/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4321",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-24"
+    "Name": "Provenza Eureka Sabbia",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/19uGWIprsklUspweLNfAWKMRT52TXgtI3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4322",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-06"
+    "Name": "Provenza UNIQUE TRAVERTINE RULED WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1dU-zYorFNPT2YMDv856_u5T32bN9JejB/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4324",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-33"
+    "Name": "Provenza UNIQUE TRAVERTINE VEIN CUT WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ojLu3o2qrTei0UNdqy714ULvkVHgbXYH/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4325",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-26"
+    "Name": "st.agostino deconcrete de-medium white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1De_Uc9eG6nuuiAslFOF5HWblwxVvwYHM/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4326",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-19"
+    "Name": "St.Agostino deconcrete DE-MICRO WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1kjikuqrY0Iw5Jz7otU3MWnqSa36QzS8g/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4327",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-38"
+    "Name": "4409 n LEA Anthology White",
+    "Type": "Tile",
+    "PreImageName": "4409_n_LEA-anthology-white.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4328",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-39"
+    "Name": "4415 n LEA Anthology Grey",
+    "Type": "Tile",
+    "PreImageName": "4415_n_LEA-anthology-gray.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4329",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-29"
+    "Name": "4424 n LEA Anthology Earth",
+    "Type": "Tile",
+    "PreImageName": "4424_n_LEA-anthology-earth.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4330",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-23"
+    "Name": "4441 n LEA Anthology Dark",
+    "Type": "Tile",
+    "PreImageName": "4441_n_LEA-anthology-dark.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4331",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-05"
+    "Name": "5645 n LEACERAMICHE Pigmenti Mauce 100x100",
+    "Type": "Tile",
+    "PreImageName": "5645_n_LEACERAMICHE-pigmenti-mauve-100x100.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4333",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-20"
+    "Name": "5646 n LEACERAMICHE Pigmenti Moss 100x100",
+    "Type": "Tile",
+    "PreImageName": "5646_n_LEACERAMICHE-pigmenti-moss-100x100.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4334",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-37"
+    "Name": "Agglobaghnin 5818 SATURNO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-5818-SATURNO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4335",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-14"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 0303 Alpi",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-0303-alpi.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4425",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-26"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1012 Marton",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1012-marton.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4428",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-linen/1727621-12"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1015 Lasa",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1015-lasa.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Linen 4435",
-    "Discription": "Linen er en tidløs, harmonisk tapetkolleksjon av ensfargete tapeter med taktil lintekstur. 35 lintapeter fra Boråstapeter i en naturlig"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1055 Cielo",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1055-cielo.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Mayfair",
-    "Discription": "Vakkert limtrykt mønster med en myk form i overkant koblet med en kantet underdel danne på nært på hold graderte firkanter som fører tankene til Art Deco.",
-    "Link_Supplier": "https://www.ellos.no/mimou/tapet-mayfair/1036610-04"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1058 Ocean",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1058-ocean.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Orust Stripe Beige 8879",
-    "Discription": "Orust Stripe fra Boråstapeter er et stripete tapet med herlig brede blokkstriper.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-orust-stripe/1727467-03"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1085 Alicante",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1085-alicante.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Pampas Azurite",
-    "Discription": "Hyll naturen med mønsteret Pampas. Den iøynefallende designen forestiller sammenflettede silhuetter og skyggeformasjoner av tropiske bananblad, bregner og gress.",
-    "Link_Supplier": "https://www.ellos.no/house-of-hackney/tapet-pampas/1675748-02"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 2802 Moon",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-2802-moon.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Paradise Birds Multi",
-    "Discription": "Det luksuriøs tapetet Paradise Birds fra Boråstapeter har et romantisk mønster inspirert av 1700-tallets chinesoise-malte vegger.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-paradise-birds/1727495-03"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 4607 Terra",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-4607-terra.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Paradise Birds Turquoise",
-    "Discription": "Det luksuriøs tapetet Paradise Birds fra Boråstapeter har et romantisk mønster inspirert av 1700-tallets chinesoise-malte vegger.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-paradise-birds/1727495-02"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 12004 Fumo",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-12004-fumo.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Petal 8815",
-    "Discription": "Tapetet Petal fra Boråstapeter har et rolig, harmonisk mønster av stiliserte blomsterklokker.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-petal/1727464-02"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 12404 Lava",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-12404-lava.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Petal 8816",
-    "Discription": "Tapetet Petal fra Boråstapeter har et rolig, harmonisk mønster av stiliserte blomsterklokker.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-petal/1727464-01"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 17311 Deserto",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-17311-deserto.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Petal 8817",
-    "Discription": "Tapetet Petal fra Boråstapeter har et rolig, harmonisk mønster av stiliserte blomsterklokker.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-petal/1727464-04"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1455 Coriandoli",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-ema-1455-coriandoli.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Raw Tiles 8833",
-    "Discription": "Tapetet Raw Tiles har en melert, betonglignende bakgrunn med diskre krakelering og et stramt, grafisk fiskebeinsmønster som leder tankene mot fliser, parkett eller kanskje vevd stoff.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-raw-tiles/1727469-01"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1089 Copenhagen",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-old-style-em-1089-copenhagen.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Statement Floral Mørk vinrød",
-    "Discription": "Tapetprøve til tapet Statement Floral, farge mørk vinrød.",
-    "Link_Supplier": "https://www.ellos.no/wallpaper-by-ellos/tapetprove-statement-floral-mork-vinrod/1664904-01"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1115 Athena",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-suprema-emg-1115-athena.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Statement Floral Gul",
-    "Discription": "Tapetprøve til tapet Statement Floral, farge gul.",
-    "Link_Supplier": "https://www.ellos.no/wallpaper-by-ellos/tapetprove-statement-floral-gul/1664876-01"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1116 Era",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-suprema-emg-1116-era.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Travis Beige Morkegra",
-    "Discription": "Tapetprøve til tapet Travis, farge beige/mørk grå.",
-    "Link_Supplier": "https://www.ellos.no/wallpaper-by-ellos/tapetprove-travis-beige-morkegra/1664884-01"
+    "Name": "Agglobaghin EM 0818 DAMASCO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-0818-DAMASCO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Type": "Tapet",
-    "Name": "Ellos Vertigo 1775",
-    "Discription": "Design av Arne Jacobsen. Vertigo som bygger på halvsirklers bevegelse, ble opprinnelig designet som møbelstoff.",
-    "Link_Supplier": "https://www.ellos.no/borastapeter/tapet-vertigo/1727501-02"
+    "Name": "Agglobaghin EM 3610 MINT",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-3610-MINT.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Agglobaghin EM 4018 GRIGIO VENATO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-4018-GRIGIO-VENATO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Agglobaghin EM 5310 WHITE",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-5310-WHITE.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Agglobaghin EM 5909 METEORA",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-5909-METEORA.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia A4800 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_A4800-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0801 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0801-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0803 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0803-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C807 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0807-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0810 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0810-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0811 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0811-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0812 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0812-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0813 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0813-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C0814 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0814-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C1303 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1303-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C1306 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1306-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C1308 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1308-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C1314 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1314-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia C1315 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1315-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia DC1012 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_DC1012-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia DC8005 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_DC8005-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia P6066R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_P6066R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH64 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH64-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH65 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH65-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH66 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH66-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH69 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH69-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH70 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH70-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH71 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH71-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia PH73 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH73-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia R3267R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_R3267R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Aleluia R3271R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_R3271R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Pz Living Ceramics Cuit Bone",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-bone.png",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Pz Living Ceramics Cuit Charcoal",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-charcoal.png",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Pz Living Ceramics Cuit Grey Copia",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-grey-copia.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Pz Living Ceramics Verso Crosscut Wall Grey Arpa Hr Scaled",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-verso-crosscut-wall-grey-arpa-hr-scaled.gif",
+    "Link_Supplier": "www.flisekompaniet.no"
+  },
+  {
+    "Name": "Pz Living Ceramics Verso Crosscut Wall Light Arpa Hr Scaled",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-verso-crosscut-wall-light-arpa-hr-scaled.gif",
+    "Link_Supplier": "www.flisekompaniet.no"
   }
 ]
