@@ -121,7 +121,7 @@ export class BookDesignerModalComponent {
   checkout(): void {
     const consultationDetails = this.getConsultationDetails();
     let sendPaymentObject = {
-      name: 'Consultations', //required
+      name: this.languageService.selected === 'no' ? 'Angrerett NO' : 'Right of withdrawal', //required
       amount: this.totalPrice * 100,//required
       receiverId: this.designer.id, //required
       locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
