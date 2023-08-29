@@ -204,7 +204,8 @@ namespace Intiri.API.DataAccess.Repository
                 .Include(m => m.Style)
                 .Include(m => m.Products.Take(1))
                 .Include(m => m.StyleImages.Take(1))
-                .Where(m => m.Style.Id == styleId && m.Room.Id != roomId).AsNoTracking()
+                .Include(m => m.Room)
+                .Where(m => m.Style.Id == styleId && m.Room.Id != roomId && m.IsTemplate == true).AsNoTracking()
                 .ToListAsync();
         }
 
