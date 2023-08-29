@@ -113,12 +113,13 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
     return isUserLoggedIn;
   }
 
-  async openLoginModal(): Promise<void> {
+  async openLoginModal(designer): Promise<void> {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,
+      componentProps: {bookDesigner: true, designer}
     });
 
     await modal.present();
@@ -135,10 +136,10 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
   }
 
   async bookConsultation() {
-    if (!this.checkIfUserLoggedIn()) {
-      await this.openLoginModal(); return;
-    }
     this.designerDetails$.subscribe(async res => {
+      if (!this.checkIfUserLoggedIn()) {
+        await this.openLoginModal(res); return;
+      }
       await this.paymentModal(res);
     });
   }
