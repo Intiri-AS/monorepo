@@ -87,7 +87,9 @@
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
-    "completed": "Completed designs"
+    "completed": "Completed designs",
+    "charges": "Charges",
+    "portfolio": "Portfolio"
   },
   "BOOK-MODAL": {
     "book": "Book your design consultation",

@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
-import { IonSlides } from '@ionic/angular';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { BookDesignerModalComponent } from 'src/app/components/modals/book-designer-modal/book-designer-modal.component';
 import { Project } from 'src/app/models/project.model';
+import { AccountService } from 'src/app/services/account.service';
 import { DesignerService } from 'src/app/services/designer.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -14,7 +15,7 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./designer-portfolio.page.scss'],
 })
 
-export class DesignerPortfolioPage implements OnInit {
+export class DesignerPortfolioPage implements OnInit, OnDestroy {
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -22,15 +23,22 @@ export class DesignerPortfolioPage implements OnInit {
 
   isScrolledDown: boolean;
 
+  designerId: any;
+  designerDetails$: BehaviorSubject<any>;
+
+  designerDetailsSubscription$: Subscription;
+
   constructor(
-    private translate: TranslateService,
     private route: ActivatedRoute,
+    private router: Router,
     private projectService: ProjectService,
     private designerService: DesignerService,
-  ) {}
+    private accountService: AccountService,
+    private modalController: ModalController,
+  ) {
+    this.designerDetails$ = new BehaviorSubject(null);
+  }
 
-  designerId: any;
-  designerDetails: any;
 
   public comments = [
     {
@@ -53,12 +61,26 @@ export class DesignerPortfolioPage implements OnInit {
 
   ngOnInit(): void {
     this.designerId = this.route.snapshot.params.id;
-    this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => this.designerDetails = res);
+    this.designerDetailsSubscription$ = this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => {
+      this.designerDetails$.next(res);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.designerDetailsSubscription$.unsubscribe();
   }
 
   async logScrollEnd() {
     const scrollElement = await this.content.getScrollElement(); // get scroll element
     this.isScrolledDown = scrollElement.scrollTop > 70;
+  }
+
+  getDesignerServices(): Array<string> {
+    let services: Array<string>;
+    this.designerDetails$.subscribe(res => {
+      services = res.designerInfo.areaOfExpertise.split(',');
+    })
+    return services;
   }
 
   getOptions(){
@@ -69,7 +91,33 @@ export class DesignerPortfolioPage implements OnInit {
     this.projectService.setCurrentProject(new Project());
   }
 
-  bookConsultation() {
-    
+  checkIfUserLoggedIn(): boolean {
+    let isUserLoggedIn = false;
+    this.accountService.currentUser$.subscribe((user) => {
+      if (user) {
+        isUserLoggedIn = true;
+      }
+    });
+    return isUserLoggedIn;
+  }
+
+  async paymentModal(designer) {
+    const modal = await this.modalController.create({
+      component: BookDesignerModalComponent,
+      componentProps: {designer, moodboard: true},
+      cssClass: 'book-designer-modal-css',
+    });
+
+    await modal.present();
+  }
+
+  bookConsultation(): void {
+    if (this.checkIfUserLoggedIn()) {
+      this.designerDetails$.subscribe(async res => {
+        await this.paymentModal(res);
+      })
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 }
