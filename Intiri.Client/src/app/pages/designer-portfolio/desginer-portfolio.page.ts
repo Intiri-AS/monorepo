@@ -142,4 +142,12 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
       await this.paymentModal(res);
     });
   }
+
+  getFeaturedPortfolios(): Array<any> {
+    let featuredPortfolios: Array<any>;
+    this.designerDetails$.subscribe(designer => {
+      featuredPortfolios = designer.designerPortfolio.filter(d => d.featured === 1);
+    })
+    return featuredPortfolios;
+  }
 }

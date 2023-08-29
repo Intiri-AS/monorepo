@@ -26,9 +26,8 @@
                 <ion-row class="designer-portfolio-container">
                     <h1 class="heading">{{'CONTACT-DESIGNER.portfolio' | translate}}</h1>
                     <div class="designer-portfolio-image-container">
-                      <div *ngFor="let portfolio of designerDetails.designerPortfolio">
+                      <div *ngFor="let portfolio of getFeaturedPortfolios()">
                         <img
-                          *ngIf="portfolio.featured === 1"
                           [src]="portfolio.imagePath"
                           [alt]="portfolio.publicId"
                           class="portfolio-image"
