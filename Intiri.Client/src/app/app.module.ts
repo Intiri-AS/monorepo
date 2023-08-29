@@ -136,6 +136,7 @@ import { DonutChartComponent } from './components/donut-chart/donut-chart.compon
 import { ProfilePopoverComponent } from './components/popovers/profile-popover/profile-popover.component';
 import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
 import { EditMoodboardStepComponent } from './pages/admin-pages/edit-moodboard/edit-moodboard-step/edit-moodboard-step.component';
+import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portfolio.page';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -157,7 +158,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
     ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
     TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent, AdminEditMoodboardPage, EditMoodboardStepComponent
+    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent, AdminEditMoodboardPage, EditMoodboardStepComponent, DesignerPortfolioPage
   ],
   entryComponents: [
     LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,

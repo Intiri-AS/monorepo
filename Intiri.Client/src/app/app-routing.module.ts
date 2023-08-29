@@ -49,7 +49,7 @@ import { DesignerService } from './services/designer.service';
 import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
 import { BlockDesignerMoodboardGuard } from './guards/ blockDesignerMoodboard.guard';
 import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
-
+import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portfolio.page';
 
 const routes: Routes = [
   {
@@ -96,8 +96,11 @@ const routes: Routes = [
   },
   {
     path: 'book-designer', //TODO Set up page guard (end-user guard)
-    component: BookDesignerPage,
-    canActivate: [EnduserGuard]
+    component: BookDesignerPage
+  },
+  {
+    path: 'designer-portfolio/:id', //TODO Set up page guard (end-user guard)
+    component: DesignerPortfolioPage,
   },
   {
     path: 'designer-profile/:id', //TODO Set up page guard (end-user guard)
