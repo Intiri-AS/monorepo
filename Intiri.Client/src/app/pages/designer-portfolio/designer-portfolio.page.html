@@ -9,7 +9,7 @@
                     <ion-col class="profile-bio-container">
                     <h1 class="name">{{designerDetails.firstName}}</h1>
                     <div class="misc-info">
-                        {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.experience}} | {{designerDetails.jobTitle}}
+                        {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.designerInfo.openToHomeVist ? ('CONTACT-DESIGNER.home-visit' | translate) : ('CONTACT-DESIGNER.online-consultation' | translate)}} | {{designerDetails.designerInfo.position}}
                     </div>
                     <div class="service-container">
                         <div *ngFor="let service of getDesignerServices()" class="service-box">{{'BOOK-WHY.' + service | translate}}</div>
@@ -18,20 +18,22 @@
                         {{designerDetails.description}}
                     </div>
                     <div class="charges">
-                        {{'CONTACT-DESIGNER.charges' | translate}}: <strong>{{designerDetails.designerInfo.price}} NOK</strong> per hour
+                        {{'CONTACT-DESIGNER.charges' | translate}}: <strong>{{designerDetails.designerInfo.price}} NOK</strong> {{'CONTACT-DESIGNER.per-hour' | translate}}
                     </div>
-                    <ion-button class="button h-[52px] mt-10" (click)="bookConsultation()">Book a Consultation</ion-button>
+                    <ion-button class="button h-[52px] mt-10" (click)="bookConsultation()">{{'CONTACT-DESIGNER.book-a-consultation' | translate}}</ion-button>
                     </ion-col>
                 </ion-row>
                 <ion-row class="designer-portfolio-container">
                     <h1 class="heading">{{'CONTACT-DESIGNER.portfolio' | translate}}</h1>
                     <div class="designer-portfolio-image-container">
-                      <img
-                        *ngFor="let portfolio of designerDetails.designerPortfolio"
-                        [src]="portfolio.imagePath"
-                        [alt]="portfolio.publicId"
-                        class="portfolio-image"
-                      >
+                      <div *ngFor="let portfolio of designerDetails.designerPortfolio">
+                        <img
+                          *ngIf="portfolio.featured === 1"
+                          [src]="portfolio.imagePath"
+                          [alt]="portfolio.publicId"
+                          class="portfolio-image"
+                        >
+                      </div>
                     </div>
                 </ion-row>
             </ion-grid>

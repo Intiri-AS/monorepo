@@ -6,5 +6,6 @@
         public int DesignerId { get; set; }
         public string ImagePath { get; set; }
         public string PublicId { get; set; }
+        public int Featured { get; set; }
     }
 }
