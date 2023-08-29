@@ -55,6 +55,7 @@
     </div>
   </div>
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
+  <p *ngIf="currentStep.data === 'final'" class="step-subtitle">{{project.currentMoodboard?.style?.name}}/{{project.currentMoodboard?.room?.name}}</p>
 
   <div [ngClass]="{'text-clamp-3' : !expandText}">
     <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->

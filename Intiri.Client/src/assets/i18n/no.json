@@ -87,7 +87,13 @@
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
-    "completed": "Antall utførte designkonsultasjoner"
+    "completed": "Antall utførte designkonsultasjoner",
+    "charges": "Laster",
+    "portfolio": "Portefølje",
+    "book-a-consultation": "Bestill konsultasjon",
+    "home-visit": "Hjemmebesøk",
+    "online-consultation": "Online konsultasjon",
+    "per-hour": "per time"
   },
   "BOOK-MODAL": {
     "book": "Book din designkonsultasjon",
@@ -100,14 +106,18 @@
     "proceed": "Gå videre"
   },
   "BOOK-WHY": {
-    "sketch": "Romskisse",
-    "adjustment": "Tilpasning av stilforslag",
-    "lining": "Innredningsplan",
-    "color": "Fargerådgivning",
-    "product": "Forslag til produkter og innredning",
-    "decoration": " Dekorasjon",
-    "quesiton": "Andre spørsmål",
-    "2d3d": "2D eller 3D tegninger"
+    "Color and material suggestions": "Farge - og materialforslag",
+    "Furnishing plan": "Møbleringsplan",
+    "Technical drawings": "Teknisketegning",
+    "Floor plans": "Plantegning",
+    "Kitchen": "Kjøkken",
+    "Bath": "Bad",
+    "Lighting plan": "Belysningsplan",
+    "Furniture design": "Møbeldesign",
+    "2D visualization": "2D visualisering",
+    "3D visualization": "3D visualisering",
+    "Project management": "Prosjektledelse",
+    "Others": "Annet"
   },
   "PAYMENT": {
     "details": "Betalingsdetaljer",

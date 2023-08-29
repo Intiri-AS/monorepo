@@ -87,7 +87,13 @@
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
-    "completed": "Completed designs"
+    "completed": "Completed designs",
+    "charges": "Charges",
+    "portfolio": "Portfolio",
+    "book-a-consultation": "Book a Consultation",
+    "home-visit": "Home Visit",
+    "online-consultation": "Online Consultation",
+    "per-hour": "per hour"
   },
   "BOOK-MODAL": {
     "book": "Book your design consultation",
@@ -100,14 +106,18 @@
     "proceed": "Proceed"
   },
   "BOOK-WHY": {
-    "sketch": "Room sketch",
-    "adjustment": "Moodboard adjustment",
-    "lining": "Lining plan",
-    "color": "Color advice",
-    "product": "Select products and furnishings",
-    "decoration": "Decoration",
-    "quesiton": "Other questions",
-    "2d3d": "2D & 3D drawings"
+    "Color and material suggestions": "Color and material suggestions",
+    "Furnishing plan": "Furnishing plan",
+    "Technical drawings": "Technical drawings",
+    "Floor plans": "Floor plans",
+    "Kitchen": "Kitchen",
+    "Bath": "Bath",
+    "Lighting plan": "Lighting plan",
+    "Furniture design": "Furniture design",
+    "2D visualization": "2D visualization",
+    "3D visualization": "3D visualization",
+    "Project management": "Project management",
+    "Others": "Others"
   },
   "PAYMENT": {
     "details": "Payment details",

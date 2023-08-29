@@ -43,6 +43,10 @@ export class DesignerService {
     return this.http.patch(this.apiUrl + 'designers/update/' + designerId, formData);
   }
 
+  getDesignersNew () {
+    return this.http.get(this.apiUrl + 'Designers/getDesigners');
+  }
+
   getContactDesigners() {
     return this.http.get(this.apiUrl + 'designers/contactDesigners');
   }
@@ -73,6 +77,10 @@ export class DesignerService {
 
   getDesignerClient(consultationPaymentId) {
     return this.http.get(this.apiUrl + 'designers/clientConsultation/' + consultationPaymentId);
+  }
+
+  getDesignerPortfolio(id) {
+    return this.http.get(this.apiUrl + 'Designers/getDesignerProfile/id/' + id);
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
