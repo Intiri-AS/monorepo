@@ -9,15 +9,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img [src]="getMoodboardImage(d, 0) || '../../../../assets/images/landing-img.png'" class="h-[120.5px] mac:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
-                  <img [src]="getMoodboardImage(d, 1) || '../../../../assets/images/landing-img.png'"  class="h-[120.5px] mac:h-[155px] w-full object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[0]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[0]?.imagePath" class="h-[120.5px] mac:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[1]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[1]?.imagePath"  class="h-[120.5px] mac:h-[155px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <!-- <div class="h-[30px] w-[55px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[20px] top-[20px] shadow-sm">
-                    <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
-                    <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
-                  </div> -->
-                  <img [src]="getMoodboardImage(d, 2) || '../../../../assets/images/landing-img.png'"  class="h-[249px] mac:h-[318px] w-full object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[2]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[2]?.imagePath"  class="h-[249px] mac:h-[318px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>

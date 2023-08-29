@@ -68,4 +68,10 @@ export class BookDesignerPage {
 
     await modal.present();
   }
+
+  getFeaturedPortfolios(id): Array<any> {
+    const designer = this.designers.filter(d => d.id === id)[0];
+    const featuredPortfolios: Array<any> = designer.designerPortfolio.filter(d => d.featured === 1);
+    return featuredPortfolios;
+  }
 }
