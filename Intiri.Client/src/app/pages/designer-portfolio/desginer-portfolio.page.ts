@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
@@ -18,7 +18,7 @@ import { LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./designer-portfolio.page.scss'],
 })
 
-export class DesignerPortfolioPage implements OnInit, OnDestroy {
+export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('slides') slides: IonSlides;
 
