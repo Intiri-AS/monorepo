@@ -7,12 +7,12 @@
                     <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full">
                     </ion-col>
                     <ion-col class="profile-bio-container">
-                    <h1 class="name">{{designerDetails.firstName}} {{designerDetails.lastName}}</h1>
+                    <h1 class="name">{{designerDetails.firstName}}</h1>
                     <div class="misc-info">
                         {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.experience}} | {{designerDetails.jobTitle}}
                     </div>
                     <div class="service-container">
-                        <div *ngFor="let service of getDesignerServices()" class="service-box">{{service}}</div>
+                        <div *ngFor="let service of getDesignerServices()" class="service-box">{{'BOOK-WHY.' + service | translate}}</div>
                     </div>
                     <div class="desc" *ngIf="designerDetails.description">
                         {{designerDetails.description}}

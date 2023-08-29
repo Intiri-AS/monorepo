@@ -102,17 +102,18 @@
     "proceed": "Proceed"
   },
   "BOOK-WHY": {
-    "suggestion": "Color and material suggestions",
-    "furnishing": "Furnishing plan",
-    "drawings": "Technical drawings",
-    "floor": "Floor plans",
-    "kitchen": "Kitchen",
-    "bath": "Bath",
-    "lighting": "Lighting plan",
-    "furniture": "Furniture design",
-    "2D": "2D visualization",
-    "3D": "3D visualization",
-    "project": "Project management"
+    "Color and material suggestions": "Color and material suggestions",
+    "Furnishing plan": "Furnishing plan",
+    "Technical drawings": "Technical drawings",
+    "Floor plans": "Floor plans",
+    "Kitchen": "Kitchen",
+    "Bath": "Bath",
+    "Lighting plan": "Lighting plan",
+    "Furniture design": "Furniture design",
+    "2D visualization": "2D visualization",
+    "3D visualization": "3D visualization",
+    "Project management": "Project management",
+    "Others": "Others"
   },
   "PAYMENT": {
     "details": "Payment details",
