@@ -14,8 +14,8 @@
                     <div class="service-container">
                         <div *ngFor="let service of getDesignerServices()" class="service-box">{{'BOOK-WHY.' + service | translate}}</div>
                     </div>
-                    <div class="desc" *ngIf="designerDetails.description">
-                        {{designerDetails.description}}
+                    <div class="desc">
+                        {{ currentLang === 'no' ? designerDetails.designerInfo.ProfileDescription_NO : designerDetails.designerInfo.ProfileDescription }}
                     </div>
                     <div class="charges">
                         {{'CONTACT-DESIGNER.charges' | translate}}: <strong>{{designerDetails.designerInfo.price}} NOK</strong> per hour

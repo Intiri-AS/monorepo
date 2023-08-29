@@ -4,10 +4,13 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { BookDesignerModalComponent } from 'src/app/components/modals/book-designer-modal/book-designer-modal.component';
+import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { AccountService } from 'src/app/services/account.service';
 import { DesignerService } from 'src/app/services/designer.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-designer-portfolio',
@@ -35,9 +38,13 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     private designerService: DesignerService,
     private accountService: AccountService,
     private modalController: ModalController,
+    private translate: TranslateService,
+    private languageService: LanguageService,
   ) {
     this.designerDetails$ = new BehaviorSubject(null);
   }
+
+  currentLang: string = '';
 
 
   public comments = [
@@ -60,10 +67,15 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
   ];
 
   ngOnInit(): void {
+    this.currentLang = this.translate.currentLang;
     this.designerId = this.route.snapshot.params.id;
     this.designerDetailsSubscription$ = this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => {
       this.designerDetails$.next(res);
     });
+  }
+
+  ngOnChanges(): void {
+    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnDestroy(): void {
@@ -79,12 +91,12 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     let services: Array<string>;
     this.designerDetails$.subscribe(res => {
       services = res.designerInfo.areaOfExpertise.split(',');
-    })
+    });
     return services;
   }
 
   getOptions(){
-    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1}
+    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1};
   }
 
   removeProjectDraft(){
@@ -101,6 +113,17 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     return isUserLoggedIn;
   }
 
+  async openLoginModal(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: LoginModalComponent,
+      cssClass: 'medium-modal-css',
+      backdropDismiss: true,
+      swipeToClose: false,
+    });
+
+    await modal.present();
+  }
+
   async paymentModal(designer) {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
@@ -111,13 +134,12 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     await modal.present();
   }
 
-  bookConsultation(): void {
-    if (this.checkIfUserLoggedIn()) {
-      this.designerDetails$.subscribe(async res => {
-        await this.paymentModal(res);
-      })
-    } else {
-      this.router.navigateByUrl('/login');
+  async bookConsultation() {
+    if (!this.checkIfUserLoggedIn()) {
+      await this.openLoginModal(); return;
     }
+    this.designerDetails$.subscribe(async res => {
+      await this.paymentModal(res);
+    });
   }
 }
