@@ -28,37 +28,37 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'suggestion', isChecked: false
+      id: 1, name: 'Color and material suggestions', isChecked: false
     },
     {
-      id: 2, name: 'furnishing', isChecked: false
+      id: 2, name: 'Furnishing plan', isChecked: false
     },
     {
-      id: 3, name: 'drawings', isChecked: false
+      id: 3, name: 'Technical drawings', isChecked: false
     },
     {
-      id: 4, name: 'floor', isChecked: false
+      id: 4, name: 'Floor plans', isChecked: false
     },
     {
-      id: 5, name: 'kitchen', isChecked: false
+      id: 5, name: 'Kitchen', isChecked: false
     },
     {
-      id: 6, name: 'bath', isChecked: false
+      id: 6, name: 'Bath', isChecked: false
     },
     {
-      id: 7, name: 'lighting', isChecked: false
+      id: 7, name: 'Lighting plan', isChecked: false
     },
     {
-      id: 8, name: 'furniture', isChecked: false
+      id: 8, name: 'Furniture design', isChecked: false
     },
     {
-      id: 9, name: '2D', isChecked: false
+      id: 9, name: '2D visualization', isChecked: false
     },
     {
-      id: 10, name: '3D', isChecked: false
+      id: 10, name: '3D visualization', isChecked: false
     },
     {
-      id: 11, name: 'project', isChecked: false
+      id: 11, name: 'Project management', isChecked: false
     },
     {
       id: 12, name: 'quesiton', isChecked: false
@@ -89,7 +89,7 @@ export class BookDesignerModalComponent {
         message: this.translate.instant('NOTIFY.consultation-get-error'),
         type: 'error',
       });
-    })
+    });
 
   }
 
@@ -131,13 +131,13 @@ export class BookDesignerModalComponent {
       consultationDetails,
       numberOfConsultations: this.numberOfConsultations, //required
       Domain: environment.apiUrl.split('/api')[0]
-    }
+    };
     this.paymentService.sendPayment(sendPaymentObject).subscribe(async (res: any) => {
       let stripe = await loadStripe(environment.stripe_key);
       stripe?.redirectToCheckout({
         sessionId: res.id
-      })
-    })
+      });
+    });
   }
 
   getConsultationDetails() {
@@ -146,11 +146,7 @@ export class BookDesignerModalComponent {
       if(e['isChecked']) {
         details.push(e.name);
       }
-    })
-    if(this.extraPayment) {
-      // details.push('2D & 3D drawings');
-      details.push('2d3d');
-    }
+    });
     return String(details);
   }
 
@@ -159,7 +155,7 @@ export class BookDesignerModalComponent {
       this.extraPayment = true;
       this.totalPrice = this.totalPrice + this.extraPaymentAmount;
     } else {
-      this.extraPayment = false
+      this.extraPayment = false;
       this.totalPrice = this.totalPrice - this.extraPaymentAmount;
     }
   }
