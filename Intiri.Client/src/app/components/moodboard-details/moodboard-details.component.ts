@@ -60,10 +60,12 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   draggedShoppingListItem: any = null;
 
   MOODBOARD_SLOT_COUNT: number = 16;
+
   cropFeatureMap = {};
   isImageCroppingState: boolean = false;
   isImageDraggingState: boolean = false;
   lastMousePosition: any = null;
+  currentZoom: number = 1;
 
   itemsInMoodboard$: BehaviorSubject<any>;
   showLoader: boolean = false;
@@ -331,25 +333,28 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isImageCroppingState) {
       event.preventDefault();
 
-      const mouseDisplacement = event.deltaY;
       const slotImage = <HTMLImageElement>document.getElementById(`slot-${slotId}-img`);
-      var style = getComputedStyle(slotImage);
-      let imageHeight = parseInt(style.height.split('px')[0]);
-      let imageWidth = parseInt(style.width.split('px')[0]);
-      if (mouseDisplacement > 0) {
-        imageHeight += 10;
-      } else {
-        imageHeight -= 10;
+
+      if (slotImage.style.transform?.match(/[+-]?\d+(\.\d+)?/g)?.map(Number)[0]) {
+        this.currentZoom = slotImage.style.transform.match(/[+-]?\d+(\.\d+)?/g).map(Number)[0];
+      }
+      let minZoom = 1;
+      let maxZoom = 3;
+      let stepSize = 0.01;
+
+      let direction = event.deltaY > 0 ? 1 : -1;
+      // this.zoomImage(direction);
+      let newZoom = this.currentZoom + direction * stepSize;
+
+      // Limit the zoom level to the minimum and maximum values
+      if (newZoom < minZoom || newZoom > maxZoom) {
+          return;
       }
 
-      let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
-      let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
-      if (_CONTAINER_HEIGHT > imageHeight && _CONTAINER_WIDTH > imageWidth) {
-        return;
-      }
+      this.currentZoom = newZoom;
 
-      event.target.style.width = imageHeight + "px";
-      event.target.style.height = imageHeight + "px";
+      // Update the CSS transform of the image to scale it
+      slotImage.style.transform = 'scale(' + this.currentZoom + ')';
     }
   }
 
@@ -723,6 +728,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   onCroppingDone (slotId) {
     this.isImageCroppingState = false;
     this.cropFeatureMap[slotId].isImageCroppingState = false;
+    this.currentZoom = 1;
 
     let slotImage = document.getElementById(`slot-${slotId}-img`);
     let updatedStyles = {
@@ -730,6 +736,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       width: slotImage.style.width,
       top: slotImage.style.top,
       left: slotImage.style.left,
+      transform: slotImage.style.transform
     };
 
     this.moodboard.slotInfo[slotId].entityImageStyles = updatedStyles;
