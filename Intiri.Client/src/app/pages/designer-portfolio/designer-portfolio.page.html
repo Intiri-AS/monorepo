@@ -26,12 +26,14 @@
                 <ion-row class="designer-portfolio-container">
                     <h1 class="heading">{{'CONTACT-DESIGNER.portfolio' | translate}}</h1>
                     <div class="designer-portfolio-image-container">
-                      <img
-                        *ngFor="let portfolio of designerDetails.designerPortfolio"
-                        [src]="portfolio.imagePath"
-                        [alt]="portfolio.publicId"
-                        class="portfolio-image"
-                      >
+                      <div *ngFor="let portfolio of designerDetails.designerPortfolio">
+                        <img
+                          *ngIf="portfolio.featured === 1"
+                          [src]="portfolio.imagePath"
+                          [alt]="portfolio.publicId"
+                          class="portfolio-image"
+                        >
+                      </div>
                     </div>
                 </ion-row>
             </ion-grid>
