@@ -106,17 +106,18 @@
     "proceed": "Gå videre"
   },
   "BOOK-WHY": {
-    "suggestion": "Farge - og materialforslag",
-    "furnishing": "Møbleringsplan",
-    "drawings": "Teknisketegning",
-    "floor": "Plantegning",
-    "kitchen": "Kjøkken",
-    "bath": "Bad",
-    "lighting": "Belysningsplan",
-    "furniture": "Møbeldesign",
-    "2D": "2D visualisering",
-    "3D": "3D visualisering",
-    "project": "Prosjektledelse"
+    "Color and material suggestions": "Farge - og materialforslag",
+    "Furnishing plan": "Møbleringsplan",
+    "Technical drawings": "Teknisketegning",
+    "Floor plans": "Plantegning",
+    "Kitchen": "Kjøkken",
+    "Bath": "Bad",
+    "Lighting plan": "Belysningsplan",
+    "Furniture design": "Møbeldesign",
+    "2D visualization": "2D visualisering",
+    "3D visualization": "3D visualisering",
+    "Project management": "Prosjektledelse",
+    "Others": "Annet"
   },
   "PAYMENT": {
     "details": "Betalingsdetaljer",

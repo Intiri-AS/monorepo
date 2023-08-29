@@ -464,6 +464,4 @@ export class NewProjectPage implements OnInit, OnDestroy {
     });
     return isUserLoggedIn;
   }
-
-
 }
