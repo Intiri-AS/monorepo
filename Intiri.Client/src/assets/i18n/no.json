@@ -89,7 +89,11 @@
     "select": "Vegg din designer",
     "completed": "Antall utførte designkonsultasjoner",
     "charges": "Laster",
-    "portfolio": "Portefølje"
+    "portfolio": "Portefølje",
+    "book-a-consultation": "Bestill konsultasjon",
+    "home-visit": "Hjemmebesøk",
+    "online-consultation": "Online konsultasjon",
+    "per-hour": "per time"
   },
   "BOOK-MODAL": {
     "book": "Book din designkonsultasjon",
