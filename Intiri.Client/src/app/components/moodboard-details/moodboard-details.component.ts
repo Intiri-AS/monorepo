@@ -373,13 +373,12 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     this.isImageDraggingState = true;
     // this.lastMousePosition = {x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top};
     this.lastMousePosition = {x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top};
-    console.log('lastMousePosition', this.lastMousePosition);
+    console.log('lastMousePosition onMouseDown', this.lastMousePosition);
   }
 
   onMouseUp (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
 
-    console.log('onMouseUp', event, slotId);
     this.isImageDraggingState = false;
   }
 
@@ -451,11 +450,10 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     if (this.isImageCroppingState && this.isImageDraggingState) {
-      console.log('onMouseMove', slotId);
-
       let _DIV_OFFSET = $(`#slot-${slotId}`).offset()
 
-      let slotImage = document.getElementById(`slot-${slotId}-img`);
+      const slot = document.getElementById(`slot-${slotId}`);
+      const slotImage = document.getElementById(`slot-${slotId}-img`);
 
       let _CONTAINER_WIDTH = $(`#slot-${slotId}`).outerWidth();
       let _CONTAINER_HEIGHT = $(`#slot-${slotId}`).outerHeight();
@@ -485,16 +483,24 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       let img_left_new = (img_left + change_x);
       // console.log('img_top_new',img_top_new, 'img_left_new', img_left_new);
 
-      if(img_top_new > 0)
-			  img_top_new = 0;
-      if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
-        img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
-      if(img_left_new > 0)
-        img_left_new = 0;
-      if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))
-        img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
+      // if(img_top_new > 0)
+			//   img_top_new = 0;
+      // if(img_top_new < (_CONTAINER_HEIGHT - _IMAGE_HEIGHT))
+      //   img_top_new = _CONTAINER_HEIGHT - _IMAGE_HEIGHT;
+      // if(img_left_new > 0)
+      //   img_left_new = 0;
+      // if(img_left_new < (_CONTAINER_WIDTH - _IMAGE_WIDTH))
+      //   img_left_new = _CONTAINER_WIDTH - _IMAGE_WIDTH;
 
-
+      // const slotDimensions = slot.getBoundingClientRect();
+      // const slotImageDimensions = slotImage.getBoundingClientRect();
+      // console.log('slotDimensions', slotDimensions);
+      // console.log('slotImageDimensions', slotImageDimensions);
+      // if (slotDimensions.left < slotImageDimensions.left || slotDimensions.right > slotImageDimensions.right) {
+      //   img_top_new = this.moodboard.slotInfo[slotId].entityImageStyles.top;
+      //   img_left_new = this.moodboard.slotInfo[slotId].entityImageStyles.left;
+      //   return;
+      // }
       // console.log('after update img_top_new',img_top_new, 'img_left_new', img_left_new);
 
       slotImage.style.top = img_top_new + 'px';
@@ -736,10 +742,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       width: slotImage.style.width,
       top: slotImage.style.top,
       left: slotImage.style.left,
-      transform: slotImage.style.transform
+      transform: slotImage.style.transform,
     };
 
     this.moodboard.slotInfo[slotId].entityImageStyles = updatedStyles;
-    console.log('moodboard after updating', this.moodboard.slotInfo);
   }
 }
