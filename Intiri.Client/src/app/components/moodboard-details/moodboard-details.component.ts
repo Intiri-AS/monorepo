@@ -450,6 +450,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     if (this.isImageCroppingState && this.isImageDraggingState) {
+      console.log('onMouseMove', slotId)
       let _DIV_OFFSET = $(`#slot-${slotId}`).offset()
 
       const slot = document.getElementById(`slot-${slotId}`);
@@ -713,11 +714,19 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isImageCroppingState) return;
 
     if (!this.moodboard.slotInfo[slotId].entityImagePath) return;
+    console.log('path', this.activateRoute.snapshot.routeConfig.path)
 
     if (this.userData.roles[0] == 'Admin') {
       if (
         this.activateRoute.snapshot.routeConfig.path === 'add-moodboard' ||
         this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard/:id'
+      ) {
+        this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
+      }
+    } else if (this.userData.roles[0] == 'FreeEndUser') {
+      if (
+        this.activateRoute.snapshot.routeConfig.path === 'new-project' ||
+        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard'
       ) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }
