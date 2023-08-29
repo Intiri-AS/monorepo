@@ -1,104 +1,56 @@
 <ion-content
 [scrollEvents]="true"
 (ionScroll)="logScrollEnd()">
-  <div id="main">
-    <div>
-      <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
-      <section class="designer-profile-container" *ngIf="designerDetails">
-        <div class="designer-profile-info-container" >
-          <div class="profile-pic-container">
-            <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full">
-          </div>
-          <div class="profile-bio-container">
-            <h1 class="name">{{designerDetails.firstName}} {{designerDetails.lastName}}</h1>
-            <div class="misc-info">
-              {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.experience}} | {{designerDetails.jobTitle}}
-            </div>
-            <div class="service-container">
-              <div class="service-box">Farge og materialforslag</div>
-              <div class="service-box">Kjøkken</div>
-              <div class="service-box">Bad</div>
-              <div class="service-box">Belysning</div>
-              <div class="service-box">Belysning</div>
-            </div>
-            <div class="desc" *ngIf="designerDetails.description">
-              <!-- {{designerDetails.description}} -->
-              Jeg er en lidenskapelig arkitekt og interiørarkitekt som inspireres av de gode øyeblikkene i rom og hvordan vi bruker og påvirkes av rommene vi lever i. Min spesialisering er å optimalisere små hjem, budsjettvennlig, med smarte planløsninger, spesialtilpasset møbeldesign og beroligende fargepaletter. Jeg har flere års arbeidserfaring som interiørarkitekt med spisskompetanse innen compact living, totalrenovering og fargedesign. De siste årene har jeg bodd i Mexico City som interiørarkitekt for det anerkjente kontoret til Frida Escobedo med store internasjonale og kommersielle prosjekter. Der fikk jeg utviklet min sterke faglige integritet og stolthet innenfor god romdesign. Jeg motiveres av kundens spesifikke livsstil og ønsker. Jeg fokuserer på å bli godt kjent med kunden for å kunne optimalisere hjemmet tilpasset kundens spesifikke livssituasjon. Er også opptatt av å tenke langsiktige løsninger og gode kvalitets materialer som er bra for miljøet og samfunnet. Jeg er alltid åpen for nye utfordringer og tar prosjekter i alle størrelser, fra fargevalg, innredning av ett rom til totalrenovering av en komplett bolig. Velkommen til en sparring om ditt prosjekt.
-            </div>
-            <div class="charges">
-              Charges: $70 per hour
-            </div>
-            <ion-button class="button h-[52px] mt-10" (click)="bookConsultation()">Book a Consultation</ion-button>
-          </div>
-        </div>
-        <div class="designer-portfolio-container">
-          <h1 class="heading">Portfolio</h1>
-          <div class="desinger-portfolio-image-container">
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-            <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Stories / Testimonials -->
-      <!-- <div class="bg-light bg-cover min-h-[1030px]" id="stories">
-        <ion-row class="container relative py-[30px] xl:py-[30vh]">
-          <ion-col size="12" size-xl="3.5"  class="ion-align-self-center pl-[5%] xl-ion:pl-0">
-            <p class="pencraft">{{'LANDING.stories' | translate}}</p>
-            <p class="landing-headline">{{'LANDING.said' | translate}}</p>
-            <p class="landing-text">{{'LANDING.said-second' | translate}}</p>
-          </ion-col>
-          <ion-col size="12" size-xl="7.5" offset-xl="0.75" class="">
-            <ion-slides #slides [options]="getOptions()" class="h-[100%]" [pager]="true">
-              <ion-slide *ngFor="let comment of comments">
-                <ion-card class="border rounded-2xl border-black-1 bg-transparent p-8 text-left h-[97%]">
-                  <div class="mb-2">
-                    <span class='quote-icon'></span>
-                    <span class='quote-icon ml-1'></span>
-                  </div>
-                  <p class="text-black-2 text-lg">{{comment.text}}</p>
-                  <p class="text-lg font-semibold text-black mt-4">{{comment.author}}</p>
-                </ion-card>
-              </ion-slide>
-            </ion-slides>
-            <div class="flex justify-end">
-              <ion-button fill="clear" (click)="prev()" class="text-black">
-                <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-              </ion-button>
-              <ion-button fill="clear" (click)="next()" class="text-black">
-                <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-              </ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-      </div> -->
-
-      <!-- Contact Us -->
-      <!-- <div id="contact" class="bg-primary bg-cover h-[480px] text-center pt-[140px]">
-        <p class="pencraft-white">{{'LANDING.contact-us' | translate}}</p>
-        <p class="landing-headline-white">{{'LANDING.hesitate' | translate}}</p>
-        <ion-buttons>
-          <ion-button href="mailto:kontakt@intiri.no" class="contact-btn">kontakt@intiri.no</ion-button>
-        </ion-buttons>
-      </div> -->
-
-      <app-footer></app-footer>
+    <div id="home">
+        <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
+            <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="designerDetails">
+                <ion-row class="designer-profile-info-container" >
+                    <ion-col class="profile-pic-container">
+                    <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full">
+                    </ion-col>
+                    <ion-col class="profile-bio-container">
+                    <h1 class="name">{{designerDetails.firstName}} {{designerDetails.lastName}}</h1>
+                    <div class="misc-info">
+                        {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.experience}} | {{designerDetails.jobTitle}}
+                    </div>
+                    <div class="service-container">
+                        <div class="service-box">Farge og materialforslag</div>
+                        <div class="service-box">Kjøkken</div>
+                        <div class="service-box">Bad</div>
+                        <div class="service-box">Belysning</div>
+                        <div class="service-box">Belysning</div>
+                    </div>
+                    <div class="desc" *ngIf="designerDetails.description">
+                        <!-- {{designerDetails.description}} -->
+                        Jeg er en lidenskapelig arkitekt og interiørarkitekt som inspireres av de gode øyeblikkene i rom og hvordan vi bruker og påvirkes av rommene vi lever i. Min spesialisering er å optimalisere små hjem, budsjettvennlig, med smarte planløsninger, spesialtilpasset møbeldesign og beroligende fargepaletter. Jeg har flere års arbeidserfaring som interiørarkitekt med spisskompetanse innen compact living, totalrenovering og fargedesign. De siste årene har jeg bodd i Mexico City som interiørarkitekt for det anerkjente kontoret til Frida Escobedo med store internasjonale og kommersielle prosjekter. Der fikk jeg utviklet min sterke faglige integritet og stolthet innenfor god romdesign. Jeg motiveres av kundens spesifikke livsstil og ønsker. Jeg fokuserer på å bli godt kjent med kunden for å kunne optimalisere hjemmet tilpasset kundens spesifikke livssituasjon. Er også opptatt av å tenke langsiktige løsninger og gode kvalitets materialer som er bra for miljøet og samfunnet. Jeg er alltid åpen for nye utfordringer og tar prosjekter i alle størrelser, fra fargevalg, innredning av ett rom til totalrenovering av en komplett bolig. Velkommen til en sparring om ditt prosjekt.
+                    </div>
+                    <div class="charges">
+                        Charges: $70 per hour
+                    </div>
+                    <ion-button class="button h-[52px] mt-10" (click)="bookConsultation()">Book a Consultation</ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="designer-portfolio-container">
+                    <h1 class="heading">Portfolio</h1>
+                    <ion-row class="desinger-portfolio-image-container">
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/><img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/><img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/><img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/><img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/><img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    <img src="https://res.cloudinary.com/dfxaxvdot/image/upload/v1663667340/ProductImages/sofa_royale_ohrxtb.jpg"/>
+                    </ion-row>
+                </ion-row>
+            </ion-grid>
     </div>
-  </div>
 </ion-content>

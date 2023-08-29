@@ -72,12 +72,10 @@
     padding-bottom: 30px;
   }
   
-  .designer-profile-container {
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 5rem;
-  
-    .designer-profile-info-container {
+  .designer-profile-container{
+    min-height: 100%;
+  }
+  .designer-profile-info-container {
       display: grid;
       grid-template-columns: 30% 65%;
       grid-column-gap: 5%;
@@ -154,7 +152,7 @@
         justify-content: space-between;
       }
     }
-  }
+
   
   @media (max-width: 1400px) and (min-width: 540px) {
     .designer-profile-container{
