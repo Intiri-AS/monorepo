@@ -100,14 +100,17 @@
     "proceed": "Gå videre"
   },
   "BOOK-WHY": {
-    "sketch": "Romskisse",
-    "adjustment": "Tilpasning av stilforslag",
-    "lining": "Innredningsplan",
-    "color": "Fargerådgivning",
-    "product": "Forslag til produkter og innredning",
-    "decoration": " Dekorasjon",
-    "quesiton": "Andre spørsmål",
-    "2d3d": "2D eller 3D tegninger"
+    "suggestion": "Farge - og materialforslag",
+    "furnishing": "Møbleringsplan",
+    "drawings": "Teknisketegning",
+    "floor": "Plantegning",
+    "kitchen": "Kjøkken",
+    "bath": "Bad",
+    "lighting": "Belysningsplan",
+    "furniture": "Møbeldesign",
+    "2D": "2D visualisering",
+    "3D": "3D visualisering",
+    "project": "Prosjektledelse"
   },
   "PAYMENT": {
     "details": "Betalingsdetaljer",
