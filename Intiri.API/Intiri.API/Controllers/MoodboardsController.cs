@@ -525,12 +525,12 @@ namespace Intiri.API.Controllers
             }
 
             contents = contents.Replace("#ShoppingItems#", shoppingItems);
-            string header = @" <!DOCTYPE html>
-						<div class=""header"" style=""padding: 20px;"">
-							<a href=""https://www.intiri.no"" target=""_blank"">
-								<img src=""https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg"" style=""height:20px;"" />
-							</a>
-						</div>";
+      //      string header = @" <!DOCTYPE html>
+						//<div class=""header"" style=""padding: 20px;"">
+						//	<a href=""https://www.intiri.no"" target=""_blank"">
+						//		<img src=""https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg"" style=""height:20px;"" />
+						//	</a>
+						//</div>";
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions.MarginTop = 0;
@@ -539,11 +539,11 @@ namespace Intiri.API.Controllers
             renderer.RenderingOptions.MarginBottom = 0;
             renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
             renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
-            renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
-            {
-                HtmlFragment = header,
-				LoadStylesAndCSSFromMainHtmlDocument = true
-            };
+    //        renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
+    //        {
+    //            HtmlFragment = header,
+				//LoadStylesAndCSSFromMainHtmlDocument = true
+    //        };
             var pdf = renderer.RenderHtmlAsPdf(contents);
             pdf.CompressImages(99);
             return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
