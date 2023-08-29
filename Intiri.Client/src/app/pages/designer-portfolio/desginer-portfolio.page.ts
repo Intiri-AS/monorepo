@@ -75,6 +75,14 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     this.isScrolledDown = scrollElement.scrollTop > 70;
   }
 
+  getDesignerServices(): Array<string> {
+    let services: Array<string>;
+    this.designerDetails$.subscribe(res => {
+      services = res.designerInfo.areaOfExpertise.split(',');
+    })
+    return services;
+  }
+
   getOptions(){
     return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1}
   }

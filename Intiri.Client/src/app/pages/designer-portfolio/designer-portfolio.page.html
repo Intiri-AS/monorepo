@@ -1,7 +1,7 @@
 <ion-content>
     <div id="home">
         <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
-            <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="(designerDetails$ | async) as designerDetails">
+            <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="(designerDetails$ | async) !== null && (designerDetails$ | async) as designerDetails">
                 <ion-row class="designer-profile-info-container" >
                     <ion-col class="profile-pic-container">
                     <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full">
@@ -12,11 +12,7 @@
                         {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.experience}} | {{designerDetails.jobTitle}}
                     </div>
                     <div class="service-container">
-                        <div class="service-box">Farge og materialforslag</div>
-                        <div class="service-box">Kjøkken</div>
-                        <div class="service-box">Bad</div>
-                        <div class="service-box">Belysning</div>
-                        <div class="service-box">Belysning</div>
+                        <div *ngFor="let service of getDesignerServices()" class="service-box">{{service}}</div>
                     </div>
                     <div class="desc" *ngIf="designerDetails.description">
                         {{designerDetails.description}}
