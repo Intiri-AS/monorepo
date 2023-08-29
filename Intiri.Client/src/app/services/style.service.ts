@@ -64,6 +64,10 @@ export class StyleService {
     })).toPromise();
   }
 
+  getStyleImagesByRoom (roomId: number) {
+    return this.http.get(this.apiUrl + 'StyleImages/getStyleImagesByRoom/' + roomId);
+  }
+
   getStyleImagesForRoomAndStyle (roomId, styleId) {
     return this.http.get(`${this.apiUrl}styleImages/getStyleImagesByRoomAndStyle/${roomId}/${styleId}`).pipe(map(styleImages => {
       if (styleImages) {

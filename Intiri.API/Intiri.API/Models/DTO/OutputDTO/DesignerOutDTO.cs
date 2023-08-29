@@ -9,5 +9,7 @@ namespace Intiri.API.Models.DTO.OutputDTO
 		public RatingBasicOutDTO DesignerRating { get; set; }
 		public ICollection<RoleDTO> Roles { get; set; }
 		public ICollection<MoodboardOutDTO> CreatedMoodboards { get; set; }
-	}
+        public DesignerInfo DesignerInfo { get; set; }
+        public ICollection<DesignerPortfolio> DesignerPortfolio { get; set; }
+    }
 }

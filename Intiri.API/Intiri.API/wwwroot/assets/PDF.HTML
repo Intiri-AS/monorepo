@@ -1,30 +1,64 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pdf-sampler.css" />
-    <title>Simple Tabs</title>
-    <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin: 15mm 0mm 0mm;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans';
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            text-decoration: none;
+        }
+
         .container {
+            position: relative;
+            margin: 0px 40px 100px;
+        }
+
+        .template-container {
+            position: relative;
+            margin: 16px 0px 32px;
+            height: 600px;
             display: grid;
-            /*margin: 32px !important;*/
-            padding: 16px;
-            background: grey;
-            height: 264px !important;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-            grid-template-rows: 32px 32px 32px 62px 62px;
-            grid-auto-columns: 1fr;
-            grid-auto-rows: 1fr;
-            gap: 10px 10px;
-            grid-auto-flow: row;
+            grid-template-columns: 20% 5% 20% 5% 20% 15% 11%;
+            grid-template-rows: 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5% 7.5%;
+            gap: 8px;
             grid-template-areas:
-                "first fifth fifth eighth tenth thirteen"
-                "second fifth fifth eighth tenth fourteen"
-                "third fifth fifth eighth eleventh fourteen"
-                "fourth sixth ninth ninth eleventh fifteen"
-                "fourth seventh ninth ninth twelth sixteen";
+                "first fifth fifth fifth eighth tenth thirteen"
+                "first fifth fifth fifth eighth tenth thirteen"
+                "second fifth fifth fifth eighth tenth thirteen"
+                "second fifth fifth fifth eighth tenth fourteen"
+                "third fifth fifth fifth eighth eleventh fourteen"
+                "third fifth fifth fifth eighth eleventh fourteen"
+                "fourth fourth sixth ninth ninth eleventh fifteen"
+                "fourth fourth sixth ninth ninth eleventh fifteen"
+                "fourth fourth sixth ninth ninth twelth fifteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+                "fourth fourth seventh ninth ninth twelth sixteen"
+        }
+
+        .title {
+            font-size: 32px;
+            margin: 0px;
+        }
+
+        .sub-title {
+            color: #9B7E60;
+            color: #9B7E60;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            word-wrap: break-word;
         }
 
         .image-container {
@@ -47,218 +81,123 @@
                 object-fit: cover;
             }
 
-        .image-container-box {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            overflow: hidden;
+        .first {
+            grid-area: first;
         }
 
-            .image-container-box a {
+        .second {
+            grid-area: second;
+        }
+
+        .third {
+            grid-area: third;
+        }
+
+        .fourth {
+            grid-area: fourth;
+        }
+
+        .fifth {
+            grid-area: fifth;
+        }
+
+        .sixth {
+            grid-area: sixth;
+        }
+
+        .seventh {
+            grid-area: seventh;
+        }
+
+        .eighth {
+            grid-area: eighth;
+        }
+
+        .ninth {
+            grid-area: ninth;
+        }
+
+        .tenth {
+            grid-area: tenth;
+        }
+
+        .eleventh {
+            grid-area: eleventh;
+        }
+
+        .twelth {
+            grid-area: twelth;
+        }
+
+        .thirteen {
+            grid-area: thirteen;
+        }
+
+        .fourteen {
+            grid-area: fourteen;
+        }
+
+        .fifteen {
+            grid-area: fifteen;
+        }
+
+        .sixteen {
+            grid-area: sixteen;
+        }
+
+        .text-box {
+            max-width: 300px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .headings {
+            color: #9B7E60;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 55px;
+            word-wrap: break-word;
+            margin-top: 24px;
+            page-break-after: avoid;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(100px, 25%));
+            gap: 40px;
+        }
+
+        .product-box {
+            page-break-inside: avoid;
+        }
+
+        .product-image-box {
+            text-align: center;
+            background: grey;
+            height: 300px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+            .product-image-box a {
                 width: 100%;
                 height: 100%;
                 text-decoration: none;
                 display: block;
             }
 
-            .image-container-box img {
+            .product-image-box img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                border-radius: 8px;
             }
-
-        .first {
-            /* display: table-cell; */
-            grid-area: first;
-            background: white;
-        }
-
-        .second {
-            /* display: table-cell; */
-            grid-area: second;
-            background: white;
-        }
-
-        .third {
-            /* display: table-cell; */
-            grid-area: third;
-            background: white;
-        }
-
-        .fourth {
-            /* display: table-cell; */
-            grid-area: fourth;
-            background: white;
-        }
-
-        .fifth {
-            /* display: table-cell; */
-            grid-area: fifth;
-            background: white;
-        }
-
-        .sixth {
-            /* display: table-cell; */
-            grid-area: sixth;
-            background: white;
-        }
-
-        .seventh {
-            /* display: table-cell; */
-            grid-area: seventh;
-            background: white;
-        }
-
-        .eighth {
-            /* display: table-cell; */
-            grid-area: eighth;
-            background: white;
-        }
-
-        .ninth {
-            /* display: table-cell; */
-            grid-area: ninth;
-            background: white;
-        }
-
-        .tenth {
-            /* display: table-cell; */
-            /* display: grid; */
-            background: white;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: tenth;
-        }
-
-        .eleventh {
-            /* display: table-cell; */
-            /* display: grid; */
-            background: white;
-            margin-top: 8px;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1f;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: eleventh;
-        }
-
-        .twelth {
-            display: table-cell;
-            /* display: table; */
-            background: white;
-            margin-top: -15px;
-            height: 75px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: twelth;
-        }
-
-        .thirteen {
-            display: table-cell;
-            /* display: table; */
-            background: white;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: thirteen;
-        }
-
-        .fourteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 24px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: fourteen;
-        }
-
-        .fifteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 8px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: fifteen;
-        }
-
-        .sixteen {
-            display: table-cell;
-            /* display: grid; */
-            background: white;
-            margin-top: 6px;
-            height: 53px;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 0px 0px;
-            grid-auto-flow: row;
-            grid-area: sixteen;
-        }
-
-        html,
-        body,
-        .container {
-            height: 100%;
-            margin: 0;
-        }
-            /* For presentation only, no need to copy the code below */
-            /*.container * {
-                border: 1px solid grey;
-                position: relative;
-            }*/
-
-                /*.container *:after {
-                     content: attr(class); 
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    display: grid;
-                    align-items: center;
-                    justify-content: center;
-                }*/
-
-        .box-text {
-            margin-top: 64px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .box-one {
-            text-align: center;
-            background: grey;
-            height: 133px;
-            width: 133px;
-            margin: 32px;
-            text-align: center;
-        }
-
-        .text-box {
-            text-align: center;
-        }
 
         .palette-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 2px;
+            gap: 8px;
             height: 100%;
             cursor: pointer;
             background-color: white;
@@ -266,116 +205,347 @@
 
             .palette-container .mainColor {
                 grid-row: span 3;
+                position: relative;
+                border-radius: 8px;
             }
+
+                .palette-container .mainColor label {
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    word-wrap: break-word;
+                    color: black;
+                    font-size: 10px;
+                    text-align: start;
+                    width: auto;
+                    background-color: #D9D9D9;
+                    border-radius: 0px 8px 0px 8px;
+                    padding: 5px;
+                    opacity: 0.50;
+                }
 
             .palette-container .shadeColorLight {
                 grid-column: span 1;
+                border-radius: 8px;
+                position: relative;
             }
+
+                .palette-container .shadeColorLight label {
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    word-wrap: break-word;
+                    color: black;
+                    font-size: 10px;
+                    text-align: start;
+                    width: auto;
+                    background-color: #D9D9D9;
+                    border-radius: 0px 8px 0px 8px;
+                    padding: 5px;
+                    opacity: 0.50;
+                }
 
             .palette-container .shadeColorMedium {
                 grid-column: span 1;
+                border-radius: 8px;
+                position: relative;
             }
+
+                .palette-container .shadeColorMedium label {
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    word-wrap: break-word;
+                    color: black;
+                    font-size: 10px;
+                    text-align: start;
+                    width: auto;
+                    background-color: #D9D9D9;
+                    border-radius: 0px 8px 0px 8px;
+                    padding: 5px;
+                    opacity: 0.50;
+                }
 
             .palette-container .shadeColorDark {
                 grid-column: span 1;
+                border-radius: 8px;
+                position: relative;
             }
 
+                .palette-container .shadeColorDark label {
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    word-wrap: break-word;
+                    color: black;
+                    font-size: 10px;
+                    text-align: start;
+                    width: auto;
+                    background-color: #D9D9D9;
+                    border-radius: 0px 8px 0px 8px;
+                    padding: 5px;
+                    opacity: 0.50;
+                }
+
+        .promo-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(100px, 25%));
+            gap: 40px;
+            place-items: flex-start;
+        }
+
+        .promo-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #FCFAF7;
+            padding: 24px 0px;
+            height: 80px;
+            width: 100%;
+        }
+
+            .promo-box img {
+                height: 28px;
+            }
+
+        .promo-text {
+            color: #9B7E60;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 18px;
+            word-wrap: break-word;
+            margin-top: 5px;
+        }
+
+        .promo-code {
+            margin-top: 5px;
+            color: #9B7E60;
+            font-size: 16px;
+            font-weight: bolder;
+            line-height: 18px;
+            word-wrap: break-word;
+        }
+
+        footer {
+            width: 100%;
+            position: running(footer);
+            page-break-inside: avoid;
+            left: 0;
+            bottom: -100;
+        }
+
+        .footer-text {
+            color: #333332;
+            font-size: 32px;
+            font-weight: 400;
+            word-wrap: break-word;
+            text-align: center;
+        }
+
+        .partner-container {
+            background-color: #CFBBA7;
+            padding: 16px;
+        }
+
+        .partner-logos {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(100px, 1fr));
+            place-items: center;
+            gap: 40px 80px;
+            padding: 32px;
+        }
+
+            .partner-logos img {
+                height: 32px;
+                width: auto;
+            }
+
+        .promotional-container {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            grid-template-rows: 200px;
+        }
+
+        .promotional-text {
+            display: flex;
+            flex-direction: column;
+            padding: 48px;
+            background-color: #7B6F64;
+        }
+
+            .promotional-text img {
+                width: 100px;
+                height: 32px;
+            }
+
+            .promotional-text .text {
+                color: white;
+                font-size: 24px;
+                font-weight: 400;
+                word-wrap: break-word;
+                margin-top: 10px;
+            }
+
+            .promotional-text .email {
+                color: #EFE8DE;
+                font-size: 20px;
+                font-family: Fira Sans;
+                font-weight: 400;
+                line-height: 30px;
+                margin-top: 32px;
+            }
+
+        .promotional-image {
+            width: 100%;
+            height: 200px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="first">
-            #slot0#
-            <!--<a href="https://www.google.com">
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" />
-            </a>-->
-        </div>
-        <div class="second">
-            #slot1#
-            <!--<a href="https://www.google.com"><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" /></a>-->
-        </div>
-        <div class="third">
-            #slot2#
-        </div>
-        <div class="fourth">
-            #slot3#
-        </div>
-        <div class="fifth">
-            #slot4#
-        </div>
-        <div class="sixth">
-            #slot5#
-        </div>
-        <div class="seventh">
-            #slot6#
-        </div>
-        <div class="eighth">
-            #slot7#
-        </div>
-        <div class="ninth">
-            #slot8#
-        </div>
-        <div class="tenth">
-            #slot9#
-        </div>
-        <div class="eleventh">
-            #slot10#
-        </div>
-        <div class="twelth">
-            #slot11#
-        </div>
-        <div class="thirteen">
-            #slot12#
-        </div>
-        <div class="fourteen">
-            #slot13#
-        </div>
-        <div class="fifteen">
-            #slot14#
-        </div>
-        <div class="sixteen">
-            #slot15#
-        </div>
-    </div>
-    <div class="box-text">
-        #ShoppingItems#
 
-        <!--<div class="box-css">
-            <div class="box-one">
-                <div class="image-container-box">
-                    <a href="https://www.google.com">
-                        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                             alt="Image Description" />
-                    </a>
-                </div>
-            </div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
-        </div>
-        <div class="box-css">
-            <div class="box-one"></div>
-            <div class="text-box">Some-text</div>
+    <main class="container">
+        <!--<div class="header">
+            <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg">
         </div>-->
-    </div>
+        <div class="title">#ProjectName#</div>
+        <div class="template-container">
+            <div class="first">
+                #slot0#
+                <!--<a href="https://www.google.com">
+                    <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" />
+                </a>-->
+            </div>
+            <div class="second">
+                #slot1#
+                <!--<a href="https://www.google.com"><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Description" /></a>-->
+            </div>
+            <div class="third">
+                #slot2#
+            </div>
+            <div class="fourth">
+                #slot3#
+            </div>
+            <div class="fifth">
+                #slot4#
+            </div>
+            <div class="sixth">
+                #slot5#
+            </div>
+            <div class="seventh">
+                #slot6#
+            </div>
+            <div class="eighth">
+                #slot7#
+            </div>
+            <div class="ninth">
+                #slot8#
+            </div>
+            <div class="tenth">
+                #slot9#
+            </div>
+            <div class="eleventh">
+                #slot10#
+            </div>
+            <div class="twelth">
+                #slot11#
+            </div>
+            <div class="thirteen">
+                #slot12#
+            </div>
+            <div class="fourteen">
+                #slot13#
+            </div>
+            <div class="fifteen">
+                #slot14#
+            </div>
+            <div class="sixteen">
+                #slot15#
+            </div>
+        </div>
+        <div class="sub-title">
+            #SubTitle1# #StyleName# - #RoomName#!
+            <br />🎉 #SubTitle2#
+        </div>
+        <div class="headings">
+            #ProductList#
+        </div>
+        <div class="product-container">
+            #ShoppingItems#
+        </div>
+        <div class="headings">
+            #PromoCodes#
+        </div>
+        <div class="promo-container">
+            <div class="promo-box">
+                <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702730/Partners/ffizfoepuazbw2dxzowr.svg" alt="Flugger-Logo" />
+                <div class="promo-text">20% #DiscountCode#:</div>
+                <div class="promo-code">Intiri20</div>
+            </div>
+
+            <div class="promo-box">
+                <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702734/Partners/ornskfag0s18znkv0sxr.svg" alt="Flugger-Logo" />
+                <div class="promo-text">10% #DiscountCode#:</div>
+                <div class="promo-code">Intiri10</div>
+            </div>
+
+            <div class="promo-box">
+                <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702729/Partners/fd3cpvcthahmjjv4ya9p.svg" alt="Flugger-Logo" />
+                <div class="promo-text">10% #DiscountCode#:</div>
+                <div class="promo-code">Intiri10</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="partner-container">
+            <div class="footer-text">#Trustedby#</div>
+            <div class="partner-logos">
+                <a href="https://lampemagasinet.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702734/Partners/ornskfag0s18znkv0sxr.svg" />
+                </a>
+                <a href="https://www.elkjop.no/epoq/epoq-kampanje?gclid=CjwKCAjwzJmlBhBBEiwAEJyLu3HLURzSA_2CmQuct3sg4nTlI8Hfvgd-4RKWTjjdbYBzVt5BFqCdNRoCFYYQAvD_BwE" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692706794/Partners/emhb9yzcfckxazzkrumh.svg" />
+                </a>
+                <a href="https://www.tarkett.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702731/Partners/v7obi0h8jlmtsly94zpp.svg" />
+                </a>
+                <a href="https://www.flugger.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702730/Partners/ffizfoepuazbw2dxzowr.svg" />
+                </a>
+                <a href="https://www.flisekompaniet.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692706697/Partners/ncvpbih47sv5clti6ngg.svg" />
+                </a>
+
+                <a href="https://flottegulv.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702729/Partners/fd3cpvcthahmjjv4ya9p.svg" />
+                </a>
+                <a href="https://www.ellos.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692707075/Partners/iqw3rxwdzrsgtc6nji1w.svg" />
+                </a>
+                <a href="https://luado.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692707574/Partners/b3aohadvjwhhxyetcvbw.svg" />
+                </a>
+                <a href="https://miton.it/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692702729/Partners/urtidn9mz3m64uqk8bse.svg" />
+                </a>
+                <a href="https://rotpunkt.no/" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692706964/Partners/c42ypwlixqrh2w7oiyjd.svg" />
+                </a>
+            </div>
+        </div>
+        <div class="promotional-container">
+            <div class="promotional-text">
+                <a href="https://www.intiri.no" target="_blank">
+                    <img src="https://res.cloudinary.com/dezushtwk/image/upload/v1692707952/Partners/h86t14eq0j96jii8ozsb.svg" alt="Intiri-Logo" />
+                </a>
+                <div class="text">Renovate smart from start</div>
+                <div class="email">kontakt@intiri.no</div>
+            </div>
+            <img class="promotional-image" src="https://res.cloudinary.com/dezushtwk/image/upload/v1692855581/Partners/x1x1xkllxghx3ooz3dwk.png" />
+        </div>
+    </footer>
+
 
     <!--<div class="hover-text">
         hover me
@@ -411,6 +581,6 @@
         }
     </style>-->
 
-    <script src="script.js"></script>
+    <!--<script src="script.js"></script>-->
 </body>
 </html>
