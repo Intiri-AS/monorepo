@@ -26,11 +26,9 @@
             <div class="flex items-start justify-start">
               <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/profile-img.png'" class="h-[60px] w-[54px] rounded-md object-fill">
               <div class="ml-2">
-                <div class="text-black-2 text-base mac:text-2xl font-medium">{{d.firstName}} {{d.lastName}}</div>
-                <div class="text-sm mac:text-base text-primary bold">{{getDesignerType(d)}} | {{ 'CARD-INFO.designs' | translate:{'length': d.createdMoodboards.length} }}
-                | {{ 'COMMON.language' | translate }} {{ 'COMMON.' + d.language | translate }}</div>
+                <div class="text-black-2 text-base mac:text-2xl font-medium">{{d.city}} {{d.country}} | {{d.designerInfo.openToHomeVist ? ('CONTACT-DESIGNER.home-visit' | translate) : ('CONTACT-DESIGNER.online-consultation' | translate)}} | {{d.designerInfo.position}}</div>
               </div>
-              
+
             </div>
             <ion-buttons *ngIf="isContactDesigner" (click)="paymentModal(d)"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>
             <ion-buttons *ngIf="!isContactDesigner" routerLink="/designer-portfolio/{{d.id}}"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>

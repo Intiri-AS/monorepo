@@ -17,11 +17,15 @@ export class BookDesignerPage {
   moodboard: any;
   isContactDesigner: boolean = false;
 
-  constructor(private designerService: DesignerService, private modalController: ModalController, private route: ActivatedRoute,
-    private router: Router) {}
+  constructor(
+    private designerService: DesignerService,
+    private modalController: ModalController,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.designerService.getContactDesigners().subscribe((res: any[]) => {
+    this.designerService.getDesignersNew().subscribe((res: any[]) => {
       this.designers = res;
     });
     this.route.data.subscribe(data => {
