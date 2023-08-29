@@ -12,58 +12,93 @@
           <img
             *ngIf="moodboard.slotInfo[0].entityImagePath"
             [src]="moodboard.slotInfo[0].entityImagePath"
-            class="object-cover h-full w-full cursor-pointer"
+            id="slot-0-img"
+            class="slot-image-style"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 0)"
             [matTooltip]="getToolTipMoodboardItem(0)"
             (click)="redirectToEntityPartnerLink(0)"
+            (mousedown)="onMouseDown($event, 0)"
+            (mouseup)="onMouseUp($event, 0)"
+            (mousemove)="onMouseMove($event, 0)"
+            (wheel)="onMouseWheel($event, 0)"
           >
+          <ion-button id="ok" *ngIf="cropFeatureMap[0].showCropButton" (click)="onCropButtonClick(0)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+          <ion-button *ngIf="cropFeatureMap[0].isImageCroppingState" (click)="onCroppingDone(0)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-4" class="image-input-1" (dragover)="allowDrop($event)" (drop)="onDrop($event, 4)"  (mouseenter)="toggleCropButtonVisibility(4)" (mouseleave)="toggleCropButtonVisibility(4)">
             <img
               *ngIf="moodboard.slotInfo[4].entityImagePath"
               [src]="moodboard.slotInfo[4].entityImagePath"
-              class="object-cover h-full w-full cursor-pointer"
+              id="slot-4-img"
+              class="slot-image-style"
               alt="image-input-1"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 4)"
               [matTooltip]="getToolTipMoodboardItem(4)"
               (click)="redirectToEntityPartnerLink(4)"
+              (mousedown)="onMouseDown($event, 4)"
+              (mouseup)="onMouseUp($event, 4)"
+              (mousemove)="onMouseMove($event, 4)"
+              (wheel)="onMouseWheel($event, 4)"
             />
-        </div>
+            <ion-button *ngIf="cropFeatureMap[4].showCropButton" (click)="onCropButtonClick(4)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[4].isImageCroppingState" (click)="onCroppingDone(4)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
+          </div>
         <div id="slot-7" class="image-input-2" (dragover)="allowDrop($event)" (drop)="onDrop($event, 7)" (mouseenter)="toggleCropButtonVisibility(7)" (mouseleave)="toggleCropButtonVisibility(7)">
             <img
               *ngIf="moodboard.slotInfo[7].entityImagePath"
               [src]="moodboard.slotInfo[7].entityImagePath"
-              class="object-cover h-full w-full cursor-pointer"
+              id="slot-7-img"
+              class="slot-image-style"
               alt="image-input-2"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 7)"
               [matTooltip]="getToolTipMoodboardItem(7)"
               (click)="redirectToEntityPartnerLink(7)"
+              (mousedown)="onMouseDown($event, 7)"
+              (mouseup)="onMouseUp($event, 7)"
+              (mousemove)="onMouseMove($event, 7)"
+              (wheel)="onMouseWheel($event, 7)"
             />
+            <ion-button *ngIf="cropFeatureMap[7].showCropButton" (click)="onCropButtonClick(7)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[7].isImageCroppingState" (click)="onCroppingDone(7)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-1" class="material" (dragover)="allowDrop($event)" (drop)="onDrop($event, 1)" (mouseenter)="toggleCropButtonVisibility(1)" (mouseleave)="toggleCropButtonVisibility(1)">
           <img
             *ngIf="moodboard.slotInfo[1].entityImagePath"
             [src]="moodboard.slotInfo[1].entityImagePath"
-            class="object-cover h-full w-full cursor-pointer"
+            id="slot-1-img"
+            class="slot-image-style"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 1)"
             [matTooltip]="getToolTipMoodboardItem(1)"
             (click)="redirectToEntityPartnerLink(1)"
+            (mousedown)="onMouseDown($event, 1)"
+            (mouseup)="onMouseUp($event, 1)"
+            (mousemove)="onMouseMove($event, 1)"
+            (wheel)="onMouseWheel($event, 1)"
           >
+          <ion-button *ngIf="cropFeatureMap[1].showCropButton" (click)="onCropButtonClick(1)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+          <ion-button *ngIf="cropFeatureMap[1].isImageCroppingState" (click)="onCroppingDone(1)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-2" class="material"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 2)" (mouseenter)="toggleCropButtonVisibility(2)" (mouseleave)="toggleCropButtonVisibility(2)">
           <img
             *ngIf="moodboard.slotInfo[2].entityImagePath"
             [src]="moodboard.slotInfo[2].entityImagePath"
-            class="object-cover h-full w-full cursor-pointer"
+            id="slot-2-img"
+            class="slot-image-style"
             (draggable)="isItemDragAndDroppable()"
             (dragstart)="dragStart($event, 2)"
             [matTooltip]="getToolTipMoodboardItem(2)"
             (click)="redirectToEntityPartnerLink(2)"
+            (mousedown)="onMouseDown($event, 2)"
+            (mouseup)="onMouseUp($event, 2)"
+            (mousemove)="onMouseMove($event, 2)"
+            (wheel)="onMouseWheel($event, 2)"
           >
+          <ion-button *ngIf="cropFeatureMap[2].showCropButton" (click)="onCropButtonClick(2)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+          <ion-button *ngIf="cropFeatureMap[2].isImageCroppingState" (click)="onCroppingDone(2)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
       </div>
       <div class="bottom-section">
@@ -71,49 +106,77 @@
             <img
               *ngIf="moodboard.slotInfo[3].entityImagePath"
               [src]="moodboard.slotInfo[3].entityImagePath"
-              class="object-cover h-[100%] w-[100%] cursor-pointer"
+              id="slot-3-img"
+              class="slot-image-style"
               alt="image-input-3"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 3)"
               [matTooltip]="getToolTipMoodboardItem(3)"
               (click)="redirectToEntityPartnerLink(3)"
+              (mousedown)="onMouseDown($event, 3)"
+              (mouseup)="onMouseUp($event, 3)"
+              (mousemove)="onMouseMove($event, 3)"
+              (wheel)="onMouseWheel($event, 3)"
             />
+            <ion-button *ngIf="cropFeatureMap[3].showCropButton" (click)="onCropButtonClick(3)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[3].isImageCroppingState" (click)="onCroppingDone(3)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-5" class="image-input-4"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 5)" (mouseenter)="toggleCropButtonVisibility(5)" (mouseleave)="toggleCropButtonVisibility(5)">
             <img
               *ngIf="moodboard.slotInfo[5].entityImagePath"
               [src]="moodboard.slotInfo[5].entityImagePath"
-              class="object-cover h-full w-full cursor-pointer"
+              id="slot-5-img"
+              class="slot-image-style"
               alt="image-input-4"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 5)"
               [matTooltip]="getToolTipMoodboardItem(5)"
               (click)="redirectToEntityPartnerLink(5)"
+              (mousedown)="onMouseDown($event, 5)"
+              (mouseup)="onMouseUp($event, 5)"
+              (mousemove)="onMouseMove($event, 5)"
+              (wheel)="onMouseWheel($event, 5)"
             />
+            <ion-button *ngIf="cropFeatureMap[5].showCropButton" (click)="onCropButtonClick(5)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[5].isImageCroppingState" (click)="onCroppingDone(5)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-8" class="image-input-5"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 8)" (mouseenter)="toggleCropButtonVisibility(8)" (mouseleave)="toggleCropButtonVisibility(8)">
             <img
               *ngIf="moodboard.slotInfo[8].entityImagePath"
               [src]="moodboard.slotInfo[8].entityImagePath"
-              class="object-cover h-full w-full cursor-pointer"
+              id="slot-8-img"
+              class="slot-image-style"
               alt="image-input-5"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 8)"
               [matTooltip]="getToolTipMoodboardItem(8)"
               (click)="redirectToEntityPartnerLink(8)"
+              (mousedown)="onMouseDown($event, 8)"
+              (mouseup)="onMouseUp($event, 8)"
+              (mousemove)="onMouseMove($event, 8)"
+              (wheel)="onMouseWheel($event, 8)"
             />
+            <ion-button *ngIf="cropFeatureMap[8].showCropButton" (click)="onCropButtonClick(8)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[8].isImageCroppingState" (click)="onCroppingDone(8)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
         <div id="slot-6" class="image-input-6"  (dragover)="allowDrop($event)" (drop)="onDrop($event, 6)" (mouseenter)="toggleCropButtonVisibility(6)" (mouseleave)="toggleCropButtonVisibility(6)">
             <img
               *ngIf="moodboard.slotInfo[6].entityImagePath"
               [src]="moodboard.slotInfo[6].entityImagePath"
-              class="object-cover h-full w-full cursor-pointer"
+              id="slot-6-img"
+              class="slot-image-style"
               alt="image-input-6"
               (draggable)="isItemDragAndDroppable()"
               (dragstart)="dragStart($event, 6)"
               [matTooltip]="getToolTipMoodboardItem(6)"
               (click)="redirectToEntityPartnerLink(6)"
+              (mousedown)="onMouseDown($event, 6)"
+              (mouseup)="onMouseUp($event, 6)"
+              (mousemove)="onMouseMove($event, 6)"
+              (wheel)="onMouseWheel($event, 6)"
             />
+            <ion-button *ngIf="cropFeatureMap[6].showCropButton" (click)="onCropButtonClick(6)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+            <ion-button *ngIf="cropFeatureMap[6].isImageCroppingState" (click)="onCroppingDone(6)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
         </div>
       </div>
     </div>
@@ -124,34 +187,55 @@
         <img
           *ngIf="moodboard.slotInfo[9].entityImagePath"
           [src]="moodboard.slotInfo[9].entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
+          id="slot-9-img"
+          class="slot-image-style"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 9)"
           [matTooltip]="getToolTipMoodboardItem(9)"
           (click)="redirectToEntityPartnerLink(9)"
+          (mousedown)="onMouseDown($event, 9)"
+          (mouseup)="onMouseUp($event, 9)"
+          (mousemove)="onMouseMove($event, 9)"
+          (wheel)="onMouseWheel($event, 9)"
         />
+        <ion-button *ngIf="cropFeatureMap[9].showCropButton" (click)="onCropButtonClick(9)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+        <ion-button *ngIf="cropFeatureMap[9].isImageCroppingState" (click)="onCroppingDone(9)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
       </div>
       <div id="slot-10" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 10)" (mouseenter)="toggleCropButtonVisibility(10)" (mouseleave)="toggleCropButtonVisibility(10)">
         <img
           *ngIf="moodboard.slotInfo[10].entityImagePath"
           [src]="moodboard.slotInfo[10].entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
+          id="slot-10-img"
+          class="slot-image-style"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 10)"
           [matTooltip]="getToolTipMoodboardItem(10)"
           (click)="redirectToEntityPartnerLink(10)"
+          (mousedown)="onMouseDown($event, 10)"
+          (mouseup)="onMouseUp($event, 10)"
+          (mousemove)="onMouseMove($event, 10)"
+          (wheel)="onMouseWheel($event, 10)"
         />
+        <ion-button *ngIf="cropFeatureMap[10].showCropButton" (click)="onCropButtonClick(10)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+        <ion-button *ngIf="cropFeatureMap[10].isImageCroppingState" (click)="onCroppingDone(10)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
       </div>
       <div id="slot-11" class="product" (dragover)="allowDrop($event)" (drop)="onDrop($event, 11)" (mouseenter)="toggleCropButtonVisibility(11)" (mouseleave)="toggleCropButtonVisibility(11)">
         <img
           *ngIf="moodboard.slotInfo[11].entityImagePath"
           [src]="moodboard.slotInfo[11].entityImagePath"
-          class="object-cover h-[100%] w-[100%] max-w-[100%] cursor-pointer"
+          id="slot-11-img"
+          class="slot-image-style"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 11)"
           [matTooltip]="getToolTipMoodboardItem(11)"
           (click)="redirectToEntityPartnerLink(11)"
+          (mousedown)="onMouseDown($event, 11)"
+          (mouseup)="onMouseUp($event, 11)"
+          (mousemove)="onMouseMove($event, 11)"
+          (wheel)="onMouseWheel($event, 11)"
         />
+        <ion-button *ngIf="cropFeatureMap[11].showCropButton" (click)="onCropButtonClick(11)" fill="clear" class="primary-btn-custom crop-btn">{{'MOODBOARD-DETAILS.crop' | translate}}</ion-button>
+        <ion-button *ngIf="cropFeatureMap[11].isImageCroppingState" (click)="onCroppingDone(11)" fill="clear" class="primary-btn-custom done-btn">{{'MOODBOARD-DETAILS.done' | translate}}</ion-button>
       </div>
     </div>
 
@@ -159,7 +243,8 @@
     <div class="grid-item colors-container">
       <div id="slot-12" class="color color-1">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          *ngIf="moodboard.slotInfo[12].entityImagePath"
+          src="{{moodboard.slotInfo[12].entityImagePath}}"
           alt="shadeColorLightData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorLightData.name"
@@ -167,7 +252,8 @@
       </div>
       <div id="slot-13" class="color color-2">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          *ngIf="moodboard.slotInfo[13].entityImagePath"
+          src="{{moodboard.slotInfo[13].entityImagePath}}"
           alt="shadeColorMediumData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorMediumData.name"
@@ -175,7 +261,8 @@
       </div>
       <div id="slot-14" class="color color-3">
         <img
-          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          *ngIf="moodboard.slotInfo[14].entityImagePath"
+          src="{{moodboard.slotInfo[14].entityImagePath}}"
           alt="mainColorData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].mainColorData.name"
@@ -183,7 +270,8 @@
       </div>
       <div id="slot-15" class="color color-4">
         <img
-          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          *ngIf="moodboard.slotInfo[15].entityImagePath"
+          src="{{moodboard.slotInfo[15].entityImagePath}}"
           alt="shadeColorDarkData"
           class="h-full cursor-pointer"
           [matTooltip]="moodboard?.colorPalettes[0].shadeColorDarkData.name"
@@ -354,59 +442,48 @@
     <div class="grid-item colors-container">
       <div id="slot-12" class="color color-1">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath"
-          src="{{moodboard?.colorPalettes[0]?.shadeColorLightData.imagePath}}"
+          *ngIf="moodboard?.slotInfo[12]?.entityImagePath"
+          src="{{moodboard.slotInfo[12].entityImagePath}}"
           alt="shadeColorLightData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorLightData.name"
+          [matTooltip]="moodboard.slotInfo[12].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-13" class="color color-2">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath"
-          src="{{moodboard?.colorPalettes[0]?.shadeColorMediumData.imagePath}}"
+          *ngIf="moodboard?.slotInfo[13]?.entityImagePath"
+          src="{{moodboard.slotInfo[13].entityImagePath}}"
           alt="shadeColorMediumData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorMediumData.name"
+          [matTooltip]="moodboard.slotInfo[13].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-14" class="color color-3">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.mainColorData.imagePath"
-          src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}"
+          *ngIf="moodboard?.slotInfo[14]?.entityImagePath"
+          src="{{moodboard.slotInfo[14].entityImagePath}}"
           alt="mainColorData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].mainColorData.name"
+          [matTooltip]="moodboard.slotInfo[14].entityName"
           (click)="redirectToColorsPartner()">
       </div>
       <div id="slot-15" class="color color-4">
         <img
-          *ngIf="moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath"
-          src="{{moodboard?.colorPalettes[0]?.shadeColorDarkData.imagePath}}"
+          *ngIf="moodboard?.slotInfo[15]?.entityImagePath"
+          src="{{moodboard.slotInfo[15].entityImagePath}}"
           alt="shadeColorDarkData"
           class="h-full cursor-pointer"
-          [matTooltip]="moodboard?.colorPalettes[0].shadeColorDarkData.name"
+          [matTooltip]="moodboard.slotInfo[15].entityName"
           (click)="redirectToColorsPartner()">
       </div>
     </div>
   </div>
 </ion-card>
 
-<!-- List included items -->
-<div *ngIf="!bigCardOnly" class="mt-16 xl:text-left">
-  <!-- No items in this div -->
-  <div class="flex justify-between items-center mb-6">
-    <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
-    <div *ngIf="withSlides && slides && slides['el']['swiper']?.currentBreakpoint && moodboard?.colorPalettes.length + moodboard?.materials.length + moodboard?.products.length > options.breakpoints[slides['el']['swiper'].currentBreakpoint].slidesPerView">
-      <ion-button fill="clear" class="text-black hover:opacity-50" (click)="prev()">
-        <ion-icon name="arrow-back" class="h-6 w-6"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear" class="text-black hover:opacity-50" (click)="next()">
-        <ion-icon name="arrow-forward" class="h-6 w-6"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
-  <ion-grid *ngIf="!withSlides" class="step-items">
+<!--Admin / List included items -->
+<div *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'" class="mt-16 xl:text-left">
+  <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}}</p>
+  <ion-grid class="step-items">
     <ion-row class="step-items-row">
       <ion-col *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
         <div class="w-full h-full bg-white rounded-2xl">
@@ -463,23 +540,67 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-slides *ngIf="withSlides" #slides [options]="options" class="py-4 pr-4 w-full">
-      <ion-slide *ngFor="let item of moodboard?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <div *ngIf="item.mainColor" class="h-full w-full rounded-sm p-0" >
-          <div class="w-full h-full inline-block rounded-xl" [ngStyle]="{background: item.mainColor}">
-            <img src="{{moodboard?.colorPalettes[0]?.mainColorData.imagePath}}" alt="mainColorData">
-          </div>
+</div>
+
+<!--Client / List included items -->
+<div *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'" class="mt-16 xl:text-left">
+  <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}} {{showLoader ? '(' + ('MOODBOARD-DETAILS.shopping-list-loading' | translate) + ')': null}}</p>
+  <mat-spinner class="spinner" *ngIf="showLoader"></mat-spinner>
+  <ion-grid class="step-items" *ngIf="!showLoader">
+    <ion-row class="step-items-row">
+      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
+        <div class="w-full h-full bg-white rounded-2xl">
+          <img
+            *ngIf="item?.imagePath"
+            src="{{item.imagePath}}"
+            (click)="openImageInModal(item)"
+            class="product-image cursor-pointer"
+            alt="product-image"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+            [matTooltip]="getToolTipShoppingList('product', item)"
+          />
+        </div>
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.styleImages" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
+        <div class="w-full h-full bg-white rounded-2xl">
+          <img
+            *ngIf="item?.imagePath"
+            src="{{item.imagePath}}"
+            (click)="openImageInModal(item)"
+            [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
+            class="product-image cursor-pointer"
+            alt="inspirationalPhotos-image"
+            (draggable)="isItemDragAndDroppable()"
+            (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+          />
+        </div>
+        <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
+        <img
+          *ngIf="item?.imagePath"
+          src="{{item.imagePath}}"
+          (click)="openImageInModal(item)"
+          class="material-image cursor-pointer"
+          alt="material-image"
+          (draggable)="isItemDragAndDroppable()"
+          (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          [matTooltip]="getToolTipShoppingList('material', item)"
+        />
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
+      </ion-col>
+      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
+        <div class="palette-container">
+          <div *ngIf="item.mainColorData" class="grid-item mainColor" [ngStyle]="{'background-image': 'url(' + item.mainColorData?.imagePath + ')'}" [matTooltip]="item.mainColorData.name" (click)="redirectToColorsPartner()"></div>
+          <div *ngIf="item.shadeColorLightData" class="grid-item shadeColorLight" [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData?.imagePath + ')'}" [matTooltip]="item.shadeColorLightData.name" (click)="redirectToColorsPartner()"></div>
+          <div *ngIf="item.shadeColorMediumData" class="grid-item shadeColorMedium" [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData?.imagePath + ')'}" [matTooltip]="item.shadeColorMediumData.name" (click)="redirectToColorsPartner()"></div>
+          <div *ngIf="item.shadeColorDarkData" class="grid-item shadeColorDark" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData?.imagePath + ')'}" [matTooltip]="item.shadeColorDarkData.name" (click)="redirectToColorsPartner()"></div>
         </div>
         <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
         <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-      </ion-slide>
-      <ion-slide *ngFor="let item of moodboard?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-      </ion-slide>
-      <ion-slide *ngFor="let item of moodboard?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <img *ngIf="item.imagePath" src="{{item.imagePath}}" (click)="openImageInModal(item)" class="step-image" alt="style-img"/>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-      </ion-slide>
-  </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </div>

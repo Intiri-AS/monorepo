@@ -53,7 +53,7 @@ export class MessengerPage implements OnInit {
 
   ngOnInit(): void {
     //Pusher.logToConsole = true; // remove after testing
-    this.pusher = new Pusher('0233be6c2ef5fb26cc7d', {
+    this.pusher = new Pusher('e705f2d3284882b4b53d', {
       cluster: 'eu',
     });
 

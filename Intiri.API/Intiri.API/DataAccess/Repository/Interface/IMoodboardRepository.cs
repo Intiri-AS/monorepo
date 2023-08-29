@@ -25,5 +25,7 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Dictionary<int, int>> GetClientMoodboardStylesCountAsync();
 
         Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId);
+		Task<ClientMoodboard> GetClientMoodboardOptimizedById(int moodboardId);
+		Task<string> GetMoodboardSlotInfo(int moodboardId);
     }
 }

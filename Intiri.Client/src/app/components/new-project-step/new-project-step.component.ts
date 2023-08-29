@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { ProjectService } from 'src/app/services/project.service';
@@ -7,20 +7,22 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service'
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { Project } from 'src/app/models/project.model';
 import { TranslateService } from '@ngx-translate/core';
+import { StyleService } from 'src/app/services/style.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-new-project-step',
   templateUrl: './new-project-step.component.html',
   styleUrls: ['./new-project-step.component.scss'],
 })
-export class NewProjectStepComponent implements OnInit {
+export class NewProjectStepComponent implements OnInit, OnChanges {
 
   apiUrl = environment.apiUrl;
   @Input() currentStep: any;
@@ -60,6 +62,7 @@ export class NewProjectStepComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
+    private styleService: StyleService,
     private projectService: ProjectService,
     private materialService: MaterialService,
     private partnerService: PartnerService,
@@ -67,8 +70,10 @@ export class NewProjectStepComponent implements OnInit {
     private productService: ProductService,
     private languageService: LanguageService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private commonUtilsService: CommonUtilsService,
     private translate: TranslateService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -98,6 +103,15 @@ export class NewProjectStepComponent implements OnInit {
 
 
   ngOnChanges () {
+    if (this.activatedRoute.snapshot.routeConfig.path === 'new-project' && this.currentStepNo === 1) {
+      this.spinner.show();
+      this.styleService.getStyleImagesByRoom(this.project.room.id).subscribe((styleImages: Array<any>) => {
+        console.log('styleImages', styleImages);
+        console.log('this.currentStep.data', this.currentStep.data);
+        this.currentStep.data = this.commonUtilsService.shuffleArrayElements(styleImages);
+        this.spinner.hide();
+      })
+    }
     this.showFilterDropdown && this.assignAllItemsData();
 
     this.typeFilters = [];
