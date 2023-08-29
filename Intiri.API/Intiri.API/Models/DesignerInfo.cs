@@ -11,6 +11,8 @@
         public string Style { get; set; }
         public string Position { get; set; }
         public Double Price { get; set; }
+        public string ProfileDescription { get; set; }
+        public string ProfileDescription_NO { get; set; }
         public int DesignerId { get; set; }
     }
 }
