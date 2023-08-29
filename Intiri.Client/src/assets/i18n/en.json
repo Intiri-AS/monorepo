@@ -89,7 +89,11 @@
     "select": "Select a designer",
     "completed": "Completed designs",
     "charges": "Charges",
-    "portfolio": "Portfolio"
+    "portfolio": "Portfolio",
+    "book-a-consultation": "Book a Consultation",
+    "home-visit": "Home Visit",
+    "online-consultation": "Online Consultation",
+    "per-hour": "per hour"
   },
   "BOOK-MODAL": {
     "book": "Book your design consultation",
