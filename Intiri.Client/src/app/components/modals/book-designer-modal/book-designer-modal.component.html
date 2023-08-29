@@ -1,7 +1,6 @@
 <ion-content>
   <div class="container">
     <p class="mt-[40px] text-[38px] text-black font-medium">{{'BOOK-MODAL.book' | translate}}</p>
-    <p class="mt-[30px] text-2xl text-primary font-medium">{{price}} NOK / {{'BOOK-MODAL.consultation' | translate}}</p>
     <p class="text-lg text-black-2">{{'BOOK-MODAL.duration' | translate:{'duration': duration} }}</p>
     <div class="mt-[30px]">
       <span class="text-sm text-black-2">{{'BOOK-MODAL.number' | translate}}</span>
@@ -17,15 +16,6 @@
         <div class="flex items-center">
           <ion-checkbox [(ngModel)]="item.isChecked" ></ion-checkbox>
           <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-WHY.' + item.name | translate}}</p>
-        </div>
-      </ion-item>
-      <ion-item class="w-full xl:w-1/2" lines="none">
-        <div class="flex items-center">
-          <ion-checkbox (ionChange)="isChecked($event)"></ion-checkbox>
-          <div>
-            <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-WHY.2d3d' | translate}}</p>
-            <p class="text-[18px] text-primary ml-2 leading-[26px]">(+3500 NOK)</p>
-          </div>
         </div>
       </ion-item>
     </div>
