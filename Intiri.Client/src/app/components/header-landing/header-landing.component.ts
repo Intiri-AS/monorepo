@@ -14,6 +14,7 @@ import { LanguagePopoverComponent } from '../popovers/language-popover/language-
 
 export class HeaderLandingComponent implements OnInit {
   @Input() isScrolledDown: boolean;
+  @Input() isDesignerPortfolioPage: boolean
 
   loggedUser$ = this.accountService.currentUser$;
   loggedInUser: any = {};
