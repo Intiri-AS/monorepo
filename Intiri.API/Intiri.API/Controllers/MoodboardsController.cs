@@ -534,6 +534,8 @@ namespace Intiri.API.Controllers
                 //	</a>
                 //</div>";
 
+                IronPdf.Installation.ChromeGpuMode = IronPdf.Engines.Chrome.ChromeGpuModes.Disabled;
+                Installation.LinuxAndDockerDependenciesAutoConfig = false;
                 var renderer = new ChromePdfRenderer();
                 renderer.RenderingOptions.MarginTop = 0;
                 renderer.RenderingOptions.MarginLeft = 0;
