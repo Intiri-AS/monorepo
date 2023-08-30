@@ -15,7 +15,7 @@
                         <div *ngFor="let service of getDesignerServices()" class="service-box">{{'BOOK-WHY.' + service | translate}}</div>
                     </div>
                     <div class="desc">
-                        {{ currentLang === 'no' ? designerDetails.designerInfo.ProfileDescription_NO : designerDetails.designerInfo.ProfileDescription }}
+                        {{ getCurrentLang() === 'no' ? designerDetails.designerInfo.profileDescription_NO : designerDetails.designerInfo.profileDescription }}
                     </div>
                     <div class="charges">
                         {{'CONTACT-DESIGNER.charges' | translate}}: <strong>{{designerDetails.designerInfo.price}} NOK</strong> {{'CONTACT-DESIGNER.per-hour' | translate}}
@@ -28,7 +28,6 @@
                     <div class="designer-portfolio-image-container">
                       <div *ngFor="let portfolio of designerDetails.designerPortfolio">
                         <img
-                          *ngIf="portfolio.featured === 1"
                           [src]="portfolio.imagePath"
                           [alt]="portfolio.publicId"
                           class="portfolio-image"
