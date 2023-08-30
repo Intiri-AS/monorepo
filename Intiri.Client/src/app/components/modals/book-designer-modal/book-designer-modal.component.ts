@@ -20,7 +20,7 @@ export class BookDesignerModalComponent {
   designer; //as modal prop
   moodboard;//as modal prop
   price: number;
-  duration: number;
+  duration: number = 60;
   totalPrice: number;
   extraPayment = false;
   extraPaymentAmount = 3500;
@@ -76,20 +76,8 @@ export class BookDesignerModalComponent {
   ) {}
 
   ngOnInit() {
-
-    this.spinner.show();
-    this.commonService.getConsulationsInfo().subscribe((res: any) => {
-      this.spinner.hide();
-      this.duration = res?.duration;
-      this.price = res?.price;
-      this.totalPrice = this.price * this.numberOfConsultations;
-    }, () => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.consultation-get-error'),
-        type: 'error',
-      });
-    });
+    this.price = this.designer.designerInfo.price;
+    this.totalPrice = this.price * this.numberOfConsultations;
 
   }
 
