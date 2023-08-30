@@ -99,4 +99,8 @@ export class RegisterPage {
       }
     );
   }
+
+  onIntiriIconClick () {
+    window.location.replace('https://intiri.no');
+  }
 }
