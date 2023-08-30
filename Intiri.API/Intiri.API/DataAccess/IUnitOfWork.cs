@@ -29,6 +29,7 @@ namespace Intiri.API.DataAccess
 		IInspirationRepository InspirationRepository { get; }
 		IConsulatationRepository ConsulatationRepository { get; }
 		IColorNCSRepository ColorNCSRepository { get; }
+		IDesignerPortfolioRepository DesignerPortfolioRepository { get; }
 
 		Task<bool> SaveChanges();
 	}

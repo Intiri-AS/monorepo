@@ -746,8 +746,72 @@ namespace Intiri.API.DataAccess.SeedData
 
                     
 
+							//    unitOfWork.MaterialRepository.Insert(material);
+							//    await unitOfWork.SaveChanges();
+							//}
+						}
+					}
+
+				}
+			}
+		}
+
+        public static async Task Seed1(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
+        {
+            var fileArray = Directory.GetFiles("wwwroot/assets/project-image/DesignerPortfolio");
+            foreach (var path in fileArray)
+            {
+                using (var stream = System.IO.File.OpenRead(path))
+                {
+                    string fileName = Path.GetFileName(stream.Name);
+
+                    var provider = new FileExtensionContentTypeProvider();
+                    string contentType;
+
+                    if (!provider.TryGetContentType(fileName, out contentType))
+                    {
+                        contentType = "application/octet-stream";
+                    }
+
+                    var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                    {
+                        Headers = new HeaderDictionary(),
+                        ContentType = contentType
+                    };
+
+                    if (file != null && file.Length > 0)
+                    {
+                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(stream.Name);
+
+                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(file, FileUploadDestinations.ColorNCS);
+
+                        if (uploadResult.Item1 != HttpStatusCode.OK)
+                        {
+                            Console.WriteLine(uploadResult.Item2);
+                        }
+                        else
+                        {
+							int Featured = 0;
+							if(stream.Name == "Fargepalett-Lisa2.jpg" || stream.Name == "Fargepalett-Lisa3.jpg" || stream.Name == "Milady-Horakove-plan_new.jpg")
+							{
+								Featured = 1;
+                            }
+
+
+                            DesignerPortfolio colorNCS = new DesignerPortfolio();
+                            colorNCS.DesignerId = 16;
+                            colorNCS.PublicId = uploadResult.Item3.PublicId;
+                            colorNCS.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+							colorNCS.Featured = Featured;
+							unitOfWork.DesignerPortfolioRepository.Insert(colorNCS);
+                            await unitOfWork.SaveChanges();
+                        }
+                    }
                 }
+
             }
+
+            
         }
     }
 }
