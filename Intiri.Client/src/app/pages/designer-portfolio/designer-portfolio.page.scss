@@ -140,6 +140,7 @@
     }
 
     .designer-portfolio-container{
+      display: block;
       .heading{
         color: #272D37;
         font-size: 40px;
@@ -151,10 +152,11 @@
         display: grid;
         grid-template-columns: repeat(3, 30%);
         gap: 4% 5%;
-        margin: 0 auto;
+        margin: 24px auto;
 
         .portfolio-image {
           height: 25rem;
+          width: 27rem;
         }
       }
     }
