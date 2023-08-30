@@ -207,7 +207,13 @@ namespace Intiri.API.Controllers
             return Ok();
         }
 
-            return Ok(styleImagesToReturn);
+        [HttpGet("SeedDesignerPortfolioImg")]
+        [AllowAnonymous]
+        public async Task<ActionResult> SeedDesignerPortfolioImg()
+        {
+            await Intiri.API.DataAccess.SeedData.SeedData.SeedDesignerPortfolioImg(_unitOfWork, _fileUploadService);
+
+            return Ok();
         }
 
         [HttpGet("getStyleImagesByRoom/{roomId}")]

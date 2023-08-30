@@ -756,7 +756,7 @@ namespace Intiri.API.DataAccess.SeedData
 			//}
 		}
 
-        public static async Task Seed1(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
+        public static async Task SeedDesignerPortfolioImg(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
         {
             var fileArray = Directory.GetFiles("wwwroot/assets/project-image/DesignerPortfolio");
             foreach (var path in fileArray)
@@ -791,20 +791,22 @@ namespace Intiri.API.DataAccess.SeedData
                         }
                         else
                         {
-                            int Featured = 0;
-                            if (stream.Name == "Fargepalett-Lisa2.jpg" || stream.Name == "Fargepalett-Lisa3.jpg" || stream.Name == "Milady-Horakove-plan_new.jpg")
-                            {
-                                Featured = 1;
-                            }
+                            Console.WriteLine(uploadResult.Item3.PublicId);
+                            Console.WriteLine(uploadResult.Item3.SecureUrl.AbsoluteUri);
 
+                            //int Featured = 0;
+                            //if (fileName == "1Intiri.jpg" || fileName == "2Intiri.jpg" || fileName == "3Intiri.jpg")
+                            //{
+                            //    Featured = 1;
+                            //}
 
-                            DesignerPortfolio colorNCS = new DesignerPortfolio();
-                            colorNCS.DesignerId = 16;
-                            colorNCS.PublicId = uploadResult.Item3.PublicId;
-                            colorNCS.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-                            colorNCS.Featured = Featured;
-                            unitOfWork.DesignerPortfolioRepository.Insert(colorNCS);
-                            await unitOfWork.SaveChanges();
+                            //DesignerPortfolio colorNCS = new DesignerPortfolio();
+                            //colorNCS.DesignerId = 17;
+                            //colorNCS.PublicId = uploadResult.Item3.PublicId;
+                            //colorNCS.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                            //colorNCS.Featured = Featured;
+                            //unitOfWork.DesignerPortfolioRepository.Insert(colorNCS);
+                            //await unitOfWork.SaveChanges();
                         }
                     }
                 }
