@@ -133,7 +133,9 @@ namespace Intiri.API.Controllers
 				styleImage.PublicId = uploadResult.Item3.PublicId;
 			}
 
-			styleImage.Style = style;
+            styleImage.RoomId = styleImageInDTO.RoomId;
+            styleImage.Provider = styleImageInDTO.Provider;
+            styleImage.Style = style;
 
 			_unitOfWork.StyleImageRepository.Update(styleImage);
 
@@ -205,5 +207,16 @@ namespace Intiri.API.Controllers
             return Ok();
         }
 
+            return Ok(styleImagesToReturn);
+        }
+
+        [HttpGet("getStyleImagesByRoom/{roomId}")]
+        public async Task<ActionResult<StyleImageOutDTO>> getStyleImagesByRoom(int roomId)
+        {
+            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAsync(roomId);
+            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+
+            return Ok(styleImagesToReturn);
+        }
     }
 }

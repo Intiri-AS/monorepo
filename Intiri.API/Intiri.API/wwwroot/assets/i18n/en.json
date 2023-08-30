@@ -87,14 +87,17 @@
     "proceed": "Proceed"
   },
   "BOOK-WHY": {
-    "sketch": "Room sketch",
-    "adjustment": "Moodboard adjustment",
-    "lining": "Lining plan",
-    "color": "Color advice",
-    "product": "Select products and furnishings",
-    "decoration": "Decoration",
-    "quesiton": "Other questions",
-    "2d3d": "2D & 3D drawings"
+    "suggestion": "Color and material suggestions",
+    "furnishing": "Furnishing plan",
+    "drawings": "Technical drawings",
+    "floor": "Floor plans",
+    "kitchen": "Kitchen",
+    "bath": "Bath",
+    "lighting": "Lighting plan",
+    "furniture": "Furniture design",
+    "2D": "2D visualization",
+    "3D": "3D visualization",
+    "project": "Project management"
   },
   "PAYMENT": {
     "details": "Payment details",

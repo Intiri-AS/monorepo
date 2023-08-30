@@ -12,6 +12,7 @@
 
 <ion-list *ngIf="moodboard" lines="none" >
   <ion-item class="text-black-1 font-medium" [routerLink]="['/moodboard-details/' + item.id]"  [button]="true">{{'COMMON.view-details' | translate}}</ion-item>
+  <ion-item class="text-black-1 font-medium" [routerLink]="['/edit-moodboard/' + item.id]"  [button]="true">{{'MOODBOARDS.edit-moodboard' | translate}}</ion-item>
   <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="openDeleteMoodboardModal()" [button]="true">{{'COMMON.delete' | translate}}</ion-item>
   <!-- <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? 'Remove from template moodboards' : 'Make a template moodboard'}}</ion-item> -->
   <ion-item *ngIf="!designerMb" class="text-black-1 font-medium" (click)="toggleTemplateMoodboard()" [button]="true">{{item.isTemplate ? ('MOODBOARDS.unset-template' | translate) : ('MOODBOARDS.set-template' | translate) }}</ion-item>

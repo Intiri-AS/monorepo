@@ -18,12 +18,8 @@
 }
 
 .product-image {
-  @apply object-contain h-full w-full rounded-2xl;
+  @apply object-cover h-full w-full rounded-2xl;
 }
-
-// img {
-//   @apply h-full w-full;
-// }
 
 p {
   @apply text-left;
@@ -31,19 +27,15 @@ p {
 
 .card {
   background: #D9D9D9;
+  margin-top: 2.6rem;
   .grid-container {
     height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: 4fr 1fr 0.5fr;
-    // grid-template-rows: 1fr 1fr 1fr 2fr 2fr;
     row-gap: 10px;
     column-gap: 15px;
     background: #D9D9D9;
-
-    .grid-item {
-      // background-color: aqua;
-    }
 
     .grid-item-1 {
       display: grid;
@@ -51,7 +43,6 @@ p {
       row-gap: 10px;
 
       .top-section {
-        // background-color: #fc3;
         display: grid;
         grid-template-columns: 1fr 1fr 0.5fr;
         grid-template-rows: repeat(3, 1fr);
@@ -59,25 +50,39 @@ p {
         row-gap: 10px;
 
         .material {
-          background-size: cover !important;
           background-color: #fff;
+          height: 5.3rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .image-input-1 {
           background-color: #fff;
           grid-row: span 3;
+          height: 17.2rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .image-input-2 {
           background-color: #fff;
           grid-row: span 3;
+          height: 17.2rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
       }
 
       .bottom-section {
         // background-color: #fc3;
         display: grid;
-        grid-template-columns: 3fr 1fr 3fr;
+        grid-template-columns: 2.67fr 1fr 3fr;
         grid-template-rows: 1fr 1fr;
         column-gap: 15px;
         row-gap: 15px;
@@ -85,16 +90,36 @@ p {
         .image-input-3 {
           background-color: #fff;
           grid-row: span 2;
+          height: 17.2rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-4 {
           background-color: #fff;
+          height: 8.3rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-5 {
           background-color: #fff;
           grid-row: span 2;
+          height: 17.2rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
         .image-input-6 {
           background-color: #fff;
+          height: 8rem;
+          position: relative;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
         }
       }
     }
@@ -109,6 +134,10 @@ p {
         width: 100%;
         background: #fff;
         max-height: 11rem;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
       }
     }
 
@@ -121,7 +150,77 @@ p {
         height: 100%;
         width: 100%;
         background-size: cover !important;
+        background: #fff;
+      }
+
+      .color-4 {
+        height: 7.8rem;
       }
     }
   }
+}
+
+.crop-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.done-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.slot-image-style {
+  @apply object-cover cursor-pointer;
+  height: 140%;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.primary-btn-custom {
+  @apply hover:opacity-80 bg-primary text-white normal-case px-4 tracking-normal;
+  height: 22px;
+  font-weight: 100;
+  font-size: 12px;
+  width: 56px;
+  margin-left: 5px;
+  border-radius: 8px;
+}
+
+
+.palette-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  height: 100%;
+  cursor: pointer;
+
+  // .grid-item {
+
+  // }
+
+  .mainColor {
+    grid-row: span 3;
+  }
+
+  .shadeColorLight {
+    grid-column: span 1;
+  }
+
+  .shadeColorMedium {
+    grid-column: span 1;
+  }
+
+  .shadeColorDark {
+    grid-column: span 1;
+  }
+}
+
+.spinner {
+  margin: 4rem auto auto auto;
 }

@@ -67,6 +67,13 @@
     --height: 460px;
   }
 
+  .add-room-modal-css::part(content) {
+    --width: 826px;
+    border-radius: 15px;
+    --height: 690px;
+    overflow: scroll;
+  }
+
   .add-designer-modal-css::part(content) {
     --width: 826px;
     border-radius: 15px;

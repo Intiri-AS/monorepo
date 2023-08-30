@@ -13,7 +13,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.room-name'| translate}}</span>
-            <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+            <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name" (keydown.space)="handleSpaces($event, 'name')" required="true"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -35,7 +35,7 @@
         <ion-col>
           <div class="profile-input mt-0">
             <span class="text-sm text-black-2">{{'STYLE.norwegian-translation'| translate}}</span>
-            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian"></ion-input>
+            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian" (keydown.space)="handleSpaces($event, 'nameNorwegian')" required="true"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && nameNorwegianErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -44,7 +44,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description'| translate}}</span>
-            <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description"></ion-textarea>
+            <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description" (keydown.space)="handleSpaces($event, 'description')" required="true"></ion-textarea>
             <span class="ion-warning" *ngIf="isFormSubmited && descriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -61,7 +61,14 @@
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="roomImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+              <input
+                (change)="onFileChange($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageFile"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg image/svg"
+              />
             </label>
             <span class="ion-warning" *ngIf="isFormSubmited && imageFileErrors?.required">{{'VALIDATION.image' | translate}}</span>
           </div>
@@ -121,7 +128,7 @@
         <ion-col>
           <div class="pr-2">
             <span class="text-sm text-black-2">{{'STYLE.room-name'| translate}}</span>
-            <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
+            <ion-input [(ngModel)]="room.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"  (keydown.space)="handleSpaces($event, 'name')"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -129,7 +136,7 @@
           <div class="pl-2">
             <div class="pl-2">
               <span class="text-sm text-black-2">Type</span>
-            <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class=" h-[56px]" formControlName="type">
+            <ion-select [(ngModel)]="room.roomTypeId" interface="popover" class="h-[56px]" formControlName="type" [value]="getRoomTypeNameByTypeId(room.roomTypeId)">
               <ion-select-option  *ngFor="let roomType of roomTypes" [value]="roomType.id">
                 {{'ROOM-TYPE.' + roomType.name | translate}}
               </ion-select-option>
@@ -143,7 +150,7 @@
         <ion-col>
           <div class="profile-input mt-0">
             <span class="text-sm text-black-2">{{'STYLE.norwegian-translation'| translate}}</span>
-            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian"></ion-input>
+            <ion-input [(ngModel)]="room.nameNorwegian" class="border border-black-2 rounded-2xl h-[3.6rem]" formControlName="nameNorwegian"  (keydown.space)="handleSpaces($event, 'nameNorwegian')"></ion-input>
             <span class="ion-warning" *ngIf="isFormSubmited && editNameNorwegianErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -152,7 +159,7 @@
         <ion-col>
           <div class="profile-input">
             <span class="text-sm text-black-2">{{'STYLE.description'| translate}}</span>
-            <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description"></ion-textarea>
+            <ion-textarea rows="5" [(ngModel)]="room.description" class="border border-black-2 rounded-2xl" formControlName="description"  (keydown.space)="handleSpaces($event, 'description')"></ion-textarea>
             <span class="ion-warning" *ngIf="isFormSubmited && editDescriptionErrors?.required">{{'VALIDATION.field' | translate}}</span>
           </div>
         </ion-col>
@@ -177,7 +184,14 @@
                 </div>
                 <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
               </div>
-              <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+              <input
+                (change)="onFileChange($event)"
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                formControlName="imageFile"
+                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg image/svg"
+              />
             </label>
           </div>
         </ion-col>

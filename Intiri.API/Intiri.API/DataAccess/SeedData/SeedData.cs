@@ -267,11 +267,11 @@ namespace Intiri.API.DataAccess.SeedData
 		public static async Task SeedColors(IUnitOfWork unitOfWork)
 		{
 			string colorData = await File.ReadAllTextAsync("DataAccess/SeedData/ColorsSeedData.json");
-			List<Color> colors = JsonSerializer.Deserialize<List<Color>>(colorData);
+			List<Models.IntiriColor.Color> colors = JsonSerializer.Deserialize<List<Models.IntiriColor.Color>>(colorData);
 
-			foreach (Color color in colors)
+			foreach (var colorr in colors)
 			{
-				unitOfWork.ColorRepository.Insert(color);
+				unitOfWork.ColorRepository.Insert(colorr);
 			}
 
 			await unitOfWork.SaveChanges();

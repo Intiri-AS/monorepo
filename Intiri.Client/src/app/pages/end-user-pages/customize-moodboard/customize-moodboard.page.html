@@ -1,5 +1,6 @@
 <ion-content>
     <div id="home">
+      <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
       <app-header></app-header>
       <ion-grid class="main-container">
         <ion-row>
@@ -11,6 +12,7 @@
               [moodboard]="moodboard"
               [steps]="steps"
               [page]="'customize-moodboard'"
+              [isEditMoodboardPage]="isEditMoodboardPage"
             ></app-step-picker>
           </ion-col>
           <ion-col size="12" size-xl="9" class="mb-20">
@@ -40,14 +42,14 @@
                 >{{'COMMON.back' | translate}}</ion-button
               >
               <ion-button
-                *ngIf="currentStepNo !== 2"
+                *ngIf="(isEditMoodboardPage && currentStepNo !== 3) || (isCustomizeMoodboardPage && currentStepNo !== 2)"
                 class="primary-btn"
                 [class.disabled]="!canChangeToStep(currentStepNo+1)"
                 (click)="nextStep()"
                 >{{'COMMON.next' | translate}}</ion-button
               >
               <ion-button
-                *ngIf="currentStepNo === 2"
+                *ngIf="(isEditMoodboardPage && currentStepNo === 3) || (isCustomizeMoodboardPage && currentStepNo == 2)"
                 class="primary-btn"
                 [class.disabled]="!validateData()"
                 (click)="finish()"

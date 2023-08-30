@@ -9,17 +9,30 @@
       </ion-button> -->
       <!-- <p class="main-title">Skandinavian bright</p> -->
       <div>
-        <p class="main-title">All projects</p>
+        <p class="main-title">{{'ALL-PROJECTS.all-projects' | translate}}</p>
         <div class="mt-7 flex flex-wrap gap-x-[2.4%] p-2 xl:p-0 mb-20">
           <div *ngFor="let project of projects" class="w-full md:w-[45%] xl:w-[31.5%] mb-4">
             <ion-grid class="border shadow-1 rounded-2xl">
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[0].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-fill" alt="moodboard-img"/>
-                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[1].imagePath}}" class="!h-[120.5px] mac:!h-[155px] !w-full object-fill" alt="moodboard-img"/>
+                  <img
+                    *ngIf="project?.projectMoodboards[0]?.styleImages?.[0]?.imagePath"
+                    src="{{project?.projectMoodboards[0]?.styleImages?.[0]?.imagePath}}"
+                    class="!h-[120.5px] mac:!h-[155px] !w-full mb-2 object-fill"
+                    alt="moodboard-img"
+                  />
+                  <img
+                    *ngIf="project?.projectMoodboards[0]?.products[0].imagePath"
+                    src="{{project?.projectMoodboards[0]?.products[0].imagePath}}"
+                    class="!h-[120.5px] mac:!h-[155px] !w-full object-fill"
+                    alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <img src="{{project?.projectMoodboards[0]?.style.styleImages[2].imagePath}}" class="!h-[249px] mac:!h-[318px] !w-full object-fill" alt="moodboard-img"/>
+                  <img
+                    *ngIf="project?.projectMoodboards[0]?.styleImages?.[1]?.imagePath"
+                    src="{{project?.projectMoodboards[0]?.styleImages?.[1]?.imagePath}}"
+                    class="!h-[249px] mac:!h-[318px] !w-full object-fill"
+                    alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>

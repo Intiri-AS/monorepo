@@ -12,13 +12,14 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
 		[Required]
 		public MoodboardInDTO Moodboard { get; set; }
 
-		#endregion Moodboard
+        #endregion Moodboard
 
-		#region RoomDetails
+        #region RoomDetails
 
-		[Required]
-		public RoomDetailsInDTO RoomDetails { get; set; }
+        //[Required]
+        //public RoomDetailsInDTO RoomDetails { get; set; }
+        public ICollection<IFormFile> roomSketchFile { get; set; }
 
-		#endregion RoomDetails
-	}
+        #endregion RoomDetails
+    }
 }

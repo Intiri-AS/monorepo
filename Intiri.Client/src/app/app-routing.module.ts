@@ -47,12 +47,14 @@ import { AdminInternalDesignerGuard } from './guards/admin-internal-designer.gua
 import { PartnerService } from './services/partner.service';
 import { DesignerService } from './services/designer.service';
 import { ProjectsPage } from './pages/end-user-pages/projects/projects.page';
-
+import { BlockDesignerMoodboardGuard } from './guards/ blockDesignerMoodboard.guard';
+import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-moodboard.page';
+import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portfolio.page';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'landing',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -94,8 +96,11 @@ const routes: Routes = [
   },
   {
     path: 'book-designer', //TODO Set up page guard (end-user guard)
-    component: BookDesignerPage,
-    canActivate: [EnduserGuard]
+    component: BookDesignerPage
+  },
+  {
+    path: 'designer-portfolio/:id', //TODO Set up page guard (end-user guard)
+    component: DesignerPortfolioPage,
   },
   {
     path: 'designer-profile/:id', //TODO Set up page guard (end-user guard)
@@ -172,6 +177,11 @@ const routes: Routes = [
     canActivate: [EnduserGuard]
   },
   {
+    path: 'edit-moodboard/:id',
+    component: AdminEditMoodboardPage,
+    canActivate: [AdminGuard]
+  },
+  {
     path: 'project-details/:id',
     component: ProjectDetailsPage,
     resolve: {project: ProjectService},
@@ -238,8 +248,9 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
-    path: 'my-moodboard', //TODO Set up page guard (designer guard)
-    component: MyMoodboardPage
+    path: 'my-moodboard',
+    component: MyMoodboardPage,
+    canActivate: [BlockDesignerMoodboardGuard]
   },
   {
     path: 'client-list', //TODO Set up page guard (internal designer guard)

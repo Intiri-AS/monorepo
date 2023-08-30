@@ -11,10 +11,15 @@ import { environment } from 'src/environments/environment';
 export class StyleService {
 
   apiUrl = environment.apiUrl;
+
   private stylesSource = new ReplaySubject<any>(1);
   styles$ = this.stylesSource.asObservable();
+
   private styleImagesSource = new ReplaySubject<any>(1);
   styleImages$ = this.styleImagesSource.asObservable();
+
+  private filteredStyleImageSource = new ReplaySubject<any>(1);
+  filteredStyleImages$ = this.filteredStyleImageSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +60,18 @@ export class StyleService {
     return this.http.get(this.apiUrl + 'styleImages').pipe(map((styleImages) => {
       if(styleImages) {
         this.styleImagesSource.next(styleImages);
+      }
+    })).toPromise();
+  }
+
+  getStyleImagesByRoom (roomId: number) {
+    return this.http.get(this.apiUrl + 'StyleImages/getStyleImagesByRoom/' + roomId);
+  }
+
+  getStyleImagesForRoomAndStyle (roomId, styleId) {
+    return this.http.get(`${this.apiUrl}styleImages/getStyleImagesByRoomAndStyle/${roomId}/${styleId}`).pipe(map(styleImages => {
+      if (styleImages) {
+        this.filteredStyleImageSource.next(styleImages);
       }
     })).toPromise();
   }

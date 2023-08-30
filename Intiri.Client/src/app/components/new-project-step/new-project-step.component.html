@@ -1,3 +1,4 @@
+<ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <div>
   <div class="flex justify-between">
     <h2 class="step-title">{{currentStep.title | translate}}</h2>
@@ -54,12 +55,13 @@
     </div>
   </div>
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
+  <p *ngIf="currentStep.data === 'final'" class="step-subtitle">{{project.currentMoodboard?.style?.name}}/{{project.currentMoodboard?.room?.name}}</p>
 
   <div [ngClass]="{'text-clamp-3' : !expandText}">
-    <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea>
+    <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->
   </div>
-  <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
-  <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button>
+  <!-- <ion-button fill="clear" *ngIf="!expandText && currentStep.data === 'final'" (click)="seeMoreLess(true)" class="see-more-less">See more</ion-button>
+  <ion-button fill="clear" *ngIf="expandText && currentStep.data === 'final'" (click)="seeMoreLess(false)" class="see-more-less">See less</ion-button> -->
 
   <!-- For project create /Client side -->
   <ion-grid *ngIf="isCreateProjectPage && isArray(currentStep.data)" class="step-items">
@@ -76,11 +78,19 @@
         </div>
         <!-- if color pallete -->
         <div *ngIf="item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
-          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-[47.5%] h-full inline-block">
+            <img [src]="item.mainColorData.imagePath" alt="" srcset="" class="h-full">
+          </div>
           <div class="w-[47.5%] h-full inline-block color-container float-right">
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+            <div class="h-[30%] mb-[6%]">
+              <img [src]="item.shadeColorLightData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
+            <div class="h-[30%] mb-[6%]">
+              <img [src]="item.shadeColorMediumData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
+            <div class="h-[30%]">
+              <img [src]="item.shadeColorDarkData.imagePath" alt="" srcset="" class="h-full w-full">
+            </div>
           </div>
         </div>
         <p *ngIf="!item.number && item.name && currentStepNo == 0" class="font-bold mt-4 text-black-2 text-clamp-2 pr-1">
@@ -103,11 +113,11 @@
       <ion-col *ngFor="let item of currentStep.filteredResult" (click)="toggleItem(item)" size="5.8" size-lg="2.82" size-xl="2.2" class="step-item-wrapper" [class.selected-item]="!item.iconPath && !item.mainColor && isItemSelected(item)" [class.bigger-margin]="item.name">
         <!-- if color palette -->
         <div *ngIf="currentStepNo == 0 && item.mainColor" class="step-color-wrapper" [class.selected-item]="isItemSelected(item)">
-          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{background: item.mainColor}"></div>
+          <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + item.mainColorData.imagePath + ')'}"></div>
           <div class="w-[47.5%] h-full inline-block color-container float-right">
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorLight}"></div>
-            <div class="h-[30%] mb-[6%]" [ngStyle]="{background: item.shadeColorMedium}"></div>
-            <div class="h-[30%]" [ngStyle]="{background: item.shadeColorDark}"></div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData.imagePath + ')'}"></div>
+            <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData.imagePath + ')'}"></div>
+            <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData.imagePath + ')'}"></div>
           </div>
         </div>
         <!-- if image (style|material|product) -->
@@ -127,22 +137,41 @@
 
    <!-- if room details -->
   <div *ngIf="currentStep.data.roomShapes">
-    <div class="w-[200px]">
+    <div class="room-details-section-container">
       <!-- <span class="text-black-2">{{'NEW-PROJECT.upload-sketch' | translate}}</span> -->
       <label for="dropzone-file">
         <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer" [class.selected-item]="imagePath">
           <div *ngIf="!imagePath" class="text-center mt-[65px]">
             <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
+            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'NEW-PROJECT.upload-your-photos'| translate}}</p>
           </div>
           <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="roomImg" />
         </div>
-        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
+        <input
+          (change)="onFileChange($event)"
+          id="dropzone-file"
+          type="file"
+          class="hidden"
+          accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+          multiple/>
       </label>
+      <div class="image-preview-container" *ngIf="roomSketchImagePaths.length > 0">
+        <h3 class="mt-0">{{"NEW-PROJECT.images-preview" | translate}}</h3>
+        <div class="image-preview">
+          <div *ngFor="let imagePath of roomSketchImagePaths; let i = index">
+            <img [src]="imagePath" alt="{{ 'roomSketchImage ' + i }}" class="preview-image"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- if moodboards -->
+  <!-- if moodboards (Customize moodboard page)-->
+  <div *ngIf="currentStep.data.moodboard">
+    <app-moodboard-details [moodboard]="currentStep.data.moodboard"></app-moodboard-details>
+  </div>
+
+   <!-- if moodboards (Project create page)-->
   <div *ngIf="currentStep.data.moodboards">
     <ion-grid class="step-items" style="min-height: 400px;">
       <ion-row class="step-items-row">
@@ -151,15 +180,15 @@
               <ion-row>
                 <ion-col size="6">
                   <div class="border border-light bg-white mb-2">
-                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                    <img *ngIf="item.styleImages?.[0]?.imagePath" src="{{item.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
                   </div>
                   <div class="border border-light bg-white">
-                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img"/>
+                    <img *ngIf="item.products[0].imagePath" src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img src="{{item.style.imagePath}}" class="h-[200px] lg:h-[280px] object-contain w-full" alt="moodboard-img"/>
+                    <img *ngIf="item.styleImages?.[1]?.imagePath" src="{{item.styleImages[1].imagePath}}" class="h-[200px] lg:h-[280px] object-cover w-full" alt="moodboard-img"/>
                   </div>
                 </ion-col>
               </ion-row>
@@ -180,20 +209,20 @@
               <ion-row>
                 <ion-col size="6">
                   <div class="border border-light bg-white mb-2">
-                    <img src="{{item.style.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img1"/>
+                    <img *ngIf="item.styleImages?.[0]?.imagePath" src="{{item.styleImages[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img1"/>
                   </div>
                   <div class="border border-light bg-white">
-                    <img src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-contain" alt="moodboard-img2"/>
+                    <img *ngIf="item.products?.[0]?.imagePath" src="{{item.products[0].imagePath}}" class="h-[95px] lg:h-[135px] w-full object-cover" alt="moodboard-img2"/>
                   </div>
                 </ion-col>
                 <ion-col size="6">
                   <div class="border border-light bg-white">
-                    <img [src]="item.style.imagePath" class="h-[200px] lg:h-[280px] w-full object-contain" alt="moodboard-img3"/>
+                    <img *ngIf="item.styleImages?.[1].imagePath" [src]="item.styleImages[1].imagePath" class="h-[200px] lg:h-[280px] w-full object-cover" alt="moodboard-img3"/>
                   </div>
                 </ion-col>
               </ion-row>
             </ion-grid>
-          <p *ngIf="item.style.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
+          <p *ngIf="item?.style?.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
             <span *ngIf="item.room?.name" class="text-base font-normal text-primary">/ {{item.room.name}}</span>
           </p>
         </ion-col>
@@ -218,6 +247,6 @@
 
     <!-- if final step -->
     <div *ngIf="currentStep.data === 'final'">
-      <app-moodboard-details [moodboard]="project.currentMoodboard"></app-moodboard-details>
+      <app-moodboard-details [project]="project" [moodboard]="project.currentMoodboard"></app-moodboard-details>
     </div>
 </div>

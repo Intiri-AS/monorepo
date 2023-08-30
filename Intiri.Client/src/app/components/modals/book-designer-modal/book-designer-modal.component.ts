@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-designer-modal',
@@ -27,25 +28,40 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'sketch', isChecked: false
+      id: 1, name: 'suggestion', isChecked: false
     },
     {
-      id: 2, name: 'color', isChecked: false
+      id: 2, name: 'furnishing', isChecked: false
     },
     {
-      id: 3, name: 'adjustment', isChecked: false
+      id: 3, name: 'drawings', isChecked: false
     },
     {
-      id: 4, name: 'product', isChecked: false
+      id: 4, name: 'floor', isChecked: false
     },
     {
-      id: 5, name: 'lining', isChecked: false
+      id: 5, name: 'kitchen', isChecked: false
     },
     {
-      id: 6, name: 'decoration', isChecked: false
+      id: 6, name: 'bath', isChecked: false
     },
     {
-      id: 7, name: 'quesiton', isChecked: false
+      id: 7, name: 'lighting', isChecked: false
+    },
+    {
+      id: 8, name: 'furniture', isChecked: false
+    },
+    {
+      id: 9, name: '2D', isChecked: false
+    },
+    {
+      id: 10, name: '3D', isChecked: false
+    },
+    {
+      id: 11, name: 'project', isChecked: false
+    },
+    {
+      id: 12, name: 'quesiton', isChecked: false
     }
   ];
 
@@ -104,19 +120,20 @@ export class BookDesignerModalComponent {
 
   checkout(): void {
     const consultationDetails = this.getConsultationDetails();
-    this.paymentService.sendPayment(
-      {
-        name: 'Consulatations', //required
-        amount: this.totalPrice * 100,//required
-        receiverId: this.designer.id, //required
-        locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
-        successUrlPath: `messenger?contact=${this.designer.id}`,//required
-        cancelUrlPath: '',//optional, if not specified path is ''
-        moodboardId: this.moodboard?.id, //optional
-        consultationDetails,
-        numberOfConsultations: this.numberOfConsultations //required
-      }).subscribe(async (res: any) => {
-      let stripe = await loadStripe('pk_test_51LrTfeKX8zAv4zjwkaohTpcztUdLuubYRrbzdmyKHqX7dR1LP5kNNyCrUZHCplwPrrEmHyTz9TW480BSefHTL0Y700LOOrqXGT');
+    let sendPaymentObject = {
+      name: this.languageService.selected === 'no' ? 'Angrerett NO' : 'Right of withdrawal', //required
+      amount: this.totalPrice * 100,//required
+      receiverId: this.designer.id, //required
+      locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
+      successUrlPath: `messenger?contact=${this.designer.id}`,//required
+      cancelUrlPath: '',//optional, if not specified path is ''
+      moodboardId: this.moodboard?.id, //optional
+      consultationDetails,
+      numberOfConsultations: this.numberOfConsultations, //required
+      Domain: environment.apiUrl.split('/api')[0]
+    }
+    this.paymentService.sendPayment(sendPaymentObject).subscribe(async (res: any) => {
+      let stripe = await loadStripe(environment.stripe_key);
       stripe?.redirectToCheckout({
         sessionId: res.id
       })

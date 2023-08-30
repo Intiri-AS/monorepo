@@ -19,6 +19,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Net;
+using System.Text;
+using IronPdf;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Intiri.API.Models.DTO;
+using Twilio.TwiML.Messaging;
+using System.Drawing.Printing;
 
 namespace Intiri.API.Controllers
 {
@@ -29,11 +36,11 @@ namespace Intiri.API.Controllers
 
 		private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper): base(unitOfWork)
+        public MoodboardsController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
 		{
 			_mapper = mapper;
 		}
@@ -66,7 +73,7 @@ namespace Intiri.API.Controllers
 
 			moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
 
-            return Ok(moodboardOut);
+			return Ok(moodboardOut);
 		}
 
 		[Authorize(Policy = PolicyNames.ClientPolicy)]
@@ -113,8 +120,8 @@ namespace Intiri.API.Controllers
 			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
 			moodboard.Products = products.ToArray();
 
-            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
-            moodboard.StyleImages = styleImages.ToArray();
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+			moodboard.StyleImages = styleImages.ToArray();
 
 			_unitOfWork.MoodboardRepository.Insert(moodboard);
 
@@ -206,7 +213,26 @@ namespace Intiri.API.Controllers
 				moodboard.Products = products.ToList();
 			}
 
-			moodboard.Updated = DateTime.UtcNow;
+            if (modifyDTO.StyleImageIds != null)
+            {
+                IEnumerable<StyleImage> styleImages =
+                    await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(modifyDTO.StyleImageIds);
+
+                moodboard.StyleImages = styleImages.ToList();
+            }
+
+            Style style = await _unitOfWork.StyleRepository.GetByID(modifyDTO.StyleId);
+            moodboard.Style = style;
+
+            Room room = await _unitOfWork.RoomRepository.GetRoomByIdAsync(modifyDTO.RoomId);
+            moodboard.Room = room;
+
+            if (modifyDTO.SlotInfo != null)
+            {
+                moodboard.SlotInfo = modifyDTO.SlotInfo;
+            }
+
+            moodboard.Updated = DateTime.UtcNow;
 
 			_unitOfWork.MoodboardRepository.Update(moodboard);
 
@@ -282,6 +308,284 @@ namespace Intiri.API.Controllers
 			return Ok();
 		}
 
-		#endregion Public methods
-	}
+        [HttpGet("CreateMoodboardPDF")]
+		[AllowAnonymous]
+        public async Task<IActionResult> CreateMoodboardPDF(int moodboardId,string lng = "")
+        {
+			#region text
+			string SubTitle1 = "Congratulations on your new mood board";
+			string SubTitle2 = "Exciting News: Unlock discounts using Intiri’s promo codes at different stores – simply scroll down for the codes!";
+			string ProductList = "Product List";
+			string PromoCodes = "Promo Codes";
+			string DiscountCode = "Discount code";
+			string Trustedby = "Trusted by top brands";
+
+            if (lng == "no")
+            {
+                SubTitle1 = "Gratulerer med ditt nye stemningskart";
+                SubTitle2 = "Spennende nyheter: Lås opp rabatter ved å bruke Intiris kampanjekoder i ulike butikker – rull bare nedover for kodene!";
+                ProductList = "Produktliste";
+                PromoCodes = "Rabattkode";
+                DiscountCode = "Rabattkode";
+                Trustedby = "Våre samarbeidspartnere";
+            }
+            #endregion
+
+            var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
+            string contents = System.IO.File.ReadAllText(htmlPath);
+
+            ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardOptimizedById(moodboardId);
+            
+            if (moodboard == null)
+            {
+                return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
+            }
+
+			contents = contents.Replace("#ProjectName#", moodboard.Project.Name);
+			contents = contents.Replace("#SubTitle1#", SubTitle1);
+			contents = contents.Replace("#StyleName#", moodboard.Style?.Name);
+			contents = contents.Replace("#RoomName#", lng == "no" ? moodboard.Room?.NameNorwegian : moodboard.Room?.Name);
+			contents = contents.Replace("#SubTitle2#", SubTitle2);
+			contents = contents.Replace("#ProductList#", ProductList);
+			contents = contents.Replace("#PromoCodes#", PromoCodes);
+			contents = contents.Replace("#DiscountCode#", DiscountCode);
+			contents = contents.Replace("#Trustedby#", Trustedby);
+
+            MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
+            moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
+			List<SlotInfo> allSlots = new List<SlotInfo>();
+			try
+			{
+                JObject slotInfo = JObject.Parse(moodboardOut.SlotInfo);
+                foreach (var pair in slotInfo)
+                {
+                    var slot = System.Text.Json.JsonSerializer.Deserialize<SlotInfo>(pair.Value.ToString());
+                    slot.slotId = pair.Key;
+                    allSlots.Add(slot);
+                }
+            }
+			catch { }
+
+			foreach (var item in allSlots)
+			{
+				string slotHtml = "";
+
+				if(!string.IsNullOrEmpty(item.entityImagePath))
+				{
+                    slotHtml = "<div class=\"image-container\"><a href=\"#Link#\" target=\"_blank\"><img src=\"#ImgSrc#\" alt=\"Image Description\" /></a></div>";
+                    slotHtml = slotHtml.Replace("#ImgSrc#", item.entityImagePath);
+
+					string link = getProviderLinkFromSlot(item, moodboardOut);
+                    if (string.IsNullOrEmpty(link) || link == "null")
+                    {
+                        slotHtml = slotHtml.Replace("<a href=\"#Link#\">", "");
+                        slotHtml = slotHtml.Replace("</a>", "");
+                    }
+                    else
+                    {
+                        slotHtml = slotHtml.Replace("#Link#", link);
+                    }
+                }
+				
+				//Colors
+				if(item.slotId == "12" || item.slotId == "13" || item.slotId == "14" || item.slotId == "15")
+				{
+					var color = moodboardOut.ColorPalettes.FirstOrDefault();
+					if(color != null)
+					{
+                        slotHtml = "<div class=\"image-container\"><a href=\"https://www.flugger.com\"><img src=\"#ImgSrc#\" alt=\"Image Description\" /></a></div>";
+                        if (item.slotId == "12")
+						{
+							slotHtml = slotHtml.Replace("#ImgSrc#", color.ShadeColorLightData.ImagePath);
+						}
+						if (item.slotId == "13")
+						{
+							slotHtml = slotHtml.Replace("#ImgSrc#", color.ShadeColorMediumData.ImagePath);
+						}
+						if (item.slotId == "14")
+						{
+							slotHtml = slotHtml.Replace("#ImgSrc#", color.MainColorData.ImagePath);
+						}
+                        if (item.slotId == "15")
+                        {
+                            slotHtml = slotHtml.Replace("#ImgSrc#", color.ShadeColorDarkData.ImagePath);
+                        }
+                    }
+
+				}
+
+				contents = contents.Replace("#slot"+ item.slotId + "#", slotHtml);
+            }
+
+			string shoppingItems = "";
+         //   string shoppingItem = @"<div class=""box-css"">
+									//	<div class=""box-one"">
+									//		<div class=""image-container-box"">
+									//			<a href=""#Link#"">
+									//				<img src=""#ImageLink#""
+									//					 alt=""Image Description"" />
+									//			</a>
+									//		</div>
+									//	</div>
+									//	<div class=""text-box"">#Name#</div>
+									//</div>";
+
+            string shoppingItem = @"
+				<div class=""product-box"">
+                    <div class=""product-image-box"">
+						<a href=""#Link#"">
+							<img src=""#ImageLink#"" alt=""Image Description"" />
+						</a>
+                    </div>
+                    <div class=""text-box"">#Name#</div>
+                </div>";
+
+            //Products
+            foreach (var item in moodboardOut.Products)
+			{
+				string sItem = shoppingItem;
+				sItem = sItem.Replace("#Name#", item.Name);
+				sItem = sItem.Replace("#ImageLink#", item.ImagePath);
+				if (string.IsNullOrEmpty(item.ProductLink) || item.ProductLink == "null")
+				{
+					sItem = sItem.Replace("<a href=\"#Link#\">", "");
+					sItem = sItem.Replace("</a>", "");
+				}
+				else
+				{
+					sItem = sItem.Replace("#Link#", item.ProductLink);
+				}
+
+                shoppingItems = shoppingItems + sItem;
+			}
+
+            //StyleImages
+            foreach (var item in moodboardOut.StyleImages)
+			{
+				string sItem = shoppingItem;
+				sItem = sItem.Replace("#Name#", item.StyleName);
+				sItem = sItem.Replace("#ImageLink#", item.ImagePath);
+				sItem = sItem.Replace("<a href=\"#Link#\">", "");
+				sItem = sItem.Replace("</a>", "");
+
+				shoppingItems = shoppingItems + sItem;
+			}
+
+			//Materials
+			foreach (var item in moodboardOut.Materials)
+			{
+				string sItem = shoppingItem;
+				sItem = sItem.Replace("#Name#", item.Name);
+				sItem = sItem.Replace("#ImageLink#", item.ImagePath);
+				if (string.IsNullOrEmpty(item.Link) || item.Link == "null")
+				{
+					sItem = sItem.Replace("<a href=\"#Link#\">", "");
+					sItem = sItem.Replace("</a>", "");
+				}
+				else
+				{
+					sItem = sItem.Replace("#Link#", item.Link);
+				}
+
+				shoppingItems = shoppingItems + sItem;
+			}
+
+            string shoppingItemColorPalette = @"
+				<div class=""product-box"">
+					<div class=""product-image-box"">
+						<div class=""palette-container"">
+							<div class=""grid-item mainColor"" style=""background-image: url('#mainColor_Link#'); ""><a href=""#Link#""><label>#mainColor_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorLight"" style=""background-image: url('#shadeColorLight_Link#'); ""><a href=""#Link#""><label>#shadeColorLight_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorMedium"" style=""background-image: url('#shadeColorMedium_Link#'); ""><a href=""#Link#""><label>#shadeColorMedium_ColorName#</label></a></div>
+							<div class=""grid-item shadeColorDark"" style=""background-image: url('#shadeColorDark_Link#'); ""><a href=""#Link#""><label>#shadeColorDark_ColorName#</label></a></div>
+						</div>
+					</div>
+					<div class=""text-box"">
+						#Number# / #Name#
+					</div>
+				</div>";
+
+            //colorPalettes
+            foreach (var item in moodboardOut.ColorPalettes)
+            {
+                string sItem = shoppingItemColorPalette;
+                sItem = sItem.Replace("#Number#", item.Number.ToString());
+                sItem = sItem.Replace("#Name#", item.Name);
+                sItem = sItem.Replace("#Link#", "https://www.flugger.com");
+                sItem = sItem.Replace("#mainColor_Link#", item.MainColorData.ImagePath);
+                sItem = sItem.Replace("#shadeColorLight_Link#", item.ShadeColorLightData.ImagePath);
+                sItem = sItem.Replace("#shadeColorMedium_Link#", item.ShadeColorMediumData.ImagePath);
+				sItem = sItem.Replace("#shadeColorDark_Link#", item.ShadeColorDarkData.ImagePath);
+                sItem = sItem.Replace("#mainColor_ColorName#", item.MainColorData.Name);
+                sItem = sItem.Replace("#shadeColorLight_ColorName#", item.ShadeColorLightData.Name);
+                sItem = sItem.Replace("#shadeColorMedium_ColorName#", item.ShadeColorMediumData.Name);
+                sItem = sItem.Replace("#shadeColorDark_ColorName#", item.ShadeColorDarkData.Name);
+
+                shoppingItems = shoppingItems + sItem;
+            }
+
+            contents = contents.Replace("#ShoppingItems#", shoppingItems);
+      //      string header = @" <!DOCTYPE html>
+						//<div class=""header"" style=""padding: 20px;"">
+						//	<a href=""https://www.intiri.no"" target=""_blank"">
+						//		<img src=""https://res.cloudinary.com/dezushtwk/image/upload/v1692359070/ejhchz5mns3ee7egupvs.svg"" style=""height:20px;"" />
+						//	</a>
+						//</div>";
+
+            var renderer = new ChromePdfRenderer();
+            renderer.RenderingOptions.MarginTop = 0;
+            renderer.RenderingOptions.MarginLeft = 0;
+            renderer.RenderingOptions.MarginRight = 0;
+            renderer.RenderingOptions.MarginBottom = 0;
+            renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
+            renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
+    //        renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
+    //        {
+    //            HtmlFragment = header,
+				//LoadStylesAndCSSFromMainHtmlDocument = true
+    //        };
+            var pdf = renderer.RenderHtmlAsPdf(contents);
+            pdf.CompressImages(99);
+            return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
+		}
+
+		private string getProviderLinkFromSlot(SlotInfo slotInfo, MoodboardOutDTO moodboarddata)
+		{
+			string link = string.Empty;
+
+			if (slotInfo.entity == "product")
+			{
+				var product = moodboarddata.Products.Where(x => x.Id.ToString() == slotInfo.entityId.ToString()).FirstOrDefault();
+				if (product != null)
+				{
+					link = product.ProductLink;
+				}
+			}
+            else if (slotInfo.entity == "material")
+            {
+                var material = moodboarddata.Materials.Where(x => x.Id.ToString() == slotInfo.entityId.ToString()).FirstOrDefault();
+                if (material != null)
+                {
+                    link = material.Link;
+                }
+            }
+
+            return link;
+		}
+
+        [HttpGet("slotinfo/{moodboardId}")]
+        public async Task<ActionResult<MoodboardOutDTO>> GetMoodboardSlotInfo(int moodboardId)
+        {
+            string slotinfo = await _unitOfWork.MoodboardRepository.GetMoodboardSlotInfo(moodboardId);
+
+            if (slotinfo == null)
+            {
+                return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
+            }
+
+            return Ok(slotinfo);
+        }
+
+        #endregion Public methods
+    }
 }

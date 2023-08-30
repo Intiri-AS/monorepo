@@ -17,11 +17,12 @@
             <div class="flex justify-evenly lg:justify-around w-full">
               <ion-button fill="clear" class="secondary-btn-borderless" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
               <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
+              <ion-button fill="clear" class="secondary-btn-borderless" (click)="downloadMoodboardPDF()">{{'MOODBOARD-DETAILS.download-moodboard-pdf' | translate}}</ion-button>
             </div>
-            <div *ngIf="projectId" class="mt-2 lg:mt-0 flex justify-evenly lg:justify-around w-full">
+            <!-- <div *ngIf="projectId" class="mt-2 lg:mt-0 flex justify-evenly lg:justify-around w-full">
               <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
               <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" target="_blank" [href]="getCraftsmanPage()"> {{'MOODBOARD-DETAILS.contact-craftsman' | translate}}</ion-button>
-            </div>
+            </div> -->
           </ion-buttons>
         </div>
       </div>

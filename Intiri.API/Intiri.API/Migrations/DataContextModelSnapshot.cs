@@ -147,6 +147,82 @@ namespace Intiri.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.DesignerInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaOfExpertise")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaofExpertiseForProfile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DesignerId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("OpenToHomeVist")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ProfileDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileDescription_NO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Style")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TravelDistance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DesignerId")
+                        .IsUnique();
+
+                    b.ToTable("DesignerInfo");
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.DesignerPortfolio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DesignerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Featured")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DesignerId");
+
+                    b.ToTable("DesignerPortfolio");
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Inspiration", b =>
                 {
                     b.Property<int>("Id")
@@ -1191,6 +1267,24 @@ namespace Intiri.API.Migrations
                     b.Navigation("ChatMessage");
                 });
 
+            modelBuilder.Entity("Intiri.API.Models.DesignerInfo", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Designer", null)
+                        .WithOne("DesignerInfo")
+                        .HasForeignKey("Intiri.API.Models.DesignerInfo", "DesignerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Intiri.API.Models.DesignerPortfolio", b =>
+                {
+                    b.HasOne("Intiri.API.Models.Designer", null)
+                        .WithMany("DesignerPortfolio")
+                        .HasForeignKey("DesignerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Intiri.API.Models.Inspiration", b =>
                 {
                     b.HasOne("Intiri.API.Models.EndUser", "EndUser")
@@ -1598,6 +1692,10 @@ namespace Intiri.API.Migrations
             modelBuilder.Entity("Intiri.API.Models.Designer", b =>
                 {
                     b.Navigation("ConsultationPaymentsReceived");
+
+                    b.Navigation("DesignerInfo");
+
+                    b.Navigation("DesignerPortfolio");
 
                     b.Navigation("DesignerRating");
 

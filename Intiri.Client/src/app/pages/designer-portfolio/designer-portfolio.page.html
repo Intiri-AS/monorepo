@@ -1,0 +1,39 @@
+<ion-content>
+    <div id="home">
+        <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
+            <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="(designerDetails$ | async) !== null && (designerDetails$ | async) as designerDetails">
+                <ion-row class="designer-profile-info-container" >
+                    <ion-col class="profile-pic-container">
+                    <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full">
+                    </ion-col>
+                    <ion-col class="profile-bio-container">
+                    <h1 class="name">{{designerDetails.firstName}} {{designerDetails.lastName}}</h1>
+                    <div class="misc-info">
+                        {{designerDetails.city}}, {{designerDetails.country}} | {{designerDetails.designerInfo.openToHomeVist ? ('CONTACT-DESIGNER.home-visit' | translate) : ('CONTACT-DESIGNER.online-consultation' | translate)}} | {{designerDetails.designerInfo.position}}
+                    </div>
+                    <div class="service-container">
+                        <div *ngFor="let service of getDesignerServices()" class="service-box">{{service}}</div>
+                    </div>
+                    <div class="desc" *ngIf="designerDetails.description">
+                        {{designerDetails.description}}
+                    </div>
+                    <div class="charges">
+                        {{'CONTACT-DESIGNER.charges' | translate}}: <strong>{{designerDetails.designerInfo.price}} NOK</strong> {{'CONTACT-DESIGNER.per-hour' | translate}}
+                    </div>
+                    <ion-button class="button h-[52px] mt-10" (click)="bookConsultation()">{{'CONTACT-DESIGNER.book-a-consultation' | translate}}</ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="designer-portfolio-container">
+                    <h1 class="heading">{{'CONTACT-DESIGNER.portfolio' | translate}}</h1>
+                    <div class="designer-portfolio-image-container">
+                      <img
+                        *ngFor="let portfolio of designerDetails.designerPortfolio"
+                        [src]="portfolio.imagePath"
+                        [alt]="portfolio.publicId"
+                        class="portfolio-image"
+                      >
+                    </div>
+                </ion-row>
+            </ion-grid>
+    </div>
+</ion-content>

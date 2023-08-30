@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { ProjectService } from 'src/app/services/project.service';
@@ -7,17 +7,22 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service'
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { ProductService } from 'src/app/services/product.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
+import { Project } from 'src/app/models/project.model';
+import { TranslateService } from '@ngx-translate/core';
+import { StyleService } from 'src/app/services/style.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-new-project-step',
   templateUrl: './new-project-step.component.html',
   styleUrls: ['./new-project-step.component.scss'],
 })
-export class NewProjectStepComponent implements OnInit {
+export class NewProjectStepComponent implements OnInit, OnChanges {
 
   apiUrl = environment.apiUrl;
   @Input() currentStep: any;
@@ -27,6 +32,8 @@ export class NewProjectStepComponent implements OnInit {
   @Output() toggleSelection = new EventEmitter<object>();
 
   imagePath = null;
+  roomSketchImagePaths = [];
+
   mbFamilyAll: any[];
   mbsExpanded: boolean = false;
 
@@ -55,22 +62,23 @@ export class NewProjectStepComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private modalController: ModalController,
+    private styleService: StyleService,
     private projectService: ProjectService,
     private materialService: MaterialService,
     private partnerService: PartnerService,
     private colorService: ColorService,
     private productService: ProductService,
     private languageService: LanguageService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private commonUtilsService: CommonUtilsService,
+    private translate: TranslateService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
-    if (this.router.url.includes('edit-moodboard')) { //For Client-side moodboard edit
+    if (this.router.url.includes('edit-moodboard') || this.router.url.includes('customize-moodboard')) { //For Client-side moodboard edit
       this.showFilterDropdown = true;
-
-      // Fetch color pallets
-      // this.colorService.getColorPalettes();
-      // this.colorPalettes$.subscribe(res => { this.colorPalettes = res });
 
       // Fetch materials
       this.materialService.getMaterials();
@@ -89,25 +97,35 @@ export class NewProjectStepComponent implements OnInit {
     } else {
       this.isCreateProjectPage = true;
     }
-    this.languageService.languageChange$.subscribe(res => {
-      this.currentLanguage = res;
-    })
+
+    this.currentLanguage = this.translate.currentLang;
   }
 
 
   ngOnChanges () {
+    if (this.activatedRoute.snapshot.routeConfig.path === 'new-project' && this.currentStepNo === 1) {
+      this.spinner.show();
+      this.styleService.getStyleImagesByRoom(this.project.room.id).subscribe((styleImages: Array<any>) => {
+        console.log('styleImages', styleImages);
+        console.log('this.currentStep.data', this.currentStep.data);
+        this.currentStep.data = this.commonUtilsService.shuffleArrayElements(styleImages);
+        this.spinner.hide();
+      })
+    }
     this.showFilterDropdown && this.assignAllItemsData();
 
     this.typeFilters = [];
     this.providerFilters = [];
 
     // list providers for materials
-    this.materialProviders = this.getUniqueElementsFromArray(this.materials.map(e => e.provider));
+    this.materialProviders = this.commonUtilsService.getUniqueElementsFromArray(this.materials.map(e => e.provider));
 
     // list providers for products
-    this.productProviders = this.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
+    this.productProviders = this.commonUtilsService.getUniqueElementsFromArray(this.products.map(e => e.partnerName))
 
-    console.log(this.currentStep, this.currentStepNo);
+    this.languageService.languageChange$.subscribe(res => {
+      this.currentLanguage = res;
+    })
   }
 
   assignAllItemsData () {
@@ -133,8 +151,9 @@ export class NewProjectStepComponent implements OnInit {
   }
 
   getMbFamily(mb) {
+    console.log('mb in getMbFamily', mb);
     this.mbsExpanded = false;
-    this.projectService.getMbFamily(mb.style.id, mb.room.id).subscribe((res: any[]) => {
+    this.projectService.getMbFamily(mb.style.id, this.project.room.id).subscribe((res: any[]) => {
       this.mbFamilyAll = res;
       this.currentStep.data.moodboardFamily = res.slice(-3);
     })
@@ -149,24 +168,20 @@ export class NewProjectStepComponent implements OnInit {
     return Array.isArray(item);
   }
 
-  getUniqueElementsFromArray(arr) {
-    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null)));
-    return uniqueValues;
-}
-
   normalizeSlashes(string): string {
     return string.replaceAll("\\", "/")
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
-      this.project.roomDetails.imageFile = event.target.files[0];
-      this.project.roomDetails.shape = {shape: "", imagePath: ""};
-      this.project.roomDetails.roomSketchFile = event.target.files[0];
-      event.srcElement.value = "";
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.project.roomDetails.imageFile));
+    if (event.target.files.length > 0) {
+      this.project.roomDetails.imageFiles = event.target.files;
+      this.project.roomDetails.roomSketchFiles = event.target.files;
+      this.roomSketchImagePaths = Object.keys(event.target.files).map((key, i) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[key])));
     } else {
-      this.imagePath = null;
+      this.project.roomDetails.roomSketchFiles = {};
+      this.project.roomDetails.imageFiles = {};
+      this.roomSketchImagePaths = [];
     }
   }
 

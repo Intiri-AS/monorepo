@@ -51,7 +51,7 @@ export class AddMoodboardPage implements OnInit {
   stepsOrder: object = {
     0: 'room',
     1: 'style',
-    2: 'inspirationalPhotos',
+    2: 'styleImages',
     3: 'materials',
     4: 'colorPalettes',
     5: 'products',

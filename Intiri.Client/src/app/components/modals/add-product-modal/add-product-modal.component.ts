@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
@@ -78,8 +78,8 @@ export class AddProductModalComponent implements OnInit {
               private notifier: NotifierService,
               private spinner: NgxSpinnerService,
               private translate: TranslateService,
-              private accountService: AccountService
-              ) {
+              private accountService: AccountService,
+            ) {
                 this.editProductForm = this.fb.group({
                   productName: ['' || undefined, Validators.required],
                   productLink: [''],
@@ -98,9 +98,6 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
-    this.partnerService.getPartnerProfile().subscribe(res => {
-      this.partners = res;
-    });
     this.materialService.getMaterialTypes().subscribe(res => {
       this.materialTypes = res;
     })
@@ -131,6 +128,11 @@ export class AddProductModalComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
       if (loggedUser) {
         this.userRole = loggedUser.roles[0];
+        if (this.userRole == 'Partner') {
+          this.partnerService.getPartnerProfile().subscribe(res => {
+            this.partners = res;
+          });
+        }
       }
     });
 
@@ -250,7 +252,7 @@ export class AddProductModalComponent implements OnInit {
     })
   }
 
-    async openSuccessModal() {
+  async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
@@ -259,6 +261,24 @@ export class AddProductModalComponent implements OnInit {
     });
 
     await modal.present();
+  }
+
+  getProductTypeNameByTypeId (typeId) {
+    if (!(typeId == 0 || !this.productsType.length)) {
+      let res = this.productsType.length && this.productsType.filter(pType => pType.id == typeId);
+      if (res.length) {
+        return res[0].name;
+      }
+    }
+  }
+
+  getMaterialTypeNameByTypeId (typeId) {
+    if (!(typeId == 0 || !this.materialTypes.length)) {
+      let res = this.materialTypes.length && this.materialTypes.filter(mType => mType.id == typeId);
+      if (res.length) {
+        return res[0].name;
+      }
+    }
   }
 
 }

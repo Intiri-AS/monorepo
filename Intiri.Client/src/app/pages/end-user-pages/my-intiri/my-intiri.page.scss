@@ -13,3 +13,49 @@
     display: inline-block;
   }
 }
+
+.new-project-container{
+  margin: 20px 0px 0px;
+  width: 50%;
+  .project-preview-card {
+    display: grid;
+    grid-template-columns: repeat(2, 49%);
+    background: #fff;
+    gap: 10px;
+    width: 100%;
+    margin: 20px 0px;
+  }
+  .moodboard-preview-container {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+  }
+}
+
+.projects-container{
+  display: grid;
+  grid-template-columns: repeat(2, 45%);
+  gap: 2.5% 10%;
+
+  .project-preview-container{
+    width: 100%;
+  
+    .project-preview-card {
+      display: grid;
+      grid-template-columns: repeat(2, 49%);
+      background: #fff;
+      gap: 10px;
+      min-width: 100%;
+      margin: 20px 0px;
+    }
+    .moodboard-preview-container {
+      display: grid;
+      gap: 1px;
+      grid-template-columns: repeat(2, 1fr);
+      height: 100%;
+    }
+  }
+}
+
+

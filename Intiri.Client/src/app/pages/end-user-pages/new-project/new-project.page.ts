@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -8,7 +10,9 @@ import { CreateProjectModalComponent } from 'src/app/components/modals/create-pr
 import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { AccountService } from 'src/app/services/account.service';
+import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -83,19 +87,16 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private router: Router,
     private spinner: NgxSpinnerService,
     private nav: NavController,
+    private commonUtilsService: CommonUtilsService,
+    private moodboardService: MoodboardService,
+    private notifier: NotifierService,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const stepParam = parseInt(urlParams.get('step'), 10);
-
-    this.route.queryParams.subscribe((stepParam: any) => {
-      if (+stepParam.step === 4 && this.checkIfUserLoggedIn() && this.canChangeToStep(+stepParam.step)) {
-        this.currentStepNo = +stepParam.step;
-        this.goToStep(4);
-      }
-    })
 
     const checkForProject = JSON.parse(sessionStorage.getItem('project'));
     if (checkForProject.name.length) {
@@ -120,10 +121,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
-    });
-
-    this.projectService.getStyleImages().subscribe((res) => {
-      this.steps[1]['data'] = res;
     });
 
     this.projectService.getColorPalettes().subscribe((res) => {
@@ -159,19 +156,21 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   nextStep() {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
-    if (this.currentStepNo + 1 === 4 && !isUserLoggedIn) {
+    if (this.currentStepNo + 1 === 5 && !isUserLoggedIn) {
       this.projectService.setCurrentProject(this.project);
       this.openLoginModal();
-    } else {
-      if (this.canChangeToStep(this.currentStepNo + 1)) {
-        this.currentStepNo++;
-        this.changeQueryParam(this.currentStepNo);
-        this.projectService.setCurrentProject(this.project);
-      }
-      if (this.currentStepNo === 4) {
-        this.getMoodboardMatches();
-      }
+      return;
     }
+
+    if (this.canChangeToStep(this.currentStepNo + 1)) {
+      this.currentStepNo++;
+      this.changeQueryParam(this.currentStepNo);
+      this.projectService.setCurrentProject(this.project);
+    }
+    if (this.currentStepNo === 4) {
+      this.getMoodboardMatches();
+    }
+
   }
 
 
@@ -179,6 +178,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
   skipPage() {
     const colorPalettes
     = [{"id":1,"name":"Space Gray","number":3043,"mainColor":"#696868","shadeColorLight":"#B4B3B3","shadeColorMedium":"#808080","shadeColorDark":"#3A3A3A"}];
+    if (this.currentStepNo === 2) {
+      this.currentStepNo++;
+      return;
+    }
     if (this.currentStepNo === 3) {
       this.currentStepNo++;
       this.changeQueryParam(this.currentStepNo);
@@ -192,17 +195,41 @@ export class NewProjectPage implements OnInit, OnDestroy {
 
   goToStep(stepNo) {
     const isUserLoggedIn = this.checkIfUserLoggedIn();
-    if (stepNo === 4 && !isUserLoggedIn) {
+    if (stepNo === 5 && !isUserLoggedIn) {
       this.openLoginModal();
-    } else {
-      if (this.canChangeToStep(stepNo)) {
-        this.currentStepNo = stepNo;
-        this.changeQueryParam(stepNo);
-        this.projectService.setCurrentProject(this.project);
+      return;
+    }
+    if (stepNo === 5) {
+      if (this.project.currentMoodboard.id) {
+        return;
       }
-      if (stepNo === 4) {
-        this.getMoodboardMatches();
+      if (this.project.currentMoodboard.id === 0) {
+        return;
       }
+      this.spinner.show();
+      let currentMoodboard = this.project.currentMoodboard;
+      console.log('here?', currentMoodboard)
+      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
+        console.log('api has been fetched', res);
+        this.project.currentMoodboard = res;
+        this.spinner.hide();
+
+        // Change route after moodboard load
+        if (res) {
+          this.currentStepNo = stepNo;
+          this.changeQueryParam(stepNo);
+          this.projectService.setCurrentProject(this.project);
+        }
+      })
+      return;
+    }
+    if (this.canChangeToStep(stepNo)) {
+      this.currentStepNo = stepNo;
+      this.changeQueryParam(stepNo);
+      this.projectService.setCurrentProject(this.project);
+    }
+    if (stepNo === 4) {
+      this.getMoodboardMatches();
     }
   }
 
@@ -231,8 +258,25 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.nav.navigateRoot(`/project-details/${this.project.id}`);
   }
 
-  saveCurrentProject()
-  {
+  onCustomizeMoodboardButtonClick () {
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
+    this.nav.navigateRoot('/customize-moodboard');
+  }
+
+  saveCurrentProject(): void {
+    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+      this.notifier.show({
+        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        type: 'error',
+      })
+      return;
+    }
     this.spinner.show();
     if(this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
@@ -291,15 +335,14 @@ export class NewProjectPage implements OnInit, OnDestroy {
       case 3: {
         return (
           this.project.styleImages.length > 0 &&
-          !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid()
+          this.project.roomDetails.roomSketchFiles &&
+          Object.keys(this.project.roomDetails.roomSketchFiles).length > 0
         );
       }
       case 4: {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0
         );
       }
@@ -307,7 +350,6 @@ export class NewProjectPage implements OnInit, OnDestroy {
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
-          this.areProjectDetailsValid() &&
           this.project.colorPalettes.length > 0 &&
           !this.isMoodboardEmpty(this.project.currentMoodboard)
         );
@@ -331,14 +373,13 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['roomSketchFile'] &&
-            this.project.roomDetails['roomSketchFile'].type &&
-            this.project.roomDetails['roomSketchFile'].type.includes('image');
+    return this.project.roomDetails['roomSketchFiles'] &&
+            Object.keys(this.project.roomDetails['roomSketchFiles']).length > 0;
   }
 
   toggleItem(item) {
     // if you change any selection, selected moodboard will reset
-    if(this.currentStepNo < 4) {
+    if(this.currentStepNo <= 4) {
       this.project.currentMoodboard = new Moodboard();
     }
     const stepName = this.stepsOrder[this.currentStepNo];

@@ -291,6 +291,9 @@ node_modules/
 # Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
 *.vbw
 
+# Dotnet auto-generated file
+Intiri.API/Intiri.API/c:\temp\internal-nlog-AspNetCore.txt
+
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
@@ -364,3 +367,4 @@ FodyWeavers.xsd
 /Intiri.API/Intiri.API/wwwroot/assets/project-image/material
 /Intiri.API/Intiri.API/c:\temp\internal-nlog-AspNetCore.txt
 /Intiri.API/Intiri.API/wwwroot/assets/project-image/productsimage
+Intiri.Client/src/environments/environment.ts

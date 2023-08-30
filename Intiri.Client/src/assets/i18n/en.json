@@ -53,7 +53,7 @@
     "invite": "Invite a friend",
     "invite-text": "Enter your friends phone number and invite them to Intiri journey.",
     "colors": "Colors",
-    "select-colors": "4. Select the Colors",
+    "select-colors": "5. Select the Colors",
     "material": "Material",
     "furniture": "Furniture",
     "add-first-inspiration": "Add first inspiration",
@@ -62,20 +62,38 @@
     "remove-inspiration": "Remove inspiration",
     "remove-inspiration-text": "Are you sure that you want to remove this inspiration? This action cannot be undone.",
     "remove-inspiration-message": "Inspiration file removed successfully.",
-    "remove-inspiration-message-error": "Cannot remove inspiration file!"
+    "remove-inspiration-message-error": "Cannot remove inspiration file!",
+    "book-craftsman": "Book Craftsman"
   },
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
+  },
+  "ALL-PROJECTS": {
+    "all-projects": "All projects"
   },
   "MOODBOARD-DETAILS": {
     "included": "What's included in moodboard",
     "edit": "Edit moodboard",
     "contact-designer": "Contact designer",
-    "contact-craftsman": "Contact craftsman"
+    "contact-craftsman": "Contact craftsman",
+    "no-inspirational-photos-found": "No Inspirational photos found for selected Room and Style",
+    "item-not-draggable": "Selected item is not draggable",
+    "item-already-in-moodboard": "Selected item is already present in moodboard",
+    "can-not-assign-null": "Can not assign null to a moodboard slot",
+    "download-moodboard-pdf": "Download Moodboard PDF",
+    "crop": "Crop",
+    "shopping-list-loading": "Please wait while your shopping list loads",
+    "done": "Done"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
-    "completed": "Completed designs"
+    "completed": "Completed designs",
+    "charges": "Charges",
+    "portfolio": "Portfolio",
+    "book-a-consultation": "Book a Consultation",
+    "home-visit": "Home Visit",
+    "online-consultation": "Online Consultation",
+    "per-hour": "per hour"
   },
   "BOOK-MODAL": {
     "book": "Book your design consultation",
@@ -88,14 +106,17 @@
     "proceed": "Proceed"
   },
   "BOOK-WHY": {
-    "sketch": "Room sketch",
-    "adjustment": "Moodboard adjustment",
-    "lining": "Lining plan",
-    "color": "Color advice",
-    "product": "Select products and furnishings",
-    "decoration": "Decoration",
-    "quesiton": "Other questions",
-    "2d3d": "2D & 3D drawings"
+    "suggestion": "Color and material suggestions",
+    "furnishing": "Furnishing plan",
+    "drawings": "Technical drawings",
+    "floor": "Floor plans",
+    "kitchen": "Kitchen",
+    "bath": "Bath",
+    "lighting": "Lighting plan",
+    "furniture": "Furniture design",
+    "2D": "2D visualization",
+    "3D": "3D visualization",
+    "project": "Project management"
   },
   "PAYMENT": {
     "details": "Payment details",
@@ -138,6 +159,7 @@
   },
   "NEW-PROJECT": {
     "upload": "Upload",
+    "upload-your-photos": "Upload your photos",
     "create": "Name your room",
     "project": "Sample: Judy’s living room",
     "project-name": "Project name",
@@ -149,9 +171,9 @@
     "select-style-title": "Select pictures that you like",
     "select-style-text": "Decisions are hard, pick as many as you want.",
     "room-details": "Room Details",
-    "room-details-title": "Upload room sketch",
-    "room-details-text": "Don't worry, you can improve rooms details later.",
-    "color-pallete": "Color Pallete",
+    "room-details-title": "Upload your photos",
+    "room-details-text": "Don't stress, you can upload photos later to your profile",
+    "color-pallete": "Color Palette",
     "select-color-title": "If you want, select colors you like",
     "select-color-text": "Don't worry, you can change color later.",
     "match": "match",
@@ -172,8 +194,9 @@
     "upgrade-text": "To see more rooms from this style upgrade to Premium plan.",
     "your-style": "This is your style",
     "customize": "Customize moodboard",
+    "customize-moodboard-subtitle": "Please customize your moodboard if required",
     "finish": "Finish",
-    "select-materials": "3. Select the Materials",
+    "select-materials": "4. Select the Materials",
     "materials": "Materials",
     "products": "Products",
     "edit-select-color": "Select colors",
@@ -188,7 +211,8 @@
     "select-material-type": "Select material type",
     "select-material-provider": "Select material provider",
     "select-product-type": "Select product type",
-    "select-product-provider": "Select product provider"
+    "select-product-provider": "Select product provider",
+    "images-preview": "Images Preview"
   },
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
@@ -321,7 +345,7 @@
     "contact-firstName": "Partner contact first name",
     "contact-lastName": "Partner contact last name",
     "products": "Products",
-    "select-products": "5. Select the Products",
+    "select-products": "6. Select the Products",
     "product-name": "Product name",
     "product-link": "Product link",
     "product-name-required" : "Product name is required",
@@ -396,7 +420,8 @@
     "update-offer": "Update offer",
     "send-offer": "Send Offer",
     "unset-template": "Unset as moodboard template",
-    "set-template": "Set as moodboard template"
+    "set-template": "Set as moodboard template",
+    "edit-moodboard": "Edit moodboard"
   },
   "STYLE": {
     "styles": "Styles",
@@ -480,7 +505,8 @@
     "first-name": "First name is required!",
     "last-name": "Last name is required!",
     "project-name": "Project name already exists!",
-    "wrong-format": "Wrong format!"
+    "wrong-format": "Wrong format!",
+    "file-size-limit-exceeded": "Each file must be less than 5MB in size"
   },
   "TIME": {
     "second": " second ago",
@@ -544,7 +570,8 @@
     "consultation-get-error": "Cannot get consultations info!",
     "template-added": "added to templates successfully",
     "template-removed": "removed from templates successfully",
-    "error": "Something went wrong!"
+    "error": "Something went wrong!",
+    "empty-values-not-accepted": "Empty values are not accepted for required fields"
   },
   "FOOTER": {
     "p-1": "For Intiri to handle your request efficently, please send an e-mail and we contact you as soon as we can.",
@@ -573,7 +600,8 @@
     "Plastic": "Plastic",
     "Textile": "Textile",
     "Other": "Other",
-    "Vinyl": "Vinyl"
+    "Vinyl": "Vinyl",
+    "Wallpaper":"Wallpaper"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
@@ -605,11 +633,24 @@
     "Carpets": "Carpets",
     "Curtains": "Curtains",
     "Pillows and Blankets": "Pillows and Blankets",
-    "Interior/Decoration": "Interior/Decoration"
+    "Interior/Decoration": "Interior/Decoration",
+    "Sofatable":"Sofatable",
+    "Set tables":"Set tables",
+    "Lamps":"Lamps",
+    "Lamp base":"Lamp base",
+    "Outdoor":"Outdoor"
   },
   "LANDING-TEXT": {
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",
     "headline-2": "We don’t expect you to either be a technical expert or knowing much about interior design. Therefore we made it quite easy for you. You can either work on your style and content by yourself or contact an interior designer online.\nWhen you have found your unique home style for a room, you can make your next room quickly in the same style.\nThe first room is free, then the next room is 299,- NOK.\nWhen you have created an account at Intiri, all your design projects are stored under My Intiri. There you can add inspirational photos, room sketches and share this with family & friends. Enjoy!",
     "headline-3": "We have recently launched our service and are proud to work with large companies who can help you refurbish your rooms.\nOur partners are present with their products in our different home styles, so you can just lean back and select what you like.\nVisit our partners' webpages and use Intiri as campaign code.\nWe have launched in Norway, and our suppliers are based in Norway. But we offer you to take the style quiz or collaborate with our designers no matter where you are based in the world."
+  },
+  "TOOLTIP-TEXT": {
+    "no-providers-found": "No providers found",
+    "no-providers-found-for-this-inspirational-photo": "No providers found for this inspirational photo",
+    "provider": "Provider",
+    "provided-by-Flügger": "Provided by Flügger",
+    "no-link-found-for-this-material": "No link found for this material",
+    "no-link-found-for-this-product": "No link found for this product"
   }
 }

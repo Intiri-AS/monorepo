@@ -21,7 +21,8 @@ namespace Intiri.API.Extension
 	{
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
 		{
-			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            string env = config.GetValue<string>("ActiveEnvironment");
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			services.AddDbContext<DataContext>(options =>
 			{
@@ -45,15 +46,23 @@ namespace Intiri.API.Extension
 			services.AddScoped<ICloudinaryService, CloudinaryService>();
 			services.AddScoped<IFileUploudService, FileUploudService>();
 			services.AddScoped<IContentTypesService, ContentTypesService>();
-			//services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
-			services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
+
+			if(env == "Production")
+			{
+                services.AddSingleton<ISmsVerificationService, SmsVerificationService>();
+            }
+			else
+			{
+				services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
+			}
+            
 			services.AddSingleton<IMessenger, Messenger.Messenger>();
 			services.AddScoped<IMessengerService, MessengerService>();
 			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
 			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
 			services.AddScoped<IUserService, UserService>();
 
-			return services;
+            return services;
 		}
 
 		public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
