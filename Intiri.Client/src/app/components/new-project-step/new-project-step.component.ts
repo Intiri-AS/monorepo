@@ -106,8 +106,6 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     if (this.activatedRoute.snapshot.routeConfig.path === 'new-project' && this.currentStepNo === 1) {
       this.spinner.show();
       this.styleService.getStyleImagesByRoom(this.project.room.id).subscribe((styleImages: Array<any>) => {
-        console.log('styleImages', styleImages);
-        console.log('this.currentStep.data', this.currentStep.data);
         this.currentStep.data = this.commonUtilsService.shuffleArrayElements(styleImages);
         this.spinner.hide();
       })
@@ -129,15 +127,6 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
   }
 
   assignAllItemsData () {
-    // if (this.currentStepNo == 0) {
-    //   this.currentStep.nonSelectedItems = this.colorPalettes.filter(colorPalette => !this.currentStep.data.map(e => e.id).includes(colorPalette.id));
-    // } else if (this.currentStepNo == 1) {
-    //   this.currentStep.nonSelectedItems = this.materials.filter(material => !this.currentStep.data.map(e => e.id).includes(material.id));
-    // } else { // currentStepNo = 2
-    //   this.currentStep.nonSelectedItems = this.products.filter(product => !this.currentStep.data.map(e => e.id).includes(product.id));
-    // }
-    // this.currentStep.data = this.currentStep.data.concat(this.currentStep.nonSelectedItems);
-
     // Show items based on filters
     this.currentStep.filteredResult = this.currentStep.data;
   }

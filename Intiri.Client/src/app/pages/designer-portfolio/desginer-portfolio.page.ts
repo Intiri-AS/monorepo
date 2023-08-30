@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
@@ -10,7 +10,6 @@ import { AccountService } from 'src/app/services/account.service';
 import { DesignerService } from 'src/app/services/designer.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TranslateService } from '@ngx-translate/core';
-import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-designer-portfolio',
@@ -18,7 +17,7 @@ import { LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./designer-portfolio.page.scss'],
 })
 
-export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
+export class DesignerPortfolioPage implements OnInit, OnDestroy {
 
   @ViewChild('slides') slides: IonSlides;
 
@@ -33,49 +32,20 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private projectService: ProjectService,
     private designerService: DesignerService,
     private accountService: AccountService,
     private modalController: ModalController,
     private translate: TranslateService,
-    private languageService: LanguageService,
   ) {
     this.designerDetails$ = new BehaviorSubject(null);
   }
 
-  currentLang: string = '';
-
-
-  public comments = [
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris.',
-      author: 'John Doe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Boe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Bro'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'Ide Ide'
-    },
-  ];
-
   ngOnInit(): void {
-    this.currentLang = this.translate.currentLang;
     this.designerId = this.route.snapshot.params.id;
     this.designerDetailsSubscription$ = this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => {
       this.designerDetails$.next(res);
     });
-  }
-
-  ngOnChanges(): void {
-    this.languageService.languageChange$.subscribe(res => this.currentLang = res);
   }
 
   ngOnDestroy(): void {
@@ -90,9 +60,11 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
   getDesignerServices(): Array<string> {
     let services: Array<string>;
     this.designerDetails$.subscribe(res => {
-      services = res.designerInfo.areaOfExpertise.split(',');
+      services = res.designerInfo.areaofExpertiseForProfile.split(',');
     });
-    return services;
+
+    // Show only first 3 services
+    return services.slice(0, 3);
   }
 
   getOptions(){
@@ -113,12 +85,13 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
     return isUserLoggedIn;
   }
 
-  async openLoginModal(): Promise<void> {
+  async openLoginModal(designer): Promise<void> {
     const modal = await this.modalController.create({
       component: LoginModalComponent,
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,
+      componentProps: {bookDesigner: true, designer}
     });
 
     await modal.present();
@@ -135,11 +108,23 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy, OnChanges {
   }
 
   async bookConsultation() {
-    if (!this.checkIfUserLoggedIn()) {
-      await this.openLoginModal(); return;
-    }
     this.designerDetails$.subscribe(async res => {
+      if (!this.checkIfUserLoggedIn()) {
+        await this.openLoginModal(res); return;
+      }
       await this.paymentModal(res);
     });
+  }
+
+  getFeaturedPortfolios(): Array<any> {
+    let featuredPortfolios: Array<any>;
+    this.designerDetails$.subscribe(designer => {
+      featuredPortfolios = designer.designerPortfolio.filter(d => d.featured === 1);
+    })
+    return featuredPortfolios;
+  }
+
+  getCurrentLang (): string {
+    return this.translate.currentLang;
   }
 }

@@ -4,6 +4,7 @@ import { ModalController } from "@ionic/angular";
 import { CodeInputComponent } from "angular-code-input";
 import { AccountService } from "src/app/services/account.service";
 import { VerificationTarget } from "src/app/types/types";
+import { BookDesignerModalComponent } from "../book-designer-modal/book-designer-modal.component";
 
 @Component({
     selector: 'app-sms-verification-modal',
@@ -12,6 +13,10 @@ import { VerificationTarget } from "src/app/types/types";
 })
 export class SmsVerificationModalComponent {
     @ViewChild('codeInput') codeInput !: CodeInputComponent;
+
+    bookDesigner: boolean // as component prop
+    designer: any; // as component prop
+
     error: string;
     step: string;
     phoneModel: any;
@@ -28,7 +33,11 @@ export class SmsVerificationModalComponent {
 
     public onCodeCompleted(verificationCode) {
         this.accountService.smsVerificationLogin(this.phoneModel.countryCode, this.phoneModel.phoneNumber, verificationCode)
-            .subscribe(response => {
+            .subscribe(async response => {
+                if (this.bookDesigner) {
+                  await this.paymentModal(this.designer);
+                  return;
+                }
                 this.router.navigate(['/new-project'], { queryParams: { step: this.step } });
                 this.modalController.dismiss({ dismissed: true });
             }, error => {
@@ -45,5 +54,15 @@ export class SmsVerificationModalComponent {
                 console.log(error);
             }
         )
+    }
+
+    async paymentModal(designer) {
+      const modal = await this.modalController.create({
+        component: BookDesignerModalComponent,
+        componentProps: {designer, moodboard: true},
+        cssClass: 'book-designer-modal-css',
+      });
+
+      await modal.present();
     }
 }
