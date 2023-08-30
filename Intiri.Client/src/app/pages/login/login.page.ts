@@ -77,4 +77,8 @@ export class LoginPage implements OnInit {
 
     this.accountService.initiateVippsLogin(redirectUri, state);
   }
+
+  onIntiriIconClick () {
+    window.location.replace('https://intiri.no');
+  }
 }
