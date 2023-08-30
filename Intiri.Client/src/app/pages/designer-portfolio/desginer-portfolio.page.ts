@@ -41,28 +41,6 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     this.designerDetails$ = new BehaviorSubject(null);
   }
 
-  currentLang: string = '';
-
-
-  public comments = [
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris.',
-      author: 'John Doe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Boe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Bro'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'Ide Ide'
-    },
-  ];
-
   ngOnInit(): void {
     this.designerId = this.route.snapshot.params.id;
     this.designerDetailsSubscription$ = this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => {
