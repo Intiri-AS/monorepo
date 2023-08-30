@@ -61,7 +61,7 @@ export class BookDesignerModalComponent {
       id: 11, name: 'Project management', isChecked: false
     },
     {
-      id: 12, name: 'quesiton', isChecked: false
+      id: 12, name: 'Others', isChecked: false
     }
   ];
 
