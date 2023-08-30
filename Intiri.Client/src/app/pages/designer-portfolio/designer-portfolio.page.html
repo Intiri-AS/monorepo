@@ -1,6 +1,6 @@
 <ion-content>
     <div id="home">
-        <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
+        <app-header-landing [isDesignerPortfolioPage]="true" [isScrolledDown]="isScrolledDown"></app-header-landing>
             <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="(designerDetails$ | async) !== null && (designerDetails$ | async) as designerDetails">
                 <ion-row class="designer-profile-info-container" >
                     <ion-col class="profile-pic-container">
