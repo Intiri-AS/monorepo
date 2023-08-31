@@ -201,11 +201,25 @@ namespace Intiri.API.DataAccess.Repository
         public async Task<IEnumerable<Moodboard>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
         {
             return await _context.Moodboards.AsNoTracking()
-                //.Include(m => m.Style)
-                .Include(m => m.Products.Take(1))
-                .Include(m => m.StyleImages.Take(2))
-                .Where(m => m.Style.Id == styleId && m.Room.Id != roomId).AsNoTracking()
+				.Include(m => m.Style)
+				.Include(m => m.Products.Take(1))
+                .Include(m => m.StyleImages.Take(1))
+                .Include(m => m.Room)
+                .Where(m => m.Style.Id == styleId && m.Room.Id != roomId && m.IsTemplate == true).AsNoTracking()
                 .ToListAsync();
+        }
+
+        public async Task<ClientMoodboard> GetClientMoodboardOptimizedById(int moodboardId)
+        {
+            return await _context.Moodboards.OfType<ClientMoodboard>().AsNoTracking()
+                .Include(m => m.Room)
+                .Include(m => m.Materials)
+                .Include(m => m.Products)
+                .Include(m => m.ColorPalettes)
+                .Include(m => m.Style)
+                .Include(m => m.StyleImages)
+                .Include(m => m.Project)
+                .SingleOrDefaultAsync(cm => cm.Id == moodboardId);
         }
 
         public async Task<string> GetMoodboardSlotInfo(int moodboardId)

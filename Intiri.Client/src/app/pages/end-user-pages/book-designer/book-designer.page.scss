@@ -1,3 +1,10 @@
 .designer {
     @apply  border rounded-2xl h-[286px] mac:h-[350px] mb-[10px] overflow-hidden shadow-1;
 }
+
+.info {
+  color: #9B7E60;
+  font-size: 14px;
+  // font-family: IBM Plex Sans;
+  font-weight: 500;
+}
