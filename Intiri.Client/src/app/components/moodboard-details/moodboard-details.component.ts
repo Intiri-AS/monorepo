@@ -435,7 +435,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (this.isImageCroppingState && this.isImageDraggingState) {
       console.log('onMouseMove', slotId)
-      let _DIV_OFFSET = $(`#slot-${slotId}`).offset()
+      let _DIV_OFFSET = $(`#slot-${slotId}`).offset();
 
       const slot = document.getElementById(`slot-${slotId}`);
       const slotImage = document.getElementById(`slot-${slotId}-img`);
