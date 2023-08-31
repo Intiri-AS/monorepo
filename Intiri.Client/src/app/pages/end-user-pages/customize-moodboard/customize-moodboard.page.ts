@@ -181,10 +181,6 @@ export class CustomizeMoodboardPage {
   }
 
   finishCustomizing() {
-    // if(JSON.stringify(this.moodboard) !== JSON.stringify(this.initialMoodboard)) {
-    //   this.moodboard.sourceMoodboardId = this.moodboard.id;
-    //   this.moodboard.id = 0;
-    // }
     this.projectService.currentProject$.pipe(take(1)).subscribe((project) => {
       const customizedProject = project;
       customizedProject.currentMoodboard = this.moodboard;
