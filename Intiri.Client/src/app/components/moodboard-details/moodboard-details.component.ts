@@ -181,7 +181,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
 
   shouldLoadMoodboardItems (): boolean {
     let resBool = this.project.currentMoodboard.room == null;
-    return resBool
+    return resBool;
   }
 
   initializeCropFeatureMap (): void {
@@ -310,14 +310,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     return string && string.replaceAll("\\", "/")
   }
 
-  next() {
-    // this.slides.slideNext();
-  }
-
-  prev() {
-    // this.slides.slidePrev();
-  }
-
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
@@ -343,7 +335,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       let stepSize = 0.01;
 
       let direction = event.deltaY > 0 ? 1 : -1;
-      // this.zoomImage(direction);
       let newZoom = this.currentZoom + direction * stepSize;
 
       // Limit the zoom level to the minimum and maximum values
@@ -361,17 +352,10 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   onMouseDown (event, slotId) {
     if (!this.cropFeatureMap[slotId].isImageCroppingState) return;
 
-    // let slot = document.getElementById(`slot-${slotId}`);
-    // let rect = slot.getBoundingClientRect();
-    // let parent_pos_in_document = {
-      //   top: rect.top + window.scrollY,
-      //   left: rect.left + window.scrollX,
-      // };
     let _DIV_OFFSET = $(`#slot-${slotId}`).offset();
     console.log("mouseDown _DIV_OFFSET", _DIV_OFFSET);
 
     this.isImageDraggingState = true;
-    // this.lastMousePosition = {x: event.pageX - parent_pos_in_document.left, y: event.pageY - parent_pos_in_document.top};
     this.lastMousePosition = {x: event.pageX - _DIV_OFFSET.left, y: event.pageY - _DIV_OFFSET.top};
     console.log('lastMousePosition onMouseDown', this.lastMousePosition);
   }
@@ -508,24 +492,6 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       slotImage.style.left = img_left_new + 'px';
       return;
     }
-  }
-
-  getOuterHeight(element) {
-    var style = getComputedStyle(element);
-    var height = element.offsetHeight;
-    var marginTop = parseFloat(style.marginTop);
-    var marginBottom = parseFloat(style.marginBottom);
-    return height + marginTop + marginBottom;
-  }
-
-
-  getOuterWidth(element) {
-    var style = getComputedStyle(element);
-    var width = element.offsetWidth;
-    var marginLeft = parseFloat(style.marginLeft);
-    var marginRight = parseFloat(style.marginRight);
-
-    return width + marginLeft + marginRight;
   }
 
   dragStart (event, slotId) {
@@ -726,7 +692,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     } else if (this.userData.roles[0] == 'FreeEndUser') {
       if (
         this.activateRoute.snapshot.routeConfig.path === 'new-project' ||
-        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard'
+        this.activateRoute.snapshot.routeConfig.path === 'edit-moodboard/:id/project/:projectId'
       ) {
         this.cropFeatureMap[slotId].showCropButton = !this.cropFeatureMap[slotId].showCropButton;
       }

@@ -174,6 +174,7 @@ p {
 
 .slot-image-style {
   @apply cursor-pointer;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   position: relative;
