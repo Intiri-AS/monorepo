@@ -18,6 +18,7 @@
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="IronPdf" Version="2023.8.6" />
+    <PackageReference Include="IronPdf.Native.Chrome.Linux" Version="2023.8.17287" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
