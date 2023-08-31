@@ -107,8 +107,6 @@ export class AddMaterialsModalComponent implements OnInit {
       this.materialTypes = res;
     });
     if (this.edit) {
-      // const {id, imagePath, ...others } = this.item;
-      console.log("item", this.item);
       this.edit_material_payload = {
         name: this.item.name,
         description: (this.item.description == "null" || !this.item.description) ? null : this.item.description,
@@ -117,7 +115,6 @@ export class AddMaterialsModalComponent implements OnInit {
         link: (this.item.link == "null" || !this.item.link) ? null : this.item.link,
         imageFile: null,
     };
-      console.log("material to edit", this.edit_material_payload)
     }
   }
 
