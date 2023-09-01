@@ -37,7 +37,7 @@ namespace Intiri.API.DataAccess
 
 		#region ctors
 
-		public UnitOfWork(DataContext dataContext, IMapper mapper)
+		public UnitOfWork(DataContext dataContext, IMapper mapper, SQLHelper sQLHelper)
 		{
 			_roleRepository = new RoleRepository(dataContext, mapper);
 			_userRepository = new UserRepository(dataContext, mapper);
@@ -53,7 +53,7 @@ namespace Intiri.API.DataAccess
 			_colorPaletteRepository = new ColorPaletteRepository(dataContext, mapper);
 			_roomDetailsRepository = new RoomDetailsRepository(dataContext);
 			_projectRepository = new ProjectRepository(dataContext, mapper);
-			_moodboardRepository = new MoodboardRepository(dataContext, mapper);
+			_moodboardRepository = new MoodboardRepository(dataContext, mapper, sQLHelper);
 			_partnerRepository = new PartnerRepository(dataContext, mapper);
 			_chatMessageRepository = new ChatMessageRepository(dataContext);
 			_consultationPaymentRepository = new ConsultationPaymentRepository(dataContext);
