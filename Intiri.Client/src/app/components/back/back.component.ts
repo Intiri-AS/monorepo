@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BackComponent implements OnInit {
 
   @Input() backPath: string;
+  @Input() additionalButtons: Array<any>
 
   constructor() { }
 

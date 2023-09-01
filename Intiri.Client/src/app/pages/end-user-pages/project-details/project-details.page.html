@@ -42,8 +42,15 @@
             <p class="text-lg font-medium">{{'PROJECT-DETAILS.new' | translate}}</p>
           </ion-card>
 
-          <app-back backPath="/my-intiri"></app-back>
-
+          <app-back
+            backPath="/my-intiri"
+            [additionalButtons]="[
+              {
+                name: 'MY-INTIRI.book',
+                routerLink: '/book-designer'
+              }
+            ]"
+          ></app-back>
         </div>
       </div>
     </div>
