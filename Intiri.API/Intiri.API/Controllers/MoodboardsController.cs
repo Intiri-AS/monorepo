@@ -62,18 +62,20 @@ namespace Intiri.API.Controllers
 		[HttpGet("id/{moodboardId}")]
 		public async Task<ActionResult<MoodboardOutDTO>> GetMoodboardById(int moodboardId)
 		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
+			//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
 
-			if (moodboard == null)
-			{
-				return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
-			}
+			//if (moodboard == null)
+			//{
+			//	return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
+			//}
 
-			MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
+			//MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
 
-			moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
+   //         moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
 
-			return Ok(moodboardOut);
+            MoodboardOutDTO moodboardOut = await _unitOfWork.MoodboardRepository.GetFullMoodboardByIdOptimized(moodboardId);
+
+            return Ok(moodboardOut);
 		}
 
 		[Authorize(Policy = PolicyNames.ClientPolicy)]
@@ -336,7 +338,7 @@ namespace Intiri.API.Controllers
                 var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets", "PDF.HTML");
                 string contents = System.IO.File.ReadAllText(htmlPath);
 
-                ClientMoodboard moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardOptimizedById(moodboardId);
+                ClientMoodboardOutDTO moodboard = await _unitOfWork.MoodboardRepository.GetClientMoodboardOptimizedFromSPById(moodboardId);
 
                 if (moodboard == null)
                 {
@@ -354,7 +356,7 @@ namespace Intiri.API.Controllers
                 contents = contents.Replace("#Trustedby#", Trustedby);
 
                 MoodboardOutDTO moodboardOut = _mapper.Map<MoodboardOutDTO>(moodboard);
-                moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
+                //moodboardOut.ColorPalettes = await _unitOfWork.ColorPaletteRepository.UpdateColorPalettesWithNCSAsync(moodboardOut.ColorPalettes);
                 List<SlotInfo> allSlots = new List<SlotInfo>();
                 try
                 {
@@ -555,7 +557,8 @@ namespace Intiri.API.Controllers
 			catch (Exception ex)
 			{
                 Console.WriteLine(ex.ToString());
-                throw ex;
+                return BadRequest(ex.ToString() + ex.InnerException.ToString());
+                //throw ex;
             }
 		}
 
