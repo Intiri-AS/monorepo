@@ -64,7 +64,7 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         try
         {
             string paymentDetailsJson = await new StreamReader(paymentEventArgs.Body).ReadToEndAsync();
-            var stripeEvent = EventUtility.ConstructEvent(paymentDetailsJson, paymentEventArgs.Headers["Stripe-Signature"], webhook_endpoint_secret);
+            var stripeEvent = EventUtility.ConstructEvent(paymentDetailsJson, paymentEventArgs.Headers["Stripe-Signature"], webhook_endpoint_secret, 300, false);
             Session session = stripeEvent.Data.Object as Session;
             StripePaymentDTO paymentDTO = null;
 
