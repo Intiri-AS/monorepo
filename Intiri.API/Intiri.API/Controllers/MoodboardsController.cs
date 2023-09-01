@@ -345,7 +345,7 @@ namespace Intiri.API.Controllers
                     return BadRequest($"Moodboard with id {moodboardId} doesn't exist");
                 }
 
-                contents = contents.Replace("#ProjectName#", moodboard.Project.Name);
+                contents = contents.Replace("#ProjectName#", moodboard.Project == null ? "" : moodboard.Project.Name);
                 contents = contents.Replace("#SubTitle1#", SubTitle1);
                 contents = contents.Replace("#StyleName#", moodboard.Style?.Name);
                 contents = contents.Replace("#RoomName#", lng == "no" ? moodboard.Room?.NameNorwegian : moodboard.Room?.Name);
