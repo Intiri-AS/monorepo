@@ -1,4 +1,5 @@
-﻿using Intiri.API.Models.IntiriColor;
+﻿using Intiri.API.Models.DTO.OutputDTO;
+using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.Project;
 using Intiri.API.Models.Room;
@@ -24,8 +25,9 @@ namespace Intiri.API.DataAccess.Repository.Interface
 		Task<Dictionary<int, int>> GetMoodboardStylesCountAsync();
 		Task<Dictionary<int, int>> GetClientMoodboardStylesCountAsync();
 
-        Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId);
+        Task<MoodboardOutDTO> GetFullMoodboardByIdOptimized(int moodboardId);
 		Task<ClientMoodboard> GetClientMoodboardOptimizedById(int moodboardId);
 		Task<string> GetMoodboardSlotInfo(int moodboardId);
+		Task<ClientMoodboardOutDTO> GetClientMoodboardOptimizedFromSPById(int moodboardId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Grpc.Core;
 using Intiri.API.DataAccess.Repository.Interface;
 using Intiri.API.Models.IntiriColor;
 using Intiri.API.Models.Moodboard;
@@ -7,6 +8,12 @@ using Intiri.API.Models.Room;
 using Intiri.API.Models.Style;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Stripe;
+using System.Diagnostics;
+using System;
+using Newtonsoft.Json;
+using Intiri.API.Models.DTO.OutputDTO;
 
 namespace Intiri.API.DataAccess.Repository
 {
@@ -15,14 +22,16 @@ namespace Intiri.API.DataAccess.Repository
 		#region Fields
 
 		private readonly IMapper _mapper;
+		private readonly SQLHelper _sQLHelper;
 
 		#endregion Fields
 
 		#region Constructors
 
-		public MoodboardRepository(DataContext dataContext, IMapper mapper) : base(dataContext)
+		public MoodboardRepository(DataContext dataContext, IMapper mapper, SQLHelper sQLHelper) : base(dataContext)
 		{
 			_mapper = mapper;
+			_sQLHelper = sQLHelper;
 		}
 
 		#endregion Constructors
@@ -155,20 +164,45 @@ namespace Intiri.API.DataAccess.Repository
 				.FirstOrDefaultAsync();
 		}
 
-		public async Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId)
-		{
-			return await _context.Moodboards.AsNoTracking()
-				.Include(m => m.Materials)
-				.Include(m => m.Products)
-				.Include(m => m.ColorPalettes)
-				.Include(m => m.Style)
-				.Include(m => m.StyleImages)
-				.Where(m => moodboardId == m.Id)
-				.AsNoTracking()
-				.FirstOrDefaultAsync();
-		}
+		//public async Task<Moodboard> GetFullMoodboardByIdOptimized(int moodboardId)
+		//{
+		//	return await _context.Moodboards.AsNoTracking()
+		//		.Include(m => m.Materials)
+		//		.Include(m => m.Products)
+		//		.Include(m => m.ColorPalettes)
+		//		.Include(m => m.Style)
+		//		.Include(m => m.StyleImages)
+		//		.Where(m => moodboardId == m.Id)
+		//		.AsNoTracking()
+		//		.FirstOrDefaultAsync();
+		//}
 
-		public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
+        public async Task<MoodboardOutDTO> GetFullMoodboardByIdOptimized(int moodboardId)
+        {
+            MoodboardOutDTO moodboard = null;
+
+            string responce = await _sQLHelper.GetJsonObject("GetFullMoodboardById", new object[,] {
+				{ "moodboardId", moodboardId },
+			});
+
+			moodboard = JsonConvert.DeserializeObject<MoodboardOutDTO>(responce);
+
+            return moodboard;
+        }
+        public async Task<ClientMoodboardOutDTO> GetClientMoodboardOptimizedFromSPById(int moodboardId)
+        {
+            ClientMoodboardOutDTO moodboard = null;
+
+            string responce = await _sQLHelper.GetJsonObject("GetFullMoodboardById", new object[,] {
+                { "moodboardId", moodboardId },
+            });
+
+            moodboard = JsonConvert.DeserializeObject<ClientMoodboardOutDTO>(responce);
+
+            return moodboard;
+        }
+
+        public async Task<Moodboard> GetFullMoodboardByName(string moodboardName)
 		{
 			return await _context.Moodboards
 				.Include(m => m.Room)

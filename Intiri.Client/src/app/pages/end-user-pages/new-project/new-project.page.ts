@@ -208,9 +208,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
       }
       this.spinner.show();
       let currentMoodboard = this.project.currentMoodboard;
-      console.log('here?', currentMoodboard)
       this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
-        console.log('api has been fetched', res);
         this.project.currentMoodboard = res;
         this.spinner.hide();
 

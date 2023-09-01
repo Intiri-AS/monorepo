@@ -80,9 +80,7 @@ export class AdminEditMoodboardPage implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.moodboardId = this.route.snapshot.params.id;
-    console.log('moodboardId', this.moodboardId);
     this.moodboardSrv.getMoodboard(this.moodboardId).subscribe(moodboard => {
-      console.log('moodboard', moodboard);
       this.moodboard = moodboard;
       this.spinner.hide();
     })

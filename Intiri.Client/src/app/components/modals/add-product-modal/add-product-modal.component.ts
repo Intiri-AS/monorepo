@@ -179,7 +179,6 @@ export class AddProductModalComponent implements OnInit {
       description: this.userForm.value?.description || undefined,
       imageFiles: this.productData.imageFiles
     };
-    console.log("productData", this.productData)
     // return;
     this.partnerService.addPartnerProduct(this.productData).subscribe( response => {
       this.spinner.hide();
