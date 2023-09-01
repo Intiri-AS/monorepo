@@ -557,7 +557,8 @@ namespace Intiri.API.Controllers
 			catch (Exception ex)
 			{
                 Console.WriteLine(ex.ToString());
-                throw ex;
+                return BadRequest(ex.ToString() + ex.InnerException.ToString());
+                //throw ex;
             }
 		}
 
