@@ -90,7 +90,7 @@
     "completed": "Completed designs",
     "charges": "Charges",
     "portfolio": "Portfolio",
-    "book-a-consultation": "Book a Consultation",
+    "book-a-consultation": "Book a consultation",
     "home-visit": "Home Visit",
     "online-consultation": "Online Consultation",
     "per-hour": "per hour"
@@ -306,6 +306,7 @@
     "save-changes": "Save changes",
     "pieces": "pieces",
     "file-selected": "file(s) selected",
+    "view": "View",
     "view-details": "View details",
     "messenger": "Messenger",
     "none-selected": "None selected",
