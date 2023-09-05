@@ -237,7 +237,7 @@ namespace Intiri.API.DataAccess.Repository
             return await _context.Moodboards.AsNoTracking()
 				.Include(m => m.Style)
 				.Include(m => m.Products.Take(1))
-                .Include(m => m.StyleImages.Take(1))
+                .Include(m => m.StyleImages.Take(2))
                 .Include(m => m.Room)
                 .Where(m => m.Style.Id == styleId && m.Room.Id != roomId && m.IsTemplate == true).AsNoTracking()
                 .ToListAsync();
