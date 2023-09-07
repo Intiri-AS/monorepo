@@ -138,9 +138,8 @@ export class MessengerPage implements OnInit {
       };
       this.msgService.sendMessage(req).subscribe(
         (res) => {
-          this.spinner.hide();
-
           return this.msgService.getChatHistory(this.activeChatUser.id).subscribe((messages: any) => {
+            this.spinner.hide();
             this.messages = messages;
 
             this.isLoading = false;
