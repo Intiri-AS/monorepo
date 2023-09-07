@@ -129,7 +129,7 @@ export class MessengerPage implements OnInit {
 
   sendMsg(): void {
     if (this.message || (this.attachments && !this.isLoading)) {
-      this.attachments && this.spinner.show();
+      this.spinner.show();
       this.isLoading = true;
       const req = {
         recipientId: this.activeChatUser.id,
@@ -139,9 +139,14 @@ export class MessengerPage implements OnInit {
       this.msgService.sendMessage(req).subscribe(
         (res) => {
           this.spinner.hide();
-          this.isLoading = false;
-          this.attachments = null;
-          this.message = '';
+
+          return this.msgService.getChatHistory(this.activeChatUser.id).subscribe((messages: any) => {
+            this.messages = messages;
+
+            this.isLoading = false;
+            this.attachments = null;
+            this.message = '';
+          })
         },
         (err) => {
           this.spinner.hide();
