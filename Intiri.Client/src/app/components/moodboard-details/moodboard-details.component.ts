@@ -12,6 +12,8 @@ import { Project } from 'src/app/models/project.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
+import { Storage } from '@ionic/storage-angular';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -82,6 +84,8 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     private moodboardService: MoodboardService,
     private projectService: ProjectService,
     private activateRoute: ActivatedRoute,
+    private storage: Storage,
+    private commonUtils: CommonUtilsService,
   ) {
     this.itemsInMoodboard$ = new BehaviorSubject(null);
   }
@@ -135,7 +139,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngAfterContentInit (): void {
+  async ngAfterContentInit (): Promise<void> {
     if (this.userData.roles[0] == 'FreeEndUser') {
       if (!this.project) {
         this.itemsInMoodboard$.next(this.moodboard);
@@ -143,13 +147,14 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       };
       this.itemsInMoodboard$.next(this.project.currentMoodboard);
 
-      if (!this.shouldLoadMoodboardItems()) return;
+      if (await this.shouldLoadMoodboardItems()) return;
       if (!this.moodboard.id) return;
 
       this.showLoader = true;
       this.getMoodboardSubscription = this.moodboardService.getMoodboard(this.moodboard.id).subscribe((res: Moodboard) => {
         this.itemsInMoodboard$.next(res);
         this.showLoader = false;
+        this.storage.set(this.commonUtils.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY, true);
 
         Object.keys(res).map(key => { // Set project-data except moodboard slotInfo
           if (key !== 'slotInfo') {
@@ -179,9 +184,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     return true;
   }
 
-  shouldLoadMoodboardItems (): boolean {
-    let resBool = this.project.currentMoodboard.room == null;
-    return resBool;
+  async shouldLoadMoodboardItems (): Promise<boolean> {
+    let result: boolean = await this.storage.get(this.commonUtils.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
+    return result;
   }
 
   initializeCropFeatureMap (): void {

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -91,6 +92,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private translate: TranslateService,
+    private storage: Storage,
   ) {}
 
   ngOnInit() {
@@ -379,6 +381,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     // if you change any selection, selected moodboard will reset
     if(this.currentStepNo <= 4) {
       this.project.currentMoodboard = new Moodboard();
+      this.storage.set(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY, false);
     }
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
