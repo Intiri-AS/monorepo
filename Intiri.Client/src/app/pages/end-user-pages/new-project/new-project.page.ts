@@ -284,7 +284,9 @@ export class NewProjectPage implements OnInit, OnDestroy {
           this.spinner.hide();
           this.project.projectMoodboards.push(this.project.currentMoodboard);
           this.projectService.setCurrentProject(this.project);
-          // this.openFinalModal(true);
+
+          //remove un-necessary key key
+          this.storage.remove(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
           this.goToProject();
         },
         (error) => {
@@ -304,8 +306,11 @@ export class NewProjectPage implements OnInit, OnDestroy {
         this.spinner.hide();
         this.project.projectMoodboards.push(this.project.currentMoodboard);
         this.project.id = res.id;
+
+        //remove un-necessary key key
+        this.storage.remove(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
+
         this.projectService.setCurrentProject(this.project);
-        // this.openFinalModal();
         this.goToProject();
       },
       (error) => {
