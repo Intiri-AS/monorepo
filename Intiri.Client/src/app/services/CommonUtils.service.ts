@@ -22,6 +22,10 @@ export class CommonUtilsService {
     'Others'
   ];
 
+  COMMON_STORAGE_KEYS: any = {
+    IS_MOODBOARD_LOADED_ONCE_KEY: 'IS_MOODBOARD_LOADED_ONCE_KEY'
+  }
+
   getUniqueElementsFromArray(arr) {
     const uniqueValues = Array.from(new Set(arr.filter(value => value !== null && value != 'null')));
     return uniqueValues;

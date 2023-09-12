@@ -158,6 +158,11 @@ namespace Intiri.API.Services
             clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
             clonedMoodboard.StyleImages = moodboard.StyleImages;
 
+			// Need to update Materials, Products & Colors as well
+			clonedMoodboard.Materials = moodboard.Materials.Where(material => moodboardIn.MaterialIds.Contains(material.Id)).ToHashSet();
+			clonedMoodboard.Products = moodboard.Products.Where(product => moodboardIn.ProductIds.Contains(product.Id)).ToHashSet();
+			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.Where(colorPalette => moodboardIn.ColorPaletteIds.Contains(colorPalette.Id)).ToHashSet();
+
             _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
             foreach (var item in roomDetails)

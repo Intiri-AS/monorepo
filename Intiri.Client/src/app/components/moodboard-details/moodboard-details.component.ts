@@ -12,6 +12,8 @@ import { Project } from 'src/app/models/project.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
+import { Storage } from '@ionic/storage-angular';
+import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 
 @Component({
   selector: 'app-moodboard-details',
@@ -82,6 +84,8 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     private moodboardService: MoodboardService,
     private projectService: ProjectService,
     private activateRoute: ActivatedRoute,
+    private storage: Storage,
+    private commonUtils: CommonUtilsService,
   ) {
     this.itemsInMoodboard$ = new BehaviorSubject(null);
   }
@@ -91,11 +95,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     console.log('moodboard-details', this.moodboard);
 
     this.loggedUser$.subscribe(res => this.userData = res );
-
     if (this.userData.roles[0] == 'Admin') {
-      if (this.areMoodboardColorPaletteSlotsEmpty()) {
-        this.assignToColorPaletteSlots();
-      }
       if (this.router.url.includes('/moodboard-details/') || this.router.url.includes('/edit-moodboard/')) { //Admin is viewing/editing existing moodboard
         if (this.moodboard.slotInfo && typeof this.moodboard.slotInfo === 'string') {
           this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
@@ -110,6 +110,8 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
         }
       }
     } else if (this.userData.roles[0] == 'FreeEndUser') {
+      this.assignToColorPaletteSlots();
+
       if (this.router.url.includes('/new-project') //If Client is creating new Project
         || this.router.url.includes('/project-details') //If Client is viewing existing project moodboard
         || this.router.url.includes('/edit-moodboard') // If Client is editing a moodboard
@@ -135,7 +137,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngAfterContentInit (): void {
+  async ngAfterContentInit (): Promise<void> {
     if (this.userData.roles[0] == 'FreeEndUser') {
       if (!this.project) {
         this.itemsInMoodboard$.next(this.moodboard);
@@ -143,13 +145,14 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
       };
       this.itemsInMoodboard$.next(this.project.currentMoodboard);
 
-      if (!this.shouldLoadMoodboardItems()) return;
+      if (await this.shouldLoadMoodboardItems()) return;
       if (!this.moodboard.id) return;
 
       this.showLoader = true;
       this.getMoodboardSubscription = this.moodboardService.getMoodboard(this.moodboard.id).subscribe((res: Moodboard) => {
         this.itemsInMoodboard$.next(res);
         this.showLoader = false;
+        this.storage.set(this.commonUtils.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY, true);
 
         Object.keys(res).map(key => { // Set project-data except moodboard slotInfo
           if (key !== 'slotInfo') {
@@ -179,9 +182,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     return true;
   }
 
-  shouldLoadMoodboardItems (): boolean {
-    let resBool = this.project.currentMoodboard.room == null;
-    return resBool;
+  async shouldLoadMoodboardItems (): Promise<boolean> {
+    let result: boolean = await this.storage.get(this.commonUtils.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
+    return result;
   }
 
   initializeCropFeatureMap (): void {
@@ -244,6 +247,7 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.moodboard.colorPalettes.length > 0) {
+      if (!this.moodboard.colorPalettes[0].shadeColorLightData) return;
       this.assignItemToMoodboardSlot(12, 'color', this.moodboard.colorPalettes[0].shadeColorLightData.id, this.moodboard.colorPalettes[0].shadeColorLightData.name, this.moodboard.colorPalettes[0].shadeColorLightData.imagePath);
       this.assignItemToMoodboardSlot(13, 'color', this.moodboard.colorPalettes[0].shadeColorMediumData.id, this.moodboard.colorPalettes[0].shadeColorMediumData.name, this.moodboard.colorPalettes[0].shadeColorMediumData.imagePath);
       this.assignItemToMoodboardSlot(14, 'color', this.moodboard.colorPalettes[0].mainColorData.id, this.moodboard.colorPalettes[0].mainColorData.name, this.moodboard.colorPalettes[0].mainColorData.imagePath);
