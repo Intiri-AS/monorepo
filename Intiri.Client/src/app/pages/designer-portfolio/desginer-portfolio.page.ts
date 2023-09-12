@@ -62,9 +62,7 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     this.designerDetails$.subscribe(res => {
       services = res.designerInfo.areaofExpertiseForProfile.split(',');
     });
-
-    // Show only first 3 services
-    return services.slice(0, 3);
+    return services;
   }
 
   getOptions(){

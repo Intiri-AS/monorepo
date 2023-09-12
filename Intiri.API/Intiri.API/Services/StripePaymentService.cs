@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Stripe;
 using Stripe.Checkout;
+using NLog;
+using NLog.Web;
 
 namespace Intiri.API.Services;
 
@@ -19,6 +21,8 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+
+    private readonly Logger logger;
 
     const string PaymentDetails = "paymentDetails";
     const string PaymentMode = "payment";
@@ -34,6 +38,7 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         _userRepository = unitOfWork.UserRepository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
     }
 
     public Task<Session> CreatePaymentSession(StripePaymentDTO paymentDTO, string host, int userId)
@@ -64,7 +69,9 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         try
         {
             string paymentDetailsJson = await new StreamReader(paymentEventArgs.Body).ReadToEndAsync();
-            var stripeEvent = EventUtility.ConstructEvent(paymentDetailsJson, paymentEventArgs.Headers["Stripe-Signature"], webhook_endpoint_secret);
+            
+            var stripeEvent = EventUtility.ParseEvent(paymentDetailsJson, false);
+            
             Session session = stripeEvent.Data.Object as Session;
             StripePaymentDTO paymentDTO = null;
 
@@ -87,11 +94,12 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
             else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed)
             {
                 //TODO: handle failure
+                logger.Info("Stripe payment failed", stripeEvent);
             }
         }
-        catch (Exception)
+        catch (Exception exception)
         {
-            //TODO: log exception
+            logger.Error("Exception occurred in HandlePaymentEvents", exception);
             return false;
         }
 
