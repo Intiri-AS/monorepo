@@ -206,7 +206,7 @@ namespace Intiri.API.Controllers
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
-			return BadRequest("Problem occured while adding project");
+			return BadRequest("Problem occurred while adding project");
 		}
 
 		// TODO: Clear moodboard cloudinary sketch file
