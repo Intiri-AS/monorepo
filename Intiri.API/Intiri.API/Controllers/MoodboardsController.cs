@@ -550,7 +550,7 @@ namespace Intiri.API.Controllers
                 //            HtmlFragment = header,
                 //LoadStylesAndCSSFromMainHtmlDocument = true
                 //        };
-                var pdf = renderer.RenderHtmlAsPdf(contents);
+                var pdf = await renderer.RenderHtmlAsPdfAsync(contents);
                 pdf.CompressImages(99);
                 return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
             }
