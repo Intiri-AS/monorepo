@@ -17,6 +17,7 @@ using Intiri.API.Shared;
 using Intiri.API.Shared.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Intiri.API.Extension;
 
 namespace Intiri.API.Services
 {
@@ -38,57 +39,67 @@ namespace Intiri.API.Services
 
 		#endregion Constructors
 
+		public KeyValuePair<int, int> findStyleWithMaxCounts (Dictionary<int, int> dict) {
+			KeyValuePair<int, int> maxEntry = new KeyValuePair<int, int>();
+			foreach (var entry in dict) {
+				if (entry.Value > maxEntry.Value) {
+					maxEntry = entry;
+				}
+			}
+			return maxEntry;
+		}
 		public async Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(MoodboardMatchInDTO matchInDTO)
 		{
-			IEnumerable<Moodboard> roomMoodboards =
+			IEnumerable<Moodboard> moodboardsByRoom =
 				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(matchInDTO.RoomId);
 
-			Dictionary<Moodboard, int> moodboardToMatchDictionary = new();
-			foreach (Moodboard moodboard in roomMoodboards)
-			{
-				int styleImageMatches = moodboard.StyleImages
-				.Select(si => si.Id).ToList()
-				.Intersect(matchInDTO.StyleImageIds).Count();
+			// Group styleImageIds with max, mid, min selected styles.
+			ICollection<int> styleImageIds = matchInDTO.StyleImageIds;
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(styleImageIds);
+			styleImages = styleImages.ToList();
 
-				int colorPaletteMatches = 0;
-				if (matchInDTO.ColorPaletteIds != null && matchInDTO.ColorPaletteIds.Count > 0)
-				{
-					colorPaletteMatches = moodboard.ColorPalettes
-					.Select(cp => cp.Id).ToList()
-					.Intersect(matchInDTO.ColorPaletteIds).Count();
+			List<int> styleImageStyleIds = new List<int>();
+			foreach (StyleImage styleImage in styleImages) {
+				styleImageStyleIds.Add(styleImage.StyleId);
+			}
+
+			Dictionary<int, int> freq = Utils.CountArrayElementsFrequency(styleImageStyleIds);
+
+			KeyValuePair<int, int> highMatchStyle = findStyleWithMaxCounts(freq);
+
+			freq.Remove(highMatchStyle.Key);
+			KeyValuePair<int, int> mediumMatchStyle = findStyleWithMaxCounts(freq);
+
+			freq.Remove(mediumMatchStyle.Key);
+			KeyValuePair<int, int> lowMatchStyle = findStyleWithMaxCounts(freq);
+			
+			Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
+			foreach (Moodboard moodboard in moodboardsByRoom)
+			{
+				if (moodboard.Style.Id == highMatchStyle.Key && !moodboardMatches.ContainsKey("High")) {
+					moodboardMatches.Add("High", moodboard);
+				} else if (moodboard.Style.Id == mediumMatchStyle.Key && !moodboardMatches.ContainsKey("Medium")) {
+					moodboardMatches.Add("Medium", moodboard);
+				} else if (moodboard.Style.Id == lowMatchStyle.Key && !moodboardMatches.ContainsKey("Low")) {
+					moodboardMatches.Add("Low", moodboard);
 				}
-
-				moodboardToMatchDictionary.Add(moodboard, styleImageMatches + colorPaletteMatches);
 			}
+			
+			List<KeyValuePair<string, Moodboard>> moodboardMatchesList = moodboardMatches.ToList();
 
-			List<KeyValuePair<Moodboard, int>> moodboardTopMatchOrder = moodboardToMatchDictionary.OrderByDescending(d => d.Value).ToList();
-
-			if (moodboardTopMatchOrder.Count == 0)
-			{
+			if (moodboardMatchesList.Count == 0) {
 				return null;
-			}
-
-			// take first two with high match
-			List<KeyValuePair<Moodboard, int>> moodboardTopMatch = moodboardTopMatchOrder.Take(2).ToList();
-
-			// take last with the lowest match
-			if (moodboardTopMatchOrder.Count > 2)
-			{
-				moodboardTopMatch.Add(moodboardTopMatchOrder.Last());
 			}
 
 			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
 
-			for (int i = 0; i < moodboardTopMatch.Count; i++)
-			{
-				//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardTopMatch[i].Key.Id);
-				Moodboard moodboard = moodboardTopMatch[i].Key;
-
-				MoodboardMatchDTO moodboardMatch = new()
-				{
-					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-				};
+			for (int i = 0; i < moodboardMatchesList.Count; i++) {
+					Moodboard moodboard = moodboardMatchesList[i].Value;
+					MoodboardMatchDTO moodboardMatch = new()
+					{	
+						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+						MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+					};
 				moodboardsMatch.Add(moodboardMatch);
 			}
 
