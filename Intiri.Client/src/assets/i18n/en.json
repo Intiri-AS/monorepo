@@ -603,7 +603,8 @@
     "Textile": "Textile",
     "Other": "Other",
     "Vinyl": "Vinyl",
-    "Wallpaper":"Wallpaper"
+    "Wallpaper":"Wallpaper",
+    "Tile":"Tile"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
