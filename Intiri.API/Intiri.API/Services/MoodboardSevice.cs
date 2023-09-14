@@ -84,14 +84,17 @@ namespace Intiri.API.Services
 
 			
 			Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
+
+			int count = 0;
 			foreach (Moodboard moodboard in moodboardsByRoom)
 			{
 				if (moodboard.Style.Id == highMatchStyle.Key && !moodboardMatches.ContainsKey("High")) {
 					moodboardMatches.Add("High", moodboard);
 				} else if (moodboard.Style.Id == mediumMatchStyle.Key && !moodboardMatches.ContainsKey("Medium")) {
 					moodboardMatches.Add("Medium", moodboard);
-				} else if (moodboard.Style.Id == lowMatchStyle.Key && !moodboardMatches.ContainsKey("Low")) {
-					moodboardMatches.Add("Low", moodboard);
+				} else {
+					count++;
+					moodboardMatches.Add("Low" + count, moodboard);
 				}
 			}
 			
@@ -105,12 +108,21 @@ namespace Intiri.API.Services
 
 			for (int i = 0; i < moodboardMatchesList.Count; i++) {
 				Moodboard moodboard = moodboardMatchesList[i].Value;
-				MoodboardMatchDTO moodboardMatch = new()
-				{	
-					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-				};
-				moodboardsMatch.Add(moodboardMatch);
+				if (i >= 2) {
+					MoodboardMatchDTO moodboardMatch = new()
+					{	
+						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+						MoodboardMatch = "Low"
+					};
+					moodboardsMatch.Add(moodboardMatch);
+				} else {
+					MoodboardMatchDTO moodboardMatch = new()
+					{	
+						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+						MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+					};
+					moodboardsMatch.Add(moodboardMatch);
+				}
 			}
 
 			return moodboardsMatch;
