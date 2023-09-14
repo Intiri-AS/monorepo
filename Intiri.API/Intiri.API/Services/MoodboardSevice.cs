@@ -65,13 +65,23 @@ namespace Intiri.API.Services
 
 			Dictionary<int, int> freq = Utils.CountArrayElementsFrequency(styleImageStyleIds);
 
-			KeyValuePair<int, int> highMatchStyle = findStyleWithMaxCounts(freq);
+			KeyValuePair<int, int> highMatchStyle = new KeyValuePair<int, int>();
+			KeyValuePair<int, int> mediumMatchStyle = new KeyValuePair<int, int>();
+			KeyValuePair<int, int> lowMatchStyle = new KeyValuePair<int, int>();
 
-			freq.Remove(highMatchStyle.Key);
-			KeyValuePair<int, int> mediumMatchStyle = findStyleWithMaxCounts(freq);
+			if (freq.Count > 0) {
+				highMatchStyle = findStyleWithMaxCounts(freq);
+				freq.Remove(highMatchStyle.Key);
+			}
+			if (freq.Count > 0) {
+				mediumMatchStyle = findStyleWithMaxCounts(freq);
+				freq.Remove(mediumMatchStyle.Key);
+			}
 
-			freq.Remove(mediumMatchStyle.Key);
-			KeyValuePair<int, int> lowMatchStyle = findStyleWithMaxCounts(freq);
+			if (freq.Count > 0) {
+				lowMatchStyle = findStyleWithMaxCounts(freq);
+			}
+
 			
 			Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
 			foreach (Moodboard moodboard in moodboardsByRoom)
@@ -94,12 +104,12 @@ namespace Intiri.API.Services
 			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
 
 			for (int i = 0; i < moodboardMatchesList.Count; i++) {
-					Moodboard moodboard = moodboardMatchesList[i].Value;
-					MoodboardMatchDTO moodboardMatch = new()
-					{	
-						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-						MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-					};
+				Moodboard moodboard = moodboardMatchesList[i].Value;
+				MoodboardMatchDTO moodboardMatch = new()
+				{	
+					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+				};
 				moodboardsMatch.Add(moodboardMatch);
 			}
 
