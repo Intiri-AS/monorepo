@@ -536,8 +536,10 @@ namespace Intiri.API.Controllers
                 //	</a>
                 //</div>";
 
+
                 IronPdf.Installation.ChromeGpuMode = IronPdf.Engines.Chrome.ChromeGpuModes.Disabled;
                 Installation.LinuxAndDockerDependenciesAutoConfig = false;
+
                 var renderer = new ChromePdfRenderer();
                 renderer.RenderingOptions.MarginTop = 0;
                 renderer.RenderingOptions.MarginLeft = 0;
@@ -545,14 +547,27 @@ namespace Intiri.API.Controllers
                 renderer.RenderingOptions.MarginBottom = 0;
                 renderer.RenderingOptions.PaperSize = IronPdf.Rendering.PdfPaperSize.A4;
                 renderer.RenderingOptions.PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Landscape;
+
                 //        renderer.RenderingOptions.HtmlHeader = new HtmlHeaderFooter()
                 //        {
                 //            HtmlFragment = header,
-                //LoadStylesAndCSSFromMainHtmlDocument = true
+                //            LoadStylesAndCSSFromMainHtmlDocument = true
                 //        };
-                var pdf = await renderer.RenderHtmlAsPdfAsync(contents);
-                pdf.CompressImages(99);
-                return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
+
+                using (var x = await renderer.RenderHtmlAsPdfAsync(contents))
+                {
+                    x.CompressImages(99);
+
+                    System.GC.Collect();
+                    System.GC.WaitForPendingFinalizers();
+                    System.GC.Collect();
+
+                    return File(x.BinaryData, "application/pdf", "MoodBoard.pdf");
+                }
+
+                //var pdf = await renderer.RenderHtmlAsPdfAsync(contents);
+                //pdf.CompressImages(99);
+                //return File(pdf.BinaryData, "application/pdf", "MoodBoard.pdf");
             }
 			catch (Exception ex)
 			{
