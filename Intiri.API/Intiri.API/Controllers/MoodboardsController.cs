@@ -540,6 +540,10 @@ namespace Intiri.API.Controllers
                 IronPdf.Installation.ChromeGpuMode = IronPdf.Engines.Chrome.ChromeGpuModes.Disabled;
                 Installation.LinuxAndDockerDependenciesAutoConfig = false;
 
+                IronPdf.Logging.Logger.EnableDebugging = true;
+                IronPdf.Logging.Logger.LogFilePath = "IronPdf.log";
+                IronPdf.Logging.Logger.LoggingMode = IronPdf.Logging.Logger.LoggingModes.All;
+
                 var renderer = new ChromePdfRenderer();
                 renderer.RenderingOptions.MarginTop = 0;
                 renderer.RenderingOptions.MarginLeft = 0;
