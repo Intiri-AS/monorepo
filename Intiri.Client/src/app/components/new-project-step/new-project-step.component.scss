@@ -115,6 +115,7 @@ ion-select {
 
 .room-details-section-container {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
 }
 
@@ -137,6 +138,19 @@ ion-select {
         height: 10rem;
         width: 10rem;
       }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .room-details-section-container {
+    flex-direction: column;
+  }
+  .image-preview-container {
+    margin: 30px 0 0 0;
+    .image-preview {
+      width: 13rem;
     }
   }
 }
