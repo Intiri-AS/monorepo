@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Moodboard } from 'src/app/models/moodboard.model';
 import { Project } from 'src/app/models/project.model';
 import { MoodboardService } from 'src/app/services/moodboard.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-project-details-page',
@@ -18,7 +20,13 @@ export class ProjectDetailsPage implements OnInit {
   project: Project;
   moodboards: Moodboard[];
 
-  constructor(public projectService: ProjectService, private route: ActivatedRoute, public moodboardService: MoodboardService, private router: Router)
+  constructor(
+    public projectService: ProjectService,
+    private route: ActivatedRoute,
+    public moodboardService: MoodboardService,
+    private router: Router,
+    private translate: TranslateService,
+  )
   {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -50,6 +58,11 @@ export class ProjectDetailsPage implements OnInit {
     this.projectService.setCurrentProject(currentProject);
     this.router.navigateByUrl('/new-project');
 
+  }
+
+  downloadMoodboardPDF (moodboardId) {
+    const getMoodboardPDFUrl: string = environment.apiUrl + 'Moodboards/CreateMoodboardPDF?moodboardId=' + moodboardId + '&lng=' + this.translate.currentLang;
+    window.open(getMoodboardPDFUrl, '_blank');
   }
 
 }
