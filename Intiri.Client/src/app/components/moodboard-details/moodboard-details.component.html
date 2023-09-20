@@ -702,7 +702,7 @@
         <div *ngIf="item.shadeColorDarkData" class="grid-item shadeColorDark" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData?.imagePath + ')'}" [matTooltip]="item.shadeColorDarkData.name" (click)="redirectToColorsPartner()"></div>
       </div>
       <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-      <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+      <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1 mb-[1rem]">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
     </div>
   </ngx-masonry>
 </div>
