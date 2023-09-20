@@ -652,63 +652,57 @@
 
 <!--Client / List included items -->
 <div *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'" class="mt-16 xl:text-left">
-  <p class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.included' | translate}} {{showLoader ? '(' + ('MOODBOARD-DETAILS.shopping-list-loading' | translate) + ')': null}}</p>
+  <p class="text-black-2 text-2xl font-medium mb-[2rem]">{{'MOODBOARD-DETAILS.included' | translate}} {{showLoader ? '(' + ('MOODBOARD-DETAILS.shopping-list-loading' | translate) + ')': null}}</p>
   <mat-spinner class="spinner" *ngIf="showLoader"></mat-spinner>
-  <ion-grid class="step-items" *ngIf="!showLoader">
-    <ion-row class="step-items-row">
-      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.products" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item.name">
-        <div class="w-full h-full bg-white rounded-2xl">
-          <img
-            *ngIf="item?.imagePath"
-            src="{{item.imagePath}}"
-            (click)="openImageInModal(item)"
-            class="product-image cursor-pointer"
-            alt="product-image"
-            (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
-            [matTooltip]="getToolTipShoppingList('product', item)"
-          />
-        </div>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-      </ion-col>
-      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.styleImages" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
-        <div class="w-full h-full bg-white rounded-2xl">
-          <img
-            *ngIf="item?.imagePath"
-            src="{{item.imagePath}}"
-            (click)="openImageInModal(item)"
-            [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
-            class="product-image cursor-pointer"
-            alt="inspirationalPhotos-image"
-            (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
-          />
-        </div>
-        <p *ngIf="item.styleName" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.styleName}} </p>
-      </ion-col>
-      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.materials" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
-        <img
+  <ngx-masonry [options]="masonryOptions" [ordered]="true" *ngIf="!showLoader" data-masonry='{ "itemSelector": ".shopping-list-item", "columnWidth": 200 }'>
+    <div ngxMasonryItem *ngFor="let item of (itemsInMoodboard$ | async)?.products">
+      <img
           *ngIf="item?.imagePath"
           src="{{item.imagePath}}"
           (click)="openImageInModal(item)"
-          class="material-image cursor-pointer"
+          class="h-full w-[26rem] object-cover cursor-pointer rounded-2xl"
+          alt="product-image"
+          (draggable)="isItemDragAndDroppable()"
+          (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          [matTooltip]="getToolTipShoppingList('product', item)"
+        />
+        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1 mb-[1rem]">{{item.name}} </p>
+    </div>
+    <div ngxMasonryItem *ngFor="let item of (itemsInMoodboard$ | async)?.styleImages">
+      <img
+        *ngIf="item?.imagePath"
+        src="{{item.imagePath}}"
+        (click)="openImageInModal(item)"
+        [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
+        class="h-full w-[26rem] object-cover cursor-pointer rounded-2xl"
+        alt="inspirationalPhotos-image"
+        (draggable)="isItemDragAndDroppable()"
+        (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+      />
+      <p class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1 mb-[1rem]">{{item.styleName || 'No name found'}} </p>
+    </div>
+    <div ngxMasonryItem *ngFor="let item of (itemsInMoodboard$ | async)?.materials">
+      <img
+          *ngIf="item?.imagePath"
+          src="{{item.imagePath}}"
+          (click)="openImageInModal(item)"
+          class="h-full w-[26rem] object-cover cursor-pointer rounded-2xl mb-[0.5rem]"
           alt="material-image"
           (draggable)="isItemDragAndDroppable()"
           (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
           [matTooltip]="getToolTipShoppingList('material', item)"
         />
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.name}} </p>
-      </ion-col>
-      <ion-col *ngFor="let item of (itemsInMoodboard$ | async)?.colorPalettes" size="12" size-sm="5.8" size-lg="2.7" size-xl="2.2" class="w-full h-[130px] lg:h-[180px] mb-16 p-0" [class.bigger-margin]="item?.name">
-        <div class="palette-container">
-          <div *ngIf="item.mainColorData" class="grid-item mainColor" [ngStyle]="{'background-image': 'url(' + item.mainColorData?.imagePath + ')'}" [matTooltip]="item.mainColorData.name" (click)="redirectToColorsPartner()"></div>
-          <div *ngIf="item.shadeColorLightData" class="grid-item shadeColorLight" [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData?.imagePath + ')'}" [matTooltip]="item.shadeColorLightData.name" (click)="redirectToColorsPartner()"></div>
-          <div *ngIf="item.shadeColorMediumData" class="grid-item shadeColorMedium" [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData?.imagePath + ')'}" [matTooltip]="item.shadeColorMediumData.name" (click)="redirectToColorsPartner()"></div>
-          <div *ngIf="item.shadeColorDarkData" class="grid-item shadeColorDark" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData?.imagePath + ')'}" [matTooltip]="item.shadeColorDarkData.name" (click)="redirectToColorsPartner()"></div>
-        </div>
-        <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
-        <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1 mb-[1rem]">{{item.name}} </p>
+    </div>
+    <div ngxMasonryItem *ngFor="let item of (itemsInMoodboard$ | async)?.colorPalettes">
+      <div class="palette-container">
+        <div *ngIf="item.mainColorData" class="grid-item mainColor" [ngStyle]="{'background-image': 'url(' + item.mainColorData?.imagePath + ')'}" [matTooltip]="item.mainColorData.name" (click)="redirectToColorsPartner()"></div>
+        <div *ngIf="item.shadeColorLightData" class="grid-item shadeColorLight" [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData?.imagePath + ')'}" [matTooltip]="item.shadeColorLightData.name" (click)="redirectToColorsPartner()"></div>
+        <div *ngIf="item.shadeColorMediumData" class="grid-item shadeColorMedium" [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData?.imagePath + ')'}" [matTooltip]="item.shadeColorMediumData.name" (click)="redirectToColorsPartner()"></div>
+        <div *ngIf="item.shadeColorDarkData" class="grid-item shadeColorDark" [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData?.imagePath + ')'}" [matTooltip]="item.shadeColorDarkData.name" (click)="redirectToColorsPartner()"></div>
+      </div>
+      <p *ngIf="!item.number && item.name" class="font-bold mt-2 text-black-2 text-clamp-2 pr-1">{{item.name}} </p>
+      <p *ngIf="item.number && item.name" class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1">{{item.number}} <span class="font-normal">/ {{item.name}}</span></p>
+    </div>
+  </ngx-masonry>
 </div>
