@@ -18,11 +18,11 @@
 }
 
 .product-image {
-  @apply object-cover h-full w-full rounded-2xl;
+  @apply object-contain h-full w-full rounded-2xl;
 }
 
 p {
-  @apply text-left;
+  @apply text-center;
 }
 
 .card {
