@@ -55,7 +55,7 @@
     </div>
   </div>
   <p *ngIf="currentStep.data !== 'final'" class="step-subtitle">{{currentStep.subtitle | translate}}</p>
-  <p *ngIf="currentStep.data === 'final'" class="text-black-2 text-2xl font-medium mb-[1rem]">{{project.currentMoodboard?.style?.name}}/{{project.currentMoodboard?.room?.name}}</p>
+  <p *ngIf="currentStep.data === 'final'" class="text-black-2 text-2xl font-medium mb-[1rem]">{{project.currentMoodboard?.style?.name}}/{{getCurrentLang() == 'no' ? project.currentMoodboard?.room?.nameNorwegian :  project.currentMoodboard?.room?.name}}</p>
   <p *ngIf="currentStep.data === 'final'" class="text-black-2 text-2xl font-medium">{{'MOODBOARD-DETAILS.client-moodboard-instruction' | translate}}</p>
 
   <div [ngClass]="{'text-clamp-3' : !expandText}">
