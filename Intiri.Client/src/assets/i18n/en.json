@@ -83,7 +83,8 @@
     "download-moodboard-pdf": "Download Moodboard PDF",
     "crop": "Crop",
     "shopping-list-loading": "Please wait while your shopping list loads",
-    "done": "Done"
+    "done": "Done",
+    "client-moodboard-instruction": "Here's your moodboard. Customize it by dragging and dropping products from below into the moodboard. With the “Customize moodboard” button you can adjust by deselecting products, materials and colors. Click \"Finish\" to download your personalized moodboard with coupon codes when you are done."
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
