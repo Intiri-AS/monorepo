@@ -124,6 +124,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -179,6 +180,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     NgApexchartsModule,
     ImageCropperModule,
+    NgxMasonryModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
