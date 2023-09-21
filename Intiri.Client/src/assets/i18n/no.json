@@ -83,7 +83,8 @@
     "download-moodboard-pdf": "Last ned Moodboard PDF",
     "crop": "Avling",
     "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
-    "done": "Ferdig"
+    "done": "Ferdig",
+    "client-moodboard-instruction": "Her er ditt stilforslag. Tilpass det ved å dra og slipp produkter inn i stilforslaget, og med “Tilpass stilforslaget” knappen kan du velge bort produkter, materialer og farger. Klikk “Ferdig” for å laste ned ditt personlige stilforslag med rabattkoder."
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
