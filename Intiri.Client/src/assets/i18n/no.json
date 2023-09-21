@@ -63,7 +63,7 @@
     "remove-inspiration-text": " Er du sikker på at du vil slette filen? Handlingen kan ikke angres",
     "remove-inspiration-message": "Inspirasjonsfilmen ble fjernet.",
     "remove-inspiration-message-error": "Kan ikke fjerne inspirasjonsfilmen!",
-    "book-craftsman": "Bokhåndverker"
+    "book-craftsman": "Book en håndverker"
   },
   "PROJECT-DETAILS": {
     "new": "Legg til nytt stilkonsept"
@@ -83,7 +83,8 @@
     "download-moodboard-pdf": "Last ned Moodboard PDF",
     "crop": "Avling",
     "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
-    "done": "Ferdig"
+    "done": "Ferdig",
+    "client-moodboard-instruction": "Her er ditt stilforslag. Tilpass det ved å dra og slipp produkter inn i stilforslaget, og med “Tilpass stilforslaget” knappen kan du velge bort produkter, materialer og farger. Klikk “Ferdig” for å laste ned ditt personlige stilforslag med rabattkoder."
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
@@ -108,7 +109,7 @@
   "BOOK-WHY": {
     "Color and material suggestions": "Farge - og materialforslag",
     "Furnishing plan": "Møbleringsplan",
-    "Technical drawings": "Teknisketegning",
+    "Technical drawings": "Teknisktegning",
     "Floor plans": "Plantegning",
     "Kitchen": "Kjøkken",
     "Bath": "Bad",
@@ -306,7 +307,7 @@
     "save-changes": "Lagre endringer",
     "pieces": "stykker",
     "file-selected": "fil(er) valgt",
-    "view": "Utsikt",
+    "view": "Mer info",
     "view-details": "Se detaljer",
     "messenger": "Budbringer",
     "none-selected": "Ingen valgt",
