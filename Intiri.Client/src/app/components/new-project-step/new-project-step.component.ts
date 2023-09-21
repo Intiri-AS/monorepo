@@ -131,6 +131,10 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     this.currentStep.filteredResult = this.currentStep.data;
   }
 
+  getCurrentLang (): string {
+    return this.translate.currentLang;
+  }
+
   toggleItem(item) {
     this.toggleSelection.emit(item);
   }

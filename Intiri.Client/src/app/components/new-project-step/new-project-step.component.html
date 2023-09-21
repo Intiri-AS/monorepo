@@ -224,7 +224,7 @@
               </ion-row>
             </ion-grid>
           <p *ngIf="item?.style?.name" class="text-lg font-bold mt-4 text-black-2">{{item.style.name}}
-            <span *ngIf="item.room?.name" class="text-base font-normal text-primary">/ {{item.room.name}}</span>
+            <span *ngIf="item.room?.name" class="text-base font-normal text-primary">/ {{getCurrentLang() == 'no' ? item.room.nameNorwegian : item.room.name}}</span>
           </p>
         </ion-col>
       </ion-row>
