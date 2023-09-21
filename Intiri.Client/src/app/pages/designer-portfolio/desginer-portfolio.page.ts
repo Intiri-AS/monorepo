@@ -60,7 +60,7 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
   getDesignerServices(): Array<string> {
     let services: Array<string>;
     this.designerDetails$.subscribe(res => {
-      services = res.designerInfo.areaofExpertiseForProfile.split(',');
+      services = res.designerInfo.areaOfExpertise.split(',');
     });
     return services;
   }
