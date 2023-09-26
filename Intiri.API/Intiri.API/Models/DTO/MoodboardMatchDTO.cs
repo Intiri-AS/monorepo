@@ -6,5 +6,6 @@ namespace Intiri.API.Models.DTO
 	{
 		public MoodboardOutDTO Moodboard { get; set; }
 		public string MoodboardMatch { get; set; }
-	}
+        public int MoodboardMatchId { get; set; }
+    }
 }
