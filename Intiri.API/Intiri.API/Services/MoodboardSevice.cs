@@ -92,9 +92,14 @@ namespace Intiri.API.Services
 					moodboardMatches.Add("High", moodboard);
 				} else if (moodboard.Style.Id == mediumMatchStyle.Key && !moodboardMatches.ContainsKey("Medium")) {
 					moodboardMatches.Add("Medium", moodboard);
-				} else {
+				}
+				else
+				{
 					count++;
-					moodboardMatches.Add("Low" + count, moodboard);
+					if(count <= 3)
+					{
+                        moodboardMatches.Add("Low" + count, moodboard);
+                    }
 				}
 			}
 			
@@ -106,26 +111,56 @@ namespace Intiri.API.Services
 
 			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
 
-			for (int i = 0; i < moodboardMatchesList.Count; i++) {
-				Moodboard moodboard = moodboardMatchesList[i].Value;
-				if (i >= 2) {
-					MoodboardMatchDTO moodboardMatch = new()
-					{	
-						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-						MoodboardMatch = "Low"
-					};
-					moodboardsMatch.Add(moodboardMatch);
-				} else {
-					MoodboardMatchDTO moodboardMatch = new()
-					{	
-						Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-						MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-					};
-					moodboardsMatch.Add(moodboardMatch);
-				}
-			}
+			foreach (var item in moodboardMatchesList)
+			{
+                MoodboardMatchDTO moodboardMatch = new()
+                {
+                    Moodboard = _mapper.Map<MoodboardOutDTO>(item.Value),
+                };
 
-			return moodboardsMatch;
+                if (item.Key.Contains("High"))
+				{
+					moodboardMatch.MoodboardMatch = "High";
+					moodboardMatch.MoodboardMatchId = 1;
+				}
+				else if (item.Key.Contains("Medium"))
+				{
+                    moodboardMatch.MoodboardMatch = "Medium";
+                    moodboardMatch.MoodboardMatchId = 2;
+                }
+				else
+				{
+                    moodboardMatch.MoodboardMatch = "Low";
+                    moodboardMatch.MoodboardMatchId = 3;
+                }
+
+				moodboardsMatch.Add(moodboardMatch);
+            }
+
+			//for (int i = 0; i < moodboardMatchesList.Count; i++) 
+			//{
+			//	Moodboard moodboard = moodboardMatchesList[i].Value;
+			//	if (i >= 2) 
+			//	{
+			//		MoodboardMatchDTO moodboardMatch = new()
+			//		{	
+			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+			//			MoodboardMatch = "Low"
+			//		};
+			//		moodboardsMatch.Add(moodboardMatch);
+			//	} 
+			//	else 
+			//	{
+			//		MoodboardMatchDTO moodboardMatch = new()
+			//		{	
+			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+			//			MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+			//		};
+			//		moodboardsMatch.Add(moodboardMatch);
+			//	}
+			//}
+
+			return moodboardsMatch.OrderBy(x=>x.MoodboardMatchId);
 		}
 
         // Get moodboards with target style ID and with all rooms other than the target room ID
