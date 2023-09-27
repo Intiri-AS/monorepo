@@ -41,10 +41,12 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
     }
 
-    public Task<Session> CreatePaymentSession(StripePaymentDTO paymentDTO, string host, int userId)
+    public async Task<Session> CreatePaymentSession(StripePaymentDTO paymentDTO, string host, int userId)
     {
         ArgumentNullException.ThrowIfNull(host, nameof(host));
         ArgumentNullException.ThrowIfNull(paymentDTO, nameof(paymentDTO));
+
+        
 
         //attach payer user to dto. Important later when handling events, because API is called from outside platform (from stripe)
         paymentDTO.PayerId = userId;
@@ -52,13 +54,27 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         //string domain = $"https://{host}/";
         string domain = $"{host}/";
 
+        string Description = "";
+
+        User customer = await _userRepository.GetByID(paymentDTO.PayerId);
+        if (customer != null)
+        {
+            Description = Description + "Customer: " + customer.FirstName + " " + customer.LastName + ", Customer Phone: " + customer.CountryCode + customer.PhoneNumber + ", ";
+        }
+
+        User designer = await _userRepository.GetByID(paymentDTO.ReceiverId);
+        if (designer != null)
+        {
+            Description = Description + "Designer: " + designer.FirstName + " " + designer.LastName;
+        }
+
         Dictionary<string, string> metadata = new Dictionary<string, string>();
         metadata.Add(PaymentDetails, JsonConvert.SerializeObject(paymentDTO));
 
-        SessionCreateOptions options = CreateSessionOptions(paymentDTO, domain, metadata);
+        SessionCreateOptions options = CreateSessionOptions(paymentDTO, domain, metadata, Description);
         var service = new SessionService();
 
-        return Task.FromResult(service.Create(options));
+        return await Task.FromResult(service.Create(options));
     }
 
     public async Task<bool> HandlePaymentEvents(HttpRequest paymentEventArgs)
@@ -138,7 +154,7 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         await _messengerService.SendMessage(message, receiver.Id, DateTime.UtcNow);
     }
 
-    private static SessionCreateOptions CreateSessionOptions(StripePaymentDTO paymentDTO, string domain, Dictionary<string, string> metadata)
+    private static SessionCreateOptions CreateSessionOptions(StripePaymentDTO paymentDTO, string domain, Dictionary<string, string> metadata, string Description)
     {
         return new SessionCreateOptions
         {
@@ -162,7 +178,8 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
             Metadata = metadata,
             Locale = paymentDTO.Locale != null ? paymentDTO.Locale : "en",
             SuccessUrl = domain + paymentDTO.SuccessUrlPath,
-            CancelUrl = domain + (paymentDTO.CancelUrlPath != null ? paymentDTO.CancelUrlPath : "")
+            CancelUrl = domain + (paymentDTO.CancelUrlPath != null ? paymentDTO.CancelUrlPath : ""),
+            PaymentIntentData = new SessionPaymentIntentDataOptions { Description = Description }
         };
     }
 
