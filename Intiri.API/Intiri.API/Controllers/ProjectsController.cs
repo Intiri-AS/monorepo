@@ -287,7 +287,7 @@ namespace Intiri.API.Controllers
 
         // Get moodboards with target style ID and with all rooms other than the target room ID
         [AllowAnonymous]
-        [HttpGet("moodboardStyleFamily")]
+        [HttpPost("moodboardStyleFamily")]
 		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardStyleFamily([FromBody] moodboardStyleFamily request)
 		{
 			if (!await _unitOfWork.StyleRepository.DoesAnyExist(st => st.Id == request.styleId))

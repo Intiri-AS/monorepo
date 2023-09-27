@@ -68,6 +68,9 @@ export class MoodboardDetailsComponent implements OnInit, OnChanges, OnDestroy {
   isImageDraggingState: boolean = false;
   lastMousePosition: any = null;
   currentZoom: number = 1;
+  masonryOptions: any= {
+    gutter: 20,
+  };
 
   itemsInMoodboard$: BehaviorSubject<any>;
   showLoader: boolean = false;

@@ -57,8 +57,13 @@ export class ProjectService implements Resolve<Project> {
     return this.http.get<Project>(this.apiUrl + 'projects/id/' + id);
   }
 
-  getMbFamily(styleId: any, roomId: any) {
-    return this.http.get(`${this.apiUrl}projects/moodboardStyleFamily/${styleId}/${roomId}`);
+  getMbFamily(styleId: any, roomId: any, colorPalettes: Array<any>) {
+    let req_data = {
+      roomId,
+      styleId,
+      colorPaletteIds: colorPalettes.map(e=> e['id']),
+    }
+    return this.http.post(`${this.apiUrl}Projects/moodboardStyleFamily`, req_data);
   }
 
   checkProjectName(projectName: string){

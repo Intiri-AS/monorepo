@@ -25,42 +25,38 @@
       </ion-row>
       <ion-row>
         <ion-col class="fixed-bottom max-h-[50px]" offset-xl="0">
-          <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row">
-            <div>
+          <ion-buttons class="flex justify-center items-center h-full flex-row lg:flex-row">
               <ion-button
                 class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
                 (click)="backStep()"
-                >{{'COMMON.back' | translate}}</ion-button
+              >{{'COMMON.back' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] !== 'final'"
                 class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo+1)"
                 (click)="nextStep()"
-                >{{'COMMON.next' | translate}}</ion-button
+              >{{'COMMON.next' | translate}}</ion-button
               >
-            </div>
-            <div class="mt-2 lg:mt-0">
               <ion-button
-              *ngIf="currentStepNo === 2 || currentStepNo === 3"
-              class="secondary-btn-borderless skip-btn"
-              (click)="skipPage()"
+                *ngIf="currentStepNo === 2 || currentStepNo === 3"
+                class="secondary-btn-borderless skip-btn"
+                (click)="skipPage()"
               >{{'COMMON.skip-page' | translate}}</ion-button>
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] === 'final'"
                 class="secondary-btn-borderless"
                 [class.disabled]="!canChangeToStep(currentStepNo-1)"
                 (click)="onCustomizeMoodboardButtonClick()"
-                >{{'NEW-PROJECT.customize' | translate}}</ion-button
+              >{{'NEW-PROJECT.customize' | translate}}</ion-button
               >
               <ion-button
                 *ngIf="steps[currentStepNo]['data'] === 'final'"
-                class="secondary-btn-borderless"
+                class="secondary-btn-borderless finish-button"
                 (click)="saveCurrentProject()"
-                >{{'NEW-PROJECT.finish' | translate}}</ion-button
+              >{{'NEW-PROJECT.finish' | translate}}</ion-button
               >
-            </div>
           </ion-buttons>
         </ion-col>
       </ion-row>

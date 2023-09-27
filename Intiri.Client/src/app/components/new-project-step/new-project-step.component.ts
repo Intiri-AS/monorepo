@@ -131,6 +131,10 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     this.currentStep.filteredResult = this.currentStep.data;
   }
 
+  getCurrentLang (): string {
+    return this.translate.currentLang;
+  }
+
   toggleItem(item) {
     this.toggleSelection.emit(item);
   }
@@ -142,7 +146,7 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
   getMbFamily(mb) {
     console.log('mb in getMbFamily', mb);
     this.mbsExpanded = false;
-    this.projectService.getMbFamily(mb.style.id, this.project.room.id).subscribe((res: any[]) => {
+    this.projectService.getMbFamily(mb.style.id, this.project.room.id, this.project.colorPalettes).subscribe((res: any[]) => {
       this.mbFamilyAll = res;
       this.currentStep.data.moodboardFamily = res.slice(-3);
     })
