@@ -22,11 +22,13 @@ namespace Intiri.API.Extension
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
 		{
             string env = config.GetValue<string>("ActiveEnvironment");
+			string useLocalDBConnection = Environment.GetEnvironmentVariable("ASPNETCORE_USELOCALDBCONNECTION");
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			services.AddDbContext<DataContext>(options =>
 			{
-				options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+				options.UseSqlServer(config.GetConnectionString(env == "Development" && useLocalDBConnection == "True" ? "LocalConnection" : "DefaultConnection"));
 			});
 
 			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
