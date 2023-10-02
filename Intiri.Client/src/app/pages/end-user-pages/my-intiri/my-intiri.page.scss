@@ -14,7 +14,7 @@
   }
 }
 
-.new-project-container{
+.new-project-container {
   margin: 20px 0px 0px;
   width: 50%;
   .project-preview-card {
@@ -33,14 +33,14 @@
   }
 }
 
-.projects-container{
+.projects-container {
   display: grid;
   grid-template-columns: repeat(2, 45%);
   gap: 2.5% 10%;
 
-  .project-preview-container{
+  .project-preview-container {
     width: 100%;
-  
+
     .project-preview-card {
       display: grid;
       grid-template-columns: repeat(2, 49%);
@@ -57,5 +57,3 @@
     }
   }
 }
-
-
