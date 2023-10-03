@@ -4,7 +4,7 @@
           <ion-grid class="px-0 m main-container designer-profile-container" *ngIf="(designerDetails$ | async) !== null && (designerDetails$ | async) as designerDetails">
               <ion-row class="designer-profile-info-container" >
                   <ion-col class="profile-pic-container">
-                  <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full object-cover">
+                  <img [src]="designerDetails.photoPath" alt="" srcset="" class="h-full w-full object-fill">
                   </ion-col>
                   <ion-col class="profile-bio-container">
                   <h1 class="name">{{designerDetails.firstName}}</h1>
