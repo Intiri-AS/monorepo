@@ -794,20 +794,20 @@ namespace Intiri.API.DataAccess.SeedData
                             Console.WriteLine(uploadResult.Item3.PublicId);
                             Console.WriteLine(uploadResult.Item3.SecureUrl.AbsoluteUri);
 
-                            //int Featured = 0;
-                            //if (fileName == "1Intiri.jpg" || fileName == "2Intiri.jpg" || fileName == "3Intiri.jpg")
-                            //{
-                            //    Featured = 1;
-                            //}
+							int Featured = 0;
+							//if (fileName == "1Intiri.jpg" || fileName == "2Intiri.jpg" || fileName == "3Intiri.jpg")
+							//{
+							//    Featured = 1;
+							//}
 
-                            //DesignerPortfolio colorNCS = new DesignerPortfolio();
-                            //colorNCS.DesignerId = 17;
-                            //colorNCS.PublicId = uploadResult.Item3.PublicId;
-                            //colorNCS.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-                            //colorNCS.Featured = Featured;
-                            //unitOfWork.DesignerPortfolioRepository.Insert(colorNCS);
-                            //await unitOfWork.SaveChanges();
-                        }
+							DesignerPortfolio colorNCS = new DesignerPortfolio();
+							colorNCS.DesignerId = 50;
+							colorNCS.PublicId = uploadResult.Item3.PublicId;
+							colorNCS.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+							colorNCS.Featured = Featured;
+							unitOfWork.DesignerPortfolioRepository.Insert(colorNCS);
+							await unitOfWork.SaveChanges();
+						}
                     }
                 }
 
