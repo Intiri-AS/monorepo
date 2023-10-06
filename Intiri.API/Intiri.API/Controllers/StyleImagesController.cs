@@ -189,33 +189,6 @@ namespace Intiri.API.Controllers
 			return Ok(styleImagesToReturn);
 		}
 
-		[HttpGet("SeedMaterialsImport")]
-		[AllowAnonymous]
-		public async Task<ActionResult> SeedMaterialsImport()
-		{
-			await Intiri.API.DataAccess.SeedData.SeedData.SeedMaterialsImport2(_unitOfWork, _fileUploadService);
-
-			return Ok();
-		}
-
-        [HttpGet("SeedProductsImport")]
-        [AllowAnonymous]
-        public async Task<ActionResult> SeedProductsImport()
-        {
-            await Intiri.API.DataAccess.SeedData.SeedData.SeedProductsImport(_unitOfWork, _fileUploadService);
-
-            return Ok();
-        }
-
-        [HttpGet("SeedDesignerPortfolioImg")]
-        [AllowAnonymous]
-        public async Task<ActionResult> SeedDesignerPortfolioImg()
-        {
-            await Intiri.API.DataAccess.SeedData.SeedData.SeedDesignerPortfolioImg(_unitOfWork, _fileUploadService);
-
-            return Ok();
-        }
-
         [HttpGet("getStyleImagesByRoom/{roomId}")]
         public async Task<ActionResult<StyleImageOutDTO>> getStyleImagesByRoom(int roomId)
         {

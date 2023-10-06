@@ -625,33 +625,11 @@ namespace Intiri.API.DataAccess.SeedData
 
 			foreach (var prodImport in materials)
 			{
-				//var prod = await unitOfWork.ProductRepository.GetIQueryable(x => x.Name == prodImport.Name && x.ProductType.Id == 32).FirstOrDefaultAsync();
-				//if(prod != null)
-				//{
-				//                Console.WriteLine("File null | " + prodImport.Name);
-				//                ProductType productType = await unitOfWork.ProductTypeRepository.SingleOrDefaultAsync(mt => mt.Name == prodImport.Category);
-				//	if (productType == null)
-				//	{
-				//		productType = new ProductType();
-				//		productType.Name = prodImport.Category;
-
-				//		unitOfWork.ProductTypeRepository.Insert(productType);
-				//		await unitOfWork.SaveChanges();
-				//	}
-
-				//	prod.ProductType = productType;
-				//                unitOfWork.ProductRepository.Update(prod);
-				//                await unitOfWork.SaveChanges();
-				//            }
-
-				//            continue;
-
 				var doesAnyExist = await unitOfWork.ProductRepository.DoesAnyExist(x => x.Name == prodImport.Name);
 
 				if (!doesAnyExist)
 				{
 					var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Name.Trim().Replace(" ", "_") + ".webp";
-					//var filep = "wwwroot/assets/project-image/productsimage/" + prodImport.Link_image;
 					string path = Path.GetFullPath(filep);
 
 					if (!File.Exists(path))
@@ -744,16 +722,8 @@ namespace Intiri.API.DataAccess.SeedData
 						}
 					}
 
-
-
-					//    unitOfWork.MaterialRepository.Insert(material);
-					//    await unitOfWork.SaveChanges();
-					//}
 				}
 			}
-
-			//	}
-			//}
 		}
 
         public static async Task SeedDesignerPortfolioImg(IUnitOfWork unitOfWork, IFileUploudService _fileUploadService)
