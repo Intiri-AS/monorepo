@@ -1,1099 +1,620 @@
 [
   {
-    "Name": "Tarkett Woodstock Handbrushed Pine White",
-    "Discription": "510019001_006_TK_02905_1080",
-    "Type": "Laminat",
-    "Link_Image": "https://drive.google.com/file/d/1vWhGmTaui9Pfhc-YVdNzhH1eopsT46Hf/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000369-woodstock/handbrushed-pine-white"
+    "Name": "Tile Aleluia chroma blush",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/170e098walZM5mfZadPThRJ0CHVXEmX9_/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Woodstock_Handbrushed_Pine_White_",
-    "Discription": "510019001_003_TK_02902_1080",
-    "Type": "Laminat",
-    "Link_Image": "https://drive.google.com/file/d/1FTVUtmanE9oxg2dJE2LusIhqJk_C8f9F/view?usp=drive_link"
+    "Name": "Aleluia chroma blush 2",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Z9hD2AzmMvDo8aJ58-Qo8QjyRIrTOwI0/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett Wood Viva Oak White 1strip",
-    "Discription": "7828013_003_TK_03533_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1X29Vk5PdNsCsF-NiMu4GNLz4X1fZk_DA/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000349-tynnparkett-viva/eik-white-1-stav"
+    "Name": "AtlasConcorde Marvel Pro Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1jKVBqfHyNsm8mlITFnn4jh5nlkI0osYC/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Pure_Oak_Nature_TreS_",
-    "Discription": "7869015_7869017_7870038_8723001_8723004_003_TK_03663_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1lR2TxhkoXCNYs95jD9t-jB_V9zdW3sUT/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000190-pure/eik-nature-tres-3-stav"
+    "Name": "AtlasConcorde Marvel Cremo Delicato",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1qMLsVyOAxBCfuYsGXPp6l-Qo8sMeMeg9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Prestige_Oak_White_Sand_",
-    "Discription": "7877046_025_TK_03643_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1d565URbj5ScfsdjnZCLTjYLHJQ-t6DCU/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-white-sand-1-stav"
+    "Name": "AtlasConcorde Marvel Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1FHeSCWPzRReeiNu68q4BkSE-K8EiOiBi/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Prestige_Oak_White_Sand_",
-    "Discription": "7877046_010_TK_03658_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/11bpyqRw9294aMUVq7wZZ5QkblQ4jXtMS/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-white-sand-1-stav"
+    "Name": "AtlasConcorde Marvel Statuario Select",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1-mq4Eub1_ixqI86vEzP7aQxBt2-o2_P5/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Prestige_Oak_White_Sand_",
-    "Discription": "7877046_002_TK_03639_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1vHLCkA200-b3z6zdCqqQnu9VZcOUa547/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-white-sand-1-stav"
+    "Name": "AtlasConcorde Marvel Statuario Select 30x60 rigato",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/18nCYK0k6FXFGN_SOKEpMAUAMo098GHf9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Noble_Oak_Soho_",
-    "Discription": "7806012_007_TK_03668_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1pZkrg3P_ywBKODZGqB9Mo0_Geblq81eh/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-soho-big-block"
+    "Name": "AtlasConcorde MarvelPro Grey Fleury",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/15y_68x1zdSpvAS_rSWbFtJnANUOGzli9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Noble_Oak_Retro_",
-    "Discription": "7806007_004_TK_03517_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/11-s0VLkkq_Ej_tdIq0AmwyjHWpE4_nQA/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-retro-basket-weave"
+    "Name": "AtlasConcorde MarvelPro Noir StLaurent",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mgUYlvIaJEl00Do75wwdfNOeSeCIj7xA/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Wood_Noble_Oak_Art_Deco_",
-    "Discription": "7806009_009_TK_03678_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1_0-YhmJ-oxsCA_4VsUwI9w4LtvRP9HvY/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-art-deco-basket-weave"
+    "Name": "chroma cotton white 2",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1zKvlaRY96pZPVor6-isUIL6E_wUIymxi/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Viva_Walnut_",
-    "Discription": "8581002_TK_00903_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1_bigCmMvZFzlTp99SP8H19D--86dSFZn/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000349-tynnparkett-viva/valnoett-3-stav"
+    "Name": "chroma cotton white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Vk1Zf2BHbiTjRta0EjkLeej4qfWT4t8p/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Viva_Oak_White_1_strip_",
-    "Discription": "7828013_TK_00901_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1GqjMTOfRrRsylK3Szmngv0x6zO4HwKX6/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000349-tynnparkett-viva/eik-white-1-stav"
+    "Name": "Dandy Terrazzo White mosaic",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1_uU01B9Zo-UJtvaCoBZk85GQ_4pT1lCz/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Viva_Oak_Grey_1_strip_",
-    "Discription": "7828014_TK_00899_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1wgYHGenm3W8JZA4TslG4ndYRXB9RQFoS/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000349-tynnparkett-viva/eik-grey-1-stav"
+    "Name": "Dandy Terrazzo White",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ShJfJISVIAIjpv6CEKm08RVzwOLGXET7/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Viva_Oak_1_Strip_",
-    "Discription": "7828009_TK_00897_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/13vd-sk_GChgSCMNvG0fqnKwaAqCedeoq/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000349-tynnparkett-viva/eik-1-stav"
+    "Name": "dandy white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1TTRyfk8ox3YAMD1cOwRR-AeblIlgT2i7/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Starfloor_Click_Ultimate_Timeless_Concrete_Light_Grey_",
-    "Discription": "35993020_003_TK_03792_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1Fq_2IK7I8OadDBEedvLIeR7ZrvybTJyi/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002415-id-inspiration-click-solid-55/rock-grey"
+    "Name": "Emilceramica Be-Square ivory",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1D1pTV9OGLwluWV8Oz7Ov4ja6CebPsUM4/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Stone_Grey_DuoPlank_",
-    "Discription": "8727006_TK_00457_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1hvS1E2nZSl1o3l-08P9vfU0_wKjBPnAU/view?usp=drive_link"
+    "Name": "Ergon architect resin berlin grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1Xm8eFlFAyuBJ9qiNLrsqSplkx4Nx_1-N/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Soft_Grey_Plank_",
-    "Discription": "7878010_TK_00455_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1ffhoy80HHjTsoyVPFBVWq_5TqHLs1PH3/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-soft-grey-plank-1-stav"
+    "Name": "Ergon Architect Resin Copenhagen ivory",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1SSXsuNb3oINnpBM5oUy7o5C-oQYQsnh3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Soft_Beige_Plank_",
-    "Discription": "7878023_TK_01799_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1oMZ12NiZYHwiZNvRzbqbrITONXPj1Nu4/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-soft-beige-plank-1-stav"
+    "Name": "Ergon Architect Resin new york sand",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1PhI0VUDheVF9ocFUxSCM_j0YT4NQVXlN/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Snow_Flake_Plank_",
-    "Discription": "7876113_7876114_TK_01818_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1hXJJCVsvvRt4X32gCPBSdXx51OzwF6QO/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-snow-flake-plank-1-stav?searchedSku=7876113"
+    "Name": "Ergon Architect Resin Tokyo white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/11NqDvBLvJ48C7m-ekpuSu5TEgIx-7r41/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Snow_Flake_Plank_",
-    "Discription": "7876113_7876114_TK_01815_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/17LWXljw2bWy4fjWrXqF5czecxd6E_q-B/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-snow-flake-plank-1-stav?searchedSku=7876113"
+    "Name": "Ergon Grainstone Fine Grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1zCsnbbw4elwl4iOlhBzKIDdA8FdLPhUV/view?usp=drive_link@",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Snow_Flake_Plank_",
-    "Discription": "7876113_7876114_TK_01795_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1ZbXDyLkNO5VDl3TwpxyBCYXO1lxFEztN/view?usp=drive_link"
+    "Name": "Ergon Grainstone Rough Dark",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ZPzJKjSyatFix06trYIPTvhygVAVKzcE/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Satin_White_Plank_",
-    "Discription": "7876031_7876094_TK_02304_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1tUJT8DBZdvMmYS2-ZWllkae5hG-zHCGr/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-satin-white-1-stav?searchedSku=7876031"
+    "Name": "ergon lombarda bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1VFQuian3KS0UlvwDfvc3jiBU-9Tz4-44/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Satin_White_Plank_",
-    "Discription": "7876031_7876094_TK_02299_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1UMZdWnltfdY26zFYAe3IIT2QB8ao3GM1/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-satin-white-1-stav?searchedSku=7876031"
+    "Name": "ergon lombarda sabbia",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/12V5p3lSYbzTpswu17Cak_H6sci2P7Muo/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Satin_White_Plank_",
-    "Discription": "7876031_7876094_TK_02288_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1F2jnpCtvXIiKvxudNuPvNDt73YaiwBWH/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-satin-white-1-stav?searchedSku=7876031"
+    "Name": "ergon lombarda sabbia org",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1eoYVDIMeP98r3Lkvm-naXIhAJMMOQrQ_/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Satin_White_Plank_",
-    "Discription": "7876031_7876094_TK_00454_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1yBxp4HdutsqufgPu2VzawXWLi5s9iDdi/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-satin-white-1-stav?searchedSku=7876031"
+    "Name": "Ergon Medley minimal green",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/11nCoRykvD1XWh7xJQQyDtd0QCDYe4-9h/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Satin_Soft_White_3_Strip_",
-    "Discription": "7870068_TK_00453_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1UAeu8HTjWYL7eimqGQoP4yLToK33wq91/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-satin-soft-white-3-stav?searchedSku=7870068"
+    "Name": "Ergon Medley Minimal pink",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1JT0144beu2FuIFLyHZBrx0hwgn2_a0Ki/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Misty_Grey_Plank_",
-    "Discription": "7876085_TK_00450_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1_sEuzdXG1ZG0ndhLbpAbsv2XG2UYt8pc/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-misty-grey-plank-1-stav?searchedSku=7876085"
+    "Name": "Ergon Medley pop black",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1rXkyCIWugLf363d-x6QcX44bqwvVEmL-/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Italian_Brown_DuoPlank_",
-    "Discription": "8727013_TK_01803_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1iMG827MUE3vpkZ89PE2BHD7fweIEE0Er/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-italian-brown-duoplank-2-stav?searchedSku=8727013"
+    "Name": "Ergon Medley pop black",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1GYo-ZB8SnpwMzgQ9CcRcdt7MxEz1F8nh/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Italian_Brown_DuoPlank_",
-    "Discription": "8727013_TK_01796_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1cHQK4YP91H87NCMIHt7ElCp2vDiSUS0a/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-italian-brown-duoplank-2-stav?searchedSku=8727013"
+    "Name": "Ergon Medley pop green",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1d6fcGYG1XO1zmOFKb-bo4G5JVDtDqkMr/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Evening_Grey_MidiPlank_",
-    "Discription": "41016002_TK_00628_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1DefLr2DuYLqtLzsmisq5_LYaDFnOJ6Oq/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-evening-grey-midiplank-1-stav?searchedSku=41016002"
+    "Name": "Ergon Medley Pop Grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1d6fcGYG1XO1zmOFKb-bo4G5JVDtDqkMr/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Evening_Grey_MidiPlank_",
-    "Discription": "41016002_TK_00448_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1QiCavC0MWxMZm9p4oVU7pJaIoTr-aFD8/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-evening-grey-midiplank-1-stav?searchedSku=41016002"
+    "Name": "Ergon Medley Pop white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1WTS2jjw-wHVoAFyI_0Q2RV1kI36wBZe4/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cream_White_MiniPlank_",
-    "Discription": "8720009_TK_00441_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1e5UgIMC2MURWxwzESD_60b98KWXvy0S2/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cream-white-miniplank?searchedSku=8720009"
+    "Name": "Italg terre bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1VLAfRGgUaQ6PVUpa9drZieMYalCXsWTI/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cream_White_DuoPlank_",
-    "Discription": "8727901_TK_00439_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1aiK-MG43onsduw7e8MSueBCw70l_EmU_/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cream-white-duoplank-2-stav?searchedSku=8727901"
+    "Name": "Italg Nuance bianco",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mn5normxxKwkJRD2Zs1e22vXszI2h0c4/view?usp=sharing",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cream_White_",
-    "Discription": "7877049_004_TK_03370_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1bBx4C8bvj2Nw80xzQ6igFa2jxX0Njz4_/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cream-white-plank-xt-1-stav?searchedSku=7877049"
+    "Name": "Italgraniti Lux Pietra grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/12GH3rNfMSdClnkRo8A4UHtbtgSwJ_sDX/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cream_White_",
-    "Discription": "7877049_001_TK_03354_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1wPypwCN88Na5qhsQlVi8dwzB_Ine-Yn6/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cream-white-plank-xt-1-stav?searchedSku=7877049"
+    "Name": "Italgraniti Nordic stone Islanda",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1FyRPWK3elQrZkqJRQjr7AbVTopSIMdiI/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cream_White_3_strip_",
-    "Discription": "7870916_TK_03299_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1HgAXfnb3vhK4ChuHtz0sAEHGbe1c9DuN/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cream-white-tres-3-stav"
+    "Name": "Italgraniti Terre cotto",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1McZirIslgH6WjT_wWFogKiYtwQhGYoX9/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cotton_White_Plank_XT_",
-    "Discription": "7877033_7877034_TK_00437_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1e5SQoCNhnMIIvoE6djGV0Sg9OGSoEYp7/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cotton-white-plank-xt-1-stav"
+    "Name": "italgranitit Lux Panda white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1mDcZtMBoh6b6fTyAm-4YbxGScP6ZGZPM/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Cotton_White_DuoPlank_",
-    "Discription": "8727004_TK_00436_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1Yt5XUl30GKvI_kI-LvzyUJUmcQqAGbos/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000243-shade/eik-cotton-white-duoplank-2-stav?searchedSku=8727004"
+    "Name": "living allure light grey wiggle",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1fDvy3fLCaceC2aoiUCUXtQBtDPA9CYUL/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Antique_White_Plank_XT_",
-    "Discription": "7877002_7877013_7877014_TK_00434_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1bky5i6jZ1w5kkGE4r-LeZOEiUeSRepZU/view?usp=drive_link"
+    "Name": "living allure light grey",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ciCUD3R0kZfdp3OzULCwlLkk-tc6EwL3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Shade_Oak_Antique_White_Plank_",
-    "Discription": "7876950_7876949_7876962_TK_03285_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/19X8pKEqCnD5G3CG3GH4Db6_ZnX5L4rxs/view?usp=drive_link"
+    "Name": "Provenza Eureka Intarsio grigio",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/15-hxaQq8zW_5ZaDktKsAjRSowecJCsfZ/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Segno_Oak_Limestone_",
-    "Discription": "41020001_41020021_41020002_41020022_TK_02234_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1Yq1RAFXPsUOd3rc8DyU5t76zCPmatzvh/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001674-segno/eik-lime-stone-herringbone"
+    "Name": "Provenza Eureka Sabbia",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/19uGWIprsklUspweLNfAWKMRT52TXgtI3/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Segno_Oak_Blonde_",
-    "Discription": "41020003_41020023_41020004_41020024_TK_02224_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1QpQ0n3LJ6GRJ7BAZSjKHhQ97q4RNkAaw/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001674-segno/eik-blonde-herringbone"
+    "Name": "Provenza UNIQUE TRAVERTINE RULED WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1dU-zYorFNPT2YMDv856_u5T32bN9JejB/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Prestige_Oak_Scallop_",
-    "Discription": "7877066_Desso_Asteranne_710079033_002_TK_04124_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1lXDYuNqquglonJN-2pJlmETdR6XWstlN/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000177-prestige/eik-scallop-1-stav?searchedSku=7877066"
+    "Name": "Provenza UNIQUE TRAVERTINE VEIN CUT WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1ojLu3o2qrTei0UNdqy714ULvkVHgbXYH/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Noble_Oak_Wasa_",
-    "Discription": "7806010_003_TK_03366_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1c1XJ7IfkF5G_cXLRYnEdm3DJXw_ajIFT/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-wasa-basket-weave?searchedSku=7806010"
+    "Name": "st.agostino deconcrete de-medium white",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1De_Uc9eG6nuuiAslFOF5HWblwxVvwYHM/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Noble_Oak_Soho_",
-    "Discription": "7806012__TK_01516_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/open?id=1c1XJ7IfkF5G_cXLRYnEdm3DJXw_ajIFT&usp=drive_copy",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/search/produkter?search%5Bbody%5D=7806012"
+    "Name": "St.Agostino deconcrete DE-MICRO WHITE",
+    "Type": "Tile",
+    "PreImageName": "https://drive.google.com/file/d/1kjikuqrY0Iw5Jz7otU3MWnqSa36QzS8g/view?usp=drive_link",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Noble_Oak_Scandinavia_",
-    "Discription": "7806008_008_TK_03364_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1M60tNVk4BL9W5TgY_q52vSzAabutU1cH/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-scandinavia-basket-weave?searchedSku=7806008"
+    "Name": "4409 n LEA Anthology White",
+    "Type": "Tile",
+    "PreImageName": "4409_n_LEA-anthology-white.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Noble_Oak_Scandinavia_",
-    "Discription": "7806008_005_TK_03361_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1Vzsc5XhdVsHUZaWYrHQDyGq3P7_1Knfk/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-scandinavia-basket-weave?searchedSku=7806008"
+    "Name": "4415 n LEA Anthology Grey",
+    "Type": "Tile",
+    "PreImageName": "4415_n_LEA-anthology-gray.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Noble_Oak_Scandinavia_",
-    "Discription": "7806004_7806008_TK_00384_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1-ixeMoXiult-UYe6E0qUF1ev4COMOTF3/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000160-noble/eik-scandinavia-basket-weave?searchedSku=7806008"
+    "Name": "4424 n LEA Anthology Earth",
+    "Type": "Tile",
+    "PreImageName": "4424_n_LEA-anthology-earth.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Linoleum_LinoWall_Olive_155_Veneto_Khaki_",
-    "Discription": "757_004_TK_03779_1080",
-    "Link_Image": "https://drive.google.com/file/d/1Mos3ryw1vn30MQfhqIprlLOxGM5mGJ_R/view?usp=drive_link"
+    "Name": "4441 n LEA Anthology Dark",
+    "Type": "Tile",
+    "PreImageName": "4441_n_LEA-anthology-dark.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Linoleum_LinoWall_Honey_112_LinoWall_Candy_135_Originale_Carbon_",
-    "Discription": "409_001_TK_03783_1080",
-    "Link_Image": "https://drive.google.com/file/d/1TcHsPhn-7kgKbjp3cbxfMs9mJv2Y0M-8/view?usp=drive_link"
+    "Name": "5645 n LEACERAMICHE Pigmenti Mauce 100x100",
+    "Type": "Tile",
+    "PreImageName": "5645_n_LEACERAMICHE-pigmenti-mauve-100x100.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Wall_Sober_Upper_",
-    "Discription": "21090386_TK_02163_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1q7TJry-fvd1wAzsr3lTk42YsYYpsAAWJ/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-wall-386-sober-upper"
+    "Name": "5646 n LEACERAMICHE Pigmenti Moss 100x100",
+    "Type": "Tile",
+    "PreImageName": "5646_n_LEACERAMICHE-pigmenti-moss-100x100.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Wall_Rouge_Upper_",
-    "Discription": "21090815_TK_02164_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1RW_8mcwXSrnbOzjK7ZFoyy3IaOdCn8IW/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002315-surface-wall/surface-wall-815-contrast-upper"
+    "Name": "Agglobaghnin 5818 SATURNO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-5818-SATURNO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Wall_Rouge_Upper_",
-    "Discription": "21090387_TK_02165_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1wmKHQWAUIrCGzvH3u-T1-iPnfb8GLs7y/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-wall-387-rouge-upper"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 0303 Alpi",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-0303-alpi.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Wall_Dimmed_Upper_",
-    "Discription": "21090388_TK_02166_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1U1ebZBgDoT7EgatVPXVpf88aB1ID97iy/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002315-surface-wall/surface-wall-388-dimmed-upper?searchedSku=21090388"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1012 Marton",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1012-marton.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Vivid_Multi_",
-    "Discription": "21089090_TK_02157_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1S-8tQBTZQUiSuQx1qPQO8-aAEEGiZ-FB/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-vivid-multi?searchedSku=21089090"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1015 Lasa",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1015-lasa.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Sober_Multi_",
-    "Discription": "21090388_TK_02172_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/14y5qZ2Fr-1zwykFiECjjptyIATrT1113/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002315-surface-wall/surface-wall-388-dimmed-upper?searchedSku=21090388"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1055 Cielo",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1055-cielo.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Sober_Airy_",
-    "Discription": "21089087_TK_02173_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1ZAmwDnrPVdUQLmkI2MXPqEkIUMlxnG90/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-sober-airy-0087?searchedSku=21089087"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1058 Ocean",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1058-ocean.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Multi_",
-    "Discription": "21089080_TK_03441_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/10AQt1xwIJOHu3oLcVL5-hwTBGHOadM_r/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-multi-0080?searchedSku=21089080"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1085 Alicante",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-1085-alicante.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Multi_",
-    "Discription": "21089080_TK_02149_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1TMhGy8kfSpK8nckHw4uIobFkC-R82YpS/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-multi-0080?searchedSku=21089080"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 2802 Moon",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-2802-moon.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Airy_",
-    "Discription": "21089074_TK_03764_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1ShxSTGGWyi7oqQqO-xGZBGsS-BrFAfnm/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-airy-0074?searchedSku=21089074"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 4607 Terra",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-4607-terra.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Airy_",
-    "Discription": "21089074_TK_03763_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1ND7D1vyxTip2588df0jbU2KKMe5XQ2wB/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-airy-0074?searchedSku=21089074"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 12004 Fumo",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-12004-fumo.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Airy_",
-    "Discription": "21089074_TK_03442_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1hNFWY9JaoBZ2iKG3a4OxI-JFOdW_cA7e/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-airy-0074?searchedSku=21089074"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 12404 Lava",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-12404-lava.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Airy_",
-    "Discription": "21089074_TK_02147_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1poDgWY4uoFBTmJnyy8fQdzq3BSf5q4ri/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-airy-0074?searchedSku=21089074"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 17311 Deserto",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-em-17311-deserto.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Rouge_Accent_",
-    "Discription": "21089163_TK_02148_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1AaKuMz6o8b7JYUqen24yje1Fh26Yl7Zd/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-rouge-accent?searchedSku=21089163"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1455 Coriandoli",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-marmo-ema-1455-coriandoli.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Dimmed_Airy_",
-    "Discription": "21089085_TK_02152_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/11Yz3cdYn5r65-oiQpGpOnqH8BNBx4V-5/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-dimmed-airy?searchedSku=21089085"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1089 Copenhagen",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-old-style-em-1089-copenhagen.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Dimmed_Accent_",
-    "Discription": "21089164_TK_02153_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/179gEOftRnjvNMjHbLoigHOv5mVqRzCoa/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-dimmed-accent-0164?searchedSku=21089164"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1115 Athena",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-suprema-emg-1115-athena.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Dimmed_Accent_",
-    "Discription": "21089164_004_TK_03237_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1GxkXv31Tlvhdgsy11dVT-DOLmFzyzCqn/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-dimmed-accent-0164?searchedSku=21089164"
+    "Name": "Agglobaghnin Collezione Ecostone Linea Marmo Em 1116 Era",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-collezione-ecostone-linea-suprema-emg-1116-era.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Dimmed_Accent_",
-    "Discription": "21089164_003_TK_03239_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1gBvybG6vEmYV2WVvfHp9iX8py_Fpu0WU/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-dimmed-accent-0164?searchedSku=21089164"
+    "Name": "Agglobaghin EM 0818 DAMASCO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-0818-DAMASCO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Dimmed_Accent_",
-    "Discription": "21089164_001_TK_03241_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1JVY8L13moOjVsLjwUQ9Q3XFSrMMJyU6F/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-dimmed-accent-0164?searchedSku=21089164"
+    "Name": "Agglobaghin EM 3610 MINT",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-3610-MINT.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Contrast_Mult_",
-    "Discription": "21089084_TK_03443_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/12iMK0tHoOxC59A8_2AvCIYBbJv1N-Nhn/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-contrast-multi?searchedSku=21089084"
+    "Name": "Agglobaghin EM 4018 GRIGIO VENATO",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-4018-GRIGIO-VENATO.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Contrast_Airy_",
-    "Discription": "21089083_TK_03444_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1SQiIEzf8lmZj8iZN3oKdG0C4B4KO7BLu/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-contrast-airy-0083?searchedSku=21089083"
+    "Name": "Agglobaghin EM 5310 WHITE",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-5310-WHITE.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Contrast_Airy_",
-    "Discription": "21089083_TK_02155_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1JJC-HVcDNKxT6-w6IwlNHFJjbf-J20gP/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-contrast-airy-0083?searchedSku=21089083"
+    "Name": "Agglobaghin EM 5909 METEORA",
+    "Type": "Tile",
+    "PreImageName": "agglobaghin-EM-5909-METEORA.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Surface_Contrast_Accent_",
-    "Discription": "21089162_TK_02156_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1-dD7FpiJhy4nkPC_-7ynhwQl23eq3xJU/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C001607-iq-surface/surface-contrast-accent-0162?searchedSku=21089162"
+    "Name": "Aleluia A4800 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_A4800-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_One_Classic_Light_Warm_Grey_",
-    "Discription": "21200116_TK_01298_1080",
-    "Link_Image": "https://drive.google.com/file/d/1bxpGGNo6HCmqLjQnP-1oRlFEp1OnEiAb/view?usp=drive_link"
+    "Name": "Aleluia C0801 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0801-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_One_Classic_Light_Warm_Beige_",
-    "Discription": "21200219_TK_01299_1080",
-    "Link_Image": "https://drive.google.com/file/d/1PYp6cAQpJR3cFoTrQ52I3cS_p1tFsErS/view?usp=drive_link"
+    "Name": "Aleluia C0803 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0803-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Natural_Flakes_Grey_",
-    "Discription": "21103185_21004185_21121185_001_TK_03314_1080",
-    "Link_Image": "https://drive.google.com/file/d/1rjPnjJvS5WerOEAo4KGADdTZjeNZHbqs/view?usp=drive_link"
+    "Name": "Aleluia C807 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0807-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Natural_Flakes_Cold_Grey_",
-    "Discription": "21103057_21004057_21121057_001_TK_03313_1080",
-    "Link_Image": "https://drive.google.com/file/d/1sK2RLk-irg5Vpbha-f_cGIk6X8t15hJi/view?usp=drive_link"
+    "Name": "Aleluia C0810 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0810-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Natural_Flakes_Cold_Beige_",
-    "Discription": "21103832_21004832_21121832_001_TK_03312_1080",
-    "Link_Image": "https://drive.google.com/file/d/1otO5iXT16MxfL4VgFXybpU_hY4Af5eP-/view?usp=drive_link"
+    "Name": "Aleluia C0811 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0811-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Granit_Multicolour_Grey_",
-    "Discription": "3218431_TK_01440_1080",
-    "Link_Image": "https://drive.google.com/file/d/1x50N6_k9DN22ATuBteIsShUKzySot3vh/view?usp=drive_link"
+    "Name": "Aleluia C0812 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0812-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Granit_Micro_Light_Beige_",
-    "Discription": "21050357_TK_01445_1080",
-    "Link_Image": "https://drive.google.com/file/d/1PzqaYCvqwVJB5gB018oo8-qD4HdmAmgh/view?usp=drive_link"
+    "Name": "Aleluia C0813 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0813-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Eminent_Purple_",
-    "Discription": "21030149_TK_01365_1080",
-    "Link_Image": "https://drive.google.com/open?id=1tDvR_Ty5h0lxmktATr8MjrCsT0FjsFfL&usp=drive_copy"
+    "Name": "Aleluia C0814 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C0814-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Eminent_Light_Beige_",
-    "Discription": "21030137_TK_01356_1080",
-    "Link_Image": "https://drive.google.com/file/d/1WgFAufSty29B9GMthAks9eqNaQEV4RkB/view?usp=drive_link"
+    "Name": "Aleluia C1303 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1303-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iQ_Eminent_Dark_Warm_Grey_",
-    "Discription": "21030133_TK_01355_1080",
-    "Link_Image": "https://drive.google.com/file/d/18TrLC1YgEGrExI1wRniSRDV8_0htxsn9/view?usp=drive_link"
+    "Name": "Aleluia C1306 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1306-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Scandinavian_Oak_Medium_Grey_",
-    "Discription": "260018036_001_TK_04349_1080",
-    "Link_Image": "https://drive.google.com/file/d/1M_mU8s_-WeCxETCd_7dWPEXm8fOnx9Sv/view?usp=drive_link"
+    "Name": "Aleluia C1308 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1308-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Highland_Oak_Smoke_",
-    "Discription": "260021023_003_TK_04357_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1EorSq1p5BHzWpJGqxThwqV3rUfdLXJYe/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/highland-oak-smoke?searchedSku=260021023"
+    "Name": "Aleluia C1314 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1314-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Highland_Oak_Smoke_",
-    "Discription": "260021023_002_TK_04356_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/18792w-NBtuD-rAsoEOeYKfn49eea-80J/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/highland-oak-smoke?searchedSku=260021023"
+    "Name": "Aleluia C1315 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_C1315-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Highland_Oak_Golden_",
-    "Discription": "260021022_004_TK_04328_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1PTl1N0mrTbR6_mPOGRGYF9eqaklFMjZB/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/highland-oak-golden?searchedSku=260021022"
+    "Name": "Aleluia DC1012 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_DC1012-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_English_Oak_Natural_",
-    "Discription": "260022018_002_TK_04359_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1TD9Vb9W6z5ZMbfjlo5LI_QAkOG5zP87y/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/english-oak-natural?searchedSku=260022018"
+    "Name": "Aleluia DC8005 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_DC8005-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_English_Oak_Natural_",
-    "Discription": "260022018_001_TK_04358_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1ANxpqUWu2NQkROw728BIqSF354LJGQP2/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/english-oak-natural?searchedSku=260022018"
+    "Name": "Aleluia P6066R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_P6066R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Delicate_Oak_Sugar_",
-    "Discription": "260021013_001_TK_04321_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1Fa2JSlxbeBSpP7RHLDRcKdsiNfIHYX1h/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/delicate-oak-sugar?searchedSku=260021013"
+    "Name": "Aleluia PH64 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH64-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Brushed_Elm_Oak_Natural_",
-    "Discription": "260020043_001_TK_04314_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/18UX3Jyjzm6X3imEkahLF1dFxHQvKShRK/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/brushed-elm-natural?searchedSku=260020043"
+    "Name": "Aleluia PH65 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH65-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Brushed_Elm_Brown_Sediment_Beige_",
-    "Discription": "260020042_260017037_002_TK_04341_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/open?id=1bIgLAaGdiq3BAyqHOqjmJUMe6amuC0PQ&usp=drive_copy",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/brushed-elm-brown?searchedSku=260020042"
+    "Name": "Aleluia PH66 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH66-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_iD_Click_Ultimate_55_Breccia_Grey_",
-    "Discription": "260017004_003_TK_04347_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1Hn3TCLxUELnJSsZd7Jvo7svaE6000F57/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001340-id-click-ultimate/breccia-grey?searchedSku=260017004"
+    "Name": "Aleluia PH69 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH69-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_Texstyle_Terrazzo_Matera_Inverno_",
-    "Discription": "240008326_240013326_240018326_001_TK_04267_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1KNezFLFILLhnMQ8iWMcFILrWF6KZintS/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000817-iconik-texstyle/terrazzo-matera-inverno?searchedSku=240008326"
+    "Name": "Aleluia PH70 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH70-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_Texstyle_Skane_Herringbone_Natural_",
-    "Discription": "240008022_240013022_240018022_002_TK_04225_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1B4qyUVbbiK-s-gt1MjD-55URbFGBw_6X/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000817-iconik-texstyle/skane-herringbone-natural?searchedSku=240008022"
+    "Name": "Aleluia PH71 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH71-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_Texstyle_Apunara_Oak_Grey_",
-    "Discription": "27013035_27020035_27027035_27027037_001_TK_04271_1080",
-    "Type": "Vinyl akustikk",
-    "Link_Image": "https://drive.google.com/file/d/1smEDF6VdQxL5EVcnZW19JDA3Lt8UqbR4/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000817-iconik-texstyle/apunara-oak-grey?searchedSku=27013035"
+    "Name": "Aleluia PH73 Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_PH73-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_T_Extra_Tyrol_Pine_White_",
-    "Discription": "240009029_240014029_240019029_002_TK_04254_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1nFsyGssA92d6S0US-srP3JPxLdiWLUQw/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000815-iconik-t-extra/tyrol-pine-white?searchedSku=240009029"
+    "Name": "Aleluia R3267R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_R3267R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_T_Extra_Legacy_Oak_Light_Grey_",
-    "Discription": "5827067_5828067_5829067_001_TK_04208_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1x9zo_HLXf77ptkcl1JBPftvP0qBS9cv1/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000815-iconik-t-extra/legacy-oak-light-grey?searchedSku=5827067"
+    "Name": "Aleluia R3271R Full",
+    "Type": "Tile",
+    "PreImageName": "Aleluia_R3271R-full.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_T_Extra_Hallstone_Ashen_",
-    "Discription": "240009010_240014010_240019010_001_TK_04270_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/13qfWhnr9SbfAC-LiW5-NpWfzAIkN2QwA/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000815-iconik-t-extra/hallstone-ashen?searchedSku=240009010"
+    "Name": "Pz Living Ceramics Cuit Bone",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-bone.png",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Iconik_T_Extra_French_Oak_White_",
-    "Discription": "5827026_5828026_5829026_001_TK_04269_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/15Pk04uxDi6DlNR4IVYfk9GKNy9WOTgDY/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000815-iconik-t-extra/french-oak-white?searchedSku=5827026"
+    "Name": "Pz Living Ceramics Cuit Charcoal",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-charcoal.png",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Homogeneous_Vinyl_iQ_Granit_Warm_Concrete_",
-    "Discription": "21142297_TK_03875_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1nudjP59oHmJGRuBWSwdbMJq7hQOhD_hq/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000120-iq-granit/granit-warm-concrete-0297?searchedSku=21142297"
+    "Name": "Pz Living Ceramics Cuit Grey Copia",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-cuit-grey-copia.jpg",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Homogeneous_Vinyl_iQ_Granit_Soft_White_Grey_",
-    "Discription": "21142528_TK_03877_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1D3KeF_pQYpi3h3Tx9YI0v_x3D81JRmNK/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000120-iq-granit/granit-soft-white-grey-0528?searchedSku=21142528"
+    "Name": "Pz Living Ceramics Verso Crosscut Wall Grey Arpa Hr Scaled",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-verso-crosscut-wall-grey-arpa-hr-scaled.gif",
+    "Link_Supplier": "www.flisekompaniet.no"
   },
   {
-    "Name": "Tarkett_Homogeneous_Vinyl_iQ_Granit_Pastel_Purple_",
-    "Discription": "21142526_TK_03884_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/14duy69QBQ6gJZXFKroIWNQwV4hw7FTdM/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000120-iq-granit/granit-pastel-purple-0526?searchedSku=21142526"
-  },
-  {
-    "Name": "Tarkett_Homogeneous_Vinyl_iQ_Granit_Pastel_Orange_",
-    "Discription": "21142457_TK_03882_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1OfXfls_4sRtBVpHeTbEAkJiE82sveUjM/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000120-iq-granit/granit-pastel-orange-0457?searchedSku=21142457"
-  },
-  {
-    "Name": "Tarkett_Homogeneous_Vinyl_iQ_Granit_Black_",
-    "Discription": "21142221_TK_03864_1080",
-    "Link_Image": "https://drive.google.com/file/d/1f0uxkGL7oUJYbvG2g_N0SoOQvWNQZ4_p/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_White_",
-    "Discription": "21030904_TK_03843_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1gX4J_U6JDUQpy4zgfMEQGGjW-S27TtsX/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-white-0904?searchedSku=21030904"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Warm_Grey_",
-    "Discription": "21030878_TK_03842_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/11fJNuRhTfCTpRlivGWYYWM8ltSavo50z/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-warm-grey-0878?searchedSku=21030878"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Sand_",
-    "Discription": "21030883_TK_03841_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1sYB5xztqXJexNRSsmOAHsYk8ZmyQicXD/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-sand-0883?searchedSku=21030883"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Dusty_White_",
-    "Discription": "21030906_TK_03831_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1comzcCUlk7waFrMUltYydL4trG5TmnOs/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-dusty-white-0906?searchedSku=21030906"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Dark_Grey_",
-    "Discription": "21030819_TK_03849_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1UbAvAlXm48v7mNBvO4OE-q0mJQtMPkuI/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-dark-grey-0819?searchedSku=21030819"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Clay_",
-    "Discription": "21030887_TK_03848_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1jnwXWmBnJwWA_faSs0Vexh2tYwQoMfzS/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-clay-0887?searchedSku=21030887"
-  },
-  {
-    "Name": "Tarkett_Homogen_vinyl_iQ_Eminent_Brick_",
-    "Discription": "21030905_TK_03847_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/14get3WFpl9nrGE6ZrbQAqu34VzeJ07x4/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000119-iq-eminent/eminent-brick-0905?searchedSku=21030905"
-  },
-  {
-    "Name": "Tarkett_Heritage_Oak_Lime_stone_",
-    "Discription": "41007002_006_TK_03358_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1l8M6S8HK0IaNQRT7BqlJ2RWtoWYnhxws/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000106-heritage/eik-lime-stone-1-stav?searchedSku=41007002"
-  },
-  {
-    "Name": "Tarkett_Heritage_Oak_Lime_stone_",
-    "Discription": "41007002_005_TK_03357_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1AK5u48iIk-kctoXN14Vq8WewcmN6RQQz/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000106-heritage/eik-lime-stone-1-stav?searchedSku=41007002"
-  },
-  {
-    "Name": "Tarkett_Heritage_Oak_Lime_stone_",
-    "Discription": "41007002_004_TK_03356_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/18kVpfo3W9JucI3Iau6o5CaEOJgjkJox1/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000106-heritage/eik-lime-stone-1-stav?searchedSku=41007002"
-  },
-  {
-    "Name": "Tarkett_Heritage_Oak_Lime_stone_",
-    "Discription": "41007002_001_TK_03345_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1hmlSLn1lzR0SIUEVJDrNxEX-ZBQoSiFy/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000106-heritage/eik-lime-stone-1-stav?searchedSku=41007002"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Soft_Skin_TreS_",
-    "Discription": "7870074_011_TK_04084_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/11aoiWn6OXcMCZr-LytIGAXyM4tw4BgfZ/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-soft-skin-tres-3-stav"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Soft_Skin_TreS_",
-    "Discription": "7870074_008_TK_04082_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1P7GgYU-wANMz-QXedAYpLs0-U-SMuvWa/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-soft-skin-tres-3-stav"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Soft_Skin_TreS_",
-    "Discription": "7870074_003_TK_04074_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1CqkHs4IiCRIdOXCQindNCz0VA1zV241K/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-soft-skin-tres-3-stav"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Rustic_Plank_XT_",
-    "Discription": "7877067_004_TK_04067_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1Lo5hnUQI2bxdkQqdy_93_4pdD9hnc_Dg/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-rustic-plank-xt-1-stav?searchedSku=7877067"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Grey_Chiffon_Plank_",
-    "Discription": "7876125_005_TK_04058_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1D1uLT8LplTy4GOPavdWZxLIToYeB_Q-g/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-grey-chiffon-plank-1-stav?searchedSku=7876125"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Grey_Chiffon_Plank_",
-    "Discription": "7876125_003_TK_04056_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1AC6hNp-w3B39S-a_TmhpCO_IhHOgirtT/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-grey-chiffon-plank-1-stav?searchedSku=7876125"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Era_",
-    "Discription": "7806020_TK_04090_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1yvWyUaebk4d___soEsDemssyqJClb8xE/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-era-basket-weave?searchedSku=7806020"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Era_",
-    "Discription": "7806020_005_TK_04046_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1CM2T-br7_TgkSDWBAfMo15TbEm6RprV3/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-era-basket-weave?searchedSku=7806020"
-  },
-  {
-    "Name": "Tarkett_Grace_Oak_Century_",
-    "Discription": "7806019_TK_04089_1080",
-    "Type": "Wood",
-    "Link_Image": "https://drive.google.com/file/d/1y6VmOlnaSjbHznIl0e1kI3k4UE85o2Yu/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C002236-grace/eik-century-basket-weave?searchedSku=7806019"
-  },
-  {
-    "Name": "Tarkett_Evolay_Opale_Purple_",
-    "Discription": "4602030_TK_01320_1080",
-    "Link_Image": "https://drive.google.com/file/d/1iLO1I0tkvwmiuByJOsV67wysIyYuVgw2/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Evolay_Opale_Orange_",
-    "Discription": "4602029_TK_01321_1080",
-    "Link_Image": "https://drive.google.com/file/d/1Q4WunoJ9iaojU0Tyv2lWriJOnPHYBEZI/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Elegance_Oak_Champagne_",
-    "Discription": "41008002_41008005_TK_00289_1080",
-    "Link_Image": "https://drive.google.com/file/d/1PYzQ5Nsbio6szmEY7bH5yImQ55qJOgZJ/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Eclipse_Premium_Spectra_Pastel_Yellow_",
-    "Discription": "21081076_TK_01884_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1QIVAKYMpv1NIZmCmGY1pE07FGWfIuCt6/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000043-eclipse-premium/eclipse-pastel-yellow-0076?searchedSku=21081076"
-  },
-  {
-    "Name": "Tarkett_Eclipse_Premium_Spectra_Pastel_Sky_Blue_",
-    "Discription": "21081079_TK_01885_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1Hj1sxTK6o5hXI3xoq7Ww3_wauaqSianF/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000043-eclipse-premium/eclipse-pastel-sky-blue-0079?searchedSku=21081079"
-  },
-  {
-    "Name": "Tarkett_Eclipse_Premium_Spectra_Pastel_Red_",
-    "Discription": "21081070_TK_01886_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1Nn6KHprWDBQ7W41Y3Ll1tKvRusEJ5zwU/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000043-eclipse-premium/eclipse-pastel-red-0070?searchedSku=21081070"
-  },
-  {
-    "Name": "Tarkett_Eclipse_Premium_Classic_Medium_Grey_Blue_",
-    "Discription": "21020067_21021067_21022067_TK_01867_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1X0ECJJQuIGI2gU7GjDMGksiZU2A_P227/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C000043-eclipse-premium/eclipse-medium-grey-blue-0067?searchedSku=21020067"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_",
-    "Discription": "9975_710779006_TK_02602_1080",
-    "Link_Image": "https://drive.google.com/file/d/1EeMvMuPv3_D1SHejgr88Y08KEwRls-QI/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_",
-    "Discription": "9945_710779005_TK_02601_1080",
-    "Link_Image": "https://drive.google.com/file/d/1CL1WqaHbZVwR7IWgbGYI2BlKyzMw5Sow/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_",
-    "Discription": "9930_710779007_TK_02600_1080",
-    "Link_Image": "https://drive.google.com/file/d/1FdcjkEsP6VQSQeCN1LoxyZIDa8khG8RO/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_9539_",
-    "Discription": "710779004_TK_02599_1080",
-    "Link_Image": "https://drive.google.com/file/d/1zJB7Yo23sXn5fzDczd-gGoT9z57eV2Or/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_",
-    "Discription": "9534_710779003_TK_02597_1080",
-    "Link_Image": "https://drive.google.com/file/d/1dBigD8QmHTiJZ3DOWylNFaNDJmBLk3aq/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Desso_Ex_Concrete_",
-    "Discription": "1053_710779002_TK_02598_1080",
-    "Link_Image": "https://drive.google.com/file/d/1giwLbGopkG38nu0WbFumeo4g1qG_RAZm/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Breccia_",
-    "Discription": "9523_711499008_TK_02524_1080",
-    "Link_Image": "https://drive.google.com/file/d/1qayjWR01a6sn8i_AUT410g9OdhpVU8f8/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Breccia_",
-    "Discription": "9097_711499006_TK_02526_1080",
-    "Link_Image": "https://drive.google.com/file/d/194f4PrbGL1q-xeHIwBbTRbBQs6wg-zQC/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Desso_Arable_",
-    "Discription": "9106_711342008_TK_02482_1080",
-    "Type": "textile",
-    "Link_Image": "https://drive.google.com/file/d/1geQsvI5Hwg5JXsbpiyeW-7l0Keks0kNU/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001521-arable/arable-aa86-9106"
-  },
-  {
-    "Name": "Tarkett_Aquarelle_Rustic_Velvet_Linen_25915089_Carcassone_Concrete_Blue_",
-    "Discription": "25916015_25917015_TK_03960_1080",
-    "Type": "vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1PxKeCBZPnMIqPFAKp2pTYFv_Mot3onCA/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000020-aquarelle-gulv-til-vaatrom/carcassonne-concrete-blue?searchedSku=25916015"
-  },
-  {
-    "Name": "Tarkett_Aquarelle_Flower_Fusion_Blue_",
-    "Discription": "25915076_001_TK_03389_1080",
-    "Type": "vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1msW8Cc3utSoncFtXnnUDl0sHZWuLzmCV/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000021-aquarelle-vaatromsvegg/flower-fusion-blue"
-  },
-  {
-    "Name": "Tarkett_Aquarelle_Border_Soft_White_25906034_Wall_Marble_Carrare_White_25903064_Floor_Marble_Carrare_White_",
-    "Discription": "25905064_TK_01856_1080",
-    "Type": "vinyl",
-    "Link_Image": "https://drive.google.com/file/d/19tSBkjKIPnVNg5J21plrszrmdMsNQWI7/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C000020-aquarelle-gulv-til-vaatrom/carrara-marble-white?searchedSku=25905064"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Salt_Pepper_Medium_Grey_",
-    "Discription": "25178009_25176009_25180009_25182009_TK_01779_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/1ox63FMBWqmqmwqBMne1bAYj-NN96CLlL/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/salt-pepper-medium-grey"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Salt_Pepper_Light_Grey_",
-    "Discription": "25178010_25176010_25180010_25182010_TK_01778_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/1rFxrx8zQwFUyzPBW4yN0yzKPuCFrSUjN/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/salt-pepper-light-grey"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Salt_Pepper_Grege_",
-    "Discription": "25178015_25176015_25180015_25182015_TK_01777_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/1b11HNJKGPpneOpY2TI4iIprUxCazuWqo/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Salt_Pepper_Graphite_",
-    "Discription": "25178014_25176014_25180014_25182014_TK_01776_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/11N3B8XKJTmmZuzcOiLipC4YngTyddvBn/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/salt-pepper-graphite"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Salt_Pepper_Dark_Grey_",
-    "Discription": "25178008_25176008_25180008_25182008_TK_01775_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/14RcHucSYwxBBe43KzRb05JJDEfiHAlsh/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/salt-pepper-dark-grey"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Plazza_Eggplant_",
-    "Discription": "25176030_25178030_25180030_25182030_TK_01763_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/1GBNKNetSWHxLxw9-_Ubgwy8CEkWd-p7x/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/plazza-eggplant"
-  },
-  {
-    "Name": "Tarkett_Acczent_Platinium_Tapiflex_Platinium_Plazza_Coral_",
-    "Discription": "25176025_25178025_25180025_25182025_TK_01761_1080",
-    "Type": "Heterogene vinylgulv",
-    "Link_Image": "https://drive.google.com/file/d/1MUQroasMpcw0iyKk89btlrTUBIE0ioHU/view?usp=drive_link",
-    "Link_Supplier": "https://prosjekt.tarkett.no/nb_NO/kolleksjon-C001304-acczent-platinium-100/plazza-coral"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Intense_Kaki_",
-    "Discription": "25121934_25131934_25126934_25136934_TK_01603_1080",
-    "Link_Image": "https://drive.google.com/file/d/14cxq1UQkLxpKGdCdOyoTl3KOxEGm2UNr/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Dark_Beige_",
-    "Discription": "25121918_25131918_25126918_25136918_TK_01606_1080",
-    "Link_Image": "https://drive.google.com/file/d/1RMvFrlXaiateR7zI-n0g-1jvDVHcP7ax/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Bright_Yellow_",
-    "Discription": "25121930_25131930_25126930_25136930_TK_01607_1080",
-    "Link_Image": "https://drive.google.com/file/d/1J2vl0Y_IWpymdc1ZmditFlx02UoUtSBS/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Bright_Pink_",
-    "Discription": "25121927_25131927_25126927_25136927_TK_01610_1080",
-    "Link_Image": "https://drive.google.com/file/d/1vz9z5Nz5remn7tlW9NrYKh2xIFVeC1fe/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Bright_Orange_",
-    "Discription": "25121929_25131929_25126929_25136929_TK_01611_1080",
-    "Link_Image": "https://drive.google.com/file/d/1F2W5ieM5B30x5k0pbo5-R0ouxluAm1uw/view?usp=drive_link",
-    "Link_Supplier": "not in the list"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Bright_Ice_Blue_",
-    "Discription": "25121932_25131932_25126932_25136932_TK_01612_1080",
-    "Link_Image": "https://drive.google.com/file/d/1VwyOAzrA7VjeQSkJD8Xqi9tSEkSvtQlx/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Uni_Bright_Extreme_Blue_",
-    "Discription": "25121941_25131941_25126941_25136941_TK_01613_1080",
-    "Link_Image": "https://drive.google.com/file/d/1bA3A0sOAjINzdX3ir9R1fzT0az_rFDsD/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Flocons_Red_",
-    "Discription": "25118169_25128169_25123169_25133169_TK_01639_1080",
-    "Link_Image": "https://drive.google.com/file/d/1sFCxpN_piw8DnQ4jvcjhRPKBPYOuYBkG/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Flocons_Rainbow_",
-    "Discription": "25118170_25128170_25123170_25133170_TK_01640_1080",
-    "Link_Image": "https://drive.google.com/file/d/1f2KBCChDFYpQvG6YBanOgiQA8nPuvXcY/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Carpet_Intense_Olive_",
-    "Discription": "25128106_25118106_25133106_25123106_TK_01699_1080",
-    "Link_Image": "https://drive.google.com/file/d/1IQKmMRE2-dLlA_TOl5nsYwu3Lscos012/view?usp=drive_link"
-  },
-  {
-    "Name": "Tarkett_Acczent_Excellence_Tapiflex_Excellence_Bubbles_Warm_Mix_",
-    "Discription": "25120142_25130142_25125142_25135142_TK_01674_1080",
-    "Link_Image": "https://drive.google.com/file/d/1yct6Lk56WfXPalVISDYmv8vEwIk5HJ0G/view?usp=drive_link"
-  },
-  {
-    "Name": "LVT_iD_Inspiration_55_Century_Dawn_",
-    "Discription": "24523059_002_TK_03984_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/15o00pkevl0RbxSFt1CPeO3lrWnfZuFHq/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002414-id-inspiration-55/century-dawn"
-  },
-  {
-    "Name": "LVT_iD_Inspiration_55_Century_Dawn_",
-    "Discription": "24523059_001_TK_03983_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1VVTg6_YNGGlYFMa7kP0AD_bD_nZDmN-5/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002414-id-inspiration-55/century-dawn"
-  },
-  {
-    "Name": "LVT_iD_Inspiration_55_Breccia_Grey_",
-    "Discription": "24522052_002_TK_03993_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1PzzSZOv7Ai07UVR-rEJsCvCKkR9ksNQS/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002414-id-inspiration-55/breccia-grey"
-  },
-  {
-    "Name": "LVT_iD_Click_Solid_55_Scandinavian_Oak_Medium_Grey_",
-    "Discription": "24616014_001_TK_03967_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/1qwsi0qQURifIbGcWWNrLFs6LFx0wGlV9/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002415-id-inspiration-click-solid-55/scandinavian-oak-medium-grey?searchedSku=24616014"
-  },
-  {
-    "Name": "LVT_iD_Click_Solid_55_Scandinavian_Oak_Medium_Beige_",
-    "Discription": "24616215_004_TK_03971_1080",
-    "Type": "Vinyl",
-    "Link_Image": "https://drive.google.com/file/d/12nBnbpUrKp9sLRS30g3BUZZxxhbEeubX/view?usp=drive_link",
-    "Link_Supplier": "https://konsument.tarkett.no/nb_NO/kolleksjon-C002415-id-inspiration-click-solid-55/scandinavian-oak-light-beige?searchedSku=24616215"
+    "Name": "Pz Living Ceramics Verso Crosscut Wall Light Arpa Hr Scaled",
+    "Type": "Tile",
+    "PreImageName": "pz-living-ceramics-verso-crosscut-wall-light-arpa-hr-scaled.gif",
+    "Link_Supplier": "www.flisekompaniet.no"
   }
 ]

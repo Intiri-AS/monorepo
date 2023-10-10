@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\assets\project-image\material\**" />
+    <Compile Remove="wwwroot\assets\project-image\productsimage\**" />
     <Content Remove="wwwroot\assets\project-image\material\**" />
+    <Content Remove="wwwroot\assets\project-image\productsimage\**" />
     <EmbeddedResource Remove="wwwroot\assets\project-image\material\**" />
+    <EmbeddedResource Remove="wwwroot\assets\project-image\productsimage\**" />
     <None Remove="wwwroot\assets\project-image\material\**" />
+    <None Remove="wwwroot\assets\project-image\productsimage\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +56,7 @@
     <Folder Include="Resources\StyleCoverImages\" />
     <Folder Include="Resources\StyleImages\" />
     <Folder Include="wwwroot\assets\project-image\color-palettes\" />
+    <Folder Include="wwwroot\assets\project-image\DesignerPortfolio\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties dataaccess_4seeddata_4userseeddata_1json__JsonSchema="https://carafe.fm/schema/draft-02/bundle.schema.json" /></VisualStudio></ProjectExtensions>
