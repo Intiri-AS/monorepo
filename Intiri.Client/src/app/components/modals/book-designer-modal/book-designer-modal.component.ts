@@ -20,7 +20,7 @@ export class BookDesignerModalComponent {
   designer; //as modal prop
   moodboard;//as modal prop
   price: number;
-  duration: number;
+  duration: number = 60;
   totalPrice: number;
   extraPayment = false;
   extraPaymentAmount = 3500;
@@ -28,40 +28,40 @@ export class BookDesignerModalComponent {
 
   items = [
     {
-      id: 1, name: 'suggestion', isChecked: false
+      id: 1, name: 'Color and material suggestions', isChecked: false
     },
     {
-      id: 2, name: 'furnishing', isChecked: false
+      id: 2, name: 'Furnishing plan', isChecked: false
     },
     {
-      id: 3, name: 'drawings', isChecked: false
+      id: 3, name: 'Technical drawings', isChecked: false
     },
     {
-      id: 4, name: 'floor', isChecked: false
+      id: 4, name: 'Floor plans', isChecked: false
     },
     {
-      id: 5, name: 'kitchen', isChecked: false
+      id: 5, name: 'Kitchen', isChecked: false
     },
     {
-      id: 6, name: 'bath', isChecked: false
+      id: 6, name: 'Bath', isChecked: false
     },
     {
-      id: 7, name: 'lighting', isChecked: false
+      id: 7, name: 'Lighting plan', isChecked: false
     },
     {
-      id: 8, name: 'furniture', isChecked: false
+      id: 8, name: 'Furniture design', isChecked: false
     },
     {
-      id: 9, name: '2D', isChecked: false
+      id: 9, name: '2D visualization', isChecked: false
     },
     {
-      id: 10, name: '3D', isChecked: false
+      id: 10, name: '3D visualization', isChecked: false
     },
     {
-      id: 11, name: 'project', isChecked: false
+      id: 11, name: 'Project management', isChecked: false
     },
     {
-      id: 12, name: 'quesiton', isChecked: false
+      id: 12, name: 'Others', isChecked: false
     }
   ];
 
@@ -76,20 +76,8 @@ export class BookDesignerModalComponent {
   ) {}
 
   ngOnInit() {
-
-    this.spinner.show();
-    this.commonService.getConsulationsInfo().subscribe((res: any) => {
-      this.spinner.hide();
-      this.duration = res?.duration;
-      this.price = res?.price;
-      this.totalPrice = this.price * this.numberOfConsultations;
-    }, () => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.consultation-get-error'),
-        type: 'error',
-      });
-    })
+    this.price = this.designer.designerInfo.price;
+    this.totalPrice = this.price * this.numberOfConsultations;
 
   }
 
@@ -121,7 +109,7 @@ export class BookDesignerModalComponent {
   checkout(): void {
     const consultationDetails = this.getConsultationDetails();
     let sendPaymentObject = {
-      name: this.languageService.selected === 'no' ? 'Angrerett NO' : 'Right of withdrawal', //required
+      name: this.languageService.selected === 'no' ? 'Totalt' : 'Total', //required
       amount: this.totalPrice * 100,//required
       receiverId: this.designer.id, //required
       locale: this.languageService.selected === 'no' ? 'nb' : 'en', //optional, if not specified 'en' default
@@ -131,13 +119,13 @@ export class BookDesignerModalComponent {
       consultationDetails,
       numberOfConsultations: this.numberOfConsultations, //required
       Domain: environment.apiUrl.split('/api')[0]
-    }
+    };
     this.paymentService.sendPayment(sendPaymentObject).subscribe(async (res: any) => {
       let stripe = await loadStripe(environment.stripe_key);
       stripe?.redirectToCheckout({
         sessionId: res.id
-      })
-    })
+      });
+    });
   }
 
   getConsultationDetails() {
@@ -146,11 +134,7 @@ export class BookDesignerModalComponent {
       if(e['isChecked']) {
         details.push(e.name);
       }
-    })
-    if(this.extraPayment) {
-      // details.push('2D & 3D drawings');
-      details.push('2d3d');
-    }
+    });
     return String(details);
   }
 
@@ -159,7 +143,7 @@ export class BookDesignerModalComponent {
       this.extraPayment = true;
       this.totalPrice = this.totalPrice + this.extraPaymentAmount;
     } else {
-      this.extraPayment = false
+      this.extraPayment = false;
       this.totalPrice = this.totalPrice - this.extraPaymentAmount;
     }
   }

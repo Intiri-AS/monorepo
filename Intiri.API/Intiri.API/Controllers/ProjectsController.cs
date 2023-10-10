@@ -206,7 +206,7 @@ namespace Intiri.API.Controllers
 				return Ok(_mapper.Map<ProjectOutDTO>(project));
 			}
 
-			return BadRequest("Problem occured while adding project");
+			return BadRequest("Problem occurred while adding project");
 		}
 
 		// TODO: Clear moodboard cloudinary sketch file
@@ -287,22 +287,58 @@ namespace Intiri.API.Controllers
 
         // Get moodboards with target style ID and with all rooms other than the target room ID
         [AllowAnonymous]
-        [HttpGet("moodboardStyleFamily/{styleId}/{roomId}")]
-		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardStyleFamily(int styleId, int roomId)
+        [HttpPost("moodboardStyleFamily")]
+		public async Task<ActionResult<IEnumerable<MoodboardOutDTO>>> GetMoodboardStyleFamily([FromBody] moodboardStyleFamily request)
 		{
-			if (!await _unitOfWork.StyleRepository.DoesAnyExist(st => st.Id == styleId))
+			if (!await _unitOfWork.StyleRepository.DoesAnyExist(st => st.Id == request.styleId))
 			{
 				return BadRequest("Style doesn't exist.");
 			}
 
-			if (!await _unitOfWork.RoomRepository.DoesAnyExist(ro => ro.Id == roomId))
+			if (!await _unitOfWork.RoomRepository.DoesAnyExist(ro => ro.Id == request.roomId))
 			{
 				return BadRequest("Room doesn't exist.");
 			}
 
-			IEnumerable<MoodboardOutDTO> moodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(styleId, roomId);
+			IEnumerable<MoodboardOutDTO> moodboardFamily = await _moodboardSevice.GetMoodboardStyleFamilyAsync(request.styleId, request.roomId);
 
-			return Ok(moodboardFamily);
+            List<MoodboardOutDTO> moodboardFamilyResponce = new List<MoodboardOutDTO>();
+            var roomoptions = moodboardFamily.GroupBy(x => x.Room.Name).Select(x=>x.Key);
+
+            foreach (var item in roomoptions)
+			{
+				int ct = moodboardFamily.Count(x => x.Room.Name == item);
+				if(ct > 1) {
+
+					//Best Match Finding
+                    var selectetion = moodboardFamily.Where(x => x.Room.Name == item).ToList();
+                    Dictionary<int, int> moodboardMatches = new Dictionary<int, int>();
+                    foreach (var moodboard in selectetion)
+					{
+                        int maxcount = 0;
+                        foreach (var selectedcolorPaletteId in request.ColorPaletteIds)
+                        {
+							var haveColor = moodboard.ColorPalettes.Any(x => x.Id == selectedcolorPaletteId);
+							if(haveColor)
+							{
+                                maxcount = maxcount + 1;
+                            }
+                        }
+
+                        moodboardMatches.Add(moodboard.Id, maxcount);
+                    }
+
+					var ak = moodboardMatches.OrderByDescending(x => x.Value).FirstOrDefault();
+                    moodboardFamilyResponce.Add(moodboardFamily.Where(x => x.Id == ak.Key).FirstOrDefault());
+                }
+				else
+				{
+                    moodboardFamilyResponce.Add(moodboardFamily.Where(x => x.Room.Name == item).FirstOrDefault());
+                }
+            }
+
+
+			return Ok(moodboardFamilyResponce);
 		}
 
 		#endregion Public methods

@@ -17,6 +17,7 @@ using Intiri.API.Shared;
 using Intiri.API.Shared.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Intiri.API.Extension;
 
 namespace Intiri.API.Services
 {
@@ -38,61 +39,128 @@ namespace Intiri.API.Services
 
 		#endregion Constructors
 
+		public KeyValuePair<int, int> findStyleWithMaxCounts (Dictionary<int, int> dict) {
+			KeyValuePair<int, int> maxEntry = new KeyValuePair<int, int>();
+			foreach (var entry in dict) {
+				if (entry.Value > maxEntry.Value) {
+					maxEntry = entry;
+				}
+			}
+			return maxEntry;
+		}
 		public async Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(MoodboardMatchInDTO matchInDTO)
 		{
-			IEnumerable<Moodboard> roomMoodboards =
+			IEnumerable<Moodboard> moodboardsByRoom =
 				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(matchInDTO.RoomId);
 
-			Dictionary<Moodboard, int> moodboardToMatchDictionary = new();
-			foreach (Moodboard moodboard in roomMoodboards)
-			{
-				int styleImageMatches = moodboard.StyleImages
-				.Select(si => si.Id).ToList()
-				.Intersect(matchInDTO.StyleImageIds).Count();
+			// Group styleImageIds with max, mid, min selected styles.
+			ICollection<int> styleImageIds = matchInDTO.StyleImageIds;
+			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(styleImageIds);
+			styleImages = styleImages.ToList();
 
-				int colorPaletteMatches = 0;
-				if (matchInDTO.ColorPaletteIds != null && matchInDTO.ColorPaletteIds.Count > 0)
-				{
-					colorPaletteMatches = moodboard.ColorPalettes
-					.Select(cp => cp.Id).ToList()
-					.Intersect(matchInDTO.ColorPaletteIds).Count();
+			List<int> styleImageStyleIds = new List<int>();
+			foreach (StyleImage styleImage in styleImages) {
+				styleImageStyleIds.Add(styleImage.StyleId);
+			}
+
+			Dictionary<int, int> freq = Utils.CountArrayElementsFrequency(styleImageStyleIds);
+
+			KeyValuePair<int, int> highMatchStyle = new KeyValuePair<int, int>();
+			KeyValuePair<int, int> mediumMatchStyle = new KeyValuePair<int, int>();
+			KeyValuePair<int, int> lowMatchStyle = new KeyValuePair<int, int>();
+
+			if (freq.Count > 0) {
+				highMatchStyle = findStyleWithMaxCounts(freq);
+				freq.Remove(highMatchStyle.Key);
+			}
+			if (freq.Count > 0) {
+				mediumMatchStyle = findStyleWithMaxCounts(freq);
+				freq.Remove(mediumMatchStyle.Key);
+			}
+
+			if (freq.Count > 0) {
+				lowMatchStyle = findStyleWithMaxCounts(freq);
+			}
+
+			
+			Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
+
+			int count = 0;
+			foreach (Moodboard moodboard in moodboardsByRoom)
+			{
+				if (moodboard.Style.Id == highMatchStyle.Key && !moodboardMatches.ContainsKey("High")) {
+					moodboardMatches.Add("High", moodboard);
+				} else if (moodboard.Style.Id == mediumMatchStyle.Key && !moodboardMatches.ContainsKey("Medium")) {
+					moodboardMatches.Add("Medium", moodboard);
 				}
-
-				moodboardToMatchDictionary.Add(moodboard, styleImageMatches + colorPaletteMatches);
+				else
+				{
+					count++;
+					if(count <= 3)
+					{
+                        moodboardMatches.Add("Low" + count, moodboard);
+                    }
+				}
 			}
+			
+			List<KeyValuePair<string, Moodboard>> moodboardMatchesList = moodboardMatches.ToList();
 
-			List<KeyValuePair<Moodboard, int>> moodboardTopMatchOrder = moodboardToMatchDictionary.OrderByDescending(d => d.Value).ToList();
-
-			if (moodboardTopMatchOrder.Count == 0)
-			{
+			if (moodboardMatchesList.Count == 0) {
 				return null;
-			}
-
-			// take first two with high match
-			List<KeyValuePair<Moodboard, int>> moodboardTopMatch = moodboardTopMatchOrder.Take(2).ToList();
-
-			// take last with the lowest match
-			if (moodboardTopMatchOrder.Count > 2)
-			{
-				moodboardTopMatch.Add(moodboardTopMatchOrder.Last());
 			}
 
 			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
 
-			for (int i = 0; i < moodboardTopMatch.Count; i++)
+			foreach (var item in moodboardMatchesList)
 			{
-				//Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardTopMatch[i].Key.Id);
-				Moodboard moodboard = moodboardTopMatch[i].Key;
+                MoodboardMatchDTO moodboardMatch = new()
+                {
+                    Moodboard = _mapper.Map<MoodboardOutDTO>(item.Value),
+                };
 
-				MoodboardMatchDTO moodboardMatch = new()
+                if (item.Key.Contains("High"))
 				{
-					Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-					MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-				};
-				moodboardsMatch.Add(moodboardMatch);
-			}
+					moodboardMatch.MoodboardMatch = "High";
+					moodboardMatch.MoodboardMatchId = 1;
+				}
+				else if (item.Key.Contains("Medium"))
+				{
+                    moodboardMatch.MoodboardMatch = "Medium";
+                    moodboardMatch.MoodboardMatchId = 2;
+                }
+				else
+				{
+                    moodboardMatch.MoodboardMatch = "Low";
+                    moodboardMatch.MoodboardMatchId = 3;
+                }
 
-			return moodboardsMatch;
+				moodboardsMatch.Add(moodboardMatch);
+            }
+
+			//for (int i = 0; i < moodboardMatchesList.Count; i++) 
+			//{
+			//	Moodboard moodboard = moodboardMatchesList[i].Value;
+			//	if (i >= 2) 
+			//	{
+			//		MoodboardMatchDTO moodboardMatch = new()
+			//		{	
+			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+			//			MoodboardMatch = "Low"
+			//		};
+			//		moodboardsMatch.Add(moodboardMatch);
+			//	} 
+			//	else 
+			//	{
+			//		MoodboardMatchDTO moodboardMatch = new()
+			//		{	
+			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+			//			MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+			//		};
+			//		moodboardsMatch.Add(moodboardMatch);
+			//	}
+			//}
+
+			return moodboardsMatch.OrderBy(x=>x.MoodboardMatchId);
 		}
 
         // Get moodboards with target style ID and with all rooms other than the target room ID
@@ -157,6 +225,11 @@ namespace Intiri.API.Services
 			ClientMoodboard clonedMoodboard = new(moodboard);
             clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
             clonedMoodboard.StyleImages = moodboard.StyleImages;
+
+			// Need to update Materials, Products & Colors as well
+			clonedMoodboard.Materials = moodboard.Materials.Where(material => moodboardIn.MaterialIds.Contains(material.Id)).ToHashSet();
+			clonedMoodboard.Products = moodboard.Products.Where(product => moodboardIn.ProductIds.Contains(product.Id)).ToHashSet();
+			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.Where(colorPalette => moodboardIn.ColorPaletteIds.Contains(colorPalette.Id)).ToHashSet();
 
             _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 

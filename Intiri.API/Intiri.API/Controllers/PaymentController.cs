@@ -34,7 +34,8 @@ public class PaymentController : BaseApiController
         return Ok(await Task.FromResult(session));
     }
 
-    [HttpPost("/stripe-webhook")]
+    [AllowAnonymous]
+    [HttpPost("stripe-webhook")]
     public async Task<ActionResult> StripeWebhookHandler()
     {
         bool eventSuccessfullyHandled =  await _paymentService.HandlePaymentEvents(Request);

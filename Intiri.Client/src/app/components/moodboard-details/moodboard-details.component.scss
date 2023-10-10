@@ -18,11 +18,11 @@
 }
 
 .product-image {
-  @apply object-cover h-full w-full rounded-2xl;
+  @apply object-contain h-full w-full rounded-2xl;
 }
 
 p {
-  @apply text-left;
+  @apply text-center;
 }
 
 .card {
@@ -173,8 +173,8 @@ p {
 }
 
 .slot-image-style {
-  @apply object-cover cursor-pointer;
-  height: 140%;
+  @apply cursor-pointer;
+  height: 100%;
   width: 100%;
   position: relative;
   top: 0;
@@ -191,33 +191,32 @@ p {
   border-radius: 8px;
 }
 
-
 .palette-container {
+  cursor: pointer;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 2px;
   height: 100%;
-  cursor: pointer;
-
-  // .grid-item {
-
-  // }
+  gap: 2px;
 
   .mainColor {
     grid-row: span 3;
+    border-radius: 0.2rem;
   }
 
   .shadeColorLight {
     grid-column: span 1;
+    border-radius: 0.2rem;
   }
 
   .shadeColorMedium {
     grid-column: span 1;
+    border-radius: 0.2rem;
   }
 
   .shadeColorDark {
     grid-column: span 1;
+    border-radius: 0.2rem;
   }
 }
 

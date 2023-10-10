@@ -5,3 +5,9 @@
 .skip-btn {
   border: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .finish-button {
+    padding: 0 11px 0 0;
+  }
+}

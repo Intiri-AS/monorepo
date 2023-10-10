@@ -9,15 +9,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
-                  <img [src]="getMoodboardImage(d, 0) || '../../../../assets/images/landing-img.png'" class="h-[120.5px] mac:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
-                  <img [src]="getMoodboardImage(d, 1) || '../../../../assets/images/landing-img.png'"  class="h-[120.5px] mac:h-[155px] w-full object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[0]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[0]?.imagePath" class="h-[120.5px] mac:h-[155px] w-full mb-2 object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[1]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[1]?.imagePath"  class="h-[120.5px] mac:h-[155px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
-                  <!-- <div class="h-[30px] w-[55px] bg-[#EFE8DE] flex items-center justify-evenly rounded-md absolute right-[20px] top-[20px] shadow-sm">
-                    <ion-icon name="star" class="text-black-1 text-sm"></ion-icon>
-                    <p class="text-black-1 text-sm">{{d.designerRating.averageRating}}</p>
-                  </div> -->
-                  <img [src]="getMoodboardImage(d, 2) || '../../../../assets/images/landing-img.png'"  class="h-[249px] mac:h-[318px] w-full object-fill" alt="moodboard-img"/>
+                  <img *ngIf="getFeaturedPortfolios(d.id)?.[2]?.imagePath" [src]="getFeaturedPortfolios(d.id)?.[2]?.imagePath"  class="h-[249px] mac:h-[318px] w-full object-fill" alt="moodboard-img"/>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -26,11 +22,10 @@
             <div class="flex items-start justify-start">
               <img [src]="d.photoPath ? d.photoPath : '../../../../assets/images/profile-img.png'" class="h-[60px] w-[54px] rounded-md object-fill">
               <div class="ml-2">
-                <div class="text-black-2 text-base mac:text-2xl font-medium">{{d.firstName}} {{d.lastName}}</div>
-                <div class="text-sm mac:text-base text-primary bold">{{getDesignerType(d)}} | {{ 'CARD-INFO.designs' | translate:{'length': d.createdMoodboards.length} }}
-                | {{ 'COMMON.language' | translate }} {{ 'COMMON.' + d.language | translate }}</div>
+                <p class="text-black-2 text-lg mac:text-2xl font-medium ml-2">{{d.firstName}}</p>
+                <div class="info text-base mac:text-2xl font-medium">{{d.city}} {{d.country}} | {{d.designerInfo.openToHomeVist ? ('CONTACT-DESIGNER.home-visit' | translate) : ('CONTACT-DESIGNER.online-consultation' | translate)}} | {{d.designerInfo.position}}</div>
               </div>
-              
+
             </div>
             <ion-buttons *ngIf="isContactDesigner" (click)="paymentModal(d)"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>
             <ion-buttons *ngIf="!isContactDesigner" routerLink="/designer-portfolio/{{d.id}}"><ion-button class="primary-btn !bg-none">{{'COMMON.choose' | translate}}</ion-button></ion-buttons>

@@ -83,14 +83,15 @@
     "download-moodboard-pdf": "Download Moodboard PDF",
     "crop": "Crop",
     "shopping-list-loading": "Please wait while your shopping list loads",
-    "done": "Done"
+    "done": "Done",
+    "client-moodboard-instruction": "Here's your moodboard. Customize it by dragging and dropping products from below into the moodboard. With the “Customize moodboard” button you can adjust by deselecting products, materials and colors. Click \"Finish\" to download your personalized moodboard with coupon codes when you are done."
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",
     "completed": "Completed designs",
     "charges": "Charges",
     "portfolio": "Portfolio",
-    "book-a-consultation": "Book a Consultation",
+    "book-a-consultation": "Book a consultation",
     "home-visit": "Home Visit",
     "online-consultation": "Online Consultation",
     "per-hour": "per hour"
@@ -106,17 +107,18 @@
     "proceed": "Proceed"
   },
   "BOOK-WHY": {
-    "suggestion": "Color and material suggestions",
-    "furnishing": "Furnishing plan",
-    "drawings": "Technical drawings",
-    "floor": "Floor plans",
-    "kitchen": "Kitchen",
-    "bath": "Bath",
-    "lighting": "Lighting plan",
-    "furniture": "Furniture design",
-    "2D": "2D visualization",
-    "3D": "3D visualization",
-    "project": "Project management"
+    "Color and material suggestions": "Color and material suggestions",
+    "Furnishing plan": "Furnishing plan",
+    "Technical drawings": "Technical drawings",
+    "Floor plans": "Floor plans",
+    "Kitchen": "Kitchen",
+    "Bath": "Bath",
+    "Lighting plan": "Lighting plan",
+    "Furniture design": "Furniture design",
+    "2D visualization": "2D visualization",
+    "3D visualization": "3D visualization",
+    "Project management": "Project management",
+    "Others": "Other questions"
   },
   "PAYMENT": {
     "details": "Payment details",
@@ -160,7 +162,7 @@
   "NEW-PROJECT": {
     "upload": "Upload",
     "upload-your-photos": "Upload your photos",
-    "create": "Name your room",
+    "create": "Name your Project",
     "project": "Sample: Judy’s living room",
     "project-name": "Project name",
     "room": "Room",
@@ -305,6 +307,7 @@
     "save-changes": "Save changes",
     "pieces": "pieces",
     "file-selected": "file(s) selected",
+    "view": "View",
     "view-details": "View details",
     "messenger": "Messenger",
     "none-selected": "None selected",
@@ -601,7 +604,8 @@
     "Textile": "Textile",
     "Other": "Other",
     "Vinyl": "Vinyl",
-    "Wallpaper":"Wallpaper"
+    "Wallpaper":"Wallpaper",
+    "Tile":"Tile"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",

@@ -4,10 +4,12 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { BookDesignerModalComponent } from 'src/app/components/modals/book-designer-modal/book-designer-modal.component';
+import { LoginModalComponent } from 'src/app/components/modals/login/login-modal.component';
 import { Project } from 'src/app/models/project.model';
 import { AccountService } from 'src/app/services/account.service';
 import { DesignerService } from 'src/app/services/designer.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-designer-portfolio',
@@ -30,34 +32,14 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private projectService: ProjectService,
     private designerService: DesignerService,
     private accountService: AccountService,
     private modalController: ModalController,
+    private translate: TranslateService,
   ) {
     this.designerDetails$ = new BehaviorSubject(null);
   }
-
-
-  public comments = [
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Aliquam id elementum elit, pulvinar pretium turpis. Morbi lobortis lacinia gravida. In sed tortor mauris.',
-      author: 'John Doe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Boe'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'John Bro'
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget neque vel libero tristique dictum. Suspendisse at justo dui',
-      author: 'Ide Ide'
-    },
-  ];
 
   ngOnInit(): void {
     this.designerId = this.route.snapshot.params.id;
@@ -79,12 +61,12 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     let services: Array<string>;
     this.designerDetails$.subscribe(res => {
       services = res.designerInfo.areaOfExpertise.split(',');
-    })
+    });
     return services;
   }
 
   getOptions(){
-    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1}
+    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1};
   }
 
   removeProjectDraft(){
@@ -101,6 +83,18 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     return isUserLoggedIn;
   }
 
+  async openLoginModal(designer): Promise<void> {
+    const modal = await this.modalController.create({
+      component: LoginModalComponent,
+      cssClass: 'medium-modal-css',
+      backdropDismiss: true,
+      swipeToClose: false,
+      componentProps: {bookDesigner: true, designer}
+    });
+
+    await modal.present();
+  }
+
   async paymentModal(designer) {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
@@ -111,13 +105,24 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     await modal.present();
   }
 
-  bookConsultation(): void {
-    if (this.checkIfUserLoggedIn()) {
-      this.designerDetails$.subscribe(async res => {
-        await this.paymentModal(res);
-      })
-    } else {
-      this.router.navigateByUrl('/login');
-    }
+  async bookConsultation() {
+    this.designerDetails$.subscribe(async res => {
+      if (!this.checkIfUserLoggedIn()) {
+        await this.openLoginModal(res); return;
+      }
+      await this.paymentModal(res);
+    });
+  }
+
+  getFeaturedPortfolios(): Array<any> {
+    let featuredPortfolios: Array<any>;
+    this.designerDetails$.subscribe(designer => {
+      featuredPortfolios = designer.designerPortfolio.filter(d => d.featured === 1);
+    })
+    return featuredPortfolios;
+  }
+
+  getCurrentLang (): string {
+    return this.translate.currentLang;
   }
 }

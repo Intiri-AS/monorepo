@@ -20,7 +20,7 @@ export class LogoutModalComponent implements OnInit {
   logout() {
     this.dismiss();
     this.accountService.logout();
-    this.nav.navigateRoot('/landing');
+    window.location.replace('https://intiri.no')
   }
 
 }

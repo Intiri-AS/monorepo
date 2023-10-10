@@ -13,6 +13,9 @@ import { SmsVerificationModalComponent } from '../sms-verification-modal/sms-ver
   styleUrls: ['./login-modal.component.scss'],
 })
 export class LoginModalComponent implements OnInit {
+  bookDesigner: boolean; // as modal prop
+  designer: any; // as modal prop
+
   model: any = {};
   public loginForm: FormGroup;
   public isFormSubmited = false;
@@ -89,7 +92,12 @@ export class LoginModalComponent implements OnInit {
   private async openSmsVerificationModal(phoneModel): Promise<void> {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
-      componentProps: { phoneModel, step: '4', verificationTarget: VerificationTarget.LOGIN },
+      componentProps: {
+        phoneModel, step: '4',
+        verificationTarget: VerificationTarget.LOGIN,
+        bookDesigner: this.bookDesigner,
+        designer: this.designer
+      },
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,

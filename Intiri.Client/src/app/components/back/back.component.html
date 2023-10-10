@@ -1,3 +1,4 @@
-<div class="flex flex-col lg:flex-row justify-center items-center mt-10 xl:mt-40 fixed-bottom max-h-[50px]">
+<div class="flex flex-row lg:flex-row justify-center items-center mt-10 xl:mt-40 fixed-bottom max-h-[50px]">
   <ion-button fill="clear" class="secondary-btn-borderless" [routerLink]=[backPath] routerDirection="root">{{'COMMON.back' | translate}}</ion-button>
+  <ion-button *ngFor="let button of additionalButtons" fill="clear" class="secondary-btn-borderless" [routerLink]="button.routerLink" routerDirection="root">{{button.name | translate}}</ion-button>
 </div>

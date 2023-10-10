@@ -2,7 +2,7 @@
   <ion-row>
     <ion-col size="12" offset-xl="1" size-xl="5" class="p-2 xl:p-12 h-full">
       <div class="w-full xl:w-[470px] text-center xl:text-left">
-        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" />
+        <img class="h-7 w-auto cursor-pointer" src="../../../assets/images/intiri-logo.svg" (click)="onIntiriIconClick()"/>
         <div>
         <h1 class="font-['Allison'] text-5xl 2xl:text-7xl text-black-2 mt-[30px]">
           {{'REGISTER.start' | translate}}

@@ -2,7 +2,7 @@
   <ion-row>
     <ion-col offset-xl="1" size-xl="5" class="p-2 xl-ion:p-12 h-full">
       <div class="w-full xl:w-[470px]">
-        <img class="h-7 w-auto" src="../../../assets/images/intiri-logo.svg" routerLink="/landing">
+        <img class="h-7 w-auto cursor-pointer" src="../../../assets/images/intiri-logo.svg" (click)="onIntiriIconClick()">
         <div class="text-center xl:text-left">
           <h1 class="font-['Allison'] text-4xl xl:text-7xl mt-16 text-black-2">{{'LOGIN.welcome' | translate}}</h1>
           <h1 class="text-3xl xl:text-5xl font-semibold">{{'LOGIN.login' | translate}}</h1>
