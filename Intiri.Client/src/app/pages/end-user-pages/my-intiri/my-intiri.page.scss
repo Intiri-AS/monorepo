@@ -57,3 +57,12 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+  .new-project-container {
+    width: unset;
+  }
+}

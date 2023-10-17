@@ -10,17 +10,26 @@ using Messenger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.IdentityModel.Tokens;
 using Stripe.Checkout;
 using System.Text;
 using Twilio.Jwt.Taskrouter;
 
+
+
 namespace Intiri.API.Extension
 {
-	public static class ServiceCollectionExtensions
+
+    
+
+    public static class ServiceCollectionExtensions
 	{
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
 		{
+
+
             string env = config.GetValue<string>("ActiveEnvironment");
 			string useLocalDBConnection = Environment.GetEnvironmentVariable("ASPNETCORE_USELOCALDBCONNECTION");
 

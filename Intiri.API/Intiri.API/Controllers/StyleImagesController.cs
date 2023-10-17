@@ -18,173 +18,213 @@ using System.Net;
 
 namespace Intiri.API.Controllers
 {
-	public class StyleImagesController : BaseApiController
-	{
-		#region Fields
+    public class StyleImagesController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly IFileUploudService _fileUploadService;
+        private readonly IMapper _mapper;
+        private readonly IFileUploudService _fileUploadService;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public StyleImagesController(
-			IUnitOfWork unitOfWork,
-			IMapper mapper,
-			IFileUploudService fileUploadService) : base(unitOfWork)
-		{
-			_mapper = mapper;
-			_fileUploadService = fileUploadService;
-		}
+        public StyleImagesController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IFileUploudService fileUploadService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _fileUploadService = fileUploadService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<StyleImageOutDTO>>> GetStyleImages()
-		{
-			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesAsync();
-			IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<StyleImageOutDTO>>> GetStyleImages()
+        {
+            IEnumerable<StyleImage> styleImages =
+                await _unitOfWork.StyleImageRepository.GetStyleImagesAsync();
+            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<
+                IEnumerable<StyleImageOutDTO>
+            >(styleImages);
 
-			return Ok(styleImagesToReturn);
-		}
+            return Ok(styleImagesToReturn);
+        }
 
-		[HttpGet("id/{imageId}")]
-		public async Task<ActionResult<StyleImageOutDTO>> GetStyleImageById(int imageId)
-		{
-			StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetStyleImageByIdAsync(imageId);
+        [HttpGet("id/{imageId}")]
+        public async Task<ActionResult<StyleImageOutDTO>> GetStyleImageById(int imageId)
+        {
+            StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetStyleImageByIdAsync(
+                imageId
+            );
 
-			if (styleImage == null)
-			{
-				return BadRequest("Style image doesn't exist");
-			}
+            if (styleImage == null)
+            {
+                return BadRequest("Style image doesn't exist");
+            }
 
-			return _mapper.Map<StyleImageOutDTO>(styleImage);
-		}
+            return _mapper.Map<StyleImageOutDTO>(styleImage);
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage([FromForm] StyleMultipleImageInDTO styleImageInDTO)
-		{
-			Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult<StyleImageOutDTO>> AddStyleImage(
+            [FromForm] StyleMultipleImageInDTO styleImageInDTO
+        )
+        {
+            Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
 
-			if (style == null)
-			{
-				return BadRequest("Target style doesn't exist");
-			}
+            if (style == null)
+            {
+                return BadRequest("Target style doesn't exist");
+            }
 
-			try
-			{
-				foreach (var image in styleImageInDTO.ImageFile)
-				{
-					StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
+            try
+            {
+                foreach (var image in styleImageInDTO.ImageFile)
+                {
+                    StyleImage styleImage = _mapper.Map<StyleImage>(styleImageInDTO);
 
-					IFormFile imageFile = image;
-					if (imageFile != null && imageFile.Length > 0)
-					{
-						Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-							await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.StyleImages);
+                    IFormFile imageFile = image;
+                    if (imageFile != null && imageFile.Length > 0)
+                    {
+                        Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                            await _fileUploadService.TryAddFileToCloudinaryAsync(
+                                imageFile,
+                                FileUploadDestinations.StyleImages
+                            );
 
-						if (uploadResult.Item1 != HttpStatusCode.OK)
-						{
-							return BadRequest(uploadResult.Item2);
-						}
+                        if (uploadResult.Item1 != HttpStatusCode.OK)
+                        {
+                            return BadRequest(uploadResult.Item2);
+                        }
 
-						styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-						styleImage.PublicId = uploadResult.Item3.PublicId;
+                        styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                        styleImage.PublicId = uploadResult.Item3.PublicId;
 
-						styleImage.Style = style;
+                        styleImage.Style = style;
 
-						_unitOfWork.StyleImageRepository.Insert(styleImage);
-						await _unitOfWork.SaveChanges();
-					}
-				}
+                        _unitOfWork.StyleImageRepository.Insert(styleImage);
+                        await _unitOfWork.SaveChanges();
+                    }
+                }
 
-				return Ok(styleImageInDTO);
-			}
-			catch
-			{
-				return BadRequest("Problem adding style image");
-			}
-		}
+                return Ok(styleImageInDTO);
+            }
+            catch
+            {
+                return BadRequest("Problem adding style image");
+            }
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPatch("update/{styleImageId}")]
-		public async Task<ActionResult<RoomOutDTO>> UpdateStyleImage(int styleImageId, [FromForm] StyleImageInDTO styleImageInDTO)
-		{
-			StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetByID(styleImageId);
-			if (styleImage == null) return BadRequest("Style image doesn't exist");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPatch("update/{styleImageId}")]
+        public async Task<ActionResult<RoomOutDTO>> UpdateStyleImage(
+            int styleImageId,
+            [FromForm] StyleImageInDTO styleImageInDTO
+        )
+        {
+            StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetByID(styleImageId);
+            if (styleImage == null)
+                return BadRequest("Style image doesn't exist");
 
-			Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
-			if (style == null) return BadRequest("Target style doesn't exist");
+            Style style = await _unitOfWork.StyleRepository.GetByID(styleImageInDTO.StyleId);
+            if (style == null)
+                return BadRequest("Target style doesn't exist");
 
-			IFormFile imageFileFile = styleImageInDTO.ImageFile;
-			if (imageFileFile != null && imageFileFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.StyleImages, styleImage.PublicId);
+            IFormFile imageFileFile = styleImageInDTO.ImageFile;
+            if (imageFileFile != null && imageFileFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        imageFileFile,
+                        FileUploadDestinations.StyleImages,
+                        styleImage.PublicId
+                    );
 
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-				styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				styleImage.PublicId = uploadResult.Item3.PublicId;
-			}
+                styleImage.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                styleImage.PublicId = uploadResult.Item3.PublicId;
+            }
 
             styleImage.RoomId = styleImageInDTO.RoomId;
             styleImage.Provider = styleImageInDTO.Provider;
             styleImage.Style = style;
 
-			_unitOfWork.StyleImageRepository.Update(styleImage);
+            _unitOfWork.StyleImageRepository.Update(styleImage);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<StyleImageOutDTO>(styleImage)); ;
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<StyleImageOutDTO>(styleImage));
+                ;
+            }
 
-			return BadRequest("Faild to Style image!");
-		}
+            return BadRequest("Faild to Style image!");
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete/{imageId}")]
-		public async Task<IActionResult> DeleteStyleImage(int imageId)
-		{
-			StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetByID(imageId);
-			if (styleImage == null) return BadRequest("Style image is not found.");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete/{imageId}")]
+        public async Task<IActionResult> DeleteStyleImage(int imageId)
+        {
+            StyleImage styleImage = await _unitOfWork.StyleImageRepository.GetByID(imageId);
+            if (styleImage == null)
+                return BadRequest("Style image is not found.");
 
-			Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(styleImage.StyleId);
-			if (style == null) return BadRequest("Style is not found.");
+            Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(
+                styleImage.StyleId
+            );
+            if (style == null)
+                return BadRequest("Style is not found.");
 
-			try
-			{
-				style.StyleImages.Remove(styleImage);
-				await _unitOfWork.StyleImageRepository.Delete(imageId);
+            try
+            {
+                style.StyleImages.Remove(styleImage);
+                await _unitOfWork.StyleImageRepository.Delete(imageId);
 
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Internal error: {ex}");
-			}
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex}");
+            }
 
-			if (!string.IsNullOrEmpty(styleImage.PublicId))
-			{
-				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(styleImage.PublicId);
+            if (!string.IsNullOrEmpty(styleImage.PublicId))
+            {
+                Tuple<HttpStatusCode, string> tuple =
+                    await _fileUploadService.TryDeleteFileFromCloudinaryAsync(styleImage.PublicId);
 
-				if (tuple.Item1 != HttpStatusCode.OK)
-					return Problem(title: "Style image is deleted. Faild delete room image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
-			}
+                if (tuple.Item1 != HttpStatusCode.OK)
+                    return Problem(
+                        title: "Style image is deleted. Faild delete room image.",
+                        statusCode: (int?)tuple.Item1,
+                        detail: tuple.Item2
+                    );
+            }
 
-			return Ok();
-		}
+            return Ok();
+        }
 
         [HttpGet("getStyleImagesByRoomAndStyle/{roomId}/{styleId}")]
-        public async Task<ActionResult<StyleImageOutDTO>> GetStyleImagesByRoomAndStyle(int roomId, int styleId)
+        public async Task<ActionResult<StyleImageOutDTO>> GetStyleImagesByRoomAndStyle(
+            int roomId,
+            int styleId
+        )
         {
-            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAndStyleAsync(roomId, styleId);
-            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+            IEnumerable<StyleImage> styleImages =
+                await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAndStyleAsync(
+                    roomId,
+                    styleId
+                );
+            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<
+                IEnumerable<StyleImageOutDTO>
+            >(styleImages);
 
             return Ok(styleImagesToReturn);
         }
@@ -192,8 +232,11 @@ namespace Intiri.API.Controllers
         [HttpGet("getStyleImagesByRoom/{roomId}")]
         public async Task<ActionResult<StyleImageOutDTO>> getStyleImagesByRoom(int roomId)
         {
-            IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAsync(roomId);
-            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<IEnumerable<StyleImageOutDTO>>(styleImages);
+            IEnumerable<StyleImage> styleImages =
+                await _unitOfWork.StyleImageRepository.GetStyleImagesByRoomAsync(roomId);
+            IEnumerable<StyleImageOutDTO> styleImagesToReturn = _mapper.Map<
+                IEnumerable<StyleImageOutDTO>
+            >(styleImages);
 
             return Ok(styleImagesToReturn);
         }
