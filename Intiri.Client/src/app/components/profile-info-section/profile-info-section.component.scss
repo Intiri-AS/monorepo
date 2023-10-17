@@ -1,21 +1,21 @@
 .profile-input {
-    @apply mt-4 mx-2 flex-1
+  @apply mt-4 mx-2 flex-1;
 }
 
 .phone-input {
-    @apply mt-4 mx-2 min-w-[130px]
+  @apply mt-4 mx-2 min-w-[130px];
 }
 
 ion-input {
-    @apply h-12
+  @apply h-12;
 }
 
 ion-select {
-    @apply border rounded-2xl h-12 border-black-2 pr-4
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
 
 .textarea {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 1rem;
 }

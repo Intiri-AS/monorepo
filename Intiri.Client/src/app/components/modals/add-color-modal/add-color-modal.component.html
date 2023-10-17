@@ -2,141 +2,316 @@
   <!-- Add color modal -->
   <div *ngIf="add" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addColorForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addColor()" autocomplete="off">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'STYLE.add-color' | translate}}</h1>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <div class="profile-input">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.color-preview' | translate}}</p>
-            <div class="border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer">
-              <div class="flex justify-center mt-[18px]">
-                <div class="card">
-                  <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + mainColorSrc + ')'}"></div>
-                  <div class="w-[47.5%] h-full inline-block color-container float-right">
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + shadeColorLightSrc + ')'}"></div>
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + shadeColorMediumSrc + ')'}"></div>
-                    <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + shadeColorDarkSrc + ')'}"></div>
+    <form
+      [formGroup]="addColorForm"
+      class="d-flex mt-2 md:mt-0"
+      (ngSubmit)="addColor()"
+      autocomplete="off"
+    >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">
+              {{ "STYLE.add-color" | translate }}
+            </h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="profile-input">
+              <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">
+                {{ "STYLE.color-preview" | translate }}
+              </p>
+              <div
+                class="border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer"
+              >
+                <div class="flex justify-center mt-[18px]">
+                  <div class="card">
+                    <div
+                      class="w-[47.5%] h-full inline-block"
+                      [ngStyle]="{
+                        'background-image': 'url(' + mainColorSrc + ')'
+                      }"
+                    ></div>
+                    <div
+                      class="w-[47.5%] h-full inline-block color-container float-right"
+                    >
+                      <div
+                        class="h-[30%] mb-[6%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorLightSrc + ')'
+                        }"
+                      ></div>
+                      <div
+                        class="h-[30%] mb-[6%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorMediumSrc + ')'
+                        }"
+                      ></div>
+                      <div
+                        class="h-[30%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorDarkSrc + ')'
+                        }"
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.color-name' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && nameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.number" type="number" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && numberErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>  
-            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain()">
-              <ion-searchbar></ion-searchbar>
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor  + '!important'"
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.color-name" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="colorPallete.name"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="name"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && nameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.color-number" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="colorPallete.number"
+                type="number"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="number"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && numberErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.select-main-color" | translate
+              }}</span>
+              <ion-select
+                [(ngModel)]="colorPallete.mainColor"
+                interface="popover"
+                formControlName="main"
+                (ngModelChange)="updateColorPalleteMain()"
+              >
+                <ion-searchbar></ion-searchbar>
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="main"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && mainErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && mainErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 1</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorLight"
+                interface="popover"
+                formControlName="shadeOne"
+                (ngModelChange)="updateColorPalleteLight()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorLight" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeOne"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeOneErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && shadeOneErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 2</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorMedium"
+                interface="popover"
+                formControlName="shadeTwo"
+                (ngModelChange)="updateColorPalleteMedium()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorMedium" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeTwo"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeTwoErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && shadeTwoErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 3</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorDark"
+                interface="popover"
+                formControlName="shadeThree"
+                (ngModelChange)="updateColorPalleteDark()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorDark" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeThree"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && shadeThreeErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.add' | translate}}</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && shadeThreeErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="text-center mt-8">
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px]"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px]"
+              type="submit"
+              >{{ "COMMON.add" | translate }}</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
-   <!-- Color added modal -->
-   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <!-- Color added modal -->
+  <div
+    *ngIf="added"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'STYLE.color-added' | translate}}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{'STYLE.color-added-text' | translate}}</p>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]">
+            <img
+              class="h-[32px] w-[32px] mx-auto mt-[18px]"
+              src="../../../../assets/icon/success.svg"
+              alt="success"
+            />
+          </div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{ "STYLE.color-added" | translate }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{ "STYLE.color-added-text" | translate }}
+          </p>
         </div>
-          <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'STYLE.go-to-colors' | translate}}</ion-button>
-          </ion-buttons>
-        </div>
+        <ion-buttons class="justify-center">
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "STYLE.go-to-colors" | translate }}</ion-button
+          >
+        </ion-buttons>
+      </div>
     </div>
   </div>
   <!-- Color delete modal -->
-  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div
+    *ngIf="delete"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.color' | translate) } }}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.color' | translate) } }}</p>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]">
+            <ion-icon
+              class="h-[32px] w-[32px] ml-[3px] mt-[7px]"
+              name="trash-outline"
+            ></ion-icon>
+          </div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.color" | translate) }
+            }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{
+              "COMMON-MODAL.remove-text"
+                | translate : { name: ("COMMON-MODAL.color" | translate) }
+            }}
+          </p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteColor()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.color' | translate) } }}</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="deleteColor()"
+            >{{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.color" | translate) }
+            }}</ion-button
+          >
+          <ion-button
+            class="secondary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "COMMON.cancel" | translate }}</ion-button
+          >
         </ion-buttons>
       </div>
     </div>
@@ -144,111 +319,240 @@
   <!-- Edit color modal -->
   <div *ngIf="edit" class="justify-center items-center h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="editColorForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="editColor()" autocomplete="off">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.color' | translate) } }}</h1> <!-- TODO Translate -->
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <div class="profile-input">
-            <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'STYLE.color-preview' | translate}}</p>
-            <div class="border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer">
-              <div class="flex justify-center mt-[18px]">
-                <div class="card">
-                  <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + mainColorSrc + ')'}"></div>
-                  <div class="w-[47.5%] h-full inline-block color-container float-right">
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + shadeColorLightSrc + ')'}"></div>
-                    <div class="h-[30%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + shadeColorMediumSrc + ')'}"></div>
-                    <div class="h-[30%]" [ngStyle]="{'background-image': 'url(' + shadeColorDarkSrc + ')'}"></div>
+    <form
+      [formGroup]="editColorForm"
+      class="d-flex mt-2 md:mt-0"
+      (ngSubmit)="editColor()"
+      autocomplete="off"
+    >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">
+              {{
+                "COMMON-MODAL.edit-title"
+                  | translate : { name: ("COMMON-MODAL.color" | translate) }
+              }}
+            </h1>
+            <!-- TODO Translate -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="profile-input">
+              <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">
+                {{ "STYLE.color-preview" | translate }}
+              </p>
+              <div
+                class="border-2 border-dashed rounded-2xl h-[240px] border-black-3 hover:opacity-70 cursor-pointer"
+              >
+                <div class="flex justify-center mt-[18px]">
+                  <div class="card">
+                    <div
+                      class="w-[47.5%] h-full inline-block"
+                      [ngStyle]="{
+                        'background-image': 'url(' + mainColorSrc + ')'
+                      }"
+                    ></div>
+                    <div
+                      class="w-[47.5%] h-full inline-block color-container float-right"
+                    >
+                      <div
+                        class="h-[30%] mb-[6%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorLightSrc + ')'
+                        }"
+                      ></div>
+                      <div
+                        class="h-[30%] mb-[6%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorMediumSrc + ')'
+                        }"
+                      ></div>
+                      <div
+                        class="h-[30%]"
+                        [ngStyle]="{
+                          'background-image': 'url(' + shadeColorDarkSrc + ')'
+                        }"
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.color-name' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.name" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="name"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && editNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.color-number' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.number" type="number" class="border rounded-2xl h-14 border-black-2" formControlName="number"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && editNumberErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-            <ion-select  [(ngModel)]="colorPallete.mainColor" interface="popover" formControlName="main" (ngModelChange)="updateColorPalleteMain()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor + '!important'"
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.color-name" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="colorPallete.name"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="name"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editNameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.color-number" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="colorPallete.number"
+                type="number"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="number"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editNumberErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px] relative">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2">{{
+                "STYLE.select-main-color" | translate
+              }}</span>
+              <ion-select
+                [(ngModel)]="colorPallete.mainColor"
+                interface="popover"
+                formControlName="main"
+                (ngModelChange)="updateColorPalleteMain()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.mainColor" [disabled]="true" [style.background]="colorPallete.mainColor + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.mainColor" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="main"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && editMainErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 1</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorLight" interface="popover" formControlName="shadeOne" (ngModelChange)="updateColorPalleteLight()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editMainErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 1</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorLight"
+                interface="popover"
+                formControlName="shadeOne"
+                (ngModelChange)="updateColorPalleteLight()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorLight" [disabled]="true" [style.background]="colorPallete.shadeColorLight  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorLight" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeOne"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && editShadeOneErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
-        <ion-col>
-          <div class="pr-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 2</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorMedium" interface="popover" formControlName="shadeTwo" (ngModelChange)="updateColorPalleteMedium()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editShadeOneErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-4 mx-2 flex-1 px-0 sm:px-[100px]">
+          <ion-col>
+            <div class="pr-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 2</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorMedium"
+                interface="popover"
+                formControlName="shadeTwo"
+                (ngModelChange)="updateColorPalleteMedium()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorMedium" [disabled]="true" [style.background]="colorPallete.shadeColorMedium  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorMedium" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeTwo"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && editShadeTwoErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="pl-2">
-            <span class="text-sm text-black-2">{{'STYLE.shade' | translate}} 3</span>
-            <ion-select  [(ngModel)]="colorPallete.shadeColorDark" interface="popover" formControlName="shadeThree" (ngModelChange)="updateColorPalleteDark()">
-              <ion-select-option *ngFor="let color of (colorNCS$ | async)" value="{{color.id}}">{{color.name}}</ion-select-option>
-            </ion-select>
-            <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editShadeTwoErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="pl-2">
+              <span class="text-sm text-black-2"
+                >{{ "STYLE.shade" | translate }} 3</span
+              >
+              <ion-select
+                [(ngModel)]="colorPallete.shadeColorDark"
+                interface="popover"
+                formControlName="shadeThree"
+                (ngModelChange)="updateColorPalleteDark()"
+              >
+                <ion-select-option
+                  *ngFor="let color of colorNCS$ | async"
+                  value="{{ color.id }}"
+                  >{{ color.name }}</ion-select-option
+                >
+              </ion-select>
+              <!-- <ion-input [(ngModel)]="colorPallete.shadeColorDark" [disabled]="true" [style.background]="colorPallete.shadeColorDark  + '!important'"
             [cpPosition]="'top'"
             [(colorPicker)]="colorPallete.shadeColorDark" type="text"
             class="border rounded-2xl h-14 border-black-2" formControlName="shadeThree"></ion-input> -->
-            <span class="ion-warning" *ngIf="isFormSubmited && editShadeThreeErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="text-center mt-8">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.save' | translate}}</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editShadeThreeErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="text-center mt-8">
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px]"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px]"
+              type="submit"
+              >{{ "COMMON.save" | translate }}</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
 </ion-content>

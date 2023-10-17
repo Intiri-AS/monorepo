@@ -1,4 +1,3 @@
-
 using Intiri.API.DataAccess;
 using Intiri.API.DataAccess.SeedData;
 using Intiri.API.Extension;
@@ -20,111 +19,120 @@ logger.Info("Init Main");
 
 try
 {
-  var builder = WebApplication.CreateBuilder(args);
-  ConfigurationManager configuration = builder.Configuration;
-  string env = configuration.GetValue<string>("ActiveEnvironment");
-  logger.Info("Environment: " + env);
+    var builder = WebApplication.CreateBuilder(args);
+    ConfigurationManager configuration = builder.Configuration;
+    string env = configuration.GetValue<string>("ActiveEnvironment");
+    logger.Info("Environment: " + env);
 
-  // NLog: Setup NLog for Dependency injection
-  builder.Logging.ClearProviders();
-  builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-  builder.Host.UseNLog();
+    // NLog: Setup NLog for Dependency injection
+    builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+    builder.Host.UseNLog();
 
-  logger.Info("Init Services..");
-  // Add services to the container
-  builder.Services.AddApplicationServices(configuration);
-  builder.Services.AddIdentityServices(configuration);
-  builder.Services.AddControllers();
-  // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-  builder.Services.AddEndpointsApiExplorer();
-  builder.Services.AddSwaggerGen();
+    logger.Info("Init Services..");
+    // Add services to the container
+    builder.Services.AddApplicationServices(configuration);
+    builder.Services.AddIdentityServices(configuration);
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-  // Add CoreAdmin
-  builder.Services.AddCoreAdmin();
+    // Add CoreAdmin
+    builder.Services.AddCoreAdmin();
 
-  logger.Info("Build app..");
-  var app = builder.Build();
+    logger.Info("Build app..");
+    var app = builder.Build();
 
-  #region Seed data
+    #region Seed data
 
-  using IServiceScope _scope = app.Services.CreateScope();
-  IServiceProvider _serviceProvider = _scope.ServiceProvider;
-  DataContext dataContext = _serviceProvider.GetRequiredService<DataContext>();
+    using IServiceScope _scope = app.Services.CreateScope();
+    IServiceProvider _serviceProvider = _scope.ServiceProvider;
+    DataContext dataContext = _serviceProvider.GetRequiredService<DataContext>();
 
-  IUnitOfWork unitOfWork = _serviceProvider.GetRequiredService<IUnitOfWork>();
-  UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
-  RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
-  IAccountService accountService = _serviceProvider.GetRequiredService<IAccountService>();
-  ICloudinaryService fileUploadService = _serviceProvider.GetRequiredService<ICloudinaryService>();
+    IUnitOfWork unitOfWork = _serviceProvider.GetRequiredService<IUnitOfWork>();
+    UserManager<User> userManager = _serviceProvider.GetRequiredService<UserManager<User>>();
+    RoleManager<Role> roleManager = _serviceProvider.GetRequiredService<RoleManager<Role>>();
+    IAccountService accountService = _serviceProvider.GetRequiredService<IAccountService>();
+    ICloudinaryService fileUploadService =
+        _serviceProvider.GetRequiredService<ICloudinaryService>();
 
-  logger.Info("Migrate db..");
-  //add migrations
-  await dataContext.Database.MigrateAsync();
-  // seed data
-  //await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
-
-
-
-  #endregion Seed data
-
-  // Configure the HTTP request pipeline.
-  if (app.Environment.IsDevelopment())
-  {
-	app.UseSwagger();
-	app.UseSwaggerUI();
-  }
-
-  app.UseCors(policy =>
-			  policy.AllowAnyHeader()
-					 .AllowAnyMethod()
-					 .AllowCredentials()
-					 .WithOrigins("http://localhost:8100", "http://localhost:4200", "https://app.intiri.no", "http://app.intiri.no", "https://qa.app.intiri.no", "http://qa.app.intiri.no"));
-
-  app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
-
-  app.UseHttpsRedirection();
-  app.UseStaticFiles();
-
-  app.UseRouting();
-
-  //create folder where chat message attachments will be stored (at the moment of implementation it is cloudinary) - catch exception immediatelly to avoid killing process because of this
-  try
-  {
-	if (!await fileUploadService.DoesFolderExist(ChatMessageNames.AttachmentsFolderName))
-	{
-	  await fileUploadService.TryCreateFolder(ChatMessageNames.AttachmentsFolderName);
-	}
-  }
-  catch (Exception)
-  {
-	//TODO: log problem
-  }
-
-  await SeedData.SeedTestData(accountService, unitOfWork, userManager, roleManager);
-
-  app.UseAuthentication();
-  app.UseAuthorization();
-
-  // app.UseDefaultFiles();
-
-  app.MapDefaultControllerRoute();
+    logger.Info("Migrate db..");
+    //add migrations
+    await dataContext.Database.MigrateAsync();
+    // seed data
+    //await SeedData.SeedTestData(unitOfWork, userManager, roleManager);
 
 
-  //TODO-SECURITY: Move this to configuration
-  StripeConfiguration.ApiKey = configuration.GetValue<string>("StripeApiKey");
 
-  //app.UseEndpoints(endpoints =>
-  //{
-  //	endpoints.MapControllers();
-  //	endpoints.MapFallbackToController("Index", "Fallback");
-  //});
+    #endregion Seed data
 
-  logger.Debug("Running app...");
-  app.Run();
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseCors(
+        policy =>
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins(
+                    "http://localhost:8100",
+                    "http://localhost:4200",
+                    "https://app.intiri.no",
+                    "http://app.intiri.no",
+                    "https://qa.app.intiri.no",
+                    "http://qa.app.intiri.no"
+                )
+    );
+
+    app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    //create folder where chat message attachments will be stored (at the moment of implementation it is cloudinary) - catch exception immediatelly to avoid killing process because of this
+    try
+    {
+        if (!await fileUploadService.DoesFolderExist(ChatMessageNames.AttachmentsFolderName))
+        {
+            await fileUploadService.TryCreateFolder(ChatMessageNames.AttachmentsFolderName);
+        }
+    }
+    catch (Exception)
+    {
+        //TODO: log problem
+    }
+
+    await SeedData.SeedTestData(accountService, unitOfWork, userManager, roleManager);
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    // app.UseDefaultFiles();
+
+    app.MapDefaultControllerRoute();
+
+    //TODO-SECURITY: Move this to configuration
+    StripeConfiguration.ApiKey = configuration.GetValue<string>("StripeApiKey");
+
+    //app.UseEndpoints(endpoints =>
+    //{
+    //	endpoints.MapControllers();
+    //	endpoints.MapFallbackToController("Index", "Fallback");
+    //});
+
+    logger.Debug("Running app...");
+    app.Run();
 }
 catch (Exception exception)
 {
-  logger.Error(exception.Message);
-  logger.Error("Stopped program: ", exception);
+    logger.Error(exception.Message);
+    logger.Error("Stopped program: ", exception);
 }
-

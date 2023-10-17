@@ -5,16 +5,14 @@ import { Component } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-
 export class FooterComponent {
-
   constructor() {}
 
   // this is a workaround - usual way does not seem to work properly
-  scrollTo(id){
+  scrollTo(id) {
     let x = document.querySelector(`#${id}`);
-    if (x){
-        x.scrollIntoView({behavior: 'smooth'});
+    if (x) {
+      x.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

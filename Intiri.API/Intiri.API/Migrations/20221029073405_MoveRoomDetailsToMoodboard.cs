@@ -10,55 +10,56 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Moodboards_Projects_ProjectId",
-                table: "Moodboards");
+                table: "Moodboards"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Projects_RoomDetails_RoomDetailsId",
-                table: "Projects");
+                table: "Projects"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_Projects_RoomDetailsId",
-                table: "Projects");
+            migrationBuilder.DropIndex(name: "IX_Projects_RoomDetailsId", table: "Projects");
 
-            migrationBuilder.DropColumn(
-                name: "BudgetRate",
-                table: "Projects");
+            migrationBuilder.DropColumn(name: "BudgetRate", table: "Projects");
 
-            migrationBuilder.DropColumn(
-                name: "RoomDetailsId",
-                table: "Projects");
+            migrationBuilder.DropColumn(name: "RoomDetailsId", table: "Projects");
 
             migrationBuilder.AddColumn<int>(
                 name: "BudgetRate",
                 table: "RoomDetails",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "MoodboardId",
                 table: "RoomDetails",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "SketchPublicId",
                 table: "RoomDetails",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "SketchUrl",
                 table: "RoomDetails",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoomDetails_MoodboardId",
                 table: "RoomDetails",
                 column: "MoodboardId",
-                unique: true);
+                unique: true
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Moodboards_Projects_ProjectId",
@@ -66,7 +67,8 @@ namespace Intiri.API.Migrations
                 column: "ProjectId",
                 principalTable: "Projects",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_RoomDetails_Moodboards_MoodboardId",
@@ -74,70 +76,68 @@ namespace Intiri.API.Migrations
                 column: "MoodboardId",
                 principalTable: "Moodboards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Moodboards_Projects_ProjectId",
-                table: "Moodboards");
+                table: "Moodboards"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_RoomDetails_Moodboards_MoodboardId",
-                table: "RoomDetails");
+                table: "RoomDetails"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_RoomDetails_MoodboardId",
-                table: "RoomDetails");
+            migrationBuilder.DropIndex(name: "IX_RoomDetails_MoodboardId", table: "RoomDetails");
 
-            migrationBuilder.DropColumn(
-                name: "BudgetRate",
-                table: "RoomDetails");
+            migrationBuilder.DropColumn(name: "BudgetRate", table: "RoomDetails");
 
-            migrationBuilder.DropColumn(
-                name: "MoodboardId",
-                table: "RoomDetails");
+            migrationBuilder.DropColumn(name: "MoodboardId", table: "RoomDetails");
 
-            migrationBuilder.DropColumn(
-                name: "SketchPublicId",
-                table: "RoomDetails");
+            migrationBuilder.DropColumn(name: "SketchPublicId", table: "RoomDetails");
 
-            migrationBuilder.DropColumn(
-                name: "SketchUrl",
-                table: "RoomDetails");
+            migrationBuilder.DropColumn(name: "SketchUrl", table: "RoomDetails");
 
             migrationBuilder.AddColumn<int>(
                 name: "BudgetRate",
                 table: "Projects",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "RoomDetailsId",
                 table: "Projects",
                 type: "int",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_RoomDetailsId",
                 table: "Projects",
-                column: "RoomDetailsId");
+                column: "RoomDetailsId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Moodboards_Projects_ProjectId",
                 table: "Moodboards",
                 column: "ProjectId",
                 principalTable: "Projects",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Projects_RoomDetails_RoomDetailsId",
                 table: "Projects",
                 column: "RoomDetailsId",
                 principalTable: "RoomDetails",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
     }
 }

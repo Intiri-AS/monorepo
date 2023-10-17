@@ -113,7 +113,12 @@
       >
         <!-- if image (style|material|product) -->
         <span *ngIf="item.imagePath">
-          <app-cloudinary-image-scaler publicId="{{ item.publicId }}" srcString="{{ item.imagePath }}" borderRadius="13px" alt="style-img"></app-cloudinary-image-scaler>
+          <app-cloudinary-image-scaler
+            publicId="{{ item.publicId }}"
+            srcString="{{ item.imagePath }}"
+            borderRadius="13px"
+            alt="style-img"
+          ></app-cloudinary-image-scaler>
           <ion-icon
             class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl"
             (click)="openImageInModal(item, { url: item.imagePath })"

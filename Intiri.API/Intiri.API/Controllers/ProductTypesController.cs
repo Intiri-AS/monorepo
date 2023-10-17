@@ -11,80 +11,92 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class ProductTypesController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class ProductTypesController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ProductTypesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
-		{
-			_mapper = mapper;
-		}
+        public ProductTypesController(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProductTypeOutDTO>>> GetProductTypes()
-		{
-			IEnumerable<ProductType> productTypes = await _unitOfWork.ProductTypeRepository.GetAllProductTypesAsync();
-			IEnumerable<ProductTypeOutDTO> productTypesToReturn = _mapper.Map<IEnumerable<ProductTypeOutDTO>>(productTypes);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductTypeOutDTO>>> GetProductTypes()
+        {
+            IEnumerable<ProductType> productTypes =
+                await _unitOfWork.ProductTypeRepository.GetAllProductTypesAsync();
+            IEnumerable<ProductTypeOutDTO> productTypesToReturn = _mapper.Map<
+                IEnumerable<ProductTypeOutDTO>
+            >(productTypes);
 
-			return Ok(productTypesToReturn);
-		}
+            return Ok(productTypesToReturn);
+        }
 
-		[HttpGet("id/{productTypeId}")]
-		public async Task<ActionResult<ProductTypeOutDTO>> GetProductTypeById(int productTypeId)
-		{
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productTypeId);
-			ProductTypeOutDTO productTypeOutDTO = _mapper.Map<ProductTypeOutDTO>(productType);
+        [HttpGet("id/{productTypeId}")]
+        public async Task<ActionResult<ProductTypeOutDTO>> GetProductTypeById(int productTypeId)
+        {
+            ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(
+                productTypeId
+            );
+            ProductTypeOutDTO productTypeOutDTO = _mapper.Map<ProductTypeOutDTO>(productType);
 
-			return Ok(productTypeOutDTO);
-		}
+            return Ok(productTypeOutDTO);
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult> AddProductType(ProductTypeInDTO productTypeInDTO)
-		{
-			if (await _unitOfWork.ProductTypeRepository.IsProductTypeNameExists(productTypeInDTO.Name))
-			{
-				return BadRequest("Product type already exists");
-			}
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult> AddProductType(ProductTypeInDTO productTypeInDTO)
+        {
+            if (
+                await _unitOfWork.ProductTypeRepository.IsProductTypeNameExists(
+                    productTypeInDTO.Name
+                )
+            )
+            {
+                return BadRequest("Product type already exists");
+            }
 
-			ProductType productType = _mapper.Map<ProductType>(productTypeInDTO);
-			_unitOfWork.ProductTypeRepository.Insert(productType);
+            ProductType productType = _mapper.Map<ProductType>(productTypeInDTO);
+            _unitOfWork.ProductTypeRepository.Insert(productType);
 
-			if(await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<ProductTypeOutDTO>(productType));
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<ProductTypeOutDTO>(productType));
+            }
 
-			return BadRequest("Something went wrong while adding product type");
-		}
+            return BadRequest("Something went wrong while adding product type");
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete/{productTypeId}")]
-		public async Task<IActionResult> DeleteProductType(int productTypeId)
-		{
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(productTypeId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete/{productTypeId}")]
+        public async Task<IActionResult> DeleteProductType(int productTypeId)
+        {
+            ProductType productType = await _unitOfWork.ProductTypeRepository.GetByID(
+                productTypeId
+            );
 
-			if (productType == null)
-			{
-				return BadRequest($"Material type for Id={productTypeId} not found");
-			}
+            if (productType == null)
+            {
+                return BadRequest($"Material type for Id={productTypeId} not found");
+            }
 
-			_unitOfWork.ProductTypeRepository.Delete(productType);
+            _unitOfWork.ProductTypeRepository.Delete(productType);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok();
-			}
-			return BadRequest("Problem occured while deleting material type");
-		}
-	}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok();
+            }
+            return BadRequest("Problem occured while deleting material type");
+        }
+    }
 }

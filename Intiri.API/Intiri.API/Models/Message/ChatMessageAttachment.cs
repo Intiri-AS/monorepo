@@ -19,4 +19,3 @@ public class ChatMessageAttachment
 
     public ChatMessage ChatMessage { get; set; }
 }
-

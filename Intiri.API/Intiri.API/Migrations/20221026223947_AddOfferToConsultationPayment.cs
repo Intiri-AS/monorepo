@@ -12,34 +12,37 @@ namespace Intiri.API.Migrations
                 name: "MoodboardOfferId",
                 table: "ConsultationPayment",
                 type: "int",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
                 table: "ConsultationPayment",
-                column: "MoodboardOfferId");
+                column: "MoodboardOfferId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
                 table: "ConsultationPayment",
                 column: "MoodboardOfferId",
                 principalTable: "Moodboards",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
-            migrationBuilder.DropColumn(
-                name: "MoodboardOfferId",
-                table: "ConsultationPayment");
+            migrationBuilder.DropColumn(name: "MoodboardOfferId", table: "ConsultationPayment");
         }
     }
 }

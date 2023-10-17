@@ -1,50 +1,107 @@
-<ion-header [class.light-header]="isScrolledDown" [ngClass]="isDesignerPortfolioPage ? 'bg-transparent top-0 z-[100]' : 'bg-transparent sticky top-0 z-[100]'" >
+<ion-header
+  [class.light-header]="isScrolledDown"
+  [ngClass]="
+    isDesignerPortfolioPage
+      ? 'bg-transparent top-0 z-[100]'
+      : 'bg-transparent sticky top-0 z-[100]'
+  "
+>
   <div class="header-wrapper">
     <a href="https://intiri.no" class="py-1">
-      <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
+      <img
+        src="../../../assets/images/intiri-logo.svg"
+        class="ml-4 sm:ml-0"
+        alt="Intiri"
+      />
     </a>
-      <ion-buttons class="header-buttons">
-        <ion-button fill="clear" class="btn" (click)="scrollTo('home')">{{'LANDING.home' | translate}}</ion-button>
-        <ion-button fill="clear" class="btn" (click)="scrollTo('how-it-works')">{{'LANDING.how-it-works' | translate}}</ion-button>
-        <ion-button fill="clear" class="btn" (click)="scrollTo('stories')">{{'LANDING.stories' | translate}}</ion-button>
-        <ion-button fill="clear" class="btn" (click)="scrollTo('contact')">{{'LANDING.contact' | translate}}</ion-button>
-        <ion-button *ngIf="!loggedInUser" fill="clear" class="primary-btn" routerLink="/login" routerDirection="root">{{'COMMON.login' | translate}}</ion-button>
-        <ion-button *ngIf="!loggedInUser" fill="clear" class="secondary-btn" routerLink="/register" routerDirection="root">{{'COMMON.register' | translate}}</ion-button>
-        <ion-button *ngIf="loggedInUser" fill="clear" class="primary-btn" (click)="goToDashboard()">{{'MY-INTIRI.intiri' | translate}}</ion-button>
-        <ion-button class="btn hover:opacity-80" (click)="showLanguage($event)">
-          <ion-img [src]="languageImg"></ion-img>
-        </ion-button>
-      </ion-buttons>
-      <div class="flex md:hidden flex-1 justify-end" id="menu-content">
-        <ion-menu-button></ion-menu-button>
-      </div>
+    <ion-buttons class="header-buttons">
+      <ion-button fill="clear" class="btn" (click)="scrollTo('home')">{{
+        "LANDING.home" | translate
+      }}</ion-button>
+      <ion-button fill="clear" class="btn" (click)="scrollTo('how-it-works')">{{
+        "LANDING.how-it-works" | translate
+      }}</ion-button>
+      <ion-button fill="clear" class="btn" (click)="scrollTo('stories')">{{
+        "LANDING.stories" | translate
+      }}</ion-button>
+      <ion-button fill="clear" class="btn" (click)="scrollTo('contact')">{{
+        "LANDING.contact" | translate
+      }}</ion-button>
+      <ion-button
+        *ngIf="!loggedInUser"
+        fill="clear"
+        class="primary-btn"
+        routerLink="/login"
+        routerDirection="root"
+        >{{ "COMMON.login" | translate }}</ion-button
+      >
+      <ion-button
+        *ngIf="!loggedInUser"
+        fill="clear"
+        class="secondary-btn"
+        routerLink="/register"
+        routerDirection="root"
+        >{{ "COMMON.register" | translate }}</ion-button
+      >
+      <ion-button
+        *ngIf="loggedInUser"
+        fill="clear"
+        class="primary-btn"
+        (click)="goToDashboard()"
+        >{{ "MY-INTIRI.intiri" | translate }}</ion-button
+      >
+      <ion-button class="btn hover:opacity-80" (click)="showLanguage($event)">
+        <ion-img [src]="languageImg"></ion-img>
+      </ion-button>
+    </ion-buttons>
+    <div class="flex md:hidden flex-1 justify-end" id="menu-content">
+      <ion-menu-button></ion-menu-button>
+    </div>
   </div>
 </ion-header>
 
-<ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
+<ion-menu
+  (ionWillOpen)="menuOpened()"
+  (ionWillClose)="menuClosed()"
+  side="start"
+  content-id="menu-content"
+>
   <ion-header>
-  <ion-toolbar translucent>
-      <ion-title><a href="https://intiri.no" class="py-1">
-        <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
-      </a></ion-title>
+    <ion-toolbar translucent>
+      <ion-title
+        ><a href="https://intiri.no" class="py-1">
+          <img
+            src="../../../assets/images/intiri-logo.svg"
+            class="ml-4 sm:ml-0"
+            alt="Intiri"
+          /> </a
+      ></ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
       <ion-item *ngIf="!loggedInUser">
-        <ion-label class="cursor-pointer" routerLink="/login" >{{'COMMON.login' | translate}}</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/login">{{
+          "COMMON.login" | translate
+        }}</ion-label>
       </ion-item>
       <ion-item *ngIf="!loggedInUser">
-        <ion-label class="cursor-pointer" routerLink="/register" >{{'COMMON.register' | translate}}</ion-label>
+        <ion-label class="cursor-pointer" routerLink="/register">{{
+          "COMMON.register" | translate
+        }}</ion-label>
       </ion-item>
       <ion-item *ngIf="loggedInUser">
-        <ion-label class="cursor-pointer" (click)="goToDashboard()">{{'MY-INTIRI.intiri' | translate}}</ion-label>
+        <ion-label class="cursor-pointer" (click)="goToDashboard()">{{
+          "MY-INTIRI.intiri" | translate
+        }}</ion-label>
       </ion-item>
-      <ion-button fill="clear" class="btn hover:opacity-80" (click)="showLanguage($event)">
+      <ion-button
+        fill="clear"
+        class="btn hover:opacity-80"
+        (click)="showLanguage($event)"
+      >
         <ion-img [src]="languageImg"></ion-img>
       </ion-button>
     </ion-list>
   </ion-content>
 </ion-menu>
-
-

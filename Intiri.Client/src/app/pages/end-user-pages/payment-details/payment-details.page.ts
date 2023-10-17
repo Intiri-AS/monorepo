@@ -1,15 +1,11 @@
-
 import { Component } from '@angular/core';
-
 
 @Component({
   selector: 'app-payment-details-page',
   templateUrl: './payment-details.page.html',
   styleUrls: ['./payment-details.page.scss'],
 })
-
 export class PaymentDetailsPage {
-
   items = [
     { name: 'Color advice' },
     { name: 'Room sketch' },
@@ -23,16 +19,7 @@ export class PaymentDetailsPage {
   consultationNumber = 3;
   totalPrice = 2850;
 
-
-
   constructor() {}
 
-
-
   ngOnInit() {}
-
-
-
-
-
 }

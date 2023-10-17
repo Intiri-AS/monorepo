@@ -3,29 +3,93 @@
     <ion-col size="12" size-sm="6" size-lg="3" class="flex">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
+          <ion-input
+            type="text"
+            class="border rounded-2xl border-black-2 h-12"
+            placeholder="{{ 'MESSENGER.search' | translate }}"
+            [(ngModel)]="searchText"
+          ></ion-input>
         </div>
       </div>
     </ion-col>
-    <ion-col size="12" size-sm="6" offset-lg="6" size-lg="3" class="flex items-end justify-center sm-ion:justify-end">
-      <ion-button (click)="addColor()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-color' | translate}}</ion-button>
+    <ion-col
+      size="12"
+      size-sm="6"
+      offset-lg="6"
+      size-lg="3"
+      class="flex items-end justify-center sm-ion:justify-end"
+    >
+      <ion-button
+        (click)="addColor()"
+        fill="clear"
+        class="primary-btn mt-4 mb-[1px]"
+        >{{ "STYLE.add-color" | translate }}</ion-button
+      >
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
-    <ion-col *ngFor="let colorPalette of (colorPalettes$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+    <ion-col
+      *ngFor="let colorPalette of colorPalettes$ | async | filter : searchText"
+      size="12"
+      size-sm="5.75"
+      size-xl="2.25"
+    >
       <div class="card">
-        <div class="w-[47.5%] h-full inline-block" [ngStyle]="{'background-image': 'url(' + colorPalette.mainColorData.imagePath + ')'}"></div>
+        <div
+          class="w-[47.5%] h-full inline-block"
+          [ngStyle]="{
+            'background-image':
+              'url(' + colorPalette.mainColorData.imagePath + ')'
+          }"
+        ></div>
         <div class="w-[47.5%] h-full inline-block color-container float-right">
-          <div class="h-[31%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorLightData.imagePath + ')'}"></div>
-          <div class="h-[31%] mb-[6%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorMediumData.imagePath + ')'}"></div>
-          <div class="h-[32%]" [ngStyle]="{'background-image': 'url(' + colorPalette.shadeColorDarkData.imagePath + ')'}"></div>
+          <div
+            class="h-[31%] mb-[6%]"
+            [ngStyle]="{
+              'background-image':
+                'url(' + colorPalette.shadeColorLightData.imagePath + ')'
+            }"
+          ></div>
+          <div
+            class="h-[31%] mb-[6%]"
+            [ngStyle]="{
+              'background-image':
+                'url(' + colorPalette.shadeColorMediumData.imagePath + ')'
+            }"
+          ></div>
+          <div
+            class="h-[32%]"
+            [ngStyle]="{
+              'background-image':
+                'url(' + colorPalette.shadeColorDarkData.imagePath + ')'
+            }"
+          ></div>
         </div>
       </div>
       <div class="flex justify-between">
-        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{colorPalette.number}} <span class="font-normal">/ {{colorPalette.name}}</span></p>
+        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">
+          {{ colorPalette.number }}
+          <span class="font-normal">/ {{ colorPalette.name }}</span>
+        </p>
         <div class="float-right">
-          <button (click)="showSettings($event, colorPalette)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center " type="button">
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          <button
+            (click)="showSettings($event, colorPalette)"
+            id="dropdownMenuIconButton"
+            data-dropdown-toggle="dropdownDots"
+            class="inline-flex py-2 text-black-1 text-sm font-medium text-center"
+            type="button"
+          >
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+              ></path>
+            </svg>
           </button>
         </div>
       </div>

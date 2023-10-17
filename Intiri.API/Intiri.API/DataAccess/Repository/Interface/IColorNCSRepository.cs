@@ -9,15 +9,14 @@ namespace Intiri.API.DataAccess.Repository.Interface
         Task<IEnumerable<ColorNCS>> GetAllColorsNCSAsync();
         Task<IEnumerable<ColorNCS>> GetAllColorsNCSAsNoTrackingAsync();
     }
-    public interface IDesignerPortfolioRepository : IRepositoryBase<DesignerPortfolio>
-    {
-        
-    }
 
-    public class DesignerPortfolioRepository : RepositoryBase<DesignerPortfolio>, IDesignerPortfolioRepository
+    public interface IDesignerPortfolioRepository : IRepositoryBase<DesignerPortfolio> { }
+
+    public class DesignerPortfolioRepository
+        : RepositoryBase<DesignerPortfolio>,
+            IDesignerPortfolioRepository
     {
-        public DesignerPortfolioRepository(DataContext context) : base(context)
-        {
-        }
+        public DesignerPortfolioRepository(DataContext context)
+            : base(context) { }
     }
 }

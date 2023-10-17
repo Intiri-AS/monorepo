@@ -5,40 +5,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ProductTypeRepository: RepositoryBase<ProductType>, IProductTypeRepository
-	{
-		#region Fields
+    public class ProductTypeRepository : RepositoryBase<ProductType>, IProductTypeRepository
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ProductTypeRepository(DataContext context, IMapper mapper) : base(context)
-		{
-			_mapper = mapper;
-		}
+        public ProductTypeRepository(DataContext context, IMapper mapper)
+            : base(context)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		public async Task<IEnumerable<ProductType>> GetAllProductTypesAsync()
-		{
-			return await _context.ProductTypes.ToListAsync();
-		}
+        public async Task<IEnumerable<ProductType>> GetAllProductTypesAsync()
+        {
+            return await _context.ProductTypes.ToListAsync();
+        }
 
-		public async Task<ProductType> 
-			GetProductTypeProductsByIdAsync(int productTypeId)
-		{
-			return (await Get(
-				pt => pt.Id == productTypeId,
-				includeProperties: "Products"))
-				.SingleOrDefault();
-		}
+        public async Task<ProductType> GetProductTypeProductsByIdAsync(int productTypeId)
+        {
+            return (
+                await Get(pt => pt.Id == productTypeId, includeProperties: "Products")
+            ).SingleOrDefault();
+        }
 
-		public async Task<bool> IsProductTypeNameExists(string productTypeName)
-		{
-			return await DoesAnyExist(productType => productType.Name == productTypeName.ToLower());
-		}
-	}
+        public async Task<bool> IsProductTypeNameExists(string productTypeName)
+        {
+            return await DoesAnyExist(productType => productType.Name == productTypeName.ToLower());
+        }
+    }
 }

@@ -12,14 +12,13 @@ namespace Intiri.API.Migrations
                 name: "Description",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Description",
-                table: "AspNetUsers");
+            migrationBuilder.DropColumn(name: "Description", table: "AspNetUsers");
         }
     }
 }

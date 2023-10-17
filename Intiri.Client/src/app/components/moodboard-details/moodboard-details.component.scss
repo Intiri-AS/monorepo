@@ -1,225 +1,58 @@
-.result-grid {
-  @apply grid grid-cols-13 gap-3 grid-flow-row-dense;
-}
-.step-items-row {
-  @apply gap-x-[2%];
-}
-
-.step-items {
-  @apply max-h-[750px] overflow-auto mb-3;
-}
-
-.step-image {
-  @apply object-fill h-full w-full rounded-2xl;
-}
-
-.material-image {
-  @apply object-cover h-full w-full rounded-2xl;
-}
-
-.product-image {
-  @apply object-contain h-full w-full rounded-2xl;
-}
-
-p {
-  @apply text-center;
-}
-
 .card {
-  background: #D9D9D9;
-  margin-top: 2.6rem;
-  .grid-container {
-    height: 100%;
-    width: 100%;
+  background: #d9d9d9;
+
+  max-width: 1400px; // To account for big screens
+
+  .moodboard-grid {
     display: grid;
-    grid-template-columns: 4fr 1fr 0.5fr;
-    row-gap: 10px;
-    column-gap: 15px;
-    background: #D9D9D9;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-template-areas:
+      "mat1 mat1 mat1 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo5 inspo5 color1"
+      "mat1 mat1 mat1 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo5 inspo5 color1"
+      "mat2 mat2 mat2 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo5 inspo5 color1"
+      "mat2 mat2 mat2 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo5 inspo5 color2"
+      "mat3 mat3 mat3 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo6 inspo6 color2"
+      "mat3 mat3 mat3 inspo1 inspo1 inspo1 inspo1 inspo4 inspo4 inspo6 inspo6 color2"
+      "inspo2 inspo2 inspo2 inspo2 inspo8 inspo8 inspo3 inspo3 inspo3 inspo6 inspo6 color3"
+      "inspo2 inspo2 inspo2 inspo2 inspo8 inspo8 inspo3 inspo3 inspo3 inspo6 inspo6 color3"
+      "inspo2 inspo2 inspo2 inspo2 inspo8 inspo8 inspo3 inspo3 inspo3 inspo7 inspo7 color3"
+      "inspo2 inspo2 inspo2 inspo2 inspo9 inspo9 inspo3 inspo3 inspo3 inspo7 inspo7 color4"
+      "inspo2 inspo2 inspo2 inspo2 inspo9 inspo9 inspo3 inspo3 inspo3 inspo7 inspo7 color4"
+      "inspo2 inspo2 inspo2 inspo2 inspo9 inspo9 inspo3 inspo3 inspo3 inspo7 inspo7 color4";
 
-    .grid-item-1 {
-      display: grid;
-      grid-template-rows: repeat(2, 1fr);
-      row-gap: 10px;
+    gap: 10px;
 
-      .top-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr 0.5fr;
-        grid-template-rows: repeat(3, 1fr);
-        column-gap: 15px;
-        row-gap: 10px;
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
 
-        .material {
-          background-color: #fff;
-          height: 5.3rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
+      grid-template-areas:
+        "mat1 mat1 mat1 mat1 inspo1 inspo1 inspo1 inspo1"
+        "mat2 mat2 mat2 mat2 inspo1 inspo1 inspo1 inspo1"
+        "mat3 mat3 mat3 mat3 inspo1 inspo1 inspo1 inspo1"
+        "inspo2 inspo2 inspo2 inspo2 inspo2 inspo2 inspo2 inspo2"
+        "inspo2 inspo2 inspo2 inspo2 inspo2 inspo2 inspo2 inspo2"
+        "inspo3 inspo3 inspo3 inspo3 inspo4 inspo4 inspo4 inspo4"
+        "inspo3 inspo3 inspo3 inspo3 inspo4 inspo4 inspo4 inspo4"
+        "inspo3 inspo3 inspo3 inspo3 color1 color2 color3 color4";
 
-        .image-input-1 {
-          background-color: #fff;
-          grid-row: span 3;
-          height: 17.2rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
+      margin-right: -20px; // To account for gap added by hidden elements
+      margin-bottom: -20px; // To accoiunt for gap added by hidden elements
 
-        .image-input-2 {
-          background-color: #fff;
-          grid-row: span 3;
-          height: 17.2rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-      }
-
-      .bottom-section {
-        // background-color: #fc3;
-        display: grid;
-        grid-template-columns: 2.67fr 1fr 3fr;
-        grid-template-rows: 1fr 1fr;
-        column-gap: 15px;
-        row-gap: 15px;
-
-        .image-input-3 {
-          background-color: #fff;
-          grid-row: span 2;
-          height: 17.2rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        .image-input-4 {
-          background-color: #fff;
-          height: 8.3rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        .image-input-5 {
-          background-color: #fff;
-          grid-row: span 2;
-          height: 17.2rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        .image-input-6 {
-          background-color: #fff;
-          height: 8rem;
-          position: relative;
-          text-align: center;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
+      .hide-on-mobile {
+        display: none;
       }
     }
 
-    .products-container {
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      row-gap: 12px;
-
-      .product {
-        height: 100%;
-        width: 100%;
-        background: #fff;
-        max-height: 11rem;
-        position: relative;
-        text-align: center;
-        overflow: hidden;
-        box-sizing: border-box;
-      }
+    div {
+      overflow: hidden;
     }
 
-    .colors-container {
-      display: grid;
-      grid-template-rows: repeat(4, 1fr);
-      row-gap: 15px;
-
-      .color {
-        height: 100%;
-        width: 100%;
-        background-size: cover !important;
-        background: #fff;
-      }
-
-      .color-4 {
-        height: 7.8rem;
-      }
+    div > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
-}
-
-.crop-btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.done-btn {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.slot-image-style {
-  @apply cursor-pointer;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  top: 0;
-  left: 0;
-}
-
-.primary-btn-custom {
-  @apply hover:opacity-80 bg-primary text-white normal-case px-4 tracking-normal;
-  height: 22px;
-  font-weight: 100;
-  font-size: 12px;
-  width: 56px;
-  margin-left: 5px;
-  border-radius: 8px;
-}
-
-.palette-container {
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  height: 100%;
-  gap: 2px;
-
-  .mainColor {
-    grid-row: span 3;
-    border-radius: 0.2rem;
-  }
-
-  .shadeColorLight {
-    grid-column: span 1;
-    border-radius: 0.2rem;
-  }
-
-  .shadeColorMedium {
-    grid-column: span 1;
-    border-radius: 0.2rem;
-  }
-
-  .shadeColorDark {
-    grid-column: span 1;
-    border-radius: 0.2rem;
-  }
-}
-
-.spinner {
-  margin: 4rem auto auto auto;
 }

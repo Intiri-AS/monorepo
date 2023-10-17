@@ -33,7 +33,7 @@ export class AddMaterialsModalComponent implements OnInit {
     return this.addMaterialForm.controls.imageFile.errors;
   }
 
-  get addImageFileErrors () {
+  get addImageFileErrors() {
     return this.addMaterialForm.controls.imageFiles.errors;
   }
 
@@ -60,7 +60,7 @@ export class AddMaterialsModalComponent implements OnInit {
       provider: [''],
       link: [''],
       description: [''],
-      imageFiles: ['', [Validators.required]]
+      imageFiles: ['', [Validators.required]],
     });
     this.editMaterialForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -68,7 +68,7 @@ export class AddMaterialsModalComponent implements OnInit {
       provider: [''],
       link: [''],
       description: [''],
-      imageFile: ['']
+      imageFile: [''],
     });
   }
 
@@ -85,8 +85,8 @@ export class AddMaterialsModalComponent implements OnInit {
     provider: '',
     link: '',
     imageFiles: [],
-    description: ''
-  }
+    description: '',
+  };
 
   edit_material_payload = {
     name: '',
@@ -94,8 +94,8 @@ export class AddMaterialsModalComponent implements OnInit {
     provider: '',
     link: '',
     imageFile: null,
-    description: ''
-  }
+    description: '',
+  };
 
   imagePath = null;
   addMaterialImagePaths = [];
@@ -109,12 +109,19 @@ export class AddMaterialsModalComponent implements OnInit {
     if (this.edit) {
       this.edit_material_payload = {
         name: this.item.name,
-        description: (this.item.description == "null" || !this.item.description) ? null : this.item.description,
+        description:
+          this.item.description == 'null' || !this.item.description
+            ? null
+            : this.item.description,
         materialTypeId: this.item.materialTypeId,
-        provider: (this.item.provider == "null" || !this.item.provider) ? null : this.item.provider,
-        link: (this.item.link == "null" || !this.item.link) ? null : this.item.link,
+        provider:
+          this.item.provider == 'null' || !this.item.provider
+            ? null
+            : this.item.provider,
+        link:
+          this.item.link == 'null' || !this.item.link ? null : this.item.link,
         imageFile: null,
-    };
+      };
     }
   }
 
@@ -122,20 +129,26 @@ export class AddMaterialsModalComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  onFileChangeAddMaterial (event) {
+  onFileChangeAddMaterial(event) {
     if (Object.keys(event.target.files).length > 0) {
       this.material.imageFiles = event.target.files;
-      this.addMaterialImagePaths = Object.keys(event.target.files).map((key, i) =>
-        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.material.imageFiles[key])));
+      this.addMaterialImagePaths = Object.keys(event.target.files).map(
+        (key, i) =>
+          this.sanitizer.bypassSecurityTrustUrl(
+            URL.createObjectURL(this.material.imageFiles[key])
+          )
+      );
     } else {
-      this.addMaterialImagePaths = []
+      this.addMaterialImagePaths = [];
     }
   }
 
   onFileChangeEditMaterial(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.edit_material_payload.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.edit_material_payload.imageFile));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.edit_material_payload.imageFile)
+      );
     } else {
       this.imagePath = null;
     }
@@ -148,35 +161,41 @@ export class AddMaterialsModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.materialService.addMaterial(this.material).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.materialService.getMaterials();
-        this.openSuccessModal();
+    this.materialService.addMaterial(this.material).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.materialService.getMaterials();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: 'Something went wrong!',
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: 'Something went wrong!',
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteMaterial() {
-    this.materialService.deleteMaterial(this.item['id']).subscribe(res => {
+    this.materialService.deleteMaterial(this.item['id']).subscribe(
+      (res) => {
         this.materialService.getMaterials();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.material-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editMaterial() {
@@ -186,39 +205,43 @@ export class AddMaterialsModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.materialService.editMaterial(this.item.id, this.edit_material_payload).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.materialService.getMaterials();
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.material-saved'),
-          type: 'success'
-        });
-      }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    this.materialService
+      .editMaterial(this.item.id, this.edit_material_payload)
+      .subscribe(
+        (res) => {
+          this.spinner.hide();
+          this.modalController.dismiss();
+          if (typeof res === 'object') {
+            this.materialService.getMaterials();
+            this.notifier.show({
+              message: this.translate.instant('NOTIFY.material-saved'),
+              type: 'success',
+            });
+          }
+        },
+        (e) => {
+          this.spinner.hide();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.error'),
+            type: 'error',
+          });
+        }
+      );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddMaterialsModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  getMaterialTypeNameByTypeId (typeId) {
-    let res = this.materialTypes.filter(mType => mType.id == typeId);
+  getMaterialTypeNameByTypeId(typeId) {
+    let res = this.materialTypes.filter((mType) => mType.id == typeId);
     return res.length ? res[0].name : null;
   }
-
 }

@@ -4,12 +4,12 @@ using Intiri.API.Models.DTO;
 
 namespace Intiri.API.Automapper
 {
-	public class ConsultationMapperProfile : Profile
-	{
-		public ConsultationMapperProfile()
-		{
-			CreateMap<ConsulatationDTO, Consultation>();
-			CreateMap<Consultation, ConsulatationDTO>();
-		}
-	}
+    public class ConsultationMapperProfile : Profile
+    {
+        public ConsultationMapperProfile()
+        {
+            CreateMap<ConsulatationDTO, Consultation>();
+            CreateMap<Consultation, ConsulatationDTO>();
+        }
+    }
 }

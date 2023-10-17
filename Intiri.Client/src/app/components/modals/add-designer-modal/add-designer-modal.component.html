@@ -2,109 +2,248 @@
   <!-- Add designer modal -->
   <div *ngIf="add" class="justify-center items-center flex flex-col h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="addDesignerForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="addDesigner()" autocomplete="off">
-    <ion-grid class="main-container">
-      <ion-row>
-        <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{'DESIGNERS.add' | translate}}</h1>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
-            <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && firstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
-            <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && lastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <section class="flex">
-            <div class="phone-input">
-              <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
-              <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode" formControlName="code">
-                <ion-select-option value="47">+47</ion-select-option>
-                <ion-select-option value="381">+381</ion-select-option>
-              </ion-select>
-            </div>
+    <form
+      [formGroup]="addDesignerForm"
+      class="d-flex mt-2 md:mt-0"
+      (ngSubmit)="addDesigner()"
+      autocomplete="off"
+    >
+      <ion-grid class="main-container">
+        <ion-row>
+          <ion-col>
+            <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">
+              {{ "DESIGNERS.add" | translate }}
+            </h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
             <div class="profile-input">
-              <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone" maxlength="8"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && phoneErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
+              <span class="text-sm text-black-2">{{
+                "COMMON.firstname" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="designer.firstName"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="firstName"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && firstNameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
             </div>
-          </section>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
-          <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
-            <ion-radio value="InternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.internal' | translate}}</span>
-            <ion-radio value="ExternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
-          </ion-radio-group>
-          <span class="ion-warning" *ngIf="isFormSubmited && roleErrors?.required">{{'VALIDATION.selection' | translate}}</span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'COMMON.language' | translate}}</p>
-          <div class="flex items-center mb-3">
-            <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer" formControlName="en">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.EN' | translate}}</label>
-          </div>
-          <div class="flex items-center">
-            <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary" formControlName="no">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.NO' | translate}}</label>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="text-center mt-12">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.add' | translate}}</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          </ion-col>
+          <ion-col>
+            <div class="profile-input">
+              <span class="text-sm text-black-2">{{
+                "COMMON.lastname" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="designer.lastName"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="lastName"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && lastNameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <section class="flex">
+              <div class="phone-input">
+                <span class="text-sm text-black-2">{{
+                  "COMMON.phone" | translate
+                }}</span>
+                <ion-select
+                  class=""
+                  interface="popover"
+                  [(ngModel)]="designer.countryCode"
+                  formControlName="code"
+                >
+                  <ion-select-option value="47">+47</ion-select-option>
+                  <ion-select-option value="381">+381</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="profile-input">
+                <span class="text-sm invisible">{{
+                  "COMMON.phone" | translate
+                }}</span>
+                <ion-input
+                  type="text"
+                  class="border rounded-2xl h-14 border-black-2"
+                  [(ngModel)]="designer.phoneNumber"
+                  formControlName="phone"
+                  maxlength="8"
+                ></ion-input>
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && phoneErrors?.required"
+                  >{{ "VALIDATION.field" | translate }}</span
+                >
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && phoneErrors?.pattern"
+                  >{{ "VALIDATION.phone" | translate }}</span
+                >
+              </div>
+            </section>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ml-2.5">
+            <p class="font-medium text-black-1 text-lg mt-7 mb-2">
+              {{ "DESIGNERS.designer-status" | translate }}
+            </p>
+            <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
+              <ion-radio value="InternalDesigner"></ion-radio>
+              <span class="m-4 relative bottom-[4px]">{{
+                "DESIGNERS.internal" | translate
+              }}</span>
+              <ion-radio value="ExternalDesigner"></ion-radio>
+              <span class="m-4 relative bottom-[4px]">{{
+                "DESIGNERS.external" | translate
+              }}</span>
+            </ion-radio-group>
+            <span
+              class="ion-warning"
+              *ngIf="isFormSubmited && roleErrors?.required"
+              >{{ "VALIDATION.selection" | translate }}</span
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ml-2.5">
+            <p class="font-medium text-black-1 text-lg mt-7 mb-2">
+              {{ "COMMON.language" | translate }}
+            </p>
+            <div class="flex items-center mb-3">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value="EN"
+                [(ngModel)]="EN"
+                class="w-5 h-5 rounded text-primary cursor-pointer"
+                formControlName="en"
+              />
+              <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{
+                "COMMON.EN" | translate
+              }}</label>
+            </div>
+            <div class="flex items-center">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value="Norwegian"
+                [(ngModel)]="NO"
+                class="w-5 h-5 rounded text-primary"
+                formControlName="no"
+              />
+              <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{
+                "COMMON.NO" | translate
+              }}</label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="text-center mt-12">
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px]"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px]"
+              type="submit"
+              >{{ "COMMON.add" | translate }}</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
-   <!-- Designer added modal -->
-   <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <!-- Designer added modal -->
+  <div
+    *ngIf="added"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]"><img class="h-[32px] w-[32px] mx-auto mt-[18px]" src="../../../../assets/icon/success.svg" alt="success"></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'DESIGNERS.designer-added' | translate}}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{'DESIGNERS.designer-added-text' | translate}}</p>
+          <div class="plus-icon-wrapper !pt-[8px] !pl-[12px]">
+            <img
+              class="h-[32px] w-[32px] mx-auto mt-[18px]"
+              src="../../../../assets/icon/success.svg"
+              alt="success"
+            />
+          </div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{ "DESIGNERS.designer-added" | translate }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{ "DESIGNERS.designer-added-text" | translate }}
+          </p>
         </div>
-          <ion-buttons class="justify-center">
-            <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'DESIGNERS.go-to' | translate}}</ion-button>
-          </ion-buttons>
-        </div>
+        <ion-buttons class="justify-center">
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "DESIGNERS.go-to" | translate }}</ion-button
+          >
+        </ion-buttons>
+      </div>
     </div>
   </div>
   <!-- Designer delete modal -->
-  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div
+    *ngIf="delete"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper flex items-center justify-center"><ion-icon class="h-[32px] w-[32px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</p>
+          <div class="plus-icon-wrapper flex items-center justify-center">
+            <ion-icon class="h-[32px] w-[32px]" name="trash-outline"></ion-icon>
+          </div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.designer" | translate) }
+            }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{
+              "COMMON-MODAL.remove-text"
+                | translate : { name: ("COMMON-MODAL.designer" | translate) }
+            }}
+          </p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteDesigner()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="deleteDesigner()"
+            >{{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.designer" | translate) }
+            }}</ion-button
+          >
+          <ion-button
+            class="secondary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "COMMON.cancel" | translate }}</ion-button
+          >
         </ion-buttons>
       </div>
     </div>
@@ -112,80 +251,176 @@
   <!-- Edit designer modal -->
   <div *ngIf="edit" class="justify-center items-center flex flex-col h-full">
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-    <form [formGroup]="editDesignerForm" class="d-flex mt-2 md:mt-0" (ngSubmit)="editDesigner()" autocomplete="off">
-    <ion-grid class="main-container">
-      <ion-row>
-        <ion-col>
-          <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.designer' | translate) } }}</h1> <!-- TODO Translate -->
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'COMMON.firstname' | translate}}</span>
-            <ion-input [(ngModel)]="designer.firstName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="firstName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && editFirstNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-        <ion-col>
-          <div class="profile-input">
-            <span class="text-sm text-black-2">{{'COMMON.lastname' | translate}}</span>
-            <ion-input [(ngModel)]="designer.lastName" type="text" class="border rounded-2xl h-14 border-black-2" formControlName="lastName"></ion-input>
-            <span class="ion-warning" *ngIf="isFormSubmited && editLastNameErrors?.required">{{'VALIDATION.field' | translate}}</span>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <section class="flex">
-            <div class="phone-input">
-              <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
-              <ion-select class="" interface="popover" [(ngModel)]="designer.countryCode" formControlName="code">
-                <ion-select-option value="47">+47</ion-select-option>
-                <ion-select-option value="381">+381</ion-select-option>
-              </ion-select>
-            </div>
+    <form
+      [formGroup]="editDesignerForm"
+      class="d-flex mt-2 md:mt-0"
+      (ngSubmit)="editDesigner()"
+      autocomplete="off"
+    >
+      <ion-grid class="main-container">
+        <ion-row>
+          <ion-col>
+            <h1 class="font-medium text-black-1 text-5xl mt-9 text-center">
+              {{
+                "COMMON-MODAL.edit-title"
+                  | translate : { name: ("COMMON-MODAL.designer" | translate) }
+              }}
+            </h1>
+            <!-- TODO Translate -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
             <div class="profile-input">
-              <span class="text-sm invisible">{{'COMMON.phone' | translate}}</span>
-              <ion-input type="text" class="border rounded-2xl h-14 border-black-2" [(ngModel)]="designer.phoneNumber" formControlName="phone" maxlength="8"></ion-input>
-              <span class="ion-warning" *ngIf="isFormSubmited && editPhoneErrors?.required">{{'VALIDATION.field' | translate}}</span>
-              <span class="ion-warning" *ngIf="isFormSubmited && editPhoneErrors?.pattern">{{'VALIDATION.phone' | translate}}</span>
+              <span class="text-sm text-black-2">{{
+                "COMMON.firstname" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="designer.firstName"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="firstName"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editFirstNameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
             </div>
-          </section>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'DESIGNERS.designer-status' | translate}}</p>
-          <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
-            <ion-radio value="InternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.internal' | translate}}</span>
-            <ion-radio value="ExternalDesigner"></ion-radio>
-            <span class="m-4 relative bottom-[4px]">{{'DESIGNERS.external' | translate}}</span>
-          </ion-radio-group>
-          <span class="ion-warning" *ngIf="isFormSubmited && editRoleErrors?.required">{{'VALIDATION.selection' | translate}}</span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ml-2.5">
-          <p class="font-medium text-black-1 text-lg mt-7 mb-2">{{'COMMON.language' | translate}}</p>
-          <div class="flex items-center mb-3">
-            <input id="default-checkbox" type="checkbox" value="EN" [(ngModel)]="EN" class="w-5 h-5 rounded text-primary cursor-pointer" formControlName="en">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.EN' | translate}}</label>
-          </div>
-          <div class="flex items-center">
-            <input id="default-checkbox" type="checkbox" value="Norwegian" [(ngModel)]="NO" class="w-5 h-5 rounded text-primary" formControlName="no">
-            <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{'COMMON.NO' | translate}}</label>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="text-center mt-12">
-          <ion-button fill="clear" class="secondary-btn h-[52px]" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px]" type="submit">{{'COMMON.save' | translate}}</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+          </ion-col>
+          <ion-col>
+            <div class="profile-input">
+              <span class="text-sm text-black-2">{{
+                "COMMON.lastname" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="designer.lastName"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="lastName"
+              ></ion-input>
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editLastNameErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <section class="flex">
+              <div class="phone-input">
+                <span class="text-sm text-black-2">{{
+                  "COMMON.phone" | translate
+                }}</span>
+                <ion-select
+                  class=""
+                  interface="popover"
+                  [(ngModel)]="designer.countryCode"
+                  formControlName="code"
+                >
+                  <ion-select-option value="47">+47</ion-select-option>
+                  <ion-select-option value="381">+381</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="profile-input">
+                <span class="text-sm invisible">{{
+                  "COMMON.phone" | translate
+                }}</span>
+                <ion-input
+                  type="text"
+                  class="border rounded-2xl h-14 border-black-2"
+                  [(ngModel)]="designer.phoneNumber"
+                  formControlName="phone"
+                  maxlength="8"
+                ></ion-input>
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && editPhoneErrors?.required"
+                  >{{ "VALIDATION.field" | translate }}</span
+                >
+                <span
+                  class="ion-warning"
+                  *ngIf="isFormSubmited && editPhoneErrors?.pattern"
+                  >{{ "VALIDATION.phone" | translate }}</span
+                >
+              </div>
+            </section>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ml-2.5">
+            <p class="font-medium text-black-1 text-lg mt-7 mb-2">
+              {{ "DESIGNERS.designer-status" | translate }}
+            </p>
+            <ion-radio-group [(ngModel)]="designer.role" formControlName="role">
+              <ion-radio value="InternalDesigner"></ion-radio>
+              <span class="m-4 relative bottom-[4px]">{{
+                "DESIGNERS.internal" | translate
+              }}</span>
+              <ion-radio value="ExternalDesigner"></ion-radio>
+              <span class="m-4 relative bottom-[4px]">{{
+                "DESIGNERS.external" | translate
+              }}</span>
+            </ion-radio-group>
+            <span
+              class="ion-warning"
+              *ngIf="isFormSubmited && editRoleErrors?.required"
+              >{{ "VALIDATION.selection" | translate }}</span
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ml-2.5">
+            <p class="font-medium text-black-1 text-lg mt-7 mb-2">
+              {{ "COMMON.language" | translate }}
+            </p>
+            <div class="flex items-center mb-3">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value="EN"
+                [(ngModel)]="EN"
+                class="w-5 h-5 rounded text-primary cursor-pointer"
+                formControlName="en"
+              />
+              <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{
+                "COMMON.EN" | translate
+              }}</label>
+            </div>
+            <div class="flex items-center">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value="Norwegian"
+                [(ngModel)]="NO"
+                class="w-5 h-5 rounded text-primary"
+                formControlName="no"
+              />
+              <label for="default-checkbox" class="ml-2 text-lg text-black-1">{{
+                "COMMON.NO" | translate
+              }}</label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="text-center mt-12">
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px]"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px]"
+              type="submit"
+              >{{ "COMMON.save" | translate }}</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </form>
   </div>
 </ion-content>

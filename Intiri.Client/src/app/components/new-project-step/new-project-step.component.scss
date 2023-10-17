@@ -7,8 +7,8 @@
 }
 
 .final-step-subtitle {
-  color: #A5A5A4;
-  font-feature-settings: 'clig' off, 'liga' off;
+  color: #a5a5a4;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: IBM Plex Sans;
   font-size: 16px;
   font-style: normal;
@@ -19,7 +19,7 @@
 
 .final-step-instructions {
   color: #555;
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: IBM Plex Sans;
   font-size: 22px;
   font-style: normal;
@@ -163,7 +163,6 @@ ion-select {
   }
 }
 
-
 @media only screen and (max-width: 768px) {
   .room-details-section-container {
     flex-direction: column;
@@ -175,4 +174,3 @@ ion-select {
     }
   }
 }
-

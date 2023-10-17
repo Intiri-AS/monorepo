@@ -1,27 +1,27 @@
 [
-	{
-		"Shape": "rectangular",
-		"Size": 17.2,
-		"ProjectId": 1
-	},
-	{
-		"Shape": "circular",
-		"Size": 14.1,
-		"ProjectId": 2
-	},
-	{
-		"Shape": "custom",
-		"Size": 27.5,
-		"ProjectId": 3
-	},
-	{
-		"Shape": "rectangular",
-		"Size": 11.6,
-		"ProjectId": 4
-	},
-	{
-		"Shape": "custom",
-		"Size": 22.8,
-		"ProjectId": 5
-	}
+  {
+    "Shape": "rectangular",
+    "Size": 17.2,
+    "ProjectId": 1
+  },
+  {
+    "Shape": "circular",
+    "Size": 14.1,
+    "ProjectId": 2
+  },
+  {
+    "Shape": "custom",
+    "Size": 27.5,
+    "ProjectId": 3
+  },
+  {
+    "Shape": "rectangular",
+    "Size": 11.6,
+    "ProjectId": 4
+  },
+  {
+    "Shape": "custom",
+    "Size": 22.8,
+    "ProjectId": 5
+  }
 ]

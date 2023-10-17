@@ -2,14 +2,13 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class StyleInDTO
-	{
-		[Required]
-		public string Name { get; set; }
+    public class StyleInDTO
+    {
+        [Required]
+        public string Name { get; set; }
 
-		
-		public IFormFile ImageFile { get; set; }
+        public IFormFile ImageFile { get; set; }
 
-		public string Description { get; set; }
-	}
+        public string Description { get; set; }
+    }
 }

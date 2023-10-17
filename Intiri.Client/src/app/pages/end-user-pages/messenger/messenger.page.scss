@@ -3,7 +3,7 @@
 }
 
 .chat-input {
-    @apply flex min-h-[102px] items-center;
+  @apply flex min-h-[102px] items-center;
 }
 
 .chat-bubble {
@@ -60,19 +60,19 @@
 }
 
 .img-btn {
-    @apply text-[32px] mr-[20px] text-primary cursor-pointer;
+  @apply text-[32px] mr-[20px] text-primary cursor-pointer;
 }
 
 .send-btn-wrapper {
-    @apply text-white bg-primary p-[10px] rounded-full mr-[20px] h-[38px] w-[38px];
+  @apply text-white bg-primary p-[10px] rounded-full mr-[20px] h-[38px] w-[38px];
 }
 
 .send-btn {
-    @apply text-[22px] mt-[-1px] cursor-pointer;
+  @apply text-[22px] mt-[-1px] cursor-pointer;
 }
 
 .disabled {
-    @apply opacity-60 pointer-events-none;
+  @apply opacity-60 pointer-events-none;
 }
 .text-clamp {
   overflow: hidden;

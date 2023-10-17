@@ -117,7 +117,11 @@ export class PartnerService {
 
     Object.keys(productData.imageFiles).forEach((key, i) => {
       let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
-      formData.append('imageFile', productData.imageFiles[key], `imageFiles${uniqueStr}.png`)
+      formData.append(
+        'imageFile',
+        productData.imageFiles[key],
+        `imageFiles${uniqueStr}.png`
+      );
     });
 
     return this.http.post(`${this.apiUrl}products/add`, formData);

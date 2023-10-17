@@ -3,27 +3,66 @@
     <ion-col size="12" size-sm="6" size-lg="3" class="flex">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
+          <ion-input
+            type="text"
+            class="border rounded-2xl border-black-2 h-12"
+            placeholder="{{ 'MESSENGER.search' | translate }}"
+            [(ngModel)]="searchText"
+          ></ion-input>
         </div>
       </div>
     </ion-col>
 
-    <ion-col size="12" size-sm="6" offset-lg="6" size-lg="3" class="flex items-end justify-center sm-ion:justify-end">
-      <ion-button (click)="addRoom()" fill="clear" class="primary-btn mt-4 mb-[1px]">{{'STYLE.add-room' | translate}}</ion-button>
+    <ion-col
+      size="12"
+      size-sm="6"
+      offset-lg="6"
+      size-lg="3"
+      class="flex items-end justify-center sm-ion:justify-end"
+    >
+      <ion-button
+        (click)="addRoom()"
+        fill="clear"
+        class="primary-btn mt-4 mb-[1px]"
+        >{{ "STYLE.add-room" | translate }}</ion-button
+      >
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
-    <ion-col *ngFor="let room of (rooms$ | async) | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+    <ion-col
+      *ngFor="let room of rooms$ | async | filter : searchText"
+      size="12"
+      size-sm="5.75"
+      size-xl="2.25"
+    >
       <div class="card">
-        <div class="step-icon-wrapper" >
-          <img src="{{room.iconPath}}" class="step-icon" alt="room-icon"/>
+        <div class="step-icon-wrapper">
+          <img src="{{ room.iconPath }}" class="step-icon" alt="room-icon" />
         </div>
       </div>
       <div class="flex justify-between">
-        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{language == 'no' ? room.nameNorwegian: room.name}}</p>
+        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">
+          {{ language == "no" ? room.nameNorwegian : room.name }}
+        </p>
         <div class="float-right">
-          <button (click)="showSettings($event, room)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg" type="button">
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          <button
+            (click)="showSettings($event, room)"
+            id="dropdownMenuIconButton"
+            data-dropdown-toggle="dropdownDots"
+            class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg"
+            type="button"
+          >
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+              ></path>
+            </svg>
           </button>
         </div>
       </div>

@@ -16,9 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './designer-portfolio.page.html',
   styleUrls: ['./designer-portfolio.page.scss'],
 })
-
 export class DesignerPortfolioPage implements OnInit, OnDestroy {
-
   @ViewChild('slides') slides: IonSlides;
 
   @ViewChild(IonContent) content: IonContent;
@@ -36,16 +34,18 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
     private designerService: DesignerService,
     private accountService: AccountService,
     private modalController: ModalController,
-    private translate: TranslateService,
+    private translate: TranslateService
   ) {
     this.designerDetails$ = new BehaviorSubject(null);
   }
 
   ngOnInit(): void {
     this.designerId = this.route.snapshot.params.id;
-    this.designerDetailsSubscription$ = this.designerService.getDesignerPortfolio(this.designerId).subscribe(res => {
-      this.designerDetails$.next(res);
-    });
+    this.designerDetailsSubscription$ = this.designerService
+      .getDesignerPortfolio(this.designerId)
+      .subscribe((res) => {
+        this.designerDetails$.next(res);
+      });
   }
 
   ngOnDestroy(): void {
@@ -59,17 +59,19 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
 
   getDesignerServices(): Array<string> {
     let services: Array<string>;
-    this.designerDetails$.subscribe(res => {
+    this.designerDetails$.subscribe((res) => {
       services = res.designerInfo.areaOfExpertise.split(',');
     });
     return services;
   }
 
-  getOptions(){
-    return window.innerWidth > 700 ? {slidesPerView: 2} : {slidesPerView: 1};
+  getOptions() {
+    return window.innerWidth > 700
+      ? { slidesPerView: 2 }
+      : { slidesPerView: 1 };
   }
 
-  removeProjectDraft(){
+  removeProjectDraft() {
     this.projectService.setCurrentProject(new Project());
   }
 
@@ -89,7 +91,7 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
       cssClass: 'medium-modal-css',
       backdropDismiss: true,
       swipeToClose: false,
-      componentProps: {bookDesigner: true, designer}
+      componentProps: { bookDesigner: true, designer },
     });
 
     await modal.present();
@@ -98,7 +100,7 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
   async paymentModal(designer) {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
-      componentProps: {designer, moodboard: true},
+      componentProps: { designer, moodboard: true },
       cssClass: 'book-designer-modal-css',
     });
 
@@ -106,9 +108,10 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
   }
 
   async bookConsultation() {
-    this.designerDetails$.subscribe(async res => {
+    this.designerDetails$.subscribe(async (res) => {
       if (!this.checkIfUserLoggedIn()) {
-        await this.openLoginModal(res); return;
+        await this.openLoginModal(res);
+        return;
       }
       await this.paymentModal(res);
     });
@@ -116,13 +119,15 @@ export class DesignerPortfolioPage implements OnInit, OnDestroy {
 
   getFeaturedPortfolios(): Array<any> {
     let featuredPortfolios: Array<any>;
-    this.designerDetails$.subscribe(designer => {
-      featuredPortfolios = designer.designerPortfolio.filter(d => d.featured === 1);
-    })
+    this.designerDetails$.subscribe((designer) => {
+      featuredPortfolios = designer.designerPortfolio.filter(
+        (d) => d.featured === 1
+      );
+    });
     return featuredPortfolios;
   }
 
-  getCurrentLang (): string {
+  getCurrentLang(): string {
     return this.translate.currentLang;
   }
 }

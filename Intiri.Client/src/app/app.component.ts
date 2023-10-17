@@ -13,7 +13,6 @@ import { ProjectService } from './services/project.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   constructor(
     private accountService: AccountService,
     private projectService: ProjectService,
@@ -35,8 +34,7 @@ export class AppComponent implements OnInit {
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    if (user)
-    {
+    if (user) {
       this.accountService.setCurrentUser(user);
     } else {
       this.accountService.setCurrentUser(null);
@@ -47,6 +45,4 @@ export class AppComponent implements OnInit {
     const project: Project = JSON.parse(sessionStorage.getItem('project'));
     this.projectService.setCurrentProject(project);
   }
-
-
 }

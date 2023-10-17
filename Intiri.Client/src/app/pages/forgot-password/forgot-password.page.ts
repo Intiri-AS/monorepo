@@ -9,26 +9,31 @@ import { AccountService } from 'src/app/services/account.service';
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss'],
 })
-
 export class ForgotPasswordPage implements OnInit {
-  model: any = {}
+  model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
-      if(loggedUser) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((loggedUser) => {
+      if (loggedUser) {
         this.router.navigateByUrl('/my-intiri');
       }
     });
   }
 
   forgotPassword() {
-    this.accountService.forgotPassword(this.model).subscribe(response => {
-      this.router.navigateByUrl('/sms-verification');
-    },error =>{
-      console.log(error);
-    })
+    this.accountService.forgotPassword(this.model).subscribe(
+      (response) => {
+        this.router.navigateByUrl('/sms-verification');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-
 }

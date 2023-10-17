@@ -9,9 +9,9 @@ namespace Intiri.API.Models.Project
         public Project()
         {
             ColorPalettes = new HashSet<ColorPalette>();
-			StyleImages = new HashSet<Style.StyleImage>();
+            StyleImages = new HashSet<Style.StyleImage>();
             ProjectMoodboards = new HashSet<ClientMoodboard>();
-		}
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace Intiri.API.Models.Project
         public EndUser EndUser { get; set; }
         public int EndUserId { get; set; }
         public Room.Room Room { get; set; }
-		public ICollection<ColorPalette> ColorPalettes { get; set; }
+        public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Style.StyleImage> StyleImages { get; set; }
         public ICollection<ClientMoodboard> ProjectMoodboards { get; set; }
     }

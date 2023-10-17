@@ -1,10 +1,24 @@
 <ion-content>
   <div class="flex flex-col items-center">
-    <div class="w-[80px] h-[80px] bg-light rounded-full mt-[75px] flex items-center justify-center">
-      <ion-icon name="checkmark-circle-outline" class="h-10 w-10 text-primary"></ion-icon>
+    <div
+      class="w-[80px] h-[80px] bg-light rounded-full mt-[75px] flex items-center justify-center"
+    >
+      <ion-icon
+        name="checkmark-circle-outline"
+        class="h-10 w-10 text-primary"
+      ></ion-icon>
     </div>
-    <p class="text-2xl font-medium mt-[40px]">{{'SHARE-RATE.moodboard-shared' | translate}}</p>
-    <p class="text-lg mt-[10px] text-black-2">{{'SHARE-RATE.success-share' | translate}}</p>
-    <ion-button fill="clear" class="primary-btn mt-[40px]" (click)="dismiss()">{{'SHARE-RATE.go-to' | translate}}</ion-button>
+    <p class="text-2xl font-medium mt-[40px]">
+      {{ "SHARE-RATE.moodboard-shared" | translate }}
+    </p>
+    <p class="text-lg mt-[10px] text-black-2">
+      {{ "SHARE-RATE.success-share" | translate }}
+    </p>
+    <ion-button
+      fill="clear"
+      class="primary-btn mt-[40px]"
+      (click)="dismiss()"
+      >{{ "SHARE-RATE.go-to" | translate }}</ion-button
+    >
   </div>
 </ion-content>

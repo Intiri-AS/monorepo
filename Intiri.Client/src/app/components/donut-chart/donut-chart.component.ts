@@ -3,10 +3,9 @@ import { AfterViewInit, Component, HostListener, Input } from '@angular/core';
 @Component({
   selector: 'app-donut-chart',
   templateUrl: './donut-chart.component.html',
-  styleUrls: ['./donut-chart.component.scss']
+  styleUrls: ['./donut-chart.component.scss'],
 })
-
-export class DonutChartComponent implements AfterViewInit{
+export class DonutChartComponent implements AfterViewInit {
   @Input()
   set chartData(value) {
     this.chartOptions.series = value.series;
@@ -15,30 +14,30 @@ export class DonutChartComponent implements AfterViewInit{
 
   public chartOptions;
 
-  @HostListener("window:resize", []) updateChart() {
+  @HostListener('window:resize', []) updateChart() {
     if (window.innerWidth >= 480) {
       this.chartOptions.legend = {
-        position: "right",
+        position: 'right',
         offsetX: 5,
-        fontSize: "18px",
+        fontSize: '18px',
         markers: {
           width: 20,
           height: 20,
           radius: 5,
-          offsetY: 3
-        }
-      }
+          offsetY: 3,
+        },
+      };
     } else if (window.innerWidth < 480) {
       this.chartOptions.legend = {
-        position: "bottom",
+        position: 'bottom',
         offsetX: 0,
-        fontSize: "16px",
+        fontSize: '16px',
         markers: {
           width: 18,
           height: 18,
           radius: 5,
-          offsetY: -2
-        }
+          offsetY: -2,
+        },
       };
     }
   }
@@ -48,16 +47,16 @@ export class DonutChartComponent implements AfterViewInit{
       series: [],
       chart: {
         height: 350,
-        type: "donut",
+        type: 'donut',
         toolbar: {
-          show: false
+          show: false,
         },
       },
       labels: [],
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
-      legend: {}
+      legend: {},
     };
   }
 

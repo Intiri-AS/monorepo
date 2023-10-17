@@ -8,31 +8,39 @@ import { DesignerService } from 'src/app/services/designer.service';
   templateUrl: './client-request.page.html',
   styleUrls: ['./client-request.page.scss'],
 })
-
 export class ClientRequestPage {
+  client = {
+    photoPath: null,
+    phoneNumber: null,
+    countryCode: null,
+    moodboard: null,
+    firstName: null,
+    lastName: null,
+  };
 
-  client = {photoPath: null, phoneNumber: null, countryCode: null, moodboard: null, firstName: null, lastName: null};
-
-
-  constructor(private designerService: DesignerService, private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) {}
+  constructor(
+    private designerService: DesignerService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
     const consultationPaymentId = this.route.snapshot.params.paymentId;
-    this.designerService.getDesignerClient(consultationPaymentId).subscribe((res: any) => {
-      this.client = res;
-      this.spinner.hide();
-    })
+    this.designerService
+      .getDesignerClient(consultationPaymentId)
+      .subscribe((res: any) => {
+        this.client = res;
+        this.spinner.hide();
+      });
   }
 
-
   goToChat() {
-    this.router.navigateByUrl(`/messenger?contact=${this.client['clientId']}`)
+    this.router.navigateByUrl(`/messenger?contact=${this.client['clientId']}`);
   }
 
   goToCreateOffer() {
-    this.router.navigateByUrl(`/create-offer/${this.client['consultationId']}`)
+    this.router.navigateByUrl(`/create-offer/${this.client['consultationId']}`);
   }
-
-
 }

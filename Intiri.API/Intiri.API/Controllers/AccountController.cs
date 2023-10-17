@@ -21,461 +21,528 @@ using Microsoft.AspNetCore.Mvc;
 namespace Intiri.API.Controllers
 {
     public class AccountController : BaseApiController
-	{
-		#region Fields
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly ITokenService _tokenService;
-		private readonly IAccountService _accountService;
-		private readonly IVippsLoginService _vippsLoginService;
-		private readonly ISmsVerificationService _smsVerificationService;
-		private readonly ILogger<AccountController> _logger;
-		private readonly IRatingService _ratingService;
-		private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly ITokenService _tokenService;
+        private readonly IAccountService _accountService;
+        private readonly IVippsLoginService _vippsLoginService;
+        private readonly ISmsVerificationService _smsVerificationService;
+        private readonly ILogger<AccountController> _logger;
+        private readonly IRatingService _ratingService;
+        private readonly IUserService _userService;
 
-		#endregion  Fields
+        #endregion  Fields
 
-		#region Constructors
+        #region Constructors
 
-		public AccountController(
-			IUnitOfWork unitOfWork,
-			ITokenService tokenService,
-			IMapper mapper,
-			IAccountService accountService,
-			IVippsLoginService vippsLoginService,
-			ISmsVerificationService smsVerificationService,
-			ILogger<AccountController> logger,
-			IRatingService ratingService,
-			IUserService userService) : base(unitOfWork)
-		{
-			_mapper = mapper;
-			_tokenService = tokenService;
-			_accountService = accountService;
-			_vippsLoginService = vippsLoginService;
-			_smsVerificationService = smsVerificationService;
-			_logger = logger;
-			_ratingService = ratingService;
-			_userService = userService;
-		}
+        public AccountController(
+            IUnitOfWork unitOfWork,
+            ITokenService tokenService,
+            IMapper mapper,
+            IAccountService accountService,
+            IVippsLoginService vippsLoginService,
+            ISmsVerificationService smsVerificationService,
+            ILogger<AccountController> logger,
+            IRatingService ratingService,
+            IUserService userService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _tokenService = tokenService;
+            _accountService = accountService;
+            _vippsLoginService = vippsLoginService;
+            _smsVerificationService = smsVerificationService;
+            _logger = logger;
+            _ratingService = ratingService;
+            _userService = userService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpPost("register")]
-		public async Task<ActionResult<RegisterOutDTO>> Register(RegisterInDTO registerIn)
-		{
-			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+        [HttpPost("register")]
+        public async Task<ActionResult<RegisterOutDTO>> Register(RegisterInDTO registerIn)
+        {
+            string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
 
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
-			{
-				return BadRequest("Phone number is taken");
-			}
+            if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+            {
+                return BadRequest("Phone number is taken");
+            }
 
-			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(registerIn.CountryCode, registerIn.PhoneNumber,false);
+            OperationResult<bool> sendOperation =
+                await _smsVerificationService.SendSmsVerificationCode(
+                    registerIn.CountryCode,
+                    registerIn.PhoneNumber,
+                    false
+                );
 
-			if (!sendOperation.Result) return BadRequest(sendOperation.ErrorMessage);
+            if (!sendOperation.Result)
+                return BadRequest(sendOperation.ErrorMessage);
 
-			RegisterOutDTO registerOut = new()
-			{
-				FirstName = registerIn.FirstName,
-				LastName = registerIn.LastName,
-				CountryCode = registerIn.CountryCode,
-				PhoneNumber = registerIn.PhoneNumber,
-			};
+            RegisterOutDTO registerOut =
+                new()
+                {
+                    FirstName = registerIn.FirstName,
+                    LastName = registerIn.LastName,
+                    CountryCode = registerIn.CountryCode,
+                    PhoneNumber = registerIn.PhoneNumber,
+                };
 
-			return Ok(registerOut);
-		}
-		
-		[HttpPost("login")]
-		public async Task<ActionResult> Login(LoginInDTO loginDto)
-		{
-			string usernameFullPhone = loginDto.CountryCode + loginDto.PhoneNumber;
+            return Ok(registerOut);
+        }
 
-			User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
-			
-			if (user == null) return BadRequest("Invalid user phone number");
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(LoginInDTO loginDto)
+        {
+            string usernameFullPhone = loginDto.CountryCode + loginDto.PhoneNumber;
 
-			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(loginDto.CountryCode, loginDto.PhoneNumber,user.PhoneNumberConfirmed);
+            User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
 
-			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
+            if (user == null)
+                return BadRequest("Invalid user phone number");
 
-			return Ok();
-		}
+            OperationResult<bool> sendOperation =
+                await _smsVerificationService.SendSmsVerificationCode(
+                    loginDto.CountryCode,
+                    loginDto.PhoneNumber,
+                    user.PhoneNumberConfirmed
+                );
 
-		[HttpPost("sms-verification-register")]
-		public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
-			SmsVerificationInDTO verificationDto)
-		{
-			EndUser eUser = _mapper.Map<EndUser>(verificationDto);
+            if (!sendOperation.IsSuccess)
+                return BadRequest(sendOperation.ErrorMessage);
 
-			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
+            return Ok();
+        }
 
-			if (!isSuccess) return BadRequest("Invalid SMS verification code.");
+        [HttpPost("sms-verification-register")]
+        public async Task<ActionResult<LoginOutDTO>> SmsVerificationRegister(
+            SmsVerificationInDTO verificationDto
+        )
+        {
+            EndUser eUser = _mapper.Map<EndUser>(verificationDto);
 
-			IdentityResult result = await _accountService.CreateUserAsync(eUser);
-			if (!result.Succeeded) return BadRequest(result.Errors);
+            bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+                verificationDto.CountryCode,
+                verificationDto.PhoneNumber,
+                verificationDto.VerificationCode
+            );
 
-			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(eUser, RoleNames.FreeEndUser);
-			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+            if (!isSuccess)
+                return BadRequest("Invalid SMS verification code.");
 
-			return new LoginOutDTO
-			{
-				CountryCode = verificationDto.CountryCode,
-				PhoneNumber = eUser.PhoneNumber,
-				Token = await _tokenService.CreateToken(eUser)
-			};
-		}
+            IdentityResult result = await _accountService.CreateUserAsync(eUser);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
 
-		[HttpPost("sms-verification-login")]
-		public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
-			SmsVerificationInDTO verificationDto)
-		{
-			string usernameFullPhone = verificationDto.CountryCode + verificationDto.PhoneNumber;
-			User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
+            IdentityResult roleResult = await _accountService.AddUserToRoleAsync(
+                eUser,
+                RoleNames.FreeEndUser
+            );
+            if (!roleResult.Succeeded)
+                return BadRequest(roleResult.Errors);
 
-			if (user == null) return BadRequest("Invalid user phone number");
+            return new LoginOutDTO
+            {
+                CountryCode = verificationDto.CountryCode,
+                PhoneNumber = eUser.PhoneNumber,
+                Token = await _tokenService.CreateToken(eUser)
+            };
+        }
 
-			bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-				verificationDto.CountryCode, verificationDto.PhoneNumber, verificationDto.VerificationCode);
+        [HttpPost("sms-verification-login")]
+        public async Task<ActionResult<LoginOutDTO>> SmsVerificationLogin(
+            SmsVerificationInDTO verificationDto
+        )
+        {
+            string usernameFullPhone = verificationDto.CountryCode + verificationDto.PhoneNumber;
+            User user = await _accountService.GetUserByUsernameAsync(usernameFullPhone);
 
-			if(isSuccess == false)
-			{
+            if (user == null)
+                return BadRequest("Invalid user phone number");
+
+            bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+                verificationDto.CountryCode,
+                verificationDto.PhoneNumber,
+                verificationDto.VerificationCode
+            );
+
+            if (isSuccess == false)
+            {
                 isSuccess = ValidateSmsVerificationTestCode(user, verificationDto.VerificationCode);
             }
 
-            if (!isSuccess) return BadRequest("Invalid SMS verification code.");
+            if (!isSuccess)
+                return BadRequest("Invalid SMS verification code.");
 
-			return Ok(new LoginOutDTO
-			{
-				CountryCode = user.CountryCode,
-				PhoneNumber = user.PhoneNumber,
-				Token = await _tokenService.CreateToken(user)
-			});
-		}
+            return Ok(
+                new LoginOutDTO
+                {
+                    CountryCode = user.CountryCode,
+                    PhoneNumber = user.PhoneNumber,
+                    Token = await _tokenService.CreateToken(user)
+                }
+            );
+        }
 
-		private bool ValidateSmsVerificationTestCode(User user, string verificationCode)
-		{
-			bool isSuccess = false;
-			if(user != null && user.PhoneNumberConfirmed == true && verificationCode == "000000")
-			{
+        private bool ValidateSmsVerificationTestCode(User user, string verificationCode)
+        {
+            bool isSuccess = false;
+            if (user != null && user.PhoneNumberConfirmed == true && verificationCode == "000000")
+            {
                 isSuccess = true;
             }
 
-			return isSuccess;
-		}
+            return isSuccess;
+        }
 
-		[HttpPost("resend-sms-verification")]
-		public async Task<IActionResult> ResendSmsVerificationCode(
-			SmsVerificationResendInDTO inDTO)
-		{
-			OperationResult<bool> sendOperation = await _smsVerificationService
-				.SendSmsVerificationCode(inDTO.CountryCode, inDTO.PhoneNumber,false);
+        [HttpPost("resend-sms-verification")]
+        public async Task<IActionResult> ResendSmsVerificationCode(SmsVerificationResendInDTO inDTO)
+        {
+            OperationResult<bool> sendOperation =
+                await _smsVerificationService.SendSmsVerificationCode(
+                    inDTO.CountryCode,
+                    inDTO.PhoneNumber,
+                    false
+                );
 
-			if (!sendOperation.IsSuccess) return BadRequest(sendOperation.ErrorMessage);
+            if (!sendOperation.IsSuccess)
+                return BadRequest(sendOperation.ErrorMessage);
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[HttpPost("vipps-auth-url")]
-		public async Task<ActionResult> GetVippsAuthorizationUrl(
-			VippsRedirectionUriDTO dto)
-		{
-			string authUrl = await _vippsLoginService.GetAuthorizationUrlAsync(dto.RedirectUri, dto.State);
+        [HttpPost("vipps-auth-url")]
+        public async Task<ActionResult> GetVippsAuthorizationUrl(VippsRedirectionUriDTO dto)
+        {
+            string authUrl = await _vippsLoginService.GetAuthorizationUrlAsync(
+                dto.RedirectUri,
+                dto.State
+            );
 
-			if (authUrl == null)
-			{
-				_logger.LogError(
-					$"Fetching Vipps authorization URL failed. " +
-					$"Authorization_URL={authUrl}");
+            if (authUrl == null)
+            {
+                _logger.LogError(
+                    $"Fetching Vipps authorization URL failed. " + $"Authorization_URL={authUrl}"
+                );
 
-				return NotFound(
-					"Something went wrong " +
-					"while fetching authorization URL from Vipps.");
-			}
+                return NotFound(
+                    "Something went wrong " + "while fetching authorization URL from Vipps."
+                );
+            }
 
-			return Ok(new VippsAuthorizationUrlDTO() { AuthorizationUrl = authUrl});
-		}
+            return Ok(new VippsAuthorizationUrlDTO() { AuthorizationUrl = authUrl });
+        }
 
-		[HttpPost("vipps-login")]
-		public async Task<ActionResult<LoginOutDTO>> VippsLogin(
-			VippsAccessTokenRequestDTO dto)
-		{
-			TokenResponse accessToken = await _vippsLoginService
-				.GetAccessTokenAsync(dto.AuthorizationCode, dto.RedirectUri);
+        [HttpPost("vipps-login")]
+        public async Task<ActionResult<LoginOutDTO>> VippsLogin(VippsAccessTokenRequestDTO dto)
+        {
+            TokenResponse accessToken = await _vippsLoginService.GetAccessTokenAsync(
+                dto.AuthorizationCode,
+                dto.RedirectUri
+            );
 
-			if (accessToken == null)
-			{
-				_logger.LogError(
-					$"Fetching access token from Vipps failed. " +
-					$"Access_token={accessToken}");
+            if (accessToken == null)
+            {
+                _logger.LogError(
+                    $"Fetching access token from Vipps failed. " + $"Access_token={accessToken}"
+                );
 
-				return NotFound(
-					"Something went wrong " +
-					"while fetching access token from Vipps.");
-			}
-			
-			if (accessToken.IsError)
-			{
-				_logger.LogError(
-					$"Fetching access token from Vipps failed. " +
-					$"Error={accessToken.Error}");
+                return NotFound(
+                    "Something went wrong " + "while fetching access token from Vipps."
+                );
+            }
 
-				return BadRequest(
-					"Something went wrong " +
-					"while fetching access token from Vipps.");
-			}
+            if (accessToken.IsError)
+            {
+                _logger.LogError(
+                    $"Fetching access token from Vipps failed. " + $"Error={accessToken.Error}"
+                );
 
-			UserInfoResponse userInfoResponse = await 
-				_vippsLoginService.GetUserInfoAsync(accessToken.AccessToken);
+                return BadRequest(
+                    "Something went wrong " + "while fetching access token from Vipps."
+                );
+            }
 
-			if (userInfoResponse == null)
-			{
-				_logger.LogError(
-					$"Fetching user info from Vipps failed. " +
-					$"Access_token={userInfoResponse}");
+            UserInfoResponse userInfoResponse = await _vippsLoginService.GetUserInfoAsync(
+                accessToken.AccessToken
+            );
 
-				return NotFound(
-					"Something went wrong " +
-					"while fetching user info from Vipps.");
-			}
+            if (userInfoResponse == null)
+            {
+                _logger.LogError(
+                    $"Fetching user info from Vipps failed. " + $"Access_token={userInfoResponse}"
+                );
 
-			if (userInfoResponse.IsError)
-			{
-				_logger.LogError(
-					$"Fetching user info from Vipps failed. " +
-					$"Error={userInfoResponse.Error}");
+                return NotFound("Something went wrong " + "while fetching user info from Vipps.");
+            }
 
-				return BadRequest(
-					"Something went wrong " +
-					"while fetching user info from Vipps.");
-			}
+            if (userInfoResponse.IsError)
+            {
+                _logger.LogError(
+                    $"Fetching user info from Vipps failed. " + $"Error={userInfoResponse.Error}"
+                );
 
-			string phoneNumber = userInfoResponse.Claims
-				.FirstOrDefault(c => c.Type == "phone_number").Value;
+                return BadRequest("Something went wrong " + "while fetching user info from Vipps.");
+            }
 
-			if (phoneNumber == null)
-			{
-				_logger.LogError(
-					$"Fetching user's phone number from Vipps failed. " +
-					$"phone_number={phoneNumber}");
+            string phoneNumber = userInfoResponse.Claims
+                .FirstOrDefault(c => c.Type == "phone_number")
+                .Value;
 
-				BadRequest("Something went wrong " +
-					"while fetching user's phone number from Vipps.");
-			}
+            if (phoneNumber == null)
+            {
+                _logger.LogError(
+                    $"Fetching user's phone number from Vipps failed. "
+                        + $"phone_number={phoneNumber}"
+                );
 
-			// Login user if already in DB
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumber))
-			{
-				User existingUser = await _accountService
-					.GetUserByUsernameAsync(phoneNumber);
+                BadRequest(
+                    "Something went wrong " + "while fetching user's phone number from Vipps."
+                );
+            }
 
-				return Ok(new LoginOutDTO
-				{
-					CountryCode = existingUser.CountryCode,
-					PhoneNumber = existingUser.PhoneNumber,
-					Token = await _tokenService.CreateToken(existingUser)
-				});
-			}
+            // Login user if already in DB
+            if (await _accountService.IsUserWithPhoneNumberExists(phoneNumber))
+            {
+                User existingUser = await _accountService.GetUserByUsernameAsync(phoneNumber);
 
-			// Register user if not in DB
-			string email = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "email").Value;
-			string firstName = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "given_name").Value;
-			string lastName = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "family_name").Value;
+                return Ok(
+                    new LoginOutDTO
+                    {
+                        CountryCode = existingUser.CountryCode,
+                        PhoneNumber = existingUser.PhoneNumber,
+                        Token = await _tokenService.CreateToken(existingUser)
+                    }
+                );
+            }
 
-			//TODO: Find the proper way to separate country code
-			string countryCode = "47";
-			User newUser = new()
-			{
-				UserName = phoneNumber,
-				FirstName = firstName,
-				LastName = lastName,
-				CountryCode = countryCode,
-				PhoneNumber = phoneNumber.Replace(countryCode, ""),
-				Email = email
-			};
+            // Register user if not in DB
+            string email = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "email").Value;
+            string firstName = userInfoResponse.Claims
+                .FirstOrDefault(c => c.Type == "given_name")
+                .Value;
+            string lastName = userInfoResponse.Claims
+                .FirstOrDefault(c => c.Type == "family_name")
+                .Value;
 
-			IdentityResult result = await
-				_accountService.CreateUserAsync(newUser);
+            //TODO: Find the proper way to separate country code
+            string countryCode = "47";
+            User newUser =
+                new()
+                {
+                    UserName = phoneNumber,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    CountryCode = countryCode,
+                    PhoneNumber = phoneNumber.Replace(countryCode, ""),
+                    Email = email
+                };
 
-			if (!result.Succeeded)
-			{
-				_logger.LogError($"{result.Errors}");
-				return BadRequest(result.Errors);
-			}
+            IdentityResult result = await _accountService.CreateUserAsync(newUser);
 
-			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(newUser, RoleNames.FreeEndUser);
+            if (!result.Succeeded)
+            {
+                _logger.LogError($"{result.Errors}");
+                return BadRequest(result.Errors);
+            }
 
-			if (!roleResult.Succeeded)
-			{
-				_logger.LogError($"{roleResult.Errors}");
-				return BadRequest(roleResult.Errors);
-			}
+            IdentityResult roleResult = await _accountService.AddUserToRoleAsync(
+                newUser,
+                RoleNames.FreeEndUser
+            );
 
-			return Ok(new LoginOutDTO
-			{
-				CountryCode = newUser.CountryCode,
-				PhoneNumber = newUser.PhoneNumber,
-				Token = await _tokenService.CreateToken(newUser)
-			});
-		}
+            if (!roleResult.Succeeded)
+            {
+                _logger.LogError($"{roleResult.Errors}");
+                return BadRequest(roleResult.Errors);
+            }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("register/partnerContact")]
-		public async Task<ActionResult<RegisterOutDTO>> AddPartnerContact(PartnerContactInDTO registerIn)
-		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetByID(registerIn.PartnerId);
+            return Ok(
+                new LoginOutDTO
+                {
+                    CountryCode = newUser.CountryCode,
+                    PhoneNumber = newUser.PhoneNumber,
+                    Token = await _tokenService.CreateToken(newUser)
+                }
+            );
+        }
 
-			if (partner == null) return NotFound("Partner for partner contact not found");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("register/partnerContact")]
+        public async Task<ActionResult<RegisterOutDTO>> AddPartnerContact(
+            PartnerContactInDTO registerIn
+        )
+        {
+            Partner partner = await _unitOfWork.PartnerRepository.GetByID(registerIn.PartnerId);
 
-			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+            if (partner == null)
+                return NotFound("Partner for partner contact not found");
 
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
-			{
-				return BadRequest("Phone number is taken");
-			}
+            string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
 
-			PartnerContact pUser = _mapper.Map<PartnerContact>(registerIn);
-			pUser.Partner = partner;
+            if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+            {
+                return BadRequest("Phone number is taken");
+            }
 
-			IdentityResult result = await _accountService.CreateUserAsync(pUser);
-			if (!result.Succeeded) return BadRequest(result.Errors);
+            PartnerContact pUser = _mapper.Map<PartnerContact>(registerIn);
+            pUser.Partner = partner;
 
-			partner.PartnerContacts.Add(pUser);
+            IdentityResult result = await _accountService.CreateUserAsync(pUser);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
 
-			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(pUser, RoleNames.Partner);
-			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+            partner.PartnerContacts.Add(pUser);
 
-			return Ok(_mapper.Map<PartnerContactOutDTO>(pUser));
-		}
+            IdentityResult roleResult = await _accountService.AddUserToRoleAsync(
+                pUser,
+                RoleNames.Partner
+            );
+            if (!roleResult.Succeeded)
+                return BadRequest(roleResult.Errors);
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("register/designer")]
-		public async Task<ActionResult<RegisterOutDTO>> AddDesigner(DesignerInDTO registerIn)
-		{
-			string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
+            return Ok(_mapper.Map<PartnerContactOutDTO>(pUser));
+        }
 
-			if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
-			{
-				return BadRequest("Phone number is taken");
-			}
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("register/designer")]
+        public async Task<ActionResult<RegisterOutDTO>> AddDesigner(DesignerInDTO registerIn)
+        {
+            string phoneNumberFull = registerIn.CountryCode + registerIn.PhoneNumber;
 
-			Designer dUser = _mapper.Map<Designer>(registerIn);
-			
-			if (string.IsNullOrEmpty(dUser.Language))
-			{
-				dUser.Language = Language.Norway;
-			}
+            if (await _accountService.IsUserWithPhoneNumberExists(phoneNumberFull))
+            {
+                return BadRequest("Phone number is taken");
+            }
 
-			IdentityResult result = await _accountService.CreateUserAsync(dUser);
-			if (!result.Succeeded) return BadRequest(result.Errors);
+            Designer dUser = _mapper.Map<Designer>(registerIn);
 
-			IdentityResult roleResult = await _accountService.AddUserToRoleAsync(dUser, registerIn.Role);
-			if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+            if (string.IsNullOrEmpty(dUser.Language))
+            {
+                dUser.Language = Language.Norway;
+            }
 
-			if (!await _ratingService.InitRatingAndSaveDesignerAsync(dUser))
-			{
-				return BadRequest("Failed to register designer.");
-			}
+            IdentityResult result = await _accountService.CreateUserAsync(dUser);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
 
-			return Ok(_mapper.Map<RegisterOutDTO>(dUser));
-		}
+            IdentityResult roleResult = await _accountService.AddUserToRoleAsync(
+                dUser,
+                registerIn.Role
+            );
+            if (!roleResult.Succeeded)
+                return BadRequest(roleResult.Errors);
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete-user/{id}")]
-		public async Task<ActionResult> DeleteUser(int id)
-		{
-			if (!await _unitOfWork.UserRepository.DoesAnyUserExistWithId(id))
-			{
-				return BadRequest("User doesn't exist ");
-			}
+            if (!await _ratingService.InitRatingAndSaveDesignerAsync(dUser))
+            {
+                return BadRequest("Failed to register designer.");
+            }
 
-			User user = null;
+            return Ok(_mapper.Map<RegisterOutDTO>(dUser));
+        }
 
-			IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
-			List<string> cloudinaryPublicIds = null;
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete-user/{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            if (!await _unitOfWork.UserRepository.DoesAnyUserExistWithId(id))
+            {
+                return BadRequest("User doesn't exist ");
+            }
 
-			if (userRoles.Contains(RoleNames.Partner))
-			{
-				user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
-			}
-			else if (userRoles.Contains(RoleNames.InternalDesigner) || userRoles.Contains(RoleNames.ExternalDesigner))
-			{
-				user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
+            User user = null;
 
-				cloudinaryPublicIds = new List<string>() { user.PublicId };
-				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+            IList<string> userRoles = await _accountService.GetUserRolesByIdAsync(id.ToString());
+            List<string> cloudinaryPublicIds = null;
 
-			}
-			else if (userRoles.Contains(RoleNames.FreeEndUser))
-			{
-				user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+            if (userRoles.Contains(RoleNames.Partner))
+            {
+                user = await _accountService.GetUserByIdAsync<PartnerContact>(id);
+            }
+            else if (
+                userRoles.Contains(RoleNames.InternalDesigner)
+                || userRoles.Contains(RoleNames.ExternalDesigner)
+            )
+            {
+                user = await _unitOfWork.UserRepository.GetDesignerUserByIdAsync(id);
 
-				cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
-				cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+                cloudinaryPublicIds = new List<string>() { user.PublicId };
+                cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
+            }
+            else if (userRoles.Contains(RoleNames.FreeEndUser))
+            {
+                user = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
-				IEnumerable<DesignerReview> clientReviews = await _unitOfWork.DesignerReviewRepository.GetAllReviewsByClientIdAsync(user.Id);
-				foreach (DesignerReview review in clientReviews)
-				{
-					review.EndUser = null;
-				}
-			}
+                cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(user as EndUser);
+                cloudinaryPublicIds.AddRange(await _userService.DeleteUserRelatedMessagesAsync(id));
 
-			try
-			{
-				IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
+                IEnumerable<DesignerReview> clientReviews =
+                    await _unitOfWork.DesignerReviewRepository.GetAllReviewsByClientIdAsync(
+                        user.Id
+                    );
+                foreach (DesignerReview review in clientReviews)
+                {
+                    review.EndUser = null;
+                }
+            }
 
-				if (!identityResult.Succeeded)
-					return BadRequest("Faild to delete user");
+            try
+            {
+                IdentityResult identityResult = await _accountService.DeleteUserAsync(user);
 
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "An error occurred during user deletion");
-				return BadRequest($"Faild to delete user.");
-			}
+                if (!identityResult.Succeeded)
+                    return BadRequest("Faild to delete user");
 
-			// delete all user cloudinary files
-			if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
-			{
-				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
-			}
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred during user deletion");
+                return BadRequest($"Faild to delete user.");
+            }
 
-			return Ok();
-		}
+            // delete all user cloudinary files
+            if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
+            {
+                await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
+            }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("deleteEndUser/{id}")]
-		public async Task<ActionResult> DeleteEndUser(int id)
-		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
+            return Ok();
+        }
 
-			if (endUser == null)
-				return BadRequest("End user doesn't exist");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("deleteEndUser/{id}")]
+        public async Task<ActionResult> DeleteEndUser(int id)
+        {
+            EndUser endUser = await _unitOfWork.UserRepository.GetEndUserWithCollectionsAsync(id);
 
-			await _userService.DeleteUserRelatedMessagesAsync(id);
-			List<string> cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(endUser);
+            if (endUser == null)
+                return BadRequest("End user doesn't exist");
 
-			try
-			{
-				IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
-				if (!identityResult.Succeeded)
-					return BadRequest("Faild to delete End user");
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Faild to delete End user: {ex.Message}");
-			}
+            await _userService.DeleteUserRelatedMessagesAsync(id);
+            List<string> cloudinaryPublicIds = _userService.GetEndUserCloudinaryFilesAsync(endUser);
 
-			// delete all user cloudinary files
-			if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
-			{
-				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
-			}
+            try
+            {
+                IdentityResult identityResult = await _accountService.DeleteUserAsync(endUser);
+                if (!identityResult.Succeeded)
+                    return BadRequest("Faild to delete End user");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Faild to delete End user: {ex.Message}");
+            }
 
-			return Ok();
-		}
-	}
+            // delete all user cloudinary files
+            if (cloudinaryPublicIds != null && cloudinaryPublicIds.Count > 0)
+            {
+                await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
+            }
+
+            return Ok();
+        }
+    }
 }

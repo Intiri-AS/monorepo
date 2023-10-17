@@ -13,12 +13,10 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './inspirations.page.html',
   styleUrls: ['./inspirations.page.scss'],
 })
-
 export class InspirationsPage {
-
   inspirations: any[] = [];
   imagePath = null;
-  newInspiration = null
+  newInspiration = null;
 
   constructor(
     public projectService: ProjectService,
@@ -34,8 +32,11 @@ export class InspirationsPage {
     this.projectService.getInspirations();
     this.projectService.inspirations$.subscribe((res: any[]) => {
       this.spinner.hide();
-      this.inspirations = res.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
-    })
+      this.inspirations = res.map((e) => {
+        e.filename = e.url.substring(e.url.lastIndexOf('/') + 1);
+        return e;
+      });
+    });
   }
 
   isExtension(file, extension) {
@@ -43,25 +44,34 @@ export class InspirationsPage {
   }
 
   addInspiration() {
-    this.projectService.addInspiration(this.newInspiration).subscribe((res: any[]) => {
-      this.projectService.getInspirations();
-      this.projectService.inspirations$.pipe(take(1)).subscribe((res: any[]) => {
+    this.projectService.addInspiration(this.newInspiration).subscribe(
+      (res: any[]) => {
+        this.projectService.getInspirations();
+        this.projectService.inspirations$
+          .pipe(take(1))
+          .subscribe((res: any[]) => {
+            this.spinner.hide();
+            this.inspirations = res;
+            this.imagePath = null;
+            this.notifier.show({
+              message: this.translate.instant(
+                'MY-INTIRI.add-inspiration-message'
+              ),
+              type: 'success',
+            });
+          });
+      },
+      () => {
         this.spinner.hide();
-        this.inspirations = res;
         this.imagePath = null;
         this.notifier.show({
-          message: this.translate.instant('MY-INTIRI.add-inspiration-message'),
-          type: 'success',
+          message: this.translate.instant(
+            'MY-INTIRI.add-inspiration-message-error'
+          ),
+          type: 'error',
         });
-      })
-    }, () => {
-      this.spinner.hide();
-      this.imagePath = null;
-      this.notifier.show({
-        message: this.translate.instant('MY-INTIRI.add-inspiration-message-error'),
-        type: 'error',
-      });
-    })
+      }
+    );
   }
 
   downloadFile(file) {
@@ -79,22 +89,23 @@ export class InspirationsPage {
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: {file: image, canDelete: true},
-      cssClass: 'open-file-modal-css'
+      componentProps: { file: image, canDelete: true },
+      cssClass: 'open-file-modal-css',
     });
 
     await modal.present();
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.newInspiration = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.newInspiration));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.newInspiration)
+      );
       this.spinner.show();
       this.addInspiration();
     } else {
       this.imagePath = null;
     }
   }
-
 }

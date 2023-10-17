@@ -3,60 +3,102 @@
     <ion-row class="">
       <ion-col size="8" offset="2" size-lg="6" offset-lg="1">
         <ion-text class="text-left">
-          <img src="../../../assets/images/intiri-white-logo.png" class="" alt="Intiri"/> <br/>
+          <img
+            src="../../../assets/images/intiri-white-logo.png"
+            class=""
+            alt="Intiri"
+          />
+          <br />
           <p>
-            {{'FOOTER.p-1' | translate}}
+            {{ "FOOTER.p-1" | translate }}
           </p>
-          <br/>
+          <br />
           <p>
-            {{'FOOTER.p-2' | translate}} <a href="mailto:reklamasjon@intiri.no">reklamasjon@intiri.no</a>
+            {{ "FOOTER.p-2" | translate }}
+            <a href="mailto:reklamasjon@intiri.no">reklamasjon@intiri.no</a>
           </p>
-          <br/>
+          <br />
           <p>
-            {{'FOOTER.p-3' | translate}} <a href="mailto:designer@intiri.no">designer@intiri.no</a>
+            {{ "FOOTER.p-3" | translate }}
+            <a href="mailto:designer@intiri.no">designer@intiri.no</a>
           </p>
-          <br/>
+          <br />
           <p>
-            {{'FOOTER.p-4' | translate}} <a href="mailto:partner@intiri.no">partner@intiri.no</a>
+            {{ "FOOTER.p-4" | translate }}
+            <a href="mailto:partner@intiri.no">partner@intiri.no</a>
           </p>
-          <br/>
+          <br />
           <a href="mailto:kontakt@intiri.no">kontakt@intiri.no</a>
           <p>
-            {{'FOOTER.p-5' | translate}}
+            {{ "FOOTER.p-5" | translate }}
           </p>
         </ion-text>
       </ion-col>
-      <hr/>
-      <ion-col size="10" offset="2" size-lg="2" offset-lg="0" class="mt-[60px] md:mt-0">
+      <hr />
+      <ion-col
+        size="10"
+        offset="2"
+        size-lg="2"
+        offset-lg="0"
+        class="mt-[60px] md:mt-0"
+      >
         <ion-text>
-          <p class="uppercase">{{'LANDING.navigation' | translate}}</p><br/>
-            <ion-button (click)="scrollTo('home')" fill="clear">{{'LANDING.home' | translate}}</ion-button><br/>
-            <ion-button (click)="scrollTo('how-it-works')" fill="clear">{{'LANDING.how-it-works' | translate}}</ion-button><br/>
-            <ion-button (click)="scrollTo('stories')" fill="clear">{{'LANDING.stories' | translate}}</ion-button><br/>
-            <ion-button (click)="scrollTo('contact')" fill="clear">{{'LANDING.contact' | translate}}</ion-button>
+          <p class="uppercase">{{ "LANDING.navigation" | translate }}</p>
+          <br />
+          <ion-button (click)="scrollTo('home')" fill="clear">{{
+            "LANDING.home" | translate
+          }}</ion-button
+          ><br />
+          <ion-button (click)="scrollTo('how-it-works')" fill="clear">{{
+            "LANDING.how-it-works" | translate
+          }}</ion-button
+          ><br />
+          <ion-button (click)="scrollTo('stories')" fill="clear">{{
+            "LANDING.stories" | translate
+          }}</ion-button
+          ><br />
+          <ion-button (click)="scrollTo('contact')" fill="clear">{{
+            "LANDING.contact" | translate
+          }}</ion-button>
         </ion-text>
       </ion-col>
-      <ion-col size="10" offset="2" size-lg="3" offset-lg="0" class="mt-[60px] md:mt-0">
+      <ion-col
+        size="10"
+        offset="2"
+        size-lg="3"
+        offset-lg="0"
+        class="mt-[60px] md:mt-0"
+      >
         <ion-text>
-          <p class="uppercase">{{'LANDING.social' | translate}}</p><br/>
+          <p class="uppercase">{{ "LANDING.social" | translate }}</p>
+          <br />
           <a href="https://www.facebook.com/intirihome" target="_blank">
             <ion-icon class="social-logo" name="logo-facebook"></ion-icon>
           </a>
           <a href="https://www.instagram.com/intirihome" target="_blank">
             <ion-icon class="social-logo" name="logo-instagram"></ion-icon>
           </a>
-          <a href="https://www.linkedin.com/company/intiri-home" target="_blank">
+          <a
+            href="https://www.linkedin.com/company/intiri-home"
+            target="_blank"
+          >
             <ion-icon class="social-logo" name="logo-linkedin"></ion-icon>
           </a>
-          <a href="https://www.pinterest.se/Intiridigitalinteriordesigner" target="_blank">
+          <a
+            href="https://www.pinterest.se/Intiridigitalinteriordesigner"
+            target="_blank"
+          >
             <ion-icon class="social-logo" name="logo-pinterest"></ion-icon>
           </a>
           <a href="https://www.tiktok.com/@intirihome" target="_blank">
-            <ion-icon class="social-logo" name="logo-tiktok"></ion-icon>
-          </a><br/>
+            <ion-icon class="social-logo" name="logo-tiktok"></ion-icon> </a
+          ><br />
 
-          <ion-button fill="clear">{{'LANDING.terms' | translate}}</ion-button><br/>
-          <ion-button fill="clear">{{'LANDING.privacy' | translate}}</ion-button>
+          <ion-button fill="clear">{{ "LANDING.terms" | translate }}</ion-button
+          ><br />
+          <ion-button fill="clear">{{
+            "LANDING.privacy" | translate
+          }}</ion-button>
         </ion-text>
       </ion-col>
     </ion-row>

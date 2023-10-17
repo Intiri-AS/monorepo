@@ -11,11 +11,10 @@ import { VerificationTarget } from 'src/app/types/types';
   templateUrl: './sms-verification.page.html',
   styleUrls: ['./sms-verification.page.scss'],
 })
-
 export class SmsVerificationPage implements OnInit {
   error: any;
   verificationTarget: VerificationTarget;
-  @ViewChild('codeInput') codeInput !: CodeInputComponent;
+  @ViewChild('codeInput') codeInput!: CodeInputComponent;
 
   constructor(
     private router: Router,
@@ -36,67 +35,83 @@ export class SmsVerificationPage implements OnInit {
   // this called only if user entered full code
   public onCodeCompleted(verificationCode) {
     switch (this.verificationTarget) {
-      case VerificationTarget.LOGIN:
-        {
-          const countryCode = this.getQueryParamFromSnapshot('countryCode');
-          const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
-          this.accountService.smsVerificationLogin(countryCode, phoneNumber, verificationCode)
-            .subscribe(response => {
-              this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
-                if (loggedUser) {
-                  const routes = this.accountService.homepageRoutes;
-                  this.nav.navigateRoot(routes[loggedUser.roles[0]]);
-                }
-              });
-            }, error => {
+      case VerificationTarget.LOGIN: {
+        const countryCode = this.getQueryParamFromSnapshot('countryCode');
+        const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
+        this.accountService
+          .smsVerificationLogin(countryCode, phoneNumber, verificationCode)
+          .subscribe(
+            (response) => {
+              this.accountService.currentUser$
+                .pipe(take(1))
+                .subscribe((loggedUser) => {
+                  if (loggedUser) {
+                    const routes = this.accountService.homepageRoutes;
+                    this.nav.navigateRoot(routes[loggedUser.roles[0]]);
+                  }
+                });
+            },
+            (error) => {
               this.error = error;
-            });
-          break;
-        }
-      case VerificationTarget.REGISTER:
-        {
-          const countryCode = this.getQueryParamFromSnapshot('countryCode');
-          const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
-          const firstName = this.getQueryParamFromSnapshot('firstName');
-          const lastName = this.getQueryParamFromSnapshot('lastName');
-          const step = this.getQueryParamFromSnapshot('step');
+            }
+          );
+        break;
+      }
+      case VerificationTarget.REGISTER: {
+        const countryCode = this.getQueryParamFromSnapshot('countryCode');
+        const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
+        const firstName = this.getQueryParamFromSnapshot('firstName');
+        const lastName = this.getQueryParamFromSnapshot('lastName');
+        const step = this.getQueryParamFromSnapshot('step');
 
-          this.accountService.smsVerificationRegister(
+        this.accountService
+          .smsVerificationRegister(
             countryCode,
             phoneNumber,
             verificationCode,
             firstName,
             lastName
-          ).subscribe(response => {
-            if (step) {
-              this.nav.navigateRoot(['/new-project'], {queryParams: {step}});
-            } else {
-              this.router.navigate(['/my-intiri']);
+          )
+          .subscribe(
+            (response) => {
+              if (step) {
+                this.nav.navigateRoot(['/new-project'], {
+                  queryParams: { step },
+                });
+              } else {
+                this.router.navigate(['/my-intiri']);
+              }
+            },
+            (error) => {
+              this.error = error;
             }
-          }, error => {
-            this.error = error;
-          });
-          break;
-        }
+          );
+        break;
+      }
       default:
-        console.log('Invalid value for verification target', this.verificationTarget);
+        console.log(
+          'Invalid value for verification target',
+          this.verificationTarget
+        );
         break;
     }
     this.codeInput.reset();
   }
 
   resendVerificationCode() {
-    
     const countryCode = this.getQueryParamFromSnapshot('countryCode');
     const phoneNumber = this.getQueryParamFromSnapshot('phoneNumber');
 
-    this.accountService.resendVerificationCode(countryCode,phoneNumber).subscribe(
-      response => {
-        // nothing to do here
-      }, error => {
-        this.error = error.error;
-      }
-    );
+    this.accountService
+      .resendVerificationCode(countryCode, phoneNumber)
+      .subscribe(
+        (response) => {
+          // nothing to do here
+        },
+        (error) => {
+          this.error = error.error;
+        }
+      );
   }
 
   private getVerificationTarget() {
@@ -110,4 +125,3 @@ export class SmsVerificationPage implements OnInit {
     return this.route.snapshot.queryParamMap.get(param);
   }
 }
-

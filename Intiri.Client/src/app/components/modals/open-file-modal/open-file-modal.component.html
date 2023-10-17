@@ -1,21 +1,64 @@
 <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
 <div *ngIf="!isRemoving && file.url">
-  <img [src]="file.url" class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh]" alt="Inspiration Img" />
-  <ion-icon *ngIf="canDelete" name="trash" class="absolute right-[96px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="isRemoving=true"></ion-icon>
-  <ion-icon name="cloud-download" class="absolute right-[56px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="downloadFile()"></ion-icon>
-  <ion-icon name="close" class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]" (click)="dismissModal()"></ion-icon>
+  <img
+    [src]="file.url"
+    class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh]"
+    alt="Inspiration Img"
+  />
+  <ion-icon
+    *ngIf="canDelete"
+    name="trash"
+    class="absolute right-[96px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]"
+    (click)="isRemoving = true"
+  ></ion-icon>
+  <ion-icon
+    name="cloud-download"
+    class="absolute right-[56px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]"
+    (click)="downloadFile()"
+  ></ion-icon>
+  <ion-icon
+    name="close"
+    class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]"
+    (click)="dismissModal()"
+  ></ion-icon>
 </div>
 <div *ngIf="!isRemoving && file.imagePath">
-  <img [src]="file.imagePath" class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh] cursor-pointer" alt="Inspiration Img" (click)="redirectToProviderLink()"/>
-  <ion-icon *ngIf="canDelete" name="trash" class="absolute right-[96px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="isRemoving=true"></ion-icon>
-  <ion-icon name="cloud-download" class="absolute right-[56px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]" (click)="downloadFile()"></ion-icon>
-  <ion-icon name="close" class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]" (click)="dismissModal()"></ion-icon>
+  <img
+    [src]="file.imagePath"
+    class="object-fill rounded-2xl max-w-full mx-auto max-h-[90vh] cursor-pointer"
+    alt="Inspiration Img"
+    (click)="redirectToProviderLink()"
+  />
+  <ion-icon
+    *ngIf="canDelete"
+    name="trash"
+    class="absolute right-[96px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]"
+    (click)="isRemoving = true"
+  ></ion-icon>
+  <ion-icon
+    name="cloud-download"
+    class="absolute right-[56px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] px-[1px] pb-[2px] border border-primary rounded-[6px]"
+    (click)="downloadFile()"
+  ></ion-icon>
+  <ion-icon
+    name="close"
+    class="absolute right-[16px] top-[16px] text-primary text-3xl cursor-pointer hover:opacity-80 bg-[#F8F5F1] p-[1px] border border-primary rounded-[6px]"
+    (click)="dismissModal()"
+  ></ion-icon>
 </div>
 <div *ngIf="isRemoving" class="p-16">
-  <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'MY-INTIRI.remove-inspiration' | translate}}</h2>
-  <p class="text-center text-base text-[18px] text-black-2 mb-6">{{'MY-INTIRI.remove-inspiration-text' | translate}}</p>
-<ion-buttons class="justify-center">
-  <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteFile()">{{'COMMON.remove' | translate}}</ion-button>
-  <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-</ion-buttons>
+  <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+    {{ "MY-INTIRI.remove-inspiration" | translate }}
+  </h2>
+  <p class="text-center text-base text-[18px] text-black-2 mb-6">
+    {{ "MY-INTIRI.remove-inspiration-text" | translate }}
+  </p>
+  <ion-buttons class="justify-center">
+    <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteFile()">{{
+      "COMMON.remove" | translate
+    }}</ion-button>
+    <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{
+      "COMMON.cancel" | translate
+    }}</ion-button>
+  </ion-buttons>
 </div>

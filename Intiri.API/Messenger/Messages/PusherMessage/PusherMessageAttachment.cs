@@ -8,4 +8,3 @@ public class PusherMessageAttachment
 
     public string PublicId { get; set; }
 }
-

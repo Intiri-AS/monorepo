@@ -3,24 +3,26 @@ using Intiri.API.Models.Room;
 
 namespace Intiri.API.Models.Moodboard
 {
-	public class ClientMoodboard : Moodboard
-	{
-		#region Constructors
+    public class ClientMoodboard : Moodboard
+    {
+        #region Constructors
 
-		public ClientMoodboard(){ }
-		public ClientMoodboard(Moodboard moodboard) : base (moodboard){ }
+        public ClientMoodboard() { }
 
-		#endregion Constructors
+        public ClientMoodboard(Moodboard moodboard)
+            : base(moodboard) { }
 
-		#region Properties
+        #endregion Constructors
 
-		public Project.Project Project { get; set; }
-		public int? ProjectId { get; set; }
-		public RoomDetails RoomDetails { get; set; }
+        #region Properties
 
-		public ConsultationPayment ConsultationPaymentSend { get; set; }
-		public ConsultationPayment ConsultationPaymentReceive { get; set; }
+        public Project.Project Project { get; set; }
+        public int? ProjectId { get; set; }
+        public RoomDetails RoomDetails { get; set; }
 
-		#endregion Properties
-	}
+        public ConsultationPayment ConsultationPaymentSend { get; set; }
+        public ConsultationPayment ConsultationPaymentReceive { get; set; }
+
+        #endregion Properties
+    }
 }

@@ -335,7 +335,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 export function ApplicationInitializerFactory(
   translate: TranslateService,
-  injector: Injector,
+  injector: Injector
 ) {
   return async () => {
     await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));

@@ -8,19 +8,21 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./logout-modal.component.scss'],
 })
 export class LogoutModalComponent implements OnInit {
-
-  constructor(public accountService: AccountService, private modalController: ModalController,  private nav: NavController) { }
+  constructor(
+    public accountService: AccountService,
+    private modalController: ModalController,
+    private nav: NavController
+  ) {}
 
   ngOnInit() {}
 
   dismiss() {
-    this.modalController.dismiss({'dismissed': true})
+    this.modalController.dismiss({ dismissed: true });
   }
 
   logout() {
     this.dismiss();
     this.accountService.logout();
-    window.location.replace('https://intiri.no')
+    window.location.replace('https://intiri.no');
   }
-
 }

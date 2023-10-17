@@ -6,7 +6,7 @@ import { CloudinaryService } from './cloudinary.service';
 describe('Service: Cloudinary', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CloudinaryService]
+      providers: [CloudinaryService],
     });
   });
 

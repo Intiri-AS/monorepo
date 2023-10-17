@@ -10,28 +10,32 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_Materials_MaterialId",
-                table: "Products");
+                table: "Products"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Products_MaterialTypes_MaterialId",
                 table: "Products",
                 column: "MaterialId",
                 principalTable: "MaterialTypes",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_MaterialTypes_MaterialId",
-                table: "Products");
+                table: "Products"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Products_Materials_MaterialId",
                 table: "Products",
                 column: "MaterialId",
                 principalTable: "Materials",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
     }
 }

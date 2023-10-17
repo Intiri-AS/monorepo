@@ -1,23 +1,23 @@
 .profile-input {
-    @apply mt-4 mx-2 flex-1
+  @apply mt-4 mx-2 flex-1;
 }
 
 .phone-input {
-    @apply mt-4 mx-2 min-w-[130px]
+  @apply mt-4 mx-2 min-w-[130px];
 }
 
 ion-input {
-    @apply h-12
+  @apply h-12;
 }
 
 ion-select {
-    @apply border rounded-2xl h-12 border-black-2 pr-4
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
 
 .plus-icon-wrapper {
-    @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[81px] w-[81px]
+  @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[81px] w-[81px];
 }
 
 .disabled {
-    @apply pointer-events-none opacity-60
-  }
+  @apply pointer-events-none opacity-60;
+}

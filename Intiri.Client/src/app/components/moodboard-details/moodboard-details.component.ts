@@ -8,7 +8,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonSlides, ModalController } from '@ionic/angular';
-import { Moodboard } from 'src/app/models/moodboard.model';
+import {
+  Moodboard,
+  SlotInfo,
+  SlotInfoEntityTypes,
+} from 'src/app/models/moodboard.model';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
@@ -61,6 +65,11 @@ export class MoodboardDetailsComponent
       },
     },
   };
+
+  // Supplementary moodboard derivatives for managing different slot areas
+  moodboardMaterials: { slotKey: string; slotValue: SlotInfo }[];
+  moodboardColors: { slotKey: string; slotValue: SlotInfo }[];
+  moodboardProductsAndStyleImages: { slotKey: string; slotValue: SlotInfo }[];
 
   loggedUser$ = this.accountService.currentUser$;
   userData: User;
@@ -151,6 +160,42 @@ export class MoodboardDetailsComponent
         //If User viewing existing moodboard in a Project
         this.assignDefaultSlots();
       }
+
+      const moodboardSlotInfoFilterer = (
+        slotInfo: { [index: string]: SlotInfo },
+        filterpredicate: (
+          value: [string, SlotInfo],
+          index: number,
+          array: [string, SlotInfo][]
+        ) => boolean
+      ) => {
+        const filteredSlotInfo =
+          Object.entries(slotInfo).filter(filterpredicate);
+        const sortedFilteredSlotInfo = filteredSlotInfo.sort(([aKey], [bKey]) =>
+          bKey.localeCompare(aKey)
+        );
+        return sortedFilteredSlotInfo.map(([slotKey, slotValue]) => ({
+          slotKey,
+          slotValue,
+        }));
+      };
+
+      console.log('slotinfo', this.moodboard.slotInfo);
+
+      this.moodboardMaterials = moodboardSlotInfoFilterer(
+        this.moodboard.slotInfo,
+        ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.material
+      ).slice(0, 3);
+      this.moodboardColors = moodboardSlotInfoFilterer(
+        this.moodboard.slotInfo,
+        ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.color
+      ).slice(0, 4);
+      this.moodboardProductsAndStyleImages = moodboardSlotInfoFilterer(
+        this.moodboard.slotInfo,
+        ([, slotValue]) =>
+          slotValue.entity === SlotInfoEntityTypes.product ||
+          slotValue.entity === SlotInfoEntityTypes.styleImages
+      );
     }
 
     // configure crop feature on Initial load

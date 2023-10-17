@@ -131,9 +131,7 @@ export class CloudinaryImageScalerComponent
     ) {
       this.updateSrcSet('[propChange]');
     }
-    if (
-      changes.borderRadius
-    ) {
+    if (changes.borderRadius) {
       this.divStyle['border-radius'] = this.borderRadius;
     }
   }

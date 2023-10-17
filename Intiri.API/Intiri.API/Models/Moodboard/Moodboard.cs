@@ -9,40 +9,40 @@ namespace Intiri.API.Models.Moodboard
 {
     public class Moodboard
     {
-		#region Constructors
+        #region Constructors
 
-		#endregion Constructors
-		public Moodboard()
+        #endregion Constructors
+        public Moodboard()
         {
             Materials = new HashSet<Material.Material>();
-			ColorPalettes = new HashSet<ColorPalette>();
-			Products = new HashSet<Product.Product>();
-			StyleImages = new HashSet<StyleImage>();
-		}
+            ColorPalettes = new HashSet<ColorPalette>();
+            Products = new HashSet<Product.Product>();
+            StyleImages = new HashSet<StyleImage>();
+        }
 
         public Moodboard(Moodboard moodboard)
         {
-			Name = moodboard.Name;
-			Description = moodboard.Description;
-			Created = DateTime.UtcNow;
-			Updated = DateTime.UtcNow;
-			Style = moodboard.Style;
-			Room = moodboard.Room;
-			SourceMoodboardId = moodboard.Id;
-			IsTemplate = false;
-			Materials = moodboard.Materials;
-			ColorPalettes = moodboard.ColorPalettes;
-			Products = moodboard.Products;
-		}
+            Name = moodboard.Name;
+            Description = moodboard.Description;
+            Created = DateTime.UtcNow;
+            Updated = DateTime.UtcNow;
+            Style = moodboard.Style;
+            Room = moodboard.Room;
+            SourceMoodboardId = moodboard.Id;
+            IsTemplate = false;
+            Materials = moodboard.Materials;
+            ColorPalettes = moodboard.ColorPalettes;
+            Products = moodboard.Products;
+        }
 
-		#region Properties
+        #region Properties
 
-		public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-		public DateTime Created { get; set; } = DateTime.UtcNow;
-		public DateTime Updated { get; set; } = DateTime.UtcNow;
-		public User Designer { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime Updated { get; set; } = DateTime.UtcNow;
+        public User Designer { get; set; }
         public int DesignerId { get; set; }
         public Style.Style Style { get; set; }
         public Room.Room Room { get; set; }
@@ -52,8 +52,8 @@ namespace Intiri.API.Models.Moodboard
         public ICollection<Material.Material> Materials { get; set; }
         public ICollection<ColorPalette> ColorPalettes { get; set; }
         public ICollection<Product.Product> Products { get; set; }
-		public ICollection<StyleImage> StyleImages { get; set; }
+        public ICollection<StyleImage> StyleImages { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

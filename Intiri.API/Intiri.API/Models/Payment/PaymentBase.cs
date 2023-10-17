@@ -19,9 +19,6 @@ public class PaymentBase
     [NotMapped]
     public bool IsExpired
     {
-        get
-        {
-            return ExpirationDate < DateTime.UtcNow;
-        }
+        get { return ExpirationDate < DateTime.UtcNow; }
     }
 }

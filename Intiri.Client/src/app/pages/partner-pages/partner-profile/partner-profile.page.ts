@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
   templateUrl: './partner-profile.page.html',
   styleUrls: ['./partner-profile.page.scss'],
 })
-
 export class PartnerProfilePage implements OnInit {
   partnerProfileForm: FormGroup;
 
@@ -32,7 +31,7 @@ export class PartnerProfilePage implements OnInit {
     postalCode: '',
     city: '',
     country: '',
-    logoPath: ''
+    logoPath: '',
   };
 
   loggedUser$ = this.accountService.currentUser$;
@@ -52,48 +51,66 @@ export class PartnerProfilePage implements OnInit {
     this.partnerProfileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-        name: '',
-        email:  '',
-        phoneNumber: '',
-        street: '',
-        postalCode: '',
-        city: '',
-        country: '',
-        countryCode: ''
+          name: '',
+          email: '',
+          phoneNumber: '',
+          street: '',
+          postalCode: '',
+          city: '',
+          country: '',
+          countryCode: '',
+        }),
       }),
-    }),
-  });
-    this.partnerService.getPartnerProfile().subscribe( response => {
+    });
+    this.partnerService.getPartnerProfile().subscribe((response) => {
       this.spinner.hide();
       this.partnerProfile = response;
       this.patchValues(this.partnerProfile);
       if (!response.logoPath) {
-            this.partnerProfile.logoPath = '../../../assets/images/profile-img.png';
-          }
+        this.partnerProfile.logoPath = '../../../assets/images/profile-img.png';
+      }
     });
   }
 
   patchValues(partnerInfo: any) {
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.name').patchValue(partnerInfo.name || null);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.email').patchValue(partnerInfo.email);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.phoneNumber').patchValue(partnerInfo.phoneNumber);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.street').patchValue(partnerInfo.street);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.postalCode').patchValue(partnerInfo.postalCode);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.city').patchValue(partnerInfo.city);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.country').patchValue(partnerInfo.country);
-    this.partnerProfileForm.get('dataInfoGroup.innerGroup.countryCode').patchValue(partnerInfo.countryCode);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.name')
+      .patchValue(partnerInfo.name || null);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.email')
+      .patchValue(partnerInfo.email);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.phoneNumber')
+      .patchValue(partnerInfo.phoneNumber);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.street')
+      .patchValue(partnerInfo.street);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.postalCode')
+      .patchValue(partnerInfo.postalCode);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.city')
+      .patchValue(partnerInfo.city);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.country')
+      .patchValue(partnerInfo.country);
+    this.partnerProfileForm
+      .get('dataInfoGroup.innerGroup.countryCode')
+      .patchValue(partnerInfo.countryCode);
   }
 
   saveChanges() {
-    const userInfoModel =  this.partnerProfileForm.value.dataInfoGroup.innerGroup;
+    const userInfoModel =
+      this.partnerProfileForm.value.dataInfoGroup.innerGroup;
     this.spinner.show();
-    this.http.put(this.apiUrl + 'partner/update', userInfoModel).subscribe(res => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('PROFILE.update-message'),
-        type: 'success',
+    this.http
+      .put(this.apiUrl + 'partner/update', userInfoModel)
+      .subscribe((res) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('PROFILE.update-message'),
+          type: 'success',
+        });
       });
-    });
   }
-
 }

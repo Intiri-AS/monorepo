@@ -14,30 +14,32 @@ namespace Intiri.API.Migrations
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int),
-                oldType: "int");
+                oldType: "int"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_MoodboardId",
                 table: "Projects",
-                column: "MoodboardId");
+                column: "MoodboardId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Projects_Moodboards_MoodboardId",
                 table: "Projects",
                 column: "MoodboardId",
                 principalTable: "Moodboards",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Projects_Moodboards_MoodboardId",
-                table: "Projects");
+                table: "Projects"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_Projects_MoodboardId",
-                table: "Projects");
+            migrationBuilder.DropIndex(name: "IX_Projects_MoodboardId", table: "Projects");
 
             migrationBuilder.AlterColumn<int>(
                 name: "MoodboardId",
@@ -47,7 +49,8 @@ namespace Intiri.API.Migrations
                 defaultValue: 0,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldNullable: true);
+                oldNullable: true
+            );
         }
     }
 }

@@ -1,71 +1,130 @@
-<ion-content
-[scrollEvents]="true"
-(ionScroll)="logScrollEnd()">
+<ion-content [scrollEvents]="true" (ionScroll)="logScrollEnd()">
   <div id="main">
     <div>
-      <app-header-landing [isScrolledDown]="isScrolledDown"></app-header-landing>
+      <app-header-landing
+        [isScrolledDown]="isScrolledDown"
+      ></app-header-landing>
       <div class="hero-wrapper">
-
         <!-- Hero Text -->
-        <div class="container relative" id="home" style="scroll-margin-top: 50px;">
+        <div
+          class="container relative"
+          id="home"
+          style="scroll-margin-top: 50px"
+        >
           <div class="hero-text-wrapper">
             <p class="hero-pencraft">{{'LANDING.welcome' | translate}}</p>
-            <p class="hero-text">{{'LANDING.ideas-get' | translate}} <span class="text-primary">{{'LANDING.ideas' | translate}}</span> {{'LANDING.ideas-content' | translate}}</p>
-            <ion-button fill="clear"class="primary-btn large mt-[30px]" (click)="removeProjectDraft()" routerLink="/new-project" routerDirection="root">{{'LANDING.find' | translate}}</ion-button>
+            <p class="hero-text">
+              {{'LANDING.ideas-get' | translate}}
+              <span class="text-primary">{{'LANDING.ideas' | translate}}</span>
+              {{'LANDING.ideas-content' | translate}}
+            </p>
+            <ion-button
+              fill="clear"
+              class="primary-btn large mt-[30px]"
+              (click)="removeProjectDraft()"
+              routerLink="/new-project"
+              routerDirection="root"
+              >{{'LANDING.find' | translate}}</ion-button
+            >
           </div>
         </div>
       </div>
 
       <!-- Text 1 -->
-      <ion-grid id="how-it-works" style="scroll-margin-top: 50px; background-color: white;">
+      <ion-grid
+        id="how-it-works"
+        style="scroll-margin-top: 50px; background-color: white"
+      >
         <ion-row class="container mt-[10vh]">
           <ion-col size="12" size-sm class="flex items-end">
-            <img class="landing-img" src="../../../assets/images/landing-img-02.png" alt="">
+            <img
+              class="landing-img"
+              src="../../../assets/images/landing-img-02.png"
+              alt=""
+            />
           </ion-col>
           <ion-col size="12" size-sm class="pt-[10vh] pl-11 flex items-end">
             <div>
-              <img src="../../../assets/images/01.png" alt="">
+              <img src="../../../assets/images/01.png" alt="" />
               <p class="pencraft">{{'LANDING.how-it-works' | translate}}</p>
               <p class="landing-headline">Headline</p>
-              <p class="landing-text whitespace-pre-wrap">{{'LANDING-TEXT.headline-1' | translate}}</p>
-              <ion-button fill="clear" class="primary-btn large mt-[30px]" (click)="removeProjectDraft()" routerLink="/new-project" routerDirection="root">{{'LANDING.find' | translate}}</ion-button>
+              <p class="landing-text whitespace-pre-wrap">
+                {{'LANDING-TEXT.headline-1' | translate}}
+              </p>
+              <ion-button
+                fill="clear"
+                class="primary-btn large mt-[30px]"
+                (click)="removeProjectDraft()"
+                routerLink="/new-project"
+                routerDirection="root"
+                >{{'LANDING.find' | translate}}</ion-button
+              >
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
 
       <!-- Text 2 -->
-      <ion-grid style="background-color: white;">
+      <ion-grid style="background-color: white">
         <ion-row class="container flex-col-reverse xs:flex-row mt-[10vh]">
-          <ion-col size="12" size-sm  class="pt-[10vh] pr-11 pl-11 md:pl-0 flex items-end">
+          <ion-col
+            size="12"
+            size-sm
+            class="pt-[10vh] pr-11 pl-11 md:pl-0 flex items-end"
+          >
             <div>
-              <img src="../../../assets/images/02.png" alt="">
+              <img src="../../../assets/images/02.png" alt="" />
               <p class="pencraft">{{'LANDING.how-it-works' | translate}}</p>
               <p class="landing-headline">Headline</p>
-              <p class="landing-text whitespace-pre-wrap">{{'LANDING-TEXT.headline-2' | translate}}</p>
-              <ion-button fill="clear" class="primary-btn large mt-[30px]" (click)="removeProjectDraft()" routerLink="/new-project" routerDirection="root">{{'LANDING.find' | translate}}</ion-button>
+              <p class="landing-text whitespace-pre-wrap">
+                {{'LANDING-TEXT.headline-2' | translate}}
+              </p>
+              <ion-button
+                fill="clear"
+                class="primary-btn large mt-[30px]"
+                (click)="removeProjectDraft()"
+                routerLink="/new-project"
+                routerDirection="root"
+                >{{'LANDING.find' | translate}}</ion-button
+              >
             </div>
           </ion-col>
           <ion-col size="12" size-sm class="flex items-end">
-            <img class="landing-img" src="../../../assets/images/landing-img-02.png" alt="">
+            <img
+              class="landing-img"
+              src="../../../assets/images/landing-img-02.png"
+              alt=""
+            />
           </ion-col>
         </ion-row>
       </ion-grid>
 
-
       <!-- Text 3 -->
-      <ion-grid class="pb-12"  style="background-color: white;">
+      <ion-grid class="pb-12" style="background-color: white">
         <ion-row class="container mt-[10vh]">
           <ion-col size="12" size-sm class="flex items-end">
-            <img class="landing-img" src="../../../assets/images/landing-img-02.png" alt="">
+            <img
+              class="landing-img"
+              src="../../../assets/images/landing-img-02.png"
+              alt=""
+            />
           </ion-col>
           <ion-col size="12" size-sm class="pt-[10vh] pl-11 flex items-end">
             <div>
-              <img src="../../../assets/images/03.png" alt="">
+              <img src="../../../assets/images/03.png" alt="" />
               <p class="pencraft">{{'LANDING.how-it-works' | translate}}</p>
               <p class="landing-headline">Headline</p>
-              <p class="landing-text whitespace-pre-wrap">{{'LANDING-TEXT.headline-3' | translate}}</p>
-              <ion-button fill="clear" class="primary-btn large mt-[30px]" (click)="removeProjectDraft()" routerLink="/new-project" routerDirection="root">{{'LANDING.find' | translate}}</ion-button>
+              <p class="landing-text whitespace-pre-wrap">
+                {{'LANDING-TEXT.headline-3' | translate}}
+              </p>
+              <ion-button
+                fill="clear"
+                class="primary-btn large mt-[30px]"
+                (click)="removeProjectDraft()"
+                routerLink="/new-project"
+                routerDirection="root"
+                >{{'LANDING.find' | translate}}</ion-button
+              >
             </div>
           </ion-col>
         </ion-row>
@@ -74,21 +133,34 @@
       <!-- Stories / Testimonials -->
       <div class="bg-light bg-cover min-h-[1030px]" id="stories">
         <ion-row class="container relative py-[30px] xl:py-[30vh]">
-          <ion-col size="12" size-xl="3.5"  class="ion-align-self-center pl-[5%] xl-ion:pl-0">
+          <ion-col
+            size="12"
+            size-xl="3.5"
+            class="ion-align-self-center pl-[5%] xl-ion:pl-0"
+          >
             <p class="pencraft">{{'LANDING.stories' | translate}}</p>
             <p class="landing-headline">{{'LANDING.said' | translate}}</p>
             <p class="landing-text">{{'LANDING.said-second' | translate}}</p>
           </ion-col>
           <ion-col size="12" size-xl="7.5" offset-xl="0.75" class="">
-            <ion-slides #slides [options]="getOptions()" class="h-[100%]" [pager]="true">
+            <ion-slides
+              #slides
+              [options]="getOptions()"
+              class="h-[100%]"
+              [pager]="true"
+            >
               <ion-slide *ngFor="let comment of comments">
-                <ion-card class="border rounded-2xl border-black-1 bg-transparent p-8 text-left h-[97%]">
+                <ion-card
+                  class="border rounded-2xl border-black-1 bg-transparent p-8 text-left h-[97%]"
+                >
                   <div class="mb-2">
-                    <span class='quote-icon'></span>
-                    <span class='quote-icon ml-1'></span>
+                    <span class="quote-icon"></span>
+                    <span class="quote-icon ml-1"></span>
                   </div>
                   <p class="text-black-2 text-lg">{{comment.text}}</p>
-                  <p class="text-lg font-semibold text-black mt-4">{{comment.author}}</p>
+                  <p class="text-lg font-semibold text-black mt-4">
+                    {{comment.author}}
+                  </p>
                 </ion-card>
               </ion-slide>
             </ion-slides>
@@ -105,11 +177,16 @@
       </div>
 
       <!-- Contact Us -->
-      <div id="contact" class="bg-primary bg-cover h-[480px] text-center pt-[140px]">
+      <div
+        id="contact"
+        class="bg-primary bg-cover h-[480px] text-center pt-[140px]"
+      >
         <p class="pencraft-white">{{'LANDING.contact-us' | translate}}</p>
         <p class="landing-headline-white">{{'LANDING.hesitate' | translate}}</p>
         <ion-buttons>
-          <ion-button href="mailto:kontakt@intiri.no" class="contact-btn">kontakt@intiri.no</ion-button>
+          <ion-button href="mailto:kontakt@intiri.no" class="contact-btn"
+            >kontakt@intiri.no</ion-button
+          >
         </ion-buttons>
       </div>
 

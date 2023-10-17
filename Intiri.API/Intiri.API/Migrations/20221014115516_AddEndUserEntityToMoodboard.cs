@@ -10,18 +10,21 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Moodboards_AspNetUsers_DesignerId",
-                table: "Moodboards");
+                table: "Moodboards"
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "EndUserId",
                 table: "Moodboards",
                 type: "int",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Moodboards_EndUserId",
                 table: "Moodboards",
-                column: "EndUserId");
+                column: "EndUserId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Moodboards_AspNetUsers_DesignerId",
@@ -29,33 +32,33 @@ namespace Intiri.API.Migrations
                 column: "DesignerId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Moodboards_AspNetUsers_EndUserId",
                 table: "Moodboards",
                 column: "EndUserId",
                 principalTable: "AspNetUsers",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Moodboards_AspNetUsers_DesignerId",
-                table: "Moodboards");
+                table: "Moodboards"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Moodboards_AspNetUsers_EndUserId",
-                table: "Moodboards");
+                table: "Moodboards"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_Moodboards_EndUserId",
-                table: "Moodboards");
+            migrationBuilder.DropIndex(name: "IX_Moodboards_EndUserId", table: "Moodboards");
 
-            migrationBuilder.DropColumn(
-                name: "EndUserId",
-                table: "Moodboards");
+            migrationBuilder.DropColumn(name: "EndUserId", table: "Moodboards");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Moodboards_AspNetUsers_DesignerId",
@@ -63,7 +66,8 @@ namespace Intiri.API.Migrations
                 column: "DesignerId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

@@ -4,7 +4,11 @@
     <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
     <ion-grid class="main-container">
       <ion-row>
-        <ion-col size="12" size-xl="2.6" class="pr-0 xl-ion:pr-4 hidden sm:block">
+        <ion-col
+          size="12"
+          size-xl="2.6"
+          class="pr-0 xl-ion:pr-4 hidden sm:block"
+        >
           <app-step-picker
             (changeStep)="goToStep($event)"
             [canChangeToStep]="canChangeToStep"
@@ -25,38 +29,41 @@
       </ion-row>
       <ion-row>
         <ion-col class="fixed-bottom max-h-[50px]" offset-xl="0">
-          <ion-buttons class="flex justify-center items-center h-full flex-row lg:flex-row">
-              <ion-button
-                class="secondary-btn-borderless"
-                [class.disabled]="!canChangeToStep(currentStepNo-1)"
-                (click)="backStep()"
+          <ion-buttons
+            class="flex justify-center items-center h-full flex-row lg:flex-row"
+          >
+            <ion-button
+              class="secondary-btn-borderless"
+              [class.disabled]="!canChangeToStep(currentStepNo-1)"
+              (click)="backStep()"
               >{{'COMMON.back' | translate}}</ion-button
-              >
-              <ion-button
-                *ngIf="steps[currentStepNo]['data'] !== 'final'"
-                class="secondary-btn-borderless"
-                [class.disabled]="!canChangeToStep(currentStepNo+1)"
-                (click)="nextStep()"
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] !== 'final'"
+              class="secondary-btn-borderless"
+              [class.disabled]="!canChangeToStep(currentStepNo+1)"
+              (click)="nextStep()"
               >{{'COMMON.next' | translate}}</ion-button
-              >
-              <ion-button
-                *ngIf="currentStepNo === 2 || currentStepNo === 3"
-                class="secondary-btn-borderless skip-btn"
-                (click)="skipPage()"
-              >{{'COMMON.skip-page' | translate}}</ion-button>
-              <ion-button
-                *ngIf="steps[currentStepNo]['data'] === 'final'"
-                class="secondary-btn-borderless"
-                [class.disabled]="!canChangeToStep(currentStepNo-1)"
-                (click)="onCustomizeMoodboardButtonClick()"
+            >
+            <ion-button
+              *ngIf="currentStepNo === 2 || currentStepNo === 3"
+              class="secondary-btn-borderless skip-btn"
+              (click)="skipPage()"
+              >{{'COMMON.skip-page' | translate}}</ion-button
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] === 'final'"
+              class="secondary-btn-borderless"
+              [class.disabled]="!canChangeToStep(currentStepNo-1)"
+              (click)="onCustomizeMoodboardButtonClick()"
               >{{'NEW-PROJECT.customize' | translate}}</ion-button
-              >
-              <ion-button
-                *ngIf="steps[currentStepNo]['data'] === 'final'"
-                class="secondary-btn-borderless finish-button"
-                (click)="saveCurrentProject()"
+            >
+            <ion-button
+              *ngIf="steps[currentStepNo]['data'] === 'final'"
+              class="secondary-btn-borderless finish-button"
+              (click)="saveCurrentProject()"
               >{{'NEW-PROJECT.finish' | translate}}</ion-button
-              >
+            >
           </ion-buttons>
         </ion-col>
       </ion-row>

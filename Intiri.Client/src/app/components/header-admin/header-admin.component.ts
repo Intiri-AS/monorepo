@@ -13,33 +13,34 @@ import { ProfilePopoverComponent } from '../popovers/profile-popover/profile-pop
   styleUrls: ['./header-admin.component.scss'],
 })
 export class HeaderAdminComponent implements OnInit {
-
   loggedUser$ = this.accountService.currentUser$;
 
   isSettingsSelected: boolean;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private accountService: AccountService,
     private popoverController: PopoverController,
     private languageService: LanguageService,
-    private translate: TranslateService) {}
+    private translate: TranslateService
+  ) {}
 
-    menuItems = [
-      {title: 'DASHBOARD.dashboard', url: '/dashboard'},
-      {title: 'DASHBOARD.consultations', url: '/consultations'},
-      {title: 'DASHBOARD.partners', url: '/partners'},
-      {title: 'DASHBOARD.designers', url: '/designers'},
-      {title: 'DASHBOARD.clients', url: '/clients'},
-      {title: 'DASHBOARD.moodboards', url: '/moodboards'},
-      {title: 'DASHBOARD.style', url: '/style'},
-    ]
+  menuItems = [
+    { title: 'DASHBOARD.dashboard', url: '/dashboard' },
+    { title: 'DASHBOARD.consultations', url: '/consultations' },
+    { title: 'DASHBOARD.partners', url: '/partners' },
+    { title: 'DASHBOARD.designers', url: '/designers' },
+    { title: 'DASHBOARD.clients', url: '/clients' },
+    { title: 'DASHBOARD.moodboards', url: '/moodboards' },
+    { title: 'DASHBOARD.style', url: '/style' },
+  ];
 
-    ngOnInit() {
-      // this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
-      //   this.translate.setDefaultLang(event.lang);
-      //   //this.revokeTranslations();
-      // });
-    }
+  ngOnInit() {
+    // this.translate.onLangChange.subscribe((event: TranslationChangeEvent) => {
+    //   this.translate.setDefaultLang(event.lang);
+    //   //this.revokeTranslations();
+    // });
+  }
 
   isActiveRoute(route): boolean {
     return this.router.url.split('?')[0] === route;
@@ -59,20 +60,20 @@ export class HeaderAdminComponent implements OnInit {
 
   menuOpened() {
     const x = document.querySelector('#home');
-    x['style'].overflow = 'hidden'
-    x['style'].height = '100vh'
+    x['style'].overflow = 'hidden';
+    x['style'].height = '100vh';
   }
   menuClosed() {
     const x = document.querySelector('#home');
-    x['style'].height = 'auto'
+    x['style'].height = 'auto';
   }
 
-  async showProfilePopover (e: Event) {
+  async showProfilePopover(e: Event) {
     const popover = await this.popoverController.create({
       component: ProfilePopoverComponent,
       componentProps: { headerType: 'admin' },
       event: e,
-      dismissOnSelect: false
+      dismissOnSelect: false,
     });
 
     await popover.present();
@@ -82,16 +83,15 @@ export class HeaderAdminComponent implements OnInit {
     this.isSettingsSelected = true;
     const popover = await this.popoverController.create({
       component: SettingsPopoverComponent,
-      componentProps: { headerType: 'admin'},
+      componentProps: { headerType: 'admin' },
       event: e,
-      dismissOnSelect: false
+      dismissOnSelect: false,
     });
 
     await popover.present();
 
     popover.onDidDismiss().then(() => {
       this.isSettingsSelected = false;
-    })
+    });
   }
-
 }

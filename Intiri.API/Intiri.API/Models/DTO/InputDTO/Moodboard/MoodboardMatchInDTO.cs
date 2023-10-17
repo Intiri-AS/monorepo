@@ -12,6 +12,5 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
 
         [Required]
         public ICollection<int> ColorPaletteIds { get; set; }
-
     }
 }

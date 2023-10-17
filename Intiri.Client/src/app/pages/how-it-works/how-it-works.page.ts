@@ -5,9 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './how-it-works.page.html',
   styleUrls: ['./how-it-works.page.scss'],
 })
-
 export class HowItWorksPage {
-
   constructor() {}
-
 }

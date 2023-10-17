@@ -28,10 +28,12 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
     const string PaymentMode = "payment";
     const string PaymentStatus = "paid";
 
-    public StripePaymentService(IOptions<Configuration.StripeConfiguration> options,
-                                IMessengerService messengerService,
-                                IUnitOfWork unitOfWork,
-                                IMapper mapper)
+    public StripePaymentService(
+        IOptions<Configuration.StripeConfiguration> options,
+        IMessengerService messengerService,
+        IUnitOfWork unitOfWork,
+        IMapper mapper
+    )
     {
         _options = options;
         _messengerService = messengerService;
@@ -41,12 +43,14 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
     }
 
-    public async Task<Session> CreatePaymentSession(StripePaymentDTO paymentDTO, string host, int userId)
+    public async Task<Session> CreatePaymentSession(
+        StripePaymentDTO paymentDTO,
+        string host,
+        int userId
+    )
     {
         ArgumentNullException.ThrowIfNull(host, nameof(host));
         ArgumentNullException.ThrowIfNull(paymentDTO, nameof(paymentDTO));
-
-        
 
         //attach payer user to dto. Important later when handling events, because API is called from outside platform (from stripe)
         paymentDTO.PayerId = userId;
@@ -59,7 +63,16 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         User customer = await _userRepository.GetByID(paymentDTO.PayerId);
         if (customer != null)
         {
-            Description = Description + "Customer: " + customer.FirstName + " " + customer.LastName + ", Customer Phone: " + customer.CountryCode + customer.PhoneNumber + ", ";
+            Description =
+                Description
+                + "Customer: "
+                + customer.FirstName
+                + " "
+                + customer.LastName
+                + ", Customer Phone: "
+                + customer.CountryCode
+                + customer.PhoneNumber
+                + ", ";
         }
 
         User designer = await _userRepository.GetByID(paymentDTO.ReceiverId);
@@ -71,7 +84,12 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         Dictionary<string, string> metadata = new Dictionary<string, string>();
         metadata.Add(PaymentDetails, JsonConvert.SerializeObject(paymentDTO));
 
-        SessionCreateOptions options = CreateSessionOptions(paymentDTO, domain, metadata, Description);
+        SessionCreateOptions options = CreateSessionOptions(
+            paymentDTO,
+            domain,
+            metadata,
+            Description
+        );
         var service = new SessionService();
 
         return await Task.FromResult(service.Create(options));
@@ -84,20 +102,31 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
         string webhook_endpoint_secret = _options.Value.WebhookEndpointSecret;
         try
         {
-            string paymentDetailsJson = await new StreamReader(paymentEventArgs.Body).ReadToEndAsync();
-            
+            string paymentDetailsJson = await new StreamReader(
+                paymentEventArgs.Body
+            ).ReadToEndAsync();
+
             var stripeEvent = EventUtility.ParseEvent(paymentDetailsJson, false);
-            
+
             Session session = stripeEvent.Data.Object as Session;
             StripePaymentDTO paymentDTO = null;
 
             string jsonPaymentDetails;
-            if (session != null && session.Metadata != null && session.Metadata.TryGetValue(PaymentDetails, out jsonPaymentDetails))
+            if (
+                session != null
+                && session.Metadata != null
+                && session.Metadata.TryGetValue(PaymentDetails, out jsonPaymentDetails)
+            )
             {
-                paymentDTO = JsonConvert.DeserializeObject(jsonPaymentDetails, typeof(StripePaymentDTO)) as StripePaymentDTO;
+                paymentDTO =
+                    JsonConvert.DeserializeObject(jsonPaymentDetails, typeof(StripePaymentDTO))
+                    as StripePaymentDTO;
             }
 
-            if (stripeEvent.Type == Events.CheckoutSessionCompleted && session.PaymentStatus == PaymentStatus)
+            if (
+                stripeEvent.Type == Events.CheckoutSessionCompleted
+                && session.PaymentStatus == PaymentStatus
+            )
             {
                 await SavePayment(paymentDTO);
                 await SendMessageAsPaymentConfirmation(paymentDTO);
@@ -142,19 +171,26 @@ public class StripePaymentService : IPaymentService<Session, StripePaymentDTO, H
             throw new ArgumentNullException("Payer or payment receiver are null.");
         }
 
-        string consultation = paymentDTO.NumberOfConsultations == 1 ? "consultation" : "consultations";
+        string consultation =
+            paymentDTO.NumberOfConsultations == 1 ? "consultation" : "consultations";
 
         ChatMessageInDTO message = new ChatMessageInDTO()
         {
             RecipientId = payer.Id,
-            Content = $"Hi {payer.FirstName}. I received your payment ({paymentDTO.Amount / 100} NOK) for {paymentDTO.NumberOfConsultations} {consultation}. " +
-            $"We can use this chat to communicate, but also we can use phone numbers (your phone number +{payer.CountryCode}  {payer.PhoneNumber} and my phone number +{receiver.CountryCode}  {receiver.PhoneNumber})"
+            Content =
+                $"Hi {payer.FirstName}. I received your payment ({paymentDTO.Amount / 100} NOK) for {paymentDTO.NumberOfConsultations} {consultation}. "
+                + $"We can use this chat to communicate, but also we can use phone numbers (your phone number +{payer.CountryCode}  {payer.PhoneNumber} and my phone number +{receiver.CountryCode}  {receiver.PhoneNumber})"
         };
 
         await _messengerService.SendMessage(message, receiver.Id, DateTime.UtcNow);
     }
 
-    private static SessionCreateOptions CreateSessionOptions(StripePaymentDTO paymentDTO, string domain, Dictionary<string, string> metadata, string Description)
+    private static SessionCreateOptions CreateSessionOptions(
+        StripePaymentDTO paymentDTO,
+        string domain,
+        Dictionary<string, string> metadata,
+        string Description
+    )
     {
         return new SessionCreateOptions
         {

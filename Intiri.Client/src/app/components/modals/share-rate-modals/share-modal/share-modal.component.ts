@@ -7,18 +7,14 @@ import { ShareSuccessfulModalComponent } from '../share-successful-modal/share-s
   templateUrl: './share-modal.component.html',
   styleUrls: ['./share-modal.component.scss'],
 })
-
 export class ShareModalComponent {
-
-  constructor(
-    private modalController: ModalController
-  ) {}
+  constructor(private modalController: ModalController) {}
 
   async share() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: ShareSuccessfulModalComponent,
-      cssClass: 'auto-size-modal-css'
+      cssClass: 'auto-size-modal-css',
     });
 
     await modal.present();

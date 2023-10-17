@@ -8,34 +8,35 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	public class RolesController : BaseApiController
-	{
-		#region Fields
+    public class RolesController : BaseApiController
+    {
+        #region Fields
 
-		private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region ctors
+        #region ctors
 
-		public RolesController(IUnitOfWork unitOfWork, ILogger<UsersController> logger) : base(unitOfWork)
-		{
-			_logger = logger;
-			_logger.LogDebug(1, "NLog injected into UsersController");
-		}
+        public RolesController(IUnitOfWork unitOfWork, ILogger<UsersController> logger)
+            : base(unitOfWork)
+        {
+            _logger = logger;
+            _logger.LogDebug(1, "NLog injected into UsersController");
+        }
 
-		#endregion ctors
+        #endregion ctors
 
-		#region Public methods
+        #region Public methods
 
-		[HttpGet]
-		public async Task<IActionResult> GetRoleNames()
-		{
-			IEnumerable<string> roleNames = await _unitOfWork.RoleRepository.GetRolesNames();
-			_logger.LogInformation("RolesController hit succesfull.");
-			return Ok(roleNames);
-		}
+        [HttpGet]
+        public async Task<IActionResult> GetRoleNames()
+        {
+            IEnumerable<string> roleNames = await _unitOfWork.RoleRepository.GetRolesNames();
+            _logger.LogInformation("RolesController hit succesfull.");
+            return Ok(roleNames);
+        }
 
-		#endregion Public methods
-	}
+        #endregion Public methods
+    }
 }

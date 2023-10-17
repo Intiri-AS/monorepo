@@ -21,12 +21,15 @@ export class CloudinaryService {
 
   constructor() {}
 
-  mapIdToCloudinaryImage(publicId: string, cloudName?: string): CloudinaryImage {
+  mapIdToCloudinaryImage(
+    publicId: string,
+    cloudName?: string
+  ): CloudinaryImage {
     if (cloudName) {
       return new Cloudinary({
         cloud: {
-          cloudName
-        }
+          cloudName,
+        },
       }).image(publicId);
     }
     return this.cloudinaryInstance.image(publicId);

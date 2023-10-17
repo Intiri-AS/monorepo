@@ -7,61 +7,57 @@ import { StylePopoverComponent } from 'src/app/components/popovers/style-popover
   templateUrl: './style-list.page.html',
   styleUrls: ['./style-list.page.scss'],
 })
-
 export class StyleListPage {
-
   styles = [
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      name: 'Vintage'
+      name: 'Vintage',
     },
-  ]
+  ];
 
-  constructor(
-    private popoverController: PopoverController
-  ) {}
+  constructor(private popoverController: PopoverController) {}
 
   async showSettings(e: Event) {
     const popover = await this.popoverController.create({
       component: StylePopoverComponent,
       event: e,
-      dismissOnSelect: true
+      dismissOnSelect: true,
     });
 
     await popover.present();

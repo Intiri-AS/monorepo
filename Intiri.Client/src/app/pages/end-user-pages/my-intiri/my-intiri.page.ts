@@ -51,7 +51,7 @@ export class MyIntiriPage implements OnInit {
     private sanitizer: DomSanitizer,
     private notifier: NotifierService,
     private translate: TranslateService,
-    public cloudinary: CloudinaryService,
+    public cloudinary: CloudinaryService
   ) {}
 
   ngOnInit() {
@@ -92,7 +92,7 @@ export class MyIntiriPage implements OnInit {
             this.inspirations = res;
             this.notifier.show({
               message: this.translate.instant(
-                'MY-INTIRI.add-inspiration-message',
+                'MY-INTIRI.add-inspiration-message'
               ),
               type: 'success',
             });
@@ -104,7 +104,7 @@ export class MyIntiriPage implements OnInit {
     if (event.target.files[0]) {
       this.newInspiration = event.target.files[0];
       this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
-        URL.createObjectURL(this.newInspiration),
+        URL.createObjectURL(this.newInspiration)
       );
       this.spinner.show();
       this.addInspiration();
