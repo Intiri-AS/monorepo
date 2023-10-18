@@ -5,17 +5,16 @@ using System.ComponentModel.Design;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class DesignerRepository : RepositoryBase<Designer>, IDesignerRepository
-	{
-		#region Fields
+    public class DesignerRepository : RepositoryBase<Designer>, IDesignerRepository
+    {
+        #region Fields
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
-		public DesignerRepository(DataContext context) : base(context)
-		{
-		}
+        #region Constructors
+        public DesignerRepository(DataContext context)
+            : base(context) { }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

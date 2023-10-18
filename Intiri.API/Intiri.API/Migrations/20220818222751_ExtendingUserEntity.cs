@@ -13,25 +13,23 @@ namespace Intiri.API.Migrations
                 name: "Address",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Created",
                 table: "AspNetUsers",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Address",
-                table: "AspNetUsers");
+            migrationBuilder.DropColumn(name: "Address", table: "AspNetUsers");
 
-            migrationBuilder.DropColumn(
-                name: "Created",
-                table: "AspNetUsers");
+            migrationBuilder.DropColumn(name: "Created", table: "AspNetUsers");
         }
     }
 }

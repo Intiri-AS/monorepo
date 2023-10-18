@@ -1,45 +1,82 @@
-
-
-  <ion-header class="admin-app-header" id="main-content">
-    <ion-toolbar class="header-wrapper header-container">
-      <ion-buttons slot="start" class="">
-        <ion-button slot="start">
-          <a href="https://intiri.no" class="py-1">
-            <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
-          </a>
-        </ion-button>
-        <section class="header-buttons">
-        <ion-button *ngFor="let item of menuItems"  routerLink="{{item.url}}" routerDirection="root" fill="clear" class="btn" [class.!text-primary]="isActiveRoute(item.url)">{{item.title | translate}}</ion-button>
-        </section>
-      </ion-buttons>
-      <ion-buttons class="header-buttons justify-end">
-        <div class="cursor-pointer" (click)="showProfilePopover($event)">
-          <img [src]="(loggedUser$ | async)?.photoPath ? (loggedUser$ | async)?.photoPath : '../../../assets/images/profile-img.png'" class="header-profile-img" alt="Profile Img"/>
-        </div>
-        <!-- <ion-icon class="header-icon" (click)="showSettings($event)" [class.selected-border]="isSettingsSelected" name="settings-sharp"></ion-icon> -->
-      </ion-buttons>
-      <ion-buttons slot="end" class="flex xl:hidden flex-1 justify-end" id="menu-content">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
+<ion-header class="admin-app-header" id="main-content">
+  <ion-toolbar class="header-wrapper header-container">
+    <ion-buttons slot="start" class="">
+      <ion-button slot="start">
+        <a href="https://intiri.no" class="py-1">
+          <img
+            src="../../../assets/images/intiri-logo.svg"
+            class="ml-4 sm:ml-0"
+            alt="Intiri"
+          />
+        </a>
+      </ion-button>
+      <section class="header-buttons">
+        <ion-button
+          *ngFor="let item of menuItems"
+          routerLink="{{ item.url }}"
+          routerDirection="root"
+          fill="clear"
+          class="btn"
+          [class.!text-primary]="isActiveRoute(item.url)"
+          >{{ item.title | translate }}</ion-button
+        >
+      </section>
+    </ion-buttons>
+    <ion-buttons class="header-buttons justify-end">
+      <div class="cursor-pointer" (click)="showProfilePopover($event)">
+        <img
+          [src]="
+            (loggedUser$ | async)?.photoPath
+              ? (loggedUser$ | async)?.photoPath
+              : '../../../assets/images/profile-img.png'
+          "
+          class="header-profile-img"
+          alt="Profile Img"
+        />
+      </div>
+      <!-- <ion-icon class="header-icon" (click)="showSettings($event)" [class.selected-border]="isSettingsSelected" name="settings-sharp"></ion-icon> -->
+    </ion-buttons>
+    <ion-buttons
+      slot="end"
+      class="flex xl:hidden flex-1 justify-end"
+      id="menu-content"
+    >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <!-- Mobile Menu -->
-<ion-menu (ionWillOpen)="menuOpened()" (ionWillClose)="menuClosed()" side="start" content-id="menu-content">
+<ion-menu
+  (ionWillOpen)="menuOpened()"
+  (ionWillClose)="menuClosed()"
+  side="start"
+  content-id="menu-content"
+>
   <ion-header>
     <ion-toolbar translucent>
-      <ion-title><a href="https://intiri.no" class="py-1">
-        <img src="../../../assets/images/intiri-logo.svg" class="ml-4 sm:ml-0" alt="Intiri"/>
-      </a></ion-title>
+      <ion-title
+        ><a href="https://intiri.no" class="py-1">
+          <img
+            src="../../../assets/images/intiri-logo.svg"
+            class="ml-4 sm:ml-0"
+            alt="Intiri"
+          /> </a
+      ></ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let item of menuItems" class="cursor-pointer" routerLink="{{item.url}}" routerDirection="root">
-        <ion-label>{{item.title | translate}}</ion-label>
+      <ion-item
+        *ngFor="let item of menuItems"
+        class="cursor-pointer"
+        routerLink="{{ item.url }}"
+        routerDirection="root"
+      >
+        <ion-label>{{ item.title | translate }}</ion-label>
       </ion-item>
       <ion-item class="cursor-pointer" (click)="showProfilePopover($event)">
-        <ion-label>{{'COMMON.my-profile' | translate}}</ion-label>
+        <ion-label>{{ "COMMON.my-profile" | translate }}</ion-label>
       </ion-item>
       <!-- <ion-item class="cursor-pointer" (click)="showSettings($event)">
         <ion-label>{{'COMMON.settings' | translate}}</ion-label>

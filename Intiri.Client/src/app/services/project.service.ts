@@ -8,52 +8,50 @@ import { Moodboard } from '../models/moodboard.model';
 import { Project } from '../models/project.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ProjectService implements Resolve<Project> {
-
   apiUrl = environment.apiUrl;
   private currentProjectSource = new ReplaySubject<Project>(1);
   currentProject$ = this.currentProjectSource.asObservable();
   private inspirationsSource = new ReplaySubject<any>(1);
   inspirations$ = this.inspirationsSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   setCurrentProject(project: Project) {
-    if(!project) {
+    if (!project) {
       project = new Project();
     }
     sessionStorage.setItem('project', JSON.stringify(project));
     this.currentProjectSource.next(project);
   }
 
-  getStyleImages(){
+  getStyleImages() {
     return this.http.get(this.apiUrl + 'styleImages');
   }
 
-  getColorPalettes(){
+  getColorPalettes() {
     return this.http.get(this.apiUrl + 'colorPalettes');
   }
 
-  getRooms(){
+  getRooms() {
     return this.http.get(this.apiUrl + 'rooms');
   }
 
-  getProducts(){
+  getProducts() {
     return this.http.get(this.apiUrl + 'products');
   }
 
-  getMaterials(){
+  getMaterials() {
     return this.http.get(this.apiUrl + 'materials');
   }
 
-  getAllProjects(){
+  getAllProjects() {
     return this.http.get<Project[]>(this.apiUrl + 'projects');
   }
 
-  getProject(id: number){
+  getProject(id: number) {
     return this.http.get<Project>(this.apiUrl + 'projects/id/' + id);
   }
 
@@ -61,38 +59,54 @@ export class ProjectService implements Resolve<Project> {
     let req_data = {
       roomId,
       styleId,
-      colorPaletteIds: colorPalettes.map(e=> e['id']),
-    }
-    return this.http.post(`${this.apiUrl}Projects/moodboardStyleFamily`, req_data);
+      colorPaletteIds: colorPalettes.map((e) => e['id']),
+    };
+    return this.http.post(
+      `${this.apiUrl}Projects/moodboardStyleFamily`,
+      req_data
+    );
   }
 
-  checkProjectName(projectName: string){
-    return this.http.get(`${this.apiUrl}projects/checkProjectName/${projectName}`);
+  checkProjectName(projectName: string) {
+    return this.http.get(
+      `${this.apiUrl}projects/checkProjectName/${projectName}`
+    );
   }
 
   parseProject(project: Project) {
     let parsedProj = {
-      styleImageIds: project.styleImages.map(e=> e['id']),
-      colorPaletteIds: project.colorPalettes.map(e=> e['id']),
+      styleImageIds: project.styleImages.map((e) => e['id']),
+      colorPaletteIds: project.colorPalettes.map((e) => e['id']),
       roomId: project.room['id'],
-      name: project.name};
+      name: project.name,
+    };
 
     return parsedProj;
-  };
+  }
 
   parseProjectAsFormData(project: Project) {
     const parsedFormData = {
       projectRoomId: project.room['id'],
-      projectName: project.name
+      projectName: project.name,
     };
-    const styleImageIds = project.styleImages.map((e: { [x: string]: any; })=> e['id']);
-    const projectColorPaletteIds = project.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
+    const styleImageIds = project.styleImages.map(
+      (e: { [x: string]: any }) => e['id']
+    );
+    const projectColorPaletteIds = project.colorPalettes.map(
+      (e: { [x: string]: any }) => e['id']
+    );
 
     const formData = new FormData();
 
-    Object.keys(parsedFormData).forEach(key => formData.append(key, parsedFormData[key]));
-    this.formDataAppendCollection("StyleImageIds", styleImageIds, formData);
-    this.formDataAppendCollection("ProjectColorPaletteIds", projectColorPaletteIds, formData);
+    Object.keys(parsedFormData).forEach((key) =>
+      formData.append(key, parsedFormData[key])
+    );
+    this.formDataAppendCollection('StyleImageIds', styleImageIds, formData);
+    this.formDataAppendCollection(
+      'ProjectColorPaletteIds',
+      projectColorPaletteIds,
+      formData
+    );
 
     this.parseRoomDetailsFormData(project, formData);
     this.parseMoodboardFormData(project.currentMoodboard, formData);
@@ -110,8 +124,7 @@ export class ProjectService implements Resolve<Project> {
     return this.http.post(this.apiUrl + 'projects/create', req_data);
   }
 
-  addMoodboardToProject(project: Project)
-  {
+  addMoodboardToProject(project: Project) {
     const formData = new FormData();
 
     formData.append('projectId', project.id.toString());
@@ -126,20 +139,27 @@ export class ProjectService implements Resolve<Project> {
   }
 
   parseMoodboard(moodboard: any) {
-    if(moodboard.room && moodboard.style) {
+    if (moodboard.room && moodboard.style) {
       let parsedMdb = {
         styleId: moodboard.style ? moodboard.style['id'] : null,
-        colorPaletteIds: moodboard.colorPalettes.map((e: { [x: string]: any; })=> e['id']),
+        colorPaletteIds: moodboard.colorPalettes.map(
+          (e: { [x: string]: any }) => e['id']
+        ),
         roomId: moodboard.room['id'],
-        materialIds: moodboard?.materials.map((e: { [x: string]: any; })=> e['id']),
-        productIds: moodboard?.products.map((e: { [x: string]: any; })=> e['id']),
+        materialIds: moodboard?.materials.map(
+          (e: { [x: string]: any }) => e['id']
+        ),
+        productIds: moodboard?.products.map(
+          (e: { [x: string]: any }) => e['id']
+        ),
         id: moodboard.id,
         name: moodboard.name, // remove later
-        sourceMoodboardId: moodboard.sourceMoodboardId
-      }
+        sourceMoodboardId: moodboard.sourceMoodboardId,
+      };
       return parsedMdb;
-    } return moodboard;
-  };
+    }
+    return moodboard;
+  }
 
   parseMoodboardFormData(moodboard: any, formData: FormData) {
     const parsedMdb = {
@@ -147,26 +167,50 @@ export class ProjectService implements Resolve<Project> {
       roomId: moodboard.room['id'],
       id: moodboard.id,
       name: moodboard.name, // remove later
-      sourceMoodboardId: moodboard.sourceMoodboardId ? moodboard.sourceMoodboardId : 0,
+      sourceMoodboardId: moodboard.sourceMoodboardId
+        ? moodboard.sourceMoodboardId
+        : 0,
       isTemplate: moodboard.isTemplate,
       description: moodboard.description,
       SlotInfo: JSON.stringify(moodboard.slotInfo),
     };
 
-    const materialIds=  moodboard?.materials.map((e: { [x: string]: any; })=> e['id']);
-    const colorPaletteIds = moodboard.colorPalettes.map((e: { [x: string]: any; })=> e['id']);
-    const productIds = moodboard?.products.map((e: { [x: string]: any; })=> e['id']);
-    const styleImageIds = moodboard?.styleImages?.map((e: { [x: string]: any; })=> e['id']);
+    const materialIds = moodboard?.materials.map(
+      (e: { [x: string]: any }) => e['id']
+    );
+    const colorPaletteIds = moodboard.colorPalettes.map(
+      (e: { [x: string]: any }) => e['id']
+    );
+    const productIds = moodboard?.products.map(
+      (e: { [x: string]: any }) => e['id']
+    );
+    const styleImageIds = moodboard?.styleImages?.map(
+      (e: { [x: string]: any }) => e['id']
+    );
 
-    Object.keys(parsedMdb).forEach(key => formData.append("Moodboard." + key, parsedMdb[key]));
+    Object.keys(parsedMdb).forEach((key) =>
+      formData.append('Moodboard.' + key, parsedMdb[key])
+    );
 
-    this.formDataAppendCollection("Moodboard.MaterialIds", materialIds, formData);
-    this.formDataAppendCollection("Moodboard.ColorPaletteIds", colorPaletteIds, formData);
-    this.formDataAppendCollection("Moodboard.ProductIds", productIds, formData);
-    this.formDataAppendCollection("Moodboard.StyleImageIds", styleImageIds, formData);
+    this.formDataAppendCollection(
+      'Moodboard.MaterialIds',
+      materialIds,
+      formData
+    );
+    this.formDataAppendCollection(
+      'Moodboard.ColorPaletteIds',
+      colorPaletteIds,
+      formData
+    );
+    this.formDataAppendCollection('Moodboard.ProductIds', productIds, formData);
+    this.formDataAppendCollection(
+      'Moodboard.StyleImageIds',
+      styleImageIds,
+      formData
+    );
 
     return parsedMdb;
-  };
+  }
 
   parseRoomDetailsFormData(project: any, formData: FormData) {
     const parsedRDFormData = {
@@ -174,19 +218,28 @@ export class ProjectService implements Resolve<Project> {
     };
 
     parsedRDFormData.roomSketchFiles &&
-    Object.keys(parsedRDFormData.roomSketchFiles).length &&
-    Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
-      let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
-      formData.append(`roomSketchFile`, parsedRDFormData.roomSketchFiles[key], `imageFile${uniqueStr}.png`);
-    })
+      Object.keys(parsedRDFormData.roomSketchFiles).length &&
+      Object.keys(parsedRDFormData.roomSketchFiles).forEach((key, i) => {
+        let uniqueStr = Date.now().toString(36) + Math.random().toString(36);
+        formData.append(
+          `roomSketchFile`,
+          parsedRDFormData.roomSketchFiles[key],
+          `imageFile${uniqueStr}.png`
+        );
+      });
 
     return parsedRDFormData;
-  };
+  }
 
   getInspirations() {
-    return this.http.get(this.apiUrl + 'inspirations').pipe(map((inspirations) => {
-      this.inspirationsSource.next(inspirations);
-    })).toPromise();
+    return this.http
+      .get(this.apiUrl + 'inspirations')
+      .pipe(
+        map((inspirations) => {
+          this.inspirationsSource.next(inspirations);
+        })
+      )
+      .toPromise();
   }
 
   addInspiration(file: string | Blob) {
@@ -199,11 +252,14 @@ export class ProjectService implements Resolve<Project> {
     return this.http.delete(this.apiUrl + 'inspirations/delete/' + id);
   }
 
-  formDataAppendCollection(arrayName: string, arrayValues: any[], formData: FormData) {
-    for (const index in arrayValues)
-    {
+  formDataAppendCollection(
+    arrayName: string,
+    arrayValues: any[],
+    formData: FormData
+  ) {
+    for (const index in arrayValues) {
       // iterate for each item and append it to form.
-      formData.append(`${arrayName}[${index}]`,arrayValues[index]);
+      formData.append(`${arrayName}[${index}]`, arrayValues[index]);
     }
   }
 }

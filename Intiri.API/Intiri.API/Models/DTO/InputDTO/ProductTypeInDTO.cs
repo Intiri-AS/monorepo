@@ -2,9 +2,9 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class ProductTypeInDTO
-	{
-		[Required]
-		public string Name { get; set; }
-	}
+    public class ProductTypeInDTO
+    {
+        [Required]
+        public string Name { get; set; }
+    }
 }

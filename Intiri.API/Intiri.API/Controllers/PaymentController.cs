@@ -16,9 +16,12 @@ public class PaymentController : BaseApiController
     private readonly IOptions<HostingConfiguration> _hostConfig;
     private readonly IPaymentService<Session, StripePaymentDTO, HttpRequest> _paymentService;
 
-    public PaymentController(IUnitOfWork unitOfWork,
-                             IOptions<HostingConfiguration> options,
-                             IPaymentService<Session, StripePaymentDTO, HttpRequest> paymentService) : base(unitOfWork)
+    public PaymentController(
+        IUnitOfWork unitOfWork,
+        IOptions<HostingConfiguration> options,
+        IPaymentService<Session, StripePaymentDTO, HttpRequest> paymentService
+    )
+        : base(unitOfWork)
     {
         _hostConfig = options;
         _paymentService = paymentService;
@@ -30,7 +33,11 @@ public class PaymentController : BaseApiController
     public async Task<ActionResult<Session>> Payment(StripePaymentDTO paymentDTO)
     {
         //string host = _hostConfig.Value.Host != null ? _hostConfig.Value.Host : Request.Host.ToString();
-        Session session = await _paymentService.CreatePaymentSession(paymentDTO, paymentDTO.Domain, User.GetUserId());
+        Session session = await _paymentService.CreatePaymentSession(
+            paymentDTO,
+            paymentDTO.Domain,
+            User.GetUserId()
+        );
         return Ok(await Task.FromResult(session));
     }
 
@@ -38,7 +45,7 @@ public class PaymentController : BaseApiController
     [HttpPost("stripe-webhook")]
     public async Task<ActionResult> StripeWebhookHandler()
     {
-        bool eventSuccessfullyHandled =  await _paymentService.HandlePaymentEvents(Request);
+        bool eventSuccessfullyHandled = await _paymentService.HandlePaymentEvents(Request);
         return eventSuccessfullyHandled ? Ok() : BadRequest();
     }
 }

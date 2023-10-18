@@ -4,7 +4,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { Observable } from 'rxjs';
 
 interface AppState {
-  language: any
+  language: any;
 }
 
 @Component({
@@ -12,21 +12,19 @@ interface AppState {
   templateUrl: './language-popover.component.html',
   styleUrls: ['./language-popover.component.scss'],
 })
-
 export class LanguagePopoverComponent implements OnInit {
-
   languages = [];
   selected = '';
   language$: Observable<any>;
 
   constructor(
     private popoverController: PopoverController,
-    private languageService: LanguageService,
+    private languageService: LanguageService
   ) {}
 
   ngOnInit() {
-      this.languages = this.languageService.getLanguages();
-      this.selected = this.languageService.selected;
+    this.languages = this.languageService.getLanguages();
+    this.selected = this.languageService.selected;
   }
 
   selectLanguage(lng) {

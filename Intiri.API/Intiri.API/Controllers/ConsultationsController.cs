@@ -15,52 +15,61 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class ConsultationsController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class ConsultationsController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ConsultationsController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
-		{
-			_mapper = mapper;
-		}
+        public ConsultationsController(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<ConsulatationDTO>> GetConsultation()
-		{
-			Consultation consultation = await _unitOfWork.ConsulatationRepository.GetByID(1);
+        [HttpGet]
+        public async Task<ActionResult<ConsulatationDTO>> GetConsultation()
+        {
+            Consultation consultation = await _unitOfWork.ConsulatationRepository.GetByID(1);
 
-			return Ok(new ConsulatationDTO { Price = consultation.Price, Duration = consultation.Duration });
-		}
+            return Ok(
+                new ConsulatationDTO
+                {
+                    Price = consultation.Price,
+                    Duration = consultation.Duration
+                }
+            );
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPatch("update")]
-		public async Task<ActionResult<ConsulatationDTO>> UpdateConsultation(ConsulatationDTO consulatationDTO)
-		{
-			if (!User.IsInRole(RoleNames.Admin))
-			{
-				return Unauthorized();
-			}
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPatch("update")]
+        public async Task<ActionResult<ConsulatationDTO>> UpdateConsultation(
+            ConsulatationDTO consulatationDTO
+        )
+        {
+            if (!User.IsInRole(RoleNames.Admin))
+            {
+                return Unauthorized();
+            }
 
-			Consultation consultation = await _unitOfWork.ConsulatationRepository.GetByID(1);
+            Consultation consultation = await _unitOfWork.ConsulatationRepository.GetByID(1);
 
-			_mapper.Map(consulatationDTO, consultation);
-			_unitOfWork.ConsulatationRepository.Update(consultation);
+            _mapper.Map(consulatationDTO, consultation);
+            _unitOfWork.ConsulatationRepository.Update(consultation);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<ConsulatationDTO>(consultation));
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<ConsulatationDTO>(consultation));
+            }
 
-			return BadRequest();
-		}
-	}
+            return BadRequest();
+        }
+    }
 }

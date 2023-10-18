@@ -1,17 +1,17 @@
 .light-header {
-  @apply bg-light
+  @apply bg-light;
 }
 
 .btn {
-  @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 text-[16px] 2xl:text-[18px] tracking-tight
+  @apply normal-case text-black-1 font-medium hover:text-black-2 mx-1 text-[16px] 2xl:text-[18px] tracking-tight;
 }
 
 .header-wrapper {
-  @apply container flex items-center py-4 mt-4 2xl:mt-12
+  @apply container flex items-center py-4 mt-4 2xl:mt-12;
 }
 
 .header-buttons {
-  @apply hidden md:flex flex-1 justify-end items-center gap-2
+  @apply hidden md:flex flex-1 justify-end items-center gap-2;
 }
 
 ion-header::after {
@@ -25,5 +25,3 @@ ion-img {
   width: 30px;
   height: 30px;
 }
-
-

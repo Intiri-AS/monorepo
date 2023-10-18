@@ -12,9 +12,8 @@ namespace Intiri.API.DataAccess.Repository
 
         #region Constructors
 
-        public ColorNCSRepository(DataContext context) : base(context)
-        {
-        }
+        public ColorNCSRepository(DataContext context)
+            : base(context) { }
 
         #endregion Constructors
 

@@ -5,9 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './pre-book-selection.page.html',
   styleUrls: ['./pre-book-selection.page.scss'],
 })
-
 export class PreBookSelectionPage {
-
   constructor() {}
-
 }

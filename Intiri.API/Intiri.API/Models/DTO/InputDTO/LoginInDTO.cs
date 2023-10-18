@@ -2,12 +2,12 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class LoginInDTO
-	{
-		[Required]
-		public string CountryCode { get; set; }
+    public class LoginInDTO
+    {
+        [Required]
+        public string CountryCode { get; set; }
 
-		[Required]
-		public string PhoneNumber { get; set; }
-	}
+        [Required]
+        public string PhoneNumber { get; set; }
+    }
 }

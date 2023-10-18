@@ -3,13 +3,12 @@
 }
 
 .header-wrapper {
-  @apply flex items-center py-4 ;
+  @apply flex items-center py-4;
 }
 
 .header-buttons {
   @apply hidden lg:flex flex-1 items-center gap-2 ml-8;
 }
-
 
 ion-popover {
   --backdrop-opacity: 0;

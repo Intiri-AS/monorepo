@@ -9,15 +9,15 @@
 }
 
 ion-select {
-  @apply border rounded-2xl h-12 border-black-2 pr-4
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
 
 ion-col {
-  @apply p-0
+  @apply p-0;
 }
 
 .designer {
-  @apply  border rounded-2xl h-[270px] lg:h-[356px] mb-[10px] overflow-hidden shadow-1;
+  @apply border rounded-2xl h-[270px] lg:h-[356px] mb-[10px] overflow-hidden shadow-1;
 }
 
 .swiper-slide {
@@ -26,9 +26,9 @@ ion-col {
 }
 
 .important-fix {
-  @apply h-[113px] lg:h-[155px] w-full object-contain #{!important}
+  @apply h-[113px] lg:h-[155px] w-full object-contain #{!important};
 }
 
 .important-fix-2 {
-  @apply h-[236px] lg:h-[320px] w-full object-contain #{!important}
+  @apply h-[236px] lg:h-[320px] w-full object-contain #{!important};
 }

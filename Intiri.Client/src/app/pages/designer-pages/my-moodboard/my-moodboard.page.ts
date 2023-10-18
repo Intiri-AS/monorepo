@@ -1,4 +1,10 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides, PopoverController } from '@ionic/angular';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,15 +21,13 @@ import { StyleService } from 'src/app/services/style.service';
   templateUrl: './my-moodboard.page.html',
   styleUrls: ['./my-moodboard.page.scss'],
 })
-
 export class MyMoodboardPage implements OnInit, OnDestroy {
   @ViewChild('slides') slides: IonSlides;
 
   options = {
     slidesPerView: 1,
-    initialSlide: 0
-  }
-
+    initialSlide: 0,
+  };
 
   searchText: any;
   innerWidth;
@@ -57,26 +61,28 @@ export class MyMoodboardPage implements OnInit, OnDestroy {
     this.styleService.getStyles();
 
     this.subscriptions.push(
-      this.moodboards$.subscribe(moodboards => {
+      this.moodboards$.subscribe((moodboards) => {
         this.spinner.hide();
         this.moodboards = moodboards;
         this.accountService.currentUser$.subscribe((loggedUser) => {
           if (loggedUser) {
-            this.myMoodboards = this.moodboards.filter(m => m.designer.id === loggedUser.id)
+            this.myMoodboards = this.moodboards.filter(
+              (m) => m.designer.id === loggedUser.id
+            );
           }
-        })
+        });
       })
     );
 
-    this._route.queryParams.subscribe(params => {
-      if(params.section) {
+    this._route.queryParams.subscribe((params) => {
+      if (params.section) {
         this.options.initialSlide = params.section;
       }
     });
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
   changeSlide(id) {
@@ -85,24 +91,27 @@ export class MyMoodboardPage implements OnInit, OnDestroy {
     this.changeQueryParam(id);
   }
 
-  onSlideChange(){
-    const currentSlideId = this.slides['el']['swiper']['activeIndex']
+  onSlideChange() {
+    const currentSlideId = this.slides['el']['swiper']['activeIndex'];
     this.currentSlide = currentSlideId;
     this.changeQueryParam(currentSlideId);
   }
 
-  changeQueryParam(section){
+  changeQueryParam(section) {
     this._router.navigate([], {
-     relativeTo: this._route,
-     queryParams: {
-       section
-     },
-   });
+      relativeTo: this._route,
+      queryParams: {
+        section,
+      },
+    });
   }
 
-  getMbPiecesNo(moodboard){
+  getMbPiecesNo(moodboard) {
     let result = 0;
-      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    result +=
+      moodboard.colorPalettes.length +
+      moodboard.materials.length +
+      moodboard.products.length;
     return result;
   }
 
@@ -110,36 +119,41 @@ export class MyMoodboardPage implements OnInit, OnDestroy {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {moodboard: true, designerMb: true, item: mb},
-      dismissOnSelect: true
+      componentProps: { moodboard: true, designerMb: true, item: mb },
+      dismissOnSelect: true,
     });
 
     await popover.present();
   }
 
-  onFilterChangeMyMoodboard(event){
+  onFilterChangeMyMoodboard(event) {
     const selectedStyleNames = event.detail.value;
-    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
+    this.moodboards$.pipe(take(1)).subscribe((moodboards) => {
       this.accountService.currentUser$.pipe(take(1)).subscribe((loggedUser) => {
-        this.myMoodboards = this.moodboards.filter(m => m.designer.id === loggedUser.id)
+        this.myMoodboards = this.moodboards.filter(
+          (m) => m.designer.id === loggedUser.id
+        );
       });
-      if(selectedStyleNames.length > 0) {
-        this.myMoodboards = this.myMoodboards.filter(moodboard => selectedStyleNames.includes(moodboard.style.name));
+      if (selectedStyleNames.length > 0) {
+        this.myMoodboards = this.myMoodboards.filter((moodboard) =>
+          selectedStyleNames.includes(moodboard.style.name)
+        );
       } else {
         this.myMoodboards = this.myMoodboards;
       }
-    })
+    });
   }
 
-  onFilterChange(event){
+  onFilterChange(event) {
     const selectedStyleNames = event.detail.value;
-    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
-      if(selectedStyleNames.length > 0) {
-        this.moodboards = moodboards.filter(moodboard => selectedStyleNames.includes(moodboard.style.name));
+    this.moodboards$.pipe(take(1)).subscribe((moodboards) => {
+      if (selectedStyleNames.length > 0) {
+        this.moodboards = moodboards.filter((moodboard) =>
+          selectedStyleNames.includes(moodboard.style.name)
+        );
       } else {
         this.moodboards = moodboards;
       }
-    })
+    });
   }
-
 }

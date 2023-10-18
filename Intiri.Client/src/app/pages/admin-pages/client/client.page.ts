@@ -12,14 +12,14 @@ export class ClientPage implements OnInit {
 
   options = {
     slidesPerView: 1,
-    initialSlide: 0
-  }
+    initialSlide: 0,
+  };
 
   currentSlide = 0;
-  constructor(private _route: ActivatedRoute, private _router: Router) { }
+  constructor(private _route: ActivatedRoute, private _router: Router) {}
 
   ngOnInit() {
-    this._route.queryParams.subscribe(params => {
+    this._route.queryParams.subscribe((params) => {
       if (params.section) {
         this.options.initialSlide = params.section;
       }
@@ -33,7 +33,7 @@ export class ClientPage implements OnInit {
   }
 
   onSlideChange() {
-    const currentSlideId = this.slides['el']['swiper']['activeIndex']
+    const currentSlideId = this.slides['el']['swiper']['activeIndex'];
     this.currentSlide = currentSlideId;
     this.changeQueryParam(currentSlideId);
   }
@@ -42,9 +42,8 @@ export class ClientPage implements OnInit {
     this._router.navigate([], {
       relativeTo: this._route,
       queryParams: {
-        section
+        section,
       },
     });
   }
-
 }

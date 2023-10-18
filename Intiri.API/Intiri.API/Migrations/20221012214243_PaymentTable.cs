@@ -11,16 +11,18 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "ConsultationPayment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PayerId = table.Column<int>(type: "int", nullable: false),
-                    ReceiverId = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<long>(type: "bigint", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
+                columns: table =>
+                    new
+                    {
+                        Id = table
+                            .Column<int>(type: "int", nullable: false)
+                            .Annotation("SqlServer:Identity", "1, 1"),
+                        PayerId = table.Column<int>(type: "int", nullable: false),
+                        ReceiverId = table.Column<int>(type: "int", nullable: false),
+                        Amount = table.Column<long>(type: "bigint", nullable: false),
+                        Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ConsultationPayment", x => x.Id);
@@ -29,30 +31,34 @@ namespace Intiri.API.Migrations
                         column: x => x.PayerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Restrict
+                    );
                     table.ForeignKey(
                         name: "FK_ConsultationPayment_AspNetUsers_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+                        onDelete: ReferentialAction.Restrict
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_PayerId",
                 table: "ConsultationPayment",
-                column: "PayerId");
+                column: "PayerId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_ReceiverId",
                 table: "ConsultationPayment",
-                column: "ReceiverId");
+                column: "ReceiverId"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ConsultationPayment");
+            migrationBuilder.DropTable(name: "ConsultationPayment");
         }
     }
 }

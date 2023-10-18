@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 //angular-notifier
 @import "~angular-notifier/styles.css";
@@ -110,7 +110,7 @@
     --height: 95%;
   }
 
-  .product-modal-css::part(content)  {
+  .product-modal-css::part(content) {
     --width: 50%;
     border-radius: 16px;
     --height: 80%;
@@ -135,7 +135,7 @@ ion-button {
 }
 
 ion-input {
-  background-color: #F8F5F1 !important;
+  background-color: #f8f5f1 !important;
 }
 
 ion-toolbar {
@@ -147,14 +147,13 @@ ion-toolbar {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #EFE8DE;
+  background-color: #efe8de;
   left: 0;
   z-index: 99;
 }
 
-
 .main-title {
-  @apply font-medium text-black-1 text-3xl sm:text-4xl mt-0
+  @apply font-medium text-black-1 text-3xl sm:text-4xl mt-0;
 }
 
 // without this change ion-grid does not work well, since slide is reducing container width based on given content (eg. size=12 will not take full width if content is not wide enough)
@@ -182,7 +181,6 @@ ion-toolbar {
     font-size: 1.5rem !important;
   }
 }
-
 
 .primary-btn-responsive {
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
@@ -222,7 +220,7 @@ ion-toolbar {
 }
 
 .header-icon {
-  @apply text-primary text-2xl border border-transparent rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2
+  @apply text-primary text-2xl border border-transparent rounded-xl bg-light cursor-pointer hover:opacity-80 p-[0.7rem] mr-2;
 }
 
 .header-profile-img {
@@ -230,7 +228,7 @@ ion-toolbar {
 }
 
 .selected-border {
-  @apply border rounded-xl border-primary
+  @apply border rounded-xl border-primary;
 }
 
 .header-container {
@@ -250,7 +248,8 @@ ion-toolbar {
     width: 36px !important;
   }
 
-  .primary-btn-responsive, .secondary-btn-responsive {
+  .primary-btn-responsive,
+  .secondary-btn-responsive {
     @apply px-2 rounded-[8px];
     margin: 0 !important;
     font-size: 16px !important;
@@ -324,10 +323,10 @@ ion-toolbar {
 }
 
 code-input {
-    span:first-child {
-      padding-left: 0px !important;
-    }
+  span:first-child {
+    padding-left: 0px !important;
   }
+}
 
 // dashboard card global style
 .result-grid {
@@ -390,5 +389,4 @@ code-input {
       height: 581px;
     }
   }
-
 }

@@ -1,8 +1,8 @@
 ﻿[
-	{ "Name": "Private house" },
-	{ "Name": "Mountain cabin" },
-	{ "Name": "Sea cabin" },
-	{ "Name": "B2B Office" },
-	{ "Name": "B2B Retail" },
-	{ "Name": "B2B Restaurant/Bar" }
+  { "Name": "Private house" },
+  { "Name": "Mountain cabin" },
+  { "Name": "Sea cabin" },
+  { "Name": "B2B Office" },
+  { "Name": "B2B Retail" },
+  { "Name": "B2B Restaurant/Bar" }
 ]

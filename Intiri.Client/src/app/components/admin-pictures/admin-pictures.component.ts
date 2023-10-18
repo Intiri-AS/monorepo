@@ -14,11 +14,11 @@ import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
   styleUrls: ['./admin-pictures.component.scss'],
 })
 export class AdminPicturesComponent implements OnInit {
-
   styleImages$: Observable<any> = this.styleService.styleImages$;
   styles$: Observable<any> = this.styleService.styles$;
   rooms$: Observable<any> = this.roomService.rooms$;
-  inspirationalPhotosProviders: Array<any> = this.commonUtilsService.inspirationalPhotosProviders;
+  inspirationalPhotosProviders: Array<any> =
+    this.commonUtilsService.inspirationalPhotosProviders;
   searchText: any;
 
   styleImages: Array<any> = [];
@@ -31,15 +31,15 @@ export class AdminPicturesComponent implements OnInit {
     private styleService: StyleService,
     private modalController: ModalController,
     private roomService: RoomService,
-    private commonUtilsService: CommonUtilsService,
-  ) { }
+    private commonUtilsService: CommonUtilsService
+  ) {}
 
   ngOnInit() {
     this.styleService.getStyleImages();
     this.styleService.getStyles();
     this.roomService.getRooms();
 
-    this.styleImages$.pipe().subscribe(styleImages => {
+    this.styleImages$.pipe().subscribe((styleImages) => {
       this.styleImages = styleImages;
     });
   }
@@ -48,8 +48,8 @@ export class AdminPicturesComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {picture: true, item: styleImage},
-      dismissOnSelect: true
+      componentProps: { picture: true, item: styleImage },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -58,55 +58,60 @@ export class AdminPicturesComponent implements OnInit {
   async addPicture() {
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  onRoomFilterChange (e) {
+  onRoomFilterChange(e) {
     this.roomFilters = e.detail.value;
     this.filterStyleImages();
   }
 
-
-  onStyleFilterChange (e) {
+  onStyleFilterChange(e) {
     this.styleFilters = e.detail.value;
     this.filterStyleImages();
   }
 
-  onPartnerFilterChange (e) {
+  onPartnerFilterChange(e) {
     this.partnerFilters = e.detail.value;
     this.filterStyleImages();
   }
 
-  filterStyleImages () {
-    this.styleImages$.pipe().subscribe(styleImages => {
+  filterStyleImages() {
+    this.styleImages$.pipe().subscribe((styleImages) => {
       this.styleImages = styleImages;
 
       if (this.styleFilters.length > 0) {
-        this.styleImages = styleImages.filter(styleImage => {
-          return this.styleFilters.includes(styleImage.styleId.toString())
-        })
+        this.styleImages = styleImages.filter((styleImage) => {
+          return this.styleFilters.includes(styleImage.styleId.toString());
+        });
       }
 
       if (this.roomFilters.length) {
-        this.styleImages = this.styleImages.filter(styleImage => {
-          return styleImage.roomId && this.roomFilters.includes(styleImage.roomId.toString());
+        this.styleImages = this.styleImages.filter((styleImage) => {
+          return (
+            styleImage.roomId &&
+            this.roomFilters.includes(styleImage.roomId.toString())
+          );
         });
       }
 
       if (this.partnerFilters.length) {
-        this.styleImages  = this.styleImages.filter(styleImage => {
+        this.styleImages = this.styleImages.filter((styleImage) => {
           return this.partnerFilters.includes(styleImage.provider);
-        })
+        });
       }
 
-      if (!this.styleFilters.length && !this.roomFilters.length && !this.partnerFilters.length) {
+      if (
+        !this.styleFilters.length &&
+        !this.roomFilters.length &&
+        !this.partnerFilters.length
+      ) {
         this.styleImages = styleImages;
       }
     });
   }
-
 }

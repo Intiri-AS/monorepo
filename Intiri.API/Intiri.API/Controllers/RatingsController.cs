@@ -14,72 +14,100 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class RatingsController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class RatingsController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IRatingService _ratingService;
-		private readonly IMapper _mapper;
+        private readonly IRatingService _ratingService;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public RatingsController(IUnitOfWork unitOfWork, IRatingService ratingService, IMapper mapper) : base(unitOfWork)
-		{
-			_ratingService = ratingService;
-			_mapper = mapper;
-		}
+        public RatingsController(
+            IUnitOfWork unitOfWork,
+            IRatingService ratingService,
+            IMapper mapper
+        )
+            : base(unitOfWork)
+        {
+            _ratingService = ratingService;
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet("designerRating")]
-		public async Task<ActionResult<RatingFullOutDTO>> GetDesignerFullRating()
-		{
-			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(User.GetUserId());
-			if (designer == null) return Unauthorized("Invalid designer.");
+        [HttpGet("designerRating")]
+        public async Task<ActionResult<RatingFullOutDTO>> GetDesignerFullRating()
+        {
+            Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(
+                User.GetUserId()
+            );
+            if (designer == null)
+                return Unauthorized("Invalid designer.");
 
-			DesignerRating dRating = designer.DesignerRating;
+            DesignerRating dRating = designer.DesignerRating;
 
-			if (dRating == null)
-			{
-				return BadRequest("Failed to read designer rating.");
-			}
+            if (dRating == null)
+            {
+                return BadRequest("Failed to read designer rating.");
+            }
 
-			return Ok(_mapper.Map<RatingFullOutDTO>(dRating));
-		}
+            return Ok(_mapper.Map<RatingFullOutDTO>(dRating));
+        }
 
-		[HttpGet("isRated/id/{designerId}")]
-		public async Task<ActionResult<bool>> GetIsDesignerAlreadyRated(int designerId)
-		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetUserByIdAsync<EndUser>(User.GetUserId());
-			if (endUser == null) return true;
+        [HttpGet("isRated/id/{designerId}")]
+        public async Task<ActionResult<bool>> GetIsDesignerAlreadyRated(int designerId)
+        {
+            EndUser endUser = await _unitOfWork.UserRepository.GetUserByIdAsync<EndUser>(
+                User.GetUserId()
+            );
+            if (endUser == null)
+                return true;
 
-			if (!await _unitOfWork.UserRepository.IsDesignerExistByAsync(designerId))
-			{
-				return BadRequest("Designer not found");
-			}
+            if (!await _unitOfWork.UserRepository.IsDesignerExistByAsync(designerId))
+            {
+                return BadRequest("Designer not found");
+            }
 
-			bool isDesignerRated = await _unitOfWork.DesignerReviewRepository.IsDesingerAlreadyRatedByUserAsync(endUser.Id, designerId);
+            bool isDesignerRated =
+                await _unitOfWork.DesignerReviewRepository.IsDesingerAlreadyRatedByUserAsync(
+                    endUser.Id,
+                    designerId
+                );
 
-			return Ok(isDesignerRated);
-		}
+            return Ok(isDesignerRated);
+        }
 
-		[HttpPut("addRating")]
-		public async Task<ActionResult<RatingBasicOutDTO>> AddDesignerRating(DesignerRatingInDTO ratingInDTO)
-		{
-			EndUser endUser = await _unitOfWork.UserRepository.GetUserByIdAsync<EndUser>(User.GetUserId());
-			if (endUser == null) return Unauthorized("Invalid client.");
+        [HttpPut("addRating")]
+        public async Task<ActionResult<RatingBasicOutDTO>> AddDesignerRating(
+            DesignerRatingInDTO ratingInDTO
+        )
+        {
+            EndUser endUser = await _unitOfWork.UserRepository.GetUserByIdAsync<EndUser>(
+                User.GetUserId()
+            );
+            if (endUser == null)
+                return Unauthorized("Invalid client.");
 
-			Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(ratingInDTO.DesignerId);
-			if (designer == null) return BadRequest("Designer not found");
+            Designer designer = await _unitOfWork.UserRepository.GetDesignerByIdWithRatingsAsync(
+                ratingInDTO.DesignerId
+            );
+            if (designer == null)
+                return BadRequest("Designer not found");
 
-			RatingBasicOutDTO designerRatingOutDTO = await _ratingService.AddDesignerRatingAsync(ratingInDTO, designer, endUser);
+            RatingBasicOutDTO designerRatingOutDTO = await _ratingService.AddDesignerRatingAsync(
+                ratingInDTO,
+                designer,
+                endUser
+            );
 
-			if (designerRatingOutDTO == null) return BadRequest("Failed to rating designer.");
+            if (designerRatingOutDTO == null)
+                return BadRequest("Failed to rating designer.");
 
-			return Ok(designerRatingOutDTO);
-		}
-	}
+            return Ok(designerRatingOutDTO);
+        }
+    }
 }

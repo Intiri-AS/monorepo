@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace Messenger.Messages
 {
-	public abstract class Message
-	{
-	}
+    public abstract class Message { }
 }

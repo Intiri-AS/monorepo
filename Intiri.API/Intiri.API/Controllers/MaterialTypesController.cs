@@ -11,94 +11,107 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class MaterialTypesController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class MaterialTypesController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
-		{
-			_mapper = mapper;
-		}
+        public MaterialTypesController(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<MaterialTypeOutDTO>>> GetMaterialTypes()
-		{
-			IEnumerable<MaterialType> materialTypes = await _unitOfWork.MaterialTypeRepository.GetAllMaterialTypesAsync();
-			IEnumerable<MaterialTypeOutDTO> materialTypesToReturn = _mapper.Map<IEnumerable<MaterialTypeOutDTO>>(materialTypes);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MaterialTypeOutDTO>>> GetMaterialTypes()
+        {
+            IEnumerable<MaterialType> materialTypes =
+                await _unitOfWork.MaterialTypeRepository.GetAllMaterialTypesAsync();
+            IEnumerable<MaterialTypeOutDTO> materialTypesToReturn = _mapper.Map<
+                IEnumerable<MaterialTypeOutDTO>
+            >(materialTypes);
 
-			return Ok(materialTypesToReturn);
-		}
+            return Ok(materialTypesToReturn);
+        }
 
-		[HttpGet("id/{materialTypeId}")]
-		public async Task<ActionResult<MaterialTypeOutDTO>> GetMaterialTypeById(int materialTypeId)
-		{
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeByIdAsync(materialTypeId);
-			MaterialTypeOutDTO materialTypeOutDTO = _mapper.Map<MaterialTypeOutDTO>(materialType);
+        [HttpGet("id/{materialTypeId}")]
+        public async Task<ActionResult<MaterialTypeOutDTO>> GetMaterialTypeById(int materialTypeId)
+        {
+            MaterialType materialType =
+                await _unitOfWork.MaterialTypeRepository.GetMaterialTypeByIdAsync(materialTypeId);
+            MaterialTypeOutDTO materialTypeOutDTO = _mapper.Map<MaterialTypeOutDTO>(materialType);
 
-			return Ok(materialTypeOutDTO);
-		}
+            return Ok(materialTypeOutDTO);
+        }
 
-		[HttpGet("materials/{materialTypeId}")]
-		public async Task<ActionResult<MaterialTypeMaterialsOutDTO>> GetMaterialTypeWithRoomsById(int materialTypeId)
-		{
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(materialTypeId);
-			MaterialTypeMaterialsOutDTO materialTypeMaterialsOutDTO = _mapper.Map<MaterialTypeMaterialsOutDTO>(materialType);
+        [HttpGet("materials/{materialTypeId}")]
+        public async Task<ActionResult<MaterialTypeMaterialsOutDTO>> GetMaterialTypeWithRoomsById(
+            int materialTypeId
+        )
+        {
+            MaterialType materialType =
+                await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(
+                    materialTypeId
+                );
+            MaterialTypeMaterialsOutDTO materialTypeMaterialsOutDTO =
+                _mapper.Map<MaterialTypeMaterialsOutDTO>(materialType);
 
-			return Ok(materialTypeMaterialsOutDTO);
-		}
+            return Ok(materialTypeMaterialsOutDTO);
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult> AddMaterialType(MaterialTypeInDTO materialTypeInDTO)
-		{
-			if (await _unitOfWork.RoomTypeRepository.IsRoomTypeNameExists(materialTypeInDTO.Name))
-			{
-				return BadRequest("Material type name is taken");
-			}
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult> AddMaterialType(MaterialTypeInDTO materialTypeInDTO)
+        {
+            if (await _unitOfWork.RoomTypeRepository.IsRoomTypeNameExists(materialTypeInDTO.Name))
+            {
+                return BadRequest("Material type name is taken");
+            }
 
-			MaterialType materialType = _mapper.Map<MaterialType>(materialTypeInDTO);
-			_unitOfWork.MaterialTypeRepository.Insert(materialType);
+            MaterialType materialType = _mapper.Map<MaterialType>(materialTypeInDTO);
+            _unitOfWork.MaterialTypeRepository.Insert(materialType);
 
-			if (!await _unitOfWork.SaveChanges())
-			{
-				return BadRequest();
-			}
+            if (!await _unitOfWork.SaveChanges())
+            {
+                return BadRequest();
+            }
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete/{materialTypeId}")]
-		public async Task<ActionResult> DeleteMaterialType(int materialTypeId)
-		{
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(materialTypeId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete/{materialTypeId}")]
+        public async Task<ActionResult> DeleteMaterialType(int materialTypeId)
+        {
+            MaterialType materialType =
+                await _unitOfWork.MaterialTypeRepository.GetMaterialTypeMaterialsByIdAsync(
+                    materialTypeId
+                );
 
-			if (materialType == null)
-			{
-				return BadRequest("Material type doesn' exist.");
-			}
+            if (materialType == null)
+            {
+                return BadRequest("Material type doesn' exist.");
+            }
 
-			try
-			{
-				await _unitOfWork.MaterialTypeRepository.Delete(materialType.Id);
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Internal error: {ex}");
-			}
+            try
+            {
+                await _unitOfWork.MaterialTypeRepository.Delete(materialType.Id);
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex}");
+            }
 
-			return Ok();
-		}
-
-	}
+            return Ok();
+        }
+    }
 }

@@ -16,7 +16,8 @@ namespace Intiri.API.Migrations
                 defaultValue: 0,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldNullable: true);
+                oldNullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -27,7 +28,8 @@ namespace Intiri.API.Migrations
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int),
-                oldType: "int");
+                oldType: "int"
+            );
         }
     }
 }

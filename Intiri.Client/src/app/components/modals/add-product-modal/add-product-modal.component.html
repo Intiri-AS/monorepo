@@ -2,248 +2,593 @@
 <ion-content>
   <!-- Add Product modal -->
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="add" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F5F1]">
-      <div class="max-w-md w-full h-full space-y-8 mt-6  h-100">
-        <div>
-          <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">{{'PARTNERS.addProduct' | translate}}</h2>
-        </div>
-
-        <!-- Product name -->
-        <div class="profile-input">
-          <span class="text-sm text-black-2">{{'PARTNERS.product-name' | translate}}</span>
-          <ion-input formControlName="productName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
-          <div *ngIf="submitted && form.productName.errors" class="invalid-feedback">
-            <span slot="error" style="color: red;" *ngIf="form.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
+    <div
+      *ngIf="add"
+      class="bg-gray-500 justify-center items-center flex flex-col h-full"
+    >
+      <div
+        class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F5F1]"
+      >
+        <div class="max-w-md w-full h-full space-y-8 mt-6 h-100">
+          <div>
+            <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">
+              {{ "PARTNERS.addProduct" | translate }}
+            </h2>
           </div>
-        </div>
 
-        <!-- Product link -->
-        <div class="profile-input">
-          <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
-          <ion-input formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
-        </div>
-
-        <!-- Product type & Material type -->
-        <section class="flex-row-product">
-          <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
-            <ion-select interface="popover"  formControlName="productType" class="border rounded-2xl h-14 border-black-2  ">
-              <ion-select-option value="{{productType.id}}" *ngFor="let productType of productsType">{{'PRODUCT-TYPE.' + productType.name | translate}}</ion-select-option>
-            </ion-select>
-            <div *ngIf="submitted && form.productType.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.productType.errors.required">*{{'PARTNERS.product-type-required' | translate}}</span>
+          <!-- Product name -->
+          <div class="profile-input">
+            <span class="text-sm text-black-2">{{
+              "PARTNERS.product-name" | translate
+            }}</span>
+            <ion-input
+              formControlName="productName"
+              type="text"
+              class="border rounded-2xl h-14 border-black-2"
+            ></ion-input>
+            <div
+              *ngIf="submitted && form.productName.errors"
+              class="invalid-feedback"
+            >
+              <span
+                slot="error"
+                style="color: red"
+                *ngIf="form.productName.errors.required"
+                >*{{ "PARTNERS.product-name-required" | translate }}</span
+              >
             </div>
           </div>
-          <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">{{'STYLE.material-type' | translate}}</span>
-            <ion-select interface="popover"  formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
-              <ion-select-option value="{{material.id}}" *ngFor="let material of materialTypes">{{material.name}}</ion-select-option>
-            </ion-select>
-            <div *ngIf="submitted && form.productMaterial.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.productMaterial.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
+
+          <!-- Product link -->
+          <div class="profile-input">
+            <span class="text-sm text-black-2">{{
+              "PARTNERS.product-link" | translate
+            }}</span>
+            <ion-input
+              formControlName="productLink"
+              type="text"
+              class="border rounded-2xl h-14 border-black-2"
+            ></ion-input>
+          </div>
+
+          <!-- Product type & Material type -->
+          <section class="flex-row-product">
+            <div class="profile-input fixed-width">
+              <span class="text-sm text-black-2">{{
+                "PARTNERS.type" | translate
+              }}</span>
+              <ion-select
+                interface="popover"
+                formControlName="productType"
+                class="border rounded-2xl h-14 border-black-2"
+              >
+                <ion-select-option
+                  value="{{ productType.id }}"
+                  *ngFor="let productType of productsType"
+                  >{{
+                    "PRODUCT-TYPE." + productType.name | translate
+                  }}</ion-select-option
+                >
+              </ion-select>
+              <div
+                *ngIf="submitted && form.productType.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  style="color: red"
+                  *ngIf="form.productType.errors.required"
+                  >*{{ "PARTNERS.product-type-required" | translate }}</span
+                >
+              </div>
+            </div>
+            <div class="profile-input fixed-width">
+              <span class="text-sm text-black-2">{{
+                "STYLE.material-type" | translate
+              }}</span>
+              <ion-select
+                interface="popover"
+                formControlName="productMaterial"
+                class="border rounded-2xl h-14 border-black-2"
+              >
+                <ion-select-option
+                  value="{{ material.id }}"
+                  *ngFor="let material of materialTypes"
+                  >{{ material.name }}</ion-select-option
+                >
+              </ion-select>
+              <div
+                *ngIf="submitted && form.productMaterial.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  style="color: red"
+                  *ngIf="form.productMaterial.errors.required"
+                  >*{{ "PARTNERS.product-material-required" | translate }}</span
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- Select color & price -->
+          <div class="flex-row-product">
+            <div class="profile-input fixed-width">
+              <span class="text-sm text-black-2">{{
+                "STYLE.select-main-color" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="colorPallete.mainColor"
+                [style.background]="colorPallete.mainColor + ' !important'"
+                [cpPosition]="'top'"
+                formControlName="color"
+                [disabled]="true"
+                [(colorPicker)]="colorPallete.mainColor"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+              ></ion-input>
+              <div
+                *ngIf="submitted && form.color.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  style="color: red"
+                  *ngIf="form.color.errors.required"
+                  >*{{ "PARTNERS.color-required" | translate }}</span
+                >
+              </div>
+            </div>
+            <div class="profile-input fixed-width">
+              <span class="text-sm text-black-2">{{
+                "CONSULTATIONS.price" | translate
+              }}</span>
+              <ion-input
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="price"
+              ></ion-input>
+              <div
+                *ngIf="submitted && form.price.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  style="color: red"
+                  *ngIf="form.price.errors.required"
+                  >*{{ "PARTNERS.price-required" | translate }}</span
+                >
+              </div>
             </div>
           </div>
-        </section>
-
-        <!-- Select color & price -->
-        <div class="flex-row-product">
-          <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-            <ion-input [(ngModel)]="colorPallete.mainColor"  [style.background]="colorPallete.mainColor + ' !important'"
-            [cpPosition]="'top'" formControlName="color" [disabled]="true"
-            [(colorPicker)]="colorPallete.mainColor" type="text"
-            class="border rounded-2xl h-14 border-black-2"></ion-input>
-            <div *ngIf="submitted && form.color.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.color.errors.required">*{{'PARTNERS.color-required' | translate}}</span>
-            </div>
-
-        </div>
-          <div class="profile-input fixed-width">
-            <span class="text-sm text-black-2">{{'CONSULTATIONS.price' | translate}}</span>
-            <ion-input  type="text" class="border rounded-2xl h-14 border-black-2 " formControlName="price"></ion-input>
-            <div *ngIf="submitted && form.price.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.price.errors.required">*{{'PARTNERS.price-required' | translate}}</span>
-            </div>
+          <div>
+            <span class="text-sm text-black-2">{{
+              "STYLE.description" | translate
+            }}</span>
+            <ion-textarea
+              rows="5"
+              class="border border-black-2 rounded-2xl focus:outline-0"
+              formControlName="description"
+            ></ion-textarea>
           </div>
-        </div>
-        <div>
-          <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
-          <ion-textarea rows="5" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
-        </div>
-        <div>
-          <span class="text-sm text-black-2">{{'PARTNERS.product-image' | translate}}</span>
-          <div class="profile-input w-fit">
-            <label for="dropzone-file">
-              <div class="w-[150px] border-2 border-dashed rounded-2xl h-[150px] border-black-3 hover:opacity-70 cursor-pointer">
-                <div class="text-center mt-[50px]">
-                  <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                  <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload'| translate}}</p>
-
+          <div>
+            <span class="text-sm text-black-2">{{
+              "PARTNERS.product-image" | translate
+            }}</span>
+            <div class="profile-input w-fit">
+              <label for="dropzone-file">
+                <div
+                  class="w-[150px] border-2 border-dashed rounded-2xl h-[150px] border-black-3 hover:opacity-70 cursor-pointer"
+                >
+                  <div class="text-center mt-[50px]">
+                    <ion-icon
+                      class="text-[27px] text-black-3"
+                      name="add-outline"
+                    ></ion-icon>
+                    <p
+                      class="leading-[22px] font-semibold text-black-3 text-lg"
+                    >
+                      {{ "COMMON.upload" | translate }}
+                    </p>
+                  </div>
+                </div>
+                <input
+                  (change)="onFileChangeAddProduct($event)"
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  formControlName="imageUrl"
+                  accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+                  multiple
+                />
+              </label>
+              <div
+                [ngClass]="{
+                  'image-preview-container': addImagePaths.length > 0
+                }"
+              >
+                <div *ngFor="let imagePath of addImagePaths; let i = index">
+                  <img
+                    [src]="imagePath"
+                    alt="{{ 'PictureImage ' + i }}"
+                    class="preview-image"
+                  />
                 </div>
               </div>
-              <input
-                (change)="onFileChangeAddProduct($event)"
-                id="dropzone-file"
-                type="file"
-                class="hidden"
-                formControlName="imageUrl"
-                accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
-                multiple
-              />
-            </label>
-            <div [ngClass]="{'image-preview-container' : addImagePaths.length > 0}">
-              <div *ngFor="let imagePath of addImagePaths; let i = index">
-                <img [src]="imagePath" alt="{{ 'PictureImage ' + i }}" class="preview-image"/>
+              <div
+                *ngIf="submitted && form.imageUrl.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  style="color: red"
+                  *ngIf="form.imageUrl.errors.required"
+                  >*{{ "PARTNERS.product-image-required" | translate }}</span
+                >
               </div>
             </div>
-            <div *ngIf="submitted && form.imageUrl.errors" class="invalid-feedback">
-              <span slot="error" style="color: red;" *ngIf="form.imageUrl.errors.required">*{{'PARTNERS.product-image-required' | translate}}</span>
-            </div>
           </div>
-        </div>
-        <div class="flex justify-center">
-          <ion-button fill="clear" class="secondary-btn h-[52px] mb-8" (click)="dismissModal()">{{'COMMON.cancel'| translate}}</ion-button>
-          <ion-button fill="clear" class="primary-btn h-[52px] mb-8" type='submit' >{{'COMMON.add'| translate}}</ion-button>
+          <div class="flex justify-center">
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px] mb-8"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px] mb-8"
+              type="submit"
+              >{{ "COMMON.add" | translate }}</ion-button
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
   <!-- Product added modal -->
-  <div *ngIf="added" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div
+    *ngIf="added"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper text-center !pt-[8px] !pl-[12px] flex justify-center">
-            <img class="h-[32px] w-[32px] mt-[7px]" src="../../../../assets/icon/success.svg" alt="success">
+          <div
+            class="plus-icon-wrapper text-center !pt-[8px] !pl-[12px] flex justify-center"
+          >
+            <img
+              class="h-[32px] w-[32px] mt-[7px]"
+              src="../../../../assets/icon/success.svg"
+              alt="success"
+            />
           </div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{'PARTNERS.product-added' | translate}}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{'PARTNERS.product-added-text' | translate}}</p>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{ "PARTNERS.product-added" | translate }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{ "PARTNERS.product-added-text" | translate }}
+          </p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="dismissModal()">{{'PARTNERS.go-to-products' | translate}}</ion-button>
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "PARTNERS.go-to-products" | translate }}</ion-button
+          >
         </ion-buttons>
       </div>
     </div>
   </div>
   <!-- Product delete modal -->
-  <div *ngIf="delete" class="bg-gray-500 justify-center items-center flex flex-col h-full">
-    <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+  <div
+    *ngIf="delete"
+    class="bg-gray-500 justify-center items-center flex flex-col h-full"
+  >
+    <div
+      class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white"
+    >
       <div class="max-w-md w-full space-y-8">
         <div>
-          <div class="plus-icon-wrapper text-center !pt-[8px] !pl-[12px]"><ion-icon class="h-[32px] w-[32px] ml-[3px] mt-[7px]" name="trash-outline"></ion-icon></div>
-          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.product' | translate) } }}</h2>
-          <p class="text-center text-base text-[18px] text-black-2">{{ 'COMMON-MODAL.remove-text' | translate:{ name: ('COMMON-MODAL.product' | translate) } }}</p>
+          <div class="plus-icon-wrapper text-center !pt-[8px] !pl-[12px]">
+            <ion-icon
+              class="h-[32px] w-[32px] ml-[3px] mt-[7px]"
+              name="trash-outline"
+            ></ion-icon>
+          </div>
+          <h2 class="mt-10 text-center text-2xl font-bold text-black-1">
+            {{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.product" | translate) }
+            }}
+          </h2>
+          <p class="text-center text-base text-[18px] text-black-2">
+            {{
+              "COMMON-MODAL.remove-text"
+                | translate : { name: ("COMMON-MODAL.product" | translate) }
+            }}
+          </p>
         </div>
         <ion-buttons class="justify-center">
-          <ion-button class="primary-btn h-[52px] mt-10" (click)="deleteProduct()">{{ 'COMMON-MODAL.remove-title' | translate:{ name: ('COMMON-MODAL.product' | translate) } }}</ion-button>
-          <ion-button class="secondary-btn h-[52px] mt-10" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
+          <ion-button
+            class="primary-btn h-[52px] mt-10"
+            (click)="deleteProduct()"
+            >{{
+              "COMMON-MODAL.remove-title"
+                | translate : { name: ("COMMON-MODAL.product" | translate) }
+            }}</ion-button
+          >
+          <ion-button
+            class="secondary-btn h-[52px] mt-10"
+            (click)="dismissModal()"
+            >{{ "COMMON.cancel" | translate }}</ion-button
+          >
         </ion-buttons>
       </div>
     </div>
   </div>
   <!-- Edit Product modal -->
   <div *ngIf="edit" class="justify-center items-center h-full">
-    <form [formGroup]="editProductForm" (ngSubmit)="editProduct()" autocomplete="off">
-      <div class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F5F1]">
-        <div class="max-w-md w-full h-full space-y-8 mt-6  h-100">
+    <form
+      [formGroup]="editProductForm"
+      (ngSubmit)="editProduct()"
+      autocomplete="off"
+    >
+      <div
+        class="min-h-full min-w-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F5F1]"
+      >
+        <div class="max-w-md w-full h-full space-y-8 mt-6 h-100">
           <div>
-            <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">{{ 'COMMON-MODAL.edit-title' | translate:{ name: ('COMMON-MODAL.product' | translate) } }}</h2> <!-- TODO Translate -->
+            <h2 class="font-medium text-black-1 text-5xl mt-2 text-center">
+              {{
+                "COMMON-MODAL.edit-title"
+                  | translate : { name: ("COMMON-MODAL.product" | translate) }
+              }}
+            </h2>
+            <!-- TODO Translate -->
           </div>
           <div class="profile-input">
-            <span class="text-sm text-black-2">{{'PARTNERS.product-name' | translate}}</span>
-            <ion-input [(ngModel)]="product.name" formControlName="productName" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
-            <div *ngIf="submitted && editForm.productName.errors" class="invalid-feedback">
-              <span slot="error" class="ion-warning" *ngIf="editForm.productName.errors.required">*{{'PARTNERS.product-name-required' | translate}}</span>
+            <span class="text-sm text-black-2">{{
+              "PARTNERS.product-name" | translate
+            }}</span>
+            <ion-input
+              [(ngModel)]="product.name"
+              formControlName="productName"
+              type="text"
+              class="border rounded-2xl h-14 border-black-2"
+            ></ion-input>
+            <div
+              *ngIf="submitted && editForm.productName.errors"
+              class="invalid-feedback"
+            >
+              <span
+                slot="error"
+                class="ion-warning"
+                *ngIf="editForm.productName.errors.required"
+                >*{{ "PARTNERS.product-name-required" | translate }}</span
+              >
             </div>
           </div>
 
           <div class="profile-input">
-            <span class="text-sm text-black-2">{{'PARTNERS.product-link' | translate}}</span>
-            <ion-input [(ngModel)]="product.productLink" formControlName="productLink" type="text" class="border rounded-2xl h-14 border-black-2"></ion-input>
+            <span class="text-sm text-black-2">{{
+              "PARTNERS.product-link" | translate
+            }}</span>
+            <ion-input
+              [(ngModel)]="product.productLink"
+              formControlName="productLink"
+              type="text"
+              class="border rounded-2xl h-14 border-black-2"
+            ></ion-input>
           </div>
 
           <!-- Product type & Material type -->
           <section class="flex-row-product">
             <div class="profile-input fixed-width">
-              <span class="text-sm text-black-2">{{'PARTNERS.type' | translate}}</span>
-              <ion-select [(ngModel)]="product.productTypeId" [placeholder]="getProductTypeNameByTypeId(product.productTypeId)" interface="popover"  formControlName="productType" class="border rounded-2xl h-14 border-black-2  ">
-                <ion-select-option [value]="productType.id" *ngFor="let productType of productsType">{{'PRODUCT-TYPE.' + productType.name | translate}}</ion-select-option>
+              <span class="text-sm text-black-2">{{
+                "PARTNERS.type" | translate
+              }}</span>
+              <ion-select
+                [(ngModel)]="product.productTypeId"
+                [placeholder]="
+                  getProductTypeNameByTypeId(product.productTypeId)
+                "
+                interface="popover"
+                formControlName="productType"
+                class="border rounded-2xl h-14 border-black-2"
+              >
+                <ion-select-option
+                  [value]="productType.id"
+                  *ngFor="let productType of productsType"
+                  >{{
+                    "PRODUCT-TYPE." + productType.name | translate
+                  }}</ion-select-option
+                >
               </ion-select>
-              <div *ngIf="submitted && editForm.productType.errors" class="invalid-feedback">
-                <span slot="error" class="ion-warning" *ngIf="editForm.productType.errors.required">*{{'PARTNERS.product-type-required' | translate}}</span>
+              <div
+                *ngIf="submitted && editForm.productType.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  class="ion-warning"
+                  *ngIf="editForm.productType.errors.required"
+                  >*{{ "PARTNERS.product-type-required" | translate }}</span
+                >
               </div>
             </div>
             <div class="profile-input fixed-width">
-              <span class="text-sm text-black-2">{{'STYLE.material-type' | translate}}</span>
-              <ion-select [(ngModel)]="product.materialId" [placeholder]="getMaterialTypeNameByTypeId(product.materialId)" interface="popover" formControlName="productMaterial" class="border rounded-2xl h-14 border-black-2  ">
-                <ion-select-option [value]="material.id" *ngFor="let material of materialTypes">{{material.name}}</ion-select-option>
+              <span class="text-sm text-black-2">{{
+                "STYLE.material-type" | translate
+              }}</span>
+              <ion-select
+                [(ngModel)]="product.materialId"
+                [placeholder]="getMaterialTypeNameByTypeId(product.materialId)"
+                interface="popover"
+                formControlName="productMaterial"
+                class="border rounded-2xl h-14 border-black-2"
+              >
+                <ion-select-option
+                  [value]="material.id"
+                  *ngFor="let material of materialTypes"
+                  >{{ material.name }}</ion-select-option
+                >
               </ion-select>
-              <div *ngIf="submitted && editForm.productType.errors" class="invalid-feedback">
-                <span slot="error" class="ion-warning" *ngIf="editForm.productMaterial.errors.required">*{{'PARTNERS.product-material-required' | translate}}</span>
+              <div
+                *ngIf="submitted && editForm.productType.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  class="ion-warning"
+                  *ngIf="editForm.productMaterial.errors.required"
+                  >*{{ "PARTNERS.product-material-required" | translate }}</span
+                >
               </div>
             </div>
           </section>
 
           <div class="flex-row-product">
             <div class="profile-input fixed-width">
-              <span class="text-sm text-black-2">{{'STYLE.select-main-color' | translate}}</span>
-              <ion-input [(ngModel)]="product.color" [style.background]="product.color + ' !important'"
-              [cpPosition]="'top'" formControlName="color"
-              [disabled]="true"
-              [(colorPicker)]="product.color" type="text"
-              class="border rounded-2xl h-14 border-black-2"></ion-input>
-              <div *ngIf="submitted && editForm.color.errors" class="invalid-feedback">
-                <span slot="error" class="ion-warning" *ngIf="editForm.color.errors.required">*{{'PARTNERS.color-required' | translate}}</span>
+              <span class="text-sm text-black-2">{{
+                "STYLE.select-main-color" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="product.color"
+                [style.background]="product.color + ' !important'"
+                [cpPosition]="'top'"
+                formControlName="color"
+                [disabled]="true"
+                [(colorPicker)]="product.color"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+              ></ion-input>
+              <div
+                *ngIf="submitted && editForm.color.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  class="ion-warning"
+                  *ngIf="editForm.color.errors.required"
+                  >*{{ "PARTNERS.color-required" | translate }}</span
+                >
               </div>
-
-          </div>
+            </div>
             <div class="profile-input fixed-width">
-              <span class="text-sm text-black-2">{{'CONSULTATIONS.price' | translate}}</span>
-              <ion-input [(ngModel)]="product.price"  type="text" class="border rounded-2xl h-14 border-black-2 " formControlName="price"></ion-input>
-              <div *ngIf="submitted && editForm.price.errors" class="invalid-feedback">
-                <span slot="error" class="ion-warning" *ngIf="editForm.price.errors.required">*{{'PARTNERS.price-required' | translate}}</span>
+              <span class="text-sm text-black-2">{{
+                "CONSULTATIONS.price" | translate
+              }}</span>
+              <ion-input
+                [(ngModel)]="product.price"
+                type="text"
+                class="border rounded-2xl h-14 border-black-2"
+                formControlName="price"
+              ></ion-input>
+              <div
+                *ngIf="submitted && editForm.price.errors"
+                class="invalid-feedback"
+              >
+                <span
+                  slot="error"
+                  class="ion-warning"
+                  *ngIf="editForm.price.errors.required"
+                  >*{{ "PARTNERS.price-required" | translate }}</span
+                >
               </div>
             </div>
           </div>
           <div>
-            <span class="text-sm text-black-2">{{'STYLE.description' | translate}}</span>
-            <ion-textarea [(ngModel)]="product.description" rows="5" class="border border-black-2 rounded-2xl focus:outline-0" formControlName="description"></ion-textarea>
+            <span class="text-sm text-black-2">{{
+              "STYLE.description" | translate
+            }}</span>
+            <ion-textarea
+              [(ngModel)]="product.description"
+              rows="5"
+              class="border border-black-2 rounded-2xl focus:outline-0"
+              formControlName="description"
+            ></ion-textarea>
           </div>
           <div class="w-full">
             <ion-row>
               <ion-col size="12" sizeMd="6" class="p-0">
                 <div class="mt-4 mx-0 px-0 w-fit">
-                  <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'COMMON-MODAL.current-picture' | translate}}</p>
-                  <div class="w-[200px] border-2 border-solid rounded-2xl h-[200px] border-primary">
-                    <img [src]="item.imagePath" class="object-fill rounded-2xl p-1 h-full w-full" alt="oldImg">
+                  <p
+                    class="leading-[22px] mb-2 font-semibold text-black-1 text-lg"
+                  >
+                    {{ "COMMON-MODAL.current-picture" | translate }}
+                  </p>
+                  <div
+                    class="w-[200px] border-2 border-solid rounded-2xl h-[200px] border-primary"
+                  >
+                    <img
+                      [src]="item.imagePath"
+                      class="object-fill rounded-2xl p-1 h-full w-full"
+                      alt="oldImg"
+                    />
                   </div>
                 </div>
               </ion-col>
               <ion-col size="12" sizeMd="6" class="p-0">
                 <div class="mt-4 mx-0 px-0 md:ml-5 w-fit">
-                  <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">{{'COMMON-MODAL.new-picture' | translate}}</p>
+                  <p
+                    class="leading-[22px] mb-2 font-semibold text-black-1 text-lg"
+                  >
+                    {{ "COMMON-MODAL.new-picture" | translate }}
+                  </p>
                   <label for="dropzone-file">
-                    <div class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer">
+                    <div
+                      class="w-[200px] border-2 border-dashed rounded-2xl h-[200px] border-black-3 hover:opacity-70 cursor-pointer"
+                    >
                       <div *ngIf="!imagePath" class="text-center mt-[65px]">
-                        <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                        <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
+                        <ion-icon
+                          class="text-[27px] text-black-3"
+                          name="add-outline"
+                        ></ion-icon>
+                        <p
+                          class="leading-[22px] font-semibold text-black-3 text-lg"
+                        >
+                          {{ "COMMON.upload" | translate }}
+                        </p>
                       </div>
-                      <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
+                      <img
+                        *ngIf="imagePath"
+                        [src]="imagePath"
+                        class="object-fill rounded-2xl p-2 h-full w-full"
+                        alt="styleImg"
+                      />
                     </div>
-                    <input (change)="onFileChangeEditProduct($event)" id="dropzone-file" type="file" class="hidden" formControlName="imageFile"/>
+                    <input
+                      (change)="onFileChangeEditProduct($event)"
+                      id="dropzone-file"
+                      type="file"
+                      class="hidden"
+                      formControlName="imageFile"
+                    />
                   </label>
                 </div>
               </ion-col>
             </ion-row>
           </div>
           <div class="flex justify-center">
-            <ion-button fill="clear" class="secondary-btn h-[52px] mb-8" (click)="dismissModal()">{{'COMMON.cancel'| translate}}</ion-button>
-            <ion-button fill="clear" class="primary-btn h-[52px] mb-8" type='submit' >{{'COMMON.save-changes'| translate}}</ion-button> <!-- TODO Translate -->
+            <ion-button
+              fill="clear"
+              class="secondary-btn h-[52px] mb-8"
+              (click)="dismissModal()"
+              >{{ "COMMON.cancel" | translate }}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="primary-btn h-[52px] mb-8"
+              type="submit"
+              >{{ "COMMON.save-changes" | translate }}</ion-button
+            >
+            <!-- TODO Translate -->
           </div>
         </div>
       </div>
     </form>
-    </div>
+  </div>
 </ion-content>

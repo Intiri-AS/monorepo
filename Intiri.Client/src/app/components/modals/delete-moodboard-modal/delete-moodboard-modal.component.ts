@@ -8,24 +8,25 @@ import { MoodboardService } from 'src/app/services/moodboard.service';
   styleUrls: ['./delete-moodboard-modal.component.scss'],
 })
 export class DeleteMoodboardModalComponent implements OnInit {
+  constructor(
+    private moodboardService: MoodboardService,
+    private modalController: ModalController
+  ) {}
 
-  constructor(private moodboardService: MoodboardService, private modalController: ModalController) { }
-
-  item: {}
+  item: {};
   delete;
 
   ngOnInit() {}
 
   deleteMoodboard() {
-    this.moodboardService.deleteMoodboard(this.item['id']).subscribe(res => {
-        this.moodboardService.getMoodboards();
-        this.modalController.dismiss();
-        location.reload();
+    this.moodboardService.deleteMoodboard(this.item['id']).subscribe((res) => {
+      this.moodboardService.getMoodboards();
+      this.modalController.dismiss();
+      location.reload();
     });
   }
 
   dismissModal() {
     this.modalController.dismiss();
   }
-
 }

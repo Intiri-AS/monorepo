@@ -11,30 +11,32 @@ import { DesignerService } from 'src/app/services/designer.service';
   templateUrl: './designer.page.html',
   styleUrls: ['./designer.page.scss'],
 })
-
 export class DesignerPage {
-
   languages = this.designerService.languages;
   designers$: Observable<any> = this.designerService.designers$;
   designers: any[];
 
   searchText: any;
 
-  constructor( public popoverController: PopoverController, private modalController: ModalController, private designerService: DesignerService) {}
+  constructor(
+    public popoverController: PopoverController,
+    private modalController: ModalController,
+    private designerService: DesignerService
+  ) {}
 
   ngOnInit() {
     this.designerService.getDesigners();
-    this.designers$.subscribe(designers => {
+    this.designers$.subscribe((designers) => {
       this.designers = designers;
     });
   }
 
   getDesignerType(d) {
     const role = d.roles[0].name;
-    if(role === 'InternalDesigner') {
-      return 'DESIGNERS.internal'
-    } else if(role === 'ExternalDesigner') {
-      return 'DESIGNERS.external'
+    if (role === 'InternalDesigner') {
+      return 'DESIGNERS.internal';
+    } else if (role === 'ExternalDesigner') {
+      return 'DESIGNERS.external';
     }
     return role;
   }
@@ -43,8 +45,8 @@ export class DesignerPage {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {designer: true, item: designer},
-      dismissOnSelect: true
+      componentProps: { designer: true, item: designer },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -53,22 +55,23 @@ export class DesignerPage {
   async addDesigner() {
     const modal = await this.modalController.create({
       component: AddDesignerModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  onFilterChange(event){
+  onFilterChange(event) {
     const selectedStatus = event.detail.value;
-    this.designers$.pipe(take(1)).subscribe(designers => {
-      if(selectedStatus.length > 0) {
-        this.designers = designers.filter(designer => selectedStatus.includes(designer.roles[0].name));
+    this.designers$.pipe(take(1)).subscribe((designers) => {
+      if (selectedStatus.length > 0) {
+        this.designers = designers.filter((designer) =>
+          selectedStatus.includes(designer.roles[0].name)
+        );
       } else {
         this.designers = designers;
       }
-    })
+    });
   }
-
 }

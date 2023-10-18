@@ -6,54 +6,66 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class PartnerRepository: RepositoryBase<Partner>, IPartnerRepository
-	{
-		#region Fields
+    public class PartnerRepository : RepositoryBase<Partner>, IPartnerRepository
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public PartnerRepository(DataContext dataContext, IMapper mapper) : base(dataContext)
-		{
-			_mapper = mapper;
-		}
+        public PartnerRepository(DataContext dataContext, IMapper mapper)
+            : base(dataContext)
+        {
+            _mapper = mapper;
+        }
 
-		public async Task<Partner> GetPartnerWithProductsAsync(int partnerId)
-		{
-			return (await Get(partner => partner.Id == partnerId, includeProperties: "Products")).FirstOrDefault();
-		}
+        public async Task<Partner> GetPartnerWithProductsAsync(int partnerId)
+        {
+            return (
+                await Get(partner => partner.Id == partnerId, includeProperties: "Products")
+            ).FirstOrDefault();
+        }
 
-		public async Task<Partner> GetPartnerWithFullProductsAsync(int partnerId)
-		{
-			return await _context.Partners
-				.Include(pt => pt.Products).ThenInclude(pr => pr.ProductType)
-				.Include(pt => pt.Products).ThenInclude(pr => pr.Material)
-				.SingleOrDefaultAsync(part => part.Id == partnerId);
-		}
+        public async Task<Partner> GetPartnerWithFullProductsAsync(int partnerId)
+        {
+            return await _context.Partners
+                .Include(pt => pt.Products)
+                .ThenInclude(pr => pr.ProductType)
+                .Include(pt => pt.Products)
+                .ThenInclude(pr => pr.Material)
+                .SingleOrDefaultAsync(part => part.Id == partnerId);
+        }
 
-		public async Task<Partner> GetPartnerWithContactsAsync(int partnerId)
-		{
-			return (await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts")).FirstOrDefault();
-		}
+        public async Task<Partner> GetPartnerWithContactsAsync(int partnerId)
+        {
+            return (
+                await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts")
+            ).FirstOrDefault();
+        }
 
-		public async Task<Partner> GetPartnerAllAsync(int partnerId)
-		{
-			return (await Get(partner => partner.Id == partnerId, includeProperties: "PartnerContacts,Products")).FirstOrDefault();
-		}
+        public async Task<Partner> GetPartnerAllAsync(int partnerId)
+        {
+            return (
+                await Get(
+                    partner => partner.Id == partnerId,
+                    includeProperties: "PartnerContacts,Products"
+                )
+            ).FirstOrDefault();
+        }
 
-		public async Task<IEnumerable<Partner>> GetPartnersAsync()
-		{
-			return await _context.Partners.ToListAsync();
-		}
+        public async Task<IEnumerable<Partner>> GetPartnersAsync()
+        {
+            return await _context.Partners.ToListAsync();
+        }
 
-		public async Task<int> GetPartnersCountAsync()
-		{
-			return await _context.Partners.CountAsync();
-		}
+        public async Task<int> GetPartnersCountAsync()
+        {
+            return await _context.Partners.CountAsync();
+        }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

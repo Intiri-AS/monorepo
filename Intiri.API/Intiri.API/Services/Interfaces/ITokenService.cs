@@ -2,8 +2,8 @@
 
 namespace Intiri.API.Services.Interfaces
 {
-	public interface ITokenService
-	{
-		Task<string> CreateToken(User user);
-	}
+    public interface ITokenService
+    {
+        Task<string> CreateToken(User user);
+    }
 }

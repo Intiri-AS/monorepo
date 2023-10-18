@@ -12,24 +12,22 @@ namespace Intiri.API.Migrations
                 name: "Link",
                 table: "Materials",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "Provider",
                 table: "Materials",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Link",
-                table: "Materials");
+            migrationBuilder.DropColumn(name: "Link", table: "Materials");
 
-            migrationBuilder.DropColumn(
-                name: "Provider",
-                table: "Materials");
+            migrationBuilder.DropColumn(name: "Provider", table: "Materials");
         }
     }
 }

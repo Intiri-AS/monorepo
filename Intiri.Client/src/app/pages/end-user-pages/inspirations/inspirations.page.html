@@ -1,42 +1,94 @@
 <ion-content>
-    <div id="home">
-      <app-header></app-header>
-      <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
-      <div class="main-container">
-        <!-- <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
+  <div id="home">
+    <app-header></app-header>
+    <ngx-spinner size="medium" type="ball-spin-clockwise"></ngx-spinner>
+    <div class="main-container">
+      <!-- <ion-button fill="clear" class="back-btn" routerLink="/my-intiri" routerDirection="root">
           <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
           <p>{{'MY-INTIRI.intiri' | translate}}</p>
         </ion-button> -->
-        <p class="main-title">{{'MY-INTIRI.inspirations' | translate}}</p>
-        <ion-grid class="mt-8 p-0 mb-28">
-            <ion-row class="gap-x-[1.45%]">
-                <ion-col *ngFor="let i of inspirations" class="p-0" size="12" size-sm="5.75" size-lg="2.85" size-xl="2.25">
-                    <div class="h-full w-full mb-4">
-                      <img *ngIf="!isExtension(i, '.pdf')" [src]="i.url" (click)="openImageInModal(i)" class="object-fill rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer" alt="Inspiration Img" />
-                      <div *ngIf="isExtension(i, '.pdf')" (click)="downloadFile(i)" title="Download file" class="document-wrapper text-center pt-[75px] object-fill rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer">
-                         <ion-icon class="text-7xl document-icon" name="document-text-outline"></ion-icon>
-                         <ion-icon class="text-7xl hidden download-icon pointer-events-none" name="cloud-download-outline"></ion-icon>
-                         <p class="px-3 text-clamp-2" [title]="i.filename">{{i.filename}}</p>
-                      </div>
-                    </div>
-                </ion-col>
-                <ion-col size="12" size-sm="5.75" size-lg="2.8" size-xl="2.25" class="p-0" *ngIf="inspirations.length < 5">
-                    <div class="profile-input w-full">
-                      <label for="dropzone-file">
-                        <div class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer">
-                          <div *ngIf="!imagePath" class="text-center mt-[95px]">
-                            <ion-icon class="text-[27px] text-black-3" name="add-outline"></ion-icon>
-                            <p class="leading-[22px] font-semibold text-black-3 text-lg">{{'COMMON.upload' | translate}}</p>
-                          </div>
-                          <img *ngIf="imagePath" [src]="imagePath" class="object-fill rounded-2xl p-2 h-full w-full" alt="styleImg" />
-                        </div>
-                        <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden" />
-                      </label>
-                    </div>
-                  </ion-col>
-            </ion-row>
-        </ion-grid>
-        <app-back backPath="/my-intiri"></app-back>
-      </div>
+      <p class="main-title">{{'MY-INTIRI.inspirations' | translate}}</p>
+      <ion-grid class="mt-8 p-0 mb-28">
+        <ion-row class="gap-x-[1.45%]">
+          <ion-col
+            *ngFor="let i of inspirations"
+            class="p-0"
+            size="12"
+            size-sm="5.75"
+            size-lg="2.85"
+            size-xl="2.25"
+          >
+            <div class="h-full w-full mb-4">
+              <img
+                *ngIf="!isExtension(i, '.pdf')"
+                [src]="i.url"
+                (click)="openImageInModal(i)"
+                class="object-fill rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer"
+                alt="Inspiration Img"
+              />
+              <div
+                *ngIf="isExtension(i, '.pdf')"
+                (click)="downloadFile(i)"
+                title="Download file"
+                class="document-wrapper text-center pt-[75px] object-fill rounded-2xl h-[250px] !w-full shadow hover:shadow-lg hover:opacity-80 cursor-pointer"
+              >
+                <ion-icon
+                  class="text-7xl document-icon"
+                  name="document-text-outline"
+                ></ion-icon>
+                <ion-icon
+                  class="text-7xl hidden download-icon pointer-events-none"
+                  name="cloud-download-outline"
+                ></ion-icon>
+                <p class="px-3 text-clamp-2" [title]="i.filename">
+                  {{i.filename}}
+                </p>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col
+            size="12"
+            size-sm="5.75"
+            size-lg="2.8"
+            size-xl="2.25"
+            class="p-0"
+            *ngIf="inspirations.length < 5"
+          >
+            <div class="profile-input w-full">
+              <label for="dropzone-file">
+                <div
+                  class="w-full border-2 border-dashed rounded-2xl h-[250px] border-black-3 hover:opacity-70 cursor-pointer"
+                >
+                  <div *ngIf="!imagePath" class="text-center mt-[95px]">
+                    <ion-icon
+                      class="text-[27px] text-black-3"
+                      name="add-outline"
+                    ></ion-icon>
+                    <p
+                      class="leading-[22px] font-semibold text-black-3 text-lg"
+                    >
+                      {{'COMMON.upload' | translate}}
+                    </p>
+                  </div>
+                  <img
+                    *ngIf="imagePath"
+                    [src]="imagePath"
+                    class="object-fill rounded-2xl p-2 h-full w-full"
+                    alt="styleImg"
+                  />
+                </div>
+                <input
+                  (change)="onFileChange($event)"
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                />
+              </label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <app-back backPath="/my-intiri"></app-back>
     </div>
+  </div>
 </ion-content>

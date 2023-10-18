@@ -12,17 +12,20 @@ import { AddStyleModalComponent } from '../modals/add-style-modal/add-style-moda
   styleUrls: ['./admin-styles.component.scss'],
 })
 export class AdminStylesComponent implements OnInit {
-
   searchText: any;
   styles$: Observable<any> = this.styleService.styles$;
   styles: any[];
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController, private styleService: StyleService) { }
+  constructor(
+    public popoverController: PopoverController,
+    private modalController: ModalController,
+    private styleService: StyleService
+  ) {}
 
   ngOnInit() {
     this.styleService.getStyles();
 
-    this.styles$.subscribe(styles => {
+    this.styles$.subscribe((styles) => {
       this.styles = styles;
     });
   }
@@ -31,8 +34,8 @@ export class AdminStylesComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {style: true, item: style},
-      dismissOnSelect: true
+      componentProps: { style: true, item: style },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -41,22 +44,23 @@ export class AdminStylesComponent implements OnInit {
   async addStyle() {
     const modal = await this.modalController.create({
       component: AddStyleModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  onFilterChange(event){
-      const selectedStyleNames = event.detail.value;
-      this.styles$.pipe(take(1)).subscribe(styles => {
-        if(selectedStyleNames.length > 0) {
-          this.styles = styles.filter(style => selectedStyleNames.includes(style.name));
-        } else {
-          this.styles = styles;
-        }
-      })
+  onFilterChange(event) {
+    const selectedStyleNames = event.detail.value;
+    this.styles$.pipe(take(1)).subscribe((styles) => {
+      if (selectedStyleNames.length > 0) {
+        this.styles = styles.filter((style) =>
+          selectedStyleNames.includes(style.name)
+        );
+      } else {
+        this.styles = styles;
+      }
+    });
   }
-
 }

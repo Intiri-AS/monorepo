@@ -13,34 +13,31 @@ namespace Intiri.API.Migrations
                 table: "DesignerPortfolio",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "ProfileDescription",
                 table: "DesignerInfo",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "ProfileDescription_NO",
                 table: "DesignerInfo",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Featured",
-                table: "DesignerPortfolio");
+            migrationBuilder.DropColumn(name: "Featured", table: "DesignerPortfolio");
 
-            migrationBuilder.DropColumn(
-                name: "ProfileDescription",
-                table: "DesignerInfo");
+            migrationBuilder.DropColumn(name: "ProfileDescription", table: "DesignerInfo");
 
-            migrationBuilder.DropColumn(
-                name: "ProfileDescription_NO",
-                table: "DesignerInfo");
+            migrationBuilder.DropColumn(name: "ProfileDescription_NO", table: "DesignerInfo");
         }
     }
 }

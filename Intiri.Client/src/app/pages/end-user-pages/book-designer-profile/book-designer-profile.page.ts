@@ -5,9 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './book-designer-profile.page.html',
   styleUrls: ['./book-designer-profile.page.scss'],
 })
-
 export class BookDesignerProfilePage {
-
   constructor() {}
-
 }

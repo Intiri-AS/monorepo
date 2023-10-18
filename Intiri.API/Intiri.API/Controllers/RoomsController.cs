@@ -22,63 +22,67 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	public class RoomsController : BaseApiController
-	{
-		#region Fields
+    public class RoomsController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly IFileUploudService _fileUploadService;
+        private readonly IMapper _mapper;
+        private readonly IFileUploudService _fileUploadService;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public RoomsController(
-			IUnitOfWork unitOfWork,
-			IMapper mapper,
-			IFileUploudService fileUploadService) : base(unitOfWork)
-		{
-			_mapper = mapper;
-			_fileUploadService = fileUploadService;
-		}
+        public RoomsController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IFileUploudService fileUploadService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _fileUploadService = fileUploadService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<RoomOutDTO>>> GetRooms()
-		{
-			IEnumerable<Room> rooms = await _unitOfWork.RoomRepository.GetAllRoomsAsync();
-			IEnumerable<RoomOutDTO> roomsToReturn = _mapper.Map<IEnumerable<RoomOutDTO>>(rooms);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RoomOutDTO>>> GetRooms()
+        {
+            IEnumerable<Room> rooms = await _unitOfWork.RoomRepository.GetAllRoomsAsync();
+            IEnumerable<RoomOutDTO> roomsToReturn = _mapper.Map<IEnumerable<RoomOutDTO>>(rooms);
 
-			return Ok(roomsToReturn);
-		}
+            return Ok(roomsToReturn);
+        }
 
-		[HttpGet("id/{roomId}")]
-		public async Task<ActionResult<RoomOutDTO>> GetRoomById(int roomId)
-		{
-			Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
+        [HttpGet("id/{roomId}")]
+        public async Task<ActionResult<RoomOutDTO>> GetRoomById(int roomId)
+        {
+            Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
 
-			if (room == null)
-			{
-				return BadRequest("Room doesn't exist");
-			}
+            if (room == null)
+            {
+                return BadRequest("Room doesn't exist");
+            }
 
-			return _mapper.Map<RoomOutDTO>(room);
-		}
+            return _mapper.Map<RoomOutDTO>(room);
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult<RoomOutDTO>> AddRoom([FromForm] RoomInDTO roomInDTO)
-		{
-			RoomType roomType = await _unitOfWork
-				.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomInDTO.RoomTypeId);
-			
-			if (roomType == null) return BadRequest("Room type doesn't exist");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult<RoomOutDTO>> AddRoom([FromForm] RoomInDTO roomInDTO)
+        {
+            RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(
+                roomInDTO.RoomTypeId
+            );
 
-			if (roomType.Rooms.Any(r => r.Name == roomInDTO.Name))
-			{
-				return BadRequest("Room name with room type already exist");
-			}
+            if (roomType == null)
+                return BadRequest("Room type doesn't exist");
+
+            if (roomType.Rooms.Any(r => r.Name == roomInDTO.Name))
+            {
+                return BadRequest("Room name with room type already exist");
+            }
 
             if (roomType.Rooms.Any(r => r.NameNorwegian == roomInDTO.NameNorwegian))
             {
@@ -87,103 +91,127 @@ namespace Intiri.API.Controllers
 
             Room room = _mapper.Map<Room>(roomInDTO);
 
-			IFormFile imageFile = roomInDTO.ImageFile;
-			if (imageFile != null && imageFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.RoomImages);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            IFormFile imageFile = roomInDTO.ImageFile;
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        imageFile,
+                        FileUploadDestinations.RoomImages
+                    );
 
-				room.IconPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				room.IconPublicId = uploadResult.Item3.PublicId;
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-				room.RoomType = roomType;
+                room.IconPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                room.IconPublicId = uploadResult.Item3.PublicId;
 
-				_unitOfWork.RoomRepository.Insert(room);
+                room.RoomType = roomType;
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return _mapper.Map<RoomOutDTO>(room);
-				}
-			}
+                _unitOfWork.RoomRepository.Insert(room);
 
-			return BadRequest("Problem adding room");
-		}
+                if (await _unitOfWork.SaveChanges())
+                {
+                    return _mapper.Map<RoomOutDTO>(room);
+                }
+            }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPatch("update/{roomId}")]
-		public async Task<ActionResult<RoomOutDTO>> UpdateRoom(int roomId, [FromForm] RoomInDTO roomInDTO)
-		{
-			Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
-			if (room == null) return BadRequest("Room doesn't exist");
+            return BadRequest("Problem adding room");
+        }
 
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(roomInDTO.RoomTypeId);
-			if (roomType == null) return BadRequest("Room type doesn't exist");
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPatch("update/{roomId}")]
+        public async Task<ActionResult<RoomOutDTO>> UpdateRoom(
+            int roomId,
+            [FromForm] RoomInDTO roomInDTO
+        )
+        {
+            Room room = await _unitOfWork.RoomRepository.GetByID(roomId);
+            if (room == null)
+                return BadRequest("Room doesn't exist");
 
-			_mapper.Map(roomInDTO, room);
+            RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(
+                roomInDTO.RoomTypeId
+            );
+            if (roomType == null)
+                return BadRequest("Room type doesn't exist");
 
-			IFormFile imageFileFile = roomInDTO.ImageFile;
-			if (imageFileFile != null && imageFileFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFileFile, FileUploadDestinations.RoomImages, room.IconPublicId);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            _mapper.Map(roomInDTO, room);
 
-				room.IconPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				room.IconPublicId = uploadResult.Item3.PublicId;
-			}
+            IFormFile imageFileFile = roomInDTO.ImageFile;
+            if (imageFileFile != null && imageFileFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        imageFileFile,
+                        FileUploadDestinations.RoomImages,
+                        room.IconPublicId
+                    );
 
-			room.RoomType = roomType;
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-			_unitOfWork.RoomRepository.Update(room);
+                room.IconPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                room.IconPublicId = uploadResult.Item3.PublicId;
+            }
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<RoomOutDTO>(room)); ;
-			}
+            room.RoomType = roomType;
 
-			return BadRequest("Faild to update room.");
-		}
+            _unitOfWork.RoomRepository.Update(room);
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete/{roomId}")]
-		public async Task<IActionResult> DeleteRoom(int roomId)
-		{
-			Room room = await _unitOfWork.RoomRepository.GetRoomByIdWithStyleImagesAsync(roomId);
-			if (room == null) return BadRequest("Room is not found.");
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<RoomOutDTO>(room));
+                ;
+            }
 
-			RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(room.RoomTypeId);
-			if (roomType == null) return BadRequest("Room type is not found.");
+            return BadRequest("Faild to update room.");
+        }
 
-			try
-			{
-				roomType.Rooms.Remove(room);
-				await _unitOfWork.RoomRepository.Delete(roomId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete/{roomId}")]
+        public async Task<IActionResult> DeleteRoom(int roomId)
+        {
+            Room room = await _unitOfWork.RoomRepository.GetRoomByIdWithStyleImagesAsync(roomId);
+            if (room == null)
+                return BadRequest("Room is not found.");
 
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Internal error: {ex}");
-			}
+            RoomType roomType = await _unitOfWork.RoomTypeRepository.GetRoomTypeRoomsByIdAsync(
+                room.RoomTypeId
+            );
+            if (roomType == null)
+                return BadRequest("Room type is not found.");
 
-			if (!string.IsNullOrEmpty(room.IconPublicId))
-			{
-				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(room.IconPublicId);
+            try
+            {
+                roomType.Rooms.Remove(room);
+                await _unitOfWork.RoomRepository.Delete(roomId);
 
-				if (tuple.Item1 != HttpStatusCode.OK)
-					return Problem(title: "Room is deleted. Faild delete room image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
-			}
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex}");
+            }
 
-			return Ok();
-		}
-	}
+            if (!string.IsNullOrEmpty(room.IconPublicId))
+            {
+                Tuple<HttpStatusCode, string> tuple =
+                    await _fileUploadService.TryDeleteFileFromCloudinaryAsync(room.IconPublicId);
+
+                if (tuple.Item1 != HttpStatusCode.OK)
+                    return Problem(
+                        title: "Room is deleted. Faild delete room image.",
+                        statusCode: (int?)tuple.Item1,
+                        detail: tuple.Item2
+                    );
+            }
+
+            return Ok();
+        }
+    }
 }

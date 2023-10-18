@@ -54,7 +54,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     },
     {
       title: 'NEW-PROJECT.select-moodboard-title',
-      subtitle:'NEW-PROJECT.select-moodboard-text',
+      subtitle: 'NEW-PROJECT.select-moodboard-text',
       data: [],
     },
     {
@@ -92,7 +92,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private translate: TranslateService,
-    private storage: Storage,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
@@ -113,9 +113,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.projectService.currentProject$.subscribe((project) => {
         this.project = project;
-        if (project.name === "") {
+        if (project.name === '') {
           this.openStartModal();
-        } if (project.id) {
+        }
+        if (project.id) {
           this.isExistingProject = true;
         }
       })
@@ -128,20 +129,19 @@ export class NewProjectPage implements OnInit, OnDestroy {
     this.projectService.getColorPalettes().subscribe((res) => {
       this.steps[3]['data'] = res;
     });
-
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
-  changeQueryParam(step){
+  changeQueryParam(step) {
     this.router.navigate([], {
-     relativeTo: this.route,
-     queryParams: {
-       step
-     },
-   });
+      relativeTo: this.route,
+      queryParams: {
+        step,
+      },
+    });
   }
 
   backStep() {
@@ -172,14 +172,21 @@ export class NewProjectPage implements OnInit, OnDestroy {
     if (this.currentStepNo === 4) {
       this.getMoodboardMatches();
     }
-
   }
-
 
   //Fixed values for skip page button
   skipPage() {
-    const colorPalettes
-    = [{"id":1,"name":"Space Gray","number":3043,"mainColor":"#696868","shadeColorLight":"#B4B3B3","shadeColorMedium":"#808080","shadeColorDark":"#3A3A3A"}];
+    const colorPalettes = [
+      {
+        id: 1,
+        name: 'Space Gray',
+        number: 3043,
+        mainColor: '#696868',
+        shadeColorLight: '#B4B3B3',
+        shadeColorMedium: '#808080',
+        shadeColorDark: '#3A3A3A',
+      },
+    ];
     if (this.currentStepNo === 2) {
       this.currentStepNo++;
       return;
@@ -187,7 +194,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     if (this.currentStepNo === 3) {
       this.currentStepNo++;
       this.changeQueryParam(this.currentStepNo);
-      const projectData: Project = {...this.project, colorPalettes };
+      const projectData: Project = { ...this.project, colorPalettes };
       this.projectService.setCurrentProject(projectData);
     }
     if (this.currentStepNo === 4) {
@@ -210,17 +217,19 @@ export class NewProjectPage implements OnInit, OnDestroy {
       }
       this.spinner.show();
       let currentMoodboard = this.project.currentMoodboard;
-      this.moodboardService.getMoodboard(currentMoodboard.id).subscribe((res: Moodboard) => {
-        this.project.currentMoodboard = res;
-        this.spinner.hide();
+      this.moodboardService
+        .getMoodboard(currentMoodboard.id)
+        .subscribe((res: Moodboard) => {
+          this.project.currentMoodboard = res;
+          this.spinner.hide();
 
-        // Change route after moodboard load
-        if (res) {
-          this.currentStepNo = stepNo;
-          this.changeQueryParam(stepNo);
-          this.projectService.setCurrentProject(this.project);
-        }
-      })
+          // Change route after moodboard load
+          if (res) {
+            this.currentStepNo = stepNo;
+            this.changeQueryParam(stepNo);
+            this.projectService.setCurrentProject(this.project);
+          }
+        });
       return;
     }
     if (this.canChangeToStep(stepNo)) {
@@ -254,31 +263,37 @@ export class NewProjectPage implements OnInit, OnDestroy {
     );
   }
 
-  goToProject () {
+  goToProject() {
     this.nav.navigateRoot(`/project-details/${this.project.id}`);
   }
 
-  onCustomizeMoodboardButtonClick () {
-    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+  onCustomizeMoodboardButtonClick() {
+    if (this.project.currentMoodboard.room == null) {
+      // Handling if moodboard shopping list is not loaded fully yet
       this.notifier.show({
-        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        message: this.translate.instant(
+          'MOODBOARD-DETAILS.shopping-list-loading'
+        ),
         type: 'error',
-      })
+      });
       return;
     }
     this.nav.navigateRoot('/customize-moodboard');
   }
 
   saveCurrentProject(): void {
-    if (this.project.currentMoodboard.room == null) { // Handling if moodboard shopping list is not loaded fully yet
+    if (this.project.currentMoodboard.room == null) {
+      // Handling if moodboard shopping list is not loaded fully yet
       this.notifier.show({
-        message: this.translate.instant('MOODBOARD-DETAILS.shopping-list-loading'),
+        message: this.translate.instant(
+          'MOODBOARD-DETAILS.shopping-list-loading'
+        ),
         type: 'error',
-      })
+      });
       return;
     }
     this.spinner.show();
-    if(this.isExistingProject) {
+    if (this.isExistingProject) {
       this.projectService.addMoodboardToProject(this.project).subscribe(
         (res) => {
           this.spinner.hide();
@@ -286,7 +301,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
           this.projectService.setCurrentProject(this.project);
 
           //remove un-necessary key key
-          this.storage.remove(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
+          this.storage.remove(
+            this.commonUtilsService.COMMON_STORAGE_KEYS
+              .IS_MOODBOARD_LOADED_ONCE_KEY
+          );
           this.goToProject();
         },
         (error) => {
@@ -294,8 +312,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
           console.log(error);
         }
       );
-    }
-    else {
+    } else {
       this.saveProject();
     }
   }
@@ -308,7 +325,10 @@ export class NewProjectPage implements OnInit, OnDestroy {
         this.project.id = res.id;
 
         //remove un-necessary key key
-        this.storage.remove(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY);
+        this.storage.remove(
+          this.commonUtilsService.COMMON_STORAGE_KEYS
+            .IS_MOODBOARD_LOADED_ONCE_KEY
+        );
 
         this.projectService.setCurrentProject(this.project);
         this.goToProject();
@@ -372,38 +392,47 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   isMoodboardEmpty(moodboard: Moodboard): boolean {
-    if(!moodboard.id && !moodboard.name && moodboard.materials.length === 0 && moodboard.products.length === 0 && moodboard.colorPalettes.length === 0) {
+    if (
+      !moodboard.id &&
+      !moodboard.name &&
+      moodboard.materials.length === 0 &&
+      moodboard.products.length === 0 &&
+      moodboard.colorPalettes.length === 0
+    ) {
       return true;
-    } return false;
+    }
+    return false;
   }
 
   areProjectDetailsValid(): boolean {
-    return this.project.roomDetails['roomSketchFiles'] &&
-            Object.keys(this.project.roomDetails['roomSketchFiles']).length > 0;
+    return (
+      this.project.roomDetails['roomSketchFiles'] &&
+      Object.keys(this.project.roomDetails['roomSketchFiles']).length > 0
+    );
   }
 
   toggleItem(item) {
     // if you change any selection, selected moodboard will reset
-    if(this.currentStepNo <= 4) {
+    if (this.currentStepNo <= 4) {
       this.project.currentMoodboard = new Moodboard();
-      this.storage.set(this.commonUtilsService.COMMON_STORAGE_KEYS.IS_MOODBOARD_LOADED_ONCE_KEY, false);
+      this.storage.set(
+        this.commonUtilsService.COMMON_STORAGE_KEYS
+          .IS_MOODBOARD_LOADED_ONCE_KEY,
+        false
+      );
     }
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if (Array.isArray(this.project[stepName])) {
-      if (
-        this.project[stepName].some(
-          (e) => e.id === item.id
-        )
-      ) {
+      if (this.project[stepName].some((e) => e.id === item.id)) {
         this.project[stepName] = this.project[stepName].filter(
           (e) => e.id !== item.id
         );
       } else {
         this.project[stepName] = [...this.project[stepName], item];
       }
-    }
-     else {  // else it's a single select
+    } else {
+      // else it's a single select
 
       // if it's updating sub-object
       if (stepName.includes('.')) {
@@ -437,7 +466,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
   async openFinalModal(existing: boolean = false) {
     const modal = await this.modalController.create({
       component: CreateProjectModalComponent,
-      componentProps: {final: true, existing, project: this.project},
+      componentProps: { final: true, existing, project: this.project },
       cssClass: 'final-project-step-modal-css',
       backdropDismiss: false,
       swipeToClose: false,

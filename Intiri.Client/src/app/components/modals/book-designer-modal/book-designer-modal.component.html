@@ -1,28 +1,60 @@
 <ion-content>
   <div class="container">
-    <p class="mt-[40px] text-[38px] text-black font-medium">{{'BOOK-MODAL.book' | translate}}</p>
-    <p class="mt-[30px] text-2xl text-primary font-medium">{{price}} NOK / {{'BOOK-MODAL.consultation' | translate}}</p>
-    <p class="text-lg text-black-2">{{'BOOK-MODAL.duration' | translate:{'duration': duration} }}</p>
+    <p class="mt-[40px] text-[38px] text-black font-medium">
+      {{ "BOOK-MODAL.book" | translate }}
+    </p>
+    <p class="mt-[30px] text-2xl text-primary font-medium">
+      {{ price }} NOK / {{ "BOOK-MODAL.consultation" | translate }}
+    </p>
+    <p class="text-lg text-black-2">
+      {{ "BOOK-MODAL.duration" | translate : { duration: duration } }}
+    </p>
     <div class="mt-[30px]">
-      <span class="text-sm text-black-2">{{'BOOK-MODAL.number' | translate}}</span>
-      <ion-input type="number" min="1" class="border rounded-2xl border-black-2 w-[310px] h-14 focus:ring-transparent" [(ngModel)]="numberOfConsultations" (ionChange)="totalPriceSum($event)"></ion-input>
+      <span class="text-sm text-black-2">{{
+        "BOOK-MODAL.number" | translate
+      }}</span>
+      <ion-input
+        type="number"
+        min="1"
+        class="border rounded-2xl border-black-2 w-[310px] h-14 focus:ring-transparent"
+        [(ngModel)]="numberOfConsultations"
+        (ionChange)="totalPriceSum($event)"
+      ></ion-input>
     </div>
-    <p class="mt-[30px] text-lg text-black-2 font-medium">{{'BOOK-MODAL.total' | translate}}</p>
-    <p class="text-[45px] text-primary font-medium">{{totalPrice}} NOK</p>
-    <ion-item-divider class="border-b-[3px] border-primary w-[60px] h-0 bg-transparent"></ion-item-divider>
-    <p class="mt-[25px] text-2xl text-black font-medium">{{'BOOK-MODAL.tell' | translate}}</p>
-    <p class="text-lg text-black-2 text-center">{{'BOOK-MODAL.help' | translate}}</p>
+    <p class="mt-[30px] text-lg text-black-2 font-medium">
+      {{ "BOOK-MODAL.total" | translate }}
+    </p>
+    <p class="text-[45px] text-primary font-medium">{{ totalPrice }} NOK</p>
+    <ion-item-divider
+      class="border-b-[3px] border-primary w-[60px] h-0 bg-transparent"
+    ></ion-item-divider>
+    <p class="mt-[25px] text-2xl text-black font-medium">
+      {{ "BOOK-MODAL.tell" | translate }}
+    </p>
+    <p class="text-lg text-black-2 text-center">
+      {{ "BOOK-MODAL.help" | translate }}
+    </p>
     <div class="flex flex-wrap mt-[30px]">
       <ion-item *ngFor="let item of items" class="w-full xl:w-1/2" lines="none">
         <div class="flex items-center">
-          <ion-checkbox [(ngModel)]="item.isChecked" ></ion-checkbox>
-          <p class="text-[18px] text-black-2 ml-2 leading-[26px]">{{'BOOK-WHY.' + item.name | translate}}</p>
+          <ion-checkbox [(ngModel)]="item.isChecked"></ion-checkbox>
+          <p class="text-[18px] text-black-2 ml-2 leading-[26px]">
+            {{ "BOOK-WHY." + item.name | translate }}
+          </p>
         </div>
       </ion-item>
     </div>
     <div class="mt-[30px] pb-6">
-      <ion-button fill="clear" class="secondary-btn" (click)="dismissModal()">{{'COMMON.cancel' | translate}}</ion-button>
-      <ion-button fill="clear" class="primary-btn" [disabled]="totalPrice <= 0" (click)="redirectToPayment()">{{'BOOK-MODAL.proceed' | translate}}</ion-button>
+      <ion-button fill="clear" class="secondary-btn" (click)="dismissModal()">{{
+        "COMMON.cancel" | translate
+      }}</ion-button>
+      <ion-button
+        fill="clear"
+        class="primary-btn"
+        [disabled]="totalPrice <= 0"
+        (click)="redirectToPayment()"
+        >{{ "BOOK-MODAL.proceed" | translate }}</ion-button
+      >
     </div>
   </div>
 </ion-content>

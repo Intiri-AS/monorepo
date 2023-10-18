@@ -5,17 +5,17 @@ using Intiri.API.Models.Room;
 
 namespace Intiri.API.Automapper
 {
-	public class RoomMapperProfile : Profile
-	{
-		public RoomMapperProfile()
-		{
-			CreateMap<RoomInDTO, Room>();
-			CreateMap<Room, RoomOutDTO>()
-				.ForMember(rt => rt.RoomTypeName, opt => opt.MapFrom(src => src.RoomType.Name));
+    public class RoomMapperProfile : Profile
+    {
+        public RoomMapperProfile()
+        {
+            CreateMap<RoomInDTO, Room>();
+            CreateMap<Room, RoomOutDTO>()
+                .ForMember(rt => rt.RoomTypeName, opt => opt.MapFrom(src => src.RoomType.Name));
 
-			CreateMap<RoomTypeInDTO, RoomType>();
-			CreateMap<RoomType, RoomTypeOutDTO>();
-			CreateMap<RoomType, RoomTypeRoomsOutDTO>();
-		}
-	}
+            CreateMap<RoomTypeInDTO, RoomType>();
+            CreateMap<RoomType, RoomTypeOutDTO>();
+            CreateMap<RoomType, RoomTypeRoomsOutDTO>();
+        }
+    }
 }

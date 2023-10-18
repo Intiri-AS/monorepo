@@ -12,14 +12,13 @@ namespace Intiri.API.Migrations
                 name: "ConsultationDetails",
                 table: "ConsultationPayment",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ConsultationDetails",
-                table: "ConsultationPayment");
+            migrationBuilder.DropColumn(name: "ConsultationDetails", table: "ConsultationPayment");
         }
     }
 }

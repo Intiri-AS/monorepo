@@ -5,18 +5,21 @@ using Intiri.API.Models.Material;
 
 namespace Intiri.API.Automapper
 {
-	public class MaterialMapperProfile : Profile
-	{
-		public MaterialMapperProfile()
-		{
-			CreateMap<MaterialInDTO, Material>();
-			CreateMap<MultipleMaterialInDTO, Material>();
-			CreateMap<Material, MaterialOutDTO>()
-				.ForMember(mt => mt.MaterialTypeName, opt => opt.MapFrom(src => src.MaterialType.Name));
+    public class MaterialMapperProfile : Profile
+    {
+        public MaterialMapperProfile()
+        {
+            CreateMap<MaterialInDTO, Material>();
+            CreateMap<MultipleMaterialInDTO, Material>();
+            CreateMap<Material, MaterialOutDTO>()
+                .ForMember(
+                    mt => mt.MaterialTypeName,
+                    opt => opt.MapFrom(src => src.MaterialType.Name)
+                );
 
-			CreateMap<MaterialTypeInDTO, MaterialType>();
-			CreateMap<MaterialType, MaterialTypeOutDTO>();
-			CreateMap<MaterialType, MaterialTypeMaterialsOutDTO>();
-		}
-	}
+            CreateMap<MaterialTypeInDTO, MaterialType>();
+            CreateMap<MaterialType, MaterialTypeOutDTO>();
+            CreateMap<MaterialType, MaterialTypeMaterialsOutDTO>();
+        }
+    }
 }

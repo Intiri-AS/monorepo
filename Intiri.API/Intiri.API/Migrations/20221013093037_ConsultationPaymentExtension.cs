@@ -12,45 +12,50 @@ namespace Intiri.API.Migrations
                 name: "MoodboardId",
                 table: "ConsultationPayment",
                 type: "int",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "NumberOfConsultations",
                 table: "ConsultationPayment",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
                 table: "ConsultationPayment",
-                column: "MoodboardId");
+                column: "MoodboardId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
                 table: "ConsultationPayment",
                 column: "MoodboardId",
                 principalTable: "Moodboards",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
-            migrationBuilder.DropColumn(
-                name: "MoodboardId",
-                table: "ConsultationPayment");
+            migrationBuilder.DropColumn(name: "MoodboardId", table: "ConsultationPayment");
 
             migrationBuilder.DropColumn(
                 name: "NumberOfConsultations",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
         }
     }
 }

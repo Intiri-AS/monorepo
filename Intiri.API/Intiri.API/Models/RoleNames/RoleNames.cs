@@ -9,7 +9,8 @@ public static class RoleNames
     public const string ExternalDesigner = "ExternalDesigner";
     public const string Partner = "Partner";
 
-    public static List<string> Values = new List<string>() {
+    public static List<string> Values = new List<string>()
+    {
         Admin,
         FreeEndUser,
         PremiumEndUser,
