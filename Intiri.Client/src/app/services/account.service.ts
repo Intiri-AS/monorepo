@@ -7,6 +7,7 @@ import { User } from '../models/user.model';
 import { VippsAccessTokenRequestDTO } from '../DTOs/vipps-access-token.dto';
 import { VippsAuthUrlRequestDTO } from '../DTOs/vipps-auth-url.dto';
 import { SmsVerificationDTO } from '../DTOs/sms-verification.dto';
+import { Intercom } from 'ng-intercom';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,9 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public intercom: Intercom) {
+    // this.intercom.boot();
+  }
 
   login(model) {
     return this.http.post(this.apiUrl + 'account/login', model);
@@ -103,6 +106,13 @@ export class AccountService {
       user.fullName = tokenData.name;
       user.photoPath = user.photoPath ? user.photoPath : tokenData.prn;
       localStorage.setItem('user', JSON.stringify(user));
+
+      this.intercom.update({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        user_id: user.id.toString(),
+        name: user.fullName,
+        phone: user.phoneNumber,
+      });
     }
     this.currentUserSource.next(user);
   }

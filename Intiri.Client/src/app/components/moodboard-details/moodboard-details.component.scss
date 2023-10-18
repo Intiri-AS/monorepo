@@ -56,3 +56,57 @@
     }
   }
 }
+
+
+.step-items {
+  @apply max-h-[750px] overflow-auto mb-3;
+}
+
+.step-items-row {
+  @apply gap-x-[2%];
+}
+
+.spinner {
+  margin: 4rem auto auto auto;
+}
+
+.product-image {
+  @apply object-contain h-full w-full rounded-2xl;
+}
+
+p {
+  @apply text-center;
+}
+
+.material-image {
+  @apply object-cover h-full w-full rounded-2xl;
+}
+
+.palette-container {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 100%;
+  gap: 2px;
+
+  .mainColor {
+    grid-row: span 3;
+    border-radius: 0.2rem;
+  }
+
+  .shadeColorLight {
+    grid-column: span 1;
+    border-radius: 0.2rem;
+  }
+
+  .shadeColorMedium {
+    grid-column: span 1;
+    border-radius: 0.2rem;
+  }
+
+  .shadeColorDark {
+    grid-column: span 1;
+    border-radius: 0.2rem;
+  }
+}

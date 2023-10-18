@@ -140,6 +140,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
 
 import { CloudinaryModule } from '@cloudinary/ng';
 
+import { IntercomModule } from 'ng-intercom';
+
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -311,6 +313,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatSlideToggleModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    IntercomModule.forRoot({
+      appId: 'ub85mv53'
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

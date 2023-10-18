@@ -63,7 +63,7 @@
     "remove-inspiration-text": "Are you sure that you want to remove this inspiration? This action cannot be undone.",
     "remove-inspiration-message": "Inspiration file removed successfully.",
     "remove-inspiration-message-error": "Cannot remove inspiration file!",
-    "book-craftsman": "Book Craftsman"
+    "book-craftsman": "Book a craftsman"
   },
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
@@ -171,7 +171,7 @@
     "select-room-title": "Select the room you want to improve",
     "select-room-text": "Don't worry, you can improve more rooms later.",
     "select-style-title": "Select pictures that you like",
-    "select-style-text": "Decisions are hard, pick as many as you want.",
+    "select-style-text": "Decisions are hard, pick as many as you want. Feel free to press the fullscreen button on the top right of each image to view it in full size.",
     "room-details": "Room Details",
     "room-details-title": "Upload your photos",
     "room-details-text": "Don't stress, you can upload photos later to your profile",

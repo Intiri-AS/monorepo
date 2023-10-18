@@ -67,9 +67,12 @@ export class MoodboardDetailsComponent
   };
 
   // Supplementary moodboard derivatives for managing different slot areas
-  moodboardMaterials: { slotKey: string; slotValue: SlotInfo }[];
-  moodboardColors: { slotKey: string; slotValue: SlotInfo }[];
-  moodboardProductsAndStyleImages: { slotKey: string; slotValue: SlotInfo }[];
+  moodboardMaterials: { slotKey: string | number; slotValue: SlotInfo }[];
+  moodboardColors: { slotKey: string | number; slotValue: SlotInfo }[];
+  moodboardProductsAndStyleImages: {
+    slotKey: string | number;
+    slotValue: SlotInfo;
+  }[];
 
   loggedUser$ = this.accountService.currentUser$;
   userData: User;
@@ -162,7 +165,7 @@ export class MoodboardDetailsComponent
       }
 
       const moodboardSlotInfoFilterer = (
-        slotInfo: { [index: string]: SlotInfo },
+        slotInfo: { [index: string | number]: SlotInfo },
         filterpredicate: (
           value: [string, SlotInfo],
           index: number,
@@ -174,10 +177,15 @@ export class MoodboardDetailsComponent
         const sortedFilteredSlotInfo = filteredSlotInfo.sort(([aKey], [bKey]) =>
           bKey.localeCompare(aKey)
         );
-        return sortedFilteredSlotInfo.map(([slotKey, slotValue]) => ({
-          slotKey,
-          slotValue,
-        }));
+        return sortedFilteredSlotInfo.map(([slotKey, slotValue]) => {
+          let slotKeyConverted;
+          try {
+            slotKeyConverted = Number(slotKey);
+          } catch (e) {
+            slotKeyConverted = slotKey;
+          }
+          return { slotKey: slotKeyConverted, slotValue };
+        });
       };
 
       console.log('slotinfo', this.moodboard.slotInfo);
@@ -195,6 +203,12 @@ export class MoodboardDetailsComponent
         ([, slotValue]) =>
           slotValue.entity === SlotInfoEntityTypes.product ||
           slotValue.entity === SlotInfoEntityTypes.styleImages
+      );
+
+      console.log(
+        this.moodboardMaterials,
+        this.moodboardColors,
+        this.moodboardProductsAndStyleImages
       );
     }
 
@@ -473,6 +487,7 @@ export class MoodboardDetailsComponent
   }
 
   isItemDragAndDroppable() {
+    console.log('isItemDragAndDroppable');
     if (this.userData.roles[0] === 'FreeEndUser') {
       if (
         !(
@@ -489,6 +504,7 @@ export class MoodboardDetailsComponent
       //Admin is viewing moodboard, hence can't edit
       return false;
     }
+    console.log('Returning item is draggable and droppable');
     return true;
   }
 
@@ -638,11 +654,14 @@ export class MoodboardDetailsComponent
   }
 
   dragStart(event, slotId) {
+    console.log('dragStart', event, slotId)
     if (this.isImageCroppingState) {
+      console.log('Image is in cropping state')
       event.preventDefault();
       return;
     }
     if (typeof slotId == 'string') {
+      console.log('slotId was a string')
       // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = slotId;
 
@@ -662,6 +681,7 @@ export class MoodboardDetailsComponent
   }
 
   isItemAlreadyOnMoodboard(item) {
+    console.log('isItemAlreadyOnMoodboard')
     return Object.keys(this.moodboard.slotInfo).some(
       (slotKey) =>
         this.moodboard.slotInfo[slotKey].entity === item.entity &&
@@ -670,6 +690,7 @@ export class MoodboardDetailsComponent
   }
 
   onDrop(event, currentSlotId) {
+    console.log('onDrop', event, currentSlotId)
     try {
       if (!this.isItemDragAndDroppable()) {
         return;

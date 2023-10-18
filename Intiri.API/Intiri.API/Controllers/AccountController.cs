@@ -104,6 +104,12 @@ namespace Intiri.API.Controllers
             if (user == null)
                 return BadRequest("Invalid user phone number");
 
+            // Special edgecase for dummy freeenduser for designer use
+            // SHOULD BE REMOVED ASAP, DEPENDS ON ALLOWING DESIGNERS AND ADMINS TO SEE THE PAGE AS USERS
+            // TODO: REMOVE
+            if (user.PhoneNumber == "87654321")
+                return Ok();
+
             OperationResult<bool> sendOperation =
                 await _smsVerificationService.SendSmsVerificationCode(
                     loginDto.CountryCode,
@@ -163,20 +169,28 @@ namespace Intiri.API.Controllers
             if (user == null)
                 return BadRequest("Invalid user phone number");
 
-            bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
-                verificationDto.CountryCode,
-                verificationDto.PhoneNumber,
-                verificationDto.VerificationCode
-            );
-
-            if (isSuccess == false)
+            // Special edgecase for dummy freeenduser for designer use
+            // SHOULD BE REMOVED ASAP, DEPENDS ON ALLOWING DESIGNERS AND ADMINS TO SEE THE PAGE AS USERS
+            // TODO: REMOVE
+            if (user.PhoneNumber != "87654321")
             {
-                isSuccess = ValidateSmsVerificationTestCode(user, verificationDto.VerificationCode);
+                bool isSuccess = _smsVerificationService.ValidateSmsVerificationCode(
+                    verificationDto.CountryCode,
+                    verificationDto.PhoneNumber,
+                    verificationDto.VerificationCode
+                );
+
+                if (isSuccess == false)
+                {
+                    isSuccess = ValidateSmsVerificationTestCode(
+                        user,
+                        verificationDto.VerificationCode
+                    );
+                }
+
+                if (!isSuccess)
+                    return BadRequest("Invalid SMS verification code.");
             }
-
-            if (!isSuccess)
-                return BadRequest("Invalid SMS verification code.");
-
             return Ok(
                 new LoginOutDTO
                 {

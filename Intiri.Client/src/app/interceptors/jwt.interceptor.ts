@@ -30,6 +30,7 @@ export class JwtInterceptor implements HttpInterceptor {
     if (currentUser) {
       request = request.clone({
         setHeaders: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           Authorization: `Bearer ${currentUser.token}`,
         },
       });
@@ -48,6 +49,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   private handleAuthError() {
     this.accountService.logout();
-    this.nav.navigateRoot('/landing');
+    this.nav.navigateRoot('/login');
   }
 }

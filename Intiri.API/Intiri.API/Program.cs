@@ -39,7 +39,7 @@ try
     builder.Services.AddSwaggerGen();
 
     // Add CoreAdmin
-    builder.Services.AddCoreAdmin();
+    // builder.Services.AddCoreAdmin();
 
     logger.Info("Build app..");
     var app = builder.Build();

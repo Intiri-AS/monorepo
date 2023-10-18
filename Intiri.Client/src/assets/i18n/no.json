@@ -81,7 +81,7 @@
     "item-already-in-moodboard": "Det valgte elementet finnes allerede i moodboard",
     "can-not-assign-null": "Kan ikke tilordne null til et moodboard-spor",
     "download-moodboard-pdf": "Last ned Moodboard PDF",
-    "crop": "Avling",
+    "crop": "Crop",
     "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
     "done": "Ferdig",
     "client-moodboard-instruction": "Her er ditt stilforslag. Tilpass det ved å dra og slipp produkter inn i stilforslaget, og med “Tilpass stilforslaget” knappen kan du velge bort produkter, materialer og farger. Klikk “Ferdig” for å laste ned ditt personlige stilforslag med rabattkoder."
@@ -171,7 +171,7 @@
     "select-room-title": "Velg rommet du vil jobbe med",
     "select-room-text": "Ikke stress, du kan velge flere rom senere.",
     "select-style-title": "Velg bildene du liker",
-    "select-style-text": "Valg er vanskelig, velg så mange du vil.",
+    "select-style-text": "Valg er vanskelig, velg så mange du vil. Trykk gjerne på fullskjerm knappen øverst til høyre på hvert bilde for å se det i full størrelse",
     "room-details": "Romdetaljer",
     "room-details-title": "Last opp egne bilder",
     "room-details-text": "Ikke stress, du kan laste opp bilder senere til din profil",
