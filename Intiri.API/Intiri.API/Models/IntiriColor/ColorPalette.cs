@@ -7,9 +7,9 @@ namespace Intiri.API.Models.IntiriColor
         public ColorPalette()
         {
             Moodboards = new HashSet<Moodboard.Moodboard>();
-			Projects = new HashSet<Project.Project>();
+            Projects = new HashSet<Project.Project>();
+        }
 
-		}
         public int Id { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }

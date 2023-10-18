@@ -8,38 +8,28 @@ namespace Intiri.API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Path",
-                table: "StyleImages",
-                newName: "ImagePath");
+            migrationBuilder.RenameColumn(name: "Path", table: "StyleImages", newName: "ImagePath");
 
             migrationBuilder.RenameColumn(
                 name: "ImagePublicId",
                 table: "Rooms",
-                newName: "IconPublicId");
+                newName: "IconPublicId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "ImagePath",
-                table: "Rooms",
-                newName: "IconPath");
+            migrationBuilder.RenameColumn(name: "ImagePath", table: "Rooms", newName: "IconPath");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ImagePath",
-                table: "StyleImages",
-                newName: "Path");
+            migrationBuilder.RenameColumn(name: "ImagePath", table: "StyleImages", newName: "Path");
 
             migrationBuilder.RenameColumn(
                 name: "IconPublicId",
                 table: "Rooms",
-                newName: "ImagePublicId");
+                newName: "ImagePublicId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "IconPath",
-                table: "Rooms",
-                newName: "ImagePath");
+            migrationBuilder.RenameColumn(name: "IconPath", table: "Rooms", newName: "ImagePath");
         }
     }
 }

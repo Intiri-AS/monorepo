@@ -10,31 +10,36 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "ProductTypes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
+                columns: table =>
+                    new
+                    {
+                        Id = table
+                            .Column<int>(type: "int", nullable: false)
+                            .Annotation("SqlServer:Identity", "1, 1"),
+                        Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductTypes", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateTable(
                 name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductTypeId = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MaterialTypeId = table.Column<int>(type: "int", nullable: true),
-                    ColorHexValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
+                columns: table =>
+                    new
+                    {
+                        Id = table
+                            .Column<int>(type: "int", nullable: false)
+                            .Annotation("SqlServer:Identity", "1, 1"),
+                        Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        ProductTypeId = table.Column<int>(type: "int", nullable: true),
+                        Price = table.Column<double>(type: "float", nullable: false),
+                        ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        MaterialTypeId = table.Column<int>(type: "int", nullable: true),
+                        ColorHexValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
@@ -42,32 +47,35 @@ namespace Intiri.API.Migrations
                         name: "FK_Products_MaterialTypes_MaterialTypeId",
                         column: x => x.MaterialTypeId,
                         principalTable: "MaterialTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id"
+                    );
                     table.ForeignKey(
                         name: "FK_Products_ProductTypes_ProductTypeId",
                         column: x => x.ProductTypeId,
                         principalTable: "ProductTypes",
-                        principalColumn: "Id");
-                });
+                        principalColumn: "Id"
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_MaterialTypeId",
                 table: "Products",
-                column: "MaterialTypeId");
+                column: "MaterialTypeId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductTypeId",
                 table: "Products",
-                column: "ProductTypeId");
+                column: "ProductTypeId"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Products");
+            migrationBuilder.DropTable(name: "Products");
 
-            migrationBuilder.DropTable(
-                name: "ProductTypes");
+            migrationBuilder.DropTable(name: "ProductTypes");
         }
     }
 }

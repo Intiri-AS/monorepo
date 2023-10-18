@@ -1,9 +1,9 @@
 export class VippsAuthUrlRequestDTO {
-    redirectUri: string;
-    state?: string;
+  redirectUri: string;
+  state?: string;
 
-    constructor(redirectUri: string, state?: string) {
-        this.redirectUri = redirectUri;
-        this.state = state;
-    }
+  constructor(redirectUri: string, state?: string) {
+    this.redirectUri = redirectUri;
+    this.state = state;
+  }
 }

@@ -11,7 +11,10 @@
       <div>
         <p class="main-title">{{'ALL-PROJECTS.all-projects' | translate}}</p>
         <div class="mt-7 flex flex-wrap gap-x-[2.4%] p-2 xl:p-0 mb-20">
-          <div *ngFor="let project of projects" class="w-full md:w-[45%] xl:w-[31.5%] mb-4">
+          <div
+            *ngFor="let project of projects"
+            class="w-full md:w-[45%] xl:w-[31.5%] mb-4"
+          >
             <ion-grid class="border shadow-1 rounded-2xl">
               <ion-row>
                 <ion-col size="4.5" class="!p-3 !pr-2">
@@ -25,20 +28,34 @@
                     *ngIf="project?.projectMoodboards[0]?.products[0].imagePath"
                     src="{{project?.projectMoodboards[0]?.products[0].imagePath}}"
                     class="!h-[120.5px] mac:!h-[155px] !w-full object-fill"
-                    alt="moodboard-img"/>
+                    alt="moodboard-img"
+                  />
                 </ion-col>
                 <ion-col size="7.5" class="!p-3 !pl-0">
                   <img
                     *ngIf="project?.projectMoodboards[0]?.styleImages?.[1]?.imagePath"
                     src="{{project?.projectMoodboards[0]?.styleImages?.[1]?.imagePath}}"
                     class="!h-[249px] mac:!h-[318px] !w-full object-fill"
-                    alt="moodboard-img"/>
+                    alt="moodboard-img"
+                  />
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <div class="flex items-center justify-between cursor-default mt-3 mac:mt-0" >
-              <p class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1">{{project.name}}</p>
-              <ion-button fill="clear" class="primary-btn-responsive !bg-none mt-3 !px-1" routerLink="/project-details/{{project.id}}" routerDirection="root">{{'COMMON.choose' | translate}}</ion-button>
+            <div
+              class="flex items-center justify-between cursor-default mt-3 mac:mt-0"
+            >
+              <p
+                class="text-black-2 text-2xl font-medium min-w-[45px] text-clamp-2 pr-1"
+              >
+                {{project.name}}
+              </p>
+              <ion-button
+                fill="clear"
+                class="primary-btn-responsive !bg-none mt-3 !px-1"
+                routerLink="/project-details/{{project.id}}"
+                routerDirection="root"
+                >{{'COMMON.choose' | translate}}</ion-button
+              >
               <!-- <ion-button fill="clear" class="text-black" (click)="goToMoodboardDetails(mb)">
                 <ion-icon name="arrow-forward" class="h-6 w-6 text-black-2"></ion-icon>
               </ion-button> -->

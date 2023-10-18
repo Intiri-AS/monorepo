@@ -21,7 +21,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./menu-popover.component.scss'],
 })
 export class MenuPopoverComponent implements OnInit {
-
   designer: boolean;
   designerMb: boolean;
   product: boolean;
@@ -35,32 +34,41 @@ export class MenuPopoverComponent implements OnInit {
   contact: boolean;
   partner: boolean;
 
-  item: any
+  item: any;
 
   constructor(
-    private modalController: ModalController, 
-    private moodboardService: MoodboardService, 
+    private modalController: ModalController,
+    private moodboardService: MoodboardService,
     private notifier: NotifierService,
     private translate: TranslateService
-    ) { }
+  ) {}
 
   ngOnInit() {}
 
   toggleTemplateMoodboard() {
-    this.moodboardService.setIsTemplate({moodboardId: this.item.id, isTemplate: !this.item.isTemplate}).subscribe(() => {
-      this.moodboardService.getMoodboards();
-      this.notifier.show({
-        message: `Moodboard ${this.item.isTemplate ? this.translate.instant('NOTIFY.template-removed') : this.translate.instant('NOTIFY.template-added')}`,
-        type: 'success',
+    this.moodboardService
+      .setIsTemplate({
+        moodboardId: this.item.id,
+        isTemplate: !this.item.isTemplate,
+      })
+      .subscribe(() => {
+        this.moodboardService.getMoodboards();
+        this.notifier.show({
+          message: `Moodboard ${
+            this.item.isTemplate
+              ? this.translate.instant('NOTIFY.template-removed')
+              : this.translate.instant('NOTIFY.template-added')
+          }`,
+          type: 'success',
+        });
       });
-    })
   }
 
   async openDeleteMoodboardModal() {
     const modal = await this.modalController.create({
       component: DeleteMoodboardModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -69,8 +77,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteStyleModal() {
     const modal = await this.modalController.create({
       component: AddStyleModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -79,8 +87,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditStyleModal() {
     const modal = await this.modalController.create({
       component: AddStyleModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -89,8 +97,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteMaterialsModal() {
     const modal = await this.modalController.create({
       component: AddMaterialsModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -99,8 +107,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditMaterialModal() {
     const modal = await this.modalController.create({
       component: AddMaterialsModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -109,8 +117,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteRoomModal() {
     const modal = await this.modalController.create({
       component: AddRoomModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -119,8 +127,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditRoomModal() {
     const modal = await this.modalController.create({
       component: AddRoomModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -129,8 +137,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteColorModal() {
     const modal = await this.modalController.create({
       component: AddColorModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -139,8 +147,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditColorModal() {
     const modal = await this.modalController.create({
       component: AddColorModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -149,8 +157,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeletePictureModal() {
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -159,8 +167,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditPictureModal() {
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -169,8 +177,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteContactModal() {
     const modal = await this.modalController.create({
       component: AddPartnerPage,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -179,8 +187,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteClientModal() {
     const modal = await this.modalController.create({
       component: AdminClientsComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -189,8 +197,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteProductModal() {
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -199,8 +207,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditProductModal() {
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -209,8 +217,8 @@ export class MenuPopoverComponent implements OnInit {
   async openDeleteDesignerModal() {
     const modal = await this.modalController.create({
       component: AddDesignerModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
@@ -219,8 +227,8 @@ export class MenuPopoverComponent implements OnInit {
   async openEditDesignerModal() {
     const modal = await this.modalController.create({
       component: AddDesignerModalComponent,
-      componentProps: {edit: true, item: this.item},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { edit: true, item: this.item },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
@@ -229,11 +237,10 @@ export class MenuPopoverComponent implements OnInit {
   async openDeletePartnerModal() {
     const modal = await this.modalController.create({
       component: AddPartnerModalComponent,
-      componentProps: {delete: true, item: this.item},
-      cssClass: 'added-designer-modal-css'
-    })
+      componentProps: { delete: true, item: this.item },
+      cssClass: 'added-designer-modal-css',
+    });
 
     await modal.present();
   }
-
 }

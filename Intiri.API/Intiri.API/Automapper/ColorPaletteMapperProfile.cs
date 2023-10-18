@@ -6,11 +6,11 @@ using Intiri.API.Models.IntiriColor;
 namespace Intiri.API.Automapper
 {
     public class ColorPaletteMapperProfile : Profile
-	{
-		public ColorPaletteMapperProfile()
-		{
-			CreateMap<ColorPaletteInDTO, ColorPalette>();
-			CreateMap<ColorPalette, ColorPaletteOutDTO>();
-		}
-	}
+    {
+        public ColorPaletteMapperProfile()
+        {
+            CreateMap<ColorPaletteInDTO, ColorPalette>();
+            CreateMap<ColorPalette, ColorPaletteOutDTO>();
+        }
+    }
 }

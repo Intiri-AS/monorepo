@@ -14,110 +14,127 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
+    [Authorize]
     public class RoomDetailsController : BaseApiController
-	{
-		#region Fields
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly ICloudinaryService _fileUploadService;
-		
+        private readonly IMapper _mapper;
+        private readonly ICloudinaryService _fileUploadService;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public RoomDetailsController(IUnitOfWork unitOfWork, IMapper mapper, ICloudinaryService fileUploadService): base(unitOfWork)
-		{
-			_mapper = mapper;
-			_fileUploadService = fileUploadService;
-		}
+        public RoomDetailsController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            ICloudinaryService fileUploadService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _fileUploadService = fileUploadService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Public methods
+        #region Public methods
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<RoomDetailsOutDTO>>> GetRoomDetails()
-		{
-			IEnumerable<RoomDetails> roomDetails = await _unitOfWork.RoomDetailsRepository.GetRoomDetails();
-			IEnumerable<RoomDetailsOutDTO> roomDetailsOut = _mapper.Map<IEnumerable<RoomDetailsOutDTO>>(roomDetails);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<RoomDetailsOutDTO>>> GetRoomDetails()
+        {
+            IEnumerable<RoomDetails> roomDetails =
+                await _unitOfWork.RoomDetailsRepository.GetRoomDetails();
+            IEnumerable<RoomDetailsOutDTO> roomDetailsOut = _mapper.Map<
+                IEnumerable<RoomDetailsOutDTO>
+            >(roomDetails);
 
-			return Ok(roomDetailsOut);
-		}
+            return Ok(roomDetailsOut);
+        }
 
-		[HttpGet("id/{roomDetailsId}")]
-		public async Task<ActionResult<RoomDetailsOutDTO>> GetRoomDetailsById(int roomDetailsId)
-		{
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(roomDetailsId);
-			RoomDetailsOutDTO roomDetailsOut = _mapper.Map<RoomDetailsOutDTO>(roomDetails);
+        [HttpGet("id/{roomDetailsId}")]
+        public async Task<ActionResult<RoomDetailsOutDTO>> GetRoomDetailsById(int roomDetailsId)
+        {
+            RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(
+                roomDetailsId
+            );
+            RoomDetailsOutDTO roomDetailsOut = _mapper.Map<RoomDetailsOutDTO>(roomDetails);
 
-			return Ok(roomDetailsOut);
-		}
+            return Ok(roomDetailsOut);
+        }
 
-		[HttpPost("add")]
-		public async Task<ActionResult<RoomDetailsOutDTO>> AddRoomDetails([FromBody] RoomDetailsInDTO roomDetailsIn)
-		{
-			RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
+        [HttpPost("add")]
+        public async Task<ActionResult<RoomDetailsOutDTO>> AddRoomDetails(
+            [FromBody] RoomDetailsInDTO roomDetailsIn
+        )
+        {
+            RoomDetails roomDetails = _mapper.Map<RoomDetails>(roomDetailsIn);
 
-			IFormFile roomSketchFile = roomDetailsIn.RoomSketchFile;
-			if (roomSketchFile != null && roomSketchFile.Length > 0)
-			{
-				ImageUploadResult uploadResult = null;
-				try
-				{
-					uploadResult = await _fileUploadService.UploadFileAsync(roomSketchFile, FileUploadDestinations.MoodboardRoomSketches);
-				}
-				catch (Exception ex)
-				{
-					return BadRequest($"Failed to upload sketch: {ex.Message}");
-				}
+            IFormFile roomSketchFile = roomDetailsIn.RoomSketchFile;
+            if (roomSketchFile != null && roomSketchFile.Length > 0)
+            {
+                ImageUploadResult uploadResult = null;
+                try
+                {
+                    uploadResult = await _fileUploadService.UploadFileAsync(
+                        roomSketchFile,
+                        FileUploadDestinations.MoodboardRoomSketches
+                    );
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to upload sketch: {ex.Message}");
+                }
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest($"Failed to upload sketch: {uploadResult.Error.Message}");
-				}
+                if (uploadResult.Error != null)
+                {
+                    return BadRequest($"Failed to upload sketch: {uploadResult.Error.Message}");
+                }
 
-				roomDetails.SketchUrl = uploadResult.SecureUrl.AbsoluteUri;
-				roomDetails.SketchPublicId = uploadResult.PublicId;
-			}
+                roomDetails.SketchUrl = uploadResult.SecureUrl.AbsoluteUri;
+                roomDetails.SketchPublicId = uploadResult.PublicId;
+            }
 
-			_unitOfWork.RoomDetailsRepository.Insert(roomDetails);
+            _unitOfWork.RoomDetailsRepository.Insert(roomDetails);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<RoomDetailsOutDTO>(roomDetails));
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<RoomDetailsOutDTO>(roomDetails));
+            }
 
-			return BadRequest("Problem occured while adding room details");
-		}
+            return BadRequest("Problem occured while adding room details");
+        }
 
-		[HttpDelete("delete/{roomDetailsId}")]
-		public async Task<IActionResult> DeleteRoomDetails(int roomDetailsId)
-		{
-			RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(roomDetailsId);
+        [HttpDelete("delete/{roomDetailsId}")]
+        public async Task<IActionResult> DeleteRoomDetails(int roomDetailsId)
+        {
+            RoomDetails roomDetails = await _unitOfWork.RoomDetailsRepository.GetByID(
+                roomDetailsId
+            );
 
-			if (roomDetails == null)
-			{
-				return BadRequest($"Room details with Id={roomDetailsId} not found");
-			}
+            if (roomDetails == null)
+            {
+                return BadRequest($"Room details with Id={roomDetailsId} not found");
+            }
 
-			if (roomDetails.SketchPublicId != null)
-			{
-				var result = await _fileUploadService.DeleteFileAsync(roomDetails.SketchPublicId);
-				if (result.Error != null) return BadRequest(result.Error.Message);
-			}
+            if (roomDetails.SketchPublicId != null)
+            {
+                var result = await _fileUploadService.DeleteFileAsync(roomDetails.SketchPublicId);
+                if (result.Error != null)
+                    return BadRequest(result.Error.Message);
+            }
 
-			await _unitOfWork.RoomDetailsRepository.Delete(roomDetailsId);
+            await _unitOfWork.RoomDetailsRepository.Delete(roomDetailsId);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok();
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok();
+            }
 
-			return BadRequest("Problem occured while deleting room details");
-		}
+            return BadRequest("Problem occured while deleting room details");
+        }
 
-		#endregion Public methods
-	}
+        #endregion Public methods
+    }
 }

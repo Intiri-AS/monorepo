@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class CommonUtilsService {
-
-  constructor() { }
+  constructor() {}
 
   inspirationalPhotosProviders: Array<any> = [
     'Flügger',
@@ -19,15 +17,17 @@ export class CommonUtilsService {
     'Ellos',
     'Between the walls',
     'Beyond Design',
-    'Others'
+    'Others',
   ];
 
   COMMON_STORAGE_KEYS: any = {
-    IS_MOODBOARD_LOADED_ONCE_KEY: 'IS_MOODBOARD_LOADED_ONCE_KEY'
-  }
+    IS_MOODBOARD_LOADED_ONCE_KEY: 'IS_MOODBOARD_LOADED_ONCE_KEY',
+  };
 
   getUniqueElementsFromArray(arr) {
-    const uniqueValues = Array.from(new Set(arr.filter(value => value !== null && value != 'null')));
+    const uniqueValues = Array.from(
+      new Set(arr.filter((value) => value !== null && value != 'null'))
+    );
     return uniqueValues;
   }
 

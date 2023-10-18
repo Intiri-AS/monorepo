@@ -11,13 +11,17 @@ public class CloudinaryService : ICloudinaryService
     private readonly IContentTypesService _contentTypesService;
     private readonly ILogger<CloudinaryService> _logger;
 
-    public CloudinaryService(IOptions<CloudinaryConfiguration> options,
-                             IContentTypesService contentTypesService,
-                             ILogger<CloudinaryService> logger)
+    public CloudinaryService(
+        IOptions<CloudinaryConfiguration> options,
+        IContentTypesService contentTypesService,
+        ILogger<CloudinaryService> logger
+    )
     {
-        var cloudinaryAccount = new CloudinaryDotNet.Account(options.Value.CloudName,
-                                            options.Value.ApiKey,
-                                            options.Value.ApiSecret);
+        var cloudinaryAccount = new CloudinaryDotNet.Account(
+            options.Value.CloudName,
+            options.Value.ApiKey,
+            options.Value.ApiSecret
+        );
         _cloudinary = new CloudinaryDotNet.Cloudinary(cloudinaryAccount);
         _contentTypesService = contentTypesService;
         _logger = logger;
@@ -33,18 +37,23 @@ public class CloudinaryService : ICloudinaryService
         int lenghtLimit = 5 * 1024 * 1024;
         if (file.Length > lenghtLimit)
         {
-            _logger.LogWarning($"Lenght of file {file.FileName} exceeded limit of {lenghtLimit} bytes. It won't be uploaded");
+            _logger.LogWarning(
+                $"Lenght of file {file.FileName} exceeded limit of {lenghtLimit} bytes. It won't be uploaded"
+            );
             return new ImageUploadResult()
             {
                 Error = new Error()
                 {
-                    Message = $"Lenght of file exceeded limit of {lenghtLimit} bytes. It won't be uploaded."
+                    Message =
+                        $"Lenght of file exceeded limit of {lenghtLimit} bytes. It won't be uploaded."
                 }
             };
         }
         if (!_contentTypesService.IsKnownType(file.ContentType))
         {
-            _logger.LogWarning($"Trying to upload file type {file.ContentType}. That is not allowed.");
+            _logger.LogWarning(
+                $"Trying to upload file type {file.ContentType}. That is not allowed."
+            );
             return new ImageUploadResult()
             {
                 Error = new Error()
@@ -68,8 +77,8 @@ public class CloudinaryService : ICloudinaryService
 
     public async Task<DeletionResult> DeleteFileAsync(string publicId)
     {
-		DeletionParams deleteParams = new(publicId);
-		return await _cloudinary.DestroyAsync(deleteParams);
+        DeletionParams deleteParams = new(publicId);
+        return await _cloudinary.DestroyAsync(deleteParams);
     }
 
     public async Task<bool> TryCreateFolder(string name)

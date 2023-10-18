@@ -75,7 +75,7 @@ export class AddPartnerModalComponent implements OnInit {
   delete;
   partnerId;
 
-  item: {}
+  item: {};
 
   partner = {
     name: '',
@@ -86,16 +86,16 @@ export class AddPartnerModalComponent implements OnInit {
     city: '',
     country: '',
     countryCode: '47',
-    logoFile: null
-  }
+    logoFile: null,
+  };
 
   partnerContact = {
     firstName: '',
     lastName: '',
     countryCode: '47',
     phoneNumber: '',
-    partnerId: 0
-  }
+    partnerId: 0,
+  };
 
   imagePath = null;
 
@@ -105,20 +105,26 @@ export class AddPartnerModalComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
-    private notifier: NotifierService, 
+    private notifier: NotifierService,
     private translate: TranslateService
   ) {
     this.addPartnerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      phone: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$')
-      ])],
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
-      ])],
+      phone: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+        ]),
+      ],
+      email: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+        ]),
+      ],
       street: ['', [Validators.required]],
       postal: ['', [Validators.required]],
       city: ['', [Validators.required]],
@@ -129,10 +135,13 @@ export class AddPartnerModalComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      phone: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$')
-      ])]
+      phone: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+        ]),
+      ],
     });
   }
 
@@ -148,9 +157,11 @@ export class AddPartnerModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.partner.logoFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.partner.logoFile));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.partner.logoFile)
+      );
     } else {
       this.imagePath = null;
     }
@@ -163,27 +174,30 @@ export class AddPartnerModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.partnerService.addPartner(this.partner).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.partnerService.getPartners();
-        this.openSuccessModal();
+    this.partnerService.addPartner(this.partner).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.partnerService.getPartners();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddPartnerModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
     await modal.present();
   }
@@ -192,8 +206,8 @@ export class AddPartnerModalComponent implements OnInit {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddPartnerModalComponent,
-      componentProps: {addedContact: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { addedContact: true },
+      cssClass: 'added-designer-modal-css',
     });
     await modal.present();
   }
@@ -206,34 +220,39 @@ export class AddPartnerModalComponent implements OnInit {
       return;
     }
     this.partnerContact.partnerId = this.partnerId;
-    this.partnerService.addPartnerContact(this.partnerContact).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.openSuccessModalContact();
+    this.partnerService.addPartnerContact(this.partnerContact).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.openSuccessModalContact();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   deletePartner() {
-    this.partnerService.deletePartner(this.item['id']).subscribe(res => {
-      this.partnerService.getPartners();
-      this.modalController.dismiss();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.partner-deleted'),
-        type: 'success',
-      });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    this.partnerService.deletePartner(this.item['id']).subscribe(
+      (res) => {
+        this.partnerService.getPartners();
+        this.modalController.dismiss();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.partner-deleted'),
+          type: 'success',
+        });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
-
 }

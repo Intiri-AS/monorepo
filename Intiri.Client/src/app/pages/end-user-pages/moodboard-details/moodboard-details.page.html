@@ -1,9 +1,14 @@
-
 <ion-content>
   <div id="home">
-    <app-header *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"></app-header>
-    <app-header-admin *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"></app-header-admin>
-    <app-header-internal-designer *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
+    <app-header
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
+    ></app-header>
+    <app-header-admin
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
+    ></app-header-admin>
+    <app-header-internal-designer
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'InternalDesigner' || (loggedUser$ | async)?.roles[0] === 'ExternalDesigner'"
+    ></app-header-internal-designer>
     <div class="moodboard-details-container">
       <!-- <ion-button fill="clear" class="back-btn" (click)="backToProjectDetails()">
         <ion-icon name="arrow-back" class="w-6 h-6" slot="start"></ion-icon>
@@ -13,11 +18,31 @@
       <div class="p-2 xl:p-0 mb-[160px] lg:mb-[90px]">
         <app-moodboard-details [moodboard]="moodboard"></app-moodboard-details>
         <div class="fixed-bottom max-h-[50px]">
-          <ion-buttons class="flex justify-center items-center h-full flex-col lg:flex-row lg:mx-[200px]">
+          <ion-buttons
+            class="flex justify-center items-center h-full flex-col lg:flex-row lg:mx-[200px]"
+          >
             <div class="flex justify-evenly lg:justify-around w-full">
-              <ion-button fill="clear" class="secondary-btn-borderless" (click)="backToProjectDetails()">{{'COMMON.back' | translate}}</ion-button>
-              <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}" routerDirection="root">{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button>
-              <ion-button fill="clear" class="secondary-btn-borderless" (click)="downloadMoodboardPDF()">{{'MOODBOARD-DETAILS.download-moodboard-pdf' | translate}}</ion-button>
+              <ion-button
+                fill="clear"
+                class="secondary-btn-borderless"
+                (click)="backToProjectDetails()"
+                >{{'COMMON.back' | translate}}</ion-button
+              >
+              <ion-button
+                *ngIf="projectId"
+                fill="clear"
+                class="secondary-btn-borderless"
+                routerLink="/edit-moodboard/{{moodboard.id}}/project/{{projectId}}"
+                routerDirection="root"
+                >{{'MOODBOARD-DETAILS.edit' | translate}}</ion-button
+              >
+              <ion-button
+                fill="clear"
+                class="secondary-btn-borderless"
+                (click)="downloadMoodboardPDF()"
+                >{{'MOODBOARD-DETAILS.download-moodboard-pdf' |
+                translate}}</ion-button
+              >
             </div>
             <!-- <div *ngIf="projectId" class="mt-2 lg:mt-0 flex justify-evenly lg:justify-around w-full">
               <ion-button *ngIf="projectId" fill="clear" class="secondary-btn-borderless" routerLink="/contact-designer/{{moodboard.id}}" routerDirection="root">{{'MOODBOARD-DETAILS.contact-designer' | translate}}</ion-button>
@@ -26,7 +51,6 @@
           </ion-buttons>
         </div>
       </div>
-
     </div>
   </div>
 </ion-content>

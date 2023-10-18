@@ -6,9 +6,9 @@ namespace Intiri.API.Automapper;
 
 public class MessageMapperProfiles : Profile
 {
-	public MessageMapperProfiles()
-	{
-		CreateMap<ChatMessage, ChatMessageOutDTO>();
-		CreateMap<ChatMessageAttachment, ChatMessageAttachmentOutDTO>();
-	}
+    public MessageMapperProfiles()
+    {
+        CreateMap<ChatMessage, ChatMessageOutDTO>();
+        CreateMap<ChatMessageAttachment, ChatMessageAttachmentOutDTO>();
+    }
 }

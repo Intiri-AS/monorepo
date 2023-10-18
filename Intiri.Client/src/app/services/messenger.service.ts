@@ -3,23 +3,22 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class MessengerService {
-
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
 
   sendMessage(messageData) {
     let formData = new FormData();
     formData.append('RecipientId', messageData.recipientId);
     formData.append('Content', messageData.content);
-    if(messageData.attachments) {
-      const fileArray = Array.from(messageData.attachments)
-      fileArray.forEach((file: any) => { formData.append('Attachments', file); });
+    if (messageData.attachments) {
+      const fileArray = Array.from(messageData.attachments);
+      fileArray.forEach((file: any) => {
+        formData.append('Attachments', file);
+      });
     }
     return this.http.post(`${this.apiUrl}messenger`, formData);
   }
@@ -31,5 +30,4 @@ export class MessengerService {
   getChatHistory(userId) {
     return this.http.get(`${this.apiUrl}messenger/chat-history/${userId}`);
   }
-
 }

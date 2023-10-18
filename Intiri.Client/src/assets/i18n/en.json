@@ -63,7 +63,7 @@
     "remove-inspiration-text": "Are you sure that you want to remove this inspiration? This action cannot be undone.",
     "remove-inspiration-message": "Inspiration file removed successfully.",
     "remove-inspiration-message-error": "Cannot remove inspiration file!",
-    "book-craftsman": "Book Craftsman"
+    "book-craftsman": "Book a craftsman"
   },
   "PROJECT-DETAILS": {
     "new": "Add new moodboard"
@@ -171,7 +171,7 @@
     "select-room-title": "Select the room you want to improve",
     "select-room-text": "Don't worry, you can improve more rooms later.",
     "select-style-title": "Select pictures that you like",
-    "select-style-text": "Decisions are hard, pick as many as you want.",
+    "select-style-text": "Decisions are hard, pick as many as you want. Feel free to press the fullscreen button on the top right of each image to view it in full size.",
     "room-details": "Room Details",
     "room-details-title": "Upload your photos",
     "room-details-text": "Don't stress, you can upload photos later to your profile",
@@ -219,7 +219,7 @@
   "PROJECT-SAVED-MODAL": {
     "save": "Saved!",
     "save-text1": "Your project",
-    "save-text2" : " and first moodboard are saved. You can add new moodboard to the same project or review it.",
+    "save-text2": " and first moodboard are saved. You can add new moodboard to the same project or review it.",
     "go-to": "Go to project",
     "add-new": "Add new moodboard",
     "added-moodboard-text1": "You have successfully added new moodboard to project",
@@ -288,7 +288,7 @@
     "email": "Email",
     "upload": "Upload",
     "add": "Add",
-    "my-profile":"My Profile",
+    "my-profile": "My Profile",
     "settings": "Settings",
     "notifications": "Notifications",
     "delete": "Delete",
@@ -320,11 +320,11 @@
     "partner": "Partner",
     "designers": "Designers",
     "clients": "Clients",
-    "statistic":"Statistic",
-    "ratings":"Ratings",
+    "statistic": "Statistic",
+    "ratings": "Ratings",
     "moodboards": "Moodboards",
-    "my-moodboards":"My moodboards",
-    "all-moodboards":"All moodboards",
+    "my-moodboards": "My moodboards",
+    "all-moodboards": "All moodboards",
     "style": "Style",
     "total-vendors": "Total vendors",
     "total-designers": "Total designers",
@@ -351,7 +351,7 @@
     "select-products": "6. Select the Products",
     "product-name": "Product name",
     "product-link": "Product link",
-    "product-name-required" : "Product name is required",
+    "product-name-required": "Product name is required",
     "product-material": "Product material",
     "product-material-required": "Material is required",
     "color-required": "Color is required",
@@ -430,7 +430,7 @@
     "styles": "Styles",
     "type": "Type",
     "provider": "Provider",
-    "link-to-material":  "Link to this material",
+    "link-to-material": "Link to this material",
     "select-room-moodboard": "1. Select the Room",
     "select-style-moodboard": "2. Select the Style",
     "select-inspirational-photos": "3. Select inspirational photos",
@@ -604,8 +604,8 @@
     "Textile": "Textile",
     "Other": "Other",
     "Vinyl": "Vinyl",
-    "Wallpaper":"Wallpaper",
-    "Tile":"Tile"
+    "Wallpaper": "Wallpaper",
+    "Tile": "Tile"
   },
   "PRODUCT-TYPE": {
     "Sofa": "Sofa",
@@ -638,11 +638,11 @@
     "Curtains": "Curtains",
     "Pillows and Blankets": "Pillows and Blankets",
     "Interior/Decoration": "Interior/Decoration",
-    "Sofatable":"Sofatable",
-    "Set tables":"Set tables",
-    "Lamps":"Lamps",
-    "Lamp base":"Lamp base",
-    "Outdoor":"Outdoor"
+    "Sofatable": "Sofatable",
+    "Set tables": "Set tables",
+    "Lamps": "Lamps",
+    "Lamp base": "Lamp base",
+    "Outdoor": "Outdoor"
   },
   "LANDING-TEXT": {
     "headline-1": "Hi!\nHave you recently purchased a new home? Or do you want to renovate or redecorate? Or perhaps you are planning putting your home on the market and need some help styling it for sale?\nIntiri can offer you a traditional interior design experience at a fraction of the cost.\nYou will be prompted to take a short quiz which will allow you to discover your unique style. From there you, you will have a world of style concepts at your fingertips.",

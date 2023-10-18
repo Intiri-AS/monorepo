@@ -2,23 +2,23 @@
 
 namespace Intiri.API.Models
 {
-	public class Role : IdentityRole<int>
-	{
-		#region ctors
+    public class Role : IdentityRole<int>
+    {
+        #region ctors
 
-		public Role() { }
+        public Role() { }
 
-		public Role(string name)
-		{
-			Name = name;
-		}
+        public Role(string name)
+        {
+            Name = name;
+        }
 
-		#endregion ctors
+        #endregion ctors
 
-		#region Properties
+        #region Properties
 
-		public ICollection<UserRole> Users { get; set; }
+        public ICollection<UserRole> Users { get; set; }
 
-		#endregion Properties
-	}
+        #endregion Properties
+    }
 }

@@ -1,19 +1,19 @@
 ion-select {
-    @apply border rounded-2xl h-12 border-black-2 pr-4
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
 
 .total {
-    @apply border rounded-2xl h-12 h-[200px] mb-[30px] shadow-1;
+  @apply border rounded-2xl h-12 h-[200px] mb-[30px] shadow-1;
 }
 
 .sales {
-    @apply border rounded-2xl h-12 h-[426px] mb-[30px] shadow-1;
+  @apply border rounded-2xl h-12 h-[426px] mb-[30px] shadow-1;
 }
 
 .designers {
-    @apply border rounded-2xl h-12 h-[882px] mb-[30px] shadow-1;
+  @apply border rounded-2xl h-12 h-[882px] mb-[30px] shadow-1;
 }
 
 .trending {
-    @apply border rounded-2xl h-12 h-[426px] mb-[30px] shadow-1;
+  @apply border rounded-2xl h-12 h-[426px] mb-[30px] shadow-1;
 }

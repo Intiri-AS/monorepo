@@ -3,18 +3,17 @@ using Intiri.API.Models;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ConsulatationRepository : RepositoryBase<Consultation>, IConsulatationRepository
-	{
-		#region Fields
+    public class ConsulatationRepository : RepositoryBase<Consultation>, IConsulatationRepository
+    {
+        #region Fields
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ConsulatationRepository(DataContext context) : base(context)
-		{
-		}
+        public ConsulatationRepository(DataContext context)
+            : base(context) { }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

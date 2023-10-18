@@ -17,8 +17,8 @@ public class MessengerController : BaseApiController
     private readonly IUserRepository _userRepository;
     private readonly IMessengerService _messengerService;
 
-    public MessengerController(IUnitOfWork unitOfWork,
-                               IMessengerService messengerService) : base(unitOfWork)
+    public MessengerController(IUnitOfWork unitOfWork, IMessengerService messengerService)
+        : base(unitOfWork)
     {
         _userRepository = unitOfWork.UserRepository;
         _messengerService = messengerService;
@@ -27,7 +27,9 @@ public class MessengerController : BaseApiController
     [HttpPost]
     public async Task<ActionResult> SendMessage([FromForm] ChatMessageInDTO messageDTO)
     {
-        bool recipientExists = await _userRepository.DoesAnyExist(user => user.Id == messageDTO.RecipientId);
+        bool recipientExists = await _userRepository.DoesAnyExist(
+            user => user.Id == messageDTO.RecipientId
+        );
 
         if (!recipientExists)
         {
@@ -55,7 +57,9 @@ public class MessengerController : BaseApiController
     {
         User user = await _userRepository.GetByID(User.GetUserId());
 
-        IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _messengerService.GetChatPersons(user);
+        IEnumerable<ChatPersonOutDTO> chatPersonOutDTOs = await _messengerService.GetChatPersons(
+            user
+        );
 
         return Ok(chatPersonOutDTOs);
     }
@@ -63,7 +67,10 @@ public class MessengerController : BaseApiController
     [HttpGet("chat-history/{chatUserId}")]
     public async Task<ActionResult<IEnumerable<ChatMessageOutDTO>>> GetChatHistory(int chatUserId)
     {
-        IEnumerable<ChatMessageOutDTO> messages = await _messengerService.GetChatHistory(User.GetUserId(), chatUserId);
+        IEnumerable<ChatMessageOutDTO> messages = await _messengerService.GetChatHistory(
+            User.GetUserId(),
+            chatUserId
+        );
 
         return Ok(messages);
     }

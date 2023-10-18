@@ -5,7 +5,9 @@ using Intiri.API.Models;
 using Intiri.API.Models.DTO.OutputDTO;
 using Intiri.API.Models.DTO.OutputDTO.Dashboard;
 using Intiri.API.Models.IntiriColor;
+using Intiri.API.Models.Moodboard;
 using Intiri.API.Models.PolicyNames;
+using Intiri.API.Models.Project;
 using Intiri.API.Models.Style;
 using Intiri.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -15,89 +17,137 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize(Policy = PolicyNames.AdminPolicy)]
-	public class AdminController : BaseApiController
-	{
-		#region Fields
+    [Authorize(Policy = PolicyNames.AdminPolicy)]
+    public class AdminController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly ICloudinaryService _fileUploadService;
-		
-		#endregion Fields
+        private readonly IMapper _mapper;
+        private readonly ICloudinaryService _fileUploadService;
 
-		#region Constructors
+        #endregion Fields
 
-		public AdminController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, ICloudinaryService fileUploadService) : base(unitOfWork)
-		{
-			_mapper = mapper;
-			_fileUploadService = fileUploadService;
-		}
+        #region Constructors
 
-		#endregion Constructors
+        public AdminController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IAccountService accountService,
+            ICloudinaryService fileUploadService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _fileUploadService = fileUploadService;
+        }
 
-		[HttpGet("totalCount")]
-		public async Task<ActionResult<DashboardTotalOutDTO>> GetDashboardTotalCount()
-		{
-			DashboardTotalOutDTO dashboardTotalDTO = new DashboardTotalOutDTO();
+        #endregion Constructors
 
-			dashboardTotalDTO.TotalClients = await _unitOfWork.UserRepository.GetUsersCountAsync<EndUser>();
-			dashboardTotalDTO.TotalDesigners = await _unitOfWork.UserRepository.GetUsersCountAsync<Designer>();
-			dashboardTotalDTO.TotalPartners = await _unitOfWork.PartnerRepository.GetPartnersCountAsync();
-			dashboardTotalDTO.TotalMoodboards = await _unitOfWork.MoodboardRepository.GetMoodboardsCountAsync();
+        [HttpGet("totalCount")]
+        public async Task<ActionResult<DashboardTotalOutDTO>> GetDashboardTotalCount()
+        {
+            DashboardTotalOutDTO dashboardTotalDTO = new DashboardTotalOutDTO();
 
-			return Ok(dashboardTotalDTO);
-		}
+            dashboardTotalDTO.TotalClients =
+                await _unitOfWork.UserRepository.GetUsersCountAsync<EndUser>();
+            dashboardTotalDTO.TotalDesigners =
+                await _unitOfWork.UserRepository.GetUsersCountAsync<Designer>();
+            dashboardTotalDTO.TotalPartners =
+                await _unitOfWork.PartnerRepository.GetPartnersCountAsync();
+            dashboardTotalDTO.TotalMoodboards =
+                await _unitOfWork.MoodboardRepository.GetMoodboardsCountAsync();
 
-		[HttpGet("inspirations")]
-		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetAllInspirations()
-		{
-			IEnumerable<Inspiration> inspirations = await _unitOfWork.InspirationRepository.Get();
+            return Ok(dashboardTotalDTO);
+        }
 
-			return Ok(_mapper.Map<IEnumerable<InspirationOutDTO>>(inspirations));
-		}
+        [HttpGet("inspirations")]
+        public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetAllInspirations()
+        {
+            IEnumerable<Inspiration> inspirations = await _unitOfWork.InspirationRepository.Get();
 
-		[HttpGet("clientsNumber")]
-		public async Task<ActionResult<IEnumerable<ClientsPerMonthDTO>>> GetClientNumberPerMonth()
-		{
-			IEnumerable<ClientsPerMonthDTO> clientsPerMonth =  await _unitOfWork.UserRepository.GetClientsPerMonthAsync();
+            return Ok(_mapper.Map<IEnumerable<InspirationOutDTO>>(inspirations));
+        }
 
-			return Ok(clientsPerMonth);
-		}
+        [HttpGet("clientsNumber")]
+        public async Task<ActionResult<IEnumerable<ClientsPerMonthDTO>>> GetClientNumberPerMonth()
+        {
+            IEnumerable<ClientsPerMonthDTO> clientsPerMonth =
+                await _unitOfWork.UserRepository.GetClientsPerMonthAsync();
 
-		[HttpGet("salesOverview")]
-		public async Task<ActionResult<IEnumerable<PaymentsPerMonthDTO>>> GetTotalIncomePerMonth()
-		{
-			IEnumerable<PaymentsPerMonthDTO> paymentsPerMonth = await _unitOfWork.ConsultationPaymentRepository.GetAllPaymentPerMonthAsync();
+            return Ok(clientsPerMonth);
+        }
 
-			return Ok(paymentsPerMonth);
-		}
+        [HttpGet("salesOverview")]
+        public async Task<ActionResult<IEnumerable<PaymentsPerMonthDTO>>> GetTotalIncomePerMonth()
+        {
+            IEnumerable<PaymentsPerMonthDTO> paymentsPerMonth =
+                await _unitOfWork.ConsultationPaymentRepository.GetAllPaymentPerMonthAsync();
 
-		[HttpGet("styleTrends")]
-		public async Task<ActionResult<IEnumerable<StyleTrendDTO>>> GetMoodboardStylesStatistic()
-		{
-			IEnumerable<Style> styles = await _unitOfWork.StyleRepository.Get();
+            return Ok(paymentsPerMonth);
+        }
 
-			#region all moodboards
-			//Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
+        [HttpGet("styleTrends")]
+        public async Task<ActionResult<IEnumerable<StyleTrendDTO>>> GetMoodboardStylesStatistic()
+        {
+            IEnumerable<Style> styles = await _unitOfWork.StyleRepository.Get();
 
-			#endregion
+            #region all moodboards
+            //Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetMoodboardStylesCountAsync();
 
-			#region cliens moodboards
+            #endregion
 
-			Dictionary<int, int> styleTrends = await _unitOfWork.MoodboardRepository.GetClientMoodboardStylesCountAsync();
+            #region cliens moodboards
 
-			#endregion
+            Dictionary<int, int> styleTrends =
+                await _unitOfWork.MoodboardRepository.GetClientMoodboardStylesCountAsync();
 
-			List<StyleTrendDTO> styleTrendDTOs = new List<StyleTrendDTO>();
-			foreach (var style in styles)
-			{
-				styleTrendDTOs.Add(new StyleTrendDTO
-				{
-					StyleName = style.Name,
-					StyleTrend = styleTrends.ContainsKey(style.Id) ? styleTrends[style.Id] : 0
-				});
-			}
-			return Ok(styleTrendDTOs);
-		}
-	}
+            #endregion
+
+            List<StyleTrendDTO> styleTrendDTOs = new List<StyleTrendDTO>();
+            foreach (var style in styles)
+            {
+                styleTrendDTOs.Add(
+                    new StyleTrendDTO
+                    {
+                        StyleName = style.Name,
+                        StyleTrend = styleTrends.ContainsKey(style.Id) ? styleTrends[style.Id] : 0
+                    }
+                );
+            }
+            return Ok(styleTrendDTOs);
+        }
+
+        [HttpGet("projects/{userId}")]
+        public async Task<ActionResult<IEnumerable<ProjectOutDTO>>> GetProjectsForUser(int userId)
+        {
+            IEnumerable<Project> projects =
+                await _unitOfWork.ProjectRepository.GetProjectsBasicInfoForUser(userId);
+
+            IEnumerable<ProjectOutDTO> projectsOut = _mapper.Map<IEnumerable<ProjectOutDTO>>(
+                projects
+            );
+
+            return Ok(projectsOut);
+        }
+
+        [HttpDelete("moodboards/{moodboardId}")]
+        public async Task<ActionResult<MoodboardOutDTO>> DeleteMoodboardForUser(int moodboardId)
+        {
+            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardId);
+            if (moodboard == null)
+                return BadRequest("Client moodboard does not exist");
+
+            try
+            {
+                await _unitOfWork.MoodboardRepository.Delete(moodboard.Id);
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex.InnerException.Message}");
+            }
+
+            return Ok(_mapper.Map<MoodboardOutDTO>(moodboard));
+        }
+    }
 }

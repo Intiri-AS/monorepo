@@ -2,8 +2,5 @@
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IInspirationRepository : IRepositoryBase<Inspiration>
-	{
-
-	}
+    public interface IInspirationRepository : IRepositoryBase<Inspiration> { }
 }

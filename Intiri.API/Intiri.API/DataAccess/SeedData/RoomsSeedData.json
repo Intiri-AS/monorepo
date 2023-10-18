@@ -1,44 +1,44 @@
 ﻿[
-	{
-		"Name": "Living Room",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Living_fujlaw.svg",
-		"IconPublicId": "RoomImages/Living_fujlaw.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	},
-	{
-		"Name": "Dinning Room",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Dining_cerzcs.svg",
-		"IconPublicId": "RoomImages/Dining_cerzcs.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	},
-	{
-		"Name": "Bedroom",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bedroom_evvbz6.svg",
-		"IconPublicId": "RoomImages/Bedroom_evvbz6.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	},
-	{
-		"Name": "Kitchen",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Kitchen_njsgt3.svg",
-		"IconPublicId": "RoomImages/Kitchen_njsgt3.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	},
-	{
-		"Name": "Bathroom",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bathroom_axq8eu.svg",
-		"IconPublicId": "RoomImages/Bathroom_axq8eu.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	},
-	{
-		"Name": "Entry ways",
-		"IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Entry_l2f3ya.svg",
-		"IconPublicId": "RoomImages/Entry_l2f3ya.svg",
-		"Description": "Description Room",
-		"RoomTypeId": 2
-	}
+  {
+    "Name": "Living Room",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Living_fujlaw.svg",
+    "IconPublicId": "RoomImages/Living_fujlaw.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  },
+  {
+    "Name": "Dinning Room",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Dining_cerzcs.svg",
+    "IconPublicId": "RoomImages/Dining_cerzcs.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  },
+  {
+    "Name": "Bedroom",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bedroom_evvbz6.svg",
+    "IconPublicId": "RoomImages/Bedroom_evvbz6.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  },
+  {
+    "Name": "Kitchen",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Kitchen_njsgt3.svg",
+    "IconPublicId": "RoomImages/Kitchen_njsgt3.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  },
+  {
+    "Name": "Bathroom",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Bathroom_axq8eu.svg",
+    "IconPublicId": "RoomImages/Bathroom_axq8eu.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  },
+  {
+    "Name": "Entry ways",
+    "IconPath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663666336/RoomImages/Entry_l2f3ya.svg",
+    "IconPublicId": "RoomImages/Entry_l2f3ya.svg",
+    "Description": "Description Room",
+    "RoomTypeId": 2
+  }
 ]

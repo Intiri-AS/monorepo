@@ -13,14 +13,13 @@ namespace Intiri.API.Migrations
                 table: "DesignerInfo",
                 type: "float",
                 nullable: false,
-                defaultValue: 0.0);
+                defaultValue: 0.0
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Price",
-                table: "DesignerInfo");
+            migrationBuilder.DropColumn(name: "Price", table: "DesignerInfo");
         }
     }
 }

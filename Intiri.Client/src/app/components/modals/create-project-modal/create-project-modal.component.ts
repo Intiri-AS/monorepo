@@ -11,7 +11,6 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./create-project-modal.component.scss'],
 })
 export class CreateProjectModalComponent implements OnInit {
-
   projectName: string = '';
   project: Project;
   start: boolean;
@@ -20,12 +19,12 @@ export class CreateProjectModalComponent implements OnInit {
   public isPrNameExist = false;
 
   constructor(
-    private modalController: ModalController, 
-    private projectService: ProjectService, 
-    private router: Router, 
+    private modalController: ModalController,
+    private projectService: ProjectService,
+    private router: Router,
     private nav: NavController,
     private craftsmanService: CraftsmanService
-    ) { }
+  ) {}
 
   ngOnInit() {}
 
@@ -34,15 +33,17 @@ export class CreateProjectModalComponent implements OnInit {
   }
 
   startProjectCreation() {
-    this.projectService.checkProjectName(this.projectName).subscribe(result =>{
-      this.isPrNameExist = result as boolean;
-      if(!result){
-        let project = new Project();
-        project.name = this.projectName;
-        this.projectService.setCurrentProject(project);
-        this.dismiss();
-      }
-    });
+    this.projectService
+      .checkProjectName(this.projectName)
+      .subscribe((result) => {
+        this.isPrNameExist = result as boolean;
+        if (!result) {
+          let project = new Project();
+          project.name = this.projectName;
+          this.projectService.setCurrentProject(project);
+          this.dismiss();
+        }
+      });
   }
 
   addNewMoodboard() {
@@ -56,7 +57,7 @@ export class CreateProjectModalComponent implements OnInit {
   }
 
   dismiss() {
-    this.modalController.dismiss({'dismissed': true})
+    this.modalController.dismiss({ dismissed: true });
   }
 
   goToBookDesigner() {
@@ -65,10 +66,13 @@ export class CreateProjectModalComponent implements OnInit {
   }
 
   goToCraftsmanPage() {
-    const roomIndex =  this.project.projectMoodboards[this.project.projectMoodboards.length - 1].room.name.toLowerCase().replace(/ /g,'');
+    const roomIndex = this.project.projectMoodboards[
+      this.project.projectMoodboards.length - 1
+    ].room.name
+      .toLowerCase()
+      .replace(/ /g, '');
     // solution to bypass popup blocker
     let newWindow = window.open();
     newWindow.location.href = this.craftsmanService.getCraftsmanUrl(roomIndex);
   }
-
 }

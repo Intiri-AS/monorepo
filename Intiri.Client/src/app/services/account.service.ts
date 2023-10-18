@@ -7,27 +7,27 @@ import { User } from '../models/user.model';
 import { VippsAccessTokenRequestDTO } from '../DTOs/vipps-access-token.dto';
 import { VippsAuthUrlRequestDTO } from '../DTOs/vipps-auth-url.dto';
 import { SmsVerificationDTO } from '../DTOs/sms-verification.dto';
+import { Intercom } from 'ng-intercom';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-
   public homepageRoutes = {
     Admin: '/dashboard',
     FreeEndUser: '/my-intiri',
     InternalDesigner: '/client-list',
     ExternalDesigner: '/client-list',
-    Partner: '/partner'
+    Partner: '/partner',
   };
 
   apiUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public intercom: Intercom) {
+    // this.intercom.boot();
+  }
 
   login(model) {
     return this.http.post(this.apiUrl + 'account/login', model);
@@ -37,9 +37,18 @@ export class AccountService {
     return this.http.post(this.apiUrl + 'account/register', model);
   }
 
-  smsVerificationLogin(countryCode: string, phoneNumber: string, verificationCode: string) {
-    const verificationDTO = new SmsVerificationDTO(countryCode, phoneNumber, verificationCode);
-    return this.http.post(this.apiUrl + 'account/sms-verification-login', verificationDTO)
+  smsVerificationLogin(
+    countryCode: string,
+    phoneNumber: string,
+    verificationCode: string
+  ) {
+    const verificationDTO = new SmsVerificationDTO(
+      countryCode,
+      phoneNumber,
+      verificationCode
+    );
+    return this.http
+      .post(this.apiUrl + 'account/sms-verification-login', verificationDTO)
       .pipe(
         map((user: User) => {
           if (user) {
@@ -54,18 +63,18 @@ export class AccountService {
     phoneNumber: string,
     verificationCode: string,
     firstName: string,
-    lastName: string) {
-
-    const verificationDTO =
-    {
+    lastName: string
+  ) {
+    const verificationDTO = {
       countryCode,
       phoneNumber,
       verificationCode,
       firstName,
-      lastName
+      lastName,
     } as SmsVerificationDTO;
 
-    return this.http.post(this.apiUrl + 'account/sms-verification-register', verificationDTO)
+    return this.http
+      .post(this.apiUrl + 'account/sms-verification-register', verificationDTO)
       .pipe(
         map((user: User) => {
           if (user) {
@@ -75,21 +84,35 @@ export class AccountService {
       );
   }
 
-  resendVerificationCode(countryCode: string, phoneNumber: string,) {
-    const verificationDTO = new SmsVerificationDTO(countryCode, phoneNumber, "");
-    return this.http.post(this.apiUrl + 'account/resend-sms-verification', verificationDTO);
+  resendVerificationCode(countryCode: string, phoneNumber: string) {
+    const verificationDTO = new SmsVerificationDTO(
+      countryCode,
+      phoneNumber,
+      ''
+    );
+    return this.http.post(
+      this.apiUrl + 'account/resend-sms-verification',
+      verificationDTO
+    );
   }
 
   setCurrentUser(user: User) {
-    if(user){
+    if (user) {
       user.roles = [];
       const tokenData = this.getDecodedToken(user.token);
       const roles = tokenData.role;
-      Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+      Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
       user.id = parseInt(tokenData.nameid);
       user.fullName = tokenData.name;
       user.photoPath = user.photoPath ? user.photoPath : tokenData.prn;
       localStorage.setItem('user', JSON.stringify(user));
+
+      this.intercom.update({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        user_id: user.id.toString(),
+        name: user.fullName,
+        phone: user.phoneNumber,
+      });
     }
     this.currentUserSource.next(user);
   }

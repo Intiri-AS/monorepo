@@ -2,9 +2,9 @@
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IDesignerReviewRepository : IRepositoryBase<DesignerReview>
-	{
-		Task<bool> IsDesingerAlreadyRatedByUserAsync(int endUserId, int designerId);
-		Task<IEnumerable<DesignerReview>> GetAllReviewsByClientIdAsync(int endUserId);
-	}
+    public interface IDesignerReviewRepository : IRepositoryBase<DesignerReview>
+    {
+        Task<bool> IsDesingerAlreadyRatedByUserAsync(int endUserId, int designerId);
+        Task<IEnumerable<DesignerReview>> GetAllReviewsByClientIdAsync(int endUserId);
+    }
 }

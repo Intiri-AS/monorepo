@@ -7,10 +7,10 @@ namespace Intiri.API.Models.DTO.InputDTO.Moodboard
         [Required]
         public int ProjectId { get; set; }
 
-		#region Moodboard
+        #region Moodboard
 
-		[Required]
-		public MoodboardInDTO Moodboard { get; set; }
+        [Required]
+        public MoodboardInDTO Moodboard { get; set; }
 
         #endregion Moodboard
 

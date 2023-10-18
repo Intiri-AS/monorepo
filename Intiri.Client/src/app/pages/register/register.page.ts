@@ -100,7 +100,7 @@ export class RegisterPage {
     );
   }
 
-  onIntiriIconClick () {
+  onIntiriIconClick() {
     window.location.replace('https://intiri.no');
   }
 }

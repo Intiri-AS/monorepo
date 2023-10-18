@@ -6,11 +6,11 @@ using Intiri.API.Models;
 
 namespace Intiri.API.Automapper
 {
-	public class InspirationMapperProfile : Profile
-	{
-		public InspirationMapperProfile()
-		{
-			CreateMap<Inspiration, InspirationOutDTO>();
-		}
-	}
+    public class InspirationMapperProfile : Profile
+    {
+        public InspirationMapperProfile()
+        {
+            CreateMap<Inspiration, InspirationOutDTO>();
+        }
+    }
 }

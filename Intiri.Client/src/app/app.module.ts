@@ -1,8 +1,17 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Injector,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -82,7 +91,7 @@ import { AdminPicturesComponent } from './components/admin-pictures/admin-pictur
 import { AddMoodboardStepComponent } from './components/add-moodboard-step/add-moodboard-step.component';
 import { ClientRequestComponent } from './components/client-request/client-request.component';
 import { BackComponent } from './components/back/back.component';
-
+import { CloudinaryImageScalerComponent } from './components/cloudinary-image-scaler/cloudinary-image-scaler.component';
 
 //app modals
 import { LoginModalComponent } from './components/modals/login/login-modal.component';
@@ -108,28 +117,35 @@ import { DeleteMoodboardModalComponent } from './components/modals/delete-moodbo
 import { MoodboardDetailsComponent } from './components/moodboard-details/moodboard-details.component';
 import { OpenFileModalComponent } from './components/modals/open-file-modal/open-file-modal.component';
 
-
 //plugins
 import { CodeInputModule } from 'angular-code-input';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { StylePopoverComponent } from './components/popovers/style-popover/style-popover.component';
 import { ProcessingPage } from './pages/processing/processing.page';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SmsVerificationModalComponent } from './components/modals/sms-verification-modal/sms-verification-modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxMasonryModule } from 'ngx-masonry';
+
+import { CloudinaryModule } from '@cloudinary/ng';
+
+import { IntercomModule } from 'ng-intercom';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe, LOCATION_INITIALIZED } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartComponent } from './components/chart/chart.component';
@@ -145,26 +161,119 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent, LandingPage, LoginPage, RegisterPage, HowItWorksPage, ProfilePage, ForgotPasswordPage, ResetPasswordPage,
+    AppComponent,
+    LandingPage,
+    LoginPage,
+    RegisterPage,
+    HowItWorksPage,
+    ProfilePage,
+    ForgotPasswordPage,
+    ResetPasswordPage,
     SmsVerificationPage,
-    NewProjectPage, PreBookSelectionPage, MyIntiriPage, CustomizeMoodboardPage, InspirationsPage, BookDesignerPage,
-    ProjectDetailsPage, ProjectsPage, MoodboardDetailsPage, PricingPlansPage, MessengerPage, DesignerProfilePage, PaymentDetailsPage,
-    DashboardPage, DesignerPage, VendorPage, BookDesignerProfilePage, ConsultationsPage, ClientPage, MoodboardsPage,
-    MyMoodboardPage, ClientListPage, StyleListPage, ClientRequestPage,
-    StylePage, AddMoodboardPage, AddPartnerPage, PartnerProductsPage, PartnerProfilePage,
-    HeaderLandingComponent, HeaderAdminComponent, HeaderComponent, FooterComponent, HeaderInternalDesignerComponents, SubHeaderComponent, HeaderPartnerComponent,
-    NewProjectStepComponent, StepPickerComponent, AddMoodboardStepComponent, MoodboardDetailsComponent, ClientRequestComponent,
-    ProfileImgSectionComponent, ProfileInfoSectionComponent, AdminPartnersComponent, AdminProductsComponent, AdminClientsComponent, AdminInspirationComponent, AdminStylesComponent, AdminMaterialsComponent, AdminRoomsComponent, AdminColorsComponent, AdminPicturesComponent,
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    SettingsPopoverComponent, MenuPopoverComponent, StylePopoverComponent, AddStyleModalComponent, LanguagePopoverComponent, RateModalComponent, RateSuccessfulModalComponent,
-    ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent, AddColorModalComponent, AddPictureModalComponent, OpenFileModalComponent,
-    TimeAgoPipe,ProcessingPage,SmsVerificationModalComponent,AddProductModalComponent, DeleteMoodboardModalComponent,
-    ChartComponent, DonutChartComponent, BackComponent, ProfilePopoverComponent, AdminEditMoodboardPage, EditMoodboardStepComponent, DesignerPortfolioPage
+    NewProjectPage,
+    PreBookSelectionPage,
+    MyIntiriPage,
+    CustomizeMoodboardPage,
+    InspirationsPage,
+    BookDesignerPage,
+    ProjectDetailsPage,
+    ProjectsPage,
+    MoodboardDetailsPage,
+    PricingPlansPage,
+    MessengerPage,
+    DesignerProfilePage,
+    PaymentDetailsPage,
+    DashboardPage,
+    DesignerPage,
+    VendorPage,
+    BookDesignerProfilePage,
+    ConsultationsPage,
+    ClientPage,
+    MoodboardsPage,
+    MyMoodboardPage,
+    ClientListPage,
+    StyleListPage,
+    ClientRequestPage,
+    StylePage,
+    AddMoodboardPage,
+    AddPartnerPage,
+    PartnerProductsPage,
+    PartnerProfilePage,
+    HeaderLandingComponent,
+    HeaderAdminComponent,
+    HeaderComponent,
+    FooterComponent,
+    HeaderInternalDesignerComponents,
+    SubHeaderComponent,
+    HeaderPartnerComponent,
+    NewProjectStepComponent,
+    StepPickerComponent,
+    AddMoodboardStepComponent,
+    MoodboardDetailsComponent,
+    ClientRequestComponent,
+    ProfileImgSectionComponent,
+    ProfileInfoSectionComponent,
+    AdminPartnersComponent,
+    AdminProductsComponent,
+    AdminClientsComponent,
+    AdminInspirationComponent,
+    AdminStylesComponent,
+    AdminMaterialsComponent,
+    AdminRoomsComponent,
+    AdminColorsComponent,
+    AdminPicturesComponent,
+    LoginModalComponent,
+    LogoutModalComponent,
+    CreateProjectModalComponent,
+    AddDesignerModalComponent,
+    AddPartnerModalComponent,
+    BookDesignerModalComponent,
+    SettingsPopoverComponent,
+    MenuPopoverComponent,
+    StylePopoverComponent,
+    AddStyleModalComponent,
+    LanguagePopoverComponent,
+    RateModalComponent,
+    RateSuccessfulModalComponent,
+    ShareModalComponent,
+    ShareSuccessfulModalComponent,
+    AddMaterialsModalComponent,
+    AddRoomModalComponent,
+    AddColorModalComponent,
+    AddPictureModalComponent,
+    OpenFileModalComponent,
+    TimeAgoPipe,
+    ProcessingPage,
+    SmsVerificationModalComponent,
+    AddProductModalComponent,
+    DeleteMoodboardModalComponent,
+    ChartComponent,
+    DonutChartComponent,
+    BackComponent,
+    ProfilePopoverComponent,
+    AdminEditMoodboardPage,
+    EditMoodboardStepComponent,
+    DesignerPortfolioPage,
+    CloudinaryImageScalerComponent,
   ],
   entryComponents: [
-    LoginModalComponent, LogoutModalComponent, CreateProjectModalComponent, AddDesignerModalComponent, AddPartnerModalComponent, BookDesignerModalComponent,
-    RateModalComponent, RateSuccessfulModalComponent, ShareModalComponent, ShareSuccessfulModalComponent, AddMaterialsModalComponent, AddRoomModalComponent,
-    AddColorModalComponent, AddPictureModalComponent, AddProductModalComponent, DeleteMoodboardModalComponent, OpenFileModalComponent
+    LoginModalComponent,
+    LogoutModalComponent,
+    CreateProjectModalComponent,
+    AddDesignerModalComponent,
+    AddPartnerModalComponent,
+    BookDesignerModalComponent,
+    RateModalComponent,
+    RateSuccessfulModalComponent,
+    ShareModalComponent,
+    ShareSuccessfulModalComponent,
+    AddMaterialsModalComponent,
+    AddRoomModalComponent,
+    AddColorModalComponent,
+    AddPictureModalComponent,
+    AddProductModalComponent,
+    DeleteMoodboardModalComponent,
+    OpenFileModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -173,8 +282,10 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     CodeInputModule,
+    CloudinaryModule,
     CommonModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
@@ -185,21 +296,26 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-    }
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     NotifierModule.withConfig({
       position: {
         horizontal: {
-          distance: 30
+          distance: 30,
         },
         vertical: {
-          distance: 30
-        }
-      }
+          distance: 30,
+        },
+      },
     }),
-    MatSlideToggleModule, MatTooltipModule, MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    IntercomModule.forRoot({
+      appId: 'ub85mv53'
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -209,8 +325,8 @@ export function createTranslateLoader(http: HttpClient) {
     {
       provide: APP_INITIALIZER,
       useFactory: ApplicationInitializerFactory,
-      deps: [ TranslateService, Injector ],
-      multi: true
+      deps: [TranslateService, Injector],
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
@@ -223,7 +339,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 export function ApplicationInitializerFactory(
-  translate: TranslateService, injector: Injector) {
+  translate: TranslateService,
+  injector: Injector
+) {
   return async () => {
     await injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
 
@@ -237,7 +355,3 @@ export function ApplicationInitializerFactory(
     }
   };
 }
-
-
-
-

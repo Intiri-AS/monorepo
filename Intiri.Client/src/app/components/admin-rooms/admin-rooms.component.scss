@@ -1,23 +1,23 @@
 .profile-input {
-    @apply mt-4 flex-1 text-left text-black-2;
+  @apply mt-4 flex-1 text-left text-black-2;
 }
 
 ion-select {
-    @apply border rounded-2xl h-12 border-black-2 pr-4;
+  @apply border rounded-2xl h-12 border-black-2 pr-4;
 }
 
 ion-col {
-    @apply mb-4
+  @apply mb-4;
 }
 
 .card {
-    @apply rounded-2xl h-[180px]
+  @apply rounded-2xl h-[180px];
 }
 
 .step-icon-wrapper {
-    @apply h-full rounded-2xl bg-light pt-[50px]
+  @apply h-full rounded-2xl bg-light pt-[50px];
 }
 
 .step-icon {
-@apply h-[70px] w-[55px] mx-auto;
+  @apply h-[70px] w-[55px] mx-auto;
 }

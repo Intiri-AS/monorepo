@@ -3,18 +3,17 @@ using Intiri.API.Models;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class InspirationRepository : RepositoryBase<Inspiration>, IInspirationRepository
-	{
-		#region Fields
+    public class InspirationRepository : RepositoryBase<Inspiration>, IInspirationRepository
+    {
+        #region Fields
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public InspirationRepository(DataContext context) : base(context)
-		{
-		}
+        public InspirationRepository(DataContext context)
+            : base(context) { }
 
-		#endregion Constructors
-	}
+        #endregion Constructors
+    }
 }

@@ -11,7 +11,6 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./open-file-modal.component.scss'],
 })
 export class OpenFileModalComponent implements OnInit {
-
   file;
   canDelete;
   isRemoving = false;
@@ -22,7 +21,7 @@ export class OpenFileModalComponent implements OnInit {
     private notifier: NotifierService,
     private spinner: NgxSpinnerService,
     private translate: TranslateService
-    ) { }
+  ) {}
 
   ngOnInit() {}
 
@@ -49,29 +48,35 @@ export class OpenFileModalComponent implements OnInit {
 
   deleteFile() {
     this.spinner.show();
-    this.projectService.deleteInspiration(this.file.id).subscribe(res => {
-      this.projectService.getInspirations();
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('MY-INTIRI.remove-inspiration-message'),
-        type: 'success',
-      });
-      this.modalController.dismiss();
-    }, () => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('MY-INTIRI.remove-inspiration-message-error'),
-        type: 'error',
-      });
-    })
+    this.projectService.deleteInspiration(this.file.id).subscribe(
+      (res) => {
+        this.projectService.getInspirations();
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant(
+            'MY-INTIRI.remove-inspiration-message'
+          ),
+          type: 'success',
+        });
+        this.modalController.dismiss();
+      },
+      () => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant(
+            'MY-INTIRI.remove-inspiration-message-error'
+          ),
+          type: 'error',
+        });
+      }
+    );
   }
 
-  redirectToProviderLink () {
+  redirectToProviderLink() {
     if (this.file.link) {
-      window.open(this.file.link, '_blank')
+      window.open(this.file.link, '_blank');
     } else if (this.file.productLink) {
-      window.open(this.file.productLink, '_blank')
+      window.open(this.file.productLink, '_blank');
     }
   }
-
 }

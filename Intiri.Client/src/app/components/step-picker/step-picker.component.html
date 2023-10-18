@@ -1,46 +1,152 @@
-<div *ngIf="page === 'create-project'" class="flex xl-ion:flex-col justify-around bg-light xl-ion:w-full xl-ion:h-[100vh] rounded-2xl text-center">
-  <section  [class.first-step-selected]="currentStepNo === 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="new-project-step">
-    <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room" [class.bg-room-white]="currentStepNo === 0"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 0">{{'NEW-PROJECT.room' | translate}}</p>
+<div
+  *ngIf="page === 'create-project'"
+  class="flex xl-ion:flex-col justify-around bg-light xl-ion:w-full xl-ion:h-[80vh] rounded-2xl text-center"
+>
+  <section
+    [class.first-step-selected]="currentStepNo === 0"
+    [class.disabled]="!canChangeStep(0)"
+    (click)="goToStep(0)"
+    class="new-project-step"
+  >
+    <div
+      class="w-[30px] h-[22px] mx-auto bg-cover bg-room"
+      [class.bg-room-white]="currentStepNo === 0"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 0">
+      {{ "NEW-PROJECT.room" | translate }}
+    </p>
   </section>
-  <section  [class.step-selected]="currentStepNo === 1" [class.disabled]="!canChangeStep(1)" (click)="goToStep(1)" class="new-project-step">
-    <div class="project-step-icon bg-style" [class.bg-style-white]="currentStepNo === 1"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 1">{{'NEW-PROJECT.style' | translate}}</p>
+  <section
+    [class.step-selected]="currentStepNo === 1"
+    [class.disabled]="!canChangeStep(1)"
+    (click)="goToStep(1)"
+    class="new-project-step"
+  >
+    <div
+      class="project-step-icon bg-style"
+      [class.bg-style-white]="currentStepNo === 1"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 1">
+      {{ "NEW-PROJECT.style" | translate }}
+    </p>
   </section>
-  <section  [class.step-selected]="currentStepNo === 2" [class.disabled]="!canChangeStep(2)" (click)="goToStep(2)" class="new-project-step">
-    <div class="w-[30px] h-[22px] mx-auto bg-cover bg-room-details" [class.bg-room-details-white]="currentStepNo === 2"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 2">{{'NEW-PROJECT.upload' | translate}}</p>
+  <section
+    [class.step-selected]="currentStepNo === 2"
+    [class.disabled]="!canChangeStep(2)"
+    (click)="goToStep(2)"
+    class="new-project-step"
+  >
+    <div
+      class="w-[30px] h-[22px] mx-auto bg-cover bg-room-details"
+      [class.bg-room-details-white]="currentStepNo === 2"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 2">
+      {{ "NEW-PROJECT.upload" | translate }}
+    </p>
   </section>
-  <section [class.step-selected]="currentStepNo === 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="new-project-step">
-    <div class="project-step-icon bg-color-pallete" [class.bg-color-pallete-white]="currentStepNo === 3"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 3">{{'NEW-PROJECT.color-pallete' | translate}}</p>
+  <section
+    [class.step-selected]="currentStepNo === 3"
+    [class.disabled]="!canChangeStep(3)"
+    (click)="goToStep(3)"
+    class="new-project-step"
+  >
+    <div
+      class="project-step-icon bg-color-pallete"
+      [class.bg-color-pallete-white]="currentStepNo === 3"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 3">
+      {{ "NEW-PROJECT.color-pallete" | translate }}
+    </p>
   </section>
-  <section [class.step-selected]="currentStepNo === 4" [class.disabled]="!canChangeStep(4)" (click)="goToStep(4)" class="new-project-step">
-    <div class="project-step-icon bg-moodboard" [class.bg-moodboard-white]="currentStepNo === 4"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 4">{{'COMMON.moodboard' | translate}}</p>
+  <section
+    [class.step-selected]="currentStepNo === 4"
+    [class.disabled]="!canChangeStep(4)"
+    (click)="goToStep(4)"
+    class="new-project-step"
+  >
+    <div
+      class="project-step-icon bg-moodboard"
+      [class.bg-moodboard-white]="currentStepNo === 4"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 4">
+      {{ "COMMON.moodboard" | translate }}
+    </p>
   </section>
-  <section [class.last-step-selected]="currentStepNo === 5" [class.disabled]="!canChangeStep(5)" (click)="goToStep(5)" class="new-project-step no-border">
-    <div class="project-step-icon bg-final-result" [class.bg-final-result-white]="currentStepNo === 5"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 5">{{'NEW-PROJECT.final' | translate}}</p>
+  <section
+    [class.last-step-selected]="currentStepNo === 5"
+    [class.disabled]="!canChangeStep(5)"
+    (click)="goToStep(5)"
+    class="new-project-step no-border"
+  >
+    <div
+      class="project-step-icon bg-final-result"
+      [class.bg-final-result-white]="currentStepNo === 5"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 5">
+      {{ "NEW-PROJECT.final" | translate }}
+    </p>
   </section>
 </div>
 
-<div *ngIf="page === 'customize-moodboard'" class="flex xl-ion:flex-col justify-around bg-light xl-ion:w-full xl-ion:h-[100vh] rounded-2xl text-center">
-  <section [class.first-step-selected]="currentStepNo === 0" [class.disabled]="!canChangeStep(0)" (click)="goToStep(0)" class="new-project-step">
-    <div class="project-step-icon bg-color-pallete" [class.bg-color-pallete-white]="currentStepNo === 0"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 0">{{'NEW-PROJECT.color-pallete' | translate}}</p>
+<div
+  *ngIf="page === 'customize-moodboard'"
+  class="flex xl-ion:flex-col justify-around bg-light xl-ion:w-full xl-ion:h-[80vh] rounded-2xl text-center"
+>
+  <section
+    [class.first-step-selected]="currentStepNo === 0"
+    [class.disabled]="!canChangeStep(0)"
+    (click)="goToStep(0)"
+    class="new-project-step"
+  >
+    <div
+      class="project-step-icon bg-color-pallete"
+      [class.bg-color-pallete-white]="currentStepNo === 0"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 0">
+      {{ "NEW-PROJECT.color-pallete" | translate }}
+    </p>
   </section>
-  <section [class.step-selected]="currentStepNo === 1" [class.disabled]="!canChangeStep(1)" (click)="goToStep(1)" class="new-project-step">
-    <div class="project-step-icon mx-auto bg-cover bg-materials" [class.bg-materials-white]="currentStepNo === 1"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 1">{{'NEW-PROJECT.materials' | translate}}</p>
+  <section
+    [class.step-selected]="currentStepNo === 1"
+    [class.disabled]="!canChangeStep(1)"
+    (click)="goToStep(1)"
+    class="new-project-step"
+  >
+    <div
+      class="project-step-icon mx-auto bg-cover bg-materials"
+      [class.bg-materials-white]="currentStepNo === 1"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 1">
+      {{ "NEW-PROJECT.materials" | translate }}
+    </p>
   </section>
-  <section [class.last-step-selected]="currentStepNo === 2" [class.disabled]="!canChangeStep(2)" (click)="goToStep(2)" class="new-project-step no-border">
-    <div class="project-step-icon bg-sofa" [class.bg-sofa-white]="currentStepNo === 2"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 2">{{'NEW-PROJECT.products' | translate}}</p>
+  <section
+    [class.last-step-selected]="currentStepNo === 2"
+    [class.disabled]="!canChangeStep(2)"
+    (click)="goToStep(2)"
+    class="new-project-step no-border"
+  >
+    <div
+      class="project-step-icon bg-sofa"
+      [class.bg-sofa-white]="currentStepNo === 2"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 2">
+      {{ "NEW-PROJECT.products" | translate }}
+    </p>
   </section>
-  <section *ngIf="isEditMoodboardPage" [class.last-step-selected]="currentStepNo === 3" [class.disabled]="!canChangeStep(3)" (click)="goToStep(3)" class="new-project-step no-border">
-    <div class="project-step-icon bg-moodboard" [class.bg-moodboard-white]="currentStepNo === 3"></div>
-    <p class="project-step-text" [class.text-white]="currentStepNo === 3">{{'COMMON.moodboard' | translate}}</p>
+  <section
+    *ngIf="isEditMoodboardPage"
+    [class.last-step-selected]="currentStepNo === 3"
+    [class.disabled]="!canChangeStep(3)"
+    (click)="goToStep(3)"
+    class="new-project-step no-border"
+  >
+    <div
+      class="project-step-icon bg-moodboard"
+      [class.bg-moodboard-white]="currentStepNo === 3"
+    ></div>
+    <p class="project-step-text" [class.text-white]="currentStepNo === 3">
+      {{ "COMMON.moodboard" | translate }}
+    </p>
   </section>
 </div>
-

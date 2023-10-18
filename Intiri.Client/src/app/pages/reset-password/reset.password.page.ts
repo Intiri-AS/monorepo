@@ -8,12 +8,14 @@ import { AccountService } from 'src/app/services/account.service';
   templateUrl: './reset-password.page.html',
   styleUrls: ['./reset-password.page.scss'],
 })
-
 export class ResetPasswordPage implements OnInit {
+  resetPassForm: FormGroup;
 
-  resetPassForm : FormGroup;
-
-  constructor(private accountService: AccountService, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.intitializeForm();
@@ -26,21 +28,22 @@ export class ResetPasswordPage implements OnInit {
 
       // This is only for testing and presenatation purpose
       phoneNumber: localStorage.getItem('userPhone'),
-      token: localStorage.getItem('resetToken')
-    })
+      token: localStorage.getItem('resetToken'),
+    });
   }
 
-  resetPassword(){
-    this.accountService.resetPassword(this.resetPassForm.value).subscribe(response => {
+  resetPassword() {
+    this.accountService.resetPassword(this.resetPassForm.value).subscribe(
+      (response) => {
+        // This is only for testing and presenatation purpose
+        localStorage.removeItem('resetToken');
+        localStorage.removeItem('userPhone');
 
-      // This is only for testing and presenatation purpose
-      localStorage.removeItem('resetToken');
-      localStorage.removeItem('userPhone');
-
-      this.router.navigateByUrl('/login');
-    }, error => {
-      console.log(error);
-    })
+        this.router.navigateByUrl('/login');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-
 }

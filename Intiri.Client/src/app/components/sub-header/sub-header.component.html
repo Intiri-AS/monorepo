@@ -1,12 +1,26 @@
 <div *ngIf="!slider" class="h-[61px] w-[100%] rounded-xl bg-light">
   <section class="header-buttons">
-      <ion-button *ngFor="let item of menuItems[menu]" [class.!text-primary]="activeTitle === item.title" fill="clear" class="btn" routerLink="{{item.url}}" routerDirection="root">{{item.title}}</ion-button>
-    </section>
+    <ion-button
+      *ngFor="let item of menuItems[menu]"
+      [class.!text-primary]="activeTitle === item.title"
+      fill="clear"
+      class="btn"
+      routerLink="{{ item.url }}"
+      routerDirection="root"
+      >{{ item.title }}</ion-button
+    >
+  </section>
 </div>
 
 <div *ngIf="slider" class="lg:h-[61px] w-[100%] rounded-xl bg-light">
   <section class="header-buttons">
-      <ion-button *ngFor="let item of menuItems[menu]; index as i" (click)="goToSlide(i)"  [class.!text-primary]="activeTitle === i" fill="clear" class="btn">{{item | titlecase}}</ion-button>
-    </section>
+    <ion-button
+      *ngFor="let item of menuItems[menu]; index as i"
+      (click)="goToSlide(i)"
+      [class.!text-primary]="activeTitle === i"
+      fill="clear"
+      class="btn"
+      >{{ item | titlecase }}</ion-button
+    >
+  </section>
 </div>
-

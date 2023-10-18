@@ -1,3 +1,23 @@
+export enum SlotInfoEntityTypes {
+  material = 'material',
+  styleImages = 'styleImages',
+  product = 'product',
+  color = 'color',
+}
+
+export type SlotInfo = {
+  entity?: string;
+  entityId?: string | number;
+  entityName?: string;
+  entityImagePath?: string;
+  entityImageStyles?: {
+    height: string;
+    width: string;
+    top: string;
+    left: string;
+  };
+};
+
 export class Moodboard {
   id: number;
   sourceMoodboardId: number;
@@ -15,10 +35,9 @@ export class Moodboard {
     roomSketchFile: string;
   };
   SLOT_COUNT: number = 16;
-  slotInfo: any = null
+  slotInfo: { [index: string]: SlotInfo } = null;
 
-  constructor()
-  {
+  constructor() {
     this.id = null;
     this.sourceMoodboardId = null;
     this.name = '';
@@ -32,7 +51,7 @@ export class Moodboard {
     this.products = [];
     this.created = null;
     this.roomDetails = {
-      roomSketchFile: ''
+      roomSketchFile: '',
     };
 
     this.slotInfo = {};
@@ -46,9 +65,9 @@ export class Moodboard {
           height: null,
           width: null,
           top: null,
-          left: null
+          left: null,
         },
-      }
+      };
     }
   }
 }

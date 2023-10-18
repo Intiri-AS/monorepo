@@ -18,7 +18,8 @@ namespace Intiri.API.Controllers
 
         #region Constructors
 
-        public ColorNCSController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        public ColorNCSController(IUnitOfWork unitOfWork, IMapper mapper)
+            : base(unitOfWork)
         {
             _mapper = mapper;
         }
@@ -28,7 +29,8 @@ namespace Intiri.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ColorNCSOutDTO>>> GetColorsNCS()
         {
-            IEnumerable<ColorNCS> colors = await _unitOfWork.ColorNCSRepository.GetAllColorsNCSAsNoTrackingAsync();
+            IEnumerable<ColorNCS> colors =
+                await _unitOfWork.ColorNCSRepository.GetAllColorsNCSAsNoTrackingAsync();
             IEnumerable<ColorNCSOutDTO> toReturn = _mapper.Map<IEnumerable<ColorNCSOutDTO>>(colors);
 
             return Ok(toReturn);

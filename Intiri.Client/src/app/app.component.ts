@@ -6,6 +6,7 @@ import { User } from './models/user.model';
 import { AccountService } from './services/account.service';
 import { LanguageService } from './services/language.service';
 import { ProjectService } from './services/project.service';
+import { Intercom } from 'ng-intercom';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,12 @@ import { ProjectService } from './services/project.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   constructor(
     private accountService: AccountService,
     private projectService: ProjectService,
     private languageService: LanguageService,
-    private storage: Storage
+    private storage: Storage,
+    public intercom: Intercom
   ) {
     this.initStorage();
   }
@@ -28,6 +29,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.intercom.boot({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      app_id: 'ub85mv53'
+    });
     this.setCurrentUser();
     this.setCurrentProject();
     this.languageService.setInitialAppLanguage();
@@ -35,8 +40,7 @@ export class AppComponent implements OnInit {
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    if (user)
-    {
+    if (user) {
       this.accountService.setCurrentUser(user);
     } else {
       this.accountService.setCurrentUser(null);
@@ -47,6 +51,4 @@ export class AppComponent implements OnInit {
     const project: Project = JSON.parse(sessionStorage.getItem('project'));
     this.projectService.setCurrentProject(project);
   }
-
-
 }

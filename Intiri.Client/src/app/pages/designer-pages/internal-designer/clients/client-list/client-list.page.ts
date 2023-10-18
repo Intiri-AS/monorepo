@@ -9,7 +9,6 @@ import { DesignerService } from 'src/app/services/designer.service';
   templateUrl: './client-list.page.html',
   styleUrls: ['./client-list.page.scss'],
 })
-
 export class ClientListPage {
   @ViewChild('slides') slides: IonSlides;
 
@@ -17,8 +16,8 @@ export class ClientListPage {
 
   options = {
     slidesPerView: 1,
-    initialSlide: 0
-  }
+    initialSlide: 0,
+  };
 
   star = 1;
   rating = 0;
@@ -38,30 +37,30 @@ export class ClientListPage {
 
   currentSlide = 0;
 
-  clients = []
+  clients = [];
 
   moodboards = [
     {
       image: '../../../../../assets/images/landing-img.png',
-      style: 'Vintage'
+      style: 'Vintage',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      style: 'Industrial'
+      style: 'Industrial',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      style: 'Minimal'
+      style: 'Minimal',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      style: 'Minimal'
+      style: 'Minimal',
     },
     {
       image: '../../../../../assets/images/landing-img.png',
-      style: 'Minimal'
-    }
-  ]
+      style: 'Minimal',
+    },
+  ];
 
   constructor(
     private _route: ActivatedRoute,
@@ -72,33 +71,38 @@ export class ClientListPage {
 
   ngOnInit() {
     this.spinner.show();
-    this._route.queryParams.subscribe(params => {
-      if(params.section) {
+    this._route.queryParams.subscribe((params) => {
+      if (params.section) {
         this.options.initialSlide = params.section;
       }
     });
 
     this.designerService.getDesignerClients().subscribe((res: any[]) => {
-      this.clients = res
-    })
+      this.clients = res;
+    });
 
-    this.designerService.getDesignerStatistic().subscribe(res => {
+    this.designerService.getDesignerStatistic().subscribe((res) => {
       this.designerStatistic = res;
-    })
+    });
 
     this.designerService.getDesignerRating().subscribe((res: any) => {
       this.spinner.hide();
-      this.ratingArray = [res.fiveStar, res.fourStar, res.threeStar, res.twoStar, res.oneStar];
+      this.ratingArray = [
+        res.fiveStar,
+        res.fourStar,
+        res.threeStar,
+        res.twoStar,
+        res.oneStar,
+      ];
       this.rating = res.averageRating;
       this.star = Math.round(res.averageRating);
       this.numberOfRatings = this.ratingArray.reduce((a, b) => a + b, 0);
 
       const max = Math.max(...this.ratingArray);
       this.ratingArray.forEach((num, index) => {
-        this['rate' + index] = Math.round(num / max * 100);
+        this['rate' + index] = Math.round((num / max) * 100);
       });
-    })
-
+    });
   }
 
   changeSlide(id) {
@@ -107,18 +111,18 @@ export class ClientListPage {
     this.changeQueryParam(id);
   }
 
-  onSlideChange(){
-    const currentSlideId = this.slides['el']['swiper']['activeIndex']
+  onSlideChange() {
+    const currentSlideId = this.slides['el']['swiper']['activeIndex'];
     this.currentSlide = currentSlideId;
     this.changeQueryParam(currentSlideId);
   }
 
-  changeQueryParam(section){
+  changeQueryParam(section) {
     this._router.navigate([], {
-     relativeTo: this._route,
-     queryParams: {
-       section
-     },
-   });
+      relativeTo: this._route,
+      queryParams: {
+        section,
+      },
+    });
   }
 }

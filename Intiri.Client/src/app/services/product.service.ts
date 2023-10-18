@@ -5,17 +5,14 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ProductService {
-
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getProducts(){
+  getProducts() {
     return this.http.get(this.apiUrl + 'Products');
   }
-
 }

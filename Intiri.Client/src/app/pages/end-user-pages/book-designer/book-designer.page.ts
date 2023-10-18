@@ -9,9 +9,7 @@ import { DesignerService } from 'src/app/services/designer.service';
   templateUrl: './book-designer.page.html',
   styleUrls: ['./book-designer.page.scss'],
 })
-
 export class BookDesignerPage {
-
   languages = this.designerService.languages;
   designers = [];
   moodboard: any;
@@ -28,31 +26,30 @@ export class BookDesignerPage {
     this.designerService.getDesignersNew().subscribe((res: any[]) => {
       this.designers = res;
     });
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.moodboard = data.moodboard;
-      if(data.moodboard){
+      if (data.moodboard) {
         this.isContactDesigner = true;
       }
-    })
+    });
   }
 
   getDesignerType(d) {
     const role = d.roles[0].name;
-    if(role === 'InternalDesigner') {
-      return 'Intiri Designer'
-    } else if(role === 'ExternalDesigner') {
-      return 'External Designer'
+    if (role === 'InternalDesigner') {
+      return 'Intiri Designer';
+    } else if (role === 'ExternalDesigner') {
+      return 'External Designer';
     }
     return role;
   }
 
   getMoodboardImage(d, index = null) {
-    if(d.createdMoodboards.length > 0) {
+    if (d.createdMoodboards.length > 0) {
       const style = d.createdMoodboards[0].style;
-      if(!index) {
+      if (!index) {
         return style?.imagePath;
-      }
-      else {
+      } else {
         return style?.styleImages[index]?.imagePath;
       }
     }
@@ -62,7 +59,10 @@ export class BookDesignerPage {
   async paymentModal(designer) {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
-      componentProps: {designer, moodboard: this.isContactDesigner ? this.moodboard : null},
+      componentProps: {
+        designer,
+        moodboard: this.isContactDesigner ? this.moodboard : null,
+      },
       cssClass: 'book-designer-modal-css',
     });
 
@@ -70,8 +70,10 @@ export class BookDesignerPage {
   }
 
   getFeaturedPortfolios(id): Array<any> {
-    const designer = this.designers.filter(d => d.id === id)[0];
-    const featuredPortfolios: Array<any> = designer.designerPortfolio.filter(d => d.featured === 1);
+    const designer = this.designers.filter((d) => d.id === id)[0];
+    const featuredPortfolios: Array<any> = designer.designerPortfolio.filter(
+      (d) => d.featured === 1
+    );
     return featuredPortfolios;
   }
 }

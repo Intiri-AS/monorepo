@@ -14,29 +14,25 @@ public class PusherMessageHandler : IMessageHandler
 
         if (message is not PusherMessage)
         {
-            throw new ArgumentException($"Message expected to be of type {typeof(PusherMessage)}, but it is {message.GetType()}");
+            throw new ArgumentException(
+                $"Message expected to be of type {typeof(PusherMessage)}, but it is {message.GetType()}"
+            );
         }
 
-        var options = new PusherOptions
-        {
-            Cluster = "eu",
-            Encrypted = true
-        };
+        var options = new PusherOptions { Cluster = "eu", Encrypted = true };
 
         var pusher = new Pusher(
-          "1488805",
-          "0233be6c2ef5fb26cc7d", // //TODO-SECURITY: Move this to configuration
-          "bab67a1d5e732b7ccfec",
-          options);
+            "1488805",
+            "0233be6c2ef5fb26cc7d", // //TODO-SECURITY: Move this to configuration
+            "bab67a1d5e732b7ccfec",
+            options
+        );
 
         PusherMessage pusherMessage = message as PusherMessage;
         string channelName = CreateChannelName(pusherMessage.RecipientId, pusherMessage.SenderId);
         string eventName = CreateMessageEvent();
 
-        await pusher.TriggerAsync(
-          channelName,
-          eventName,
-          pusherMessage);
+        await pusher.TriggerAsync(channelName, eventName, pusherMessage);
 
         return true;
     }

@@ -9,12 +9,11 @@ import { DesignerService } from 'src/app/services/designer.service';
   templateUrl: './designer-profile.page.html',
   styleUrls: ['./designer-profile.page.scss'],
 })
-
 export class DesignerProfilePage {
   showMore = false;
 
   // eslint-disable-next-line max-len
-  designerText ='';
+  designerText = '';
 
   languages = this.designerService.languages;
 
@@ -30,49 +29,51 @@ export class DesignerProfilePage {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.designer = data.designer;
       this.designerText = data.designer.description;
-    })
+    });
   }
 
   getDesignerType() {
     const role = this.designer.roles[0].name;
-    if(role === 'InternalDesigner') {
-      return 'Intiri Designer'
-    } else if(role === 'ExternalDesigner') {
-      return 'External Designer'
+    if (role === 'InternalDesigner') {
+      return 'Intiri Designer';
+    } else if (role === 'ExternalDesigner') {
+      return 'External Designer';
     }
     return role;
   }
 
   normalizeSlashes(string): string {
-    return string.replaceAll("\\", "/")
+    return string.replaceAll('\\', '/');
   }
 
   getMoodboardImage(mb, index = null) {
     const style = mb.style;
-    if(index >= 0) {
+    if (index >= 0) {
       return style?.styleImages[index]?.imagePath;
     }
     return style?.imagePath;
   }
 
   // TODO: needs to be updated after project is allowed to have multiple moodboards!
-  getPiecesNo(moodboard){
+  getPiecesNo(moodboard) {
     let result = 0;
-    result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    result +=
+      moodboard.colorPalettes.length +
+      moodboard.materials.length +
+      moodboard.products.length;
     return result;
   }
 
   async bookConsultationModal() {
     const modal = await this.modalController.create({
       component: BookDesignerModalComponent,
-      componentProps: {designer: this.designer},
+      componentProps: { designer: this.designer },
       cssClass: 'book-designer-modal-css',
     });
 
     await modal.present();
   }
-
 }

@@ -12,7 +12,6 @@ import { AddPartnerModalComponent } from '../modals/add-partner-modal/add-partne
   styleUrls: ['./admin-partners.component.scss'],
 })
 export class AdminPartnersComponent implements OnInit {
-
   partners: any[];
   partners$: Observable<any> = this.partnerService.partners$;
   searchText: any;
@@ -25,7 +24,7 @@ export class AdminPartnersComponent implements OnInit {
 
   ngOnInit(): void {
     this.partnerService.getPartners();
-    this.partners$.pipe(take(1)).subscribe(partners => {
+    this.partners$.pipe(take(1)).subscribe((partners) => {
       this.partners = partners;
     });
   }
@@ -33,8 +32,8 @@ export class AdminPartnersComponent implements OnInit {
   async addPartner() {
     const modal = await this.modalController.create({
       component: AddPartnerModalComponent,
-      componentProps: {nextPage: false},
-      cssClass: 'add-partner-modal-css'
+      componentProps: { nextPage: false },
+      cssClass: 'add-partner-modal-css',
     });
 
     await modal.present();
@@ -45,11 +44,10 @@ export class AdminPartnersComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {partner: true, item: partner},
-      dismissOnSelect: true
+      componentProps: { partner: true, item: partner },
+      dismissOnSelect: true,
     });
 
     await popover.present();
   }
-
 }

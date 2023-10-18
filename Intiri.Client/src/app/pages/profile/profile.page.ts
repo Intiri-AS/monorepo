@@ -12,9 +12,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-
 export class ProfilePage implements OnInit {
-
   apiUrl = environment.apiUrl;
 
   profileForm: FormGroup;
@@ -43,68 +41,97 @@ export class ProfilePage implements OnInit {
     private notifier: NotifierService,
     private fb: FormBuilder,
     private translate: TranslateService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
     this.profileForm = this.fb.group({
       dataInfoGroup: this.fb.group({
         innerGroup: this.fb.group({
-        firstName: '',
-        lastName: '',
-        gender: '',
-        email:  '',
-        phoneNumber: '',
-        street: '',
-        postalCode: '',
-        city: '',
-        country: '',
-        countryCode: '',
-        description: '',
+          firstName: '',
+          lastName: '',
+          gender: '',
+          email: '',
+          phoneNumber: '',
+          street: '',
+          postalCode: '',
+          city: '',
+          country: '',
+          countryCode: '',
+          description: '',
+        }),
       }),
-    }),
-  });
-    this.http.get(this.apiUrl + 'users/profile').toPromise().then((res: any) => {
-      this.spinner.hide();
-      this.userInfo = res;
-
-      this.patchValues(this.userInfo);
-      if (!res.photoPath) {
-        this.userInfo.photoPath = '../../../assets/images/profile-img.png';
-      }
     });
+    this.http
+      .get(this.apiUrl + 'users/profile')
+      .toPromise()
+      .then((res: any) => {
+        this.spinner.hide();
+        this.userInfo = res;
+
+        this.patchValues(this.userInfo);
+        if (!res.photoPath) {
+          this.userInfo.photoPath = '../../../assets/images/profile-img.png';
+        }
+      });
   }
 
   patchValues(userInfo: any) {
-    this.profileForm.get('dataInfoGroup.innerGroup.firstName').patchValue(userInfo.firstName);
-    this.profileForm.get('dataInfoGroup.innerGroup.lastName').patchValue(userInfo.lastName);
-    this.profileForm.get('dataInfoGroup.innerGroup.gender').patchValue(userInfo.gender);
-    this.profileForm.get('dataInfoGroup.innerGroup.email').patchValue(userInfo.email);
-    this.profileForm.get('dataInfoGroup.innerGroup.lastName').patchValue(userInfo.lastName);
-    this.profileForm.get('dataInfoGroup.innerGroup.gender').patchValue(userInfo.gender);
-    this.profileForm.get('dataInfoGroup.innerGroup.phoneNumber').patchValue(userInfo.phoneNumber);
-    this.profileForm.get('dataInfoGroup.innerGroup.street').patchValue(userInfo.street);
-    this.profileForm.get('dataInfoGroup.innerGroup.postalCode').patchValue(userInfo.postalCode);
-    this.profileForm.get('dataInfoGroup.innerGroup.city').patchValue(userInfo.city);
-    this.profileForm.get('dataInfoGroup.innerGroup.lastName').patchValue(userInfo.lastName);
-    this.profileForm.get('dataInfoGroup.innerGroup.country').patchValue(userInfo.country);
-    this.profileForm.get('dataInfoGroup.innerGroup.countryCode').patchValue(userInfo.countryCode);
-    this.profileForm.get('dataInfoGroup.innerGroup.description').patchValue(userInfo.description);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.firstName')
+      .patchValue(userInfo.firstName);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.lastName')
+      .patchValue(userInfo.lastName);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.gender')
+      .patchValue(userInfo.gender);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.email')
+      .patchValue(userInfo.email);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.lastName')
+      .patchValue(userInfo.lastName);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.gender')
+      .patchValue(userInfo.gender);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.phoneNumber')
+      .patchValue(userInfo.phoneNumber);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.street')
+      .patchValue(userInfo.street);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.postalCode')
+      .patchValue(userInfo.postalCode);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.city')
+      .patchValue(userInfo.city);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.lastName')
+      .patchValue(userInfo.lastName);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.country')
+      .patchValue(userInfo.country);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.countryCode')
+      .patchValue(userInfo.countryCode);
+    this.profileForm
+      .get('dataInfoGroup.innerGroup.description')
+      .patchValue(userInfo.description);
   }
 
   saveChanges() {
     const userInfoModel = this.profileForm.value.dataInfoGroup.innerGroup;
     this.spinner.show();
-    this.http.put(this.apiUrl + 'users/profile', userInfoModel).subscribe(res => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('PROFILE.update-message'),
-        type: 'success',
+    this.http
+      .put(this.apiUrl + 'users/profile', userInfoModel)
+      .subscribe((res) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('PROFILE.update-message'),
+          type: 'success',
+        });
       });
-    });
   }
-
-
 }

@@ -3,7 +3,5 @@ using Intiri.API.Models.Rating;
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-	public interface IDesignerRatingRepository : IRepositoryBase<DesignerRating>
-	{
-	}
+    public interface IDesignerRatingRepository : IRepositoryBase<DesignerRating> { }
 }

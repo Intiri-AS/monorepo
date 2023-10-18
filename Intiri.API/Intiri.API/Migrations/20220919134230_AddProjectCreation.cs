@@ -11,19 +11,22 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalletesId",
-                table: "MoodboardColorPallete");
+                table: "MoodboardColorPallete"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "ColorPalletesId",
                 table: "MoodboardColorPallete",
-                newName: "ColorPalettesId");
+                newName: "ColorPalettesId"
+            );
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Created",
                 table: "Projects",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalettesId",
@@ -31,23 +34,24 @@ namespace Intiri.API.Migrations
                 column: "ColorPalettesId",
                 principalTable: "ColorPalletes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalettesId",
-                table: "MoodboardColorPallete");
+                table: "MoodboardColorPallete"
+            );
 
-            migrationBuilder.DropColumn(
-                name: "Created",
-                table: "Projects");
+            migrationBuilder.DropColumn(name: "Created", table: "Projects");
 
             migrationBuilder.RenameColumn(
                 name: "ColorPalettesId",
                 table: "MoodboardColorPallete",
-                newName: "ColorPalletesId");
+                newName: "ColorPalletesId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalletesId",
@@ -55,7 +59,8 @@ namespace Intiri.API.Migrations
                 column: "ColorPalletesId",
                 principalTable: "ColorPalletes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

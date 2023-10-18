@@ -12,7 +12,6 @@ import { StyleService } from 'src/app/services/style.service';
   styleUrls: ['./moodboards.page.scss'],
 })
 export class MoodboardsPage implements OnInit {
-
   moodboards$ = this.moodboardService.moodboards$;
   moodboards: any[];
   styles$ = this.styleService.styles$;
@@ -21,13 +20,18 @@ export class MoodboardsPage implements OnInit {
   private selectedStyleNames: any[] = [];
   private selectedTypes: any[] = [];
 
-  constructor(public popoverController: PopoverController, private moodboardService: MoodboardService, private styleService: StyleService, private spinner: NgxSpinnerService) { }
+  constructor(
+    public popoverController: PopoverController,
+    private moodboardService: MoodboardService,
+    private styleService: StyleService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
     this.moodboardService.getMoodboards();
     this.styleService.getStyles();
-    this.moodboards$.subscribe(moodboards => {
+    this.moodboards$.subscribe((moodboards) => {
       this.moodboards = moodboards;
       this.spinner.hide();
     });
@@ -37,75 +41,110 @@ export class MoodboardsPage implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {moodboard: true, item: mb},
-      dismissOnSelect: true
+      componentProps: { moodboard: true, item: mb },
+      dismissOnSelect: true,
     });
 
     await popover.present();
   }
 
-  onFilterChange(event){
+  onFilterChange(event) {
     this.selectedStyleNames = event.detail.value;
-    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
+    this.moodboards$.pipe(take(1)).subscribe((moodboards) => {
       if (this.selectedStyleNames.length > 0 && this.selectedTypes.length > 0) {
-        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+        this.moodboards = moodboards.filter((moodboard) =>
+          this.selectedStyleNames.includes(moodboard.style.name)
+        );
         if (this.selectedTypes.length == 2) {
           this.moodboards = this.moodboards;
         } else {
           if (this.selectedTypes.includes('Template Moodboards')) {
-            this.moodboards = this.moodboards.filter(moodboard => moodboard.isTemplate);
+            this.moodboards = this.moodboards.filter(
+              (moodboard) => moodboard.isTemplate
+            );
           } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
-            this.moodboards = this.moodboards.filter(moodboard => !moodboard.isTemplate);
+            this.moodboards = this.moodboards.filter(
+              (moodboard) => !moodboard.isTemplate
+            );
           }
         }
-      } else if (this.selectedStyleNames.length > 0 && this.selectedTypes.length == 0) {
-        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
-      } else if (this.selectedStyleNames.length == 0 && this.selectedTypes.length > 0) {
+      } else if (
+        this.selectedStyleNames.length > 0 &&
+        this.selectedTypes.length == 0
+      ) {
+        this.moodboards = moodboards.filter((moodboard) =>
+          this.selectedStyleNames.includes(moodboard.style.name)
+        );
+      } else if (
+        this.selectedStyleNames.length == 0 &&
+        this.selectedTypes.length > 0
+      ) {
         if (this.selectedTypes.length == 2) {
           this.moodboards = moodboards;
         } else {
           if (this.selectedTypes.includes('Template Moodboards')) {
-            this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+            this.moodboards = moodboards.filter(
+              (moodboard) => moodboard.isTemplate
+            );
           } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
-            this.moodboards = moodboards.filter(moodboard => !moodboard.isTemplate);
+            this.moodboards = moodboards.filter(
+              (moodboard) => !moodboard.isTemplate
+            );
           }
         }
       } else {
         this.moodboards = moodboards;
       }
-    })
+    });
   }
 
-  onTypeFilterChange(event){
+  onTypeFilterChange(event) {
     this.selectedTypes = event.detail.value;
-    this.moodboards$.pipe(take(1)).subscribe(moodboards => {
+    this.moodboards$.pipe(take(1)).subscribe((moodboards) => {
       if (this.selectedStyleNames.length > 0 && this.selectedTypes.length > 0) {
-        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
+        this.moodboards = moodboards.filter((moodboard) =>
+          this.selectedStyleNames.includes(moodboard.style.name)
+        );
         if (this.selectedTypes.length == 2) {
           this.moodboards = this.moodboards;
         } else {
           if (this.selectedTypes.includes('Template Moodboards')) {
-            this.moodboards = this.moodboards.filter(moodboard => moodboard.isTemplate);
+            this.moodboards = this.moodboards.filter(
+              (moodboard) => moodboard.isTemplate
+            );
           } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
-            this.moodboards = this.moodboards.filter(moodboard => !moodboard.isTemplate);
+            this.moodboards = this.moodboards.filter(
+              (moodboard) => !moodboard.isTemplate
+            );
           }
         }
-      } else if (this.selectedStyleNames.length > 0 && this.selectedTypes.length == 0) {
-        this.moodboards = moodboards.filter(moodboard => this.selectedStyleNames.includes(moodboard.style.name));
-      } else if (this.selectedStyleNames.length == 0 && this.selectedTypes.length > 0) {
+      } else if (
+        this.selectedStyleNames.length > 0 &&
+        this.selectedTypes.length == 0
+      ) {
+        this.moodboards = moodboards.filter((moodboard) =>
+          this.selectedStyleNames.includes(moodboard.style.name)
+        );
+      } else if (
+        this.selectedStyleNames.length == 0 &&
+        this.selectedTypes.length > 0
+      ) {
         if (this.selectedTypes.length == 2) {
           this.moodboards = moodboards;
         } else {
           if (this.selectedTypes.includes('Template Moodboards')) {
-            this.moodboards = moodboards.filter(moodboard => moodboard.isTemplate);
+            this.moodboards = moodboards.filter(
+              (moodboard) => moodboard.isTemplate
+            );
           } else if (this.selectedTypes.includes('Non-Template Moodboards')) {
-            this.moodboards = moodboards.filter(moodboard => !moodboard.isTemplate);
+            this.moodboards = moodboards.filter(
+              (moodboard) => !moodboard.isTemplate
+            );
           }
         }
       } else {
         this.moodboards = moodboards;
       }
-    })
+    });
   }
-
 }

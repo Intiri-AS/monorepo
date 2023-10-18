@@ -13,27 +13,29 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './projects.page.html',
   styleUrls: ['./projects.page.scss'],
 })
-
 export class ProjectsPage implements OnInit {
-
   projects: Project[];
 
-  constructor(public projectService: ProjectService, public moodboardService: MoodboardService, private spinner: NgxSpinnerService)
-  {}
+  constructor(
+    public projectService: ProjectService,
+    public moodboardService: MoodboardService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
-    this.projectService.getAllProjects().subscribe(res => {
+    this.projectService.getAllProjects().subscribe((res) => {
       this.projects = res;
       this.spinner.hide();
     });
   }
 
-  getMbPiecesNo(moodboard){
+  getMbPiecesNo(moodboard) {
     let result = 0;
-      result += moodboard.colorPalettes.length + moodboard.materials.length + moodboard.products.length;
+    result +=
+      moodboard.colorPalettes.length +
+      moodboard.materials.length +
+      moodboard.products.length;
     return result;
   }
-
-
 }

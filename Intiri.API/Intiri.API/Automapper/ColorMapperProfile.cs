@@ -4,12 +4,12 @@ using Intiri.API.Models.IntiriColor;
 
 namespace Intiri.API.Automapper
 {
-	public class ColorMapperProfile : Profile
-	{
-		public ColorMapperProfile()
-		{
-			CreateMap<ColorDTO, Models.IntiriColor.Color>();
-			CreateMap<Models.IntiriColor.Color, ColorDTO>();
-		}
-	}
+    public class ColorMapperProfile : Profile
+    {
+        public ColorMapperProfile()
+        {
+            CreateMap<ColorDTO, Models.IntiriColor.Color>();
+            CreateMap<Models.IntiriColor.Color, ColorDTO>();
+        }
+    }
 }

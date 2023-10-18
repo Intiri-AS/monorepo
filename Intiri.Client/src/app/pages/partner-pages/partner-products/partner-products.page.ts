@@ -7,15 +7,12 @@ import { AddProductModalComponent } from 'src/app/components/modals/add-product-
 import { MaterialService } from 'src/app/services/material.service';
 import { PartnerService } from 'src/app/services/partner.service';
 
-
 @Component({
   selector: 'app-partner-products-page',
   templateUrl: './partner-products.page.html',
   styleUrls: ['./partner-products.page.scss'],
 })
-
 export class PartnerProductsPage implements OnInit, OnDestroy {
-
   products$: Observable<any> = this.partnerService.products$;
   material$: Observable<any> = this.materialService.materials$;
   products: any[];
@@ -24,10 +21,12 @@ export class PartnerProductsPage implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(public popoverController: PopoverController,
-              private partnerService: PartnerService,
-              private modalController: ModalController,
-              private materialService: MaterialService) { }
+  constructor(
+    public popoverController: PopoverController,
+    private partnerService: PartnerService,
+    private modalController: ModalController,
+    private materialService: MaterialService
+  ) {}
 
   ngOnInit() {
     this.partnerService.getPartnerProducts();
@@ -37,23 +36,22 @@ export class PartnerProductsPage implements OnInit, OnDestroy {
       })
     );
     this.subscriptions.push(
-      this.products$.subscribe( response => {
+      this.products$.subscribe((response) => {
         this.products = response;
       })
     );
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
-
 
   async showSettings(e: Event, product) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {product: true, item: product},
-      dismissOnSelect: true
+      componentProps: { product: true, item: product },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -61,26 +59,26 @@ export class PartnerProductsPage implements OnInit, OnDestroy {
 
   async openAddProductModal() {
     const popover = await this.popoverController.getTop();
-        if (popover)
-            await popover.dismiss(null);
+    if (popover) await popover.dismiss(null);
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
-      componentProps: {add: true},
-      cssClass: 'product-modal-css'
+      componentProps: { add: true },
+      cssClass: 'product-modal-css',
     });
 
     await modal.present();
   }
 
-  onFilterChange(event){
+  onFilterChange(event) {
     const selectedTypeNames = event.detail.value;
-    this.products$.subscribe(products => {
-      if(selectedTypeNames.length > 0) {
-        this.products = products.filter(products => selectedTypeNames.includes(products.productTypeId));
+    this.products$.subscribe((products) => {
+      if (selectedTypeNames.length > 0) {
+        this.products = products.filter((products) =>
+          selectedTypeNames.includes(products.productTypeId)
+        );
       } else {
         this.products = products;
       }
-    })
-}
-
+    });
+  }
 }

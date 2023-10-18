@@ -8,8 +8,8 @@ namespace Intiri.API.Models.Room
         public int Id { get; set; }
         public string Shape { get; set; }
         public double Size { get; set; }
-		public string SketchUrl { get; set; }
-		public string SketchPublicId { get; set; }
+        public string SketchUrl { get; set; }
+        public string SketchPublicId { get; set; }
         public int BudgetRate { get; set; }
 
         //public Moodboard.Moodboard Moodboard { get; set; }

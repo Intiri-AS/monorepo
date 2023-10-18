@@ -9,23 +9,28 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
   styleUrls: ['./admin-inspiration.component.scss'],
 })
 export class AdminInspirationComponent implements OnInit {
-
   searchText: any;
   inspirations: any[];
 
-  constructor(private commonService: CommonService, private modalController: ModalController) { }
+  constructor(
+    private commonService: CommonService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.commonService.getAllInspirations().subscribe((res: any[]) => {
-      this.inspirations = res.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});;
-    })
+      this.inspirations = res.map((e) => {
+        e.filename = e.url.substring(e.url.lastIndexOf('/') + 1);
+        return e;
+      });
+    });
   }
 
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: {file: image, canDelete: false},
-      cssClass: 'open-file-modal-css'
+      componentProps: { file: image, canDelete: false },
+      cssClass: 'open-file-modal-css',
     });
 
     await modal.present();
@@ -46,5 +51,4 @@ export class AdminInspirationComponent implements OnInit {
     el.click();
     el.remove();
   }
-
 }

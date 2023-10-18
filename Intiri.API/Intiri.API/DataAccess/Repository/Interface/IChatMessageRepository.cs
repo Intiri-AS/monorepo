@@ -2,7 +2,5 @@
 
 namespace Intiri.API.DataAccess.Repository.Interface
 {
-    public interface IChatMessageRepository : IRepositoryBase<ChatMessage>
-    {
-    }
+    public interface IChatMessageRepository : IRepositoryBase<ChatMessage> { }
 }

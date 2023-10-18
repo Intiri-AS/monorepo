@@ -23,13 +23,13 @@
 }
 
 .first-step-selected {
-  @apply bg-primary rounded-l-2xl xl-ion:rounded-l-none xl-ion:rounded-t-2xl
+  @apply bg-primary rounded-l-2xl xl-ion:rounded-l-none xl-ion:rounded-t-2xl;
 }
 
 .step-selected {
-  @apply bg-primary
+  @apply bg-primary;
 }
 
 .last-step-selected {
-  @apply bg-primary rounded-r-2xl xl-ion:rounded-r-none xl-ion:rounded-b-2xl
+  @apply bg-primary rounded-r-2xl xl-ion:rounded-r-none xl-ion:rounded-b-2xl;
 }

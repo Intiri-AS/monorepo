@@ -12,7 +12,6 @@ import { VerificationTarget } from 'src/app/types/types';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-
 export class LoginPage implements OnInit {
   model: any = {};
   public loginForm: FormGroup;
@@ -27,10 +26,13 @@ export class LoginPage implements OnInit {
     private nav: NavController
   ) {
     this.loginForm = this.formBuilder.group({
-      phoneNumber: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$')
-      ])],
+      phoneNumber: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+        ]),
+      ],
     });
   }
 
@@ -39,7 +41,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((loggedUser) => {
       if (loggedUser) {
         const routes = this.accountService.homepageRoutes;
         this.nav.navigateRoot(routes[loggedUser.roles[0]]);
@@ -58,17 +60,22 @@ export class LoginPage implements OnInit {
     }
     const loginModel = {
       countryCode: this.activeCode,
-      phoneNumber: this.loginForm.value.phoneNumber
+      phoneNumber: this.loginForm.value.phoneNumber,
     };
     this.accountService.login(loginModel).subscribe(
       (response) => {
-        this.router.navigate(['/sms-verification'], { queryParams: {
-          target: VerificationTarget.LOGIN,
-          countryCode: loginModel.countryCode,
-          phoneNumber: loginModel.phoneNumber } });
-      }, e => {
+        this.router.navigate(['/sms-verification'], {
+          queryParams: {
+            target: VerificationTarget.LOGIN,
+            countryCode: loginModel.countryCode,
+            phoneNumber: loginModel.phoneNumber,
+          },
+        });
+      },
+      (e) => {
         this.error = e.error;
-      });
+      }
+    );
   }
 
   initiateVippsLogin() {
@@ -78,7 +85,7 @@ export class LoginPage implements OnInit {
     this.accountService.initiateVippsLogin(redirectUri, state);
   }
 
-  onIntiriIconClick () {
+  onIntiriIconClick() {
     window.location.replace('https://intiri.no');
   }
 }

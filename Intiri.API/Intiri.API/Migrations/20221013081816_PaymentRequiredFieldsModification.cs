@@ -16,7 +16,8 @@ namespace Intiri.API.Migrations
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
-                oldNullable: true);
+                oldNullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -27,7 +28,8 @@ namespace Intiri.API.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldType: "nvarchar(max)"
+            );
         }
     }
 }

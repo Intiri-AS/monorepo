@@ -10,56 +10,62 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalettesId",
-                table: "MoodboardColorPallete");
+                table: "MoodboardColorPallete"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPallete_Moodboards_MoodboardsId",
-                table: "MoodboardColorPallete");
+                table: "MoodboardColorPallete"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Projects_ColorPalletes_ColorPalleteId",
-                table: "Projects");
+                table: "Projects"
+            );
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_MoodboardColorPallete",
-                table: "MoodboardColorPallete");
+                table: "MoodboardColorPallete"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_ColorPalletes",
-                table: "ColorPalletes");
+            migrationBuilder.DropPrimaryKey(name: "PK_ColorPalletes", table: "ColorPalletes");
 
             migrationBuilder.RenameTable(
                 name: "MoodboardColorPallete",
-                newName: "MoodboardColorPalette");
+                newName: "MoodboardColorPalette"
+            );
 
-            migrationBuilder.RenameTable(
-                name: "ColorPalletes",
-                newName: "ColorPalettes");
+            migrationBuilder.RenameTable(name: "ColorPalletes", newName: "ColorPalettes");
 
             migrationBuilder.RenameColumn(
                 name: "ColorPalleteId",
                 table: "Projects",
-                newName: "ColorPaletteId");
+                newName: "ColorPaletteId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_Projects_ColorPalleteId",
                 table: "Projects",
-                newName: "IX_Projects_ColorPaletteId");
+                newName: "IX_Projects_ColorPaletteId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_MoodboardColorPallete_MoodboardsId",
                 table: "MoodboardColorPalette",
-                newName: "IX_MoodboardColorPalette_MoodboardsId");
+                newName: "IX_MoodboardColorPalette_MoodboardsId"
+            );
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_MoodboardColorPalette",
                 table: "MoodboardColorPalette",
-                columns: new[] { "ColorPalettesId", "MoodboardsId" });
+                columns: new[] { "ColorPalettesId", "MoodboardsId" }
+            );
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_ColorPalettes",
                 table: "ColorPalettes",
-                column: "Id");
+                column: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPalette_ColorPalettes_ColorPalettesId",
@@ -67,7 +73,8 @@ namespace Intiri.API.Migrations
                 column: "ColorPalettesId",
                 principalTable: "ColorPalettes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPalette_Moodboards_MoodboardsId",
@@ -75,70 +82,78 @@ namespace Intiri.API.Migrations
                 column: "MoodboardsId",
                 principalTable: "Moodboards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Projects_ColorPalettes_ColorPaletteId",
                 table: "Projects",
                 column: "ColorPaletteId",
                 principalTable: "ColorPalettes",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPalette_ColorPalettes_ColorPalettesId",
-                table: "MoodboardColorPalette");
+                table: "MoodboardColorPalette"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoodboardColorPalette_Moodboards_MoodboardsId",
-                table: "MoodboardColorPalette");
+                table: "MoodboardColorPalette"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Projects_ColorPalettes_ColorPaletteId",
-                table: "Projects");
+                table: "Projects"
+            );
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_MoodboardColorPalette",
-                table: "MoodboardColorPalette");
+                table: "MoodboardColorPalette"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_ColorPalettes",
-                table: "ColorPalettes");
+            migrationBuilder.DropPrimaryKey(name: "PK_ColorPalettes", table: "ColorPalettes");
 
             migrationBuilder.RenameTable(
                 name: "MoodboardColorPalette",
-                newName: "MoodboardColorPallete");
+                newName: "MoodboardColorPallete"
+            );
 
-            migrationBuilder.RenameTable(
-                name: "ColorPalettes",
-                newName: "ColorPalletes");
+            migrationBuilder.RenameTable(name: "ColorPalettes", newName: "ColorPalletes");
 
             migrationBuilder.RenameColumn(
                 name: "ColorPaletteId",
                 table: "Projects",
-                newName: "ColorPalleteId");
+                newName: "ColorPalleteId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_Projects_ColorPaletteId",
                 table: "Projects",
-                newName: "IX_Projects_ColorPalleteId");
+                newName: "IX_Projects_ColorPalleteId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_MoodboardColorPalette_MoodboardsId",
                 table: "MoodboardColorPallete",
-                newName: "IX_MoodboardColorPallete_MoodboardsId");
+                newName: "IX_MoodboardColorPallete_MoodboardsId"
+            );
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_MoodboardColorPallete",
                 table: "MoodboardColorPallete",
-                columns: new[] { "ColorPalettesId", "MoodboardsId" });
+                columns: new[] { "ColorPalettesId", "MoodboardsId" }
+            );
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_ColorPalletes",
                 table: "ColorPalletes",
-                column: "Id");
+                column: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPallete_ColorPalletes_ColorPalettesId",
@@ -146,7 +161,8 @@ namespace Intiri.API.Migrations
                 column: "ColorPalettesId",
                 principalTable: "ColorPalletes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoodboardColorPallete_Moodboards_MoodboardsId",
@@ -154,14 +170,16 @@ namespace Intiri.API.Migrations
                 column: "MoodboardsId",
                 principalTable: "Moodboards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Projects_ColorPalletes_ColorPalleteId",
                 table: "Projects",
                 column: "ColorPalleteId",
                 principalTable: "ColorPalletes",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
     }
 }

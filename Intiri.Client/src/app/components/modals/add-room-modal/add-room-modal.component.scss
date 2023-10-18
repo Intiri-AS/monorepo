@@ -1,11 +1,11 @@
 .profile-input {
-    @apply mt-4 mx-2 flex-1 px-0 sm:px-[100px]
+  @apply mt-4 mx-2 flex-1 px-0 sm:px-[100px];
 }
 
 ion-select {
-    @apply border rounded-2xl border-black-2 ;
+  @apply border rounded-2xl border-black-2;
 }
 
 .plus-icon-wrapper {
-    @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[60px] w-[60px]
+  @apply mx-auto text-primary text-2xl rounded-full bg-light p-2 h-[60px] w-[60px];
 }

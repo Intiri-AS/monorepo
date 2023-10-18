@@ -32,10 +32,24 @@ namespace Intiri.API.DataAccess
                     SqlParameter[] param = new SqlParameter[ParamValue.GetUpperBound(0) + 1];
                     for (int i = 0; i < param.Length; i++)
                     {
-                        param[i] = new SqlParameter("@" + ParamValue[i, 0].ToString(), (ParamValue[i, 1] == null ? null : (ParamValue[i, 1].ToString() == "null" ? null : ParamValue[i, 1].ToString())));
+                        param[i] = new SqlParameter(
+                            "@" + ParamValue[i, 0].ToString(),
+                            (
+                                ParamValue[i, 1] == null
+                                    ? null
+                                    : (
+                                        ParamValue[i, 1].ToString() == "null"
+                                            ? null
+                                            : ParamValue[i, 1].ToString()
+                                    )
+                            )
+                        );
                     }
                     cmd.Parameters.AddRange(param);
-                    if (con.State != ConnectionState.Open) { con.Open(); }
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
 
                     SqlDataReader reader = await cmd.ExecuteReaderAsync();
                     StringBuilder sb = new StringBuilder();
@@ -70,10 +84,24 @@ namespace Intiri.API.DataAccess
                     SqlParameter[] param = new SqlParameter[ParamValue.GetUpperBound(0) + 1];
                     for (int i = 0; i < param.Length; i++)
                     {
-                        param[i] = new SqlParameter("@" + ParamValue[i, 0].ToString(), (ParamValue[i, 1] == null ? null : (ParamValue[i, 1].ToString() == "null" ? null : ParamValue[i, 1].ToString())));
+                        param[i] = new SqlParameter(
+                            "@" + ParamValue[i, 0].ToString(),
+                            (
+                                ParamValue[i, 1] == null
+                                    ? null
+                                    : (
+                                        ParamValue[i, 1].ToString() == "null"
+                                            ? null
+                                            : ParamValue[i, 1].ToString()
+                                    )
+                            )
+                        );
                     }
                     cmd.Parameters.AddRange(param);
-                    if (con.State != ConnectionState.Open) { con.Open(); }
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
 
                     SqlDataAdapter myDAP = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -101,7 +129,6 @@ namespace Intiri.API.DataAccess
             DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-
                 try
                 {
                     if (con.State == ConnectionState.Closed)
@@ -111,19 +138,14 @@ namespace Intiri.API.DataAccess
                     if (con.State == ConnectionState.Open)
                         con.Close();
                 }
-                catch (Exception e)
-                {
-
-                }
+                catch (Exception e) { }
                 finally
                 {
                     if (con.State == ConnectionState.Open)
                         con.Close();
                 }
-
             }
             return dt;
         }
-
     }
 }

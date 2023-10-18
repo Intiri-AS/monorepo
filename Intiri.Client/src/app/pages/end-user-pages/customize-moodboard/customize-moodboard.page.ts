@@ -15,7 +15,6 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './customize-moodboard.page.html',
   styleUrls: ['./customize-moodboard.page.scss'],
 })
-
 export class CustomizeMoodboardPage {
   isScrolledDown: boolean;
 
@@ -33,7 +32,7 @@ export class CustomizeMoodboardPage {
       title: 'NEW-PROJECT.edit-select-products',
       subtitle: 'NEW-PROJECT.edit-select-products-text',
       data: [],
-    }
+    },
   ];
 
   initialMoodboard: Moodboard;
@@ -43,14 +42,14 @@ export class CustomizeMoodboardPage {
   stepsOrder: object = {
     0: 'colorPalettes',
     1: 'materials',
-    2: 'products'
-  }
+    2: 'products',
+  };
 
   currentStepNo: number = 0;
   isEditMoodboardPage: boolean = false;
   isCustomizeMoodboardPage: boolean = false;
 
-  constructor (
+  constructor(
     public projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
@@ -59,7 +58,7 @@ export class CustomizeMoodboardPage {
     private notifier: NotifierService,
     private location: Location,
     private translate: TranslateService,
-    private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -75,18 +74,19 @@ export class CustomizeMoodboardPage {
         subtitle: 'NEW-PROJECT.customize-moodboard-subtitle',
         data: {},
       });
-      this.stepsOrder[3] = 'moodboard'
+      this.stepsOrder[3] = 'moodboard';
     }
 
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       // if edit
-      if(data.moodboard) {
+      if (data.moodboard) {
         this.moodboard = data.moodboard;
         this.isEdit = true;
-      } else {  // if customize
+      } else {
+        // if customize
         this.projectService.currentProject$.subscribe((project) => {
           this.moodboard = project.currentMoodboard;
-          this.initialMoodboard = {...project.currentMoodboard};
+          this.initialMoodboard = { ...project.currentMoodboard };
           this.isEdit = false;
         });
       }
@@ -96,11 +96,10 @@ export class CustomizeMoodboardPage {
 
       if (this.isEditMoodboardPage) {
         this.steps[3]['data'] = {
-          moodboard: this.moodboard
+          moodboard: this.moodboard,
         };
       }
-
-    })
+    });
   }
 
   goBack() {
@@ -129,55 +128,79 @@ export class CustomizeMoodboardPage {
     if (step >= this.steps.length || step < 0) {
       return false;
     }
-    switch(step) {
-      case 0: { return true; }
-      case 1: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4 }
-      case 2: { return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4}
+    switch (step) {
+      case 0: {
+        return true;
+      }
+      case 1: {
+        return (
+          this.moodboard.colorPalettes.length > 0 &&
+          this.moodboard.materials.length >= 4
+        );
+      }
+      case 2: {
+        return (
+          this.moodboard.colorPalettes.length > 0 &&
+          this.moodboard.materials.length >= 4
+        );
+      }
       case 3: {
-        return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length >= 4;
+        return (
+          this.moodboard.colorPalettes.length > 0 &&
+          this.moodboard.materials.length >= 4
+        );
       }
     }
     return true;
   }
 
   validateData(): boolean {
-    return this.moodboard.colorPalettes.length > 0 && this.moodboard.materials.length > 3 && this.moodboard.products.length > 1;
+    return (
+      this.moodboard.colorPalettes.length > 0 &&
+      this.moodboard.materials.length > 3 &&
+      this.moodboard.products.length > 1
+    );
   }
 
   toggleItem(item) {
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
-    if(Array.isArray(this.moodboard[stepName])) {
-      if(this.moodboard[stepName].some(e => e.id === item.id)) {
-        this.moodboard[stepName] = this.moodboard[stepName].filter(e => e.id !== item.id);
+    if (Array.isArray(this.moodboard[stepName])) {
+      if (this.moodboard[stepName].some((e) => e.id === item.id)) {
+        this.moodboard[stepName] = this.moodboard[stepName].filter(
+          (e) => e.id !== item.id
+        );
       } else {
         this.moodboard[stepName] = [...this.moodboard[stepName], item];
       }
     } else {
       // else it's a single select
-      this.moodboard[stepName] = this.moodboard[stepName] === item ? null : item;
+      this.moodboard[stepName] =
+        this.moodboard[stepName] === item ? null : item;
     }
   }
 
   finish() {
-    if(this.isEdit){
+    if (this.isEdit) {
       this.finishEditing();
     } else {
-      this.finishCustomizing()
+      this.finishCustomizing();
     }
   }
 
   finishEditing() {
     this.spinner.show();
-    this.moodboardService.editMoodboard(this.moodboard).subscribe(res => {
+    this.moodboardService.editMoodboard(this.moodboard).subscribe((res) => {
       this.spinner.hide();
       this.notifier.show({
         message: this.translate.instant('NOTIFY.moodboard-updated'),
         type: 'success',
       });
-      const projectId = this.route.snapshot.paramMap.get('projectId')
-      this.router.navigateByUrl(`/project-details/${projectId}/moodboard-details/${this.moodboard.id}`)
-    })
+      const projectId = this.route.snapshot.paramMap.get('projectId');
+      this.router.navigateByUrl(
+        `/project-details/${projectId}/moodboard-details/${this.moodboard.id}`
+      );
+    });
   }
 
   finishCustomizing() {
@@ -188,5 +211,4 @@ export class CustomizeMoodboardPage {
       this.nav.navigateRoot('/new-project?step=5');
     });
   }
-
 }

@@ -5,24 +5,22 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class CommonService {
-
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getDashboardData(){
-    return this.http.get(this.apiUrl + 'admin/totalCount')
+  getDashboardData() {
+    return this.http.get(this.apiUrl + 'admin/totalCount');
   }
 
-  getConsulationsInfo(){
-    return this.http.get(this.apiUrl + 'consultations')
+  getConsulationsInfo() {
+    return this.http.get(this.apiUrl + 'consultations');
   }
 
-  updateConsulationsInfo(data){
+  updateConsulationsInfo(data) {
     return this.http.patch(this.apiUrl + 'consultations/update', data);
   }
 
@@ -41,5 +39,4 @@ export class CommonService {
   getAllInspirations() {
     return this.http.get(this.apiUrl + 'admin/inspirations');
   }
-
 }

@@ -1,13 +1,13 @@
 [
-	{ "Name": "Wood" },
-	{ "Name": "Laminate" },
-	{ "Name": "Steel" },
-	{ "Name": "Glass" },
-	{ "Name": "Ceramic" },
-	{ "Name": "Slate" },
-	{ "Name": "Stone" },
-	{ "Name": "Marble" },
-	{ "Name": "Plastic" },
-	{ "Name": "Textile" },
-	{ "Name": "Other" }
+  { "Name": "Wood" },
+  { "Name": "Laminate" },
+  { "Name": "Steel" },
+  { "Name": "Glass" },
+  { "Name": "Ceramic" },
+  { "Name": "Slate" },
+  { "Name": "Stone" },
+  { "Name": "Marble" },
+  { "Name": "Plastic" },
+  { "Name": "Textile" },
+  { "Name": "Other" }
 ]

@@ -5,35 +5,36 @@ using Intiri.API.Models.DTO.OutputDTO;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class RoleRepository : RepositoryBase<Role>, IRoleRepository
-	{
-		#region Fields
+    public class RoleRepository : RepositoryBase<Role>, IRoleRepository
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region ctors
+        #region ctors
 
-		public RoleRepository(DataContext context, IMapper mapper) : base(context)
-		{
-			_mapper = mapper;
-		}
+        public RoleRepository(DataContext context, IMapper mapper)
+            : base(context)
+        {
+            _mapper = mapper;
+        }
 
-		#endregion ctors
+        #endregion ctors
 
-		#region Public methods
+        #region Public methods
 
-		public async Task<IEnumerable<string>> GetRolesNames()
-		{
-			return await Get(role => role.Name);
-		}
+        public async Task<IEnumerable<string>> GetRolesNames()
+        {
+            return await Get(role => role.Name);
+        }
 
-		public async Task<RoleDTO> GetRoleByName(string roleName)
-		{
-			return await SingleOrDefaultAsync<RoleDTO>(role => role.Name == roleName, _mapper);
-		}
+        public async Task<RoleDTO> GetRoleByName(string roleName)
+        {
+            return await SingleOrDefaultAsync<RoleDTO>(role => role.Name == roleName, _mapper);
+        }
 
-		#endregion Public methods
-	}
+        #endregion Public methods
+    }
 }
