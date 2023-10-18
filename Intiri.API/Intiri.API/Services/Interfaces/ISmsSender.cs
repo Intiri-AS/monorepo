@@ -2,8 +2,8 @@
 
 namespace Intiri.API.Services.Interfaces
 {
-	public interface ISmsSender
-	{
-		Task<MessageResource> SendSmsAsync(string number, string message);
-	}
+    public interface ISmsSender
+    {
+        Task<MessageResource> SendSmsAsync(string number, string message);
+    }
 }

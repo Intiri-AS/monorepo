@@ -16,7 +16,6 @@ import { StyleService } from 'src/app/services/style.service';
   styleUrls: ['./edit-moodboard.page.scss'],
 })
 export class AdminEditMoodboardPage implements OnInit {
-
   steps: Array<object> = [
     {
       title: 'STYLE.select-room-moodboard',
@@ -32,7 +31,13 @@ export class AdminEditMoodboardPage implements OnInit {
     },
     {
       title: 'NEW-PROJECT.select-materials',
-      data: {roomShapes: [{shape: 'rectangular', imagePath: 'icon/rectangle.png'}, {shape: 'square', imagePath: 'icon/square.png'}, {shape: 'l-shaped', imagePath: 'icon/l-shape.png'}]},
+      data: {
+        roomShapes: [
+          { shape: 'rectangular', imagePath: 'icon/rectangle.png' },
+          { shape: 'square', imagePath: 'icon/square.png' },
+          { shape: 'l-shaped', imagePath: 'icon/l-shape.png' },
+        ],
+      },
     },
     {
       title: 'MY-INTIRI.select-colors',
@@ -44,8 +49,8 @@ export class AdminEditMoodboardPage implements OnInit {
     },
     {
       title: '',
-      data: 'final'
-    }
+      data: 'final',
+    },
   ];
 
   stepsOrder: object = {
@@ -55,7 +60,7 @@ export class AdminEditMoodboardPage implements OnInit {
     3: 'materials',
     4: 'colorPalettes',
     5: 'products',
-    6: 'final'
+    6: 'final',
   };
 
   moodboard = new Moodboard();
@@ -72,26 +77,39 @@ export class AdminEditMoodboardPage implements OnInit {
 
   moodboardId: any;
 
-  constructor(public projectService: ProjectService, private moodboardSrv: MoodboardService, private styleSrv: StyleService,
-    private router: Router, private route: ActivatedRoute, private designerService: DesignerService,
-    private accountService: AccountService, private notifier: NotifierService, private spinner: NgxSpinnerService,
-    private translate: TranslateService) { }
+  constructor(
+    public projectService: ProjectService,
+    private moodboardSrv: MoodboardService,
+    private styleSrv: StyleService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private designerService: DesignerService,
+    private accountService: AccountService,
+    private notifier: NotifierService,
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
     this.moodboardId = this.route.snapshot.params.id;
-    this.moodboardSrv.getMoodboard(this.moodboardId).subscribe(moodboard => {
+    this.moodboardSrv.getMoodboard(this.moodboardId).subscribe((moodboard) => {
       this.moodboard = moodboard;
       this.spinner.hide();
-    })
-
+    });
 
     this.projectService.getRooms().subscribe((res) => {
       this.steps[0]['data'] = res;
     });
     this.styleSrv.getStyles();
     this.styleSrv.styles$.subscribe((res: Array<any>) => {
-      this.steps[1]['data'] = res.map(e => {e.imagePath = (!e.imagePath || e.imagePath === 'path') ?  e.styleImages[0].imagePath : e.imagePath; return e;});
+      this.steps[1]['data'] = res.map((e) => {
+        e.imagePath =
+          !e.imagePath || e.imagePath === 'path'
+            ? e.styleImages[0].imagePath
+            : e.imagePath;
+        return e;
+      });
     });
     this.projectService.getMaterials().subscribe((res: Array<any>) => {
       this.steps[3]['data'] = res;
@@ -177,24 +195,19 @@ export class AdminEditMoodboardPage implements OnInit {
   }
 
   toggleItem(item) {
-
     const stepName = this.stepsOrder[this.currentStepNo];
     // check if it's multi-select
     if (Array.isArray(this.moodboard[stepName])) {
-      if (
-        this.moodboard[stepName].some(
-          (e) => e.id === item.id
-        )
-      ) {
+      if (this.moodboard[stepName].some((e) => e.id === item.id)) {
         this.moodboard[stepName] = this.moodboard[stepName].filter(
           (e) => e.id !== item.id
         );
       } else {
         this.moodboard[stepName] = [...this.moodboard[stepName], item];
       }
-    }
-     else {  // else it's a single select
-        this.moodboard[stepName] =
+    } else {
+      // else it's a single select
+      this.moodboard[stepName] =
         JSON.stringify(this.moodboard[stepName]) === JSON.stringify(item)
           ? null
           : item;
@@ -203,42 +216,49 @@ export class AdminEditMoodboardPage implements OnInit {
 
   sendOffer() {
     this.spinner.show();
-    if(this.client.moodboardOfferId) {
-      this.moodboardSrv.editMoodboard(this.moodboard).subscribe(res => {
-        if(res['id']) {
+    if (this.client.moodboardOfferId) {
+      this.moodboardSrv.editMoodboard(this.moodboard).subscribe(
+        (res) => {
+          if (res['id']) {
+            this.spinner.hide();
+            this.notifier.show({
+              message: this.translate.instant('NOTIFY.offer-updated'),
+              type: 'success',
+            });
+            this.router.navigateByUrl('/client-list');
+          }
+        },
+        () => {
           this.spinner.hide();
           this.notifier.show({
-            message: this.translate.instant('NOTIFY.offer-updated'),
-            type: 'success',
+            message: this.translate.instant('NOTIFY.offer-updated-error'),
+            type: 'error',
           });
-          this.router.navigateByUrl('/client-list');
-         }
-      }, () => {
-        this.spinner.hide();
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.offer-updated-error'),
-          type: 'error',
-        });
-       })
-    } else {
-      this.moodboardSrv.addMoodboardOffer(this.moodboard, this.consultationPaymentId).subscribe(res => {
-        if(res['id']) {
-         this.spinner.hide();
-         this.notifier.show({
-           message: this.translate.instant('NOTIFY.offer-created'),
-           type: 'success',
-         });
-         this.router.navigateByUrl('/client-list');
         }
-      }, () => {
-       this.spinner.hide();
-       this.notifier.show({
-         message: this.translate.instant('NOTIFY.offer-created-error'),
-         type: 'error',
-       });
-      })
+      );
+    } else {
+      this.moodboardSrv
+        .addMoodboardOffer(this.moodboard, this.consultationPaymentId)
+        .subscribe(
+          (res) => {
+            if (res['id']) {
+              this.spinner.hide();
+              this.notifier.show({
+                message: this.translate.instant('NOTIFY.offer-created'),
+                type: 'success',
+              });
+              this.router.navigateByUrl('/client-list');
+            }
+          },
+          () => {
+            this.spinner.hide();
+            this.notifier.show({
+              message: this.translate.instant('NOTIFY.offer-created-error'),
+              type: 'error',
+            });
+          }
+        );
     }
-
   }
 
   saveMoodboard() {
@@ -271,7 +291,7 @@ export class AdminEditMoodboardPage implements OnInit {
   }
 
   cancel() {
-    if(this.client) {
+    if (this.client) {
       this.router.navigateByUrl('/client-list');
     } else {
       this.router.navigateByUrl('/moodboards');
@@ -282,9 +302,7 @@ export class AdminEditMoodboardPage implements OnInit {
     return (
       !object ||
       (Object.keys(object).length === 0 &&
-      Object.getPrototypeOf(object) === Object.prototype)
+        Object.getPrototypeOf(object) === Object.prototype)
     );
   }
-
-
 }

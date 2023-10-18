@@ -10,14 +10,16 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "Inspirations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EndUserId = table.Column<int>(type: "int", nullable: false)
-                },
+                columns: table =>
+                    new
+                    {
+                        Id = table
+                            .Column<int>(type: "int", nullable: false)
+                            .Annotation("SqlServer:Identity", "1, 1"),
+                        Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                        EndUserId = table.Column<int>(type: "int", nullable: false)
+                    },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Inspirations", x => x.Id);
@@ -26,19 +28,21 @@ namespace Intiri.API.Migrations
                         column: x => x.EndUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inspirations_EndUserId",
                 table: "Inspirations",
-                column: "EndUserId");
+                column: "EndUserId"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Inspirations");
+            migrationBuilder.DropTable(name: "Inspirations");
         }
     }
 }

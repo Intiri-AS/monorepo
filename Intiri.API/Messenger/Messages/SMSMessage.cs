@@ -1,6 +1,4 @@
 ﻿namespace Messenger.Messages
 {
-    public class SMSMessage : Message
-	{
-	}
+    public class SMSMessage : Message { }
 }

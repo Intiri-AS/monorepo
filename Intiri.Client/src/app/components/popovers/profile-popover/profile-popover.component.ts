@@ -7,20 +7,19 @@ import { SettingsPopoverComponent } from '../../settings-popover/settings-popove
   templateUrl: './profile-popover.component.html',
   styleUrls: ['./profile-popover.component.scss'],
 })
-
 export class ProfilePopoverComponent {
   headerType;
 
-  constructor (
+  constructor(
     private nav: NavController,
-    public popoverController: PopoverController,
+    public popoverController: PopoverController
   ) {}
 
-  ngOnInit () {
-    console.log(this.headerType)
+  ngOnInit() {
+    console.log(this.headerType);
   }
 
-  showProfilePage () {
+  showProfilePage() {
     if (this.headerType === 'partner') {
       this.nav.navigateRoot('/partner/profile');
     } else {
@@ -35,10 +34,10 @@ export class ProfilePopoverComponent {
       component: SettingsPopoverComponent,
       componentProps: {
         headerType: this.headerType,
-        onSettingsItemClick: this.onSettingsItemClick
+        onSettingsItemClick: this.onSettingsItemClick,
       },
       event: e,
-      dismissOnSelect: false
+      dismissOnSelect: false,
     });
 
     await popover.present();
@@ -50,7 +49,7 @@ export class ProfilePopoverComponent {
     // })
   }
 
-  onSettingsItemClick () {
+  onSettingsItemClick() {
     this.popoverController.dismiss();
   }
 }

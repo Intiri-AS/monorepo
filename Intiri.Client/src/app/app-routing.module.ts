@@ -55,48 +55,48 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'landing',
-    component: LandingPage
+    component: LandingPage,
   },
   {
     path: 'login',
-    component: LoginPage
+    component: LoginPage,
   },
   {
     path: 'register',
-    component: RegisterPage
+    component: RegisterPage,
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordPage
+    component: ForgotPasswordPage,
   },
   {
     path: 'reset-password',
-    component: ResetPasswordPage
+    component: ResetPasswordPage,
   },
   {
     path: 'sms-verification',
-    component: SmsVerificationPage
+    component: SmsVerificationPage,
   },
   {
     path: 'how-it-works',
-    component: HowItWorksPage
+    component: HowItWorksPage,
   },
   {
     path: 'processing',
-    component: ProcessingPage
+    component: ProcessingPage,
   },
   {
     path: 'profile', //TODO Set up page guard (all users guard)
     component: ProfilePage,
-    canActivate: [SharedGuard]
+    canActivate: [SharedGuard],
   },
   {
     path: 'book-designer', //TODO Set up page guard (end-user guard)
-    component: BookDesignerPage
+    component: BookDesignerPage,
   },
   {
     path: 'designer-portfolio/:id', //TODO Set up page guard (end-user guard)
@@ -104,9 +104,9 @@ const routes: Routes = [
   },
   {
     path: 'designer-profile/:id', //TODO Set up page guard (end-user guard)
-    resolve: {designer: DesignerService},
+    resolve: { designer: DesignerService },
     component: DesignerProfilePage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   // {
   //   path: 'payment-details', //TODO Set up page guard (end-user guard)
@@ -115,152 +115,152 @@ const routes: Routes = [
   {
     path: 'book-designer-profile', //TODO Set up page guard (end-user guard)
     component: BookDesignerProfilePage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'my-inspirations', //TODO Set up page guard (end-user guard)
     component: InspirationsPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'pricing-plans', //TODO Set up page guard (end-user guard)
     component: PricingPlansPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'messenger', //TODO Set up page guard (all user guard)
     component: MessengerPage,
-    canActivate: [SharedGuard]
+    canActivate: [SharedGuard],
   },
   {
     path: 'customize-moodboard', //TODO Set up page guard (end-user guard)
     component: CustomizeMoodboardPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'my-intiri', //TODO Set up page guard (end-user guard)
     component: MyIntiriPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'project-details', //TODO Set up page guard (end-user guard)
     component: ProjectDetailsPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'projects', //TODO Set up page guard (end-user guard)
     component: ProjectsPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'moodboard-details/:id', //TODO Set up page guard (end-user guard)
     component: MoodboardDetailsPage,
-    resolve: {moodboard: MoodboardService},
-    canActivate: [SharedGuard]
+    resolve: { moodboard: MoodboardService },
+    canActivate: [SharedGuard],
   },
   {
     path: 'contact-designer/:id', //TODO Set up page guard (end-user guard)
     component: BookDesignerPage,
-    resolve: {moodboard: MoodboardService},
-    canActivate: [EnduserGuard]
+    resolve: { moodboard: MoodboardService },
+    canActivate: [EnduserGuard],
   },
   {
     path: 'project-details/:projectId/moodboard-details/:id',
     component: MoodboardDetailsPage,
-    resolve: {moodboard: MoodboardService},
-    canActivate: [EnduserGuard]
+    resolve: { moodboard: MoodboardService },
+    canActivate: [EnduserGuard],
   },
   {
     path: 'edit-moodboard/:id/project/:projectId',
     component: CustomizeMoodboardPage,
-    resolve: {moodboard: MoodboardService},
-    canActivate: [EnduserGuard]
+    resolve: { moodboard: MoodboardService },
+    canActivate: [EnduserGuard],
   },
   {
     path: 'edit-moodboard/:id',
     component: AdminEditMoodboardPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'project-details/:id',
     component: ProjectDetailsPage,
-    resolve: {project: ProjectService},
-    canActivate: [EnduserGuard]
+    resolve: { project: ProjectService },
+    canActivate: [EnduserGuard],
   },
   {
     path: 'partner-profile/:id',
     component: AddPartnerPage,
-    resolve: {partner: PartnerService},
-    canActivate: [AdminGuard]
+    resolve: { partner: PartnerService },
+    canActivate: [AdminGuard],
   },
   {
     path: 'new-project',
-    component: NewProjectPage
+    component: NewProjectPage,
   },
   {
     path: 'pre-book-selection', //TODO Set up page guard (end-user guard)
     component: PreBookSelectionPage,
-    canActivate: [EnduserGuard]
+    canActivate: [EnduserGuard],
   },
   {
     path: 'dashboard', //TODO Set up page guard (admin guard)
     component: DashboardPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'consultations', //TODO Set up page guard (admin guard)
     component: ConsultationsPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'designers', //TODO Set up page guard (admin guard)
     component: DesignerPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'partners', //TODO Set up page guard (admin guard)
     component: VendorPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'moodboards', //TODO Set up page guard (admin guard)
     component: MoodboardsPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'clients', //TODO Set up page guard (admin guard)
     component: ClientPage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'add-moodboard',
     component: AddMoodboardPage,
-    canActivate: [AdminInternalDesignerGuard]
+    canActivate: [AdminInternalDesignerGuard],
   },
   {
     path: 'create-offer/:paymentId',
     component: AddMoodboardPage,
-    canActivate: [AdminDesignerGuard]
+    canActivate: [AdminDesignerGuard],
   },
   {
     path: 'style', //TODO Set up page guard (shared guard)
     component: StylePage,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   {
     path: 'my-moodboard',
     component: MyMoodboardPage,
-    canActivate: [BlockDesignerMoodboardGuard]
+    canActivate: [BlockDesignerMoodboardGuard],
   },
   {
     path: 'client-list', //TODO Set up page guard (internal designer guard)
     component: ClientListPage,
-    canActivate: [DesignerGuard]
+    canActivate: [DesignerGuard],
   },
   {
     path: 'client-request/:paymentId',
     component: ClientRequestPage,
-    canActivate: [DesignerGuard]
+    canActivate: [DesignerGuard],
   },
   // {
   //   path: 'style-list', //TODO Set up page guard (internal designer guard)
@@ -269,22 +269,21 @@ const routes: Routes = [
   {
     path: 'partner', //TODO Set up page guard (shared guard)
     component: PartnerProductsPage,
-    canActivate: [PartnerGuard]
+    canActivate: [PartnerGuard],
   },
   {
     path: 'partner/profile', //TODO Set up page guard (shared guard)
     component: PartnerProfilePage,
-    canActivate: [PartnerGuard]
-  }
-
+    canActivate: [PartnerGuard],
+  },
 
   //TODO Add routes for client pages, after discussion
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

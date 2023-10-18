@@ -12,14 +12,13 @@ namespace Intiri.API.Migrations
                 name: "PublicId",
                 table: "StyleImages",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "PublicId",
-                table: "StyleImages");
+            migrationBuilder.DropColumn(name: "PublicId", table: "StyleImages");
         }
     }
 }

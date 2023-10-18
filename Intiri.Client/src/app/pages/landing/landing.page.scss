@@ -1,9 +1,9 @@
 .hero-pencraft {
-  @apply text-black-2 font-Allison text-4xl md:text-6xl mb-8 leading-[90px]
+  @apply text-black-2 font-Allison text-4xl md:text-6xl mb-8 leading-[90px];
 }
 
 .hero-text {
-  @apply text-black-1 text-3xl md:text-4xl xl:text-4xl 2xl:text-6xl lg:text-left mb-6 leading-[60px] xl:leading-[50px] 2xl:leading-[90px] font-bold
+  @apply text-black-1 text-3xl md:text-4xl xl:text-4xl 2xl:text-6xl lg:text-left mb-6 leading-[60px] xl:leading-[50px] 2xl:leading-[90px] font-bold;
 }
 
 .hero-wrapper {
@@ -17,16 +17,16 @@
 }
 @media (max-height: 850px) {
   .hero-text {
-    @apply text-4xl leading-[50px]
+    @apply text-4xl leading-[50px];
   }
 }
 
 .hero-text-wrapper {
-  @apply lg:w-[610px] top-[90px] 2xl:top-[150px] absolute flex flex-1 flex-col items-start
+  @apply lg:w-[610px] top-[90px] 2xl:top-[150px] absolute flex flex-1 flex-col items-start;
 }
 
 .pencraft {
-  @apply pt-16 text-black-2 font-Allison text-6xl leading-[70px]
+  @apply pt-16 text-black-2 font-Allison text-6xl leading-[70px];
 }
 
 .pencraft-white {
@@ -35,7 +35,7 @@
 }
 
 .landing-headline {
-  @apply text-black-1 text-4xl lg:text-5xl text-left mb-6 leading-[55px] font-bold
+  @apply text-black-1 text-4xl lg:text-5xl text-left mb-6 leading-[55px] font-bold;
 }
 
 .landing-headline-white {
@@ -44,27 +44,27 @@
 }
 
 .landing-text {
-  @apply font-normal text-black-2 text-[18px] leading-[30px]
+  @apply font-normal text-black-2 text-[18px] leading-[30px];
 }
 
 .landing-bold {
-  @apply font-bold text-black-1 text-[18px] leading-[30px]
+  @apply font-bold text-black-1 text-[18px] leading-[30px];
 }
 
 .landing-img {
-  @apply m-1 ml-0 rounded-2xl max-h-[80vh]
+  @apply m-1 ml-0 rounded-2xl max-h-[80vh];
 }
 
 .quote-icon {
-  @apply inline-block w-[27px] h-[40px] bg-quote
+  @apply inline-block w-[27px] h-[40px] bg-quote;
 }
 
 .arrow-icon {
-  @apply inline-block cursor-pointer w-[40px] h-[20px] hover:opacity-50
+  @apply inline-block cursor-pointer w-[40px] h-[20px] hover:opacity-50;
 }
 
 .contact-btn {
-  @apply hover:opacity-70 bg-transparent text-white normal-case rounded-xl border-white border px-4 mx-auto my-0 h-10
+  @apply hover:opacity-70 bg-transparent text-white normal-case rounded-xl border-white border px-4 mx-auto my-0 h-10;
 }
 
 ion-slides {

@@ -10,7 +10,8 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_ProductTypes_ProductTypeId",
-                table: "Products");
+                table: "Products"
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "ProductTypeId",
@@ -18,7 +19,8 @@ namespace Intiri.API.Migrations
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int),
-                oldType: "int");
+                oldType: "int"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Products_ProductTypes_ProductTypeId",
@@ -26,14 +28,16 @@ namespace Intiri.API.Migrations
                 column: "ProductTypeId",
                 principalTable: "ProductTypes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.SetNull);
+                onDelete: ReferentialAction.SetNull
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_ProductTypes_ProductTypeId",
-                table: "Products");
+                table: "Products"
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "ProductTypeId",
@@ -43,7 +47,8 @@ namespace Intiri.API.Migrations
                 defaultValue: 0,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Products_ProductTypes_ProductTypeId",
@@ -51,7 +56,8 @@ namespace Intiri.API.Migrations
                 column: "ProductTypeId",
                 principalTable: "ProductTypes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

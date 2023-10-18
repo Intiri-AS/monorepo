@@ -83,8 +83,8 @@ export class AddColorModalComponent implements OnInit {
     mainColor: '',
     shadeColorLight: '',
     shadeColorMedium: '',
-    shadeColorDark: ''
-  }
+    shadeColorDark: '',
+  };
 
   constructor(
     private modalController: ModalController,
@@ -100,7 +100,7 @@ export class AddColorModalComponent implements OnInit {
       main: ['', [Validators.required]],
       shadeOne: ['', [Validators.required]],
       shadeTwo: ['', [Validators.required]],
-      shadeThree: ['', [Validators.required]]
+      shadeThree: ['', [Validators.required]],
     });
     this.editColorForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -108,22 +108,24 @@ export class AddColorModalComponent implements OnInit {
       main: ['', [Validators.required]],
       shadeOne: ['', [Validators.required]],
       shadeTwo: ['', [Validators.required]],
-      shadeThree: ['', [Validators.required]]
+      shadeThree: ['', [Validators.required]],
     });
   }
 
-  item: any
+  item: any;
 
   ngOnInit() {
     this.colorService.getNCSColors();
-    this.colorService.colorNCS$.subscribe(countries => this.colorNCSArr = countries);
+    this.colorService.colorNCS$.subscribe(
+      (countries) => (this.colorNCSArr = countries)
+    );
 
     if (this.edit) {
-      const {id, ...others } = this.item;
+      const { id, ...others } = this.item;
       setTimeout(() => {
         this.colorPallete = others;
         this.refreshColorPalletes();
-      }, 1000);  //5s
+      }, 1000); //5s
     }
   }
 
@@ -138,35 +140,41 @@ export class AddColorModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.colorService.addColorPalette(this.colorPallete).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.colorService.getColorPalettes();
-        this.openSuccessModal();
+    this.colorService.addColorPalette(this.colorPallete).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.colorService.getColorPalettes();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteColor() {
-    this.colorService.deleteColorPalette(this.item.id).subscribe(res => {
+    this.colorService.deleteColorPalette(this.item.id).subscribe(
+      (res) => {
         this.colorService.getColorPalettes();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.color-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editColor() {
@@ -176,37 +184,42 @@ export class AddColorModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.colorService.editColorPalette(this.item.id, this.colorPallete).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.colorService.getColorPalettes();
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.color-saved'),
-          type: 'success'
-        });
-      }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    this.colorService
+      .editColorPalette(this.item.id, this.colorPallete)
+      .subscribe(
+        (res) => {
+          this.spinner.hide();
+          this.modalController.dismiss();
+          if (typeof res === 'object') {
+            this.colorService.getColorPalettes();
+            this.notifier.show({
+              message: this.translate.instant('NOTIFY.color-saved'),
+              type: 'success',
+            });
+          }
+        },
+        (e) => {
+          this.spinner.hide();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.error'),
+            type: 'error',
+          });
+        }
+      );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddColorModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  refreshColorPalletes(){
+  refreshColorPalletes() {
     this.updateColorPalleteMain();
     this.updateColorPalleteLight();
     this.updateColorPalleteMedium();
@@ -260,5 +273,4 @@ export class AddColorModalComponent implements OnInit {
       }
     }
   }
-
 }

@@ -22,247 +22,305 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class PartnerController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class PartnerController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly IUserService _userService;
-		private readonly IAccountService _accountService;
-		private readonly ILogger<UsersController> _logger;
-		private readonly IFileUploudService _fileUploadService;
+        private readonly IMapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
+        private readonly ILogger<UsersController> _logger;
+        private readonly IFileUploudService _fileUploadService;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public PartnerController(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService, IFileUploudService fileUploadService, IUserService userService, ILogger<UsersController> logger) 
-			: base(unitOfWork)
-		{
-			_mapper = mapper;
-			_logger = logger;
-			_userService = userService;
-			_fileUploadService = fileUploadService;
-			_accountService = accountService;
-		}
+        public PartnerController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IAccountService accountService,
+            IFileUploudService fileUploadService,
+            IUserService userService,
+            ILogger<UsersController> logger
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _logger = logger;
+            _userService = userService;
+            _fileUploadService = fileUploadService;
+            _accountService = accountService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
-		{
-			IEnumerable<Partner> partners = await _unitOfWork.PartnerRepository.GetPartnersAsync();
-			IEnumerable<PartnerOutDTO> usersToReturn = _mapper.Map<IEnumerable<PartnerOutDTO>>(partners);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PartnerOutDTO>>> GetAllPartners()
+        {
+            IEnumerable<Partner> partners = await _unitOfWork.PartnerRepository.GetPartnersAsync();
+            IEnumerable<PartnerOutDTO> usersToReturn = _mapper.Map<IEnumerable<PartnerOutDTO>>(
+                partners
+            );
 
-			return Ok(usersToReturn);
-		}
+            return Ok(usersToReturn);
+        }
 
-		[HttpGet("partner/{partnerId}")]
-		public async Task<ActionResult<IEnumerable<PartnerContactOutDTO>>> GetPartnerWithContactsAndProducts(int partnerId)
-		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllAsync(partnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+        [HttpGet("partner/{partnerId}")]
+        public async Task<
+            ActionResult<IEnumerable<PartnerContactOutDTO>>
+        > GetPartnerWithContactsAndProducts(int partnerId)
+        {
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerAllAsync(partnerId);
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			PartnerAllOutDTO partnerOut = _mapper.Map<PartnerAllOutDTO>(partner);
+            PartnerAllOutDTO partnerOut = _mapper.Map<PartnerAllOutDTO>(partner);
 
-			return Ok(partnerOut);
-		}
+            return Ok(partnerOut);
+        }
 
-		[HttpGet("profile")]
-		public async Task<ActionResult<PartnerContactOutDTO>> GetPartnerProfile()
-		{
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+        [HttpGet("profile")]
+        public async Task<ActionResult<PartnerContactOutDTO>> GetPartnerProfile()
+        {
+            PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(
+                User.GetUsername()
+            );
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			return Ok(_mapper.Map<PartnerOutDTO>(partner));
-		}
+            return Ok(_mapper.Map<PartnerOutDTO>(partner));
+        }
 
-		[HttpGet("allPartnersContacts")]
-		public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
-		{
-			IEnumerable<PartnerContact> pUsers = await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
-			IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(pUsers);
+        [HttpGet("allPartnersContacts")]
+        public async Task<ActionResult<IEnumerable<UserOutDTO>>> GetAllPartnerContacts()
+        {
+            IEnumerable<PartnerContact> pUsers =
+                await _unitOfWork.UserRepository.GetUsersAsync<PartnerContact>();
+            IEnumerable<UserOutDTO> usersToReturn = _mapper.Map<IEnumerable<UserOutDTO>>(pUsers);
 
-			return Ok(usersToReturn);
-		}
+            return Ok(usersToReturn);
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPost("createPartner")]
-		public async Task<ActionResult<PartnerOutDTO>> CreatePartner([FromForm] PartnerInDTO partnerInDTO)
-		{
-			if (await _unitOfWork.PartnerRepository.DoesAnyExist(p => p.Name == partnerInDTO.Name))
-			{
-				return BadRequest($"Partner name: '{partnerInDTO.Name}' already exists.");
-			}
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPost("createPartner")]
+        public async Task<ActionResult<PartnerOutDTO>> CreatePartner(
+            [FromForm] PartnerInDTO partnerInDTO
+        )
+        {
+            if (await _unitOfWork.PartnerRepository.DoesAnyExist(p => p.Name == partnerInDTO.Name))
+            {
+                return BadRequest($"Partner name: '{partnerInDTO.Name}' already exists.");
+            }
 
-			Partner partner = _mapper.Map<Partner>(partnerInDTO);
+            Partner partner = _mapper.Map<Partner>(partnerInDTO);
 
-			IFormFile logoFile = partnerInDTO.LogoFile;
-			if (logoFile != null && logoFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos);
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            IFormFile logoFile = partnerInDTO.LogoFile;
+            if (logoFile != null && logoFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        logoFile,
+                        FileUploadDestinations.PartnerLogos
+                    );
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.Item3.PublicId;
-			}
+                partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                partner.LogoPublicId = uploadResult.Item3.PublicId;
+            }
 
-			_unitOfWork.PartnerRepository.Insert(partner);
+            _unitOfWork.PartnerRepository.Insert(partner);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return _mapper.Map<PartnerOutDTO>(partner);
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return _mapper.Map<PartnerOutDTO>(partner);
+            }
 
-			return BadRequest("Problem occured while adding partner");
-		}
+            return BadRequest("Problem occured while adding partner");
+        }
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpDelete("delete/{partnerId}")]
-		public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
-		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(partnerId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpDelete("delete/{partnerId}")]
+        public async Task<ActionResult<PartnerOutDTO>> DeletePartner(int partnerId)
+        {
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                partnerId
+            );
 
-			if (partner == null)
-			{
-				return BadRequest("Partner doesn' exist.");
-			}
+            if (partner == null)
+            {
+                return BadRequest("Partner doesn' exist.");
+            }
 
-			List<string> cloudinaryPublicIds = _userService.GetPartnerCloudinaryFilesAsync(partner);
+            List<string> cloudinaryPublicIds = _userService.GetPartnerCloudinaryFilesAsync(partner);
 
-			try
-			{
-				await _unitOfWork.PartnerRepository.Delete(partner.Id);
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Internal error: {ex}");
-			}
+            try
+            {
+                await _unitOfWork.PartnerRepository.Delete(partner.Id);
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex}");
+            }
 
-			// delete all partner and partner products cloudinary files
-			if (cloudinaryPublicIds.Count > 0)
-			{
-				await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
-			}
+            // delete all partner and partner products cloudinary files
+            if (cloudinaryPublicIds.Count > 0)
+            {
+                await _userService.CleanUserCloudinaryFilesAsync(cloudinaryPublicIds);
+            }
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[Authorize(Policy = PolicyNames.PartnerPolicy)]
-		[HttpPut("update")]
-		public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile(PartnerInDTO partnerInDTO)
-		{
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+        [Authorize(Policy = PolicyNames.PartnerPolicy)]
+        [HttpPut("update")]
+        public async Task<ActionResult<PartnerOutDTO>> UpdatePartnerProfile(
+            PartnerInDTO partnerInDTO
+        )
+        {
+            PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(
+                User.GetUsername()
+            );
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			IFormFile logoFile = partnerInDTO.LogoFile;
+            IFormFile logoFile = partnerInDTO.LogoFile;
 
-			if (logoFile != null && logoFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            if (logoFile != null && logoFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        logoFile,
+                        FileUploadDestinations.PartnerLogos,
+                        partner.LogoPublicId
+                    );
 
-				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.Item3.PublicId;
-			}
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-			_mapper.Map(partnerInDTO, partner);
-			_unitOfWork.PartnerRepository.Update(partner);
+                partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                partner.LogoPublicId = uploadResult.Item3.PublicId;
+            }
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return _mapper.Map<PartnerOutDTO>(partner);
-			}
+            _mapper.Map(partnerInDTO, partner);
+            _unitOfWork.PartnerRepository.Update(partner);
 
-			return BadRequest("Failed to update partner.");
-		}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return _mapper.Map<PartnerOutDTO>(partner);
+            }
 
-		[HttpPost("addLogo")]
-		public async Task<ActionResult<PartnerLogoPathOutDTO>> AddLogo([FromForm] UserPhotoFileInDTO inFile)
-		{
-			PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+            return BadRequest("Failed to update partner.");
+        }
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+        [HttpPost("addLogo")]
+        public async Task<ActionResult<PartnerLogoPathOutDTO>> AddLogo(
+            [FromForm] UserPhotoFileInDTO inFile
+        )
+        {
+            PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(
+                User.GetUsername()
+            );
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			IFormFile logoFile = inFile.PhotoPath;
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			if (logoFile != null && logoFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            IFormFile logoFile = inFile.PhotoPath;
 
-				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.Item3.PublicId;
+            if (logoFile != null && logoFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        logoFile,
+                        FileUploadDestinations.PartnerLogos,
+                        partner.LogoPublicId
+                    );
 
-				_unitOfWork.PartnerRepository.Update(partner);
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return Ok(new PartnerLogoPathOutDTO() { LogoPath = partner.LogoPath });
-				}
-			}
+                partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                partner.LogoPublicId = uploadResult.Item3.PublicId;
 
-			return BadRequest("Problem adding partner logo.");
-		}
+                _unitOfWork.PartnerRepository.Update(partner);
 
-		[Authorize(Policy = PolicyNames.AdminPolicy)]
-		[HttpPatch("updatePartner/{partnerId}")]
-		public async Task<ActionResult<PartnerOutDTO>> UpdatePartner(int partnerId, [FromForm] PartnerInDTO partnerInDTO)
-		{
-			Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
+                if (await _unitOfWork.SaveChanges())
+                {
+                    return Ok(new PartnerLogoPathOutDTO() { LogoPath = partner.LogoPath });
+                }
+            }
 
-			if (partner == null)
-			{
-				return NotFound();
-			}
+            return BadRequest("Problem adding partner logo.");
+        }
 
-			IFormFile logoFile = partnerInDTO.LogoFile;
-			if (logoFile != null && logoFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-					await _fileUploadService.TryAddFileToCloudinaryAsync(logoFile, FileUploadDestinations.PartnerLogos, partner.LogoPublicId);
+        [Authorize(Policy = PolicyNames.AdminPolicy)]
+        [HttpPatch("updatePartner/{partnerId}")]
+        public async Task<ActionResult<PartnerOutDTO>> UpdatePartner(
+            int partnerId,
+            [FromForm] PartnerInDTO partnerInDTO
+        )
+        {
+            Partner partner = await _unitOfWork.PartnerRepository.GetByID(partnerId);
 
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            if (partner == null)
+            {
+                return NotFound();
+            }
 
-				partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				partner.LogoPublicId = uploadResult.Item3.PublicId;
-			}
+            IFormFile logoFile = partnerInDTO.LogoFile;
+            if (logoFile != null && logoFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        logoFile,
+                        FileUploadDestinations.PartnerLogos,
+                        partner.LogoPublicId
+                    );
 
-			_mapper.Map(partnerInDTO, partner);
-			_unitOfWork.PartnerRepository.Update(partner);
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return _mapper.Map<PartnerOutDTO>(partner);
-			}
+                partner.LogoPath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                partner.LogoPublicId = uploadResult.Item3.PublicId;
+            }
 
-			return BadRequest("Failed to update partner.");
-		}
-	}
+            _mapper.Map(partnerInDTO, partner);
+            _unitOfWork.PartnerRepository.Update(partner);
+
+            if (await _unitOfWork.SaveChanges())
+            {
+                return _mapper.Map<PartnerOutDTO>(partner);
+            }
+
+            return BadRequest("Failed to update partner.");
+        }
+    }
 }

@@ -24,11 +24,11 @@ export class AddPictureModalComponent implements OnInit {
     return this.addPictureForm.controls.style.errors;
   }
 
-  get roomTypeErrors () {
+  get roomTypeErrors() {
     return this.addPictureForm.controls.roomType.errors;
   }
 
-  get providerErrors () {
+  get providerErrors() {
     return this.addPictureForm.controls.provider.errors;
   }
 
@@ -57,19 +57,19 @@ export class AddPictureModalComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private notifier: NotifierService,
     private translate: TranslateService,
-    private commonUtils: CommonUtilsService,
+    private commonUtils: CommonUtilsService
   ) {
     this.addPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
       roomType: ['', [Validators.required]],
       provider: ['', Validators.required],
-      imageFiles: ['', [Validators.required]]
+      imageFiles: ['', [Validators.required]],
     });
     this.editPictureForm = this.formBuilder.group({
       style: ['', [Validators.required]],
       roomType: [''],
       provider: [''],
-      imageFile: ['']
+      imageFile: [''],
     });
   }
 
@@ -78,14 +78,14 @@ export class AddPictureModalComponent implements OnInit {
   delete: boolean;
   edit: boolean;
 
-  item: any
+  item: any;
 
   styleImage = {
     styleId: null,
     roomId: null,
     imageFiles: [],
-    provider: ''
-  }
+    provider: '',
+  };
 
   edit_styleImage_payload = {
     styleId: null,
@@ -95,7 +95,7 @@ export class AddPictureModalComponent implements OnInit {
   };
 
   imagePath = null;
-  imagePaths:Array<any> = [];
+  imagePaths: Array<any> = [];
 
   MAX_FILE_SIZE_LIMIT = 5000000;
   imageFileSizeExceededMaxLimit: boolean = false;
@@ -122,7 +122,10 @@ export class AddPictureModalComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.styleImage.imageFiles = event.target.files;
 
-      let fileSizeExceedslimit= Object.keys(this.styleImage.imageFiles).some((key, i) => this.checkIfFileSizeExceedMaxLimit(this.styleImage.imageFiles[key]))
+      let fileSizeExceedslimit = Object.keys(this.styleImage.imageFiles).some(
+        (key, i) =>
+          this.checkIfFileSizeExceedMaxLimit(this.styleImage.imageFiles[key])
+      );
 
       if (fileSizeExceedslimit) {
         this.imageFileSizeExceededMaxLimit = true;
@@ -131,28 +134,38 @@ export class AddPictureModalComponent implements OnInit {
         return;
       } else {
         this.imageFileSizeExceededMaxLimit = false;
-        this.imagePaths = Object.keys(this.styleImage.imageFiles).map((key, i) => {
-          return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.styleImage.imageFiles[key]))
-        });
+        this.imagePaths = Object.keys(this.styleImage.imageFiles).map(
+          (key, i) => {
+            return this.sanitizer.bypassSecurityTrustUrl(
+              URL.createObjectURL(this.styleImage.imageFiles[key])
+            );
+          }
+        );
       }
     }
   }
 
-  onFileChangeOnEdit (event) {
+  onFileChangeOnEdit(event) {
     if (event.target.files[0]) {
       this.edit_styleImage_payload.imageFile = event.target.files[0];
-      if (this.checkIfFileSizeExceedMaxLimit(this.edit_styleImage_payload.imageFile)) {
+      if (
+        this.checkIfFileSizeExceedMaxLimit(
+          this.edit_styleImage_payload.imageFile
+        )
+      ) {
         this.imageFileSizeExceededMaxLimit = true;
         return;
       }
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(event.target.files[0]));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(event.target.files[0])
+      );
     } else {
       this.edit_styleImage_payload.imageFile = null;
       this.imagePath = null;
     }
   }
 
-  checkIfFileSizeExceedMaxLimit (file) {
+  checkIfFileSizeExceedMaxLimit(file) {
     return file.size > this.MAX_FILE_SIZE_LIMIT;
   }
 
@@ -163,35 +176,41 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.styleService.addStyleImage(this.styleImage).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.styleService.getStyleImages();
-        this.openSuccessModal();
+    this.styleService.addStyleImage(this.styleImage).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.styleService.getStyleImages();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteStyleImage() {
-    this.styleService.deleteStyleImage(this.item['id']).subscribe(res => {
+    this.styleService.deleteStyleImage(this.item['id']).subscribe(
+      (res) => {
         this.styleService.getStyleImages();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.picture-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editStyleImage() {
@@ -201,34 +220,38 @@ export class AddPictureModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.styleService.editStyleImage(this.item.id, this.edit_styleImage_payload).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.styleService.getStyleImages();
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.picture-saved'),
-          type: 'success'
-        });
-      }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    this.styleService
+      .editStyleImage(this.item.id, this.edit_styleImage_payload)
+      .subscribe(
+        (res) => {
+          this.spinner.hide();
+          this.modalController.dismiss();
+          if (typeof res === 'object') {
+            this.styleService.getStyleImages();
+            this.notifier.show({
+              message: this.translate.instant('NOTIFY.picture-saved'),
+              type: 'success',
+            });
+          }
+        },
+        (e) => {
+          this.spinner.hide();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.error'),
+            type: 'error',
+          });
+        }
+      );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddPictureModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
-
 }

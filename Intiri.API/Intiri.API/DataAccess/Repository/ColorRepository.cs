@@ -4,33 +4,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class ColorRepository : RepositoryBase<Models.IntiriColor.Color>, IColorRepository
-	{
-		#region Fields
+    public class ColorRepository : RepositoryBase<Models.IntiriColor.Color>, IColorRepository
+    {
+        #region Fields
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ColorRepository(DataContext context) : base(context)
-		{
-		}
+        public ColorRepository(DataContext context)
+            : base(context) { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		public async Task<IEnumerable<Models.IntiriColor.Color>> GetAllColorsAsync()
-		{
-			return await _context.Colors.ToListAsync();
-		}
+        public async Task<IEnumerable<Models.IntiriColor.Color>> GetAllColorsAsync()
+        {
+            return await _context.Colors.ToListAsync();
+        }
 
-		public async Task<bool> IsColorByHexValueExistAsync(string hexValue)
-		{
-			return await DoesAnyExist(color => color.HexValue == hexValue);
-		}
+        public async Task<bool> IsColorByHexValueExistAsync(string hexValue)
+        {
+            return await DoesAnyExist(color => color.HexValue == hexValue);
+        }
 
-		public async Task<Models.IntiriColor.Color> GetColorByHexValueAsync(string hexValue)
-		{
-			return await SingleOrDefaultAsync(color => color.HexValue == hexValue);
-		}
-	}
+        public async Task<Models.IntiriColor.Color> GetColorByHexValueAsync(string hexValue)
+        {
+            return await SingleOrDefaultAsync(color => color.HexValue == hexValue);
+        }
+    }
 }

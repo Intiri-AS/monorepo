@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./profile-img-section.component.scss'],
 })
 export class ProfileImgSectionComponent implements OnInit {
-
   @Input() image = null;
   @Input() firstName = null;
   @Input() lastName = null;
@@ -27,21 +26,20 @@ export class ProfileImgSectionComponent implements OnInit {
     private accountService: AccountService,
     private notifier: NotifierService,
     private translate: TranslateService
-  ) { }
+  ) {}
 
-  ngOnInit() {
-   }
+  ngOnInit() {}
 
   openFile() {
     document.querySelector('input').click();
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.spinner.show();
       const formData = new FormData();
       formData.append('photoPath', event.target.files[0]);
-      if(this.partnerProfilePhoto === true) {
+      if (this.partnerProfilePhoto === true) {
         this.addPhotoForPartnerProfile(formData);
       } else {
         this.addPhotoForUsers(formData);
@@ -52,35 +50,44 @@ export class ProfileImgSectionComponent implements OnInit {
   }
 
   addPhotoForUsers(formData: FormData) {
-    this.http.post(this.apiUrl + 'users/addPhoto', formData).subscribe((res: any) => {
-      this.spinner.hide();
-      if (res.photoPath) {
-        this.image = res.photoPath;
-        this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
-          this.accountService.setCurrentUser({...user, photoPath: res.photoPath});
-        });
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.profile-image-updated'),
-          type: 'success',
-        });
-      }
-    });
+    this.http
+      .post(this.apiUrl + 'users/addPhoto', formData)
+      .subscribe((res: any) => {
+        this.spinner.hide();
+        if (res.photoPath) {
+          this.image = res.photoPath;
+          this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+            this.accountService.setCurrentUser({
+              ...user,
+              photoPath: res.photoPath,
+            });
+          });
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.profile-image-updated'),
+            type: 'success',
+          });
+        }
+      });
   }
 
   addPhotoForPartnerProfile(formData: FormData) {
-    this.http.post(this.apiUrl + 'partner/addLogo', formData).subscribe((res: any) => {
-      this.spinner.hide();
-      if (res.logoPath) {
-        this.image = res.logoPath;
-        this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
-          this.accountService.setCurrentUser({...user, photoPath: res.logoPath});
-        });
-        this.notifier.show({
-          message: this.translate.instant('NOTIFY.profile-image-updated'),
-          type: 'success',
-        });
-      }
-    });
+    this.http
+      .post(this.apiUrl + 'partner/addLogo', formData)
+      .subscribe((res: any) => {
+        this.spinner.hide();
+        if (res.logoPath) {
+          this.image = res.logoPath;
+          this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+            this.accountService.setCurrentUser({
+              ...user,
+              photoPath: res.logoPath,
+            });
+          });
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.profile-image-updated'),
+            type: 'success',
+          });
+        }
+      });
   }
-
 }

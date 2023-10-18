@@ -3,59 +3,129 @@
     <ion-col size="12" size-sm="6" size-lg="3" class="flex">
       <div class="profile-input">
         <div class="mt-6">
-          <ion-input type="text" class="border rounded-2xl border-black-2 h-12" placeholder="{{'MESSENGER.search' | translate}}" [(ngModel)]="searchText"></ion-input>
+          <ion-input
+            type="text"
+            class="border rounded-2xl border-black-2 h-12"
+            placeholder="{{ 'MESSENGER.search' | translate }}"
+            [(ngModel)]="searchText"
+          ></ion-input>
         </div>
       </div>
     </ion-col>
-    <ion-col size="12" size-sm="6" offset-lg="6" size-lg="3" class="flex items-end justify-center sm-ion:justify-end">
+    <ion-col
+      size="12"
+      size-sm="6"
+      offset-lg="6"
+      size-lg="3"
+      class="flex items-end justify-center sm-ion:justify-end"
+    >
       <ion-col>
         <span class="text-sm text-black-2">
-          {{'STYLE.room' | translate}}
+          {{ "STYLE.room" | translate }}
         </span>
-        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onRoomFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
-          <ion-select-option *ngFor="let room of (rooms$ | async)" value={{room.id}}>
+        <ion-select
+          [placeholder]="'COMMON.none-selected' | translate"
+          (ionChange)="onRoomFilterChange($event)"
+          interface="popover"
+          [multiple]="true"
+          class="w-[11rem]"
+        >
+          <ion-select-option
+            *ngFor="let room of rooms$ | async"
+            value="{{ room.id }}"
+          >
             {{ room.name }}
           </ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col>
         <span class="text-sm text-black-2">
-          {{'STYLE.style' | translate}}
+          {{ "STYLE.style" | translate }}
         </span>
-        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onStyleFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
-          <ion-select-option *ngFor="let style of (styles$ | async)" value={{style.id}}>
-            {{style.name}}
+        <ion-select
+          [placeholder]="'COMMON.none-selected' | translate"
+          (ionChange)="onStyleFilterChange($event)"
+          interface="popover"
+          [multiple]="true"
+          class="w-[11rem]"
+        >
+          <ion-select-option
+            *ngFor="let style of styles$ | async"
+            value="{{ style.id }}"
+          >
+            {{ style.name }}
           </ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col>
         <span class="text-sm text-black-2">
-          {{'STYLE.provider' | translate}}
+          {{ "STYLE.provider" | translate }}
         </span>
-        <ion-select [placeholder]="'COMMON.none-selected' | translate" (ionChange)="onPartnerFilterChange($event)" interface="popover" [multiple]="true" class="w-[11rem]">
-          <ion-select-option *ngFor="let partnerName of inspirationalPhotosProviders" value={{partnerName}}>
-            {{partnerName}}
+        <ion-select
+          [placeholder]="'COMMON.none-selected' | translate"
+          (ionChange)="onPartnerFilterChange($event)"
+          interface="popover"
+          [multiple]="true"
+          class="w-[11rem]"
+        >
+          <ion-select-option
+            *ngFor="let partnerName of inspirationalPhotosProviders"
+            value="{{ partnerName }}"
+          >
+            {{ partnerName }}
           </ion-select-option>
         </ion-select>
       </ion-col>
-      <ion-button (click)="addPicture()" fill="clear" class="primary-btn mb-[1.5rem]">{{'STYLE.add-pictures' | translate}}</ion-button>
+      <ion-button
+        (click)="addPicture()"
+        fill="clear"
+        class="primary-btn mb-[1.5rem]"
+        >{{ "STYLE.add-pictures" | translate }}</ion-button
+      >
     </ion-col>
   </ion-row>
   <ion-row class="gap-x-[1.45%]">
     <ion-col *ngIf="!styleImages.length">
-      {{'COMMON.no-available-data' | translate}}
+      {{ "COMMON.no-available-data" | translate }}
     </ion-col>
-    <ion-col *ngFor="let styleImage of styleImages | filter:searchText" size="12" size-sm="5.75" size-xl="2.25">
+    <ion-col
+      *ngFor="let styleImage of styleImages | filter : searchText"
+      size="12"
+      size-sm="5.75"
+      size-xl="2.25"
+    >
       <div class="card">
         <div class="h-full w-full">
-          <img src="{{styleImage.imagePath}}" class="object-fill !h-full !w-full rounded-2xl" alt="Picture Img" />
+          <img
+            src="{{ styleImage.imagePath }}"
+            class="object-fill !h-full !w-full rounded-2xl"
+            alt="Picture Img"
+          />
         </div>
       </div>
       <div class="flex justify-between">
-        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">{{styleImage.styleName}}</p>
+        <p class="pt-2 pr-1 text-black-2 font-semibold text-clamp-3">
+          {{ styleImage.styleName }}
+        </p>
         <div class="float-right">
-          <button (click)="showSettings($event, styleImage)" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg" type="button">
-              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+          <button
+            (click)="showSettings($event, styleImage)"
+            id="dropdownMenuIconButton"
+            data-dropdown-toggle="dropdownDots"
+            class="inline-flex py-2 text-black-1 text-sm font-medium text-center bg-transparent rounded-lg"
+            type="button"
+          >
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+              ></path>
+            </svg>
           </button>
         </div>
       </div>

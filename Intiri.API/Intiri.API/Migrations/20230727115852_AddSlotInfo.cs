@@ -12,14 +12,13 @@ namespace Intiri.API.Migrations
                 name: "SlotInfo",
                 table: "Moodboards",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "SlotInfo",
-                table: "Moodboards");
+            migrationBuilder.DropColumn(name: "SlotInfo", table: "Moodboards");
         }
     }
 }

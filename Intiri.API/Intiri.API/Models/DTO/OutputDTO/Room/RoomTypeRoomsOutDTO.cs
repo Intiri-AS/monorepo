@@ -2,6 +2,6 @@
 {
     public class RoomTypeRoomsOutDTO : RoomTypeOutDTO
     {
-		public ICollection<RoomOutDTO> Rooms { get; set; }
-	}
+        public ICollection<RoomOutDTO> Rooms { get; set; }
+    }
 }

@@ -10,23 +10,28 @@ namespace Intiri.API.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_AspNetUsers_ReceiverId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "PayerId",
@@ -34,21 +39,24 @@ namespace Intiri.API.Migrations
                 type: "int",
                 nullable: true,
                 oldClrType: typeof(int),
-                oldType: "int");
+                oldType: "int"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
                 table: "ConsultationPayment",
                 column: "MoodboardId",
                 unique: true,
-                filter: "[MoodboardId] IS NOT NULL");
+                filter: "[MoodboardId] IS NOT NULL"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
                 table: "ConsultationPayment",
                 column: "MoodboardOfferId",
                 unique: true,
-                filter: "[MoodboardOfferId] IS NOT NULL");
+                filter: "[MoodboardOfferId] IS NOT NULL"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_AspNetUsers_ReceiverId",
@@ -56,7 +64,8 @@ namespace Intiri.API.Migrations
                 column: "ReceiverId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
@@ -64,7 +73,8 @@ namespace Intiri.API.Migrations
                 column: "MoodboardId",
                 principalTable: "Moodboards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
@@ -72,30 +82,36 @@ namespace Intiri.API.Migrations
                 column: "MoodboardOfferId",
                 principalTable: "Moodboards",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_AspNetUsers_ReceiverId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.DropIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
-                table: "ConsultationPayment");
+                table: "ConsultationPayment"
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "PayerId",
@@ -105,17 +121,20 @@ namespace Intiri.API.Migrations
                 defaultValue: 0,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardId",
                 table: "ConsultationPayment",
-                column: "MoodboardId");
+                column: "MoodboardId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultationPayment_MoodboardOfferId",
                 table: "ConsultationPayment",
-                column: "MoodboardOfferId");
+                column: "MoodboardOfferId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_AspNetUsers_ReceiverId",
@@ -123,21 +142,24 @@ namespace Intiri.API.Migrations
                 column: "ReceiverId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardId",
                 table: "ConsultationPayment",
                 column: "MoodboardId",
                 principalTable: "Moodboards",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ConsultationPayment_Moodboards_MoodboardOfferId",
                 table: "ConsultationPayment",
                 column: "MoodboardOfferId",
                 principalTable: "Moodboards",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
     }
 }

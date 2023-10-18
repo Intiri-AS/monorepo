@@ -78,9 +78,12 @@ export class MessengerPage implements OnInit {
   }
 
   checkShouldPromptRating() {
-    this.designerService.isDesignerRated(this.activeChatUser.id).subscribe((res: boolean) => {
-      this.ratePrompt = !res && this.activeChatUser.chatPeriodExpired;
-    }, () => this.ratePrompt = false)
+    this.designerService.isDesignerRated(this.activeChatUser.id).subscribe(
+      (res: boolean) => {
+        this.ratePrompt = !res && this.activeChatUser.chatPeriodExpired;
+      },
+      () => (this.ratePrompt = false)
+    );
   }
 
   onFileChange(event) {
@@ -138,14 +141,16 @@ export class MessengerPage implements OnInit {
       };
       this.msgService.sendMessage(req).subscribe(
         (res) => {
-          return this.msgService.getChatHistory(this.activeChatUser.id).subscribe((messages: any) => {
-            this.spinner.hide();
-            this.messages = messages;
+          return this.msgService
+            .getChatHistory(this.activeChatUser.id)
+            .subscribe((messages: any) => {
+              this.spinner.hide();
+              this.messages = messages;
 
-            this.isLoading = false;
-            this.attachments = null;
-            this.message = '';
-          })
+              this.isLoading = false;
+              this.attachments = null;
+              this.message = '';
+            });
         },
         (err) => {
           this.spinner.hide();
@@ -198,9 +203,9 @@ export class MessengerPage implements OnInit {
   async openRatingModal() {
     this.ratePrompt = false;
     const modal = await this.modalController.create({
-      componentProps: {designer: this.activeChatUser},
+      componentProps: { designer: this.activeChatUser },
       component: RateModalComponent,
-      cssClass: 'auto-size-modal-css'
+      cssClass: 'auto-size-modal-css',
     });
     await modal.present();
   }

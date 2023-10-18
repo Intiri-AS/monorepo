@@ -8,9 +8,7 @@ import { RateSuccessfulModalComponent } from '../rate-successful-modal/rate-succ
   templateUrl: './rate-modal.component.html',
   styleUrls: ['./rate-modal.component.scss'],
 })
-
 export class RateModalComponent {
-
   star = 0;
   hoverStar = 0;
   rateDisabled = true;
@@ -22,25 +20,27 @@ export class RateModalComponent {
   ) {}
 
   rate() {
-    const payload = {rating: this.star, designerId: this.designer.id};
-    this.designerService.rateDesigner(payload).subscribe(res => {
+    const payload = { rating: this.star, designerId: this.designer.id };
+    this.designerService.rateDesigner(payload).subscribe((res) => {
       this.openSuccessModal();
-    })
+    });
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: RateSuccessfulModalComponent,
-      componentProps: {designerFullname: `${this.designer.firstName} ${this.designer.lastName}`},
-      cssClass: 'auto-size-modal-css'
+      componentProps: {
+        designerFullname: `${this.designer.firstName} ${this.designer.lastName}`,
+      },
+      cssClass: 'auto-size-modal-css',
     });
 
     await modal.present();
   }
 
   dismiss() {
-    this.modalController.dismiss()
+    this.modalController.dismiss();
   }
 
   addRate(num) {

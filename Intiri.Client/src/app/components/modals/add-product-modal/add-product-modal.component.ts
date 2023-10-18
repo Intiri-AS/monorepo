@@ -1,4 +1,4 @@
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
@@ -55,7 +55,7 @@ export class AddProductModalComponent implements OnInit {
     color: '',
     price: '',
     description: '',
-    imageFiles: []
+    imageFiles: [],
   };
 
   product: any = {
@@ -67,91 +67,100 @@ export class AddProductModalComponent implements OnInit {
     color: '',
     description: '',
     imageFile: null,
+  };
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private modalController: ModalController,
+    private fb: FormBuilder,
+    private colorService: ColorService,
+    private materialService: MaterialService,
+    private partnerService: PartnerService,
+    private notifier: NotifierService,
+    private spinner: NgxSpinnerService,
+    private translate: TranslateService,
+    private accountService: AccountService
+  ) {
+    this.editProductForm = this.fb.group({
+      productName: ['' || undefined, Validators.required],
+      productLink: [''],
+      productType: ['', Validators.required],
+      productMaterial: [''],
+      color: [''],
+      price: [''],
+      imageFile: [''],
+      description: [''],
+    });
   }
 
-  constructor(private sanitizer: DomSanitizer,
-              private modalController: ModalController,
-              private fb: FormBuilder,
-              private colorService: ColorService,
-              private materialService: MaterialService,
-              private partnerService: PartnerService,
-              private notifier: NotifierService,
-              private spinner: NgxSpinnerService,
-              private translate: TranslateService,
-              private accountService: AccountService,
-            ) {
-                this.editProductForm = this.fb.group({
-                  productName: ['' || undefined, Validators.required],
-                  productLink: [''],
-                  productType: ['', Validators.required],
-                  productMaterial: [''],
-                  color: [''],
-                  price: [''],
-                  imageFile: [''],
-                  description: [''],
-                });
-              }
-
-  get form() { return this.userForm.controls; }
-  get editForm() { return this.editProductForm.controls; }
+  get form() {
+    return this.userForm.controls;
+  }
+  get editForm() {
+    return this.editProductForm.controls;
+  }
 
   ngOnInit() {
     this.colorService.getColors();
     this.materialService.getMaterials();
-    this.materialService.getMaterialTypes().subscribe(res => {
+    this.materialService.getMaterialTypes().subscribe((res) => {
       this.materialTypes = res;
-    })
-    this.partnerService.getProductsType().subscribe( response => {
+    });
+    this.partnerService.getProductsType().subscribe((response) => {
       this.productsType = response;
     });
-    this.colors$.subscribe(response => {
+    this.colors$.subscribe((response) => {
       this.colors = response;
-    }) ;
-    this.materials$.subscribe(response => {
+    });
+    this.materials$.subscribe((response) => {
       this.materials = response;
-    }) ;
+    });
     if (this.edit) {
-      const {id, imagePath, ...others} = this.item;
+      const { id, imagePath, ...others } = this.item;
       this.product = others;
     }
     this.userForm = this.fb.group({
-        productName: ['' || undefined, Validators.required],
-        productType: ['', Validators.required],
-        productMaterial: [''],
-        productLink: [''],
-        color: [''],
-        price: [''],
-        imageUrl: ['', Validators.required],
-        description: '',
+      productName: ['' || undefined, Validators.required],
+      productType: ['', Validators.required],
+      productMaterial: [''],
+      productLink: [''],
+      color: [''],
+      price: [''],
+      imageUrl: ['', Validators.required],
+      description: '',
     });
 
-    this.accountService.currentUser$.pipe(take(1)).subscribe(loggedUser => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((loggedUser) => {
       if (loggedUser) {
         this.userRole = loggedUser.roles[0];
         if (this.userRole == 'Partner') {
-          this.partnerService.getPartnerProfile().subscribe(res => {
+          this.partnerService.getPartnerProfile().subscribe((res) => {
             this.partners = res;
           });
         }
       }
     });
-
   }
 
-  onFileChangeAddProduct (event) {
+  onFileChangeAddProduct(event) {
     if (Object.keys(event.target.files).length > 0) {
       this.productData.imageFiles = event.target.files;
       this.addImagePaths = Object.keys(event.target.files).map((key, i) =>
-        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.productData.imageFiles[key])));
+        this.sanitizer.bypassSecurityTrustUrl(
+          URL.createObjectURL(this.productData.imageFiles[key])
+        )
+      );
     } else {
-      this.addImagePaths = []
+      this.addImagePaths = [];
     }
   }
   onFileChangeEditProduct(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.productData.imageFile = event.target.files[0];
       this.product.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.productData.imageFile));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.productData.imageFile)
+      );
     } else {
       this.imagePath = null;
     }
@@ -161,11 +170,11 @@ export class AddProductModalComponent implements OnInit {
     this.submitted = true;
     this.spinner.show();
     if (this.userForm.invalid) {
-    this.spinner.hide();
-    return;
+      this.spinner.hide();
+      return;
     }
     this.addProduct();
-}
+  }
 
   addProduct() {
     this.productData = {
@@ -177,21 +186,24 @@ export class AddProductModalComponent implements OnInit {
       color: this.userForm.value.color,
       price: Number(this.userForm.value.price),
       description: this.userForm.value?.description || undefined,
-      imageFiles: this.productData.imageFiles
+      imageFiles: this.productData.imageFiles,
     };
     // return;
-    this.partnerService.addPartnerProduct(this.productData).subscribe( response => {
-      this.spinner.hide();
-      this.openSuccessModal();
-      this.partnerService.getPartnerProducts();
-      this.dismissModal();
-    }, error => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: error.error,
-        type: 'error',
-      });
-    });
+    this.partnerService.addPartnerProduct(this.productData).subscribe(
+      (response) => {
+        this.spinner.hide();
+        this.openSuccessModal();
+        this.partnerService.getPartnerProducts();
+        this.dismissModal();
+      },
+      (error) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: error.error,
+          type: 'error',
+        });
+      }
+    );
   }
 
   dismissModal() {
@@ -200,7 +212,8 @@ export class AddProductModalComponent implements OnInit {
 
   deleteProduct() {
     this.spinner.show();
-    this.partnerService.deleteProduct(this.item.id).subscribe(res => {
+    this.partnerService.deleteProduct(this.item.id).subscribe(
+      (res) => {
         this.spinner.hide();
         this.modalController.dismiss();
 
@@ -209,14 +222,15 @@ export class AddProductModalComponent implements OnInit {
         } else {
           this.partnerService.getProductsFromAllPartners();
         }
-
-    }, () => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.product-error'),
-        type: 'error',
-      });
-    });
+      },
+      () => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.product-error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editProduct() {
@@ -226,58 +240,63 @@ export class AddProductModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.partnerService.editProduct(this.item.id, this.product).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
+    this.partnerService.editProduct(this.item.id, this.product).subscribe(
+      (res) => {
+        this.spinner.hide();
+        this.modalController.dismiss();
+        if (typeof res === 'object') {
+          if (this.userRole === 'Partner') {
+            this.partnerService.getPartnerProducts();
+          } else {
+            this.partnerService.getProductsFromAllPartners();
+          }
 
-        if (this.userRole === 'Partner') {
-          this.partnerService.getPartnerProducts();
-        } else {
-          this.partnerService.getProductsFromAllPartners();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.product-saved'),
+            type: 'success',
+          });
         }
-
+      },
+      (e) => {
+        this.spinner.hide();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.product-saved'),
-          type: 'success'
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
         });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddProductModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  getProductTypeNameByTypeId (typeId) {
+  getProductTypeNameByTypeId(typeId) {
     if (!(typeId == 0 || !this.productsType.length)) {
-      let res = this.productsType.length && this.productsType.filter(pType => pType.id == typeId);
+      let res =
+        this.productsType.length &&
+        this.productsType.filter((pType) => pType.id == typeId);
       if (res.length) {
         return res[0].name;
       }
     }
   }
 
-  getMaterialTypeNameByTypeId (typeId) {
+  getMaterialTypeNameByTypeId(typeId) {
     if (!(typeId == 0 || !this.materialTypes.length)) {
-      let res = this.materialTypes.length && this.materialTypes.filter(mType => mType.id == typeId);
+      let res =
+        this.materialTypes.length &&
+        this.materialTypes.filter((mType) => mType.id == typeId);
       if (res.length) {
         return res[0].name;
       }
     }
   }
-
 }

@@ -1,15 +1,27 @@
 <ion-content>
   <div class="flex flex-col items-center px-[65px]">
-    <div class="h-[80px] w-[80px] rounded-full bg-light mt-[75px] flex items-center justify-center">
-      <ion-icon name="share-social" class="h-[30px] w-[30px] text-primary"></ion-icon>
+    <div
+      class="h-[80px] w-[80px] rounded-full bg-light mt-[75px] flex items-center justify-center"
+    >
+      <ion-icon
+        name="share-social"
+        class="h-[30px] w-[30px] text-primary"
+      ></ion-icon>
     </div>
-    <p class="text-2xl font-medium mt-[40px]">{{'SHARE-RATE.share' | translate}}</p>
-    <p class="text-lg mt-[10px] text-black-2">{{'SHARE-RATE.share-text' | translate}}</p>
+    <p class="text-2xl font-medium mt-[40px]">
+      {{ "SHARE-RATE.share" | translate }}
+    </p>
+    <p class="text-lg mt-[10px] text-black-2">
+      {{ "SHARE-RATE.share-text" | translate }}
+    </p>
     <div class="mt-[40px]">
-      <span class="text-sm text-black-2">{{'COMMON.phone' | translate}}</span>
+      <span class="text-sm text-black-2">{{ "COMMON.phone" | translate }}</span>
       <div class="flex justify-between">
         <div>
-          <ion-select class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32" interface="popover">
+          <ion-select
+            class="border rounded-2xl border-black-2 h-14 w-24 xl:w-32"
+            interface="popover"
+          >
             <ion-select-option>
               <div>
                 <p class="text-lg text-black">+47</p>
@@ -21,19 +33,29 @@
           </ion-select>
         </div>
         <div>
-          <ion-input name="phoneNumber" maxlength="8" class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80 ml-[10px]"></ion-input>
+          <ion-input
+            name="phoneNumber"
+            maxlength="8"
+            class="border rounded-2xl h-14 border-black-2 w-60 xl:w-80 ml-[10px]"
+          ></ion-input>
         </div>
       </div>
     </div>
     <div class="flex justify-start w-full">
       <ion-button fill="clear" class="normal-case mt-[30px]">
         <ion-icon name="add" slot="start"></ion-icon>
-        <p class="text-lg text-primary font-medium">{{'COMMON.add' | translate}}</p>
+        <p class="text-lg text-primary font-medium">
+          {{ "COMMON.add" | translate }}
+        </p>
       </ion-button>
     </div>
     <div class="flex justify-center mt-[40px]">
-      <ion-button fill="clear" class="secondary-btn" (click)="dismiss()">{{'COMMON.cancel' | translate}}</ion-button>
-      <ion-button fill="clear" class="primary-btn" (click)="share()">{{'SHARE-RATE.share' | translate}}</ion-button>
+      <ion-button fill="clear" class="secondary-btn" (click)="dismiss()">{{
+        "COMMON.cancel" | translate
+      }}</ion-button>
+      <ion-button fill="clear" class="primary-btn" (click)="share()">{{
+        "SHARE-RATE.share" | translate
+      }}</ion-button>
     </div>
   </div>
 </ion-content>

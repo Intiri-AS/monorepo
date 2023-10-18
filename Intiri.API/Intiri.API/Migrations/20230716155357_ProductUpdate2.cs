@@ -11,12 +11,14 @@ namespace Intiri.API.Migrations
             migrationBuilder.RenameColumn(
                 name: "productLink",
                 table: "Products",
-                newName: "ProductLink");
+                newName: "ProductLink"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "partnerName",
                 table: "Products",
-                newName: "PartnerName");
+                newName: "PartnerName"
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -24,12 +26,14 @@ namespace Intiri.API.Migrations
             migrationBuilder.RenameColumn(
                 name: "ProductLink",
                 table: "Products",
-                newName: "productLink");
+                newName: "productLink"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "PartnerName",
                 table: "Products",
-                newName: "partnerName");
+                newName: "partnerName"
+            );
         }
     }
 }

@@ -11,12 +11,15 @@ import { AddColorModalComponent } from '../modals/add-color-modal/add-color-moda
   styleUrls: ['./admin-colors.component.scss'],
 })
 export class AdminColorsComponent implements OnInit {
-
   colorPalettes$: Observable<any> = this.colorService.colorPalettes$;
 
   searchText: any;
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController, private colorService: ColorService) { }
+  constructor(
+    public popoverController: PopoverController,
+    private modalController: ModalController,
+    private colorService: ColorService
+  ) {}
 
   ngOnInit() {
     this.colorService.getColorPalettes();
@@ -26,8 +29,8 @@ export class AdminColorsComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {color: true, item: color},
-      dismissOnSelect: true
+      componentProps: { color: true, item: color },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -36,11 +39,10 @@ export class AdminColorsComponent implements OnInit {
   async addColor() {
     const modal = await this.modalController.create({
       component: AddColorModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-color-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-color-modal-css',
     });
 
     await modal.present();
   }
-
 }

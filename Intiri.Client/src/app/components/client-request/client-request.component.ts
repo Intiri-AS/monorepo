@@ -9,13 +9,12 @@ import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-moda
   styleUrls: ['./client-request.component.scss'],
 })
 export class ClientRequestComponent implements OnInit {
-
   @Input() client: any;
   @Input() includeClientDetails: boolean = false;
   screenWidth: any;
 
-  budget: any = "";
-  shape: any = "";
+  budget: any = '';
+  shape: any = '';
 
   constructor(
     private modalController: ModalController,
@@ -25,23 +24,28 @@ export class ClientRequestComponent implements OnInit {
   ngOnInit() {
     this.screenWidth = window.innerWidth;
     if (this.client.clientInspirations) {
-      this.client.clientInspirations = this.client.clientInspirations.map(e => {e.filename = e.url.substring(e.url.lastIndexOf('/')+1); return e;});
+      this.client.clientInspirations = this.client.clientInspirations.map(
+        (e) => {
+          e.filename = e.url.substring(e.url.lastIndexOf('/') + 1);
+          return e;
+        }
+      );
     }
     if (this.client.moodboard) {
       if (this.client.moodboard.roomDetails.budgetRate === 1) {
-        this.budget = "Low"
+        this.budget = 'Low';
       } else if (this.client.moodboard.roomDetails.budgetRate === 2) {
-        this.budget = "Medium"
+        this.budget = 'Medium';
       } else if (this.client.moodboard.roomDetails.budgetRate === 3) {
-        this.budget = "High"
+        this.budget = 'High';
       }
       if (this.client.moodboard.roomDetails.shape) {
-        if (this.client.moodboard.roomDetails.shape === "square") {
-          this.shape = "../../../../assets/icon/square.png";
-        } else if (this.client.moodboard.roomDetails.shape === "rectangular") {
-          this.shape = "../../../../assets/icon/rectangle.png";
-        } else if (this.client.moodboard.roomDetails.shape === "l-shaped") {
-          this.shape = "../../../../assets/icon/l-shape.png";
+        if (this.client.moodboard.roomDetails.shape === 'square') {
+          this.shape = '../../../../assets/icon/square.png';
+        } else if (this.client.moodboard.roomDetails.shape === 'rectangular') {
+          this.shape = '../../../../assets/icon/rectangle.png';
+        } else if (this.client.moodboard.roomDetails.shape === 'l-shaped') {
+          this.shape = '../../../../assets/icon/l-shape.png';
         }
       } else {
         this.shape = this.client.moodboard.roomDetails.sketchUrl;
@@ -57,15 +61,15 @@ export class ClientRequestComponent implements OnInit {
   async openImageInModal(image) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: {file: image},
-      cssClass: 'open-file-modal-css'
+      componentProps: { file: image },
+      cssClass: 'open-file-modal-css',
     });
 
     await modal.present();
   }
 
   goToChat() {
-    this.router.navigateByUrl(`/messenger?contact=${this.client['clientId']}`)
+    this.router.navigateByUrl(`/messenger?contact=${this.client['clientId']}`);
   }
 
   downloadFile(file) {
@@ -84,9 +88,8 @@ export class ClientRequestComponent implements OnInit {
     return file?.filename.endsWith(extension);
   }
 
-  parseConsultationDetails(consultations: string){
+  parseConsultationDetails(consultations: string) {
     var splitted = consultations.split(',');
     return splitted;
   }
-
 }

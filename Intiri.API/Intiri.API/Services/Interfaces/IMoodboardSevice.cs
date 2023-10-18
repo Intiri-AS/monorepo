@@ -8,10 +8,16 @@ using Intiri.API.Models;
 
 namespace Intiri.API.Services.Interfaces
 {
-	public interface IMoodboardSevice
-	{
-		Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(MoodboardMatchInDTO matchInDTO);
-		Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId);
-		Task<ClientMoodboard> CreateClientMoodboardAsync(List<RoomDetails> roomDetails, MoodboardInDTO moodboardIn, EndUser endUser);
-	}
+    public interface IMoodboardSevice
+    {
+        Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(
+            MoodboardMatchInDTO matchInDTO
+        );
+        Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId);
+        Task<ClientMoodboard> CreateClientMoodboardAsync(
+            List<RoomDetails> roomDetails,
+            MoodboardInDTO moodboardIn,
+            EndUser endUser
+        );
+    }
 }

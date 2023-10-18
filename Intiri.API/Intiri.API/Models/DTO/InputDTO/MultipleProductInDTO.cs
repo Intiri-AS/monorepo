@@ -11,7 +11,7 @@ namespace Intiri.API.Models.DTO.InputDTO
         public int ProductTypeId { get; set; }
 
         public int MaterialId { get; set; }
-        
+
         public string Color { get; set; }
 
         public double? Price { get; set; } = 0;

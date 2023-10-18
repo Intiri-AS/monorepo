@@ -12,44 +12,40 @@ namespace Intiri.API.Migrations
                 name: "ImagePublicId",
                 table: "Styles",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "ImagePublicId",
                 table: "Rooms",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "ImagePublicId",
                 table: "Products",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "ImagePublicId",
                 table: "Materials",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImagePublicId",
-                table: "Styles");
+            migrationBuilder.DropColumn(name: "ImagePublicId", table: "Styles");
 
-            migrationBuilder.DropColumn(
-                name: "ImagePublicId",
-                table: "Rooms");
+            migrationBuilder.DropColumn(name: "ImagePublicId", table: "Rooms");
 
-            migrationBuilder.DropColumn(
-                name: "ImagePublicId",
-                table: "Products");
+            migrationBuilder.DropColumn(name: "ImagePublicId", table: "Products");
 
-            migrationBuilder.DropColumn(
-                name: "ImagePublicId",
-                table: "Materials");
+            migrationBuilder.DropColumn(name: "ImagePublicId", table: "Materials");
         }
     }
 }

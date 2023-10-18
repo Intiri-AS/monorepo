@@ -3,23 +3,23 @@ using Intiri.API.Models.Rating;
 
 namespace Intiri.API.DataAccess.Repository
 {
-	public class DesignerRatingRepository : RepositoryBase<DesignerRating>, IDesignerRatingRepository
-	{
-		#region Fields
+    public class DesignerRatingRepository
+        : RepositoryBase<DesignerRating>,
+            IDesignerRatingRepository
+    {
+        #region Fields
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
-		public DesignerRatingRepository(DataContext context) : base(context)
-		{
-		}
+        #region Constructors
+        public DesignerRatingRepository(DataContext context)
+            : base(context) { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		public async Task<bool> RateDisagner()
-		{
-
-			return true;
-		}
-	}
+        public async Task<bool> RateDisagner()
+        {
+            return true;
+        }
+    }
 }

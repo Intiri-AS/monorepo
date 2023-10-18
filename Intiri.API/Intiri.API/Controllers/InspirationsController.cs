@@ -17,114 +17,142 @@ using Intiri.API.Models.PolicyNames;
 
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class InspirationsController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class InspirationsController : BaseApiController
+    {
+        #region Fields
 
-		private readonly ICloudinaryService _cloudinaryUploadService;
-		private readonly ILogger<InspirationsController> _logger;
-		private readonly IAccountService _accountService;
-		private readonly IMapper _mapper;
-		private readonly int _inspirationLimit = 5;
+        private readonly ICloudinaryService _cloudinaryUploadService;
+        private readonly ILogger<InspirationsController> _logger;
+        private readonly IAccountService _accountService;
+        private readonly IMapper _mapper;
+        private readonly int _inspirationLimit = 5;
 
+        #endregion Fields
 
-		#endregion Fields
+        #region Constructors
 
-		#region Constructors
+        public InspirationsController(
+            IUnitOfWork unitOfWork,
+            ICloudinaryService cloudinaryUploadService,
+            IAccountService accountService,
+            ILogger<InspirationsController> logger,
+            IMapper mapper
+        )
+            : base(unitOfWork)
+        {
+            _cloudinaryUploadService = cloudinaryUploadService;
+            _accountService = accountService;
+            _logger = logger;
+            _mapper = mapper;
+        }
 
-		public InspirationsController(IUnitOfWork unitOfWork, ICloudinaryService cloudinaryUploadService, IAccountService accountService, ILogger<InspirationsController> logger, IMapper mapper) : base(unitOfWork)
-		{
-			_cloudinaryUploadService = cloudinaryUploadService;
-			_accountService = accountService;
-			_logger = logger;
-			_mapper = mapper;
-		}
+        #endregion Constructors
 
-		#endregion Constructors
+        [Authorize(Policy = PolicyNames.ClientPolicy)]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
+        {
+            EndUser clientUser =
+                await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(
+                    User.GetUserId()
+                );
+            if (clientUser == null)
+                return Unauthorized("Invalid clent.");
 
-		[Authorize(Policy = PolicyNames.ClientPolicy)]
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<InspirationOutDTO>>> GetInspiration()
-		{
-			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
-			if (clientUser == null) return Unauthorized("Invalid clent.");
+            IEnumerable<InspirationOutDTO> inspirationsOut = _mapper.Map<
+                IEnumerable<InspirationOutDTO>
+            >(clientUser.Inspirations);
 
-			IEnumerable<InspirationOutDTO> inspirationsOut = _mapper.Map<IEnumerable<InspirationOutDTO>>(clientUser.Inspirations);
+            return Ok(inspirationsOut);
+        }
 
-			return Ok(inspirationsOut);
-		}
+        [Authorize(Policy = PolicyNames.ClientPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
+        {
+            EndUser clientUser =
+                await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(
+                    User.GetUserId()
+                );
 
-		[Authorize(Policy = PolicyNames.ClientPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult<InspirationOutDTO>> AddInspiration(IFormFile inFile)
-		{
-			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
+            if (clientUser == null)
+                return Unauthorized("Invalid clent.");
 
-			if (clientUser == null) 
-				return Unauthorized("Invalid clent.");
+            if (clientUser.Inspirations.Count >= _inspirationLimit)
+                return BadRequest("Inspirations limit is reached.");
 
-			if (clientUser.Inspirations.Count >= _inspirationLimit) 
-				return BadRequest("Inspirations limit is reached.");
+            if (inFile != null && inFile.Length > 0)
+            {
+                ImageUploadResult uploadResult = null;
+                try
+                {
+                    uploadResult = await _cloudinaryUploadService.UploadFileAsync(
+                        inFile,
+                        FileUploadDestinations.ClientInspirations
+                    );
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Failed to upload client inspiration: {ex.Message}");
+                }
 
-			if (inFile != null && inFile.Length > 0)
-			{
-				ImageUploadResult uploadResult = null;
-				try
-				{
-					uploadResult = await _cloudinaryUploadService.UploadFileAsync(inFile, FileUploadDestinations.ClientInspirations);
-				}
-				catch (Exception ex)
-				{
-					return BadRequest($"Failed to upload client inspiration: {ex.Message}");
-				}
+                if (uploadResult.Error != null)
+                {
+                    return BadRequest(
+                        $"Failed to upload client inspiration: {uploadResult.Error.Message}"
+                    );
+                }
 
-				if (uploadResult.Error != null)
-				{
-					return BadRequest($"Failed to upload client inspiration: {uploadResult.Error.Message}");
-				}
+                Inspiration inspiration = new Inspiration()
+                {
+                    Url = uploadResult.SecureUrl.AbsoluteUri,
+                    PublicId = uploadResult.PublicId
+                };
 
-				Inspiration inspiration = new Inspiration()
-				{
-					Url = uploadResult.SecureUrl.AbsoluteUri,
-					PublicId = uploadResult.PublicId
-				};
+                clientUser.Inspirations.Add(inspiration);
 
-				clientUser.Inspirations.Add(inspiration);
+                if (await _unitOfWork.SaveChanges())
+                {
+                    return Ok(_mapper.Map<InspirationOutDTO>(inspiration));
+                }
+            }
 
-				if (await _unitOfWork.SaveChanges())
-				{
-					return Ok(_mapper.Map<InspirationOutDTO>(inspiration));
-				}
-			}
+            return BadRequest("Problem adding client inspiration.");
+        }
 
-			return BadRequest("Problem adding client inspiration.");
-		}
+        [Authorize(Policy = PolicyNames.ClientPolicy)]
+        [HttpDelete("delete/{inspirationId}")]
+        public async Task<IActionResult> DeleteInspiration(int inspirationId)
+        {
+            EndUser clientUser =
+                await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(
+                    User.GetUserId()
+                );
+            if (clientUser == null)
+                return Unauthorized("Invalid clent.");
 
-		[Authorize(Policy = PolicyNames.ClientPolicy)]
-		[HttpDelete("delete/{inspirationId}")]
-		public async Task<IActionResult> DeleteInspiration(int inspirationId)
-		{
-			EndUser clientUser = await _unitOfWork.UserRepository.GetEndUserByIdWithInspirationsAsync(User.GetUserId());
-			if (clientUser == null) return Unauthorized("Invalid clent.");
+            Inspiration inspiration = clientUser.Inspirations.FirstOrDefault(
+                x => x.Id == inspirationId
+            );
+            if (inspiration == null)
+                return NotFound("Inspiration file not found.");
 
-			Inspiration inspiration = clientUser.Inspirations.FirstOrDefault(x => x.Id == inspirationId);
-			if (inspiration == null) return NotFound("Inspiration file not found.");
+            if (inspiration.PublicId != null)
+            {
+                var result = await _cloudinaryUploadService.DeleteFileAsync(inspiration.PublicId);
+                if (result.Error != null)
+                    return BadRequest(result.Error.Message);
+            }
 
-			if (inspiration.PublicId != null)
-			{
-				var result = await _cloudinaryUploadService.DeleteFileAsync(inspiration.PublicId);
-				if (result.Error != null) return BadRequest(result.Error.Message);
-			}
-			 
-			clientUser.Inspirations.Remove(inspiration);
+            clientUser.Inspirations.Remove(inspiration);
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok();
-			}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok();
+            }
 
-			return BadRequest("Failed to delete the inspiration");
-		}
-	}
+            return BadRequest("Failed to delete the inspiration");
+        }
+    }
 }

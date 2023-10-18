@@ -1,8 +1,12 @@
 <ion-content>
   <div id="home">
     <app-header *ngIf="loggedUser?.roles[0] === 'FreeEndUser'"></app-header>
-    <app-header-admin *ngIf="loggedUser?.roles[0] === 'Admin'"></app-header-admin>
-    <app-header-internal-designer *ngIf="loggedUser?.roles[0] === 'InternalDesigner' || loggedUser?.roles[0] === 'ExternalDesigner'"></app-header-internal-designer>
+    <app-header-admin
+      *ngIf="loggedUser?.roles[0] === 'Admin'"
+    ></app-header-admin>
+    <app-header-internal-designer
+      *ngIf="loggedUser?.roles[0] === 'InternalDesigner' || loggedUser?.roles[0] === 'ExternalDesigner'"
+    ></app-header-internal-designer>
     <ion-grid class="main-container">
       <ion-row>
         <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="4">
@@ -10,88 +14,247 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0" size-xl="3.2">
-            <div class=" xl-ion:h-[720px] pb-8">
-              <div class="mb-2">
-                <span class="text-sm text-black-2">{{'MESSENGER.search' | translate}}</span>
-                <ion-input [(ngModel)]="searchText" type="text" class="border rounded-2xl border-black-2 h-[52px]"></ion-input>
-              </div>
-              <ul>
-                <li *ngFor="let user of contacts | filter:searchText">
-                  <div [class.bg-light]="activeChatUser.id === user.id" class="py-3 mb-1 px-2 rounded-md hover:bg-light flex justify-between cursor-pointer" (click)="changeChat(user)">
-                    <div class="flex" >
-                      <img [src]="user.photoPath ? user.photoPath : '../../../assets/images/profile-img.png'" class="w-[57px] h-[57px] rounded-lg object-fill" alt="Profile Img"/>
-                      <div class="ml-3.5 w-[170px]">
-                        <p class="text-black-1 leading-5 font-semibold">{{user.firstName}} {{user.lastName}}</p>
-                        <p class="text-black-3 size-[15px] leading-5 text-clamp">{{user.lastMessageContent}}</p>
-                      </div>
-                    </div>
-                    <div>
-                      <p class="text-black-3 size-[15px] leading-[14px]">{{parseDate(user.lastMessageDate)}}</p>
+        <ion-col
+          size="12"
+          size-sm="10"
+          offset-sm="1"
+          offset-xl="0"
+          size-xl="3.2"
+        >
+          <div class="xl-ion:h-[720px] pb-8">
+            <div class="mb-2">
+              <span class="text-sm text-black-2"
+                >{{'MESSENGER.search' | translate}}</span
+              >
+              <ion-input
+                [(ngModel)]="searchText"
+                type="text"
+                class="border rounded-2xl border-black-2 h-[52px]"
+              ></ion-input>
+            </div>
+            <ul>
+              <li *ngFor="let user of contacts | filter:searchText">
+                <div
+                  [class.bg-light]="activeChatUser.id === user.id"
+                  class="py-3 mb-1 px-2 rounded-md hover:bg-light flex justify-between cursor-pointer"
+                  (click)="changeChat(user)"
+                >
+                  <div class="flex">
+                    <img
+                      [src]="user.photoPath ? user.photoPath : '../../../assets/images/profile-img.png'"
+                      class="w-[57px] h-[57px] rounded-lg object-fill"
+                      alt="Profile Img"
+                    />
+                    <div class="ml-3.5 w-[170px]">
+                      <p class="text-black-1 leading-5 font-semibold">
+                        {{user.firstName}} {{user.lastName}}
+                      </p>
+                      <p class="text-black-3 size-[15px] leading-5 text-clamp">
+                        {{user.lastMessageContent}}
+                      </p>
                     </div>
                   </div>
-                </li>
-              </ul>
-            </div>
-        </ion-col>
-        <ion-col size="12" size-sm="10" offset-sm="1" offset-xl="0.3" size-xl="8.5" class="relative">
-          <div *ngIf="ratePrompt" class="w-[333px] h-[100px] absolute z-10 m-auto inset-0">
-            <ion-button fill="clear" class="primary-btn w-[170px]" (click)="openRatingModal()">{{'SHARE-RATE.rate-designer' | translate}}</ion-button>
-            <ion-button fill="clear" class="secondary-btn w-[130px]" (click)="ratePrompt=false;">{{'COMMON.skip' | translate}}</ion-button>
+                  <div>
+                    <p class="text-black-3 size-[15px] leading-[14px]">
+                      {{parseDate(user.lastMessageDate)}}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-            <div [class]="ratePrompt ? 'blur pointer-events-none' : ''">
+        </ion-col>
+        <ion-col
+          size="12"
+          size-sm="10"
+          offset-sm="1"
+          offset-xl="0.3"
+          size-xl="8.5"
+          class="relative"
+        >
+          <div
+            *ngIf="ratePrompt"
+            class="w-[333px] h-[100px] absolute z-10 m-auto inset-0"
+          >
+            <ion-button
+              fill="clear"
+              class="primary-btn w-[170px]"
+              (click)="openRatingModal()"
+              >{{'SHARE-RATE.rate-designer' | translate}}</ion-button
+            >
+            <ion-button
+              fill="clear"
+              class="secondary-btn w-[130px]"
+              (click)="ratePrompt=false;"
+              >{{'COMMON.skip' | translate}}</ion-button
+            >
+          </div>
+          <div [class]="ratePrompt ? 'blur pointer-events-none' : ''">
             <div class="bg-light xl-ion:h-[682px] rounded-lg text-center pb-8">
               <div class="flex py-[22px] pl-[18px] border-b border-secondary">
-                <img [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'" class="w-[45px] h-[45px] rounded-lg object-fill" alt="Profile Img"/>
-                <p class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center">{{activeChatUser.firstName}} {{activeChatUser.lastName}}</p>
+                <img
+                  [src]="activeChatUser.photoPath ? activeChatUser.photoPath : '../../../assets/images/profile-img.png'"
+                  class="w-[45px] h-[45px] rounded-lg object-fill"
+                  alt="Profile Img"
+                />
+                <p
+                  class="text-black-1 leading-5 font-semibold ml-[13px] flex items-center"
+                >
+                  {{activeChatUser.firstName}} {{activeChatUser.lastName}}
+                </p>
               </div>
               <div class="chat" id="chatbox">
                 <ng-container *ngFor="let msg of messages">
-                  <div *ngIf="msg.content || msg.Content" [class]="getChatClassName(msg, 'chat-right', 'chat-left')">{{msg.content ? msg.content : msg.Content}}</div>
+                  <div
+                    *ngIf="msg.content || msg.Content"
+                    [class]="getChatClassName(msg, 'chat-right', 'chat-left')"
+                  >
+                    {{msg.content ? msg.content : msg.Content}}
+                  </div>
                   <ng-container *ngFor="let file of msg.attachments">
-                    <div *ngIf="!file.fileFormat.startsWith('image')" class="chat-file" [class]="getChatClassName(msg, 'r-side', 'l-side')"  (click)="downloadFile(file)">
-                      <ion-icon class="text-4xl mt-2 pl-2 text-primary" name="document"></ion-icon>
-                      <span class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]" [title]="'Download '+file.url.split('/').pop()">{{file.url.split('/').pop()}}</span>
+                    <div
+                      *ngIf="!file.fileFormat.startsWith('image')"
+                      class="chat-file"
+                      [class]="getChatClassName(msg, 'r-side', 'l-side')"
+                      (click)="downloadFile(file)"
+                    >
+                      <ion-icon
+                        class="text-4xl mt-2 pl-2 text-primary"
+                        name="document"
+                      ></ion-icon>
+                      <span
+                        class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]"
+                        [title]="'Download '+file.url.split('/').pop()"
+                        >{{file.url.split('/').pop()}}</span
+                      >
                     </div>
-                    <div *ngIf="file.fileFormat.startsWith('image')" [ngStyle]="{background: 'url(' + file.url + ')'}"  [class]="getChatClassName(msg, 'r-side', 'l-side')" class="chat-image !bg-cover">
-                      <div [ngStyle]="{background: 'url(' + file.url + ')'}" class="w-full h-full !bg-cover blur-sm rounded-lg download-img"></div>
-                      <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img" style="transform: translate(-50%, -50%)">
-                        <div (click)="downloadFile(file)" class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"> <ion-icon name="download" class="text-4xl text-primary"></ion-icon> </div>
+                    <div
+                      *ngIf="file.fileFormat.startsWith('image')"
+                      [ngStyle]="{background: 'url(' + file.url + ')'}"
+                      [class]="getChatClassName(msg, 'r-side', 'l-side')"
+                      class="chat-image !bg-cover"
+                    >
+                      <div
+                        [ngStyle]="{background: 'url(' + file.url + ')'}"
+                        class="w-full h-full !bg-cover blur-sm rounded-lg download-img"
+                      ></div>
+                      <div
+                        class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img"
+                        style="transform: translate(-50%, -50%)"
+                      >
+                        <div
+                          (click)="downloadFile(file)"
+                          class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"
+                        >
+                          <ion-icon
+                            name="download"
+                            class="text-4xl text-primary"
+                          ></ion-icon>
+                        </div>
                       </div>
                     </div>
                   </ng-container>
                   <ng-container *ngFor="let file of msg.MessageAttachments">
-                    <div *ngIf="!file.FileFormat.startsWith('image')" class="chat-file" [class]="getChatClassName(msg, 'r-side', 'l-side')"   (click)="downloadFile(file)">
-                      <ion-icon class="text-4xl mt-2 pl-2 text-primary" name="document"></ion-icon>
-                      <span class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]" [title]="'Download '+file.Url.split('/').pop()">{{file.Url.split('/').pop()}}</span>
+                    <div
+                      *ngIf="!file.FileFormat.startsWith('image')"
+                      class="chat-file"
+                      [class]="getChatClassName(msg, 'r-side', 'l-side')"
+                      (click)="downloadFile(file)"
+                    >
+                      <ion-icon
+                        class="text-4xl mt-2 pl-2 text-primary"
+                        name="document"
+                      ></ion-icon>
+                      <span
+                        class="relative bottom-[30px] left-[45px] text-clamp-1 max-w-[120px] text-[15px]"
+                        [title]="'Download '+file.Url.split('/').pop()"
+                        >{{file.Url.split('/').pop()}}</span
+                      >
                     </div>
-                    <div *ngIf="file.FileFormat.startsWith('image')" [ngStyle]="{background: 'url(' + file.Url + ')'}"  [class]="getChatClassName(msg, 'r-side', 'l-side')" class="chat-image !bg-cover">
-                      <div [ngStyle]="{background: 'url(' + file.Url + ')'}" class="w-full h-full !bg-cover blur-sm rounded-lg download-img"></div>
-                      <div class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img" style="transform: translate(-50%, -50%)">
-                        <div (click)="downloadFile(file)" class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"> <ion-icon name="download" class="text-4xl text-primary"></ion-icon> </div>
+                    <div
+                      *ngIf="file.FileFormat.startsWith('image')"
+                      [ngStyle]="{background: 'url(' + file.Url + ')'}"
+                      [class]="getChatClassName(msg, 'r-side', 'l-side')"
+                      class="chat-image !bg-cover"
+                    >
+                      <div
+                        [ngStyle]="{background: 'url(' + file.Url + ')'}"
+                        class="w-full h-full !bg-cover blur-sm rounded-lg download-img"
+                      ></div>
+                      <div
+                        class="flex-column text-center w-[80%] absolute top-1/2 left-1/2 download-img"
+                        style="transform: translate(-50%, -50%)"
+                      >
+                        <div
+                          (click)="downloadFile(file)"
+                          class="mx-auto bg-secondary rounded-xl w-[40px] h-[40px] cursor-pointer"
+                        >
+                          <ion-icon
+                            name="download"
+                            class="text-4xl text-primary"
+                          ></ion-icon>
+                        </div>
                       </div>
                     </div>
                   </ng-container>
                 </ng-container>
-
               </div>
               <div class="chat-input relative">
-                <ngx-spinner [fullScreen]="false" size="medium" bdColor="rgba(51,51,51,0.1)" color="#9B7E60" type="ball-spin-clockwise"></ngx-spinner>
+                <ngx-spinner
+                  [fullScreen]="false"
+                  size="medium"
+                  bdColor="rgba(51,51,51,0.1)"
+                  color="#9B7E60"
+                  type="ball-spin-clockwise"
+                ></ngx-spinner>
                 <ng-container *ngIf="!activeChatUser.chatPeriodExpired">
-                  <ion-input type="text" (keyup.enter)="sendMsg()" [(ngModel)]="message" placeholder="{{'MESSENGER.type' | translate}}" class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"></ion-input>
+                  <ion-input
+                    type="text"
+                    (keyup.enter)="sendMsg()"
+                    [(ngModel)]="message"
+                    placeholder="{{'MESSENGER.type' | translate}}"
+                    class="border bg-transparent text-left h-[52px] rounded-2xl border-black-2 mx-[20px] w-[80%]"
+                  ></ion-input>
                   <label for="dropzone-file">
-                    <div *ngIf="attachments" class="text-primary cursor-pointer relative bottom-[10px] inline-block">{{attachments.length}} {{'COMMON.file-selected' | translate}}</div>
+                    <div
+                      *ngIf="attachments"
+                      class="text-primary cursor-pointer relative bottom-[10px] inline-block"
+                    >
+                      {{attachments.length}} {{'COMMON.file-selected' |
+                      translate}}
+                    </div>
                     <ion-icon class="img-btn" name="attach-outline"></ion-icon>
-                    <input (change)="onFileChange($event)" id="dropzone-file" multiple type="file" class="hidden" />
+                    <input
+                      (change)="onFileChange($event)"
+                      id="dropzone-file"
+                      multiple
+                      type="file"
+                      class="hidden"
+                    />
                   </label>
-                  <div class="send-btn-wrapper" (click)="sendMsg()"><ion-icon class="send-btn" name="send-sharp"></ion-icon></div>
+                  <div class="send-btn-wrapper" (click)="sendMsg()">
+                    <ion-icon class="send-btn" name="send-sharp"></ion-icon>
+                  </div>
                 </ng-container>
-                <div *ngIf="activeChatUser.id && activeChatUser.chatPeriodExpired" class="text-primary mx-auto cursor-default">
-                  {{ 'MESSENGER.session-expired' | translate:{'name': activeChatUser.firstName} }}
+                <div
+                  *ngIf="activeChatUser.id && activeChatUser.chatPeriodExpired"
+                  class="text-primary mx-auto cursor-default"
+                >
+                  {{ 'MESSENGER.session-expired' | translate:{'name':
+                  activeChatUser.firstName} }}
                 </div>
-                <div *ngIf="!activeChatUser.id" class="text-primary mx-auto cursor-default">
+                <div
+                  *ngIf="!activeChatUser.id"
+                  class="text-primary mx-auto cursor-default"
+                >
                   {{'MESSENGER.empty-inbox' | translate}}
-                  <span routerLink="/book-designer" routerDirection="root" class="font-bold cursor-pointer hover:opacity-80">{{'MY-INTIRI.book' | translate}}</span> {{'MESSENGER.book-designer-text' | translate}}
+                  <span
+                    routerLink="/book-designer"
+                    routerDirection="root"
+                    class="font-bold cursor-pointer hover:opacity-80"
+                    >{{'MY-INTIRI.book' | translate}}</span
+                  >
+                  {{'MESSENGER.book-designer-text' | translate}}
                 </div>
               </div>
             </div>

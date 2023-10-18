@@ -6,15 +6,15 @@ using Intiri.API.Models.Project;
 namespace Intiri.API.Automapper
 {
     public class ProjectMapperProfile : Profile
-	{
-		public ProjectMapperProfile()
-		{
-			CreateMap<ProjectNameInDTO, Project>();
+    {
+        public ProjectMapperProfile()
+        {
+            CreateMap<ProjectNameInDTO, Project>();
 
-			CreateMap<ProjectInDTO, Project>()
-				.ForMember(cl => cl.Name, opt => opt.MapFrom(src => src.ProjectName));
+            CreateMap<ProjectInDTO, Project>()
+                .ForMember(cl => cl.Name, opt => opt.MapFrom(src => src.ProjectName));
 
-			CreateMap<Project, ProjectOutDTO>();
-		}
-	}
+            CreateMap<Project, ProjectOutDTO>();
+        }
+    }
 }

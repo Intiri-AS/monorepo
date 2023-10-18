@@ -11,9 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './moodboard-details.page.html',
   styleUrls: ['./moodboard-details.page.scss'],
 })
-
 export class MoodboardDetailsPage implements OnInit {
-
   moodboard: any;
   projectId: string;
   loggedUser$ = this.accountService.currentUser$;
@@ -24,18 +22,18 @@ export class MoodboardDetailsPage implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private craftsmanService: CraftsmanService,
-    private translate: TranslateService,
-    ){}
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.moodboard = data.moodboard;
-    })
+    });
     this.projectId = this.route.snapshot.paramMap.get('projectId');
   }
 
   backToProjectDetails() {
-    if(this.projectId) {
+    if (this.projectId) {
       this.router.navigateByUrl(this.router.url.split('/moodboard-details')[0]);
     } else {
       history.back();
@@ -43,13 +41,17 @@ export class MoodboardDetailsPage implements OnInit {
   }
 
   getCraftsmanPage() {
-    const roomIndex = this.moodboard.room.name.toLowerCase().replace(/ /g,'');
+    const roomIndex = this.moodboard.room.name.toLowerCase().replace(/ /g, '');
     return this.craftsmanService.getCraftsmanUrl(roomIndex);
   }
 
-  downloadMoodboardPDF () {
-    const getMoodboardPDFUrl: string = environment.apiUrl + 'Moodboards/CreateMoodboardPDF?moodboardId=' + this.moodboard.id + '&lng=' + this.translate.currentLang;
-    window.open(getMoodboardPDFUrl, '_blank')
+  downloadMoodboardPDF() {
+    const getMoodboardPDFUrl: string =
+      environment.apiUrl +
+      'Moodboards/CreateMoodboardPDF?moodboardId=' +
+      this.moodboard.id +
+      '&lng=' +
+      this.translate.currentLang;
+    window.open(getMoodboardPDFUrl, '_blank');
   }
-
 }

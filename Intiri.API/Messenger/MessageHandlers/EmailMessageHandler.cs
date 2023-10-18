@@ -7,46 +7,46 @@ using System.Threading.Tasks;
 
 namespace Messenger.MessageHandlers
 {
-	public class EmailMessageHandler : IMessageHandler
-	{
-		#region Fields
+    public class EmailMessageHandler : IMessageHandler
+    {
+        #region Fields
 
 
 
-		#endregion Fields
+        #endregion Fields
 
-		#region ctors
+        #region ctors
 
-		public EmailMessageHandler()
-		{
-			MessageType = typeof(EmalMessage);
-		}
+        public EmailMessageHandler()
+        {
+            MessageType = typeof(EmalMessage);
+        }
 
-		#endregion ctors
+        #endregion ctors
 
-		#region Properties
+        #region Properties
 
-		/// <summary>
-		/// Type of message to be handled
-		/// </summary>
-		public Type MessageType { get; private set; }
+        /// <summary>
+        /// Type of message to be handled
+        /// </summary>
+        public Type MessageType { get; private set; }
 
-		#endregion Properties
+        #endregion Properties
 
-		#region Public methods
+        #region Public methods
 
-		/// <summary>
-		/// Sends provided message
-		/// </summary>
-		/// <param name="message">Message</param>
-		/// <returns>True if successful, otherwise false</returns>
-		public async Task<bool> SendMesssage(Message message)
-		{
-			ArgumentNullException.ThrowIfNull(message, nameof(message));
+        /// <summary>
+        /// Sends provided message
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>True if successful, otherwise false</returns>
+        public async Task<bool> SendMesssage(Message message)
+        {
+            ArgumentNullException.ThrowIfNull(message, nameof(message));
 
-			return await Task.FromResult(true);
-		}
+            return await Task.FromResult(true);
+        }
 
-		#endregion Public methods
-	}
+        #endregion Public methods
+    }
 }

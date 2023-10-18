@@ -21,215 +21,268 @@ using Intiri.API.Extension;
 
 namespace Intiri.API.Services
 {
-	public class MoodboardSevice : IMoodboardSevice
-	{
-		#region Fields
+    public class MoodboardSevice : IMoodboardSevice
+    {
+        #region Fields
 
-		private readonly IUnitOfWork _unitOfWork;
-		private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
-		public MoodboardSevice( IUnitOfWork unitOfWork, IMapper mapper)
-		{
-			_unitOfWork = unitOfWork;
-			_mapper = mapper;
-		}
+        #region Constructors
+        public MoodboardSevice(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		public KeyValuePair<int, int> findStyleWithMaxCounts (Dictionary<int, int> dict) {
-			KeyValuePair<int, int> maxEntry = new KeyValuePair<int, int>();
-			foreach (var entry in dict) {
-				if (entry.Value > maxEntry.Value) {
-					maxEntry = entry;
-				}
-			}
-			return maxEntry;
-		}
-		public async Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(MoodboardMatchInDTO matchInDTO)
-		{
-			IEnumerable<Moodboard> moodboardsByRoom =
-				await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(matchInDTO.RoomId);
+        public KeyValuePair<int, int> findStyleWithMaxCounts(Dictionary<int, int> dict)
+        {
+            KeyValuePair<int, int> maxEntry = new KeyValuePair<int, int>();
+            foreach (var entry in dict)
+            {
+                if (entry.Value > maxEntry.Value)
+                {
+                    maxEntry = entry;
+                }
+            }
+            return maxEntry;
+        }
 
-			// Group styleImageIds with max, mid, min selected styles.
-			ICollection<int> styleImageIds = matchInDTO.StyleImageIds;
-			IEnumerable<StyleImage> styleImages = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(styleImageIds);
-			styleImages = styleImages.ToList();
+        public async Task<IEnumerable<MoodboardMatchDTO>> FindMoodboardMatchesAsync(
+            MoodboardMatchInDTO matchInDTO
+        )
+        {
+            IEnumerable<Moodboard> moodboardsByRoom =
+                await _unitOfWork.MoodboardRepository.GetMoodboardsByRoomId(matchInDTO.RoomId);
 
-			List<int> styleImageStyleIds = new List<int>();
-			foreach (StyleImage styleImage in styleImages) {
-				styleImageStyleIds.Add(styleImage.StyleId);
-			}
+            // Group styleImageIds with max, mid, min selected styles.
+            ICollection<int> styleImageIds = matchInDTO.StyleImageIds;
+            IEnumerable<StyleImage> styleImages =
+                await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(styleImageIds);
+            styleImages = styleImages.ToList();
 
-			Dictionary<int, int> freq = Utils.CountArrayElementsFrequency(styleImageStyleIds);
+            List<int> styleImageStyleIds = new List<int>();
+            foreach (StyleImage styleImage in styleImages)
+            {
+                styleImageStyleIds.Add(styleImage.StyleId);
+            }
 
-			KeyValuePair<int, int> highMatchStyle = new KeyValuePair<int, int>();
-			KeyValuePair<int, int> mediumMatchStyle = new KeyValuePair<int, int>();
-			KeyValuePair<int, int> lowMatchStyle = new KeyValuePair<int, int>();
+            Dictionary<int, int> freq = Utils.CountArrayElementsFrequency(styleImageStyleIds);
 
-			if (freq.Count > 0) {
-				highMatchStyle = findStyleWithMaxCounts(freq);
-				freq.Remove(highMatchStyle.Key);
-			}
-			if (freq.Count > 0) {
-				mediumMatchStyle = findStyleWithMaxCounts(freq);
-				freq.Remove(mediumMatchStyle.Key);
-			}
+            KeyValuePair<int, int> highMatchStyle = new KeyValuePair<int, int>();
+            KeyValuePair<int, int> mediumMatchStyle = new KeyValuePair<int, int>();
+            KeyValuePair<int, int> lowMatchStyle = new KeyValuePair<int, int>();
 
-			if (freq.Count > 0) {
-				lowMatchStyle = findStyleWithMaxCounts(freq);
-			}
+            if (freq.Count > 0)
+            {
+                highMatchStyle = findStyleWithMaxCounts(freq);
+                freq.Remove(highMatchStyle.Key);
+            }
+            if (freq.Count > 0)
+            {
+                mediumMatchStyle = findStyleWithMaxCounts(freq);
+                freq.Remove(mediumMatchStyle.Key);
+            }
 
-			
-			Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
+            if (freq.Count > 0)
+            {
+                lowMatchStyle = findStyleWithMaxCounts(freq);
+            }
 
-			int count = 0;
-			foreach (Moodboard moodboard in moodboardsByRoom)
-			{
-				if (moodboard.Style.Id == highMatchStyle.Key && !moodboardMatches.ContainsKey("High")) {
-					moodboardMatches.Add("High", moodboard);
-				} else if (moodboard.Style.Id == mediumMatchStyle.Key && !moodboardMatches.ContainsKey("Medium")) {
-					moodboardMatches.Add("Medium", moodboard);
-				}
-				else
-				{
-					count++;
-					if(count <= 3)
-					{
+            Dictionary<string, Moodboard> moodboardMatches = new Dictionary<string, Moodboard>();
+
+            int count = 0;
+            foreach (Moodboard moodboard in moodboardsByRoom)
+            {
+                if (
+                    moodboard.Style.Id == highMatchStyle.Key
+                    && !moodboardMatches.ContainsKey("High")
+                )
+                {
+                    moodboardMatches.Add("High", moodboard);
+                }
+                else if (
+                    moodboard.Style.Id == mediumMatchStyle.Key
+                    && !moodboardMatches.ContainsKey("Medium")
+                )
+                {
+                    moodboardMatches.Add("Medium", moodboard);
+                }
+                else
+                {
+                    count++;
+                    if (count <= 3)
+                    {
                         moodboardMatches.Add("Low" + count, moodboard);
                     }
-				}
-			}
-			
-			List<KeyValuePair<string, Moodboard>> moodboardMatchesList = moodboardMatches.ToList();
+                }
+            }
 
-			if (moodboardMatchesList.Count == 0) {
-				return null;
-			}
+            List<KeyValuePair<string, Moodboard>> moodboardMatchesList = moodboardMatches.ToList();
 
-			List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
+            if (moodboardMatchesList.Count == 0)
+            {
+                return null;
+            }
 
-			foreach (var item in moodboardMatchesList)
-			{
-                MoodboardMatchDTO moodboardMatch = new()
-                {
-                    Moodboard = _mapper.Map<MoodboardOutDTO>(item.Value),
-                };
+            List<MoodboardMatchDTO> moodboardsMatch = new List<MoodboardMatchDTO>();
+
+            foreach (var item in moodboardMatchesList)
+            {
+                MoodboardMatchDTO moodboardMatch =
+                    new() { Moodboard = _mapper.Map<MoodboardOutDTO>(item.Value), };
 
                 if (item.Key.Contains("High"))
-				{
-					moodboardMatch.MoodboardMatch = "High";
-					moodboardMatch.MoodboardMatchId = 1;
-				}
-				else if (item.Key.Contains("Medium"))
-				{
+                {
+                    moodboardMatch.MoodboardMatch = "High";
+                    moodboardMatch.MoodboardMatchId = 1;
+                }
+                else if (item.Key.Contains("Medium"))
+                {
                     moodboardMatch.MoodboardMatch = "Medium";
                     moodboardMatch.MoodboardMatchId = 2;
                 }
-				else
-				{
+                else
+                {
                     moodboardMatch.MoodboardMatch = "Low";
                     moodboardMatch.MoodboardMatchId = 3;
                 }
 
-				moodboardsMatch.Add(moodboardMatch);
+                moodboardsMatch.Add(moodboardMatch);
             }
 
-			//for (int i = 0; i < moodboardMatchesList.Count; i++) 
-			//{
-			//	Moodboard moodboard = moodboardMatchesList[i].Value;
-			//	if (i >= 2) 
-			//	{
-			//		MoodboardMatchDTO moodboardMatch = new()
-			//		{	
-			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-			//			MoodboardMatch = "Low"
-			//		};
-			//		moodboardsMatch.Add(moodboardMatch);
-			//	} 
-			//	else 
-			//	{
-			//		MoodboardMatchDTO moodboardMatch = new()
-			//		{	
-			//			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
-			//			MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
-			//		};
-			//		moodboardsMatch.Add(moodboardMatch);
-			//	}
-			//}
+            //for (int i = 0; i < moodboardMatchesList.Count; i++)
+            //{
+            //	Moodboard moodboard = moodboardMatchesList[i].Value;
+            //	if (i >= 2)
+            //	{
+            //		MoodboardMatchDTO moodboardMatch = new()
+            //		{
+            //			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+            //			MoodboardMatch = "Low"
+            //		};
+            //		moodboardsMatch.Add(moodboardMatch);
+            //	}
+            //	else
+            //	{
+            //		MoodboardMatchDTO moodboardMatch = new()
+            //		{
+            //			Moodboard = _mapper.Map<MoodboardOutDTO>(moodboard),
+            //			MoodboardMatch = Enum.GetName(typeof(MoodboardMatch), i)
+            //		};
+            //		moodboardsMatch.Add(moodboardMatch);
+            //	}
+            //}
 
-			return moodboardsMatch.OrderBy(x=>x.MoodboardMatchId);
-		}
+            return moodboardsMatch.OrderBy(x => x.MoodboardMatchId);
+        }
 
         // Get moodboards with target style ID and with all rooms other than the target room ID
-        public async Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(int styleId, int roomId)
-		{
-			IEnumerable<Moodboard> moodboardFamily = await _unitOfWork.MoodboardRepository
-				.GetMoodboardStyleFamilyAsync(styleId, roomId);
+        public async Task<IEnumerable<MoodboardOutDTO>> GetMoodboardStyleFamilyAsync(
+            int styleId,
+            int roomId
+        )
+        {
+            IEnumerable<Moodboard> moodboardFamily =
+                await _unitOfWork.MoodboardRepository.GetMoodboardStyleFamilyAsync(styleId, roomId);
 
-			var moodboardFamilyOut = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
+            var moodboardFamilyOut = _mapper.Map<ICollection<MoodboardOutDTO>>(moodboardFamily);
 
             return moodboardFamilyOut;
-		}
+        }
 
-		public async Task<ClientMoodboard> CreateClientMoodboardAsync(List<RoomDetails> roomDetails,  MoodboardInDTO moodboardIn, EndUser endUser)
-		{
-			Moodboard moodboard;
-			ClientMoodboard newMoodboard;
+        public async Task<ClientMoodboard> CreateClientMoodboardAsync(
+            List<RoomDetails> roomDetails,
+            MoodboardInDTO moodboardIn,
+            EndUser endUser
+        )
+        {
+            Moodboard moodboard;
+            ClientMoodboard newMoodboard;
 
-			if (moodboardIn.Id > 0)
-			{
-				newMoodboard = await CloneMoodboardAsync(moodboardIn.Id, roomDetails, moodboardIn);
-				newMoodboard.Designer = endUser;
-			}
-			else
-			{
-				moodboard = await _unitOfWork.MoodboardRepository.GetByID(moodboardIn.SourceMoodboardId);
-				newMoodboard = _mapper.Map<ClientMoodboard>(moodboardIn);
-				newMoodboard.SourceMoodboardId = moodboard.Id;
-				newMoodboard.IsTemplate = false;
-				_unitOfWork.MoodboardRepository.Insert(newMoodboard);
+            if (moodboardIn.Id > 0)
+            {
+                newMoodboard = await CloneMoodboardAsync(moodboardIn.Id, roomDetails, moodboardIn);
+                newMoodboard.Designer = endUser;
+            }
+            else
+            {
+                moodboard = await _unitOfWork.MoodboardRepository.GetByID(
+                    moodboardIn.SourceMoodboardId
+                );
+                newMoodboard = _mapper.Map<ClientMoodboard>(moodboardIn);
+                newMoodboard.SourceMoodboardId = moodboard.Id;
+                newMoodboard.IsTemplate = false;
+                _unitOfWork.MoodboardRepository.Insert(newMoodboard);
 
-				foreach (var item in roomDetails)
-				{
+                foreach (var item in roomDetails)
+                {
                     item.Moodboard = newMoodboard;
                 }
-				newMoodboard.Designer = endUser;
+                newMoodboard.Designer = endUser;
 
-				Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardIn.RoomId);
-				newMoodboard.Room = mRoom;
-				Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(moodboardIn.StyleId);
-				newMoodboard.Style = style;
+                Room mRoom = await _unitOfWork.RoomRepository.GetRoomByIdAsync(moodboardIn.RoomId);
+                newMoodboard.Room = mRoom;
+                Style style = await _unitOfWork.StyleRepository.GetStyleWithStyleImagesByIdAsync(
+                    moodboardIn.StyleId
+                );
+                newMoodboard.Style = style;
 
-				IEnumerable<ColorPalette> mColorPalettes = await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(moodboardIn.ColorPaletteIds);
-				newMoodboard.ColorPalettes = mColorPalettes.ToArray();
+                IEnumerable<ColorPalette> mColorPalettes =
+                    await _unitOfWork.ColorPaletteRepository.GetColorPalettesByIdsListAsync(
+                        moodboardIn.ColorPaletteIds
+                    );
+                newMoodboard.ColorPalettes = mColorPalettes.ToArray();
 
-				IEnumerable<Material> mMaterials = await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(moodboardIn.MaterialIds);
-				newMoodboard.Materials = mMaterials.ToArray();
+                IEnumerable<Material> mMaterials =
+                    await _unitOfWork.MaterialRepository.GetMaterialsByIdsListAsync(
+                        moodboardIn.MaterialIds
+                    );
+                newMoodboard.Materials = mMaterials.ToArray();
 
-				IEnumerable<Product> mProducts = await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(moodboardIn.ProductIds);
-				newMoodboard.Products = mProducts.ToArray();
+                IEnumerable<Product> mProducts =
+                    await _unitOfWork.ProductRepository.GetProductsByIdsListAsync(
+                        moodboardIn.ProductIds
+                    );
+                newMoodboard.Products = mProducts.ToArray();
 
-                IEnumerable<StyleImage> mstyleimage = await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(moodboardIn.StyleImageIds);
+                IEnumerable<StyleImage> mstyleimage =
+                    await _unitOfWork.StyleImageRepository.GetStyleImagesByIdsListAsync(
+                        moodboardIn.StyleImageIds
+                    );
                 newMoodboard.StyleImages = mstyleimage.ToArray();
             }
 
-			return newMoodboard;
-		}
+            return newMoodboard;
+        }
 
-		public async Task<ClientMoodboard> CloneMoodboardAsync(int moodboardId, List<RoomDetails> roomDetails, MoodboardInDTO moodboardIn)
-		{
-			Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(moodboardId);
-			ClientMoodboard clonedMoodboard = new(moodboard);
+        public async Task<ClientMoodboard> CloneMoodboardAsync(
+            int moodboardId,
+            List<RoomDetails> roomDetails,
+            MoodboardInDTO moodboardIn
+        )
+        {
+            Moodboard moodboard = await _unitOfWork.MoodboardRepository.GetFullMoodboardById(
+                moodboardId
+            );
+            ClientMoodboard clonedMoodboard = new(moodboard);
             clonedMoodboard.SlotInfo = moodboardIn.SlotInfo;
             clonedMoodboard.StyleImages = moodboard.StyleImages;
 
-			// Need to update Materials, Products & Colors as well
-			clonedMoodboard.Materials = moodboard.Materials.Where(material => moodboardIn.MaterialIds.Contains(material.Id)).ToHashSet();
-			clonedMoodboard.Products = moodboard.Products.Where(product => moodboardIn.ProductIds.Contains(product.Id)).ToHashSet();
-			clonedMoodboard.ColorPalettes = moodboard.ColorPalettes.Where(colorPalette => moodboardIn.ColorPaletteIds.Contains(colorPalette.Id)).ToHashSet();
+            // Need to update Materials, Products & Colors as well
+            clonedMoodboard.Materials = moodboard.Materials
+                .Where(material => moodboardIn.MaterialIds.Contains(material.Id))
+                .ToHashSet();
+            clonedMoodboard.Products = moodboard.Products
+                .Where(product => moodboardIn.ProductIds.Contains(product.Id))
+                .ToHashSet();
+            clonedMoodboard.ColorPalettes = moodboard.ColorPalettes
+                .Where(colorPalette => moodboardIn.ColorPaletteIds.Contains(colorPalette.Id))
+                .ToHashSet();
 
             _unitOfWork.MoodboardRepository.Insert(clonedMoodboard);
 
@@ -239,6 +292,6 @@ namespace Intiri.API.Services
             }
 
             return clonedMoodboard;
-		}
-	}
+        }
+    }
 }

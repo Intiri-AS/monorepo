@@ -48,12 +48,12 @@ export class AddStyleModalComponent implements OnInit {
     this.addStyleForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      imageFile: ['', [Validators.required]],
     });
     this.editStyleForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      imageFile: ['']
+      imageFile: [''],
     });
   }
 
@@ -62,13 +62,13 @@ export class AddStyleModalComponent implements OnInit {
   delete: boolean;
   edit: boolean;
 
-  item: any
+  item: any;
 
   style = {
     name: '',
     description: '',
-    imageFile: null
-  }
+    imageFile: null,
+  };
 
   imagePath = null;
 
@@ -84,9 +84,11 @@ export class AddStyleModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.style.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.style.imageFile));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.style.imageFile)
+      );
     } else {
       this.imagePath = null;
     }
@@ -99,35 +101,41 @@ export class AddStyleModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.styleService.addStyle(this.style).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.styleService.getStyles();
-        this.openSuccessModal();
+    this.styleService.addStyle(this.style).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.styleService.getStyles();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteStyle() {
-    this.styleService.deleteStyle(this.item['id']).subscribe(res => {
+    this.styleService.deleteStyle(this.item['id']).subscribe(
+      (res) => {
         this.styleService.getStyles();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.style-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editStyle() {
@@ -137,34 +145,36 @@ export class AddStyleModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.styleService.editStyle(this.item.id, this.style).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.styleService.getStyles();
+    this.styleService.editStyle(this.item.id, this.style).subscribe(
+      (res) => {
+        this.spinner.hide();
+        this.modalController.dismiss();
+        if (typeof res === 'object') {
+          this.styleService.getStyles();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.style-saved'),
+            type: 'success',
+          });
+        }
+      },
+      (e) => {
+        this.spinner.hide();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.style-saved'),
-          type: 'success'
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
         });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddStyleModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
-
 }

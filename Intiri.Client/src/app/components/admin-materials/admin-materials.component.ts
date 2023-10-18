@@ -12,22 +12,24 @@ import { AddMaterialsModalComponent } from '../modals/add-materials-modal/add-ma
   styleUrls: ['./admin-materials.component.scss'],
 })
 export class AdminMaterialsComponent implements OnInit {
-
   materials$: Observable<any> = this.materialService.materials$;
   materials: any[];
   materialTypes: any[];
 
   searchText: any;
 
-  constructor(public popoverController: PopoverController, private modalController: ModalController, private materialService: MaterialService) { }
-
+  constructor(
+    public popoverController: PopoverController,
+    private modalController: ModalController,
+    private materialService: MaterialService
+  ) {}
 
   ngOnInit() {
     this.materialService.getMaterials();
     this.materialService.getMaterialTypes().subscribe((res: []) => {
       this.materialTypes = res;
-    })
-    this.materials$.subscribe(materials => {
+    });
+    this.materials$.subscribe((materials) => {
       this.materials = materials;
     });
   }
@@ -36,8 +38,8 @@ export class AdminMaterialsComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {material: true, item: material},
-      dismissOnSelect: true
+      componentProps: { material: true, item: material },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -46,22 +48,23 @@ export class AdminMaterialsComponent implements OnInit {
   async addMaterials() {
     const modal = await this.modalController.create({
       component: AddMaterialsModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-designer-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  onFilterChange(event){
+  onFilterChange(event) {
     const selectedTypeNames = event.detail.value;
-    this.materials$.pipe(take(1)).subscribe(materials => {
-      if(selectedTypeNames.length > 0) {
-        this.materials = materials.filter(material => selectedTypeNames.includes(material.materialTypeName));
+    this.materials$.pipe(take(1)).subscribe((materials) => {
+      if (selectedTypeNames.length > 0) {
+        this.materials = materials.filter((material) =>
+          selectedTypeNames.includes(material.materialTypeName)
+        );
       } else {
         this.materials = materials;
       }
-    })
-}
-
+    });
+  }
 }

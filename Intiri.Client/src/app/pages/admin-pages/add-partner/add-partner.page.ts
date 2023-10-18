@@ -12,30 +12,34 @@ import { PartnerService } from 'src/app/services/partner.service';
   styleUrls: ['./add-partner.page.scss'],
 })
 export class AddPartnerPage implements OnInit {
-
   partner;
   added: boolean;
   delete: boolean;
 
-  item: {}
+  item: {};
 
-
-  constructor(private modalController: ModalController, private route: ActivatedRoute, private router: Router,public popoverController: PopoverController, private partnerService: PartnerService) {
+  constructor(
+    private modalController: ModalController,
+    private route: ActivatedRoute,
+    private router: Router,
+    public popoverController: PopoverController,
+    private partnerService: PartnerService
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-   }
+  }
 
   ngOnInit() {
-    this.route.data.pipe(take(1)).subscribe(data => {
+    this.route.data.pipe(take(1)).subscribe((data) => {
       this.partner = data.partner;
-    })
+    });
   }
 
   async showSettings(e: Event, item) {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {contact: true, item},
-      dismissOnSelect: true
+      componentProps: { contact: true, item },
+      dismissOnSelect: true,
     });
 
     await popover.present();
@@ -44,21 +48,22 @@ export class AddPartnerPage implements OnInit {
   async openAddContactModal(partnerId) {
     const modal = await this.modalController.create({
       component: AddPartnerModalComponent,
-      componentProps: {nextPage: true, partnerId: partnerId},
-      cssClass: 'add-partner-contact-modal-css'
+      componentProps: { nextPage: true, partnerId: partnerId },
+      cssClass: 'add-partner-contact-modal-css',
     });
 
     await modal.present();
   }
 
   deleteContact() {
-    this.partnerService.deletePartnerContact(this.item['id']).subscribe(res => {
+    this.partnerService
+      .deletePartnerContact(this.item['id'])
+      .subscribe((res) => {
         location.reload();
-    });
+      });
   }
-  
+
   dismissModal() {
     this.modalController.dismiss();
   }
-
 }

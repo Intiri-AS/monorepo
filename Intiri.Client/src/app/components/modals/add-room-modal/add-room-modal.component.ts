@@ -25,7 +25,7 @@ export class AddRoomModalComponent implements OnInit {
     return this.addRoomForm.controls.type.errors;
   }
 
-  get nameNorwegianErrors () {
+  get nameNorwegianErrors() {
     return this.addRoomForm.controls.nameNorwegian.errors;
   }
 
@@ -49,7 +49,7 @@ export class AddRoomModalComponent implements OnInit {
     return this.editRoomForm.controls.description.errors;
   }
 
-  get editNameNorwegianErrors () {
+  get editNameNorwegianErrors() {
     return this.editRoomForm.controls.nameNorwegian.errors;
   }
 
@@ -67,14 +67,14 @@ export class AddRoomModalComponent implements OnInit {
       nameNorwegian: ['', [Validators.required]],
       type: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]]
+      imageFile: ['', [Validators.required]],
     });
     this.editRoomForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       nameNorwegian: ['', [Validators.required]],
       type: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      imageFile: ['']
+      imageFile: [''],
     });
   }
 
@@ -90,8 +90,8 @@ export class AddRoomModalComponent implements OnInit {
     nameNorwegian: '',
     roomTypeId: null,
     imageFile: null,
-    description: ''
-  }
+    description: '',
+  };
 
   imagePath = null;
 
@@ -100,7 +100,7 @@ export class AddRoomModalComponent implements OnInit {
   ngOnInit() {
     this.roomService.getRoomTypes().subscribe((res: []) => {
       this.roomTypes = res;
-    })
+    });
     if (this.edit) {
       this.room.name = this.item.name;
       this.room.nameNorwegian = this.item.nameNorwegian;
@@ -109,7 +109,7 @@ export class AddRoomModalComponent implements OnInit {
     }
   }
 
-  handleSpaces (e, field) {
+  handleSpaces(e, field) {
     if (!this.room[field].trim()) {
       e.preventDefault();
     }
@@ -120,9 +120,11 @@ export class AddRoomModalComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if(event.target.files[0]) {
+    if (event.target.files[0]) {
       this.room.imageFile = event.target.files[0];
-      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.room.imageFile));
+      this.imagePath = this.sanitizer.bypassSecurityTrustUrl(
+        URL.createObjectURL(this.room.imageFile)
+      );
     } else {
       this.imagePath = null;
     }
@@ -135,35 +137,41 @@ export class AddRoomModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.roomService.addRoom(this.room).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.roomService.getRooms();
-        this.openSuccessModal();
+    this.roomService.addRoom(this.room).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.roomService.getRooms();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteRoom() {
-    this.roomService.deleteRoom(this.item['id']).subscribe(res => {
+    this.roomService.deleteRoom(this.item['id']).subscribe(
+      (res) => {
         this.roomService.getRooms();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.room-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editRoom() {
@@ -173,39 +181,41 @@ export class AddRoomModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.roomService.editRoom(this.item.id, this.room).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.roomService.getRooms();
+    this.roomService.editRoom(this.item.id, this.room).subscribe(
+      (res) => {
+        this.spinner.hide();
+        this.modalController.dismiss();
+        if (typeof res === 'object') {
+          this.roomService.getRooms();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.room-saved'),
+            type: 'success',
+          });
+        }
+      },
+      (e) => {
+        this.spinner.hide();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.room-saved'),
-          type: 'success'
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
         });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    })
+    );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddRoomModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
 
-  getRoomTypeNameByTypeId (typeId) {
-    let res = this.roomTypes.filter(rType => rType.id == typeId);
+  getRoomTypeNameByTypeId(typeId) {
+    let res = this.roomTypes.filter((rType) => rType.id == typeId);
     return res.length ? res[0].name : null;
   }
-
 }

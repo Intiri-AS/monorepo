@@ -33,7 +33,7 @@ export class LoginModalComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern('^[0-9]+$')
+          Validators.pattern('^[0-9]+$'),
         ]),
       ],
     });
@@ -43,7 +43,7 @@ export class LoginModalComponent implements OnInit {
     return this.loginForm.controls.phoneNumber.errors;
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   setActiveCode(event) {
     this.activeCode = event.detail.value;
@@ -84,8 +84,8 @@ export class LoginModalComponent implements OnInit {
     this.modalController.dismiss({ dismissed: true });
     this.router.navigate(['/register'], {
       state: {
-        step: '4'
-      }
+        step: '4',
+      },
     });
   }
 
@@ -93,10 +93,11 @@ export class LoginModalComponent implements OnInit {
     const modal = await this.modalController.create({
       component: SmsVerificationModalComponent,
       componentProps: {
-        phoneModel, step: '4',
+        phoneModel,
+        step: '4',
         verificationTarget: VerificationTarget.LOGIN,
         bookDesigner: this.bookDesigner,
-        designer: this.designer
+        designer: this.designer,
       },
       cssClass: 'medium-modal-css',
       backdropDismiss: true,

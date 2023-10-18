@@ -10,10 +10,10 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./profile-info-section.component.scss'],
 })
 export class ProfileInfoSectionComponent implements OnInit {
-  @Input () userInfo  = false;
-  @Input () partnerProfile  = false;
+  @Input() userInfo = false;
+  @Input() partnerProfile = false;
   @Input() dataInput? = {
-    firstName: '' ,
+    firstName: '',
     lastName: '',
     gender: '' || undefined,
     countryCode: '',
@@ -34,13 +34,14 @@ export class ProfileInfoSectionComponent implements OnInit {
     private http: HttpClient,
     private _parentContainer: ControlContainer,
     private accountService: AccountService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.formGroup = this._parentContainer.control as FormGroup;
-    this.accountService.currentUser$.subscribe( user => this.currentUser = user);
+    this.accountService.currentUser$.subscribe(
+      (user) => (this.currentUser = user)
+    );
   }
-
 
   genderChange(event) {
     this.dataInput.gender = event.detail.value;

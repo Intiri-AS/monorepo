@@ -12,14 +12,13 @@ namespace Intiri.API.Migrations
                 name: "NameNorwegian",
                 table: "Rooms",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "NameNorwegian",
-                table: "Rooms");
+            migrationBuilder.DropColumn(name: "NameNorwegian", table: "Rooms");
         }
     }
 }

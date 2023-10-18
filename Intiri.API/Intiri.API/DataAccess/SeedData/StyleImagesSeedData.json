@@ -1,92 +1,92 @@
 ﻿[
-	{
-		"Name": "StyleImage1_1",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665388/StyleImages/StyleImage1_1_lnnzu5.png",
-		"PublicId": "StyleImages/StyleImage1_1_lnnzu5.png",
-		"StyleId": 1
-	},
-	{
-		"Name": "StyleImage2_1",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage2_1_jxaje9.png",
-		"PublicId": "StyleImages/StyleImage2_1_jxaje9.png",
-		"StyleId": 2
-	},
-	{
-		"Name": "StyleImage3_1",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage3_1_cwtvti.png",
-		"PublicId": "StyleImages/StyleImage3_1_cwtvti.png",
-		"StyleId": 3
-	},
-	{
-		"Name": "StyleImage4_1",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage4_1_pbaanw.png",
-		"PublicId": "StyleImages/StyleImage4_1_pbaanw.png",
-		"StyleId": 4
-	},
-	{
-		"Name": "StyleImage5_1",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage5_1_qtqvst.png",
-		"PublicId": "StyleImages/StyleImage5_1_qtqvst.png",
-		"StyleId": 5
-	},
-	{
-		"Name": "StyleImage1_2",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665391/StyleImages/StyleImage1_2_flszeg.png",
-		"PublicId": "StyleImages/StyleImage1_2_flszeg.png",
-		"StyleId": 1
-	},
-	{
-		"Name": "StyleImage2_2",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage2_2_q4nnw7.png",
-		"PublicId": "StyleImages/StyleImage2_2_q4nnw7.png",
-		"StyleId": 2
-	},
-	{
-		"Name": "StyleImage3_2",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage3_2_kmhuzg.png",
-		"PublicId": "StyleImages/StyleImage3_2_kmhuzg.png",
-		"StyleId": 3
-	},
-	{
-		"Name": "StyleImage4_2",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665391/StyleImages/StyleImage4_2_euerj9.png",
-		"PublicId": "StyleImages/StyleImage4_2_euerj9.png",
-		"StyleId": 4
-	},
-	{
-		"Name": "StyleImage5_2",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage5_2_a13qdp.png",
-		"PublicId": "StyleImages/StyleImage5_2_a13qdp.png",
-		"StyleId": 5
-	},
-	{
-		"Name": "StyleImage1_3",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665398/StyleImages/StyleImage1_3_vsjyel.png",
-		"PublicId": "StyleImages/StyleImage1_3_vsjyel.png",
-		"StyleId": 1
-	},
-	{
-		"Name": "StyleImage2_3",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665393/StyleImages/StyleImage2_3_vril3a.png",
-		"PublicId": "StyleImages/StyleImage2_3_vril3a.png",
-		"StyleId": 2
-	},
-	{
-		"Name": "StyleImage3_3",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage3_3_wha0a5.png",
-		"PublicId": "StyleImages/StyleImage3_3_wha0a5.png",
-		"StyleId": 3
-	},
-	{
-		"Name": "StyleImage4_3",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage4_3_dmd2ai.png",
-		"PublicId": "StyleImages/StyleImage4_3_dmd2ai.png",
-		"StyleId": 4
-	},
-	{
-		"Name": "StyleImage5_3",
-		"ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665395/StyleImages/StyleImage5_3_bsbu0n.png",
-		"PublicId": "StyleImages/StyleImage5_3_bsbu0n.png",
-		"StyleId": 5
-	}
+  {
+    "Name": "StyleImage1_1",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665388/StyleImages/StyleImage1_1_lnnzu5.png",
+    "PublicId": "StyleImages/StyleImage1_1_lnnzu5.png",
+    "StyleId": 1
+  },
+  {
+    "Name": "StyleImage2_1",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage2_1_jxaje9.png",
+    "PublicId": "StyleImages/StyleImage2_1_jxaje9.png",
+    "StyleId": 2
+  },
+  {
+    "Name": "StyleImage3_1",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage3_1_cwtvti.png",
+    "PublicId": "StyleImages/StyleImage3_1_cwtvti.png",
+    "StyleId": 3
+  },
+  {
+    "Name": "StyleImage4_1",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage4_1_pbaanw.png",
+    "PublicId": "StyleImages/StyleImage4_1_pbaanw.png",
+    "StyleId": 4
+  },
+  {
+    "Name": "StyleImage5_1",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage5_1_qtqvst.png",
+    "PublicId": "StyleImages/StyleImage5_1_qtqvst.png",
+    "StyleId": 5
+  },
+  {
+    "Name": "StyleImage1_2",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665391/StyleImages/StyleImage1_2_flszeg.png",
+    "PublicId": "StyleImages/StyleImage1_2_flszeg.png",
+    "StyleId": 1
+  },
+  {
+    "Name": "StyleImage2_2",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665387/StyleImages/StyleImage2_2_q4nnw7.png",
+    "PublicId": "StyleImages/StyleImage2_2_q4nnw7.png",
+    "StyleId": 2
+  },
+  {
+    "Name": "StyleImage3_2",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage3_2_kmhuzg.png",
+    "PublicId": "StyleImages/StyleImage3_2_kmhuzg.png",
+    "StyleId": 3
+  },
+  {
+    "Name": "StyleImage4_2",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665391/StyleImages/StyleImage4_2_euerj9.png",
+    "PublicId": "StyleImages/StyleImage4_2_euerj9.png",
+    "StyleId": 4
+  },
+  {
+    "Name": "StyleImage5_2",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage5_2_a13qdp.png",
+    "PublicId": "StyleImages/StyleImage5_2_a13qdp.png",
+    "StyleId": 5
+  },
+  {
+    "Name": "StyleImage1_3",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665398/StyleImages/StyleImage1_3_vsjyel.png",
+    "PublicId": "StyleImages/StyleImage1_3_vsjyel.png",
+    "StyleId": 1
+  },
+  {
+    "Name": "StyleImage2_3",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665393/StyleImages/StyleImage2_3_vril3a.png",
+    "PublicId": "StyleImages/StyleImage2_3_vril3a.png",
+    "StyleId": 2
+  },
+  {
+    "Name": "StyleImage3_3",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665392/StyleImages/StyleImage3_3_wha0a5.png",
+    "PublicId": "StyleImages/StyleImage3_3_wha0a5.png",
+    "StyleId": 3
+  },
+  {
+    "Name": "StyleImage4_3",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665390/StyleImages/StyleImage4_3_dmd2ai.png",
+    "PublicId": "StyleImages/StyleImage4_3_dmd2ai.png",
+    "StyleId": 4
+  },
+  {
+    "Name": "StyleImage5_3",
+    "ImagePath": "https://res.cloudinary.com/dfxaxvdot/image/upload/v1663665395/StyleImages/StyleImage5_3_bsbu0n.png",
+    "PublicId": "StyleImages/StyleImage5_3_bsbu0n.png",
+    "StyleId": 5
+  }
 ]

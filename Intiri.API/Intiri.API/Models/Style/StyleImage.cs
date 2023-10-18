@@ -13,7 +13,7 @@ namespace Intiri.API.Models.Style
         public int Id { get; set; }
         public string Name { get; set; }
         public string ImagePath { get; set; }
-		public string PublicId { get; set; }
+        public string PublicId { get; set; }
         public Style Style { get; set; }
         public int StyleId { get; set; }
         public Room.Room Room { get; set; }

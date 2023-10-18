@@ -5,17 +5,17 @@ using Intiri.API.Models.Moodboard;
 
 namespace Intiri.API.Automapper
 {
-	public class MoodboardMapperProfile: Profile
-	{
-		public MoodboardMapperProfile()
-		{
-			CreateMap<MoodboardInDTO, Moodboard>();
-			CreateMap<Moodboard, MoodboardOutDTO>();
-			
-			CreateMap<Moodboard, MoodboardOutDTO>();
+    public class MoodboardMapperProfile : Profile
+    {
+        public MoodboardMapperProfile()
+        {
+            CreateMap<MoodboardInDTO, Moodboard>();
+            CreateMap<Moodboard, MoodboardOutDTO>();
 
-			CreateMap<MoodboardInDTO, ClientMoodboard>();
-			CreateMap<ClientMoodboard, MoodboardOutDTO>();
-		}
-	}
+            CreateMap<Moodboard, MoodboardOutDTO>();
+
+            CreateMap<MoodboardInDTO, ClientMoodboard>();
+            CreateMap<ClientMoodboard, MoodboardOutDTO>();
+        }
+    }
 }

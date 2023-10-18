@@ -16,116 +16,152 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-
 namespace Intiri.API.Controllers
 {
-	[Authorize]
-	public class ProductsController : BaseApiController
-	{
-		#region Fields
+    [Authorize]
+    public class ProductsController : BaseApiController
+    {
+        #region Fields
 
-		private readonly IMapper _mapper;
-		private readonly IFileUploudService _fileUploadService;
+        private readonly IMapper _mapper;
+        private readonly IFileUploudService _fileUploadService;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
-		public ProductsController(
-			IUnitOfWork unitOfWork,
-			IMapper mapper,
-			IFileUploudService fileUploadService) : base(unitOfWork)
-		{
-			_mapper = mapper;
-			_fileUploadService = fileUploadService;
-		}
-		#endregion Constructors
+        #region Constructors
+        public ProductsController(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IFileUploudService fileUploadService
+        )
+            : base(unitOfWork)
+        {
+            _mapper = mapper;
+            _fileUploadService = fileUploadService;
+        }
+        #endregion Constructors
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetProducts()
-		{
-			IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsAsync();
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetProducts()
+        {
+            IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetProductsAsync();
 
-			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(products);
+            IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(
+                products
+            );
 
-			return Ok(productsOut);
-		}
+            return Ok(productsOut);
+        }
 
-		[HttpGet("partnerProducts")]
-		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetAllPartnerProducts()
-		{
-			//PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			PartnerContact pUser = await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+        [HttpGet("partnerProducts")]
+        public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetAllPartnerProducts()
+        {
+            //PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
+            PartnerContact pUser =
+                await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithFullProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithFullProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(partner.Products);
+            IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(
+                partner.Products
+            );
 
-			return Ok(productsOut);
-		}
+            return Ok(productsOut);
+        }
 
-		[HttpGet("partnerProducts/{partnerId}")]
-		public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetAllPartnerProductsById(int partnerId)
-		{
-			//PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			PartnerContact pUser = await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(partnerId);
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+        [HttpGet("partnerProducts/{partnerId}")]
+        public async Task<ActionResult<IEnumerable<ProductOutDTO>>> GetAllPartnerProductsById(
+            int partnerId
+        )
+        {
+            //PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
+            PartnerContact pUser =
+                await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(partnerId);
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(partner.Products);
+            IEnumerable<ProductOutDTO> productsOut = _mapper.Map<IEnumerable<ProductOutDTO>>(
+                partner.Products
+            );
 
-			return Ok(productsOut);
-		}
+            return Ok(productsOut);
+        }
 
-		[HttpGet("id/{productId}")]
-		public async Task<ActionResult<ProductOutDTO>> GetProductByProductId(int productId)
-		{
-			Product product = await _unitOfWork.ProductRepository.GetByID(productId);
+        [HttpGet("id/{productId}")]
+        public async Task<ActionResult<ProductOutDTO>> GetProductByProductId(int productId)
+        {
+            Product product = await _unitOfWork.ProductRepository.GetByID(productId);
 
-			if (product == null)
-			{
-				return BadRequest($"Product with Id={productId} doesn't exist");
-			}
+            if (product == null)
+            {
+                return BadRequest($"Product with Id={productId} doesn't exist");
+            }
 
-			return Ok(_mapper.Map<ProductOutDTO>(product));
-		}
+            return Ok(_mapper.Map<ProductOutDTO>(product));
+        }
 
-		[Authorize(Policy = PolicyNames.PartnerPolicy)]
-		[HttpPost("add")]
-		public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct([FromForm] MultipleProductInDTO productInDTO)
-		{
-			//PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
-			PartnerContact pUser = await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
-			if (pUser == null) return Unauthorized("Invalid partner contact user.");
+        [Authorize(Policy = PolicyNames.PartnerPolicy)]
+        [HttpPost("add")]
+        public async Task<ActionResult<ProductOutDTO>> AddPartnerProduct(
+            [FromForm] MultipleProductInDTO productInDTO
+        )
+        {
+            //PartnerContact pUser = await _accountService.GetUserByUsernameAsync<PartnerContact>(User.GetUsername());
+            PartnerContact pUser =
+                await _unitOfWork.UserRepository.GetUserByIdAsync<PartnerContact>(User.GetUserId());
+            if (pUser == null)
+                return Unauthorized("Invalid partner contact user.");
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(pUser.PartnerId);
-			if (partner == null) return BadRequest("Invalid partner.");
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                pUser.PartnerId
+            );
+            if (partner == null)
+                return BadRequest("Invalid partner.");
 
-			ProductType productType = await _unitOfWork.ProductTypeRepository.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
-			if (productType == null) return BadRequest("Product type doesn't exist");
+            ProductType productType =
+                await _unitOfWork.ProductTypeRepository.GetProductTypeProductsByIdAsync(
+                    productInDTO.ProductTypeId
+                );
+            if (productType == null)
+                return BadRequest("Product type doesn't exist");
 
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(productInDTO.MaterialId);
-			//if (materialType == null) return BadRequest("Material type doesn't exist");
+            MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(
+                productInDTO.MaterialId
+            );
+            //if (materialType == null) return BadRequest("Material type doesn't exist");
 
-			if (productType.Products.Any(p => p.Name == productInDTO.Name))
-			{
-				return BadRequest(
-					$"Product name: '{productInDTO.Name}' already exists" +
-					$" for product type: {productInDTO.ProductTypeId}");
-			}
+            if (productType.Products.Any(p => p.Name == productInDTO.Name))
+            {
+                return BadRequest(
+                    $"Product name: '{productInDTO.Name}' already exists"
+                        + $" for product type: {productInDTO.ProductTypeId}"
+                );
+            }
 
-			try
-			{
+            try
+            {
                 foreach (var imageFile in productInDTO.ImageFile)
                 {
                     Product product = _mapper.Map<Product>(productInDTO);
                     if (imageFile != null && imageFile.Length > 0)
                     {
                         Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
-                            await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages);
+                            await _fileUploadService.TryAddFileToCloudinaryAsync(
+                                imageFile,
+                                FileUploadDestinations.ProductImages
+                            );
 
                         if (uploadResult.Item1 != HttpStatusCode.OK)
                         {
@@ -146,91 +182,113 @@ namespace Intiri.API.Controllers
                 }
                 return Ok(productInDTO);
             }
-			catch
-			{
+            catch
+            {
                 return BadRequest("Probem occured while adding product");
             }
-		}
+        }
 
-		[Authorize(Policy = PolicyNames.ProductPolicy)]
-		[HttpDelete("delete/{productId}")]
-		public async Task<IActionResult> DeleteProduct(int productId)
-		{
-			Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
+        [Authorize(Policy = PolicyNames.ProductPolicy)]
+        [HttpDelete("delete/{productId}")]
+        public async Task<IActionResult> DeleteProduct(int productId)
+        {
+            Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
 
-			if (product == null)
-			{
-				return BadRequest($"Product '{product.Name}' not found");
-			}
+            if (product == null)
+            {
+                return BadRequest($"Product '{product.Name}' not found");
+            }
 
-			Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(product.Partner.Id);
+            Partner partner = await _unitOfWork.PartnerRepository.GetPartnerWithProductsAsync(
+                product.Partner.Id
+            );
 
-			try
-			{
-				partner.Products.Remove(product);
-				await _unitOfWork.ProductRepository.Delete(productId);
+            try
+            {
+                partner.Products.Remove(product);
+                await _unitOfWork.ProductRepository.Delete(productId);
 
-				await _unitOfWork.SaveChanges();
-			}
-			catch (Exception ex)
-			{
-				return BadRequest($"Internal error: {ex}");
-			}
+                await _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Internal error: {ex}");
+            }
 
-			if (!string.IsNullOrEmpty(product.ImagePublicId))
-			{
-				Tuple<HttpStatusCode, string> tuple = await _fileUploadService.TryDeleteFileFromCloudinaryAsync(product.ImagePublicId);
+            if (!string.IsNullOrEmpty(product.ImagePublicId))
+            {
+                Tuple<HttpStatusCode, string> tuple =
+                    await _fileUploadService.TryDeleteFileFromCloudinaryAsync(
+                        product.ImagePublicId
+                    );
 
-				if (tuple.Item1 != HttpStatusCode.OK)
-					return Problem(title: "Product is deleted. Faild delete product image.", statusCode: (int?)tuple.Item1, detail: tuple.Item2);
-			}
+                if (tuple.Item1 != HttpStatusCode.OK)
+                    return Problem(
+                        title: "Product is deleted. Faild delete product image.",
+                        statusCode: (int?)tuple.Item1,
+                        detail: tuple.Item2
+                    );
+            }
 
-			return Ok();
-		}
+            return Ok();
+        }
 
-		[Authorize(Policy = PolicyNames.ProductPolicy)]
-		[HttpPatch("update/{productId}")]
-		public async Task<IActionResult> UpdateProduct(int productId, [FromForm]ProductInDTO productInDTO)
-		{
-			Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
-			if (product == null) return BadRequest($"Product '{product.Name}' not found");
+        [Authorize(Policy = PolicyNames.ProductPolicy)]
+        [HttpPatch("update/{productId}")]
+        public async Task<IActionResult> UpdateProduct(
+            int productId,
+            [FromForm] ProductInDTO productInDTO
+        )
+        {
+            Product product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productId);
+            if (product == null)
+                return BadRequest($"Product '{product.Name}' not found");
 
-			_mapper.Map(productInDTO, product);
+            _mapper.Map(productInDTO, product);
 
-			ProductType productType = await _unitOfWork.ProductTypeRepository
-				.GetProductTypeProductsByIdAsync(productInDTO.ProductTypeId);
-			if (productType == null) return BadRequest("Product type doesn't exist");
+            ProductType productType =
+                await _unitOfWork.ProductTypeRepository.GetProductTypeProductsByIdAsync(
+                    productInDTO.ProductTypeId
+                );
+            if (productType == null)
+                return BadRequest("Product type doesn't exist");
 
-			MaterialType materialType = await _unitOfWork.MaterialTypeRepository
-				.GetByID(productInDTO.MaterialId);
-			//if (materialType == null) return BadRequest("Material type doesn't exist");
+            MaterialType materialType = await _unitOfWork.MaterialTypeRepository.GetByID(
+                productInDTO.MaterialId
+            );
+            //if (materialType == null) return BadRequest("Material type doesn't exist");
 
-			IFormFile imageFile = productInDTO.ImageFile;
-			if (imageFile != null && imageFile.Length > 0)
-			{
-				Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult = 
-					await _fileUploadService.TryAddFileToCloudinaryAsync(imageFile, FileUploadDestinations.ProductImages, product.ImagePublicId);
-				
-				if (uploadResult.Item1 != HttpStatusCode.OK)
-				{
-					return BadRequest(uploadResult.Item2);
-				}
+            IFormFile imageFile = productInDTO.ImageFile;
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                Tuple<HttpStatusCode, string, ImageUploadResult> uploadResult =
+                    await _fileUploadService.TryAddFileToCloudinaryAsync(
+                        imageFile,
+                        FileUploadDestinations.ProductImages,
+                        product.ImagePublicId
+                    );
 
-				product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
-				product.ImagePublicId = uploadResult.Item3.PublicId;
-			}
+                if (uploadResult.Item1 != HttpStatusCode.OK)
+                {
+                    return BadRequest(uploadResult.Item2);
+                }
 
-			product.ProductType = productType;
-			product.Material = materialType;
+                product.ImagePath = uploadResult.Item3.SecureUrl.AbsoluteUri;
+                product.ImagePublicId = uploadResult.Item3.PublicId;
+            }
 
-			_unitOfWork.ProductRepository.Update(product);
+            product.ProductType = productType;
+            product.Material = materialType;
 
-			if (await _unitOfWork.SaveChanges())
-			{
-				return Ok(_mapper.Map<ProductOutDTO>(product)); ;
-			}
+            _unitOfWork.ProductRepository.Update(product);
 
-			return BadRequest("Faild to update product.");
-		}
-	}
+            if (await _unitOfWork.SaveChanges())
+            {
+                return Ok(_mapper.Map<ProductOutDTO>(product));
+                ;
+            }
+
+            return BadRequest("Faild to update product.");
+        }
+    }
 }

@@ -13,32 +13,32 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./admin-rooms.component.scss'],
 })
 export class AdminRoomsComponent implements OnInit {
-
   rooms$: Observable<any> = this.roomService.rooms$;
   roomTypes: [];
   searchText: any;
   language$: Observable<any>;
-  language: any
+  language: any;
 
   constructor(
     public popoverController: PopoverController,
     private modalController: ModalController,
     private roomService: RoomService,
     private languageService: LanguageService,
-    private translate: TranslateService,
-  ) {
-  }
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
-    this.roomService.getRooms()
+    this.roomService.getRooms();
     this.roomService.getRoomTypes().subscribe((res: []) => {
       this.roomTypes = res;
-    })
+    });
 
-    this.languageService.languageChange$.subscribe(res => this.language = res);
+    this.languageService.languageChange$.subscribe(
+      (res) => (this.language = res)
+    );
   }
 
-  ngAfterViewInit () {
+  ngAfterViewInit() {
     this.language = this.translate.currentLang;
   }
 
@@ -46,7 +46,7 @@ export class AdminRoomsComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: MenuPopoverComponent,
       event: e,
-      componentProps: {room: true, item: room},
+      componentProps: { room: true, item: room },
       dismissOnSelect: true,
     });
 
@@ -56,11 +56,10 @@ export class AdminRoomsComponent implements OnInit {
   async addRoom() {
     const modal = await this.modalController.create({
       component: AddRoomModalComponent,
-      componentProps: {add: true},
-      cssClass: 'add-room-modal-css'
+      componentProps: { add: true },
+      cssClass: 'add-room-modal-css',
     });
 
     await modal.present();
   }
-
 }

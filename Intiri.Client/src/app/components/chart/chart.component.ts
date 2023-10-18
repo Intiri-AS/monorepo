@@ -3,10 +3,9 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  styleUrls: ['./chart.component.scss'],
 })
-
-export class ChartComponent implements AfterViewInit{
+export class ChartComponent implements AfterViewInit {
   @Input()
   set chartData(value) {
     this.chartOptions.series[0].name = value.name;
@@ -21,24 +20,24 @@ export class ChartComponent implements AfterViewInit{
     this.chartOptions = {
       series: [
         {
-          name: "",
-          data: []
+          name: '',
+          data: [],
         },
       ],
       chart: {
         height: 350,
-        type: "",
+        type: '',
         toolbar: {
-          show: false
+          show: false,
         },
       },
       xaxis: {
-        categories: []
+        categories: [],
       },
-      colors: ["#9B7E60"],
+      colors: ['#9B7E60'],
       dataLabels: {
-        enabled: false
-      }
+        enabled: false,
+      },
     };
   }
 

@@ -73,8 +73,8 @@ export class AddDesignerModalComponent implements OnInit {
     phoneNumber: '',
     countryCode: '47',
     role: '',
-    language: ''
-  }
+    language: '',
+  };
 
   constructor(
     private modalController: ModalController,
@@ -89,25 +89,31 @@ export class AddDesignerModalComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      phone: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$')
-      ])],
+      phone: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+        ]),
+      ],
       role: ['', [Validators.required]],
       en: [''],
-      no: ['']
+      no: [''],
     });
     this.editDesignerForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       code: ['', [Validators.required]],
-      phone: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+$')
-      ])],
+      phone: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+        ]),
+      ],
       role: ['', [Validators.required]],
       en: [''],
-      no: ['']
+      no: [''],
     });
   }
 
@@ -143,36 +149,43 @@ export class AddDesignerModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.designer.language = (this.EN && this.NO) ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
-    this.designerService.addDesigner(this.designer).subscribe(res => {
-      this.spinner.hide();
-      if (typeof (res) === 'object') {
-        this.designerService.getDesigners();
-        this.openSuccessModal();
+    this.designer.language =
+      this.EN && this.NO ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
+    this.designerService.addDesigner(this.designer).subscribe(
+      (res) => {
+        this.spinner.hide();
+        if (typeof res === 'object') {
+          this.designerService.getDesigners();
+          this.openSuccessModal();
+        }
+      },
+      (e) => {
+        this.spinner.hide();
+        this.notifier.show({
+          message: e.error,
+          type: 'error',
+        });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: e.error,
-        type: 'error',
-      });
-    });
+    );
   }
 
   deleteDesigner() {
-    this.userService.deleteUser(this.item['id']).subscribe(res => {
+    this.userService.deleteUser(this.item['id']).subscribe(
+      (res) => {
         this.designerService.getDesigners();
         this.modalController.dismiss();
         this.notifier.show({
           message: this.translate.instant('NOTIFY.designer-deleted'),
           type: 'success',
         });
-    }, e => {
-      this.notifier.show({
-        message: this.translate.instant('NOTIFY.error'),
-        type: 'error',
-      });
-    });
+      },
+      (e) => {
+        this.notifier.show({
+          message: this.translate.instant('NOTIFY.error'),
+          type: 'error',
+        });
+      }
+    );
   }
 
   editDesigner() {
@@ -182,35 +195,38 @@ export class AddDesignerModalComponent implements OnInit {
       this.spinner.hide();
       return;
     }
-    this.designer.language = (this.EN && this.NO) ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
-    this.designerService.editDesigner(this.item.id, this.designer).subscribe(res => {
-      this.spinner.hide();
-      this.modalController.dismiss();
-      if (typeof (res) === 'object') {
-        this.designerService.getDesigners();
+    this.designer.language =
+      this.EN && this.NO ? 'NO/EN' : this.EN ? 'EN' : this.NO ? 'NO' : '';
+    this.designerService.editDesigner(this.item.id, this.designer).subscribe(
+      (res) => {
+        this.spinner.hide();
+        this.modalController.dismiss();
+        if (typeof res === 'object') {
+          this.designerService.getDesigners();
+          this.notifier.show({
+            message: this.translate.instant('NOTIFY.designer-updated'),
+            type: 'success',
+          });
+        }
+      },
+      (e) => {
+        this.spinner.hide();
         this.notifier.show({
-          message: this.translate.instant('NOTIFY.designer-updated'),
-          type: 'success',
+          message: e.error,
+          type: 'error',
         });
       }
-    }, e => {
-      this.spinner.hide();
-      this.notifier.show({
-        message: e.error,
-        type: 'error',
-      });
-    });
+    );
   }
 
   async openSuccessModal() {
     this.modalController.dismiss();
     const modal = await this.modalController.create({
       component: AddDesignerModalComponent,
-      componentProps: {added: true},
-      cssClass: 'added-designer-modal-css'
+      componentProps: { added: true },
+      cssClass: 'added-designer-modal-css',
     });
 
     await modal.present();
   }
-
 }

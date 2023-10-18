@@ -10,6 +10,8 @@ using Messenger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.IdentityModel.Tokens;
 using Stripe.Checkout;
 using System.Text;
@@ -17,108 +19,158 @@ using Twilio.Jwt.Taskrouter;
 
 namespace Intiri.API.Extension
 {
-	public static class ServiceCollectionExtensions
-	{
-		public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
-		{
+    public static class ServiceCollectionExtensions
+    {
+        public static IServiceCollection AddApplicationServices(
+            this IServiceCollection services,
+            IConfiguration config
+        )
+        {
             string env = config.GetValue<string>("ActiveEnvironment");
-			string useLocalDBConnection = Environment.GetEnvironmentVariable("ASPNETCORE_USELOCALDBCONNECTION");
+            string useLocalDBConnection = Environment.GetEnvironmentVariable(
+                "ASPNETCORE_USELOCALDBCONNECTION"
+            );
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-			services.AddDbContext<DataContext>(options =>
-			{
-				options.UseSqlServer(config.GetConnectionString(env == "Development" && useLocalDBConnection == "True" ? "LocalConnection" : "DefaultConnection"));
-			});
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(
+                    config.GetConnectionString(
+                        env == "Development" && useLocalDBConnection == "True"
+                            ? "LocalConnection"
+                            : "DefaultConnection"
+                    )
+                );
+            });
 
-			AddConfigurationService<CloudinaryConfiguration>(services, config, "CloudinaryConfiguration");
-			AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
-			AddConfigurationService<TwilioConfiguration>(services, config, "TwilioConfiguaration");
-			AddConfigurationService<PusherConfiguration>(services, config, "PusherConfiguration");
-			AddConfigurationService<StripeConfiguration>(services, config, "StripeConfiguration");
-			AddConfigurationService<HostingConfiguration>(services, config, "HostingConfiguration");
+            AddConfigurationService<CloudinaryConfiguration>(
+                services,
+                config,
+                "CloudinaryConfiguration"
+            );
+            AddConfigurationService<VippsConfiguration>(services, config, "VippsConfiguration");
+            AddConfigurationService<TwilioConfiguration>(services, config, "TwilioConfiguaration");
+            AddConfigurationService<PusherConfiguration>(services, config, "PusherConfiguration");
+            AddConfigurationService<StripeConfiguration>(services, config, "StripeConfiguration");
+            AddConfigurationService<HostingConfiguration>(services, config, "HostingConfiguration");
 
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
-			services.AddScoped<ITokenService, TokenService>();
-			services.AddScoped<IAccountService, AccountService>();
-			services.AddScoped<IRatingService, RatingService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IRatingService, RatingService>();
 
-			services.AddScoped<IVippsLoginService, VippsLoginService>();
-			services.AddSingleton<ISmsSender, AuthMessageSenderService>();
-			services.AddScoped<ICloudinaryService, CloudinaryService>();
-			services.AddScoped<IFileUploudService, FileUploudService>();
-			services.AddScoped<IContentTypesService, ContentTypesService>();
+            services.AddScoped<IVippsLoginService, VippsLoginService>();
+            services.AddSingleton<ISmsSender, AuthMessageSenderService>();
+            services.AddScoped<ICloudinaryService, CloudinaryService>();
+            services.AddScoped<IFileUploudService, FileUploudService>();
+            services.AddScoped<IContentTypesService, ContentTypesService>();
 
-			if(env == "Production")
-			{
+            if (env == "Production")
+            {
                 services.AddSingleton<ISmsVerificationService, SmsVerificationService>();
             }
-			else
-			{
-				services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
-			}
-            
-			services.AddSingleton<IMessenger, Messenger.Messenger>();
-			services.AddScoped<IMessengerService, MessengerService>();
-			services.AddScoped<IPaymentService<Session, StripePaymentDTO, HttpRequest>, StripePaymentService>();
-			services.AddScoped<IMoodboardSevice, MoodboardSevice>();
-			services.AddScoped<IUserService, UserService>();
-			services.AddScoped<SQLHelper>();
+            else
+            {
+                services.AddSingleton<ISmsVerificationService, TestSmsVerificationService>();
+            }
+
+            services.AddSingleton<IMessenger, Messenger.Messenger>();
+            services.AddScoped<IMessengerService, MessengerService>();
+            services.AddScoped<
+                IPaymentService<Session, StripePaymentDTO, HttpRequest>,
+                StripePaymentService
+            >();
+            services.AddScoped<IMoodboardSevice, MoodboardSevice>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<SQLHelper>();
 
             return services;
-		}
+        }
 
-		public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
-		{
-			services.AddIdentityCore<User>(opt =>
-			{
-				//opt.User.RequireUniqueEmail = true;
-				//opt.SignIn.RequireConfirmedEmail = true;
-				opt.Password.RequireNonAlphanumeric = false;
-			})
-				.AddRoles<Role>()
-				.AddRoleManager<RoleManager<Role>>()
-				.AddSignInManager<SignInManager<User>>()
-				.AddRoleValidator<RoleValidator<Role>>()
-				.AddEntityFrameworkStores<DataContext>()
-				.AddDefaultTokenProviders();
+        public static IServiceCollection AddIdentityServices(
+            this IServiceCollection services,
+            IConfiguration config
+        )
+        {
+            services
+                .AddIdentityCore<User>(opt =>
+                {
+                    //opt.User.RequireUniqueEmail = true;
+                    //opt.SignIn.RequireConfirmedEmail = true;
+                    opt.Password.RequireNonAlphanumeric = false;
+                })
+                .AddRoles<Role>()
+                .AddRoleManager<RoleManager<Role>>()
+                .AddSignInManager<SignInManager<User>>()
+                .AddRoleValidator<RoleValidator<Role>>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-				.AddJwtBearer(options =>
-				{
-					options.TokenValidationParameters = new TokenValidationParameters
-					{
-						ValidateIssuerSigningKey = true,
-						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
-						ValidateIssuer = false,
-						ValidateAudience = false,
-					};
-				});
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(config["TokenKey"])
+                        ),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                });
 
-			services.AddAuthorization(opt =>
-			{
-				opt.AddPolicy(PolicyNames.AdminPolicy, policy => policy.RequireRole(RoleNames.Admin));
-				opt.AddPolicy(PolicyNames.ClientPolicy, policy => policy.RequireRole(RoleNames.FreeEndUser));
-				opt.AddPolicy(PolicyNames.DesignerPolicy, policy => policy.RequireRole(RoleNames.InternalDesigner));
-				opt.AddPolicy(PolicyNames.PartnerPolicy, policy => policy.RequireRole(RoleNames.Partner));
-				opt.AddPolicy(PolicyNames.MoodboardPolicy, policy => policy.RequireRole(RoleNames.Admin, RoleNames.InternalDesigner));
-				opt.AddPolicy(PolicyNames.ClientMoodboardPolicy, policy => policy.RequireRole(RoleNames.FreeEndUser, RoleNames.InternalDesigner));
-				opt.AddPolicy(PolicyNames.ProductPolicy, policy => policy.RequireRole(RoleNames.Admin, RoleNames.Partner));
-			});
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy(
+                    PolicyNames.AdminPolicy,
+                    policy => policy.RequireRole(RoleNames.Admin)
+                );
+                opt.AddPolicy(
+                    PolicyNames.ClientPolicy,
+                    policy => policy.RequireRole(RoleNames.FreeEndUser)
+                );
+                opt.AddPolicy(
+                    PolicyNames.DesignerPolicy,
+                    policy => policy.RequireRole(RoleNames.InternalDesigner)
+                );
+                opt.AddPolicy(
+                    PolicyNames.PartnerPolicy,
+                    policy => policy.RequireRole(RoleNames.Partner)
+                );
+                opt.AddPolicy(
+                    PolicyNames.MoodboardPolicy,
+                    policy => policy.RequireRole(RoleNames.Admin, RoleNames.InternalDesigner)
+                );
+                opt.AddPolicy(
+                    PolicyNames.ClientMoodboardPolicy,
+                    policy => policy.RequireRole(RoleNames.FreeEndUser, RoleNames.InternalDesigner)
+                );
+                opt.AddPolicy(
+                    PolicyNames.ProductPolicy,
+                    policy => policy.RequireRole(RoleNames.Admin, RoleNames.Partner)
+                );
+            });
 
-			return services;
-		}
+            return services;
+        }
 
-		#region Private methods
+        #region Private methods
 
-		private static IConfiguration AddConfigurationService<T>(IServiceCollection services, IConfiguration config, string configSection)
-		where T : class
-		{
-			IConfiguration _config = config.GetSection(configSection);
-			services.Configure<T>(_config);
-			return _config;
-		}
+        private static IConfiguration AddConfigurationService<T>(
+            IServiceCollection services,
+            IConfiguration config,
+            string configSection
+        )
+            where T : class
+        {
+            IConfiguration _config = config.GetSection(configSection);
+            services.Configure<T>(_config);
+            return _config;
+        }
 
-		#endregion Private methods
-	}
+        #endregion Private methods
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace Intiri.API.Models.DTO.InputDTO
 {
-	public class ForgotPasswordInDTO
-	{
-		[Required]
-		public string PhoneNumber { get; set; }
-	}
+    public class ForgotPasswordInDTO
+    {
+        [Required]
+        public string PhoneNumber { get; set; }
+    }
 }

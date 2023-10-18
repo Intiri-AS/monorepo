@@ -1,4 +1,5 @@
 ﻿namespace Intiri.API.Models.Payment;
+
 using Intiri.API.Models.Moodboard;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,6 +26,5 @@ public class ConsultationPayment : PaymentBase
 
     public string ConsultationDetails { get; set; }
 
-	public DateTime PaymentDate { get; set; }
-
+    public DateTime PaymentDate { get; set; }
 }
