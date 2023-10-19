@@ -36,15 +36,10 @@ import { CloudinaryService } from 'src/app/services/cloudinary.service';
         height: 100%;
         width: 100%;
         transition: all 0.5s;
-
-        & {
-          overflow: hidden;
-        }
       }
     `,
     `
       img {
-        background: url(http://i.imgur.com/0BBsCUB.gif) no-repeat center;
         background-size: cover;
         width: 100%;
         height: 100%;
@@ -98,16 +93,16 @@ export class CloudinaryImageScalerComponent
 
     this.divStyle['border-radius'] = this.borderRadius;
 
-    // this.src = this.cloudinary
-    //   .mapIdToCloudinaryImage(this.publicId)
-    //   .effect(Effect.blur(2000))
-    //   .quality(Quality.auto())
-    //   .delivery(format(Format.auto()))
-    //   .toURL();
+    this.src = this.cloudinary
+      .mapIdToCloudinaryImage(this.publicId)
+      // .effect(Effect.blur(2000))
+      .quality(Quality.auto())
+      .delivery(format(Format.auto()))
+      .toURL();
 
-    // this.imgStyle = {
-    //   background: `url(${this.src}) no-repeat center`,
-    // };
+    this.imgStyle = {
+      background: `url(${this.src}) no-repeat center`,
+    };
   }
 
   ngAfterContentChecked(): void {
@@ -152,7 +147,11 @@ export class CloudinaryImageScalerComponent
   private updateSrcSet(source: string = '') {
     const { offsetHeight: height, offsetWidth: width } = this.el.nativeElement;
 
-    // TODO: Generate a good src
+    if (height === 0 && width === 0) {
+      return;
+    }
+
+   // TODO: Generate a good src
 
     const { imgHeight, imgWidth } = this.dimensionsToImageDimensions(
       height,
