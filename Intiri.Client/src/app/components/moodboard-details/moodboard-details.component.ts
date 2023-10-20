@@ -129,7 +129,7 @@ export class MoodboardDetailsComponent
           this.moodboard.slotInfo &&
           typeof this.moodboard.slotInfo === 'string'
         ) {
-          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+          this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
         }
       } else {
         //Admin is creating new moodboard
@@ -155,7 +155,7 @@ export class MoodboardDetailsComponent
           this.moodboard.slotInfo &&
           typeof this.moodboard.slotInfo == 'string'
         ) {
-          this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+          this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
         } else {
           // this.assignDefaultSlots();
         }
@@ -189,6 +189,7 @@ export class MoodboardDetailsComponent
       };
 
       console.log('slotinfo', this.moodboard.slotInfo);
+      this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
 
       this.moodboardMaterials = moodboardSlotInfoFilterer(
         this.moodboard.slotInfo,
@@ -214,6 +215,70 @@ export class MoodboardDetailsComponent
 
     // configure crop feature on Initial load
     this.initializeCropFeatureMap();
+  }
+
+  // The purpose of parseSlotInfo is to be a function that can be used whereever slotinfo is turned into a json object
+  // The function will check that all slotInfo slots are filled and fill them if necessary
+  parseSlotInfo(slotInfoInput: string | { [key: number]: SlotInfo }): { [key: number]: SlotInfo } {
+    const parsedSlotInfo = typeof slotInfoInput === 'string' ? JSON.parse(slotInfoInput) as {
+      [key: number]: SlotInfo;
+    } : slotInfoInput;
+
+    for (const keyString of Object.keys(parsedSlotInfo)) {
+      const key = Number(keyString);
+      if (!parsedSlotInfo[key].entity) {
+        console.log('Found null slotInfo');
+        switch (key) {
+          case 0:
+          case 1:
+          case 2:
+            // Is missing a material in slotInfo
+            // TODO: Get a valid material to fill the spot
+            const newMaterialToUse = this.moodboard.materials.find(
+              (material) =>
+                ![
+                  parsedSlotInfo[0].entityId,
+                  parsedSlotInfo[1].entityId,
+                  parsedSlotInfo[2].entityId,
+                ].includes(material.id)
+            );
+            parsedSlotInfo[key] = {
+              entity: SlotInfoEntityTypes.material,
+              entityId: newMaterialToUse.id,
+              entityImagePath: newMaterialToUse.imagePath,
+              entityName: newMaterialToUse.name,
+            };
+            break;
+          default:
+            // Is missing a product or inspiration, the case where a colour is missing has not been experiences
+            // But a check should perhaps be made
+            // TODO: Get a valid product to fill the spot
+            const newProductToUse = this.moodboard.products.find(
+              (product) =>
+                ![
+                  parsedSlotInfo[3].entityId,
+                  parsedSlotInfo[4].entityId,
+                  parsedSlotInfo[5].entityId,
+                  parsedSlotInfo[6].entityId,
+                  parsedSlotInfo[7].entityId,
+                  parsedSlotInfo[8].entityId,
+                  parsedSlotInfo[9].entityId,
+                  parsedSlotInfo[10].entityId,
+                  parsedSlotInfo[11].entityId,
+                ].includes(product.id)
+            );
+            parsedSlotInfo[key] = {
+              entity: SlotInfoEntityTypes.product,
+              entityId: newProductToUse.id,
+              entityImagePath: newProductToUse.imagePath,
+              entityName: newProductToUse.name,
+            };
+            break;
+        }
+      }
+    }
+    console.log('Here is returned slotINfo', parsedSlotInfo);
+    return parsedSlotInfo;
   }
 
   ngOnChanges(): void {
@@ -272,7 +337,7 @@ export class MoodboardDetailsComponent
   areMoodboardColorPaletteSlotsEmpty(): boolean {
     if (this.moodboard) {
       if (typeof this.moodboard.slotInfo === 'string') {
-        this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+        this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
       }
 
       const colorPaletteSlotIds = [12, 13, 14, 15];
@@ -413,7 +478,7 @@ export class MoodboardDetailsComponent
 
   assignToColorPaletteSlots(): void {
     if (typeof this.moodboard.slotInfo === 'string') {
-      this.moodboard.slotInfo = JSON.parse(this.moodboard.slotInfo);
+      this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
     }
 
     if (this.moodboard.colorPalettes.length > 0) {
@@ -654,14 +719,14 @@ export class MoodboardDetailsComponent
   }
 
   dragStart(event, slotId) {
-    console.log('dragStart', event, slotId)
+    console.log('dragStart', event, slotId);
     if (this.isImageCroppingState) {
-      console.log('Image is in cropping state')
+      console.log('Image is in cropping state');
       event.preventDefault();
       return;
     }
     if (typeof slotId == 'string') {
-      console.log('slotId was a string')
+      console.log('slotId was a string');
       // Admin can drag & drop anything from shopping list
       this.draggedShoppingListItem = slotId;
 
@@ -681,7 +746,7 @@ export class MoodboardDetailsComponent
   }
 
   isItemAlreadyOnMoodboard(item) {
-    console.log('isItemAlreadyOnMoodboard')
+    console.log('isItemAlreadyOnMoodboard');
     return Object.keys(this.moodboard.slotInfo).some(
       (slotKey) =>
         this.moodboard.slotInfo[slotKey].entity === item.entity &&
@@ -690,7 +755,7 @@ export class MoodboardDetailsComponent
   }
 
   onDrop(event, currentSlotId) {
-    console.log('onDrop', event, currentSlotId)
+    console.log('onDrop', event, currentSlotId);
     try {
       if (!this.isItemDragAndDroppable()) {
         return;

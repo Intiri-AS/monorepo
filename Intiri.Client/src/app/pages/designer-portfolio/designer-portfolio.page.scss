@@ -76,9 +76,19 @@ ion-slides {
   min-height: 100%;
 }
 .designer-profile-info-container {
+
   display: grid;
   grid-template-columns: 30% 65%;
   grid-column-gap: 5%;
+
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    grid-auto-flow: column;
+  }
+
+
   .profile-pic-container {
     width: 100%;
     background: lightgray 50% / cover no-repeat;
@@ -158,15 +168,6 @@ ion-slides {
     .portfolio-image {
       height: 25rem;
       width: 27rem;
-    }
-  }
-}
-
-@media (max-width: 1400px) and (min-width: 540px) {
-  .designer-profile-container {
-    margin: 2rem 3rem;
-    .designer-profile-info-container {
-      grid-template-columns: 40% 55%;
     }
   }
 }
