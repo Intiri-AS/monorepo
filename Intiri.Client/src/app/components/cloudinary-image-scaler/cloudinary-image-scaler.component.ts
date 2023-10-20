@@ -97,7 +97,8 @@ export class CloudinaryImageScalerComponent
       .mapIdToCloudinaryImage(this.publicId)
       // .effect(Effect.blur(2000))
       .quality(Quality.auto())
-      .delivery(format(Format.auto()))
+      .resize(fill().height(400).width(600).gravity(autoGravity()))
+      // .delivery(format(Format.auto()))
       .toURL();
 
     this.imgStyle = {
