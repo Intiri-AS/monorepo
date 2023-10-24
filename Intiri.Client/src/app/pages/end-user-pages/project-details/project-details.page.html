@@ -63,14 +63,10 @@
                 >
                 <ion-button
                   fill="clear"
+                  class="secondary-btn-responsive !bg-none mt-3 !px-1"
                   (click)="downloadMoodboardPDF(moodboard.id)"
                 >
-                  <img
-                    class="h-full w-full"
-                    src="../../../../assets/icon/download-01.svg"
-                    alt=""
-                    srcset=""
-                  />
+                  {{ 'COMMON.share' | translate }}
                 </ion-button>
               </div>
             </div>
