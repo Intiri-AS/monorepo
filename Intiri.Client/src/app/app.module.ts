@@ -155,6 +155,12 @@ import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-
 import { EditMoodboardStepComponent } from './pages/admin-pages/edit-moodboard/edit-moodboard-step/edit-moodboard-step.component';
 import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portfolio.page';
 
+
+// Import custom directives
+import { ClickElementOnKeyPressDirective } from './directives/pressOnButtonPress';
+
+
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -255,6 +261,9 @@ export function createTranslateLoader(http: HttpClient) {
     EditMoodboardStepComponent,
     DesignerPortfolioPage,
     CloudinaryImageScalerComponent,
+
+    // Declare custom directives
+    ClickElementOnKeyPressDirective,
   ],
   entryComponents: [
     LoginModalComponent,
