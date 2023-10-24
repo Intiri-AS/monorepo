@@ -22,7 +22,24 @@ namespace Intiri.API.Services
 
         public TwilioConfiguration Options { get; private set; }
 
-        public async Task<MessageResource> SendSmsAsync(string number, string message)
+
+        // Function that based on country code will return the sender string
+        // In the case of a sms being sent to Norway (country code 47) the
+        // sender id from Options.SMSAccountFromSenderId should be used
+        private string GetSender(string countryCode)
+        {
+            switch (countryCode)
+            {
+                case "47":
+                    return Options.SMSAccountFromSenderId;
+                default:
+                    return Options.SMSAccountFromNumber;
+            }
+        }
+
+        // Function that will send an SMS message to the number provided
+        // with the message provided, using the Twilio API
+        public async Task<MessageResource> SendSmsAsync(string countryCode, string number, string message)
         {
             MessageResource messageResource = null;
 
@@ -34,8 +51,8 @@ namespace Intiri.API.Services
             try
             {
                 messageResource = await MessageResource.CreateAsync(
-                    to: new Twilio.Types.PhoneNumber(number),
-                    from: new Twilio.Types.PhoneNumber(Options.SMSAccountFrom),
+                    to: new Twilio.Types.PhoneNumber($"+{countryCode}{number}"),
+                    from: new Twilio.Types.PhoneNumber(GetSender(countryCode)),
                     body: message
                 );
             }
