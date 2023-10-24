@@ -84,7 +84,7 @@
     "crop": "Crop",
     "shopping-list-loading": "Please wait while your shopping list loads",
     "done": "Done",
-    "client-moodboard-instruction": "Here's your moodboard. Customize it by dragging and dropping products from below into the moodboard. With the “Customize moodboard” button you can adjust by deselecting products, materials and colors. Click \"Finish\" to download your personalized moodboard with coupon codes when you are done."
+    "client-moodboard-instruction": "<b>How to edit:</b><br><b>- Click \"Customize moodboard\"</b> button to deselect products, materials and colors.<br><b>- Click \"Finish\" to download your personalized moodboard</b> with coupon codes when you are done!"
   },
   "CONTACT-DESIGNER": {
     "select": "Select a designer",

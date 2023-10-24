@@ -83,8 +83,8 @@
   <p
     *ngIf="currentStep.data === 'final'"
     class="text-black-2 text-2xl font-medium"
+    innerHTML="{{ 'MOODBOARD-DETAILS.client-moodboard-instruction' | translate }}"
   >
-    {{ "MOODBOARD-DETAILS.client-moodboard-instruction" | translate }}
   </p>
 
   <div [ngClass]="{ 'text-clamp-3': !expandText }">

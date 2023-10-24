@@ -84,7 +84,7 @@
     "crop": "Crop",
     "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
     "done": "Ferdig",
-    "client-moodboard-instruction": "Her er ditt stilforslag. Tilpass det ved å dra og slipp produkter inn i stilforslaget, og med “Tilpass stilforslaget” knappen kan du velge bort produkter, materialer og farger. Klikk “Ferdig” for å laste ned ditt personlige stilforslag med rabattkoder."
+    "client-moodboard-instruction": "<b>Hvordan redigere:</b><br><b>- Klick \"Tilpass stilforslaget\"</b> knappen for å velge vekk produkter, materialer og farger<br><b>- Klick \"Ferdig\" for å laste ned ditt personlige moodboard</b> med kupong koder når du er ferdig!"
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
