@@ -55,7 +55,8 @@ namespace Intiri.API.Services
             string message = GenerateVerificationMessage(verificationCode);
 
             MessageResource messageResource = await _smsSender.SendSmsAsync(
-                $"+{countryCode}{phoneNumber}",
+                countryCode,
+                phoneNumber,
                 message
             );
 

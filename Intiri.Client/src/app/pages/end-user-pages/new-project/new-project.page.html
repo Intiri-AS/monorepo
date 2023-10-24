@@ -42,6 +42,7 @@
               *ngIf="steps[currentStepNo]['data'] !== 'final'"
               class="secondary-btn-borderless"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
+              [appClickElementOnKeyPress]="'Enter'"
               (click)="nextStep()"
               >{{'COMMON.next' | translate}}</ion-button
             >

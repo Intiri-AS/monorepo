@@ -161,13 +161,25 @@ ion-slides {
   .designer-portfolio-image-container {
     display: grid;
     grid-template-columns: repeat(3, 30%);
+    grid-auto-rows: 25rem;
     gap: 4% 5%;
     margin: 24px auto;
     margin-bottom: 10rem;
+    
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+
 
     .portfolio-image {
-      height: 25rem;
-      width: 27rem;
+      // height: 25rem;
+      width: 100%;
+      height: 100%
     }
   }
 }
