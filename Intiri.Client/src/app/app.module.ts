@@ -323,7 +323,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatTooltipModule,
     MatProgressSpinnerModule,
     IntercomModule.forRoot({
-      appId: 'ub85mv53'
+      appId: 'ub85mv53',
+      updateOnRouterChange: true,
     })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
