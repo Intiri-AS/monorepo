@@ -157,7 +157,7 @@ import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portf
 
 
 // Import custom directives
-import { ClickElementOnKeyPressDirective } from './directives/pressOnButtonPress';
+import { ClickElementOnKeyPressDirective } from './directives/clickElementOnKeyPressDirective';
 
 
 
