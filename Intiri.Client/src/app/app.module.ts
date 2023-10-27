@@ -142,6 +142,8 @@ import { CloudinaryModule } from '@cloudinary/ng';
 
 import { IntercomModule } from 'ng-intercom';
 
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -157,7 +159,7 @@ import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portf
 
 
 // Import custom directives
-import { ClickElementOnKeyPressDirective } from './directives/pressOnButtonPress';
+import { ClickElementOnKeyPressDirective } from './directives/clickElementOnKeyPressDirective';
 
 
 
@@ -323,8 +325,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatTooltipModule,
     MatProgressSpinnerModule,
     IntercomModule.forRoot({
-      appId: 'ub85mv53'
-    })
+      appId: 'ub85mv53',
+      updateOnRouterChange: true,
+    }),
+    NgxGoogleAnalyticsModule.forRoot('G-JNZC85C6J2'),
+    NgxGoogleAnalyticsRouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

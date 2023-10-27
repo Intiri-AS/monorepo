@@ -58,6 +58,36 @@
         </ion-row>
         <ion-row>
           <ion-col>
+            <div class="profile-input">
+              <span class="text-sm text-black-2">
+                {{ "STYLE.shortDescription" | translate }}
+              </span>
+              <ion-textarea
+                rows="1"
+                [(ngModel)]="style.shortDescription"
+                class="border border-black-2 rounded-2xl"
+                formControlName="shortDescription"
+              ></ion-textarea>
+              <span
+                [class.text-red-500]="
+                  style.shortDescription.length >
+                  shortDescriptionRecommendedLength
+                "
+                >{{ style.shortDescription.length }}/{{
+                  shortDescriptionRecommendedLength
+                }}</span
+              >
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && shortDescriptionErrors?.required"
+              >
+                {{ "VALIDATION.field" | translate }}
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
             <div class="profile-input w-fit">
               <p class="leading-[22px] mb-2 font-semibold text-black-1 text-lg">
                 {{ "STYLE.image" | translate }}
@@ -255,6 +285,36 @@
               <span
                 class="ion-warning"
                 *ngIf="isFormSubmited && editDescriptionErrors?.required"
+                >{{ "VALIDATION.field" | translate }}</span
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="profile-input">
+              <span class="text-sm text-black-2">{{
+                "STYLE.shortDescription" | translate
+              }}</span>
+              <ion-textarea
+                rows="2"
+                [(ngModel)]="style.shortDescription"
+                class="border border-black-2 rounded-2xl"
+                formControlName="shortDescription"
+              ></ion-textarea>
+              <span
+                [class.text-red-500]="
+                  style.shortDescription.length >
+                  shortDescriptionRecommendedLength
+                "
+                >{{ style.shortDescription.length }}/{{
+                  shortDescriptionRecommendedLength
+                }}</span
+              >
+              <span
+                class="ion-warning"
+                *ngIf="isFormSubmited && editShortDescriptionErrors?.required"
                 >{{ "VALIDATION.field" | translate }}</span
               >
             </div>

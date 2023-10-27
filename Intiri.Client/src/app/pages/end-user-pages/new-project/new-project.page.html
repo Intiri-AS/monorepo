@@ -43,6 +43,8 @@
               class="secondary-btn-borderless"
               [class.disabled]="!canChangeToStep(currentStepNo+1)"
               [appClickElementOnKeyPress]="'Enter'"
+              [clickElementSendAlternativeEvent]="'nextDisabledTrySkipPage'"
+              [clickElementCheckIfClassExistsForDisabled]="'disabled'"
               (click)="nextStep()"
               >{{'COMMON.next' | translate}}</ion-button
             >
@@ -50,6 +52,8 @@
               *ngIf="currentStepNo === 2 || currentStepNo === 3"
               class="secondary-btn-borderless skip-btn"
               (click)="skipPage()"
+              [appClickElementOnKeyPress]=""
+              [clickElementAlternativeEvent]="'nextDisabledTrySkipPage'"
               >{{'COMMON.skip-page' | translate}}</ion-button
             >
             <ion-button

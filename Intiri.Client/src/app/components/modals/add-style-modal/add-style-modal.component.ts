@@ -16,12 +16,57 @@ export class AddStyleModalComponent implements OnInit {
   public editStyleForm: FormGroup;
   public isFormSubmited = false;
 
+  add: boolean;
+  added: boolean;
+  delete: boolean;
+  edit: boolean;
+
+  item: any;
+
+  shortDescriptionRecommendedLength = 100;
+
+  style = {
+    name: '',
+    description: '',
+    shortDescription: '',
+    imageFile: null,
+  };
+
+  imagePath = null;
+
+  constructor(
+    private modalController: ModalController,
+    private styleService: StyleService,
+    private sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private notifier: NotifierService,
+    private translate: TranslateService
+  ) {
+    this.addStyleForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      shortDescription: ['', [Validators.required]],
+      imageFile: ['', [Validators.required]],
+    });
+    this.editStyleForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      shortDescription: ['', [Validators.required]],
+      imageFile: [''],
+    });
+  }
+
   get nameErrors() {
     return this.addStyleForm.controls.name.errors;
   }
 
   get descriptionErrors() {
     return this.addStyleForm.controls.description.errors;
+  }
+
+  get shortDescriptionErrors() {
+    return this.addStyleForm.controls.shortDescription.errors;
   }
 
   get imageFileErrors() {
@@ -36,46 +81,15 @@ export class AddStyleModalComponent implements OnInit {
     return this.editStyleForm.controls.description.errors;
   }
 
-  constructor(
-    private modalController: ModalController,
-    private styleService: StyleService,
-    private sanitizer: DomSanitizer,
-    private formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService,
-    private notifier: NotifierService,
-    private translate: TranslateService
-  ) {
-    this.addStyleForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      imageFile: ['', [Validators.required]],
-    });
-    this.editStyleForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      imageFile: [''],
-    });
+  get editShortDescriptionErrors() {
+    return this.editStyleForm.controls.shortDescription.errors;
   }
-
-  add: boolean;
-  added: boolean;
-  delete: boolean;
-  edit: boolean;
-
-  item: any;
-
-  style = {
-    name: '',
-    description: '',
-    imageFile: null,
-  };
-
-  imagePath = null;
 
   ngOnInit() {
     if (this.edit) {
       this.style.name = this.item.name;
       this.style.description = this.item.description;
+      this.style.shortDescription = this.item.shortDescription;
     }
   }
 
@@ -120,7 +134,7 @@ export class AddStyleModalComponent implements OnInit {
   }
 
   deleteStyle() {
-    this.styleService.deleteStyle(this.item['id']).subscribe(
+    this.styleService.deleteStyle(this.item.id).subscribe(
       (res) => {
         this.styleService.getStyles();
         this.modalController.dismiss();

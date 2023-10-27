@@ -84,7 +84,7 @@
     "crop": "Crop",
     "shopping-list-loading": "Vennligst vent mens handlelisten din lastes",
     "done": "Ferdig",
-    "client-moodboard-instruction": "<b>Hvordan redigere:</b><br><b>- Klick \"Tilpass stilforslaget\"</b> knappen for å velge vekk produkter, materialer og farger<br><b>- Klick \"Ferdig\" for å laste ned ditt personlige moodboard</b> med kupong koder når du er ferdig!"
+    "client-moodboard-instruction": "<b>Hvordan redigere:</b><br><b>- Klikk \"Tilpass stilforslaget\"</b> knappen for å velge vekk produkter, materialer og farger<br><b>- Klikk \"Ferdig\" for å laste ned ditt personlige moodboard</b> med kupong koder når du er ferdig!"
   },
   "CONTACT-DESIGNER": {
     "select": "Vegg din designer",
@@ -310,7 +310,7 @@
     "view": "Mer info",
     "share": "Del",
     "view-details": "Se detaljer",
-    "messenger": "Budbringer",
+    "messenger": "Innboks",
     "none-selected": "Ingen valgt",
     "no-available-data": "Ingen data tilgjengelig å vise"
   },
@@ -441,6 +441,7 @@
     "add-style": "Legg til stil",
     "style-name": "Stilnavn",
     "description": "Beskrivelse",
+    "shortDescription": "Kort beskrivelse",
     "image": "Bilde",
     "add-material": "Legg til material",
     "material-name": "Material navn",
