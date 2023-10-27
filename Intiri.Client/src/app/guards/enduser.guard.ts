@@ -29,8 +29,12 @@ export class EnduserGuard implements CanActivate {
     | Promise<boolean | UrlTree> {
     return this.accountService.currentUser$.pipe(
       map((user) => {
-        if (user && user.roles[0] === 'FreeEndUser') {
-          return true;
+        if (user) {
+          if (!user.roles && location.pathname === '/login')  {
+            location.reload();
+          } else if (user.roles && user.roles[0] === 'FreeEndUser') {
+            return true;
+          }
         } else {
           this.nav.navigateRoot('/login');
           return false;
