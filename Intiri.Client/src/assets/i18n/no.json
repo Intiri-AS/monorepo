@@ -441,6 +441,7 @@
     "add-style": "Legg til stil",
     "style-name": "Stilnavn",
     "description": "Beskrivelse",
+    "shortDescription": "Kort beskrivelse",
     "image": "Bilde",
     "add-material": "Legg til material",
     "material-name": "Material navn",

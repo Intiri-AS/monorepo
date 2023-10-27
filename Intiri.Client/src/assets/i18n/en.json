@@ -441,6 +441,7 @@
     "add-style": "Add style",
     "style-name": "Style name",
     "description": "Description",
+    "shortDescription": "Short description",
     "image": "Image",
     "add-material": "Add material",
     "material-name": "Material name",
