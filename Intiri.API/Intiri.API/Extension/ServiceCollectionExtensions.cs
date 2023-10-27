@@ -35,13 +35,16 @@ namespace Intiri.API.Extension
 
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(
-                    config.GetConnectionString(
-                        env == "Development" && useLocalDBConnection == "True"
-                            ? "LocalConnection"
-                            : "DefaultConnection"
+                options
+                    .UseSqlServer(
+                        config.GetConnectionString(
+                            env == "Development" && useLocalDBConnection == "True"
+                                ? "LocalConnection"
+                                : "DefaultConnection"
+                        )
                     )
-                );
+                    .EnableDetailedErrors(true)
+                    .EnableSensitiveDataLogging(true);
             });
 
             AddConfigurationService<CloudinaryConfiguration>(
