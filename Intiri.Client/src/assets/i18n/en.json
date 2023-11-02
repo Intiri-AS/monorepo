@@ -1,16 +1,18 @@
 {
   "LOGIN": {
-    "welcome": "Welcome back",
-    "login": "Login",
-    "login-msg": "Manage your account, create and edit projects, collaborate on design and more.",
+    "welcome": "Hello 👋",
+    "login": "Please log in to continue",
+    "login-msg": "Manage your account, create projects, edit styles and explore more at Intiri!",
     "phone": "Phone number",
-    "or": "Or",
+    "login-btn": "Login",
     "no-account": "Don't have an account?",
-    "create": "Create an account"
+    "already-have-account": "Already have an account?",
+    "create": "Sign up for free!"
   },
   "REGISTER": {
     "start": "Start your journey",
-    "create": "Create an account"
+    "create": "Create an account",
+    "back-to-login": "← Login"
   },
   "SMS": {
     "create": "Create an account",

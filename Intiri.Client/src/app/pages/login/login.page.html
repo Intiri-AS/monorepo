@@ -7,52 +7,49 @@
           src="../../../assets/images/intiri-logo.svg"
           (click)="onIntiriIconClick()"
         />
-        <div class="text-center xl:text-left">
-          <h1 class="font-['Allison'] text-4xl xl:text-7xl mt-16 text-black-2">
+        <div class="max-w-md mx-auto">
+          <h1
+            class="font-['IBM Plex Sans'] font-bold text-6xl mt-16 text-black-2"
+          >
             {{'LOGIN.welcome' | translate}}
           </h1>
-          <h1 class="text-3xl xl:text-5xl font-semibold">
-            {{'LOGIN.login' | translate}}
-          </h1>
-          <p class="text-sm xl:text-lg text-black-2">
-            {{'LOGIN.login-msg' | translate}}
-          </p>
+          <h1 class="text-3xl font-semibold">{{'LOGIN.login' | translate}}</h1>
+          <p class="text-lg text-black-2">{{'LOGIN.login-msg' | translate}}</p>
           <form
             [formGroup]="loginForm"
-            class="d-flex mt-2 md:mt-0 text-left"
+            class="mt-2 text-left login-form-grid"
             (ngSubmit)="login()"
             autocomplete="off"
           >
-            <div class="mt-8 mx-auto w-max">
-              <span
-                class="text-xs xl:text-sm text-black-2 text-left block mb-[3px]"
+            <div class="mt-8">
+              <span class="text-xs text-black-2 text-left block mb-[3px]"
                 >{{'LOGIN.phone' | translate}}</span
               >
-              <div class="flex gap-x-2">
+              <div class="flex gap-x-4">
                 <div>
                   <ion-select
-                    class="border rounded-xl xl:rounded-xl border-black-2 h-10 xl:h-14 w-24 xl:w-32 text-xs xl:text-base"
+                    class="border rounded-xl border-black-2 w-24 text-lg"
                     interface="popover"
                     (ionChange)="setActiveCode($event)"
                     [value]="activeCode"
                   >
                     <ion-select-option value="47">
                       <div>
-                        <p class="text-sm xl:text-lg text-black">+47</p>
+                        <p class="text-black">+47</p>
                       </div>
                     </ion-select-option>
                     <ion-select-option value="381">
-                      <p class="text-sm xl:text-lg text-black">+381</p>
+                      <p class="text-black">+381</p>
                     </ion-select-option>
                   </ion-select>
                 </div>
-                <div>
+                <div class="flex-grow">
                   <ion-input
                     #phoneNumber
                     formControlName="phoneNumber"
                     name="phoneNumber"
                     maxlength="8"
-                    class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-60 xl:w-80 text-xs xl:text-base"
+                    class="border rounded-xl border-black-2 text-lg"
                   ></ion-input>
                   <span
                     class="ion-warning"
@@ -68,34 +65,31 @@
                 </div>
               </div>
             </div>
-            <div
-              class="flex flex-col justify-center items-center mt-[16px] xl:mt-[30px]"
-            >
+            <div class="mt-[16px] xl:mt-[30px]">
               <ion-button
                 fill="clear"
-                class="primary-btn-responsive"
-                type="submit"
-                >{{'LOGIN.login' | translate}}</ion-button
-              >
-              <p class="text-sm xl:text-lg text-black-2 mt-2 xl:mt-4">
-                {{'LOGIN.or' | translate}}
-              </p>
-              <ion-button
-                fill="clear"
-                class="vipps-btn mt-4"
-                (click)="initiateVippsLogin()"
-              >
-                <img src="../../../assets/icon/vipps-white.svg" />
-              </ion-button>
-              <p class="text-sm xl:text-lg text-black-2 mt-4">
-                {{'LOGIN.no-account' | translate}}
-              </p>
-              <ion-button
-                fill="clear"
-                class="secondary-btn-responsive"
+                class="primary-btn !m-0"
                 routerLink="/register"
                 routerDirection="root"
                 >{{'LOGIN.create' | translate}}</ion-button
+              >
+              <!-- <p class="text-sm xl:text-lg text-black-2 mt-2 xl:mt-4"> -->
+              <!-- {{'LOGIN.or' | translate}} -->
+              <!-- </p> -->
+              <!-- <ion-button fill="clear" -->
+              <!-- class="vipps-btn mt-4" -->
+              <!-- (click)="initiateVippsLogin()" -->
+              <!-- > -->
+              <!-- <img src="../../../assets/icon/vipps-white.svg" /> -->
+              <!-- </ion-button> -->
+              <p class="text-sm text-black-2 mt-8">
+                {{'LOGIN.already-have-account' | translate}}
+              </p>
+              <ion-button
+                fill="clear"
+                class="secondary-btn !mx-0 mt-4"
+                type="submit"
+                >{{'LOGIN.login-btn' | translate}}</ion-button
               >
             </div>
           </form>

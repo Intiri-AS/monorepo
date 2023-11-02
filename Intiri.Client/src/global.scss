@@ -170,11 +170,11 @@ ion-toolbar {
 .primary-btn {
   //this one don't resize on smaller screens (don't have media queries)
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
-  margin-right: 0.5rem !important;
-  margin-left: 0.5rem !important;
-  height: 46px !important;
-  font-weight: 500 !important;
-  font-size: 1.125rem !important;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  height: 46px;
+  font-weight: 500;
+  font-size: 1.125rem;
 
   &.large {
     height: 60px !important;
@@ -184,8 +184,8 @@ ion-toolbar {
 
 .primary-btn-responsive {
   @apply hover:opacity-80 bg-primary text-white normal-case rounded-[15px] text-lg px-4 tracking-normal;
-  margin-right: 0.5rem !important;
-  margin-left: 0.5rem !important;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   height: 46px !important;
   font-weight: 500 !important;
   font-size: 1.125rem !important;
@@ -194,8 +194,8 @@ ion-toolbar {
 .secondary-btn {
   //this one don't resize on smaller screens (don't have media queries)
   @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
-  margin-right: 0.5rem !important;
-  margin-left: 0.5rem !important;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   height: 46px !important;
   font-weight: 500 !important;
   font-size: 1.125rem !important;
@@ -212,11 +212,11 @@ ion-toolbar {
 
 .secondary-btn-responsive {
   @apply hover:opacity-80 bg-transparent text-primary normal-case rounded-[15px] border-primary border px-4 tracking-normal;
-  margin-right: 0.5rem !important;
-  margin-left: 0.5rem !important;
-  height: 46px !important;
-  font-weight: 500 !important;
-  font-size: 1.125rem !important;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  height: 46px;
+  font-weight: 500;
+  font-size: 1.125rem;
 }
 
 .header-icon {

@@ -1,24 +1,29 @@
 <ion-content>
   <ion-row>
     <ion-col size="12" offset-xl="1" size-xl="5" class="p-2 xl:p-12 h-full">
-      <div class="w-full xl:w-[470px] text-center xl:text-left">
+      <div class="w-full xl:w-[470px]">
         <img
           class="h-7 w-auto cursor-pointer"
           src="../../../assets/images/intiri-logo.svg"
           (click)="onIntiriIconClick()"
         />
-        <div>
+        <ion-button
+          fill="clear"
+          class="font-semibold w-auto mt-12"
+          routerLink="/login"
+          routerDirection="root"
+          >{{'REGISTER.back-to-login' | translate}}</ion-button
+        >
+        <div class="max-w-md mx-auto">
           <h1
-            class="font-['Allison'] text-5xl 2xl:text-7xl text-black-2 mt-[30px]"
+            class="font-['IBM Plex Sans'] font-bold text-6xl mt-16 text-black-2"
           >
-            {{'REGISTER.start' | translate}}
+            {{'LOGIN.welcome' | translate}}
           </h1>
-          <h1 class="text-3xl xl:text-5xl font-semibold">
-            {{'LOGIN.create' | translate}}
+          <h1 class="text-3xl font-semibold">
+            {{'REGISTER.create' | translate}}
           </h1>
-          <p class="text-sm xl:text-lg text-black-2">
-            {{'LOGIN.login-msg' | translate}}
-          </p>
+          <p class="text-lg text-black-2">{{'LOGIN.login-msg' | translate}}</p>
           <form
             [formGroup]="registerForm"
             (ngSubmit)="register()"
@@ -33,7 +38,7 @@
                   type="text"
                   #firstName
                   formControlName="firstName"
-                  class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-full xl:w-56"
+                  class="border rounded-xl xl:rounded-xl h-14 border-black-2 w-full xl:w-56"
                 ></ion-input>
                 <span
                   class="ion-warning"
@@ -49,7 +54,7 @@
                   type="text"
                   #lastName
                   formControlName="lastName"
-                  class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-full xl:w-56"
+                  class="border rounded-xl xl:rounded-xl h-14 border-black-2 w-full xl:w-56"
                 ></ion-input>
                 <span
                   class="ion-warning"
@@ -65,7 +70,7 @@
               <div class="flex gap-x-2">
                 <div>
                   <ion-select
-                    class="border rounded-xl xl:rounded-xl border-black-2 h-10 xl:h-14 w-24 xl:w-32"
+                    class="border rounded-xl xl:rounded-xl border-black-2 h-14 w-24 xl:w-32"
                     interface="popover"
                     (ionChange)="setActiveCode($event)"
                     [value]="activeCode"
@@ -84,7 +89,7 @@
                   <ion-input
                     #phoneNumber
                     formControlName="phoneNumber"
-                    class="border rounded-xl xl:rounded-xl h-10 xl:h-14 border-black-2 w-60 xl:w-80"
+                    class="border rounded-xl xl:rounded-xl h-14 border-black-2 w-60 xl:w-80"
                     maxlength="8"
                   ></ion-input>
                   <span
@@ -101,18 +106,15 @@
               </div>
             </div>
             <div class="flex flex-col justify-center items-center mt-[30px]">
-              <ion-button
-                type="submit"
-                fill="clear"
-                class="primary-btn-responsive"
+              <ion-button type="submit" fill="clear" class="primary-btn"
                 >{{'COMMON.register' | translate}}</ion-button
               >
-              <p class="text-lg text-black-2 mt-4">Or</p>
+              <!-- <p class="text-lg text-black-2 mt-4">Or</p>
               <ion-button fill="clear" class="vipps-btn mt-4">
                 <img src="../../../assets/icon/vipps-white.svg" />
-              </ion-button>
+              </ion-button> -->
               <span class="ion-warning" *ngIf="error">{{error}}</span>
-              <div class="mt-6">
+              <!-- <div class="mt-6">
                 <ion-button
                   fill="clear"
                   class="secondary-btn-responsive"
@@ -120,7 +122,7 @@
                   routerDirection="root"
                   >{{'COMMON.back' | translate}}</ion-button
                 >
-              </div>
+              </div> -->
             </div>
           </form>
         </div>
