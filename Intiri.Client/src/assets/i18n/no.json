@@ -1,16 +1,18 @@
 {
   "LOGIN": {
-    "welcome": "Velkommen tilbake",
-    "login": "Logg inn",
-    "login-msg": "Administrer konto, lag og endre prosjekter, samarbeid om design og mer.",
+    "welcome": "Hallo 👋",
+    "login": "Vennligst logg inn for å fortsette",
+    "login-msg": "Administrer konto, lag prosjekter, rediger stiler og utforsk mer hos Intiri!",
     "phone": "Telefonnummer",
-    "or": "Eller",
+    "login-btn": "Logg inn",
     "no-account": "Har du ikke opprettet konto?",
-    "create": "Opprett konto"
+    "already-have-account": "Har du allerede en konto?",
+    "create": "Registrer deg gratis!"
   },
   "REGISTER": {
     "start": "Start reisen din",
-    "create": "Opprett konto"
+    "create": "Opprett konto",
+    "back-to-login": "← Logg inn"
   },
   "SMS": {
     "create": "Opprett konto",
