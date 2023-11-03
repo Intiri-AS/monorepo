@@ -65,13 +65,12 @@
                 </div>
               </div>
             </div>
-            <div class="mt-[16px] xl:mt-[30px]">
+            <div class="mt-[16px] xl:mt-[30px] text-center">
               <ion-button
                 fill="clear"
-                class="primary-btn !m-0"
-                routerLink="/register"
-                routerDirection="root"
-                >{{'LOGIN.create' | translate}}</ion-button
+                class="primary-btn-no-x-margin !m-0"
+                type="submit"
+                >{{'LOGIN.login-btn' | translate}}</ion-button
               >
               <!-- <p class="text-sm xl:text-lg text-black-2 mt-2 xl:mt-4"> -->
               <!-- {{'LOGIN.or' | translate}} -->
@@ -83,13 +82,14 @@
               <!-- <img src="../../../assets/icon/vipps-white.svg" /> -->
               <!-- </ion-button> -->
               <p class="text-sm text-black-2 mt-8">
-                {{'LOGIN.already-have-account' | translate}}
+                {{'LOGIN.no-account' | translate}}
               </p>
               <ion-button
                 fill="clear"
-                class="secondary-btn !mx-0 mt-4"
-                type="submit"
-                >{{'LOGIN.login-btn' | translate}}</ion-button
+                class="secondary-btn-no-x-margin !mx-0 mt-4"
+                routerLink="/register"
+                routerDirection="root"
+                >{{'LOGIN.create' | translate}}</ion-button
               >
             </div>
           </form>
