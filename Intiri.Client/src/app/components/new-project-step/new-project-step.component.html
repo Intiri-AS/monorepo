@@ -83,9 +83,10 @@
   <p
     *ngIf="currentStep.data === 'final'"
     class="text-black-2 text-2xl font-medium"
-    innerHTML="{{ 'MOODBOARD-DETAILS.client-moodboard-instruction' | translate }}"
-  >
-  </p>
+    innerHTML="{{
+      'MOODBOARD-DETAILS.client-moodboard-instruction' | translate
+    }}"
+  ></p>
 
   <div [ngClass]="{ 'text-clamp-3': !expandText }">
     <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->
@@ -118,10 +119,19 @@
             srcString="{{ item.imagePath }}"
             borderRadius="13px"
             alt="style-img"
+            [matTooltip]="item.provider"
           ></app-cloudinary-image-scaler>
           <ion-icon
             class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl"
-            (click)="openImageInModal(item, { url: item.imagePath })"
+            (click)="
+              openImageInModal(
+                item,
+                {
+                  url: item.imagePath
+                },
+                item.provider
+              )
+            "
             name="expand-outline"
           ></ion-icon>
         </span>
