@@ -10,7 +10,9 @@ namespace Intiri.API.Services
 {
     public class SmsVerificationService : ISmsVerificationService
     {
-        private static readonly int VERIFICATION_CODE_EXPIRATION_IN_SECONDS = 120;
+        private static readonly int VERIFICATION_CODE_EXPIRATION_IN_MINUTES = 5;
+        private static readonly int VERIFICATION_CODE_EXPIRATION_IN_SECONDS =
+            VERIFICATION_CODE_EXPIRATION_IN_MINUTES * 60;
         private readonly Timer _checker;
         private readonly List<PendingSmsVerification> _pendingSmsVerifications;
         private readonly ISmsSender _smsSender;
@@ -159,7 +161,7 @@ namespace Intiri.API.Services
         private string GenerateVerificationMessage(string verificationCode)
         {
             return $"Your Intiri verification code is: {verificationCode}\n"
-                + $"Valid for 120 seconds.";
+                + $"Valid for {VERIFICATION_CODE_EXPIRATION_IN_MINUTES} minutes.";
         }
     }
 }
