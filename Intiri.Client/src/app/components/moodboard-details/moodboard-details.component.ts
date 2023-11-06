@@ -219,10 +219,15 @@ export class MoodboardDetailsComponent
 
   // The purpose of parseSlotInfo is to be a function that can be used whereever slotinfo is turned into a json object
   // The function will check that all slotInfo slots are filled and fill them if necessary
-  parseSlotInfo(slotInfoInput: string | { [key: number]: SlotInfo }): { [key: number]: SlotInfo } {
-    const parsedSlotInfo = typeof slotInfoInput === 'string' ? JSON.parse(slotInfoInput) as {
-      [key: number]: SlotInfo;
-    } : slotInfoInput;
+  parseSlotInfo(slotInfoInput: string | { [key: number]: SlotInfo }): {
+    [key: number]: SlotInfo;
+  } {
+    const parsedSlotInfo =
+      typeof slotInfoInput === 'string'
+        ? (JSON.parse(slotInfoInput) as {
+            [key: number]: SlotInfo;
+          })
+        : slotInfoInput;
 
     for (const keyString of Object.keys(parsedSlotInfo)) {
       const key = Number(keyString);
@@ -597,10 +602,10 @@ export class MoodboardDetailsComponent
     return inputString && inputString.replaceAll('\\', '/');
   }
 
-  async openImageInModal(image) {
+  async openImageInModal(image, titleText?: string) {
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: { file: image },
+      componentProps: { file: image, titleText },
       cssClass: 'open-file-modal-css',
     });
 
@@ -893,15 +898,15 @@ export class MoodboardDetailsComponent
       }
     } else if (this.moodboard.slotInfo[slotId].entity === 'product') {
       const product = this.moodboard.products.filter(
-        (p) => p.id === this.moodboard.slotInfo[slotId].entityId
+        (p) => Number(p.id) === Number(this.moodboard.slotInfo[slotId].entityId)
       )[0];
       if (product) {
-        if (product.productLink === 'null' || !product.productLink) {
+        if (product.name === 'null' || !product.name) {
           return this.translate.instant(
             'TOOLTIP-TEXT.no-link-found-for-this-product'
           );
         } else {
-          return product.productLink;
+          return product.name;
         }
       } else {
         return '';

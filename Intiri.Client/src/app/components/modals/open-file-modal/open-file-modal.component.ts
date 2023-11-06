@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NotifierService } from 'angular-notifier';
@@ -11,9 +11,10 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./open-file-modal.component.scss'],
 })
 export class OpenFileModalComponent implements OnInit {
-  file;
-  canDelete;
-  isRemoving = false;
+  @Input() file;
+  @Input() canDelete;
+  @Input() isRemoving = false;
+  @Input() titleText;
 
   constructor(
     private modalController: ModalController,

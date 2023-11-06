@@ -11,7 +11,7 @@
     <div
       *ngFor="let slotInfo of moodboardMaterials; let index = index"
       [style]="'grid-area: mat' + (index + 1)"
-      id="slot-{{slotInfo.slotKey}}"
+      id="slot-{{ slotInfo.slotKey }}"
       (dragover)="allowDrop($event)"
       (drop)="onDrop($event, slotInfo.slotKey)"
     >
@@ -72,14 +72,17 @@
   </div>
 </ion-card>
 
-
 <div
   *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
   class="mt-16 xl:text-left"
 >
   <p class="text-black-2 text-2xl font-medium">
-    {{'MOODBOARD-DETAILS.included' | translate}} {{showLoader ? '(' +
-    ('MOODBOARD-DETAILS.shopping-list-loading' | translate) + ')': null}}
+    {{ "MOODBOARD-DETAILS.included" | translate }}
+    {{
+      showLoader
+        ? "(" + ("MOODBOARD-DETAILS.shopping-list-loading" | translate) + ")"
+        : null
+    }}
   </p>
   <mat-spinner class="spinner" *ngIf="showLoader"></mat-spinner>
   <ion-grid class="step-items" *ngIf="!showLoader">
@@ -96,12 +99,17 @@
         <div class="w-full h-full rounded-2xl">
           <img
             *ngIf="item?.imagePath"
-            src="{{item.imagePath}}"
-            (click)="openImageInModal(item)"
+            src="{{ item.imagePath }}"
+            (click)="openImageInModal(item, item.name)"
             class="product-image cursor-pointer"
             alt="product-image"
             (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'product__' + item.name + '__' + item.id + '__' + item.imagePath)"
+            (dragstart)="
+              dragStart(
+                $event,
+                'product__' + item.name + '__' + item.id + '__' + item.imagePath
+              )
+            "
             [matTooltip]="getToolTipShoppingList('product', item)"
           />
         </div>
@@ -109,7 +117,7 @@
           *ngIf="!item.number && item.name"
           class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1"
         >
-          {{item.name}}
+          {{ item.name }}
         </p>
       </ion-col>
       <ion-col
@@ -124,20 +132,30 @@
         <div class="w-full h-full rounded-2xl">
           <img
             *ngIf="item?.imagePath"
-            src="{{item.imagePath}}"
+            src="{{ item.imagePath }}"
             (click)="openImageInModal(item)"
             [matTooltip]="getToolTipShoppingList('inspirationalPhoto', item)"
             class="product-image cursor-pointer"
             alt="inspirationalPhotos-image"
             (draggable)="isItemDragAndDroppable()"
-            (dragstart)="dragStart($event, 'styleImages__' + item.styleName + '__' + item.id + '__' + item.imagePath)"
+            (dragstart)="
+              dragStart(
+                $event,
+                'styleImages__' +
+                  item.styleName +
+                  '__' +
+                  item.id +
+                  '__' +
+                  item.imagePath
+              )
+            "
           />
         </div>
         <p
           *ngIf="item.styleName"
           class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1"
         >
-          {{item.styleName}}
+          {{ item.styleName }}
         </p>
       </ion-col>
       <ion-col
@@ -151,19 +169,24 @@
       >
         <img
           *ngIf="item?.imagePath"
-          src="{{item.imagePath}}"
+          src="{{ item.imagePath }}"
           (click)="openImageInModal(item)"
           class="material-image cursor-pointer"
           alt="material-image"
           (draggable)="isItemDragAndDroppable()"
-          (dragstart)="dragStart($event, 'material__' + item.name + '__' + item.id + '__' + item.imagePath)"
+          (dragstart)="
+            dragStart(
+              $event,
+              'material__' + item.name + '__' + item.id + '__' + item.imagePath
+            )
+          "
           [matTooltip]="getToolTipShoppingList('material', item)"
         />
         <p
           *ngIf="!item.number && item.name"
           class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1"
         >
-          {{item.name}}
+          {{ item.name }}
         </p>
       </ion-col>
       <ion-col
@@ -179,28 +202,39 @@
           <div
             *ngIf="item.mainColorData"
             class="grid-item mainColor"
-            [ngStyle]="{'background-image': 'url(' + item.mainColorData?.imagePath + ')'}"
+            [ngStyle]="{
+              'background-image': 'url(' + item.mainColorData?.imagePath + ')'
+            }"
             [matTooltip]="item.mainColorData.name"
             (click)="redirectToColorsPartner()"
           ></div>
           <div
             *ngIf="item.shadeColorLightData"
             class="grid-item shadeColorLight"
-            [ngStyle]="{'background-image': 'url(' + item.shadeColorLightData?.imagePath + ')'}"
+            [ngStyle]="{
+              'background-image':
+                'url(' + item.shadeColorLightData?.imagePath + ')'
+            }"
             [matTooltip]="item.shadeColorLightData.name"
             (click)="redirectToColorsPartner()"
           ></div>
           <div
             *ngIf="item.shadeColorMediumData"
             class="grid-item shadeColorMedium"
-            [ngStyle]="{'background-image': 'url(' + item.shadeColorMediumData?.imagePath + ')'}"
+            [ngStyle]="{
+              'background-image':
+                'url(' + item.shadeColorMediumData?.imagePath + ')'
+            }"
             [matTooltip]="item.shadeColorMediumData.name"
             (click)="redirectToColorsPartner()"
           ></div>
           <div
             *ngIf="item.shadeColorDarkData"
             class="grid-item shadeColorDark"
-            [ngStyle]="{'background-image': 'url(' + item.shadeColorDarkData?.imagePath + ')'}"
+            [ngStyle]="{
+              'background-image':
+                'url(' + item.shadeColorDarkData?.imagePath + ')'
+            }"
             [matTooltip]="item.shadeColorDarkData.name"
             (click)="redirectToColorsPartner()"
           ></div>
@@ -209,13 +243,13 @@
           *ngIf="!item.number && item.name"
           class="font-bold mt-2 text-black-2 text-clamp-2 pr-1"
         >
-          {{item.name}}
+          {{ item.name }}
         </p>
         <p
           *ngIf="item.number && item.name"
           class="font-bold mt-2 text-black-2 text-[18px] text-clamp-2 pr-1"
         >
-          {{item.number}} <span class="font-normal">/ {{item.name}}</span>
+          {{ item.number }} <span class="font-normal">/ {{ item.name }}</span>
         </p>
       </ion-col>
     </ion-row>
