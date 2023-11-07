@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RegisterInDTO } from 'src/app/DTOs/In/register-in.dto';
 import { RegisterOutDTO } from 'src/app/DTOs/Out/register-out.dto';
 import { AccountService } from 'src/app/services/account.service';
+import { CountriesService } from 'src/app/services/countries.service';
 import { VerificationTarget } from 'src/app/types/types';
 
 @Component({
@@ -21,23 +22,12 @@ export class RegisterPage {
   error: HttpErrorResponse;
   newProjectPageStep: number;
 
-  get firstNameErrors() {
-    return this.registerForm.controls.firstName.errors;
-  }
-
-  get lastNameErrors() {
-    return this.registerForm.controls.lastName.errors;
-  }
-
-  get phoneNumberErrors() {
-    return this.registerForm.controls.phoneNumber.errors;
-  }
-
   constructor(
     private accountService: AccountService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public countryService: CountriesService
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -55,6 +45,18 @@ export class RegisterPage {
     if (state) {
       this.newProjectPageStep = state.step;
     }
+  }
+
+  get firstNameErrors() {
+    return this.registerForm.controls.firstName.errors;
+  }
+
+  get lastNameErrors() {
+    return this.registerForm.controls.lastName.errors;
+  }
+
+  get phoneNumberErrors() {
+    return this.registerForm.controls.phoneNumber.errors;
   }
 
   setActiveCode(event) {
