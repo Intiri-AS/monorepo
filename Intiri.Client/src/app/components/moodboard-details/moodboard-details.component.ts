@@ -163,56 +163,54 @@ export class MoodboardDetailsComponent
         //If User viewing existing moodboard in a Project
         this.assignDefaultSlots();
       }
-
-      const moodboardSlotInfoFilterer = (
-        slotInfo: { [index: string | number]: SlotInfo },
-        filterpredicate: (
-          value: [string, SlotInfo],
-          index: number,
-          array: [string, SlotInfo][]
-        ) => boolean
-      ) => {
-        const filteredSlotInfo =
-          Object.entries(slotInfo).filter(filterpredicate);
-        const sortedFilteredSlotInfo = filteredSlotInfo.sort(([aKey], [bKey]) =>
-          bKey.localeCompare(aKey)
-        );
-        return sortedFilteredSlotInfo.map(([slotKey, slotValue]) => {
-          let slotKeyConverted;
-          try {
-            slotKeyConverted = Number(slotKey);
-          } catch (e) {
-            slotKeyConverted = slotKey;
-          }
-          return { slotKey: slotKeyConverted, slotValue };
-        });
-      };
-
-      console.log('slotinfo', this.moodboard.slotInfo);
-      this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
-
-      this.moodboardMaterials = moodboardSlotInfoFilterer(
-        this.moodboard.slotInfo,
-        ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.material
-      ).slice(0, 3);
-      this.moodboardColors = moodboardSlotInfoFilterer(
-        this.moodboard.slotInfo,
-        ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.color
-      ).slice(0, 4);
-      this.moodboardProductsAndStyleImages = moodboardSlotInfoFilterer(
-        this.moodboard.slotInfo,
-        ([, slotValue]) =>
-          slotValue.entity === SlotInfoEntityTypes.product ||
-          slotValue.entity === SlotInfoEntityTypes.styleImages
-      );
-
-      console.log(
-        this.moodboardMaterials,
-        this.moodboardColors,
-        this.moodboardProductsAndStyleImages
-      );
     }
 
+    const moodboardSlotInfoFilterer = (
+      slotInfo: { [index: string | number]: SlotInfo },
+      filterpredicate: (
+        value: [string, SlotInfo],
+        index: number,
+        array: [string, SlotInfo][]
+      ) => boolean
+    ) => {
+      const filteredSlotInfo = Object.entries(slotInfo).filter(filterpredicate);
+      const sortedFilteredSlotInfo = filteredSlotInfo.sort(([aKey], [bKey]) =>
+        bKey.localeCompare(aKey)
+      );
+      return sortedFilteredSlotInfo.map(([slotKey, slotValue]) => {
+        let slotKeyConverted;
+        try {
+          slotKeyConverted = Number(slotKey);
+        } catch (e) {
+          slotKeyConverted = slotKey;
+        }
+        return { slotKey: slotKeyConverted, slotValue };
+      });
+    };
+
+    console.log('slotinfo', this.moodboard.slotInfo);
+    this.moodboard.slotInfo = this.parseSlotInfo(this.moodboard.slotInfo);
+
+    this.moodboardMaterials = moodboardSlotInfoFilterer(
+      this.moodboard.slotInfo,
+      ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.material
+    ).slice(0, 3);
+    this.moodboardColors = moodboardSlotInfoFilterer(
+      this.moodboard.slotInfo,
+      ([, slotValue]) => slotValue.entity === SlotInfoEntityTypes.color
+    ).slice(0, 4);
+    this.moodboardProductsAndStyleImages = moodboardSlotInfoFilterer(
+      this.moodboard.slotInfo,
+      ([, slotValue]) =>
+        slotValue.entity === SlotInfoEntityTypes.product ||
+        slotValue.entity === SlotInfoEntityTypes.styleImages
+    );
+
+    console.log(
+      this.moodboardMaterials,
+      this.moodboardColors,
+      this.moodboardProductsAndStyleImages
+    );
     // configure crop feature on Initial load
     this.initializeCropFeatureMap();
   }
