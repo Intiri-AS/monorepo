@@ -15,15 +15,31 @@ export class LanguageService {
   constructor(private translate: TranslateService, private storage: Storage) {}
 
   setInitialAppLanguage() {
+    const browserLang = navigator.language;
+
     let language = 'no';
+
+    switch (browserLang) {
+      case 'en':
+        language = 'en';
+        break;
+      case 'no':
+        language = 'no';
+        break;
+      default:
+        language = 'en';
+        break;
+    }
+
     this.languageChange$.next(language);
     this.translate.setDefaultLang(language);
     this.storage.get(LNG_KEY).then((val) => {
       if (val) {
         this.setLanguage(val);
         this.selected = val;
-      } else if (!val) {
-        this.setLanguage('no');
+      } else {
+        this.setLanguage(language);
+        this.selected = language;
       }
     });
   }

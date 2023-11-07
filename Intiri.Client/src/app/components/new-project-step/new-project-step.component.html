@@ -83,9 +83,10 @@
   <p
     *ngIf="currentStep.data === 'final'"
     class="text-black-2 text-2xl font-medium"
-    innerHTML="{{ 'MOODBOARD-DETAILS.client-moodboard-instruction' | translate }}"
-  >
-  </p>
+    innerHTML="{{
+      'MOODBOARD-DETAILS.client-moodboard-instruction' | translate
+    }}"
+  ></p>
 
   <div [ngClass]="{ 'text-clamp-3': !expandText }">
     <!-- <ion-textarea [disabled]="true" [autoGrow]="true" *ngIf="currentStep.data === 'final'" class="step-subtitle no-visible-area">{{project.currentMoodboard.style?.description}}{{project.currentMoodboard.room?.description}}</ion-textarea> -->
@@ -118,10 +119,19 @@
             srcString="{{ item.imagePath }}"
             borderRadius="13px"
             alt="style-img"
+            [matTooltip]="item.provider"
           ></app-cloudinary-image-scaler>
           <ion-icon
             class="absolute top-2 right-2 z-50 text-lg hover:text-2xl text-light drop-shadow-xl"
-            (click)="openImageInModal(item, { url: item.imagePath })"
+            (click)="
+              openImageInModal(
+                item,
+                {
+                  url: item.imagePath
+                },
+                item.provider
+              )
+            "
             name="expand-outline"
           ></ion-icon>
         </span>
@@ -200,6 +210,30 @@
             {{ item.number }} <span class="font-normal">/ {{ item.name }}</span>
           </p>
         </div>
+      </ion-col>
+
+      <ion-col
+        *ngIf="currentStepNo === 0"
+        size="5.8"
+        size-lg="2.82"
+        size-xl="2.2"
+        class="rounded-2xl h-[130px] opacity-70 lg:h-[180px] mt-4 p-0 disabled bigger-margin"
+      >
+        <!-- if icon (room) -->
+        <div class="step-icon-wrapper">
+          <img
+            src="https://res.cloudinary.com/dirqhh7af/image/upload/v1693341259/RoomImagesIntiri/styleImgLiving_Room_fj8fvr.png"
+            class="step-icon"
+            alt="room-icon"
+          />
+        </div>
+
+        <p
+          *ngIf="currentStepNo == 0"
+          class="font-bold mt-2 text-black-2 text-clamp-2 pr-1"
+        >
+          {{ currentLang == "no" ? "Mer rom kommer" : "More rooms coming" }}
+        </p>
       </ion-col>
     </ion-row>
   </ion-grid>

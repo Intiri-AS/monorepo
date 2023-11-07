@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
+import { CountriesService } from 'src/app/services/countries.service';
 import { VerificationTarget } from 'src/app/types/types';
 @Component({
   selector: 'app-login-page',
@@ -23,7 +24,8 @@ export class LoginPage implements OnInit {
     public accountService: AccountService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private nav: NavController
+    private nav: NavController,
+    public countryService: CountriesService
   ) {
     this.loginForm = this.formBuilder.group({
       phoneNumber: [

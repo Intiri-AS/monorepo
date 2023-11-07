@@ -6,6 +6,7 @@ import { VippsState } from 'src/app/models/vipps-state';
 import { AccountService } from 'src/app/services/account.service';
 import { VerificationTarget } from 'src/app/types/types';
 import { SmsVerificationModalComponent } from '../sms-verification-modal/sms-verification-modal.component';
+import { CountriesService } from 'src/app/services/countries.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -26,7 +27,8 @@ export class LoginModalComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private serializer: UrlSerializer,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public countryService: CountriesService
   ) {
     this.loginForm = this.formBuilder.group({
       phoneNumber: [

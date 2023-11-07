@@ -28,18 +28,20 @@
               <div class="flex gap-x-4">
                 <div>
                   <ion-select
-                    class="border rounded-xl border-black-2 w-24 text-lg"
+                    class="border rounded-xl border-black-2 w-24 text-lg h-12"
                     interface="popover"
                     (ionChange)="setActiveCode($event)"
                     [value]="activeCode"
                   >
-                    <ion-select-option value="47">
+                    <ion-select-option
+                      *ngFor="let country of countryService.getCountries()"
+                      value="{{country.phonePrefix}}"
+                    >
                       <div>
-                        <p class="text-black">+47</p>
+                        <p class="text-black">
+                          +{{country.phonePrefix}} {{country.localName}}
+                        </p>
                       </div>
-                    </ion-select-option>
-                    <ion-select-option value="381">
-                      <p class="text-black">+381</p>
                     </ion-select-option>
                   </ion-select>
                 </div>
@@ -49,7 +51,7 @@
                     formControlName="phoneNumber"
                     name="phoneNumber"
                     maxlength="8"
-                    class="border rounded-xl border-black-2 text-lg"
+                    class="border rounded-xl border-black-2 text-lg h-12"
                   ></ion-input>
                   <span
                     class="ion-warning"

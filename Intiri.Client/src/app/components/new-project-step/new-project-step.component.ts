@@ -30,12 +30,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./new-project-step.component.scss'],
 })
 export class NewProjectStepComponent implements OnInit, OnChanges {
-  apiUrl = environment.apiUrl;
   @Input() currentStep: any;
   @Input() project: any;
   @Input() currentStepNo: number;
   @Input() stepsOrder: object;
   @Output() toggleSelection = new EventEmitter<object>();
+
+  apiUrl = environment.apiUrl;
 
   imagePath = null;
   roomSketchImagePaths = [];
@@ -233,11 +234,11 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     return false;
   }
 
-  async openImageInModal(item, image) {
+  async openImageInModal(item, image, titleText?: string) {
     this.toggleSelection.emit(item);
     const modal = await this.modalController.create({
       component: OpenFileModalComponent,
-      componentProps: { file: image, canDelete: false },
+      componentProps: { file: image, canDelete: false, titleText },
       cssClass: 'open-file-modal-css',
     });
 

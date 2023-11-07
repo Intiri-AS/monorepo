@@ -75,6 +75,8 @@ export class CloudinaryImageScalerComponent
   cloudRegex = /https:\/\/res\.cloudinary\.com\/(.*)\/image\/upload/;
   cloud: string;
 
+  private readonly debug = false;
+
   constructor(private el: ElementRef, public cloudinary: CloudinaryService) {}
 
   @HostListener('window:resize')
@@ -152,7 +154,7 @@ export class CloudinaryImageScalerComponent
       return;
     }
 
-   // TODO: Generate a good src
+    // TODO: Generate a good src
 
     const { imgHeight, imgWidth } = this.dimensionsToImageDimensions(
       height,
@@ -166,13 +168,15 @@ export class CloudinaryImageScalerComponent
       .toURL();
 
     if (this.src !== calculatedSrc) {
-      console.log(
-        source,
-        'Generated new src:',
-        { height, width },
-        { imgHeight, imgWidth },
-        calculatedSrc
-      );
+      if (this.debug) {
+        console.log(
+          source,
+          'Generated new src:',
+          { height, width },
+          { imgHeight, imgWidth },
+          calculatedSrc
+        );
+      }
 
       this.src = calculatedSrc;
 

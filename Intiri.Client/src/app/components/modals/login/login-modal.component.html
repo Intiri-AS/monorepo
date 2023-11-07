@@ -24,18 +24,20 @@
             <div class="flex justify-between w-full">
               <div>
                 <ion-select
-                  class="border rounded-2xl border-black-2 h-14 w-24"
+                  class="border rounded-xl border-black-2 h-12 text-lg w-24"
                   interface="popover"
                   (ionChange)="setActiveCode($event)"
                   [value]="activeCode"
                 >
-                  <ion-select-option value="47">
+                  <ion-select-option
+                    *ngFor="let country of countryService.getCountries()"
+                    value="{{ country.phonePrefix }}"
+                  >
                     <div>
-                      <p class="text-lg text-black">+47</p>
+                      <p class="text-black">
+                        +{{ country.phonePrefix }} {{ country.localName }}
+                      </p>
                     </div>
-                  </ion-select-option>
-                  <ion-select-option value="381">
-                    <p class="text-lg text-black">+381</p>
                   </ion-select-option>
                 </ion-select>
               </div>
@@ -45,7 +47,7 @@
                   formControlName="phoneNumber"
                   name="phoneNumber"
                   maxlength="8"
-                  class="border rounded-2xl h-14 border-black-2 w-full"
+                  class="border rounded-xl h-12 border-black-2 w-full"
                 ></ion-input>
                 <span
                   class="ion-warning"
@@ -60,11 +62,14 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col justify-center items-center mt-6">
-            <ion-button fill="clear" class="primary-btn" type="submit">{{
-              "LOGIN.login" | translate
-            }}</ion-button>
-            <p class="text-lg text-black-2 mt-2">
+          <div class="mt-[16px] text-center grid grid-flow-row justify-center">
+            <ion-button
+              fill="clear"
+              class="primary-btn-no-x-margin !m-0 !my-6"
+              type="submit"
+              >{{ "LOGIN.login-btn" | translate }}</ion-button
+            >
+            <!-- <p class="text-lg text-black-2 mt-2">
               {{ "LOGIN.or" | translate }}
             </p>
             <ion-button
@@ -73,15 +78,13 @@
               (click)="initiateVippsLogin()"
             >
               <img src="../../../../assets/icon/vipps-white.svg" />
-            </ion-button>
-          </div>
-          <div class="flex flex-col justify-center items-center mt-6">
+            </ion-button> -->
             <p class="text-lg text-black-2">
               {{ "LOGIN.no-account" | translate }}
             </p>
             <ion-button
               fill="clear"
-              class="secondary-btn"
+              class="secondary-btn-no-x-margin !mx-0 mt-4"
               (click)="goToRegisterPage()"
               >{{ "LOGIN.create" | translate }}
             </ion-button>
