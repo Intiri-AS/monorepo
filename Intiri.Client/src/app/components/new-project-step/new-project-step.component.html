@@ -229,10 +229,12 @@
         </div>
 
         <p
-          *ngIf="currentStepNo == 0"
+          *ngIf="currentStepNo === 0"
           class="font-bold mt-2 text-black-2 text-clamp-2 pr-1"
         >
-          {{ currentLang == "no" ? "Mer rom kommer" : "More rooms coming" }}
+          {{
+            currentLanguage === "no" ? "Mer rom kommer" : "More rooms coming"
+          }}
         </p>
       </ion-col>
     </ion-row>
