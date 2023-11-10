@@ -233,6 +233,14 @@
 
   <!-- if final step -->
   <div *ngIf="currentStep.data === 'final'">
-    <app-moodboard-details [moodboard]="moodboard"></app-moodboard-details>
+    <app-moodboard-details-old
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
+      [moodboard]="moodboard"
+    ></app-moodboard-details-old>
+    <app-moodboard-details
+      #loggedOut
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
+      [moodboard]="moodboard"
+    ></app-moodboard-details>
   </div>
 </div>

@@ -23,6 +23,7 @@ import { Project } from 'src/app/models/project.model';
 import { TranslateService } from '@ngx-translate/core';
 import { StyleService } from 'src/app/services/style.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-new-project-step',
@@ -63,6 +64,8 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
   typeFilters: Array<string> = [];
   providerFilters: Array<string> = [];
 
+  loggedUser$ = this.accountService.currentUser$;
+
   currentLanguage: string = '';
 
   constructor(
@@ -73,6 +76,7 @@ export class NewProjectStepComponent implements OnInit, OnChanges {
     private materialService: MaterialService,
     private partnerService: PartnerService,
     private colorService: ColorService,
+    private accountService: AccountService,
     private productService: ProductService,
     private languageService: LanguageService,
     private router: Router,

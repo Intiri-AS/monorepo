@@ -383,9 +383,9 @@
 
   <!-- if moodboards (Customize moodboard page)-->
   <div *ngIf="currentStep.data.moodboard">
-    <app-moodboard-details
+    <app-moodboard-details-old
       [moodboard]="currentStep.data.moodboard"
-    ></app-moodboard-details>
+    ></app-moodboard-details-old>
   </div>
 
   <!-- if moodboards (Project create page)-->
@@ -562,7 +562,13 @@
 
   <!-- if final step -->
   <div *ngIf="currentStep.data === 'final'">
+    <app-moodboard-details-old
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'Admin'"
+      [project]="project"
+      [moodboard]="project.currentMoodboard"
+    ></app-moodboard-details-old>
     <app-moodboard-details
+      *ngIf="(loggedUser$ | async)?.roles[0] === 'FreeEndUser'"
       [project]="project"
       [moodboard]="project.currentMoodboard"
     ></app-moodboard-details>
