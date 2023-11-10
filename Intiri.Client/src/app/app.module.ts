@@ -115,6 +115,7 @@ import { AddPictureModalComponent } from './components/modals/add-picture-modal/
 import { AddProductModalComponent } from './components/modals/add-product-modal/add-product-modal.component';
 import { DeleteMoodboardModalComponent } from './components/modals/delete-moodboard-modal/delete-moodboard-modal.component';
 import { MoodboardDetailsComponent } from './components/moodboard-details/moodboard-details.component';
+import { MoodboardDetailsOldComponent } from './components/moodboard-details/moodboard-details-old.component';
 import { OpenFileModalComponent } from './components/modals/open-file-modal/open-file-modal.component';
 
 //plugins
@@ -142,7 +143,10 @@ import { CloudinaryModule } from '@cloudinary/ng';
 
 import { IntercomModule } from 'ng-intercom';
 
-import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import {
+  NgxGoogleAnalyticsModule,
+  NgxGoogleAnalyticsRouterModule,
+} from 'ngx-google-analytics';
 
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -157,11 +161,8 @@ import { AdminEditMoodboardPage } from './pages/admin-pages/edit-moodboard/edit-
 import { EditMoodboardStepComponent } from './pages/admin-pages/edit-moodboard/edit-moodboard-step/edit-moodboard-step.component';
 import { DesignerPortfolioPage } from './pages/designer-portfolio/desginer-portfolio.page';
 
-
 // Import custom directives
 import { ClickElementOnKeyPressDirective } from './directives/clickElementOnKeyPressDirective';
-
-
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -218,6 +219,7 @@ export function createTranslateLoader(http: HttpClient) {
     StepPickerComponent,
     AddMoodboardStepComponent,
     MoodboardDetailsComponent,
+    MoodboardDetailsOldComponent,
     ClientRequestComponent,
     ProfileImgSectionComponent,
     ProfileInfoSectionComponent,
@@ -329,7 +331,7 @@ export function createTranslateLoader(http: HttpClient) {
       updateOnRouterChange: true,
     }),
     NgxGoogleAnalyticsModule.forRoot('G-JNZC85C6J2'),
-    NgxGoogleAnalyticsRouterModule
+    NgxGoogleAnalyticsRouterModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

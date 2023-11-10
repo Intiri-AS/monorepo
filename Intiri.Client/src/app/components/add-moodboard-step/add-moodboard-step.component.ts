@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { OpenFileModalComponent } from '../modals/open-file-modal/open-file-modal.component';
@@ -8,14 +15,14 @@ import { Observable } from 'rxjs';
 import { CommonUtilsService } from 'src/app/services/CommonUtils.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-add-moodboard-step',
   templateUrl: './add-moodboard-step.component.html',
   styleUrls: ['./add-moodboard-step.component.scss'],
 })
-export class AddMoodboardStepComponent implements OnInit {
-  apiUrl = environment.apiUrl;
+export class AddMoodboardStepComponent implements OnInit, OnChanges {
   @Input() disabledSteps: any;
   @Input() currentStep: any;
   @Input() moodboard: any;
@@ -23,6 +30,8 @@ export class AddMoodboardStepComponent implements OnInit {
   @Input() stepsOrder: object;
   @Input() loggedUser: any;
   @Output() toggleSelection = new EventEmitter<object>();
+
+  apiUrl = environment.apiUrl;
 
   types: Array<any> = [];
   providers: Array<any> = [];
@@ -32,21 +41,24 @@ export class AddMoodboardStepComponent implements OnInit {
 
   filteredItems: Array<any> = [];
 
-  constructor(
-    private modalController: ModalController,
-    private languageService: LanguageService,
-    private styleService: StyleService,
-    private commonUtilsService: CommonUtilsService,
-    private partnerService: PartnerService,
-    private translate: TranslateService,
-    private commonUtils: CommonUtilsService
-  ) {}
-
   currentLang: string = '';
   filteredStyleImages$: Observable<any> =
     this.styleService.filteredStyleImages$;
   inspirationalPhotosProviders: Array<any> =
     this.commonUtils.inspirationalPhotosProviders;
+
+  loggedUser$ = this.accountService.currentUser$;
+
+  constructor(
+    private modalController: ModalController,
+    private languageService: LanguageService,
+    private styleService: StyleService,
+    private accountService: AccountService,
+    private commonUtilsService: CommonUtilsService,
+    private partnerService: PartnerService,
+    private translate: TranslateService,
+    private commonUtils: CommonUtilsService
+  ) {}
 
   ngOnInit() {
     this.currentLang = this.translate.currentLang;
