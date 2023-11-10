@@ -432,7 +432,7 @@
   "STYLE": {
     "styles": "Stilen",
     "type": "Type",
-    "provider": "Forsørger",
+    "provider": "Leverandør",
     "link-to-material": "Link til dette materialet",
     "select-room-moodboard": "1. Velg rommet",
     "select-style-moodboard": "2. Velg stilen",
@@ -656,7 +656,7 @@
   "TOOLTIP-TEXT": {
     "no-providers-found": "Finner ingen leverandører",
     "no-providers-found-for-this-inspirational-photo": "Fant ingen leverandører for dette inspirerende bildet",
-    "provider": "Forsørger",
+    "provider": "Leverandør",
     "provided-by-Flügger": "Levert av Flügger",
     "no-link-found-for-this-material": "Fant ingen lenke for dette materialet",
     "no-link-found-for-this-product": "Ingen lenke funnet for dette produktet"
