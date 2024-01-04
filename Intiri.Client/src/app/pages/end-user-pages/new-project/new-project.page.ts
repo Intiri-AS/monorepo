@@ -93,7 +93,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
     private notifier: NotifierService,
     private translate: TranslateService,
     private storage: Storage
-  ) {}
+  ) { }
 
   ngOnInit() {
     const queryString = window.location.search;
@@ -106,8 +106,13 @@ export class NewProjectPage implements OnInit, OnDestroy {
     }
 
     if (stepParam === 5 && this.canChangeToStep(stepParam)) {
+      console.log('File: new-project.page.ts, Function: ngOnInit, stepParam:', stepParam);
+      console.log('File: new-project.page.ts, Function: ngOnInit, canChangeToStep:', this.canChangeToStep(stepParam));
       this.currentStepNo = stepParam;
+      console.log('File: new-project.page.ts, Function: ngOnInit, currentStepNo:', this.currentStepNo);
       this.goToStep(5);
+    } else if (stepParam === 5 && !this.canChangeToStep(stepParam)) {
+      console.log('File: new-project.page.ts, Function: ngOnInit, stepParam is 5 but cannot change to step');
     }
 
     this.subscriptions.push(
@@ -203,45 +208,63 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   goToStep(stepNo) {
+    console.log('File: new-project.page.ts, Function: goToStep, stepNo:', stepNo, ' - at the start of goToStep function');
     const isUserLoggedIn = this.checkIfUserLoggedIn();
+    console.log('File: new-project.page.ts, Function: goToStep, isUserLoggedIn:', isUserLoggedIn, ' - after checking if user is logged in');
+
     if (stepNo === 5 && !isUserLoggedIn) {
+      console.log('File: new-project.page.ts, Function: goToStep - inside if block where stepNo is 5 and user is not logged in');
       this.openLoginModal();
       return;
     }
+
+    // If stepNo is 5, perform the following operations
     if (stepNo === 5) {
+      // If the current moodboard id exists, return immediately
       if (this.project.currentMoodboard.id) {
+        console.log('File: new-project.page.ts, Function: goToStep, currentMoodboard.id exists - inside if block where currentMoodboard.id exists');
         return;
       }
+      // If the current moodboard id is 0, return immediately
       if (this.project.currentMoodboard.id === 0) {
+        console.log('File: new-project.page.ts, Function: goToStep, currentMoodboard.id is 0 - inside if block where currentMoodboard.id is 0');
         return;
       }
+      // Show the spinner while loading the moodboard
       this.spinner.show();
       let currentMoodboard = this.project.currentMoodboard;
+      // Fetch the moodboard from the service
       this.moodboardService
         .getMoodboard(currentMoodboard.id)
         .subscribe((res: Moodboard) => {
+          // Update the current moodboard with the response
           this.project.currentMoodboard = res;
+          // Hide the spinner after loading the moodboard
           this.spinner.hide();
 
-          // Change route after moodboard load
+          // If the response exists, update the current step number and change the query parameter
           if (res) {
             this.currentStepNo = stepNo;
+            console.log('File: new-project.page.ts, Function: goToStep, currentStepNo:', this.currentStepNo, ' - after updating currentStepNo and changing query parameter');
             this.changeQueryParam(stepNo);
             this.projectService.setCurrentProject(this.project);
           }
         });
       return;
     }
+
     if (this.canChangeToStep(stepNo)) {
       this.currentStepNo = stepNo;
+      console.log('File: new-project.page.ts, Function: goToStep, currentStepNo:', this.currentStepNo, ' - after updating currentStepNo and changing query parameter in the canChangeToStep if block');
       this.changeQueryParam(stepNo);
       this.projectService.setCurrentProject(this.project);
     }
+
     if (stepNo === 4) {
+      console.log('File: new-project.page.ts, Function: goToStep - inside if block where stepNo is 4');
       this.getMoodboardMatches();
     }
   }
-
   getMoodboardMatches() {
     this.spinner.show();
     this.projectService.getMoodboardMatches(this.project).subscribe(
@@ -341,23 +364,31 @@ export class NewProjectPage implements OnInit, OnDestroy {
   }
 
   canChangeToStep(step): boolean {
+    console.log('File: new-project.page.ts, Function: canChangeToStep, step:', step, ' - at the start of canChangeToStep function');
+
     if (step >= this.steps.length || step < 0) {
+      console.log('File: new-project.page.ts, Function: canChangeToStep - inside if block where step is out of bounds');
       return false;
     }
+
     switch (step) {
       case 0: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep - inside case 0');
         return true;
       }
       case 1: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep, isEmpty:', this.isEmpty(this.project.room), ' - inside case 1');
         return !this.isEmpty(this.project.room);
       }
       case 2: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep, styleImages.length:', this.project.styleImages.length, ', isEmpty:', this.isEmpty(this.project.room), ' - inside case 2');
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room)
         );
       }
       case 3: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep, styleImages.length:', this.project.styleImages.length, ', roomSketchFiles:', this.project.roomDetails.roomSketchFiles, ' - inside case 3');
         return (
           this.project.styleImages.length > 0 &&
           this.project.roomDetails.roomSketchFiles &&
@@ -365,6 +396,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
         );
       }
       case 4: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep, styleImages.length:', this.project.styleImages.length, ', isEmpty:', this.isEmpty(this.project.room), ', colorPalettes.length:', this.project.colorPalettes.length, ' - inside case 4');
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
@@ -372,6 +404,7 @@ export class NewProjectPage implements OnInit, OnDestroy {
         );
       }
       case 5: {
+        console.log('File: new-project.page.ts, Function: canChangeToStep, styleImages.length:', this.project.styleImages.length, ', isEmpty:', this.isEmpty(this.project.room), ', colorPalettes.length:', this.project.colorPalettes.length, ', isMoodboardEmpty:', this.isMoodboardEmpty(this.project.currentMoodboard), ' - inside case 5');
         return (
           this.project.styleImages.length > 0 &&
           !this.isEmpty(this.project.room) &&
@@ -380,6 +413,8 @@ export class NewProjectPage implements OnInit, OnDestroy {
         );
       }
     }
+
+    console.log('File: new-project.page.ts, Function: canChangeToStep - at the end of canChangeToStep function');
     return false;
   }
 
